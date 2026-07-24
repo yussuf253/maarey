@@ -8,6 +8,7 @@ import '../../providers/notification_provider.dart';
 import '../../providers/theme_provider.dart';
 import '../../providers/idle_timeout_provider.dart';
 import '../../providers/ui_feedback_settings_provider.dart';
+import '../../providers/locale_provider.dart';
 import '../../screens/license/subscription_plans_screen.dart';
 import '../../services/cloud_sync_service.dart';
 import '../../services/license_service.dart';
@@ -22,6 +23,7 @@ import '../onboarding/business_setup_wizard_screen.dart';
 import '../printing/printing_screen.dart';
 import 'dashboard_layout_settings_screen.dart';
 import 'market_pos_import_screen.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 const _kTeal = Color(0xFF0D9488);
 const _kAmber = Color(0xFFF59E0B);
@@ -29,8 +31,8 @@ const _kRed = Color(0xFFEF4444);
 
 /// شريط عنوان إعدادات يتبع [ColorScheme.primary] — نفس هوية الثيم في باقي التطبيق.
 AppBar _settingsAppBar(
-  BuildContext context,
-  String title, {
+  BuildContext context, {
+  required String title,
   List<Widget>? actions,
 }) {
   final cs = Theme.of(context).colorScheme;
@@ -68,228 +70,229 @@ class SettingsScreen extends StatelessWidget {
 
     return SecureScreen(
       child: Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
-        backgroundColor: cs.surface,
-        appBar: showAppBar ? _settingsAppBar(context, 'الإعدادات') : null,
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            /// يمنع كسر [ListTile] عند عرض أقل من ~72 (مثلاً أثناء أنيميشن التصغير).
-            final minW = math.max(constraints.maxWidth, 300.0);
-            final gap = ScreenLayout.of(context).pageHorizontalGap;
-            return Scrollbar(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
+        textDirection: TextDirection.rtl,
+        child: Scaffold(
+          backgroundColor: cs.surface,
+          appBar: showAppBar
+              ? _settingsAppBar(
+                  context,
+                  title: AppLocalizations.of(context)!.settings,
+                )
+              : null,
+          body: LayoutBuilder(
+            builder: (context, constraints) {
+              /// يمنع كسر [ListTile] عند عرض أقل من ~72 (مثلاً أثناء أنيميشن التصغير).
+              final minW = math.max(constraints.maxWidth, 300.0);
+              final gap = ScreenLayout.of(context).pageHorizontalGap;
+              final loc = AppLocalizations.of(context)!;
+              return Scrollbar(
                 child: SingleChildScrollView(
-                  child: SizedBox(
-                    width: minW,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: gap,
-                        vertical: 16,
-                      ),
-                      child: Column(
-                        children: [
-                          // ── بطاقة الشركة ─────────────────────────────────────────────
-                          const _CompanyCard(),
-                          const SizedBox(height: 16),
-                          // ── المجموعات ────────────────────────────────────────────────
-                          _SettingsGroup(
-                            title: 'المتجر والحساب',
-                            isDark: isDark,
-                            items: [
-                              _SettingItem(
-                                icon: Icons.store_rounded,
-                                iconColor: cs.primary,
-                                title: 'بيانات المتجر',
-                                subtitle: 'الاسم، العنوان، الشعار، الفرع',
-                                onTap: () => _goTo(
-                                  context,
-                                  const _StoreInfoScreen(),
-                                  routeId: AppContentRoutes.settingsStoreInfo,
-                                  breadcrumbTitle: 'بيانات المتجر',
-                                ),
-                              ),
-                              _SettingItem(
-                                icon: Icons.receipt_long_rounded,
-                                iconColor: _kTeal,
-                                title: 'إعدادات الفواتير',
-                                subtitle:
-                                    'رقم البداية، التذييل، الضريبة، الخصم',
-                                onTap: () => _goTo(
-                                  context,
-                                  const _InvoiceSettingsScreen(),
-                                  routeId: AppContentRoutes.settingsInvoice,
-                                  breadcrumbTitle: 'إعدادات الفواتير',
-                                ),
-                              ),
-                              _SettingItem(
-                                icon: Icons.tune_rounded,
-                                iconColor: _kAmber,
-                                title: 'ميزات المتجر',
-                                subtitle:
-                                    'العملاء، الولاء، الضريبة، الخصم، الديون، التقسيط، الوزن، الملابس، والخدمات',
-                                onTap: () => _goTo(
-                                  context,
-                                  const BusinessSetupWizardScreen(
-                                    openedFromSettings: true,
-                                  ),
-                                  routeId:
-                                      AppContentRoutes.settingsBusinessFeatures,
-                                  breadcrumbTitle: 'ميزات المتجر',
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 14),
-                          _SettingsGroup(
-                            title: 'المظهر والإشعارات',
-                            isDark: isDark,
-                            items: [
-                              _SettingItem(
-                                icon: Icons.dashboard_customize_rounded,
-                                iconColor: _kBlue,
-                                title: 'تخصيص الشاشة الرئيسية',
-                                subtitle:
-                                    'إظهار أو إخفاء أقسام لوحة التحكم وترتيبها بالسحب',
-                                onTap: () => _goTo(
-                                  context,
-                                  const DashboardLayoutSettingsScreen(),
-                                  routeId:
-                                      AppContentRoutes.settingsDashboardLayout,
-                                  breadcrumbTitle: 'تخصيص الشاشة الرئيسية',
-                                ),
-                              ),
-                              _SettingItem(
-                                icon: Icons.palette_outlined,
-                                iconColor: cs.primary,
-                                title: 'ألوان وهوية التطبيق',
-                                subtitle:
-                                    'مخططات جاهزة، مخصص، وزوايا البطاقات — تُطبَّق على كل الشاشات',
-                                onTap: () => _goTo(
-                                  context,
-                                  const SalePosSettingsScreen(
-                                    appearanceOnly: true,
-                                  ),
-                                  routeId: AppContentRoutes
-                                      .settingsSalePosAppearance,
-                                  breadcrumbTitle: 'ألوان وهوية التطبيق',
-                                ),
-                              ),
-                              _CompactSnackNotificationsTile(isDark: isDark),
-                              _ThemeToggleTile(isDark: isDark),
-                              if (!context.screenLayout.isPhoneVariant)
-                                _MacStyleSettingsPanelTile(isDark: isDark),
-                              _IdleTimeoutTile(isDark: isDark),
-                              _SettingItem(
-                                icon: Icons.language_rounded,
-                                iconColor: _kTeal,
-                                title: 'اللغة',
-                                subtitle: 'العربية',
-                                trailing: Text(
-                                  'العربية',
-                                  style: TextStyle(
-                                    color: cs.onSurfaceVariant,
-                                    fontSize: 13,
+                  scrollDirection: Axis.horizontal,
+                  child: SingleChildScrollView(
+                    child: SizedBox(
+                      width: minW,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: gap,
+                          vertical: 16,
+                        ),
+                        child: Column(
+                          children: [
+                            // ── بطاقة الشركة ─────────────────────────────────────────────
+                            const _CompanyCard(),
+                            const SizedBox(height: 16),
+                            // ── المجموعات ────────────────────────────────────────────────
+                            _SettingsGroup(
+                              title: loc.storeAccountGroup,
+                              isDark: isDark,
+                              items: [
+                                _SettingItem(
+                                  icon: Icons.store_rounded,
+                                  iconColor: cs.primary,
+                                  title: loc.storeInfo,
+                                  subtitle: loc.storeInfoSubtitle,
+                                  onTap: () => _goTo(
+                                    context,
+                                    const _StoreInfoScreen(),
+                                    routeId: AppContentRoutes.settingsStoreInfo,
+                                    breadcrumbTitle: loc.storeInfo,
                                   ),
                                 ),
-                                onTap: () {},
-                              ),
-                              _SettingItem(
-                                icon: Icons.notifications_rounded,
-                                iconColor: _kAmber,
-                                title: 'الإشعارات',
-                                subtitle: 'تنبيهات المخزون، الفواتير، الأقساط',
-                                onTap: () => _goTo(
-                                  context,
-                                  const _NotificationsScreen(),
-                                  routeId:
-                                      AppContentRoutes.settingsNotifications,
-                                  breadcrumbTitle: 'الإشعارات',
+                                _SettingItem(
+                                  icon: Icons.receipt_long_rounded,
+                                  iconColor: _kTeal,
+                                  title: loc.invoiceSettings,
+                                  subtitle: loc.invoiceSettingsSubtitle,
+                                  onTap: () => _goTo(
+                                    context,
+                                    const _InvoiceSettingsScreen(),
+                                    routeId: AppContentRoutes.settingsInvoice,
+                                    breadcrumbTitle: loc.invoiceSettings,
+                                  ),
                                 ),
-                              ),
-                              _SettingItem(
-                                icon: Icons.print_rounded,
-                                iconColor: cs.primary,
-                                title: 'إعدادات الطباعة',
-                                subtitle: 'حجم الورق، الطابعة الافتراضية',
-                                onTap: () => _goTo(
-                                  context,
-                                  const PrintingScreen(),
-                                  routeId:
-                                      AppContentRoutes.settingsPrintingInline,
-                                  breadcrumbTitle: 'إعدادات الطباعة',
+                                _SettingItem(
+                                  icon: Icons.tune_rounded,
+                                  iconColor: _kAmber,
+                                  title: loc.businessFeatures,
+                                  subtitle: loc.businessFeaturesSubtitle,
+                                  onTap: () => _goTo(
+                                    context,
+                                    const BusinessSetupWizardScreen(
+                                      openedFromSettings: true,
+                                    ),
+                                    routeId: AppContentRoutes
+                                        .settingsBusinessFeatures,
+                                    breadcrumbTitle: loc.businessFeatures,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 14),
-                          _SettingsGroup(
-                            title: 'البيانات والنسخ الاحتياطي',
-                            isDark: isDark,
-                            items: [
-                              _SettingItem(
-                                icon: Icons.restore_rounded,
-                                iconColor: _kBlue,
-                                title: 'استعادة البيانات',
-                                subtitle: 'من ملف أو سحابة',
-                                onTap: () => _goTo(
-                                  context,
-                                  const MarketPosImportScreen(),
-                                  routeId: AppContentRoutes.settingsRestore,
-                                  breadcrumbTitle: 'استيراد مواد وأسعار',
+                              ],
+                            ),
+                            const SizedBox(height: 14),
+                            _SettingsGroup(
+                              title: loc.appearanceNotificationsGroup,
+                              isDark: isDark,
+                              items: [
+                                _SettingItem(
+                                  icon: Icons.dashboard_customize_rounded,
+                                  iconColor: _kBlue,
+                                  title: loc.customizeDashboard,
+                                  subtitle: loc.customizeDashboardSubtitle,
+                                  onTap: () => _goTo(
+                                    context,
+                                    const DashboardLayoutSettingsScreen(),
+                                    routeId: AppContentRoutes
+                                        .settingsDashboardLayout,
+                                    breadcrumbTitle: loc.customizeDashboard,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 14),
-                          _SettingsGroup(
-                            title: 'الاشتراك والدعم',
-                            isDark: isDark,
-                            items: [
-                              _SettingItem(
-                                icon: Icons.star_rounded,
-                                iconColor: _kAmber,
-                                title: 'خطة الاشتراك',
-                                subtitle:
-                                    'الحساب، الأجهزة، والمزامنة التلقائية',
-                                trailing:
-                                    const _SubscriptionPlanTrailingBadge(),
-                                onTap: () => _goTo(
-                                  context,
-                                  const _AccountSubscriptionScreen(),
-                                  routeId: AppContentRoutes
-                                      .settingsSubscriptionAccount,
-                                  breadcrumbTitle: 'خطة الاشتراك والحساب',
+                                _SettingItem(
+                                  icon: Icons.palette_outlined,
+                                  iconColor: cs.primary,
+                                  title: loc.appColorsIdentity,
+                                  subtitle: loc.appColorsIdentitySubtitle,
+                                  onTap: () => _goTo(
+                                    context,
+                                    const SalePosSettingsScreen(
+                                      appearanceOnly: true,
+                                    ),
+                                    routeId: AppContentRoutes
+                                        .settingsSalePosAppearance,
+                                    breadcrumbTitle: loc.appColorsIdentity,
+                                  ),
                                 ),
-                              ),
-                              _SettingItem(
-                                icon: Icons.help_rounded,
-                                iconColor: _kBlue,
-                                title: 'المساعدة والدعم',
-                                subtitle: 'الأسئلة الشائعة والتواصل مع الدعم',
-                                onTap: () {},
-                              ),
-                              _SettingItem(
-                                icon: Icons.info_rounded,
-                                iconColor: Colors.grey,
-                                title: 'عن التطبيق',
-                                subtitle: 'الإصدار 1.0.0 · NaBoo Store Manager',
-                                onTap: () => _showAbout(context),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 24),
-                        ],
+                                _CompactSnackNotificationsTile(isDark: isDark),
+                                _ThemeToggleTile(isDark: isDark),
+                                if (!context.screenLayout.isPhoneVariant)
+                                  _MacStyleSettingsPanelTile(isDark: isDark),
+                                _IdleTimeoutTile(isDark: isDark),
+                                _SettingItem(
+                                  icon: Icons.language_rounded,
+                                  iconColor: _kTeal,
+                                  title: loc.language,
+                                  subtitle: loc.arabic,
+                                  trailing: Text(
+                                    loc.arabic,
+                                    style: TextStyle(
+                                      color: cs.onSurfaceVariant,
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                  onTap: () => _showLanguageSelector(context),
+                                ),
+                                _SettingItem(
+                                  icon: Icons.notifications_rounded,
+                                  iconColor: _kAmber,
+                                  title: loc.notifications,
+                                  subtitle: loc.notificationsSubtitle,
+                                  onTap: () => _goTo(
+                                    context,
+                                    const _NotificationsScreen(),
+                                    routeId:
+                                        AppContentRoutes.settingsNotifications,
+                                    breadcrumbTitle: loc.notifications,
+                                  ),
+                                ),
+                                _SettingItem(
+                                  icon: Icons.print_rounded,
+                                  iconColor: cs.primary,
+                                  title: loc.printingSettings,
+                                  subtitle: loc.printingSettingsSubtitle,
+                                  onTap: () => _goTo(
+                                    context,
+                                    const PrintingScreen(),
+                                    routeId:
+                                        AppContentRoutes.settingsPrintingInline,
+                                    breadcrumbTitle: loc.printingSettings,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 14),
+                            _SettingsGroup(
+                              title: loc.dataBackupGroup,
+                              isDark: isDark,
+                              items: [
+                                _SettingItem(
+                                  icon: Icons.restore_rounded,
+                                  iconColor: _kBlue,
+                                  title: loc.restoreData,
+                                  subtitle: loc.restoreDataSubtitle,
+                                  onTap: () => _goTo(
+                                    context,
+                                    const MarketPosImportScreen(),
+                                    routeId: AppContentRoutes.settingsRestore,
+                                    breadcrumbTitle: loc.restoreData,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 14),
+                            _SettingsGroup(
+                              title: loc.subscriptionSupportGroup,
+                              isDark: isDark,
+                              items: [
+                                _SettingItem(
+                                  icon: Icons.star_rounded,
+                                  iconColor: _kAmber,
+                                  title: loc.subscriptionPlan,
+                                  subtitle: loc.subscriptionPlanSubtitle,
+                                  trailing:
+                                      const _SubscriptionPlanTrailingBadge(),
+                                  onTap: () => _goTo(
+                                    context,
+                                    const _AccountSubscriptionScreen(),
+                                    routeId: AppContentRoutes
+                                        .settingsSubscriptionAccount,
+                                    breadcrumbTitle: loc.subscriptionPlan,
+                                  ),
+                                ),
+                                _SettingItem(
+                                  icon: Icons.help_rounded,
+                                  iconColor: _kBlue,
+                                  title: loc.helpSupport,
+                                  subtitle: loc.helpSupportSubtitle,
+                                  onTap: () {},
+                                ),
+                                _SettingItem(
+                                  icon: Icons.info_rounded,
+                                  iconColor: Colors.grey,
+                                  title: loc.aboutApp,
+                                  subtitle: loc.aboutAppSubtitle,
+                                  onTap: () => _showAbout(context),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 24),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
-      ),
       ),
     );
   }
@@ -316,20 +319,75 @@ class SettingsScreen extends StatelessWidget {
   }
 
   void _showAbout(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     showAboutDialog(
       context: context,
-      applicationName: 'نابو لإدارة المتاجر',
+      applicationName: loc.appName,
       applicationVersion: 'الإصدار 1.0.0',
       applicationLegalese: '© 2026 نابو. جميع الحقوق محفوظة.',
-      children: const [
+      children: [
         Padding(
-          padding: EdgeInsetsDirectional.only(top: 8),
-          child: Text(
-            'تطبيق متكامل لإدارة المبيعات والمخزون والحسابات.',
-            textAlign: TextAlign.start,
-          ),
+          padding: const EdgeInsetsDirectional.only(top: 8),
+          child: Text(loc.appDescription, textAlign: TextAlign.start),
         ),
       ],
+    );
+  }
+
+  void _showLanguageSelector(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+    showDialog<void>(
+      context: context,
+      builder: (ctx) => Directionality(
+        textDirection: TextDirection.rtl,
+        child: AlertDialog(
+          title: Text(loc.language),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              RadioListTile<String>(
+                value: 'ar',
+                groupValue: context.watch<LocaleProvider>().locale.languageCode,
+                onChanged: (v) {
+                  if (v != null) {
+                    context.read<LocaleProvider>().setLocale(v);
+                    Navigator.pop(ctx);
+                  }
+                },
+                title: Text(loc.arabic),
+              ),
+              RadioListTile<String>(
+                value: 'en',
+                groupValue: context.watch<LocaleProvider>().locale.languageCode,
+                onChanged: (v) {
+                  if (v != null) {
+                    context.read<LocaleProvider>().setLocale(v);
+                    Navigator.pop(ctx);
+                  }
+                },
+                title: Text(loc.english),
+              ),
+              RadioListTile<String>(
+                value: 'fr',
+                groupValue: context.watch<LocaleProvider>().locale.languageCode,
+                onChanged: (v) {
+                  if (v != null) {
+                    context.read<LocaleProvider>().setLocale(v);
+                    Navigator.pop(ctx);
+                  }
+                },
+                title: Text(loc.french),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: Text(loc.cancel),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -651,13 +709,13 @@ class _IdleTimeoutTile extends StatelessWidget {
               size: 20,
             ),
           ),
-          title: const Text(
-            'وضع السكون',
+          title: Text(
+            AppLocalizations.of(context)!.idleMode,
             style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
           ),
           subtitle: Text(
-            'بعد عدم النشاط: ${idle.currentLabel}',
-            style: const TextStyle(fontSize: 12, color: Colors.grey),
+            AppLocalizations.of(context)!.idleModeSubtitle(idle.currentLabel),
+            style: TextStyle(fontSize: 12, color: Colors.grey),
           ),
           trailing: PopupMenuButton<int>(
             initialValue: idle.minutes,
@@ -719,16 +777,24 @@ class _CompactSnackNotificationsTile extends StatelessWidget {
               color: _kTeal.withValues(alpha: 0.12),
               borderRadius: BorderRadius.zero,
             ),
-            child: const Icon(Icons.view_sidebar_outlined, color: _kTeal, size: 20),
+            child: const Icon(
+              Icons.view_sidebar_outlined,
+              color: _kTeal,
+              size: 20,
+            ),
           ),
-          title: const Text(
-            'شكل تنبيهات الصفحات (كل التطبيق)',
+          title: Text(
+            AppLocalizations.of(context)!.compactSnackNotifications,
             style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
           ),
           subtitle: Text(
             ui.useCompactSnackNotifications
-                ? 'شرائط أضيق وعائمة في كل الشاشات — من إعدادات التطبيق العامة هنا، وليس من «إعدادات نقطة البيع»'
-                : 'وضع كلاسيكي: شريط تنبيه بعرض أسفل الشاشة في كل الصفحات',
+                ? AppLocalizations.of(
+                    context,
+                  )!.compactSnackNotificationsSubtitleOn
+                : AppLocalizations.of(
+                    context,
+                  )!.compactSnackNotificationsSubtitleOff,
             style: TextStyle(
               fontSize: 12,
               color: isDark ? Colors.white70 : Colors.grey.shade700,
@@ -790,14 +856,14 @@ class _MacStyleSettingsPanelTileState
           size: 20,
         ),
       ),
-      title: const Text(
-        'النافذة العائمة (macOS)',
+      title: Text(
+        AppLocalizations.of(context)!.floatingWindowMacos,
         style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
       ),
       subtitle: Text(
         on
-            ? 'يمكن فتح عدة نوافذ معاً؛ التصغير الأصفر يضع بلاطة أسفل الشاشة بأيقونة كل صفحة — عطّلها لفتحها داخل المحتوى'
-            : 'تُفتح هذه الشاشات داخل المحتوى. فعّل الخيار لاستخدام النوافذ العائمة والبلاطات',
+            ? AppLocalizations.of(context)!.floatingWindowSubtitleOn
+            : AppLocalizations.of(context)!.floatingWindowSubtitleOff,
         style: TextStyle(
           fontSize: 12,
           color: isDark ? Colors.white70 : Colors.grey.shade700,
@@ -839,13 +905,15 @@ class _ThemeToggleTile extends StatelessWidget {
           size: 20,
         ),
       ),
-      title: const Text(
-        'المظهر',
+      title: Text(
+        AppLocalizations.of(context)!.theme,
         style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
       ),
       subtitle: Text(
-        isDark ? 'الوضع الداكن' : 'الوضع الفاتح',
-        style: const TextStyle(fontSize: 12, color: Colors.grey),
+        isDark
+            ? AppLocalizations.of(context)!.darkMode
+            : AppLocalizations.of(context)!.lightMode,
+        style: TextStyle(fontSize: 12, color: Colors.grey),
       ),
       trailing: Switch(
         value: isDark,
@@ -912,28 +980,27 @@ class _AccountSubscriptionScreenState
     if (!mounted) return;
     setState(() {
       _busy = false;
-      _message = err ?? 'تمت المزامنة بنجاح';
+      _message = err ?? AppLocalizations.of(context)!.syncSuccess;
     });
   }
 
   Future<void> _approveDevice(AccountDevice d) async {
+    final loc = AppLocalizations.of(context)!;
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => Directionality(
         textDirection: TextDirection.rtl,
         child: AlertDialog(
-          title: const Text('السماح بالعودة'),
-          content: Text(
-            'هل تسمح لجهاز «${d.deviceName}» بتسجيل الدخول مرة أخرى؟',
-          ),
+          title: Text(loc.allowDeviceReturnTitle),
+          content: Text(loc.allowDeviceReturnContent(d.deviceName)),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: const Text('إلغاء'),
+              child: Text(loc.cancel),
             ),
             FilledButton(
               onPressed: () => Navigator.pop(ctx, true),
-              child: const Text('موافقة'),
+              child: Text(loc.allowReturn),
             ),
           ],
         ),
@@ -954,25 +1021,20 @@ class _AccountSubscriptionScreenState
   }
 
   Future<void> _removeDevice(AccountDevice d) async {
+    final loc = AppLocalizations.of(context)!;
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => Directionality(
         textDirection: TextDirection.rtl,
         child: AlertDialog(
-          title: const Text('فصل الجهاز'),
+          title: Text(loc.disconnectDeviceTitle),
           content: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'الجهاز: ${d.deviceName}',
-                  style: const TextStyle(fontWeight: FontWeight.w600),
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  'سيتم إنهاء الجلسة على ذلك الجهاز فورًا (إن كان متصلاً)، ولن يستطيع '
-                  'تسجيل الدخول حتى تضغط «السماح بالعودة» من هنا.',
+                  loc.disconnectDeviceContent(d.deviceName),
                   style: TextStyle(color: Colors.grey.shade800, height: 1.45),
                 ),
               ],
@@ -981,12 +1043,12 @@ class _AccountSubscriptionScreenState
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: const Text('إلغاء'),
+              child: Text(loc.cancel),
             ),
             FilledButton(
               onPressed: () => Navigator.pop(ctx, true),
               style: FilledButton.styleFrom(backgroundColor: _kRed),
-              child: const Text('فصل الآن'),
+              child: Text(loc.disconnectNow),
             ),
           ],
         ),
@@ -1003,7 +1065,7 @@ class _AccountSubscriptionScreenState
     if (!mounted) return;
     setState(() {
       _busy = false;
-      _message = err ?? 'تم فصل الجهاز بنجاح';
+      _message = err ?? loc.deviceDisconnected;
     });
   }
 
@@ -1013,7 +1075,7 @@ class _AccountSubscriptionScreenState
   }
 
   /// الحد الفعلي من الترخيص / JWT وليس وصف البطاقة التسويقي للخطة.
-  String _effectiveDeviceCapLabel(LicenseState lic) {
+  String _effectiveDeviceCapLabel(LicenseState lic, AppLocalizations loc) {
     switch (lic.status) {
       case LicenseStatus.none:
       case LicenseStatus.checking:
@@ -1021,7 +1083,7 @@ class _AccountSubscriptionScreenState
       default:
         break;
     }
-    if (lic.maxDevices == 0) return 'غير محدود';
+    if (lic.maxDevices == 0) return loc.unlimited;
     return '${lic.maxDevices} أجهزة';
   }
 
@@ -1032,7 +1094,10 @@ class _AccountSubscriptionScreenState
       textDirection: TextDirection.rtl,
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.surface,
-        appBar: _settingsAppBar(context, 'الحساب والاشتراك'),
+        appBar: _settingsAppBar(
+          context,
+          title: AppLocalizations.of(context)!.subscriptionPlan,
+        ),
         body: ListenableBuilder(
           listenable: LicenseService.instance,
           builder: (context, _) {
@@ -1047,23 +1112,44 @@ class _AccountSubscriptionScreenState
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'بيانات الحساب',
+                      Text(
+                        AppLocalizations.of(context)!.accountData,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 10),
-                      Text('المستخدم: ${auth.displayName}'),
+                      Text(
+                        AppLocalizations.of(
+                          context,
+                        )!.userLabel(auth.displayName),
+                      ),
                       const SizedBox(height: 6),
-                      Text('البريد: ${auth.email.isEmpty ? '—' : auth.email}'),
+                      Text(
+                        AppLocalizations.of(
+                          context,
+                        )!.emailLabel(auth.email.isEmpty ? '—' : auth.email),
+                      ),
                       const SizedBox(height: 6),
-                      Text('الخطة الحالية: ${displayPlan?.nameAr ?? '—'}'),
+                      Text(
+                        AppLocalizations.of(
+                          context,
+                        )!.currentPlanLabel(displayPlan?.nameAr ?? '—'),
+                      ),
                       const SizedBox(height: 6),
-                      Text('حد الأجهزة: ${_effectiveDeviceCapLabel(lic)}'),
+                      Text(
+                        AppLocalizations.of(context)!.deviceLimitLabel(
+                          _effectiveDeviceCapLabel(
+                            lic,
+                            AppLocalizations.of(context)!,
+                          ),
+                        ),
+                      ),
                       if (lic.status == LicenseStatus.active ||
                           lic.status == LicenseStatus.trial) ...[
                         const SizedBox(height: 6),
                         Text(
-                          'الأجهزة المسجّلة: ${lic.devicesInfo}',
+                          AppLocalizations.of(
+                            context,
+                          )!.devicesLabel(lic.devicesInfo),
                           style: TextStyle(
                             fontSize: 13,
                             color: Colors.grey.shade700,
@@ -1081,13 +1167,15 @@ class _AccountSubscriptionScreenState
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'التجربة المجانية',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                        Text(
+                          AppLocalizations.of(context)!.freeTrial,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          'الأيام المتبقية: ${lic.daysLeft ?? 0} من 15',
+                          AppLocalizations.of(
+                            context,
+                          )!.daysRemaining(lic.daysLeft ?? 0),
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -1095,7 +1183,9 @@ class _AccountSubscriptionScreenState
                         ),
                         const SizedBox(height: 6),
                         Text(
-                          'تنتهي في: ${_fmtDate(lic.trialEndsAt)}',
+                          AppLocalizations.of(
+                            context,
+                          )!.trialEndsAt(_fmtDate(lic.trialEndsAt)),
                           style: TextStyle(
                             fontSize: 13,
                             color: Colors.grey.shade700,
@@ -1388,16 +1478,16 @@ class _StoreInfoScreenState extends State<_StoreInfoScreen> {
         backgroundColor: cs.surface,
         appBar: _settingsAppBar(
           context,
-          'بيانات المتجر',
+          title: AppLocalizations.of(context)!.storeInfo,
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
               style: TextButton.styleFrom(foregroundColor: cs.onPrimary),
-              child: const Text(
-                'حفظ',
-                style: TextStyle(fontWeight: FontWeight.bold),
+              child: Text(
+                AppLocalizations.of(context)!.save,
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
           ],
@@ -1449,26 +1539,26 @@ class _StoreInfoScreenState extends State<_StoreInfoScreen> {
               const SizedBox(height: 24),
               _Field(
                 controller: _name,
-                label: 'اسم المتجر',
+                label: AppLocalizations.of(context)!.storeName,
                 icon: Icons.store_rounded,
               ),
               const SizedBox(height: 14),
               _Field(
                 controller: _address,
-                label: 'العنوان',
+                label: AppLocalizations.of(context)!.address,
                 icon: Icons.location_on_rounded,
               ),
               const SizedBox(height: 14),
               _Field(
                 controller: _phone,
-                label: 'رقم الهاتف',
+                label: AppLocalizations.of(context)!.phone,
                 icon: Icons.phone_rounded,
                 keyboard: TextInputType.phone,
               ),
               const SizedBox(height: 14),
               _Field(
                 controller: _taxNo,
-                label: 'الرقم الضريبي',
+                label: AppLocalizations.of(context)!.taxNumber,
                 icon: Icons.numbers_rounded,
               ),
             ],
@@ -1505,14 +1595,14 @@ class _InvoiceSettingsScreenState extends State<_InvoiceSettingsScreen> {
         backgroundColor: cs.surface,
         appBar: _settingsAppBar(
           context,
-          'إعدادات الفواتير',
+          title: AppLocalizations.of(context)!.invoiceSettings,
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
               style: TextButton.styleFrom(foregroundColor: cs.onPrimary),
-              child: const Text(
-                'حفظ',
-                style: TextStyle(fontWeight: FontWeight.bold),
+              child: Text(
+                AppLocalizations.of(context)!.save,
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
           ],
@@ -1525,25 +1615,25 @@ class _InvoiceSettingsScreenState extends State<_InvoiceSettingsScreen> {
           child: Column(
             children: [
               _SwitchTile(
-                title: 'إظهار الضريبة',
+                title: AppLocalizations.of(context)!.showTax,
                 value: _showTax,
                 onChange: (v) => setState(() => _showTax = v),
                 isDark: isDark,
               ),
               _SwitchTile(
-                title: 'إظهار الخصم',
+                title: AppLocalizations.of(context)!.showDiscount,
                 value: _showDiscount,
                 onChange: (v) => setState(() => _showDiscount = v),
                 isDark: isDark,
               ),
               _SwitchTile(
-                title: 'إظهار الشعار',
+                title: AppLocalizations.of(context)!.showLogo,
                 value: _showLogo,
                 onChange: (v) => setState(() => _showLogo = v),
                 isDark: isDark,
               ),
               _SwitchTile(
-                title: 'إظهار التذييل',
+                title: AppLocalizations.of(context)!.showFooter,
                 value: _showFooter,
                 onChange: (v) => setState(() => _showFooter = v),
                 isDark: isDark,
@@ -1555,8 +1645,8 @@ class _InvoiceSettingsScreenState extends State<_InvoiceSettingsScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'نسبة الضريبة',
+                    Text(
+                      AppLocalizations.of(context)!.taxRate,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     SliderTheme(
@@ -1571,12 +1661,16 @@ class _InvoiceSettingsScreenState extends State<_InvoiceSettingsScreen> {
                         min: 0,
                         max: 25,
                         divisions: 25,
-                        label: '${_taxRate.round()}%',
+                        label: AppLocalizations.of(
+                          context,
+                        )!.taxRatePercent(_taxRate.round()),
                         onChanged: (v) => setState(() => _taxRate = v),
                       ),
                     ),
                     Text(
-                      '${_taxRate.round()}%',
+                      AppLocalizations.of(
+                        context,
+                      )!.taxRatePercent(_taxRate.round()),
                       style: TextStyle(color: cs.onSurfaceVariant),
                     ),
                   ],
@@ -1585,14 +1679,14 @@ class _InvoiceSettingsScreenState extends State<_InvoiceSettingsScreen> {
               const SizedBox(height: 12),
               _Field(
                 controller: _startNum,
-                label: 'رقم بداية الفواتير',
+                label: AppLocalizations.of(context)!.invoiceStartNumber,
                 icon: Icons.tag_rounded,
                 keyboard: TextInputType.number,
               ),
               const SizedBox(height: 12),
               _Field(
                 controller: _footer,
-                label: 'نص التذييل',
+                label: AppLocalizations.of(context)!.invoiceFooterText,
                 icon: Icons.notes_rounded,
               ),
             ],
@@ -1681,7 +1775,10 @@ class _NotificationsScreenState extends State<_NotificationsScreen> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         backgroundColor: cs.surface,
-        appBar: _settingsAppBar(context, 'الإشعارات'),
+        appBar: _settingsAppBar(
+          context,
+          title: AppLocalizations.of(context)!.notifications,
+        ),
         body: !_prefsLoaded
             ? const Center(child: CircularProgressIndicator())
             : SingleChildScrollView(
@@ -1693,7 +1790,7 @@ class _NotificationsScreenState extends State<_NotificationsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      'تُبنى التنبيهات من قاعدة البيانات عند فتح لوحة الإشعارات من الشاشة الرئيسية.',
+                      AppLocalizations.of(context)!.notificationsBuildFromDb,
                       style: TextStyle(
                         fontSize: 12,
                         height: 1.35,
@@ -1704,9 +1801,10 @@ class _NotificationsScreenState extends State<_NotificationsScreen> {
                     ),
                     const SizedBox(height: 14),
                     _SwitchTile(
-                      title: 'تنبيه نقص المخزون',
-                      subtitle:
-                          'منتجات وصلت للحد الأدنى أو نفدت (مع تتبع مخزون)',
+                      title: AppLocalizations.of(context)!.lowStockAlert,
+                      subtitle: AppLocalizations.of(
+                        context,
+                      )!.lowStockAlertSubtitle,
                       value: _lowStock,
                       onChange: (v) {
                         setState(() => _lowStock = v);
@@ -1715,9 +1813,12 @@ class _NotificationsScreenState extends State<_NotificationsScreen> {
                       isDark: isDark,
                     ),
                     _SwitchTile(
-                      title: 'إشعار بيع أدى لرصيد سالب',
-                      subtitle:
-                          'بعد حفظ فاتورة البيع: رقم الفاتورة، البائع، العميل، والأصناف والكميات قبل/بعد الرصيد',
+                      title: AppLocalizations.of(
+                        context,
+                      )!.negativeStockSaleAlert,
+                      subtitle: AppLocalizations.of(
+                        context,
+                      )!.negativeStockSaleAlertSubtitle,
                       value: _negStockSale,
                       onChange: (v) {
                         setState(() => _negStockSale = v);
@@ -1726,9 +1827,10 @@ class _NotificationsScreenState extends State<_NotificationsScreen> {
                       isDark: isDark,
                     ),
                     _SwitchTile(
-                      title: 'إشعار بيع بالدين أو التقسيط',
-                      subtitle:
-                          'عند حفظ فاتورة «آجل» أو «تقسيط» من شاشة البيع: رقم الفاتورة، البائع، العميل، المبالغ، الأسطر، وخطة التقسيط إن وُجدت',
+                      title: AppLocalizations.of(context)!.financedSaleAlert,
+                      subtitle: AppLocalizations.of(
+                        context,
+                      )!.financedSaleAlertSubtitle,
                       value: _financedSale,
                       onChange: (v) {
                         setState(() => _financedSale = v);
@@ -1737,9 +1839,10 @@ class _NotificationsScreenState extends State<_NotificationsScreen> {
                       isDark: isDark,
                     ),
                     _SwitchTile(
-                      title: 'تنبيه صلاحية المنتجات',
-                      subtitle:
-                          'منتهية، أو تدخل ضمن «نافذة التنبيه» قبل التاريخ (حسب كل منتج أو الافتراضي أدناه)',
+                      title: AppLocalizations.of(context)!.expiryAlert,
+                      subtitle: AppLocalizations.of(
+                        context,
+                      )!.expiryAlertSubtitle,
                       value: _expiry,
                       onChange: (v) {
                         setState(() => _expiry = v);
@@ -1750,7 +1853,7 @@ class _NotificationsScreenState extends State<_NotificationsScreen> {
                     if (_expiry) ...[
                       const SizedBox(height: 10),
                       Text(
-                        'الأيام الافتراضية قبل تاريخ الانتهاء لإظهار تنبيه «قرب الصلاحية» (يُستعمل عند إضافة منتج إن لم تُضبط للصنف، و1–365).',
+                        AppLocalizations.of(context)!.defaultExpiryDaysLabel,
                         style: TextStyle(
                           fontSize: 12,
                           height: 1.35,
@@ -1765,10 +1868,14 @@ class _NotificationsScreenState extends State<_NotificationsScreen> {
                         keyboardType: TextInputType.number,
                         textAlign: TextAlign.right,
                         textDirection: TextDirection.rtl,
-                        decoration: const InputDecoration(
-                          labelText: 'أيام التنبيه الافتراضية',
-                          hintText: 'مثال: 14',
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          labelText: AppLocalizations.of(
+                            context,
+                          )!.defaultExpiryDaysInputLabel,
+                          hintText: AppLocalizations.of(
+                            context,
+                          )!.defaultExpiryDaysHint,
+                          border: const OutlineInputBorder(),
                           isDense: true,
                         ),
                         onSubmitted: (_) => _saveExpiryDefaultDays(),
@@ -1777,13 +1884,17 @@ class _NotificationsScreenState extends State<_NotificationsScreen> {
                         alignment: Alignment.centerLeft,
                         child: TextButton(
                           onPressed: _saveExpiryDefaultDays,
-                          child: const Text('حفظ الرقم الافتراضي'),
+                          child: Text(
+                            AppLocalizations.of(context)!.saveDefaultDays,
+                          ),
                         ),
                       ),
                     ],
                     _SwitchTile(
-                      title: 'أقساط التقسيط',
-                      subtitle: 'متأخرة أو مستحقة خلال 14 يوماً',
+                      title: AppLocalizations.of(context)!.installmentAlert,
+                      subtitle: AppLocalizations.of(
+                        context,
+                      )!.installmentAlertSubtitle,
                       value: _installment,
                       onChange: (v) {
                         setState(() => _installment = v);
@@ -1792,9 +1903,10 @@ class _NotificationsScreenState extends State<_NotificationsScreen> {
                       isDark: isDark,
                     ),
                     _SwitchTile(
-                      title: 'ديون العملاء (آجل)',
-                      subtitle:
-                          'رصيد مدين في بطاقة العميل، وفق إعدادات الدين: عمر الفاتورة، سقف المجموع لكل عميل، وسقف الفاتورة الواحدة',
+                      title: AppLocalizations.of(context)!.customerDebtAlert,
+                      subtitle: AppLocalizations.of(
+                        context,
+                      )!.customerDebtAlertSubtitle,
                       value: _customerDebt,
                       onChange: (v) {
                         setState(() => _customerDebt = v);
@@ -1803,8 +1915,10 @@ class _NotificationsScreenState extends State<_NotificationsScreen> {
                       isDark: isDark,
                     ),
                     _SwitchTile(
-                      title: 'تسجيل المرتجعات',
-                      subtitle: 'آخر مرتجعات مسجّلة (21 يوماً)',
+                      title: AppLocalizations.of(context)!.returnsAlert,
+                      subtitle: AppLocalizations.of(
+                        context,
+                      )!.returnsAlertSubtitle,
                       value: _returns,
                       onChange: (v) {
                         setState(() => _returns = v);
@@ -1813,8 +1927,10 @@ class _NotificationsScreenState extends State<_NotificationsScreen> {
                       isDark: isDark,
                     ),
                     _SwitchTile(
-                      title: 'ملخص مبيعات اليوم',
-                      subtitle: 'إجمالي فواتير البيع لهذا اليوم (بدون مرتجعات)',
+                      title: AppLocalizations.of(context)!.dailyReportAlert,
+                      subtitle: AppLocalizations.of(
+                        context,
+                      )!.dailyReportAlertSubtitle,
                       value: _dailyReport,
                       onChange: (v) {
                         setState(() => _dailyReport = v);
@@ -1823,9 +1939,10 @@ class _NotificationsScreenState extends State<_NotificationsScreen> {
                       isDark: isDark,
                     ),
                     _SwitchTile(
-                      title: 'فتح وإغلاق الوردية',
-                      subtitle:
-                          'إشعار بموظف الوردية والمبالغ (رصيد النظام، الجرد، المضاف، المسحوب، المتبقي)',
+                      title: AppLocalizations.of(context)!.shiftLifecycleAlert,
+                      subtitle: AppLocalizations.of(
+                        context,
+                      )!.shiftLifecycleAlertSubtitle,
                       value: _shiftLifecycle,
                       onChange: (v) {
                         setState(() => _shiftLifecycle = v);

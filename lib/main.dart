@@ -50,6 +50,8 @@ import 'screens/shift/open_shift_screen.dart';
 import 'theme/app_theme_resolver.dart';
 import 'widgets/idle_session_shell.dart';
 import 'screens/dev/stress_tools_screen.dart';
+import 'providers/locale_provider.dart';
+import 'l10n/generated/app_localizations.dart';
 
 bool _remoteKickHandlerRegistered = false;
 bool _remoteKickInProgress = false;
@@ -68,9 +70,7 @@ void _registerRemoteDeviceRevokeHandler() {
       await auth.logout();
       if (!nav.mounted) return;
       await nav.pushAndRemoveUntil(
-        MaterialPageRoute<void>(
-          builder: (_) => const DeviceKickedOutScreen(),
-        ),
+        MaterialPageRoute<void>(builder: (_) => const DeviceKickedOutScreen()),
         (_) => false,
       );
     } finally {
@@ -99,9 +99,7 @@ void _registerTenantRevokeHandler() {
       await auth.logout();
       if (!nav.mounted) return;
       await nav.pushAndRemoveUntil(
-        MaterialPageRoute<void>(
-          builder: (_) => const DeviceKickedOutScreen(),
-        ),
+        MaterialPageRoute<void>(builder: (_) => const DeviceKickedOutScreen()),
         (_) => false,
       );
     } finally {
@@ -170,8 +168,7 @@ void main() async {
     authOptions: FlutterAuthClientOptions(
       autoRefreshToken: false,
       localStorage: SecureLocalStorage(
-        persistSessionKey:
-            supabasePersistSessionKeyFromUrl(SupabaseConfig.url),
+        persistSessionKey: supabasePersistSessionKeyFromUrl(SupabaseConfig.url),
       ),
     ),
   );
@@ -210,6 +207,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => InvoiceProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => LocaleProvider()),
         ChangeNotifierProvider(create: (_) => ProductProvider()),
         ChangeNotifierProvider(create: (_) => InventoryProductsProvider()),
         ChangeNotifierProvider(create: (_) => CustomersProvider()),
@@ -315,12 +313,13 @@ class MyApp extends StatelessWidget {
                   );
                 },
                 localizationsDelegates: const [
+                  AppLocalizations.delegate,
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
                   GlobalCupertinoLocalizations.delegate,
                 ],
-                supportedLocales: const [Locale('ar', 'SA')],
-                locale: const Locale('ar', 'SA'),
+                supportedLocales: AppLocalizations.supportedLocales,
+                locale: context.watch<LocaleProvider>().locale,
                 initialRoute: '/',
                 routes: {
                   '/': (context) => const _LicenseAwareRoot(),
@@ -382,10 +381,12 @@ class _ThemeModeTransitionShellState extends State<_ThemeModeTransitionShell> {
     if (disableAnimations) return;
 
     setState(() => _showTransition = true);
-    unawaited(Future<void>.delayed(const Duration(milliseconds: 520), () {
-      if (!mounted) return;
-      setState(() => _showTransition = false);
-    }));
+    unawaited(
+      Future<void>.delayed(const Duration(milliseconds: 520), () {
+        if (!mounted) return;
+        setState(() => _showTransition = false);
+      }),
+    );
   }
 
   @override

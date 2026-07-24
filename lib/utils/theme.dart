@@ -5,11 +5,11 @@ import '../theme/design_tokens.dart';
 /// انتقالات متسقة عبر المنصات.
 const _kTransitions = PageTransitionsTheme(
   builders: {
-    TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-    TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-    TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
-    TargetPlatform.windows: CupertinoPageTransitionsBuilder(),
-    TargetPlatform.linux: CupertinoPageTransitionsBuilder(),
+    TargetPlatform.android: ZoomPageTransitionsBuilder(),
+    TargetPlatform.iOS: ZoomPageTransitionsBuilder(),
+    TargetPlatform.macOS: ZoomPageTransitionsBuilder(),
+    TargetPlatform.windows: ZoomPageTransitionsBuilder(),
+    TargetPlatform.linux: ZoomPageTransitionsBuilder(),
   },
 );
 
@@ -91,12 +91,18 @@ class AppTheme {
 
     final inputBorderError = OutlineInputBorder(
       borderRadius: ErpInputConstants.borderRadius,
-      borderSide: BorderSide(color: cs.error, width: ErpInputConstants.borderWidthDefault),
+      borderSide: BorderSide(
+        color: cs.error,
+        width: ErpInputConstants.borderWidthDefault,
+      ),
     );
 
     final inputBorderErrFocus = OutlineInputBorder(
       borderRadius: ErpInputConstants.borderRadius,
-      borderSide: BorderSide(color: cs.error, width: ErpInputConstants.borderWidthFocus),
+      borderSide: BorderSide(
+        color: cs.error,
+        width: ErpInputConstants.borderWidthFocus,
+      ),
     );
 
     final inputBorderDis = OutlineInputBorder(
@@ -110,6 +116,7 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: brightness,
+
       /// خط عربي مُسجَّل — بدونه قد لا يُرسَم النص داخل بعض البطاقات على الويب.
       fontFamily: 'Tajawal',
       colorScheme: cs,
@@ -175,8 +182,15 @@ class AppTheme {
         errorBorder: inputBorderError,
         focusedErrorBorder: inputBorderErrFocus,
         disabledBorder: inputBorderDis,
-        labelStyle: TextStyle(color: onSurfaceVariant, fontSize: 13, fontWeight: FontWeight.w500),
-        hintStyle: TextStyle(color: onSurfaceVariant.withValues(alpha: 0.82), fontSize: 13),
+        labelStyle: TextStyle(
+          color: onSurfaceVariant,
+          fontSize: 13,
+          fontWeight: FontWeight.w500,
+        ),
+        hintStyle: TextStyle(
+          color: onSurfaceVariant.withValues(alpha: 0.82),
+          fontSize: 13,
+        ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -198,8 +212,7 @@ class AppTheme {
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          foregroundColor:
-              brightness == Brightness.light ? primary : onSurface,
+          foregroundColor: brightness == Brightness.light ? primary : onSurface,
           iconColor: brightness == Brightness.light ? primary : onSurface,
           shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
           side: BorderSide(color: outline),
