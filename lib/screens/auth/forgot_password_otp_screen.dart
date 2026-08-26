@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../providers/auth_provider.dart';
 import '../../widgets/secure_screen.dart';
 import 'reset_password_screen.dart';
@@ -88,9 +89,8 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
   Future<void> _verify() async {
     final otp = _otp.trim();
     if (otp.length < _digits) {
-      setState(
-        () => _error = 'أدخل الرمز كاملاً ($_digits أرقام كما في البريد)',
-      );
+      final loc = AppLocalizations.of(context)!;
+      setState(() => _error = loc.otpEnterFullCode(_digits));
       return;
     }
     setState(() {
@@ -135,9 +135,10 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
     }
     _focusNodes.first.requestFocus();
     _startCountdown();
+    if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('تم إعادة إرسال رمز التحقق'),
+      SnackBar(
+        content: Text(AppLocalizations.of(context)!.otpResentSuccess),
         behavior: SnackBarBehavior.floating,
       ),
     );
@@ -145,6 +146,7 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return SecureScreen(
       child: Directionality(
       textDirection: TextDirection.rtl,
@@ -154,7 +156,7 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
           backgroundColor: Colors.white,
           foregroundColor: _navy2,
           elevation: 0.5,
-          title: const Text('التحقق من البريد'),
+          title: Text(loc.emailVerificationTitle),
         ),
         body: Center(
           child: SingleChildScrollView(
@@ -164,10 +166,10 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Text(
-                    'أدخل رمز التحقق',
+                  Text(
+                    loc.enterVerificationCode,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                       color: _navy2,
@@ -175,7 +177,7 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'أُرسل رمز مكوّن من $_digits أرقام إلى:\n${widget.email}',
+                    loc.otpSentToEmailColon(_digits, widget.email),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 13,
@@ -243,14 +245,14 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
                                 color: Colors.white,
                               ),
                             )
-                          : const Text('متابعة'),
+                          : Text(loc.continueAction),
                     ),
                   ),
                   const SizedBox(height: 14),
                   Center(
                     child: _resendCountdown > 0
                         ? Text(
-                            'إعادة الإرسال خلال $_resendCountdown ثانية',
+                            loc.resendInSeconds(_resendCountdown),
                             style: TextStyle(
                               fontSize: 13,
                               color: Colors.grey.shade500,
@@ -258,9 +260,9 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
                           )
                         : TextButton(
                             onPressed: _busy ? null : _resend,
-                            child: const Text(
-                              'إعادة إرسال الرمز',
-                              style: TextStyle(
+                            child: Text(
+                              loc.resendCode,
+                              style: const TextStyle(
                                 color: _gold,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -275,9 +277,9 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
                       size: 16,
                       color: _navy3,
                     ),
-                    label: const Text(
-                      'تعديل البريد',
-                      style: TextStyle(color: _navy3),
+                    label: Text(
+                      loc.editEmail,
+                      style: const TextStyle(color: _navy3),
                     ),
                   ),
                 ],

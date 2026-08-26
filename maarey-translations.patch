@@ -1,0 +1,3681 @@
+diff --git a/lib/l10n/app_ar.arb b/lib/l10n/app_ar.arb
+index bd91d13..c1dd534 100644
+--- a/lib/l10n/app_ar.arb
++++ b/lib/l10n/app_ar.arb
+@@ -125,5 +125,274 @@
+   "inactiveLicense": "غير نشط",
+   "testTools": "فتح أدوات الاختبار…",
+   "basraStore": "متجر البصرة",
+-  "basraIraq": "البصرة، العراق"
++  "basraIraq": "البصرة، العراق",
++  "deviceKickedOutTitle": "تم فصل هذا الجهاز من الحساب",
++  "deviceKickedOutBody": "أُنهيت جلستك على هذا الجهاز. عند فتح التطبيق لاحقًا ستظهر لك شاشة تسجيل الدخول المعتادة.",
++  "goToLoginAction": "الانتقال لتسجيل الدخول",
++  "exitAction": "خروج",
++  "closeWindowHint": "يمكنك إغلاق النافذة أو استخدام الزر أعلاه.",
++  "appWillCloseHint": "يغلق التطبيق",
++  "deviceRevokedTitle": "تم إزالة هذا الجهاز من الحساب",
++  "deviceRevokedBody": "لا يمكنك تسجيل الدخول من هذا الجهاز حتى يوافق أحد الأجهزة المفعّلة على نفس الحساب من الإعدادات ← الحساب والاشتراك ← «السماح بالعودة».",
++  "backToLoginAction": "العودة لتسجيل الدخول",
++  "otpEnterFullCode": "أدخل الرمز كاملاً ({digits} أرقام كما في البريد)",
++  "otpResentSuccess": "تم إعادة إرسال رمز التحقق",
++  "back": "رجوع",
++  "emailVerificationTitle": "التحقق من البريد",
++  "otpSentToEmailShort": "أرسلنا رمزاً من {digits} أرقام إلى بريدك الإلكتروني",
++  "enterVerificationCode": "أدخل رمز التحقق",
++  "otpSentToEmailDetailed": "أُرسل رمز مكوّن من {digits} أرقام إلى\n{email}",
++  "verifyAndCreateAccount": "تحقق وأنشئ الحساب",
++  "resendInSeconds": "إعادة الإرسال خلال {seconds} ثانية",
++  "resendCode": "إعادة إرسال الرمز",
++  "editData": "تعديل البيانات",
++  "emailRequired": "البريد الإلكتروني مطلوب",
++  "emailInvalidFormat": "صيغة البريد غير صحيحة",
++  "enterYourEmail": "أدخل بريدك الإلكتروني",
++  "forgotPasswordSendCodeHint": "سنرسل لك رمز تحقق لإعادة تعيين رمز الدخول",
++  "sendVerificationCode": "إرسال رمز التحقق",
++  "otpSentToEmailColon": "أُرسل رمز مكوّن من {digits} أرقام إلى:\n{email}",
++  "continueAction": "متابعة",
++  "editEmail": "تعديل البريد",
++  "passwordUpdateSuccess": "تم تحديث رمز الدخول بنجاح",
++  "setNewPasswordTitle": "تعيين رمز دخول جديد",
++  "newPasswordLabel": "رمز الدخول الجديد",
++  "enterNewPasswordHint": "أدخل رمز الدخول الجديد",
++  "enterPasswordValidation": "أدخل رمز الدخول",
++  "minLength8Chars": "يجب أن يكون 8 أحرف على الأقل",
++  "confirmPasswordLabel": "إعادة كتابة رمز الدخول",
++  "confirmPasswordHint": "أعد كتابة رمز الدخول",
++  "passwordMismatch": "رمز الدخول غير متطابق",
++  "passwordRequirementsTitle": "شروط رمز الدخول (اختياري)",
++  "reqMinLength": "8 أحرف على الأقل",
++  "reqUppercase": "حرف كبير (A-Z)",
++  "reqLowercase": "حرف صغير (a-z)",
++  "reqDigit": "رقم (0-9)",
++  "reqSpecialChar": "رمز خاص (!@#...)",
++  "onboardingChangeLaterHint": "يمكنك تغيير هذه الخيارات لاحقاً من الإعدادات ← ميزات المتجر.",
++  "businessFeaturesWizardTitle": "ميزات المتجر",
++  "quickAppSetupTitle": "إعداد سريع للتطبيق",
++  "stepXofY": "الخطوة {current} من {total}",
++  "previousAction": "السابق",
++  "nextAction": "التالي",
++  "practicalExamplesLabel": "أمثلة عملية",
++  "onboardingStep1Question": "هل تستخدم العملاء في نشاطك؟",
++  "onboardingStep1Paragraph1": "عند التفعيل تظهر لك وحدة العملاء الكاملة: بطاقة لكل عميل، سجل مشتريات، ومتابعة سريعة من الفاتورة.",
++  "onboardingStep1Paragraph2": "يمكنك ربط كل عملية بيع بعميل معيّن، ما يسهّل التقارير لاحقاً ويوحّد تجربة المتجر أمام الزبائن الذين يتكررون.",
++  "onboardingStep1Paragraph3": "إذا عملت بيعاً نقدياً سريعاً دون اسم، يبقى ذلك متاحاً؛ التفعيل لا يفرض اختيار عميل في كل مرة.",
++  "onboardingStep1Example1": "مثال: زبون دائم يشتري يومياً، تحفظ اسمه وترى آخر فواتيره بسرعة.",
++  "onboardingStep1Example2": "مثال: عند وجود دين أو نقاط ولاء، تظهر مرتبطة بنفس العميل بدل البحث اليدوي.",
++  "onboardingStep1SwitchLabel": "تفعيل وحدة العملاء",
++  "onboardingStep2Question": "هل تريد برنامج نقاط الولاء؟",
++  "onboardingStep2Paragraph1": "الولاء يمنح الزبائن نقاطاً عند الشراء، ويمكنهم استبدالها وفق القواعد التي تضبطها من الإعدادات.",
++  "onboardingStep2Paragraph2": "البرنامج مرتبط بملفات العملاء؛ كلما كانت بيانات العملاء أوضح، كانت المتابعة أسهل.",
++  "onboardingStep2Paragraph3": "يمكنك تشغيل الميزة الآن وتعديل نسب الجمع والاستبدال لاحقاً دون إعادة هذا المعالج.",
++  "onboardingStep2Example1": "مثال: كل 10,000 د.ع تمنح 10 نقاط حسب القاعدة التي تختارها.",
++  "onboardingStep2Example2": "مثال: عميل جمع نقاطاً كافية فيستبدلها بخصم في فاتورة لاحقة.",
++  "onboardingStep2SwitchLabel": "تفعيل نقاط الولاء",
++  "onboardingStep2Footnote": "يتطلّب تفعيل وحدة العملاء في الخطوة السابقة؛ إن لم تكن مفعّلة، لن يعمل الولاء حتى تعيد تفعيل العملاء.",
++  "onboardingStep3Question": "هل تستخدم الضريبة عند البيع؟",
++  "onboardingStep3Paragraph1": "عند التفعيل يظهر في فاتورة البيع حقل واضح للضريبة بحيث تحسب مع الإجمالي بطريقة متسقة.",
++  "onboardingStep3Paragraph2": "مناسب للمتاجر التي تطبّق نسبة ضريبة معروفة على السلع أو الخدمات.",
++  "onboardingStep3Paragraph3": "يمكنك ضبط السلوك التفصيلي من إعدادات نقطة البيع بعد إنهاء الإعداد السريع.",
++  "onboardingStep3Example1": "مثال: فاتورة قيمتها 100,000 د.ع وتضيف عليها نسبة ضريبة محددة.",
++  "onboardingStep3Example2": "مثال: الموظف يرى الضريبة والإجمالي النهائي داخل نفس فاتورة البيع.",
++  "onboardingStep3SwitchLabel": "إظهار الضريبة في فاتورة البيع",
++  "onboardingStep4Question": "هل تسمح بالخصم على إجمالي الفاتورة؟",
++  "onboardingStep4Paragraph1": "الخصم الإجمالي مفيد للعروض الموسمية أو التفاوض على السعر أمام الزبون دون تعديل سعر كل صنف.",
++  "onboardingStep4Paragraph2": "يظهر الحقل في شاشة البيع بحيث يكمّل الفاتورة دون تعقيد إضافي للموظف.",
++  "onboardingStep4Paragraph3": "يمكنك إيقافه لاحقاً إذا قررت العمل بأسعار ثابتة فقط.",
++  "onboardingStep4Example1": "مثال: تمنح خصماً عاماً 5,000 د.ع على فاتورة كبيرة.",
++  "onboardingStep4Example2": "مثال: عرض خاص ليوم واحد دون تغيير أسعار المنتجات الأساسية.",
++  "onboardingStep4SwitchLabel": "إظهار الخصم الإجمالي في الفاتورة",
++  "onboardingStep5Question": "هل تبيع بالدّين (بيع آجل)؟",
++  "onboardingStep5Paragraph1": "التفعيل يفتح لوحة الديون ومتابعة المبالغ المستحقة على كل عميل مع تنبيهات وسقوف يمكن ضبطها.",
++  "onboardingStep5Paragraph2": "يناسب التجار الذين يثقون بزبائن معروفين ويحتاجون أرشيفاً واضحاً للآجلات.",
++  "onboardingStep5Paragraph3": "لا يمنع البيع النقدي؛ يضيف فقط خيار التسجيل كدين عند اختيار العميل والصلاحيات المناسبة.",
++  "onboardingStep5Example1": "مثال: زبون يأخذ بضاعة اليوم ويدفع نهاية الأسبوع.",
++  "onboardingStep5Example2": "مثال: تراجع كشف العميل فتجد المبلغ المدفوع والمتبقي بوضوح.",
++  "onboardingStep5SwitchLabel": "تفعيل البيع الآجل والديون",
++  "onboardingStep6Question": "هل تبيع بالتقسيط؟",
++  "onboardingStep6Paragraph1": "خطط الأقساط تتيح تقسيم ثمن الفاتورة على دفعات مجدولة مع متابعة ما تبقّى على العميل.",
++  "onboardingStep6Paragraph2": "مفيد للسلع ذات السعر المرتفع أو العقود طويلة الأمد.",
++  "onboardingStep6Paragraph3": "التفاصيل الدقيقة للجدولة تُدار من الوحدات المخصصة بعد إتمام هذا الإعداد.",
++  "onboardingStep6Example1": "مثال: جهاز قيمته 600,000 د.ع يُدفع على 6 دفعات شهرية.",
++  "onboardingStep6Example2": "مثال: ترى الدفعات القادمة والمتأخرة لكل عميل من مكان واحد.",
++  "onboardingStep6SwitchLabel": "تفعيل البيع بالتقسيط",
++  "onboardingStep7Question": "هل تبيع بالوزن (كيلو، غرام، إلخ)؟",
++  "onboardingStep7Paragraph1": "التفعيل يجهّز واجهة البيع والباركود بحيث تدعم أوزاناً وكميات عشرية حيث يلزم.",
++  "onboardingStep7Paragraph2": "مناسب للمواد الغذائية، الحديد، أو أي نشاط يعتمد الميزان.",
++  "onboardingStep7Paragraph3": "يمكن ضبط أنماط الباركود بالوزن من الإعدادات المتقدمة بعد متابعة هذا المعالج.",
++  "onboardingStep7Example1": "مثال: بيع 1.250 كغم من منتج بدلاً من قطعة واحدة.",
++  "onboardingStep7Example2": "مثال: قراءة باركود ميزان يحتوي وزن المنتج وسعره تلقائياً.",
++  "onboardingStep7SwitchLabel": "تفعيل البيع بالوزن",
++  "onboardingStep8Question": "هل تبيع ملابس (ألوان ومقاسات)؟",
++  "onboardingStep8Paragraph1": "التفعيل يجهّز شاشات المنتجات والبيع لدعم تباين الأصناف (الألوان والقياسات المختلفة لنفس الموديل).",
++  "onboardingStep8Paragraph2": "يسهل تتبع مخزون كل لون أو مقاس على حدة وإظهار نافذة التحديد التفاعلية عند البيع.",
++  "onboardingStep8Example1": "مثال: قميص متوفر باللون الأزرق والأسود، وبقياسات S و M و L.",
++  "onboardingStep8Example2": "مثال: اختيار قطعة الملابس يفتح نافذة منبثقة سريعة لاختيار المقاس واللون المتاحين بالمخزون.",
++  "onboardingStep8SwitchLabel": "تفعيل وحدة الملابس والقياسات",
++  "onboardingStep9Question": "هل تقدّم خدمات معينة (صيانة، ورشة، إلخ)؟",
++  "onboardingStep9Paragraph1": "التفعيل يظهر وحدة الخدمات والصيانة كاملة: تذاكر عمل، طلبات الصيانة، ودليل الخدمات والأسعار.",
++  "onboardingStep9Paragraph2": "مفيدة للمشاغل، مراكز الصيانة، وأي نشاط يعتمد تقديم خدمات للعملاء إلى جانب بيع المواد.",
++  "onboardingStep9Example1": "مثال: فتح تذكرة صيانة لجهاز كمبيوتر أو سيارة وتعيين حالة العمل.",
++  "onboardingStep9Example2": "مثال: إضافة خدمة تركيب أو صيانة سريعة لفاتورة البيع.",
++  "onboardingStep9SwitchLabel": "تفعيل الخدمات وتذاكر الصيانة",
++  "invoicesLabel": "الفواتير",
++  "invoicesListLabel": "قائمة الفواتير",
++  "newSaleLabel": "بيع جديد",
++  "parkedSalesLabel": "معلّقة مؤقتاً",
++  "posSettingsLabel": "إعدادات نقطة البيع",
++  "customersLabel": "العملاء",
++  "customersManageLabel": "إدارة العملاء",
++  "addNewCustomerLabel": "إضافة عميل جديد",
++  "addCustomerBreadcrumb": "إضافة عميل",
++  "contactListLabel": "قائمة الاتصال",
++  "customerLoyaltySettingsLabel": "إعدادات العميل (الولاء)",
++  "customerLoyaltyLabel": "ولاء العملاء",
++  "loyaltyPointsSettingsLabel": "إعدادات النقاط والاستبدال",
++  "loyaltyLedgerLabel": "سجل حركات النقاط",
++  "installmentsLabel": "الأقساط",
++  "installmentPlansLabel": "خطط التقسيط",
++  "installmentSettingsLabel": "إعدادات تقسيط",
++  "debtsLabel": "الديون",
++  "debtsPanelLabel": "لوحة الديون (آجل)",
++  "debtSettingsLabel": "إعدادات الدين",
++  "inventoryLabel": "المخزون",
++  "productListLabel": "قائمة المنتجات",
++  "addNewProductLabel": "إضافة منتج جديد",
++  "updateExistingProductLabel": "تحديث منتج موجود",
++  "printBarcodeLabelsLabel": "طباعة ملصقات باركود",
++  "inventoryMovementsLabel": "حركات المخزون",
++  "warehousesLabel": "المستودعات",
++  "stocktakingLabel": "الجرد الدوري",
++  "purchaseOrdersLabel": "أوامر الشراء",
++  "stockAnalyticsLabel": "تحليلات المخزون",
++  "inventorySettingsLabel": "إعدادات المخزون",
++  "servicesAndMaintenanceLabel": "الخدمات والصيانة",
++  "servicesAndMaintenancePanelLabel": "لوحة الخدمات والصيانة",
++  "addTechnicalServiceLabel": "إضافة خدمة فنية",
++  "maintenanceRequestsLabel": "طلبات الصيانة وتذاكر العمل",
++  "cashRegisterLabel": "الصندوق",
++  "expensesLabel": "المصروفات",
++  "reportsLabel": "التقارير",
++  "usersLabel": "المستخدمين",
++  "manageUsersLabel": "إدارة المستخدمين",
++  "staffShiftsWeekLabel": "ورديات الموظفين (أسبوع)",
++  "staffIdentitiesLabel": "هويات الموظفين",
++  "printingLabel": "الطباعة",
++  "homeLabel": "الرئيسية",
++  "defaultUserFallback": "المستخدم",
++  "logoutLabel": "تسجيل الخروج",
++  "logoutConfirmMessage": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
++  "confirmAction": "تأكيد",
++  "searchFailedSnackbar": "تعذر إكمال البحث: {error}",
++  "addProductLabel": "إضافة منتج",
++  "shiftTooltipWithName": "وردية: {name} — إغلاق",
++  "closeShiftTooltip": "إغلاق الوردية",
++  "syncFailedTooltip": "تزامن — فشل آخر محاولة",
++  "cloudSyncTooltip": "تزامن سحابي",
++  "syncStartingSnackbar": "بدء التزامن…",
++  "notificationsTooltip": "التنبيهات",
++  "settingsLabel": "الإعدادات",
++  "copyLabel": "نسخ",
++  "copiedSnackbar": "تم النسخ",
++  "userInfoTitle": "بيانات المستخدم",
++  "displayNameFieldLabel": "الاسم المعروض:",
++  "usernameFieldLabel": "اسم الدخول:",
++  "roleFieldLabel": "الصلاحية:",
++  "emailFieldLabel": "البريد الإلكتروني:",
++  "closeAction": "إغلاق",
++  "barcodeScanTooltip": "قراءة باركود (كاميرا على الجهاز المحمول، أو نافذة القارئ على الحاسوب)",
++  "hideKeyboardTooltip": "إخفاء لوحة المفاتيح",
++  "keyboardDragPinHint": "لوحة مفاتيح عربي / English — اسحب من المقبض أو ثبّتها بالدبوس",
++  "clearSearchTooltip": "مسح البحث",
++  "searchToolsTooltip": "أدوات البحث",
++  "showKeyboardTooltip": "إظهار لوحة المفاتيح (عربي / English)",
++  "quickSearchHint": "بحث سريع: وحدات، منتجات، عملاء…",
++  "fullSearchHint": "بحث: وحدات، منتجات، عملاء، موظفون، باركود…",
++  "collapseMenuTooltip": "طي القائمة",
++  "expandMenuTooltip": "توسيع القائمة",
++  "restrictedModeTooltip": "غير متاح في الوضع المقيّد",
++  "paymentTypeCash": "نقدي",
++  "paymentTypeCredit": "دين",
++  "paymentTypeInstallment": "تقسيط",
++  "paymentTypeDelivery": "توصيل",
++  "paymentTypeDebtCollection": "تحصيل دين",
++  "paymentTypeInstallmentCollection": "تسديد قسط",
++  "paymentTypeSupplierPayment": "دفع مورد",
++  "noInvoiceWithNumber": "لا توجد فاتورة برقم {id}",
++  "invoiceAlreadyReturned": "هذه الفاتورة مسجّلة كمرتجع مسبقاً",
++  "invoiceNotOpenableAsReturn": "هذا السند لا يُفتَح كمرتجع بيع — عكس الدفعة من شاشة المورد أو إدارة الأقساط حسب النوع.",
++  "salesInvoiceNumber": "فاتورة بيع #{id}",
++  "emptyPlaceholder": "(فارغ)",
++  "returnInvoiceDialogBody": "العميل: {customer}\nالدفع: {paymentType}\nالإجمالي: {total}\n\nفتح شاشة المرتجع؟ يمكنك تقليل الكمية أو حذف الأسطر لإرجاع جزئي فقط.",
++  "returnLabel": "مرتجع",
++  "returnNumber": "مرتجع #{id}",
++  "scanQrBarcodeTitle": "مسح QR / Barcode",
++  "pointsLedgerShortLabel": "سجل النقاط",
++  "staffShiftsLabel": "ورديات الموظفين",
++  "shiftStaffFallback": "موظف الوردية",
++  "itemsLabel": "الأصناف",
++  "noResultsFor": "لا توجد نتائج لـ «{query}»",
++  "modulesLabel": "الوحدات",
++  "openModuleLabel": "فتح الوحدة",
++  "productsLabel": "المنتجات",
++  "sellPriceIqd": "بيع {price} د.ع",
++  "viewCustomersLabel": "عرض العملاء",
++  "staffLabel": "الموظفون",
++  "viewStaffLabel": "عرض الموظفين",
++  "technicalServiceLabel": "خدمة فنية",
++  "notStockTracked": "غير متتبّع للمخزون",
++  "availableUnknown": "المتوفر: —",
++  "availableZero": "المتوفر: 0",
++  "availableQty": "المتوفر: {qty}",
++  "negativeStockWarning": "رصيد سالب {qty} — بيع زائد قدره {soldOver} عن آخر رصيد",
++  "chooseFromListBelow": "اختر من القائمة أدناه",
++  "viewAllLabel": "عرض الكل",
++  "untitledLabel": "بدون عنوان",
++  "deleteParkedSaleTitle": "حذف الفاتورة المعلّقة؟",
++  "deleteParkedSaleBody": "سيتم حذف «{label}» نهائياً من الجهاز.",
++  "deleteAction": "حذف",
++  "deletedSnackbar": "تم الحذف",
++  "parkedSalesScreenTitle": "فواتير معلّقة مؤقتاً",
++  "noParkedSalesTitle": "لا توجد فواتير معلّقة",
++  "noParkedSalesHint": "من شاشة البيع اضغط «تعليق الفاتورة» لحفظ العمل الحالي وخدمة عميل آخر.",
++  "parkedSaleSummaryLine": "{count} صنف · ≈ {total} د.ع",
++  "lastUpdatedLabel": "آخر تحديث: {date}",
++  "resumeSaleTooltip": "متابعة البيع",
++  "allLabel": "الكل",
++  "paidStatus": "مدفوعة",
++  "unpaidStatus": "غير مدفوعة",
++  "cannotShowInvoiceNoId": "لا يمكن عرض فاتورة بدون رقم",
++  "invoiceNotFound": "الفاتورة غير موجودة",
++  "flatViewOption": "عرض مفرد (بدون تجميع بالوردية)",
++  "groupByShiftOption": "تجميع حسب الوردية",
++  "advancedFilterLabel": "تصفية متقدمة",
++  "shiftsCalendarLabel": "تقويم الورديات",
++  "moreLabel": "المزيد",
++  "parkedInvoicesShortLabel": "فواتير معلّقة",
++  "saleLabel": "البيع",
++  "totalLabel": "الإجمالي",
++  "sortLabel": "ترتيب",
++  "sortNewestFirst": "الأحدث أولاً",
++  "sortOldestFirst": "الأقدم أولاً",
++  "sortHighestAmount": "الأعلى مبلغاً",
++  "sortLowestAmount": "الأقل مبلغاً",
++  "searchInvoicesHint": "بحث باسم العميل أو رقم الفاتورة أو هاتف العميل...",
++  "shiftNumberLabel": "وردية #{id}",
++  "noShiftGroupLabel": "بدون وردية — فواتير قديمة أو خارج جلسة وردية ({count})",
++  "shiftLoadFailedLabel": "وردية #{id} — تعذر تحميل تفاصيل الوردية ({count} فاتورة)",
++  "openStatus": "مفتوحة",
++  "shiftWithNameLabel": "وردية #{id} — {name}",
++  "invoiceCountLabel": "{count} فاتورة",
++  "totalIqd": "{amount} د.ع",
++  "itemsAndDiscountLine": "{count} صنف · خصم {discount} د.ع",
++  "shiftColonLabel": "وردية: {name}",
++  "createReturnInvoiceTooltip": "إنشاء فاتورة ترجيع لهذه الفاتورة",
++  "returnActionLabel": "ترجيع",
++  "noInvoicesTitle": "لا توجد فواتير",
++  "addFirstInvoiceCta": "أضف أول فاتورة الآن",
++  "sortOptionsTitle": "خيارات الترتيب",
++  "applyAction": "تطبيق"
+ }
+diff --git a/lib/l10n/app_en.arb b/lib/l10n/app_en.arb
+index a912747..685501e 100644
+--- a/lib/l10n/app_en.arb
++++ b/lib/l10n/app_en.arb
+@@ -125,5 +125,274 @@
+   "inactiveLicense": "Inactive",
+   "testTools": "Open Test Tools…",
+   "basraStore": "Basra Store",
+-  "basraIraq": "Basra, Iraq"
++  "basraIraq": "Basra, Iraq",
++  "deviceRevokedTitle": "This device has been removed from the account",
++  "deviceRevokedBody": "You can't sign in from this device until one of the account's active devices approves it, from Settings → Account & Subscription → \"Allow Return\".",
++  "backToLoginAction": "Back to login",
++  "otpEnterFullCode": "Enter the full code ({digits} digits as sent by email)",
++  "otpResentSuccess": "Verification code resent",
++  "back": "Back",
++  "emailVerificationTitle": "Email verification",
++  "otpSentToEmailShort": "We sent a {digits}-digit code to your email",
++  "enterVerificationCode": "Enter the verification code",
++  "otpSentToEmailDetailed": "A {digits}-digit code was sent to\n{email}",
++  "verifyAndCreateAccount": "Verify and create account",
++  "resendInSeconds": "Resend in {seconds} seconds",
++  "resendCode": "Resend code",
++  "editData": "Edit details",
++  "emailRequired": "Email is required",
++  "emailInvalidFormat": "Invalid email format",
++  "enterYourEmail": "Enter your email",
++  "forgotPasswordSendCodeHint": "We'll send you a verification code to reset your password",
++  "sendVerificationCode": "Send verification code",
++  "otpSentToEmailColon": "A {digits}-digit code was sent to:\n{email}",
++  "continueAction": "Continue",
++  "editEmail": "Edit email",
++  "passwordUpdateSuccess": "Password updated successfully",
++  "setNewPasswordTitle": "Set a new password",
++  "newPasswordLabel": "New password",
++  "enterNewPasswordHint": "Enter your new password",
++  "enterPasswordValidation": "Enter a password",
++  "minLength8Chars": "Must be at least 8 characters",
++  "confirmPasswordLabel": "Confirm password",
++  "confirmPasswordHint": "Re-enter your password",
++  "passwordMismatch": "Passwords don't match",
++  "passwordRequirementsTitle": "Password requirements (optional)",
++  "reqMinLength": "At least 8 characters",
++  "reqUppercase": "Uppercase letter (A-Z)",
++  "reqLowercase": "Lowercase letter (a-z)",
++  "reqDigit": "Number (0-9)",
++  "reqSpecialChar": "Special character (!@#...)",
++  "deviceKickedOutTitle": "This device was disconnected from the account",
++  "deviceKickedOutBody": "Your session on this device has ended. The next time you open the app, you'll see the usual login screen.",
++  "goToLoginAction": "Go to login",
++  "exitAction": "Exit",
++  "closeWindowHint": "You can close this window or use the button above.",
++  "appWillCloseHint": "The app will close",
++  "onboardingChangeLaterHint": "You can change these options later from Settings → Business Features.",
++  "businessFeaturesWizardTitle": "Business Features",
++  "quickAppSetupTitle": "Quick App Setup",
++  "stepXofY": "Step {current} of {total}",
++  "previousAction": "Previous",
++  "nextAction": "Next",
++  "practicalExamplesLabel": "Practical examples",
++  "onboardingStep1Question": "Do you use customers in your business?",
++  "onboardingStep1Paragraph1": "When enabled, you get the full customer module: a card for each customer, purchase history, and quick tracking from the invoice.",
++  "onboardingStep1Paragraph2": "You can link every sale to a specific customer, which makes reporting easier later and creates a more consistent experience for repeat customers.",
++  "onboardingStep1Paragraph3": "If you do a quick cash sale without a name, that stays available — enabling this doesn't force you to pick a customer every time.",
++  "onboardingStep1Example1": "Example: a regular customer who buys daily — you save their name and quickly see their latest invoices.",
++  "onboardingStep1Example2": "Example: when there's a debt or loyalty points, they show up linked to the same customer instead of manual searching.",
++  "onboardingStep1SwitchLabel": "Enable customer module",
++  "onboardingStep2Question": "Do you want a loyalty points program?",
++  "onboardingStep2Paragraph1": "Loyalty gives customers points on purchases, which they can redeem according to rules you set in Settings.",
++  "onboardingStep2Paragraph2": "The program is linked to customer profiles — the clearer your customer data, the easier it is to track.",
++  "onboardingStep2Paragraph3": "You can turn the feature on now and adjust the earn/redeem rates later without redoing this wizard.",
++  "onboardingStep2Example1": "Example: every 10,000 IQD earns 10 points, based on the rule you choose.",
++  "onboardingStep2Example2": "Example: a customer who's collected enough points redeems them for a discount on a later invoice.",
++  "onboardingStep2SwitchLabel": "Enable loyalty points",
++  "onboardingStep2Footnote": "Requires the customer module enabled in the previous step; if it isn't, loyalty won't work until you re-enable customers.",
++  "onboardingStep3Question": "Do you charge tax on sales?",
++  "onboardingStep3Paragraph1": "When enabled, a clear tax field appears on the sales invoice so it's calculated consistently with the total.",
++  "onboardingStep3Paragraph2": "Suitable for stores that apply a known tax rate on goods or services.",
++  "onboardingStep3Paragraph3": "You can fine-tune the detailed behavior from POS settings after finishing this quick setup.",
++  "onboardingStep3Example1": "Example: an invoice worth 100,000 IQD with a set tax percentage added on top.",
++  "onboardingStep3Example2": "Example: the staff member sees the tax and final total within the same sales invoice.",
++  "onboardingStep3SwitchLabel": "Show tax on sales invoice",
++  "onboardingStep4Question": "Do you allow a discount on the invoice total?",
++  "onboardingStep4Paragraph1": "An overall discount is useful for seasonal offers or negotiating price in front of the customer without changing each item's price.",
++  "onboardingStep4Paragraph2": "The field appears on the sales screen so it completes the invoice without adding extra complexity for staff.",
++  "onboardingStep4Paragraph3": "You can turn it off later if you decide to work with fixed prices only.",
++  "onboardingStep4Example1": "Example: you give a flat 5,000 IQD discount on a large invoice.",
++  "onboardingStep4Example2": "Example: a one-day special offer without changing the base product prices.",
++  "onboardingStep4SwitchLabel": "Show overall discount on invoice",
++  "onboardingStep5Question": "Do you sell on credit (deferred payment)?",
++  "onboardingStep5Paragraph1": "Enabling this opens the debts panel and tracks amounts owed by each customer, with adjustable alerts and limits.",
++  "onboardingStep5Paragraph2": "Suits merchants who trust known customers and need a clear record of deferred sales.",
++  "onboardingStep5Paragraph3": "It doesn't stop cash sales — it just adds the option to record a sale as debt when selecting a customer with the right permissions.",
++  "onboardingStep5Example1": "Example: a customer takes goods today and pays at the end of the week.",
++  "onboardingStep5Example2": "Example: you check a customer's statement and clearly see what's paid and what's still owed.",
++  "onboardingStep5SwitchLabel": "Enable credit sales and debts",
++  "onboardingStep6Question": "Do you sell on installments?",
++  "onboardingStep6Paragraph1": "Installment plans let you split an invoice's price into scheduled payments while tracking what's left owed by the customer.",
++  "onboardingStep6Paragraph2": "Useful for higher-priced goods or long-term contracts.",
++  "onboardingStep6Paragraph3": "The fine details of scheduling are managed from dedicated modules after finishing this setup.",
++  "onboardingStep6Example1": "Example: a device worth 600,000 IQD paid over 6 monthly installments.",
++  "onboardingStep6Example2": "Example: you see upcoming and overdue payments for each customer in one place.",
++  "onboardingStep6SwitchLabel": "Enable installment sales",
++  "onboardingStep7Question": "Do you sell by weight (kilo, gram, etc.)?",
++  "onboardingStep7Paragraph1": "Enabling this prepares the sales interface and barcodes to support weights and decimal quantities where needed.",
++  "onboardingStep7Paragraph2": "Suitable for groceries, hardware, or any business that relies on a scale.",
++  "onboardingStep7Paragraph3": "You can configure weight-based barcode formats from advanced settings after this wizard.",
++  "onboardingStep7Example1": "Example: selling 1.250 kg of a product instead of a single piece.",
++  "onboardingStep7Example2": "Example: scanning a scale barcode that automatically contains the product's weight and price.",
++  "onboardingStep7SwitchLabel": "Enable sales by weight",
++  "onboardingStep8Question": "Do you sell clothing (colors and sizes)?",
++  "onboardingStep8Paragraph1": "Enabling this prepares product and sales screens to support item variants (different colors and sizes of the same model).",
++  "onboardingStep8Paragraph2": "Makes it easier to track stock for each color or size separately and shows a quick interactive picker at the time of sale.",
++  "onboardingStep8Example1": "Example: a shirt available in blue and black, in sizes S, M, and L.",
++  "onboardingStep8Example2": "Example: selecting a clothing item opens a quick popup to pick the available size and color in stock.",
++  "onboardingStep8SwitchLabel": "Enable clothing and sizes module",
++  "onboardingStep9Question": "Do you offer specific services (repairs, workshop, etc.)?",
++  "onboardingStep9Paragraph1": "Enabling this reveals the full services and maintenance module: work tickets, service requests, and a services and pricing catalog.",
++  "onboardingStep9Paragraph2": "Useful for workshops, service centers, and any business that provides services to customers alongside selling goods.",
++  "onboardingStep9Example1": "Example: opening a maintenance ticket for a computer or car and setting the job status.",
++  "onboardingStep9Example2": "Example: adding an installation or quick maintenance service to a sales invoice.",
++  "onboardingStep9SwitchLabel": "Enable services and maintenance tickets",
++  "invoicesLabel": "Invoices",
++  "invoicesListLabel": "Invoice list",
++  "newSaleLabel": "New sale",
++  "parkedSalesLabel": "Parked sales",
++  "posSettingsLabel": "POS settings",
++  "customersLabel": "Customers",
++  "customersManageLabel": "Manage customers",
++  "addNewCustomerLabel": "Add new customer",
++  "addCustomerBreadcrumb": "Add customer",
++  "contactListLabel": "Contact list",
++  "customerLoyaltySettingsLabel": "Customer settings (loyalty)",
++  "customerLoyaltyLabel": "Customer loyalty",
++  "loyaltyPointsSettingsLabel": "Points and redemption settings",
++  "loyaltyLedgerLabel": "Points activity log",
++  "installmentsLabel": "Installments",
++  "installmentPlansLabel": "Installment plans",
++  "installmentSettingsLabel": "Installment settings",
++  "debtsLabel": "Debts",
++  "debtsPanelLabel": "Debts panel (credit)",
++  "debtSettingsLabel": "Debt settings",
++  "inventoryLabel": "Inventory",
++  "productListLabel": "Product list",
++  "addNewProductLabel": "Add new product",
++  "updateExistingProductLabel": "Update existing product",
++  "printBarcodeLabelsLabel": "Print barcode labels",
++  "inventoryMovementsLabel": "Inventory movements",
++  "warehousesLabel": "Warehouses",
++  "stocktakingLabel": "Periodic stocktaking",
++  "purchaseOrdersLabel": "Purchase orders",
++  "stockAnalyticsLabel": "Stock analytics",
++  "inventorySettingsLabel": "Inventory settings",
++  "servicesAndMaintenanceLabel": "Services & maintenance",
++  "servicesAndMaintenancePanelLabel": "Services & maintenance panel",
++  "addTechnicalServiceLabel": "Add technical service",
++  "maintenanceRequestsLabel": "Maintenance requests & work tickets",
++  "cashRegisterLabel": "Cash register",
++  "expensesLabel": "Expenses",
++  "reportsLabel": "Reports",
++  "usersLabel": "Users",
++  "manageUsersLabel": "Manage users",
++  "staffShiftsWeekLabel": "Staff shifts (week)",
++  "staffIdentitiesLabel": "Staff identities",
++  "printingLabel": "Printing",
++  "homeLabel": "Home",
++  "defaultUserFallback": "User",
++  "logoutLabel": "Log out",
++  "logoutConfirmMessage": "Are you sure you want to log out?",
++  "confirmAction": "Confirm",
++  "searchFailedSnackbar": "Couldn't complete search: {error}",
++  "addProductLabel": "Add product",
++  "shiftTooltipWithName": "Shift: {name} — close",
++  "closeShiftTooltip": "Close shift",
++  "syncFailedTooltip": "Sync — last attempt failed",
++  "cloudSyncTooltip": "Cloud sync",
++  "syncStartingSnackbar": "Starting sync…",
++  "notificationsTooltip": "Notifications",
++  "settingsLabel": "Settings",
++  "copyLabel": "Copy",
++  "copiedSnackbar": "Copied",
++  "userInfoTitle": "User info",
++  "displayNameFieldLabel": "Display name:",
++  "usernameFieldLabel": "Username:",
++  "roleFieldLabel": "Role:",
++  "emailFieldLabel": "Email:",
++  "closeAction": "Close",
++  "barcodeScanTooltip": "Scan barcode (camera on mobile, or reader window on desktop)",
++  "hideKeyboardTooltip": "Hide keyboard",
++  "keyboardDragPinHint": "Arabic / English keyboard — drag by the handle or pin it",
++  "clearSearchTooltip": "Clear search",
++  "searchToolsTooltip": "Search tools",
++  "showKeyboardTooltip": "Show keyboard (Arabic / English)",
++  "quickSearchHint": "Quick search: modules, products, customers…",
++  "fullSearchHint": "Search: modules, products, customers, staff, barcode…",
++  "collapseMenuTooltip": "Collapse menu",
++  "expandMenuTooltip": "Expand menu",
++  "restrictedModeTooltip": "Not available in restricted mode",
++  "paymentTypeCash": "Cash",
++  "paymentTypeCredit": "Credit",
++  "paymentTypeInstallment": "Installment",
++  "paymentTypeDelivery": "Delivery",
++  "paymentTypeDebtCollection": "Debt collection",
++  "paymentTypeInstallmentCollection": "Installment payment",
++  "paymentTypeSupplierPayment": "Supplier payment",
++  "noInvoiceWithNumber": "No invoice with number {id}",
++  "invoiceAlreadyReturned": "This invoice is already recorded as returned",
++  "invoiceNotOpenableAsReturn": "This voucher can't be opened as a sales return — reverse the payment from the supplier screen or installments management depending on its type.",
++  "salesInvoiceNumber": "Sales invoice #{id}",
++  "emptyPlaceholder": "(empty)",
++  "returnInvoiceDialogBody": "Customer: {customer}\nPayment: {paymentType}\nTotal: {total}\n\nOpen the return screen? You can reduce quantities or remove lines for a partial return only.",
++  "returnLabel": "Return",
++  "returnNumber": "Return #{id}",
++  "scanQrBarcodeTitle": "Scan QR / Barcode",
++  "pointsLedgerShortLabel": "Points log",
++  "staffShiftsLabel": "Staff shifts",
++  "shiftStaffFallback": "Shift staff",
++  "itemsLabel": "Items",
++  "noResultsFor": "No results for «{query}»",
++  "modulesLabel": "Modules",
++  "openModuleLabel": "Open module",
++  "productsLabel": "Products",
++  "sellPriceIqd": "Sell {price} IQD",
++  "viewCustomersLabel": "View customers",
++  "staffLabel": "Staff",
++  "viewStaffLabel": "View staff",
++  "technicalServiceLabel": "Technical service",
++  "notStockTracked": "Not stock-tracked",
++  "availableUnknown": "Available: —",
++  "availableZero": "Available: 0",
++  "availableQty": "Available: {qty}",
++  "negativeStockWarning": "Negative balance {qty} — oversold by {soldOver} beyond last balance",
++  "chooseFromListBelow": "Choose from the list below",
++  "viewAllLabel": "View all",
++  "untitledLabel": "Untitled",
++  "deleteParkedSaleTitle": "Delete parked sale?",
++  "deleteParkedSaleBody": "«{label}» will be permanently deleted from this device.",
++  "deleteAction": "Delete",
++  "deletedSnackbar": "Deleted",
++  "parkedSalesScreenTitle": "Parked sales",
++  "noParkedSalesTitle": "No parked sales",
++  "noParkedSalesHint": "From the sale screen, tap «Park sale» to save the current work and serve another customer.",
++  "parkedSaleSummaryLine": "{count} items · ≈ {total} IQD",
++  "lastUpdatedLabel": "Last updated: {date}",
++  "resumeSaleTooltip": "Resume sale",
++  "allLabel": "All",
++  "paidStatus": "Paid",
++  "unpaidStatus": "Unpaid",
++  "cannotShowInvoiceNoId": "Can't display an invoice without a number",
++  "invoiceNotFound": "Invoice not found",
++  "flatViewOption": "Flat view (no shift grouping)",
++  "groupByShiftOption": "Group by shift",
++  "advancedFilterLabel": "Advanced filter",
++  "shiftsCalendarLabel": "Shifts calendar",
++  "moreLabel": "More",
++  "parkedInvoicesShortLabel": "Parked invoices",
++  "saleLabel": "Sale",
++  "totalLabel": "Total",
++  "sortLabel": "Sort",
++  "sortNewestFirst": "Newest first",
++  "sortOldestFirst": "Oldest first",
++  "sortHighestAmount": "Highest amount",
++  "sortLowestAmount": "Lowest amount",
++  "searchInvoicesHint": "Search by customer name, invoice number, or customer phone...",
++  "shiftNumberLabel": "Shift #{id}",
++  "noShiftGroupLabel": "No shift — old invoices or outside a shift session ({count})",
++  "shiftLoadFailedLabel": "Shift #{id} — couldn't load shift details ({count} invoices)",
++  "openStatus": "Open",
++  "shiftWithNameLabel": "Shift #{id} — {name}",
++  "invoiceCountLabel": "{count} invoices",
++  "totalIqd": "{amount} IQD",
++  "itemsAndDiscountLine": "{count} items · discount {discount} IQD",
++  "shiftColonLabel": "Shift: {name}",
++  "createReturnInvoiceTooltip": "Create a return invoice for this invoice",
++  "returnActionLabel": "Return",
++  "noInvoicesTitle": "No invoices",
++  "addFirstInvoiceCta": "Add your first invoice now",
++  "sortOptionsTitle": "Sort options",
++  "applyAction": "Apply"
+ }
+diff --git a/lib/l10n/app_fr.arb b/lib/l10n/app_fr.arb
+index cf13409..e563b9a 100644
+--- a/lib/l10n/app_fr.arb
++++ b/lib/l10n/app_fr.arb
+@@ -125,5 +125,274 @@
+   "inactiveLicense": "Inactif",
+   "testTools": "Ouvrir les Outils de Test…",
+   "basraStore": "Magasin de Basra",
+-  "basraIraq": "Basra, Irak"
++  "basraIraq": "Basra, Irak",
++  "deviceRevokedTitle": "Cet appareil a été retiré du compte",
++  "deviceRevokedBody": "Vous ne pouvez pas vous connecter depuis cet appareil tant qu'un des appareils actifs du compte ne l'approuve pas, depuis Paramètres → Compte et abonnement → « Autoriser le retour ».",
++  "backToLoginAction": "Retour à la connexion",
++  "otpEnterFullCode": "Entrez le code complet ({digits} chiffres comme indiqué dans l'e-mail)",
++  "otpResentSuccess": "Code de vérification renvoyé",
++  "back": "Retour",
++  "emailVerificationTitle": "Vérification de l'e-mail",
++  "otpSentToEmailShort": "Nous avons envoyé un code à {digits} chiffres à votre e-mail",
++  "enterVerificationCode": "Entrez le code de vérification",
++  "otpSentToEmailDetailed": "Un code à {digits} chiffres a été envoyé à\n{email}",
++  "verifyAndCreateAccount": "Vérifier et créer le compte",
++  "resendInSeconds": "Renvoyer dans {seconds} secondes",
++  "resendCode": "Renvoyer le code",
++  "editData": "Modifier les informations",
++  "emailRequired": "L'e-mail est requis",
++  "emailInvalidFormat": "Format d'e-mail invalide",
++  "enterYourEmail": "Entrez votre e-mail",
++  "forgotPasswordSendCodeHint": "Nous vous enverrons un code de vérification pour réinitialiser votre mot de passe",
++  "sendVerificationCode": "Envoyer le code de vérification",
++  "otpSentToEmailColon": "Un code à {digits} chiffres a été envoyé à :\n{email}",
++  "continueAction": "Continuer",
++  "editEmail": "Modifier l'e-mail",
++  "passwordUpdateSuccess": "Mot de passe mis à jour avec succès",
++  "setNewPasswordTitle": "Définir un nouveau mot de passe",
++  "newPasswordLabel": "Nouveau mot de passe",
++  "enterNewPasswordHint": "Entrez votre nouveau mot de passe",
++  "enterPasswordValidation": "Entrez un mot de passe",
++  "minLength8Chars": "Doit contenir au moins 8 caractères",
++  "confirmPasswordLabel": "Confirmer le mot de passe",
++  "confirmPasswordHint": "Ressaisissez votre mot de passe",
++  "passwordMismatch": "Les mots de passe ne correspondent pas",
++  "passwordRequirementsTitle": "Exigences du mot de passe (facultatif)",
++  "reqMinLength": "Au moins 8 caractères",
++  "reqUppercase": "Lettre majuscule (A-Z)",
++  "reqLowercase": "Lettre minuscule (a-z)",
++  "reqDigit": "Chiffre (0-9)",
++  "reqSpecialChar": "Caractère spécial (!@#...)",
++  "deviceKickedOutTitle": "Cet appareil a été déconnecté du compte",
++  "deviceKickedOutBody": "Votre session sur cet appareil a été terminée. La prochaine fois que vous ouvrirez l'application, l'écran de connexion habituel s'affichera.",
++  "goToLoginAction": "Aller à la connexion",
++  "exitAction": "Quitter",
++  "closeWindowHint": "Vous pouvez fermer cette fenêtre ou utiliser le bouton ci-dessus.",
++  "appWillCloseHint": "L'application va se fermer",
++  "onboardingChangeLaterHint": "Vous pouvez modifier ces options plus tard depuis Paramètres → Fonctionnalités du magasin.",
++  "businessFeaturesWizardTitle": "Fonctionnalités du magasin",
++  "quickAppSetupTitle": "Configuration rapide de l'application",
++  "stepXofY": "Étape {current} sur {total}",
++  "previousAction": "Précédent",
++  "nextAction": "Suivant",
++  "practicalExamplesLabel": "Exemples pratiques",
++  "onboardingStep1Question": "Utilisez-vous des clients dans votre activité ?",
++  "onboardingStep1Paragraph1": "Une fois activé, vous obtenez le module client complet : une fiche pour chaque client, un historique d'achats et un suivi rapide depuis la facture.",
++  "onboardingStep1Paragraph2": "Vous pouvez lier chaque vente à un client précis, ce qui facilite les rapports par la suite et uniformise l'expérience pour les clients réguliers.",
++  "onboardingStep1Paragraph3": "Si vous faites une vente rapide au comptant sans nom, cela reste possible ; l'activation n'impose pas de choisir un client à chaque fois.",
++  "onboardingStep1Example1": "Exemple : un client régulier qui achète quotidiennement — vous enregistrez son nom et consultez rapidement ses dernières factures.",
++  "onboardingStep1Example2": "Exemple : en cas de dette ou de points de fidélité, ils apparaissent liés au même client au lieu d'une recherche manuelle.",
++  "onboardingStep1SwitchLabel": "Activer le module clients",
++  "onboardingStep2Question": "Voulez-vous un programme de points de fidélité ?",
++  "onboardingStep2Paragraph1": "La fidélité accorde des points aux clients lors des achats, qu'ils peuvent échanger selon les règles que vous définissez dans les paramètres.",
++  "onboardingStep2Paragraph2": "Le programme est lié aux profils clients ; plus les données clients sont claires, plus le suivi est facile.",
++  "onboardingStep2Paragraph3": "Vous pouvez activer la fonctionnalité maintenant et ajuster les taux d'acquisition et d'échange plus tard sans refaire cet assistant.",
++  "onboardingStep2Example1": "Exemple : chaque 10 000 IQD rapporte 10 points selon la règle choisie.",
++  "onboardingStep2Example2": "Exemple : un client ayant accumulé assez de points les échange contre une remise sur une facture ultérieure.",
++  "onboardingStep2SwitchLabel": "Activer les points de fidélité",
++  "onboardingStep2Footnote": "Nécessite l'activation du module clients à l'étape précédente ; s'il n'est pas activé, la fidélité ne fonctionnera pas tant que vous ne réactivez pas les clients.",
++  "onboardingStep3Question": "Appliquez-vous une taxe lors de la vente ?",
++  "onboardingStep3Paragraph1": "Une fois activé, un champ de taxe clair apparaît sur la facture de vente afin qu'elle soit calculée de façon cohérente avec le total.",
++  "onboardingStep3Paragraph2": "Convient aux commerces qui appliquent un taux de taxe connu sur les biens ou services.",
++  "onboardingStep3Paragraph3": "Vous pouvez ajuster le comportement détaillé depuis les paramètres du point de vente après cette configuration rapide.",
++  "onboardingStep3Example1": "Exemple : une facture de 100 000 IQD à laquelle un pourcentage de taxe déterminé est ajouté.",
++  "onboardingStep3Example2": "Exemple : l'employé voit la taxe et le total final dans la même facture de vente.",
++  "onboardingStep3SwitchLabel": "Afficher la taxe sur la facture de vente",
++  "onboardingStep4Question": "Autorisez-vous une remise sur le total de la facture ?",
++  "onboardingStep4Paragraph1": "La remise globale est utile pour les offres saisonnières ou pour négocier le prix devant le client sans modifier le prix de chaque article.",
++  "onboardingStep4Paragraph2": "Le champ apparaît sur l'écran de vente afin de compléter la facture sans complexité supplémentaire pour l'employé.",
++  "onboardingStep4Paragraph3": "Vous pouvez la désactiver plus tard si vous décidez de travailler uniquement avec des prix fixes.",
++  "onboardingStep4Example1": "Exemple : vous accordez une remise globale de 5 000 IQD sur une grosse facture.",
++  "onboardingStep4Example2": "Exemple : une offre spéciale d'un jour sans changer les prix de base des produits.",
++  "onboardingStep4SwitchLabel": "Afficher la remise globale sur la facture",
++  "onboardingStep5Question": "Vendez-vous à crédit (paiement différé) ?",
++  "onboardingStep5Paragraph1": "L'activation ouvre le panneau des dettes et le suivi des montants dus par chaque client, avec des alertes et des plafonds ajustables.",
++  "onboardingStep5Paragraph2": "Convient aux commerçants qui font confiance à des clients connus et ont besoin d'un historique clair des ventes à crédit.",
++  "onboardingStep5Paragraph3": "Cela n'empêche pas les ventes au comptant ; cela ajoute seulement l'option d'enregistrer une vente comme dette lors de la sélection d'un client avec les permissions appropriées.",
++  "onboardingStep5Example1": "Exemple : un client prend la marchandise aujourd'hui et paie en fin de semaine.",
++  "onboardingStep5Example2": "Exemple : vous consultez le relevé d'un client et voyez clairement le montant payé et le solde restant.",
++  "onboardingStep5SwitchLabel": "Activer les ventes à crédit et les dettes",
++  "onboardingStep6Question": "Vendez-vous à tempérament (paiement échelonné) ?",
++  "onboardingStep6Paragraph1": "Les plans d'échelonnement permettent de diviser le prix d'une facture en paiements programmés tout en suivant ce qu'il reste dû par le client.",
++  "onboardingStep6Paragraph2": "Utile pour les biens à prix élevé ou les contrats de longue durée.",
++  "onboardingStep6Paragraph3": "Les détails précis de l'échéancier sont gérés depuis les modules dédiés une fois cette configuration terminée.",
++  "onboardingStep6Example1": "Exemple : un appareil d'une valeur de 600 000 IQD payé en 6 mensualités.",
++  "onboardingStep6Example2": "Exemple : vous voyez les paiements à venir et en retard de chaque client au même endroit.",
++  "onboardingStep6SwitchLabel": "Activer les ventes à tempérament",
++  "onboardingStep7Question": "Vendez-vous au poids (kilo, gramme, etc.) ?",
++  "onboardingStep7Paragraph1": "L'activation prépare l'interface de vente et les codes-barres pour prendre en charge les poids et quantités décimales lorsque nécessaire.",
++  "onboardingStep7Paragraph2": "Convient à l'alimentation, à la quincaillerie, ou à toute activité reposant sur une balance.",
++  "onboardingStep7Paragraph3": "Vous pouvez configurer les formats de codes-barres au poids depuis les paramètres avancés après cet assistant.",
++  "onboardingStep7Example1": "Exemple : vendre 1,250 kg d'un produit plutôt qu'une seule pièce.",
++  "onboardingStep7Example2": "Exemple : lire un code-barres de balance contenant automatiquement le poids et le prix du produit.",
++  "onboardingStep7SwitchLabel": "Activer la vente au poids",
++  "onboardingStep8Question": "Vendez-vous des vêtements (couleurs et tailles) ?",
++  "onboardingStep8Paragraph1": "L'activation prépare les écrans de produits et de vente pour prendre en charge les variantes d'articles (couleurs et tailles différentes du même modèle).",
++  "onboardingStep8Paragraph2": "Facilite le suivi du stock de chaque couleur ou taille séparément et affiche une fenêtre de sélection rapide lors de la vente.",
++  "onboardingStep8Example1": "Exemple : une chemise disponible en bleu et noir, en tailles S, M et L.",
++  "onboardingStep8Example2": "Exemple : sélectionner un vêtement ouvre une fenêtre rapide pour choisir la taille et la couleur disponibles en stock.",
++  "onboardingStep8SwitchLabel": "Activer le module vêtements et tailles",
++  "onboardingStep9Question": "Proposez-vous des services spécifiques (réparation, atelier, etc.) ?",
++  "onboardingStep9Paragraph1": "L'activation affiche le module complet de services et maintenance : tickets de travail, demandes d'intervention, et catalogue des services et tarifs.",
++  "onboardingStep9Paragraph2": "Utile pour les ateliers, centres de service, et toute activité offrant des services aux clients en plus de la vente de marchandises.",
++  "onboardingStep9Example1": "Exemple : ouvrir un ticket de maintenance pour un ordinateur ou une voiture et définir le statut du travail.",
++  "onboardingStep9Example2": "Exemple : ajouter un service d'installation ou de maintenance rapide à une facture de vente.",
++  "onboardingStep9SwitchLabel": "Activer les services et tickets de maintenance",
++  "invoicesLabel": "Factures",
++  "invoicesListLabel": "Liste des factures",
++  "newSaleLabel": "Nouvelle vente",
++  "parkedSalesLabel": "Ventes en attente",
++  "posSettingsLabel": "Paramètres du point de vente",
++  "customersLabel": "Clients",
++  "customersManageLabel": "Gérer les clients",
++  "addNewCustomerLabel": "Ajouter un nouveau client",
++  "addCustomerBreadcrumb": "Ajouter un client",
++  "contactListLabel": "Liste de contacts",
++  "customerLoyaltySettingsLabel": "Paramètres client (fidélité)",
++  "customerLoyaltyLabel": "Fidélité client",
++  "loyaltyPointsSettingsLabel": "Paramètres des points et échanges",
++  "loyaltyLedgerLabel": "Historique des points",
++  "installmentsLabel": "Échelonnement",
++  "installmentPlansLabel": "Plans d'échelonnement",
++  "installmentSettingsLabel": "Paramètres d'échelonnement",
++  "debtsLabel": "Dettes",
++  "debtsPanelLabel": "Panneau des dettes (crédit)",
++  "debtSettingsLabel": "Paramètres des dettes",
++  "inventoryLabel": "Stock",
++  "productListLabel": "Liste des produits",
++  "addNewProductLabel": "Ajouter un nouveau produit",
++  "updateExistingProductLabel": "Mettre à jour un produit existant",
++  "printBarcodeLabelsLabel": "Imprimer des étiquettes code-barres",
++  "inventoryMovementsLabel": "Mouvements de stock",
++  "warehousesLabel": "Entrepôts",
++  "stocktakingLabel": "Inventaire périodique",
++  "purchaseOrdersLabel": "Bons de commande",
++  "stockAnalyticsLabel": "Analyses de stock",
++  "inventorySettingsLabel": "Paramètres du stock",
++  "servicesAndMaintenanceLabel": "Services et maintenance",
++  "servicesAndMaintenancePanelLabel": "Panneau des services et maintenance",
++  "addTechnicalServiceLabel": "Ajouter un service technique",
++  "maintenanceRequestsLabel": "Demandes de maintenance et tickets de travail",
++  "cashRegisterLabel": "Caisse",
++  "expensesLabel": "Dépenses",
++  "reportsLabel": "Rapports",
++  "usersLabel": "Utilisateurs",
++  "manageUsersLabel": "Gérer les utilisateurs",
++  "staffShiftsWeekLabel": "Équipes du personnel (semaine)",
++  "staffIdentitiesLabel": "Identités du personnel",
++  "printingLabel": "Impression",
++  "homeLabel": "Accueil",
++  "defaultUserFallback": "Utilisateur",
++  "logoutLabel": "Se déconnecter",
++  "logoutConfirmMessage": "Voulez-vous vraiment vous déconnecter ?",
++  "confirmAction": "Confirmer",
++  "searchFailedSnackbar": "Impossible de terminer la recherche : {error}",
++  "addProductLabel": "Ajouter un produit",
++  "shiftTooltipWithName": "Équipe : {name} — fermer",
++  "closeShiftTooltip": "Fermer l'équipe",
++  "syncFailedTooltip": "Synchronisation — dernière tentative échouée",
++  "cloudSyncTooltip": "Synchronisation cloud",
++  "syncStartingSnackbar": "Démarrage de la synchronisation…",
++  "notificationsTooltip": "Notifications",
++  "settingsLabel": "Paramètres",
++  "copyLabel": "Copier",
++  "copiedSnackbar": "Copié",
++  "userInfoTitle": "Informations utilisateur",
++  "displayNameFieldLabel": "Nom affiché :",
++  "usernameFieldLabel": "Nom d'utilisateur :",
++  "roleFieldLabel": "Rôle :",
++  "emailFieldLabel": "E-mail :",
++  "closeAction": "Fermer",
++  "barcodeScanTooltip": "Scanner un code-barres (caméra sur mobile, ou fenêtre du lecteur sur ordinateur)",
++  "hideKeyboardTooltip": "Masquer le clavier",
++  "keyboardDragPinHint": "Clavier arabe / anglais — faites glisser par la poignée ou épinglez-le",
++  "clearSearchTooltip": "Effacer la recherche",
++  "searchToolsTooltip": "Outils de recherche",
++  "showKeyboardTooltip": "Afficher le clavier (arabe / anglais)",
++  "quickSearchHint": "Recherche rapide : modules, produits, clients…",
++  "fullSearchHint": "Recherche : modules, produits, clients, personnel, code-barres…",
++  "collapseMenuTooltip": "Réduire le menu",
++  "expandMenuTooltip": "Développer le menu",
++  "restrictedModeTooltip": "Non disponible en mode restreint",
++  "paymentTypeCash": "Comptant",
++  "paymentTypeCredit": "Crédit",
++  "paymentTypeInstallment": "Échelonné",
++  "paymentTypeDelivery": "Livraison",
++  "paymentTypeDebtCollection": "Recouvrement de dette",
++  "paymentTypeInstallmentCollection": "Paiement d'échéance",
++  "paymentTypeSupplierPayment": "Paiement fournisseur",
++  "noInvoiceWithNumber": "Aucune facture avec le numéro {id}",
++  "invoiceAlreadyReturned": "Cette facture est déjà enregistrée comme retournée",
++  "invoiceNotOpenableAsReturn": "Ce bon ne peut pas être ouvert comme retour de vente — annulez le paiement depuis l'écran fournisseur ou la gestion des échelonnements selon son type.",
++  "salesInvoiceNumber": "Facture de vente #{id}",
++  "emptyPlaceholder": "(vide)",
++  "returnInvoiceDialogBody": "Client : {customer}\nPaiement : {paymentType}\nTotal : {total}\n\nOuvrir l'écran de retour ? Vous pouvez réduire les quantités ou supprimer des lignes pour un retour partiel uniquement.",
++  "returnLabel": "Retour",
++  "returnNumber": "Retour #{id}",
++  "scanQrBarcodeTitle": "Scanner QR / code-barres",
++  "pointsLedgerShortLabel": "Historique des points",
++  "staffShiftsLabel": "Équipes du personnel",
++  "shiftStaffFallback": "Personnel de service",
++  "itemsLabel": "Articles",
++  "noResultsFor": "Aucun résultat pour « {query} »",
++  "modulesLabel": "Modules",
++  "openModuleLabel": "Ouvrir le module",
++  "productsLabel": "Produits",
++  "sellPriceIqd": "Vente {price} IQD",
++  "viewCustomersLabel": "Voir les clients",
++  "staffLabel": "Personnel",
++  "viewStaffLabel": "Voir le personnel",
++  "technicalServiceLabel": "Service technique",
++  "notStockTracked": "Stock non suivi",
++  "availableUnknown": "Disponible : —",
++  "availableZero": "Disponible : 0",
++  "availableQty": "Disponible : {qty}",
++  "negativeStockWarning": "Solde négatif {qty} — survente de {soldOver} par rapport au dernier solde",
++  "chooseFromListBelow": "Choisissez dans la liste ci-dessous",
++  "viewAllLabel": "Voir tout",
++  "untitledLabel": "Sans titre",
++  "deleteParkedSaleTitle": "Supprimer la vente en attente ?",
++  "deleteParkedSaleBody": "« {label} » sera définitivement supprimée de cet appareil.",
++  "deleteAction": "Supprimer",
++  "deletedSnackbar": "Supprimé",
++  "parkedSalesScreenTitle": "Ventes en attente",
++  "noParkedSalesTitle": "Aucune vente en attente",
++  "noParkedSalesHint": "Depuis l'écran de vente, appuyez sur « Mettre en attente » pour enregistrer le travail en cours et servir un autre client.",
++  "parkedSaleSummaryLine": "{count} articles · ≈ {total} IQD",
++  "lastUpdatedLabel": "Dernière mise à jour : {date}",
++  "resumeSaleTooltip": "Reprendre la vente",
++  "allLabel": "Tout",
++  "paidStatus": "Payée",
++  "unpaidStatus": "Impayée",
++  "cannotShowInvoiceNoId": "Impossible d'afficher une facture sans numéro",
++  "invoiceNotFound": "Facture introuvable",
++  "flatViewOption": "Vue simple (sans regroupement par équipe)",
++  "groupByShiftOption": "Regrouper par équipe",
++  "advancedFilterLabel": "Filtre avancé",
++  "shiftsCalendarLabel": "Calendrier des équipes",
++  "moreLabel": "Plus",
++  "parkedInvoicesShortLabel": "Factures en attente",
++  "saleLabel": "Vente",
++  "totalLabel": "Total",
++  "sortLabel": "Trier",
++  "sortNewestFirst": "Plus récent d'abord",
++  "sortOldestFirst": "Plus ancien d'abord",
++  "sortHighestAmount": "Montant le plus élevé",
++  "sortLowestAmount": "Montant le plus bas",
++  "searchInvoicesHint": "Rechercher par nom du client, numéro de facture ou téléphone du client...",
++  "shiftNumberLabel": "Équipe #{id}",
++  "noShiftGroupLabel": "Sans équipe — anciennes factures ou hors session d'équipe ({count})",
++  "shiftLoadFailedLabel": "Équipe #{id} — impossible de charger les détails de l'équipe ({count} factures)",
++  "openStatus": "Ouverte",
++  "shiftWithNameLabel": "Équipe #{id} — {name}",
++  "invoiceCountLabel": "{count} factures",
++  "totalIqd": "{amount} IQD",
++  "itemsAndDiscountLine": "{count} articles · remise {discount} IQD",
++  "shiftColonLabel": "Équipe : {name}",
++  "createReturnInvoiceTooltip": "Créer une facture de retour pour cette facture",
++  "returnActionLabel": "Retour",
++  "noInvoicesTitle": "Aucune facture",
++  "addFirstInvoiceCta": "Ajoutez votre première facture maintenant",
++  "sortOptionsTitle": "Options de tri",
++  "applyAction": "Appliquer"
+ }
+diff --git a/lib/screens/auth/device_kicked_out_screen.dart b/lib/screens/auth/device_kicked_out_screen.dart
+index a6e3b22..bafd7f8 100644
+--- a/lib/screens/auth/device_kicked_out_screen.dart
++++ b/lib/screens/auth/device_kicked_out_screen.dart
+@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
+ import 'package:flutter/material.dart';
+ import 'package:flutter/services.dart';
+ 
++import '../../l10n/generated/app_localizations.dart';
+ import '../login_screen.dart';
+ 
+ /// يُعرض فورًا عند فصل هذا الجهاز من الحساب أثناء جلسة نشطة (من جهاز آخر).
+@@ -10,6 +11,7 @@ class DeviceKickedOutScreen extends StatelessWidget {
+ 
+   @override
+   Widget build(BuildContext context) {
++    final loc = AppLocalizations.of(context)!;
+     return Directionality(
+       textDirection: TextDirection.rtl,
+       child: Scaffold(
+@@ -36,10 +38,10 @@ class DeviceKickedOutScreen extends StatelessWidget {
+                   color: Colors.orange.shade300,
+                 ),
+                 const SizedBox(height: 24),
+-                const Text(
+-                  'تم فصل هذا الجهاز من الحساب',
++                Text(
++                  loc.deviceKickedOutTitle,
+                   textAlign: TextAlign.center,
+-                  style: TextStyle(
++                  style: const TextStyle(
+                     color: Colors.white,
+                     fontSize: 20,
+                     fontWeight: FontWeight.bold,
+@@ -47,7 +49,7 @@ class DeviceKickedOutScreen extends StatelessWidget {
+                 ),
+                 const SizedBox(height: 14),
+                 Text(
+-                  'أُنهيت جلستك على هذا الجهاز. عند فتح التطبيق لاحقًا ستظهر لك شاشة تسجيل الدخول المعتادة.',
++                  loc.deviceKickedOutBody,
+                   textAlign: TextAlign.center,
+                   style: TextStyle(
+                     color: Colors.white.withValues(alpha: 0.88),
+@@ -74,14 +76,12 @@ class DeviceKickedOutScreen extends StatelessWidget {
+                     style: FilledButton.styleFrom(
+                       padding: const EdgeInsets.symmetric(vertical: 14),
+                     ),
+-                    child: const Text(kIsWeb ? 'الانتقال لتسجيل الدخول' : 'خروج'),
++                    child: Text(kIsWeb ? loc.goToLoginAction : loc.exitAction),
+                   ),
+                 ),
+                 const SizedBox(height: 12),
+                 Text(
+-                  kIsWeb
+-                      ? 'يمكنك إغلاق النافذة أو استخدام الزر أعلاه.'
+-                      : 'يغلق التطبيق',
++                  kIsWeb ? loc.closeWindowHint : loc.appWillCloseHint,
+                   textAlign: TextAlign.center,
+                   style: TextStyle(
+                     color: Colors.white.withValues(alpha: 0.55),
+diff --git a/lib/screens/auth/device_revoked_screen.dart b/lib/screens/auth/device_revoked_screen.dart
+index fb76246..3c6e84e 100644
+--- a/lib/screens/auth/device_revoked_screen.dart
++++ b/lib/screens/auth/device_revoked_screen.dart
+@@ -1,11 +1,14 @@
+ import 'package:flutter/material.dart';
+ 
++import '../../l10n/generated/app_localizations.dart';
++
+ /// يُعرض عندما يكون هذا الجهاز مفصولاً من الحساب (فصل من جهاز آخر).
+ class DeviceRevokedScreen extends StatelessWidget {
+   const DeviceRevokedScreen({super.key});
+ 
+   @override
+   Widget build(BuildContext context) {
++    final loc = AppLocalizations.of(context)!;
+     return Directionality(
+       textDirection: TextDirection.rtl,
+       child: Scaffold(
+@@ -32,10 +35,10 @@ class DeviceRevokedScreen extends StatelessWidget {
+                   color: Colors.red.shade300,
+                 ),
+                 const SizedBox(height: 24),
+-                const Text(
+-                  'تم إزالة هذا الجهاز من الحساب',
++                Text(
++                  loc.deviceRevokedTitle,
+                   textAlign: TextAlign.center,
+-                  style: TextStyle(
++                  style: const TextStyle(
+                     color: Colors.white,
+                     fontSize: 20,
+                     fontWeight: FontWeight.bold,
+@@ -43,8 +46,7 @@ class DeviceRevokedScreen extends StatelessWidget {
+                 ),
+                 const SizedBox(height: 14),
+                 Text(
+-                  'لا يمكنك تسجيل الدخول من هذا الجهاز حتى يوافق أحد الأجهزة '
+-                  'المفعّلة على نفس الحساب من الإعدادات ← الحساب والاشتراك ← «السماح بالعودة».',
++                  loc.deviceRevokedBody,
+                   textAlign: TextAlign.center,
+                   style: TextStyle(
+                     color: Colors.white.withValues(alpha: 0.88),
+@@ -60,7 +62,7 @@ class DeviceRevokedScreen extends StatelessWidget {
+                     style: FilledButton.styleFrom(
+                       padding: const EdgeInsets.symmetric(vertical: 14),
+                     ),
+-                    child: const Text('العودة لتسجيل الدخول'),
++                    child: Text(loc.backToLoginAction),
+                   ),
+                 ),
+               ],
+diff --git a/lib/screens/auth/email_otp_screen.dart b/lib/screens/auth/email_otp_screen.dart
+index f3c5f42..39e2dca 100644
+--- a/lib/screens/auth/email_otp_screen.dart
++++ b/lib/screens/auth/email_otp_screen.dart
+@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
+ import 'package:flutter/services.dart';
+ import 'package:provider/provider.dart';
+ 
++import '../../l10n/generated/app_localizations.dart';
+ import '../../providers/auth_provider.dart';
+ import '../../theme/design_tokens.dart';
+ import '../../services/app_settings_repository.dart';
+@@ -101,7 +102,8 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
+   Future<void> _verify() async {
+     final otp = _otp.trim();
+     if (otp.length < _digits) {
+-      setState(() => _error = 'أدخل الرمز كاملاً ($_digits أرقام كما في البريد)');
++      final loc = AppLocalizations.of(context)!;
++      setState(() => _error = loc.otpEnterFullCode(_digits));
+       return;
+     }
+     setState(() {
+@@ -159,9 +161,10 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
+     }
+     _focusNodes.first.requestFocus();
+     _startCountdown();
++    if (!mounted) return;
+     ScaffoldMessenger.of(context).showSnackBar(
+-      const SnackBar(
+-        content: Text('تم إعادة إرسال رمز التحقق'),
++      SnackBar(
++        content: Text(AppLocalizations.of(context)!.otpResentSuccess),
+         behavior: SnackBarBehavior.floating,
+       ),
+     );
+@@ -169,6 +172,7 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
+ 
+   @override
+   Widget build(BuildContext context) {
++    final loc = AppLocalizations.of(context)!;
+     final w = MediaQuery.sizeOf(context).width;
+     final isWide = w >= 760;
+     final kb = MediaQuery.viewInsetsOf(context).bottom;
+@@ -243,7 +247,7 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
+                   top: 8,
+                   start: 8,
+                   child: IconButton(
+-                    tooltip: 'رجوع',
++                    tooltip: loc.back,
+                     onPressed: _busy ? null : () => Navigator.of(context).maybePop(),
+                     icon: const Icon(Icons.arrow_back),
+                     color: Colors.white.withValues(alpha: 0.92),
+@@ -279,7 +283,7 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
+             ),
+             SizedBox(height: collapsed ? 6 : 10),
+             Text(
+-              'التحقق من البريد',
++              AppLocalizations.of(context)!.emailVerificationTitle,
+               style: TextStyle(
+                 color: Colors.white,
+                 fontSize: titleSize,
+@@ -289,7 +293,7 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
+             if (!collapsed) ...[
+               const SizedBox(height: 10),
+               Text(
+-                'أرسلنا رمزاً من $_digits أرقام إلى بريدك الإلكتروني',
++                AppLocalizations.of(context)!.otpSentToEmailShort(_digits),
+                 textAlign: TextAlign.center,
+                 style: TextStyle(
+                   color: Colors.white.withValues(alpha: 0.74),
+@@ -310,6 +314,7 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
+     required double bottomInset,
+   }) {
+     final cs = Theme.of(context).colorScheme;
++    final loc = AppLocalizations.of(context)!;
+     return Center(
+       child: SingleChildScrollView(
+         padding: EdgeInsetsDirectional.fromSTEB(
+@@ -329,10 +334,10 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
+               crossAxisAlignment: CrossAxisAlignment.stretch,
+               children: [
+                 if (!(keyboardVisible && isNarrow)) ...[
+-                  const Text(
+-                    'أدخل رمز التحقق',
++                  Text(
++                    loc.enterVerificationCode,
+                     textAlign: TextAlign.center,
+-                    style: TextStyle(
++                    style: const TextStyle(
+                       fontSize: 22,
+                       fontWeight: FontWeight.w800,
+                       color: Colors.white,
+@@ -340,7 +345,7 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
+                   ),
+                   const SizedBox(height: 10),
+                   Text(
+-                    'أُرسل رمز مكوّن من $_digits أرقام إلى\n${widget.email}',
++                    loc.otpSentToEmailDetailed(_digits, widget.email),
+                     textAlign: TextAlign.center,
+                     style: TextStyle(
+                       fontSize: 13,
+@@ -476,9 +481,9 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
+                                 color: Colors.white,
+                               ),
+                             )
+-                          : const Text(
+-                              'تحقق وأنشئ الحساب',
+-                              style: TextStyle(
++                          : Text(
++                              loc.verifyAndCreateAccount,
++                              style: const TextStyle(
+                                 fontSize: 15,
+                                 fontWeight: FontWeight.w800,
+                               ),
+@@ -490,7 +495,7 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
+                 Center(
+                   child: _resendCountdown > 0
+                       ? Text(
+-                          'إعادة الإرسال خلال $_resendCountdown ثانية',
++                          loc.resendInSeconds(_resendCountdown),
+                           style: TextStyle(
+                             fontSize: 13,
+                             color: Colors.white.withValues(alpha: 0.60),
+@@ -501,9 +506,9 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
+                           style: TextButton.styleFrom(
+                             foregroundColor: AppColors.accentGold,
+                           ),
+-                          child: const Text(
+-                            'إعادة إرسال الرمز',
+-                            style: TextStyle(fontWeight: FontWeight.w800),
++                          child: Text(
++                            loc.resendCode,
++                            style: const TextStyle(fontWeight: FontWeight.w800),
+                           ),
+                         ),
+                 ),
+@@ -516,7 +521,7 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
+                     color: cs.onSurface.withValues(alpha: 0.80),
+                   ),
+                   label: Text(
+-                    'تعديل البيانات',
++                    loc.editData,
+                     style: TextStyle(color: cs.onSurface.withValues(alpha: 0.80)),
+                   ),
+                 ),
+diff --git a/lib/screens/auth/forgot_password_email_screen.dart b/lib/screens/auth/forgot_password_email_screen.dart
+index f58e38c..7d55173 100644
+--- a/lib/screens/auth/forgot_password_email_screen.dart
++++ b/lib/screens/auth/forgot_password_email_screen.dart
+@@ -1,6 +1,7 @@
+ import 'package:flutter/material.dart';
+ import 'package:provider/provider.dart';
+ 
++import '../../l10n/generated/app_localizations.dart';
+ import '../../providers/auth_provider.dart';
+ import '../../theme/design_tokens.dart';
+ import '../../widgets/glass/glass_background.dart';
+@@ -49,9 +50,10 @@ class _ForgotPasswordEmailScreenState extends State<ForgotPasswordEmailScreen> {
+   String? _validateEmail(String? value) {
+     final t = (value ?? '').trim();
+     if (!_blurredEmail) return null;
+-    if (t.isEmpty) return 'البريد الإلكتروني مطلوب';
++    final loc = AppLocalizations.of(context)!;
++    if (t.isEmpty) return loc.emailRequired;
+     final ok = RegExp(r'^[^\s]+@[^\s]+\.[^\s]+$').hasMatch(t);
+-    return ok ? null : 'صيغة البريد غير صحيحة';
++    return ok ? null : loc.emailInvalidFormat;
+   }
+ 
+   Future<void> _send() async {
+@@ -86,6 +88,7 @@ class _ForgotPasswordEmailScreenState extends State<ForgotPasswordEmailScreen> {
+   @override
+   Widget build(BuildContext context) {
+     final cs = Theme.of(context).colorScheme;
++    final loc = AppLocalizations.of(context)!;
+     final kb = MediaQuery.viewInsetsOf(context).bottom;
+     final keyboardVisible = kb > 0;
+     final w = MediaQuery.sizeOf(context).width;
+@@ -159,10 +162,10 @@ class _ForgotPasswordEmailScreenState extends State<ForgotPasswordEmailScreen> {
+                                             color: AppColors.accentGold,
+                                           ),
+                                           const SizedBox(height: 12),
+-                                          const Text(
+-                                            'أدخل بريدك الإلكتروني',
++                                          Text(
++                                            loc.enterYourEmail,
+                                             textAlign: TextAlign.center,
+-                                            style: TextStyle(
++                                            style: const TextStyle(
+                                               fontSize: 18,
+                                               fontWeight: FontWeight.w800,
+                                               color: Colors.white,
+@@ -170,7 +173,7 @@ class _ForgotPasswordEmailScreenState extends State<ForgotPasswordEmailScreen> {
+                                           ),
+                                           const SizedBox(height: 8),
+                                           Text(
+-                                            'سنرسل لك رمز تحقق لإعادة تعيين رمز الدخول',
++                                            loc.forgotPasswordSendCodeHint,
+                                             textAlign: TextAlign.center,
+                                             style: TextStyle(
+                                               fontSize: 13,
+@@ -246,7 +249,7 @@ class _ForgotPasswordEmailScreenState extends State<ForgotPasswordEmailScreen> {
+                                               color: Colors.white,
+                                             ),
+                                           )
+-                                        : const Text('إرسال رمز التحقق'),
++                                        : Text(loc.sendVerificationCode),
+                                   ),
+                                 ),
+                               ),
+@@ -261,7 +264,7 @@ class _ForgotPasswordEmailScreenState extends State<ForgotPasswordEmailScreen> {
+                   top: 8,
+                   start: 8,
+                   child: IconButton(
+-                    tooltip: 'رجوع',
++                    tooltip: loc.back,
+                     onPressed: () => Navigator.of(context).maybePop(),
+                     icon: const Icon(Icons.arrow_back),
+                     color: Colors.white.withValues(alpha: 0.9),
+diff --git a/lib/screens/auth/forgot_password_otp_screen.dart b/lib/screens/auth/forgot_password_otp_screen.dart
+index d7b323d..2af93eb 100644
+--- a/lib/screens/auth/forgot_password_otp_screen.dart
++++ b/lib/screens/auth/forgot_password_otp_screen.dart
+@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
+ import 'package:flutter/services.dart';
+ import 'package:provider/provider.dart';
+ 
++import '../../l10n/generated/app_localizations.dart';
+ import '../../providers/auth_provider.dart';
+ import '../../widgets/secure_screen.dart';
+ import 'reset_password_screen.dart';
+@@ -88,9 +89,8 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
+   Future<void> _verify() async {
+     final otp = _otp.trim();
+     if (otp.length < _digits) {
+-      setState(
+-        () => _error = 'أدخل الرمز كاملاً ($_digits أرقام كما في البريد)',
+-      );
++      final loc = AppLocalizations.of(context)!;
++      setState(() => _error = loc.otpEnterFullCode(_digits));
+       return;
+     }
+     setState(() {
+@@ -135,9 +135,10 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
+     }
+     _focusNodes.first.requestFocus();
+     _startCountdown();
++    if (!mounted) return;
+     ScaffoldMessenger.of(context).showSnackBar(
+-      const SnackBar(
+-        content: Text('تم إعادة إرسال رمز التحقق'),
++      SnackBar(
++        content: Text(AppLocalizations.of(context)!.otpResentSuccess),
+         behavior: SnackBarBehavior.floating,
+       ),
+     );
+@@ -145,6 +146,7 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
+ 
+   @override
+   Widget build(BuildContext context) {
++    final loc = AppLocalizations.of(context)!;
+     return SecureScreen(
+       child: Directionality(
+       textDirection: TextDirection.rtl,
+@@ -154,7 +156,7 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
+           backgroundColor: Colors.white,
+           foregroundColor: _navy2,
+           elevation: 0.5,
+-          title: const Text('التحقق من البريد'),
++          title: Text(loc.emailVerificationTitle),
+         ),
+         body: Center(
+           child: SingleChildScrollView(
+@@ -164,10 +166,10 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
+               child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.stretch,
+                 children: [
+-                  const Text(
+-                    'أدخل رمز التحقق',
++                  Text(
++                    loc.enterVerificationCode,
+                     textAlign: TextAlign.center,
+-                    style: TextStyle(
++                    style: const TextStyle(
+                       fontSize: 22,
+                       fontWeight: FontWeight.bold,
+                       color: _navy2,
+@@ -175,7 +177,7 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
+                   ),
+                   const SizedBox(height: 8),
+                   Text(
+-                    'أُرسل رمز مكوّن من $_digits أرقام إلى:\n${widget.email}',
++                    loc.otpSentToEmailColon(_digits, widget.email),
+                     textAlign: TextAlign.center,
+                     style: TextStyle(
+                       fontSize: 13,
+@@ -243,14 +245,14 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
+                                 color: Colors.white,
+                               ),
+                             )
+-                          : const Text('متابعة'),
++                          : Text(loc.continueAction),
+                     ),
+                   ),
+                   const SizedBox(height: 14),
+                   Center(
+                     child: _resendCountdown > 0
+                         ? Text(
+-                            'إعادة الإرسال خلال $_resendCountdown ثانية',
++                            loc.resendInSeconds(_resendCountdown),
+                             style: TextStyle(
+                               fontSize: 13,
+                               color: Colors.grey.shade500,
+@@ -258,9 +260,9 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
+                           )
+                         : TextButton(
+                             onPressed: _busy ? null : _resend,
+-                            child: const Text(
+-                              'إعادة إرسال الرمز',
+-                              style: TextStyle(
++                            child: Text(
++                              loc.resendCode,
++                              style: const TextStyle(
+                                 color: _gold,
+                                 fontWeight: FontWeight.bold,
+                               ),
+@@ -275,9 +277,9 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
+                       size: 16,
+                       color: _navy3,
+                     ),
+-                    label: const Text(
+-                      'تعديل البريد',
+-                      style: TextStyle(color: _navy3),
++                    label: Text(
++                      loc.editEmail,
++                      style: const TextStyle(color: _navy3),
+                     ),
+                   ),
+                 ],
+diff --git a/lib/screens/auth/reset_password_screen.dart b/lib/screens/auth/reset_password_screen.dart
+index 14a440f..be2dd85 100644
+--- a/lib/screens/auth/reset_password_screen.dart
++++ b/lib/screens/auth/reset_password_screen.dart
+@@ -1,6 +1,7 @@
+ import 'package:flutter/material.dart';
+ import 'package:provider/provider.dart';
+ 
++import '../../l10n/generated/app_localizations.dart';
+ import '../../providers/auth_provider.dart';
+ 
+ class ResetPasswordScreen extends StatefulWidget {
+@@ -62,9 +63,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+       );
+       return;
+     }
++    if (!mounted) return;
+     messenger.showSnackBar(
+-      const SnackBar(
+-        content: Text('تم تحديث رمز الدخول بنجاح'),
++      SnackBar(
++        content: Text(AppLocalizations.of(context)!.passwordUpdateSuccess),
+         behavior: SnackBarBehavior.floating,
+       ),
+     );
+@@ -80,6 +82,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+     final confirmBorderColor = !confirmHasText
+         ? Colors.grey.shade300
+         : (confirmMatches ? Colors.green.shade600 : Colors.red.shade600);
++    final loc = AppLocalizations.of(context)!;
+ 
+     return Directionality(
+       textDirection: TextDirection.rtl,
+@@ -89,7 +92,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+           backgroundColor: Colors.white,
+           foregroundColor: _navy2,
+           elevation: 0.5,
+-          title: const Text('تعيين رمز دخول جديد'),
++          title: Text(loc.setNewPasswordTitle),
+         ),
+         body: Center(
+           child: SingleChildScrollView(
+@@ -102,7 +105,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+                   crossAxisAlignment: CrossAxisAlignment.stretch,
+                   children: [
+                     Text(
+-                      'البريد: ${widget.email}',
++                      loc.emailLabel(widget.email),
+                       textAlign: TextAlign.center,
+                       style: TextStyle(
+                         fontSize: 13,
+@@ -110,7 +113,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+                       ),
+                     ),
+                     const SizedBox(height: 14),
+-                    _label('رمز الدخول الجديد'),
++                    _label(loc.newPasswordLabel),
+                     const SizedBox(height: 8),
+                     TextFormField(
+                       controller: _passController,
+@@ -120,7 +123,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+                       style: const TextStyle(color: _navy2, fontSize: 14),
+                       cursorColor: _navy2,
+                       decoration: _dec(
+-                        'أدخل رمز الدخول الجديد',
++                        loc.enterNewPasswordHint,
+                         Icons.lock_outline_rounded,
+                         suffix: IconButton(
+                           icon: Icon(
+@@ -133,13 +136,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+                       ),
+                       validator: (v) {
+                         final t = (v ?? '').trim();
+-                        if (t.isEmpty) return 'أدخل رمز الدخول';
+-                        if (t.length < 8) return 'يجب أن يكون 8 أحرف على الأقل';
++                        if (t.isEmpty) return loc.enterPasswordValidation;
++                        if (t.length < 8) return loc.minLength8Chars;
+                         return null;
+                       },
+                     ),
+                     const SizedBox(height: 12),
+-                    _label('إعادة كتابة رمز الدخول'),
++                    _label(loc.confirmPasswordLabel),
+                     const SizedBox(height: 8),
+                     TextFormField(
+                       controller: _confirmController,
+@@ -149,7 +152,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+                       style: const TextStyle(color: _navy2, fontSize: 14),
+                       cursorColor: _navy2,
+                       decoration: _dec(
+-                        'أعد كتابة رمز الدخول',
++                        loc.confirmPasswordHint,
+                         Icons.lock_outline_rounded,
+                         borderColor: confirmBorderColor,
+                         focusedBorderColor: confirmBorderColor,
+@@ -190,8 +193,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+                       ),
+                       validator: (v) {
+                         final t = (v ?? '');
+-                        if (t.trim().isEmpty) return 'أعد كتابة رمز الدخول';
+-                        if (t != _passController.text) return 'رمز الدخول غير متطابق';
++                        if (t.trim().isEmpty) return loc.confirmPasswordHint;
++                        if (t != _passController.text) return loc.passwordMismatch;
+                         return null;
+                       },
+                     ),
+@@ -215,7 +218,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+                                   color: Colors.white,
+                                 ),
+                               )
+-                            : const Text('حفظ'),
++                            : Text(loc.save),
+                       ),
+                     ),
+                   ],
+@@ -229,6 +232,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+   }
+ 
+   Widget _requirements() {
++    final loc = AppLocalizations.of(context)!;
+     Widget item(String text, bool ok) => Row(
+           children: [
+             Icon(
+@@ -258,16 +262,16 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+       child: Column(
+         crossAxisAlignment: CrossAxisAlignment.stretch,
+         children: [
+-          const Text(
+-            'شروط رمز الدخول (اختياري)',
+-            style: TextStyle(fontWeight: FontWeight.bold, color: _navy2),
++          Text(
++            loc.passwordRequirementsTitle,
++            style: const TextStyle(fontWeight: FontWeight.bold, color: _navy2),
+           ),
+           const SizedBox(height: 8),
+-          item('8 أحرف على الأقل', _hasMinLength),
+-          item('حرف كبير (A-Z)', _hasUppercase),
+-          item('حرف صغير (a-z)', _hasLowercase),
+-          item('رقم (0-9)', _hasDigit),
+-          item('رمز خاص (!@#...)', _hasSpecialChar),
++          item(loc.reqMinLength, _hasMinLength),
++          item(loc.reqUppercase, _hasUppercase),
++          item(loc.reqLowercase, _hasLowercase),
++          item(loc.reqDigit, _hasDigit),
++          item(loc.reqSpecialChar, _hasSpecialChar),
+         ],
+       ),
+     );
+diff --git a/lib/screens/home_screen.dart b/lib/screens/home_screen.dart
+index c8e9a80..51ca912 100644
+--- a/lib/screens/home_screen.dart
++++ b/lib/screens/home_screen.dart
+@@ -7,6 +7,7 @@ import 'package:flutter/scheduler.dart';
+ import 'package:flutter/services.dart';
+ import 'package:provider/provider.dart';
+ import 'package:shared_preferences/shared_preferences.dart';
++import '../l10n/generated/app_localizations.dart';
+ import '../providers/auth_provider.dart';
+ import '../services/app_settings_repository.dart';
+ import '../services/business_setup_settings.dart';
+@@ -334,8 +335,11 @@ class _HomeScreenState extends State<HomeScreen>
+   late final NavigatorObserver _innerNavObserver = _HomeInnerNavObserver(this);
+ 
+   /// مسار الشاشات الحالي (الرئيسية → …) للعرض والرجوع السريع.
+-  final List<BreadcrumbSegment> _breadcrumbTrail = [
+-    const BreadcrumbSegment(id: AppContentRoutes.home, title: 'الرئيسية'),
++  late final List<BreadcrumbSegment> _breadcrumbTrail = [
++    BreadcrumbSegment(
++      id: AppContentRoutes.home,
++      title: AppLocalizations.of(context)!.homeLabel,
++    ),
+   ];
+ 
+   /// Active tab index for the bottom nav bar (small screens) ومزامنة تمييز الشريط الجانبي.
+@@ -433,31 +437,35 @@ class _HomeScreenState extends State<HomeScreen>
+   bool _macPanelEnabled = MacStyleSettingsPrefs.cachedValue ?? true;
+ 
+   /// ترتيب الوحدات: مبيعات وعملاء → أقساط ومخزون وصندوق → تقارير وإدارة → أدوات.
+-  final List<ModuleItem> _originalModules = [
++  late List<ModuleItem> _originalModules;
++  bool _originalModulesBuilt = false;
++
++  List<ModuleItem> _buildOriginalModules(AppLocalizations loc) {
++    return [
+     ModuleItem(
+       icon: Icons.receipt,
+-      title: 'الفواتير',
++      title: loc.invoicesLabel,
+       iconColor: Colors.green,
+       routeId: AppContentRoutes.invoices,
+       destination: (context) => const InvoicesScreen(),
+       subItems: [
+         SubMenuItem(
+-          title: 'قائمة الفواتير',
++          title: loc.invoicesListLabel,
+           routeId: AppContentRoutes.invoices,
+           destination: (context) => const InvoicesScreen(),
+         ),
+         SubMenuItem(
+-          title: 'بيع جديد',
++          title: loc.newSaleLabel,
+           routeId: AppContentRoutes.addInvoice,
+           destination: (context) => const AddInvoiceScreen(),
+         ),
+         SubMenuItem(
+-          title: 'معلّقة مؤقتاً',
++          title: loc.parkedSalesLabel,
+           routeId: AppContentRoutes.parkedSales,
+           destination: (context) => const ParkedSalesScreen(),
+         ),
+         SubMenuItem(
+-          title: 'إعدادات نقطة البيع',
++          title: loc.posSettingsLabel,
+           routeId: AppContentRoutes.salePosSettings,
+           destination: (context) => const SalePosSettingsScreen(),
+         ),
+@@ -465,29 +473,29 @@ class _HomeScreenState extends State<HomeScreen>
+     ),
+     ModuleItem(
+       icon: Icons.person_outline,
+-      title: 'العملاء',
++      title: loc.customersLabel,
+       iconColor: Colors.teal,
+       routeId: AppContentRoutes.customers,
+       destination: (context) => const CustomersScreen(),
+       subItems: [
+         SubMenuItem(
+-          title: 'إدارة العملاء',
++          title: loc.customersManageLabel,
+           routeId: AppContentRoutes.customers,
+           destination: (context) => const CustomersScreen(),
+         ),
+         SubMenuItem(
+-          title: 'إضافة عميل جديد',
++          title: loc.addNewCustomerLabel,
+           routeId: AppContentRoutes.customersAdd,
+-          breadcrumbTitle: 'إضافة عميل',
++          breadcrumbTitle: loc.addCustomerBreadcrumb,
+           destination: (context) => const CustomerFormScreen(),
+         ),
+         SubMenuItem(
+-          title: 'قائمة الاتصال',
++          title: loc.contactListLabel,
+           routeId: AppContentRoutes.customerContacts,
+           destination: (context) => const CustomerContactsScreen(),
+         ),
+         SubMenuItem(
+-          title: 'إعدادات العميل (الولاء)',
++          title: loc.customerLoyaltySettingsLabel,
+           routeId: AppContentRoutes.loyaltySettings,
+           destination: (context) => const LoyaltySettingsScreen(),
+         ),
+@@ -495,18 +503,18 @@ class _HomeScreenState extends State<HomeScreen>
+     ),
+     ModuleItem(
+       icon: Icons.card_giftcard_rounded,
+-      title: 'ولاء العملاء',
++      title: loc.customerLoyaltyLabel,
+       iconColor: Colors.deepPurple,
+       routeId: AppContentRoutes.loyaltySettings,
+       destination: (context) => const LoyaltySettingsScreen(),
+       subItems: [
+         SubMenuItem(
+-          title: 'إعدادات النقاط والاستبدال',
++          title: loc.loyaltyPointsSettingsLabel,
+           routeId: AppContentRoutes.loyaltySettings,
+           destination: (context) => const LoyaltySettingsScreen(),
+         ),
+         SubMenuItem(
+-          title: 'سجل حركات النقاط',
++          title: loc.loyaltyLedgerLabel,
+           routeId: AppContentRoutes.loyaltyLedger,
+           destination: (context) => const LoyaltyLedgerScreen(),
+         ),
+@@ -514,19 +522,19 @@ class _HomeScreenState extends State<HomeScreen>
+     ),
+     ModuleItem(
+       icon: Icons.calendar_today,
+-      title: 'الأقساط',
++      title: loc.installmentsLabel,
+       iconColor: Colors.blue,
+       routeId: AppContentRoutes.installments,
+       destination: (context) => const InstallmentsScreen(),
+       subItems: [
+         SubMenuItem(
+-          title: 'خطط التقسيط',
++          title: loc.installmentPlansLabel,
+           icon: Icons.receipt_long_rounded,
+           routeId: AppContentRoutes.installments,
+           destination: (context) => const InstallmentsScreen(),
+         ),
+         SubMenuItem(
+-          title: 'إعدادات تقسيط',
++          title: loc.installmentSettingsLabel,
+           icon: Icons.tune_rounded,
+           routeId: AppContentRoutes.installmentSettings,
+           destination: (context) => const InstallmentSettingsScreen(),
+@@ -535,19 +543,19 @@ class _HomeScreenState extends State<HomeScreen>
+     ),
+     ModuleItem(
+       icon: Icons.balance_outlined,
+-      title: 'الديون',
++      title: loc.debtsLabel,
+       iconColor: Colors.amber,
+       routeId: AppContentRoutes.debts,
+       destination: (context) => const DebtsScreen(),
+       subItems: [
+         SubMenuItem(
+-          title: 'لوحة الديون (آجل)',
++          title: loc.debtsPanelLabel,
+           icon: Icons.dashboard_customize_outlined,
+           routeId: AppContentRoutes.debts,
+           destination: (context) => const DebtsScreen(),
+         ),
+         SubMenuItem(
+-          title: 'إعدادات الدين',
++          title: loc.debtSettingsLabel,
+           icon: Icons.tune_rounded,
+           routeId: AppContentRoutes.debtSettings,
+           destination: (context) => const DebtSettingsScreen(),
+@@ -556,58 +564,58 @@ class _HomeScreenState extends State<HomeScreen>
+     ),
+     ModuleItem(
+       icon: Icons.inventory_2,
+-      title: 'المخزون',
++      title: loc.inventoryLabel,
+       iconColor: Colors.orange,
+       routeId: AppContentRoutes.inventory,
+       destination: (context) => const InventoryHubScreen(),
+       subItems: [
+         SubMenuItem(
+-          title: 'قائمة المنتجات',
++          title: loc.productListLabel,
+           routeId: AppContentRoutes.inventoryProducts,
+           destination: (context) => const InventoryProductsScreen(),
+         ),
+         SubMenuItem(
+-          title: 'إضافة منتج جديد',
++          title: loc.addNewProductLabel,
+           routeId: AppContentRoutes.addProduct,
+           destination: (context) => const AddProductScreen(),
+         ),
+         SubMenuItem(
+-          title: 'تحديث منتج موجود',
++          title: loc.updateExistingProductLabel,
+           routeId: AppContentRoutes.quickUpdateProducts,
+           destination: (context) => const QuickProductUpdateScreen(),
+         ),
+         SubMenuItem(
+-          title: 'طباعة ملصقات باركود',
++          title: loc.printBarcodeLabelsLabel,
+           routeId: AppContentRoutes.inventoryBarcodeLabels,
+           destination: (context) => const BarcodeLabelsScreen(),
+         ),
+         SubMenuItem(
+-          title: 'حركات المخزون',
++          title: loc.inventoryMovementsLabel,
+           routeId: AppContentRoutes.inventoryManagement,
+           destination: (context) => const InventoryManagementScreen(),
+         ),
+         SubMenuItem(
+-          title: 'المستودعات',
++          title: loc.warehousesLabel,
+           routeId: AppContentRoutes.inventoryWarehouses,
+           destination: (context) => const WarehousesScreen(),
+         ),
+         SubMenuItem(
+-          title: 'الجرد الدوري',
++          title: loc.stocktakingLabel,
+           routeId: AppContentRoutes.inventoryStocktaking,
+           destination: (context) => const StocktakingScreen(),
+         ),
+         SubMenuItem(
+-          title: 'أوامر الشراء',
++          title: loc.purchaseOrdersLabel,
+           routeId: AppContentRoutes.inventoryPurchaseOrders,
+           destination: (context) => const PurchaseOrdersScreen(),
+         ),
+         SubMenuItem(
+-          title: 'تحليلات المخزون',
++          title: loc.stockAnalyticsLabel,
+           routeId: AppContentRoutes.inventoryAnalytics,
+           destination: (context) => const StockAnalyticsScreen(),
+         ),
+         SubMenuItem(
+-          title: 'إعدادات المخزون',
++          title: loc.inventorySettingsLabel,
+           routeId: AppContentRoutes.inventorySettings,
+           destination: (context) => const InventorySettingsScreen(),
+         ),
+@@ -615,23 +623,23 @@ class _HomeScreenState extends State<HomeScreen>
+     ),
+     ModuleItem(
+       icon: Icons.handyman_rounded,
+-      title: 'الخدمات والصيانة',
++      title: loc.servicesAndMaintenanceLabel,
+       iconColor: Colors.blueAccent,
+       routeId: AppContentRoutes.servicesHub,
+       destination: (context) => const ServicesHubScreen(),
+       subItems: [
+         SubMenuItem(
+-          title: 'لوحة الخدمات والصيانة',
++          title: loc.servicesAndMaintenancePanelLabel,
+           routeId: AppContentRoutes.servicesHub,
+           destination: (context) => const ServicesHubScreen(),
+         ),
+         SubMenuItem(
+-          title: 'إضافة خدمة فنية',
++          title: loc.addTechnicalServiceLabel,
+           routeId: AppContentRoutes.servicesAdd,
+           destination: (context) => const AddServiceScreen(),
+         ),
+         SubMenuItem(
+-          title: 'طلبات الصيانة وتذاكر العمل',
++          title: loc.maintenanceRequestsLabel,
+           routeId: AppContentRoutes.serviceOrdersHub,
+           destination: (context) => const ServiceOrdersHubScreen(),
+         ),
+@@ -639,46 +647,46 @@ class _HomeScreenState extends State<HomeScreen>
+     ),
+     ModuleItem(
+       icon: Icons.account_balance_wallet,
+-      title: 'الصندوق',
++      title: loc.cashRegisterLabel,
+       iconColor: Colors.purple,
+       routeId: AppContentRoutes.cash,
+       destination: (context) => const CashScreen(),
+     ),
+     ModuleItem(
+       icon: Icons.payments_outlined,
+-      title: 'المصروفات',
++      title: loc.expensesLabel,
+       iconColor: Colors.teal,
+       routeId: AppContentRoutes.expenses,
+       destination: (context) => const ExpensesScreen(),
+     ),
+     ModuleItem(
+       icon: Icons.bar_chart,
+-      title: 'التقارير',
++      title: loc.reportsLabel,
+       iconColor: Colors.red,
+       routeId: AppContentRoutes.reports(0),
+       destination: (context) => const ReportsScreen(initialSection: 0),
+     ),
+     ModuleItem(
+       icon: Icons.people_alt,
+-      title: 'المستخدمين',
++      title: loc.usersLabel,
+       iconColor: Colors.indigo,
+       routeId: AppContentRoutes.users,
+       destination: (context) => const UsersScreen(),
+       subItems: [
+         SubMenuItem(
+-          title: 'إدارة المستخدمين',
++          title: loc.manageUsersLabel,
+           icon: Icons.manage_accounts_outlined,
+           routeId: AppContentRoutes.users,
+           destination: (context) => const UsersScreen(),
+         ),
+         SubMenuItem(
+-          title: 'ورديات الموظفين (أسبوع)',
++          title: loc.staffShiftsWeekLabel,
+           icon: Icons.date_range_rounded,
+           routeId: AppContentRoutes.staffShiftsWeek,
+           destination: (context) => const StaffShiftsWeekScreen(),
+         ),
+         SubMenuItem(
+-          title: 'هويات الموظفين',
++          title: loc.staffIdentitiesLabel,
+           icon: Icons.badge_outlined,
+           routeId: AppContentRoutes.employeeIdentity,
+           destination: (context) => const EmployeeIdentityScreen(),
+@@ -687,12 +695,13 @@ class _HomeScreenState extends State<HomeScreen>
+     ),
+     ModuleItem(
+       icon: Icons.print,
+-      title: 'الطباعة',
++      title: loc.printingLabel,
+       iconColor: Colors.blueGrey,
+       routeId: AppContentRoutes.printing,
+       destination: (context) => const PrintingScreen(),
+     ),
+   ];
++  }
+ 
+   late List<ModuleItem> _orderedModules;
+ 
+@@ -707,8 +716,6 @@ class _HomeScreenState extends State<HomeScreen>
+   void initState() {
+     super.initState();
+     WidgetsBinding.instance.addObserver(this);
+-    // تهيئة فورية — تمنع LateInitializationError قبل انتهاء الـ async
+-    _orderedModules = List.from(_originalModules);
+     _nameAnimController = AnimationController(
+       vsync: this,
+       duration: const Duration(milliseconds: 300),
+@@ -813,6 +820,29 @@ class _HomeScreenState extends State<HomeScreen>
+   @override
+   void didChangeDependencies() {
+     super.didChangeDependencies();
++    final loc = AppLocalizations.of(context)!;
++    final freshModules = _buildOriginalModules(loc);
++    if (!_originalModulesBuilt) {
++      _originalModules = freshModules;
++      _orderedModules = List.from(_originalModules);
++      _originalModulesBuilt = true;
++    } else {
++      // إعادة بناء بعد تغيير اللغة أثناء الجلسة: نحافظ على ترتيب المستخدم
++      // الحالي لكن نستبدل كل عنصر بنسخته المترجَمة حديثاً، مطابقةً بـ routeId
++      // (وليس بالعنوان النصي الذي تغيّر الآن مع اللغة).
++      final byRoute = {for (final m in freshModules) m.routeId: m};
++      final reconciled = _orderedModules
++          .map((old) => byRoute[old.routeId])
++          .whereType<ModuleItem>()
++          .toList();
++      for (final m in freshModules) {
++        if (!reconciled.any((x) => x.routeId == m.routeId)) {
++          reconciled.add(m);
++        }
++      }
++      _originalModules = freshModules;
++      _orderedModules = reconciled;
++    }
+     _barcodeBridge ??= context.read<GlobalBarcodeRouteBridge>();
+     if (!_barcodeBridgeAttached) {
+       _barcodeBridgeAttached = true;
+@@ -929,10 +959,11 @@ class _HomeScreenState extends State<HomeScreen>
+     }
+     final u = auth.username.trim();
+     if (u.contains('@') && !u.contains(' ')) return u.split('@').first;
+-    return u.isNotEmpty ? u : 'المستخدم';
++    return u.isNotEmpty ? u : AppLocalizations.of(context)!.defaultUserFallback;
+   }
+ 
+   Future<void> _confirmAndLogout(AuthProvider auth) async {
++    final loc = AppLocalizations.of(context)!;
+     final ok = await showDialog<bool>(
+       context: context,
+       barrierDismissible: true,
+@@ -940,13 +971,13 @@ class _HomeScreenState extends State<HomeScreen>
+         return Directionality(
+           textDirection: TextDirection.rtl,
+           child: AlertDialog(
+-            title: const Text('تسجيل الخروج'),
++            title: Text(loc.logoutLabel),
+             content: Column(
+               mainAxisSize: MainAxisSize.min,
+               crossAxisAlignment: CrossAxisAlignment.stretch,
+               children: [
+                 Text(
+-                  'هل أنت متأكد أنك تريد تسجيل الخروج؟',
++                  loc.logoutConfirmMessage,
+                   style: TextStyle(
+                     color: Theme.of(ctx).colorScheme.onSurfaceVariant,
+                     height: 1.4,
+@@ -955,12 +986,12 @@ class _HomeScreenState extends State<HomeScreen>
+                 const SizedBox(height: 20),
+                 FilledButton(
+                   onPressed: () => Navigator.of(ctx).pop(true),
+-                  child: const Text('تأكيد'),
++                  child: Text(loc.confirmAction),
+                 ),
+                 const SizedBox(height: 8),
+                 TextButton(
+                   onPressed: () => Navigator.of(ctx).pop(false),
+-                  child: const Text('إلغاء'),
++                  child: Text(loc.cancel),
+                 ),
+               ],
+             ),
+@@ -1047,7 +1078,7 @@ class _HomeScreenState extends State<HomeScreen>
+       setState(() => _globalSearchLoading = false);
+       ScaffoldMessenger.of(context).showSnackBar(
+         SnackBar(
+-          content: Text('تعذر إكمال البحث: $e'),
++          content: Text(AppLocalizations.of(context)!.searchFailedSnackbar(e)),
+           behavior: SnackBarBehavior.floating,
+         ),
+       );
+@@ -1061,7 +1092,7 @@ class _HomeScreenState extends State<HomeScreen>
+     if (!mounted) return;
+     final route = contentMaterialRoute(
+       routeId: AppContentRoutes.addProduct,
+-      breadcrumbTitle: 'إضافة منتج',
++      breadcrumbTitle: AppLocalizations.of(context)!.addProductLabel,
+       builder: (_) =>
+           AddProductScreen(initialBarcode: raw, autoFillFromScan: true),
+     );
+@@ -1118,7 +1149,7 @@ class _HomeScreenState extends State<HomeScreen>
+       if (!draft.isSaleScreenOpen) {
+         _pushInContentTagged(
+           AppContentRoutes.addInvoice,
+-          'بيع جديد',
++          AppLocalizations.of(context)!.newSaleLabel,
+           (_) => const AddInvoiceScreen(),
+         );
+       }
+@@ -1140,7 +1171,7 @@ class _HomeScreenState extends State<HomeScreen>
+ 
+     _pushInContentTagged(
+       AppContentRoutes.addProduct,
+-      'إضافة منتج',
++      AppLocalizations.of(context)!.addProductLabel,
+       (_) => AddProductScreen(initialBarcode: raw, autoFillFromScan: true),
+     );
+   }
+@@ -1414,10 +1445,11 @@ class _HomeScreenState extends State<HomeScreen>
+                                         ],
+                                         onGenerateInitialRoutes: (_, _) => [
+                                           FastContentPageRoute(
+-                                            settings: const RouteSettings(
++                                            settings: RouteSettings(
+                                               name: AppContentRoutes.home,
+                                               arguments: BreadcrumbMeta(
+-                                                'الرئيسية',
++                                                AppLocalizations.of(context)!
++                                                    .homeLabel,
+                                               ),
+                                             ),
+                                             builder: (_) => _HomeContentPage(
+@@ -1471,9 +1503,11 @@ class _HomeScreenState extends State<HomeScreen>
+               ],
+               onGenerateInitialRoutes: (_, _) => [
+                 FastContentPageRoute(
+-                  settings: const RouteSettings(
++                  settings: RouteSettings(
+                     name: AppContentRoutes.home,
+-                    arguments: BreadcrumbMeta('الرئيسية'),
++                    arguments: BreadcrumbMeta(
++                      AppLocalizations.of(context)!.homeLabel,
++                    ),
+                   ),
+                   builder: (_) => _HomeContentPage(parentState: this),
+                 ),
+@@ -1567,12 +1601,13 @@ class _HomeScreenState extends State<HomeScreen>
+       builder: (context, shift, _) {
+         if (!shift.hasOpenShift) return const SizedBox.shrink();
+         final label = shift.activeShift?['shiftStaffName'] as String?;
++        final loc = AppLocalizations.of(context)!;
+         return IconButton(
+           style: _homeAppBarActionStyle(),
+           icon: const Icon(Icons.event_available_outlined, size: 20),
+           tooltip: label != null && label.isNotEmpty
+-              ? 'وردية: $label — إغلاق'
+-              : 'إغلاق الوردية',
++              ? loc.shiftTooltipWithName(label)
++              : loc.closeShiftTooltip,
+           onPressed: () => showCloseShiftDialog(context),
+         );
+       },
+@@ -1586,6 +1621,7 @@ class _HomeScreenState extends State<HomeScreen>
+       valueListenable: CloudSyncService.instance.lastError,
+       builder: (context, lastError, _) {
+         final hasError = lastError != null && lastError.isNotEmpty;
++        final loc = AppLocalizations.of(context)!;
+         return Stack(
+           clipBehavior: Clip.none,
+           alignment: Alignment.center,
+@@ -1598,13 +1634,13 @@ class _HomeScreenState extends State<HomeScreen>
+                     : Icons.cloud_sync_outlined,
+                 size: 20,
+               ),
+-              tooltip: hasError ? 'تزامن — فشل آخر محاولة' : 'تزامن سحابي',
++              tooltip: hasError ? loc.syncFailedTooltip : loc.cloudSyncTooltip,
+               onPressed: () async {
+                 final messenger = ScaffoldMessenger.of(context);
+                 messenger.showSnackBar(
+-                  const SnackBar(
+-                    content: Text('بدء التزامن…'),
+-                    duration: Duration(seconds: 2),
++                  SnackBar(
++                    content: Text(loc.syncStartingSnackbar),
++                    duration: const Duration(seconds: 2),
+                     behavior: SnackBarBehavior.floating,
+                   ),
+                 );
+@@ -1646,7 +1682,7 @@ class _HomeScreenState extends State<HomeScreen>
+                 context,
+                 contentNavigator: _contentNavigator,
+               ),
+-              tooltip: 'التنبيهات',
++              tooltip: AppLocalizations.of(context)!.notificationsTooltip,
+             ),
+             if (c > 0)
+               PositionedDirectional(
+@@ -1690,7 +1726,7 @@ class _HomeScreenState extends State<HomeScreen>
+       },
+       onOpenSettings: () => _pushInContentTagged(
+         AppContentRoutes.settings,
+-        'الإعدادات',
++        AppLocalizations.of(context)!.settingsLabel,
+         (_) => const SettingsScreen(),
+         floatingPageBuilder: (_) => const SettingsScreen(showAppBar: false),
+       ),
+@@ -1922,6 +1958,7 @@ class _HomeScreenState extends State<HomeScreen>
+         final mq = MediaQuery.sizeOf(ctx);
+         final dialogW = math.min(400.0, mq.width - 48);
+         const goldClose = Color(0xFFF5C518);
++        final loc = AppLocalizations.of(ctx)!;
+ 
+         Widget row(
+           String label,
+@@ -1991,15 +2028,15 @@ class _HomeScreenState extends State<HomeScreen>
+                   ),
+                 ),
+                 IconButton(
+-                  tooltip: 'نسخ',
++                  tooltip: loc.copyLabel,
+                   visualDensity: VisualDensity.compact,
+                   onPressed: allowCopy && value.isNotEmpty && value != '—'
+                       ? () async {
+                           await Clipboard.setData(ClipboardData(text: value));
+                           if (!ctx.mounted) return;
+                           ScaffoldMessenger.of(ctx).showSnackBar(
+-                            const SnackBar(
+-                              content: Text('تم النسخ'),
++                            SnackBar(
++                              content: Text(loc.copiedSnackbar),
+                               behavior: SnackBarBehavior.floating,
+                             ),
+                           );
+@@ -2039,7 +2076,7 @@ class _HomeScreenState extends State<HomeScreen>
+                   ),
+                   Expanded(
+                     child: Text(
+-                      'بيانات المستخدم',
++                      loc.userInfoTitle,
+                       textAlign: TextAlign.center,
+                       style: TextStyle(
+                         color: _textPrimary,
+@@ -2059,16 +2096,16 @@ class _HomeScreenState extends State<HomeScreen>
+                     Divider(color: _dividerColor),
+                     const SizedBox(height: 6),
+                     row(
+-                      'الاسم المعروض:',
++                      loc.displayNameFieldLabel,
+                       auth.displayName.isNotEmpty ? auth.displayName : '—',
+                     ),
+                     row(
+-                      'اسم الدخول:',
++                      loc.usernameFieldLabel,
+                       auth.username.isNotEmpty ? auth.username : '—',
+                     ),
+-                    row('الصلاحية:', auth.role.isNotEmpty ? auth.role : '—'),
++                    row(loc.roleFieldLabel, auth.role.isNotEmpty ? auth.role : '—'),
+                     row(
+-                      'البريد الإلكتروني:',
++                      loc.emailFieldLabel,
+                       auth.email.isNotEmpty ? auth.email : '—',
+                       ltrValue: true,
+                     ),
+@@ -2080,9 +2117,9 @@ class _HomeScreenState extends State<HomeScreen>
+               actions: [
+                 TextButton(
+                   onPressed: () => Navigator.pop(ctx),
+-                  child: const Text(
+-                    'إغلاق',
+-                    style: TextStyle(
++                  child: Text(
++                    loc.closeAction,
++                    style: const TextStyle(
+                       color: goldClose,
+                       fontWeight: FontWeight.w700,
+                     ),
+@@ -2121,11 +2158,11 @@ class _HomeScreenState extends State<HomeScreen>
+     final sl = ScreenLayout.of(context);
+     final w = MediaQuery.sizeOf(context).width;
+     final collapse = sl.isHandsetForLayout && w < 400 && !hideVk;
++    final loc = AppLocalizations.of(context)!;
+ 
+     final barcodeBtn = IconButton(
+       style: _searchBarSuffixIconStyle(iconInField),
+-      tooltip:
+-          'قراءة باركود (كاميرا على الجهاز المحمول، أو نافذة القارئ على الحاسوب)',
++      tooltip: loc.barcodeScanTooltip,
+       icon: Icon(Icons.qr_code_scanner_rounded, color: iconInField, size: 21),
+       onPressed: _scanFromDashboardSearch,
+     );
+@@ -2133,8 +2170,8 @@ class _HomeScreenState extends State<HomeScreen>
+     final keyboardBtn = IconButton(
+       style: _searchBarSuffixIconStyle(iconInField),
+       tooltip: _showVirtualSearchKeyboard
+-          ? 'إخفاء لوحة المفاتيح'
+-          : 'لوحة مفاتيح عربي / English — اسحب من المقبض أو ثبّتها بالدبوس',
++          ? loc.hideKeyboardTooltip
++          : loc.keyboardDragPinHint,
+       icon: Icon(
+         _showVirtualSearchKeyboard
+             ? Icons.keyboard_hide_rounded
+@@ -2155,7 +2192,7 @@ class _HomeScreenState extends State<HomeScreen>
+     final clearBtn = _searchQuery.isNotEmpty
+         ? IconButton(
+             style: _searchBarSuffixIconStyle(iconInField),
+-            tooltip: 'مسح البحث',
++            tooltip: loc.clearSearchTooltip,
+             icon: Icon(Icons.clear_rounded, color: iconInField, size: 20),
+             onPressed: _clearGlobalSearch,
+           )
+@@ -2174,7 +2211,7 @@ class _HomeScreenState extends State<HomeScreen>
+         barcodeBtn,
+         PopupMenuButton<String>(
+           padding: EdgeInsets.zero,
+-          tooltip: 'أدوات البحث',
++          tooltip: loc.searchToolsTooltip,
+           color: Theme.of(context).colorScheme.surface,
+           surfaceTintColor: Colors.transparent,
+           icon: Icon(Icons.tune_rounded, color: iconInField, size: 20),
+@@ -2200,8 +2237,8 @@ class _HomeScreenState extends State<HomeScreen>
+                 ),
+                 title: Text(
+                   _showVirtualSearchKeyboard
+-                      ? 'إخفاء لوحة المفاتيح'
+-                      : 'إظهار لوحة المفاتيح (عربي / English)',
++                      ? loc.hideKeyboardTooltip
++                      : loc.showKeyboardTooltip,
+                 ),
+               ),
+             ),
+@@ -2219,6 +2256,7 @@ class _HomeScreenState extends State<HomeScreen>
+     final iconInField = _textSecondary;
+     final w = MediaQuery.sizeOf(context).width;
+     final shortHint = sl.isHandsetForLayout && w < 400;
++    final loc = AppLocalizations.of(context)!;
+     return Directionality(
+       textDirection: TextDirection.rtl,
+       child: TextField(
+@@ -2238,9 +2276,7 @@ class _HomeScreenState extends State<HomeScreen>
+             minHeight: 48,
+             maxHeight: 52,
+           ),
+-          hintText: shortHint
+-              ? 'بحث سريع: وحدات، منتجات، عملاء…'
+-              : 'بحث: وحدات، منتجات، عملاء، موظفون، باركود…',
++          hintText: shortHint ? loc.quickSearchHint : loc.fullSearchHint,
+           hintStyle: TextStyle(
+             color: _textSecondary,
+             fontSize: sl.isNarrowWidth ? 12 : 13,
+@@ -2274,36 +2310,38 @@ class _HomeScreenState extends State<HomeScreen>
+   }
+ 
+   String _invoiceTypeAr(InvoiceType t) {
++    final loc = AppLocalizations.of(context)!;
+     switch (t) {
+       case InvoiceType.cash:
+-        return 'نقدي';
++        return loc.paymentTypeCash;
+       case InvoiceType.credit:
+-        return 'دين';
++        return loc.paymentTypeCredit;
+       case InvoiceType.installment:
+-        return 'تقسيط';
++        return loc.paymentTypeInstallment;
+       case InvoiceType.delivery:
+-        return 'توصيل';
++        return loc.paymentTypeDelivery;
+       case InvoiceType.debtCollection:
+-        return 'تحصيل دين';
++        return loc.paymentTypeDebtCollection;
+       case InvoiceType.installmentCollection:
+-        return 'تسديد قسط';
++        return loc.paymentTypeInstallmentCollection;
+       case InvoiceType.supplierPayment:
+-        return 'دفع مورد';
++        return loc.paymentTypeSupplierPayment;
+     }
+   }
+ 
+   Future<void> _offerReturnForScannedInvoiceId(int id) async {
++    final loc = AppLocalizations.of(context)!;
+     final inv = await _dbHelper.getInvoiceById(id);
+     if (!mounted) return;
+     if (inv == null) {
+       ScaffoldMessenger.of(
+         context,
+-      ).showSnackBar(SnackBar(content: Text('لا توجد فاتورة برقم $id')));
++      ).showSnackBar(SnackBar(content: Text(loc.noInvoiceWithNumber(id))));
+       return;
+     }
+     if (inv.isReturned) {
+       ScaffoldMessenger.of(context).showSnackBar(
+-        const SnackBar(content: Text('هذه الفاتورة مسجّلة كمرتجع مسبقاً')),
++        SnackBar(content: Text(loc.invoiceAlreadyReturned)),
+       );
+       return;
+     }
+@@ -2311,10 +2349,8 @@ class _HomeScreenState extends State<HomeScreen>
+         inv.type == InvoiceType.installmentCollection ||
+         inv.type == InvoiceType.supplierPayment) {
+       ScaffoldMessenger.of(context).showSnackBar(
+-        const SnackBar(
+-          content: Text(
+-            'هذا السند لا يُفتَح كمرتجع بيع — عكس الدفعة من شاشة المورد أو إدارة الأقساط حسب النوع.',
+-          ),
++        SnackBar(
++          content: Text(loc.invoiceNotOpenableAsReturn),
+         ),
+       );
+       return;
+@@ -2323,21 +2359,24 @@ class _HomeScreenState extends State<HomeScreen>
+         await showDialog<bool>(
+           context: context,
+           builder: (ctx) => AlertDialog(
+-            title: Text('فاتورة بيع #${inv.id}'),
++            title: Text(loc.salesInvoiceNumber(inv.id ?? id)),
+             content: Text(
+-              'العميل: ${inv.customerName.trim().isEmpty ? '(فارغ)' : inv.customerName}\n'
+-              'الدفع: ${_invoiceTypeAr(inv.type)}\n'
+-              'الإجمالي: ${IraqiCurrencyFormat.formatIqd(inv.total)}\n\n'
+-              'فتح شاشة المرتجع؟ يمكنك تقليل الكمية أو حذف الأسطر لإرجاع جزئي فقط.',
++              loc.returnInvoiceDialogBody(
++                inv.customerName.trim().isEmpty
++                    ? loc.emptyPlaceholder
++                    : inv.customerName,
++                _invoiceTypeAr(inv.type),
++                IraqiCurrencyFormat.formatIqd(inv.total),
++              ),
+             ),
+             actions: [
+               TextButton(
+                 onPressed: () => Navigator.pop(ctx, false),
+-                child: const Text('إلغاء'),
++                child: Text(loc.cancel),
+               ),
+               FilledButton(
+                 onPressed: () => Navigator.pop(ctx, true),
+-                child: const Text('مرتجع'),
++                child: Text(loc.returnLabel),
+               ),
+             ],
+           ),
+@@ -2347,7 +2386,7 @@ class _HomeScreenState extends State<HomeScreen>
+     final rid = inv.id ?? id;
+     _pushInContentTagged(
+       AppContentRoutes.processReturn(rid),
+-      'مرتجع #$rid',
++      loc.returnNumber(rid),
+       (_) => ProcessReturnScreen(originalInvoice: inv),
+     );
+   }
+@@ -2355,7 +2394,7 @@ class _HomeScreenState extends State<HomeScreen>
+   Future<void> _scanFromDashboardSearch() async {
+     final code = await BarcodeInputLauncher.captureBarcode(
+       context,
+-      title: 'مسح QR / Barcode',
++      title: AppLocalizations.of(context)!.scanQrBarcodeTitle,
+     );
+     if (!mounted || code == null || code.trim().isEmpty) return;
+     await _applyScannedCode(code.trim());
+@@ -2366,6 +2405,7 @@ class _HomeScreenState extends State<HomeScreen>
+     final auth = Provider.of<AuthProvider>(context, listen: false);
+     final lic = context.watch<LicenseService>();
+     final isRestricted = lic.state.status == LicenseStatus.restricted;
++    final loc = AppLocalizations.of(context)!;
+ 
+     void navToTagged(
+       String routeId,
+@@ -2393,7 +2433,7 @@ class _HomeScreenState extends State<HomeScreen>
+                   title: s.title,
+                   icon: s.icon,
+                   disabledTooltip: blockedInRestricted(s.routeId)
+-                      ? 'غير متاح في الوضع المقيّد'
++                      ? loc.restrictedModeTooltip
+                       : null,
+                   onTap: blockedInRestricted(s.routeId)
+                       ? null
+@@ -2406,7 +2446,7 @@ class _HomeScreenState extends State<HomeScreen>
+               )
+               .toList(),
+           disabledTooltip: blockedInRestricted(module.routeId)
+-              ? 'غير متاح في الوضع المقيّد'
++              ? loc.restrictedModeTooltip
+               : null,
+           onTap: blockedInRestricted(module.routeId)
+               ? null
+@@ -2419,7 +2459,7 @@ class _HomeScreenState extends State<HomeScreen>
+       ),
+       _SidebarItem(
+         icon: Icons.logout,
+-        title: 'تسجيل الخروج',
++        title: loc.logoutLabel,
+         iconColor: Colors.red,
+         onTap: () => _confirmAndLogout(auth),
+       ),
+@@ -2446,7 +2486,7 @@ class _HomeScreenState extends State<HomeScreen>
+             SizedBox(
+               height: 56,
+               child: Tooltip(
+-                message: isExpanded ? 'طي القائمة' : 'توسيع القائمة',
++                message: isExpanded ? loc.collapseMenuTooltip : loc.expandMenuTooltip,
+                 child: IconButton(
+                   padding: const EdgeInsets.all(10),
+                   style: IconButton.styleFrom(foregroundColor: cs.onPrimary),
+@@ -2518,7 +2558,7 @@ class _HomeScreenState extends State<HomeScreen>
+                         if (isExpanded)
+                           SidebarLogoutPill(
+                             colorScheme: cs,
+-                            label: 'تسجيل الخروج',
++                            label: loc.logoutLabel,
+                             onTap: () => _confirmAndLogout(auth),
+                           )
+                         else
+@@ -2558,7 +2598,7 @@ class _HomeScreenState extends State<HomeScreen>
+       children: [
+         Tooltip(
+           message: item.onTap == null && !hasSubmenu
+-              ? (item.disabledTooltip ?? 'غير متاح في الوضع المقيّد')
++              ? (item.disabledTooltip ?? AppLocalizations.of(context)!.restrictedModeTooltip)
+               : (isExpanded ? '' : item.title),
+           preferBelow: false,
+           child: Material(
+@@ -2755,6 +2795,7 @@ class _HomeScreenState extends State<HomeScreen>
+   /// إضافة صنف لبيع جديد من البحث أو من عمود المنتجات على الشاشات العريضة.
+   void _handleProductQuickPick(Map<String, dynamic> p) {
+     final draft = context.read<SaleDraftProvider>();
++    final loc = AppLocalizations.of(context)!;
+     final line = <String, dynamic>{
+       'name': p['name'],
+       'sell': p['sell'],
+@@ -2773,7 +2814,7 @@ class _HomeScreenState extends State<HomeScreen>
+     if (!draft.isSaleScreenOpen) {
+       _pushInContentTagged(
+         AppContentRoutes.addInvoice,
+-        'بيع جديد',
++        loc.newSaleLabel,
+         (_) => const AddInvoiceScreen(),
+       );
+       WidgetsBinding.instance.addPostFrameCallback((_) {
+@@ -2789,12 +2830,13 @@ class _HomeScreenState extends State<HomeScreen>
+ 
+   // ── Main content (Dashboard فقط — QuickActions حُذفت في 2026-05) ──────────
+   Widget _buildMainContent(double availableWidth) {
++    final loc = AppLocalizations.of(context)!;
+     final dashboard = DashboardView(
+       isDark: _isDarkMode,
+       onPinnedProductQuickSale: (preset) {
+         _pushInContentTagged(
+           AppContentRoutes.addInvoice,
+-          'بيع جديد',
++          loc.newSaleLabel,
+           (_) => AddInvoiceScreen(presetProductLine: preset),
+         );
+       },
+@@ -2803,42 +2845,42 @@ class _HomeScreenState extends State<HomeScreen>
+           case HomeGlanceAction.cash:
+             _pushInContentTagged(
+               AppContentRoutes.cash,
+-              'الصندوق',
++              loc.cashRegisterLabel,
+               (_) => const CashScreen(),
+             );
+             break;
+           case HomeGlanceAction.newSale:
+             _pushInContentTagged(
+               AppContentRoutes.addInvoice,
+-              'بيع جديد',
++              loc.newSaleLabel,
+               (_) => const AddInvoiceScreen(),
+             );
+             break;
+           case HomeGlanceAction.inventoryProducts:
+             _pushInContentTagged(
+               AppContentRoutes.inventoryProducts,
+-              'الأصناف',
++              loc.itemsLabel,
+               (_) => const InventoryProductsScreen(),
+             );
+             break;
+           case HomeGlanceAction.parkedSales:
+             _pushInContentTagged(
+               AppContentRoutes.parkedSales,
+-              'معلّقة مؤقتاً',
++              loc.parkedSalesLabel,
+               (_) => const ParkedSalesScreen(),
+             );
+             break;
+           case HomeGlanceAction.reportsExecutive:
+             _pushInContentTagged(
+               AppContentRoutes.reports(0),
+-              'التقارير',
++              loc.reportsLabel,
+               (_) => const ReportsScreen(initialSection: 0),
+             );
+             break;
+           case HomeGlanceAction.completedOrders:
+             _pushInContentTagged(
+               AppContentRoutes.invoices,
+-              'الفواتير',
++              loc.invoicesLabel,
+               (_) => const InvoicesScreen(),
+             );
+             break;
+@@ -2860,7 +2902,7 @@ class _HomeScreenState extends State<HomeScreen>
+             } else {
+               _pushInContentTagged(
+                 AppContentRoutes.cash,
+-                'الصندوق',
++                loc.cashRegisterLabel,
+                 (_) => const CashScreen(),
+               );
+             }
+@@ -2868,7 +2910,7 @@ class _HomeScreenState extends State<HomeScreen>
+           case RecentActivityKind.parkedSale:
+             _pushInContentTagged(
+               AppContentRoutes.parkedSales,
+-              'معلّقة مؤقتاً',
++              loc.parkedSalesLabel,
+               (_) => const ParkedSalesScreen(),
+             );
+             break;
+@@ -2879,7 +2921,7 @@ class _HomeScreenState extends State<HomeScreen>
+             } else {
+               _pushInContentTagged(
+                 AppContentRoutes.loyaltyLedger,
+-                'سجل النقاط',
++                loc.pointsLedgerShortLabel,
+                 (_) => const LoyaltyLedgerScreen(),
+               );
+             }
+@@ -2887,28 +2929,28 @@ class _HomeScreenState extends State<HomeScreen>
+           case RecentActivityKind.stockVoucher:
+             _pushInContentTagged(
+               AppContentRoutes.inventory,
+-              'المخزون',
++              loc.inventoryLabel,
+               (_) => const InventoryHubScreen(),
+             );
+             break;
+           case RecentActivityKind.customerCreated:
+             _pushInContentTagged(
+               AppContentRoutes.customers,
+-              'العملاء',
++              loc.customersLabel,
+               (_) => const CustomersScreen(),
+             );
+             break;
+           case RecentActivityKind.productCreated:
+             _pushInContentTagged(
+               AppContentRoutes.inventoryProducts,
+-              'الأصناف',
++              loc.itemsLabel,
+               (_) => const InventoryProductsScreen(),
+             );
+             break;
+           case RecentActivityKind.workShift:
+             _pushInContentTagged(
+               AppContentRoutes.staffShiftsWeek,
+-              'ورديات الموظفين',
++              loc.staffShiftsLabel,
+               (_) => const StaffShiftsWeekScreen(),
+             );
+             break;
+@@ -2916,12 +2958,12 @@ class _HomeScreenState extends State<HomeScreen>
+       },
+       onOpenInvoicesFromActivity: () => _pushInContentTagged(
+         AppContentRoutes.invoices,
+-        'الفواتير',
++        loc.invoicesLabel,
+         (_) => const InvoicesScreen(),
+       ),
+       onOpenCashFromActivity: () => _pushInContentTagged(
+         AppContentRoutes.cash,
+-        'الصندوق',
++        loc.cashRegisterLabel,
+         (_) => const CashScreen(),
+       ),
+     );
+@@ -2935,7 +2977,7 @@ class _HomeScreenState extends State<HomeScreen>
+             if (raw == null) return const SizedBox.shrink();
+             final name = (row!['shiftStaffName'] as String?)?.trim() ?? '';
+             return ShiftPermissionBanner(
+-              userName: name.isEmpty ? 'موظف الوردية' : name,
++              userName: name.isEmpty ? loc.shiftStaffFallback : name,
+             );
+           },
+         ),
+@@ -2996,6 +3038,7 @@ class _HomeScreenState extends State<HomeScreen>
+ 
+   Widget _buildSearchOverlayScrollable() {
+     final sl = ScreenLayout.of(context);
++    final loc = AppLocalizations.of(context)!;
+     final hasAny =
+         _hitModules.isNotEmpty ||
+         _hitProducts.isNotEmpty ||
+@@ -3008,7 +3051,7 @@ class _HomeScreenState extends State<HomeScreen>
+           vertical: 20,
+         ),
+         child: Text(
+-          'لا توجد نتائج لـ «${_searchController.text.trim()}»',
++          loc.noResultsFor(_searchController.text.trim()),
+           textAlign: TextAlign.center,
+           style: TextStyle(color: _textSecondary, fontSize: 14, height: 1.4),
+         ),
+@@ -3027,7 +3070,7 @@ class _HomeScreenState extends State<HomeScreen>
+         children: [
+           if (_hitModules.isNotEmpty)
+             _buildHorizontalSearchSection(
+-              title: 'الوحدات',
++              title: loc.modulesLabel,
+               count: _hitModules.length,
+               height: 92,
+               itemCount: _hitModules.length,
+@@ -3045,13 +3088,13 @@ class _HomeScreenState extends State<HomeScreen>
+                   icon: m.icon,
+                   iconColor: m.iconColor,
+                   title: m.title,
+-                  subtitle: 'فتح الوحدة',
++                  subtitle: loc.openModuleLabel,
+                 );
+               },
+             ),
+           if (_hitProducts.isNotEmpty)
+             _buildHorizontalSearchSection(
+-              title: 'المنتجات',
++              title: loc.productsLabel,
+               count: _hitProducts.length,
+               height: 128,
+               itemCount: _hitProducts.length,
+@@ -3067,14 +3110,14 @@ class _HomeScreenState extends State<HomeScreen>
+                   icon: Icons.inventory_2_outlined,
+                   iconColor: const Color(0xFF0D9488),
+                   title: '${p['name'] ?? ''}',
+-                  subtitle: 'بيع $sell د.ع',
++                  subtitle: loc.sellPriceIqd(sell),
+                   belowSubtitle: stockLine,
+                 );
+               },
+             ),
+           if (_hitCustomers.isNotEmpty)
+             _buildHorizontalSearchSection(
+-              title: 'العملاء',
++              title: loc.customersLabel,
+               count: _hitCustomers.length,
+               height: 96,
+               itemCount: _hitCustomers.length,
+@@ -3091,20 +3134,20 @@ class _HomeScreenState extends State<HomeScreen>
+                     _clearGlobalSearch();
+                     _pushInContentTagged(
+                       AppContentRoutes.customers,
+-                      'العملاء',
++                      loc.customersLabel,
+                       (_) => const CustomersScreen(),
+                     );
+                   },
+                   icon: Icons.person_outline,
+                   iconColor: const Color(0xFF0D9488),
+                   title: '${c['name'] ?? ''}',
+-                  subtitle: sub.isEmpty ? 'عرض العملاء' : sub,
++                  subtitle: sub.isEmpty ? loc.viewCustomersLabel : sub,
+                 );
+               },
+             ),
+           if (_hitUsers.isNotEmpty)
+             _buildHorizontalSearchSection(
+-              title: 'الموظفون',
++              title: loc.staffLabel,
+               count: _hitUsers.length,
+               height: 96,
+               itemCount: _hitUsers.length,
+@@ -3121,14 +3164,14 @@ class _HomeScreenState extends State<HomeScreen>
+                     _clearGlobalSearch();
+                     _pushInContentTagged(
+                       AppContentRoutes.users,
+-                      'المستخدمين',
++                      loc.usersLabel,
+                       (_) => const UsersScreen(),
+                     );
+                   },
+                   icon: Icons.badge_outlined,
+                   iconColor: const Color(0xFF3B82F6),
+                   title: '${u['username'] ?? ''}',
+-                  subtitle: sub.isEmpty ? 'عرض الموظفين' : sub,
++                  subtitle: sub.isEmpty ? loc.viewStaffLabel : sub,
+                 );
+               },
+             ),
+@@ -3167,13 +3210,14 @@ class _HomeScreenState extends State<HomeScreen>
+ 
+   /// سطر المخزون تحت السعر في نتائج بحث المنتجات.
+   String _productSearchStockLine(Map<String, dynamic> p) {
++    final loc = AppLocalizations.of(context)!;
+     if (((p['isService'] as num?)?.toInt() ?? 0) == 1) {
+-      return 'خدمة فنية';
++      return loc.technicalServiceLabel;
+     }
+     final track = (p['trackInventory'] as int?) != 0;
+-    if (!track) return 'غير متتبّع للمخزون';
++    if (!track) return loc.notStockTracked;
+     final q = p['qty'];
+-    if (q == null) return 'المتوفر: —';
++    if (q == null) return loc.availableUnknown;
+     final n = (q as num).toDouble();
+     if (n < -1e-9) {
+       final qStr = (n % 1).abs() < 1e-6
+@@ -3182,15 +3226,15 @@ class _HomeScreenState extends State<HomeScreen>
+       final soldOver = (n.abs() % 1).abs() < 1e-6
+           ? IraqiCurrencyFormat.formatInt(n.abs())
+           : IraqiCurrencyFormat.formatDecimal2(n.abs());
+-      return 'رصيد سالب $qStr — بيع زائد قدره $soldOver عن آخر رصيد';
++      return loc.negativeStockWarning(qStr, soldOver);
+     }
+     if (n.abs() < 1e-9) {
+-      return 'المتوفر: 0';
++      return loc.availableZero;
+     }
+     final s = (n % 1).abs() < 1e-6
+         ? IraqiCurrencyFormat.formatInt(n)
+         : IraqiCurrencyFormat.formatDecimal2(n);
+-    return 'المتوفر: $s';
++    return loc.availableQty(s);
+   }
+ 
+   Widget _searchHChip({
+@@ -3498,6 +3542,7 @@ class _HomeScreenState extends State<HomeScreen>
+   /// ورقة القائمة الفرعية لعنصر ذي sub-items
+   void _showSubItemsSheet(ModuleItem module) {
+     final ac = context.appCorners;
++    final loc = AppLocalizations.of(context)!;
+     showModalBottomSheet(
+       context: context,
+       backgroundColor: Colors.transparent,
+@@ -3567,7 +3612,7 @@ class _HomeScreenState extends State<HomeScreen>
+                             ),
+                           ),
+                           Text(
+-                            'اختر من القائمة أدناه',
++                            loc.chooseFromListBelow,
+                             style: TextStyle(
+                               fontSize: 11,
+                               color: _textSecondary,
+@@ -3592,9 +3637,9 @@ class _HomeScreenState extends State<HomeScreen>
+                           vertical: 6,
+                         ),
+                       ),
+-                      child: const Text(
+-                        'عرض الكل',
+-                        style: TextStyle(fontSize: 12),
++                      child: Text(
++                        loc.viewAllLabel,
++                        style: const TextStyle(fontSize: 12),
+                       ),
+                     ),
+                   ],
+diff --git a/lib/screens/invoices/invoices_screen.dart b/lib/screens/invoices/invoices_screen.dart
+index 1b646b9..13e0ef9 100644
+--- a/lib/screens/invoices/invoices_screen.dart
++++ b/lib/screens/invoices/invoices_screen.dart
+@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
+ import 'package:intl/intl.dart' hide TextDirection;
+ import '../../providers/invoice_provider.dart';
+ import '../../providers/product_provider.dart';
++import '../../l10n/generated/app_localizations.dart';
+ import '../../models/invoice.dart';
+ import '../../services/database_helper.dart';
+ import '../../utils/sale_receipt_pdf.dart';
+@@ -115,12 +116,19 @@ class _InvoicesScreenState extends State<InvoicesScreen>
+   /// (وضع `MasterDetailLayout` على `tabletLG+` فقط).
+   int? _selectedInvoiceId;
+ 
+-  static const _tabLabels = ['الكل', 'مدفوعة', 'غير مدفوعة', 'مرتجع', 'تقسيط'];
++  static const _tabCount = 5;
++  List<String> _tabLabels(AppLocalizations loc) => [
++        loc.allLabel,
++        loc.paidStatus,
++        loc.unpaidStatus,
++        loc.returnLabel,
++        loc.paymentTypeInstallment,
++      ];
+ 
+   @override
+   void initState() {
+     super.initState();
+-    _tabs = TabController(length: _tabLabels.length, vsync: this);
++    _tabs = TabController(length: _tabCount, vsync: this);
+     _search.addListener(() {
+       setState(() => _query = _search.text.trim());
+       _syncFiltersToProvider();
+@@ -165,11 +173,12 @@ class _InvoicesScreenState extends State<InvoicesScreen>
+   }
+ 
+   Future<void> _openInvoiceDetails(Invoice inv) async {
++    final loc = AppLocalizations.of(context)!;
+     final id = inv.id;
+     if (id == null) {
+       if (!mounted) return;
+       ScaffoldMessenger.of(context).showSnackBar(
+-        const SnackBar(content: Text('لا يمكن عرض فاتورة بدون رقم')),
++        SnackBar(content: Text(loc.cannotShowInvoiceNoId)),
+       );
+       return;
+     }
+@@ -184,7 +193,7 @@ class _InvoicesScreenState extends State<InvoicesScreen>
+     if (!mounted) return;
+     if (full == null) {
+       ScaffoldMessenger.of(context).showSnackBar(
+-        const SnackBar(content: Text('الفاتورة غير موجودة')),
++        SnackBar(content: Text(loc.invoiceNotFound)),
+       );
+       return;
+     }
+@@ -300,7 +309,7 @@ class _InvoicesScreenState extends State<InvoicesScreen>
+             controller: _tabs,
+             physics: const NeverScrollableScrollPhysics(),
+             children: List.generate(
+-              _tabLabels.length,
++              _tabCount,
+               (_) => _InvoiceList(
+                 invoices: all,
+                 onAdd: () => _addInvoice(),
+@@ -392,18 +401,19 @@ class _InvoicesScreenState extends State<InvoicesScreen>
+ 
+   PreferredSizeWidget _buildAppBar(ColorScheme cs) {
+     final isPhone = context.screenLayout.isPhoneVariant;
++    final loc = AppLocalizations.of(context)!;
+     final toggleGroup = IconButton(
+       icon: Icon(
+         _groupByShift ? Icons.view_agenda_rounded : Icons.view_list_rounded,
+       ),
+       tooltip: _groupByShift
+-          ? 'عرض مفرد (بدون تجميع بالوردية)'
+-          : 'تجميع حسب الوردية',
++          ? loc.flatViewOption
++          : loc.groupByShiftOption,
+       onPressed: () => setState(() => _groupByShift = !_groupByShift),
+     );
+     final filterBtn = IconButton(
+       icon: const Icon(Icons.filter_list_rounded),
+-      tooltip: 'تصفية متقدمة',
++      tooltip: loc.advancedFilterLabel,
+       onPressed: _showFilterSheet,
+     );
+ 
+@@ -427,12 +437,12 @@ class _InvoicesScreenState extends State<InvoicesScreen>
+ 
+     final calendarBtn = IconButton(
+       icon: const Icon(Icons.calendar_month_rounded),
+-      tooltip: 'تقويم الورديات',
++      tooltip: loc.shiftsCalendarLabel,
+       onPressed: openCalendar,
+     );
+     final parkedBtn = IconButton(
+       icon: const Icon(Icons.pause_circle_outline_rounded),
+-      tooltip: 'فواتير معلّقة مؤقتاً',
++      tooltip: loc.parkedSalesScreenTitle,
+       onPressed: openParked,
+     );
+ 
+@@ -440,15 +450,15 @@ class _InvoicesScreenState extends State<InvoicesScreen>
+       backgroundColor: cs.primary,
+       foregroundColor: cs.onPrimary,
+       elevation: 0,
+-      title: const Text('الفواتير',
+-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
++      title: Text(loc.invoicesLabel,
++          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+       actions: isPhone
+           ? [
+               // على الهواتف: تجميع + تصفية (الأكثر استخداماً) + قائمة المزيد.
+               toggleGroup,
+               filterBtn,
+               PopupMenuButton<String>(
+-                tooltip: 'المزيد',
++                tooltip: loc.moreLabel,
+                 icon: const Icon(Icons.more_vert_rounded),
+                 onSelected: (v) {
+                   switch (v) {
+@@ -458,14 +468,14 @@ class _InvoicesScreenState extends State<InvoicesScreen>
+                       openParked();
+                   }
+                 },
+-                itemBuilder: (_) => const [
++                itemBuilder: (_) => [
+                   PopupMenuItem(
+                     value: 'calendar',
+                     child: Row(
+                       children: [
+-                        Icon(Icons.calendar_month_rounded, size: 20),
+-                        SizedBox(width: 10),
+-                        Text('تقويم الورديات'),
++                        const Icon(Icons.calendar_month_rounded, size: 20),
++                        const SizedBox(width: 10),
++                        Text(loc.shiftsCalendarLabel),
+                       ],
+                     ),
+                   ),
+@@ -473,9 +483,9 @@ class _InvoicesScreenState extends State<InvoicesScreen>
+                     value: 'parked',
+                     child: Row(
+                       children: [
+-                        Icon(Icons.pause_circle_outline_rounded, size: 20),
+-                        SizedBox(width: 10),
+-                        Text('فواتير معلّقة'),
++                        const Icon(Icons.pause_circle_outline_rounded, size: 20),
++                        const SizedBox(width: 10),
++                        Text(loc.parkedInvoicesShortLabel),
+                       ],
+                     ),
+                   ),
+@@ -493,6 +503,7 @@ class _InvoicesScreenState extends State<InvoicesScreen>
+ 
+   Widget _buildTabBar(ColorScheme cs) {
+     final narrow = ScreenLayout.of(context).isNarrowWidth;
++    final loc = AppLocalizations.of(context)!;
+     return Container(
+       color: cs.surface,
+       child: TabBar(
+@@ -508,7 +519,7 @@ class _InvoicesScreenState extends State<InvoicesScreen>
+           fontSize: narrow ? 12 : 13,
+         ),
+         unselectedLabelStyle: TextStyle(fontSize: narrow ? 12 : 13),
+-        tabs: _tabLabels.map((t) => Tab(text: t)).toList(),
++        tabs: _tabLabels(loc).map((t) => Tab(text: t)).toList(),
+       ),
+     );
+   }
+@@ -527,8 +538,8 @@ class _InvoicesScreenState extends State<InvoicesScreen>
+       backgroundColor: cs.primary,
+       foregroundColor: cs.onPrimary,
+       icon: const Icon(Icons.add_rounded),
+-      label: const Text('البيع',
+-          style: TextStyle(fontWeight: FontWeight.bold)),
++      label: Text(AppLocalizations.of(context)!.saleLabel,
++          style: const TextStyle(fontWeight: FontWeight.bold)),
+     );
+   }
+ 
+@@ -596,6 +607,7 @@ class _StatsBar extends StatelessWidget {
+ 
+   @override
+   Widget build(BuildContext context) {
++    final loc = AppLocalizations.of(context)!;
+     final total   = invoices.fold(0.0, (s, i) => s + i.total);
+     final paid = invoices
+         .where(
+@@ -628,7 +640,7 @@ class _StatsBar extends StatelessWidget {
+                   children: [
+                     Expanded(
+                       child: _StatChip(
+-                        label: 'الإجمالي',
++                        label: loc.totalLabel,
+                         value: _numFmt.format(total),
+                         color: cs.primary,
+                         icon: Icons.receipt_long_rounded,
+@@ -637,7 +649,7 @@ class _StatsBar extends StatelessWidget {
+                     const SizedBox(width: 8),
+                     Expanded(
+                       child: _StatChip(
+-                        label: 'مدفوعة',
++                        label: loc.paidStatus,
+                         value: _numFmt.format(paid),
+                         color: AppSemanticColors.success,
+                         icon: Icons.check_circle_rounded,
+@@ -650,7 +662,7 @@ class _StatsBar extends StatelessWidget {
+                   children: [
+                     Expanded(
+                       child: _StatChip(
+-                        label: 'دين',
++                        label: loc.paymentTypeCredit,
+                         value: _numFmt.format(unpaid),
+                         color: AppSemanticColors.warning,
+                         icon: Icons.access_time_rounded,
+@@ -659,7 +671,7 @@ class _StatsBar extends StatelessWidget {
+                     const SizedBox(width: 8),
+                     Expanded(
+                       child: _StatChip(
+-                        label: 'مرتجع',
++                        label: loc.returnLabel,
+                         value: _numFmt.format(returns),
+                         color: cs.error,
+                         icon: Icons.reply_rounded,
+@@ -674,7 +686,7 @@ class _StatsBar extends StatelessWidget {
+             children: [
+               Expanded(
+                 child: _StatChip(
+-                  label: 'الإجمالي',
++                  label: loc.totalLabel,
+                   value: _numFmt.format(total),
+                   color: cs.primary,
+                   icon: Icons.receipt_long_rounded,
+@@ -683,7 +695,7 @@ class _StatsBar extends StatelessWidget {
+               const SizedBox(width: 8),
+               Expanded(
+                 child: _StatChip(
+-                  label: 'مدفوعة',
++                  label: loc.paidStatus,
+                   value: _numFmt.format(paid),
+                   color: AppSemanticColors.success,
+                   icon: Icons.check_circle_rounded,
+@@ -692,7 +704,7 @@ class _StatsBar extends StatelessWidget {
+               const SizedBox(width: 8),
+               Expanded(
+                 child: _StatChip(
+-                  label: 'دين',
++                  label: loc.paymentTypeCredit,
+                   value: _numFmt.format(unpaid),
+                   color: AppSemanticColors.warning,
+                   icon: Icons.access_time_rounded,
+@@ -701,7 +713,7 @@ class _StatsBar extends StatelessWidget {
+               const SizedBox(width: 8),
+               Expanded(
+                 child: _StatChip(
+-                  label: 'مرتجع',
++                  label: loc.returnLabel,
+                   value: _numFmt.format(returns),
+                   color: cs.error,
+                   icon: Icons.reply_rounded,
+@@ -768,6 +780,7 @@ class _SearchSortBar extends StatelessWidget {
+   @override
+   Widget build(BuildContext context) {
+     final cs = colorScheme;
++    final loc = AppLocalizations.of(context)!;
+     final gap = ScreenLayout.of(context).pageHorizontalGap;
+     return Container(
+       color: cs.surface,
+@@ -778,7 +791,7 @@ class _SearchSortBar extends StatelessWidget {
+           final sortBtn = PopupMenuButton<String>(
+             initialValue: sort,
+             onSelected: onSort,
+-            tooltip: 'ترتيب',
++            tooltip: loc.sortLabel,
+             icon: Container(
+               padding: const EdgeInsets.all(8),
+               decoration: BoxDecoration(
+@@ -788,10 +801,10 @@ class _SearchSortBar extends StatelessWidget {
+               child: Icon(Icons.sort_rounded, size: 20, color: cs.primary),
+             ),
+             itemBuilder: (_) => [
+-              const PopupMenuItem(value: 'date_desc',   child: Text('الأحدث أولاً')),
+-              const PopupMenuItem(value: 'date_asc',    child: Text('الأقدم أولاً')),
+-              const PopupMenuItem(value: 'amount_desc', child: Text('الأعلى مبلغاً')),
+-              const PopupMenuItem(value: 'amount_asc',  child: Text('الأقل مبلغاً')),
++              PopupMenuItem(value: 'date_desc',   child: Text(loc.sortNewestFirst)),
++              PopupMenuItem(value: 'date_asc',    child: Text(loc.sortOldestFirst)),
++              PopupMenuItem(value: 'amount_desc', child: Text(loc.sortHighestAmount)),
++              PopupMenuItem(value: 'amount_asc',  child: Text(loc.sortLowestAmount)),
+             ],
+           );
+           final searchField = TextField(
+@@ -799,7 +812,7 @@ class _SearchSortBar extends StatelessWidget {
+               focusNode: focusNode,
+               textDirection: TextDirection.rtl,
+               decoration: InputDecoration(
+-                hintText: 'بحث باسم العميل أو رقم الفاتورة أو هاتف العميل...',
++                hintText: loc.searchInvoicesHint,
+                 hintStyle: TextStyle(fontSize: 13, color: cs.onSurfaceVariant),
+                 prefixIcon: Icon(Icons.search_rounded, size: 20, color: cs.onSurfaceVariant),
+                 contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+@@ -905,6 +918,7 @@ class _InvoiceList extends StatelessWidget {
+ 
+   Widget _buildList(BuildContext context) {
+     final gap = ScreenLayout.of(context).pageHorizontalGap;
++    final loc = AppLocalizations.of(context)!;
+     final baseCount = invoices.length;
+     final tail = (isLoadingMore ? 1 : 0);
+ 
+@@ -923,7 +937,7 @@ class _InvoiceList extends StatelessWidget {
+           return _InvoiceCard(
+             invoice: inv,
+             isDark: isDark,
+-            shiftStaffLabel: _labelFor(inv.workShiftId),
++            shiftStaffLabel: _labelFor(inv.workShiftId, loc),
+             isSelected: inv.id != null && inv.id == selectedInvoiceId,
+             serviceProductIds: serviceProductIds,
+             onTap: () => onInvoiceTap(inv),
+@@ -973,7 +987,7 @@ class _InvoiceList extends StatelessWidget {
+         return _InvoiceCard(
+           invoice: inv,
+           isDark: isDark,
+-          shiftStaffLabel: _labelFor(inv.workShiftId),
++          shiftStaffLabel: _labelFor(inv.workShiftId, loc),
+           isSelected: inv.id != null && inv.id == selectedInvoiceId,
+           serviceProductIds: serviceProductIds,
+           onTap: () => onInvoiceTap(inv),
+@@ -982,10 +996,10 @@ class _InvoiceList extends StatelessWidget {
+     );
+   }
+ 
+-  String? _labelFor(int? shiftId) {
++  String? _labelFor(int? shiftId, AppLocalizations loc) {
+     if (shiftId == null) return null;
+     final name = shiftById[shiftId]?['shiftStaffName']?.toString().trim();
+-    if (name == null || name.isEmpty) return 'وردية #$shiftId';
++    if (name == null || name.isEmpty) return loc.shiftNumberLabel(shiftId);
+     return name;
+   }
+ }
+@@ -1008,6 +1022,7 @@ class _ShiftSectionHeader extends StatelessWidget {
+   @override
+   Widget build(BuildContext context) {
+     final cs = Theme.of(context).colorScheme;
++    final loc = AppLocalizations.of(context)!;
+     final bg = Color.alphaBlend(
+       cs.primary.withValues(alpha: isDark ? 0.12 : 0.08),
+       cs.surface,
+@@ -1033,7 +1048,7 @@ class _ShiftSectionHeader extends StatelessWidget {
+             const SizedBox(width: 8),
+             Expanded(
+               child: Text(
+-                'بدون وردية — فواتير قديمة أو خارج جلسة وردية ($invoiceCount)',
++                loc.noShiftGroupLabel(invoiceCount),
+                 style: const TextStyle(
+                   fontWeight: FontWeight.w700,
+                   fontSize: 13,
+@@ -1054,7 +1069,7 @@ class _ShiftSectionHeader extends StatelessWidget {
+           border: Border.all(color: border),
+         ),
+         child: Text(
+-          'وردية #$shiftId — تعذر تحميل تفاصيل الوردية ($invoiceCount فاتورة)',
++          loc.shiftLoadFailedLabel(shiftId, invoiceCount),
+           style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+         ),
+       );
+@@ -1064,7 +1079,7 @@ class _ShiftSectionHeader extends StatelessWidget {
+     final name =
+         (row['shiftStaffName'] as String?)?.trim().isNotEmpty == true
+             ? (row['shiftStaffName'] as String).trim()
+-            : 'موظف الوردية';
++            : loc.shiftStaffFallback;
+     final opened = DateTime.tryParse(row['openedAt']?.toString() ?? '');
+     final closed = row['closedAt'] != null &&
+             row['closedAt'].toString().isNotEmpty
+@@ -1074,7 +1089,7 @@ class _ShiftSectionHeader extends StatelessWidget {
+         opened != null ? dateTimeFmt.format(opened) : '—';
+     final closeS = closed != null
+         ? dateTimeFmt.format(closed)
+-        : 'مفتوحة';
++        : loc.openStatus;
+ 
+     return Container(
+       width: double.infinity,
+@@ -1093,7 +1108,7 @@ class _ShiftSectionHeader extends StatelessWidget {
+               const SizedBox(width: 8),
+               Expanded(
+                 child: Text(
+-                  'وردية #$shiftId — $name',
++                  loc.shiftWithNameLabel(shiftId, name),
+                   style: const TextStyle(
+                     fontWeight: FontWeight.w800,
+                     fontSize: 14,
+@@ -1101,7 +1116,7 @@ class _ShiftSectionHeader extends StatelessWidget {
+                 ),
+               ),
+               Text(
+-                '$invoiceCount فاتورة',
++                loc.invoiceCountLabel(invoiceCount),
+                 style: TextStyle(
+                   fontWeight: FontWeight.w600,
+                   fontSize: 12,
+@@ -1147,19 +1162,19 @@ class _InvoiceCard extends StatelessWidget {
+     this.isSelected = false,
+   });
+ 
+-  String get _statusLabel {
+-    if (invoice.isReturned) return 'مرتجع';
++  String _statusLabel(AppLocalizations loc) {
++    if (invoice.isReturned) return loc.returnLabel;
+     switch (invoice.type) {
+-      case InvoiceType.cash:        return 'مدفوعة';
+-      case InvoiceType.credit:      return 'غير مدفوعة';
+-      case InvoiceType.installment: return 'تقسيط';
+-      case InvoiceType.delivery:    return 'توصيل';
++      case InvoiceType.cash:        return loc.paidStatus;
++      case InvoiceType.credit:      return loc.unpaidStatus;
++      case InvoiceType.installment: return loc.paymentTypeInstallment;
++      case InvoiceType.delivery:    return loc.paymentTypeDelivery;
+       case InvoiceType.debtCollection:
+-        return 'تحصيل دين';
++        return loc.paymentTypeDebtCollection;
+       case InvoiceType.installmentCollection:
+-        return 'تسديد قسط';
++        return loc.paymentTypeInstallmentCollection;
+       case InvoiceType.supplierPayment:
+-        return 'دفع مورد';
++        return loc.paymentTypeSupplierPayment;
+     }
+   }
+ 
+@@ -1181,6 +1196,7 @@ class _InvoiceCard extends StatelessWidget {
+   @override
+   Widget build(BuildContext context) {
+     final cs = Theme.of(context).colorScheme;
++    final loc = AppLocalizations.of(context)!;
+     final statusColor = _invoiceStatusColor(invoice, cs);
+     return Container(
+       margin: const EdgeInsets.only(bottom: 10),
+@@ -1239,7 +1255,7 @@ class _InvoiceCard extends StatelessWidget {
+                             ),
+                           ),
+                           Text(
+-                            '${_numFmt.format(invoice.total)} د.ع',
++                            loc.totalIqd(_numFmt.format(invoice.total)),
+                             style: TextStyle(
+                               fontWeight: FontWeight.bold,
+                               fontSize: 14,
+@@ -1282,7 +1298,7 @@ class _InvoiceCard extends StatelessWidget {
+                               borderRadius: AppShape.none,
+                             ),
+                             child: Text(
+-                              _statusLabel,
++                              _statusLabel(loc),
+                               style: TextStyle(
+                                 color: statusColor,
+                                 fontSize: 11,
+@@ -1295,7 +1311,10 @@ class _InvoiceCard extends StatelessWidget {
+                       if (invoice.items.isNotEmpty) ...[
+                         const SizedBox(height: 5),
+                         Text(
+-                          '${invoice.items.length} صنف · خصم ${_numFmt.format(invoice.discount)} د.ع',
++                          loc.itemsAndDiscountLine(
++                            invoice.items.length,
++                            _numFmt.format(invoice.discount),
++                          ),
+                           style: TextStyle(
+                             fontSize: 11,
+                             color: cs.onSurfaceVariant,
+@@ -1314,7 +1333,7 @@ class _InvoiceCard extends StatelessWidget {
+                             const SizedBox(width: 4),
+                             Expanded(
+                               child: Text(
+-                                'وردية: $shiftStaffLabel',
++                                loc.shiftColonLabel(shiftStaffLabel!),
+                                 style: TextStyle(
+                                   fontSize: 11,
+                                   fontWeight: FontWeight.w600,
+@@ -1368,28 +1387,29 @@ class _ReturnActionPill extends StatelessWidget {
+ 
+   @override
+   Widget build(BuildContext context) {
++    final loc = AppLocalizations.of(context)!;
+     return Tooltip(
+-      message: 'إنشاء فاتورة ترجيع لهذه الفاتورة',
++      message: loc.createReturnInvoiceTooltip,
+       child: Material(
+         color: AppSemanticColors.danger.withValues(alpha: 0.10),
+         borderRadius: BorderRadius.zero,
+         child: InkWell(
+           onTap: onPressed,
+           borderRadius: BorderRadius.zero,
+-          child: const Padding(
+-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
++          child: Padding(
++            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+             child: Row(
+               mainAxisSize: MainAxisSize.min,
+               children: [
+-                Icon(
++                const Icon(
+                   Icons.assignment_return_rounded,
+                   size: 14,
+                   color: AppSemanticColors.danger,
+                 ),
+-                SizedBox(width: 4),
++                const SizedBox(width: 4),
+                 Text(
+-                  'ترجيع',
+-                  style: TextStyle(
++                  loc.returnActionLabel,
++                  style: const TextStyle(
+                     fontSize: 11,
+                     fontWeight: FontWeight.w700,
+                     color: AppSemanticColors.danger,
+@@ -1412,6 +1432,7 @@ class _EmptyState extends StatelessWidget {
+   @override
+   Widget build(BuildContext context) {
+     final cs = Theme.of(context).colorScheme;
++    final loc = AppLocalizations.of(context)!;
+     final gap = ScreenLayout.of(context).pageHorizontalGap;
+     return LayoutBuilder(
+       builder: (context, c) {
+@@ -1437,7 +1458,7 @@ class _EmptyState extends StatelessWidget {
+                 ),
+                 const SizedBox(height: 16),
+                 Text(
+-                  'لا توجد فواتير',
++                  loc.noInvoicesTitle,
+                   style: TextStyle(
+                     fontSize: 18,
+                     fontWeight: FontWeight.bold,
+@@ -1446,7 +1467,7 @@ class _EmptyState extends StatelessWidget {
+                 ),
+                 const SizedBox(height: 8),
+                 Text(
+-                  'أضف أول فاتورة الآن',
++                  loc.addFirstInvoiceCta,
+                   style: TextStyle(
+                     color: cs.onSurfaceVariant,
+                     fontSize: 14,
+@@ -1467,9 +1488,9 @@ class _EmptyState extends StatelessWidget {
+                     ),
+                   ),
+                   icon: const Icon(Icons.add_rounded),
+-                  label: const Text(
+-                    'البيع',
+-                    style: TextStyle(fontWeight: FontWeight.bold),
++                  label: Text(
++                    loc.saleLabel,
++                    style: const TextStyle(fontWeight: FontWeight.bold),
+                   ),
+                 ),
+               ],
+@@ -1498,6 +1519,7 @@ class _FilterSheetState extends State<_FilterSheet> {
+   @override
+   Widget build(BuildContext context) {
+     final cs = Theme.of(context).colorScheme;
++    final loc = AppLocalizations.of(context)!;
+     return Container(
+       margin: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+       decoration: BoxDecoration(
+@@ -1514,14 +1536,14 @@ class _FilterSheetState extends State<_FilterSheet> {
+             mainAxisSize: MainAxisSize.min,
+             crossAxisAlignment: CrossAxisAlignment.stretch,
+             children: [
+-              const Text('خيارات الترتيب',
+-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
++              Text(loc.sortOptionsTitle,
++                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+               const SizedBox(height: 16),
+               ...[
+-                ('date_desc',   'الأحدث أولاً',    Icons.arrow_downward_rounded),
+-                ('date_asc',    'الأقدم أولاً',     Icons.arrow_upward_rounded),
+-                ('amount_desc', 'الأعلى مبلغاً',    Icons.trending_up_rounded),
+-                ('amount_asc',  'الأقل مبلغاً',     Icons.trending_down_rounded),
++                ('date_desc',   loc.sortNewestFirst,    Icons.arrow_downward_rounded),
++                ('date_asc',    loc.sortOldestFirst,     Icons.arrow_upward_rounded),
++                ('amount_desc', loc.sortHighestAmount,    Icons.trending_up_rounded),
++                ('amount_asc',  loc.sortLowestAmount,     Icons.trending_down_rounded),
+               ].map((e) {
+                 final selected = _sort == e.$1;
+                 return RadioListTile<String>(
+@@ -1553,7 +1575,7 @@ class _FilterSheetState extends State<_FilterSheet> {
+                   ),
+                   padding: const EdgeInsets.symmetric(vertical: 14),
+                 ),
+-                child: const Text('تطبيق', style: TextStyle(fontWeight: FontWeight.bold)),
++                child: Text(loc.applyAction, style: const TextStyle(fontWeight: FontWeight.bold)),
+               ),
+             ],
+           ),
+diff --git a/lib/screens/invoices/parked_sales_screen.dart b/lib/screens/invoices/parked_sales_screen.dart
+index 3ddb61f..5f08abe 100644
+--- a/lib/screens/invoices/parked_sales_screen.dart
++++ b/lib/screens/invoices/parked_sales_screen.dart
+@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
+ import 'package:intl/intl.dart' hide TextDirection;
+ import 'package:provider/provider.dart';
+ 
++import '../../l10n/generated/app_localizations.dart';
+ import '../../providers/parked_sales_provider.dart';
+ import '../../services/cloud_sync_service.dart';
+ import '../../services/database_helper.dart';
+@@ -27,8 +28,8 @@ class _ParkedSummary {
+     required this.totalApprox,
+   });
+ 
+-  static _ParkedSummary fromRow(Map<String, dynamic> row) {
+-    final title = (row['title'] as String?)?.trim() ?? 'بدون عنوان';
++  static _ParkedSummary fromRow(Map<String, dynamic> row, AppLocalizations loc) {
++    final title = (row['title'] as String?)?.trim() ?? loc.untitledLabel;
+     var customer = '';
+     var lineCount = 0;
+     var total = 0.0;
+@@ -76,20 +77,21 @@ class _ParkedSalesScreenState extends State<ParkedSalesScreen> {
+   }
+ 
+   Future<void> _delete(int id, String label) async {
++    final loc = AppLocalizations.of(context)!;
+     final ok = await showDialog<bool>(
+       context: context,
+       builder: (ctx) => Directionality(
+         textDirection: TextDirection.rtl,
+         child: AlertDialog(
+           shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
+-          title: const Text('حذف الفاتورة المعلّقة؟'),
+-          content: Text('سيتم حذف «$label» نهائياً من الجهاز.'),
++          title: Text(loc.deleteParkedSaleTitle),
++          content: Text(loc.deleteParkedSaleBody(label)),
+           actions: [
+-            TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('إلغاء')),
++            TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(loc.cancel)),
+             FilledButton(
+               onPressed: () => Navigator.pop(ctx, true),
+               style: FilledButton.styleFrom(backgroundColor: Colors.red.shade700),
+-              child: const Text('حذف'),
++              child: Text(loc.deleteAction),
+             ),
+           ],
+         ),
+@@ -102,7 +104,7 @@ class _ParkedSalesScreenState extends State<ParkedSalesScreen> {
+     await context.read<ParkedSalesProvider>().refresh();
+     if (!mounted) return;
+     ScaffoldMessenger.of(context).showSnackBar(
+-      const SnackBar(content: Text('تم الحذف')),
++      SnackBar(content: Text(loc.deletedSnackbar)),
+     );
+   }
+ 
+@@ -122,13 +124,14 @@ class _ParkedSalesScreenState extends State<ParkedSalesScreen> {
+     final isDark = Theme.of(context).brightness == Brightness.dark;
+     final bg = isDark ? AppColors.surfaceDark : AppColors.surfaceLight;
+     final gap = context.screenLayout.pageHorizontalGap;
++    final loc = AppLocalizations.of(context)!;
+ 
+     return Directionality(
+       textDirection: TextDirection.rtl,
+       child: Scaffold(
+         backgroundColor: bg,
+         appBar: AppBar(
+-          title: const Text('فواتير معلّقة مؤقتاً'),
++          title: Text(loc.parkedSalesScreenTitle),
+           actions: [
+             IconButton(
+               icon: const Icon(Icons.refresh_rounded),
+@@ -148,12 +151,12 @@ class _ParkedSalesScreenState extends State<ParkedSalesScreen> {
+                       Icon(Icons.inventory_2_outlined, size: 56, color: Colors.grey.shade400),
+                       const SizedBox(height: 16),
+                       Text(
+-                        'لا توجد فواتير معلّقة',
++                        loc.noParkedSalesTitle,
+                         style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                       ),
+                       const SizedBox(height: 8),
+                       Text(
+-                        'من شاشة البيع اضغط «تعليق الفاتورة» لحفظ العمل الحالي وخدمة عميل آخر.',
++                        loc.noParkedSalesHint,
+                         textAlign: TextAlign.center,
+                         style: TextStyle(color: Theme.of(context).hintColor, height: 1.4),
+                       ),
+@@ -171,7 +174,7 @@ class _ParkedSalesScreenState extends State<ParkedSalesScreen> {
+                 itemBuilder: (_, i) {
+                   final row = prov.rows[i];
+                   final id = row['id'] as int;
+-                  final sum = _ParkedSummary.fromRow(row);
++                  final sum = _ParkedSummary.fromRow(row, loc);
+                   final updated = DateTime.tryParse(row['updatedAt'] as String? ?? '') ?? DateTime.now();
+                   return Card(
+                     margin: const EdgeInsets.only(bottom: 10),
+@@ -204,11 +207,14 @@ class _ParkedSalesScreenState extends State<ParkedSalesScreen> {
+                                   ),
+                                 const SizedBox(height: 6),
+                                 Text(
+-                                  '${sum.lineCount} صنف · ≈ ${sum.totalApprox.toStringAsFixed(0)} د.ع',
++                                  loc.parkedSaleSummaryLine(
++                                    sum.lineCount,
++                                    sum.totalApprox.toStringAsFixed(0),
++                                  ),
+                                   style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                                 ),
+                                 Text(
+-                                  'آخر تحديث: ${_dateFmt.format(updated)}',
++                                  loc.lastUpdatedLabel(_dateFmt.format(updated)),
+                                   style: TextStyle(fontSize: 11, color: Theme.of(context).hintColor),
+                                 ),
+                               ],
+@@ -216,12 +222,12 @@ class _ParkedSalesScreenState extends State<ParkedSalesScreen> {
+                             final actions = Column(
+                               children: [
+                                 IconButton(
+-                                  tooltip: 'متابعة البيع',
++                                  tooltip: loc.resumeSaleTooltip,
+                                   icon: const Icon(Icons.play_arrow_rounded, color: AppColors.primary),
+                                   onPressed: () => _resume(id),
+                                 ),
+                                 IconButton(
+-                                  tooltip: 'حذف',
++                                  tooltip: loc.deleteAction,
+                                   icon: Icon(Icons.delete_outline_rounded, color: Colors.red.shade600),
+                                   onPressed: () => _delete(id, sum.title),
+                                 ),
+diff --git a/lib/screens/onboarding/business_setup_wizard_screen.dart b/lib/screens/onboarding/business_setup_wizard_screen.dart
+index d6ea912..b44eae1 100644
+--- a/lib/screens/onboarding/business_setup_wizard_screen.dart
++++ b/lib/screens/onboarding/business_setup_wizard_screen.dart
+@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
+ import 'package:flutter/services.dart';
+ import 'package:provider/provider.dart';
+ 
++import '../../l10n/generated/app_localizations.dart';
+ import '../../models/sale_pos_settings_data.dart';
+ import '../../providers/loyalty_settings_provider.dart';
+ import '../../services/app_settings_repository.dart';
+@@ -62,142 +63,146 @@ class _BusinessSetupWizardScreenState extends State<BusinessSetupWizardScreen> {
+   bool _enableTaxOnSale = false;
+   bool _enableInvoiceDiscount = true;
+ 
+-  late final List<_StepCopy> _copy;
++  late List<_StepCopy> _copy;
+ 
+   @override
+   void initState() {
+     super.initState();
+-    _copy = _buildCopy();
+     _load();
+   }
+ 
+-  List<_StepCopy> _buildCopy() {
++  @override
++  void didChangeDependencies() {
++    super.didChangeDependencies();
++    _copy = _buildCopy(AppLocalizations.of(context)!);
++  }
++
++  List<_StepCopy> _buildCopy(AppLocalizations loc) {
+     return [
+-      const _StepCopy(
++      _StepCopy(
+         icon: Icons.people_alt_outlined,
+-        question: 'هل تستخدم العملاء في نشاطك؟',
++        question: loc.onboardingStep1Question,
+         paragraphs: [
+-          'عند التفعيل تظهر لك وحدة العملاء الكاملة: بطاقة لكل عميل، سجل مشتريات، ومتابعة سريعة من الفاتورة.',
+-          'يمكنك ربط كل عملية بيع بعميل معيّن، ما يسهّل التقارير لاحقاً ويوحّد تجربة المتجر أمام الزبائن الذين يتكررون.',
+-          'إذا عملت بيعاً نقدياً سريعاً دون اسم، يبقى ذلك متاحاً؛ التفعيل لا يفرض اختيار عميل في كل مرة.',
++          loc.onboardingStep1Paragraph1,
++          loc.onboardingStep1Paragraph2,
++          loc.onboardingStep1Paragraph3,
+         ],
+         examples: [
+-          'مثال: زبون دائم يشتري يومياً، تحفظ اسمه وترى آخر فواتيره بسرعة.',
+-          'مثال: عند وجود دين أو نقاط ولاء، تظهر مرتبطة بنفس العميل بدل البحث اليدوي.',
++          loc.onboardingStep1Example1,
++          loc.onboardingStep1Example2,
+         ],
+-        switchLabel: 'تفعيل وحدة العملاء',
++        switchLabel: loc.onboardingStep1SwitchLabel,
+       ),
+-      const _StepCopy(
++      _StepCopy(
+         icon: Icons.card_giftcard_outlined,
+-        question: 'هل تريد برنامج نقاط الولاء؟',
++        question: loc.onboardingStep2Question,
+         paragraphs: [
+-          'الولاء يمنح الزبائن نقاطاً عند الشراء، ويمكنهم استبدالها وفق القواعد التي تضبطها من الإعدادات.',
+-          'البرنامج مرتبط بملفات العملاء؛ كلما كانت بيانات العملاء أوضح، كانت المتابعة أسهل.',
+-          'يمكنك تشغيل الميزة الآن وتعديل نسب الجمع والاستبدال لاحقاً دون إعادة هذا المعالج.',
++          loc.onboardingStep2Paragraph1,
++          loc.onboardingStep2Paragraph2,
++          loc.onboardingStep2Paragraph3,
+         ],
+         examples: [
+-          'مثال: كل 10,000 د.ع تمنح 10 نقاط حسب القاعدة التي تختارها.',
+-          'مثال: عميل جمع نقاطاً كافية فيستبدلها بخصم في فاتورة لاحقة.',
++          loc.onboardingStep2Example1,
++          loc.onboardingStep2Example2,
+         ],
+-        switchLabel: 'تفعيل نقاط الولاء',
+-        footnote:
+-            'يتطلّب تفعيل وحدة العملاء في الخطوة السابقة؛ إن لم تكن مفعّلة، لن يعمل الولاء حتى تعيد تفعيل العملاء.',
++        switchLabel: loc.onboardingStep2SwitchLabel,
++        footnote: loc.onboardingStep2Footnote,
+       ),
+-      const _StepCopy(
++      _StepCopy(
+         icon: Icons.receipt_long_outlined,
+-        question: 'هل تستخدم الضريبة عند البيع؟',
++        question: loc.onboardingStep3Question,
+         paragraphs: [
+-          'عند التفعيل يظهر في فاتورة البيع حقل واضح للضريبة بحيث تحسب مع الإجمالي بطريقة متسقة.',
+-          'مناسب للمتاجر التي تطبّق نسبة ضريبة معروفة على السلع أو الخدمات.',
+-          'يمكنك ضبط السلوك التفصيلي من إعدادات نقطة البيع بعد إنهاء الإعداد السريع.',
++          loc.onboardingStep3Paragraph1,
++          loc.onboardingStep3Paragraph2,
++          loc.onboardingStep3Paragraph3,
+         ],
+         examples: [
+-          'مثال: فاتورة قيمتها 100,000 د.ع وتضيف عليها نسبة ضريبة محددة.',
+-          'مثال: الموظف يرى الضريبة والإجمالي النهائي داخل نفس فاتورة البيع.',
++          loc.onboardingStep3Example1,
++          loc.onboardingStep3Example2,
+         ],
+-        switchLabel: 'إظهار الضريبة في فاتورة البيع',
++        switchLabel: loc.onboardingStep3SwitchLabel,
+       ),
+-      const _StepCopy(
++      _StepCopy(
+         icon: Icons.percent_outlined,
+-        question: 'هل تسمح بالخصم على إجمالي الفاتورة؟',
++        question: loc.onboardingStep4Question,
+         paragraphs: [
+-          'الخصم الإجمالي مفيد للعروض الموسمية أو التفاوض على السعر أمام الزبون دون تعديل سعر كل صنف.',
+-          'يظهر الحقل في شاشة البيع بحيث يكمّل الفاتورة دون تعقيد إضافي للموظف.',
+-          'يمكنك إيقافه لاحقاً إذا قررت العمل بأسعار ثابتة فقط.',
++          loc.onboardingStep4Paragraph1,
++          loc.onboardingStep4Paragraph2,
++          loc.onboardingStep4Paragraph3,
+         ],
+         examples: [
+-          'مثال: تمنح خصماً عاماً 5,000 د.ع على فاتورة كبيرة.',
+-          'مثال: عرض خاص ليوم واحد دون تغيير أسعار المنتجات الأساسية.',
++          loc.onboardingStep4Example1,
++          loc.onboardingStep4Example2,
+         ],
+-        switchLabel: 'إظهار الخصم الإجمالي في الفاتورة',
++        switchLabel: loc.onboardingStep4SwitchLabel,
+       ),
+-      const _StepCopy(
++      _StepCopy(
+         icon: Icons.account_balance_wallet_outlined,
+-        question: 'هل تبيع بالدّين (بيع آجل)؟',
++        question: loc.onboardingStep5Question,
+         paragraphs: [
+-          'التفعيل يفتح لوحة الديون ومتابعة المبالغ المستحقة على كل عميل مع تنبيهات وسقوف يمكن ضبطها.',
+-          'يناسب التجار الذين يثقون بزبائن معروفين ويحتاجون أرشيفاً واضحاً للآجلات.',
+-          'لا يمنع البيع النقدي؛ يضيف فقط خيار التسجيل كدين عند اختيار العميل والصلاحيات المناسبة.',
++          loc.onboardingStep5Paragraph1,
++          loc.onboardingStep5Paragraph2,
++          loc.onboardingStep5Paragraph3,
+         ],
+         examples: [
+-          'مثال: زبون يأخذ بضاعة اليوم ويدفع نهاية الأسبوع.',
+-          'مثال: تراجع كشف العميل فتجد المبلغ المدفوع والمتبقي بوضوح.',
++          loc.onboardingStep5Example1,
++          loc.onboardingStep5Example2,
+         ],
+-        switchLabel: 'تفعيل البيع الآجل والديون',
++        switchLabel: loc.onboardingStep5SwitchLabel,
+       ),
+-      const _StepCopy(
++      _StepCopy(
+         icon: Icons.calendar_month_outlined,
+-        question: 'هل تبيع بالتقسيط؟',
++        question: loc.onboardingStep6Question,
+         paragraphs: [
+-          'خطط الأقساط تتيح تقسيم ثمن الفاتورة على دفعات مجدولة مع متابعة ما تبقّى على العميل.',
+-          'مفيد للسلع ذات السعر المرتفع أو العقود طويلة الأمد.',
+-          'التفاصيل الدقيقة للجدولة تُدار من الوحدات المخصصة بعد إتمام هذا الإعداد.',
++          loc.onboardingStep6Paragraph1,
++          loc.onboardingStep6Paragraph2,
++          loc.onboardingStep6Paragraph3,
+         ],
+         examples: [
+-          'مثال: جهاز قيمته 600,000 د.ع يُدفع على 6 دفعات شهرية.',
+-          'مثال: ترى الدفعات القادمة والمتأخرة لكل عميل من مكان واحد.',
++          loc.onboardingStep6Example1,
++          loc.onboardingStep6Example2,
+         ],
+-        switchLabel: 'تفعيل البيع بالتقسيط',
++        switchLabel: loc.onboardingStep6SwitchLabel,
+       ),
+-      const _StepCopy(
++      _StepCopy(
+         icon: Icons.scale_outlined,
+-        question: 'هل تبيع بالوزن (كيلو، غرام، إلخ)؟',
++        question: loc.onboardingStep7Question,
+         paragraphs: [
+-          'التفعيل يجهّز واجهة البيع والباركود بحيث تدعم أوزاناً وكميات عشرية حيث يلزم.',
+-          'مناسب للمواد الغذائية، الحديد، أو أي نشاط يعتمد الميزان.',
+-          'يمكن ضبط أنماط الباركود بالوزن من الإعدادات المتقدمة بعد متابعة هذا المعالج.',
++          loc.onboardingStep7Paragraph1,
++          loc.onboardingStep7Paragraph2,
++          loc.onboardingStep7Paragraph3,
+         ],
+         examples: [
+-          'مثال: بيع 1.250 كغم من منتج بدلاً من قطعة واحدة.',
+-          'مثال: قراءة باركود ميزان يحتوي وزن المنتج وسعره تلقائياً.',
++          loc.onboardingStep7Example1,
++          loc.onboardingStep7Example2,
+         ],
+-        switchLabel: 'تفعيل البيع بالوزن',
++        switchLabel: loc.onboardingStep7SwitchLabel,
+       ),
+-      const _StepCopy(
++      _StepCopy(
+         icon: Icons.checkroom_rounded,
+-        question: 'هل تبيع ملابس (ألوان ومقاسات)؟',
++        question: loc.onboardingStep8Question,
+         paragraphs: [
+-          'التفعيل يجهّز شاشات المنتجات والبيع لدعم تباين الأصناف (الألوان والقياسات المختلفة لنفس الموديل).',
+-          'يسهل تتبع مخزون كل لون أو مقاس على حدة وإظهار نافذة التحديد التفاعلية عند البيع.',
++          loc.onboardingStep8Paragraph1,
++          loc.onboardingStep8Paragraph2,
+         ],
+         examples: [
+-          'مثال: قميص متوفر باللون الأزرق والأسود، وبقياسات S و M و L.',
+-          'مثال: اختيار قطعة الملابس يفتح نافذة منبثقة سريعة لاختيار المقاس واللون المتاحين بالمخزون.',
++          loc.onboardingStep8Example1,
++          loc.onboardingStep8Example2,
+         ],
+-        switchLabel: 'تفعيل وحدة الملابس والقياسات',
++        switchLabel: loc.onboardingStep8SwitchLabel,
+       ),
+-      const _StepCopy(
++      _StepCopy(
+         icon: Icons.handyman_rounded,
+-        question: 'هل تقدّم خدمات معينة (صيانة، ورشة، إلخ)؟',
++        question: loc.onboardingStep9Question,
+         paragraphs: [
+-          'التفعيل يظهر وحدة الخدمات والصيانة كاملة: تذاكر عمل، طلبات الصيانة، ودليل الخدمات والأسعار.',
+-          'مفيدة للمشاغل، مراكز الصيانة، وأي نشاط يعتمد تقديم خدمات للعملاء إلى جانب بيع المواد.',
++          loc.onboardingStep9Paragraph1,
++          loc.onboardingStep9Paragraph2,
+         ],
+         examples: [
+-          'مثال: فتح تذكرة صيانة لجهاز كمبيوتر أو سيارة وتعيين حالة العمل.',
+-          'مثال: إضافة خدمة تركيب أو صيانة سريعة لفاتورة البيع.',
++          loc.onboardingStep9Example1,
++          loc.onboardingStep9Example2,
+         ],
+-        switchLabel: 'تفعيل الخدمات وتذاكر الصيانة',
++        switchLabel: loc.onboardingStep9SwitchLabel,
+       ),
+     ];
+   }
+@@ -346,7 +351,10 @@ class _BusinessSetupWizardScreenState extends State<BusinessSetupWizardScreen> {
+ 
+   @override
+   Widget build(BuildContext context) {
+-    final title = widget.openedFromSettings ? 'ميزات المتجر' : 'إعداد سريع للتطبيق';
++    final loc = AppLocalizations.of(context)!;
++    final title = widget.openedFromSettings
++        ? loc.businessFeaturesWizardTitle
++        : loc.quickAppSetupTitle;
+ 
+     return PopScope(
+       canPop: widget.openedFromSettings && _step == 0 && !_saving,
+@@ -442,7 +450,7 @@ class _BusinessSetupWizardScreenState extends State<BusinessSetupWizardScreen> {
+                                 if (!widget.openedFromSettings) ...[
+                                   SizedBox(height: compact ? 8 : 10),
+                                   Text(
+-                                    'يمكنك تغيير هذه الخيارات لاحقاً من الإعدادات ← ميزات المتجر.',
++                                    loc.onboardingChangeLaterHint,
+                                     textAlign: TextAlign.center,
+                                     style: TextStyle(
+                                       fontSize: compact ? 10.5 : 12,
+@@ -480,7 +488,7 @@ class _BusinessSetupWizardScreenState extends State<BusinessSetupWizardScreen> {
+                       size: compact ? 17 : 18,
+                       color: Colors.white,
+                     ),
+-                    tooltip: 'رجوع',
++                    tooltip: AppLocalizations.of(context)!.back,
+                     onPressed: _saving
+                         ? null
+                         : () {
+@@ -512,11 +520,12 @@ class _BusinessSetupWizardScreenState extends State<BusinessSetupWizardScreen> {
+ 
+   Widget _progressHeader({required bool compact}) {
+     final progress = (_step + 1) / _stepCount;
++    final loc = AppLocalizations.of(context)!;
+     return Column(
+       crossAxisAlignment: CrossAxisAlignment.stretch,
+       children: [
+         Text(
+-          'الخطوة ${_step + 1} من $_stepCount',
++          loc.stepXofY(_step + 1, _stepCount),
+           textAlign: TextAlign.center,
+           style: TextStyle(
+             fontSize: compact ? 12 : 13,
+@@ -572,6 +581,7 @@ class _BusinessSetupWizardScreenState extends State<BusinessSetupWizardScreen> {
+   }) {
+     final value = _valueForStep(stepIndex);
+     final switchOn = _switchEnabledForStep(stepIndex);
++    final loc = AppLocalizations.of(context)!;
+     final cardPadding = compact ? 18.0 : 22.0;
+     final titleSize = compact ? 18.0 : 21.0;
+     final bodySize = compact ? 12.8 : 14.0;
+@@ -628,7 +638,7 @@ class _BusinessSetupWizardScreenState extends State<BusinessSetupWizardScreen> {
+             if (c.examples.isNotEmpty) ...[
+               SizedBox(height: compact ? 14 : 18),
+               Text(
+-                'أمثلة عملية',
++                loc.practicalExamplesLabel,
+                 style: TextStyle(
+                   color: AppColors.accentGold,
+                   fontSize: compact ? 13 : 14,
+@@ -737,6 +747,7 @@ class _BusinessSetupWizardScreenState extends State<BusinessSetupWizardScreen> {
+ 
+   Widget _navActions({required bool compact}) {
+     final isLast = _step >= _stepCount - 1;
++    final loc = AppLocalizations.of(context)!;
+     return Row(
+       children: [
+         Expanded(
+@@ -752,7 +763,7 @@ class _BusinessSetupWizardScreenState extends State<BusinessSetupWizardScreen> {
+                 borderRadius: BorderRadius.circular(compact ? 12 : 14),
+               ),
+             ),
+-            child: const Text('السابق'),
++            child: Text(loc.previousAction),
+           ),
+         ),
+         SizedBox(width: compact ? 10 : 12),
+@@ -778,8 +789,8 @@ class _BusinessSetupWizardScreenState extends State<BusinessSetupWizardScreen> {
+                     ),
+                   )
+                 : Text(isLast
+-                    ? (widget.openedFromSettings ? 'حفظ' : 'متابعة')
+-                    : 'التالي'),
++                    ? (widget.openedFromSettings ? loc.save : loc.continueAction)
++                    : loc.nextAction),
+           ),
+         ),
+       ],

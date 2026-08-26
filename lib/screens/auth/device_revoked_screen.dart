@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../../l10n/generated/app_localizations.dart';
+
 /// يُعرض عندما يكون هذا الجهاز مفصولاً من الحساب (فصل من جهاز آخر).
 class DeviceRevokedScreen extends StatelessWidget {
   const DeviceRevokedScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
@@ -32,10 +35,10 @@ class DeviceRevokedScreen extends StatelessWidget {
                   color: Colors.red.shade300,
                 ),
                 const SizedBox(height: 24),
-                const Text(
-                  'تم إزالة هذا الجهاز من الحساب',
+                Text(
+                  loc.deviceRevokedTitle,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -43,8 +46,7 @@ class DeviceRevokedScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 14),
                 Text(
-                  'لا يمكنك تسجيل الدخول من هذا الجهاز حتى يوافق أحد الأجهزة '
-                  'المفعّلة على نفس الحساب من الإعدادات ← الحساب والاشتراك ← «السماح بالعودة».',
+                  loc.deviceRevokedBody,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white.withValues(alpha: 0.88),
@@ -60,7 +62,7 @@ class DeviceRevokedScreen extends StatelessWidget {
                     style: FilledButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 14),
                     ),
-                    child: const Text('العودة لتسجيل الدخول'),
+                    child: Text(loc.backToLoginAction),
                   ),
                 ),
               ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../providers/auth_provider.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
@@ -62,9 +63,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       );
       return;
     }
+    if (!mounted) return;
     messenger.showSnackBar(
-      const SnackBar(
-        content: Text('تم تحديث رمز الدخول بنجاح'),
+      SnackBar(
+        content: Text(AppLocalizations.of(context)!.passwordUpdateSuccess),
         behavior: SnackBarBehavior.floating,
       ),
     );
@@ -80,6 +82,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     final confirmBorderColor = !confirmHasText
         ? Colors.grey.shade300
         : (confirmMatches ? Colors.green.shade600 : Colors.red.shade600);
+    final loc = AppLocalizations.of(context)!;
 
     return Directionality(
       textDirection: TextDirection.rtl,
@@ -89,7 +92,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           backgroundColor: Colors.white,
           foregroundColor: _navy2,
           elevation: 0.5,
-          title: const Text('تعيين رمز دخول جديد'),
+          title: Text(loc.setNewPasswordTitle),
         ),
         body: Center(
           child: SingleChildScrollView(
@@ -102,7 +105,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      'البريد: ${widget.email}',
+                      loc.emailLabel(widget.email),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 13,
@@ -110,7 +113,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       ),
                     ),
                     const SizedBox(height: 14),
-                    _label('رمز الدخول الجديد'),
+                    _label(loc.newPasswordLabel),
                     const SizedBox(height: 8),
                     TextFormField(
                       controller: _passController,
@@ -120,7 +123,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       style: const TextStyle(color: _navy2, fontSize: 14),
                       cursorColor: _navy2,
                       decoration: _dec(
-                        'أدخل رمز الدخول الجديد',
+                        loc.enterNewPasswordHint,
                         Icons.lock_outline_rounded,
                         suffix: IconButton(
                           icon: Icon(
@@ -133,13 +136,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       ),
                       validator: (v) {
                         final t = (v ?? '').trim();
-                        if (t.isEmpty) return 'أدخل رمز الدخول';
-                        if (t.length < 8) return 'يجب أن يكون 8 أحرف على الأقل';
+                        if (t.isEmpty) return loc.enterPasswordValidation;
+                        if (t.length < 8) return loc.minLength8Chars;
                         return null;
                       },
                     ),
                     const SizedBox(height: 12),
-                    _label('إعادة كتابة رمز الدخول'),
+                    _label(loc.confirmPasswordLabel),
                     const SizedBox(height: 8),
                     TextFormField(
                       controller: _confirmController,
@@ -149,7 +152,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       style: const TextStyle(color: _navy2, fontSize: 14),
                       cursorColor: _navy2,
                       decoration: _dec(
-                        'أعد كتابة رمز الدخول',
+                        loc.confirmPasswordHint,
                         Icons.lock_outline_rounded,
                         borderColor: confirmBorderColor,
                         focusedBorderColor: confirmBorderColor,
@@ -190,8 +193,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       ),
                       validator: (v) {
                         final t = (v ?? '');
-                        if (t.trim().isEmpty) return 'أعد كتابة رمز الدخول';
-                        if (t != _passController.text) return 'رمز الدخول غير متطابق';
+                        if (t.trim().isEmpty) return loc.confirmPasswordHint;
+                        if (t != _passController.text) return loc.passwordMismatch;
                         return null;
                       },
                     ),
@@ -215,7 +218,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                   color: Colors.white,
                                 ),
                               )
-                            : const Text('حفظ'),
+                            : Text(loc.save),
                       ),
                     ),
                   ],
@@ -229,6 +232,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   }
 
   Widget _requirements() {
+    final loc = AppLocalizations.of(context)!;
     Widget item(String text, bool ok) => Row(
           children: [
             Icon(
@@ -258,16 +262,16 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
-            'شروط رمز الدخول (اختياري)',
-            style: TextStyle(fontWeight: FontWeight.bold, color: _navy2),
+          Text(
+            loc.passwordRequirementsTitle,
+            style: const TextStyle(fontWeight: FontWeight.bold, color: _navy2),
           ),
           const SizedBox(height: 8),
-          item('8 أحرف على الأقل', _hasMinLength),
-          item('حرف كبير (A-Z)', _hasUppercase),
-          item('حرف صغير (a-z)', _hasLowercase),
-          item('رقم (0-9)', _hasDigit),
-          item('رمز خاص (!@#...)', _hasSpecialChar),
+          item(loc.reqMinLength, _hasMinLength),
+          item(loc.reqUppercase, _hasUppercase),
+          item(loc.reqLowercase, _hasLowercase),
+          item(loc.reqDigit, _hasDigit),
+          item(loc.reqSpecialChar, _hasSpecialChar),
         ],
       ),
     );

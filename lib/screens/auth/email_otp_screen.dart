@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../providers/auth_provider.dart';
 import '../../theme/design_tokens.dart';
 import '../../services/app_settings_repository.dart';
@@ -101,7 +102,8 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
   Future<void> _verify() async {
     final otp = _otp.trim();
     if (otp.length < _digits) {
-      setState(() => _error = 'أدخل الرمز كاملاً ($_digits أرقام كما في البريد)');
+      final loc = AppLocalizations.of(context)!;
+      setState(() => _error = loc.otpEnterFullCode(_digits));
       return;
     }
     setState(() {
@@ -159,9 +161,10 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
     }
     _focusNodes.first.requestFocus();
     _startCountdown();
+    if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('تم إعادة إرسال رمز التحقق'),
+      SnackBar(
+        content: Text(AppLocalizations.of(context)!.otpResentSuccess),
         behavior: SnackBarBehavior.floating,
       ),
     );
@@ -169,6 +172,7 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final w = MediaQuery.sizeOf(context).width;
     final isWide = w >= 760;
     final kb = MediaQuery.viewInsetsOf(context).bottom;
@@ -243,7 +247,7 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
                   top: 8,
                   start: 8,
                   child: IconButton(
-                    tooltip: 'رجوع',
+                    tooltip: loc.back,
                     onPressed: _busy ? null : () => Navigator.of(context).maybePop(),
                     icon: const Icon(Icons.arrow_back),
                     color: Colors.white.withValues(alpha: 0.92),
@@ -279,7 +283,7 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
             ),
             SizedBox(height: collapsed ? 6 : 10),
             Text(
-              'التحقق من البريد',
+              AppLocalizations.of(context)!.emailVerificationTitle,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: titleSize,
@@ -289,7 +293,7 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
             if (!collapsed) ...[
               const SizedBox(height: 10),
               Text(
-                'أرسلنا رمزاً من $_digits أرقام إلى بريدك الإلكتروني',
+                AppLocalizations.of(context)!.otpSentToEmailShort(_digits),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white.withValues(alpha: 0.74),
@@ -310,6 +314,7 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
     required double bottomInset,
   }) {
     final cs = Theme.of(context).colorScheme;
+    final loc = AppLocalizations.of(context)!;
     return Center(
       child: SingleChildScrollView(
         padding: EdgeInsetsDirectional.fromSTEB(
@@ -329,10 +334,10 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 if (!(keyboardVisible && isNarrow)) ...[
-                  const Text(
-                    'أدخل رمز التحقق',
+                  Text(
+                    loc.enterVerificationCode,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.w800,
                       color: Colors.white,
@@ -340,7 +345,7 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'أُرسل رمز مكوّن من $_digits أرقام إلى\n${widget.email}',
+                    loc.otpSentToEmailDetailed(_digits, widget.email),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 13,
@@ -476,9 +481,9 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
                                 color: Colors.white,
                               ),
                             )
-                          : const Text(
-                              'تحقق وأنشئ الحساب',
-                              style: TextStyle(
+                          : Text(
+                              loc.verifyAndCreateAccount,
+                              style: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w800,
                               ),
@@ -490,7 +495,7 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
                 Center(
                   child: _resendCountdown > 0
                       ? Text(
-                          'إعادة الإرسال خلال $_resendCountdown ثانية',
+                          loc.resendInSeconds(_resendCountdown),
                           style: TextStyle(
                             fontSize: 13,
                             color: Colors.white.withValues(alpha: 0.60),
@@ -501,9 +506,9 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
                           style: TextButton.styleFrom(
                             foregroundColor: AppColors.accentGold,
                           ),
-                          child: const Text(
-                            'إعادة إرسال الرمز',
-                            style: TextStyle(fontWeight: FontWeight.w800),
+                          child: Text(
+                            loc.resendCode,
+                            style: const TextStyle(fontWeight: FontWeight.w800),
                           ),
                         ),
                 ),
@@ -516,7 +521,7 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
                     color: cs.onSurface.withValues(alpha: 0.80),
                   ),
                   label: Text(
-                    'تعديل البيانات',
+                    loc.editData,
                     style: TextStyle(color: cs.onSurface.withValues(alpha: 0.80)),
                   ),
                 ),

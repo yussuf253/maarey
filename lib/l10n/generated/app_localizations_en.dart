@@ -172,9 +172,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String emailLabel(Object email) {
-    return 'Email: $email';
-  }
+  String get emailLabel => 'Email';
 
   @override
   String currentPlanLabel(Object plan) {
@@ -435,4 +433,1106 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get basraIraq => 'Basra, Iraq';
+
+  @override
+  String get deviceKickedOutTitle =>
+      'This device was disconnected from the account';
+
+  @override
+  String get deviceKickedOutBody =>
+      'Your session on this device has ended. The next time you open the app, you\'ll see the usual login screen.';
+
+  @override
+  String get goToLoginAction => 'Go to login';
+
+  @override
+  String get exitAction => 'Exit';
+
+  @override
+  String get closeWindowHint =>
+      'You can close this window or use the button above.';
+
+  @override
+  String get appWillCloseHint => 'The app will close';
+
+  @override
+  String get deviceRevokedTitle =>
+      'This device has been removed from the account';
+
+  @override
+  String get deviceRevokedBody =>
+      'You can\'t sign in from this device until one of the account\'s active devices approves it, from Settings → Account & Subscription → \"Allow Return\".';
+
+  @override
+  String get backToLoginAction => 'Back to login';
+
+  @override
+  String otpEnterFullCode(Object digits) {
+    return 'Enter the full code ($digits digits as sent by email)';
+  }
+
+  @override
+  String get otpResentSuccess => 'Verification code resent';
+
+  @override
+  String get back => 'Back';
+
+  @override
+  String get emailVerificationTitle => 'Email verification';
+
+  @override
+  String otpSentToEmailShort(Object digits) {
+    return 'We sent a $digits-digit code to your email';
+  }
+
+  @override
+  String get enterVerificationCode => 'Enter the verification code';
+
+  @override
+  String otpSentToEmailDetailed(Object digits, Object email) {
+    return 'A $digits-digit code was sent to\n$email';
+  }
+
+  @override
+  String get verifyAndCreateAccount => 'Verify and create account';
+
+  @override
+  String resendInSeconds(Object seconds) {
+    return 'Resend in $seconds seconds';
+  }
+
+  @override
+  String get resendCode => 'Resend code';
+
+  @override
+  String get editData => 'Edit details';
+
+  @override
+  String get emailRequired => 'Email is required';
+
+  @override
+  String get emailInvalidFormat => 'Invalid email format';
+
+  @override
+  String get enterYourEmail => 'Enter your email';
+
+  @override
+  String get forgotPasswordSendCodeHint =>
+      'We\'ll send you a verification code to reset your password';
+
+  @override
+  String get sendVerificationCode => 'Send verification code';
+
+  @override
+  String otpSentToEmailColon(Object digits, Object email) {
+    return 'A $digits-digit code was sent to:\n$email';
+  }
+
+  @override
+  String get continueAction => 'Continue';
+
+  @override
+  String get editEmail => 'Edit email';
+
+  @override
+  String get passwordUpdateSuccess => 'Password updated successfully';
+
+  @override
+  String get setNewPasswordTitle => 'Set a new password';
+
+  @override
+  String get newPasswordLabel => 'New password';
+
+  @override
+  String get enterNewPasswordHint => 'Enter your new password';
+
+  @override
+  String get enterPasswordValidation => 'Enter a password';
+
+  @override
+  String get minLength8Chars => 'Must be at least 8 characters';
+
+  @override
+  String get confirmPasswordLabel => 'Confirm Password';
+
+  @override
+  String get confirmPasswordHint => 'Re-enter your password';
+
+  @override
+  String get passwordMismatch => 'Passwords don\'t match';
+
+  @override
+  String get passwordRequirementsTitle => 'Password requirements (optional)';
+
+  @override
+  String get reqMinLength => 'At least 8 characters';
+
+  @override
+  String get reqUppercase => 'Uppercase letter (A-Z)';
+
+  @override
+  String get reqLowercase => 'Lowercase letter (a-z)';
+
+  @override
+  String get reqDigit => 'Number (0-9)';
+
+  @override
+  String get reqSpecialChar => 'Special character (!@#...)';
+
+  @override
+  String get onboardingChangeLaterHint =>
+      'You can change these options later from Settings → Business Features.';
+
+  @override
+  String get businessFeaturesWizardTitle => 'Business Features';
+
+  @override
+  String get quickAppSetupTitle => 'Quick App Setup';
+
+  @override
+  String stepXofY(Object current, Object total) {
+    return 'Step $current of $total';
+  }
+
+  @override
+  String get previousAction => 'Previous';
+
+  @override
+  String get nextAction => 'Next';
+
+  @override
+  String get practicalExamplesLabel => 'Practical examples';
+
+  @override
+  String get onboardingStep1Question =>
+      'Do you use customers in your business?';
+
+  @override
+  String get onboardingStep1Paragraph1 =>
+      'When enabled, you get the full customer module: a card for each customer, purchase history, and quick tracking from the invoice.';
+
+  @override
+  String get onboardingStep1Paragraph2 =>
+      'You can link every sale to a specific customer, which makes reporting easier later and creates a more consistent experience for repeat customers.';
+
+  @override
+  String get onboardingStep1Paragraph3 =>
+      'If you do a quick cash sale without a name, that stays available — enabling this doesn\'t force you to pick a customer every time.';
+
+  @override
+  String get onboardingStep1Example1 =>
+      'Example: a regular customer who buys daily — you save their name and quickly see their latest invoices.';
+
+  @override
+  String get onboardingStep1Example2 =>
+      'Example: when there\'s a debt or loyalty points, they show up linked to the same customer instead of manual searching.';
+
+  @override
+  String get onboardingStep1SwitchLabel => 'Enable customer module';
+
+  @override
+  String get onboardingStep2Question => 'Do you want a loyalty points program?';
+
+  @override
+  String get onboardingStep2Paragraph1 =>
+      'Loyalty gives customers points on purchases, which they can redeem according to rules you set in Settings.';
+
+  @override
+  String get onboardingStep2Paragraph2 =>
+      'The program is linked to customer profiles — the clearer your customer data, the easier it is to track.';
+
+  @override
+  String get onboardingStep2Paragraph3 =>
+      'You can turn the feature on now and adjust the earn/redeem rates later without redoing this wizard.';
+
+  @override
+  String get onboardingStep2Example1 =>
+      'Example: every 10,000 IQD earns 10 points, based on the rule you choose.';
+
+  @override
+  String get onboardingStep2Example2 =>
+      'Example: a customer who\'s collected enough points redeems them for a discount on a later invoice.';
+
+  @override
+  String get onboardingStep2SwitchLabel => 'Enable loyalty points';
+
+  @override
+  String get onboardingStep2Footnote =>
+      'Requires the customer module enabled in the previous step; if it isn\'t, loyalty won\'t work until you re-enable customers.';
+
+  @override
+  String get onboardingStep3Question => 'Do you charge tax on sales?';
+
+  @override
+  String get onboardingStep3Paragraph1 =>
+      'When enabled, a clear tax field appears on the sales invoice so it\'s calculated consistently with the total.';
+
+  @override
+  String get onboardingStep3Paragraph2 =>
+      'Suitable for stores that apply a known tax rate on goods or services.';
+
+  @override
+  String get onboardingStep3Paragraph3 =>
+      'You can fine-tune the detailed behavior from POS settings after finishing this quick setup.';
+
+  @override
+  String get onboardingStep3Example1 =>
+      'Example: an invoice worth 100,000 IQD with a set tax percentage added on top.';
+
+  @override
+  String get onboardingStep3Example2 =>
+      'Example: the staff member sees the tax and final total within the same sales invoice.';
+
+  @override
+  String get onboardingStep3SwitchLabel => 'Show tax on sales invoice';
+
+  @override
+  String get onboardingStep4Question =>
+      'Do you allow a discount on the invoice total?';
+
+  @override
+  String get onboardingStep4Paragraph1 =>
+      'An overall discount is useful for seasonal offers or negotiating price in front of the customer without changing each item\'s price.';
+
+  @override
+  String get onboardingStep4Paragraph2 =>
+      'The field appears on the sales screen so it completes the invoice without adding extra complexity for staff.';
+
+  @override
+  String get onboardingStep4Paragraph3 =>
+      'You can turn it off later if you decide to work with fixed prices only.';
+
+  @override
+  String get onboardingStep4Example1 =>
+      'Example: you give a flat 5,000 IQD discount on a large invoice.';
+
+  @override
+  String get onboardingStep4Example2 =>
+      'Example: a one-day special offer without changing the base product prices.';
+
+  @override
+  String get onboardingStep4SwitchLabel => 'Show overall discount on invoice';
+
+  @override
+  String get onboardingStep5Question =>
+      'Do you sell on credit (deferred payment)?';
+
+  @override
+  String get onboardingStep5Paragraph1 =>
+      'Enabling this opens the debts panel and tracks amounts owed by each customer, with adjustable alerts and limits.';
+
+  @override
+  String get onboardingStep5Paragraph2 =>
+      'Suits merchants who trust known customers and need a clear record of deferred sales.';
+
+  @override
+  String get onboardingStep5Paragraph3 =>
+      'It doesn\'t stop cash sales — it just adds the option to record a sale as debt when selecting a customer with the right permissions.';
+
+  @override
+  String get onboardingStep5Example1 =>
+      'Example: a customer takes goods today and pays at the end of the week.';
+
+  @override
+  String get onboardingStep5Example2 =>
+      'Example: you check a customer\'s statement and clearly see what\'s paid and what\'s still owed.';
+
+  @override
+  String get onboardingStep5SwitchLabel => 'Enable credit sales and debts';
+
+  @override
+  String get onboardingStep6Question => 'Do you sell on installments?';
+
+  @override
+  String get onboardingStep6Paragraph1 =>
+      'Installment plans let you split an invoice\'s price into scheduled payments while tracking what\'s left owed by the customer.';
+
+  @override
+  String get onboardingStep6Paragraph2 =>
+      'Useful for higher-priced goods or long-term contracts.';
+
+  @override
+  String get onboardingStep6Paragraph3 =>
+      'The fine details of scheduling are managed from dedicated modules after finishing this setup.';
+
+  @override
+  String get onboardingStep6Example1 =>
+      'Example: a device worth 600,000 IQD paid over 6 monthly installments.';
+
+  @override
+  String get onboardingStep6Example2 =>
+      'Example: you see upcoming and overdue payments for each customer in one place.';
+
+  @override
+  String get onboardingStep6SwitchLabel => 'Enable installment sales';
+
+  @override
+  String get onboardingStep7Question =>
+      'Do you sell by weight (kilo, gram, etc.)?';
+
+  @override
+  String get onboardingStep7Paragraph1 =>
+      'Enabling this prepares the sales interface and barcodes to support weights and decimal quantities where needed.';
+
+  @override
+  String get onboardingStep7Paragraph2 =>
+      'Suitable for groceries, hardware, or any business that relies on a scale.';
+
+  @override
+  String get onboardingStep7Paragraph3 =>
+      'You can configure weight-based barcode formats from advanced settings after this wizard.';
+
+  @override
+  String get onboardingStep7Example1 =>
+      'Example: selling 1.250 kg of a product instead of a single piece.';
+
+  @override
+  String get onboardingStep7Example2 =>
+      'Example: scanning a scale barcode that automatically contains the product\'s weight and price.';
+
+  @override
+  String get onboardingStep7SwitchLabel => 'Enable sales by weight';
+
+  @override
+  String get onboardingStep8Question =>
+      'Do you sell clothing (colors and sizes)?';
+
+  @override
+  String get onboardingStep8Paragraph1 =>
+      'Enabling this prepares product and sales screens to support item variants (different colors and sizes of the same model).';
+
+  @override
+  String get onboardingStep8Paragraph2 =>
+      'Makes it easier to track stock for each color or size separately and shows a quick interactive picker at the time of sale.';
+
+  @override
+  String get onboardingStep8Example1 =>
+      'Example: a shirt available in blue and black, in sizes S, M, and L.';
+
+  @override
+  String get onboardingStep8Example2 =>
+      'Example: selecting a clothing item opens a quick popup to pick the available size and color in stock.';
+
+  @override
+  String get onboardingStep8SwitchLabel => 'Enable clothing and sizes module';
+
+  @override
+  String get onboardingStep9Question =>
+      'Do you offer specific services (repairs, workshop, etc.)?';
+
+  @override
+  String get onboardingStep9Paragraph1 =>
+      'Enabling this reveals the full services and maintenance module: work tickets, service requests, and a services and pricing catalog.';
+
+  @override
+  String get onboardingStep9Paragraph2 =>
+      'Useful for workshops, service centers, and any business that provides services to customers alongside selling goods.';
+
+  @override
+  String get onboardingStep9Example1 =>
+      'Example: opening a maintenance ticket for a computer or car and setting the job status.';
+
+  @override
+  String get onboardingStep9Example2 =>
+      'Example: adding an installation or quick maintenance service to a sales invoice.';
+
+  @override
+  String get onboardingStep9SwitchLabel =>
+      'Enable services and maintenance tickets';
+
+  @override
+  String get invoicesLabel => 'Invoices';
+
+  @override
+  String get invoicesListLabel => 'Invoice list';
+
+  @override
+  String get newSaleLabel => 'New sale';
+
+  @override
+  String get parkedSalesLabel => 'Parked sales';
+
+  @override
+  String get posSettingsLabel => 'POS settings';
+
+  @override
+  String get customersLabel => 'Customers';
+
+  @override
+  String get customersManageLabel => 'Manage customers';
+
+  @override
+  String get addNewCustomerLabel => 'Add new customer';
+
+  @override
+  String get addCustomerBreadcrumb => 'Add customer';
+
+  @override
+  String get contactListLabel => 'Contact list';
+
+  @override
+  String get customerLoyaltySettingsLabel => 'Customer settings (loyalty)';
+
+  @override
+  String get customerLoyaltyLabel => 'Customer loyalty';
+
+  @override
+  String get loyaltyPointsSettingsLabel => 'Points and redemption settings';
+
+  @override
+  String get loyaltyLedgerLabel => 'Points activity log';
+
+  @override
+  String get installmentsLabel => 'Installments';
+
+  @override
+  String get installmentPlansLabel => 'Installment plans';
+
+  @override
+  String get installmentSettingsLabel => 'Installment settings';
+
+  @override
+  String get debtsLabel => 'Debts';
+
+  @override
+  String get debtsPanelLabel => 'Debts panel (credit)';
+
+  @override
+  String get debtSettingsLabel => 'Debt settings';
+
+  @override
+  String get inventoryLabel => 'Inventory';
+
+  @override
+  String get productListLabel => 'Product list';
+
+  @override
+  String get addNewProductLabel => 'Add new product';
+
+  @override
+  String get updateExistingProductLabel => 'Update existing product';
+
+  @override
+  String get printBarcodeLabelsLabel => 'Print barcode labels';
+
+  @override
+  String get inventoryMovementsLabel => 'Inventory movements';
+
+  @override
+  String get warehousesLabel => 'Warehouses';
+
+  @override
+  String get stocktakingLabel => 'Periodic stocktaking';
+
+  @override
+  String get purchaseOrdersLabel => 'Purchase orders';
+
+  @override
+  String get stockAnalyticsLabel => 'Stock analytics';
+
+  @override
+  String get inventorySettingsLabel => 'Inventory settings';
+
+  @override
+  String get servicesAndMaintenanceLabel => 'Services & maintenance';
+
+  @override
+  String get servicesAndMaintenancePanelLabel => 'Services & maintenance panel';
+
+  @override
+  String get addTechnicalServiceLabel => 'Add technical service';
+
+  @override
+  String get maintenanceRequestsLabel => 'Maintenance requests & work tickets';
+
+  @override
+  String get cashRegisterLabel => 'Cash register';
+
+  @override
+  String get expensesLabel => 'Expenses';
+
+  @override
+  String get reportsLabel => 'Reports';
+
+  @override
+  String get usersLabel => 'Users';
+
+  @override
+  String get manageUsersLabel => 'Manage users';
+
+  @override
+  String get staffShiftsWeekLabel => 'Staff shifts (week)';
+
+  @override
+  String get staffIdentitiesLabel => 'Staff identities';
+
+  @override
+  String get printingLabel => 'Printing';
+
+  @override
+  String get homeLabel => 'Home';
+
+  @override
+  String get defaultUserFallback => 'User';
+
+  @override
+  String get logoutLabel => 'Log out';
+
+  @override
+  String get logoutConfirmMessage => 'Are you sure you want to log out?';
+
+  @override
+  String get confirmAction => 'Confirm';
+
+  @override
+  String searchFailedSnackbar(Object error) {
+    return 'Couldn\'t complete search: $error';
+  }
+
+  @override
+  String get addProductLabel => 'Add product';
+
+  @override
+  String shiftTooltipWithName(Object name) {
+    return 'Shift: $name — close';
+  }
+
+  @override
+  String get closeShiftTooltip => 'Close shift';
+
+  @override
+  String get syncFailedTooltip => 'Sync — last attempt failed';
+
+  @override
+  String get cloudSyncTooltip => 'Cloud sync';
+
+  @override
+  String get syncStartingSnackbar => 'Starting sync…';
+
+  @override
+  String get notificationsTooltip => 'Notifications';
+
+  @override
+  String get settingsLabel => 'Settings';
+
+  @override
+  String get copyLabel => 'Copy';
+
+  @override
+  String get copiedSnackbar => 'Copied';
+
+  @override
+  String get userInfoTitle => 'User info';
+
+  @override
+  String get displayNameFieldLabel => 'Display name:';
+
+  @override
+  String get usernameFieldLabel => 'Username:';
+
+  @override
+  String get roleFieldLabel => 'Role:';
+
+  @override
+  String get emailFieldLabel => 'Email:';
+
+  @override
+  String get closeAction => 'Close';
+
+  @override
+  String get barcodeScanTooltip =>
+      'Scan barcode (camera on mobile, or reader window on desktop)';
+
+  @override
+  String get hideKeyboardTooltip => 'Hide keyboard';
+
+  @override
+  String get keyboardDragPinHint =>
+      'Arabic / English keyboard — drag by the handle or pin it';
+
+  @override
+  String get clearSearchTooltip => 'Clear search';
+
+  @override
+  String get searchToolsTooltip => 'Search tools';
+
+  @override
+  String get showKeyboardTooltip => 'Show keyboard (Arabic / English)';
+
+  @override
+  String get quickSearchHint => 'Quick search: modules, products, customers…';
+
+  @override
+  String get fullSearchHint =>
+      'Search: modules, products, customers, staff, barcode…';
+
+  @override
+  String get collapseMenuTooltip => 'Collapse menu';
+
+  @override
+  String get expandMenuTooltip => 'Expand menu';
+
+  @override
+  String get restrictedModeTooltip => 'Not available in restricted mode';
+
+  @override
+  String get paymentTypeCash => 'Cash';
+
+  @override
+  String get paymentTypeCredit => 'Credit';
+
+  @override
+  String get paymentTypeInstallment => 'Installment';
+
+  @override
+  String get paymentTypeDelivery => 'Delivery';
+
+  @override
+  String get paymentTypeDebtCollection => 'Debt collection';
+
+  @override
+  String get paymentTypeInstallmentCollection => 'Installment payment';
+
+  @override
+  String get paymentTypeSupplierPayment => 'Supplier payment';
+
+  @override
+  String noInvoiceWithNumber(Object id) {
+    return 'No invoice with number $id';
+  }
+
+  @override
+  String get invoiceAlreadyReturned =>
+      'This invoice is already recorded as returned';
+
+  @override
+  String get invoiceNotOpenableAsReturn =>
+      'This voucher can\'t be opened as a sales return — reverse the payment from the supplier screen or installments management depending on its type.';
+
+  @override
+  String salesInvoiceNumber(Object id) {
+    return 'Sales invoice #$id';
+  }
+
+  @override
+  String get emptyPlaceholder => '(empty)';
+
+  @override
+  String returnInvoiceDialogBody(
+    Object customer,
+    Object paymentType,
+    Object total,
+  ) {
+    return 'Customer: $customer\nPayment: $paymentType\nTotal: $total\n\nOpen the return screen? You can reduce quantities or remove lines for a partial return only.';
+  }
+
+  @override
+  String get returnLabel => 'Return';
+
+  @override
+  String returnNumber(Object id) {
+    return 'Return #$id';
+  }
+
+  @override
+  String get scanQrBarcodeTitle => 'Scan QR / Barcode';
+
+  @override
+  String get pointsLedgerShortLabel => 'Points log';
+
+  @override
+  String get staffShiftsLabel => 'Staff shifts';
+
+  @override
+  String get shiftStaffFallback => 'Shift staff';
+
+  @override
+  String get itemsLabel => 'Items';
+
+  @override
+  String noResultsFor(Object query) {
+    return 'No results for «$query»';
+  }
+
+  @override
+  String get modulesLabel => 'Modules';
+
+  @override
+  String get openModuleLabel => 'Open module';
+
+  @override
+  String get productsLabel => 'Products';
+
+  @override
+  String sellPriceIqd(Object price) {
+    return 'Sell $price IQD';
+  }
+
+  @override
+  String get viewCustomersLabel => 'View customers';
+
+  @override
+  String get staffLabel => 'Staff';
+
+  @override
+  String get viewStaffLabel => 'View staff';
+
+  @override
+  String get technicalServiceLabel => 'Technical service';
+
+  @override
+  String get notStockTracked => 'Not stock-tracked';
+
+  @override
+  String get availableUnknown => 'Available: —';
+
+  @override
+  String get availableZero => 'Available: 0';
+
+  @override
+  String availableQty(Object qty) {
+    return 'Available: $qty';
+  }
+
+  @override
+  String negativeStockWarning(Object qty, Object soldOver) {
+    return 'Negative balance $qty — oversold by $soldOver beyond last balance';
+  }
+
+  @override
+  String get chooseFromListBelow => 'Choose from the list below';
+
+  @override
+  String get viewAllLabel => 'View all';
+
+  @override
+  String get untitledLabel => 'Untitled';
+
+  @override
+  String get deleteParkedSaleTitle => 'Delete parked sale?';
+
+  @override
+  String deleteParkedSaleBody(Object label) {
+    return '«$label» will be permanently deleted from this device.';
+  }
+
+  @override
+  String get deleteAction => 'Delete';
+
+  @override
+  String get deletedSnackbar => 'Deleted';
+
+  @override
+  String get parkedSalesScreenTitle => 'Parked sales';
+
+  @override
+  String get noParkedSalesTitle => 'No parked sales';
+
+  @override
+  String get noParkedSalesHint =>
+      'From the sale screen, tap «Park sale» to save the current work and serve another customer.';
+
+  @override
+  String parkedSaleSummaryLine(Object count, Object total) {
+    return '$count items · ≈ $total IQD';
+  }
+
+  @override
+  String lastUpdatedLabel(Object date) {
+    return 'Last updated: $date';
+  }
+
+  @override
+  String get resumeSaleTooltip => 'Resume sale';
+
+  @override
+  String get allLabel => 'All';
+
+  @override
+  String get paidStatus => 'Paid';
+
+  @override
+  String get unpaidStatus => 'Unpaid';
+
+  @override
+  String get cannotShowInvoiceNoId =>
+      'Can\'t display an invoice without a number';
+
+  @override
+  String get invoiceNotFound => 'Invoice not found';
+
+  @override
+  String get flatViewOption => 'Flat view (no shift grouping)';
+
+  @override
+  String get groupByShiftOption => 'Group by shift';
+
+  @override
+  String get advancedFilterLabel => 'Advanced filter';
+
+  @override
+  String get shiftsCalendarLabel => 'Shifts calendar';
+
+  @override
+  String get moreLabel => 'More';
+
+  @override
+  String get parkedInvoicesShortLabel => 'Parked invoices';
+
+  @override
+  String get saleLabel => 'Sale';
+
+  @override
+  String get totalLabel => 'Total';
+
+  @override
+  String get sortLabel => 'Sort';
+
+  @override
+  String get sortNewestFirst => 'Newest first';
+
+  @override
+  String get sortOldestFirst => 'Oldest first';
+
+  @override
+  String get sortHighestAmount => 'Highest amount';
+
+  @override
+  String get sortLowestAmount => 'Lowest amount';
+
+  @override
+  String get searchInvoicesHint =>
+      'Search by customer name, invoice number, or customer phone...';
+
+  @override
+  String shiftNumberLabel(Object id) {
+    return 'Shift #$id';
+  }
+
+  @override
+  String noShiftGroupLabel(Object count) {
+    return 'No shift — old invoices or outside a shift session ($count)';
+  }
+
+  @override
+  String shiftLoadFailedLabel(Object count, Object id) {
+    return 'Shift #$id — couldn\'t load shift details ($count invoices)';
+  }
+
+  @override
+  String get openStatus => 'Open';
+
+  @override
+  String shiftWithNameLabel(Object id, Object name) {
+    return 'Shift #$id — $name';
+  }
+
+  @override
+  String invoiceCountLabel(Object count) {
+    return '$count invoices';
+  }
+
+  @override
+  String totalIqd(Object amount) {
+    return '$amount IQD';
+  }
+
+  @override
+  String itemsAndDiscountLine(Object count, Object discount) {
+    return '$count items · discount $discount IQD';
+  }
+
+  @override
+  String shiftColonLabel(Object name) {
+    return 'Shift: $name';
+  }
+
+  @override
+  String get createReturnInvoiceTooltip =>
+      'Create a return invoice for this invoice';
+
+  @override
+  String get returnActionLabel => 'Return';
+
+  @override
+  String get noInvoicesTitle => 'No invoices';
+
+  @override
+  String get addFirstInvoiceCta => 'Add your first invoice now';
+
+  @override
+  String get sortOptionsTitle => 'Sort options';
+
+  @override
+  String get applyAction => 'Apply';
+
+  @override
+  String get loginTabLabel => 'Login';
+
+  @override
+  String get signupTabLabel => 'Sign Up';
+
+  @override
+  String get usernameOrEmailLabel => 'Username or Email';
+
+  @override
+  String get enterUsernameOrEmail => 'Enter your username or email';
+
+  @override
+  String get passwordLabel => 'Password';
+
+  @override
+  String get enterPassword => 'Enter your password';
+
+  @override
+  String get storeNameLabel => 'Store/Business Name';
+
+  @override
+  String get enterStoreName => 'Enter your store or business name';
+
+  @override
+  String get nameLabel => 'Name';
+
+  @override
+  String get enterName => 'Enter your name';
+
+  @override
+  String get enterEmail => 'Enter your email';
+
+  @override
+  String get phoneLabel => 'Phone Number';
+
+  @override
+  String get enterPhone => 'Enter your phone number';
+
+  @override
+  String get countryCodeLabel => 'Country Code';
+
+  @override
+  String get selectCountryCode => 'Select country code';
+
+  @override
+  String get confirmPassword => 'Confirm your password';
+
+  @override
+  String get showPassword => 'Show password';
+
+  @override
+  String get hidePassword => 'Hide password';
+
+  @override
+  String get clearField => 'Clear';
+
+  @override
+  String get rememberMe => 'Remember me';
+
+  @override
+  String get forgotPassword => 'Forgot password?';
+
+  @override
+  String get alreadyHaveAccount => 'Already have an account?';
+
+  @override
+  String get dontHaveAccount => 'Don\'t have an account?';
+
+  @override
+  String get loginButton => 'Login';
+
+  @override
+  String get signupButton => 'Sign up';
+
+  @override
+  String get signupButton2 => 'Create Account';
+
+  @override
+  String get termsAndConditions => 'Terms & Conditions';
+
+  @override
+  String get privacyPolicy => 'Privacy Policy';
+
+  @override
+  String get agreeToTerms => 'I agree to the Terms & Conditions';
+
+  @override
+  String get agreeToTermsRequired => 'You must agree to the terms to continue';
+
+  @override
+  String get passwordRecovery => 'Password Recovery';
+
+  @override
+  String get enterEmailForRecovery =>
+      'Enter your email to recover your password';
+
+  @override
+  String get captchaLabel => 'Verification Code';
+
+  @override
+  String enterCaptcha(Object firstNumber, Object secondNumber) {
+    return 'Enter the code: $firstNumber + $secondNumber = ?';
+  }
+
+  @override
+  String get invalidCaptcha => 'Incorrect verification code';
+
+  @override
+  String get invalidCredentials => 'Invalid username or password';
+
+  @override
+  String get accountCreated => 'Account created successfully';
+
+  @override
+  String get loginSuccessful => 'Logged in successfully';
+
+  @override
+  String get passwordResetSent =>
+      'Password reset code has been sent to your email';
+
+  @override
+  String get passwordResetSuccess => 'Password reset successfully';
+
+  @override
+  String get accountAlreadyExists =>
+      'An account with this email already exists';
+
+  @override
+  String get weekDayMonday => 'Monday';
+
+  @override
+  String get weekDayTuesday => 'Tuesday';
+
+  @override
+  String get weekDayWednesday => 'Wednesday';
+
+  @override
+  String get weekDayThursday => 'Thursday';
+
+  @override
+  String get weekDayFriday => 'Friday';
+
+  @override
+  String get weekDaySaturday => 'Saturday';
+
+  @override
+  String get weekDaySunday => 'Sunday';
+
+  @override
+  String get iraq => 'Iraq';
+
+  @override
+  String get saudiArabia => 'Saudi Arabia';
+
+  @override
+  String get uae => 'United Arab Emirates';
+
+  @override
+  String get kuwait => 'Kuwait';
+
+  @override
+  String get syria => 'Syria';
+
+  @override
+  String get jordan => 'Jordan';
+
+  @override
+  String get lebanon => 'Lebanon';
 }

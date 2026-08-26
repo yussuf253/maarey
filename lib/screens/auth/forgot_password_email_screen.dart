@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../providers/auth_provider.dart';
 import '../../theme/design_tokens.dart';
 import '../../widgets/glass/glass_background.dart';
@@ -49,9 +50,10 @@ class _ForgotPasswordEmailScreenState extends State<ForgotPasswordEmailScreen> {
   String? _validateEmail(String? value) {
     final t = (value ?? '').trim();
     if (!_blurredEmail) return null;
-    if (t.isEmpty) return 'البريد الإلكتروني مطلوب';
+    final loc = AppLocalizations.of(context)!;
+    if (t.isEmpty) return loc.emailRequired;
     final ok = RegExp(r'^[^\s]+@[^\s]+\.[^\s]+$').hasMatch(t);
-    return ok ? null : 'صيغة البريد غير صحيحة';
+    return ok ? null : loc.emailInvalidFormat;
   }
 
   Future<void> _send() async {
@@ -86,6 +88,7 @@ class _ForgotPasswordEmailScreenState extends State<ForgotPasswordEmailScreen> {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    final loc = AppLocalizations.of(context)!;
     final kb = MediaQuery.viewInsetsOf(context).bottom;
     final keyboardVisible = kb > 0;
     final w = MediaQuery.sizeOf(context).width;
@@ -159,10 +162,10 @@ class _ForgotPasswordEmailScreenState extends State<ForgotPasswordEmailScreen> {
                                             color: AppColors.accentGold,
                                           ),
                                           const SizedBox(height: 12),
-                                          const Text(
-                                            'أدخل بريدك الإلكتروني',
+                                          Text(
+                                            loc.enterYourEmail,
                                             textAlign: TextAlign.center,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.w800,
                                               color: Colors.white,
@@ -170,7 +173,7 @@ class _ForgotPasswordEmailScreenState extends State<ForgotPasswordEmailScreen> {
                                           ),
                                           const SizedBox(height: 8),
                                           Text(
-                                            'سنرسل لك رمز تحقق لإعادة تعيين رمز الدخول',
+                                            loc.forgotPasswordSendCodeHint,
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               fontSize: 13,
@@ -246,7 +249,7 @@ class _ForgotPasswordEmailScreenState extends State<ForgotPasswordEmailScreen> {
                                               color: Colors.white,
                                             ),
                                           )
-                                        : const Text('إرسال رمز التحقق'),
+                                        : Text(loc.sendVerificationCode),
                                   ),
                                 ),
                               ),
@@ -261,7 +264,7 @@ class _ForgotPasswordEmailScreenState extends State<ForgotPasswordEmailScreen> {
                   top: 8,
                   start: 8,
                   child: IconButton(
-                    tooltip: 'رجوع',
+                    tooltip: loc.back,
                     onPressed: () => Navigator.of(context).maybePop(),
                     icon: const Icon(Icons.arrow_back),
                     color: Colors.white.withValues(alpha: 0.9),

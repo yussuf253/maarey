@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:provider/provider.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../providers/parked_sales_provider.dart';
 import '../../services/cloud_sync_service.dart';
 import '../../services/database_helper.dart';
@@ -27,8 +28,8 @@ class _ParkedSummary {
     required this.totalApprox,
   });
 
-  static _ParkedSummary fromRow(Map<String, dynamic> row) {
-    final title = (row['title'] as String?)?.trim() ?? 'بدون عنوان';
+  static _ParkedSummary fromRow(Map<String, dynamic> row, AppLocalizations loc) {
+    final title = (row['title'] as String?)?.trim() ?? loc.untitledLabel;
     var customer = '';
     var lineCount = 0;
     var total = 0.0;
@@ -76,20 +77,21 @@ class _ParkedSalesScreenState extends State<ParkedSalesScreen> {
   }
 
   Future<void> _delete(int id, String label) async {
+    final loc = AppLocalizations.of(context)!;
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => Directionality(
         textDirection: TextDirection.rtl,
         child: AlertDialog(
           shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
-          title: const Text('حذف الفاتورة المعلّقة؟'),
-          content: Text('سيتم حذف «$label» نهائياً من الجهاز.'),
+          title: Text(loc.deleteParkedSaleTitle),
+          content: Text(loc.deleteParkedSaleBody(label)),
           actions: [
-            TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('إلغاء')),
+            TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(loc.cancel)),
             FilledButton(
               onPressed: () => Navigator.pop(ctx, true),
               style: FilledButton.styleFrom(backgroundColor: Colors.red.shade700),
-              child: const Text('حذف'),
+              child: Text(loc.deleteAction),
             ),
           ],
         ),
@@ -102,7 +104,7 @@ class _ParkedSalesScreenState extends State<ParkedSalesScreen> {
     await context.read<ParkedSalesProvider>().refresh();
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('تم الحذف')),
+      SnackBar(content: Text(loc.deletedSnackbar)),
     );
   }
 
@@ -122,13 +124,14 @@ class _ParkedSalesScreenState extends State<ParkedSalesScreen> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final bg = isDark ? AppColors.surfaceDark : AppColors.surfaceLight;
     final gap = context.screenLayout.pageHorizontalGap;
+    final loc = AppLocalizations.of(context)!;
 
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
         backgroundColor: bg,
         appBar: AppBar(
-          title: const Text('فواتير معلّقة مؤقتاً'),
+          title: Text(loc.parkedSalesScreenTitle),
           actions: [
             IconButton(
               icon: const Icon(Icons.refresh_rounded),
@@ -148,12 +151,12 @@ class _ParkedSalesScreenState extends State<ParkedSalesScreen> {
                       Icon(Icons.inventory_2_outlined, size: 56, color: Colors.grey.shade400),
                       const SizedBox(height: 16),
                       Text(
-                        'لا توجد فواتير معلّقة',
+                        loc.noParkedSalesTitle,
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'من شاشة البيع اضغط «تعليق الفاتورة» لحفظ العمل الحالي وخدمة عميل آخر.',
+                        loc.noParkedSalesHint,
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Theme.of(context).hintColor, height: 1.4),
                       ),
@@ -171,7 +174,7 @@ class _ParkedSalesScreenState extends State<ParkedSalesScreen> {
                 itemBuilder: (_, i) {
                   final row = prov.rows[i];
                   final id = row['id'] as int;
-                  final sum = _ParkedSummary.fromRow(row);
+                  final sum = _ParkedSummary.fromRow(row, loc);
                   final updated = DateTime.tryParse(row['updatedAt'] as String? ?? '') ?? DateTime.now();
                   return Card(
                     margin: const EdgeInsets.only(bottom: 10),
@@ -204,11 +207,14 @@ class _ParkedSalesScreenState extends State<ParkedSalesScreen> {
                                   ),
                                 const SizedBox(height: 6),
                                 Text(
-                                  '${sum.lineCount} صنف · ≈ ${sum.totalApprox.toStringAsFixed(0)} د.ع',
+                                  loc.parkedSaleSummaryLine(
+                                    sum.lineCount,
+                                    sum.totalApprox.toStringAsFixed(0),
+                                  ),
                                   style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
                                 ),
                                 Text(
-                                  'آخر تحديث: ${_dateFmt.format(updated)}',
+                                  loc.lastUpdatedLabel(_dateFmt.format(updated)),
                                   style: TextStyle(fontSize: 11, color: Theme.of(context).hintColor),
                                 ),
                               ],
@@ -216,12 +222,12 @@ class _ParkedSalesScreenState extends State<ParkedSalesScreen> {
                             final actions = Column(
                               children: [
                                 IconButton(
-                                  tooltip: 'متابعة البيع',
+                                  tooltip: loc.resumeSaleTooltip,
                                   icon: const Icon(Icons.play_arrow_rounded, color: AppColors.primary),
                                   onPressed: () => _resume(id),
                                 ),
                                 IconButton(
-                                  tooltip: 'حذف',
+                                  tooltip: loc.deleteAction,
                                   icon: Icon(Icons.delete_outline_rounded, color: Colors.red.shade600),
                                   onPressed: () => _delete(id, sum.title),
                                 ),

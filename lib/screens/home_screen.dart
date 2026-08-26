@@ -7,6 +7,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../l10n/generated/app_localizations.dart';
 import '../providers/auth_provider.dart';
 import '../services/app_settings_repository.dart';
 import '../services/business_setup_settings.dart';
@@ -51,6 +52,7 @@ import 'users/employee_identity_screen.dart';
 import 'users/staff_shifts_week_screen.dart';
 import 'reports/reports_screen.dart';
 import 'expenses/expenses_screen.dart';
+import 'ai/local_ai_agent_screen.dart';
 import 'invoices/add_invoice_screen.dart';
 import 'invoices/process_return_screen.dart';
 import 'services/add_service_screen.dart';
@@ -334,8 +336,11 @@ class _HomeScreenState extends State<HomeScreen>
   late final NavigatorObserver _innerNavObserver = _HomeInnerNavObserver(this);
 
   /// مسار الشاشات الحالي (الرئيسية → …) للعرض والرجوع السريع.
-  final List<BreadcrumbSegment> _breadcrumbTrail = [
-    const BreadcrumbSegment(id: AppContentRoutes.home, title: 'الرئيسية'),
+  late final List<BreadcrumbSegment> _breadcrumbTrail = [
+    BreadcrumbSegment(
+      id: AppContentRoutes.home,
+      title: AppLocalizations.of(context)!.homeLabel,
+    ),
   ];
 
   /// Active tab index for the bottom nav bar (small screens) ومزامنة تمييز الشريط الجانبي.
@@ -433,266 +438,278 @@ class _HomeScreenState extends State<HomeScreen>
   bool _macPanelEnabled = MacStyleSettingsPrefs.cachedValue ?? true;
 
   /// ترتيب الوحدات: مبيعات وعملاء → أقساط ومخزون وصندوق → تقارير وإدارة → أدوات.
-  final List<ModuleItem> _originalModules = [
-    ModuleItem(
-      icon: Icons.receipt,
-      title: 'الفواتير',
-      iconColor: Colors.green,
-      routeId: AppContentRoutes.invoices,
-      destination: (context) => const InvoicesScreen(),
-      subItems: [
-        SubMenuItem(
-          title: 'قائمة الفواتير',
-          routeId: AppContentRoutes.invoices,
-          destination: (context) => const InvoicesScreen(),
-        ),
-        SubMenuItem(
-          title: 'بيع جديد',
-          routeId: AppContentRoutes.addInvoice,
-          destination: (context) => const AddInvoiceScreen(),
-        ),
-        SubMenuItem(
-          title: 'معلّقة مؤقتاً',
-          routeId: AppContentRoutes.parkedSales,
-          destination: (context) => const ParkedSalesScreen(),
-        ),
-        SubMenuItem(
-          title: 'إعدادات نقطة البيع',
-          routeId: AppContentRoutes.salePosSettings,
-          destination: (context) => const SalePosSettingsScreen(),
-        ),
-      ],
-    ),
-    ModuleItem(
-      icon: Icons.person_outline,
-      title: 'العملاء',
-      iconColor: Colors.teal,
-      routeId: AppContentRoutes.customers,
-      destination: (context) => const CustomersScreen(),
-      subItems: [
-        SubMenuItem(
-          title: 'إدارة العملاء',
-          routeId: AppContentRoutes.customers,
-          destination: (context) => const CustomersScreen(),
-        ),
-        SubMenuItem(
-          title: 'إضافة عميل جديد',
-          routeId: AppContentRoutes.customersAdd,
-          breadcrumbTitle: 'إضافة عميل',
-          destination: (context) => const CustomerFormScreen(),
-        ),
-        SubMenuItem(
-          title: 'قائمة الاتصال',
-          routeId: AppContentRoutes.customerContacts,
-          destination: (context) => const CustomerContactsScreen(),
-        ),
-        SubMenuItem(
-          title: 'إعدادات العميل (الولاء)',
-          routeId: AppContentRoutes.loyaltySettings,
-          destination: (context) => const LoyaltySettingsScreen(),
-        ),
-      ],
-    ),
-    ModuleItem(
-      icon: Icons.card_giftcard_rounded,
-      title: 'ولاء العملاء',
-      iconColor: Colors.deepPurple,
-      routeId: AppContentRoutes.loyaltySettings,
-      destination: (context) => const LoyaltySettingsScreen(),
-      subItems: [
-        SubMenuItem(
-          title: 'إعدادات النقاط والاستبدال',
-          routeId: AppContentRoutes.loyaltySettings,
-          destination: (context) => const LoyaltySettingsScreen(),
-        ),
-        SubMenuItem(
-          title: 'سجل حركات النقاط',
-          routeId: AppContentRoutes.loyaltyLedger,
-          destination: (context) => const LoyaltyLedgerScreen(),
-        ),
-      ],
-    ),
-    ModuleItem(
-      icon: Icons.calendar_today,
-      title: 'الأقساط',
-      iconColor: Colors.blue,
-      routeId: AppContentRoutes.installments,
-      destination: (context) => const InstallmentsScreen(),
-      subItems: [
-        SubMenuItem(
-          title: 'خطط التقسيط',
-          icon: Icons.receipt_long_rounded,
-          routeId: AppContentRoutes.installments,
-          destination: (context) => const InstallmentsScreen(),
-        ),
-        SubMenuItem(
-          title: 'إعدادات تقسيط',
-          icon: Icons.tune_rounded,
-          routeId: AppContentRoutes.installmentSettings,
-          destination: (context) => const InstallmentSettingsScreen(),
-        ),
-      ],
-    ),
-    ModuleItem(
-      icon: Icons.balance_outlined,
-      title: 'الديون',
-      iconColor: Colors.amber,
-      routeId: AppContentRoutes.debts,
-      destination: (context) => const DebtsScreen(),
-      subItems: [
-        SubMenuItem(
-          title: 'لوحة الديون (آجل)',
-          icon: Icons.dashboard_customize_outlined,
-          routeId: AppContentRoutes.debts,
-          destination: (context) => const DebtsScreen(),
-        ),
-        SubMenuItem(
-          title: 'إعدادات الدين',
-          icon: Icons.tune_rounded,
-          routeId: AppContentRoutes.debtSettings,
-          destination: (context) => const DebtSettingsScreen(),
-        ),
-      ],
-    ),
-    ModuleItem(
-      icon: Icons.inventory_2,
-      title: 'المخزون',
-      iconColor: Colors.orange,
-      routeId: AppContentRoutes.inventory,
-      destination: (context) => const InventoryHubScreen(),
-      subItems: [
-        SubMenuItem(
-          title: 'قائمة المنتجات',
-          routeId: AppContentRoutes.inventoryProducts,
-          destination: (context) => const InventoryProductsScreen(),
-        ),
-        SubMenuItem(
-          title: 'إضافة منتج جديد',
-          routeId: AppContentRoutes.addProduct,
-          destination: (context) => const AddProductScreen(),
-        ),
-        SubMenuItem(
-          title: 'تحديث منتج موجود',
-          routeId: AppContentRoutes.quickUpdateProducts,
-          destination: (context) => const QuickProductUpdateScreen(),
-        ),
-        SubMenuItem(
-          title: 'طباعة ملصقات باركود',
-          routeId: AppContentRoutes.inventoryBarcodeLabels,
-          destination: (context) => const BarcodeLabelsScreen(),
-        ),
-        SubMenuItem(
-          title: 'حركات المخزون',
-          routeId: AppContentRoutes.inventoryManagement,
-          destination: (context) => const InventoryManagementScreen(),
-        ),
-        SubMenuItem(
-          title: 'المستودعات',
-          routeId: AppContentRoutes.inventoryWarehouses,
-          destination: (context) => const WarehousesScreen(),
-        ),
-        SubMenuItem(
-          title: 'الجرد الدوري',
-          routeId: AppContentRoutes.inventoryStocktaking,
-          destination: (context) => const StocktakingScreen(),
-        ),
-        SubMenuItem(
-          title: 'أوامر الشراء',
-          routeId: AppContentRoutes.inventoryPurchaseOrders,
-          destination: (context) => const PurchaseOrdersScreen(),
-        ),
-        SubMenuItem(
-          title: 'تحليلات المخزون',
-          routeId: AppContentRoutes.inventoryAnalytics,
-          destination: (context) => const StockAnalyticsScreen(),
-        ),
-        SubMenuItem(
-          title: 'إعدادات المخزون',
-          routeId: AppContentRoutes.inventorySettings,
-          destination: (context) => const InventorySettingsScreen(),
-        ),
-      ],
-    ),
-    ModuleItem(
-      icon: Icons.handyman_rounded,
-      title: 'الخدمات والصيانة',
-      iconColor: Colors.blueAccent,
-      routeId: AppContentRoutes.servicesHub,
-      destination: (context) => const ServicesHubScreen(),
-      subItems: [
-        SubMenuItem(
-          title: 'لوحة الخدمات والصيانة',
-          routeId: AppContentRoutes.servicesHub,
-          destination: (context) => const ServicesHubScreen(),
-        ),
-        SubMenuItem(
-          title: 'إضافة خدمة فنية',
-          routeId: AppContentRoutes.servicesAdd,
-          destination: (context) => const AddServiceScreen(),
-        ),
-        SubMenuItem(
-          title: 'طلبات الصيانة وتذاكر العمل',
-          routeId: AppContentRoutes.serviceOrdersHub,
-          destination: (context) => const ServiceOrdersHubScreen(),
-        ),
-      ],
-    ),
-    ModuleItem(
-      icon: Icons.account_balance_wallet,
-      title: 'الصندوق',
-      iconColor: Colors.purple,
-      routeId: AppContentRoutes.cash,
-      destination: (context) => const CashScreen(),
-    ),
-    ModuleItem(
-      icon: Icons.payments_outlined,
-      title: 'المصروفات',
-      iconColor: Colors.teal,
-      routeId: AppContentRoutes.expenses,
-      destination: (context) => const ExpensesScreen(),
-    ),
-    ModuleItem(
-      icon: Icons.bar_chart,
-      title: 'التقارير',
-      iconColor: Colors.red,
-      routeId: AppContentRoutes.reports(0),
-      destination: (context) => const ReportsScreen(initialSection: 0),
-    ),
-    ModuleItem(
-      icon: Icons.people_alt,
-      title: 'المستخدمين',
-      iconColor: Colors.indigo,
-      routeId: AppContentRoutes.users,
-      destination: (context) => const UsersScreen(),
-      subItems: [
-        SubMenuItem(
-          title: 'إدارة المستخدمين',
-          icon: Icons.manage_accounts_outlined,
-          routeId: AppContentRoutes.users,
-          destination: (context) => const UsersScreen(),
-        ),
-        SubMenuItem(
-          title: 'ورديات الموظفين (أسبوع)',
-          icon: Icons.date_range_rounded,
-          routeId: AppContentRoutes.staffShiftsWeek,
-          destination: (context) => const StaffShiftsWeekScreen(),
-        ),
-        SubMenuItem(
-          title: 'هويات الموظفين',
-          icon: Icons.badge_outlined,
-          routeId: AppContentRoutes.employeeIdentity,
-          destination: (context) => const EmployeeIdentityScreen(),
-        ),
-      ],
-    ),
-    ModuleItem(
-      icon: Icons.print,
-      title: 'الطباعة',
-      iconColor: Colors.blueGrey,
-      routeId: AppContentRoutes.printing,
-      destination: (context) => const PrintingScreen(),
-    ),
-  ];
+  late List<ModuleItem> _originalModules;
+  bool _originalModulesBuilt = false;
+
+  List<ModuleItem> _buildOriginalModules(AppLocalizations loc) {
+    return [
+      ModuleItem(
+        icon: Icons.receipt,
+        title: loc.invoicesLabel,
+        iconColor: Colors.green,
+        routeId: AppContentRoutes.invoices,
+        destination: (context) => const InvoicesScreen(),
+        subItems: [
+          SubMenuItem(
+            title: loc.invoicesListLabel,
+            routeId: AppContentRoutes.invoices,
+            destination: (context) => const InvoicesScreen(),
+          ),
+          SubMenuItem(
+            title: loc.newSaleLabel,
+            routeId: AppContentRoutes.addInvoice,
+            destination: (context) => const AddInvoiceScreen(),
+          ),
+          SubMenuItem(
+            title: loc.parkedSalesLabel,
+            routeId: AppContentRoutes.parkedSales,
+            destination: (context) => const ParkedSalesScreen(),
+          ),
+          SubMenuItem(
+            title: loc.posSettingsLabel,
+            routeId: AppContentRoutes.salePosSettings,
+            destination: (context) => const SalePosSettingsScreen(),
+          ),
+        ],
+      ),
+      ModuleItem(
+        icon: Icons.person_outline,
+        title: loc.customersLabel,
+        iconColor: Colors.teal,
+        routeId: AppContentRoutes.customers,
+        destination: (context) => const CustomersScreen(),
+        subItems: [
+          SubMenuItem(
+            title: loc.customersManageLabel,
+            routeId: AppContentRoutes.customers,
+            destination: (context) => const CustomersScreen(),
+          ),
+          SubMenuItem(
+            title: loc.addNewCustomerLabel,
+            routeId: AppContentRoutes.customersAdd,
+            breadcrumbTitle: loc.addCustomerBreadcrumb,
+            destination: (context) => const CustomerFormScreen(),
+          ),
+          SubMenuItem(
+            title: loc.contactListLabel,
+            routeId: AppContentRoutes.customerContacts,
+            destination: (context) => const CustomerContactsScreen(),
+          ),
+          SubMenuItem(
+            title: loc.customerLoyaltySettingsLabel,
+            routeId: AppContentRoutes.loyaltySettings,
+            destination: (context) => const LoyaltySettingsScreen(),
+          ),
+        ],
+      ),
+      ModuleItem(
+        icon: Icons.card_giftcard_rounded,
+        title: loc.customerLoyaltyLabel,
+        iconColor: Colors.deepPurple,
+        routeId: AppContentRoutes.loyaltySettings,
+        destination: (context) => const LoyaltySettingsScreen(),
+        subItems: [
+          SubMenuItem(
+            title: loc.loyaltyPointsSettingsLabel,
+            routeId: AppContentRoutes.loyaltySettings,
+            destination: (context) => const LoyaltySettingsScreen(),
+          ),
+          SubMenuItem(
+            title: loc.loyaltyLedgerLabel,
+            routeId: AppContentRoutes.loyaltyLedger,
+            destination: (context) => const LoyaltyLedgerScreen(),
+          ),
+        ],
+      ),
+      ModuleItem(
+        icon: Icons.calendar_today,
+        title: loc.installmentsLabel,
+        iconColor: Colors.blue,
+        routeId: AppContentRoutes.installments,
+        destination: (context) => const InstallmentsScreen(),
+        subItems: [
+          SubMenuItem(
+            title: loc.installmentPlansLabel,
+            icon: Icons.receipt_long_rounded,
+            routeId: AppContentRoutes.installments,
+            destination: (context) => const InstallmentsScreen(),
+          ),
+          SubMenuItem(
+            title: loc.installmentSettingsLabel,
+            icon: Icons.tune_rounded,
+            routeId: AppContentRoutes.installmentSettings,
+            destination: (context) => const InstallmentSettingsScreen(),
+          ),
+        ],
+      ),
+      ModuleItem(
+        icon: Icons.balance_outlined,
+        title: loc.debtsLabel,
+        iconColor: Colors.amber,
+        routeId: AppContentRoutes.debts,
+        destination: (context) => const DebtsScreen(),
+        subItems: [
+          SubMenuItem(
+            title: loc.debtsPanelLabel,
+            icon: Icons.dashboard_customize_outlined,
+            routeId: AppContentRoutes.debts,
+            destination: (context) => const DebtsScreen(),
+          ),
+          SubMenuItem(
+            title: loc.debtSettingsLabel,
+            icon: Icons.tune_rounded,
+            routeId: AppContentRoutes.debtSettings,
+            destination: (context) => const DebtSettingsScreen(),
+          ),
+        ],
+      ),
+      ModuleItem(
+        icon: Icons.inventory_2,
+        title: loc.inventoryLabel,
+        iconColor: Colors.orange,
+        routeId: AppContentRoutes.inventory,
+        destination: (context) => const InventoryHubScreen(),
+        subItems: [
+          SubMenuItem(
+            title: loc.productListLabel,
+            routeId: AppContentRoutes.inventoryProducts,
+            destination: (context) => const InventoryProductsScreen(),
+          ),
+          SubMenuItem(
+            title: loc.addNewProductLabel,
+            routeId: AppContentRoutes.addProduct,
+            destination: (context) => const AddProductScreen(),
+          ),
+          SubMenuItem(
+            title: loc.updateExistingProductLabel,
+            routeId: AppContentRoutes.quickUpdateProducts,
+            destination: (context) => const QuickProductUpdateScreen(),
+          ),
+          SubMenuItem(
+            title: loc.printBarcodeLabelsLabel,
+            routeId: AppContentRoutes.inventoryBarcodeLabels,
+            destination: (context) => const BarcodeLabelsScreen(),
+          ),
+          SubMenuItem(
+            title: loc.inventoryMovementsLabel,
+            routeId: AppContentRoutes.inventoryManagement,
+            destination: (context) => const InventoryManagementScreen(),
+          ),
+          SubMenuItem(
+            title: loc.warehousesLabel,
+            routeId: AppContentRoutes.inventoryWarehouses,
+            destination: (context) => const WarehousesScreen(),
+          ),
+          SubMenuItem(
+            title: loc.stocktakingLabel,
+            routeId: AppContentRoutes.inventoryStocktaking,
+            destination: (context) => const StocktakingScreen(),
+          ),
+          SubMenuItem(
+            title: loc.purchaseOrdersLabel,
+            routeId: AppContentRoutes.inventoryPurchaseOrders,
+            destination: (context) => const PurchaseOrdersScreen(),
+          ),
+          SubMenuItem(
+            title: loc.stockAnalyticsLabel,
+            routeId: AppContentRoutes.inventoryAnalytics,
+            destination: (context) => const StockAnalyticsScreen(),
+          ),
+          SubMenuItem(
+            title: loc.inventorySettingsLabel,
+            routeId: AppContentRoutes.inventorySettings,
+            destination: (context) => const InventorySettingsScreen(),
+          ),
+        ],
+      ),
+      ModuleItem(
+        icon: Icons.handyman_rounded,
+        title: loc.servicesAndMaintenanceLabel,
+        iconColor: Colors.blueAccent,
+        routeId: AppContentRoutes.servicesHub,
+        destination: (context) => const ServicesHubScreen(),
+        subItems: [
+          SubMenuItem(
+            title: loc.servicesAndMaintenancePanelLabel,
+            routeId: AppContentRoutes.servicesHub,
+            destination: (context) => const ServicesHubScreen(),
+          ),
+          SubMenuItem(
+            title: loc.addTechnicalServiceLabel,
+            routeId: AppContentRoutes.servicesAdd,
+            destination: (context) => const AddServiceScreen(),
+          ),
+          SubMenuItem(
+            title: loc.maintenanceRequestsLabel,
+            routeId: AppContentRoutes.serviceOrdersHub,
+            destination: (context) => const ServiceOrdersHubScreen(),
+          ),
+        ],
+      ),
+      ModuleItem(
+        icon: Icons.account_balance_wallet,
+        title: loc.cashRegisterLabel,
+        iconColor: Colors.purple,
+        routeId: AppContentRoutes.cash,
+        destination: (context) => const CashScreen(),
+      ),
+      ModuleItem(
+        icon: Icons.payments_outlined,
+        title: loc.expensesLabel,
+        iconColor: Colors.teal,
+        routeId: AppContentRoutes.expenses,
+        destination: (context) => const ExpensesScreen(),
+      ),
+      ModuleItem(
+        icon: Icons.bar_chart,
+        title: loc.reportsLabel,
+        iconColor: Colors.red,
+        routeId: AppContentRoutes.reports(0),
+        destination: (context) => const ReportsScreen(initialSection: 0),
+      ),
+      ModuleItem(
+        icon: Icons.auto_awesome_rounded,
+        title: 'AI Sales Agent',
+        iconColor: Colors.deepPurple,
+        routeId: AppContentRoutes.localAiAgent,
+        destination: (context) => const LocalAiAgentScreen(),
+      ),
+      ModuleItem(
+        icon: Icons.people_alt,
+        title: loc.usersLabel,
+        iconColor: Colors.indigo,
+        routeId: AppContentRoutes.users,
+        destination: (context) => const UsersScreen(),
+        subItems: [
+          SubMenuItem(
+            title: loc.manageUsersLabel,
+            icon: Icons.manage_accounts_outlined,
+            routeId: AppContentRoutes.users,
+            destination: (context) => const UsersScreen(),
+          ),
+          SubMenuItem(
+            title: loc.staffShiftsWeekLabel,
+            icon: Icons.date_range_rounded,
+            routeId: AppContentRoutes.staffShiftsWeek,
+            destination: (context) => const StaffShiftsWeekScreen(),
+          ),
+          SubMenuItem(
+            title: loc.staffIdentitiesLabel,
+            icon: Icons.badge_outlined,
+            routeId: AppContentRoutes.employeeIdentity,
+            destination: (context) => const EmployeeIdentityScreen(),
+          ),
+        ],
+      ),
+      ModuleItem(
+        icon: Icons.print,
+        title: loc.printingLabel,
+        iconColor: Colors.blueGrey,
+        routeId: AppContentRoutes.printing,
+        destination: (context) => const PrintingScreen(),
+      ),
+    ];
+  }
 
   late List<ModuleItem> _orderedModules;
 
@@ -707,8 +724,6 @@ class _HomeScreenState extends State<HomeScreen>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    // تهيئة فورية — تمنع LateInitializationError قبل انتهاء الـ async
-    _orderedModules = List.from(_originalModules);
     _nameAnimController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
@@ -724,7 +739,9 @@ class _HomeScreenState extends State<HomeScreen>
       if (!mounted) return;
       _shiftProviderForGateListener = context.read<ShiftProvider>();
       _shiftProviderForGateListener!.addListener(_shiftGateListener);
-      BusinessFeaturesRevision.instance.addListener(_onBusinessFeaturesRevision);
+      BusinessFeaturesRevision.instance.addListener(
+        _onBusinessFeaturesRevision,
+      );
       unawaited(_ensureActiveShiftGate());
       Future<void>.delayed(const Duration(milliseconds: 450), () {
         if (!mounted) return;
@@ -813,6 +830,29 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    final loc = AppLocalizations.of(context)!;
+    final freshModules = _buildOriginalModules(loc);
+    if (!_originalModulesBuilt) {
+      _originalModules = freshModules;
+      _orderedModules = List.from(_originalModules);
+      _originalModulesBuilt = true;
+    } else {
+      // إعادة بناء بعد تغيير اللغة أثناء الجلسة: نحافظ على ترتيب المستخدم
+      // الحالي لكن نستبدل كل عنصر بنسخته المترجَمة حديثاً، مطابقةً بـ routeId
+      // (وليس بالعنوان النصي الذي تغيّر الآن مع اللغة).
+      final byRoute = {for (final m in freshModules) m.routeId: m};
+      final reconciled = _orderedModules
+          .map((old) => byRoute[old.routeId])
+          .whereType<ModuleItem>()
+          .toList();
+      for (final m in freshModules) {
+        if (!reconciled.any((x) => x.routeId == m.routeId)) {
+          reconciled.add(m);
+        }
+      }
+      _originalModules = freshModules;
+      _orderedModules = reconciled;
+    }
     _barcodeBridge ??= context.read<GlobalBarcodeRouteBridge>();
     if (!_barcodeBridgeAttached) {
       _barcodeBridgeAttached = true;
@@ -853,7 +893,9 @@ class _HomeScreenState extends State<HomeScreen>
     CloudSyncService.instance.remoteImportGeneration.removeListener(
       _onRemoteSnapshotImported,
     );
-    BusinessFeaturesRevision.instance.removeListener(_onBusinessFeaturesRevision);
+    BusinessFeaturesRevision.instance.removeListener(
+      _onBusinessFeaturesRevision,
+    );
     _searchDebounce?.cancel();
     _nameAnimController.dispose();
     _searchController.removeListener(_onSearchControllerChanged);
@@ -929,10 +971,11 @@ class _HomeScreenState extends State<HomeScreen>
     }
     final u = auth.username.trim();
     if (u.contains('@') && !u.contains(' ')) return u.split('@').first;
-    return u.isNotEmpty ? u : 'المستخدم';
+    return u.isNotEmpty ? u : AppLocalizations.of(context)!.defaultUserFallback;
   }
 
   Future<void> _confirmAndLogout(AuthProvider auth) async {
+    final loc = AppLocalizations.of(context)!;
     final ok = await showDialog<bool>(
       context: context,
       barrierDismissible: true,
@@ -940,13 +983,13 @@ class _HomeScreenState extends State<HomeScreen>
         return Directionality(
           textDirection: TextDirection.rtl,
           child: AlertDialog(
-            title: const Text('تسجيل الخروج'),
+            title: Text(loc.logoutLabel),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  'هل أنت متأكد أنك تريد تسجيل الخروج؟',
+                  loc.logoutConfirmMessage,
                   style: TextStyle(
                     color: Theme.of(ctx).colorScheme.onSurfaceVariant,
                     height: 1.4,
@@ -955,12 +998,12 @@ class _HomeScreenState extends State<HomeScreen>
                 const SizedBox(height: 20),
                 FilledButton(
                   onPressed: () => Navigator.of(ctx).pop(true),
-                  child: const Text('تأكيد'),
+                  child: Text(loc.confirmAction),
                 ),
                 const SizedBox(height: 8),
                 TextButton(
                   onPressed: () => Navigator.of(ctx).pop(false),
-                  child: const Text('إلغاء'),
+                  child: Text(loc.cancel),
                 ),
               ],
             ),
@@ -1047,7 +1090,7 @@ class _HomeScreenState extends State<HomeScreen>
       setState(() => _globalSearchLoading = false);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('تعذر إكمال البحث: $e'),
+          content: Text(AppLocalizations.of(context)!.searchFailedSnackbar(e)),
           behavior: SnackBarBehavior.floating,
         ),
       );
@@ -1061,7 +1104,7 @@ class _HomeScreenState extends State<HomeScreen>
     if (!mounted) return;
     final route = contentMaterialRoute(
       routeId: AppContentRoutes.addProduct,
-      breadcrumbTitle: 'إضافة منتج',
+      breadcrumbTitle: AppLocalizations.of(context)!.addProductLabel,
       builder: (_) =>
           AddProductScreen(initialBarcode: raw, autoFillFromScan: true),
     );
@@ -1118,7 +1161,7 @@ class _HomeScreenState extends State<HomeScreen>
       if (!draft.isSaleScreenOpen) {
         _pushInContentTagged(
           AppContentRoutes.addInvoice,
-          'بيع جديد',
+          AppLocalizations.of(context)!.newSaleLabel,
           (_) => const AddInvoiceScreen(),
         );
       }
@@ -1140,7 +1183,7 @@ class _HomeScreenState extends State<HomeScreen>
 
     _pushInContentTagged(
       AppContentRoutes.addProduct,
-      'إضافة منتج',
+      AppLocalizations.of(context)!.addProductLabel,
       (_) => AddProductScreen(initialBarcode: raw, autoFillFromScan: true),
     );
   }
@@ -1414,10 +1457,12 @@ class _HomeScreenState extends State<HomeScreen>
                                         ],
                                         onGenerateInitialRoutes: (_, _) => [
                                           FastContentPageRoute(
-                                            settings: const RouteSettings(
+                                            settings: RouteSettings(
                                               name: AppContentRoutes.home,
                                               arguments: BreadcrumbMeta(
-                                                'الرئيسية',
+                                                AppLocalizations.of(
+                                                  context,
+                                                )!.homeLabel,
                                               ),
                                             ),
                                             builder: (_) => _HomeContentPage(
@@ -1465,15 +1510,14 @@ class _HomeScreenState extends State<HomeScreen>
             final navigatorWidget = Navigator(
               key: _innerNavKeySmall,
               restorationScopeId: 'home_inner_nav_small',
-              observers: [
-                _innerNavObserver,
-                homeInnerRouteObserver,
-              ],
+              observers: [_innerNavObserver, homeInnerRouteObserver],
               onGenerateInitialRoutes: (_, _) => [
                 FastContentPageRoute(
-                  settings: const RouteSettings(
+                  settings: RouteSettings(
                     name: AppContentRoutes.home,
-                    arguments: BreadcrumbMeta('الرئيسية'),
+                    arguments: BreadcrumbMeta(
+                      AppLocalizations.of(context)!.homeLabel,
+                    ),
                   ),
                   builder: (_) => _HomeContentPage(parentState: this),
                 ),
@@ -1567,12 +1611,13 @@ class _HomeScreenState extends State<HomeScreen>
       builder: (context, shift, _) {
         if (!shift.hasOpenShift) return const SizedBox.shrink();
         final label = shift.activeShift?['shiftStaffName'] as String?;
+        final loc = AppLocalizations.of(context)!;
         return IconButton(
           style: _homeAppBarActionStyle(),
           icon: const Icon(Icons.event_available_outlined, size: 20),
           tooltip: label != null && label.isNotEmpty
-              ? 'وردية: $label — إغلاق'
-              : 'إغلاق الوردية',
+              ? loc.shiftTooltipWithName(label)
+              : loc.closeShiftTooltip,
           onPressed: () => showCloseShiftDialog(context),
         );
       },
@@ -1586,6 +1631,7 @@ class _HomeScreenState extends State<HomeScreen>
       valueListenable: CloudSyncService.instance.lastError,
       builder: (context, lastError, _) {
         final hasError = lastError != null && lastError.isNotEmpty;
+        final loc = AppLocalizations.of(context)!;
         return Stack(
           clipBehavior: Clip.none,
           alignment: Alignment.center,
@@ -1593,18 +1639,16 @@ class _HomeScreenState extends State<HomeScreen>
             IconButton(
               style: _homeAppBarActionStyle(),
               icon: Icon(
-                hasError
-                    ? Icons.cloud_off_outlined
-                    : Icons.cloud_sync_outlined,
+                hasError ? Icons.cloud_off_outlined : Icons.cloud_sync_outlined,
                 size: 20,
               ),
-              tooltip: hasError ? 'تزامن — فشل آخر محاولة' : 'تزامن سحابي',
+              tooltip: hasError ? loc.syncFailedTooltip : loc.cloudSyncTooltip,
               onPressed: () async {
                 final messenger = ScaffoldMessenger.of(context);
                 messenger.showSnackBar(
-                  const SnackBar(
-                    content: Text('بدء التزامن…'),
-                    duration: Duration(seconds: 2),
+                  SnackBar(
+                    content: Text(loc.syncStartingSnackbar),
+                    duration: const Duration(seconds: 2),
                     behavior: SnackBarBehavior.floating,
                   ),
                 );
@@ -1646,7 +1690,7 @@ class _HomeScreenState extends State<HomeScreen>
                 context,
                 contentNavigator: _contentNavigator,
               ),
-              tooltip: 'التنبيهات',
+              tooltip: AppLocalizations.of(context)!.notificationsTooltip,
             ),
             if (c > 0)
               PositionedDirectional(
@@ -1672,7 +1716,8 @@ class _HomeScreenState extends State<HomeScreen>
   /// الحاسبة، Mac panel، التحرير، الخروج). تُستخدم في كل الفئات.
   Widget _appBarUserMenu(ThemeProvider themeProvider, AuthProvider auth) {
     final variant = context.screenLayout.layoutVariant;
-    final isDesktop = variant == DeviceVariant.desktopSM ||
+    final isDesktop =
+        variant == DeviceVariant.desktopSM ||
         variant == DeviceVariant.desktopLG;
     final showEditMode = variant.index >= DeviceVariant.tabletLG.index;
 
@@ -1690,7 +1735,7 @@ class _HomeScreenState extends State<HomeScreen>
       },
       onOpenSettings: () => _pushInContentTagged(
         AppContentRoutes.settings,
-        'الإعدادات',
+        AppLocalizations.of(context)!.settingsLabel,
         (_) => const SettingsScreen(),
         floatingPageBuilder: (_) => const SettingsScreen(showAppBar: false),
       ),
@@ -1922,6 +1967,7 @@ class _HomeScreenState extends State<HomeScreen>
         final mq = MediaQuery.sizeOf(ctx);
         final dialogW = math.min(400.0, mq.width - 48);
         const goldClose = Color(0xFFF5C518);
+        final loc = AppLocalizations.of(ctx)!;
 
         Widget row(
           String label,
@@ -1991,15 +2037,15 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                 ),
                 IconButton(
-                  tooltip: 'نسخ',
+                  tooltip: loc.copyLabel,
                   visualDensity: VisualDensity.compact,
                   onPressed: allowCopy && value.isNotEmpty && value != '—'
                       ? () async {
                           await Clipboard.setData(ClipboardData(text: value));
                           if (!ctx.mounted) return;
                           ScaffoldMessenger.of(ctx).showSnackBar(
-                            const SnackBar(
-                              content: Text('تم النسخ'),
+                            SnackBar(
+                              content: Text(loc.copiedSnackbar),
                               behavior: SnackBarBehavior.floating,
                             ),
                           );
@@ -2039,7 +2085,7 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                   Expanded(
                     child: Text(
-                      'بيانات المستخدم',
+                      loc.userInfoTitle,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: _textPrimary,
@@ -2059,16 +2105,19 @@ class _HomeScreenState extends State<HomeScreen>
                     Divider(color: _dividerColor),
                     const SizedBox(height: 6),
                     row(
-                      'الاسم المعروض:',
+                      loc.displayNameFieldLabel,
                       auth.displayName.isNotEmpty ? auth.displayName : '—',
                     ),
                     row(
-                      'اسم الدخول:',
+                      loc.usernameFieldLabel,
                       auth.username.isNotEmpty ? auth.username : '—',
                     ),
-                    row('الصلاحية:', auth.role.isNotEmpty ? auth.role : '—'),
                     row(
-                      'البريد الإلكتروني:',
+                      loc.roleFieldLabel,
+                      auth.role.isNotEmpty ? auth.role : '—',
+                    ),
+                    row(
+                      loc.emailFieldLabel,
                       auth.email.isNotEmpty ? auth.email : '—',
                       ltrValue: true,
                     ),
@@ -2080,9 +2129,9 @@ class _HomeScreenState extends State<HomeScreen>
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(ctx),
-                  child: const Text(
-                    'إغلاق',
-                    style: TextStyle(
+                  child: Text(
+                    loc.closeAction,
+                    style: const TextStyle(
                       color: goldClose,
                       fontWeight: FontWeight.w700,
                     ),
@@ -2121,11 +2170,11 @@ class _HomeScreenState extends State<HomeScreen>
     final sl = ScreenLayout.of(context);
     final w = MediaQuery.sizeOf(context).width;
     final collapse = sl.isHandsetForLayout && w < 400 && !hideVk;
+    final loc = AppLocalizations.of(context)!;
 
     final barcodeBtn = IconButton(
       style: _searchBarSuffixIconStyle(iconInField),
-      tooltip:
-          'قراءة باركود (كاميرا على الجهاز المحمول، أو نافذة القارئ على الحاسوب)',
+      tooltip: loc.barcodeScanTooltip,
       icon: Icon(Icons.qr_code_scanner_rounded, color: iconInField, size: 21),
       onPressed: _scanFromDashboardSearch,
     );
@@ -2133,8 +2182,8 @@ class _HomeScreenState extends State<HomeScreen>
     final keyboardBtn = IconButton(
       style: _searchBarSuffixIconStyle(iconInField),
       tooltip: _showVirtualSearchKeyboard
-          ? 'إخفاء لوحة المفاتيح'
-          : 'لوحة مفاتيح عربي / English — اسحب من المقبض أو ثبّتها بالدبوس',
+          ? loc.hideKeyboardTooltip
+          : loc.keyboardDragPinHint,
       icon: Icon(
         _showVirtualSearchKeyboard
             ? Icons.keyboard_hide_rounded
@@ -2155,7 +2204,7 @@ class _HomeScreenState extends State<HomeScreen>
     final clearBtn = _searchQuery.isNotEmpty
         ? IconButton(
             style: _searchBarSuffixIconStyle(iconInField),
-            tooltip: 'مسح البحث',
+            tooltip: loc.clearSearchTooltip,
             icon: Icon(Icons.clear_rounded, color: iconInField, size: 20),
             onPressed: _clearGlobalSearch,
           )
@@ -2174,7 +2223,7 @@ class _HomeScreenState extends State<HomeScreen>
         barcodeBtn,
         PopupMenuButton<String>(
           padding: EdgeInsets.zero,
-          tooltip: 'أدوات البحث',
+          tooltip: loc.searchToolsTooltip,
           color: Theme.of(context).colorScheme.surface,
           surfaceTintColor: Colors.transparent,
           icon: Icon(Icons.tune_rounded, color: iconInField, size: 20),
@@ -2200,8 +2249,8 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
                 title: Text(
                   _showVirtualSearchKeyboard
-                      ? 'إخفاء لوحة المفاتيح'
-                      : 'إظهار لوحة المفاتيح (عربي / English)',
+                      ? loc.hideKeyboardTooltip
+                      : loc.showKeyboardTooltip,
                 ),
               ),
             ),
@@ -2219,6 +2268,7 @@ class _HomeScreenState extends State<HomeScreen>
     final iconInField = _textSecondary;
     final w = MediaQuery.sizeOf(context).width;
     final shortHint = sl.isHandsetForLayout && w < 400;
+    final loc = AppLocalizations.of(context)!;
     return Directionality(
       textDirection: TextDirection.rtl,
       child: TextField(
@@ -2238,9 +2288,7 @@ class _HomeScreenState extends State<HomeScreen>
             minHeight: 48,
             maxHeight: 52,
           ),
-          hintText: shortHint
-              ? 'بحث سريع: وحدات، منتجات، عملاء…'
-              : 'بحث: وحدات، منتجات، عملاء، موظفون، باركود…',
+          hintText: shortHint ? loc.quickSearchHint : loc.fullSearchHint,
           hintStyle: TextStyle(
             color: _textSecondary,
             fontSize: sl.isNarrowWidth ? 12 : 13,
@@ -2274,70 +2322,71 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   String _invoiceTypeAr(InvoiceType t) {
+    final loc = AppLocalizations.of(context)!;
     switch (t) {
       case InvoiceType.cash:
-        return 'نقدي';
+        return loc.paymentTypeCash;
       case InvoiceType.credit:
-        return 'دين';
+        return loc.paymentTypeCredit;
       case InvoiceType.installment:
-        return 'تقسيط';
+        return loc.paymentTypeInstallment;
       case InvoiceType.delivery:
-        return 'توصيل';
+        return loc.paymentTypeDelivery;
       case InvoiceType.debtCollection:
-        return 'تحصيل دين';
+        return loc.paymentTypeDebtCollection;
       case InvoiceType.installmentCollection:
-        return 'تسديد قسط';
+        return loc.paymentTypeInstallmentCollection;
       case InvoiceType.supplierPayment:
-        return 'دفع مورد';
+        return loc.paymentTypeSupplierPayment;
     }
   }
 
   Future<void> _offerReturnForScannedInvoiceId(int id) async {
+    final loc = AppLocalizations.of(context)!;
     final inv = await _dbHelper.getInvoiceById(id);
     if (!mounted) return;
     if (inv == null) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('لا توجد فاتورة برقم $id')));
+      ).showSnackBar(SnackBar(content: Text(loc.noInvoiceWithNumber(id))));
       return;
     }
     if (inv.isReturned) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('هذه الفاتورة مسجّلة كمرتجع مسبقاً')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(loc.invoiceAlreadyReturned)));
       return;
     }
     if (inv.type == InvoiceType.debtCollection ||
         inv.type == InvoiceType.installmentCollection ||
         inv.type == InvoiceType.supplierPayment) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            'هذا السند لا يُفتَح كمرتجع بيع — عكس الدفعة من شاشة المورد أو إدارة الأقساط حسب النوع.',
-          ),
-        ),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(loc.invoiceNotOpenableAsReturn)));
       return;
     }
     final go =
         await showDialog<bool>(
           context: context,
           builder: (ctx) => AlertDialog(
-            title: Text('فاتورة بيع #${inv.id}'),
+            title: Text(loc.salesInvoiceNumber(inv.id ?? id)),
             content: Text(
-              'العميل: ${inv.customerName.trim().isEmpty ? '(فارغ)' : inv.customerName}\n'
-              'الدفع: ${_invoiceTypeAr(inv.type)}\n'
-              'الإجمالي: ${IraqiCurrencyFormat.formatIqd(inv.total)}\n\n'
-              'فتح شاشة المرتجع؟ يمكنك تقليل الكمية أو حذف الأسطر لإرجاع جزئي فقط.',
+              loc.returnInvoiceDialogBody(
+                inv.customerName.trim().isEmpty
+                    ? loc.emptyPlaceholder
+                    : inv.customerName,
+                _invoiceTypeAr(inv.type),
+                IraqiCurrencyFormat.formatIqd(inv.total),
+              ),
             ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(ctx, false),
-                child: const Text('إلغاء'),
+                child: Text(loc.cancel),
               ),
               FilledButton(
                 onPressed: () => Navigator.pop(ctx, true),
-                child: const Text('مرتجع'),
+                child: Text(loc.returnLabel),
               ),
             ],
           ),
@@ -2347,7 +2396,7 @@ class _HomeScreenState extends State<HomeScreen>
     final rid = inv.id ?? id;
     _pushInContentTagged(
       AppContentRoutes.processReturn(rid),
-      'مرتجع #$rid',
+      loc.returnNumber(rid),
       (_) => ProcessReturnScreen(originalInvoice: inv),
     );
   }
@@ -2355,7 +2404,7 @@ class _HomeScreenState extends State<HomeScreen>
   Future<void> _scanFromDashboardSearch() async {
     final code = await BarcodeInputLauncher.captureBarcode(
       context,
-      title: 'مسح QR / Barcode',
+      title: AppLocalizations.of(context)!.scanQrBarcodeTitle,
     );
     if (!mounted || code == null || code.trim().isEmpty) return;
     await _applyScannedCode(code.trim());
@@ -2366,6 +2415,7 @@ class _HomeScreenState extends State<HomeScreen>
     final auth = Provider.of<AuthProvider>(context, listen: false);
     final lic = context.watch<LicenseService>();
     final isRestricted = lic.state.status == LicenseStatus.restricted;
+    final loc = AppLocalizations.of(context)!;
 
     void navToTagged(
       String routeId,
@@ -2393,33 +2443,33 @@ class _HomeScreenState extends State<HomeScreen>
                   title: s.title,
                   icon: s.icon,
                   disabledTooltip: blockedInRestricted(s.routeId)
-                      ? 'غير متاح في الوضع المقيّد'
+                      ? loc.restrictedModeTooltip
                       : null,
                   onTap: blockedInRestricted(s.routeId)
                       ? null
                       : () => navToTagged(
-                            s.routeId,
-                            s.breadcrumbTitle,
-                            s.destination,
-                          ),
+                          s.routeId,
+                          s.breadcrumbTitle,
+                          s.destination,
+                        ),
                 ),
               )
               .toList(),
           disabledTooltip: blockedInRestricted(module.routeId)
-              ? 'غير متاح في الوضع المقيّد'
+              ? loc.restrictedModeTooltip
               : null,
           onTap: blockedInRestricted(module.routeId)
               ? null
               : () => navToTagged(
-                    module.routeId,
-                    module.breadcrumbTitle,
-                    module.destination,
-                  ),
+                  module.routeId,
+                  module.breadcrumbTitle,
+                  module.destination,
+                ),
         ),
       ),
       _SidebarItem(
         icon: Icons.logout,
-        title: 'تسجيل الخروج',
+        title: loc.logoutLabel,
         iconColor: Colors.red,
         onTap: () => _confirmAndLogout(auth),
       ),
@@ -2446,7 +2496,9 @@ class _HomeScreenState extends State<HomeScreen>
             SizedBox(
               height: 56,
               child: Tooltip(
-                message: isExpanded ? 'طي القائمة' : 'توسيع القائمة',
+                message: isExpanded
+                    ? loc.collapseMenuTooltip
+                    : loc.expandMenuTooltip,
                 child: IconButton(
                   padding: const EdgeInsets.all(10),
                   style: IconButton.styleFrom(foregroundColor: cs.onPrimary),
@@ -2518,7 +2570,7 @@ class _HomeScreenState extends State<HomeScreen>
                         if (isExpanded)
                           SidebarLogoutPill(
                             colorScheme: cs,
-                            label: 'تسجيل الخروج',
+                            label: loc.logoutLabel,
                             onTap: () => _confirmAndLogout(auth),
                           )
                         else
@@ -2558,7 +2610,8 @@ class _HomeScreenState extends State<HomeScreen>
       children: [
         Tooltip(
           message: item.onTap == null && !hasSubmenu
-              ? (item.disabledTooltip ?? 'غير متاح في الوضع المقيّد')
+              ? (item.disabledTooltip ??
+                    AppLocalizations.of(context)!.restrictedModeTooltip)
               : (isExpanded ? '' : item.title),
           preferBelow: false,
           child: Material(
@@ -2569,20 +2622,21 @@ class _HomeScreenState extends State<HomeScreen>
               onTap: !enabled
                   ? null
                   : () {
-                if (hasSubmenu) {
-                  setState(() {
-                    if (isSubmenuOpen) {
-                      _expandedSubmenus.remove(item.title);
-                    } else {
-                      _expandedSubmenus.add(item.title);
-                      // افتح الشريط إذا كان مطوياً
-                      if (!_isDrawerOpen.value) _isDrawerOpen.value = true;
-                    }
-                  });
-                } else {
-                  item.onTap?.call();
-                }
-              },
+                      if (hasSubmenu) {
+                        setState(() {
+                          if (isSubmenuOpen) {
+                            _expandedSubmenus.remove(item.title);
+                          } else {
+                            _expandedSubmenus.add(item.title);
+                            // افتح الشريط إذا كان مطوياً
+                            if (!_isDrawerOpen.value)
+                              _isDrawerOpen.value = true;
+                          }
+                        });
+                      } else {
+                        item.onTap?.call();
+                      }
+                    },
               child: SizedBox(
                 height: 48,
                 child: LayoutBuilder(
@@ -2755,6 +2809,7 @@ class _HomeScreenState extends State<HomeScreen>
   /// إضافة صنف لبيع جديد من البحث أو من عمود المنتجات على الشاشات العريضة.
   void _handleProductQuickPick(Map<String, dynamic> p) {
     final draft = context.read<SaleDraftProvider>();
+    final loc = AppLocalizations.of(context)!;
     final line = <String, dynamic>{
       'name': p['name'],
       'sell': p['sell'],
@@ -2773,7 +2828,7 @@ class _HomeScreenState extends State<HomeScreen>
     if (!draft.isSaleScreenOpen) {
       _pushInContentTagged(
         AppContentRoutes.addInvoice,
-        'بيع جديد',
+        loc.newSaleLabel,
         (_) => const AddInvoiceScreen(),
       );
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -2789,12 +2844,13 @@ class _HomeScreenState extends State<HomeScreen>
 
   // ── Main content (Dashboard فقط — QuickActions حُذفت في 2026-05) ──────────
   Widget _buildMainContent(double availableWidth) {
+    final loc = AppLocalizations.of(context)!;
     final dashboard = DashboardView(
       isDark: _isDarkMode,
       onPinnedProductQuickSale: (preset) {
         _pushInContentTagged(
           AppContentRoutes.addInvoice,
-          'بيع جديد',
+          loc.newSaleLabel,
           (_) => AddInvoiceScreen(presetProductLine: preset),
         );
       },
@@ -2803,42 +2859,42 @@ class _HomeScreenState extends State<HomeScreen>
           case HomeGlanceAction.cash:
             _pushInContentTagged(
               AppContentRoutes.cash,
-              'الصندوق',
+              loc.cashRegisterLabel,
               (_) => const CashScreen(),
             );
             break;
           case HomeGlanceAction.newSale:
             _pushInContentTagged(
               AppContentRoutes.addInvoice,
-              'بيع جديد',
+              loc.newSaleLabel,
               (_) => const AddInvoiceScreen(),
             );
             break;
           case HomeGlanceAction.inventoryProducts:
             _pushInContentTagged(
               AppContentRoutes.inventoryProducts,
-              'الأصناف',
+              loc.itemsLabel,
               (_) => const InventoryProductsScreen(),
             );
             break;
           case HomeGlanceAction.parkedSales:
             _pushInContentTagged(
               AppContentRoutes.parkedSales,
-              'معلّقة مؤقتاً',
+              loc.parkedSalesLabel,
               (_) => const ParkedSalesScreen(),
             );
             break;
           case HomeGlanceAction.reportsExecutive:
             _pushInContentTagged(
               AppContentRoutes.reports(0),
-              'التقارير',
+              loc.reportsLabel,
               (_) => const ReportsScreen(initialSection: 0),
             );
             break;
           case HomeGlanceAction.completedOrders:
             _pushInContentTagged(
               AppContentRoutes.invoices,
-              'الفواتير',
+              loc.invoicesLabel,
               (_) => const InvoicesScreen(),
             );
             break;
@@ -2860,7 +2916,7 @@ class _HomeScreenState extends State<HomeScreen>
             } else {
               _pushInContentTagged(
                 AppContentRoutes.cash,
-                'الصندوق',
+                loc.cashRegisterLabel,
                 (_) => const CashScreen(),
               );
             }
@@ -2868,7 +2924,7 @@ class _HomeScreenState extends State<HomeScreen>
           case RecentActivityKind.parkedSale:
             _pushInContentTagged(
               AppContentRoutes.parkedSales,
-              'معلّقة مؤقتاً',
+              loc.parkedSalesLabel,
               (_) => const ParkedSalesScreen(),
             );
             break;
@@ -2879,7 +2935,7 @@ class _HomeScreenState extends State<HomeScreen>
             } else {
               _pushInContentTagged(
                 AppContentRoutes.loyaltyLedger,
-                'سجل النقاط',
+                loc.pointsLedgerShortLabel,
                 (_) => const LoyaltyLedgerScreen(),
               );
             }
@@ -2887,28 +2943,28 @@ class _HomeScreenState extends State<HomeScreen>
           case RecentActivityKind.stockVoucher:
             _pushInContentTagged(
               AppContentRoutes.inventory,
-              'المخزون',
+              loc.inventoryLabel,
               (_) => const InventoryHubScreen(),
             );
             break;
           case RecentActivityKind.customerCreated:
             _pushInContentTagged(
               AppContentRoutes.customers,
-              'العملاء',
+              loc.customersLabel,
               (_) => const CustomersScreen(),
             );
             break;
           case RecentActivityKind.productCreated:
             _pushInContentTagged(
               AppContentRoutes.inventoryProducts,
-              'الأصناف',
+              loc.itemsLabel,
               (_) => const InventoryProductsScreen(),
             );
             break;
           case RecentActivityKind.workShift:
             _pushInContentTagged(
               AppContentRoutes.staffShiftsWeek,
-              'ورديات الموظفين',
+              loc.staffShiftsLabel,
               (_) => const StaffShiftsWeekScreen(),
             );
             break;
@@ -2916,12 +2972,12 @@ class _HomeScreenState extends State<HomeScreen>
       },
       onOpenInvoicesFromActivity: () => _pushInContentTagged(
         AppContentRoutes.invoices,
-        'الفواتير',
+        loc.invoicesLabel,
         (_) => const InvoicesScreen(),
       ),
       onOpenCashFromActivity: () => _pushInContentTagged(
         AppContentRoutes.cash,
-        'الصندوق',
+        loc.cashRegisterLabel,
         (_) => const CashScreen(),
       ),
     );
@@ -2935,7 +2991,7 @@ class _HomeScreenState extends State<HomeScreen>
             if (raw == null) return const SizedBox.shrink();
             final name = (row!['shiftStaffName'] as String?)?.trim() ?? '';
             return ShiftPermissionBanner(
-              userName: name.isEmpty ? 'موظف الوردية' : name,
+              userName: name.isEmpty ? loc.shiftStaffFallback : name,
             );
           },
         ),
@@ -2996,6 +3052,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   Widget _buildSearchOverlayScrollable() {
     final sl = ScreenLayout.of(context);
+    final loc = AppLocalizations.of(context)!;
     final hasAny =
         _hitModules.isNotEmpty ||
         _hitProducts.isNotEmpty ||
@@ -3008,7 +3065,7 @@ class _HomeScreenState extends State<HomeScreen>
           vertical: 20,
         ),
         child: Text(
-          'لا توجد نتائج لـ «${_searchController.text.trim()}»',
+          loc.noResultsFor(_searchController.text.trim()),
           textAlign: TextAlign.center,
           style: TextStyle(color: _textSecondary, fontSize: 14, height: 1.4),
         ),
@@ -3027,7 +3084,7 @@ class _HomeScreenState extends State<HomeScreen>
         children: [
           if (_hitModules.isNotEmpty)
             _buildHorizontalSearchSection(
-              title: 'الوحدات',
+              title: loc.modulesLabel,
               count: _hitModules.length,
               height: 92,
               itemCount: _hitModules.length,
@@ -3045,13 +3102,13 @@ class _HomeScreenState extends State<HomeScreen>
                   icon: m.icon,
                   iconColor: m.iconColor,
                   title: m.title,
-                  subtitle: 'فتح الوحدة',
+                  subtitle: loc.openModuleLabel,
                 );
               },
             ),
           if (_hitProducts.isNotEmpty)
             _buildHorizontalSearchSection(
-              title: 'المنتجات',
+              title: loc.productsLabel,
               count: _hitProducts.length,
               height: 128,
               itemCount: _hitProducts.length,
@@ -3067,14 +3124,14 @@ class _HomeScreenState extends State<HomeScreen>
                   icon: Icons.inventory_2_outlined,
                   iconColor: const Color(0xFF0D9488),
                   title: '${p['name'] ?? ''}',
-                  subtitle: 'بيع $sell د.ع',
+                  subtitle: loc.sellPriceIqd(sell),
                   belowSubtitle: stockLine,
                 );
               },
             ),
           if (_hitCustomers.isNotEmpty)
             _buildHorizontalSearchSection(
-              title: 'العملاء',
+              title: loc.customersLabel,
               count: _hitCustomers.length,
               height: 96,
               itemCount: _hitCustomers.length,
@@ -3091,20 +3148,20 @@ class _HomeScreenState extends State<HomeScreen>
                     _clearGlobalSearch();
                     _pushInContentTagged(
                       AppContentRoutes.customers,
-                      'العملاء',
+                      loc.customersLabel,
                       (_) => const CustomersScreen(),
                     );
                   },
                   icon: Icons.person_outline,
                   iconColor: const Color(0xFF0D9488),
                   title: '${c['name'] ?? ''}',
-                  subtitle: sub.isEmpty ? 'عرض العملاء' : sub,
+                  subtitle: sub.isEmpty ? loc.viewCustomersLabel : sub,
                 );
               },
             ),
           if (_hitUsers.isNotEmpty)
             _buildHorizontalSearchSection(
-              title: 'الموظفون',
+              title: loc.staffLabel,
               count: _hitUsers.length,
               height: 96,
               itemCount: _hitUsers.length,
@@ -3121,14 +3178,14 @@ class _HomeScreenState extends State<HomeScreen>
                     _clearGlobalSearch();
                     _pushInContentTagged(
                       AppContentRoutes.users,
-                      'المستخدمين',
+                      loc.usersLabel,
                       (_) => const UsersScreen(),
                     );
                   },
                   icon: Icons.badge_outlined,
                   iconColor: const Color(0xFF3B82F6),
                   title: '${u['username'] ?? ''}',
-                  subtitle: sub.isEmpty ? 'عرض الموظفين' : sub,
+                  subtitle: sub.isEmpty ? loc.viewStaffLabel : sub,
                 );
               },
             ),
@@ -3167,13 +3224,14 @@ class _HomeScreenState extends State<HomeScreen>
 
   /// سطر المخزون تحت السعر في نتائج بحث المنتجات.
   String _productSearchStockLine(Map<String, dynamic> p) {
+    final loc = AppLocalizations.of(context)!;
     if (((p['isService'] as num?)?.toInt() ?? 0) == 1) {
-      return 'خدمة فنية';
+      return loc.technicalServiceLabel;
     }
     final track = (p['trackInventory'] as int?) != 0;
-    if (!track) return 'غير متتبّع للمخزون';
+    if (!track) return loc.notStockTracked;
     final q = p['qty'];
-    if (q == null) return 'المتوفر: —';
+    if (q == null) return loc.availableUnknown;
     final n = (q as num).toDouble();
     if (n < -1e-9) {
       final qStr = (n % 1).abs() < 1e-6
@@ -3182,15 +3240,15 @@ class _HomeScreenState extends State<HomeScreen>
       final soldOver = (n.abs() % 1).abs() < 1e-6
           ? IraqiCurrencyFormat.formatInt(n.abs())
           : IraqiCurrencyFormat.formatDecimal2(n.abs());
-      return 'رصيد سالب $qStr — بيع زائد قدره $soldOver عن آخر رصيد';
+      return loc.negativeStockWarning(qStr, soldOver);
     }
     if (n.abs() < 1e-9) {
-      return 'المتوفر: 0';
+      return loc.availableZero;
     }
     final s = (n % 1).abs() < 1e-6
         ? IraqiCurrencyFormat.formatInt(n)
         : IraqiCurrencyFormat.formatDecimal2(n);
-    return 'المتوفر: $s';
+    return loc.availableQty(s);
   }
 
   Widget _searchHChip({
@@ -3365,9 +3423,7 @@ class _HomeScreenState extends State<HomeScreen>
         : const Color(0xFFE8E0D6);
     // على بعض أجهزة الهاتف يظهر overflow بسيط (≈5px) بسبب SafeArea + حشوات عناصر الشريط.
     // نعطي ارتفاعاً أعلى قليلاً مع تقليل الحشوات الداخلية.
-    final height = sl.isVeryShort
-        ? 66.0
-        : (sl.isCompactHeight ? 70.0 : 78.0);
+    final height = sl.isVeryShort ? 66.0 : (sl.isCompactHeight ? 70.0 : 78.0);
     final idx = _activeBottomIndex.clamp(0, bottomModules.length - 1);
 
     Widget reorderableBar({required Color effectiveBarColor}) {
@@ -3381,7 +3437,9 @@ class _HomeScreenState extends State<HomeScreen>
           return Material(
             color: Colors.transparent,
             elevation: isPhoneDock ? 10 : 6,
-            shadowColor: Colors.black.withValues(alpha: isPhoneDock ? 0.24 : 0.18),
+            shadowColor: Colors.black.withValues(
+              alpha: isPhoneDock ? 0.24 : 0.18,
+            ),
             child: child,
           );
         },
@@ -3465,10 +3523,7 @@ class _HomeScreenState extends State<HomeScreen>
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [
-                      topHighlight,
-                      topHighlight.withValues(alpha: 0),
-                    ],
+                    colors: [topHighlight, topHighlight.withValues(alpha: 0)],
                     stops: const [0, 0.18],
                   ),
                 ),
@@ -3498,6 +3553,7 @@ class _HomeScreenState extends State<HomeScreen>
   /// ورقة القائمة الفرعية لعنصر ذي sub-items
   void _showSubItemsSheet(ModuleItem module) {
     final ac = context.appCorners;
+    final loc = AppLocalizations.of(context)!;
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
@@ -3567,7 +3623,7 @@ class _HomeScreenState extends State<HomeScreen>
                             ),
                           ),
                           Text(
-                            'اختر من القائمة أدناه',
+                            loc.chooseFromListBelow,
                             style: TextStyle(
                               fontSize: 11,
                               color: _textSecondary,
@@ -3592,9 +3648,9 @@ class _HomeScreenState extends State<HomeScreen>
                           vertical: 6,
                         ),
                       ),
-                      child: const Text(
-                        'عرض الكل',
-                        style: TextStyle(fontSize: 12),
+                      child: Text(
+                        loc.viewAllLabel,
+                        style: const TextStyle(fontSize: 12),
                       ),
                     ),
                   ],
@@ -3776,10 +3832,15 @@ class _BottomNavTileState extends State<_BottomNavTile> {
     final useGlassDock = widget.useGlassDock;
     final fg = selected ? cs.onSurface : cs.onSurfaceVariant;
     final indicatorColor = useGlassDock
-        ? Color.lerp(widget.indicatorColor, widget.module.iconColor, 0.18)!
-            .withValues(alpha: Theme.of(context).brightness == Brightness.dark
+        ? Color.lerp(
+            widget.indicatorColor,
+            widget.module.iconColor,
+            0.18,
+          )!.withValues(
+            alpha: Theme.of(context).brightness == Brightness.dark
                 ? 0.22
-                : 0.34)
+                : 0.34,
+          )
         : widget.indicatorColor;
     return SizedBox(
       width: useGlassDock ? 76 : 78,
@@ -3806,7 +3867,9 @@ class _BottomNavTileState extends State<_BottomNavTile> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     AnimatedContainer(
-                      duration: Duration(milliseconds: useGlassDock ? 230 : 160),
+                      duration: Duration(
+                        milliseconds: useGlassDock ? 230 : 160,
+                      ),
                       curve: useGlassDock
                           ? Curves.easeOutBack
                           : Curves.easeOutCubic,
@@ -3852,8 +3915,9 @@ class _BottomNavTileState extends State<_BottomNavTile> {
                             fontSize: tiny ? 10.2 : (useGlassDock ? 10.8 : 11),
                             height: 1.12,
                             letterSpacing: -0.2,
-                            fontWeight:
-                                selected ? FontWeight.w700 : FontWeight.w500,
+                            fontWeight: selected
+                                ? FontWeight.w700
+                                : FontWeight.w500,
                             color: fg,
                           ),
                           child: Text(

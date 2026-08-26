@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../models/sale_pos_settings_data.dart';
 import '../../providers/loyalty_settings_provider.dart';
 import '../../services/app_settings_repository.dart';
@@ -62,142 +63,146 @@ class _BusinessSetupWizardScreenState extends State<BusinessSetupWizardScreen> {
   bool _enableTaxOnSale = false;
   bool _enableInvoiceDiscount = true;
 
-  late final List<_StepCopy> _copy;
+  late List<_StepCopy> _copy;
 
   @override
   void initState() {
     super.initState();
-    _copy = _buildCopy();
     _load();
   }
 
-  List<_StepCopy> _buildCopy() {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _copy = _buildCopy(AppLocalizations.of(context)!);
+  }
+
+  List<_StepCopy> _buildCopy(AppLocalizations loc) {
     return [
-      const _StepCopy(
+      _StepCopy(
         icon: Icons.people_alt_outlined,
-        question: 'هل تستخدم العملاء في نشاطك؟',
+        question: loc.onboardingStep1Question,
         paragraphs: [
-          'عند التفعيل تظهر لك وحدة العملاء الكاملة: بطاقة لكل عميل، سجل مشتريات، ومتابعة سريعة من الفاتورة.',
-          'يمكنك ربط كل عملية بيع بعميل معيّن، ما يسهّل التقارير لاحقاً ويوحّد تجربة المتجر أمام الزبائن الذين يتكررون.',
-          'إذا عملت بيعاً نقدياً سريعاً دون اسم، يبقى ذلك متاحاً؛ التفعيل لا يفرض اختيار عميل في كل مرة.',
+          loc.onboardingStep1Paragraph1,
+          loc.onboardingStep1Paragraph2,
+          loc.onboardingStep1Paragraph3,
         ],
         examples: [
-          'مثال: زبون دائم يشتري يومياً، تحفظ اسمه وترى آخر فواتيره بسرعة.',
-          'مثال: عند وجود دين أو نقاط ولاء، تظهر مرتبطة بنفس العميل بدل البحث اليدوي.',
+          loc.onboardingStep1Example1,
+          loc.onboardingStep1Example2,
         ],
-        switchLabel: 'تفعيل وحدة العملاء',
+        switchLabel: loc.onboardingStep1SwitchLabel,
       ),
-      const _StepCopy(
+      _StepCopy(
         icon: Icons.card_giftcard_outlined,
-        question: 'هل تريد برنامج نقاط الولاء؟',
+        question: loc.onboardingStep2Question,
         paragraphs: [
-          'الولاء يمنح الزبائن نقاطاً عند الشراء، ويمكنهم استبدالها وفق القواعد التي تضبطها من الإعدادات.',
-          'البرنامج مرتبط بملفات العملاء؛ كلما كانت بيانات العملاء أوضح، كانت المتابعة أسهل.',
-          'يمكنك تشغيل الميزة الآن وتعديل نسب الجمع والاستبدال لاحقاً دون إعادة هذا المعالج.',
+          loc.onboardingStep2Paragraph1,
+          loc.onboardingStep2Paragraph2,
+          loc.onboardingStep2Paragraph3,
         ],
         examples: [
-          'مثال: كل 10,000 د.ع تمنح 10 نقاط حسب القاعدة التي تختارها.',
-          'مثال: عميل جمع نقاطاً كافية فيستبدلها بخصم في فاتورة لاحقة.',
+          loc.onboardingStep2Example1,
+          loc.onboardingStep2Example2,
         ],
-        switchLabel: 'تفعيل نقاط الولاء',
-        footnote:
-            'يتطلّب تفعيل وحدة العملاء في الخطوة السابقة؛ إن لم تكن مفعّلة، لن يعمل الولاء حتى تعيد تفعيل العملاء.',
+        switchLabel: loc.onboardingStep2SwitchLabel,
+        footnote: loc.onboardingStep2Footnote,
       ),
-      const _StepCopy(
+      _StepCopy(
         icon: Icons.receipt_long_outlined,
-        question: 'هل تستخدم الضريبة عند البيع؟',
+        question: loc.onboardingStep3Question,
         paragraphs: [
-          'عند التفعيل يظهر في فاتورة البيع حقل واضح للضريبة بحيث تحسب مع الإجمالي بطريقة متسقة.',
-          'مناسب للمتاجر التي تطبّق نسبة ضريبة معروفة على السلع أو الخدمات.',
-          'يمكنك ضبط السلوك التفصيلي من إعدادات نقطة البيع بعد إنهاء الإعداد السريع.',
+          loc.onboardingStep3Paragraph1,
+          loc.onboardingStep3Paragraph2,
+          loc.onboardingStep3Paragraph3,
         ],
         examples: [
-          'مثال: فاتورة قيمتها 100,000 د.ع وتضيف عليها نسبة ضريبة محددة.',
-          'مثال: الموظف يرى الضريبة والإجمالي النهائي داخل نفس فاتورة البيع.',
+          loc.onboardingStep3Example1,
+          loc.onboardingStep3Example2,
         ],
-        switchLabel: 'إظهار الضريبة في فاتورة البيع',
+        switchLabel: loc.onboardingStep3SwitchLabel,
       ),
-      const _StepCopy(
+      _StepCopy(
         icon: Icons.percent_outlined,
-        question: 'هل تسمح بالخصم على إجمالي الفاتورة؟',
+        question: loc.onboardingStep4Question,
         paragraphs: [
-          'الخصم الإجمالي مفيد للعروض الموسمية أو التفاوض على السعر أمام الزبون دون تعديل سعر كل صنف.',
-          'يظهر الحقل في شاشة البيع بحيث يكمّل الفاتورة دون تعقيد إضافي للموظف.',
-          'يمكنك إيقافه لاحقاً إذا قررت العمل بأسعار ثابتة فقط.',
+          loc.onboardingStep4Paragraph1,
+          loc.onboardingStep4Paragraph2,
+          loc.onboardingStep4Paragraph3,
         ],
         examples: [
-          'مثال: تمنح خصماً عاماً 5,000 د.ع على فاتورة كبيرة.',
-          'مثال: عرض خاص ليوم واحد دون تغيير أسعار المنتجات الأساسية.',
+          loc.onboardingStep4Example1,
+          loc.onboardingStep4Example2,
         ],
-        switchLabel: 'إظهار الخصم الإجمالي في الفاتورة',
+        switchLabel: loc.onboardingStep4SwitchLabel,
       ),
-      const _StepCopy(
+      _StepCopy(
         icon: Icons.account_balance_wallet_outlined,
-        question: 'هل تبيع بالدّين (بيع آجل)؟',
+        question: loc.onboardingStep5Question,
         paragraphs: [
-          'التفعيل يفتح لوحة الديون ومتابعة المبالغ المستحقة على كل عميل مع تنبيهات وسقوف يمكن ضبطها.',
-          'يناسب التجار الذين يثقون بزبائن معروفين ويحتاجون أرشيفاً واضحاً للآجلات.',
-          'لا يمنع البيع النقدي؛ يضيف فقط خيار التسجيل كدين عند اختيار العميل والصلاحيات المناسبة.',
+          loc.onboardingStep5Paragraph1,
+          loc.onboardingStep5Paragraph2,
+          loc.onboardingStep5Paragraph3,
         ],
         examples: [
-          'مثال: زبون يأخذ بضاعة اليوم ويدفع نهاية الأسبوع.',
-          'مثال: تراجع كشف العميل فتجد المبلغ المدفوع والمتبقي بوضوح.',
+          loc.onboardingStep5Example1,
+          loc.onboardingStep5Example2,
         ],
-        switchLabel: 'تفعيل البيع الآجل والديون',
+        switchLabel: loc.onboardingStep5SwitchLabel,
       ),
-      const _StepCopy(
+      _StepCopy(
         icon: Icons.calendar_month_outlined,
-        question: 'هل تبيع بالتقسيط؟',
+        question: loc.onboardingStep6Question,
         paragraphs: [
-          'خطط الأقساط تتيح تقسيم ثمن الفاتورة على دفعات مجدولة مع متابعة ما تبقّى على العميل.',
-          'مفيد للسلع ذات السعر المرتفع أو العقود طويلة الأمد.',
-          'التفاصيل الدقيقة للجدولة تُدار من الوحدات المخصصة بعد إتمام هذا الإعداد.',
+          loc.onboardingStep6Paragraph1,
+          loc.onboardingStep6Paragraph2,
+          loc.onboardingStep6Paragraph3,
         ],
         examples: [
-          'مثال: جهاز قيمته 600,000 د.ع يُدفع على 6 دفعات شهرية.',
-          'مثال: ترى الدفعات القادمة والمتأخرة لكل عميل من مكان واحد.',
+          loc.onboardingStep6Example1,
+          loc.onboardingStep6Example2,
         ],
-        switchLabel: 'تفعيل البيع بالتقسيط',
+        switchLabel: loc.onboardingStep6SwitchLabel,
       ),
-      const _StepCopy(
+      _StepCopy(
         icon: Icons.scale_outlined,
-        question: 'هل تبيع بالوزن (كيلو، غرام، إلخ)؟',
+        question: loc.onboardingStep7Question,
         paragraphs: [
-          'التفعيل يجهّز واجهة البيع والباركود بحيث تدعم أوزاناً وكميات عشرية حيث يلزم.',
-          'مناسب للمواد الغذائية، الحديد، أو أي نشاط يعتمد الميزان.',
-          'يمكن ضبط أنماط الباركود بالوزن من الإعدادات المتقدمة بعد متابعة هذا المعالج.',
+          loc.onboardingStep7Paragraph1,
+          loc.onboardingStep7Paragraph2,
+          loc.onboardingStep7Paragraph3,
         ],
         examples: [
-          'مثال: بيع 1.250 كغم من منتج بدلاً من قطعة واحدة.',
-          'مثال: قراءة باركود ميزان يحتوي وزن المنتج وسعره تلقائياً.',
+          loc.onboardingStep7Example1,
+          loc.onboardingStep7Example2,
         ],
-        switchLabel: 'تفعيل البيع بالوزن',
+        switchLabel: loc.onboardingStep7SwitchLabel,
       ),
-      const _StepCopy(
+      _StepCopy(
         icon: Icons.checkroom_rounded,
-        question: 'هل تبيع ملابس (ألوان ومقاسات)؟',
+        question: loc.onboardingStep8Question,
         paragraphs: [
-          'التفعيل يجهّز شاشات المنتجات والبيع لدعم تباين الأصناف (الألوان والقياسات المختلفة لنفس الموديل).',
-          'يسهل تتبع مخزون كل لون أو مقاس على حدة وإظهار نافذة التحديد التفاعلية عند البيع.',
+          loc.onboardingStep8Paragraph1,
+          loc.onboardingStep8Paragraph2,
         ],
         examples: [
-          'مثال: قميص متوفر باللون الأزرق والأسود، وبقياسات S و M و L.',
-          'مثال: اختيار قطعة الملابس يفتح نافذة منبثقة سريعة لاختيار المقاس واللون المتاحين بالمخزون.',
+          loc.onboardingStep8Example1,
+          loc.onboardingStep8Example2,
         ],
-        switchLabel: 'تفعيل وحدة الملابس والقياسات',
+        switchLabel: loc.onboardingStep8SwitchLabel,
       ),
-      const _StepCopy(
+      _StepCopy(
         icon: Icons.handyman_rounded,
-        question: 'هل تقدّم خدمات معينة (صيانة، ورشة، إلخ)؟',
+        question: loc.onboardingStep9Question,
         paragraphs: [
-          'التفعيل يظهر وحدة الخدمات والصيانة كاملة: تذاكر عمل، طلبات الصيانة، ودليل الخدمات والأسعار.',
-          'مفيدة للمشاغل، مراكز الصيانة، وأي نشاط يعتمد تقديم خدمات للعملاء إلى جانب بيع المواد.',
+          loc.onboardingStep9Paragraph1,
+          loc.onboardingStep9Paragraph2,
         ],
         examples: [
-          'مثال: فتح تذكرة صيانة لجهاز كمبيوتر أو سيارة وتعيين حالة العمل.',
-          'مثال: إضافة خدمة تركيب أو صيانة سريعة لفاتورة البيع.',
+          loc.onboardingStep9Example1,
+          loc.onboardingStep9Example2,
         ],
-        switchLabel: 'تفعيل الخدمات وتذاكر الصيانة',
+        switchLabel: loc.onboardingStep9SwitchLabel,
       ),
     ];
   }
@@ -346,7 +351,10 @@ class _BusinessSetupWizardScreenState extends State<BusinessSetupWizardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final title = widget.openedFromSettings ? 'ميزات المتجر' : 'إعداد سريع للتطبيق';
+    final loc = AppLocalizations.of(context)!;
+    final title = widget.openedFromSettings
+        ? loc.businessFeaturesWizardTitle
+        : loc.quickAppSetupTitle;
 
     return PopScope(
       canPop: widget.openedFromSettings && _step == 0 && !_saving,
@@ -442,7 +450,7 @@ class _BusinessSetupWizardScreenState extends State<BusinessSetupWizardScreen> {
                                 if (!widget.openedFromSettings) ...[
                                   SizedBox(height: compact ? 8 : 10),
                                   Text(
-                                    'يمكنك تغيير هذه الخيارات لاحقاً من الإعدادات ← ميزات المتجر.',
+                                    loc.onboardingChangeLaterHint,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: compact ? 10.5 : 12,
@@ -480,7 +488,7 @@ class _BusinessSetupWizardScreenState extends State<BusinessSetupWizardScreen> {
                       size: compact ? 17 : 18,
                       color: Colors.white,
                     ),
-                    tooltip: 'رجوع',
+                    tooltip: AppLocalizations.of(context)!.back,
                     onPressed: _saving
                         ? null
                         : () {
@@ -512,11 +520,12 @@ class _BusinessSetupWizardScreenState extends State<BusinessSetupWizardScreen> {
 
   Widget _progressHeader({required bool compact}) {
     final progress = (_step + 1) / _stepCount;
+    final loc = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          'الخطوة ${_step + 1} من $_stepCount',
+          loc.stepXofY(_step + 1, _stepCount),
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: compact ? 12 : 13,
@@ -572,6 +581,7 @@ class _BusinessSetupWizardScreenState extends State<BusinessSetupWizardScreen> {
   }) {
     final value = _valueForStep(stepIndex);
     final switchOn = _switchEnabledForStep(stepIndex);
+    final loc = AppLocalizations.of(context)!;
     final cardPadding = compact ? 18.0 : 22.0;
     final titleSize = compact ? 18.0 : 21.0;
     final bodySize = compact ? 12.8 : 14.0;
@@ -628,7 +638,7 @@ class _BusinessSetupWizardScreenState extends State<BusinessSetupWizardScreen> {
             if (c.examples.isNotEmpty) ...[
               SizedBox(height: compact ? 14 : 18),
               Text(
-                'أمثلة عملية',
+                loc.practicalExamplesLabel,
                 style: TextStyle(
                   color: AppColors.accentGold,
                   fontSize: compact ? 13 : 14,
@@ -737,6 +747,7 @@ class _BusinessSetupWizardScreenState extends State<BusinessSetupWizardScreen> {
 
   Widget _navActions({required bool compact}) {
     final isLast = _step >= _stepCount - 1;
+    final loc = AppLocalizations.of(context)!;
     return Row(
       children: [
         Expanded(
@@ -752,7 +763,7 @@ class _BusinessSetupWizardScreenState extends State<BusinessSetupWizardScreen> {
                 borderRadius: BorderRadius.circular(compact ? 12 : 14),
               ),
             ),
-            child: const Text('السابق'),
+            child: Text(loc.previousAction),
           ),
         ),
         SizedBox(width: compact ? 10 : 12),
@@ -778,8 +789,8 @@ class _BusinessSetupWizardScreenState extends State<BusinessSetupWizardScreen> {
                     ),
                   )
                 : Text(isLast
-                    ? (widget.openedFromSettings ? 'حفظ' : 'متابعة')
-                    : 'التالي'),
+                    ? (widget.openedFromSettings ? loc.save : loc.continueAction)
+                    : loc.nextAction),
           ),
         ),
       ],

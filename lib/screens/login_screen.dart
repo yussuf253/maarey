@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import '../l10n/generated/app_localizations.dart';
 import '../providers/auth_provider.dart';
 import '../widgets/app_brand_mark.dart';
 import '../widgets/inputs/app_input.dart';
@@ -307,6 +308,7 @@ class _LoginScreenState extends State<LoginScreen>
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     // 2026-05 (Phase 2): قرار التخطيط أصبح يعتمد على DeviceVariant
     // (Single Source of Truth) بدل breakpoint رقمي 760. الـ side-by-side
     // (Brand | Form) يظهر في tabletLG+ (≥840dp). أصغر ⇒ Column مع
@@ -349,7 +351,7 @@ class _LoginScreenState extends State<LoginScreen>
                         flex: 5,
                         child: _brandPanel(isNarrow: false, collapsed: false),
                       ),
-                      Expanded(flex: 6, child: _formPanel(isNarrow: false)),
+                      Expanded(flex: 6, child: _formPanel(isNarrow: false, loc: loc)),
                     ],
                   )
                 : Column(
@@ -364,7 +366,7 @@ class _LoginScreenState extends State<LoginScreen>
                           collapsed: keyboardVisible,
                         ),
                       ),
-                      Expanded(child: _formPanel(isNarrow: true)),
+                      Expanded(child: _formPanel(isNarrow: true, loc: loc)),
                     ],
                   ),
           ),
@@ -458,7 +460,7 @@ class _LoginScreenState extends State<LoginScreen>
     );
   }
 
-  Widget _formPanel({required bool isNarrow}) {
+  Widget _formPanel({required bool isNarrow, required AppLocalizations loc}) {
     return AnimatedBuilder(
       animation: _animController,
       builder: (_, child) => Opacity(
@@ -527,7 +529,7 @@ class _LoginScreenState extends State<LoginScreen>
                     duration: const Duration(milliseconds: 320),
                     switchInCurve: Curves.easeOutCubic,
                     switchOutCurve: Curves.easeInCubic,
-                    child: _isSignUpMode ? _signUpForm() : _loginForm(),
+                    child: _isSignUpMode ? _signUpForm(loc) : _loginForm(loc),
                   ),
                   const SizedBox(height: 12),
                   TextButton(
@@ -555,7 +557,7 @@ class _LoginScreenState extends State<LoginScreen>
     );
   }
 
-  Widget _loginForm() {
+  Widget _loginForm(AppLocalizations loc) {
     String? validateUser(String? value) {
       final t = (value ?? '').trim();
       if (!_blurredLoginUser) return null;
@@ -577,10 +579,10 @@ class _LoginScreenState extends State<LoginScreen>
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AppInput(
-            label: 'البريد أو اسم المستخدم',
+            label: loc.usernameOrEmailLabel,
             labelFontWeight: FontWeight.w700,
             isRequired: true,
-            hint: 'البريد أو اسم الدخول',
+            hint: loc.enterUsernameOrEmail,
             controller: _usernameController,
             focusNode: _focusLoginUser,
             useGlass: true,
@@ -598,10 +600,10 @@ class _LoginScreenState extends State<LoginScreen>
           ),
           const SizedBox(height: 14),
           AppInput(
-            label: 'رمز الدخول',
+            label: loc.passwordLabel,
             labelFontWeight: FontWeight.w700,
             isRequired: true,
-            hint: 'أدخل رمز الدخول',
+            hint: loc.enterPassword,
             controller: _passwordController,
             focusNode: _focusLoginPass,
             obscureText: _obscurePassword,
@@ -613,7 +615,7 @@ class _LoginScreenState extends State<LoginScreen>
               minWidth: 48,
             ),
             prefixIcon: IconButton(
-              tooltip: _obscurePassword ? 'إظهار الرمز' : 'إخفاء الرمز',
+              tooltip: _obscurePassword ? loc.showPassword : loc.hidePassword,
               splashRadius: 22,
               icon: Icon(
                 _obscurePassword
@@ -652,9 +654,9 @@ class _LoginScreenState extends State<LoginScreen>
                 padding: EdgeInsetsDirectional.zero,
                 foregroundColor: _goldLink,
               ),
-              child: const Text(
-                'نسيت رمز الدخول؟',
-                style: TextStyle(fontWeight: FontWeight.w700),
+              child: Text(
+                loc.forgotPassword,
+                style: const TextStyle(fontWeight: FontWeight.w700),
               ),
             ),
           ),
@@ -757,7 +759,7 @@ class _LoginScreenState extends State<LoginScreen>
     );
   }
 
-  Widget _signUpForm() {
+  Widget _signUpForm(AppLocalizations loc) {
     String? validateSignupName(String? value) {
       final t = (value ?? '').trim();
       if (!_blurredSignupName) return null;
@@ -818,10 +820,10 @@ class _LoginScreenState extends State<LoginScreen>
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AppInput(
-            label: 'الاسم التجاري/الشخصي',
+            label: loc.storeNameLabel,
             labelFontWeight: FontWeight.w700,
             isRequired: true,
-            hint: 'أدخل الاسم',
+            hint: loc.enterName,
             controller: _nameController,
             focusNode: _focusSignupName,
             useGlass: true,
@@ -839,7 +841,7 @@ class _LoginScreenState extends State<LoginScreen>
           ),
           const SizedBox(height: 14),
           AppInput(
-            label: 'البريد الإلكتروني',
+            label: loc.emailFieldLabel,
             labelFontWeight: FontWeight.w700,
             isRequired: true,
             hint: 'example@domain.com',
@@ -866,7 +868,7 @@ class _LoginScreenState extends State<LoginScreen>
             children: [
               Flexible(
                 child: Text(
-                  'رقم الجوال',
+                  loc.phoneLabel,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
@@ -931,10 +933,10 @@ class _LoginScreenState extends State<LoginScreen>
           ),
           const SizedBox(height: 14),
           AppInput(
-            label: 'كلمة السر',
+            label: loc.passwordLabel,
             labelFontWeight: FontWeight.w700,
             isRequired: true,
-            hint: '8 أحرف على الأقل',
+            hint: loc.minLength8Chars,
             controller: _signupPasswordController,
             focusNode: _focusSignupPwd,
             obscureText: _obscureSignupPassword,
@@ -946,7 +948,7 @@ class _LoginScreenState extends State<LoginScreen>
               minWidth: 48,
             ),
             prefixIcon: IconButton(
-              tooltip: _obscureSignupPassword ? 'إظهار الرمز' : 'إخفاء الرمز',
+              tooltip: _obscureSignupPassword ? loc.showPassword : loc.hidePassword,
               splashRadius: 22,
               icon: Icon(
                 _obscureSignupPassword
@@ -977,7 +979,7 @@ class _LoginScreenState extends State<LoginScreen>
                 ? Padding(
                     key: const ValueKey('pwdRules'),
                     padding: const EdgeInsets.only(top: 10),
-                    child: _passwordRulesCard(),
+                    child: _passwordRulesCard(loc),
                   )
                 : const SizedBox(height: 0, key: ValueKey('noPwd')),
           ),
@@ -987,7 +989,7 @@ class _LoginScreenState extends State<LoginScreen>
             children: [
               Flexible(
                 child: Text(
-                  'إعادة كتابة رمز الدخول',
+                  loc.confirmPasswordLabel,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
@@ -1015,7 +1017,7 @@ class _LoginScreenState extends State<LoginScreen>
           AppInput(
             label: ' ',
             showLabel: false,
-            hint: 'أعد كتابة كلمة السر',
+            hint: loc.confirmPassword,
             controller: _confirmSignupPasswordController,
             focusNode: _focusSignupConfirm,
             obscureText: _obscureConfirmSignupPassword,
@@ -1031,8 +1033,8 @@ class _LoginScreenState extends State<LoginScreen>
               children: [
                 IconButton(
                   tooltip: _obscureConfirmSignupPassword
-                      ? 'إظهار الرمز'
-                      : 'إخفاء الرمز',
+                      ? loc.showPassword
+                      : loc.hidePassword,
                   splashRadius: 22,
                   icon: Icon(
                     _obscureConfirmSignupPassword
@@ -1047,7 +1049,7 @@ class _LoginScreenState extends State<LoginScreen>
                 ),
                 if (confirmHasText)
                   IconButton(
-                    tooltip: 'مسح',
+                    tooltip: loc.clearField,
                     splashRadius: 22,
                     icon: const Icon(
                       Icons.cancel_rounded,
@@ -1119,7 +1121,7 @@ class _LoginScreenState extends State<LoginScreen>
                           ),
                         )
                       : Text(
-                          'إنشاء الحساب',
+                          loc.signupButton2,
                           style: GoogleFonts.tajawal(
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
@@ -1135,7 +1137,7 @@ class _LoginScreenState extends State<LoginScreen>
     );
   }
 
-  Widget _passwordRulesCard() {
+  Widget _passwordRulesCard(AppLocalizations loc) {
     final metCount = [_hasMinLength, _hasUppercase, _hasLowercase, _hasDigit, _hasSpecialChar]
         .where((v) => v).length;
     final strength = metCount / 5.0;
@@ -1162,7 +1164,7 @@ class _LoginScreenState extends State<LoginScreen>
               ),
               const SizedBox(width: 6),
               Text(
-                'شروط كلمة السر',
+                loc.passwordRequirementsTitle,
                 style: GoogleFonts.tajawal(
                   fontSize: 13,
                   fontWeight: FontWeight.w700,
@@ -1188,11 +1190,11 @@ class _LoginScreenState extends State<LoginScreen>
             ),
           ),
           const SizedBox(height: 10),
-          _ruleItem(_hasMinLength, '8 أحرف على الأقل'),
-          _ruleItem(_hasUppercase, 'حرف كبير واحد على الأقل (A-Z)'),
-          _ruleItem(_hasLowercase, 'حرف صغير واحد على الأقل (a-z)'),
-          _ruleItem(_hasDigit, 'رقم واحد على الأقل (0-9)'),
-          _ruleItem(_hasSpecialChar, 'رمز خاص واحد على الأقل (@#!...)'),
+          _ruleItem(_hasMinLength, loc.reqMinLength),
+          _ruleItem(_hasUppercase, loc.reqUppercase),
+          _ruleItem(_hasLowercase, loc.reqLowercase),
+          _ruleItem(_hasDigit, loc.reqDigit),
+          _ruleItem(_hasSpecialChar, loc.reqSpecialChar),
         ],
       ),
     );

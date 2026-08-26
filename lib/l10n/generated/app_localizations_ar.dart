@@ -171,9 +171,7 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String emailLabel(Object email) {
-    return 'البريد: $email';
-  }
+  String get emailLabel => 'البريد الإلكتروني';
 
   @override
   String currentPlanLabel(Object plan) {
@@ -434,4 +432,1092 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get basraIraq => 'البصرة، العراق';
+
+  @override
+  String get deviceKickedOutTitle => 'تم فصل هذا الجهاز من الحساب';
+
+  @override
+  String get deviceKickedOutBody =>
+      'أُنهيت جلستك على هذا الجهاز. عند فتح التطبيق لاحقًا ستظهر لك شاشة تسجيل الدخول المعتادة.';
+
+  @override
+  String get goToLoginAction => 'الانتقال لتسجيل الدخول';
+
+  @override
+  String get exitAction => 'خروج';
+
+  @override
+  String get closeWindowHint => 'يمكنك إغلاق النافذة أو استخدام الزر أعلاه.';
+
+  @override
+  String get appWillCloseHint => 'يغلق التطبيق';
+
+  @override
+  String get deviceRevokedTitle => 'تم إزالة هذا الجهاز من الحساب';
+
+  @override
+  String get deviceRevokedBody =>
+      'لا يمكنك تسجيل الدخول من هذا الجهاز حتى يوافق أحد الأجهزة المفعّلة على نفس الحساب من الإعدادات ← الحساب والاشتراك ← «السماح بالعودة».';
+
+  @override
+  String get backToLoginAction => 'العودة لتسجيل الدخول';
+
+  @override
+  String otpEnterFullCode(Object digits) {
+    return 'أدخل الرمز كاملاً ($digits أرقام كما في البريد)';
+  }
+
+  @override
+  String get otpResentSuccess => 'تم إعادة إرسال رمز التحقق';
+
+  @override
+  String get back => 'رجوع';
+
+  @override
+  String get emailVerificationTitle => 'التحقق من البريد';
+
+  @override
+  String otpSentToEmailShort(Object digits) {
+    return 'أرسلنا رمزاً من $digits أرقام إلى بريدك الإلكتروني';
+  }
+
+  @override
+  String get enterVerificationCode => 'أدخل رمز التحقق';
+
+  @override
+  String otpSentToEmailDetailed(Object digits, Object email) {
+    return 'أُرسل رمز مكوّن من $digits أرقام إلى\n$email';
+  }
+
+  @override
+  String get verifyAndCreateAccount => 'تحقق وأنشئ الحساب';
+
+  @override
+  String resendInSeconds(Object seconds) {
+    return 'إعادة الإرسال خلال $seconds ثانية';
+  }
+
+  @override
+  String get resendCode => 'إعادة إرسال الرمز';
+
+  @override
+  String get editData => 'تعديل البيانات';
+
+  @override
+  String get emailRequired => 'البريد الإلكتروني مطلوب';
+
+  @override
+  String get emailInvalidFormat => 'صيغة البريد غير صحيحة';
+
+  @override
+  String get enterYourEmail => 'أدخل بريدك الإلكتروني';
+
+  @override
+  String get forgotPasswordSendCodeHint =>
+      'سنرسل لك رمز تحقق لإعادة تعيين رمز الدخول';
+
+  @override
+  String get sendVerificationCode => 'إرسال رمز التحقق';
+
+  @override
+  String otpSentToEmailColon(Object digits, Object email) {
+    return 'أُرسل رمز مكوّن من $digits أرقام إلى:\n$email';
+  }
+
+  @override
+  String get continueAction => 'متابعة';
+
+  @override
+  String get editEmail => 'تعديل البريد';
+
+  @override
+  String get passwordUpdateSuccess => 'تم تحديث رمز الدخول بنجاح';
+
+  @override
+  String get setNewPasswordTitle => 'تعيين رمز دخول جديد';
+
+  @override
+  String get newPasswordLabel => 'رمز الدخول الجديد';
+
+  @override
+  String get enterNewPasswordHint => 'أدخل رمز الدخول الجديد';
+
+  @override
+  String get enterPasswordValidation => 'أدخل رمز الدخول';
+
+  @override
+  String get minLength8Chars => 'يجب أن يكون 8 أحرف على الأقل';
+
+  @override
+  String get confirmPasswordLabel => 'تأكيد كلمة السر';
+
+  @override
+  String get confirmPasswordHint => 'أعد كتابة رمز الدخول';
+
+  @override
+  String get passwordMismatch => 'رمز الدخول غير متطابق';
+
+  @override
+  String get passwordRequirementsTitle => 'شروط رمز الدخول (اختياري)';
+
+  @override
+  String get reqMinLength => '8 أحرف على الأقل';
+
+  @override
+  String get reqUppercase => 'حرف كبير (A-Z)';
+
+  @override
+  String get reqLowercase => 'حرف صغير (a-z)';
+
+  @override
+  String get reqDigit => 'رقم (0-9)';
+
+  @override
+  String get reqSpecialChar => 'رمز خاص (!@#...)';
+
+  @override
+  String get onboardingChangeLaterHint =>
+      'يمكنك تغيير هذه الخيارات لاحقاً من الإعدادات ← ميزات المتجر.';
+
+  @override
+  String get businessFeaturesWizardTitle => 'ميزات المتجر';
+
+  @override
+  String get quickAppSetupTitle => 'إعداد سريع للتطبيق';
+
+  @override
+  String stepXofY(Object current, Object total) {
+    return 'الخطوة $current من $total';
+  }
+
+  @override
+  String get previousAction => 'السابق';
+
+  @override
+  String get nextAction => 'التالي';
+
+  @override
+  String get practicalExamplesLabel => 'أمثلة عملية';
+
+  @override
+  String get onboardingStep1Question => 'هل تستخدم العملاء في نشاطك؟';
+
+  @override
+  String get onboardingStep1Paragraph1 =>
+      'عند التفعيل تظهر لك وحدة العملاء الكاملة: بطاقة لكل عميل، سجل مشتريات، ومتابعة سريعة من الفاتورة.';
+
+  @override
+  String get onboardingStep1Paragraph2 =>
+      'يمكنك ربط كل عملية بيع بعميل معيّن، ما يسهّل التقارير لاحقاً ويوحّد تجربة المتجر أمام الزبائن الذين يتكررون.';
+
+  @override
+  String get onboardingStep1Paragraph3 =>
+      'إذا عملت بيعاً نقدياً سريعاً دون اسم، يبقى ذلك متاحاً؛ التفعيل لا يفرض اختيار عميل في كل مرة.';
+
+  @override
+  String get onboardingStep1Example1 =>
+      'مثال: زبون دائم يشتري يومياً، تحفظ اسمه وترى آخر فواتيره بسرعة.';
+
+  @override
+  String get onboardingStep1Example2 =>
+      'مثال: عند وجود دين أو نقاط ولاء، تظهر مرتبطة بنفس العميل بدل البحث اليدوي.';
+
+  @override
+  String get onboardingStep1SwitchLabel => 'تفعيل وحدة العملاء';
+
+  @override
+  String get onboardingStep2Question => 'هل تريد برنامج نقاط الولاء؟';
+
+  @override
+  String get onboardingStep2Paragraph1 =>
+      'الولاء يمنح الزبائن نقاطاً عند الشراء، ويمكنهم استبدالها وفق القواعد التي تضبطها من الإعدادات.';
+
+  @override
+  String get onboardingStep2Paragraph2 =>
+      'البرنامج مرتبط بملفات العملاء؛ كلما كانت بيانات العملاء أوضح، كانت المتابعة أسهل.';
+
+  @override
+  String get onboardingStep2Paragraph3 =>
+      'يمكنك تشغيل الميزة الآن وتعديل نسب الجمع والاستبدال لاحقاً دون إعادة هذا المعالج.';
+
+  @override
+  String get onboardingStep2Example1 =>
+      'مثال: كل 10,000 د.ع تمنح 10 نقاط حسب القاعدة التي تختارها.';
+
+  @override
+  String get onboardingStep2Example2 =>
+      'مثال: عميل جمع نقاطاً كافية فيستبدلها بخصم في فاتورة لاحقة.';
+
+  @override
+  String get onboardingStep2SwitchLabel => 'تفعيل نقاط الولاء';
+
+  @override
+  String get onboardingStep2Footnote =>
+      'يتطلّب تفعيل وحدة العملاء في الخطوة السابقة؛ إن لم تكن مفعّلة، لن يعمل الولاء حتى تعيد تفعيل العملاء.';
+
+  @override
+  String get onboardingStep3Question => 'هل تستخدم الضريبة عند البيع؟';
+
+  @override
+  String get onboardingStep3Paragraph1 =>
+      'عند التفعيل يظهر في فاتورة البيع حقل واضح للضريبة بحيث تحسب مع الإجمالي بطريقة متسقة.';
+
+  @override
+  String get onboardingStep3Paragraph2 =>
+      'مناسب للمتاجر التي تطبّق نسبة ضريبة معروفة على السلع أو الخدمات.';
+
+  @override
+  String get onboardingStep3Paragraph3 =>
+      'يمكنك ضبط السلوك التفصيلي من إعدادات نقطة البيع بعد إنهاء الإعداد السريع.';
+
+  @override
+  String get onboardingStep3Example1 =>
+      'مثال: فاتورة قيمتها 100,000 د.ع وتضيف عليها نسبة ضريبة محددة.';
+
+  @override
+  String get onboardingStep3Example2 =>
+      'مثال: الموظف يرى الضريبة والإجمالي النهائي داخل نفس فاتورة البيع.';
+
+  @override
+  String get onboardingStep3SwitchLabel => 'إظهار الضريبة في فاتورة البيع';
+
+  @override
+  String get onboardingStep4Question => 'هل تسمح بالخصم على إجمالي الفاتورة؟';
+
+  @override
+  String get onboardingStep4Paragraph1 =>
+      'الخصم الإجمالي مفيد للعروض الموسمية أو التفاوض على السعر أمام الزبون دون تعديل سعر كل صنف.';
+
+  @override
+  String get onboardingStep4Paragraph2 =>
+      'يظهر الحقل في شاشة البيع بحيث يكمّل الفاتورة دون تعقيد إضافي للموظف.';
+
+  @override
+  String get onboardingStep4Paragraph3 =>
+      'يمكنك إيقافه لاحقاً إذا قررت العمل بأسعار ثابتة فقط.';
+
+  @override
+  String get onboardingStep4Example1 =>
+      'مثال: تمنح خصماً عاماً 5,000 د.ع على فاتورة كبيرة.';
+
+  @override
+  String get onboardingStep4Example2 =>
+      'مثال: عرض خاص ليوم واحد دون تغيير أسعار المنتجات الأساسية.';
+
+  @override
+  String get onboardingStep4SwitchLabel => 'إظهار الخصم الإجمالي في الفاتورة';
+
+  @override
+  String get onboardingStep5Question => 'هل تبيع بالدّين (بيع آجل)؟';
+
+  @override
+  String get onboardingStep5Paragraph1 =>
+      'التفعيل يفتح لوحة الديون ومتابعة المبالغ المستحقة على كل عميل مع تنبيهات وسقوف يمكن ضبطها.';
+
+  @override
+  String get onboardingStep5Paragraph2 =>
+      'يناسب التجار الذين يثقون بزبائن معروفين ويحتاجون أرشيفاً واضحاً للآجلات.';
+
+  @override
+  String get onboardingStep5Paragraph3 =>
+      'لا يمنع البيع النقدي؛ يضيف فقط خيار التسجيل كدين عند اختيار العميل والصلاحيات المناسبة.';
+
+  @override
+  String get onboardingStep5Example1 =>
+      'مثال: زبون يأخذ بضاعة اليوم ويدفع نهاية الأسبوع.';
+
+  @override
+  String get onboardingStep5Example2 =>
+      'مثال: تراجع كشف العميل فتجد المبلغ المدفوع والمتبقي بوضوح.';
+
+  @override
+  String get onboardingStep5SwitchLabel => 'تفعيل البيع الآجل والديون';
+
+  @override
+  String get onboardingStep6Question => 'هل تبيع بالتقسيط؟';
+
+  @override
+  String get onboardingStep6Paragraph1 =>
+      'خطط الأقساط تتيح تقسيم ثمن الفاتورة على دفعات مجدولة مع متابعة ما تبقّى على العميل.';
+
+  @override
+  String get onboardingStep6Paragraph2 =>
+      'مفيد للسلع ذات السعر المرتفع أو العقود طويلة الأمد.';
+
+  @override
+  String get onboardingStep6Paragraph3 =>
+      'التفاصيل الدقيقة للجدولة تُدار من الوحدات المخصصة بعد إتمام هذا الإعداد.';
+
+  @override
+  String get onboardingStep6Example1 =>
+      'مثال: جهاز قيمته 600,000 د.ع يُدفع على 6 دفعات شهرية.';
+
+  @override
+  String get onboardingStep6Example2 =>
+      'مثال: ترى الدفعات القادمة والمتأخرة لكل عميل من مكان واحد.';
+
+  @override
+  String get onboardingStep6SwitchLabel => 'تفعيل البيع بالتقسيط';
+
+  @override
+  String get onboardingStep7Question => 'هل تبيع بالوزن (كيلو، غرام، إلخ)؟';
+
+  @override
+  String get onboardingStep7Paragraph1 =>
+      'التفعيل يجهّز واجهة البيع والباركود بحيث تدعم أوزاناً وكميات عشرية حيث يلزم.';
+
+  @override
+  String get onboardingStep7Paragraph2 =>
+      'مناسب للمواد الغذائية، الحديد، أو أي نشاط يعتمد الميزان.';
+
+  @override
+  String get onboardingStep7Paragraph3 =>
+      'يمكن ضبط أنماط الباركود بالوزن من الإعدادات المتقدمة بعد متابعة هذا المعالج.';
+
+  @override
+  String get onboardingStep7Example1 =>
+      'مثال: بيع 1.250 كغم من منتج بدلاً من قطعة واحدة.';
+
+  @override
+  String get onboardingStep7Example2 =>
+      'مثال: قراءة باركود ميزان يحتوي وزن المنتج وسعره تلقائياً.';
+
+  @override
+  String get onboardingStep7SwitchLabel => 'تفعيل البيع بالوزن';
+
+  @override
+  String get onboardingStep8Question => 'هل تبيع ملابس (ألوان ومقاسات)؟';
+
+  @override
+  String get onboardingStep8Paragraph1 =>
+      'التفعيل يجهّز شاشات المنتجات والبيع لدعم تباين الأصناف (الألوان والقياسات المختلفة لنفس الموديل).';
+
+  @override
+  String get onboardingStep8Paragraph2 =>
+      'يسهل تتبع مخزون كل لون أو مقاس على حدة وإظهار نافذة التحديد التفاعلية عند البيع.';
+
+  @override
+  String get onboardingStep8Example1 =>
+      'مثال: قميص متوفر باللون الأزرق والأسود، وبقياسات S و M و L.';
+
+  @override
+  String get onboardingStep8Example2 =>
+      'مثال: اختيار قطعة الملابس يفتح نافذة منبثقة سريعة لاختيار المقاس واللون المتاحين بالمخزون.';
+
+  @override
+  String get onboardingStep8SwitchLabel => 'تفعيل وحدة الملابس والقياسات';
+
+  @override
+  String get onboardingStep9Question =>
+      'هل تقدّم خدمات معينة (صيانة، ورشة، إلخ)؟';
+
+  @override
+  String get onboardingStep9Paragraph1 =>
+      'التفعيل يظهر وحدة الخدمات والصيانة كاملة: تذاكر عمل، طلبات الصيانة، ودليل الخدمات والأسعار.';
+
+  @override
+  String get onboardingStep9Paragraph2 =>
+      'مفيدة للمشاغل، مراكز الصيانة، وأي نشاط يعتمد تقديم خدمات للعملاء إلى جانب بيع المواد.';
+
+  @override
+  String get onboardingStep9Example1 =>
+      'مثال: فتح تذكرة صيانة لجهاز كمبيوتر أو سيارة وتعيين حالة العمل.';
+
+  @override
+  String get onboardingStep9Example2 =>
+      'مثال: إضافة خدمة تركيب أو صيانة سريعة لفاتورة البيع.';
+
+  @override
+  String get onboardingStep9SwitchLabel => 'تفعيل الخدمات وتذاكر الصيانة';
+
+  @override
+  String get invoicesLabel => 'الفواتير';
+
+  @override
+  String get invoicesListLabel => 'قائمة الفواتير';
+
+  @override
+  String get newSaleLabel => 'بيع جديد';
+
+  @override
+  String get parkedSalesLabel => 'معلّقة مؤقتاً';
+
+  @override
+  String get posSettingsLabel => 'إعدادات نقطة البيع';
+
+  @override
+  String get customersLabel => 'العملاء';
+
+  @override
+  String get customersManageLabel => 'إدارة العملاء';
+
+  @override
+  String get addNewCustomerLabel => 'إضافة عميل جديد';
+
+  @override
+  String get addCustomerBreadcrumb => 'إضافة عميل';
+
+  @override
+  String get contactListLabel => 'قائمة الاتصال';
+
+  @override
+  String get customerLoyaltySettingsLabel => 'إعدادات العميل (الولاء)';
+
+  @override
+  String get customerLoyaltyLabel => 'ولاء العملاء';
+
+  @override
+  String get loyaltyPointsSettingsLabel => 'إعدادات النقاط والاستبدال';
+
+  @override
+  String get loyaltyLedgerLabel => 'سجل حركات النقاط';
+
+  @override
+  String get installmentsLabel => 'الأقساط';
+
+  @override
+  String get installmentPlansLabel => 'خطط التقسيط';
+
+  @override
+  String get installmentSettingsLabel => 'إعدادات تقسيط';
+
+  @override
+  String get debtsLabel => 'الديون';
+
+  @override
+  String get debtsPanelLabel => 'لوحة الديون (آجل)';
+
+  @override
+  String get debtSettingsLabel => 'إعدادات الدين';
+
+  @override
+  String get inventoryLabel => 'المخزون';
+
+  @override
+  String get productListLabel => 'قائمة المنتجات';
+
+  @override
+  String get addNewProductLabel => 'إضافة منتج جديد';
+
+  @override
+  String get updateExistingProductLabel => 'تحديث منتج موجود';
+
+  @override
+  String get printBarcodeLabelsLabel => 'طباعة ملصقات باركود';
+
+  @override
+  String get inventoryMovementsLabel => 'حركات المخزون';
+
+  @override
+  String get warehousesLabel => 'المستودعات';
+
+  @override
+  String get stocktakingLabel => 'الجرد الدوري';
+
+  @override
+  String get purchaseOrdersLabel => 'أوامر الشراء';
+
+  @override
+  String get stockAnalyticsLabel => 'تحليلات المخزون';
+
+  @override
+  String get inventorySettingsLabel => 'إعدادات المخزون';
+
+  @override
+  String get servicesAndMaintenanceLabel => 'الخدمات والصيانة';
+
+  @override
+  String get servicesAndMaintenancePanelLabel => 'لوحة الخدمات والصيانة';
+
+  @override
+  String get addTechnicalServiceLabel => 'إضافة خدمة فنية';
+
+  @override
+  String get maintenanceRequestsLabel => 'طلبات الصيانة وتذاكر العمل';
+
+  @override
+  String get cashRegisterLabel => 'الصندوق';
+
+  @override
+  String get expensesLabel => 'المصروفات';
+
+  @override
+  String get reportsLabel => 'التقارير';
+
+  @override
+  String get usersLabel => 'المستخدمين';
+
+  @override
+  String get manageUsersLabel => 'إدارة المستخدمين';
+
+  @override
+  String get staffShiftsWeekLabel => 'ورديات الموظفين (أسبوع)';
+
+  @override
+  String get staffIdentitiesLabel => 'هويات الموظفين';
+
+  @override
+  String get printingLabel => 'الطباعة';
+
+  @override
+  String get homeLabel => 'الرئيسية';
+
+  @override
+  String get defaultUserFallback => 'المستخدم';
+
+  @override
+  String get logoutLabel => 'تسجيل الخروج';
+
+  @override
+  String get logoutConfirmMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
+
+  @override
+  String get confirmAction => 'تأكيد';
+
+  @override
+  String searchFailedSnackbar(Object error) {
+    return 'تعذر إكمال البحث: $error';
+  }
+
+  @override
+  String get addProductLabel => 'إضافة منتج';
+
+  @override
+  String shiftTooltipWithName(Object name) {
+    return 'وردية: $name — إغلاق';
+  }
+
+  @override
+  String get closeShiftTooltip => 'إغلاق الوردية';
+
+  @override
+  String get syncFailedTooltip => 'تزامن — فشل آخر محاولة';
+
+  @override
+  String get cloudSyncTooltip => 'تزامن سحابي';
+
+  @override
+  String get syncStartingSnackbar => 'بدء التزامن…';
+
+  @override
+  String get notificationsTooltip => 'التنبيهات';
+
+  @override
+  String get settingsLabel => 'الإعدادات';
+
+  @override
+  String get copyLabel => 'نسخ';
+
+  @override
+  String get copiedSnackbar => 'تم النسخ';
+
+  @override
+  String get userInfoTitle => 'بيانات المستخدم';
+
+  @override
+  String get displayNameFieldLabel => 'الاسم المعروض:';
+
+  @override
+  String get usernameFieldLabel => 'اسم الدخول:';
+
+  @override
+  String get roleFieldLabel => 'الصلاحية:';
+
+  @override
+  String get emailFieldLabel => 'البريد الإلكتروني:';
+
+  @override
+  String get closeAction => 'إغلاق';
+
+  @override
+  String get barcodeScanTooltip =>
+      'قراءة باركود (كاميرا على الجهاز المحمول، أو نافذة القارئ على الحاسوب)';
+
+  @override
+  String get hideKeyboardTooltip => 'إخفاء لوحة المفاتيح';
+
+  @override
+  String get keyboardDragPinHint =>
+      'لوحة مفاتيح عربي / English — اسحب من المقبض أو ثبّتها بالدبوس';
+
+  @override
+  String get clearSearchTooltip => 'مسح البحث';
+
+  @override
+  String get searchToolsTooltip => 'أدوات البحث';
+
+  @override
+  String get showKeyboardTooltip => 'إظهار لوحة المفاتيح (عربي / English)';
+
+  @override
+  String get quickSearchHint => 'بحث سريع: وحدات، منتجات، عملاء…';
+
+  @override
+  String get fullSearchHint => 'بحث: وحدات، منتجات، عملاء، موظفون، باركود…';
+
+  @override
+  String get collapseMenuTooltip => 'طي القائمة';
+
+  @override
+  String get expandMenuTooltip => 'توسيع القائمة';
+
+  @override
+  String get restrictedModeTooltip => 'غير متاح في الوضع المقيّد';
+
+  @override
+  String get paymentTypeCash => 'نقدي';
+
+  @override
+  String get paymentTypeCredit => 'دين';
+
+  @override
+  String get paymentTypeInstallment => 'تقسيط';
+
+  @override
+  String get paymentTypeDelivery => 'توصيل';
+
+  @override
+  String get paymentTypeDebtCollection => 'تحصيل دين';
+
+  @override
+  String get paymentTypeInstallmentCollection => 'تسديد قسط';
+
+  @override
+  String get paymentTypeSupplierPayment => 'دفع مورد';
+
+  @override
+  String noInvoiceWithNumber(Object id) {
+    return 'لا توجد فاتورة برقم $id';
+  }
+
+  @override
+  String get invoiceAlreadyReturned => 'هذه الفاتورة مسجّلة كمرتجع مسبقاً';
+
+  @override
+  String get invoiceNotOpenableAsReturn =>
+      'هذا السند لا يُفتَح كمرتجع بيع — عكس الدفعة من شاشة المورد أو إدارة الأقساط حسب النوع.';
+
+  @override
+  String salesInvoiceNumber(Object id) {
+    return 'فاتورة بيع #$id';
+  }
+
+  @override
+  String get emptyPlaceholder => '(فارغ)';
+
+  @override
+  String returnInvoiceDialogBody(
+    Object customer,
+    Object paymentType,
+    Object total,
+  ) {
+    return 'العميل: $customer\nالدفع: $paymentType\nالإجمالي: $total\n\nفتح شاشة المرتجع؟ يمكنك تقليل الكمية أو حذف الأسطر لإرجاع جزئي فقط.';
+  }
+
+  @override
+  String get returnLabel => 'مرتجع';
+
+  @override
+  String returnNumber(Object id) {
+    return 'مرتجع #$id';
+  }
+
+  @override
+  String get scanQrBarcodeTitle => 'مسح QR / Barcode';
+
+  @override
+  String get pointsLedgerShortLabel => 'سجل النقاط';
+
+  @override
+  String get staffShiftsLabel => 'ورديات الموظفين';
+
+  @override
+  String get shiftStaffFallback => 'موظف الوردية';
+
+  @override
+  String get itemsLabel => 'الأصناف';
+
+  @override
+  String noResultsFor(Object query) {
+    return 'لا توجد نتائج لـ «$query»';
+  }
+
+  @override
+  String get modulesLabel => 'الوحدات';
+
+  @override
+  String get openModuleLabel => 'فتح الوحدة';
+
+  @override
+  String get productsLabel => 'المنتجات';
+
+  @override
+  String sellPriceIqd(Object price) {
+    return 'بيع $price د.ع';
+  }
+
+  @override
+  String get viewCustomersLabel => 'عرض العملاء';
+
+  @override
+  String get staffLabel => 'الموظفون';
+
+  @override
+  String get viewStaffLabel => 'عرض الموظفين';
+
+  @override
+  String get technicalServiceLabel => 'خدمة فنية';
+
+  @override
+  String get notStockTracked => 'غير متتبّع للمخزون';
+
+  @override
+  String get availableUnknown => 'المتوفر: —';
+
+  @override
+  String get availableZero => 'المتوفر: 0';
+
+  @override
+  String availableQty(Object qty) {
+    return 'المتوفر: $qty';
+  }
+
+  @override
+  String negativeStockWarning(Object qty, Object soldOver) {
+    return 'رصيد سالب $qty — بيع زائد قدره $soldOver عن آخر رصيد';
+  }
+
+  @override
+  String get chooseFromListBelow => 'اختر من القائمة أدناه';
+
+  @override
+  String get viewAllLabel => 'عرض الكل';
+
+  @override
+  String get untitledLabel => 'بدون عنوان';
+
+  @override
+  String get deleteParkedSaleTitle => 'حذف الفاتورة المعلّقة؟';
+
+  @override
+  String deleteParkedSaleBody(Object label) {
+    return 'سيتم حذف «$label» نهائياً من الجهاز.';
+  }
+
+  @override
+  String get deleteAction => 'حذف';
+
+  @override
+  String get deletedSnackbar => 'تم الحذف';
+
+  @override
+  String get parkedSalesScreenTitle => 'فواتير معلّقة مؤقتاً';
+
+  @override
+  String get noParkedSalesTitle => 'لا توجد فواتير معلّقة';
+
+  @override
+  String get noParkedSalesHint =>
+      'من شاشة البيع اضغط «تعليق الفاتورة» لحفظ العمل الحالي وخدمة عميل آخر.';
+
+  @override
+  String parkedSaleSummaryLine(Object count, Object total) {
+    return '$count صنف · ≈ $total د.ع';
+  }
+
+  @override
+  String lastUpdatedLabel(Object date) {
+    return 'آخر تحديث: $date';
+  }
+
+  @override
+  String get resumeSaleTooltip => 'متابعة البيع';
+
+  @override
+  String get allLabel => 'الكل';
+
+  @override
+  String get paidStatus => 'مدفوعة';
+
+  @override
+  String get unpaidStatus => 'غير مدفوعة';
+
+  @override
+  String get cannotShowInvoiceNoId => 'لا يمكن عرض فاتورة بدون رقم';
+
+  @override
+  String get invoiceNotFound => 'الفاتورة غير موجودة';
+
+  @override
+  String get flatViewOption => 'عرض مفرد (بدون تجميع بالوردية)';
+
+  @override
+  String get groupByShiftOption => 'تجميع حسب الوردية';
+
+  @override
+  String get advancedFilterLabel => 'تصفية متقدمة';
+
+  @override
+  String get shiftsCalendarLabel => 'تقويم الورديات';
+
+  @override
+  String get moreLabel => 'المزيد';
+
+  @override
+  String get parkedInvoicesShortLabel => 'فواتير معلّقة';
+
+  @override
+  String get saleLabel => 'البيع';
+
+  @override
+  String get totalLabel => 'الإجمالي';
+
+  @override
+  String get sortLabel => 'ترتيب';
+
+  @override
+  String get sortNewestFirst => 'الأحدث أولاً';
+
+  @override
+  String get sortOldestFirst => 'الأقدم أولاً';
+
+  @override
+  String get sortHighestAmount => 'الأعلى مبلغاً';
+
+  @override
+  String get sortLowestAmount => 'الأقل مبلغاً';
+
+  @override
+  String get searchInvoicesHint =>
+      'بحث باسم العميل أو رقم الفاتورة أو هاتف العميل...';
+
+  @override
+  String shiftNumberLabel(Object id) {
+    return 'وردية #$id';
+  }
+
+  @override
+  String noShiftGroupLabel(Object count) {
+    return 'بدون وردية — فواتير قديمة أو خارج جلسة وردية ($count)';
+  }
+
+  @override
+  String shiftLoadFailedLabel(Object count, Object id) {
+    return 'وردية #$id — تعذر تحميل تفاصيل الوردية ($count فاتورة)';
+  }
+
+  @override
+  String get openStatus => 'مفتوحة';
+
+  @override
+  String shiftWithNameLabel(Object id, Object name) {
+    return 'وردية #$id — $name';
+  }
+
+  @override
+  String invoiceCountLabel(Object count) {
+    return '$count فاتورة';
+  }
+
+  @override
+  String totalIqd(Object amount) {
+    return '$amount د.ع';
+  }
+
+  @override
+  String itemsAndDiscountLine(Object count, Object discount) {
+    return '$count صنف · خصم $discount د.ع';
+  }
+
+  @override
+  String shiftColonLabel(Object name) {
+    return 'وردية: $name';
+  }
+
+  @override
+  String get createReturnInvoiceTooltip => 'إنشاء فاتورة ترجيع لهذه الفاتورة';
+
+  @override
+  String get returnActionLabel => 'ترجيع';
+
+  @override
+  String get noInvoicesTitle => 'لا توجد فواتير';
+
+  @override
+  String get addFirstInvoiceCta => 'أضف أول فاتورة الآن';
+
+  @override
+  String get sortOptionsTitle => 'خيارات الترتيب';
+
+  @override
+  String get applyAction => 'تطبيق';
+
+  @override
+  String get loginTabLabel => 'دخول';
+
+  @override
+  String get signupTabLabel => 'إنشاء حساب';
+
+  @override
+  String get usernameOrEmailLabel => 'اسم المستخدم أو البريد';
+
+  @override
+  String get enterUsernameOrEmail => 'أدخل اسم المستخدم أو البريد الإلكتروني';
+
+  @override
+  String get passwordLabel => 'كلمة السر';
+
+  @override
+  String get enterPassword => 'أدخل كلمة السر';
+
+  @override
+  String get storeNameLabel => 'اسم المتجر/الشركة';
+
+  @override
+  String get enterStoreName => 'أدخل اسم المتجر أو الشركة';
+
+  @override
+  String get nameLabel => 'الاسم';
+
+  @override
+  String get enterName => 'أدخل اسمك';
+
+  @override
+  String get enterEmail => 'أدخل بريدك الإلكتروني';
+
+  @override
+  String get phoneLabel => 'رقم الهاتف';
+
+  @override
+  String get enterPhone => 'أدخل رقم هاتفك';
+
+  @override
+  String get countryCodeLabel => 'رمز الدولة';
+
+  @override
+  String get selectCountryCode => 'اختر رمز الدولة';
+
+  @override
+  String get confirmPassword => 'أعد إدخال كلمة السر';
+
+  @override
+  String get showPassword => 'إظهار كلمة السر';
+
+  @override
+  String get hidePassword => 'إخفاء كلمة السر';
+
+  @override
+  String get clearField => 'مسح';
+
+  @override
+  String get rememberMe => 'تذكرني';
+
+  @override
+  String get forgotPassword => 'هل نسيت كلمة السر؟';
+
+  @override
+  String get alreadyHaveAccount => 'هل لديك حساب بالفعل؟';
+
+  @override
+  String get dontHaveAccount => 'ليس لديك حساب؟';
+
+  @override
+  String get loginButton => 'دخول';
+
+  @override
+  String get signupButton => 'إنشاء حساب';
+
+  @override
+  String get signupButton2 => 'إنشاء حساب جديد';
+
+  @override
+  String get termsAndConditions => 'الشروط والأحكام';
+
+  @override
+  String get privacyPolicy => 'سياسة الخصوصية';
+
+  @override
+  String get agreeToTerms => 'أوافق على الشروط والأحكام';
+
+  @override
+  String get agreeToTermsRequired => 'يجب أن توافق على الشروط للمتابعة';
+
+  @override
+  String get passwordRecovery => 'استعادة كلمة السر';
+
+  @override
+  String get enterEmailForRecovery =>
+      'أدخل بريدك الإلكتروني لاستعادة كلمة السر';
+
+  @override
+  String get captchaLabel => 'رمز التحقق';
+
+  @override
+  String enterCaptcha(Object firstNumber, Object secondNumber) {
+    return 'أدخل النتيجة: $firstNumber + $secondNumber = ؟';
+  }
+
+  @override
+  String get invalidCaptcha => 'رمز التحقق غير صحيح';
+
+  @override
+  String get invalidCredentials => 'اسم المستخدم أو كلمة السر غير صحيحة';
+
+  @override
+  String get accountCreated => 'تم إنشاء الحساب بنجاح';
+
+  @override
+  String get loginSuccessful => 'تم الدخول بنجاح';
+
+  @override
+  String get passwordResetSent =>
+      'تم إرسال رمز استعادة كلمة السر إلى بريدك الإلكتروني';
+
+  @override
+  String get passwordResetSuccess => 'تم إعادة تعيين كلمة السر بنجاح';
+
+  @override
+  String get accountAlreadyExists => 'يوجد حساب بهذا البريد الإلكتروني بالفعل';
+
+  @override
+  String get weekDayMonday => 'الإثنين';
+
+  @override
+  String get weekDayTuesday => 'الثلاثاء';
+
+  @override
+  String get weekDayWednesday => 'الأربعاء';
+
+  @override
+  String get weekDayThursday => 'الخميس';
+
+  @override
+  String get weekDayFriday => 'الجمعة';
+
+  @override
+  String get weekDaySaturday => 'السبت';
+
+  @override
+  String get weekDaySunday => 'الأحد';
+
+  @override
+  String get iraq => 'العراق';
+
+  @override
+  String get saudiArabia => 'المملكة العربية السعودية';
+
+  @override
+  String get uae => 'الإمارات العربية المتحدة';
+
+  @override
+  String get kuwait => 'الكويت';
+
+  @override
+  String get syria => 'سوريا';
+
+  @override
+  String get jordan => 'الأردن';
+
+  @override
+  String get lebanon => 'لبنان';
 }

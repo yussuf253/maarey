@@ -21,6 +21,7 @@ abstract class AppContentRoutes {
   static const parkedSales = 'app_parked_sales';
   static const salePosSettings = 'app_sale_pos_settings';
   static const customers = 'app_customers';
+
   /// نفس [customers] مع فتح حوار إضافة عميل عند الدخول (من القائمة الجانبية).
   static const customersAdd = 'app_customers_add';
   static const customerContacts = 'app_customer_contacts';
@@ -30,10 +31,11 @@ abstract class AppContentRoutes {
   static const installmentSettings = 'app_installment_settings';
   static const debts = 'app_debts';
   static const debtSettings = 'app_debt_settings';
-  static const inventory           = 'app_inventory';
-  static const inventoryProducts   = 'app_inventory_products';
+  static const inventory = 'app_inventory';
+  static const inventoryProducts = 'app_inventory_products';
   static const inventoryBarcodeLabels = 'app_inventory_barcode_labels';
-  static const addProduct          = 'app_add_product';
+  static const addProduct = 'app_add_product';
+
   /// تعديل سريع لأسعار وكميات منتجات موجودة (بحث + صفحات، باركود بسياق هذه الشاشة).
   static const quickUpdateProducts = 'app_inventory_quick_update';
   static const inventoryManagement = 'app_inventory_management';
@@ -41,15 +43,17 @@ abstract class AppContentRoutes {
   static const inventoryPriceLists = 'app_inventory_price_lists';
   static const inventoryStocktaking = 'app_inventory_stocktaking';
   static const inventoryPurchaseOrders = 'app_inventory_purchase_orders';
-  static const inventoryAnalytics  = 'app_inventory_analytics';
-  static const inventorySettings   = 'app_inventory_settings';
+  static const inventoryAnalytics = 'app_inventory_analytics';
+  static const inventorySettings = 'app_inventory_settings';
   static const cash = 'app_cash';
   static const expenses = 'app_expenses';
+  static const localAiAgent = 'app_local_ai_agent';
   static const users = 'app_users';
   static const staffShiftsWeek = 'app_staff_shifts_week';
   static const employeeIdentity = 'app_employee_identity';
   static const printing = 'app_printing';
   static const settings = 'app_settings';
+
   /// شاشات تُفتح من داخل [SettingsScreen] — لفتات الخبز (لا تُستخدم للقائمة الرئيسية).
   static const settingsStoreInfo = 'app_settings_store_info';
   static const settingsInvoice = 'app_settings_invoice';
@@ -58,7 +62,8 @@ abstract class AppContentRoutes {
   static const settingsPrintingInline = 'app_settings_printing_inline';
   static const settingsDashboardLayout = 'app_settings_dashboard_layout';
   static const settingsRestore = 'app_settings_restore';
-  static const settingsSubscriptionAccount = 'app_settings_subscription_account';
+  static const settingsSubscriptionAccount =
+      'app_settings_subscription_account';
   static const settingsBusinessFeatures = 'app_settings_business_features';
   static const subscriptionPlans = 'app_subscription_plans';
   static const reportsPrefix = 'app_reports_';
@@ -67,6 +72,7 @@ abstract class AppContentRoutes {
 
   // ── Services & Job Tickets ────────────────────────────────────────────────
   static const servicesHub = 'app_services_hub';
+
   /// إضافة خدمة فنية للبيع المباشر (مستقل عن إضافة منتج مخزني كامل).
   static const servicesAdd = 'app_services_add';
   static const servicesCatalog = 'app_services_catalog';
@@ -199,6 +205,8 @@ String breadcrumbFallbackTitleForRouteId(String id) {
       return 'الصندوق';
     case AppContentRoutes.expenses:
       return 'المصروفات';
+    case AppContentRoutes.localAiAgent:
+      return 'مساعد المبيعات الذكي';
     case AppContentRoutes.users:
       return 'المستخدمون';
     case AppContentRoutes.staffShiftsWeek:
@@ -300,6 +308,8 @@ IconData breadcrumbIconForRouteId(String id) {
       return Icons.account_balance_wallet_rounded;
     case AppContentRoutes.expenses:
       return Icons.payments_rounded;
+    case AppContentRoutes.localAiAgent:
+      return Icons.auto_awesome_rounded;
     case AppContentRoutes.users:
     case AppContentRoutes.staffShiftsWeek:
     case AppContentRoutes.employeeIdentity:

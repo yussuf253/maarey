@@ -174,9 +174,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String emailLabel(Object email) {
-    return 'Email: $email';
-  }
+  String get emailLabel => 'Email';
 
   @override
   String currentPlanLabel(Object plan) {
@@ -439,4 +437,1117 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get basraIraq => 'Basra, Irak';
+
+  @override
+  String get deviceKickedOutTitle => 'Cet appareil a été déconnecté du compte';
+
+  @override
+  String get deviceKickedOutBody =>
+      'Votre session sur cet appareil a été terminée. La prochaine fois que vous ouvrirez l\'application, l\'écran de connexion habituel s\'affichera.';
+
+  @override
+  String get goToLoginAction => 'Aller à la connexion';
+
+  @override
+  String get exitAction => 'Quitter';
+
+  @override
+  String get closeWindowHint =>
+      'Vous pouvez fermer cette fenêtre ou utiliser le bouton ci-dessus.';
+
+  @override
+  String get appWillCloseHint => 'L\'application va se fermer';
+
+  @override
+  String get deviceRevokedTitle => 'Cet appareil a été retiré du compte';
+
+  @override
+  String get deviceRevokedBody =>
+      'Vous ne pouvez pas vous connecter depuis cet appareil tant qu\'un des appareils actifs du compte ne l\'approuve pas, depuis Paramètres → Compte et abonnement → « Autoriser le retour ».';
+
+  @override
+  String get backToLoginAction => 'Retour à la connexion';
+
+  @override
+  String otpEnterFullCode(Object digits) {
+    return 'Entrez le code complet ($digits chiffres comme indiqué dans l\'e-mail)';
+  }
+
+  @override
+  String get otpResentSuccess => 'Code de vérification renvoyé';
+
+  @override
+  String get back => 'Retour';
+
+  @override
+  String get emailVerificationTitle => 'Vérification de l\'e-mail';
+
+  @override
+  String otpSentToEmailShort(Object digits) {
+    return 'Nous avons envoyé un code à $digits chiffres à votre e-mail';
+  }
+
+  @override
+  String get enterVerificationCode => 'Entrez le code de vérification';
+
+  @override
+  String otpSentToEmailDetailed(Object digits, Object email) {
+    return 'Un code à $digits chiffres a été envoyé à\n$email';
+  }
+
+  @override
+  String get verifyAndCreateAccount => 'Vérifier et créer le compte';
+
+  @override
+  String resendInSeconds(Object seconds) {
+    return 'Renvoyer dans $seconds secondes';
+  }
+
+  @override
+  String get resendCode => 'Renvoyer le code';
+
+  @override
+  String get editData => 'Modifier les informations';
+
+  @override
+  String get emailRequired => 'L\'e-mail est requis';
+
+  @override
+  String get emailInvalidFormat => 'Format d\'e-mail invalide';
+
+  @override
+  String get enterYourEmail => 'Entrez votre e-mail';
+
+  @override
+  String get forgotPasswordSendCodeHint =>
+      'Nous vous enverrons un code de vérification pour réinitialiser votre mot de passe';
+
+  @override
+  String get sendVerificationCode => 'Envoyer le code de vérification';
+
+  @override
+  String otpSentToEmailColon(Object digits, Object email) {
+    return 'Un code à $digits chiffres a été envoyé à :\n$email';
+  }
+
+  @override
+  String get continueAction => 'Continuer';
+
+  @override
+  String get editEmail => 'Modifier l\'e-mail';
+
+  @override
+  String get passwordUpdateSuccess => 'Mot de passe mis à jour avec succès';
+
+  @override
+  String get setNewPasswordTitle => 'Définir un nouveau mot de passe';
+
+  @override
+  String get newPasswordLabel => 'Nouveau mot de passe';
+
+  @override
+  String get enterNewPasswordHint => 'Entrez votre nouveau mot de passe';
+
+  @override
+  String get enterPasswordValidation => 'Entrez un mot de passe';
+
+  @override
+  String get minLength8Chars => 'Doit contenir au moins 8 caractères';
+
+  @override
+  String get confirmPasswordLabel => 'Confirmer le Mot de Passe';
+
+  @override
+  String get confirmPasswordHint => 'Ressaisissez votre mot de passe';
+
+  @override
+  String get passwordMismatch => 'Les mots de passe ne correspondent pas';
+
+  @override
+  String get passwordRequirementsTitle =>
+      'Exigences du mot de passe (facultatif)';
+
+  @override
+  String get reqMinLength => 'Au moins 8 caractères';
+
+  @override
+  String get reqUppercase => 'Lettre majuscule (A-Z)';
+
+  @override
+  String get reqLowercase => 'Lettre minuscule (a-z)';
+
+  @override
+  String get reqDigit => 'Chiffre (0-9)';
+
+  @override
+  String get reqSpecialChar => 'Caractère spécial (!@#...)';
+
+  @override
+  String get onboardingChangeLaterHint =>
+      'Vous pouvez modifier ces options plus tard depuis Paramètres → Fonctionnalités du magasin.';
+
+  @override
+  String get businessFeaturesWizardTitle => 'Fonctionnalités du magasin';
+
+  @override
+  String get quickAppSetupTitle => 'Configuration rapide de l\'application';
+
+  @override
+  String stepXofY(Object current, Object total) {
+    return 'Étape $current sur $total';
+  }
+
+  @override
+  String get previousAction => 'Précédent';
+
+  @override
+  String get nextAction => 'Suivant';
+
+  @override
+  String get practicalExamplesLabel => 'Exemples pratiques';
+
+  @override
+  String get onboardingStep1Question =>
+      'Utilisez-vous des clients dans votre activité ?';
+
+  @override
+  String get onboardingStep1Paragraph1 =>
+      'Une fois activé, vous obtenez le module client complet : une fiche pour chaque client, un historique d\'achats et un suivi rapide depuis la facture.';
+
+  @override
+  String get onboardingStep1Paragraph2 =>
+      'Vous pouvez lier chaque vente à un client précis, ce qui facilite les rapports par la suite et uniformise l\'expérience pour les clients réguliers.';
+
+  @override
+  String get onboardingStep1Paragraph3 =>
+      'Si vous faites une vente rapide au comptant sans nom, cela reste possible ; l\'activation n\'impose pas de choisir un client à chaque fois.';
+
+  @override
+  String get onboardingStep1Example1 =>
+      'Exemple : un client régulier qui achète quotidiennement — vous enregistrez son nom et consultez rapidement ses dernières factures.';
+
+  @override
+  String get onboardingStep1Example2 =>
+      'Exemple : en cas de dette ou de points de fidélité, ils apparaissent liés au même client au lieu d\'une recherche manuelle.';
+
+  @override
+  String get onboardingStep1SwitchLabel => 'Activer le module clients';
+
+  @override
+  String get onboardingStep2Question =>
+      'Voulez-vous un programme de points de fidélité ?';
+
+  @override
+  String get onboardingStep2Paragraph1 =>
+      'La fidélité accorde des points aux clients lors des achats, qu\'ils peuvent échanger selon les règles que vous définissez dans les paramètres.';
+
+  @override
+  String get onboardingStep2Paragraph2 =>
+      'Le programme est lié aux profils clients ; plus les données clients sont claires, plus le suivi est facile.';
+
+  @override
+  String get onboardingStep2Paragraph3 =>
+      'Vous pouvez activer la fonctionnalité maintenant et ajuster les taux d\'acquisition et d\'échange plus tard sans refaire cet assistant.';
+
+  @override
+  String get onboardingStep2Example1 =>
+      'Exemple : chaque 10 000 IQD rapporte 10 points selon la règle choisie.';
+
+  @override
+  String get onboardingStep2Example2 =>
+      'Exemple : un client ayant accumulé assez de points les échange contre une remise sur une facture ultérieure.';
+
+  @override
+  String get onboardingStep2SwitchLabel => 'Activer les points de fidélité';
+
+  @override
+  String get onboardingStep2Footnote =>
+      'Nécessite l\'activation du module clients à l\'étape précédente ; s\'il n\'est pas activé, la fidélité ne fonctionnera pas tant que vous ne réactivez pas les clients.';
+
+  @override
+  String get onboardingStep3Question =>
+      'Appliquez-vous une taxe lors de la vente ?';
+
+  @override
+  String get onboardingStep3Paragraph1 =>
+      'Une fois activé, un champ de taxe clair apparaît sur la facture de vente afin qu\'elle soit calculée de façon cohérente avec le total.';
+
+  @override
+  String get onboardingStep3Paragraph2 =>
+      'Convient aux commerces qui appliquent un taux de taxe connu sur les biens ou services.';
+
+  @override
+  String get onboardingStep3Paragraph3 =>
+      'Vous pouvez ajuster le comportement détaillé depuis les paramètres du point de vente après cette configuration rapide.';
+
+  @override
+  String get onboardingStep3Example1 =>
+      'Exemple : une facture de 100 000 IQD à laquelle un pourcentage de taxe déterminé est ajouté.';
+
+  @override
+  String get onboardingStep3Example2 =>
+      'Exemple : l\'employé voit la taxe et le total final dans la même facture de vente.';
+
+  @override
+  String get onboardingStep3SwitchLabel =>
+      'Afficher la taxe sur la facture de vente';
+
+  @override
+  String get onboardingStep4Question =>
+      'Autorisez-vous une remise sur le total de la facture ?';
+
+  @override
+  String get onboardingStep4Paragraph1 =>
+      'La remise globale est utile pour les offres saisonnières ou pour négocier le prix devant le client sans modifier le prix de chaque article.';
+
+  @override
+  String get onboardingStep4Paragraph2 =>
+      'Le champ apparaît sur l\'écran de vente afin de compléter la facture sans complexité supplémentaire pour l\'employé.';
+
+  @override
+  String get onboardingStep4Paragraph3 =>
+      'Vous pouvez la désactiver plus tard si vous décidez de travailler uniquement avec des prix fixes.';
+
+  @override
+  String get onboardingStep4Example1 =>
+      'Exemple : vous accordez une remise globale de 5 000 IQD sur une grosse facture.';
+
+  @override
+  String get onboardingStep4Example2 =>
+      'Exemple : une offre spéciale d\'un jour sans changer les prix de base des produits.';
+
+  @override
+  String get onboardingStep4SwitchLabel =>
+      'Afficher la remise globale sur la facture';
+
+  @override
+  String get onboardingStep5Question =>
+      'Vendez-vous à crédit (paiement différé) ?';
+
+  @override
+  String get onboardingStep5Paragraph1 =>
+      'L\'activation ouvre le panneau des dettes et le suivi des montants dus par chaque client, avec des alertes et des plafonds ajustables.';
+
+  @override
+  String get onboardingStep5Paragraph2 =>
+      'Convient aux commerçants qui font confiance à des clients connus et ont besoin d\'un historique clair des ventes à crédit.';
+
+  @override
+  String get onboardingStep5Paragraph3 =>
+      'Cela n\'empêche pas les ventes au comptant ; cela ajoute seulement l\'option d\'enregistrer une vente comme dette lors de la sélection d\'un client avec les permissions appropriées.';
+
+  @override
+  String get onboardingStep5Example1 =>
+      'Exemple : un client prend la marchandise aujourd\'hui et paie en fin de semaine.';
+
+  @override
+  String get onboardingStep5Example2 =>
+      'Exemple : vous consultez le relevé d\'un client et voyez clairement le montant payé et le solde restant.';
+
+  @override
+  String get onboardingStep5SwitchLabel =>
+      'Activer les ventes à crédit et les dettes';
+
+  @override
+  String get onboardingStep6Question =>
+      'Vendez-vous à tempérament (paiement échelonné) ?';
+
+  @override
+  String get onboardingStep6Paragraph1 =>
+      'Les plans d\'échelonnement permettent de diviser le prix d\'une facture en paiements programmés tout en suivant ce qu\'il reste dû par le client.';
+
+  @override
+  String get onboardingStep6Paragraph2 =>
+      'Utile pour les biens à prix élevé ou les contrats de longue durée.';
+
+  @override
+  String get onboardingStep6Paragraph3 =>
+      'Les détails précis de l\'échéancier sont gérés depuis les modules dédiés une fois cette configuration terminée.';
+
+  @override
+  String get onboardingStep6Example1 =>
+      'Exemple : un appareil d\'une valeur de 600 000 IQD payé en 6 mensualités.';
+
+  @override
+  String get onboardingStep6Example2 =>
+      'Exemple : vous voyez les paiements à venir et en retard de chaque client au même endroit.';
+
+  @override
+  String get onboardingStep6SwitchLabel => 'Activer les ventes à tempérament';
+
+  @override
+  String get onboardingStep7Question =>
+      'Vendez-vous au poids (kilo, gramme, etc.) ?';
+
+  @override
+  String get onboardingStep7Paragraph1 =>
+      'L\'activation prépare l\'interface de vente et les codes-barres pour prendre en charge les poids et quantités décimales lorsque nécessaire.';
+
+  @override
+  String get onboardingStep7Paragraph2 =>
+      'Convient à l\'alimentation, à la quincaillerie, ou à toute activité reposant sur une balance.';
+
+  @override
+  String get onboardingStep7Paragraph3 =>
+      'Vous pouvez configurer les formats de codes-barres au poids depuis les paramètres avancés après cet assistant.';
+
+  @override
+  String get onboardingStep7Example1 =>
+      'Exemple : vendre 1,250 kg d\'un produit plutôt qu\'une seule pièce.';
+
+  @override
+  String get onboardingStep7Example2 =>
+      'Exemple : lire un code-barres de balance contenant automatiquement le poids et le prix du produit.';
+
+  @override
+  String get onboardingStep7SwitchLabel => 'Activer la vente au poids';
+
+  @override
+  String get onboardingStep8Question =>
+      'Vendez-vous des vêtements (couleurs et tailles) ?';
+
+  @override
+  String get onboardingStep8Paragraph1 =>
+      'L\'activation prépare les écrans de produits et de vente pour prendre en charge les variantes d\'articles (couleurs et tailles différentes du même modèle).';
+
+  @override
+  String get onboardingStep8Paragraph2 =>
+      'Facilite le suivi du stock de chaque couleur ou taille séparément et affiche une fenêtre de sélection rapide lors de la vente.';
+
+  @override
+  String get onboardingStep8Example1 =>
+      'Exemple : une chemise disponible en bleu et noir, en tailles S, M et L.';
+
+  @override
+  String get onboardingStep8Example2 =>
+      'Exemple : sélectionner un vêtement ouvre une fenêtre rapide pour choisir la taille et la couleur disponibles en stock.';
+
+  @override
+  String get onboardingStep8SwitchLabel =>
+      'Activer le module vêtements et tailles';
+
+  @override
+  String get onboardingStep9Question =>
+      'Proposez-vous des services spécifiques (réparation, atelier, etc.) ?';
+
+  @override
+  String get onboardingStep9Paragraph1 =>
+      'L\'activation affiche le module complet de services et maintenance : tickets de travail, demandes d\'intervention, et catalogue des services et tarifs.';
+
+  @override
+  String get onboardingStep9Paragraph2 =>
+      'Utile pour les ateliers, centres de service, et toute activité offrant des services aux clients en plus de la vente de marchandises.';
+
+  @override
+  String get onboardingStep9Example1 =>
+      'Exemple : ouvrir un ticket de maintenance pour un ordinateur ou une voiture et définir le statut du travail.';
+
+  @override
+  String get onboardingStep9Example2 =>
+      'Exemple : ajouter un service d\'installation ou de maintenance rapide à une facture de vente.';
+
+  @override
+  String get onboardingStep9SwitchLabel =>
+      'Activer les services et tickets de maintenance';
+
+  @override
+  String get invoicesLabel => 'Factures';
+
+  @override
+  String get invoicesListLabel => 'Liste des factures';
+
+  @override
+  String get newSaleLabel => 'Nouvelle vente';
+
+  @override
+  String get parkedSalesLabel => 'Ventes en attente';
+
+  @override
+  String get posSettingsLabel => 'Paramètres du point de vente';
+
+  @override
+  String get customersLabel => 'Clients';
+
+  @override
+  String get customersManageLabel => 'Gérer les clients';
+
+  @override
+  String get addNewCustomerLabel => 'Ajouter un nouveau client';
+
+  @override
+  String get addCustomerBreadcrumb => 'Ajouter un client';
+
+  @override
+  String get contactListLabel => 'Liste de contacts';
+
+  @override
+  String get customerLoyaltySettingsLabel => 'Paramètres client (fidélité)';
+
+  @override
+  String get customerLoyaltyLabel => 'Fidélité client';
+
+  @override
+  String get loyaltyPointsSettingsLabel => 'Paramètres des points et échanges';
+
+  @override
+  String get loyaltyLedgerLabel => 'Historique des points';
+
+  @override
+  String get installmentsLabel => 'Échelonnement';
+
+  @override
+  String get installmentPlansLabel => 'Plans d\'échelonnement';
+
+  @override
+  String get installmentSettingsLabel => 'Paramètres d\'échelonnement';
+
+  @override
+  String get debtsLabel => 'Dettes';
+
+  @override
+  String get debtsPanelLabel => 'Panneau des dettes (crédit)';
+
+  @override
+  String get debtSettingsLabel => 'Paramètres des dettes';
+
+  @override
+  String get inventoryLabel => 'Stock';
+
+  @override
+  String get productListLabel => 'Liste des produits';
+
+  @override
+  String get addNewProductLabel => 'Ajouter un nouveau produit';
+
+  @override
+  String get updateExistingProductLabel => 'Mettre à jour un produit existant';
+
+  @override
+  String get printBarcodeLabelsLabel => 'Imprimer des étiquettes code-barres';
+
+  @override
+  String get inventoryMovementsLabel => 'Mouvements de stock';
+
+  @override
+  String get warehousesLabel => 'Entrepôts';
+
+  @override
+  String get stocktakingLabel => 'Inventaire périodique';
+
+  @override
+  String get purchaseOrdersLabel => 'Bons de commande';
+
+  @override
+  String get stockAnalyticsLabel => 'Analyses de stock';
+
+  @override
+  String get inventorySettingsLabel => 'Paramètres du stock';
+
+  @override
+  String get servicesAndMaintenanceLabel => 'Services et maintenance';
+
+  @override
+  String get servicesAndMaintenancePanelLabel =>
+      'Panneau des services et maintenance';
+
+  @override
+  String get addTechnicalServiceLabel => 'Ajouter un service technique';
+
+  @override
+  String get maintenanceRequestsLabel =>
+      'Demandes de maintenance et tickets de travail';
+
+  @override
+  String get cashRegisterLabel => 'Caisse';
+
+  @override
+  String get expensesLabel => 'Dépenses';
+
+  @override
+  String get reportsLabel => 'Rapports';
+
+  @override
+  String get usersLabel => 'Utilisateurs';
+
+  @override
+  String get manageUsersLabel => 'Gérer les utilisateurs';
+
+  @override
+  String get staffShiftsWeekLabel => 'Équipes du personnel (semaine)';
+
+  @override
+  String get staffIdentitiesLabel => 'Identités du personnel';
+
+  @override
+  String get printingLabel => 'Impression';
+
+  @override
+  String get homeLabel => 'Accueil';
+
+  @override
+  String get defaultUserFallback => 'Utilisateur';
+
+  @override
+  String get logoutLabel => 'Se déconnecter';
+
+  @override
+  String get logoutConfirmMessage => 'Voulez-vous vraiment vous déconnecter ?';
+
+  @override
+  String get confirmAction => 'Confirmer';
+
+  @override
+  String searchFailedSnackbar(Object error) {
+    return 'Impossible de terminer la recherche : $error';
+  }
+
+  @override
+  String get addProductLabel => 'Ajouter un produit';
+
+  @override
+  String shiftTooltipWithName(Object name) {
+    return 'Équipe : $name — fermer';
+  }
+
+  @override
+  String get closeShiftTooltip => 'Fermer l\'équipe';
+
+  @override
+  String get syncFailedTooltip =>
+      'Synchronisation — dernière tentative échouée';
+
+  @override
+  String get cloudSyncTooltip => 'Synchronisation cloud';
+
+  @override
+  String get syncStartingSnackbar => 'Démarrage de la synchronisation…';
+
+  @override
+  String get notificationsTooltip => 'Notifications';
+
+  @override
+  String get settingsLabel => 'Paramètres';
+
+  @override
+  String get copyLabel => 'Copier';
+
+  @override
+  String get copiedSnackbar => 'Copié';
+
+  @override
+  String get userInfoTitle => 'Informations utilisateur';
+
+  @override
+  String get displayNameFieldLabel => 'Nom affiché :';
+
+  @override
+  String get usernameFieldLabel => 'Nom d\'utilisateur :';
+
+  @override
+  String get roleFieldLabel => 'Rôle :';
+
+  @override
+  String get emailFieldLabel => 'E-mail :';
+
+  @override
+  String get closeAction => 'Fermer';
+
+  @override
+  String get barcodeScanTooltip =>
+      'Scanner un code-barres (caméra sur mobile, ou fenêtre du lecteur sur ordinateur)';
+
+  @override
+  String get hideKeyboardTooltip => 'Masquer le clavier';
+
+  @override
+  String get keyboardDragPinHint =>
+      'Clavier arabe / anglais — faites glisser par la poignée ou épinglez-le';
+
+  @override
+  String get clearSearchTooltip => 'Effacer la recherche';
+
+  @override
+  String get searchToolsTooltip => 'Outils de recherche';
+
+  @override
+  String get showKeyboardTooltip => 'Afficher le clavier (arabe / anglais)';
+
+  @override
+  String get quickSearchHint =>
+      'Recherche rapide : modules, produits, clients…';
+
+  @override
+  String get fullSearchHint =>
+      'Recherche : modules, produits, clients, personnel, code-barres…';
+
+  @override
+  String get collapseMenuTooltip => 'Réduire le menu';
+
+  @override
+  String get expandMenuTooltip => 'Développer le menu';
+
+  @override
+  String get restrictedModeTooltip => 'Non disponible en mode restreint';
+
+  @override
+  String get paymentTypeCash => 'Comptant';
+
+  @override
+  String get paymentTypeCredit => 'Crédit';
+
+  @override
+  String get paymentTypeInstallment => 'Échelonné';
+
+  @override
+  String get paymentTypeDelivery => 'Livraison';
+
+  @override
+  String get paymentTypeDebtCollection => 'Recouvrement de dette';
+
+  @override
+  String get paymentTypeInstallmentCollection => 'Paiement d\'échéance';
+
+  @override
+  String get paymentTypeSupplierPayment => 'Paiement fournisseur';
+
+  @override
+  String noInvoiceWithNumber(Object id) {
+    return 'Aucune facture avec le numéro $id';
+  }
+
+  @override
+  String get invoiceAlreadyReturned =>
+      'Cette facture est déjà enregistrée comme retournée';
+
+  @override
+  String get invoiceNotOpenableAsReturn =>
+      'Ce bon ne peut pas être ouvert comme retour de vente — annulez le paiement depuis l\'écran fournisseur ou la gestion des échelonnements selon son type.';
+
+  @override
+  String salesInvoiceNumber(Object id) {
+    return 'Facture de vente #$id';
+  }
+
+  @override
+  String get emptyPlaceholder => '(vide)';
+
+  @override
+  String returnInvoiceDialogBody(
+    Object customer,
+    Object paymentType,
+    Object total,
+  ) {
+    return 'Client : $customer\nPaiement : $paymentType\nTotal : $total\n\nOuvrir l\'écran de retour ? Vous pouvez réduire les quantités ou supprimer des lignes pour un retour partiel uniquement.';
+  }
+
+  @override
+  String get returnLabel => 'Retour';
+
+  @override
+  String returnNumber(Object id) {
+    return 'Retour #$id';
+  }
+
+  @override
+  String get scanQrBarcodeTitle => 'Scanner QR / code-barres';
+
+  @override
+  String get pointsLedgerShortLabel => 'Historique des points';
+
+  @override
+  String get staffShiftsLabel => 'Équipes du personnel';
+
+  @override
+  String get shiftStaffFallback => 'Personnel de service';
+
+  @override
+  String get itemsLabel => 'Articles';
+
+  @override
+  String noResultsFor(Object query) {
+    return 'Aucun résultat pour « $query »';
+  }
+
+  @override
+  String get modulesLabel => 'Modules';
+
+  @override
+  String get openModuleLabel => 'Ouvrir le module';
+
+  @override
+  String get productsLabel => 'Produits';
+
+  @override
+  String sellPriceIqd(Object price) {
+    return 'Vente $price IQD';
+  }
+
+  @override
+  String get viewCustomersLabel => 'Voir les clients';
+
+  @override
+  String get staffLabel => 'Personnel';
+
+  @override
+  String get viewStaffLabel => 'Voir le personnel';
+
+  @override
+  String get technicalServiceLabel => 'Service technique';
+
+  @override
+  String get notStockTracked => 'Stock non suivi';
+
+  @override
+  String get availableUnknown => 'Disponible : —';
+
+  @override
+  String get availableZero => 'Disponible : 0';
+
+  @override
+  String availableQty(Object qty) {
+    return 'Disponible : $qty';
+  }
+
+  @override
+  String negativeStockWarning(Object qty, Object soldOver) {
+    return 'Solde négatif $qty — survente de $soldOver par rapport au dernier solde';
+  }
+
+  @override
+  String get chooseFromListBelow => 'Choisissez dans la liste ci-dessous';
+
+  @override
+  String get viewAllLabel => 'Voir tout';
+
+  @override
+  String get untitledLabel => 'Sans titre';
+
+  @override
+  String get deleteParkedSaleTitle => 'Supprimer la vente en attente ?';
+
+  @override
+  String deleteParkedSaleBody(Object label) {
+    return '« $label » sera définitivement supprimée de cet appareil.';
+  }
+
+  @override
+  String get deleteAction => 'Supprimer';
+
+  @override
+  String get deletedSnackbar => 'Supprimé';
+
+  @override
+  String get parkedSalesScreenTitle => 'Ventes en attente';
+
+  @override
+  String get noParkedSalesTitle => 'Aucune vente en attente';
+
+  @override
+  String get noParkedSalesHint =>
+      'Depuis l\'écran de vente, appuyez sur « Mettre en attente » pour enregistrer le travail en cours et servir un autre client.';
+
+  @override
+  String parkedSaleSummaryLine(Object count, Object total) {
+    return '$count articles · ≈ $total IQD';
+  }
+
+  @override
+  String lastUpdatedLabel(Object date) {
+    return 'Dernière mise à jour : $date';
+  }
+
+  @override
+  String get resumeSaleTooltip => 'Reprendre la vente';
+
+  @override
+  String get allLabel => 'Tout';
+
+  @override
+  String get paidStatus => 'Payée';
+
+  @override
+  String get unpaidStatus => 'Impayée';
+
+  @override
+  String get cannotShowInvoiceNoId =>
+      'Impossible d\'afficher une facture sans numéro';
+
+  @override
+  String get invoiceNotFound => 'Facture introuvable';
+
+  @override
+  String get flatViewOption => 'Vue simple (sans regroupement par équipe)';
+
+  @override
+  String get groupByShiftOption => 'Regrouper par équipe';
+
+  @override
+  String get advancedFilterLabel => 'Filtre avancé';
+
+  @override
+  String get shiftsCalendarLabel => 'Calendrier des équipes';
+
+  @override
+  String get moreLabel => 'Plus';
+
+  @override
+  String get parkedInvoicesShortLabel => 'Factures en attente';
+
+  @override
+  String get saleLabel => 'Vente';
+
+  @override
+  String get totalLabel => 'Total';
+
+  @override
+  String get sortLabel => 'Trier';
+
+  @override
+  String get sortNewestFirst => 'Plus récent d\'abord';
+
+  @override
+  String get sortOldestFirst => 'Plus ancien d\'abord';
+
+  @override
+  String get sortHighestAmount => 'Montant le plus élevé';
+
+  @override
+  String get sortLowestAmount => 'Montant le plus bas';
+
+  @override
+  String get searchInvoicesHint =>
+      'Rechercher par nom du client, numéro de facture ou téléphone du client...';
+
+  @override
+  String shiftNumberLabel(Object id) {
+    return 'Équipe #$id';
+  }
+
+  @override
+  String noShiftGroupLabel(Object count) {
+    return 'Sans équipe — anciennes factures ou hors session d\'équipe ($count)';
+  }
+
+  @override
+  String shiftLoadFailedLabel(Object count, Object id) {
+    return 'Équipe #$id — impossible de charger les détails de l\'équipe ($count factures)';
+  }
+
+  @override
+  String get openStatus => 'Ouverte';
+
+  @override
+  String shiftWithNameLabel(Object id, Object name) {
+    return 'Équipe #$id — $name';
+  }
+
+  @override
+  String invoiceCountLabel(Object count) {
+    return '$count factures';
+  }
+
+  @override
+  String totalIqd(Object amount) {
+    return '$amount IQD';
+  }
+
+  @override
+  String itemsAndDiscountLine(Object count, Object discount) {
+    return '$count articles · remise $discount IQD';
+  }
+
+  @override
+  String shiftColonLabel(Object name) {
+    return 'Équipe : $name';
+  }
+
+  @override
+  String get createReturnInvoiceTooltip =>
+      'Créer une facture de retour pour cette facture';
+
+  @override
+  String get returnActionLabel => 'Retour';
+
+  @override
+  String get noInvoicesTitle => 'Aucune facture';
+
+  @override
+  String get addFirstInvoiceCta => 'Ajoutez votre première facture maintenant';
+
+  @override
+  String get sortOptionsTitle => 'Options de tri';
+
+  @override
+  String get applyAction => 'Appliquer';
+
+  @override
+  String get loginTabLabel => 'Connexion';
+
+  @override
+  String get signupTabLabel => 'S\'inscrire';
+
+  @override
+  String get usernameOrEmailLabel => 'Nom d\'utilisateur ou Email';
+
+  @override
+  String get enterUsernameOrEmail => 'Entrez votre nom d\'utilisateur ou email';
+
+  @override
+  String get passwordLabel => 'Mot de passe';
+
+  @override
+  String get enterPassword => 'Entrez votre mot de passe';
+
+  @override
+  String get storeNameLabel => 'Nom du Magasin/Entreprise';
+
+  @override
+  String get enterStoreName => 'Entrez le nom de votre magasin ou entreprise';
+
+  @override
+  String get nameLabel => 'Nom';
+
+  @override
+  String get enterName => 'Entrez votre nom';
+
+  @override
+  String get enterEmail => 'Entrez votre email';
+
+  @override
+  String get phoneLabel => 'Numéro de Téléphone';
+
+  @override
+  String get enterPhone => 'Entrez votre numéro de téléphone';
+
+  @override
+  String get countryCodeLabel => 'Indicatif Pays';
+
+  @override
+  String get selectCountryCode => 'Sélectionnez l\'indicatif du pays';
+
+  @override
+  String get confirmPassword => 'Confirmez votre mot de passe';
+
+  @override
+  String get showPassword => 'Afficher le mot de passe';
+
+  @override
+  String get hidePassword => 'Masquer le mot de passe';
+
+  @override
+  String get clearField => 'Effacer';
+
+  @override
+  String get rememberMe => 'Se souvenir de moi';
+
+  @override
+  String get forgotPassword => 'Mot de passe oublié ?';
+
+  @override
+  String get alreadyHaveAccount => 'Vous avez déjà un compte ?';
+
+  @override
+  String get dontHaveAccount => 'Vous n\'avez pas de compte ?';
+
+  @override
+  String get loginButton => 'Connexion';
+
+  @override
+  String get signupButton => 'S\'inscrire';
+
+  @override
+  String get signupButton2 => 'Créer un Compte';
+
+  @override
+  String get termsAndConditions => 'Conditions d\'Utilisation';
+
+  @override
+  String get privacyPolicy => 'Politique de Confidentialité';
+
+  @override
+  String get agreeToTerms => 'J\'accepte les Conditions d\'Utilisation';
+
+  @override
+  String get agreeToTermsRequired =>
+      'Vous devez accepter les conditions pour continuer';
+
+  @override
+  String get passwordRecovery => 'Récupération de Mot de Passe';
+
+  @override
+  String get enterEmailForRecovery =>
+      'Entrez votre email pour récupérer votre mot de passe';
+
+  @override
+  String get captchaLabel => 'Code de Vérification';
+
+  @override
+  String enterCaptcha(Object firstNumber, Object secondNumber) {
+    return 'Entrez le résultat : $firstNumber + $secondNumber = ?';
+  }
+
+  @override
+  String get invalidCaptcha => 'Code de vérification incorrect';
+
+  @override
+  String get invalidCredentials =>
+      'Nom d\'utilisateur ou mot de passe invalide';
+
+  @override
+  String get accountCreated => 'Compte créé avec succès';
+
+  @override
+  String get loginSuccessful => 'Connecté avec succès';
+
+  @override
+  String get passwordResetSent =>
+      'Le code de réinitialisation du mot de passe a été envoyé à votre email';
+
+  @override
+  String get passwordResetSuccess => 'Mot de passe réinitialisé avec succès';
+
+  @override
+  String get accountAlreadyExists => 'Un compte avec cet email existe déjà';
+
+  @override
+  String get weekDayMonday => 'Lundi';
+
+  @override
+  String get weekDayTuesday => 'Mardi';
+
+  @override
+  String get weekDayWednesday => 'Mercredi';
+
+  @override
+  String get weekDayThursday => 'Jeudi';
+
+  @override
+  String get weekDayFriday => 'Vendredi';
+
+  @override
+  String get weekDaySaturday => 'Samedi';
+
+  @override
+  String get weekDaySunday => 'Dimanche';
+
+  @override
+  String get iraq => 'Irak';
+
+  @override
+  String get saudiArabia => 'Arabie Saoudite';
+
+  @override
+  String get uae => 'Émirats Arabes Unis';
+
+  @override
+  String get kuwait => 'Koweït';
+
+  @override
+  String get syria => 'Syrie';
+
+  @override
+  String get jordan => 'Jordanie';
+
+  @override
+  String get lebanon => 'Liban';
 }

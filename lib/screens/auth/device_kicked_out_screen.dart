@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../login_screen.dart';
 
 /// يُعرض فورًا عند فصل هذا الجهاز من الحساب أثناء جلسة نشطة (من جهاز آخر).
@@ -10,6 +11,7 @@ class DeviceKickedOutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
@@ -36,10 +38,10 @@ class DeviceKickedOutScreen extends StatelessWidget {
                   color: Colors.orange.shade300,
                 ),
                 const SizedBox(height: 24),
-                const Text(
-                  'تم فصل هذا الجهاز من الحساب',
+                Text(
+                  loc.deviceKickedOutTitle,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -47,7 +49,7 @@ class DeviceKickedOutScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 14),
                 Text(
-                  'أُنهيت جلستك على هذا الجهاز. عند فتح التطبيق لاحقًا ستظهر لك شاشة تسجيل الدخول المعتادة.',
+                  loc.deviceKickedOutBody,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white.withValues(alpha: 0.88),
@@ -74,14 +76,12 @@ class DeviceKickedOutScreen extends StatelessWidget {
                     style: FilledButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 14),
                     ),
-                    child: const Text(kIsWeb ? 'الانتقال لتسجيل الدخول' : 'خروج'),
+                    child: Text(kIsWeb ? loc.goToLoginAction : loc.exitAction),
                   ),
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  kIsWeb
-                      ? 'يمكنك إغلاق النافذة أو استخدام الزر أعلاه.'
-                      : 'يغلق التطبيق',
+                  kIsWeb ? loc.closeWindowHint : loc.appWillCloseHint,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white.withValues(alpha: 0.55),

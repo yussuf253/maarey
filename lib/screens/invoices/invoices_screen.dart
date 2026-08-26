@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import '../../providers/invoice_provider.dart';
 import '../../providers/product_provider.dart';
+import '../../l10n/generated/app_localizations.dart';
 import '../../models/invoice.dart';
 import '../../services/database_helper.dart';
 import '../../utils/sale_receipt_pdf.dart';
@@ -56,9 +57,10 @@ bool _canReturnInvoice(Invoice inv, Set<int> serviceProductIds) {
       return false;
   }
   if (inv.items.isNotEmpty &&
-      inv.items.every((it) =>
-          it.productId != null &&
-          serviceProductIds.contains(it.productId))) {
+      inv.items.every(
+        (it) =>
+            it.productId != null && serviceProductIds.contains(it.productId),
+      )) {
     return false;
   }
   return true;
@@ -83,7 +85,7 @@ Color _invoiceStatusColor(Invoice invoice, ColorScheme cs) {
   }
 }
 
-final _numFmt  = NumberFormat('#,##0', 'ar');
+final _numFmt = NumberFormat('#,##0', 'ar');
 final _dateFmt = DateFormat('dd/MM/yyyy', 'en');
 final _dateTimeFmt = DateFormat('dd/MM/yyyy HH:mm', 'ar');
 
@@ -105,7 +107,7 @@ class _InvoicesScreenState extends State<InvoicesScreen>
   final _searchFocus = FocusNode();
   final DatabaseHelper _db = DatabaseHelper();
   String _query = '';
-  String _sort  = 'date_desc'; // date_desc | date_asc | amount_desc | amount_asc
+  String _sort = 'date_desc'; // date_desc | date_asc | amount_desc | amount_asc
   /// تجميع الفواتير تحت عناوين الورديات (فتح → إغلاق + اسم موظف الوردية).
   bool _groupByShift = true;
   Map<int, Map<String, dynamic>> _shiftById = {};
@@ -115,12 +117,19 @@ class _InvoicesScreenState extends State<InvoicesScreen>
   /// (وضع `MasterDetailLayout` على `tabletLG+` فقط).
   int? _selectedInvoiceId;
 
-  static const _tabLabels = ['الكل', 'مدفوعة', 'غير مدفوعة', 'مرتجع', 'تقسيط'];
+  static const _tabCount = 5;
+  List<String> _tabLabels(AppLocalizations loc) => [
+    loc.allLabel,
+    loc.paidStatus,
+    loc.unpaidStatus,
+    loc.returnLabel,
+    loc.paymentTypeInstallment,
+  ];
 
   @override
   void initState() {
     super.initState();
-    _tabs = TabController(length: _tabLabels.length, vsync: this);
+    _tabs = TabController(length: _tabCount, vsync: this);
     _search.addListener(() {
       setState(() => _query = _search.text.trim());
       _syncFiltersToProvider();
@@ -153,11 +162,7 @@ class _InvoicesScreenState extends State<InvoicesScreen>
     if (!mounted) return;
     final prov = Provider.of<InvoiceProvider>(context, listen: false);
     unawaited(
-      prov.setFilters(
-        tabIndex: _tabs.index,
-        sort: _sort,
-        query: _query,
-      ),
+      prov.setFilters(tabIndex: _tabs.index, sort: _sort, query: _query),
     );
     if (initial && prov.invoices.isEmpty && !prov.isLoading) {
       unawaited(prov.refresh());
@@ -165,12 +170,13 @@ class _InvoicesScreenState extends State<InvoicesScreen>
   }
 
   Future<void> _openInvoiceDetails(Invoice inv) async {
+    final loc = AppLocalizations.of(context)!;
     final id = inv.id;
     if (id == null) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('لا يمكن عرض فاتورة بدون رقم')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(loc.cannotShowInvoiceNoId)));
       return;
     }
     // على الديسكتوب/التابلت الكبير: التفاصيل تظهر إنلاين في `MasterDetailLayout`.
@@ -183,13 +189,15 @@ class _InvoicesScreenState extends State<InvoicesScreen>
     final full = await _db.getInvoiceById(id);
     if (!mounted) return;
     if (full == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('الفاتورة غير موجودة')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(loc.invoiceNotFound)));
       return;
     }
-    final subtotalBeforeDiscount =
-        full.items.fold<double>(0, (sum, e) => sum + e.total);
+    final subtotalBeforeDiscount = full.items.fold<double>(
+      0,
+      (sum, e) => sum + e.total,
+    );
     try {
       if (!mounted) return;
       await SaleReceiptPdf.presentReceipt(
@@ -227,19 +235,12 @@ class _InvoicesScreenState extends State<InvoicesScreen>
     setState(() => _shiftById = map);
   }
 
-  int _compareShiftKeys(
-    int? a,
-    int? b,
-  ) {
+  int _compareShiftKeys(int? a, int? b) {
     if (a == null && b == null) return 0;
     if (a == null) return 1;
     if (b == null) return -1;
-    final ta = DateTime.tryParse(
-      _shiftById[a]?['openedAt']?.toString() ?? '',
-    );
-    final tb = DateTime.tryParse(
-      _shiftById[b]?['openedAt']?.toString() ?? '',
-    );
+    final ta = DateTime.tryParse(_shiftById[a]?['openedAt']?.toString() ?? '');
+    final tb = DateTime.tryParse(_shiftById[b]?['openedAt']?.toString() ?? '');
     if (ta == null && tb == null) return b.compareTo(a);
     if (ta == null) return 1;
     if (tb == null) return -1;
@@ -300,7 +301,7 @@ class _InvoicesScreenState extends State<InvoicesScreen>
             controller: _tabs,
             physics: const NeverScrollableScrollPhysics(),
             children: List.generate(
-              _tabLabels.length,
+              _tabCount,
               (_) => _InvoiceList(
                 invoices: all,
                 onAdd: () => _addInvoice(),
@@ -392,18 +393,17 @@ class _InvoicesScreenState extends State<InvoicesScreen>
 
   PreferredSizeWidget _buildAppBar(ColorScheme cs) {
     final isPhone = context.screenLayout.isPhoneVariant;
+    final loc = AppLocalizations.of(context)!;
     final toggleGroup = IconButton(
       icon: Icon(
         _groupByShift ? Icons.view_agenda_rounded : Icons.view_list_rounded,
       ),
-      tooltip: _groupByShift
-          ? 'عرض مفرد (بدون تجميع بالوردية)'
-          : 'تجميع حسب الوردية',
+      tooltip: _groupByShift ? loc.flatViewOption : loc.groupByShiftOption,
       onPressed: () => setState(() => _groupByShift = !_groupByShift),
     );
     final filterBtn = IconButton(
       icon: const Icon(Icons.filter_list_rounded),
-      tooltip: 'تصفية متقدمة',
+      tooltip: loc.advancedFilterLabel,
       onPressed: _showFilterSheet,
     );
 
@@ -419,20 +419,18 @@ class _InvoicesScreenState extends State<InvoicesScreen>
     void openParked() {
       Navigator.push(
         context,
-        MaterialPageRoute<void>(
-          builder: (_) => const ParkedSalesScreen(),
-        ),
+        MaterialPageRoute<void>(builder: (_) => const ParkedSalesScreen()),
       );
     }
 
     final calendarBtn = IconButton(
       icon: const Icon(Icons.calendar_month_rounded),
-      tooltip: 'تقويم الورديات',
+      tooltip: loc.shiftsCalendarLabel,
       onPressed: openCalendar,
     );
     final parkedBtn = IconButton(
       icon: const Icon(Icons.pause_circle_outline_rounded),
-      tooltip: 'فواتير معلّقة مؤقتاً',
+      tooltip: loc.parkedSalesScreenTitle,
       onPressed: openParked,
     );
 
@@ -440,15 +438,17 @@ class _InvoicesScreenState extends State<InvoicesScreen>
       backgroundColor: cs.primary,
       foregroundColor: cs.onPrimary,
       elevation: 0,
-      title: const Text('الفواتير',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+      title: Text(
+        loc.invoicesLabel,
+        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+      ),
       actions: isPhone
           ? [
               // على الهواتف: تجميع + تصفية (الأكثر استخداماً) + قائمة المزيد.
               toggleGroup,
               filterBtn,
               PopupMenuButton<String>(
-                tooltip: 'المزيد',
+                tooltip: loc.moreLabel,
                 icon: const Icon(Icons.more_vert_rounded),
                 onSelected: (v) {
                   switch (v) {
@@ -458,14 +458,14 @@ class _InvoicesScreenState extends State<InvoicesScreen>
                       openParked();
                   }
                 },
-                itemBuilder: (_) => const [
+                itemBuilder: (_) => [
                   PopupMenuItem(
                     value: 'calendar',
                     child: Row(
                       children: [
-                        Icon(Icons.calendar_month_rounded, size: 20),
-                        SizedBox(width: 10),
-                        Text('تقويم الورديات'),
+                        const Icon(Icons.calendar_month_rounded, size: 20),
+                        const SizedBox(width: 10),
+                        Text(loc.shiftsCalendarLabel),
                       ],
                     ),
                   ),
@@ -473,26 +473,25 @@ class _InvoicesScreenState extends State<InvoicesScreen>
                     value: 'parked',
                     child: Row(
                       children: [
-                        Icon(Icons.pause_circle_outline_rounded, size: 20),
-                        SizedBox(width: 10),
-                        Text('فواتير معلّقة'),
+                        const Icon(
+                          Icons.pause_circle_outline_rounded,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 10),
+                        Text(loc.parkedInvoicesShortLabel),
                       ],
                     ),
                   ),
                 ],
               ),
             ]
-          : [
-              toggleGroup,
-              calendarBtn,
-              parkedBtn,
-              filterBtn,
-            ],
+          : [toggleGroup, calendarBtn, parkedBtn, filterBtn],
     );
   }
 
   Widget _buildTabBar(ColorScheme cs) {
     final narrow = ScreenLayout.of(context).isNarrowWidth;
+    final loc = AppLocalizations.of(context)!;
     return Container(
       color: cs.surface,
       child: TabBar(
@@ -508,7 +507,7 @@ class _InvoicesScreenState extends State<InvoicesScreen>
           fontSize: narrow ? 12 : 13,
         ),
         unselectedLabelStyle: TextStyle(fontSize: narrow ? 12 : 13),
-        tabs: _tabLabels.map((t) => Tab(text: t)).toList(),
+        tabs: _tabLabels(loc).map((t) => Tab(text: t)).toList(),
       ),
     );
   }
@@ -517,8 +516,8 @@ class _InvoicesScreenState extends State<InvoicesScreen>
   /// يبقى [FloatingActionButton.extended] على التابلت والشاشات العريضة.
   Widget? _buildFAB(ColorScheme cs) {
     final variant = context.screenLayout.layoutVariant;
-    final isPhone = variant == DeviceVariant.phoneXS ||
-        variant == DeviceVariant.phoneSM;
+    final isPhone =
+        variant == DeviceVariant.phoneXS || variant == DeviceVariant.phoneSM;
     if (isPhone) {
       return null;
     }
@@ -527,14 +526,18 @@ class _InvoicesScreenState extends State<InvoicesScreen>
       backgroundColor: cs.primary,
       foregroundColor: cs.onPrimary,
       icon: const Icon(Icons.add_rounded),
-      label: const Text('البيع',
-          style: TextStyle(fontWeight: FontWeight.bold)),
+      label: Text(
+        AppLocalizations.of(context)!.saleLabel,
+        style: const TextStyle(fontWeight: FontWeight.bold),
+      ),
     );
   }
 
   void _addInvoice() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (_) => const AddInvoiceScreen()));
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const AddInvoiceScreen()),
+    );
   }
 
   void _showFilterSheet() {
@@ -554,10 +557,7 @@ class _InvoicesScreenState extends State<InvoicesScreen>
 
 // ── SliverPersistentHeader Delegate لإبقاء التبويبات ثابتة أعلى الشاشة ───────
 class _StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
-  _StickyTabBarDelegate({
-    required this.tabBar,
-    required this.backgroundColor,
-  });
+  _StickyTabBarDelegate({required this.tabBar, required this.backgroundColor});
 
   final Widget tabBar;
   final Color backgroundColor;
@@ -596,7 +596,8 @@ class _StatsBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final total   = invoices.fold(0.0, (s, i) => s + i.total);
+    final loc = AppLocalizations.of(context)!;
+    final total = invoices.fold(0.0, (s, i) => s + i.total);
     final paid = invoices
         .where(
           (i) =>
@@ -606,8 +607,12 @@ class _StatsBar extends StatelessWidget {
                   i.type == InvoiceType.installmentCollection),
         )
         .fold(0.0, (s, i) => s + i.total);
-    final unpaid  = invoices.where((i) => i.type == InvoiceType.credit && !i.isReturned).fold(0.0, (s, i) => s + i.total);
-    final returns = invoices.where((i) => i.isReturned).fold(0.0, (s, i) => s + i.total);
+    final unpaid = invoices
+        .where((i) => i.type == InvoiceType.credit && !i.isReturned)
+        .fold(0.0, (s, i) => s + i.total);
+    final returns = invoices
+        .where((i) => i.isReturned)
+        .fold(0.0, (s, i) => s + i.total);
 
     final cs = colorScheme;
     final layout = ScreenLayout.of(context);
@@ -628,7 +633,7 @@ class _StatsBar extends StatelessWidget {
                   children: [
                     Expanded(
                       child: _StatChip(
-                        label: 'الإجمالي',
+                        label: loc.totalLabel,
                         value: _numFmt.format(total),
                         color: cs.primary,
                         icon: Icons.receipt_long_rounded,
@@ -637,7 +642,7 @@ class _StatsBar extends StatelessWidget {
                     const SizedBox(width: 8),
                     Expanded(
                       child: _StatChip(
-                        label: 'مدفوعة',
+                        label: loc.paidStatus,
                         value: _numFmt.format(paid),
                         color: AppSemanticColors.success,
                         icon: Icons.check_circle_rounded,
@@ -650,7 +655,7 @@ class _StatsBar extends StatelessWidget {
                   children: [
                     Expanded(
                       child: _StatChip(
-                        label: 'دين',
+                        label: loc.paymentTypeCredit,
                         value: _numFmt.format(unpaid),
                         color: AppSemanticColors.warning,
                         icon: Icons.access_time_rounded,
@@ -659,7 +664,7 @@ class _StatsBar extends StatelessWidget {
                     const SizedBox(width: 8),
                     Expanded(
                       child: _StatChip(
-                        label: 'مرتجع',
+                        label: loc.returnLabel,
                         value: _numFmt.format(returns),
                         color: cs.error,
                         icon: Icons.reply_rounded,
@@ -674,7 +679,7 @@ class _StatsBar extends StatelessWidget {
             children: [
               Expanded(
                 child: _StatChip(
-                  label: 'الإجمالي',
+                  label: loc.totalLabel,
                   value: _numFmt.format(total),
                   color: cs.primary,
                   icon: Icons.receipt_long_rounded,
@@ -683,7 +688,7 @@ class _StatsBar extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: _StatChip(
-                  label: 'مدفوعة',
+                  label: loc.paidStatus,
                   value: _numFmt.format(paid),
                   color: AppSemanticColors.success,
                   icon: Icons.check_circle_rounded,
@@ -692,7 +697,7 @@ class _StatsBar extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: _StatChip(
-                  label: 'دين',
+                  label: loc.paymentTypeCredit,
                   value: _numFmt.format(unpaid),
                   color: AppSemanticColors.warning,
                   icon: Icons.access_time_rounded,
@@ -701,7 +706,7 @@ class _StatsBar extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: _StatChip(
-                  label: 'مرتجع',
+                  label: loc.returnLabel,
                   value: _numFmt.format(returns),
                   color: cs.error,
                   icon: Icons.reply_rounded,
@@ -719,7 +724,12 @@ class _StatChip extends StatelessWidget {
   final String label, value;
   final Color color;
   final IconData icon;
-  const _StatChip({required this.label, required this.value, required this.color, required this.icon});
+  const _StatChip({
+    required this.label,
+    required this.value,
+    required this.color,
+    required this.icon,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -734,9 +744,15 @@ class _StatChip extends StatelessWidget {
         children: [
           Icon(icon, size: 18, color: color),
           const SizedBox(height: 3),
-          Text(value,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: color),
-              overflow: TextOverflow.ellipsis),
+          Text(
+            value,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 13,
+              color: color,
+            ),
+            overflow: TextOverflow.ellipsis,
+          ),
           Text(
             label,
             style: TextStyle(
@@ -768,6 +784,7 @@ class _SearchSortBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = colorScheme;
+    final loc = AppLocalizations.of(context)!;
     final gap = ScreenLayout.of(context).pageHorizontalGap;
     return Container(
       color: cs.surface,
@@ -778,7 +795,7 @@ class _SearchSortBar extends StatelessWidget {
           final sortBtn = PopupMenuButton<String>(
             initialValue: sort,
             onSelected: onSort,
-            tooltip: 'ترتيب',
+            tooltip: loc.sortLabel,
             icon: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
@@ -788,35 +805,54 @@ class _SearchSortBar extends StatelessWidget {
               child: Icon(Icons.sort_rounded, size: 20, color: cs.primary),
             ),
             itemBuilder: (_) => [
-              const PopupMenuItem(value: 'date_desc',   child: Text('الأحدث أولاً')),
-              const PopupMenuItem(value: 'date_asc',    child: Text('الأقدم أولاً')),
-              const PopupMenuItem(value: 'amount_desc', child: Text('الأعلى مبلغاً')),
-              const PopupMenuItem(value: 'amount_asc',  child: Text('الأقل مبلغاً')),
+              PopupMenuItem(
+                value: 'date_desc',
+                child: Text(loc.sortNewestFirst),
+              ),
+              PopupMenuItem(
+                value: 'date_asc',
+                child: Text(loc.sortOldestFirst),
+              ),
+              PopupMenuItem(
+                value: 'amount_desc',
+                child: Text(loc.sortHighestAmount),
+              ),
+              PopupMenuItem(
+                value: 'amount_asc',
+                child: Text(loc.sortLowestAmount),
+              ),
             ],
           );
           final searchField = TextField(
-              controller: controller,
-              focusNode: focusNode,
-              textDirection: TextDirection.rtl,
-              decoration: InputDecoration(
-                hintText: 'بحث باسم العميل أو رقم الفاتورة أو هاتف العميل...',
-                hintStyle: TextStyle(fontSize: 13, color: cs.onSurfaceVariant),
-                prefixIcon: Icon(Icons.search_rounded, size: 20, color: cs.onSurfaceVariant),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                filled: true,
-                fillColor: cs.surfaceContainerHighest.withValues(alpha: 0.65),
-                border: const OutlineInputBorder(
-                  borderRadius: AppShape.none,
-                  borderSide: BorderSide.none,
-                ),
-                suffixIcon: controller.text.isNotEmpty
-                    ? IconButton(
-                        icon: const Icon(Icons.close_rounded, size: 18),
-                        onPressed: controller.clear,
-                      )
-                    : null,
+            controller: controller,
+            focusNode: focusNode,
+            textDirection: TextDirection.rtl,
+            decoration: InputDecoration(
+              hintText: loc.searchInvoicesHint,
+              hintStyle: TextStyle(fontSize: 13, color: cs.onSurfaceVariant),
+              prefixIcon: Icon(
+                Icons.search_rounded,
+                size: 20,
+                color: cs.onSurfaceVariant,
               ),
-            );
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 14,
+                vertical: 10,
+              ),
+              filled: true,
+              fillColor: cs.surfaceContainerHighest.withValues(alpha: 0.65),
+              border: const OutlineInputBorder(
+                borderRadius: AppShape.none,
+                borderSide: BorderSide.none,
+              ),
+              suffixIcon: controller.text.isNotEmpty
+                  ? IconButton(
+                      icon: const Icon(Icons.close_rounded, size: 18),
+                      onPressed: controller.clear,
+                    )
+                  : null,
+            ),
+          );
           if (narrow) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -905,6 +941,7 @@ class _InvoiceList extends StatelessWidget {
 
   Widget _buildList(BuildContext context) {
     final gap = ScreenLayout.of(context).pageHorizontalGap;
+    final loc = AppLocalizations.of(context)!;
     final baseCount = invoices.length;
     final tail = (isLoadingMore ? 1 : 0);
 
@@ -923,7 +960,7 @@ class _InvoiceList extends StatelessWidget {
           return _InvoiceCard(
             invoice: inv,
             isDark: isDark,
-            shiftStaffLabel: _labelFor(inv.workShiftId),
+            shiftStaffLabel: _labelFor(inv.workShiftId, loc),
             isSelected: inv.id != null && inv.id == selectedInvoiceId,
             serviceProductIds: serviceProductIds,
             onTap: () => onInvoiceTap(inv),
@@ -973,7 +1010,7 @@ class _InvoiceList extends StatelessWidget {
         return _InvoiceCard(
           invoice: inv,
           isDark: isDark,
-          shiftStaffLabel: _labelFor(inv.workShiftId),
+          shiftStaffLabel: _labelFor(inv.workShiftId, loc),
           isSelected: inv.id != null && inv.id == selectedInvoiceId,
           serviceProductIds: serviceProductIds,
           onTap: () => onInvoiceTap(inv),
@@ -982,10 +1019,10 @@ class _InvoiceList extends StatelessWidget {
     );
   }
 
-  String? _labelFor(int? shiftId) {
+  String? _labelFor(int? shiftId, AppLocalizations loc) {
     if (shiftId == null) return null;
     final name = shiftById[shiftId]?['shiftStaffName']?.toString().trim();
-    if (name == null || name.isEmpty) return 'وردية #$shiftId';
+    if (name == null || name.isEmpty) return loc.shiftNumberLabel(shiftId);
     return name;
   }
 }
@@ -1008,6 +1045,7 @@ class _ShiftSectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    final loc = AppLocalizations.of(context)!;
     final bg = Color.alphaBlend(
       cs.primary.withValues(alpha: isDark ? 0.12 : 0.08),
       cs.surface,
@@ -1033,7 +1071,7 @@ class _ShiftSectionHeader extends StatelessWidget {
             const SizedBox(width: 8),
             Expanded(
               child: Text(
-                'بدون وردية — فواتير قديمة أو خارج جلسة وردية ($invoiceCount)',
+                loc.noShiftGroupLabel(invoiceCount),
                 style: const TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 13,
@@ -1054,27 +1092,23 @@ class _ShiftSectionHeader extends StatelessWidget {
           border: Border.all(color: border),
         ),
         child: Text(
-          'وردية #$shiftId — تعذر تحميل تفاصيل الوردية ($invoiceCount فاتورة)',
+          loc.shiftLoadFailedLabel(shiftId as Object, invoiceCount),
           style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
         ),
       );
     }
 
     final Map<String, dynamic> row = shiftRow!;
-    final name =
-        (row['shiftStaffName'] as String?)?.trim().isNotEmpty == true
-            ? (row['shiftStaffName'] as String).trim()
-            : 'موظف الوردية';
+    final name = (row['shiftStaffName'] as String?)?.trim().isNotEmpty == true
+        ? (row['shiftStaffName'] as String).trim()
+        : loc.shiftStaffFallback;
     final opened = DateTime.tryParse(row['openedAt']?.toString() ?? '');
-    final closed = row['closedAt'] != null &&
-            row['closedAt'].toString().isNotEmpty
+    final closed =
+        row['closedAt'] != null && row['closedAt'].toString().isNotEmpty
         ? DateTime.tryParse(row['closedAt'].toString())
         : null;
-    final openS =
-        opened != null ? dateTimeFmt.format(opened) : '—';
-    final closeS = closed != null
-        ? dateTimeFmt.format(closed)
-        : 'مفتوحة';
+    final openS = opened != null ? dateTimeFmt.format(opened) : '—';
+    final closeS = closed != null ? dateTimeFmt.format(closed) : loc.openStatus;
 
     return Container(
       width: double.infinity,
@@ -1093,7 +1127,7 @@ class _ShiftSectionHeader extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
-                  'وردية #$shiftId — $name',
+                  loc.shiftWithNameLabel(shiftId as Object, name),
                   style: const TextStyle(
                     fontWeight: FontWeight.w800,
                     fontSize: 14,
@@ -1101,7 +1135,7 @@ class _ShiftSectionHeader extends StatelessWidget {
                 ),
               ),
               Text(
-                '$invoiceCount فاتورة',
+                loc.invoiceCountLabel(invoiceCount),
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 12,
@@ -1128,6 +1162,7 @@ class _ShiftSectionHeader extends StatelessWidget {
 class _InvoiceCard extends StatelessWidget {
   final Invoice invoice;
   final bool isDark;
+
   /// اسم موظف الوردية من جدول الورديات (يُعرض على البطاقة).
   final String? shiftStaffLabel;
   final VoidCallback onTap;
@@ -1147,28 +1182,36 @@ class _InvoiceCard extends StatelessWidget {
     this.isSelected = false,
   });
 
-  String get _statusLabel {
-    if (invoice.isReturned) return 'مرتجع';
+  String _statusLabel(AppLocalizations loc) {
+    if (invoice.isReturned) return loc.returnLabel;
     switch (invoice.type) {
-      case InvoiceType.cash:        return 'مدفوعة';
-      case InvoiceType.credit:      return 'غير مدفوعة';
-      case InvoiceType.installment: return 'تقسيط';
-      case InvoiceType.delivery:    return 'توصيل';
+      case InvoiceType.cash:
+        return loc.paidStatus;
+      case InvoiceType.credit:
+        return loc.unpaidStatus;
+      case InvoiceType.installment:
+        return loc.paymentTypeInstallment;
+      case InvoiceType.delivery:
+        return loc.paymentTypeDelivery;
       case InvoiceType.debtCollection:
-        return 'تحصيل دين';
+        return loc.paymentTypeDebtCollection;
       case InvoiceType.installmentCollection:
-        return 'تسديد قسط';
+        return loc.paymentTypeInstallmentCollection;
       case InvoiceType.supplierPayment:
-        return 'دفع مورد';
+        return loc.paymentTypeSupplierPayment;
     }
   }
 
   IconData get _typeIcon {
     switch (invoice.type) {
-      case InvoiceType.cash:        return Icons.payments_rounded;
-      case InvoiceType.credit:      return Icons.credit_score_rounded;
-      case InvoiceType.installment: return Icons.calendar_month_rounded;
-      case InvoiceType.delivery:    return Icons.local_shipping_rounded;
+      case InvoiceType.cash:
+        return Icons.payments_rounded;
+      case InvoiceType.credit:
+        return Icons.credit_score_rounded;
+      case InvoiceType.installment:
+        return Icons.calendar_month_rounded;
+      case InvoiceType.delivery:
+        return Icons.local_shipping_rounded;
       case InvoiceType.debtCollection:
         return Icons.account_balance_wallet_rounded;
       case InvoiceType.installmentCollection:
@@ -1181,6 +1224,7 @@ class _InvoiceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    final loc = AppLocalizations.of(context)!;
     final statusColor = _invoiceStatusColor(invoice, cs);
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
@@ -1193,14 +1237,13 @@ class _InvoiceCard extends StatelessWidget {
             : cs.surface,
         borderRadius: AppShape.none,
         border: isSelected
-            ? Border(
-                right: BorderSide(color: cs.primary, width: 3),
-              )
+            ? Border(right: BorderSide(color: cs.primary, width: 3))
             : null,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.05),
-            blurRadius: 8, offset: const Offset(0, 2),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -1216,7 +1259,8 @@ class _InvoiceCard extends StatelessWidget {
               children: [
                 // أيقونة النوع
                 Container(
-                  width: 46, height: 46,
+                  width: 46,
+                  height: 46,
                   decoration: BoxDecoration(
                     color: statusColor.withValues(alpha: 0.12),
                     borderRadius: AppShape.none,
@@ -1234,12 +1278,15 @@ class _InvoiceCard extends StatelessWidget {
                           Expanded(
                             child: Text(
                               invoice.customerName,
-                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                              ),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
                           Text(
-                            '${_numFmt.format(invoice.total)} د.ع',
+                            loc.totalIqd(_numFmt.format(invoice.total)),
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
@@ -1260,7 +1307,8 @@ class _InvoiceCard extends StatelessWidget {
                           ),
                           const SizedBox(width: 6),
                           Container(
-                            width: 4, height: 4,
+                            width: 4,
+                            height: 4,
                             decoration: BoxDecoration(
                               color: cs.onSurfaceVariant,
                               shape: BoxShape.circle,
@@ -1276,13 +1324,16 @@ class _InvoiceCard extends StatelessWidget {
                           ),
                           const Spacer(),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 3,
+                            ),
                             decoration: BoxDecoration(
                               color: statusColor.withValues(alpha: 0.12),
                               borderRadius: AppShape.none,
                             ),
                             child: Text(
-                              _statusLabel,
+                              _statusLabel(loc),
                               style: TextStyle(
                                 color: statusColor,
                                 fontSize: 11,
@@ -1295,7 +1346,10 @@ class _InvoiceCard extends StatelessWidget {
                       if (invoice.items.isNotEmpty) ...[
                         const SizedBox(height: 5),
                         Text(
-                          '${invoice.items.length} صنف · خصم ${_numFmt.format(invoice.discount)} د.ع',
+                          loc.itemsAndDiscountLine(
+                            invoice.items.length,
+                            _numFmt.format(invoice.discount),
+                          ),
                           style: TextStyle(
                             fontSize: 11,
                             color: cs.onSurfaceVariant,
@@ -1314,7 +1368,7 @@ class _InvoiceCard extends StatelessWidget {
                             const SizedBox(width: 4),
                             Expanded(
                               child: Text(
-                                'وردية: $shiftStaffLabel',
+                                loc.shiftColonLabel(shiftStaffLabel!),
                                 style: TextStyle(
                                   fontSize: 11,
                                   fontWeight: FontWeight.w600,
@@ -1335,9 +1389,8 @@ class _InvoiceCard extends StatelessWidget {
                       Navigator.push<void>(
                         context,
                         MaterialPageRoute<void>(
-                          builder: (_) => ProcessReturnScreen(
-                            originalInvoice: invoice,
-                          ),
+                          builder: (_) =>
+                              ProcessReturnScreen(originalInvoice: invoice),
                         ),
                       );
                     },
@@ -1368,28 +1421,29 @@ class _ReturnActionPill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return Tooltip(
-      message: 'إنشاء فاتورة ترجيع لهذه الفاتورة',
+      message: loc.createReturnInvoiceTooltip,
       child: Material(
         color: AppSemanticColors.danger.withValues(alpha: 0.10),
         borderRadius: BorderRadius.zero,
         child: InkWell(
           onTap: onPressed,
           borderRadius: BorderRadius.zero,
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(
+                const Icon(
                   Icons.assignment_return_rounded,
                   size: 14,
                   color: AppSemanticColors.danger,
                 ),
-                SizedBox(width: 4),
+                const SizedBox(width: 4),
                 Text(
-                  'ترجيع',
-                  style: TextStyle(
+                  loc.returnActionLabel,
+                  style: const TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.w700,
                     color: AppSemanticColors.danger,
@@ -1412,6 +1466,7 @@ class _EmptyState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    final loc = AppLocalizations.of(context)!;
     final gap = ScreenLayout.of(context).pageHorizontalGap;
     return LayoutBuilder(
       builder: (context, c) {
@@ -1437,7 +1492,7 @@ class _EmptyState extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  'لا توجد فواتير',
+                  loc.noInvoicesTitle,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -1446,11 +1501,8 @@ class _EmptyState extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'أضف أول فاتورة الآن',
-                  style: TextStyle(
-                    color: cs.onSurfaceVariant,
-                    fontSize: 14,
-                  ),
+                  loc.addFirstInvoiceCta,
+                  style: TextStyle(color: cs.onSurfaceVariant, fontSize: 14),
                 ),
                 const SizedBox(height: 24),
                 FilledButton.icon(
@@ -1467,9 +1519,9 @@ class _EmptyState extends StatelessWidget {
                     ),
                   ),
                   icon: const Icon(Icons.add_rounded),
-                  label: const Text(
-                    'البيع',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  label: Text(
+                    loc.saleLabel,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
@@ -1493,11 +1545,15 @@ class _FilterSheet extends StatefulWidget {
 class _FilterSheetState extends State<_FilterSheet> {
   late String _sort;
   @override
-  void initState() { super.initState(); _sort = widget.currentSort; }
+  void initState() {
+    super.initState();
+    _sort = widget.currentSort;
+  }
 
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    final loc = AppLocalizations.of(context)!;
     return Container(
       margin: const EdgeInsets.fromLTRB(12, 0, 12, 12),
       decoration: BoxDecoration(
@@ -1514,14 +1570,31 @@ class _FilterSheetState extends State<_FilterSheet> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text('خيارات الترتيب',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              Text(
+                loc.sortOptionsTitle,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               const SizedBox(height: 16),
               ...[
-                ('date_desc',   'الأحدث أولاً',    Icons.arrow_downward_rounded),
-                ('date_asc',    'الأقدم أولاً',     Icons.arrow_upward_rounded),
-                ('amount_desc', 'الأعلى مبلغاً',    Icons.trending_up_rounded),
-                ('amount_asc',  'الأقل مبلغاً',     Icons.trending_down_rounded),
+                (
+                  'date_desc',
+                  loc.sortNewestFirst,
+                  Icons.arrow_downward_rounded,
+                ),
+                ('date_asc', loc.sortOldestFirst, Icons.arrow_upward_rounded),
+                (
+                  'amount_desc',
+                  loc.sortHighestAmount,
+                  Icons.trending_up_rounded,
+                ),
+                (
+                  'amount_asc',
+                  loc.sortLowestAmount,
+                  Icons.trending_down_rounded,
+                ),
               ].map((e) {
                 final selected = _sort == e.$1;
                 return RadioListTile<String>(
@@ -1553,7 +1626,10 @@ class _FilterSheetState extends State<_FilterSheet> {
                   ),
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
-                child: const Text('تطبيق', style: TextStyle(fontWeight: FontWeight.bold)),
+                child: Text(
+                  loc.applyAction,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
             ],
           ),
