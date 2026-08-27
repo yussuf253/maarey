@@ -11,6 +11,7 @@ import '../services/database_helper.dart';
 import '../services/tenant_context_service.dart';
 import '../utils/iraqi_currency_format.dart';
 import '../utils/screen_layout.dart';
+import '../l10n/generated/app_localizations.dart';
 
 /// أهداف البطاقات المصغّرة في الرئيسية — تُمرَّر إلى [HomeScreen] للتنقّل.
 enum HomeGlanceAction {
@@ -156,7 +157,7 @@ class _HomeGlanceOrbitState extends State<HomeGlanceOrbit> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        'ترتيب البطاقات',
+                        AppLocalizations.of(context)!.reorderCards,
                         textAlign: TextAlign.right,
                         style: TextStyle(
                           fontSize: 18,
@@ -166,7 +167,7 @@ class _HomeGlanceOrbitState extends State<HomeGlanceOrbit> {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        'اسحب العناصر لأعلى أو لأسفل. الترتيب يُحفظ على هذا الجهاز.',
+                        AppLocalizations.of(context)!.dragToReorderCards,
                         textAlign: TextAlign.right,
                         style: TextStyle(
                           fontSize: 12.5,
@@ -194,7 +195,7 @@ class _HomeGlanceOrbitState extends State<HomeGlanceOrbit> {
                                 color: cs.outline,
                               ),
                               title: Text(
-                                _titleForId(id),
+                                _titleForId(id, AppLocalizations.of(ctx)!),
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
@@ -216,7 +217,7 @@ class _HomeGlanceOrbitState extends State<HomeGlanceOrbit> {
                             await _persistOrder();
                             if (ctx.mounted) Navigator.pop(ctx);
                           },
-                          child: const Text('حفظ الترتيب'),
+                          child: Text(AppLocalizations.of(context)!.saveOrder),
                         ),
                       ),
                     ],
@@ -230,20 +231,20 @@ class _HomeGlanceOrbitState extends State<HomeGlanceOrbit> {
     );
   }
 
-  String _titleForId(String id) {
+  String _titleForId(String id, AppLocalizations loc) {
     switch (id) {
       case 'cash':
-        return 'الصندوق';
+        return loc.cashRegisterCard;
       case 'sale':
-        return 'بيع جديد';
+        return loc.newSaleCard;
       case 'stock':
-        return 'المخزون';
+        return loc.inventoryCard;
       case 'orders':
-        return 'الطلبات المنجزة';
+        return loc.completedOrdersCard;
       case 'parked':
-        return 'معلّقات';
+        return loc.parkedCard;
       case 'reports':
-        return 'التقارير';
+        return loc.reportsCard;
       default:
         return id;
     }
@@ -283,7 +284,7 @@ class _HomeGlanceOrbitState extends State<HomeGlanceOrbit> {
               children: [
                 Expanded(
                   child: Text(
-                    'لمحة المربّع',
+                    AppLocalizations.of(context)!.glanceOverview,
                     textAlign: TextAlign.right,
                     style: TextStyle(
                       fontSize: w < 360 ? 14 : 15,
@@ -293,12 +294,12 @@ class _HomeGlanceOrbitState extends State<HomeGlanceOrbit> {
                   ),
                 ),
                 IconButton(
-                  tooltip: 'إعادة ترتيب البطاقات',
+                  tooltip: AppLocalizations.of(context)!.reorderCards,
                   onPressed: _openReorderSheet,
                   icon: Icon(Icons.swap_vert_rounded, color: cs.primary),
                 ),
                 IconButton(
-                  tooltip: 'تحديث الأرقام',
+                  tooltip: AppLocalizations.of(context)!.refreshNumbers,
                   onPressed: () {
                     setState(() => _loading = true);
                     _loadStats();
@@ -367,9 +368,9 @@ class _HomeGlanceOrbitState extends State<HomeGlanceOrbit> {
         return _GlanceCard(
           accent: const Color(0xFF059669),
           icon: Icons.payments_rounded,
-          title: 'الصندوق',
+          title: AppLocalizations.of(context)!.cashRegisterCard,
           subtitle: IraqiCurrencyFormat.formatIqd(_cashBalance),
-          hint: 'رصيد مجمّع في السجل',
+          hint: AppLocalizations.of(context)!.cashRegisterHint,
           badge: Consumer<ShiftProvider>(
             builder: (ctx, shift, _) {
               if (!shift.hasOpenShift) return const SizedBox.shrink();
@@ -379,8 +380,8 @@ class _HomeGlanceOrbitState extends State<HomeGlanceOrbit> {
                   color: const Color(0xFF22C55E).withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(4),
                 ),
-                child: const Text(
-                  'وردية',
+                child: Text(
+                  AppLocalizations.of(context)!.shiftLabel,
                   style: TextStyle(
                     fontSize: 9,
                     fontWeight: FontWeight.w800,
@@ -396,20 +397,20 @@ class _HomeGlanceOrbitState extends State<HomeGlanceOrbit> {
         return _GlanceCard(
           accent: const Color(0xFF2563EB),
           icon: Icons.add_shopping_cart_rounded,
-          title: 'بيع جديد',
-          subtitle: 'فاتورة سريعة',
-          hint: 'اختصار للصندوق والبيع',
+          title: AppLocalizations.of(context)!.newSaleCard,
+          subtitle: AppLocalizations.of(context)!.newSaleSubtitle,
+          hint: AppLocalizations.of(context)!.newSaleHint,
           onTap: () => widget.onAction(HomeGlanceAction.newSale),
         );
       case 'stock':
         return _GlanceCard(
           accent: const Color(0xFFD97706),
           icon: Icons.inventory_2_rounded,
-          title: 'المخزون',
-          subtitle: '$_productCount صنفاً نشطاً',
+          title: AppLocalizations.of(context)!.inventoryCard,
+          subtitle: AppLocalizations.of(context)!.inventorySubtitle(_productCount),
           hint: _lowStockCount > 0
-              ? 'تنبيه: $_lowStockCount بمخزون منخفض'
-              : 'لا تنبيهات مخزون',
+              ? AppLocalizations.of(context)!.inventoryAlertLowStock(_lowStockCount)
+              : AppLocalizations.of(context)!.inventoryNoAlerts,
           alertDot: _lowStockCount > 0,
           onTap: () => widget.onAction(HomeGlanceAction.inventoryProducts),
         );
@@ -424,9 +425,9 @@ class _HomeGlanceOrbitState extends State<HomeGlanceOrbit> {
         return _GlanceCard(
           accent: const Color(0xFF1D4ED8),
           icon: Icons.shopping_cart_checkout_rounded,
-          title: 'الطلبات المنجزة',
-          subtitle: '$_completedOrdersCount طلب',
-          hint: 'مكسب الوردية السابقة',
+          title: AppLocalizations.of(context)!.completedOrdersCard,
+          subtitle: AppLocalizations.of(context)!.completedOrdersSubtitle(_completedOrdersCount),
+          hint: AppLocalizations.of(context)!.completedOrdersHint,
           badge: Container(
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
             decoration: BoxDecoration(
@@ -458,9 +459,9 @@ class _HomeGlanceOrbitState extends State<HomeGlanceOrbit> {
         return _GlanceCard(
           accent: const Color(0xFF7C3AED),
           icon: Icons.pause_circle_filled_rounded,
-          title: 'معلّقات',
-          subtitle: '$_parkedCount فاتورة',
-          hint: 'مؤقتاً في الانتظار',
+          title: AppLocalizations.of(context)!.parkedCard,
+          subtitle: AppLocalizations.of(context)!.parkedSubtitle(_parkedCount),
+          hint: AppLocalizations.of(context)!.parkedHint,
           alertDot: _parkedCount > 0,
           onTap: () => widget.onAction(HomeGlanceAction.parkedSales),
         );
@@ -468,9 +469,9 @@ class _HomeGlanceOrbitState extends State<HomeGlanceOrbit> {
         return _GlanceCard(
           accent: const Color(0xFF0D9488),
           icon: Icons.insights_rounded,
-          title: 'التقارير',
-          subtitle: 'لوحة تنفيذية',
-          hint: 'مؤشرات الفترة',
+          title: AppLocalizations.of(context)!.reportsCard,
+          subtitle: AppLocalizations.of(context)!.reportsSubtitle,
+          hint: AppLocalizations.of(context)!.reportsHint,
           onTap: () => widget.onAction(HomeGlanceAction.reportsExecutive),
         );
       default:

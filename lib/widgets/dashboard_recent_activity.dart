@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/recent_activity_entry.dart';
 import '../services/database_helper.dart';
+import '../l10n/generated/app_localizations.dart';
 
 const String _kPrefRecentActivityListHeight = 'dashboard_recent_activity_list_height';
 const String _kPrefRecentActivityPanelWidth = 'dashboard_recent_activity_panel_width';
@@ -227,7 +228,7 @@ class _DashboardRecentActivityState extends State<DashboardRecentActivity> {
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Text(
-                'تعذر تحميل النشاط: $_error',
+                AppLocalizations.of(context)!.failedToLoadActivity(_error ?? 'Unknown'),
                 textAlign: TextAlign.center,
                 style: TextStyle(color: cs.error, fontSize: 13),
               ),
@@ -245,7 +246,7 @@ class _DashboardRecentActivityState extends State<DashboardRecentActivity> {
                   Icon(Icons.inbox_rounded, size: 48, color: text2),
                   const SizedBox(height: 12),
                   Text(
-                    'لا يوجد نشاط مطابق بعد',
+                    AppLocalizations.of(context)!.noMatchingActivityYet,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 14,
@@ -255,7 +256,7 @@ class _DashboardRecentActivityState extends State<DashboardRecentActivity> {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    'سجّل مبيعات أو حركات صندوق أو أي عمل في التطبيق لتظهر هنا مرتّبة زمنياً.',
+                    AppLocalizations.of(context)!.noActivityHint,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 12.5,
@@ -334,7 +335,7 @@ class _DashboardRecentActivityState extends State<DashboardRecentActivity> {
                                 const SizedBox(width: 8),
                                 Expanded(
                                   child: Text(
-                                    'نظرة عامة على النشاطات الأخيرة',
+                                    AppLocalizations.of(context)!.recentActivityOverview,
                                     style: TextStyle(
                                       fontWeight: FontWeight.w800,
                                       fontSize: 15,
@@ -344,7 +345,7 @@ class _DashboardRecentActivityState extends State<DashboardRecentActivity> {
                                   ),
                                 ),
                                 IconButton(
-                                  tooltip: 'تحديث',
+                                  tooltip: AppLocalizations.of(context)!.refreshTooltip,
                                   onPressed: _loading ? null : _load,
                                   icon: _loading
                                       ? SizedBox(
@@ -372,7 +373,7 @@ class _DashboardRecentActivityState extends State<DashboardRecentActivity> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   _FilterChip(
-                                    label: 'الكل',
+                                    label: AppLocalizations.of(context)!.allLabel,
                                     selected: _filter == _ActivityFilter.all,
                                     scheme: cs,
                                     onTap: () =>
@@ -380,7 +381,7 @@ class _DashboardRecentActivityState extends State<DashboardRecentActivity> {
                                   ),
                                   const SizedBox(width: 8),
                                   _FilterChip(
-                                    label: 'الفواتير',
+                                    label: AppLocalizations.of(context)!.invoicesLabelShort,
                                     selected: _filter == _ActivityFilter.invoices,
                                     scheme: cs,
                                     onTap: () => setState(
@@ -389,7 +390,7 @@ class _DashboardRecentActivityState extends State<DashboardRecentActivity> {
                                   ),
                                   const SizedBox(width: 8),
                                   _FilterChip(
-                                    label: 'الصندوق',
+                                    label: AppLocalizations.of(context)!.cashLabelShort,
                                     selected: _filter == _ActivityFilter.cash,
                                     scheme: cs,
                                     onTap: () => setState(
@@ -398,7 +399,7 @@ class _DashboardRecentActivityState extends State<DashboardRecentActivity> {
                                   ),
                                   const SizedBox(width: 8),
                                   _FilterChip(
-                                    label: 'أخرى',
+                                    label: AppLocalizations.of(context)!.otherLabelShort,
                                     selected: _filter == _ActivityFilter.other,
                                     scheme: cs,
                                     onTap: () => setState(
@@ -429,7 +430,7 @@ class _DashboardRecentActivityState extends State<DashboardRecentActivity> {
                                           color: cs.primary,
                                         ),
                                         label: Text(
-                                          'قائمة الفواتير',
+                                          AppLocalizations.of(context)!.openInvoicesList,
                                           style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             color: cs.primary,
@@ -446,11 +447,7 @@ class _DashboardRecentActivityState extends State<DashboardRecentActivity> {
                                           color: cs.secondary,
                                         ),
                                         label: Text(
-                                          'الصندوق',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            color: cs.secondary,
-                                          ),
+                                          AppLocalizations.of(context)!.openCashRegister,
                                         ),
                                       ),
                                     ],

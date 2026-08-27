@@ -172,7 +172,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get emailLabel => 'Email';
+  String emailLabel(Object email) {
+    return 'Email: $email';
+  }
 
   @override
   String currentPlanLabel(Object plan) {
@@ -1535,4 +1537,338 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get lebanon => 'Lebanon';
+
+  @override
+  String get checkingLicense => 'Checking license…';
+
+  @override
+  String get storeManagementSystem => 'Store Management System';
+
+  @override
+  String get systemInitializing => 'Initializing system...';
+
+  @override
+  String get maintenance => 'Maintenance';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get updateRequired => 'Update Required';
+
+  @override
+  String get downloadUpdate => 'Download Update';
+
+  @override
+  String get updateAvailable => 'Update Available';
+
+  @override
+  String get later => 'Later';
+
+  @override
+  String get download => 'Download';
+
+  @override
+  String get openLink => 'Open link';
+
+  @override
+  String get done => 'Done';
+
+  @override
+  String get businessManagementSystem => 'Business Management System';
+
+  @override
+  String get salesAndInvoices => 'Sales & Invoices';
+
+  @override
+  String get accountsAndReports => 'Accounts & Reports';
+
+  @override
+  String get inventoryAndWarehouses => 'Inventory & Warehouses';
+
+  @override
+  String get createNewAccountTitle => 'Create New Account';
+
+  @override
+  String get loginTitle => 'Login';
+
+  @override
+  String get signupSubtitle =>
+      'You\'ll receive a verification code on your email to confirm your account';
+
+  @override
+  String get loginSubtitle => 'Enter your email and password to login';
+
+  @override
+  String get haveAccountBackToLogin => 'Have an account? Back to login';
+
+  @override
+  String get noAccountCreateNew => 'Don\'t have an account? Create new account';
+
+  @override
+  String get requiredField => 'This field is required';
+
+  @override
+  String get minLength3Chars => 'Must be at least 3 characters';
+
+  @override
+  String get nameRequired => 'Name is required';
+
+  @override
+  String get nameRequiredMin3 => 'Name is required (at least 3 characters)';
+
+  @override
+  String get emailRequiredShort => 'Email is required';
+
+  @override
+  String get iraqMobileInvalid =>
+      'Iraqi mobile: 11 digits starting with 07 (e.g., 07701234567)';
+
+  @override
+  String get passwordRequired => 'Password is required';
+
+  @override
+  String get passwordDoesNotMeetRequirements =>
+      'Password does not meet requirements';
+
+  @override
+  String get passwordsDoNotMatch => 'Passwords don\'t match';
+
+  @override
+  String get enterPasswordAgain => 'Please re-enter your password';
+
+  @override
+  String get iraqDialTooltip =>
+      '+964 Iraq — other country codes will be available later';
+
+  @override
+  String get welcomeToNaBoo => 'Welcome to NaBoo';
+
+  @override
+  String welcomeBackGreeting(Object name) {
+    return 'Welcome back, $name';
+  }
+
+  @override
+  String get todaysBusinessSummary => 'Here\'s today\'s business summary';
+
+  @override
+  String get userFallback => 'User';
+
+  @override
+  String get failedToLoadChartData => 'Failed to load chart data.';
+
+  @override
+  String get lastWeek => 'Last week';
+
+  @override
+  String get lastMonth => 'Last month';
+
+  @override
+  String get incomeLabel => 'Income:';
+
+  @override
+  String get expenseLabel => 'Expense:';
+
+  @override
+  String get salesPerformance => 'Sales performance';
+
+  @override
+  String get totalLabelColon => 'Total:';
+
+  @override
+  String get expensesVsIncome => 'Expenses vs Income';
+
+  @override
+  String get incomeLegend => 'Income';
+
+  @override
+  String get expensesLegend => 'Expenses';
+
+  @override
+  String get changePeriod => 'Change period';
+
+  @override
+  String get pinnedProductsHint => 'Pinned products — tap for quick sale';
+
+  @override
+  String get byPiece => 'By piece';
+
+  @override
+  String get byWeight => 'By weight';
+
+  @override
+  String get addGroup => 'Add group';
+
+  @override
+  String get remainingColon => 'Remaining:';
+
+  @override
+  String get notTracked => 'Not tracked';
+
+  @override
+  String get technicalService => 'Technical service';
+
+  @override
+  String get groupByCategory => 'Group by category';
+
+  @override
+  String get groupByCategoryDesc =>
+      'Filter pinned products by a single category';
+
+  @override
+  String get groupByBrand => 'Group by brand';
+
+  @override
+  String get groupByBrandDesc => 'Filter pinned products by a single brand';
+
+  @override
+  String get noCategoriesYet => 'No categories yet';
+
+  @override
+  String get chooseCategory => 'Choose a category';
+
+  @override
+  String get categoryFallback => 'Category';
+
+  @override
+  String get noBrandsYet => 'No brands yet';
+
+  @override
+  String get chooseBrand => 'Choose a brand';
+
+  @override
+  String get brandFallback => 'Brand';
+
+  @override
+  String get groupAlreadyExists => 'This group already exists';
+
+  @override
+  String get noMatchingActivityYet => 'No matching activity yet';
+
+  @override
+  String get noActivityHint =>
+      'Record sales, cash movements, or any activity in the app to see them here chronologically.';
+
+  @override
+  String failedToLoadActivity(Object error) {
+    return 'Failed to load activity: $error';
+  }
+
+  @override
+  String get recentActivityOverview => 'Recent activity overview';
+
+  @override
+  String get invoicesLabelShort => 'Invoices';
+
+  @override
+  String get cashLabelShort => 'Cash register';
+
+  @override
+  String get otherLabelShort => 'Other';
+
+  @override
+  String get openInvoicesList => 'Open invoices list';
+
+  @override
+  String get openCashRegister => 'Cash register';
+
+  @override
+  String get cashRegisterCard => 'Cash register';
+
+  @override
+  String get cashRegisterHint => 'Aggregated balance in the ledger';
+
+  @override
+  String get shiftLabel => 'Shift';
+
+  @override
+  String get newSaleCard => 'New sale';
+
+  @override
+  String get newSaleSubtitle => 'Quick invoice';
+
+  @override
+  String get newSaleHint => 'Shortcut for cash register and sale';
+
+  @override
+  String get inventoryCard => 'Inventory';
+
+  @override
+  String inventorySubtitle(Object count) {
+    return '$count active items';
+  }
+
+  @override
+  String inventoryAlertLowStock(Object count) {
+    return 'Alert: $count with low stock';
+  }
+
+  @override
+  String get inventoryNoAlerts => 'No stock alerts';
+
+  @override
+  String get completedOrdersCard => 'Completed orders';
+
+  @override
+  String completedOrdersSubtitle(Object count) {
+    return '$count orders';
+  }
+
+  @override
+  String get completedOrdersHint => 'Previous shift profit';
+
+  @override
+  String get parkedCard => 'Parked';
+
+  @override
+  String parkedSubtitle(Object count) {
+    return '$count invoices';
+  }
+
+  @override
+  String get parkedHint => 'Temporarily waiting';
+
+  @override
+  String get reportsCard => 'Reports';
+
+  @override
+  String get reportsSubtitle => 'Dashboard';
+
+  @override
+  String get reportsHint => 'Period indicators';
+
+  @override
+  String get dragToReorderCards =>
+      'Drag items up or down to reorder. Order is saved on this device.';
+
+  @override
+  String get saveOrder => 'Save order';
+
+  @override
+  String get reorderCards => 'Reorder cards';
+
+  @override
+  String get refreshNumbers => 'Refresh numbers';
+
+  @override
+  String get glanceOverview => 'Quick overview';
+
+  @override
+  String get dragHeightHint =>
+      'Drag up or down to change the height of the pinned products list';
+
+  @override
+  String get pinnedProductsHeightHandle =>
+      'Handle to change pinned products list height';
+
+  @override
+  String filterByCategoryColon(Object name) {
+    return 'Filter by category: $name';
+  }
+
+  @override
+  String filterByBrandColon(Object name) {
+    return 'Filter by brand: $name';
+  }
 }

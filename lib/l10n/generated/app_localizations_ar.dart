@@ -171,7 +171,9 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get emailLabel => 'البريد الإلكتروني';
+  String emailLabel(Object email) {
+    return 'البريد: $email';
+  }
 
   @override
   String currentPlanLabel(Object plan) {
@@ -1520,4 +1522,336 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get lebanon => 'لبنان';
+
+  @override
+  String get checkingLicense => 'جارٍ التحقق من الترخيص…';
+
+  @override
+  String get storeManagementSystem => 'نظام إدارة المتاجر';
+
+  @override
+  String get systemInitializing => 'جاري تهيئة النظام...';
+
+  @override
+  String get maintenance => 'صيانة';
+
+  @override
+  String get ok => 'حسناً';
+
+  @override
+  String get updateRequired => 'تحديث مطلوب';
+
+  @override
+  String get downloadUpdate => 'تحميل التحديث';
+
+  @override
+  String get updateAvailable => 'تحديث متوفر';
+
+  @override
+  String get later => 'لاحقاً';
+
+  @override
+  String get download => 'تحميل';
+
+  @override
+  String get openLink => 'فتح الرابط';
+
+  @override
+  String get done => 'تم';
+
+  @override
+  String get businessManagementSystem => 'نظام إدارة الأعمال';
+
+  @override
+  String get salesAndInvoices => 'المبيعات والفواتير';
+
+  @override
+  String get accountsAndReports => 'الحسابات والتقارير';
+
+  @override
+  String get inventoryAndWarehouses => 'المخزون والمستودعات';
+
+  @override
+  String get createNewAccountTitle => 'إنشاء حساب جديد';
+
+  @override
+  String get loginTitle => 'تسجيل الدخول';
+
+  @override
+  String get signupSubtitle =>
+      'سيصلك رمز تحقق على بريدك الإلكتروني لتأكيد حسابك';
+
+  @override
+  String get loginSubtitle => 'أدخل البريد الإلكتروني وكلمة السر للدخول';
+
+  @override
+  String get haveAccountBackToLogin => 'لديك حساب؟ العودة إلى تسجيل الدخول';
+
+  @override
+  String get noAccountCreateNew => 'ليس لديك حساب؟ إنشاء حساب جديد';
+
+  @override
+  String get requiredField => 'هذا الحقل مطلوب';
+
+  @override
+  String get minLength3Chars => 'يجب أن يكون 3 أحرف على الأقل';
+
+  @override
+  String get nameRequired => 'الاسم مطلوب';
+
+  @override
+  String get nameRequiredMin3 => 'الاسم مطلوب (3 أحرف على الأقل)';
+
+  @override
+  String get emailRequiredShort => 'البريد مطلوب';
+
+  @override
+  String get iraqMobileInvalid =>
+      'رقم عراقي: 11 رقماً يبدأ بـ 07 (مثال: 07701234567)';
+
+  @override
+  String get passwordRequired => 'كلمة السر مطلوبة';
+
+  @override
+  String get passwordDoesNotMeetRequirements =>
+      'كلمة السر لا تحقق الشروط المطلوبة';
+
+  @override
+  String get passwordsDoNotMatch => 'كلمتا السر غير متطابقتين';
+
+  @override
+  String get enterPasswordAgain => 'الرجاء إعادة كتابة كلمة السر';
+
+  @override
+  String get iraqDialTooltip => '+964 العراق — سيتوفر اختيار دول أخرى لاحقاً';
+
+  @override
+  String get welcomeToNaBoo => 'مرحباً بك في نابو';
+
+  @override
+  String welcomeBackGreeting(Object name) {
+    return 'مرحبًا بعودتك، $name';
+  }
+
+  @override
+  String get todaysBusinessSummary => 'إليك ملخص أعمال اليوم';
+
+  @override
+  String get userFallback => 'مستخدم';
+
+  @override
+  String get failedToLoadChartData => 'تعذر تحميل بيانات الرسوم البيانية.';
+
+  @override
+  String get lastWeek => 'آخر أسبوع';
+
+  @override
+  String get lastMonth => 'آخر شهر';
+
+  @override
+  String get incomeLabel => 'إيراد:';
+
+  @override
+  String get expenseLabel => 'مصروف:';
+
+  @override
+  String get salesPerformance => 'أداء المبيعات';
+
+  @override
+  String get totalLabelColon => 'الإجمالي:';
+
+  @override
+  String get expensesVsIncome => 'المصروفات مقابل الإيرادات';
+
+  @override
+  String get incomeLegend => 'الإيرادات';
+
+  @override
+  String get expensesLegend => 'المصروفات';
+
+  @override
+  String get changePeriod => 'تغيير الفترة';
+
+  @override
+  String get pinnedProductsHint => 'منتجات مثبّتة — اضغط لبيع جديد';
+
+  @override
+  String get byPiece => 'بالقطعة';
+
+  @override
+  String get byWeight => 'بالوزن';
+
+  @override
+  String get addGroup => 'إضافة مجموعة';
+
+  @override
+  String get remainingColon => 'متبقي:';
+
+  @override
+  String get notTracked => 'غير متتبّع';
+
+  @override
+  String get technicalService => 'خدمة فنية';
+
+  @override
+  String get groupByCategory => 'مجموعة حسب التصنيف';
+
+  @override
+  String get groupByCategoryDesc => 'تصفية المنتجات المثبتة حسب تصنيف واحد';
+
+  @override
+  String get groupByBrand => 'مجموعة حسب الماركة';
+
+  @override
+  String get groupByBrandDesc => 'تصفية المنتجات المثبتة حسب ماركة واحدة';
+
+  @override
+  String get noCategoriesYet => 'لا توجد تصنيفات بعد';
+
+  @override
+  String get chooseCategory => 'اختر تصنيفاً';
+
+  @override
+  String get categoryFallback => 'تصنيف';
+
+  @override
+  String get noBrandsYet => 'لا توجد ماركات بعد';
+
+  @override
+  String get chooseBrand => 'اختر ماركة';
+
+  @override
+  String get brandFallback => 'ماركة';
+
+  @override
+  String get groupAlreadyExists => 'هذه المجموعة موجودة مسبقاً';
+
+  @override
+  String get noMatchingActivityYet => 'لا يوجد نشاط مطابق بعد';
+
+  @override
+  String get noActivityHint =>
+      'سجّل مبيعات أو حركات صندوق أو أي عمل في التطبيق لتظهر هنا مرتّبة زمنياً.';
+
+  @override
+  String failedToLoadActivity(Object error) {
+    return 'تعذر تحميل النشاط: $error';
+  }
+
+  @override
+  String get recentActivityOverview => 'نظرة عامة على النشاطات الأخيرة';
+
+  @override
+  String get invoicesLabelShort => 'الفواتير';
+
+  @override
+  String get cashLabelShort => 'الصندوق';
+
+  @override
+  String get otherLabelShort => 'أخرى';
+
+  @override
+  String get openInvoicesList => 'قائمة الفواتير';
+
+  @override
+  String get openCashRegister => 'الصندوق';
+
+  @override
+  String get cashRegisterCard => 'الصندوق';
+
+  @override
+  String get cashRegisterHint => 'رصيد مجمّع في السجل';
+
+  @override
+  String get shiftLabel => 'وردية';
+
+  @override
+  String get newSaleCard => 'بيع جديد';
+
+  @override
+  String get newSaleSubtitle => 'فاتورة سريعة';
+
+  @override
+  String get newSaleHint => 'اختصار للصندوق والبيع';
+
+  @override
+  String get inventoryCard => 'المخزون';
+
+  @override
+  String inventorySubtitle(Object count) {
+    return '$count صنفاً نشطاً';
+  }
+
+  @override
+  String inventoryAlertLowStock(Object count) {
+    return 'تنبيه: $count بمخزون منخفض';
+  }
+
+  @override
+  String get inventoryNoAlerts => 'لا تنبيهات مخزون';
+
+  @override
+  String get completedOrdersCard => 'الطلبات المنجزة';
+
+  @override
+  String completedOrdersSubtitle(Object count) {
+    return '$count طلب';
+  }
+
+  @override
+  String get completedOrdersHint => 'مكسب الوردية السابقة';
+
+  @override
+  String get parkedCard => 'معلّقات';
+
+  @override
+  String parkedSubtitle(Object count) {
+    return '$count فاتورة';
+  }
+
+  @override
+  String get parkedHint => 'مؤقتاً في الانتظار';
+
+  @override
+  String get reportsCard => 'التقارير';
+
+  @override
+  String get reportsSubtitle => 'لوحة تنفيذية';
+
+  @override
+  String get reportsHint => 'مؤشرات الفترة';
+
+  @override
+  String get dragToReorderCards =>
+      'اسحب العناصر لأعلى أو لأسفل. الترتيب يُحفظ على هذا الجهاز.';
+
+  @override
+  String get saveOrder => 'حفظ الترتيب';
+
+  @override
+  String get reorderCards => 'ترتيب البطاقات';
+
+  @override
+  String get refreshNumbers => 'تحديث الأرقام';
+
+  @override
+  String get glanceOverview => 'لمحة المربّع';
+
+  @override
+  String get dragHeightHint =>
+      'اسحب لأعلى أو لأسفل لتغيير ارتفاع قائمة المنتجات';
+
+  @override
+  String get pinnedProductsHeightHandle =>
+      'مقبض تغيير ارتفاع قائمة المنتجات المثبتة';
+
+  @override
+  String filterByCategoryColon(Object name) {
+    return 'تصفية حسب التصنيف: $name';
+  }
+
+  @override
+  String filterByBrandColon(Object name) {
+    return 'تصفية حسب الماركة: $name';
+  }
 }

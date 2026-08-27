@@ -484,43 +484,48 @@ class _LicenseCheckingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color(0xFF1E3A5F),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'NaBoo',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 42,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 2,
-              ),
+    return Builder(
+      builder: (context) {
+        final loc = AppLocalizations.of(context)!;
+        return Scaffold(
+          backgroundColor: Color(0xFF1E3A5F),
+          body: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'NaBoo',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 42,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 2,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  loc.storeManagementSystem,
+                  style: TextStyle(color: Colors.white70, fontSize: 14),
+                ),
+                SizedBox(height: 32),
+                SizedBox(
+                  width: 28,
+                  height: 28,
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                    strokeWidth: 2,
+                  ),
+                ),
+                SizedBox(height: 12),
+                Text(
+                  loc.checkingLicense,
+                  style: TextStyle(color: Colors.white54, fontSize: 12),
+                ),
+              ],
             ),
-            SizedBox(height: 8),
-            Text(
-              'نظام إدارة المتاجر',
-              style: TextStyle(color: Colors.white70, fontSize: 14),
-            ),
-            SizedBox(height: 32),
-            SizedBox(
-              width: 28,
-              height: 28,
-              child: CircularProgressIndicator(
-                color: Colors.white,
-                strokeWidth: 2,
-              ),
-            ),
-            SizedBox(height: 12),
-            Text(
-              'جارٍ التحقق من الترخيص…',
-              style: TextStyle(color: Colors.white54, fontSize: 12),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

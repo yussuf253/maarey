@@ -20,6 +20,7 @@ import '../utils/iraqi_currency_format.dart';
 import '../utils/screen_layout.dart';
 import 'dashboard_recent_activity.dart';
 import 'home_glance_orbit.dart';
+import '../l10n/generated/app_localizations.dart';
 
 // ── Design Tokens ─────────────────────────────────────────────────────────────
 const _kTeal = Color(0xFF0D9488);
@@ -182,6 +183,7 @@ class _DashHeader extends StatelessWidget {
     final text2 = isDark ? Colors.white60 : _kText2;
     final sl = ScreenLayout.of(context);
     final auth = context.watch<AuthProvider>();
+    final loc = AppLocalizations.of(context)!;
     final who = _greetingDisplayName(auth);
     return LayoutBuilder(
       builder: (_, c) {
@@ -217,7 +219,7 @@ class _DashHeader extends StatelessWidget {
                         runSpacing: 2,
                         children: [
                           Text(
-                            'مرحبًا بعودتك، $who',
+                            loc.welcomeBackGreeting(who),
                             style: GoogleFonts.tajawal(
                               fontSize: titleSize,
                               fontWeight: FontWeight.w700,
@@ -230,7 +232,7 @@ class _DashHeader extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        "إليك ملخص أعمال اليوم",
+                        loc.todaysBusinessSummary,
                         style: GoogleFonts.tajawal(
                           fontSize: stackActions ? 13.0 : 14.0,
                           color: text2,
@@ -258,7 +260,7 @@ class _DashHeader extends StatelessWidget {
       }
       return dn;
     }
-    return 'مستخدم';
+    return 'User';
   }
 }
 
@@ -395,13 +397,13 @@ class _ChartsRowState extends State<_ChartsRow> {
             decoration: _cardDecor(context, widget.isDark),
             padding: const EdgeInsets.all(16),
             child: Text(
-              'تعذر تحميل بيانات الرسوم البيانية.',
+              AppLocalizations.of(context)!.failedToLoadChartData,
               style: TextStyle(color: widget.isDark ? Colors.white70 : _kText2),
             ),
           );
         }
         final data = _DashboardChartData.fromMap(snap.data!);
-        final periodLabel = _days == 7 ? 'آخر أسبوع' : 'آخر شهر';
+        final periodLabel = _days == 7 ? AppLocalizations.of(context)!.lastWeek : AppLocalizations.of(context)!.lastMonth;
         return LayoutBuilder(
           builder: (context, c) {
             final sl = ScreenLayout.of(context);
@@ -1277,12 +1279,12 @@ class _LineChartTooltipLayer extends StatelessWidget {
     final xCenter = isBar
         ? (idx + 0.5) / n * width
         : (n < 2 ? width / 2 : idx / (n - 1) * width);
-    final dateLine = _tooltipDateLine(dayKey);
+    final dateLine = _tooltipDateLine(dayKey, AppLocalizations.of(context)!);
     final primaryLine = isBar
-        ? 'إيراد: ${IraqiCurrencyFormat.formatIqd(values[idx])}'
+        ? '${AppLocalizations.of(context)!.incomeLabel} ${IraqiCurrencyFormat.formatIqd(values[idx])}'
         : IraqiCurrencyFormat.formatIqd(values[idx]);
     final sub = isBar && expenseVal != null
-        ? 'مصروف: ${IraqiCurrencyFormat.formatIqd(expenseVal!)}'
+        ? '${AppLocalizations.of(context)!.expenseLabel} ${IraqiCurrencyFormat.formatIqd(expenseVal!)}'
         : null;
     final bg = isDark
         ? const Color(0xFF1E293B).withValues(alpha: 0.96)
@@ -1353,11 +1355,11 @@ class _LineChartTooltipLayer extends StatelessWidget {
     );
   }
 
-  static String _tooltipDateLine(String iso) {
+  static String _tooltipDateLine(String iso, AppLocalizations loc) {
     final key = iso.length >= 10 ? iso.substring(0, 10) : iso;
     final d = DateTime.tryParse(key);
     if (d == null) return iso;
-    final w = _weekdayLabelAr(iso);
+    final w = _weekdayLabelAr(iso, loc);
     return '$w — ${d.day}/${d.month}/${d.year}';
   }
 }
@@ -1412,7 +1414,7 @@ class _LineChartCard extends StatelessWidget {
                       const SizedBox(width: 6),
                       Expanded(
                         child: Text(
-                          'أداء المبيعات',
+                          AppLocalizations.of(context)!.salesPerformance,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
@@ -1442,7 +1444,7 @@ class _LineChartCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'الإجمالي: ${IraqiCurrencyFormat.formatIqd(data.totalSales)}',
+                    '${AppLocalizations.of(context)!.totalLabelColon} ${IraqiCurrencyFormat.formatIqd(data.totalSales)}',
                     style: TextStyle(
                       fontSize: 12,
                       color: text2,
@@ -1544,7 +1546,7 @@ class _BarChartCard extends StatelessWidget {
                       const SizedBox(width: 6),
                       Expanded(
                         child: Text(
-                          'المصروفات مقابل الإيرادات',
+                          AppLocalizations.of(context)!.expensesVsIncome,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
@@ -1578,13 +1580,13 @@ class _BarChartCard extends StatelessWidget {
                     runSpacing: 6,
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
-                      const _LegDot(color: _kTeal, label: 'الإيرادات'),
-                      _LegDot(color: expLeg, label: 'المصروفات'),
+                      _LegDot(color: _kTeal, label: AppLocalizations.of(context)!.incomeLegend),
+                      _LegDot(color: expLeg, label: AppLocalizations.of(context)!.expensesLegend),
                     ],
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'الإيرادات ${IraqiCurrencyFormat.formatIqd(data.totalIncome)}  |  المصروفات ${IraqiCurrencyFormat.formatIqd(data.totalExpense)}',
+                    '${AppLocalizations.of(context)!.incomeLegend} ${IraqiCurrencyFormat.formatIqd(data.totalIncome)}  |  ${AppLocalizations.of(context)!.expensesLegend} ${IraqiCurrencyFormat.formatIqd(data.totalExpense)}',
                     style: TextStyle(fontSize: 12, color: text2),
                   ),
                   const SizedBox(height: 8),
@@ -1649,21 +1651,21 @@ class _DropBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     return PopupMenuButton<int>(
-      tooltip: 'تغيير الفترة',
+      tooltip: AppLocalizations.of(context)!.changePeriod,
       onSelected: onPickDays,
       itemBuilder: (context) => [
         PopupMenuItem(
           value: 7,
           child: _periodMenuRow(
             selected: selectedDays == 7,
-            text: 'آخر أسبوع',
+            text: AppLocalizations.of(context)!.lastWeek,
           ),
         ),
         PopupMenuItem(
           value: 30,
           child: _periodMenuRow(
             selected: selectedDays == 30,
-            text: 'آخر شهر',
+            text: AppLocalizations.of(context)!.lastMonth,
           ),
         ),
       ],
@@ -1826,35 +1828,38 @@ String _compactIqd(double value) {
   return value.toStringAsFixed(0);
 }
 
-String _weekdayLabelAr(String isoDay) {
+String _weekdayLabelAr(String isoDay, AppLocalizations loc) {
   final d = DateTime.tryParse(isoDay);
   switch (d?.weekday) {
     case DateTime.monday:
-      return 'الإثنين';
+      return loc.weekDayMonday;
     case DateTime.tuesday:
-      return 'الثلاثاء';
+      return loc.weekDayTuesday;
     case DateTime.wednesday:
-      return 'الأربعاء';
+      return loc.weekDayWednesday;
     case DateTime.thursday:
-      return 'الخميس';
+      return loc.weekDayThursday;
     case DateTime.friday:
-      return 'الجمعة';
+      return loc.weekDayFriday;
     case DateTime.saturday:
-      return 'السبت';
+      return loc.weekDaySaturday;
     case DateTime.sunday:
-      return 'الأحد';
+      return loc.weekDaySunday;
     default:
       return isoDay;
   }
 }
 
 /// تسمية محور الزمن: أيام قليلة = اسم اليوم؛ غير ذلك = تاريخ قصير يتجنب تكرار «السبت» 4 مرات.
-String _chartXLabel(String isoDay, int totalPoints) {
+String _chartXLabel(String isoDay, int totalPoints, [AppLocalizations? loc]) {
   final key = isoDay.length >= 10 ? isoDay.substring(0, 10) : isoDay;
   final d = DateTime.tryParse(key);
   if (d == null) return isoDay;
   if (totalPoints <= 7) {
-    return _weekdayLabelAr(isoDay);
+    if (loc != null) return _weekdayLabelAr(isoDay, loc);
+    // Fallback English labels for factory (no context)
+    const en = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    return en[(d.weekday - 1) % 7];
   }
   return '${d.day}/${d.month}';
 }
@@ -1904,7 +1909,7 @@ class _PinnedQuickGroup {
 }
 
 /// شارة «خدمة فنية» لمربّعات المثبّتات — يطابق أسلوب المثبّتات في `WideHomeProductRail`.
-Widget _dashboardTechnicalServiceChip({required bool isDark}) {
+Widget _dashboardTechnicalServiceChip({required bool isDark, required BuildContext context}) {
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
     decoration: BoxDecoration(
@@ -1919,7 +1924,7 @@ Widget _dashboardTechnicalServiceChip({required bool isDark}) {
       ),
     ),
     child: Text(
-      'خدمة فنية',
+      AppLocalizations.of(context)!.technicalService,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       textAlign: TextAlign.center,
@@ -2021,9 +2026,8 @@ class _PinnedProductsRailState extends State<_PinnedProductsRail> {
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
-                leading: const Icon(Icons.category_outlined),
-                title: const Text('مجموعة حسب التصنيف'),
-                subtitle: const Text('تصفية المنتجات المثبتة حسب تصنيف واحد'),
+                leading: const Icon(Icons.category_outlined),                 title: Text(AppLocalizations.of(context)!.groupByCategory),
+                subtitle: Text(AppLocalizations.of(context)!.groupByCategoryDesc),
                 onTap: () async {
                   Navigator.pop(ctx);
                   await _pickAndAddCategoryGroup();
@@ -2031,8 +2035,8 @@ class _PinnedProductsRailState extends State<_PinnedProductsRail> {
               ),
               ListTile(
                 leading: const Icon(Icons.local_offer_outlined),
-                title: const Text('مجموعة حسب الماركة'),
-                subtitle: const Text('تصفية المنتجات المثبتة حسب ماركة واحدة'),
+                title: Text(AppLocalizations.of(context)!.groupByBrand),
+                subtitle: Text(AppLocalizations.of(context)!.groupByBrandDesc),
                 onTap: () async {
                   Navigator.pop(ctx);
                   await _pickAndAddBrandGroup();
@@ -2050,14 +2054,13 @@ class _PinnedProductsRailState extends State<_PinnedProductsRail> {
     final rows = await _repo.listCategoriesForSettings();
     if (!mounted) return;
     if (rows.isEmpty) {
-      _pinnedSnack('لا توجد تصنيفات بعد');
+      _pinnedSnack(AppLocalizations.of(context)!.noCategoriesYet);
       return;
     }
     final picked = await showDialog<Map<String, dynamic>?>(
       context: context,
       builder: (ctx) {
-        return AlertDialog(
-          title: const Text('اختر تصنيفاً'),
+        return AlertDialog(           title: Text(AppLocalizations.of(context)!.chooseCategory),
           content: SizedBox(
             width: 320,
             height: 360,
@@ -2065,8 +2068,7 @@ class _PinnedProductsRailState extends State<_PinnedProductsRail> {
               itemCount: rows.length,
               separatorBuilder: (_, __) => const Divider(height: 1),
               itemBuilder: (_, i) {
-                final r = rows[i];
-                final name = (r['name'] as String?)?.trim() ?? 'تصنيف';
+                final r = rows[i];                 final name = (r['name'] as String?)?.trim() ?? AppLocalizations.of(context)!.categoryFallback;
                 return ListTile(
                   title: Text(name),
                   onTap: () => Navigator.pop(ctx, r),
@@ -2076,8 +2078,7 @@ class _PinnedProductsRailState extends State<_PinnedProductsRail> {
           ),
           actions: [
             TextButton(
-              onPressed: () => Navigator.pop(ctx, null),
-              child: const Text('إلغاء'),
+              onPressed: () => Navigator.pop(ctx, null),               child: Text(AppLocalizations.of(context)!.cancel),
             ),
           ],
         );
@@ -2089,7 +2090,7 @@ class _PinnedProductsRailState extends State<_PinnedProductsRail> {
     if (id == null || name == null || name.isEmpty) return;
     final g = _PinnedQuickGroup(isCategory: true, id: id, label: name);
     if (_quickGroups.any((e) => e.key == g.key)) {
-      _pinnedSnack('هذه المجموعة موجودة مسبقاً');
+      _pinnedSnack(AppLocalizations.of(context)!.groupAlreadyExists);
       return;
     }
     setState(() {
@@ -2103,14 +2104,13 @@ class _PinnedProductsRailState extends State<_PinnedProductsRail> {
     final rows = await _repo.listBrandsForSettings();
     if (!mounted) return;
     if (rows.isEmpty) {
-      _pinnedSnack('لا توجد ماركات بعد');
+      _pinnedSnack(AppLocalizations.of(context)!.noBrandsYet);
       return;
     }
     final picked = await showDialog<Map<String, dynamic>?>(
       context: context,
       builder: (ctx) {
-        return AlertDialog(
-          title: const Text('اختر ماركة'),
+        return AlertDialog(           title: Text(AppLocalizations.of(context)!.chooseBrand),
           content: SizedBox(
             width: 320,
             height: 360,
@@ -2118,8 +2118,7 @@ class _PinnedProductsRailState extends State<_PinnedProductsRail> {
               itemCount: rows.length,
               separatorBuilder: (_, __) => const Divider(height: 1),
               itemBuilder: (_, i) {
-                final r = rows[i];
-                final name = (r['name'] as String?)?.trim() ?? 'ماركة';
+                final r = rows[i];                 final name = (r['name'] as String?)?.trim() ?? AppLocalizations.of(context)!.brandFallback;
                 return ListTile(
                   title: Text(name),
                   onTap: () => Navigator.pop(ctx, r),
@@ -2129,8 +2128,7 @@ class _PinnedProductsRailState extends State<_PinnedProductsRail> {
           ),
           actions: [
             TextButton(
-              onPressed: () => Navigator.pop(ctx, null),
-              child: const Text('إلغاء'),
+              onPressed: () => Navigator.pop(ctx, null),               child: Text(AppLocalizations.of(context)!.cancel),
             ),
           ],
         );
@@ -2142,7 +2140,7 @@ class _PinnedProductsRailState extends State<_PinnedProductsRail> {
     if (id == null || name == null || name.isEmpty) return;
     final g = _PinnedQuickGroup(isCategory: false, id: id, label: name);
     if (_quickGroups.any((e) => e.key == g.key)) {
-      _pinnedSnack('هذه المجموعة موجودة مسبقاً');
+      _pinnedSnack(AppLocalizations.of(context)!.groupAlreadyExists);
       return;
     }
     setState(() {
@@ -2223,7 +2221,7 @@ class _PinnedProductsRailState extends State<_PinnedProductsRail> {
     final isService = (p['isService'] as num?)?.toInt() ?? 0;
     final serviceKind = (p['serviceKind'] as String?)?.trim();
     return {
-      'name': name.isEmpty ? 'منتج' : name,
+      'name': name.isEmpty ? 'Product' : name,
       'sell': sell,
       'minSell': minS,
       'productId': id,
@@ -2344,7 +2342,7 @@ class _PinnedProductsRailState extends State<_PinnedProductsRail> {
               const SizedBox(width: 6),
               Expanded(
                 child: Text(
-                  'منتجات مثبّتة — اضغط لبيع جديد',
+                  AppLocalizations.of(context)!.pinnedProductsHint,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 13.5,
@@ -2355,7 +2353,7 @@ class _PinnedProductsRailState extends State<_PinnedProductsRail> {
                 ),
               ),
               IconButton(
-                tooltip: 'تحديث',
+                tooltip: AppLocalizations.of(context)!.refreshTooltip,
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
                 icon: Icon(Icons.refresh_rounded, size: 20, color: text2),
@@ -2372,19 +2370,19 @@ class _PinnedProductsRailState extends State<_PinnedProductsRail> {
             child: Row(
               children: [
                 ChoiceChip(
-                  label: const Text('الكل'),
+                  label: Text(AppLocalizations.of(context)!.allLabel),
                   selected: _group == 0,
                   onSelected: (_) => setState(() => _group = 0),
                 ),
                 const SizedBox(width: 8),
                 ChoiceChip(
-                  label: const Text('بالقطعة'),
+                  label: Text(AppLocalizations.of(context)!.byPiece),
                   selected: _group == 1,
                   onSelected: (_) => setState(() => _group = 1),
                 ),
                 const SizedBox(width: 8),
                 ChoiceChip(
-                  label: const Text('بالوزن'),
+                  label: Text(AppLocalizations.of(context)!.byWeight),
                   selected: _group == 2,
                   onSelected: (_) => setState(() => _group = 2),
                 ),
@@ -2393,8 +2391,8 @@ class _PinnedProductsRailState extends State<_PinnedProductsRail> {
                   ChoiceChip(
                     label: Text(g.label),
                     tooltip: g.isCategory
-                        ? 'تصفية حسب التصنيف: ${g.label}'
-                        : 'تصفية حسب الماركة: ${g.label}',
+                        ? AppLocalizations.of(context)!.filterByCategoryColon(g.label)
+                        : AppLocalizations.of(context)!.filterByBrandColon(g.label),
                     selected: _activeQuickKey == g.key,
                     onSelected: (_) {
                       setState(() {
@@ -2409,8 +2407,7 @@ class _PinnedProductsRailState extends State<_PinnedProductsRail> {
                 ],
                 Padding(
                   padding: const EdgeInsetsDirectional.only(start: 4),
-                  child: IconButton(
-                    tooltip: 'إضافة مجموعة',
+                  child: IconButton(                    tooltip: AppLocalizations.of(context)!.addGroup,
                     padding: EdgeInsets.zero,
                     constraints:
                         const BoxConstraints(minWidth: 36, minHeight: 36),
@@ -2443,14 +2440,14 @@ class _PinnedProductsRailState extends State<_PinnedProductsRail> {
                   itemCount: filtered.length,
                   itemBuilder: (context, i) {
                     final p = filtered[i];
-                    final name = (p['name'] as String?)?.trim() ?? 'منتج';
+                    final name = (p['name'] as String?)?.trim() ?? 'Product';
                     final sell = (p['sellPrice'] as num?)?.toDouble() ?? 0;
                     final isService =
                         ((p['isService'] as num?)?.toInt() ?? 0) == 1;
                     final eff = _effectiveQtyForPinned(p);
                     final stock = _tracksInventory(p)
-                        ? 'متبقي: ${eff.abs() < 1e-9 ? '0' : IraqiCurrencyFormat.formatDecimal2(eff)}'
-                        : 'غير متتبّع';
+                        ? '${AppLocalizations.of(context)!.remainingColon} ${eff.abs() < 1e-9 ? '0' : IraqiCurrencyFormat.formatDecimal2(eff)}'
+                        : AppLocalizations.of(context)!.notTracked;
                     final stockColor = _stockColor(p, text2);
                     return Material(
                       color: Colors.transparent,
@@ -2535,6 +2532,7 @@ class _PinnedProductsRailState extends State<_PinnedProductsRail> {
                                                   child:
                                                       _dashboardTechnicalServiceChip(
                                                     isDark: widget.isDark,
+                                                    context: context,
                                                   ),
                                                 ),
                                               ),
@@ -2567,11 +2565,11 @@ class _PinnedProductsRailState extends State<_PinnedProductsRail> {
           ),
           const SizedBox(height: 4),
           Tooltip(
-            message: 'اسحب لأعلى أو لأسفل لتغيير ارتفاع قائمة المنتجات',
+            message: AppLocalizations.of(context)!.dragHeightHint,
             child: MouseRegion(
               cursor: SystemMouseCursors.resizeUpDown,
               child: Semantics(
-                label: 'مقبض تغيير ارتفاع قائمة المنتجات المثبتة',
+                label: AppLocalizations.of(context)!.pinnedProductsHeightHandle,
                 child: GestureDetector(
                   behavior: HitTestBehavior.opaque,
                   onPanUpdate: (details) {

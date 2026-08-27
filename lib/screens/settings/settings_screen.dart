@@ -189,9 +189,9 @@ class SettingsScreen extends StatelessWidget {
                                   icon: Icons.language_rounded,
                                   iconColor: _kTeal,
                                   title: loc.language,
-                                  subtitle: loc.arabic,
+                                  subtitle: LocaleProvider.labelFor(context.watch<LocaleProvider>().locale.languageCode),
                                   trailing: Text(
-                                    loc.arabic,
+                                    LocaleProvider.labelFor(context.watch<LocaleProvider>().locale.languageCode),
                                     style: TextStyle(
                                       color: cs.onSurfaceVariant,
                                       fontSize: 13,

@@ -16,6 +16,7 @@ import '../services/app_remote_config_service.dart';
 import '../theme/design_tokens.dart';
 import '../widgets/glass/glass_surface.dart';
 import '../utils/screen_layout.dart';
+import '../l10n/generated/app_localizations.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -132,12 +133,12 @@ class _SplashScreenState extends State<SplashScreen>
         context: context,
         barrierDismissible: false,
         builder: (ctx) => AlertDialog(
-          title: const Text('صيانة'),
+          title: Text(AppLocalizations.of(context)!.maintenance),
           content: SingleChildScrollView(child: Text(msg)),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(ctx).pop(),
-              child: const Text('حسناً'),
+              child: Text(AppLocalizations.of(context)!.ok),
             ),
           ],
         ),
@@ -158,7 +159,7 @@ class _SplashScreenState extends State<SplashScreen>
         context: context,
         barrierDismissible: false,
         builder: (ctx) => AlertDialog(
-          title: const Text('تحديث مطلوب'),
+          title: Text(AppLocalizations.of(context)!.updateRequired),
           content: SingleChildScrollView(child: Text(msg)),
           actions: [
             if (cfg.updateDownloadUrl.isNotEmpty)
@@ -169,7 +170,7 @@ class _SplashScreenState extends State<SplashScreen>
                     await launchUrl(u, mode: LaunchMode.externalApplication);
                   }
                 },
-                child: const Text('تحميل التحديث'),
+                child: Text(AppLocalizations.of(context)!.downloadUpdate),
               ),
           ],
         ),
@@ -184,12 +185,12 @@ class _SplashScreenState extends State<SplashScreen>
         context: context,
         barrierDismissible: true,
         builder: (ctx) => AlertDialog(
-          title: const Text('تحديث متوفر'),
+          title: Text(AppLocalizations.of(context)!.updateAvailable),
           content: SingleChildScrollView(child: Text(cfg.updateMessageAr)),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(ctx).pop(),
-              child: const Text('لاحقاً'),
+              child: Text(AppLocalizations.of(context)!.later),
             ),
             if (cfg.updateDownloadUrl.isNotEmpty)
               TextButton(
@@ -200,7 +201,7 @@ class _SplashScreenState extends State<SplashScreen>
                     await launchUrl(u, mode: LaunchMode.externalApplication);
                   }
                 },
-                child: const Text('تحميل'),
+                child: Text(AppLocalizations.of(context)!.download),
               ),
           ],
         ),
@@ -226,7 +227,7 @@ class _SplashScreenState extends State<SplashScreen>
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(ctx).pop(),
-                child: const Text('حسناً'),
+                child: Text(AppLocalizations.of(context)!.ok),
               ),
               if (cfg.announcementUrl.isNotEmpty)
                 TextButton(
@@ -236,7 +237,7 @@ class _SplashScreenState extends State<SplashScreen>
                       await launchUrl(u, mode: LaunchMode.externalApplication);
                     }
                   },
-                  child: const Text('فتح الرابط'),
+                  child: Text(AppLocalizations.of(context)!.openLink),
                 ),
             ],
           ),
@@ -324,7 +325,7 @@ class _SplashScreenState extends State<SplashScreen>
                 style: TextButton.styleFrom(
                   foregroundColor: const Color(0xFFFFE08A),
                 ),
-                child: const Text('تم'),
+                child: Text(AppLocalizations.of(context)!.done),
               ),
             ],
           );
@@ -548,7 +549,7 @@ class _SplashScreenState extends State<SplashScreen>
                     ),
                     SizedBox(height: (progressSize * 0.35).clamp(8.0, 16.0)),
                     Text(
-                      'جاري تهيئة النظام...',
+                      AppLocalizations.of(context)!.systemInitializing,
                       style: GoogleFonts.tajawal(
                         color: Colors.white.withOpacity(0.6),
                         fontSize: (w * 0.03).clamp(12.0, 16.0),

@@ -403,8 +403,8 @@ abstract class AppLocalizations {
   /// No description provided for @emailLabel.
   ///
   /// In ar, this message translates to:
-  /// **'البريد الإلكتروني'**
-  String get emailLabel;
+  /// **'البريد: {email}'**
+  String emailLabel(Object email);
 
   /// No description provided for @currentPlanLabel.
   ///
@@ -2803,6 +2803,624 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'لبنان'**
   String get lebanon;
+
+  /// No description provided for @checkingLicense.
+  ///
+  /// In ar, this message translates to:
+  /// **'جارٍ التحقق من الترخيص…'**
+  String get checkingLicense;
+
+  /// No description provided for @storeManagementSystem.
+  ///
+  /// In ar, this message translates to:
+  /// **'نظام إدارة المتاجر'**
+  String get storeManagementSystem;
+
+  /// No description provided for @systemInitializing.
+  ///
+  /// In ar, this message translates to:
+  /// **'جاري تهيئة النظام...'**
+  String get systemInitializing;
+
+  /// No description provided for @maintenance.
+  ///
+  /// In ar, this message translates to:
+  /// **'صيانة'**
+  String get maintenance;
+
+  /// No description provided for @ok.
+  ///
+  /// In ar, this message translates to:
+  /// **'حسناً'**
+  String get ok;
+
+  /// No description provided for @updateRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديث مطلوب'**
+  String get updateRequired;
+
+  /// No description provided for @downloadUpdate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحميل التحديث'**
+  String get downloadUpdate;
+
+  /// No description provided for @updateAvailable.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديث متوفر'**
+  String get updateAvailable;
+
+  /// No description provided for @later.
+  ///
+  /// In ar, this message translates to:
+  /// **'لاحقاً'**
+  String get later;
+
+  /// No description provided for @download.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحميل'**
+  String get download;
+
+  /// No description provided for @openLink.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح الرابط'**
+  String get openLink;
+
+  /// No description provided for @done.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم'**
+  String get done;
+
+  /// No description provided for @businessManagementSystem.
+  ///
+  /// In ar, this message translates to:
+  /// **'نظام إدارة الأعمال'**
+  String get businessManagementSystem;
+
+  /// No description provided for @salesAndInvoices.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبيعات والفواتير'**
+  String get salesAndInvoices;
+
+  /// No description provided for @accountsAndReports.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحسابات والتقارير'**
+  String get accountsAndReports;
+
+  /// No description provided for @inventoryAndWarehouses.
+  ///
+  /// In ar, this message translates to:
+  /// **'المخزون والمستودعات'**
+  String get inventoryAndWarehouses;
+
+  /// No description provided for @createNewAccountTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنشاء حساب جديد'**
+  String get createNewAccountTitle;
+
+  /// No description provided for @loginTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل الدخول'**
+  String get loginTitle;
+
+  /// No description provided for @signupSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيصلك رمز تحقق على بريدك الإلكتروني لتأكيد حسابك'**
+  String get signupSubtitle;
+
+  /// No description provided for @loginSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل البريد الإلكتروني وكلمة السر للدخول'**
+  String get loginSubtitle;
+
+  /// No description provided for @haveAccountBackToLogin.
+  ///
+  /// In ar, this message translates to:
+  /// **'لديك حساب؟ العودة إلى تسجيل الدخول'**
+  String get haveAccountBackToLogin;
+
+  /// No description provided for @noAccountCreateNew.
+  ///
+  /// In ar, this message translates to:
+  /// **'ليس لديك حساب؟ إنشاء حساب جديد'**
+  String get noAccountCreateNew;
+
+  /// No description provided for @requiredField.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الحقل مطلوب'**
+  String get requiredField;
+
+  /// No description provided for @minLength3Chars.
+  ///
+  /// In ar, this message translates to:
+  /// **'يجب أن يكون 3 أحرف على الأقل'**
+  String get minLength3Chars;
+
+  /// No description provided for @nameRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم مطلوب'**
+  String get nameRequired;
+
+  /// No description provided for @nameRequiredMin3.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم مطلوب (3 أحرف على الأقل)'**
+  String get nameRequiredMin3;
+
+  /// No description provided for @emailRequiredShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'البريد مطلوب'**
+  String get emailRequiredShort;
+
+  /// No description provided for @iraqMobileInvalid.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم عراقي: 11 رقماً يبدأ بـ 07 (مثال: 07701234567)'**
+  String get iraqMobileInvalid;
+
+  /// No description provided for @passwordRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمة السر مطلوبة'**
+  String get passwordRequired;
+
+  /// No description provided for @passwordDoesNotMeetRequirements.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمة السر لا تحقق الشروط المطلوبة'**
+  String get passwordDoesNotMeetRequirements;
+
+  /// No description provided for @passwordsDoNotMatch.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمتا السر غير متطابقتين'**
+  String get passwordsDoNotMatch;
+
+  /// No description provided for @enterPasswordAgain.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرجاء إعادة كتابة كلمة السر'**
+  String get enterPasswordAgain;
+
+  /// No description provided for @iraqDialTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'+964 العراق — سيتوفر اختيار دول أخرى لاحقاً'**
+  String get iraqDialTooltip;
+
+  /// No description provided for @welcomeToNaBoo.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرحباً بك في نابو'**
+  String get welcomeToNaBoo;
+
+  /// No description provided for @welcomeBackGreeting.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرحبًا بعودتك، {name}'**
+  String welcomeBackGreeting(Object name);
+
+  /// No description provided for @todaysBusinessSummary.
+  ///
+  /// In ar, this message translates to:
+  /// **'إليك ملخص أعمال اليوم'**
+  String get todaysBusinessSummary;
+
+  /// No description provided for @userFallback.
+  ///
+  /// In ar, this message translates to:
+  /// **'مستخدم'**
+  String get userFallback;
+
+  /// No description provided for @failedToLoadChartData.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر تحميل بيانات الرسوم البيانية.'**
+  String get failedToLoadChartData;
+
+  /// No description provided for @lastWeek.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر أسبوع'**
+  String get lastWeek;
+
+  /// No description provided for @lastMonth.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر شهر'**
+  String get lastMonth;
+
+  /// No description provided for @incomeLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيراد:'**
+  String get incomeLabel;
+
+  /// No description provided for @expenseLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مصروف:'**
+  String get expenseLabel;
+
+  /// No description provided for @salesPerformance.
+  ///
+  /// In ar, this message translates to:
+  /// **'أداء المبيعات'**
+  String get salesPerformance;
+
+  /// No description provided for @totalLabelColon.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإجمالي:'**
+  String get totalLabelColon;
+
+  /// No description provided for @expensesVsIncome.
+  ///
+  /// In ar, this message translates to:
+  /// **'المصروفات مقابل الإيرادات'**
+  String get expensesVsIncome;
+
+  /// No description provided for @incomeLegend.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإيرادات'**
+  String get incomeLegend;
+
+  /// No description provided for @expensesLegend.
+  ///
+  /// In ar, this message translates to:
+  /// **'المصروفات'**
+  String get expensesLegend;
+
+  /// No description provided for @changePeriod.
+  ///
+  /// In ar, this message translates to:
+  /// **'تغيير الفترة'**
+  String get changePeriod;
+
+  /// No description provided for @pinnedProductsHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'منتجات مثبّتة — اضغط لبيع جديد'**
+  String get pinnedProductsHint;
+
+  /// No description provided for @byPiece.
+  ///
+  /// In ar, this message translates to:
+  /// **'بالقطعة'**
+  String get byPiece;
+
+  /// No description provided for @byWeight.
+  ///
+  /// In ar, this message translates to:
+  /// **'بالوزن'**
+  String get byWeight;
+
+  /// No description provided for @addGroup.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة مجموعة'**
+  String get addGroup;
+
+  /// No description provided for @remainingColon.
+  ///
+  /// In ar, this message translates to:
+  /// **'متبقي:'**
+  String get remainingColon;
+
+  /// No description provided for @notTracked.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير متتبّع'**
+  String get notTracked;
+
+  /// No description provided for @technicalService.
+  ///
+  /// In ar, this message translates to:
+  /// **'خدمة فنية'**
+  String get technicalService;
+
+  /// No description provided for @groupByCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'مجموعة حسب التصنيف'**
+  String get groupByCategory;
+
+  /// No description provided for @groupByCategoryDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'تصفية المنتجات المثبتة حسب تصنيف واحد'**
+  String get groupByCategoryDesc;
+
+  /// No description provided for @groupByBrand.
+  ///
+  /// In ar, this message translates to:
+  /// **'مجموعة حسب الماركة'**
+  String get groupByBrand;
+
+  /// No description provided for @groupByBrandDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'تصفية المنتجات المثبتة حسب ماركة واحدة'**
+  String get groupByBrandDesc;
+
+  /// No description provided for @noCategoriesYet.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد تصنيفات بعد'**
+  String get noCategoriesYet;
+
+  /// No description provided for @chooseCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر تصنيفاً'**
+  String get chooseCategory;
+
+  /// No description provided for @categoryFallback.
+  ///
+  /// In ar, this message translates to:
+  /// **'تصنيف'**
+  String get categoryFallback;
+
+  /// No description provided for @noBrandsYet.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد ماركات بعد'**
+  String get noBrandsYet;
+
+  /// No description provided for @chooseBrand.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر ماركة'**
+  String get chooseBrand;
+
+  /// No description provided for @brandFallback.
+  ///
+  /// In ar, this message translates to:
+  /// **'ماركة'**
+  String get brandFallback;
+
+  /// No description provided for @groupAlreadyExists.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذه المجموعة موجودة مسبقاً'**
+  String get groupAlreadyExists;
+
+  /// No description provided for @noMatchingActivityYet.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد نشاط مطابق بعد'**
+  String get noMatchingActivityYet;
+
+  /// No description provided for @noActivityHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل مبيعات أو حركات صندوق أو أي عمل في التطبيق لتظهر هنا مرتّبة زمنياً.'**
+  String get noActivityHint;
+
+  /// No description provided for @failedToLoadActivity.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر تحميل النشاط: {error}'**
+  String failedToLoadActivity(Object error);
+
+  /// No description provided for @recentActivityOverview.
+  ///
+  /// In ar, this message translates to:
+  /// **'نظرة عامة على النشاطات الأخيرة'**
+  String get recentActivityOverview;
+
+  /// No description provided for @invoicesLabelShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفواتير'**
+  String get invoicesLabelShort;
+
+  /// No description provided for @cashLabelShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصندوق'**
+  String get cashLabelShort;
+
+  /// No description provided for @otherLabelShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'أخرى'**
+  String get otherLabelShort;
+
+  /// No description provided for @openInvoicesList.
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة الفواتير'**
+  String get openInvoicesList;
+
+  /// No description provided for @openCashRegister.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصندوق'**
+  String get openCashRegister;
+
+  /// No description provided for @cashRegisterCard.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصندوق'**
+  String get cashRegisterCard;
+
+  /// No description provided for @cashRegisterHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'رصيد مجمّع في السجل'**
+  String get cashRegisterHint;
+
+  /// No description provided for @shiftLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'وردية'**
+  String get shiftLabel;
+
+  /// No description provided for @newSaleCard.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع جديد'**
+  String get newSaleCard;
+
+  /// No description provided for @newSaleSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة سريعة'**
+  String get newSaleSubtitle;
+
+  /// No description provided for @newSaleHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختصار للصندوق والبيع'**
+  String get newSaleHint;
+
+  /// No description provided for @inventoryCard.
+  ///
+  /// In ar, this message translates to:
+  /// **'المخزون'**
+  String get inventoryCard;
+
+  /// No description provided for @inventorySubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} صنفاً نشطاً'**
+  String inventorySubtitle(Object count);
+
+  /// No description provided for @inventoryAlertLowStock.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه: {count} بمخزون منخفض'**
+  String inventoryAlertLowStock(Object count);
+
+  /// No description provided for @inventoryNoAlerts.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا تنبيهات مخزون'**
+  String get inventoryNoAlerts;
+
+  /// No description provided for @completedOrdersCard.
+  ///
+  /// In ar, this message translates to:
+  /// **'الطلبات المنجزة'**
+  String get completedOrdersCard;
+
+  /// No description provided for @completedOrdersSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} طلب'**
+  String completedOrdersSubtitle(Object count);
+
+  /// No description provided for @completedOrdersHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكسب الوردية السابقة'**
+  String get completedOrdersHint;
+
+  /// No description provided for @parkedCard.
+  ///
+  /// In ar, this message translates to:
+  /// **'معلّقات'**
+  String get parkedCard;
+
+  /// No description provided for @parkedSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} فاتورة'**
+  String parkedSubtitle(Object count);
+
+  /// No description provided for @parkedHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مؤقتاً في الانتظار'**
+  String get parkedHint;
+
+  /// No description provided for @reportsCard.
+  ///
+  /// In ar, this message translates to:
+  /// **'التقارير'**
+  String get reportsCard;
+
+  /// No description provided for @reportsSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لوحة تنفيذية'**
+  String get reportsSubtitle;
+
+  /// No description provided for @reportsHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مؤشرات الفترة'**
+  String get reportsHint;
+
+  /// No description provided for @dragToReorderCards.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسحب العناصر لأعلى أو لأسفل. الترتيب يُحفظ على هذا الجهاز.'**
+  String get dragToReorderCards;
+
+  /// No description provided for @saveOrder.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ الترتيب'**
+  String get saveOrder;
+
+  /// No description provided for @reorderCards.
+  ///
+  /// In ar, this message translates to:
+  /// **'ترتيب البطاقات'**
+  String get reorderCards;
+
+  /// No description provided for @refreshNumbers.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديث الأرقام'**
+  String get refreshNumbers;
+
+  /// No description provided for @glanceOverview.
+  ///
+  /// In ar, this message translates to:
+  /// **'لمحة المربّع'**
+  String get glanceOverview;
+
+  /// No description provided for @dragHeightHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسحب لأعلى أو لأسفل لتغيير ارتفاع قائمة المنتجات'**
+  String get dragHeightHint;
+
+  /// No description provided for @pinnedProductsHeightHandle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مقبض تغيير ارتفاع قائمة المنتجات المثبتة'**
+  String get pinnedProductsHeightHandle;
+
+  /// No description provided for @filterByCategoryColon.
+  ///
+  /// In ar, this message translates to:
+  /// **'تصفية حسب التصنيف: {name}'**
+  String filterByCategoryColon(Object name);
+
+  /// No description provided for @filterByBrandColon.
+  ///
+  /// In ar, this message translates to:
+  /// **'تصفية حسب الماركة: {name}'**
+  String filterByBrandColon(Object name);
 }
 
 class _AppLocalizationsDelegate

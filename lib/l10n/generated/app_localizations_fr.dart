@@ -174,7 +174,9 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get emailLabel => 'Email';
+  String emailLabel(Object email) {
+    return 'Email: $email';
+  }
 
   @override
   String currentPlanLabel(Object plan) {
@@ -1550,4 +1552,344 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get lebanon => 'Liban';
+
+  @override
+  String get checkingLicense => 'Vérification de la licence…';
+
+  @override
+  String get storeManagementSystem => 'Système de gestion du magasin';
+
+  @override
+  String get systemInitializing => 'Initialisation du système...';
+
+  @override
+  String get maintenance => 'Maintenance';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get updateRequired => 'Mise à jour requise';
+
+  @override
+  String get downloadUpdate => 'Télécharger la mise à jour';
+
+  @override
+  String get updateAvailable => 'Mise à jour disponible';
+
+  @override
+  String get later => 'Plus tard';
+
+  @override
+  String get download => 'Télécharger';
+
+  @override
+  String get openLink => 'Ouvrir le lien';
+
+  @override
+  String get done => 'Terminé';
+
+  @override
+  String get businessManagementSystem => 'Système de gestion commerciale';
+
+  @override
+  String get salesAndInvoices => 'Ventes et factures';
+
+  @override
+  String get accountsAndReports => 'Comptes et rapports';
+
+  @override
+  String get inventoryAndWarehouses => 'Stock et entrepôts';
+
+  @override
+  String get createNewAccountTitle => 'Créer un nouveau compte';
+
+  @override
+  String get loginTitle => 'Connexion';
+
+  @override
+  String get signupSubtitle =>
+      'Vous recevrez un code de vérification par e-mail pour confirmer votre compte';
+
+  @override
+  String get loginSubtitle =>
+      'Entrez votre e-mail et mot de passe pour vous connecter';
+
+  @override
+  String get haveAccountBackToLogin => 'Déjà un compte ? Retour à la connexion';
+
+  @override
+  String get noAccountCreateNew =>
+      'Pas encore de compte ? Créer un nouveau compte';
+
+  @override
+  String get requiredField => 'Ce champ est obligatoire';
+
+  @override
+  String get minLength3Chars => 'Doit contenir au moins 3 caractères';
+
+  @override
+  String get nameRequired => 'Le nom est requis';
+
+  @override
+  String get nameRequiredMin3 => 'Le nom est requis (au moins 3 caractères)';
+
+  @override
+  String get emailRequiredShort => 'L\'e-mail est requis';
+
+  @override
+  String get iraqMobileInvalid =>
+      'Mobile irakien : 11 chiffres commençant par 07 (ex. : 07701234567)';
+
+  @override
+  String get passwordRequired => 'Le mot de passe est requis';
+
+  @override
+  String get passwordDoesNotMeetRequirements =>
+      'Le mot de passe ne respecte pas les exigences';
+
+  @override
+  String get passwordsDoNotMatch => 'Les mots de passe ne correspondent pas';
+
+  @override
+  String get enterPasswordAgain => 'Veuillez ressaisir votre mot de passe';
+
+  @override
+  String get iraqDialTooltip =>
+      '+964 Irak — d\'autres codes pays seront disponibles plus tard';
+
+  @override
+  String get welcomeToNaBoo => 'Bienvenue sur NaBoo';
+
+  @override
+  String welcomeBackGreeting(Object name) {
+    return 'Bon retour, $name';
+  }
+
+  @override
+  String get todaysBusinessSummary => 'Voici le résumé des affaires du jour';
+
+  @override
+  String get userFallback => 'Utilisateur';
+
+  @override
+  String get failedToLoadChartData =>
+      'Échec du chargement des données graphiques.';
+
+  @override
+  String get lastWeek => 'Dernière semaine';
+
+  @override
+  String get lastMonth => 'Dernier mois';
+
+  @override
+  String get incomeLabel => 'Revenu :';
+
+  @override
+  String get expenseLabel => 'Dépense :';
+
+  @override
+  String get salesPerformance => 'Performance des ventes';
+
+  @override
+  String get totalLabelColon => 'Total :';
+
+  @override
+  String get expensesVsIncome => 'Dépenses vs Revenus';
+
+  @override
+  String get incomeLegend => 'Revenus';
+
+  @override
+  String get expensesLegend => 'Dépenses';
+
+  @override
+  String get changePeriod => 'Changer la période';
+
+  @override
+  String get pinnedProductsHint =>
+      'Produits épinglés — appuyez pour une vente rapide';
+
+  @override
+  String get byPiece => 'Par pièce';
+
+  @override
+  String get byWeight => 'Au poids';
+
+  @override
+  String get addGroup => 'Ajouter un groupe';
+
+  @override
+  String get remainingColon => 'Reste :';
+
+  @override
+  String get notTracked => 'Non suivi';
+
+  @override
+  String get technicalService => 'Service technique';
+
+  @override
+  String get groupByCategory => 'Grouper par catégorie';
+
+  @override
+  String get groupByCategoryDesc =>
+      'Filtrer les produits épinglés par une seule catégorie';
+
+  @override
+  String get groupByBrand => 'Grouper par marque';
+
+  @override
+  String get groupByBrandDesc =>
+      'Filtrer les produits épinglés par une seule marque';
+
+  @override
+  String get noCategoriesYet => 'Aucune catégorie pour le moment';
+
+  @override
+  String get chooseCategory => 'Choisir une catégorie';
+
+  @override
+  String get categoryFallback => 'Catégorie';
+
+  @override
+  String get noBrandsYet => 'Aucune marque pour le moment';
+
+  @override
+  String get chooseBrand => 'Choisir une marque';
+
+  @override
+  String get brandFallback => 'Marque';
+
+  @override
+  String get groupAlreadyExists => 'Ce groupe existe déjà';
+
+  @override
+  String get noMatchingActivityYet =>
+      'Aucune activité correspondante pour le moment';
+
+  @override
+  String get noActivityHint =>
+      'Enregistrez des ventes, mouvements de caisse ou toute activité dans l\'application pour les voir ici chronologiquement.';
+
+  @override
+  String failedToLoadActivity(Object error) {
+    return 'Échec du chargement de l\'activité : $error';
+  }
+
+  @override
+  String get recentActivityOverview => 'Aperçu des activités récentes';
+
+  @override
+  String get invoicesLabelShort => 'Factures';
+
+  @override
+  String get cashLabelShort => 'Caisse';
+
+  @override
+  String get otherLabelShort => 'Autre';
+
+  @override
+  String get openInvoicesList => 'Ouvrir la liste des factures';
+
+  @override
+  String get openCashRegister => 'Caisse';
+
+  @override
+  String get cashRegisterCard => 'Caisse';
+
+  @override
+  String get cashRegisterHint => 'Solde agrégé dans le registre';
+
+  @override
+  String get shiftLabel => 'Équipe';
+
+  @override
+  String get newSaleCard => 'Nouvelle vente';
+
+  @override
+  String get newSaleSubtitle => 'Facture rapide';
+
+  @override
+  String get newSaleHint => 'Raccourci pour la caisse et la vente';
+
+  @override
+  String get inventoryCard => 'Stock';
+
+  @override
+  String inventorySubtitle(Object count) {
+    return '$count articles actifs';
+  }
+
+  @override
+  String inventoryAlertLowStock(Object count) {
+    return 'Alerte : $count avec stock bas';
+  }
+
+  @override
+  String get inventoryNoAlerts => 'Pas d\'alertes de stock';
+
+  @override
+  String get completedOrdersCard => 'Commandes terminées';
+
+  @override
+  String completedOrdersSubtitle(Object count) {
+    return '$count commandes';
+  }
+
+  @override
+  String get completedOrdersHint => 'Bénéfice de l\'équipe précédente';
+
+  @override
+  String get parkedCard => 'En attente';
+
+  @override
+  String parkedSubtitle(Object count) {
+    return '$count factures';
+  }
+
+  @override
+  String get parkedHint => 'Temporairement en attente';
+
+  @override
+  String get reportsCard => 'Rapports';
+
+  @override
+  String get reportsSubtitle => 'Tableau de bord';
+
+  @override
+  String get reportsHint => 'Indicateurs de la période';
+
+  @override
+  String get dragToReorderCards =>
+      'Glissez les éléments vers le haut ou le bas pour réordonner. L\'ordre est sauvegardé sur cet appareil.';
+
+  @override
+  String get saveOrder => 'Enregistrer l\'ordre';
+
+  @override
+  String get reorderCards => 'Réordonner les cartes';
+
+  @override
+  String get refreshNumbers => 'Actualiser les chiffres';
+
+  @override
+  String get glanceOverview => 'Aperçu rapide';
+
+  @override
+  String get dragHeightHint =>
+      'Glissez vers le haut ou le bas pour modifier la hauteur de la liste des produits';
+
+  @override
+  String get pinnedProductsHeightHandle =>
+      'Poignée pour modifier la hauteur de la liste des produits épinglés';
+
+  @override
+  String filterByCategoryColon(Object name) {
+    return 'Filtrer par catégorie : $name';
+  }
+
+  @override
+  String filterByBrandColon(Object name) {
+    return 'Filtrer par marque : $name';
+  }
 }

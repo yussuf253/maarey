@@ -260,7 +260,7 @@ class _LoginScreenState extends State<LoginScreen>
     }
     messenger.showSnackBar(
       SnackBar(
-        content: const Text('اسم المستخدم أو رمز الدخول غير صحيح'),
+        content: Text(AppLocalizations.of(context)!.invalidCredentials),
         backgroundColor: Colors.red.shade700,
         behavior: SnackBarBehavior.floating,
       ),
@@ -376,6 +376,7 @@ class _LoginScreenState extends State<LoginScreen>
   }
 
   Widget _brandPanel({required bool isNarrow, required bool collapsed}) {
+    final loc = AppLocalizations.of(context)!;
     final logoSize = isNarrow ? (collapsed ? 44.0 : 64.0) : 96.0;
     final titleSize = isNarrow ? (collapsed ? 34.0 : 44.0) : 64.0;
     final content = Center(
@@ -400,7 +401,7 @@ class _LoginScreenState extends State<LoginScreen>
             if (!collapsed) ...[
               SizedBox(height: isNarrow ? 10 : 20),
               Text(
-                'نظام إدارة الأعمال',
+                loc.businessManagementSystem,
                 style: GoogleFonts.tajawal(
                   color: Colors.white.withValues(alpha: 0.74),
                   fontSize: isNarrow ? 13 : 17,
@@ -411,11 +412,11 @@ class _LoginScreenState extends State<LoginScreen>
             ],
             if (!isNarrow) ...[
               const SizedBox(height: 36),
-              _feature(Icons.receipt_long_rounded, 'المبيعات والفواتير'),
+              _feature(Icons.receipt_long_rounded, loc.salesAndInvoices),
               const SizedBox(height: 10),
-              _feature(Icons.account_balance_rounded, 'الحسابات والتقارير'),
+              _feature(Icons.account_balance_rounded, loc.accountsAndReports),
               const SizedBox(height: 10),
-              _feature(Icons.inventory_2_rounded, 'المخزون والمستودعات'),
+              _feature(Icons.inventory_2_rounded, loc.inventoryAndWarehouses),
             ],
           ],
         ),
@@ -502,7 +503,7 @@ class _LoginScreenState extends State<LoginScreen>
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    _isSignUpMode ? 'إنشاء حساب جديد' : 'تسجيل الدخول',
+                    _isSignUpMode ? loc.createNewAccountTitle : loc.loginTitle,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.tajawal(
                       fontSize: isNarrow ? 24 : 28,
@@ -514,8 +515,8 @@ class _LoginScreenState extends State<LoginScreen>
                   const SizedBox(height: 10),
                   Text(
                     _isSignUpMode
-                        ? 'سيصلك رمز تحقق على بريدك الإلكتروني لتأكيد حسابك'
-                        : 'أدخل البريد الإلكتروني وكلمة السر للدخول',
+                        ? loc.signupSubtitle
+                        : loc.loginSubtitle,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.tajawal(
                       fontSize: 14,
@@ -540,8 +541,8 @@ class _LoginScreenState extends State<LoginScreen>
                     ),
                     child: Text(
                       _isSignUpMode
-                          ? 'لديك حساب؟ العودة إلى تسجيل الدخول'
-                          : 'ليس لديك حساب؟ إنشاء حساب جديد',
+                          ? loc.haveAccountBackToLogin
+                          : loc.noAccountCreateNew,
                       style: GoogleFonts.tajawal(
                         fontWeight: FontWeight.w700,
                         fontSize: 14,
@@ -561,14 +562,14 @@ class _LoginScreenState extends State<LoginScreen>
     String? validateUser(String? value) {
       final t = (value ?? '').trim();
       if (!_blurredLoginUser) return null;
-      if (t.isEmpty) return 'هذا الحقل مطلوب';
-      if (t.length < 3) return 'يجب أن يكون 3 أحرف على الأقل';
+      if (t.isEmpty) return loc.requiredField;
+      if (t.length < 3) return loc.minLength3Chars;
       return null;
     }
 
     String? validatePass(String? value) {
       if (!_blurredLoginPass) return null;
-      if ((value ?? '').trim().isEmpty) return 'هذا الحقل مطلوب';
+      if ((value ?? '').trim().isEmpty) return loc.requiredField;
       return null;
     }
 
@@ -697,7 +698,7 @@ class _LoginScreenState extends State<LoginScreen>
                         ),
                       )
                     : Text(
-                        'تسجيل الدخول',
+                        loc.loginButton,
                         style: GoogleFonts.tajawal(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
@@ -713,8 +714,9 @@ class _LoginScreenState extends State<LoginScreen>
   }
 
   Widget _iraqDialChip() {
+    final loc = AppLocalizations.of(context)!;
     return Tooltip(
-      message: '+964 العراق — سيتوفر اختيار دول أخرى لاحقاً',
+      message: loc.iraqDialTooltip,
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -763,16 +765,16 @@ class _LoginScreenState extends State<LoginScreen>
     String? validateSignupName(String? value) {
       final t = (value ?? '').trim();
       if (!_blurredSignupName) return null;
-      if (t.isEmpty) return 'الاسم مطلوب';
-      if (t.length < 3) return 'الاسم مطلوب (3 أحرف على الأقل)';
+      if (t.isEmpty) return loc.nameRequired;
+      if (t.length < 3) return loc.nameRequiredMin3;
       return null;
     }
 
     String? validateSignupEmail(String? value) {
       final t = (value ?? '').trim();
       if (!_blurredSignupEmail) return null;
-      if (t.isEmpty) return 'البريد مطلوب';
-      if (!_emailFormatOk(t)) return 'صيغة البريد غير صحيحة';
+      if (t.isEmpty) return loc.emailRequiredShort;
+      if (!_emailFormatOk(t)) return loc.emailInvalidFormat;
       return null;
     }
 
@@ -780,7 +782,7 @@ class _LoginScreenState extends State<LoginScreen>
       final raw = (value ?? '').trim();
       if (!_blurredSignupPhone) return null;
       if (!_iraqMobileOk(raw)) {
-        return 'رقم عراقي: 11 رقماً يبدأ بـ 07 (مثال: 07701234567)';
+        return loc.iraqMobileInvalid;
       }
       return null;
     }
@@ -789,10 +791,10 @@ class _LoginScreenState extends State<LoginScreen>
       final t = value ?? '';
       if (t.isEmpty) {
         if (!_blurredSignupPwd) return null;
-        return 'كلمة السر مطلوبة';
+        return loc.passwordRequired;
       }
       if (!_allPasswordRequirementsMet) {
-        return 'كلمة السر لا تحقق الشروط المطلوبة';
+        return loc.passwordDoesNotMeetRequirements;
       }
       return null;
     }
@@ -800,11 +802,11 @@ class _LoginScreenState extends State<LoginScreen>
     String? validateConfirm(String? value) {
       final t = value ?? '';
       if (t.isNotEmpty && !_passwordsMatch) {
-        return 'كلمتا السر غير متطابقتين';
+        return loc.passwordsDoNotMatch;
       }
       if (t.isEmpty) {
         if (!_blurredSignupConfirm) return null;
-        return 'الرجاء إعادة كتابة كلمة السر';
+        return loc.enterPasswordAgain;
       }
       return null;
     }
