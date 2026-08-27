@@ -1854,4 +1854,45 @@ class AppLocalizationsAr extends AppLocalizations {
   String filterByBrandColon(Object name) {
     return 'تصفية حسب الماركة: $name';
   }
+
+  @override
+  String get accountLabel => 'الحساب';
+
+  @override
+  String get lightModeLabel => 'الوضع النهاري';
+
+  @override
+  String get darkModeLabel => 'الوضع الليلي';
+
+  @override
+  String get calculatorLabel => 'حاسبة';
+
+  @override
+  String get settingsLabelMenu => 'الإعدادات';
+
+  @override
+  String get showMacPanel => 'إظهار لوحة Mac';
+
+  @override
+  String get hideMacPanel => 'إخفاء لوحة Mac';
+
+  @override
+  String get customizeModules => 'تخصيص الوحدات';
+
+  @override
+  String get editDone => 'إنهاء التحرير';
+
+  @override
+  String get breadcrumbNavHint => 'مسار التنقل — اضغط خطوة سابقة للرجوع';
+
+  @override
+  String currentPageLabel(Object title) {
+    return 'الصفحة الحالية: $title';
+  }
+
+  @override
+  String get restrictedModeBanner => 'وضع مقيّد — اتصل بالإنترنت للتحقق';
+
+  @override
+  String get retryButton => 'إعادة المحاولة';
 }

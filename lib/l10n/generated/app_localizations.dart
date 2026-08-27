@@ -3421,6 +3421,84 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'تصفية حسب الماركة: {name}'**
   String filterByBrandColon(Object name);
+
+  /// No description provided for @accountLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحساب'**
+  String get accountLabel;
+
+  /// No description provided for @lightModeLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوضع النهاري'**
+  String get lightModeLabel;
+
+  /// No description provided for @darkModeLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوضع الليلي'**
+  String get darkModeLabel;
+
+  /// No description provided for @calculatorLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'حاسبة'**
+  String get calculatorLabel;
+
+  /// No description provided for @settingsLabelMenu.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإعدادات'**
+  String get settingsLabelMenu;
+
+  /// No description provided for @showMacPanel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إظهار لوحة Mac'**
+  String get showMacPanel;
+
+  /// No description provided for @hideMacPanel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إخفاء لوحة Mac'**
+  String get hideMacPanel;
+
+  /// No description provided for @customizeModules.
+  ///
+  /// In ar, this message translates to:
+  /// **'تخصيص الوحدات'**
+  String get customizeModules;
+
+  /// No description provided for @editDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنهاء التحرير'**
+  String get editDone;
+
+  /// No description provided for @breadcrumbNavHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسار التنقل — اضغط خطوة سابقة للرجوع'**
+  String get breadcrumbNavHint;
+
+  /// No description provided for @currentPageLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصفحة الحالية: {title}'**
+  String currentPageLabel(Object title);
+
+  /// No description provided for @restrictedModeBanner.
+  ///
+  /// In ar, this message translates to:
+  /// **'وضع مقيّد — اتصل بالإنترنت للتحقق'**
+  String get restrictedModeBanner;
+
+  /// No description provided for @retryButton.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة المحاولة'**
+  String get retryButton;
 }
 
 class _AppLocalizationsDelegate

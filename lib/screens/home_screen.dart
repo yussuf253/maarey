@@ -852,6 +852,19 @@ class _HomeScreenState extends State<HomeScreen>
       }
       _originalModules = freshModules;
       _orderedModules = reconciled;
+      // Also reconcile _visibleNavModules so the sidebar/bottom nav
+      // get the new translations immediately (not just after async _recomputeNavModules).
+      if (_navFilterApplied && _visibleNavModules.isNotEmpty) {
+        final visReconciled = _visibleNavModules
+            .map((old) => byRoute[old.routeId])
+            .whereType<ModuleItem>()
+            .toList();
+        _visibleNavModules = visReconciled;
+      }
+      // Trigger rebuild so the sidebar/bottom nav redraw with new translations.
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) setState(() {});
+      });
     }
     _barcodeBridge ??= context.read<GlobalBarcodeRouteBridge>();
     if (!_barcodeBridgeAttached) {

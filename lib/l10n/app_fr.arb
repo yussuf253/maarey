@@ -554,5 +554,18 @@
   "dragHeightHint": "Glissez vers le haut ou le bas pour modifier la hauteur de la liste des produits",
   "pinnedProductsHeightHandle": "Poignée pour modifier la hauteur de la liste des produits épinglés",
   "filterByCategoryColon": "Filtrer par catégorie : {name}",
-  "filterByBrandColon": "Filtrer par marque : {name}"
+  "filterByBrandColon": "Filtrer par marque : {name}",
+  "accountLabel": "Compte",
+  "lightModeLabel": "Mode clair",
+  "darkModeLabel": "Mode sombre",
+  "calculatorLabel": "Calculatrice",
+  "settingsLabelMenu": "Paramètres",
+  "showMacPanel": "Afficher le panneau Mac",
+  "hideMacPanel": "Masquer le panneau Mac",
+  "customizeModules": "Personnaliser les modules",
+  "editDone": "Terminer l'édition",
+  "breadcrumbNavHint": "Chemin de navigation — appuyez sur une étape pour revenir",
+  "currentPageLabel": "Page actuelle : {title}",
+  "restrictedModeBanner": "Mode restreint — connectez-vous à Internet pour vérifier",
+  "retryButton": "Réessayer"
 }

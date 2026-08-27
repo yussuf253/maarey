@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../navigation/content_navigation.dart';
 import '../theme/app_corner_style.dart';
+import '../l10n/generated/app_localizations.dart';
 
 /// شريط فتات خبز حديث — يتبع مسار [Navigator] ويعرض عنواناً عربياً لكل صفحة.
 class AppBreadcrumbStrip extends StatelessWidget {
@@ -64,7 +65,7 @@ class AppBreadcrumbStrip extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Tooltip(
-                message: 'مسار التنقل — اضغط خطوة سابقة للرجوع',
+                message: AppLocalizations.of(context)!.breadcrumbNavHint,
                 child: Padding(
                   padding: const EdgeInsetsDirectional.only(end: 8),
                   child: DecoratedBox(
@@ -192,7 +193,7 @@ class _BreadcrumbChip extends StatelessWidget {
 
     if (isCurrent) {
       return Semantics(
-        label: 'الصفحة الحالية: $title',
+        label: AppLocalizations.of(context)!.currentPageLabel(title),
         child: DecoratedBox(
           decoration: BoxDecoration(
             borderRadius: borderRadius,

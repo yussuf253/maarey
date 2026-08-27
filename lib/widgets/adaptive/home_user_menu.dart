@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_spacing.dart';
 import '../../utils/screen_layout.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 /// قائمة المستخدم المنسدلة في الـ AppBar للشاشة الرئيسية.
 ///
@@ -80,7 +81,7 @@ class HomeUserMenu extends StatelessWidget {
     final cs = Theme.of(context).colorScheme;
 
     return PopupMenuButton<_HomeUserMenuAction>(
-      tooltip: userName.isNotEmpty ? userName : 'الحساب',
+      tooltip: userName.isNotEmpty ? userName : AppLocalizations.of(context)!.accountLabel,
       color: cs.surface,
       surfaceTintColor: Colors.transparent,
       offset: const Offset(0, 44),
@@ -138,7 +139,7 @@ class HomeUserMenu extends StatelessWidget {
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 120),
             child: Text(
-              userName.isEmpty ? 'الحساب' : userName,
+              userName.isEmpty ? AppLocalizations.of(context)!.accountLabel : userName,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
@@ -193,7 +194,7 @@ class HomeUserMenu extends StatelessWidget {
         value: _HomeUserMenuAction.profile,
         child: _MenuRow(
           icon: Icons.person_outline_rounded,
-          title: userName.isEmpty ? 'الحساب' : userName,
+          title: userName.isEmpty ? AppLocalizations.of(context)!.accountLabel : userName,
           subtitle: userRole.isEmpty ? null : userRole,
           color: cs.primary,
         ),
@@ -206,21 +207,21 @@ class HomeUserMenu extends StatelessWidget {
           icon: isDarkMode
               ? Icons.light_mode_outlined
               : Icons.dark_mode_outlined,
-          title: isDarkMode ? 'الوضع النهاري' : 'الوضع الليلي',
+          title: isDarkMode ? AppLocalizations.of(context)!.lightModeLabel : AppLocalizations.of(context)!.darkModeLabel,
         ),
       ),
-      const PopupMenuItem<_HomeUserMenuAction>(
+       PopupMenuItem<_HomeUserMenuAction>(
         value: _HomeUserMenuAction.calculator,
         child: _MenuRow(
           icon: Icons.calculate_rounded,
-          title: 'حاسبة',
+          title: AppLocalizations.of(context)!.calculatorLabel,
         ),
       ),
-      const PopupMenuItem<_HomeUserMenuAction>(
+       PopupMenuItem<_HomeUserMenuAction>(
         value: _HomeUserMenuAction.settings,
         child: _MenuRow(
           icon: Icons.settings_rounded,
-          title: 'الإعدادات',
+          title: AppLocalizations.of(context)!.settingsLabelMenu,
         ),
       ),
     ];
@@ -235,8 +236,8 @@ class HomeUserMenu extends StatelessWidget {
                 ? Icons.dashboard_customize_rounded
                 : Icons.dashboard_customize_outlined,
             title: macPanelEnabled
-                ? 'إخفاء لوحة Mac'
-                : 'إظهار لوحة Mac',
+                ? AppLocalizations.of(context)!.hideMacPanel
+                : AppLocalizations.of(context)!.showMacPanel,
           ),
         ),
       );
@@ -249,7 +250,7 @@ class HomeUserMenu extends StatelessWidget {
           value: _HomeUserMenuAction.editMode,
           child: _MenuRow(
             icon: isEditMode ? Icons.check_rounded : Icons.edit_rounded,
-            title: isEditMode ? 'إنهاء التحرير' : 'تخصيص الوحدات',
+            title: isEditMode ? AppLocalizations.of(context)!.editDone : AppLocalizations.of(context)!.customizeModules,
           ),
         ),
       );
@@ -261,7 +262,7 @@ class HomeUserMenu extends StatelessWidget {
         value: _HomeUserMenuAction.logout,
         child: _MenuRow(
           icon: Icons.logout_rounded,
-          title: 'تسجيل الخروج',
+          title: AppLocalizations.of(context)!.logoutLabel,
           color: cs.error,
         ),
       ),

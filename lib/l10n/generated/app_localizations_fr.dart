@@ -1892,4 +1892,47 @@ class AppLocalizationsFr extends AppLocalizations {
   String filterByBrandColon(Object name) {
     return 'Filtrer par marque : $name';
   }
+
+  @override
+  String get accountLabel => 'Compte';
+
+  @override
+  String get lightModeLabel => 'Mode clair';
+
+  @override
+  String get darkModeLabel => 'Mode sombre';
+
+  @override
+  String get calculatorLabel => 'Calculatrice';
+
+  @override
+  String get settingsLabelMenu => 'Paramètres';
+
+  @override
+  String get showMacPanel => 'Afficher le panneau Mac';
+
+  @override
+  String get hideMacPanel => 'Masquer le panneau Mac';
+
+  @override
+  String get customizeModules => 'Personnaliser les modules';
+
+  @override
+  String get editDone => 'Terminer l\'édition';
+
+  @override
+  String get breadcrumbNavHint =>
+      'Chemin de navigation — appuyez sur une étape pour revenir';
+
+  @override
+  String currentPageLabel(Object title) {
+    return 'Page actuelle : $title';
+  }
+
+  @override
+  String get restrictedModeBanner =>
+      'Mode restreint — connectez-vous à Internet pour vérifier';
+
+  @override
+  String get retryButton => 'Réessayer';
 }

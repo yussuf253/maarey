@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../services/license_service.dart';
+import '../l10n/generated/app_localizations.dart';
 
 class RestrictedModeBannerController extends StatefulWidget {
   const RestrictedModeBannerController({super.key, required this.child});
@@ -55,7 +56,7 @@ class _RestrictedModeBannerControllerState
           content: Text(
             lic.state.message?.trim().isNotEmpty == true
                 ? lic.state.message!
-                : 'وضع مقيّد — اتصل بالإنترنت للتحقق',
+                : AppLocalizations.of(context)!.restrictedModeBanner,
             style: TextStyle(color: cs.onErrorContainer),
           ),
           actions: [
@@ -76,7 +77,7 @@ class _RestrictedModeBannerControllerState
                         }
                       }
                     },
-              child: const Text('إعادة المحاولة'),
+              child: Text(AppLocalizations.of(context)!.retryButton),
             ),
           ],
         );

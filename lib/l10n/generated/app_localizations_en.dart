@@ -1871,4 +1871,46 @@ class AppLocalizationsEn extends AppLocalizations {
   String filterByBrandColon(Object name) {
     return 'Filter by brand: $name';
   }
+
+  @override
+  String get accountLabel => 'Account';
+
+  @override
+  String get lightModeLabel => 'Light mode';
+
+  @override
+  String get darkModeLabel => 'Dark mode';
+
+  @override
+  String get calculatorLabel => 'Calculator';
+
+  @override
+  String get settingsLabelMenu => 'Settings';
+
+  @override
+  String get showMacPanel => 'Show Mac panel';
+
+  @override
+  String get hideMacPanel => 'Hide Mac panel';
+
+  @override
+  String get customizeModules => 'Customize modules';
+
+  @override
+  String get editDone => 'Done editing';
+
+  @override
+  String get breadcrumbNavHint => 'Navigation path — tap a step to go back';
+
+  @override
+  String currentPageLabel(Object title) {
+    return 'Current page: $title';
+  }
+
+  @override
+  String get restrictedModeBanner =>
+      'Restricted mode — connect to the internet to verify';
+
+  @override
+  String get retryButton => 'Retry';
 }
