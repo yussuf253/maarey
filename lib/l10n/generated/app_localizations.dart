@@ -63,8 +63,7 @@ import 'app_localizations_fr.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale)
-    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -72,8 +71,7 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -85,19 +83,18 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
-        delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('ar'),
     Locale('en'),
-    Locale('fr'),
+    Locale('fr')
   ];
 
   /// No description provided for @appTitle.
@@ -2060,11 +2057,7 @@ abstract class AppLocalizations {
   ///
   /// In ar, this message translates to:
   /// **'العميل: {customer}\nالدفع: {paymentType}\nالإجمالي: {total}\n\nفتح شاشة المرتجع؟ يمكنك تقليل الكمية أو حذف الأسطر لإرجاع جزئي فقط.'**
-  String returnInvoiceDialogBody(
-    Object customer,
-    Object paymentType,
-    Object total,
-  );
+  String returnInvoiceDialogBody(Object customer, Object paymentType, Object total);
 
   /// No description provided for @returnLabel.
   ///
@@ -3499,10 +3492,441 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'إعادة المحاولة'**
   String get retryButton;
+
+  /// No description provided for @timeTamperTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعارض في إعدادات الوقت'**
+  String get timeTamperTitle;
+
+  /// No description provided for @licenseSuspendedTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الترخيص موقوف'**
+  String get licenseSuspendedTitle;
+
+  /// No description provided for @deviceLimitExceededTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجاوز حد الأجهزة'**
+  String get deviceLimitExceededTitle;
+
+  /// No description provided for @subscriptionExpiredTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهى الاشتراك'**
+  String get subscriptionExpiredTitle;
+
+  /// No description provided for @timeTamperMessage.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم اكتشاف تعارض في إعدادات الوقت. تواصل مع الدعم للمساعدة في إعادة التحقق.'**
+  String get timeTamperMessage;
+
+  /// No description provided for @accountSuspendedMessage.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم إيقاف حسابك. تواصل مع الدعم الفني.'**
+  String get accountSuspendedMessage;
+
+  /// No description provided for @subscriptionExpiredMessage.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهى اشتراكك. جدّد للمتابعة.'**
+  String get subscriptionExpiredMessage;
+
+  /// No description provided for @enterLicenseKeyError.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل مفتاح الترخيص'**
+  String get enterLicenseKeyError;
+
+  /// No description provided for @yourCurrentPlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطتك الحالية'**
+  String get yourCurrentPlan;
+
+  /// No description provided for @registeredDevices.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأجهزة المسجّلة'**
+  String get registeredDevices;
+
+  /// No description provided for @subscriptionExpires.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهاء الاشتراك'**
+  String get subscriptionExpires;
+
+  /// No description provided for @trialExpires.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهاء التجربة'**
+  String get trialExpires;
+
+  /// No description provided for @upgradePlanToAddDevices.
+  ///
+  /// In ar, this message translates to:
+  /// **'ترقية الخطة لإضافة أجهزة'**
+  String get upgradePlanToAddDevices;
+
+  /// No description provided for @renewSubscription.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجديد الاشتراك'**
+  String get renewSubscription;
+
+  /// No description provided for @comparePlans.
+  ///
+  /// In ar, this message translates to:
+  /// **'مقارنة خطط الاشتراك'**
+  String get comparePlans;
+
+  /// No description provided for @enterNewKey.
+  ///
+  /// In ar, this message translates to:
+  /// **'إدخال مفتاح جديد'**
+  String get enterNewKey;
+
+  /// No description provided for @activateButton.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفعيل'**
+  String get activateButton;
+
+  /// No description provided for @reVerifyButton.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة التحقق'**
+  String get reVerifyButton;
+
+  /// No description provided for @useAnotherKey.
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدام مفتاح آخر'**
+  String get useAnotherKey;
+
+  /// No description provided for @allRightsReserved.
+  ///
+  /// In ar, this message translates to:
+  /// **'NaBoo v2.0 — جميع الحقوق محفوظة'**
+  String get allRightsReserved;
+
+  /// No description provided for @noInternetConnection.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد اتصال بالإنترنت'**
+  String get noInternetConnection;
+
+  /// No description provided for @offlineMessage.
+  ///
+  /// In ar, this message translates to:
+  /// **'يعمل التطبيق بآخر بيانات ترخيص محفوظة.\nتأكد من الاتصال في أقرب فرصة.'**
+  String get offlineMessage;
+
+  /// No description provided for @enterWithoutConnection.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدخول بدون اتصال'**
+  String get enterWithoutConnection;
+
+  /// No description provided for @activateLicenseTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفعيل الترخيص'**
+  String get activateLicenseTitle;
+
+  /// No description provided for @enterLicenseKeyToContinue.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل مفتاح الترخيص للمتابعة'**
+  String get enterLicenseKeyToContinue;
+
+  /// No description provided for @contactTeamForLicense.
+  ///
+  /// In ar, this message translates to:
+  /// **'للحصول على مفتاح ترخيص، تواصل مع فريق NaBoo.'**
+  String get contactTeamForLicense;
+
+  /// No description provided for @subscriptionPlansTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطط الاشتراك'**
+  String get subscriptionPlansTitle;
+
+  /// No description provided for @chooseRightPlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر الخطة المناسبة لنشاطك'**
+  String get chooseRightPlan;
+
+  /// No description provided for @plansDescriptionJwt.
+  ///
+  /// In ar, this message translates to:
+  /// **'البطاقات أدناه للمقارنة والأسعار فقط. بعد الدفع تستلم رمزاً موقّعاً (JWT) — الصقه في حقل التفعيل أسفل البطاقات مباشرة.'**
+  String get plansDescriptionJwt;
+
+  /// No description provided for @plansDescriptionLegacy.
+  ///
+  /// In ar, this message translates to:
+  /// **'البطاقة الأولى: تجربة تلقائية 15 يوماً (جهازان). البطاقات التالية خطط مدفوعة — بعد الدفع تُدخل المفتاح في الحقل الموحّد أسفل الصفحة.'**
+  String get plansDescriptionLegacy;
+
+  /// No description provided for @howToSubscribe.
+  ///
+  /// In ar, this message translates to:
+  /// **'كيفية الاشتراك'**
+  String get howToSubscribe;
+
+  /// No description provided for @subscribeStepsJwt.
+  ///
+  /// In ar, this message translates to:
+  /// **'١. تواصل مع فريق NaBoo عبر الطرق أدناه\n٢. أكمل الدفع للخطة التي تريدها\n٣. استلم رمز التفعيل الكامل (JWT) من الإدارة\n٤. الصق الرمز في الحقل الموحّد أسفل بطاقات الخطط — الخطة وحد الأجهزة يُستنتجان من الرمز'**
+  String get subscribeStepsJwt;
+
+  /// No description provided for @subscribeStepsLegacy.
+  ///
+  /// In ar, this message translates to:
+  /// **'١. تواصل مع فريق NaBoo عبر الطرق أدناه\n٢. أخبرنا بالخطة التي تريدها وأكمل الدفع\n٣. استلم مفتاح الترخيص من الإدارة\n٤. الصق المفتاح في الحقل الموحّد أسفل بطاقات الخطط ثم اضغط «تفعيل المفتاح»'**
+  String get subscribeStepsLegacy;
+
+  /// No description provided for @whatsappOrPhone.
+  ///
+  /// In ar, this message translates to:
+  /// **'واتساب / هاتف'**
+  String get whatsappOrPhone;
+
+  /// No description provided for @emailContact.
+  ///
+  /// In ar, this message translates to:
+  /// **'البريد الإلكتروني'**
+  String get emailContact;
+
+  /// No description provided for @continueButton.
+  ///
+  /// In ar, this message translates to:
+  /// **'متابعة'**
+  String get continueButton;
+
+  /// No description provided for @pasteTokenFirst.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصق رمز الترخيص أولاً'**
+  String get pasteTokenFirst;
+
+  /// No description provided for @activateTokenTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفعيل رمز الترخيص'**
+  String get activateTokenTitle;
+
+  /// No description provided for @activateTokenDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصق الرمز الكامل الذي أرسلته الإدارة. الخطة وحد الأجهزة يُستنتجان من داخل الرمز وليس من شكل البطاقة.'**
+  String get activateTokenDescription;
+
+  /// No description provided for @pasteTokenHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصق رمز التفعيل هنا'**
+  String get pasteTokenHint;
+
+  /// No description provided for @activateTokenButton.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفعيل الرمز'**
+  String get activateTokenButton;
+
+  /// No description provided for @pasteKeyOrTokenFirst.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصق مفتاح الترخيص أو رمز التفعيل أولاً'**
+  String get pasteKeyOrTokenFirst;
+
+  /// No description provided for @activateKeyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفعيل المفتاح'**
+  String get activateKeyTitle;
+
+  /// No description provided for @activateKeyDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصق مفتاح الترخيص الذي استلمته بعد الدفع، أو رمز JWT إن وُجد. الخطط أعلاه للعرض والمقارنة فقط.'**
+  String get activateKeyDescription;
+
+  /// No description provided for @pasteKeyHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصق مفتاح الترخيص أو رمز التفعيل'**
+  String get pasteKeyHint;
+
+  /// No description provided for @activateKeyButton.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفعيل المفتاح'**
+  String get activateKeyButton;
+
+  /// No description provided for @freeLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مجاناً'**
+  String get freeLabel;
+
+  /// No description provided for @trialDaysLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'15 يوماً'**
+  String get trialDaysLabel;
+
+  /// No description provided for @currencyLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'د.ع'**
+  String get currencyLabel;
+
+  /// No description provided for @perMonthLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'شهرياً'**
+  String get perMonthLabel;
+
+  /// No description provided for @yourCurrentTrial.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجربتك الحالية'**
+  String get yourCurrentTrial;
+
+  /// No description provided for @yourCurrentPlanCard.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطتك الحالية'**
+  String get yourCurrentPlanCard;
+
+  /// No description provided for @trialAutoStartsMessage.
+  ///
+  /// In ar, this message translates to:
+  /// **'التجربة تبدأ تلقائياً — لا مفتاح. عند الترقية استلم الرمز من الإدارة والصقه في الحقل الموحّد أسفل البطاقات.'**
+  String get trialAutoStartsMessage;
+
+  /// No description provided for @jwtPlanDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذه البطاقة للعرض والمقارنة فقط. بعد الدفع الصق رمز التفعيل (JWT) في الحقل الموحّد أسفل البطاقات مباشرة.'**
+  String get jwtPlanDescription;
+
+  /// No description provided for @legacyPlanDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذه البطاقة للعرض والمقارنة فقط. بعد الدفع الصق مفتاح الترخيص في الحقل الموحّد أسفل البطاقات.'**
+  String get legacyPlanDescription;
+
+  /// No description provided for @mostPopular.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأكثر طلباً'**
+  String get mostPopular;
+
+  /// No description provided for @numberCopied.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم نسخ الرقم'**
+  String get numberCopied;
+
+  /// No description provided for @emailCopied.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم نسخ البريد'**
+  String get emailCopied;
+
+  /// No description provided for @copyTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخ'**
+  String get copyTooltip;
+
+  /// No description provided for @inventorySettingsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات المخزون'**
+  String get inventorySettingsTitle;
+
+  /// No description provided for @subSettingsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإعدادات الفرعية'**
+  String get subSettingsTitle;
+
+  /// No description provided for @subSettingsSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات تفصيلية لكل جانب من جوانب المخزون'**
+  String get subSettingsSubtitle;
+
+  /// No description provided for @productAddSettingsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات إضافة منتج'**
+  String get productAddSettingsTitle;
+
+  /// No description provided for @productAddSettingsDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحقول الافتراضية، المخزن الافتراضي، حقول إلزامية'**
+  String get productAddSettingsDesc;
+
+  /// No description provided for @barcodeSettingsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات الباركود'**
+  String get barcodeSettingsTitle;
+
+  /// No description provided for @barcodeSettingsDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'معيار الباركود، الحقول المدمجة في الباركود'**
+  String get barcodeSettingsDesc;
+
+  /// No description provided for @categoriesTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفئات والتصنيفات'**
+  String get categoriesTitle;
+
+  /// No description provided for @categoriesDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة وتعديل وحذف فئات المنتجات'**
+  String get categoriesDesc;
+
+  /// No description provided for @brandsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الماركات والعلامات التجارية'**
+  String get brandsTitle;
+
+  /// No description provided for @brandsDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة وتعديل وحذف الماركات'**
+  String get brandsDesc;
+
+  /// No description provided for @unitTemplatesTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'قوالب وحدات القياس'**
+  String get unitTemplatesTitle;
+
+  /// No description provided for @unitTemplatesDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعريف وحدات البيع والشراء وعوامل التحويل'**
+  String get unitTemplatesDesc;
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -3511,28 +3935,26 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['ar', 'en', 'fr'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['ar', 'en', 'fr'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
+
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'ar':
-      return AppLocalizationsAr();
-    case 'en':
-      return AppLocalizationsEn();
-    case 'fr':
-      return AppLocalizationsFr();
+    case 'ar': return AppLocalizationsAr();
+    case 'en': return AppLocalizationsEn();
+    case 'fr': return AppLocalizationsFr();
   }
 
   throw FlutterError(
     'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.',
+    'that was used.'
   );
 }

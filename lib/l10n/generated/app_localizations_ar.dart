@@ -51,33 +51,28 @@ class AppLocalizationsAr extends AppLocalizations {
   String get businessFeatures => 'ميزادات المتجر';
 
   @override
-  String get businessFeaturesSubtitle =>
-      'العملاء، الولاء، الضريبة، الخصم، الديون، التقسيط، الوزن، الملابن، والخدمات';
+  String get businessFeaturesSubtitle => 'العملاء، الولاء، الضريبة، الخصم، الديون، التقسيط، الوزن، الملابن، والخدمات';
 
   @override
   String get customizeDashboard => 'تخصيص الشاشة الرئيسية';
 
   @override
-  String get customizeDashboardSubtitle =>
-      'إظهار أو إخفاء أقسام لوحة التحكم وترتيبها بالسحب';
+  String get customizeDashboardSubtitle => 'إظهار أو إخفاء أقسام لوحة التحكم وترتيبها بالسحب';
 
   @override
   String get appColorsIdentity => 'ألوان وهوية التطبيق';
 
   @override
-  String get appColorsIdentitySubtitle =>
-      'مخططات جاهزة، مخصص، وزوايا البطاقات — تُطبَّق على كل الشاشات';
+  String get appColorsIdentitySubtitle => 'مخططات جاهزة، مخصص، وزوايا البطاقات — تُطبَّق على كل الشاشات';
 
   @override
   String get compactSnackNotifications => 'شكل تنبيهات الصفحات (كل التطبيق)';
 
   @override
-  String get compactSnackNotificationsSubtitleOn =>
-      'شرائط أضيق وعائمة في كل الشاشات — من إعدادات التطبيق العامة هنا، وليس من «إعدادات نقطة البيع»';
+  String get compactSnackNotificationsSubtitleOn => 'شرائط أضيق وعائمة في كل الشاشات — من إعدادات التطبيق العامة هنا، وليس من «إعدادات نقطة البيع»';
 
   @override
-  String get compactSnackNotificationsSubtitleOff =>
-      'وضع كلاسيكي: شريط تنبيه بعرض أسفل الشاشة في كل الصفحات';
+  String get compactSnackNotificationsSubtitleOff => 'وضع كلاسيكي: شريط تنبيه بعرض أسفل الشاشة في كل الصفحات';
 
   @override
   String get idleMode => 'وضع السكون';
@@ -100,12 +95,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get floatingWindowMacos => 'النافذة العائمة (macOS)';
 
   @override
-  String get floatingWindowSubtitleOn =>
-      'يمكن فتح عدة نوافذ معاً؛ التصغير الأصفر يضع بلاطة أسفل الشاشة بأيقونة كل صفحة — عطّلها لفتحها داخل المحتوى';
+  String get floatingWindowSubtitleOn => 'يمكن فتح عدة نوافذ معاً؛ التصغير الأصفر يضع بلاطة أسفل الشاشة بأيقونة كل صفحة — عطّلها لفتحها داخل المحتوى';
 
   @override
-  String get floatingWindowSubtitleOff =>
-      'تُفتح هذه الشاشات داخل المحتوى. فعّل الخيار لاستخدام النوافذ العائمة والبلاطات';
+  String get floatingWindowSubtitleOff => 'تُفتح هذه الشاشات داخل المحتوى. فعّل الخيار لاستخدام النوافذ العائمة والبلاطات';
 
   @override
   String get theme => 'المظهر';
@@ -159,8 +152,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get appName => 'نابو لإدارة المتاجر';
 
   @override
-  String get appDescription =>
-      'تطبيق متكامل لإدارة المبيعات والمخزون والحسابات.';
+  String get appDescription => 'تطبيق متكامل لإدارة المبيعات والمخزون والحسابات.';
 
   @override
   String get accountData => 'بيانات الحساب';
@@ -220,8 +212,7 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get noExpirationDate =>
-      'اشتراك مفعّل بلا تاريخ انتهاء محدد في السحابة.';
+  String get noExpirationDate => 'اشتراك مفعّل بلا تاريخ انتهاء محدد في السحابة.';
 
   @override
   String get linkedDevices => 'الأجهزة المرتبطة بالحساب';
@@ -250,8 +241,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get autoSync => 'المزامنة التلقائية';
 
   @override
-  String get autoSyncDescription =>
-      'تُرفع من كل جهاز نسخة كاملة من قاعدة البيانات؛ الأحدث في السحابة هي التي تُستورد على الجهاز الآخر بعد «مزامنة الآن» أو خلال نحو دقيقة. ليست لحظية لكل إدخال. يجب تنفيذ ملف SQL للمزامنة في Supabase، والإنترنت مفعّل.';
+  String get autoSyncDescription => 'تُرفع من كل جهاز نسخة كاملة من قاعدة البيانات؛ الأحدث في السحابة هي التي تُستورد على الجهاز الآخر بعد «مزامنة الآن» أو خلال نحو دقيقة. ليست لحظية لكل إدخال. يجب تنفيذ ملف SQL للمزامنة في Supabase، والإنترنت مفعّل.';
 
   @override
   String get syncNow => 'مزامنة الآن';
@@ -306,40 +296,34 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get notificationsBuildFromDb =>
-      'تُبنى التنبيهات من قاعدة البيانات عند فتح لوحة الإشعارات من الشاشة الرئيسية.';
+  String get notificationsBuildFromDb => 'تُبنى التنبيهات من قاعدة البيانات عند فتح لوحة الإشعارات من الشاشة الرئيسية.';
 
   @override
   String get lowStockAlert => 'تنبيه نقص المخزون';
 
   @override
-  String get lowStockAlertSubtitle =>
-      'منتجات وصلت للحد الأدنى أو نفدت (مع تتبع مخزون)';
+  String get lowStockAlertSubtitle => 'منتجات وصلت للحد الأدنى أو نفدت (مع تتبع مخزون)';
 
   @override
   String get negativeStockSaleAlert => 'إشعار بيع أدى لرصيد سالب';
 
   @override
-  String get negativeStockSaleAlertSubtitle =>
-      'بعد حفظ فاتورة البيع: رقم الفاتورة، البائع، العميل، والأصناف والكميات قبل/بعد الرصيد';
+  String get negativeStockSaleAlertSubtitle => 'بعد حفظ فاتورة البيع: رقم الفاتورة، البائع، العميل، والأصناف والكميات قبل/بعد الرصيد';
 
   @override
   String get financedSaleAlert => 'إشعار بيع بالدين أو التقسيط';
 
   @override
-  String get financedSaleAlertSubtitle =>
-      'عند حفظ فاتورة «آجل» أو «تقسيط» من شاشة البيع: رقم الفاتورة، البائع، العميل، المبالغ، الأسطر، وخطة التقسيط إن وُجدت';
+  String get financedSaleAlertSubtitle => 'عند حفظ فاتورة «آجل» أو «تقسيط» من شاشة البيع: رقم الفاتورة، البائع، العميل، المبالغ، الأسطر، وخطة التقسيط إن وُجدت';
 
   @override
   String get expiryAlert => 'تنبيه صلاحية المنتجات';
 
   @override
-  String get expiryAlertSubtitle =>
-      'منتهية، أو تدخل ضمن «نافذة التنبيه» قبل التاريخ (حسب كل منتج أو الافتراضي أدناه)';
+  String get expiryAlertSubtitle => 'منتهية، أو تدخل ضمن «نافذة التنبيه» قبل التاريخ (حسب كل منتج أو الافتراضي أدناه)';
 
   @override
-  String get defaultExpiryDaysLabel =>
-      'الأيام الافتراضية قبل تاريخ الانتهاء لإظهار تنبيه «قرب الصلاحية» (يُستعمل عند إضافة منتج إن لم تُضبط للصنف، و1–365).';
+  String get defaultExpiryDaysLabel => 'الأيام الافتراضية قبل تاريخ الانتهاء لإظهار تنبيه «قرب الصلاحية» (يُستعمل عند إضافة منتج إن لم تُضبط للصنف، و1–365).';
 
   @override
   String get defaultExpiryDaysHint => 'مثال: 14';
@@ -360,8 +344,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get customerDebtAlert => 'ديون العملاء (آجل)';
 
   @override
-  String get customerDebtAlertSubtitle =>
-      'رصيد مدين في بطاقة العميل، وفق إعدادات الدين: عمر الفاتورة، سقف المجموع لكل عميل، وسقف الفاتورة الواحدة';
+  String get customerDebtAlertSubtitle => 'رصيد مدين في بطاقة العميل، وفق إعدادات الدين: عمر الفاتورة، سقف المجموع لكل عميل، وسقف الفاتورة الواحدة';
 
   @override
   String get returnsAlert => 'تسجيل المرتجعات';
@@ -373,15 +356,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get dailyReportAlert => 'ملخص مبيعات اليوم';
 
   @override
-  String get dailyReportAlertSubtitle =>
-      'إجمالي فواتير البيع لهذا اليوم (بدون مرتجعات)';
+  String get dailyReportAlertSubtitle => 'إجمالي فواتير البيع لهذا اليوم (بدون مرتجعات)';
 
   @override
   String get shiftLifecycleAlert => 'فتح وإغلاق الوردية';
 
   @override
-  String get shiftLifecycleAlertSubtitle =>
-      'إشعار بموظف الوردية والمبالغ (رصيد النظام، الجرد، المضاف، المسحوب، المتبقي)';
+  String get shiftLifecycleAlertSubtitle => 'إشعار بموظف الوردية والمبالغ (رصيد النظام، الجرد، المضاف، المسحوب، المتبقي)';
 
   @override
   String get allowDeviceReturnTitle => 'السماح بالعودة';
@@ -439,8 +420,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get deviceKickedOutTitle => 'تم فصل هذا الجهاز من الحساب';
 
   @override
-  String get deviceKickedOutBody =>
-      'أُنهيت جلستك على هذا الجهاز. عند فتح التطبيق لاحقًا ستظهر لك شاشة تسجيل الدخول المعتادة.';
+  String get deviceKickedOutBody => 'أُنهيت جلستك على هذا الجهاز. عند فتح التطبيق لاحقًا ستظهر لك شاشة تسجيل الدخول المعتادة.';
 
   @override
   String get goToLoginAction => 'الانتقال لتسجيل الدخول';
@@ -458,8 +438,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get deviceRevokedTitle => 'تم إزالة هذا الجهاز من الحساب';
 
   @override
-  String get deviceRevokedBody =>
-      'لا يمكنك تسجيل الدخول من هذا الجهاز حتى يوافق أحد الأجهزة المفعّلة على نفس الحساب من الإعدادات ← الحساب والاشتراك ← «السماح بالعودة».';
+  String get deviceRevokedBody => 'لا يمكنك تسجيل الدخول من هذا الجهاز حتى يوافق أحد الأجهزة المفعّلة على نفس الحساب من الإعدادات ← الحساب والاشتراك ← «السماح بالعودة».';
 
   @override
   String get backToLoginAction => 'العودة لتسجيل الدخول';
@@ -515,8 +494,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get enterYourEmail => 'أدخل بريدك الإلكتروني';
 
   @override
-  String get forgotPasswordSendCodeHint =>
-      'سنرسل لك رمز تحقق لإعادة تعيين رمز الدخول';
+  String get forgotPasswordSendCodeHint => 'سنرسل لك رمز تحقق لإعادة تعيين رمز الدخول';
 
   @override
   String get sendVerificationCode => 'إرسال رمز التحقق';
@@ -578,8 +556,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get reqSpecialChar => 'رمز خاص (!@#...)';
 
   @override
-  String get onboardingChangeLaterHint =>
-      'يمكنك تغيير هذه الخيارات لاحقاً من الإعدادات ← ميزات المتجر.';
+  String get onboardingChangeLaterHint => 'يمكنك تغيير هذه الخيارات لاحقاً من الإعدادات ← ميزات المتجر.';
 
   @override
   String get businessFeaturesWizardTitle => 'ميزات المتجر';
@@ -605,24 +582,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get onboardingStep1Question => 'هل تستخدم العملاء في نشاطك؟';
 
   @override
-  String get onboardingStep1Paragraph1 =>
-      'عند التفعيل تظهر لك وحدة العملاء الكاملة: بطاقة لكل عميل، سجل مشتريات، ومتابعة سريعة من الفاتورة.';
+  String get onboardingStep1Paragraph1 => 'عند التفعيل تظهر لك وحدة العملاء الكاملة: بطاقة لكل عميل، سجل مشتريات، ومتابعة سريعة من الفاتورة.';
 
   @override
-  String get onboardingStep1Paragraph2 =>
-      'يمكنك ربط كل عملية بيع بعميل معيّن، ما يسهّل التقارير لاحقاً ويوحّد تجربة المتجر أمام الزبائن الذين يتكررون.';
+  String get onboardingStep1Paragraph2 => 'يمكنك ربط كل عملية بيع بعميل معيّن، ما يسهّل التقارير لاحقاً ويوحّد تجربة المتجر أمام الزبائن الذين يتكررون.';
 
   @override
-  String get onboardingStep1Paragraph3 =>
-      'إذا عملت بيعاً نقدياً سريعاً دون اسم، يبقى ذلك متاحاً؛ التفعيل لا يفرض اختيار عميل في كل مرة.';
+  String get onboardingStep1Paragraph3 => 'إذا عملت بيعاً نقدياً سريعاً دون اسم، يبقى ذلك متاحاً؛ التفعيل لا يفرض اختيار عميل في كل مرة.';
 
   @override
-  String get onboardingStep1Example1 =>
-      'مثال: زبون دائم يشتري يومياً، تحفظ اسمه وترى آخر فواتيره بسرعة.';
+  String get onboardingStep1Example1 => 'مثال: زبون دائم يشتري يومياً، تحفظ اسمه وترى آخر فواتيره بسرعة.';
 
   @override
-  String get onboardingStep1Example2 =>
-      'مثال: عند وجود دين أو نقاط ولاء، تظهر مرتبطة بنفس العميل بدل البحث اليدوي.';
+  String get onboardingStep1Example2 => 'مثال: عند وجود دين أو نقاط ولاء، تظهر مرتبطة بنفس العميل بدل البحث اليدوي.';
 
   @override
   String get onboardingStep1SwitchLabel => 'تفعيل وحدة العملاء';
@@ -631,54 +603,43 @@ class AppLocalizationsAr extends AppLocalizations {
   String get onboardingStep2Question => 'هل تريد برنامج نقاط الولاء؟';
 
   @override
-  String get onboardingStep2Paragraph1 =>
-      'الولاء يمنح الزبائن نقاطاً عند الشراء، ويمكنهم استبدالها وفق القواعد التي تضبطها من الإعدادات.';
+  String get onboardingStep2Paragraph1 => 'الولاء يمنح الزبائن نقاطاً عند الشراء، ويمكنهم استبدالها وفق القواعد التي تضبطها من الإعدادات.';
 
   @override
-  String get onboardingStep2Paragraph2 =>
-      'البرنامج مرتبط بملفات العملاء؛ كلما كانت بيانات العملاء أوضح، كانت المتابعة أسهل.';
+  String get onboardingStep2Paragraph2 => 'البرنامج مرتبط بملفات العملاء؛ كلما كانت بيانات العملاء أوضح، كانت المتابعة أسهل.';
 
   @override
-  String get onboardingStep2Paragraph3 =>
-      'يمكنك تشغيل الميزة الآن وتعديل نسب الجمع والاستبدال لاحقاً دون إعادة هذا المعالج.';
+  String get onboardingStep2Paragraph3 => 'يمكنك تشغيل الميزة الآن وتعديل نسب الجمع والاستبدال لاحقاً دون إعادة هذا المعالج.';
 
   @override
-  String get onboardingStep2Example1 =>
-      'مثال: كل 10,000 د.ع تمنح 10 نقاط حسب القاعدة التي تختارها.';
+  String get onboardingStep2Example1 => 'مثال: كل 10,000 د.ع تمنح 10 نقاط حسب القاعدة التي تختارها.';
 
   @override
-  String get onboardingStep2Example2 =>
-      'مثال: عميل جمع نقاطاً كافية فيستبدلها بخصم في فاتورة لاحقة.';
+  String get onboardingStep2Example2 => 'مثال: عميل جمع نقاطاً كافية فيستبدلها بخصم في فاتورة لاحقة.';
 
   @override
   String get onboardingStep2SwitchLabel => 'تفعيل نقاط الولاء';
 
   @override
-  String get onboardingStep2Footnote =>
-      'يتطلّب تفعيل وحدة العملاء في الخطوة السابقة؛ إن لم تكن مفعّلة، لن يعمل الولاء حتى تعيد تفعيل العملاء.';
+  String get onboardingStep2Footnote => 'يتطلّب تفعيل وحدة العملاء في الخطوة السابقة؛ إن لم تكن مفعّلة، لن يعمل الولاء حتى تعيد تفعيل العملاء.';
 
   @override
   String get onboardingStep3Question => 'هل تستخدم الضريبة عند البيع؟';
 
   @override
-  String get onboardingStep3Paragraph1 =>
-      'عند التفعيل يظهر في فاتورة البيع حقل واضح للضريبة بحيث تحسب مع الإجمالي بطريقة متسقة.';
+  String get onboardingStep3Paragraph1 => 'عند التفعيل يظهر في فاتورة البيع حقل واضح للضريبة بحيث تحسب مع الإجمالي بطريقة متسقة.';
 
   @override
-  String get onboardingStep3Paragraph2 =>
-      'مناسب للمتاجر التي تطبّق نسبة ضريبة معروفة على السلع أو الخدمات.';
+  String get onboardingStep3Paragraph2 => 'مناسب للمتاجر التي تطبّق نسبة ضريبة معروفة على السلع أو الخدمات.';
 
   @override
-  String get onboardingStep3Paragraph3 =>
-      'يمكنك ضبط السلوك التفصيلي من إعدادات نقطة البيع بعد إنهاء الإعداد السريع.';
+  String get onboardingStep3Paragraph3 => 'يمكنك ضبط السلوك التفصيلي من إعدادات نقطة البيع بعد إنهاء الإعداد السريع.';
 
   @override
-  String get onboardingStep3Example1 =>
-      'مثال: فاتورة قيمتها 100,000 د.ع وتضيف عليها نسبة ضريبة محددة.';
+  String get onboardingStep3Example1 => 'مثال: فاتورة قيمتها 100,000 د.ع وتضيف عليها نسبة ضريبة محددة.';
 
   @override
-  String get onboardingStep3Example2 =>
-      'مثال: الموظف يرى الضريبة والإجمالي النهائي داخل نفس فاتورة البيع.';
+  String get onboardingStep3Example2 => 'مثال: الموظف يرى الضريبة والإجمالي النهائي داخل نفس فاتورة البيع.';
 
   @override
   String get onboardingStep3SwitchLabel => 'إظهار الضريبة في فاتورة البيع';
@@ -687,24 +648,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get onboardingStep4Question => 'هل تسمح بالخصم على إجمالي الفاتورة؟';
 
   @override
-  String get onboardingStep4Paragraph1 =>
-      'الخصم الإجمالي مفيد للعروض الموسمية أو التفاوض على السعر أمام الزبون دون تعديل سعر كل صنف.';
+  String get onboardingStep4Paragraph1 => 'الخصم الإجمالي مفيد للعروض الموسمية أو التفاوض على السعر أمام الزبون دون تعديل سعر كل صنف.';
 
   @override
-  String get onboardingStep4Paragraph2 =>
-      'يظهر الحقل في شاشة البيع بحيث يكمّل الفاتورة دون تعقيد إضافي للموظف.';
+  String get onboardingStep4Paragraph2 => 'يظهر الحقل في شاشة البيع بحيث يكمّل الفاتورة دون تعقيد إضافي للموظف.';
 
   @override
-  String get onboardingStep4Paragraph3 =>
-      'يمكنك إيقافه لاحقاً إذا قررت العمل بأسعار ثابتة فقط.';
+  String get onboardingStep4Paragraph3 => 'يمكنك إيقافه لاحقاً إذا قررت العمل بأسعار ثابتة فقط.';
 
   @override
-  String get onboardingStep4Example1 =>
-      'مثال: تمنح خصماً عاماً 5,000 د.ع على فاتورة كبيرة.';
+  String get onboardingStep4Example1 => 'مثال: تمنح خصماً عاماً 5,000 د.ع على فاتورة كبيرة.';
 
   @override
-  String get onboardingStep4Example2 =>
-      'مثال: عرض خاص ليوم واحد دون تغيير أسعار المنتجات الأساسية.';
+  String get onboardingStep4Example2 => 'مثال: عرض خاص ليوم واحد دون تغيير أسعار المنتجات الأساسية.';
 
   @override
   String get onboardingStep4SwitchLabel => 'إظهار الخصم الإجمالي في الفاتورة';
@@ -713,24 +669,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get onboardingStep5Question => 'هل تبيع بالدّين (بيع آجل)؟';
 
   @override
-  String get onboardingStep5Paragraph1 =>
-      'التفعيل يفتح لوحة الديون ومتابعة المبالغ المستحقة على كل عميل مع تنبيهات وسقوف يمكن ضبطها.';
+  String get onboardingStep5Paragraph1 => 'التفعيل يفتح لوحة الديون ومتابعة المبالغ المستحقة على كل عميل مع تنبيهات وسقوف يمكن ضبطها.';
 
   @override
-  String get onboardingStep5Paragraph2 =>
-      'يناسب التجار الذين يثقون بزبائن معروفين ويحتاجون أرشيفاً واضحاً للآجلات.';
+  String get onboardingStep5Paragraph2 => 'يناسب التجار الذين يثقون بزبائن معروفين ويحتاجون أرشيفاً واضحاً للآجلات.';
 
   @override
-  String get onboardingStep5Paragraph3 =>
-      'لا يمنع البيع النقدي؛ يضيف فقط خيار التسجيل كدين عند اختيار العميل والصلاحيات المناسبة.';
+  String get onboardingStep5Paragraph3 => 'لا يمنع البيع النقدي؛ يضيف فقط خيار التسجيل كدين عند اختيار العميل والصلاحيات المناسبة.';
 
   @override
-  String get onboardingStep5Example1 =>
-      'مثال: زبون يأخذ بضاعة اليوم ويدفع نهاية الأسبوع.';
+  String get onboardingStep5Example1 => 'مثال: زبون يأخذ بضاعة اليوم ويدفع نهاية الأسبوع.';
 
   @override
-  String get onboardingStep5Example2 =>
-      'مثال: تراجع كشف العميل فتجد المبلغ المدفوع والمتبقي بوضوح.';
+  String get onboardingStep5Example2 => 'مثال: تراجع كشف العميل فتجد المبلغ المدفوع والمتبقي بوضوح.';
 
   @override
   String get onboardingStep5SwitchLabel => 'تفعيل البيع الآجل والديون';
@@ -739,24 +690,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get onboardingStep6Question => 'هل تبيع بالتقسيط؟';
 
   @override
-  String get onboardingStep6Paragraph1 =>
-      'خطط الأقساط تتيح تقسيم ثمن الفاتورة على دفعات مجدولة مع متابعة ما تبقّى على العميل.';
+  String get onboardingStep6Paragraph1 => 'خطط الأقساط تتيح تقسيم ثمن الفاتورة على دفعات مجدولة مع متابعة ما تبقّى على العميل.';
 
   @override
-  String get onboardingStep6Paragraph2 =>
-      'مفيد للسلع ذات السعر المرتفع أو العقود طويلة الأمد.';
+  String get onboardingStep6Paragraph2 => 'مفيد للسلع ذات السعر المرتفع أو العقود طويلة الأمد.';
 
   @override
-  String get onboardingStep6Paragraph3 =>
-      'التفاصيل الدقيقة للجدولة تُدار من الوحدات المخصصة بعد إتمام هذا الإعداد.';
+  String get onboardingStep6Paragraph3 => 'التفاصيل الدقيقة للجدولة تُدار من الوحدات المخصصة بعد إتمام هذا الإعداد.';
 
   @override
-  String get onboardingStep6Example1 =>
-      'مثال: جهاز قيمته 600,000 د.ع يُدفع على 6 دفعات شهرية.';
+  String get onboardingStep6Example1 => 'مثال: جهاز قيمته 600,000 د.ع يُدفع على 6 دفعات شهرية.';
 
   @override
-  String get onboardingStep6Example2 =>
-      'مثال: ترى الدفعات القادمة والمتأخرة لكل عميل من مكان واحد.';
+  String get onboardingStep6Example2 => 'مثال: ترى الدفعات القادمة والمتأخرة لكل عميل من مكان واحد.';
 
   @override
   String get onboardingStep6SwitchLabel => 'تفعيل البيع بالتقسيط';
@@ -765,24 +711,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get onboardingStep7Question => 'هل تبيع بالوزن (كيلو، غرام، إلخ)؟';
 
   @override
-  String get onboardingStep7Paragraph1 =>
-      'التفعيل يجهّز واجهة البيع والباركود بحيث تدعم أوزاناً وكميات عشرية حيث يلزم.';
+  String get onboardingStep7Paragraph1 => 'التفعيل يجهّز واجهة البيع والباركود بحيث تدعم أوزاناً وكميات عشرية حيث يلزم.';
 
   @override
-  String get onboardingStep7Paragraph2 =>
-      'مناسب للمواد الغذائية، الحديد، أو أي نشاط يعتمد الميزان.';
+  String get onboardingStep7Paragraph2 => 'مناسب للمواد الغذائية، الحديد، أو أي نشاط يعتمد الميزان.';
 
   @override
-  String get onboardingStep7Paragraph3 =>
-      'يمكن ضبط أنماط الباركود بالوزن من الإعدادات المتقدمة بعد متابعة هذا المعالج.';
+  String get onboardingStep7Paragraph3 => 'يمكن ضبط أنماط الباركود بالوزن من الإعدادات المتقدمة بعد متابعة هذا المعالج.';
 
   @override
-  String get onboardingStep7Example1 =>
-      'مثال: بيع 1.250 كغم من منتج بدلاً من قطعة واحدة.';
+  String get onboardingStep7Example1 => 'مثال: بيع 1.250 كغم من منتج بدلاً من قطعة واحدة.';
 
   @override
-  String get onboardingStep7Example2 =>
-      'مثال: قراءة باركود ميزان يحتوي وزن المنتج وسعره تلقائياً.';
+  String get onboardingStep7Example2 => 'مثال: قراءة باركود ميزان يحتوي وزن المنتج وسعره تلقائياً.';
 
   @override
   String get onboardingStep7SwitchLabel => 'تفعيل البيع بالوزن';
@@ -791,43 +732,34 @@ class AppLocalizationsAr extends AppLocalizations {
   String get onboardingStep8Question => 'هل تبيع ملابس (ألوان ومقاسات)؟';
 
   @override
-  String get onboardingStep8Paragraph1 =>
-      'التفعيل يجهّز شاشات المنتجات والبيع لدعم تباين الأصناف (الألوان والقياسات المختلفة لنفس الموديل).';
+  String get onboardingStep8Paragraph1 => 'التفعيل يجهّز شاشات المنتجات والبيع لدعم تباين الأصناف (الألوان والقياسات المختلفة لنفس الموديل).';
 
   @override
-  String get onboardingStep8Paragraph2 =>
-      'يسهل تتبع مخزون كل لون أو مقاس على حدة وإظهار نافذة التحديد التفاعلية عند البيع.';
+  String get onboardingStep8Paragraph2 => 'يسهل تتبع مخزون كل لون أو مقاس على حدة وإظهار نافذة التحديد التفاعلية عند البيع.';
 
   @override
-  String get onboardingStep8Example1 =>
-      'مثال: قميص متوفر باللون الأزرق والأسود، وبقياسات S و M و L.';
+  String get onboardingStep8Example1 => 'مثال: قميص متوفر باللون الأزرق والأسود، وبقياسات S و M و L.';
 
   @override
-  String get onboardingStep8Example2 =>
-      'مثال: اختيار قطعة الملابس يفتح نافذة منبثقة سريعة لاختيار المقاس واللون المتاحين بالمخزون.';
+  String get onboardingStep8Example2 => 'مثال: اختيار قطعة الملابس يفتح نافذة منبثقة سريعة لاختيار المقاس واللون المتاحين بالمخزون.';
 
   @override
   String get onboardingStep8SwitchLabel => 'تفعيل وحدة الملابس والقياسات';
 
   @override
-  String get onboardingStep9Question =>
-      'هل تقدّم خدمات معينة (صيانة، ورشة، إلخ)؟';
+  String get onboardingStep9Question => 'هل تقدّم خدمات معينة (صيانة، ورشة، إلخ)؟';
 
   @override
-  String get onboardingStep9Paragraph1 =>
-      'التفعيل يظهر وحدة الخدمات والصيانة كاملة: تذاكر عمل، طلبات الصيانة، ودليل الخدمات والأسعار.';
+  String get onboardingStep9Paragraph1 => 'التفعيل يظهر وحدة الخدمات والصيانة كاملة: تذاكر عمل، طلبات الصيانة، ودليل الخدمات والأسعار.';
 
   @override
-  String get onboardingStep9Paragraph2 =>
-      'مفيدة للمشاغل، مراكز الصيانة، وأي نشاط يعتمد تقديم خدمات للعملاء إلى جانب بيع المواد.';
+  String get onboardingStep9Paragraph2 => 'مفيدة للمشاغل، مراكز الصيانة، وأي نشاط يعتمد تقديم خدمات للعملاء إلى جانب بيع المواد.';
 
   @override
-  String get onboardingStep9Example1 =>
-      'مثال: فتح تذكرة صيانة لجهاز كمبيوتر أو سيارة وتعيين حالة العمل.';
+  String get onboardingStep9Example1 => 'مثال: فتح تذكرة صيانة لجهاز كمبيوتر أو سيارة وتعيين حالة العمل.';
 
   @override
-  String get onboardingStep9Example2 =>
-      'مثال: إضافة خدمة تركيب أو صيانة سريعة لفاتورة البيع.';
+  String get onboardingStep9Example2 => 'مثال: إضافة خدمة تركيب أو صيانة سريعة لفاتورة البيع.';
 
   @override
   String get onboardingStep9SwitchLabel => 'تفعيل الخدمات وتذاكر الصيانة';
@@ -1032,15 +964,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get closeAction => 'إغلاق';
 
   @override
-  String get barcodeScanTooltip =>
-      'قراءة باركود (كاميرا على الجهاز المحمول، أو نافذة القارئ على الحاسوب)';
+  String get barcodeScanTooltip => 'قراءة باركود (كاميرا على الجهاز المحمول، أو نافذة القارئ على الحاسوب)';
 
   @override
   String get hideKeyboardTooltip => 'إخفاء لوحة المفاتيح';
 
   @override
-  String get keyboardDragPinHint =>
-      'لوحة مفاتيح عربي / English — اسحب من المقبض أو ثبّتها بالدبوس';
+  String get keyboardDragPinHint => 'لوحة مفاتيح عربي / English — اسحب من المقبض أو ثبّتها بالدبوس';
 
   @override
   String get clearSearchTooltip => 'مسح البحث';
@@ -1096,8 +1026,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get invoiceAlreadyReturned => 'هذه الفاتورة مسجّلة كمرتجع مسبقاً';
 
   @override
-  String get invoiceNotOpenableAsReturn =>
-      'هذا السند لا يُفتَح كمرتجع بيع — عكس الدفعة من شاشة المورد أو إدارة الأقساط حسب النوع.';
+  String get invoiceNotOpenableAsReturn => 'هذا السند لا يُفتَح كمرتجع بيع — عكس الدفعة من شاشة المورد أو إدارة الأقساط حسب النوع.';
 
   @override
   String salesInvoiceNumber(Object id) {
@@ -1108,11 +1037,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get emptyPlaceholder => '(فارغ)';
 
   @override
-  String returnInvoiceDialogBody(
-    Object customer,
-    Object paymentType,
-    Object total,
-  ) {
+  String returnInvoiceDialogBody(Object customer, Object paymentType, Object total) {
     return 'العميل: $customer\nالدفع: $paymentType\nالإجمالي: $total\n\nفتح شاشة المرتجع؟ يمكنك تقليل الكمية أو حذف الأسطر لإرجاع جزئي فقط.';
   }
 
@@ -1219,8 +1144,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get noParkedSalesTitle => 'لا توجد فواتير معلّقة';
 
   @override
-  String get noParkedSalesHint =>
-      'من شاشة البيع اضغط «تعليق الفاتورة» لحفظ العمل الحالي وخدمة عميل آخر.';
+  String get noParkedSalesHint => 'من شاشة البيع اضغط «تعليق الفاتورة» لحفظ العمل الحالي وخدمة عميل آخر.';
 
   @override
   String parkedSaleSummaryLine(Object count, Object total) {
@@ -1290,8 +1214,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get sortLowestAmount => 'الأقل مبلغاً';
 
   @override
-  String get searchInvoicesHint =>
-      'بحث باسم العميل أو رقم الفاتورة أو هاتف العميل...';
+  String get searchInvoicesHint => 'بحث باسم العميل أو رقم الفاتورة أو هاتف العميل...';
 
   @override
   String shiftNumberLabel(Object id) {
@@ -1448,8 +1371,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get passwordRecovery => 'استعادة كلمة السر';
 
   @override
-  String get enterEmailForRecovery =>
-      'أدخل بريدك الإلكتروني لاستعادة كلمة السر';
+  String get enterEmailForRecovery => 'أدخل بريدك الإلكتروني لاستعادة كلمة السر';
 
   @override
   String get captchaLabel => 'رمز التحقق';
@@ -1472,8 +1394,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get loginSuccessful => 'تم الدخول بنجاح';
 
   @override
-  String get passwordResetSent =>
-      'تم إرسال رمز استعادة كلمة السر إلى بريدك الإلكتروني';
+  String get passwordResetSent => 'تم إرسال رمز استعادة كلمة السر إلى بريدك الإلكتروني';
 
   @override
   String get passwordResetSuccess => 'تم إعادة تعيين كلمة السر بنجاح';
@@ -1578,8 +1499,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get loginTitle => 'تسجيل الدخول';
 
   @override
-  String get signupSubtitle =>
-      'سيصلك رمز تحقق على بريدك الإلكتروني لتأكيد حسابك';
+  String get signupSubtitle => 'سيصلك رمز تحقق على بريدك الإلكتروني لتأكيد حسابك';
 
   @override
   String get loginSubtitle => 'أدخل البريد الإلكتروني وكلمة السر للدخول';
@@ -1606,15 +1526,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get emailRequiredShort => 'البريد مطلوب';
 
   @override
-  String get iraqMobileInvalid =>
-      'رقم عراقي: 11 رقماً يبدأ بـ 07 (مثال: 07701234567)';
+  String get iraqMobileInvalid => 'رقم عراقي: 11 رقماً يبدأ بـ 07 (مثال: 07701234567)';
 
   @override
   String get passwordRequired => 'كلمة السر مطلوبة';
 
   @override
-  String get passwordDoesNotMeetRequirements =>
-      'كلمة السر لا تحقق الشروط المطلوبة';
+  String get passwordDoesNotMeetRequirements => 'كلمة السر لا تحقق الشروط المطلوبة';
 
   @override
   String get passwordsDoNotMatch => 'كلمتا السر غير متطابقتين';
@@ -1730,8 +1648,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get noMatchingActivityYet => 'لا يوجد نشاط مطابق بعد';
 
   @override
-  String get noActivityHint =>
-      'سجّل مبيعات أو حركات صندوق أو أي عمل في التطبيق لتظهر هنا مرتّبة زمنياً.';
+  String get noActivityHint => 'سجّل مبيعات أو حركات صندوق أو أي عمل في التطبيق لتظهر هنا مرتّبة زمنياً.';
 
   @override
   String failedToLoadActivity(Object error) {
@@ -1822,8 +1739,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get reportsHint => 'مؤشرات الفترة';
 
   @override
-  String get dragToReorderCards =>
-      'اسحب العناصر لأعلى أو لأسفل. الترتيب يُحفظ على هذا الجهاز.';
+  String get dragToReorderCards => 'اسحب العناصر لأعلى أو لأسفل. الترتيب يُحفظ على هذا الجهاز.';
 
   @override
   String get saveOrder => 'حفظ الترتيب';
@@ -1838,12 +1754,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get glanceOverview => 'لمحة المربّع';
 
   @override
-  String get dragHeightHint =>
-      'اسحب لأعلى أو لأسفل لتغيير ارتفاع قائمة المنتجات';
+  String get dragHeightHint => 'اسحب لأعلى أو لأسفل لتغيير ارتفاع قائمة المنتجات';
 
   @override
-  String get pinnedProductsHeightHandle =>
-      'مقبض تغيير ارتفاع قائمة المنتجات المثبتة';
+  String get pinnedProductsHeightHandle => 'مقبض تغيير ارتفاع قائمة المنتجات المثبتة';
 
   @override
   String filterByCategoryColon(Object name) {
@@ -1895,4 +1809,220 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get retryButton => 'إعادة المحاولة';
+
+  @override
+  String get timeTamperTitle => 'تعارض في إعدادات الوقت';
+
+  @override
+  String get licenseSuspendedTitle => 'الترخيص موقوف';
+
+  @override
+  String get deviceLimitExceededTitle => 'تجاوز حد الأجهزة';
+
+  @override
+  String get subscriptionExpiredTitle => 'انتهى الاشتراك';
+
+  @override
+  String get timeTamperMessage => 'تم اكتشاف تعارض في إعدادات الوقت. تواصل مع الدعم للمساعدة في إعادة التحقق.';
+
+  @override
+  String get accountSuspendedMessage => 'تم إيقاف حسابك. تواصل مع الدعم الفني.';
+
+  @override
+  String get subscriptionExpiredMessage => 'انتهى اشتراكك. جدّد للمتابعة.';
+
+  @override
+  String get enterLicenseKeyError => 'أدخل مفتاح الترخيص';
+
+  @override
+  String get yourCurrentPlan => 'خطتك الحالية';
+
+  @override
+  String get registeredDevices => 'الأجهزة المسجّلة';
+
+  @override
+  String get subscriptionExpires => 'انتهاء الاشتراك';
+
+  @override
+  String get trialExpires => 'انتهاء التجربة';
+
+  @override
+  String get upgradePlanToAddDevices => 'ترقية الخطة لإضافة أجهزة';
+
+  @override
+  String get renewSubscription => 'تجديد الاشتراك';
+
+  @override
+  String get comparePlans => 'مقارنة خطط الاشتراك';
+
+  @override
+  String get enterNewKey => 'إدخال مفتاح جديد';
+
+  @override
+  String get activateButton => 'تفعيل';
+
+  @override
+  String get reVerifyButton => 'إعادة التحقق';
+
+  @override
+  String get useAnotherKey => 'استخدام مفتاح آخر';
+
+  @override
+  String get allRightsReserved => 'NaBoo v2.0 — جميع الحقوق محفوظة';
+
+  @override
+  String get noInternetConnection => 'لا يوجد اتصال بالإنترنت';
+
+  @override
+  String get offlineMessage => 'يعمل التطبيق بآخر بيانات ترخيص محفوظة.\nتأكد من الاتصال في أقرب فرصة.';
+
+  @override
+  String get enterWithoutConnection => 'الدخول بدون اتصال';
+
+  @override
+  String get activateLicenseTitle => 'تفعيل الترخيص';
+
+  @override
+  String get enterLicenseKeyToContinue => 'أدخل مفتاح الترخيص للمتابعة';
+
+  @override
+  String get contactTeamForLicense => 'للحصول على مفتاح ترخيص، تواصل مع فريق NaBoo.';
+
+  @override
+  String get subscriptionPlansTitle => 'خطط الاشتراك';
+
+  @override
+  String get chooseRightPlan => 'اختر الخطة المناسبة لنشاطك';
+
+  @override
+  String get plansDescriptionJwt => 'البطاقات أدناه للمقارنة والأسعار فقط. بعد الدفع تستلم رمزاً موقّعاً (JWT) — الصقه في حقل التفعيل أسفل البطاقات مباشرة.';
+
+  @override
+  String get plansDescriptionLegacy => 'البطاقة الأولى: تجربة تلقائية 15 يوماً (جهازان). البطاقات التالية خطط مدفوعة — بعد الدفع تُدخل المفتاح في الحقل الموحّد أسفل الصفحة.';
+
+  @override
+  String get howToSubscribe => 'كيفية الاشتراك';
+
+  @override
+  String get subscribeStepsJwt => '١. تواصل مع فريق NaBoo عبر الطرق أدناه\n٢. أكمل الدفع للخطة التي تريدها\n٣. استلم رمز التفعيل الكامل (JWT) من الإدارة\n٤. الصق الرمز في الحقل الموحّد أسفل بطاقات الخطط — الخطة وحد الأجهزة يُستنتجان من الرمز';
+
+  @override
+  String get subscribeStepsLegacy => '١. تواصل مع فريق NaBoo عبر الطرق أدناه\n٢. أخبرنا بالخطة التي تريدها وأكمل الدفع\n٣. استلم مفتاح الترخيص من الإدارة\n٤. الصق المفتاح في الحقل الموحّد أسفل بطاقات الخطط ثم اضغط «تفعيل المفتاح»';
+
+  @override
+  String get whatsappOrPhone => 'واتساب / هاتف';
+
+  @override
+  String get emailContact => 'البريد الإلكتروني';
+
+  @override
+  String get continueButton => 'متابعة';
+
+  @override
+  String get pasteTokenFirst => 'الصق رمز الترخيص أولاً';
+
+  @override
+  String get activateTokenTitle => 'تفعيل رمز الترخيص';
+
+  @override
+  String get activateTokenDescription => 'الصق الرمز الكامل الذي أرسلته الإدارة. الخطة وحد الأجهزة يُستنتجان من داخل الرمز وليس من شكل البطاقة.';
+
+  @override
+  String get pasteTokenHint => 'الصق رمز التفعيل هنا';
+
+  @override
+  String get activateTokenButton => 'تفعيل الرمز';
+
+  @override
+  String get pasteKeyOrTokenFirst => 'الصق مفتاح الترخيص أو رمز التفعيل أولاً';
+
+  @override
+  String get activateKeyTitle => 'تفعيل المفتاح';
+
+  @override
+  String get activateKeyDescription => 'الصق مفتاح الترخيص الذي استلمته بعد الدفع، أو رمز JWT إن وُجد. الخطط أعلاه للعرض والمقارنة فقط.';
+
+  @override
+  String get pasteKeyHint => 'الصق مفتاح الترخيص أو رمز التفعيل';
+
+  @override
+  String get activateKeyButton => 'تفعيل المفتاح';
+
+  @override
+  String get freeLabel => 'مجاناً';
+
+  @override
+  String get trialDaysLabel => '15 يوماً';
+
+  @override
+  String get currencyLabel => 'د.ع';
+
+  @override
+  String get perMonthLabel => 'شهرياً';
+
+  @override
+  String get yourCurrentTrial => 'تجربتك الحالية';
+
+  @override
+  String get yourCurrentPlanCard => 'خطتك الحالية';
+
+  @override
+  String get trialAutoStartsMessage => 'التجربة تبدأ تلقائياً — لا مفتاح. عند الترقية استلم الرمز من الإدارة والصقه في الحقل الموحّد أسفل البطاقات.';
+
+  @override
+  String get jwtPlanDescription => 'هذه البطاقة للعرض والمقارنة فقط. بعد الدفع الصق رمز التفعيل (JWT) في الحقل الموحّد أسفل البطاقات مباشرة.';
+
+  @override
+  String get legacyPlanDescription => 'هذه البطاقة للعرض والمقارنة فقط. بعد الدفع الصق مفتاح الترخيص في الحقل الموحّد أسفل البطاقات.';
+
+  @override
+  String get mostPopular => 'الأكثر طلباً';
+
+  @override
+  String get numberCopied => 'تم نسخ الرقم';
+
+  @override
+  String get emailCopied => 'تم نسخ البريد';
+
+  @override
+  String get copyTooltip => 'نسخ';
+
+  @override
+  String get inventorySettingsTitle => 'إعدادات المخزون';
+
+  @override
+  String get subSettingsTitle => 'الإعدادات الفرعية';
+
+  @override
+  String get subSettingsSubtitle => 'إعدادات تفصيلية لكل جانب من جوانب المخزون';
+
+  @override
+  String get productAddSettingsTitle => 'إعدادات إضافة منتج';
+
+  @override
+  String get productAddSettingsDesc => 'الحقول الافتراضية، المخزن الافتراضي، حقول إلزامية';
+
+  @override
+  String get barcodeSettingsTitle => 'إعدادات الباركود';
+
+  @override
+  String get barcodeSettingsDesc => 'معيار الباركود، الحقول المدمجة في الباركود';
+
+  @override
+  String get categoriesTitle => 'الفئات والتصنيفات';
+
+  @override
+  String get categoriesDesc => 'إضافة وتعديل وحذف فئات المنتجات';
+
+  @override
+  String get brandsTitle => 'الماركات والعلامات التجارية';
+
+  @override
+  String get brandsDesc => 'إضافة وتعديل وحذف الماركات';
+
+  @override
+  String get unitTemplatesTitle => 'قوالب وحدات القياس';
+
+  @override
+  String get unitTemplatesDesc => 'تعريف وحدات البيع والشراء وعوامل التحويل';
 }

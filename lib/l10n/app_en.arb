@@ -627,5 +627,18 @@
   "mostPopular": "Most popular",
   "numberCopied": "Number copied",
   "emailCopied": "Email copied",
-  "copyTooltip": "Copy"
+  "copyTooltip": "Copy",
+  "inventorySettingsTitle": "Inventory Settings",
+  "subSettingsTitle": "Sub Settings",
+  "subSettingsSubtitle": "Detailed settings for each aspect of inventory",
+  "productAddSettingsTitle": "Product Add Settings",
+  "productAddSettingsDesc": "Default fields, default warehouse, required fields",
+  "barcodeSettingsTitle": "Barcode Settings",
+  "barcodeSettingsDesc": "Barcode standard, fields embedded in barcode",
+  "categoriesTitle": "Categories",
+  "categoriesDesc": "Add, edit, and delete product categories",
+  "brandsTitle": "Brands",
+  "brandsDesc": "Add, edit, and delete brands",
+  "unitTemplatesTitle": "Unit Templates",
+  "unitTemplatesDesc": "Define sale and purchase units and conversion factors"
 }

@@ -626,5 +626,18 @@
   "mostPopular": "الأكثر طلباً",
   "numberCopied": "تم نسخ الرقم",
   "emailCopied": "تم نسخ البريد",
-  "copyTooltip": "نسخ"
+  "copyTooltip": "نسخ",
+  "inventorySettingsTitle": "إعدادات المخزون",
+  "subSettingsTitle": "الإعدادات الفرعية",
+  "subSettingsSubtitle": "إعدادات تفصيلية لكل جانب من جوانب المخزون",
+  "productAddSettingsTitle": "إعدادات إضافة منتج",
+  "productAddSettingsDesc": "الحقول الافتراضية، المخزن الافتراضي، حقول إلزامية",
+  "barcodeSettingsTitle": "إعدادات الباركود",
+  "barcodeSettingsDesc": "معيار الباركود، الحقول المدمجة في الباركود",
+  "categoriesTitle": "الفئات والتصنيفات",
+  "categoriesDesc": "إضافة وتعديل وحذف فئات المنتجات",
+  "brandsTitle": "الماركات والعلامات التجارية",
+  "brandsDesc": "إضافة وتعديل وحذف الماركات",
+  "unitTemplatesTitle": "قوالب وحدات القياس",
+  "unitTemplatesDesc": "تعريف وحدات البيع والشراء وعوامل التحويل"
 }

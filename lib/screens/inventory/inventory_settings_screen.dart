@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 import '../../providers/theme_provider.dart';
 import '../../utils/screen_layout.dart';
@@ -21,6 +22,8 @@ class InventorySettingsScreen extends StatefulWidget {
 }
 
 class _InventorySettingsScreenState extends State<InventorySettingsScreen> {
+  AppLocalizations get loc => AppLocalizations.of(context)!;
+
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
@@ -47,8 +50,8 @@ class _InventorySettingsScreenState extends State<InventorySettingsScreen> {
                 ),
                 onPressed: () => Navigator.pop(context),
               ),
-              title: const Text(
-                'إعدادات المخزون',
+              title: Text(
+                loc.inventorySettingsTitle,
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -66,8 +69,8 @@ class _InventorySettingsScreenState extends State<InventorySettingsScreen> {
               children: [
                 _SectionHeader(
                   icon: Icons.tune_outlined,
-                  title: 'الإعدادات الفرعية',
-                  subtitle: 'إعدادات تفصيلية لكل جانب من جوانب المخزون',
+                  title: loc.subSettingsTitle,
+                  subtitle: loc.subSettingsSubtitle,
                   textPrimary: textPrimary,
                   textMuted: textMuted,
                 ),
@@ -78,8 +81,8 @@ class _InventorySettingsScreenState extends State<InventorySettingsScreen> {
                   items: [
                     _SubSettingItem(
                       icon: Icons.add_box_outlined,
-                      title: 'إعدادات إضافة منتج',
-                      desc: 'الحقول الافتراضية، المخزن الافتراضي، حقول إلزامية',
+                      title: loc.productAddSettingsTitle,
+                      desc: loc.productAddSettingsDesc,
                       color: _kAccent,
                       onTap: () => Navigator.push<void>(
                         context,
@@ -90,8 +93,8 @@ class _InventorySettingsScreenState extends State<InventorySettingsScreen> {
                     ),
                     _SubSettingItem(
                       icon: Icons.qr_code_outlined,
-                      title: 'إعدادات الباركود',
-                      desc: 'معيار الباركود، الحقول المدمجة في الباركود',
+                      title: loc.barcodeSettingsTitle,
+                      desc: loc.barcodeSettingsDesc,
                       color: _kAccent,
                       onTap: () => Navigator.push<void>(
                         context,
@@ -102,8 +105,8 @@ class _InventorySettingsScreenState extends State<InventorySettingsScreen> {
                     ),
                     _SubSettingItem(
                       icon: Icons.category_outlined,
-                      title: 'الفئات والتصنيفات',
-                      desc: 'إضافة وتعديل وحذف فئات المنتجات',
+                      title: loc.categoriesTitle,
+                      desc: loc.categoriesDesc,
                       color: _kAccent,
                       onTap: () => Navigator.push<void>(
                         context,
@@ -114,8 +117,8 @@ class _InventorySettingsScreenState extends State<InventorySettingsScreen> {
                     ),
                     _SubSettingItem(
                       icon: Icons.branding_watermark_outlined,
-                      title: 'الماركات والعلامات التجارية',
-                      desc: 'إضافة وتعديل وحذف الماركات',
+                      title: loc.brandsTitle,
+                      desc: loc.brandsDesc,
                       color: _kAccent,
                       onTap: () => Navigator.push<void>(
                         context,
@@ -126,8 +129,8 @@ class _InventorySettingsScreenState extends State<InventorySettingsScreen> {
                     ),
                     _SubSettingItem(
                       icon: Icons.straighten_outlined,
-                      title: 'قوالب وحدات القياس',
-                      desc: 'تعريف وحدات البيع والشراء وعوامل التحويل',
+                      title: loc.unitTemplatesTitle,
+                      desc: loc.unitTemplatesDesc,
                       color: _kAccent,
                       onTap: () => Navigator.push<void>(
                         context,

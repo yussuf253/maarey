@@ -567,5 +567,18 @@
   "breadcrumbNavHint": "Chemin de navigation — appuyez sur une étape pour revenir",
   "currentPageLabel": "Page actuelle : {title}",
   "restrictedModeBanner": "Mode restreint — connectez-vous à Internet pour vérifier",
-  "retryButton": "Réessayer"
+  "retryButton": "Réessayer",
+  "inventorySettingsTitle": "Paramètres d'inventaire",
+  "subSettingsTitle": "Sous-paramètres",
+  "subSettingsSubtitle": "Paramètres détaillés pour chaque aspect de l'inventaire",
+  "productAddSettingsTitle": "Paramètres d'ajout de produit",
+  "productAddSettingsDesc": "Champs par défaut, entrepôt par défaut, champs obligatoires",
+  "barcodeSettingsTitle": "Paramètres de code-barres",
+  "barcodeSettingsDesc": "Standard de code-barres, champs intégrés dans le code-barres",
+  "categoriesTitle": "Catégories",
+  "categoriesDesc": "Ajouter, modifier et supprimer des catégories de produits",
+  "brandsTitle": "Marques",
+  "brandsDesc": "Ajouter, modifier et supprimer des marques",
+  "unitTemplatesTitle": "Modèles d'unités",
+  "unitTemplatesDesc": "Définir les unités de vente et d'achat et les facteurs de conversion"
 }
