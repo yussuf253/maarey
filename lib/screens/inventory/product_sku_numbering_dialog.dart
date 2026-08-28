@@ -48,6 +48,8 @@ class _ProductSkuNumberingDialogState extends State<_ProductSkuNumberingDialog> 
   late bool _unique;
   late bool _prefixEnabled;
 
+  AppLocalizations get loc => AppLocalizations.of(context)!;
+
   @override
   void initState() {
     super.initState();
@@ -163,7 +165,7 @@ class _ProductSkuNumberingDialogState extends State<_ProductSkuNumberingDialog> 
                           ),
                           isDense: true,
                         ),
-                        items: const [
+                        items: [
                           DropdownMenuItem(
                             value: 'numeric',
                             child: Text(loc.numericFormat),

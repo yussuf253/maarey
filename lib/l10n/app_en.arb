@@ -663,7 +663,7 @@
   "lowStock": "Low Stock",
   "inStock": "In Stock",
   "summary": "Summary",
-  "availableQty": "Available Quantity",
+  "availableQtyLabel": "Available Quantity",
   "salePrice": "Sale Price",
   "minSalePrice": "Minimum Sale Price",
   "purchasePrice": "Purchase Price",

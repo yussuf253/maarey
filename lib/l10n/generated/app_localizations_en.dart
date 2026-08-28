@@ -1192,7 +1192,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get availableZero => 'Available: 0';
 
   @override
-  String get availableQty => 'Available Quantity';
+  String availableQty(Object qty) {
+    return 'Available: $qty';
+  }
 
   @override
   String negativeStockWarning(Object qty, Object soldOver) {
@@ -2216,6 +2218,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get summary => 'Summary';
+
+  @override
+  String get availableQtyLabel => 'Available Quantity';
 
   @override
   String get salePrice => 'Sale Price';

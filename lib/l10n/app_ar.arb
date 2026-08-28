@@ -662,7 +662,7 @@
   "lowStock": "مخزون منخفض",
   "inStock": "في المخزون",
   "summary": "ملخص",
-  "availableQty": "الكمية المتاحة",
+  "availableQtyLabel": "الكمية المتاحة",
   "salePrice": "سعر البيع",
   "minSalePrice": "الحد الأدنى للبيع",
   "purchasePrice": "سعر الشراء",

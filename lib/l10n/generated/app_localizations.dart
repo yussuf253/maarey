@@ -2183,8 +2183,8 @@ abstract class AppLocalizations {
   /// No description provided for @availableQty.
   ///
   /// In ar, this message translates to:
-  /// **'الكمية المتاحة'**
-  String get availableQty;
+  /// **'المتوفر: {qty}'**
+  String availableQty(Object qty);
 
   /// No description provided for @negativeStockWarning.
   ///
@@ -4063,6 +4063,12 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'ملخص'**
   String get summary;
+
+  /// No description provided for @availableQtyLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكمية المتاحة'**
+  String get availableQtyLabel;
 
   /// No description provided for @salePrice.
   ///
