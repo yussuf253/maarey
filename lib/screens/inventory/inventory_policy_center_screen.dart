@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 import '../../services/app_settings_repository.dart';
 import '../../services/inventory_policy_settings.dart';
@@ -17,6 +18,8 @@ class _InventoryPolicyCenterScreenState
   final _repo = AppSettingsRepository.instance;
   InventoryPolicySettingsData _data = InventoryPolicySettingsData.defaults();
   bool _loading = true;
+
+  AppLocalizations get loc => AppLocalizations.of(context)!;
   bool _saving  = false;
 
   @override
@@ -42,7 +45,7 @@ class _InventoryPolicyCenterScreenState
     if (!mounted) return;
     setState(() => _saving = false);
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('تم حفظ سياسات المخزون')),
+      SnackBar(content: Text(loc.savedInventoryPolicies)),
     );
   }
 
@@ -52,7 +55,7 @@ class _InventoryPolicyCenterScreenState
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('مركز سياسات المخزون'),
+          title: Text(loc.inventoryPolicyCenter),
           actions: [
             IconButton(
               onPressed: _saving ? null : _save,
@@ -63,7 +66,7 @@ class _InventoryPolicyCenterScreenState
                       child: CircularProgressIndicator(strokeWidth: 2),
                     )
                   : const Icon(Icons.save_outlined),
-              tooltip: 'حفظ',
+              tooltip: loc.saveTooltip,
             ),
           ],
         ),
@@ -73,11 +76,11 @@ class _InventoryPolicyCenterScreenState
                 padding: const EdgeInsets.all(12),
                 children: [
                   // ── نوع النشاط ──────────────────────────────────────────
-                  _card('نوع نشاط العميل', [
+                  _card(loc.customerActivityType, [
                     DropdownButtonFormField<String>(
                       value: _data.businessProfile,
-                      decoration: const InputDecoration(
-                        labelText: 'ملف النشاط',
+                      decoration: InputDecoration(
+                        labelText: loc.activityProfile,
                         border: OutlineInputBorder(),
                       ),
                       items: BusinessProfile.values.map((p) {
@@ -98,8 +101,8 @@ class _InventoryPolicyCenterScreenState
                     Container(
                       padding: const EdgeInsets.all(8),
                       color: Colors.blue.withOpacity(0.06),
-                      child: const Text(
-                        'عند اختيار نوع النشاط تُضبط الخصائص الافتراضية تلقائياً — يمكنك تعديلها يدوياً.',
+                      child: Text(
+                        loc.activityTypeDesc,
                         style: TextStyle(fontSize: 12, color: Colors.blue),
                       ),
                     ),
@@ -108,56 +111,56 @@ class _InventoryPolicyCenterScreenState
                   const SizedBox(height: 12),
 
                   // ── وحدات المخزون الأساسية ──────────────────────────────
-                  _card('تمكين الوحدات', [
-                    _sw('إدارة المنتجات', _data.enableProducts,
+                  _card(loc.enableUnits, [
+                    _sw(loc.productManagement, _data.enableProducts,
                         (v) => setState(() => _data = _data.copyWith(enableProducts: v))),
-                    _sw('إضافة منتج', _data.enableAddProduct,
+                    _sw(loc.addProductToggle, _data.enableAddProduct,
                         (v) => setState(() => _data = _data.copyWith(enableAddProduct: v))),
-                    _sw('السندات المخزنية', _data.enableVouchers,
+                    _sw(loc.inventoryVouchersToggle, _data.enableVouchers,
                         (v) => setState(() => _data = _data.copyWith(enableVouchers: v))),
-                    _sw('قوائم الأسعار', _data.enablePriceLists,
+                    _sw(loc.priceListsToggle, _data.enablePriceLists,
                         (v) => setState(() => _data = _data.copyWith(enablePriceLists: v))),
-                    _sw('المستودعات', _data.enableWarehouses,
+                    _sw(loc.warehousesToggle, _data.enableWarehouses,
                         (v) => setState(() => _data = _data.copyWith(enableWarehouses: v))),
-                    _sw('الجرد', _data.enableStocktaking,
+                    _sw(loc.stocktakingToggle, _data.enableStocktaking,
                         (v) => setState(() => _data = _data.copyWith(enableStocktaking: v))),
-                    _sw('إعدادات المخزون', _data.enableSettings,
+                    _sw(loc.settingsToggle, _data.enableSettings,
                         (v) => setState(() => _data = _data.copyWith(enableSettings: v))),
                   ]),
 
                   const SizedBox(height: 12),
 
                   // ── خصائص بطاقة المنتج ──────────────────────────────────
-                  _card('خصائص بطاقة المنتج', [
-                    _sw('حقل الرتبة / درجة الجودة', _data.enableProductGrade,
+                  _card(loc.productCardProperties, [
+                    _sw(loc.gradeField, _data.enableProductGrade,
                         (v) => setState(() => _data = _data.copyWith(enableProductGrade: v))),
-                    _sw('تاريخ الانتهاء والإنتاج', _data.enableExpiryTracking,
+                    _sw(loc.expiryTracking, _data.enableExpiryTracking,
                         (v) => setState(() => _data = _data.copyWith(enableExpiryTracking: v))),
-                    _sw('تتبع الدفعات (Batch)', _data.enableBatchTracking,
+                    _sw(loc.batchTracking, _data.enableBatchTracking,
                         (v) => setState(() => _data = _data.copyWith(enableBatchTracking: v))),
-                    _sw('تنبيهات نفاد المخزون', _data.enableLowStockAlerts,
+                    _sw(loc.lowStockAlerts, _data.enableLowStockAlerts,
                         (v) => setState(() => _data = _data.copyWith(enableLowStockAlerts: v))),
-                    _sw('صور المنتج', _data.enableProductImages,
+                    _sw(loc.productImages, _data.enableProductImages,
                         (v) => setState(() => _data = _data.copyWith(enableProductImages: v))),
-                    _sw('متغيرات المنتج (مقاس/لون)', _data.enableProductVariants,
+                    _sw(loc.productVariants, _data.enableProductVariants,
                         (v) => setState(() => _data = _data.copyWith(enableProductVariants: v))),
                   ]),
 
                   const SizedBox(height: 12),
 
                   // ── المشتريات ────────────────────────────────────────────
-                  _card('المشتريات والموردون', [
-                    _sw('أوامر الشراء (PO)', _data.enablePurchaseOrders,
+                  _card(loc.purchasingAndSuppliers, [
+                    _sw(loc.purchaseOrders, _data.enablePurchaseOrders,
                         (v) => setState(() => _data = _data.copyWith(enablePurchaseOrders: v))),
-                    _sw('إلزام تحديد مصدر في الوارد', _data.requireSourceOnInbound,
+                    _sw(loc.requireSourceOnInbound, _data.requireSourceOnInbound,
                         (v) => setState(() => _data = _data.copyWith(requireSourceOnInbound: v))),
                   ]),
 
                   const SizedBox(height: 12),
 
                   // ── التحليلات ────────────────────────────────────────────
-                  _card('التحليلات والتقارير', [
-                    _sw('تحليلات المخزون', _data.enableStockAnalytics,
+                  _card(loc.analyticsAndReports, [
+                    _sw(loc.stockAnalytics, _data.enableStockAnalytics,
                         (v) => setState(() => _data = _data.copyWith(enableStockAnalytics: v))),
                   ]),
                 ],

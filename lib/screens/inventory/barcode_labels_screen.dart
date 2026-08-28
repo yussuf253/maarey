@@ -3,6 +3,7 @@ import 'dart:math' as math;
 
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
+import '../../l10n/generated/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
@@ -57,6 +58,8 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
   bool _refreshing = false;
   String? _err;
   DateTime _lastSynced = DateTime.now();
+
+  AppLocalizations get loc => AppLocalizations.of(context)!;
 
   final TextEditingController _search = TextEditingController();
   final FocusNode _searchFn = FocusNode();
@@ -132,7 +135,7 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
     if (!mounted) return true;
     if (resolved == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('لا يوجد منتج بهذا الباركود')),
+        SnackBar(content: Text(loc.noProductForBarcode)),
       );
       return true;
     }
@@ -146,7 +149,7 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
     if (!mounted) return true;
     if (rows.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('تعذّر تحميل بيانات المنتج')),
+        SnackBar(content: Text(loc.failedToLoadProduct)),
       );
       return true;
     }
@@ -333,7 +336,7 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
     if (_queueIds.contains(id)) {
       setState(() => _flashDupId = id);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('المنتج موجود بالفعل')),
+        SnackBar(content: Text(loc.productAlreadyExists)),
       );
       Future<void>.delayed(const Duration(milliseconds: 420), () {
         if (!mounted) return;
@@ -358,18 +361,18 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
       final ok = await showDialog<bool>(
             context: context,
             builder: (ctx) => AlertDialog(
-              title: const Text('إزالة من القائمة'),
-              content: const Text(
-                'كمية الطباعة أكبر من 5؛ هل تريد الإزالة؟',
+              title: Text(loc.removeFromList),
+              content: Text(
+                loc.removeConfirm,
               ),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(ctx, false),
-                  child: const Text('إلغاء'),
+                  child: Text(loc.cancelAction),
                 ),
                 FilledButton(
                   onPressed: () => Navigator.pop(ctx, true),
-                  child: const Text('إزالة'),
+                  child: Text(loc.removeAction),
                 ),
               ],
             ),
@@ -419,7 +422,7 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
     if (!mounted) return;
     setState(() {});
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('تم تحديث الكميات')),
+      SnackBar(content: Text(loc.quantitiesUpdated)),
     );
     if (skipped > 0) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -446,18 +449,18 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
       final ok = await showDialog<bool>(
             context: context,
             builder: (ctx) => AlertDialog(
-              title: const Text('إعادة التعيين'),
-              content: const Text(
-                'سيتم إعادة تعيين جميع الكميات إلى 1، هل تريد المتابعة؟',
+              title: Text(loc.resetAll),
+              content: Text(
+                loc.resetConfirm,
               ),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(ctx, false),
-                  child: const Text('إلغاء'),
+                  child: Text(loc.cancelAction),
                 ),
                 FilledButton(
                   onPressed: () => Navigator.pop(ctx, true),
-                  child: const Text('متابعة'),
+                  child: Text(loc.continueAction),
                 ),
               ],
             ),
@@ -482,7 +485,7 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
           builder: (ctx) {
             final first = _queueIds.isEmpty ? null : _rowsById[_queueIds.first];
             return AlertDialog(
-              title: const Text('معاينة الطباعة'),
+              title: Text(loc.printPreview),
               content: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -499,7 +502,7 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 12),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     if (first != null)
                       SizedBox(
                         height: 240,
@@ -513,8 +516,8 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
                 ),
               ),
               actions: [
-                TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('إلغاء')),
-                FilledButton(onPressed: () => Navigator.pop(ctx, true), child: const Text('تأكيد')),
+                TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(loc.cancelAction)),
+                FilledButton(onPressed: () => Navigator.pop(ctx, true), child: Text(loc.confirmAction)),
               ],
             );
           },
@@ -579,16 +582,16 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
     final go = await showDialog<bool>(
           context: context,
           builder: (ctx) => AlertDialog(
-            title: const Text('تمت الطباعة'),
-            content: const Text('تم تنفيذ المعاينة أو الطباعة من نافذة النظام.'),
+            title: Text(loc.printedTitle),
+            content: Text(loc.printedContent),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(ctx, false),
-                child: const Text('مسح القائمة'),
+                child: Text(loc.clearList),
               ),
               FilledButton(
                 onPressed: () => Navigator.pop(ctx, true),
-                child: const Text('طباعة مرة أخرى'),
+                child: Text(loc.printAgain),
               ),
             ],
           ),
@@ -600,7 +603,7 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
     }
     _clearWholeQueueUi();
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('تم مسح قائمة الطباعة')),
+      SnackBar(content: Text(loc.printListCleared)),
     );
   }
 
@@ -629,7 +632,7 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
       if (pid == null || pid <= 0) continue;
       final barcode = (r['barcode'] as String?)?.trim() ?? '';
       if (barcode.isEmpty) continue;
-      final name = (r['name'] as String?) ?? 'صنف';
+      final name = (r['name'] as String?) ?? loc.itemFallback;
       final sell = (r['sellPrice'] as num?)?.toDouble() ?? 0;
       final stockBaseKind = (r['stockBaseKind'] as num?)?.toInt() ?? 0;
       out.add(
@@ -787,9 +790,9 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
     final emptyHits = !_searchBusy && showDd && _searchHits.isEmpty;
     return Card(
       elevation: 0,
-      shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
+      shape: RoundedRectangleBorder(borderRadius: AppShape.none),
       child: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -798,8 +801,8 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
               focusNode: _searchFn,
               textAlign: TextAlign.right,
               decoration: InputDecoration(
-                labelText: 'بحث عن منتج',
-                hintText: 'حرفان أو أكثر (اسم / باركود / رمز صنف)',
+                labelText: loc.searchProductHint,
+                hintText: loc.searchProductSub,
                 prefixIcon: const Icon(Icons.search_rounded),
                 border: const OutlineInputBorder(borderRadius: AppShape.none),
                 isDense: true,
@@ -809,7 +812,7 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       if (_searchBusy)
-                        const Padding(
+                        Padding(
                           padding: EdgeInsetsDirectional.only(start: 6),
                           child: SizedBox(
                             width: 22,
@@ -819,7 +822,7 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
                         )
                       else if (q.isNotEmpty)
                         IconButton(
-                          tooltip: 'مسح',
+                          tooltip: loc.clearTooltip,
                           icon: const Icon(Icons.close_rounded),
                           onPressed: _clearSearchRefocusSearch,
                         ),
@@ -843,16 +846,16 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
             ),
             if (showDd || emptyHits || _searchBusy)
               Padding(
-                padding: const EdgeInsets.only(top: 8),
+                padding: EdgeInsets.only(top: 8),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     color: cs.surfaceContainerHighest.withValues(alpha: 0.4),
                     border: Border.all(color: cs.outlineVariant),
                   ),
                   child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxHeight: 210),
+                    constraints: BoxConstraints(maxHeight: 210),
                     child: emptyHits
-                        ? const Center(child: Text('لا توجد نتائج'))
+                        ? Center(child: Text(loc.noResults))
                         : ListView.builder(
                             shrinkWrap: true,
                             itemCount: showDd ? _searchHits.length : 0,
@@ -951,9 +954,9 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
               child: AnimatedOpacity(
                 key: ValueKey<bool>(_showName && _showPrice),
                 opacity: 1,
-                duration: const Duration(milliseconds: 180),
+                duration: Duration(milliseconds: 180),
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 6),
+                  padding: EdgeInsets.only(bottom: 6),
                   child: _TogglePreviewRibbon(
                     size: _size,
                     showName: _showName,
@@ -964,7 +967,7 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
             ),
             SwitchListTile(
               contentPadding: EdgeInsets.zero,
-              title: const Text('إظهار اسم المنتج'),
+              title: Text(loc.showProductName),
               value: _showName,
               onChanged: (v) async {
                 setState(() => _showName = v);
@@ -973,35 +976,35 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
             ),
             SwitchListTile(
               contentPadding: EdgeInsets.zero,
-              title: const Text('إظهار السعر'),
+              title: Text(loc.showPrice),
               value: _showPrice,
               onChanged: (v) async {
                 setState(() => _showPrice = v);
                 await _persistShowPrice();
               },
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
             Row(
               children: [
                 Expanded(
                   child: Tooltip(
-                    message: 'يضبط كمية الطباعة تلقائياً حسب كمية المخزون',
+                    message: loc.smartQtyTooltip,
                     child: OutlinedButton(
                       onPressed: _queueIds.isEmpty
                           ? null
                           : () => unawaited(_applySmartQuantities()),
-                      child: const Text('اعتماد الكمية الذكية'),
+                      child: Text(loc.smartQtyLabel),
                     ),
                   ),
                 ),
-                const SizedBox(width: 10),
+                SizedBox(width: 10),
                 Expanded(
                   child: OutlinedButton(
                     onPressed: _queueIds.isEmpty
                         ? null
                         : () => unawaited(_makeAllCopiesOne()),
                     child: Text(_totalProducts <= 1
-                        ? 'اجعل الكل (1)'
+                        ? loc.setAllOne
                         : 'اجعل الكل (1) ($_totalProducts)'),
                   ),
                 ),
@@ -1117,7 +1120,7 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
                   Expanded(
                     child: Text(
                       name,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.w800,
                         fontSize: 14,
                       ),
@@ -1127,9 +1130,9 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
                     ),
                   ),
                   IconButton(
-                    tooltip: 'إزالة',
+                    tooltip: loc.removeTooltip,
                     onPressed: () => _removeQueued(id, confirmHeavy: true),
-                    icon: const Icon(Icons.close_rounded),
+                    icon: Icon(Icons.close_rounded),
                   ),
                 ],
               ),
@@ -1139,9 +1142,9 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
               ),
               if (overStock)
                 Padding(
-                  padding: const EdgeInsets.only(top: 4),
+                  padding: EdgeInsets.only(top: 4),
                   child: Text(
-                    'كمية الطباعة أكبر من المخزون',
+                    loc.printQtyExceedsStock,
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w700,
@@ -1149,17 +1152,17 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
                     ),
                   ),
                 ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               SizedBox(
                 height: math.max(_size.thumbnailLogicalSize.height * .55, 118),
                 child: _CardLabelPreview(row: r, showName: _showName, showPrice: _showPrice),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
-                    tooltip: 'نقص',
+                    tooltip: loc.decreaseTooltip,
                     icon: const Icon(Icons.remove_circle_outline),
                     onPressed: () =>
                         (_copies[id] ?? 1) > 1 ? _adjustCopies(id, -1) : null,
@@ -1224,7 +1227,7 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
                     ),
                   ),
                   IconButton(
-                    tooltip: 'زيادة',
+                    tooltip: loc.increaseTooltip,
                     icon: const Icon(Icons.add_circle_outline),
                     onPressed: () => _adjustCopies(id, 1),
                   ),

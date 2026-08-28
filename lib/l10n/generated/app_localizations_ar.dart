@@ -1029,7 +1029,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get emailFieldLabel => 'البريد الإلكتروني:';
 
   @override
-  String get closeAction => 'إغلاق';
+  String get closeAction => 'إقفال';
 
   @override
   String get barcodeScanTooltip =>
@@ -1309,7 +1309,7 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get openStatus => 'مفتوحة';
+  String get openStatus => 'مفتوح';
 
   @override
   String shiftWithNameLabel(Object id, Object name) {
@@ -1591,7 +1591,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get noAccountCreateNew => 'ليس لديك حساب؟ إنشاء حساب جديد';
 
   @override
-  String get requiredField => 'هذا الحقل مطلوب';
+  String get requiredField => 'مطلوب';
 
   @override
   String get minLength3Chars => 'يجب أن يكون 3 أحرف على الأقل';
@@ -2110,7 +2110,7 @@ class AppLocalizationsAr extends AppLocalizations {
       'معيار الباركود، الحقول المدمجة في الباركود';
 
   @override
-  String get categoriesTitle => 'الفئات والتصنيفات';
+  String get categoriesTitle => 'التصنيفات';
 
   @override
   String get categoriesDesc => 'إضافة وتعديل وحذف فئات المنتجات';
@@ -2185,7 +2185,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get pinToHome => 'تثبيت في الرئيسية';
 
   @override
-  String get failedToLoadProduct => 'تعذر تحميل المنتج';
+  String get failedToLoadProduct => 'تعذّر تحميل بيانات المنتج';
 
   @override
   String get lowStock => 'مخزون منخفض';
@@ -2354,7 +2354,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get baseUnitHint => 'مثال: جرام';
 
   @override
-  String get symbolLabel => 'التمييز';
+  String get symbolLabel => 'رمز';
 
   @override
   String get symbolHint => 'مثال: جم';
@@ -2384,7 +2384,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get largerUnitHint => 'مثال: كيلوغرام';
 
   @override
-  String get conversionFactorLabel => 'معامل التحويل';
+  String get conversionFactorLabel => 'عامل التحويل إلى الأساس';
 
   @override
   String get conversionFactorHint => 'مثال: 1000';
@@ -2638,4 +2638,1153 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get reset => 'إعادة تعيين';
+
+  @override
+  String get newCategory => 'تصنيف جديد';
+
+  @override
+  String get parentCategory => 'التصنيف الرئيسي';
+
+  @override
+  String get noParent => 'بدون (تصنيف رئيسي)';
+
+  @override
+  String get descriptionLabel => 'الوصف';
+
+  @override
+  String get categorySaved => 'تم حفظ التصنيف';
+
+  @override
+  String get deleteCategory => 'حذف التصنيف';
+
+  @override
+  String deleteCategoryConfirm(Object name) {
+    return 'حذف «$name»؟';
+  }
+
+  @override
+  String get addNewCategory => 'إضافة تصنيف جديد';
+
+  @override
+  String get rootsOnly => 'جذور فقط (بدون أب)';
+
+  @override
+  String underParent(Object name) {
+    return 'تحت: $name';
+  }
+
+  @override
+  String get noMatchingCategories =>
+      'لا توجد تصنيفات مطابقة.\nأضف تصنيفاً جديداً أو غيّر الفلتر.';
+
+  @override
+  String get noResults => 'لا توجد نتائج';
+
+  @override
+  String get inventoryManagement => 'إدارة المخزون';
+
+  @override
+  String get alerts => 'التنبيهات';
+
+  @override
+  String get inventorySettings => 'إعدادات المخزون';
+
+  @override
+  String get mainSections => 'الأقسام الرئيسية';
+
+  @override
+  String get recentInventoryMovements => 'آخر الحركات المخزونية';
+
+  @override
+  String get quickActions => 'إجراءات سريعة';
+
+  @override
+  String get addProduct => 'إضافة منتج';
+
+  @override
+  String get inventoryVoucher => 'سند مخزوني';
+
+  @override
+  String get periodicStocktaking => 'جرد دوري';
+
+  @override
+  String get movements => 'الحركات';
+
+  @override
+  String get products => 'المنتجات';
+
+  @override
+  String get productsSub => 'عرض وإدارة جميع الأصناف';
+
+  @override
+  String get warehouses => 'المستودعات';
+
+  @override
+  String get warehousesSub => 'مراقبة الأرصدة والأماكن';
+
+  @override
+  String get inventoryVouchers => 'السندات المخزونية';
+
+  @override
+  String get inventoryVouchersSub => 'إيداع وصرف ونقل';
+
+  @override
+  String get priceLists => 'فوائم الأسعار';
+
+  @override
+  String get priceListsSub => 'تجزئة وجملة وخاصة';
+
+  @override
+  String get periodicStocktakingSub => 'تسوية الفروقات الفعلية';
+
+  @override
+  String get inventorySettingsSub => 'وحدات، تصنيفات، طباعة';
+
+  @override
+  String get deposit => 'إيداع';
+
+  @override
+  String get withdrawal => 'صرف';
+
+  @override
+  String get transfer => 'تحويل';
+
+  @override
+  String get lastMovements => 'آخر الحركات';
+
+  @override
+  String get viewAll => 'عرض الكل';
+
+  @override
+  String get savedInventoryPolicies => 'تم حفظ سياسات المخزون';
+
+  @override
+  String get inventoryPolicyCenter => 'مركز سياسات المخزون';
+
+  @override
+  String get saveTooltip => 'حفظ';
+
+  @override
+  String get customerActivityType => 'نوع نشاط العميل';
+
+  @override
+  String get activityProfile => 'ملف النشاط';
+
+  @override
+  String get activityTypeDesc =>
+      'عند اختيار نوع النشاط تُضبط الخصائص الافتراضية تلقائياً — يمكنك تعديلها يدوياً.';
+
+  @override
+  String get enableUnits => 'تمكين الوحدات';
+
+  @override
+  String get productManagement => 'إدارة المنتجات';
+
+  @override
+  String get addProductToggle => 'إضافة منتج';
+
+  @override
+  String get inventoryVouchersToggle => 'السندات المخزنية';
+
+  @override
+  String get priceListsToggle => 'قوائم الأسعار';
+
+  @override
+  String get warehousesToggle => 'المستودعات';
+
+  @override
+  String get stocktakingToggle => 'الجرد';
+
+  @override
+  String get settingsToggle => 'إعدادات المخزون';
+
+  @override
+  String get productCardProperties => 'خصائص بطاقة المنتج';
+
+  @override
+  String get gradeField => 'حقل الرتبة / درجة الجودة';
+
+  @override
+  String get expiryTracking => 'تاريخ الانتهاء والإنتاج';
+
+  @override
+  String get batchTracking => 'تتبع الدفعات (Batch)';
+
+  @override
+  String get lowStockAlerts => 'تنبيهات نفاد المخزون';
+
+  @override
+  String get productImages => 'صور المنتج';
+
+  @override
+  String get productVariants => 'متغيرات المنتج (مقاس/لون)';
+
+  @override
+  String get purchasingAndSuppliers => 'المشتريات والموردون';
+
+  @override
+  String get purchaseOrders => 'أوامر الشراء (PO)';
+
+  @override
+  String get requireSourceOnInbound => 'إلزام تحديد مصدر في الوارد';
+
+  @override
+  String get analyticsAndReports => 'التحليلات والتقارير';
+
+  @override
+  String get items => 'صنف';
+
+  @override
+  String get iqd => 'د.ع';
+
+  @override
+  String get warehouseLabel => 'المستودع';
+
+  @override
+  String get periodicStocktakingTitle => 'الجرد الدوري';
+
+  @override
+  String openSessions(Object count) {
+    return 'جلسات مفتوحة ($count)';
+  }
+
+  @override
+  String closedSessions(Object count) {
+    return 'مكتملة ($count)';
+  }
+
+  @override
+  String get startNewStocktake => 'بدء جرد جديد';
+
+  @override
+  String get closeStocktaking => 'إقفال الجرد';
+
+  @override
+  String closeStocktakeConfirm(Object title) {
+    return 'هل تريد إقفال جلسة «$title»؟';
+  }
+
+  @override
+  String get autoPostDifferences => 'ترحيل الفروقات تلقائيا';
+
+  @override
+  String get autoPostDesc => 'ينشئ سند تسوية مخزني واحد للجلسة';
+
+  @override
+  String get sessionClosedSuccess => 'تم إقفال الجلسة بنجاح';
+
+  @override
+  String get noSessionsYet => 'لا توجد جلسات';
+
+  @override
+  String get closedStatus => 'مكتمل';
+
+  @override
+  String itemsCount(Object counted, Object total) {
+    return '$counted / $total صنف';
+  }
+
+  @override
+  String startedAt(Object date) {
+    return 'بدأ: $date';
+  }
+
+  @override
+  String closedAt(Object date) {
+    return 'أُقفل: $date';
+  }
+
+  @override
+  String get closeStocktakingAction => 'إقفال الجرد';
+
+  @override
+  String get reportAction => 'التقرير';
+
+  @override
+  String get startNewStocktakeSession => 'بدء جلسة جرد جديدة';
+
+  @override
+  String get sessionTitleLabel => 'عنوان الجلسة *';
+
+  @override
+  String get sessionTitleHint => 'مثال: جرد شهر يوليو 2025';
+
+  @override
+  String get selectWarehouseError => 'اختر مستودعاً';
+
+  @override
+  String get startStocktakingBtn => 'بدء الجرد';
+
+  @override
+  String get searchHint => 'اسم، باركود، رمز، أو رقم المنتج';
+
+  @override
+  String systemQty(Object qty) {
+    return 'النظام: $qty';
+  }
+
+  @override
+  String diffQty(Object diff) {
+    return 'فرق: $diff';
+  }
+
+  @override
+  String get enterValueHint => 'أدخل';
+
+  @override
+  String reportTitle(Object title) {
+    return 'تقرير: $title';
+  }
+
+  @override
+  String get totalItemsLabel => 'إجمالي الأصناف';
+
+  @override
+  String get countedLabel => 'تم عده';
+
+  @override
+  String get uncountedLabel => 'غير معدود';
+
+  @override
+  String get sessionSummary => 'ملخص الجلسة:';
+
+  @override
+  String get statusRow => 'الحالة';
+
+  @override
+  String actualQty(Object qty) {
+    return 'الفعلي: $qty';
+  }
+
+  @override
+  String get purchaseOrdersTitle => 'أوامر الشراء';
+
+  @override
+  String get newPurchaseOrder => 'أمر شراء جديد';
+
+  @override
+  String get sentLabel => 'مرسلة';
+
+  @override
+  String get partialLabel => 'جزئي';
+
+  @override
+  String get completedLabel => 'مكتمل';
+
+  @override
+  String totalOrderValue(Object value) {
+    return 'القيمة الكلية: $value';
+  }
+
+  @override
+  String get clearTooltip => 'مسح';
+
+  @override
+  String get cancelOrder => 'إلغاء أمر الشراء';
+
+  @override
+  String get cancelOrderConfirm => 'هل تريد إلغاء هذا الأمر؟';
+
+  @override
+  String get backAction => 'رجوع';
+
+  @override
+  String get cancelAction => 'إلغاء';
+
+  @override
+  String get allFilter => 'الكل';
+
+  @override
+  String get draftStatus => 'مسودة';
+
+  @override
+  String get sentStatus => 'مرسلة';
+
+  @override
+  String get partialStatus => 'جزئي';
+
+  @override
+  String get receivedStatus => 'مكتمل';
+
+  @override
+  String get cancelledStatus => 'ملغي';
+
+  @override
+  String get noSupplier => 'مورد غير محدد';
+
+  @override
+  String receivedValue(Object received, Object total) {
+    return 'مستلم $received من $total';
+  }
+
+  @override
+  String itemCount(Object count) {
+    return '$count صنف';
+  }
+
+  @override
+  String get viewAction => 'عرض';
+
+  @override
+  String get editAction => 'تعديل';
+
+  @override
+  String get copyAction => 'نسخ';
+
+  @override
+  String get noResultsMatch => 'لا توجد نتائج تطابق البحث';
+
+  @override
+  String get noPurchaseOrdersYet => 'لا توجد أوامر شراء بعد';
+
+  @override
+  String get createFirstOrder => '+ إنشاء أول أمر شراء';
+
+  @override
+  String get orPressCtrlN => 'أو اضغط Ctrl+N';
+
+  @override
+  String get failedToFetchLowItems =>
+      'تعذر جلب الأصناف المنخفضة. تأكد من تحديث قاعدة البيانات.';
+
+  @override
+  String get noNewItemsAllAdded =>
+      'لا توجد أصناف جديدة: كل المنتجات المنخفضة مضافة مسبقاً في القائمة.';
+
+  @override
+  String get noLowStockProducts =>
+      'لا توجد منتجات منخفضة المخزون (رصيد عند أو تحت حد التنبيه، مع تفعيل تتبع المخزون).';
+
+  @override
+  String addedLowItems(Object added) {
+    return 'تمت إضافة $added صنفاً من المخزون المنخفض/النافض. عُدّل الكميات ثم احفظ.';
+  }
+
+  @override
+  String skippedDuplicates(Object skipped) {
+    return ' (تُجاهل $skipped مكرراً)';
+  }
+
+  @override
+  String showingOnlyFirst(Object count) {
+    return ' — عُرض أول $count صنفاً فقط.';
+  }
+
+  @override
+  String get addAtLeastOne => 'أضف صنفاً واحداً على الأقل';
+
+  @override
+  String get checkNameAndQty => 'تأكد من اسم المنتج والكمية في كل صنف';
+
+  @override
+  String errorOccurred(Object error) {
+    return 'حدث خطأ: $error';
+  }
+
+  @override
+  String get editPurchaseOrder => 'تعديل أمر شراء';
+
+  @override
+  String get newPurchaseOrderTitle => 'أمر شراء جديد';
+
+  @override
+  String get orderInfo => 'معلومات الأمر';
+
+  @override
+  String get supplierLabel => 'المورد';
+
+  @override
+  String get selectSupplierHint => 'اختر مورداً (اختياري)';
+
+  @override
+  String get noSupplierText => '— بدون مورد —';
+
+  @override
+  String get orderDateLabel => 'تاريخ الأمر';
+
+  @override
+  String get expectedDeliveryLabel => 'تاريخ الاستلام المتوقع';
+
+  @override
+  String get selectOptionalHint => 'اختر (اختياري)';
+
+  @override
+  String get statusLabel => 'الحالة';
+
+  @override
+  String get draftText => 'مسودة';
+
+  @override
+  String get sentText => 'مرسل للمورد';
+
+  @override
+  String get partialText => 'مستلم جزئياً';
+
+  @override
+  String get receivedText => 'مستلم بالكامل';
+
+  @override
+  String get cancelledText => 'ملغى';
+
+  @override
+  String get notesLabel => 'ملاحظات';
+
+  @override
+  String get notesHint => 'شروط، تفاصيل، ملاحظات…';
+
+  @override
+  String get orderItems => 'أصناف الأمر';
+
+  @override
+  String get fillLowStock => 'ملء من المخزون النافض';
+
+  @override
+  String get addItem => 'إضافة صنف';
+
+  @override
+  String get emptyListHint =>
+      'اضغط «ملء من المخزون النافض» أو «إضافة صنف» لبدء القائمة';
+
+  @override
+  String get itemCol => 'الصنف';
+
+  @override
+  String get qtyCol => 'الكمية';
+
+  @override
+  String get unitPriceCol => 'سعر الوحدة';
+
+  @override
+  String get totalCol => 'الإجمالي';
+
+  @override
+  String get grandTotal => 'الإجمالي';
+
+  @override
+  String get itemNameHint => 'اسم الصنف';
+
+  @override
+  String get noProductForBarcode => 'لا يوجد منتج بهذا الباركود';
+
+  @override
+  String get productAlreadyExists => 'المنتج موجود بالفعل';
+
+  @override
+  String get removeFromList => 'إزالة من القائمة';
+
+  @override
+  String get removeConfirm => 'كمية الطباعة أكبر من 5؛ هل تريد الإزالة؟';
+
+  @override
+  String get removeAction => 'إزالة';
+
+  @override
+  String get quantitiesUpdated => 'تم تحديث الكميات';
+
+  @override
+  String zeroQtySkipped(Object count) {
+    return 'تم تخطي المنتجات ذات الكمية صفر ($count)';
+  }
+
+  @override
+  String get resetAll => 'إعادة التعيين';
+
+  @override
+  String get resetConfirm =>
+      'سيتم إعادة تعيين جميع الكميات إلى 1، هل تريد المتابعة؟';
+
+  @override
+  String get printPreview => 'معاينة الطباعة';
+
+  @override
+  String totalLabels(Object count) {
+    return 'إجمالي الملصقات: $count';
+  }
+
+  @override
+  String get printViaSystem =>
+      'الطباعة عبر الطابعة الافتراضية للنظام أو من شاشة المعاينة.';
+
+  @override
+  String get productBarcodes => 'ملصقات باركود المنتجات';
+
+  @override
+  String get printedTitle => 'تمت الطباعة';
+
+  @override
+  String get printedContent => 'تم تنفيذ المعاينة أو الطباعة من نافذة النظام.';
+
+  @override
+  String get clearList => 'مسح القائمة';
+
+  @override
+  String get printAgain => 'طباعة مرة أخرى';
+
+  @override
+  String get printListCleared => 'تم مسح قائمة الطباعة';
+
+  @override
+  String get itemFallback => 'صنف';
+
+  @override
+  String get kgUnit => 'كجم';
+
+  @override
+  String get justNow => 'الآن';
+
+  @override
+  String minutesAgo(Object minutes) {
+    return 'منذ $minutes دقيقة';
+  }
+
+  @override
+  String hoursAgo(Object hours) {
+    return 'منذ $hours ساعة';
+  }
+
+  @override
+  String get dayOrMoreAgo => 'منذ يوم أو أكثر';
+
+  @override
+  String get barcodeLabelsTitle => 'طباعة ملصقات باركود';
+
+  @override
+  String lastUpdate(Object time) {
+    return 'آخر تحديث: $time — إعادة جلب الأسعار والمخزون';
+  }
+
+  @override
+  String printLabelsBtn(Object count) {
+    return 'طباعة $count ملصق';
+  }
+
+  @override
+  String loadFailed(Object error) {
+    return 'تعذّر التحميل: $error';
+  }
+
+  @override
+  String get searchProductHint => 'بحث عن منتج';
+
+  @override
+  String get searchProductSub => 'حرفان أو أكثر (اسم / باركود / رمز صنف)';
+
+  @override
+  String get weightProductsNote =>
+      'منتجات الوزن: يُطبع المعرف على الملصق؛ الوزن يُوزَّن عند البيع.';
+
+  @override
+  String get barcodeLabel => 'الباركود';
+
+  @override
+  String stockLabel(Object qty) {
+    return 'مخزون: $qty';
+  }
+
+  @override
+  String skuLabel(Object code) {
+    return 'رمز صنف: $code';
+  }
+
+  @override
+  String get sizeAndPreview =>
+      'اختَر المقاس ومظهر المعاينة (تطبَّق على البطاقات والطباعة).';
+
+  @override
+  String get labelSizeHint => 'مقاس الملصق';
+
+  @override
+  String get showProductName => 'إظهار اسم المنتج';
+
+  @override
+  String get showPrice => 'إظهار السعر';
+
+  @override
+  String get smartQtyTooltip => 'يضبط كمية الطباعة تلقائياً حسب كمية المخزون';
+
+  @override
+  String get smartQtyLabel => 'الكمية الذكية';
+
+  @override
+  String get setAllOne => 'اجعل الكل (1)';
+
+  @override
+  String setAllOneCount(Object count) {
+    return 'اجعل الكل (1) ($count)';
+  }
+
+  @override
+  String productsCount(Object count) {
+    return 'المنتجات: $count';
+  }
+
+  @override
+  String totalLabelsCount(Object count) {
+    return 'إجمالي الملصقات: $count';
+  }
+
+  @override
+  String get searchToAddHint => 'ابحث عن منتج لإضافته للطباعة';
+
+  @override
+  String get addMultipleHint => 'يمكنك إضافة منتجات متعددة وطباعتها دفعة واحدة';
+
+  @override
+  String get removeTooltip => 'إزالة';
+
+  @override
+  String stockAndPrint(Object print, Object stock) {
+    return 'مخزون: $stock | طباعة: $print';
+  }
+
+  @override
+  String get printQtyExceedsStock => 'كمية الطباعة أكبر من المخزون';
+
+  @override
+  String get decreaseTooltip => 'نقص';
+
+  @override
+  String get increaseTooltip => 'زيادة';
+
+  @override
+  String previewLabel(Object name, Object price, Object size) {
+    return 'معاينة: $name — $price — $size';
+  }
+
+  @override
+  String priceFormat(Object price) {
+    return '$price د.ع';
+  }
+
+  @override
+  String get autoBarcodeNote => 'سيتم توليد باركود تلقائياً';
+
+  @override
+  String get unsavedChanges => 'تغييرات غير محفوظة';
+
+  @override
+  String get unsavedChangesConfirm => 'التغييرات لم تُحفظ، هل تريد المغادرة؟';
+
+  @override
+  String get stayAction => 'البقاء';
+
+  @override
+  String get leaveAction => 'مغادرة';
+
+  @override
+  String productSelected(Object name) {
+    return 'تم اختيار: $name';
+  }
+
+  @override
+  String failedToLoad(Object error) {
+    return 'تعذّر التحميل: $error';
+  }
+
+  @override
+  String failedToLoadMore(Object error) {
+    return 'تعذّر تحميل المزيد: $error';
+  }
+
+  @override
+  String get clearProductBarcode => 'مسح باركود المنتج';
+
+  @override
+  String get nameEmpty => 'اسم المنتج لا يمكن أن يكون فارغاً';
+
+  @override
+  String get nameTooLong => 'اسم المنتج طويل جداً';
+
+  @override
+  String get barcodeAlreadyUsed => 'الباركود مستخدم مسبقاً';
+
+  @override
+  String get minPriceExceedsSalePrice => 'أقل سعر بيع يجب ألا يتجاوز سعر البيع';
+
+  @override
+  String get productUpdatedSuccess => 'تم تحديث المنتج بنجاح';
+
+  @override
+  String get barcodeUsedByOther => 'الباركود مستخدم لمنتج/وحدة أخرى';
+
+  @override
+  String get saveFailed => 'تعذر حفظ التعديلات';
+
+  @override
+  String get lossSuffix => ' — خسارة';
+
+  @override
+  String get profitMarginLabel => 'هامش الربح: ';
+
+  @override
+  String get profitLabel => 'ربح: ';
+
+  @override
+  String get updateExistingProduct => 'تحديث منتج موجود';
+
+  @override
+  String get clearBarcodeCameraTooltip => 'مسح باركود (كاميرا)';
+
+  @override
+  String get searchLabel => 'بحث';
+
+  @override
+  String get typeTwoCharsHint => 'اكتب حرفين على الأقل للبحث الموحّد';
+
+  @override
+  String get noResultsFound => 'لا توجد نتائج';
+
+  @override
+  String get scannerSearchNote =>
+      'في هذه الصفحة: قارئ الباركود (HID) يبحث عن المنتج هنا ولا يُوجَّه للبيع. مرّر للأسفل لتحميل المزيد.';
+
+  @override
+  String get noResultsForText => 'لا توجد نتائج لهذا النص بعد.';
+
+  @override
+  String get pieceUnit => 'قطعة';
+
+  @override
+  String get outOfStockWarning => 'المنتج نفذ من المخزون';
+
+  @override
+  String get lowStockWarning => 'الكمية وصلت لحد التنبيه';
+
+  @override
+  String get productNameLabel => 'اسم المنتج';
+
+  @override
+  String get barcodeAlreadyUsedByOther => 'الباركود مستخدم مسبقاً';
+
+  @override
+  String get viewProductWithBarcode => 'عرض المنتج الذي يملك هذا الباركود';
+
+  @override
+  String get purchasePriceLabel => 'سعر الشراء';
+
+  @override
+  String get salePriceLabel => 'سعر البيع';
+
+  @override
+  String get minSalePriceLabel => 'الحد الأدنى للبيع';
+
+  @override
+  String get quantityLabel => 'الكمية';
+
+  @override
+  String get alertThresholdLabel => 'حد التنبيه';
+
+  @override
+  String productIdLabel(Object id) {
+    return 'رقم $id';
+  }
+
+  @override
+  String categoryLabel(Object name) {
+    return 'التصنيف: $name';
+  }
+
+  @override
+  String get stockTrackingDisabled =>
+      'تتبع المخزون معطّل لهذا الصنف — الكمية من قاعدة البيانات تبقى كما هي عند الحفظ.';
+
+  @override
+  String get saveLabel => 'حفظ';
+
+  @override
+  String get retailList => 'قائمة التجزئة';
+
+  @override
+  String get retailDesc => 'أسعار بيع التجزئة للعملاء العاديين';
+
+  @override
+  String get wholesaleList => 'قائمة الجملة';
+
+  @override
+  String get wholesaleDesc => 'أسعار الجملة للموزعين والتجار';
+
+  @override
+  String get vipList => 'قائمة العملاء المميزين';
+
+  @override
+  String get vipDesc => 'أسعار خاصة للعملاء الدائمين (VIP)';
+
+  @override
+  String get cannotDeleteDefault => 'لا يمكن حذف قائمة الأسعار الافتراضية';
+
+  @override
+  String get deletePriceList => 'حذف قائمة الأسعار';
+
+  @override
+  String deletePriceListConfirm(Object name) {
+    return 'هل تريد حذف «$name»؟';
+  }
+
+  @override
+  String get priceListsTitle => 'فوائم الأسعار';
+
+  @override
+  String get listsTab => 'القوائم';
+
+  @override
+  String get productsByListTab => 'منتجات بحسب القائمة';
+
+  @override
+  String get newListBtn => 'قائمة جديدة';
+
+  @override
+  String get defaultLabel => 'افتراضي';
+
+  @override
+  String get setAsDefault => 'تعيين كافتراضي';
+
+  @override
+  String get managePrices => 'إدارة الأسعار';
+
+  @override
+  String get productCol => 'المنتج';
+
+  @override
+  String get purchasePriceCol => 'سعر الشراء';
+
+  @override
+  String get retailPriceCol => 'سعر التجزئة';
+
+  @override
+  String get wholesalePriceCol => 'سعر الجملة';
+
+  @override
+  String get vipPriceCol => 'سعر VIP';
+
+  @override
+  String listPricesTitle(Object name) {
+    return 'أسعار $name';
+  }
+
+  @override
+  String get salePriceCol => 'سعر البيع';
+
+  @override
+  String get editList => 'تعديل القائمة';
+
+  @override
+  String get newListTitle => 'قائمة أسعار جديدة';
+
+  @override
+  String get listNameLabel => 'اسم القائمة *';
+
+  @override
+  String get listColorLabel => 'لون القائمة:';
+
+  @override
+  String get saveChanges => 'حفظ التعديلات';
+
+  @override
+  String get createList => 'إنشاء القائمة';
+
+  @override
+  String get colorsAndSizes => 'الألوان والمقاسات';
+
+  @override
+  String get closeBtn => 'إغلاق';
+
+  @override
+  String get doneBtn => 'تم';
+
+  @override
+  String get addAtLeastOneColor => 'أضف لوناً واحداً على الأقل.';
+
+  @override
+  String get colorNameRequired => 'اسم اللون مطلوب.';
+
+  @override
+  String get addAtLeastOneSize => 'أضف مقاساً واحداً على الأقل لكل لون.';
+
+  @override
+  String get sizeFieldRequired => 'حقل المقاس مطلوب.';
+
+  @override
+  String duplicateSize(Object color, Object size) {
+    return 'المقاس \"\$size\" مكرر داخل اللون \"\$color\".';
+  }
+
+  @override
+  String get qtyMustBeNonNegative =>
+      'الكمية يجب أن تكون رقماً صحيحاً أكبر أو يساوي 0.';
+
+  @override
+  String get duplicateBarcode => 'يوجد باركود مكرر داخل المتغيرات.';
+
+  @override
+  String get conversionFactorError =>
+      'عامل التحويل يجب أن يكون أكبر من 0 لكل وحدة جديدة.';
+
+  @override
+  String get variantBarcodeUsed => 'باركود المتغير مستخدم مسبقاً';
+
+  @override
+  String get conversionFactorGt0 => 'عامل التحويل يجب أن يكون أكبر من 0';
+
+  @override
+  String get chooseColorTitle => 'اختيار لون';
+
+  @override
+  String get chooseColorSubtitle => 'اختر لوناً يمثّل هذا الخيار (اختياري).';
+
+  @override
+  String get applyUniformQtyTitle => 'تطبيق كمية موحدة';
+
+  @override
+  String get enterQtyHint => 'أدخل كمية (0 أو أكثر)';
+
+  @override
+  String get qtyMustBePositive =>
+      'الكمية يجب أن تكون رقماً صحيحاً أكبر أو يساوي 0.';
+
+  @override
+  String get sizeLabel => 'المقاس';
+
+  @override
+  String get chooseSizeTooltip => 'اختيار مقاس';
+
+  @override
+  String get qtyLabel => 'الكمية';
+
+  @override
+  String get barcodeOptional => 'الباركود (اختياري)';
+
+  @override
+  String get deleteTooltip => 'حذف';
+
+  @override
+  String get colorNameLabel => 'اسم اللون';
+
+  @override
+  String get colorPickerTooltip => 'اختيار لون (HEX)';
+
+  @override
+  String get deleteColorTooltip => 'حذف اللون';
+
+  @override
+  String get sizesAndQuantities => 'المقاسات والكميات';
+
+  @override
+  String get noSizesYet => 'لا توجد مقاسات بعد. أضف مقاساً واحداً على الأقل.';
+
+  @override
+  String get addSizeBtn => 'إضافة مقاس';
+
+  @override
+  String colorTotal(Object count) {
+    return 'إجمالي اللون: $count';
+  }
+
+  @override
+  String get addNewColor => 'إضافة لون جديد';
+
+  @override
+  String get applyUniformQtyAllSizes => 'تطبيق كمية موحدة على كل المقاسات';
+
+  @override
+  String get noColorsYet => 'لا توجد ألوان بعد. أضف لوناً للبدء.';
+
+  @override
+  String get editProductTitle => 'تعديل المنتج';
+
+  @override
+  String get saveBtn => 'حفظ';
+
+  @override
+  String get productNameHint => 'مثال: سكر 1 كغم';
+
+  @override
+  String get barcodeOptionalLabel => 'الباركود (اختياري)';
+
+  @override
+  String get trackStock => 'تتبع المخزون';
+
+  @override
+  String get trackStockDesc => 'يحسب الكمية والتنبيه منخفض';
+
+  @override
+  String get noTrackDesc => 'الكمية تُصبح 0 ولا تظهر تنبيهات مخزون';
+
+  @override
+  String get pricingTitle => 'التسعير';
+
+  @override
+  String get enterSalePrice => 'أدخل سعر بيع';
+
+  @override
+  String get baseStockType => 'نوع المخزون الأساسي';
+
+  @override
+  String get stockTypePiece => 'عدد (قطعة كأساس)';
+
+  @override
+  String get stockTypeWeight => 'وزن (كيلوغرام كأساس)';
+
+  @override
+  String get stockTypeClothing => 'ملابس (ألوان ومقاسات)';
+
+  @override
+  String get colorsAndSizesTitle => 'الألوان والمقاسات';
+
+  @override
+  String get editColorsSizesBtn => 'تعديل الألوان والمقاسات';
+
+  @override
+  String get salesUnitsBarcode => 'وحدات البيع والباركود';
+
+  @override
+  String get unitsDesc =>
+      'الوحدة الافتراضية تُدار تلقائياً مع المنتج؛ يمكنك تعديل الوحدات الإضافية أو إضافة وحدة جديدة.';
+
+  @override
+  String get defaultUnitTitle => 'الوحدة الافتراضية';
+
+  @override
+  String defaultUnitDesc(Object factor, Object name) {
+    return '$name — عامل $factor';
+  }
+
+  @override
+  String unitNumber(Object id) {
+    return 'وحدة #$id';
+  }
+
+  @override
+  String get unitNameLabel => 'اسم الوحدة';
+
+  @override
+  String get unitBarcodeOptional => 'باركود (اختياري)';
+
+  @override
+  String get unitSalePriceOptional => 'سعر بيع الوحدة (اختياري)';
+
+  @override
+  String get unitMinPriceOptional => 'أدنى سعر (اختياري)';
+
+  @override
+  String get addNewUnitBtn => 'إضافة وحدة جديدة';
+
+  @override
+  String get newUnitTitle => 'وحدة جديدة';
+
+  @override
+  String get cancelTooltip => 'إلغاء';
+
+  @override
+  String get stockTitle => 'المخزون';
+
+  @override
+  String stockManagedByVariants(Object count) {
+    return 'المخزون يُدار عبر الألوان والمقاسات. الإجمالي الحالي: $count';
+  }
+
+  @override
+  String get lowStockThreshold => 'حد التنبيه منخفض';
+
+  @override
+  String get saveChangesBtn => 'حفظ التعديلات';
 }

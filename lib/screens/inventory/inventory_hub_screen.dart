@@ -89,7 +89,7 @@ class _InventoryHubScreenState extends State<InventoryHubScreen> {
       subtitle: 'أسعار مخصصة للعملاء والمجموعات',
       icon:     Icons.price_change_outlined,
       color:    Colors.green,
-      builder:  (_) => const PriceListsScreen(),
+      builder:  (_) => PriceListsScreen(),
     ),
     _InvModule(
       id:       'stocktaking',

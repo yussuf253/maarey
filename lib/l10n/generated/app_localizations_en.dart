@@ -1606,7 +1606,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noAccountCreateNew => 'Don\'t have an account? Create new account';
 
   @override
-  String get requiredField => 'This field is required';
+  String get requiredField => 'Required';
 
   @override
   String get minLength3Chars => 'Must be at least 3 characters';
@@ -2208,7 +2208,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pinToHome => 'Pin to Home';
 
   @override
-  String get failedToLoadProduct => 'Failed to load product';
+  String get failedToLoadProduct => 'Failed to load product data';
 
   @override
   String get lowStock => 'Low Stock';
@@ -2407,7 +2407,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get largerUnitHint => 'e.g. kilogram';
 
   @override
-  String get conversionFactorLabel => 'Conversion Factor';
+  String get conversionFactorLabel => 'Conversion factor to base';
 
   @override
   String get conversionFactorHint => 'e.g. 1000';
@@ -2664,4 +2664,1157 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reset => 'Reset';
+
+  @override
+  String get newCategory => 'New Category';
+
+  @override
+  String get parentCategory => 'Parent Category';
+
+  @override
+  String get noParent => 'None (top-level)';
+
+  @override
+  String get descriptionLabel => 'Description';
+
+  @override
+  String get categorySaved => 'Category saved';
+
+  @override
+  String get deleteCategory => 'Delete Category';
+
+  @override
+  String deleteCategoryConfirm(Object name) {
+    return 'Delete \'$name\'?';
+  }
+
+  @override
+  String get addNewCategory => 'Add New Category';
+
+  @override
+  String get rootsOnly => 'Roots only (no parent)';
+
+  @override
+  String underParent(Object name) {
+    return 'Under: $name';
+  }
+
+  @override
+  String get noMatchingCategories =>
+      'No matching categories.\nAdd a new category or change the filter.';
+
+  @override
+  String get noResults => 'No results';
+
+  @override
+  String get inventoryManagement => 'Inventory Management';
+
+  @override
+  String get alerts => 'Alerts';
+
+  @override
+  String get inventorySettings => 'Inventory Settings';
+
+  @override
+  String get mainSections => 'Main Sections';
+
+  @override
+  String get recentInventoryMovements => 'Recent Inventory Movements';
+
+  @override
+  String get quickActions => 'Quick Actions';
+
+  @override
+  String get addProduct => 'Add Product';
+
+  @override
+  String get inventoryVoucher => 'Inventory Voucher';
+
+  @override
+  String get periodicStocktaking => 'Periodic Stocktaking';
+
+  @override
+  String get movements => 'Movements';
+
+  @override
+  String get products => 'Products';
+
+  @override
+  String get productsSub => 'View and manage all items';
+
+  @override
+  String get warehouses => 'Warehouses';
+
+  @override
+  String get warehousesSub => 'Monitor balances and locations';
+
+  @override
+  String get inventoryVouchers => 'Inventory Vouchers';
+
+  @override
+  String get inventoryVouchersSub => 'Deposit, withdrawal, and transfer';
+
+  @override
+  String get priceLists => 'Price Lists';
+
+  @override
+  String get priceListsSub => 'Retail, wholesale, and special';
+
+  @override
+  String get periodicStocktakingSub => 'Reconcile actual differences';
+
+  @override
+  String get inventorySettingsSub => 'Units, categories, printing';
+
+  @override
+  String get deposit => 'Deposit';
+
+  @override
+  String get withdrawal => 'Withdrawal';
+
+  @override
+  String get transfer => 'Transfer';
+
+  @override
+  String get lastMovements => 'Last Movements';
+
+  @override
+  String get viewAll => 'View All';
+
+  @override
+  String get savedInventoryPolicies => 'Inventory policies saved';
+
+  @override
+  String get inventoryPolicyCenter => 'Inventory Policy Center';
+
+  @override
+  String get saveTooltip => 'Save';
+
+  @override
+  String get customerActivityType => 'Customer Activity Type';
+
+  @override
+  String get activityProfile => 'Activity Profile';
+
+  @override
+  String get activityTypeDesc =>
+      'When selecting an activity type, default properties are set automatically — you can edit them manually.';
+
+  @override
+  String get enableUnits => 'Enable Units';
+
+  @override
+  String get productManagement => 'Product Management';
+
+  @override
+  String get addProductToggle => 'Add Product';
+
+  @override
+  String get inventoryVouchersToggle => 'Inventory Vouchers';
+
+  @override
+  String get priceListsToggle => 'Price Lists';
+
+  @override
+  String get warehousesToggle => 'Warehouses';
+
+  @override
+  String get stocktakingToggle => 'Stocktaking';
+
+  @override
+  String get settingsToggle => 'Settings';
+
+  @override
+  String get productCardProperties => 'Product Card Properties';
+
+  @override
+  String get gradeField => 'Grade / Quality Field';
+
+  @override
+  String get expiryTracking => 'Expiry and Production Date';
+
+  @override
+  String get batchTracking => 'Batch Tracking';
+
+  @override
+  String get lowStockAlerts => 'Low Stock Alerts';
+
+  @override
+  String get productImages => 'Product Images';
+
+  @override
+  String get productVariants => 'Product Variants (Size/Color)';
+
+  @override
+  String get purchasingAndSuppliers => 'Purchasing & Suppliers';
+
+  @override
+  String get purchaseOrders => 'Purchase Orders (PO)';
+
+  @override
+  String get requireSourceOnInbound => 'Require Source on Inbound';
+
+  @override
+  String get analyticsAndReports => 'Analytics & Reports';
+
+  @override
+  String get items => 'items';
+
+  @override
+  String get iqd => 'IQD';
+
+  @override
+  String get warehouseLabel => 'Warehouse';
+
+  @override
+  String get periodicStocktakingTitle => 'Periodic Stocktaking';
+
+  @override
+  String openSessions(Object count) {
+    return 'Open Sessions ($count)';
+  }
+
+  @override
+  String closedSessions(Object count) {
+    return 'Completed ($count)';
+  }
+
+  @override
+  String get startNewStocktake => 'Start New Stocktake';
+
+  @override
+  String get closeStocktaking => 'Close Stocktaking';
+
+  @override
+  String closeStocktakeConfirm(Object title) {
+    return 'Do you want to close session «$title»?';
+  }
+
+  @override
+  String get autoPostDifferences => 'Auto-post differences';
+
+  @override
+  String get autoPostDesc =>
+      'Creates a single inventory adjustment voucher for the session';
+
+  @override
+  String get sessionClosedSuccess => 'Session closed successfully';
+
+  @override
+  String get noSessionsYet => 'No sessions yet';
+
+  @override
+  String get closedStatus => 'Completed';
+
+  @override
+  String itemsCount(Object counted, Object total) {
+    return '$counted / $total items';
+  }
+
+  @override
+  String startedAt(Object date) {
+    return 'Started: $date';
+  }
+
+  @override
+  String closedAt(Object date) {
+    return 'Closed: $date';
+  }
+
+  @override
+  String get closeStocktakingAction => 'Close Stocktaking';
+
+  @override
+  String get reportAction => 'Report';
+
+  @override
+  String get startNewStocktakeSession => 'Start New Stocktaking Session';
+
+  @override
+  String get sessionTitleLabel => 'Session Title *';
+
+  @override
+  String get sessionTitleHint => 'e.g. July 2025 stocktaking';
+
+  @override
+  String get selectWarehouseError => 'Select a warehouse';
+
+  @override
+  String get startStocktakingBtn => 'Start Stocktaking';
+
+  @override
+  String get searchHint => 'Name, barcode, SKU, or product number';
+
+  @override
+  String systemQty(Object qty) {
+    return 'System: $qty';
+  }
+
+  @override
+  String diffQty(Object diff) {
+    return 'Diff: $diff';
+  }
+
+  @override
+  String get enterValueHint => 'Enter';
+
+  @override
+  String reportTitle(Object title) {
+    return 'Report: $title';
+  }
+
+  @override
+  String get totalItemsLabel => 'Total Items';
+
+  @override
+  String get countedLabel => 'Counted';
+
+  @override
+  String get uncountedLabel => 'Uncounted';
+
+  @override
+  String get sessionSummary => 'Session Summary:';
+
+  @override
+  String get statusRow => 'Status';
+
+  @override
+  String actualQty(Object qty) {
+    return 'Actual: $qty';
+  }
+
+  @override
+  String get purchaseOrdersTitle => 'Purchase Orders';
+
+  @override
+  String get newPurchaseOrder => 'New Purchase Order';
+
+  @override
+  String get sentLabel => 'Sent';
+
+  @override
+  String get partialLabel => 'Partial';
+
+  @override
+  String get completedLabel => 'Completed';
+
+  @override
+  String totalOrderValue(Object value) {
+    return 'Total order value: $value';
+  }
+
+  @override
+  String get clearTooltip => 'Clear';
+
+  @override
+  String get cancelOrder => 'Cancel Purchase Order';
+
+  @override
+  String get cancelOrderConfirm => 'Do you want to cancel this order?';
+
+  @override
+  String get backAction => 'Back';
+
+  @override
+  String get cancelAction => 'Cancel';
+
+  @override
+  String get allFilter => 'All';
+
+  @override
+  String get draftStatus => 'Draft';
+
+  @override
+  String get sentStatus => 'Sent';
+
+  @override
+  String get partialStatus => 'Partial';
+
+  @override
+  String get receivedStatus => 'Completed';
+
+  @override
+  String get cancelledStatus => 'Cancelled';
+
+  @override
+  String get noSupplier => 'Unspecified supplier';
+
+  @override
+  String receivedValue(Object received, Object total) {
+    return 'Received $received of $total';
+  }
+
+  @override
+  String itemCount(Object count) {
+    return '$count items';
+  }
+
+  @override
+  String get viewAction => 'View';
+
+  @override
+  String get editAction => 'Edit';
+
+  @override
+  String get copyAction => 'Copy';
+
+  @override
+  String get noResultsMatch => 'No results match the search';
+
+  @override
+  String get noPurchaseOrdersYet => 'No purchase orders yet';
+
+  @override
+  String get createFirstOrder => '+ Create first purchase order';
+
+  @override
+  String get orPressCtrlN => 'Or press Ctrl+N';
+
+  @override
+  String get failedToFetchLowItems =>
+      'Failed to fetch low items. Make sure the database is updated.';
+
+  @override
+  String get noNewItemsAllAdded =>
+      'No new items: all low products are already in the list.';
+
+  @override
+  String get noLowStockProducts =>
+      'No low stock products (at or below alert threshold with stock tracking enabled).';
+
+  @override
+  String addedLowItems(Object added) {
+    return 'Added $added low/depleted items. Adjust quantities then save.';
+  }
+
+  @override
+  String skippedDuplicates(Object skipped) {
+    return ' ($skipped duplicates skipped)';
+  }
+
+  @override
+  String showingOnlyFirst(Object count) {
+    return ' — Only showing the first $count items.';
+  }
+
+  @override
+  String get addAtLeastOne => 'Add at least one item';
+
+  @override
+  String get checkNameAndQty => 'Check product name and quantity for each item';
+
+  @override
+  String errorOccurred(Object error) {
+    return 'An error occurred: $error';
+  }
+
+  @override
+  String get editPurchaseOrder => 'Edit Purchase Order';
+
+  @override
+  String get newPurchaseOrderTitle => 'New Purchase Order';
+
+  @override
+  String get orderInfo => 'Order Information';
+
+  @override
+  String get supplierLabel => 'Supplier';
+
+  @override
+  String get selectSupplierHint => 'Select a supplier (optional)';
+
+  @override
+  String get noSupplierText => '— No supplier —';
+
+  @override
+  String get orderDateLabel => 'Order Date';
+
+  @override
+  String get expectedDeliveryLabel => 'Expected Delivery Date';
+
+  @override
+  String get selectOptionalHint => 'Select (optional)';
+
+  @override
+  String get statusLabel => 'Status';
+
+  @override
+  String get draftText => 'Draft';
+
+  @override
+  String get sentText => 'Sent to supplier';
+
+  @override
+  String get partialText => 'Partially received';
+
+  @override
+  String get receivedText => 'Fully received';
+
+  @override
+  String get cancelledText => 'Cancelled';
+
+  @override
+  String get notesLabel => 'Notes';
+
+  @override
+  String get notesHint => 'Terms, details, notes…';
+
+  @override
+  String get orderItems => 'Order Items';
+
+  @override
+  String get fillLowStock => 'Fill from Low Stock';
+
+  @override
+  String get addItem => 'Add Item';
+
+  @override
+  String get emptyListHint =>
+      'Tap \'Fill from Low Stock\' or \'Add Item\' to start the list';
+
+  @override
+  String get itemCol => 'Item';
+
+  @override
+  String get qtyCol => 'Quantity';
+
+  @override
+  String get unitPriceCol => 'Unit Price';
+
+  @override
+  String get totalCol => 'Total';
+
+  @override
+  String get grandTotal => 'Grand Total';
+
+  @override
+  String get itemNameHint => 'Item name';
+
+  @override
+  String get noProductForBarcode => 'No product found for this barcode';
+
+  @override
+  String get productAlreadyExists => 'Product already exists';
+
+  @override
+  String get removeFromList => 'Remove from List';
+
+  @override
+  String get removeConfirm => 'Print quantity is greater than 5. Remove?';
+
+  @override
+  String get removeAction => 'Remove';
+
+  @override
+  String get quantitiesUpdated => 'Quantities updated';
+
+  @override
+  String zeroQtySkipped(Object count) {
+    return 'Products with zero quantity skipped ($count)';
+  }
+
+  @override
+  String get resetAll => 'Reset All';
+
+  @override
+  String get resetConfirm => 'All quantities will be reset to 1. Continue?';
+
+  @override
+  String get printPreview => 'Print Preview';
+
+  @override
+  String totalLabels(Object count) {
+    return 'Total labels: $count';
+  }
+
+  @override
+  String get printViaSystem =>
+      'Print via the system default printer or from the preview screen.';
+
+  @override
+  String get productBarcodes => 'Product Barcode Labels';
+
+  @override
+  String get printedTitle => 'Printed';
+
+  @override
+  String get printedContent =>
+      'Preview executed or printed from the system window.';
+
+  @override
+  String get clearList => 'Clear List';
+
+  @override
+  String get printAgain => 'Print Again';
+
+  @override
+  String get printListCleared => 'Print list cleared';
+
+  @override
+  String get itemFallback => 'item';
+
+  @override
+  String get kgUnit => 'kg';
+
+  @override
+  String get justNow => 'Just now';
+
+  @override
+  String minutesAgo(Object minutes) {
+    return '$minutes min ago';
+  }
+
+  @override
+  String hoursAgo(Object hours) {
+    return '${hours}h ago';
+  }
+
+  @override
+  String get dayOrMoreAgo => 'A day or more ago';
+
+  @override
+  String get barcodeLabelsTitle => 'Print Barcode Labels';
+
+  @override
+  String lastUpdate(Object time) {
+    return 'Last update: $time — Refresh prices and stock';
+  }
+
+  @override
+  String printLabelsBtn(Object count) {
+    return 'Print $count labels';
+  }
+
+  @override
+  String loadFailed(Object error) {
+    return 'Load failed: $error';
+  }
+
+  @override
+  String get searchProductHint => 'Search for a product';
+
+  @override
+  String get searchProductSub =>
+      'Two or more characters (name / barcode / SKU)';
+
+  @override
+  String get weightProductsNote =>
+      'Weight products: The ID is printed on the label; weight is determined at sale.';
+
+  @override
+  String get barcodeLabel => 'Barcode';
+
+  @override
+  String stockLabel(Object qty) {
+    return 'Stock: $qty';
+  }
+
+  @override
+  String skuLabel(Object code) {
+    return 'SKU: $code';
+  }
+
+  @override
+  String get sizeAndPreview =>
+      'Choose size and preview appearance (applies to cards and printing).';
+
+  @override
+  String get labelSizeHint => 'Label size';
+
+  @override
+  String get showProductName => 'Show Product Name';
+
+  @override
+  String get showPrice => 'Show Price';
+
+  @override
+  String get smartQtyTooltip =>
+      'Automatically adjusts print quantity based on stock quantity';
+
+  @override
+  String get smartQtyLabel => 'Smart Quantity';
+
+  @override
+  String get setAllOne => 'Set All to (1)';
+
+  @override
+  String setAllOneCount(Object count) {
+    return 'Set All to (1) ($count)';
+  }
+
+  @override
+  String productsCount(Object count) {
+    return 'Products: $count';
+  }
+
+  @override
+  String totalLabelsCount(Object count) {
+    return 'Total labels: $count';
+  }
+
+  @override
+  String get searchToAddHint => 'Search for a product to add for printing';
+
+  @override
+  String get addMultipleHint =>
+      'You can add multiple products and print them all at once';
+
+  @override
+  String get removeTooltip => 'Remove';
+
+  @override
+  String stockAndPrint(Object print, Object stock) {
+    return 'Stock: $stock | Print: $print';
+  }
+
+  @override
+  String get printQtyExceedsStock => 'Print quantity exceeds stock';
+
+  @override
+  String get decreaseTooltip => 'Decrease';
+
+  @override
+  String get increaseTooltip => 'Increase';
+
+  @override
+  String previewLabel(Object name, Object price, Object size) {
+    return 'Preview: $name — $price — $size';
+  }
+
+  @override
+  String priceFormat(Object price) {
+    return '$price IQD';
+  }
+
+  @override
+  String get autoBarcodeNote => 'A barcode will be generated automatically';
+
+  @override
+  String get unsavedChanges => 'Unsaved Changes';
+
+  @override
+  String get unsavedChangesConfirm => 'Changes were not saved. Leave anyway?';
+
+  @override
+  String get stayAction => 'Stay';
+
+  @override
+  String get leaveAction => 'Leave';
+
+  @override
+  String productSelected(Object name) {
+    return 'Selected: $name';
+  }
+
+  @override
+  String failedToLoad(Object error) {
+    return 'Load failed: $error';
+  }
+
+  @override
+  String failedToLoadMore(Object error) {
+    return 'Failed to load more: $error';
+  }
+
+  @override
+  String get clearProductBarcode => 'Clear Product Barcode';
+
+  @override
+  String get nameEmpty => 'Product name cannot be empty';
+
+  @override
+  String get nameTooLong => 'Product name is too long';
+
+  @override
+  String get barcodeAlreadyUsed => 'Barcode is already in use';
+
+  @override
+  String get minPriceExceedsSalePrice =>
+      'Minimum sale price cannot exceed sale price';
+
+  @override
+  String get productUpdatedSuccess => 'Product updated successfully';
+
+  @override
+  String get barcodeUsedByOther => 'Barcode is used by another product/unit';
+
+  @override
+  String get saveFailed => 'Failed to save changes';
+
+  @override
+  String get lossSuffix => ' — Loss';
+
+  @override
+  String get profitMarginLabel => 'Profit margin: ';
+
+  @override
+  String get profitLabel => 'Profit: ';
+
+  @override
+  String get updateExistingProduct => 'Update Existing Product';
+
+  @override
+  String get clearBarcodeCameraTooltip => 'Clear barcode (camera)';
+
+  @override
+  String get searchLabel => 'Search';
+
+  @override
+  String get typeTwoCharsHint => 'Type two characters for unified search';
+
+  @override
+  String get noResultsFound => 'No results found';
+
+  @override
+  String get scannerSearchNote =>
+      'On this page: The barcode reader (HID) searches for the product here and does not redirect to sales. Scroll down to load more.';
+
+  @override
+  String get noResultsForText => 'No results for this text yet.';
+
+  @override
+  String get pieceUnit => 'piece';
+
+  @override
+  String get outOfStockWarning => 'Product is out of stock';
+
+  @override
+  String get lowStockWarning => 'Quantity reached alert threshold';
+
+  @override
+  String get productNameLabel => 'Product Name';
+
+  @override
+  String get barcodeAlreadyUsedByOther => 'Barcode is already in use';
+
+  @override
+  String get viewProductWithBarcode => 'View product with this barcode';
+
+  @override
+  String get purchasePriceLabel => 'Purchase Price';
+
+  @override
+  String get salePriceLabel => 'Sale Price';
+
+  @override
+  String get minSalePriceLabel => 'Minimum Sale Price';
+
+  @override
+  String get quantityLabel => 'Quantity';
+
+  @override
+  String get alertThresholdLabel => 'Alert Threshold';
+
+  @override
+  String productIdLabel(Object id) {
+    return 'ID $id';
+  }
+
+  @override
+  String categoryLabel(Object name) {
+    return 'Category: $name';
+  }
+
+  @override
+  String get stockTrackingDisabled =>
+      'Stock tracking is disabled for this item — the quantity in the database will remain as is when saving.';
+
+  @override
+  String get saveLabel => 'Save';
+
+  @override
+  String get retailList => 'Retail List';
+
+  @override
+  String get retailDesc => 'Retail sale prices for regular customers';
+
+  @override
+  String get wholesaleList => 'Wholesale List';
+
+  @override
+  String get wholesaleDesc => 'Wholesale prices for distributors and traders';
+
+  @override
+  String get vipList => 'VIP Customer List';
+
+  @override
+  String get vipDesc => 'Special prices for regular customers (VIP)';
+
+  @override
+  String get cannotDeleteDefault => 'Cannot delete the default price list';
+
+  @override
+  String get deletePriceList => 'Delete Price List';
+
+  @override
+  String deletePriceListConfirm(Object name) {
+    return 'Delete \'$name\'?';
+  }
+
+  @override
+  String get priceListsTitle => 'Price Lists';
+
+  @override
+  String get listsTab => 'Lists';
+
+  @override
+  String get productsByListTab => 'Products by List';
+
+  @override
+  String get newListBtn => 'New List';
+
+  @override
+  String get defaultLabel => 'Default';
+
+  @override
+  String get setAsDefault => 'Set as Default';
+
+  @override
+  String get managePrices => 'Manage Prices';
+
+  @override
+  String get productCol => 'Product';
+
+  @override
+  String get purchasePriceCol => 'Purchase Price';
+
+  @override
+  String get retailPriceCol => 'Retail';
+
+  @override
+  String get wholesalePriceCol => 'Wholesale';
+
+  @override
+  String get vipPriceCol => 'VIP';
+
+  @override
+  String listPricesTitle(Object name) {
+    return '$name Prices';
+  }
+
+  @override
+  String get salePriceCol => 'Sale Price';
+
+  @override
+  String get editList => 'Edit List';
+
+  @override
+  String get newListTitle => 'New Price List';
+
+  @override
+  String get listNameLabel => 'List Name *';
+
+  @override
+  String get listColorLabel => 'List Color:';
+
+  @override
+  String get saveChanges => 'Save Changes';
+
+  @override
+  String get createList => 'Create List';
+
+  @override
+  String get colorsAndSizes => 'Colors & Sizes';
+
+  @override
+  String get closeBtn => 'Close';
+
+  @override
+  String get doneBtn => 'Done';
+
+  @override
+  String get addAtLeastOneColor => 'Add at least one color.';
+
+  @override
+  String get colorNameRequired => 'Color name is required.';
+
+  @override
+  String get addAtLeastOneSize => 'Add at least one size per color.';
+
+  @override
+  String get sizeFieldRequired => 'Size field is required.';
+
+  @override
+  String duplicateSize(Object color, Object size) {
+    return 'Size \"$size\" is duplicated within color \"$color\".';
+  }
+
+  @override
+  String get qtyMustBeNonNegative => 'Quantity must be a non-negative integer.';
+
+  @override
+  String get duplicateBarcode => 'Duplicate barcode found within variants.';
+
+  @override
+  String get conversionFactorError =>
+      'Conversion factor must be greater than 0 for each new unit.';
+
+  @override
+  String get variantBarcodeUsed => 'Variant barcode already in use';
+
+  @override
+  String get conversionFactorGt0 => 'Conversion factor must be greater than 0';
+
+  @override
+  String get chooseColorTitle => 'Choose Color';
+
+  @override
+  String get chooseColorSubtitle =>
+      'Choose a color to represent this option (optional).';
+
+  @override
+  String get applyUniformQtyTitle => 'Apply Uniform Quantity';
+
+  @override
+  String get enterQtyHint => 'Enter quantity (0 or more)';
+
+  @override
+  String get qtyMustBePositive => 'Quantity must be a non-negative integer.';
+
+  @override
+  String get sizeLabel => 'Size';
+
+  @override
+  String get chooseSizeTooltip => 'Choose size';
+
+  @override
+  String get qtyLabel => 'Quantity';
+
+  @override
+  String get barcodeOptional => 'Barcode (optional)';
+
+  @override
+  String get deleteTooltip => 'Delete';
+
+  @override
+  String get colorNameLabel => 'Color Name';
+
+  @override
+  String get colorPickerTooltip => 'Choose color (HEX)';
+
+  @override
+  String get deleteColorTooltip => 'Delete color';
+
+  @override
+  String get sizesAndQuantities => 'Sizes & Quantities';
+
+  @override
+  String get noSizesYet => 'No sizes yet. Add at least one size.';
+
+  @override
+  String get addSizeBtn => 'Add Size';
+
+  @override
+  String colorTotal(Object count) {
+    return 'Color total: $count';
+  }
+
+  @override
+  String get addNewColor => 'Add New Color';
+
+  @override
+  String get applyUniformQtyAllSizes => 'Apply uniform quantity to all sizes';
+
+  @override
+  String get noColorsYet => 'No colors yet. Add a color to start.';
+
+  @override
+  String get editProductTitle => 'Edit Product';
+
+  @override
+  String get saveBtn => 'Save';
+
+  @override
+  String get productNameHint => 'e.g. Sugar 1 kg';
+
+  @override
+  String get barcodeOptionalLabel => 'Barcode (optional)';
+
+  @override
+  String get trackStock => 'Track Stock';
+
+  @override
+  String get trackStockDesc => 'Calculates quantity and low stock alerts';
+
+  @override
+  String get noTrackDesc => 'Quantity becomes 0 and no stock alerts shown';
+
+  @override
+  String get pricingTitle => 'Pricing';
+
+  @override
+  String get enterSalePrice => 'Enter sale price';
+
+  @override
+  String get baseStockType => 'Base Stock Type';
+
+  @override
+  String get stockTypePiece => 'Piece (unit as base)';
+
+  @override
+  String get stockTypeWeight => 'Weight (kilogram as base)';
+
+  @override
+  String get stockTypeClothing => 'Clothing (colors & sizes)';
+
+  @override
+  String get colorsAndSizesTitle => 'Colors & Sizes';
+
+  @override
+  String get editColorsSizesBtn => 'Edit Colors & Sizes';
+
+  @override
+  String get salesUnitsBarcode => 'Sales Units & Barcode';
+
+  @override
+  String get unitsDesc =>
+      'The default unit is managed automatically with the product; you can edit additional units or add a new unit.';
+
+  @override
+  String get defaultUnitTitle => 'Default Unit';
+
+  @override
+  String defaultUnitDesc(Object factor, Object name) {
+    return '$name — factor $factor';
+  }
+
+  @override
+  String unitNumber(Object id) {
+    return 'Unit #$id';
+  }
+
+  @override
+  String get unitNameLabel => 'Unit Name';
+
+  @override
+  String get unitBarcodeOptional => 'Barcode (optional)';
+
+  @override
+  String get unitSalePriceOptional => 'Unit sale price (optional)';
+
+  @override
+  String get unitMinPriceOptional => 'Min price (optional)';
+
+  @override
+  String get addNewUnitBtn => 'Add New Unit';
+
+  @override
+  String get newUnitTitle => 'New Unit';
+
+  @override
+  String get cancelTooltip => 'Cancel';
+
+  @override
+  String get stockTitle => 'Stock';
+
+  @override
+  String stockManagedByVariants(Object count) {
+    return 'Stock is managed via colors & sizes. Current total: $count';
+  }
+
+  @override
+  String get lowStockThreshold => 'Low stock alert threshold';
+
+  @override
+  String get saveChangesBtn => 'Save Changes';
 }

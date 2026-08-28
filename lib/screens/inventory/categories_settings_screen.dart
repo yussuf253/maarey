@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../services/product_repository.dart';
 import '../../utils/screen_layout.dart';
 
@@ -19,6 +20,8 @@ class _CategoriesSettingsScreenState extends State<CategoriesSettingsScreen> {
   static const int _kParentRootsOnly = -2;
 
   bool _loading = true;
+
+  AppLocalizations get loc => AppLocalizations.of(context)!;
 
   List<Map<String, dynamic>> _rows = [];
 
@@ -81,7 +84,7 @@ class _CategoriesSettingsScreenState extends State<CategoriesSettingsScreen> {
                   );
 
               return AlertDialog(
-                title: const Text('تصنيف جديد'),
+                title: Text(loc.newCategory),
                 content: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -91,19 +94,19 @@ class _CategoriesSettingsScreenState extends State<CategoriesSettingsScreen> {
                         controller: nameCtrl,
                         autofocus: true,
                         textAlign: TextAlign.right,
-                        decoration: const InputDecoration(
-                          labelText: 'الاسم',
-                          border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                          labelText: loc.nameLabel,
+                          border: const OutlineInputBorder(),
                         ),
                       ),
                       const SizedBox(height: 16),
                       _OutlineLabeledDropdown<int?>(
-                        label: 'التصنيف الرئيسي',
+                        label: loc.parentCategory,
                         value: parentId,
                         items: [
-                          const DropdownMenuItem<int?>(
+                          DropdownMenuItem<int?>(
                             value: null,
-                            child: Text('بدون (تصنيف رئيسي)'),
+                            child: Text(loc.noParent),
                           ),
                           ...parents.map(
                             (r) => DropdownMenuItem<int?>(
@@ -123,10 +126,10 @@ class _CategoriesSettingsScreenState extends State<CategoriesSettingsScreen> {
                         controller: descCtrl,
                         textAlign: TextAlign.right,
                         maxLines: 4,
-                        decoration: const InputDecoration(
-                          labelText: 'الوصف',
+                        decoration: InputDecoration(
+                          labelText: loc.descriptionLabel,
                           alignLabelWithHint: true,
-                          border: OutlineInputBorder(),
+                          border: const OutlineInputBorder(),
                         ),
                       ),
                     ],
@@ -135,11 +138,11 @@ class _CategoriesSettingsScreenState extends State<CategoriesSettingsScreen> {
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(ctx),
-                    child: const Text('إلغاء'),
+                    child: Text(loc.cancel),
                   ),
                   FilledButton(
                     onPressed: () => Navigator.pop(ctx, 'save'),
-                    child: const Text('حفظ'),
+                    child: Text(loc.save),
                   ),
                 ],
               );
@@ -174,7 +177,7 @@ class _CategoriesSettingsScreenState extends State<CategoriesSettingsScreen> {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: const Text('تم حفظ التصنيف'),
+        content: Text(loc.categorySaved),
         behavior: SnackBarBehavior.floating,
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
@@ -187,16 +190,16 @@ class _CategoriesSettingsScreenState extends State<CategoriesSettingsScreen> {
       builder: (ctx) => Directionality(
         textDirection: TextDirection.rtl,
         child: AlertDialog(
-          title: const Text('حذف التصنيف'),
-          content: Text('حذف «${row['name']}»؟'),
+          title: Text(loc.deleteCategory),
+          content: Text(loc.deleteCategoryConfirm(row['name'] as String)),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: const Text('إلغاء'),
+              child: Text(loc.cancel),
             ),
             FilledButton(
               onPressed: () => Navigator.pop(ctx, true),
-              child: const Text('حذف'),
+              child: Text(loc.delete),
             ),
           ],
         ),
@@ -214,8 +217,8 @@ class _CategoriesSettingsScreenState extends State<CategoriesSettingsScreen> {
     await _reload();
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('تم الحذف'),
+      SnackBar(
+        content: Text(loc.deleted),
         behavior: SnackBarBehavior.floating,
       ),
     );
@@ -223,6 +226,7 @@ class _CategoriesSettingsScreenState extends State<CategoriesSettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
     final bg = cs.brightness == Brightness.dark
@@ -239,8 +243,8 @@ class _CategoriesSettingsScreenState extends State<CategoriesSettingsScreen> {
           backgroundColor: const Color(0xFF1E3A5F),
           foregroundColor: Colors.white,
           elevation: 0,
-          title: const Text(
-            'التصنيفات',
+          title: Text(
+            loc.categoriesTitle,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
           ),
           leading: IconButton(
@@ -274,7 +278,7 @@ class _CategoriesSettingsScreenState extends State<CategoriesSettingsScreen> {
                       FilledButton.icon(
                         onPressed: _showAddCategoryDialog,
                         icon: const Icon(Icons.add_rounded, size: 20),
-                        label: const Text('إضافة تصنيف جديد'),
+                        label: Text(loc.addNewCategory),
                         style: FilledButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 18,
@@ -327,11 +331,12 @@ class _SearchCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
 
     final nameItems = <DropdownMenuItem<int?>>[
-      const DropdownMenuItem<int?>(value: null, child: Text('الكل')),
+      DropdownMenuItem<int?>(value: null, child: Text(loc.all)),
       ...rows.map(
         (r) => DropdownMenuItem<int?>(
           value: r['id'] as int,
@@ -341,15 +346,15 @@ class _SearchCard extends StatelessWidget {
     ];
 
     final parentItems = <DropdownMenuItem<int>>[
-      DropdownMenuItem<int>(value: kParentAll, child: const Text('الكل')),
+      DropdownMenuItem<int>(value: kParentAll, child: Text(loc.all)),
       DropdownMenuItem<int>(
         value: kParentRootsOnly,
-        child: const Text('جذور فقط (بدون أب)'),
+        child: Text(loc.rootsOnly),
       ),
       ...rows.map(
         (r) => DropdownMenuItem<int>(
           value: r['id'] as int,
-          child: Text('تحت: ${r['name']}', overflow: TextOverflow.ellipsis),
+          child: Text(loc.underParent(r['name'] as String), overflow: TextOverflow.ellipsis),
         ),
       ),
     ];
@@ -367,7 +372,7 @@ class _SearchCard extends StatelessWidget {
           Align(
             alignment: AlignmentDirectional.centerEnd,
             child: Text(
-              'بحث',
+              loc.search,
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w700,
               ),
@@ -379,7 +384,7 @@ class _SearchCard extends StatelessWidget {
             children: [
               Expanded(
                 child: _OutlineLabeledDropdown<int?>(
-                  label: 'الاسم',
+                  label: loc.nameLabel,
                   value: nameFilterId,
                   items: nameItems,
                   onChanged: onNameChanged,
@@ -388,7 +393,7 @@ class _SearchCard extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: _OutlineLabeledDropdown<int>(
-                  label: 'التصنيف الرئيسي',
+                  label: loc.parentCategory,
                   value: parentFilter,
                   items: parentItems,
                   onChanged: onParentChanged,
@@ -402,7 +407,7 @@ class _SearchCard extends StatelessWidget {
               const Spacer(),
               OutlinedButton(
                 onPressed: onCancelFilter,
-                child: const Text('إلغاء الفلتر'),
+                child: Text(loc.cancelFilter),
               ),
               const SizedBox(width: 10),
               FilledButton(
@@ -411,7 +416,7 @@ class _SearchCard extends StatelessWidget {
                   backgroundColor: cs.primary,
                   foregroundColor: cs.onPrimary,
                 ),
-                child: const Text('بحث'),
+                child: Text(loc.search),
               ),
             ],
           ),
@@ -436,6 +441,7 @@ class _ResultsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
 
@@ -458,7 +464,7 @@ class _ResultsCard extends StatelessWidget {
             child: Align(
               alignment: AlignmentDirectional.centerEnd,
               child: Text(
-                'النتائج',
+                loc.results,
                 style: theme.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.w700,
                 ),
@@ -470,7 +476,7 @@ class _ResultsCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 16),
               child: Text(
-                'لا توجد تصنيفات مطابقة.\nأضف تصنيفاً جديداً أو غيّر الفلتر.',
+                loc.noMatchingCategories,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: cs.onSurfaceVariant,
@@ -489,7 +495,7 @@ class _ResultsCard extends StatelessWidget {
                 final row = rows[i];
                 final parentName = row['parentName'] as String?;
                 final subtitle = parentName != null && parentName.isNotEmpty
-                    ? 'تحت: $parentName'
+                    ? loc.underParent(parentName ?? '')
                     : null;
                 return Padding(
                   padding: const EdgeInsets.symmetric(

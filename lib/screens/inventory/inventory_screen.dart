@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/generated/app_localizations.dart';
 import '../../widgets/app_notifications_sheet.dart';
 import '../../utils/screen_layout.dart';
 import 'inventory_products_screen.dart';
@@ -43,12 +44,13 @@ class InventoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
         backgroundColor: _bg,
         appBar: AppBar(
-          title: const Text('إدارة المخزون',
+          title: Text(loc.inventoryManagement,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
           backgroundColor: _navy,
           foregroundColor: Colors.white,
@@ -56,12 +58,12 @@ class InventoryScreen extends StatelessWidget {
           actions: [
             IconButton(
               icon: const Icon(Icons.notifications_outlined, size: 22),
-              tooltip: 'التنبيهات',
+              tooltip: loc.alerts,
               onPressed: () => showAppNotificationsSheet(context),
             ),
             IconButton(
               icon: const Icon(Icons.settings_outlined, size: 22),
-              tooltip: 'إعدادات المخزون',
+              tooltip: loc.inventorySettings,
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const InventorySettingsScreen())),
             ),
@@ -77,11 +79,11 @@ class InventoryScreen extends StatelessWidget {
               const SizedBox(height: 16),
               _QuickActionsCard(context: context),
               const SizedBox(height: 20),
-              _sectionTitle('الأقسام الرئيسية'),
+              _sectionTitle(loc.mainSections),
               const SizedBox(height: 12),
               _ModulesGrid(context: context),
               const SizedBox(height: 20),
-              _sectionTitle('آخر الحركات المخزونية'),
+              _sectionTitle(loc.recentInventoryMovements),
               const SizedBox(height: 12),
               const _RecentMovements(),
               const SizedBox(height: 24),
@@ -103,6 +105,7 @@ class InventoryScreen extends StatelessWidget {
 class _StatsBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return GridView.count(
       crossAxisCount: _gridColumnsFor(context),
       crossAxisSpacing: 10,
@@ -110,38 +113,38 @@ class _StatsBar extends StatelessWidget {
       childAspectRatio: 2.1,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      children: const [
+      children: [
         _StatCard(
           icon: Icons.inventory_2_rounded,
           color: _blue,
           bg: Color(0xFFEFF6FF),
-          title: 'إجمالي المنتجات',
+          title: loc.totalProducts,
           value: '248',
-          unit: 'صنف',
+          unit: loc.items,
         ),
         _StatCard(
           icon: Icons.monetization_on_rounded,
           color: _green,
           bg: Color(0xFFD1FAE5),
-          title: 'قيمة المخزون',
+          title: loc.inventoryValue,
           value: '4.25M',
-          unit: 'د.ع',
+          unit: loc.iqd,
         ),
         _StatCard(
           icon: Icons.warning_amber_rounded,
           color: _orange,
           bg: Color(0xFFFFEDD5),
-          title: 'مخزون منخفض',
+          title: loc.lowStockLabel,
           value: '12',
-          unit: 'صنف',
+          unit: loc.items,
         ),
         _StatCard(
           icon: Icons.warehouse_rounded,
           color: _purple,
           bg: Color(0xFFF5F3FF),
-          title: 'المستودعات',
+          title: loc.warehouses,
           value: '3',
-          unit: 'مستودع',
+          unit: loc.warehouseLabel,
         ),
       ],
     );
@@ -229,6 +232,7 @@ class _QuickActionsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext ctx) {
+    final loc = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -245,7 +249,7 @@ class _QuickActionsCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('إجراءات سريعة',
+          Text(loc.quickActions,
               style: TextStyle(
                   fontSize: 13, fontWeight: FontWeight.bold, color: _t2)),
           const SizedBox(height: 14),
@@ -254,7 +258,7 @@ class _QuickActionsCard extends StatelessWidget {
             children: [
               _QuickBtn(
                 icon: Icons.add_box_rounded,
-                label: 'إضافة منتج',
+                label: loc.addProduct,
                 color: _blue,
                 onTap: () => Navigator.push(context,
                     MaterialPageRoute(
@@ -262,21 +266,21 @@ class _QuickActionsCard extends StatelessWidget {
               ),
               _QuickBtn(
                 icon: Icons.swap_vert_rounded,
-                label: 'سند مخزوني',
+                label: loc.inventoryVoucher,
                 color: _purple,
                 onTap: () => Navigator.push(context,
                     MaterialPageRoute(builder: (_) => const StockVoucherScreen())),
               ),
               _QuickBtn(
                 icon: Icons.fact_check_rounded,
-                label: 'جرد دوري',
+                label: loc.periodicStocktaking,
                 color: _orange,
                 onTap: () => Navigator.push(context,
                     MaterialPageRoute(builder: (_) => const StocktakingScreen())),
               ),
               _QuickBtn(
                 icon: Icons.analytics_rounded,
-                label: 'الحركات',
+                label: loc.movements,
                 color: _teal,
                 onTap: () => Navigator.push(context,
                     MaterialPageRoute(
@@ -337,13 +341,14 @@ class _ModulesGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext ctx) {
+    final loc = AppLocalizations.of(context)!;
     final mods = [
       _ModDef(
         icon: Icons.category_outlined,
         color: _blue,
         bg: const Color(0xFFEFF6FF),
-        title: 'المنتجات',
-        sub: 'عرض وإدارة جميع الأصناف',
+        title: loc.products,
+        sub: loc.productsSub,
         badge: '248',
         onTap: () => Navigator.push(context,
             MaterialPageRoute(builder: (_) => const InventoryProductsScreen())),
@@ -352,8 +357,8 @@ class _ModulesGrid extends StatelessWidget {
         icon: Icons.warehouse_outlined,
         color: _teal,
         bg: const Color(0xFFCCFBF1),
-        title: 'المستودعات',
-        sub: 'مراقبة الأرصدة والأماكن',
+        title: loc.warehouses,
+        sub: loc.warehousesSub,
         badge: '3',
         onTap: () => Navigator.push(context,
             MaterialPageRoute(builder: (_) => const WarehousesScreen())),
@@ -362,8 +367,8 @@ class _ModulesGrid extends StatelessWidget {
         icon: Icons.swap_horiz_rounded,
         color: _purple,
         bg: const Color(0xFFF5F3FF),
-        title: 'السندات المخزونية',
-        sub: 'إيداع وصرف ونقل',
+        title: loc.inventoryVouchers,
+        sub: loc.inventoryVouchersSub,
         onTap: () => Navigator.push(context,
             MaterialPageRoute(builder: (_) => const StockVoucherScreen())),
       ),
@@ -371,18 +376,18 @@ class _ModulesGrid extends StatelessWidget {
         icon: Icons.price_change_outlined,
         color: _green,
         bg: const Color(0xFFD1FAE5),
-        title: 'فوائم الأسعار',
-        sub: 'تجزئة وجملة وخاصة',
+        title: loc.priceLists,
+        sub: loc.priceListsSub,
         badge: '2',
         onTap: () => Navigator.push(context,
-            MaterialPageRoute(builder: (_) => const PriceListsScreen())),
+            MaterialPageRoute(builder: (_) => PriceListsScreen())),
       ),
       _ModDef(
         icon: Icons.fact_check_outlined,
         color: _orange,
         bg: const Color(0xFFFFEDD5),
-        title: 'الجرد الدوري',
-        sub: 'تسوية الفروقات الفعلية',
+        title: loc.periodicStocktaking,
+        sub: loc.periodicStocktakingSub,
         onTap: () => Navigator.push(context,
             MaterialPageRoute(builder: (_) => const StocktakingScreen())),
       ),
@@ -390,8 +395,8 @@ class _ModulesGrid extends StatelessWidget {
         icon: Icons.settings_outlined,
         color: const Color(0xFF37474F),
         bg: const Color(0xFFECEFF1),
-        title: 'إعدادات المخزون',
-        sub: 'وحدات، تصنيفات، طباعة',
+        title: loc.inventorySettings,
+        sub: loc.inventorySettingsSub,
         onTap: () => Navigator.push(context,
             MaterialPageRoute(builder: (_) => const InventorySettingsScreen())),
       ),
@@ -527,6 +532,7 @@ class _RecentMovements extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return Container(
       decoration: BoxDecoration(
         color: _card,
@@ -545,9 +551,9 @@ class _RecentMovements extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(16, 14, 8, 0),
             child: Row(
               children: [
-                const Expanded(
-                  child: Text('آخر الحركات',
-                      style: TextStyle(
+                Expanded(
+                  child: Text(loc.lastMovements,
+                      style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 13,
                           color: _t2)),
@@ -556,14 +562,14 @@ class _RecentMovements extends StatelessWidget {
                   onPressed: () => Navigator.push(context,
                       MaterialPageRoute(
                           builder: (_) => const InventoryManagementScreen())),
-                  child: const Text('عرض الكل',
+                  child: Text(loc.viewAll,
                       style: TextStyle(fontSize: 12, color: _teal)),
                 ),
               ],
             ),
           ),
           for (final m in _movements)
-            _MoveTile(type: m.$1, name: m.$2, qty: m.$3, loc: m.$4, date: m.$5),
+            _MoveTile(type: m.$1, name: m.$2, qty: m.$3, locLabel: m.$4, date: m.$5),
         ],
       ),
     );
@@ -574,13 +580,13 @@ class _MoveTile extends StatelessWidget {
   final String type;
   final String name;
   final String qty;
-  final String loc;
+  final String locLabel;
   final String date;
   const _MoveTile(
       {required this.type,
       required this.name,
       required this.qty,
-      required this.loc,
+      required this.locLabel,
       required this.date});
 
   @override
@@ -619,7 +625,7 @@ class _MoveTile extends StatelessWidget {
                             fontWeight: FontWeight.w600,
                             color: _t1)),
                     const SizedBox(height: 2),
-                    Text('$lbl • $loc',
+                    Text('$lbl • $locLabel',
                         style: const TextStyle(fontSize: 11, color: _t2)),
                   ],
                 ),
