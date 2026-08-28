@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:provider/provider.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../providers/theme_provider.dart';
 import '../../services/database_helper.dart';
 import '../../services/tenant_context_service.dart';
@@ -112,7 +113,7 @@ class _StockAnalyticsScreenState extends State<StockAnalyticsScreen> {
 
     // 6. قيمة المخزون حسب الفئة
     final catRows = await db.rawQuery('''
-      SELECT IFNULL(c.name, 'بدون فئة') AS catName,
+      SELECT IFNULL(c.name, 'No Category') AS catName,
              IFNULL(SUM(p.qty * p.buyPrice), 0) AS catValue,
              COUNT(p.id) AS catCount
       FROM products p
@@ -157,6 +158,7 @@ class _StockAnalyticsScreenState extends State<StockAnalyticsScreen> {
       final isDark  = tp.isDarkMode;
       final bg      = isDark ? const Color(0xFF0F0F0F) : const Color(0xFFF2F5F9);
       final surface = isDark ? const Color(0xFF1C1C1E) : Colors.white;
+      final loc = AppLocalizations.of(context)!;
 
       return Directionality(
         textDirection: TextDirection.rtl,
@@ -169,14 +171,14 @@ class _StockAnalyticsScreenState extends State<StockAnalyticsScreen> {
               icon: const Icon(Icons.arrow_back_ios, color: Colors.white, size: 18),
               onPressed: () => Navigator.pop(context),
             ),
-            title: const Text('تحليلات المخزون',
-                style: TextStyle(
+            title: Text(loc.stockAnalytics,
+                style: const TextStyle(
                     color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
             actions: [
               IconButton(
                 icon: const Icon(Icons.refresh_outlined, color: Colors.white),
                 onPressed: _load,
-                tooltip: 'تحديث',
+                tooltip: loc.refreshTooltip,
               ),
             ],
           ),
@@ -188,7 +190,7 @@ class _StockAnalyticsScreenState extends State<StockAnalyticsScreen> {
                     padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
                     children: [
                       // ── الإحصاءات الرئيسية ────────────────────────────────
-                      const _SectionTitle(title: 'نظرة عامة على المخزون'),
+                      _SectionTitle(title: loc.stockOverview),
                       const SizedBox(height: 10),
                       GridView.count(
                         crossAxisCount: 2,
@@ -200,28 +202,28 @@ class _StockAnalyticsScreenState extends State<StockAnalyticsScreen> {
                         children: [
                           _KpiCard(
                             icon:    Icons.inventory_2_outlined,
-                            label:   'قيمة المخزون',
+                            label:   loc.inventoryValue,
                             value:   _fmt.format(_inventoryValue),
                             color:   _kAccent,
                             surface: surface,
                           ),
                           _KpiCard(
                             icon:    Icons.category_outlined,
-                            label:   'إجمالي المنتجات',
+                            label:   loc.totalProducts,
                             value:   '$_totalProducts',
                             color:   Colors.teal,
                             surface: surface,
                           ),
                           _KpiCard(
                             icon:    Icons.warning_amber_outlined,
-                            label:   'مخزون منخفض',
+                            label:   loc.lowStockLabel,
                             value:   '$_lowStockCount',
                             color:   Colors.orange,
                             surface: surface,
                           ),
                           _KpiCard(
                             icon:    Icons.remove_shopping_cart_outlined,
-                            label:   'نفد المخزون',
+                            label:   loc.outOfStockLabel,
                             value:   '$_outOfStockCount',
                             color:   Colors.red,
                             surface: surface,
@@ -247,7 +249,7 @@ class _StockAnalyticsScreenState extends State<StockAnalyticsScreen> {
                               const SizedBox(width: 10),
                               Expanded(
                                 child: Text(
-                                  '$_nearExpiryCount منتج قريب الانتهاء خلال 60 يوماً — راجع القائمة أدناه',
+                                  loc.nearExpiryWarning('$_nearExpiryCount'),
                                   style: const TextStyle(
                                       color: Colors.red,
                                       fontWeight: FontWeight.w600,
@@ -264,14 +266,14 @@ class _StockAnalyticsScreenState extends State<StockAnalyticsScreen> {
                       // ── منتجات المخزون المنخفض ─────────────────────────────
                       if (_lowStockProducts.isNotEmpty) ...[
                         _SectionTitle(
-                          title: 'مخزون منخفض',
+                          title: loc.lowStockLabel,
                           badge: '$_lowStockCount',
                           badgeColor: Colors.orange,
                         ),
                         const SizedBox(height: 8),
                         _TableCard(
                           surface: surface,
-                          headers: const ['المنتج', 'الكمية', 'الحد الأدنى'],
+                          headers: [loc.product, loc.quantity, loc.minimumThreshold],
                           rows: _lowStockProducts.map((p) {
                             final qty   = (p['qty'] as num?)?.toDouble() ?? 0;
                             final low   = (p['lowStockThreshold'] as num?)?.toDouble() ?? 0;
@@ -295,14 +297,14 @@ class _StockAnalyticsScreenState extends State<StockAnalyticsScreen> {
                       // ── قريبة الانتهاء ─────────────────────────────────────
                       if (_nearExpiryProducts.isNotEmpty) ...[
                         _SectionTitle(
-                          title: 'قريبة الانتهاء (60 يوم)',
+                          title: loc.nearExpiry60days,
                           badge: '$_nearExpiryCount',
                           badgeColor: Colors.red,
                         ),
                         const SizedBox(height: 8),
                         _TableCard(
                           surface: surface,
-                          headers: const ['المنتج', 'الكمية', 'تاريخ الانتهاء'],
+                          headers: [loc.product, loc.quantity, loc.expiryDate],
                           rows: _nearExpiryProducts.map((p) => [
                             p['name'] as String? ?? '',
                             _fmt.format((p['qty'] as num?)?.toDouble() ?? 0),
@@ -317,11 +319,11 @@ class _StockAnalyticsScreenState extends State<StockAnalyticsScreen> {
 
                       // ── الأكثر مبيعاً (30 يوم) ────────────────────────────
                       if (_topMovers.isNotEmpty) ...[
-                        const _SectionTitle(title: 'الأكثر مبيعاً — آخر 30 يوم'),
+                        _SectionTitle(title: loc.topSellersLast30),
                         const SizedBox(height: 8),
                         _TableCard(
                           surface: surface,
-                          headers: const ['المنتج', 'الكمية المباعة', 'الإيرادات'],
+                          headers: [loc.product, loc.soldQuantity, loc.revenue],
                           rows: _topMovers.map((p) => [
                             p['productName'] as String? ?? '',
                             _fmt.format((p['totalSold'] as num?)?.toDouble() ?? 0),
@@ -333,7 +335,7 @@ class _StockAnalyticsScreenState extends State<StockAnalyticsScreen> {
 
                       // ── قيمة المخزون حسب الفئة ────────────────────────────
                       if (_categoryValues.isNotEmpty) ...[
-                        const _SectionTitle(title: 'قيمة المخزون حسب الفئة'),
+                        _SectionTitle(title: loc.inventoryValueByCategory),
                         const SizedBox(height: 8),
                         Container(
                           decoration: BoxDecoration(
@@ -364,7 +366,7 @@ class _StockAnalyticsScreenState extends State<StockAnalyticsScreen> {
                                                 fontWeight: FontWeight.w600),
                                           ),
                                         ),
-                                        Text('$count منتج',
+                                        Text(loc.productCount(count),
                                             style: const TextStyle(
                                                 fontSize: 11, color: Colors.grey)),
                                         const SizedBox(width: 12),

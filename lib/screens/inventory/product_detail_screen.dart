@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../services/product_repository.dart';
 import '../../theme/app_corner_style.dart';
 
@@ -48,6 +49,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
     final ac = context.appCorners;
+    final loc = AppLocalizations.of(context)!;
 
     return Directionality(
       textDirection: TextDirection.rtl,
@@ -56,13 +58,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         appBar: AppBar(
           backgroundColor: cs.primary,
           foregroundColor: cs.onPrimary,
-          title: const Text(
-            'تفاصيل المنتج',
-            style: TextStyle(fontWeight: FontWeight.w800),
+          title: Text(
+            loc.productDetails,
+            style: const TextStyle(fontWeight: FontWeight.w800),
           ),
           actions: [
             IconButton(
-              tooltip: _pinned ? 'إلغاء التثبيت من الرئيسية' : 'تثبيت في الرئيسية',
+              tooltip: _pinned ? loc.unpinFromHome : loc.pinToHome,
               icon: Icon(
                 _pinned ? Icons.push_pin : Icons.push_pin_outlined,
               ),
@@ -82,14 +84,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             }
             final vm = snap.data;
             if (vm == null) {
-              return const Center(child: Text('تعذر تحميل المنتج'));
+              return Center(child: Text(loc.failedToLoadProduct));
             }
             final p = vm.product;
 
             final name = (p['name']?.toString() ?? '').trim();
             final status = (p['status']?.toString() ?? '').trim();
             final isLow = status == 'low';
-            final statusLabel = isLow ? 'مخزون منخفض' : 'في المخزون';
+            final statusLabel = isLow ? loc.lowStock : loc.inStock;
             final statusColor = isLow ? cs.error : const Color(0xFF16A34A);
             final barcode = (p['barcode']?.toString() ?? '').trim();
             final code = (p['productCode']?.toString() ?? '').trim();
@@ -183,29 +185,28 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 12),
-                _SectionCard(
-                  title: 'ملخص',
+                const SizedBox(height: 12),                  _SectionCard(
+                  title: loc.summary,
                   child: Column(
                     children: [
-                      _kv('الكمية المتاحة', qty.toStringAsFixed(qty % 1 == 0 ? 0 : 2)),
-                      _kv('سعر البيع', '${sell.toStringAsFixed(0)} د.ع'),
-                      _kv('الحد الأدنى للبيع', '${minSell.toStringAsFixed(0)} د.ع'),
-                      _kv('سعر الشراء', '${buy.toStringAsFixed(0)} د.ع'),
+                      _kv(loc.availableQty, qty.toStringAsFixed(qty % 1 == 0 ? 0 : 2)),
+                      _kv(loc.salePrice, '${sell.toStringAsFixed(0)} د.ع'),
+                      _kv(loc.minSalePrice, '${minSell.toStringAsFixed(0)} د.ع'),
+                      _kv(loc.purchasePrice, '${buy.toStringAsFixed(0)} د.ع'),
                     ],
                   ),
                 ),
                 const SizedBox(height: 12),
                 _SectionCard(
-                  title: 'مخزون المخازن',
-                  subtitle: vm.warehouses.isEmpty ? 'لا توجد بيانات مخازن' : null,
+                  title: loc.warehouseStock,
+                  subtitle: vm.warehouses.isEmpty ? loc.noWarehouseData : null,
                   child: vm.warehouses.isEmpty
                       ? const SizedBox.shrink()
                       : Column(
                           children: [
                             for (final w in vm.warehouses)
                               _kv(
-                                (w['warehouseName']?.toString() ?? 'مخزن').trim(),
+                                (w['warehouseName']?.toString() ?? loc.warehouseFallback).trim(),
                                 ((w['qty'] as num?)?.toDouble() ?? 0)
                                     .toStringAsFixed(0),
                               ),
@@ -214,8 +215,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 ),
                 const SizedBox(height: 12),
                 _SectionCard(
-                  title: 'دفعات (Batches) — آخر 20',
-                  subtitle: vm.batches.isEmpty ? 'لا توجد دفعات مسجلة' : null,
+                  title: loc.batchesLast20,
+                  subtitle: vm.batches.isEmpty ? loc.noRecordedBatches : null,
                   child: vm.batches.isEmpty
                       ? const SizedBox.shrink()
                       : Column(
@@ -223,7 +224,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             for (final b in vm.batches)
                               _kv(
                                 (b['batchNumber']?.toString() ?? '').trim().isEmpty
-                                    ? 'دفعة'
+                                    ? loc.batch
                                     : (b['batchNumber']?.toString() ?? '').trim(),
                                 '${((b['qty'] as num?)?.toDouble() ?? 0).toStringAsFixed(0)} × '
                                 '${((b['unitCost'] as num?)?.toDouble() ?? 0).toStringAsFixed(0)}',
@@ -233,8 +234,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 ),
                 const SizedBox(height: 12),
                 _SectionCard(
-                  title: 'آخر مبيعات/حركات',
-                  subtitle: vm.sales.isEmpty ? 'لا توجد حركات بيع مؤخراً' : null,
+                  title: loc.recentSalesMovements,
+                  subtitle: vm.sales.isEmpty ? loc.noRecentSales : null,
                   child: vm.sales.isEmpty
                       ? const SizedBox.shrink()
                       : Column(

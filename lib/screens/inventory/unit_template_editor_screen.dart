@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../services/product_repository.dart';
 
 /// إنشاء أو تعديل قالب وحدات — الوحدة الأساسية، وحدات أكبر بمعامل تحويل، اسم القالب، نشط.
@@ -32,6 +33,8 @@ class _UnitTemplateEditorScreenState extends State<UnitTemplateEditorScreen> {
   final _baseNameCtrl = TextEditingController();
   final _baseSymbolCtrl = TextEditingController();
   final _templateNameCtrl = TextEditingController();
+
+  AppLocalizations get loc => AppLocalizations.of(context)!;
 
   final List<_ConvField> _conversions = [];
 
@@ -157,8 +160,8 @@ class _UnitTemplateEditorScreenState extends State<UnitTemplateEditorScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(widget.templateId == null
-            ? 'تم إنشاء القالب'
-            : 'تم حفظ التعديلات'),
+            ? loc.templateCreated
+            : loc.templateSaved),
         behavior: SnackBarBehavior.floating,
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
@@ -170,11 +173,12 @@ class _UnitTemplateEditorScreenState extends State<UnitTemplateEditorScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
+    final loc = AppLocalizations.of(context)!;
     final bg = cs.brightness == Brightness.dark
         ? const Color(0xFF121212)
         : const Color(0xFFF0F4F8);
 
-    final title = widget.templateId == null ? 'قالب جديد' : 'تعديل القالب';
+    final title = widget.templateId == null ? loc.newTemplateEditor : loc.editTemplateEditor;
 
     if (_missingTemplate) {
       return Directionality(
@@ -190,7 +194,7 @@ class _UnitTemplateEditorScreenState extends State<UnitTemplateEditorScreen> {
               onPressed: () => Navigator.pop(context),
             ),
           ),
-          body: const Center(child: Text('القالب غير موجود.')),
+          body: Center(child: Text(loc.templateNotFound)),
         ),
       );
     }
@@ -238,7 +242,7 @@ class _UnitTemplateEditorScreenState extends State<UnitTemplateEditorScreen> {
                                       children: [
                                         Tooltip(
                                           message:
-                                              'أصغر وحدة للقياس في هذا القالب (مثال: كيلوغرام عند بيع بالوزن).',
+                                              loc.baseUnitTooltip,
                                           child: Icon(
                                             Icons.help_outline_rounded,
                                             size: 20,
@@ -247,8 +251,7 @@ class _UnitTemplateEditorScreenState extends State<UnitTemplateEditorScreen> {
                                         ),
                                         const SizedBox(width: 6),
                                         Expanded(
-                                          child: Text(
-                                            'اسم الوحدة الأساسية',
+                                          child: Text(                                             loc.baseUnitNameLabel,
                                             textAlign: TextAlign.right,
                                             style: theme.textTheme.labelLarge,
                                           ),
@@ -259,8 +262,7 @@ class _UnitTemplateEditorScreenState extends State<UnitTemplateEditorScreen> {
                                     TextField(
                                       controller: _baseNameCtrl,
                                       textAlign: TextAlign.right,
-                                      decoration: InputDecoration(
-                                        hintText: 'مثال: جرام',
+                                      decoration: InputDecoration(                                         hintText: loc.baseUnitHint,
                                         hintStyle: TextStyle(
                                           color: cs.onSurfaceVariant
                                               .withValues(alpha: 0.85),
@@ -276,9 +278,8 @@ class _UnitTemplateEditorScreenState extends State<UnitTemplateEditorScreen> {
                               const SizedBox(width: 12),
                               Expanded(
                                 child: _simpleField(
-                                  context,
-                                  label: 'التمييز',
-                                  hint: 'مثال: جم',
+                                  context,                                   label: loc.symbolLabel,
+                                   hint: loc.symbolHint,
                                   controller: _baseSymbolCtrl,
                                 ),
                               ),
@@ -300,8 +301,7 @@ class _UnitTemplateEditorScreenState extends State<UnitTemplateEditorScreen> {
                                   alignment: Alignment.centerRight,
                                   child: FilledButton.tonalIcon(
                                     onPressed: _addConversionRow,
-                                    icon: const Icon(Icons.add_rounded, size: 20),
-                                    label: const Text('أضف الوحدة'),
+                                    icon: const Icon(Icons.add_rounded, size: 20),                                     label: Text(loc.addUnit),
                                   ),
                                 ),
                               ],
@@ -310,14 +310,13 @@ class _UnitTemplateEditorScreenState extends State<UnitTemplateEditorScreen> {
                           const SizedBox(height: 16),
                           _simpleField(
                             context,
-                            label: 'القالب',
-                            hint: 'مثال: الوزن',
+                            label: loc.templateNameLabel,
+                            hint: loc.templateHint,
                             controller: _templateNameCtrl,
                           ),
                           const SizedBox(height: 8),
                           CheckboxListTile(
-                            contentPadding: EdgeInsets.zero,
-                            title: const Text('نشط'),
+                            contentPadding: EdgeInsets.zero,                             title: Text(loc.activeLabel),
                             value: _active,
                             onChanged: (v) =>
                                 setState(() => _active = v ?? true),
@@ -339,7 +338,7 @@ class _UnitTemplateEditorScreenState extends State<UnitTemplateEditorScreen> {
                             width: 22,
                             child: CircularProgressIndicator(strokeWidth: 2),
                           )
-                        : const Text('حفظ'),
+                        : Text(loc.save),
                   ),
                 ],
               ),
@@ -375,8 +374,8 @@ class _UnitTemplateEditorScreenState extends State<UnitTemplateEditorScreen> {
                 flex: 2,
                 child: _simpleField(
                   context,
-                  label: 'اسم الوحدة الأكبر',
-                  hint: 'مثال: كيلوغرام',
+                  label: loc.largerUnitNameLabel,
+                  hint: loc.largerUnitHint,
                   controller: c.name,
                 ),
               ),
@@ -384,8 +383,8 @@ class _UnitTemplateEditorScreenState extends State<UnitTemplateEditorScreen> {
               Expanded(
                 child: _simpleField(
                   context,
-                  label: 'معامل التحويل',
-                  hint: 'مثال: 1000',
+                  label: loc.conversionFactorLabel,
+                  hint: loc.conversionFactorHint,
                   controller: c.factor,
                   keyboardType:
                       const TextInputType.numberWithOptions(decimal: true),
@@ -395,8 +394,8 @@ class _UnitTemplateEditorScreenState extends State<UnitTemplateEditorScreen> {
               Expanded(
                 child: _simpleField(
                   context,
-                  label: 'التمييز',
-                  hint: 'مثال: كجم',
+                  label: loc.symbolLabel,
+                  hint: loc.unitSymbolHint,
                   controller: c.symbol,
                 ),
               ),

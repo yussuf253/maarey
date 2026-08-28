@@ -63,7 +63,8 @@ import 'app_localizations_fr.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -71,7 +72,8 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -83,18 +85,19 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
-    delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-  ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('ar'),
     Locale('en'),
-    Locale('fr')
+    Locale('fr'),
   ];
 
   /// No description provided for @appTitle.
@@ -2057,7 +2060,11 @@ abstract class AppLocalizations {
   ///
   /// In ar, this message translates to:
   /// **'العميل: {customer}\nالدفع: {paymentType}\nالإجمالي: {total}\n\nفتح شاشة المرتجع؟ يمكنك تقليل الكمية أو حذف الأسطر لإرجاع جزئي فقط.'**
-  String returnInvoiceDialogBody(Object customer, Object paymentType, Object total);
+  String returnInvoiceDialogBody(
+    Object customer,
+    Object paymentType,
+    Object total,
+  );
 
   /// No description provided for @returnLabel.
   ///
@@ -2176,8 +2183,8 @@ abstract class AppLocalizations {
   /// No description provided for @availableQty.
   ///
   /// In ar, this message translates to:
-  /// **'المتوفر: {qty}'**
-  String availableQty(Object qty);
+  /// **'الكمية المتاحة'**
+  String get availableQty;
 
   /// No description provided for @negativeStockWarning.
   ///
@@ -3172,7 +3179,7 @@ abstract class AppLocalizations {
   /// No description provided for @noBrandsYet.
   ///
   /// In ar, this message translates to:
-  /// **'لا توجد ماركات بعد'**
+  /// **'لا توجد علامات تجارية بعد.\nاضغط «ماركة جديدة» لإضافة أول ماركة.'**
   String get noBrandsYet;
 
   /// No description provided for @chooseBrand.
@@ -3904,7 +3911,7 @@ abstract class AppLocalizations {
   /// No description provided for @brandsTitle.
   ///
   /// In ar, this message translates to:
-  /// **'الماركات والعلامات التجارية'**
+  /// **'العلامات التجارية'**
   String get brandsTitle;
 
   /// No description provided for @brandsDesc.
@@ -3922,11 +3929,942 @@ abstract class AppLocalizations {
   /// No description provided for @unitTemplatesDesc.
   ///
   /// In ar, this message translates to:
-  /// **'تعريف وحدات البيع والشراء وعوامل التحويل'**
+  /// **'إدارة قوالب الوحدات (الأساسية والتحويل) من الشاشة المخصّصة. افتح «قوالب الوحدات» من القائمة الرئيسية لإعدادات المخزون — تُستعمل كمرجع عند تعريف وحدات إضافية للمنتج.'**
   String get unitTemplatesDesc;
+
+  /// No description provided for @stockMovementsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'حركات المخزون'**
+  String get stockMovementsTitle;
+
+  /// No description provided for @newVoucher.
+  ///
+  /// In ar, this message translates to:
+  /// **'سند جديد'**
+  String get newVoucher;
+
+  /// No description provided for @deposits.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيداعات'**
+  String get deposits;
+
+  /// No description provided for @withdrawals.
+  ///
+  /// In ar, this message translates to:
+  /// **'مصروفات'**
+  String get withdrawals;
+
+  /// No description provided for @transfers.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحويلات'**
+  String get transfers;
+
+  /// No description provided for @searchByProductOrVoucher.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث بالمنتج أو رقم السند...'**
+  String get searchByProductOrVoucher;
+
+  /// No description provided for @noMovements.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد حركات'**
+  String get noMovements;
+
+  /// No description provided for @noItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدون بنود'**
+  String get noItems;
+
+  /// No description provided for @failedToLoadMovements.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر تحميل الحركات: {error}'**
+  String failedToLoadMovements(Object error);
+
+  /// No description provided for @filterAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكل'**
+  String get filterAll;
+
+  /// No description provided for @filterDeposit.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيداع'**
+  String get filterDeposit;
+
+  /// No description provided for @filterWithdraw.
+  ///
+  /// In ar, this message translates to:
+  /// **'صرف'**
+  String get filterWithdraw;
+
+  /// No description provided for @filterTransfer.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحويل'**
+  String get filterTransfer;
+
+  /// No description provided for @sortNewest.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأحدث'**
+  String get sortNewest;
+
+  /// No description provided for @sortOldest.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأقدم'**
+  String get sortOldest;
+
+  /// No description provided for @productDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل المنتج'**
+  String get productDetails;
+
+  /// No description provided for @unpinFromHome.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء التثبيت من الرئيسية'**
+  String get unpinFromHome;
+
+  /// No description provided for @pinToHome.
+  ///
+  /// In ar, this message translates to:
+  /// **'تثبيت في الرئيسية'**
+  String get pinToHome;
+
+  /// No description provided for @failedToLoadProduct.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر تحميل المنتج'**
+  String get failedToLoadProduct;
+
+  /// No description provided for @lowStock.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخزون منخفض'**
+  String get lowStock;
+
+  /// No description provided for @inStock.
+  ///
+  /// In ar, this message translates to:
+  /// **'في المخزون'**
+  String get inStock;
+
+  /// No description provided for @summary.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخص'**
+  String get summary;
+
+  /// No description provided for @salePrice.
+  ///
+  /// In ar, this message translates to:
+  /// **'سعر البيع'**
+  String get salePrice;
+
+  /// No description provided for @minSalePrice.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحد الأدنى للبيع'**
+  String get minSalePrice;
+
+  /// No description provided for @purchasePrice.
+  ///
+  /// In ar, this message translates to:
+  /// **'سعر الشراء'**
+  String get purchasePrice;
+
+  /// No description provided for @warehouseStock.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخزون المخازن'**
+  String get warehouseStock;
+
+  /// No description provided for @noWarehouseData.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد بيانات مخازن'**
+  String get noWarehouseData;
+
+  /// No description provided for @batchesLast20.
+  ///
+  /// In ar, this message translates to:
+  /// **'دفعات (Batches) — آخر 20'**
+  String get batchesLast20;
+
+  /// No description provided for @noRecordedBatches.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد دفعات مسجلة'**
+  String get noRecordedBatches;
+
+  /// No description provided for @batch.
+  ///
+  /// In ar, this message translates to:
+  /// **'دفعة'**
+  String get batch;
+
+  /// No description provided for @recentSalesMovements.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر مبيعات/حركات'**
+  String get recentSalesMovements;
+
+  /// No description provided for @noRecentSales.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد حركات بيع مؤخراً'**
+  String get noRecentSales;
+
+  /// No description provided for @warehouseFallback.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخزن'**
+  String get warehouseFallback;
+
+  /// No description provided for @stockAnalytics.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحليلات المخزون'**
+  String get stockAnalytics;
+
+  /// No description provided for @stockOverview.
+  ///
+  /// In ar, this message translates to:
+  /// **'نظرة عامة على المخزون'**
+  String get stockOverview;
+
+  /// No description provided for @inventoryValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيمة المخزون'**
+  String get inventoryValue;
+
+  /// No description provided for @totalProducts.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي المنتجات'**
+  String get totalProducts;
+
+  /// No description provided for @lowStockLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخزون منخفض'**
+  String get lowStockLabel;
+
+  /// No description provided for @outOfStockLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'نفد المخزون'**
+  String get outOfStockLabel;
+
+  /// No description provided for @nearExpiryWarning.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} منتج قريب الانتهاء خلال 60 يوماً — راجع القائمة أدناه'**
+  String nearExpiryWarning(Object count);
+
+  /// No description provided for @nearExpiry60days.
+  ///
+  /// In ar, this message translates to:
+  /// **'قريبة الانتهاء (60 يوم)'**
+  String get nearExpiry60days;
+
+  /// No description provided for @topSellersLast30.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأكثر مبيعاً — آخر 30 يوم'**
+  String get topSellersLast30;
+
+  /// No description provided for @inventoryValueByCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيمة المخزون حسب الفئة'**
+  String get inventoryValueByCategory;
+
+  /// No description provided for @product.
+  ///
+  /// In ar, this message translates to:
+  /// **'المنتج'**
+  String get product;
+
+  /// No description provided for @quantity.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكمية'**
+  String get quantity;
+
+  /// No description provided for @minimumThreshold.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحد الأدنى'**
+  String get minimumThreshold;
+
+  /// No description provided for @expiryDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ الانتهاء'**
+  String get expiryDate;
+
+  /// No description provided for @soldQuantity.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكمية المباعة'**
+  String get soldQuantity;
+
+  /// No description provided for @revenue.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإيرادات'**
+  String get revenue;
+
+  /// No description provided for @productCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} منتج'**
+  String productCount(Object count);
+
+  /// No description provided for @noCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدون فئة'**
+  String get noCategory;
+
+  /// No description provided for @unitTemplates.
+  ///
+  /// In ar, this message translates to:
+  /// **'قوالب الوحدات'**
+  String get unitTemplates;
+
+  /// No description provided for @search.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث'**
+  String get search;
+
+  /// No description provided for @all.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكل'**
+  String get all;
+
+  /// No description provided for @cancelFilter.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء الفلتر'**
+  String get cancelFilter;
+
+  /// No description provided for @newTemplate.
+  ///
+  /// In ar, this message translates to:
+  /// **'قالب جديد'**
+  String get newTemplate;
+
+  /// No description provided for @sortBy.
+  ///
+  /// In ar, this message translates to:
+  /// **'الترتيب حسب'**
+  String get sortBy;
+
+  /// No description provided for @results.
+  ///
+  /// In ar, this message translates to:
+  /// **'النتائج'**
+  String get results;
+
+  /// No description provided for @noTemplatesYet.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد قوالب بعد.\nاضغط «قالب جديد» لإضافة قالب وربط وحدات البيع بالمنتجات.'**
+  String get noTemplatesYet;
+
+  /// No description provided for @edit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل'**
+  String get edit;
+
+  /// No description provided for @delete.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف'**
+  String get delete;
+
+  /// No description provided for @activeStatus.
+  ///
+  /// In ar, this message translates to:
+  /// **'نشط'**
+  String get activeStatus;
+
+  /// No description provided for @inactiveStatus.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير نشط'**
+  String get inactiveStatus;
+
+  /// No description provided for @deleteTemplate.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف القالب'**
+  String get deleteTemplate;
+
+  /// No description provided for @deleteTemplateConfirm.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف «{name}»؟'**
+  String deleteTemplateConfirm(Object name);
+
+  /// No description provided for @deleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم الحذف'**
+  String get deleted;
+
+  /// No description provided for @newTemplateEditor.
+  ///
+  /// In ar, this message translates to:
+  /// **'قالب جديد'**
+  String get newTemplateEditor;
+
+  /// No description provided for @editTemplateEditor.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل القالب'**
+  String get editTemplateEditor;
+
+  /// No description provided for @templateNotFound.
+  ///
+  /// In ar, this message translates to:
+  /// **'القالب غير موجود.'**
+  String get templateNotFound;
+
+  /// No description provided for @baseUnitNameLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الوحدة الأساسية'**
+  String get baseUnitNameLabel;
+
+  /// No description provided for @baseUnitHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: جرام'**
+  String get baseUnitHint;
+
+  /// No description provided for @symbolLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'التمييز'**
+  String get symbolLabel;
+
+  /// No description provided for @symbolHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: جم'**
+  String get symbolHint;
+
+  /// No description provided for @addUnit.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف الوحدة'**
+  String get addUnit;
+
+  /// No description provided for @templateNameLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'القالب'**
+  String get templateNameLabel;
+
+  /// No description provided for @templateHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: الوزن'**
+  String get templateHint;
+
+  /// No description provided for @activeLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'نشط'**
+  String get activeLabel;
+
+  /// No description provided for @templateCreated.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم إنشاء القالب'**
+  String get templateCreated;
+
+  /// No description provided for @templateSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم حفظ التعديلات'**
+  String get templateSaved;
+
+  /// No description provided for @largerUnitNameLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الوحدة الأكبر'**
+  String get largerUnitNameLabel;
+
+  /// No description provided for @largerUnitHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: كيلوغرام'**
+  String get largerUnitHint;
+
+  /// No description provided for @conversionFactorLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'معامل التحويل'**
+  String get conversionFactorLabel;
+
+  /// No description provided for @conversionFactorHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: 1000'**
+  String get conversionFactorHint;
+
+  /// No description provided for @unitSymbolHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: كجم'**
+  String get unitSymbolHint;
+
+  /// No description provided for @baseUnitTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'أصغر وحدة للقياس في هذا القالب (مثال: كيلوغرام عند بيع بالوزن).'**
+  String get baseUnitTooltip;
+
+  /// No description provided for @newBrand.
+  ///
+  /// In ar, this message translates to:
+  /// **'ماركة جديدة'**
+  String get newBrand;
+
+  /// No description provided for @brandNameLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الماركة'**
+  String get brandNameLabel;
+
+  /// No description provided for @brandSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم حفظ الماركة'**
+  String get brandSaved;
+
+  /// No description provided for @deleteBrand.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف الماركة'**
+  String get deleteBrand;
+
+  /// No description provided for @deleteBrandConfirm.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف «{name}»؟'**
+  String deleteBrandConfirm(Object name);
+
+  /// No description provided for @searchAndFilter.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث وتصفية'**
+  String get searchAndFilter;
+
+  /// No description provided for @showHide.
+  ///
+  /// In ar, this message translates to:
+  /// **'{show, select, true {إخفاء} other {إظهار}}'**
+  String showHide(String show);
+
+  /// No description provided for @barcodeConfiguration.
+  ///
+  /// In ar, this message translates to:
+  /// **'تهيئة الباركود'**
+  String get barcodeConfiguration;
+
+  /// No description provided for @barcodeConfigDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'حدد تفضيلات وصيغ الباركود لمسح دقيق وضبط التسعير حسب الوزن.'**
+  String get barcodeConfigDesc;
+
+  /// No description provided for @barcodeType.
+  ///
+  /// In ar, this message translates to:
+  /// **'نوع الباركود'**
+  String get barcodeType;
+
+  /// No description provided for @code128Desc.
+  ///
+  /// In ar, this message translates to:
+  /// **'باركود مرن يدعم ترميز الأرقام والحروف والرموز، ويُستخدم على نطاق واسع في التوصيل والمستودعات وتتبع المنتجات.'**
+  String get code128Desc;
+
+  /// No description provided for @ean13Desc.
+  ///
+  /// In ar, this message translates to:
+  /// **'معيار مكوّن من 13 رقمًا يُستخدم بشكل شائع في قطاع التجزئة، ويشمل رمز الدولة ورمز المصنّع ورمز المنتج بالإضافة إلى رقم تحقق.'**
+  String get ean13Desc;
+
+  /// No description provided for @selectBarcodeStandard.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر معيار الباركود الذي سيعتمد عليه النظام في إنشاء وقراءة باركود المنتجات.'**
+  String get selectBarcodeStandard;
+
+  /// No description provided for @weightEmbedBarcode.
+  ///
+  /// In ar, this message translates to:
+  /// **'باركود متضمن الوزن'**
+  String get weightEmbedBarcode;
+
+  /// No description provided for @enabledLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفعّل'**
+  String get enabledLabel;
+
+  /// No description provided for @disabledLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'معطّل'**
+  String get disabledLabel;
+
+  /// No description provided for @weightEmbedDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدم الباركود متضمن الوزن ليتمكّن النظام من قراءة وزن المنتج (والسعر إذن) مباشرة من الباركود.'**
+  String get weightEmbedDesc;
+
+  /// No description provided for @embeddedPattern.
+  ///
+  /// In ar, this message translates to:
+  /// **'صيغة الباركود المتضمن'**
+  String get embeddedPattern;
+
+  /// No description provided for @patternFormatDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل صيغة الباركود المدمج وفق النموذج، حيث تُمثل X أرقام المنتج، وW خانات الوزن.'**
+  String get patternFormatDesc;
+
+  /// No description provided for @patternExample.
+  ///
+  /// In ar, this message translates to:
+  /// **'على سبيل المثال، إذا كان الوزن يُعرض بأربع خانات فسيظهر 250 جرامًا كـ 0250.'**
+  String get patternExample;
+
+  /// No description provided for @weightDivisor.
+  ///
+  /// In ar, this message translates to:
+  /// **'تقسيم وحدة الوزن'**
+  String get weightDivisor;
+
+  /// No description provided for @weightDivisorHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: 1000'**
+  String get weightDivisorHint;
+
+  /// No description provided for @weightDivisorDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل القيمة التي يستخدمها النظام لتحويل وحدة الوزن في الباركود إلى وحدة البيع.'**
+  String get weightDivisorDesc;
+
+  /// No description provided for @currencyDivisor.
+  ///
+  /// In ar, this message translates to:
+  /// **'قسمة العملة'**
+  String get currencyDivisor;
+
+  /// No description provided for @currencyDivisorHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: 100'**
+  String get currencyDivisorHint;
+
+  /// No description provided for @currencyDivisorDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل القيمة التي يستخدمها النظام لتحويل السعر من الوحدة المضمنة في الباركود إلى سعر البيع.'**
+  String get currencyDivisorDesc;
+
+  /// No description provided for @barcodePatternError.
+  ///
+  /// In ar, this message translates to:
+  /// **'صيغة الباركود المتضمن يجب أن تحتوي فقط على الحروف X و W و P و N.'**
+  String get barcodePatternError;
+
+  /// No description provided for @weightDivisorError.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل قيمة صحيحة أكبر من صفر لتقسيم وحدة الوزن.'**
+  String get weightDivisorError;
+
+  /// No description provided for @currencyDivisorError.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل قيمة صحيحة أكبر من صفر لقسمة العملة.'**
+  String get currencyDivisorError;
+
+  /// No description provided for @barcodeSettingsSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم حفظ إعدادات الباركود.'**
+  String get barcodeSettingsSaved;
+
+  /// No description provided for @saveError.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر الحفظ: {error}'**
+  String saveError(Object error);
+
+  /// No description provided for @savingLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'جاري الحفظ…'**
+  String get savingLabel;
+
+  /// No description provided for @saveSettings.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ الإعدادات'**
+  String get saveSettings;
+
+  /// No description provided for @productsFullSettings.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات المنتجات الكاملة (تهيئة، تتبع، أذون، قيم افتراضية) متوفرة من البطاقة الرئيسية «إعدادات المنتجات» في شبكة إعدادات المخزون.'**
+  String get productsFullSettings;
+
+  /// No description provided for @categoriesMoved.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم نقل إدارة التصنيفات إلى شاشة مخصّصة. افتح «التصنيفات» من القائمة الرئيسية لإعدادات المخزون.'**
+  String get categoriesMoved;
+
+  /// No description provided for @brandsMoved.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم نقل إدارة العلامات التجارية إلى شاشة مخصّصة. افتح «العلامات التجارية» من القائمة الرئيسية.'**
+  String get brandsMoved;
+
+  /// No description provided for @barcodeMoved.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم نقل تهيئة الباركود إلى شاشة مخصّصة. افتح «إعدادات الباركود» من القائمة الرئيسية لهذه الإعدادات.'**
+  String get barcodeMoved;
+
+  /// No description provided for @defaultWarehouses.
+  ///
+  /// In ar, this message translates to:
+  /// **'المستودعات الافتراضية للموظفين'**
+  String get defaultWarehouses;
+
+  /// No description provided for @forceDefaultWarehouse.
+  ///
+  /// In ar, this message translates to:
+  /// **'فرض مستودع افتراضي عند تسجيل الحركات'**
+  String get forceDefaultWarehouse;
+
+  /// No description provided for @recommendDefaultWarehouse.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُنصح بربط كل موظف بمستودع افتراضي لتتبع الصلاحيات والحركات.'**
+  String get recommendDefaultWarehouse;
+
+  /// No description provided for @unitsSection.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوحدات'**
+  String get unitsSection;
+
+  /// No description provided for @allowDifferentPurchaseUnits.
+  ///
+  /// In ar, this message translates to:
+  /// **'السماح بوحدات شراء مختلفة عن البيع'**
+  String get allowDifferentPurchaseUnits;
+
+  /// No description provided for @showConversionsInPO.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض التحويلات في فاتورة الشراء'**
+  String get showConversionsInPO;
+
+  /// No description provided for @printingSection.
+  ///
+  /// In ar, this message translates to:
+  /// **'الطباعة'**
+  String get printingSection;
+
+  /// No description provided for @includeStoreLogo.
+  ///
+  /// In ar, this message translates to:
+  /// **'تضمين شعار المتجر في المستندات'**
+  String get includeStoreLogo;
+
+  /// No description provided for @printBarcodeOnIssue.
+  ///
+  /// In ar, this message translates to:
+  /// **'طباعة باركود على أذون الصرف'**
+  String get printBarcodeOnIssue;
+
+  /// No description provided for @customFieldsSection.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحقول الإضافية'**
+  String get customFieldsSection;
+
+  /// No description provided for @showCustomFieldLists.
+  ///
+  /// In ar, this message translates to:
+  /// **'إظهار الحقول الإضافية في قوائم المنتجات'**
+  String get showCustomFieldLists;
+
+  /// No description provided for @includeInExport.
+  ///
+  /// In ar, this message translates to:
+  /// **'تضمينها في التقارير القابلة للتصدير'**
+  String get includeInExport;
+
+  /// No description provided for @noAdditionalSettings.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد إعدادات إضافية لهذه الفئة بعد.'**
+  String get noAdditionalSettings;
+
+  /// No description provided for @autoNumberingTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الترقيم التلقائي لـ المنتجات'**
+  String get autoNumberingTitle;
+
+  /// No description provided for @autoNumberingDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحكم في إعدادات وتنسيق الترقيم التلقائي.'**
+  String get autoNumberingDesc;
+
+  /// No description provided for @nextNumberLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرقم التالي'**
+  String get nextNumberLabel;
+
+  /// No description provided for @nextNumberDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرقم الذي سيقوم النظام بتعيينه للعنصر التالي.'**
+  String get nextNumberDesc;
+
+  /// No description provided for @numberingFormat.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنسيق الترقيم'**
+  String get numberingFormat;
+
+  /// No description provided for @numericFormat.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأرقام الرقمية (0، 1، 2، …)'**
+  String get numericFormat;
+
+  /// No description provided for @alphaFormat.
+  ///
+  /// In ar, this message translates to:
+  /// **'حروف أبجدية'**
+  String get alphaFormat;
+
+  /// No description provided for @alnumFormat.
+  ///
+  /// In ar, this message translates to:
+  /// **'أرقام وحروف'**
+  String get alnumFormat;
+
+  /// No description provided for @formatDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر الصيغة المراد استخدامها في إنشاء الترقيم (أرقام، حروف، أو مزيج).'**
+  String get formatDescription;
+
+  /// No description provided for @digitCountLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الأرقام'**
+  String get digitCountLabel;
+
+  /// No description provided for @digitCountDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'حدد عدد الخانات للرقم التسلسلي. إذا كان الرقم أقل من هذا العدد، تُضاف أصفار من اليسار.'**
+  String get digitCountDesc;
+
+  /// No description provided for @uniqueLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير مكرر'**
+  String get uniqueLabel;
+
+  /// No description provided for @uniqueDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكد من أن يكون كل رقم في التسلسل فريداً وغير مكرر.'**
+  String get uniqueDesc;
+
+  /// No description provided for @prefixLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'البادئة'**
+  String get prefixLabel;
+
+  /// No description provided for @prefixHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: PR أو INV'**
+  String get prefixHint;
+
+  /// No description provided for @prefixDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرموز أو الأحرف التي تظهر قبل رقم المستند. يمكن أن تكون ثابتة مثل INV أو تتبع نمط.'**
+  String get prefixDesc;
+
+  /// No description provided for @noAdditionalSettingsForCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد إعدادات إضافية لهذه الفئة بعد.'**
+  String get noAdditionalSettingsForCategory;
+
+  /// No description provided for @hideLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إخفاء'**
+  String get hideLabel;
+
+  /// No description provided for @showLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إظهار'**
+  String get showLabel;
+
+  /// No description provided for @reset.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة تعيين'**
+  String get reset;
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -3935,26 +4873,28 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['ar', 'en', 'fr'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['ar', 'en', 'fr'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
-
-
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'ar': return AppLocalizationsAr();
-    case 'en': return AppLocalizationsEn();
-    case 'fr': return AppLocalizationsFr();
+    case 'ar':
+      return AppLocalizationsAr();
+    case 'en':
+      return AppLocalizationsEn();
+    case 'fr':
+      return AppLocalizationsFr();
   }
 
   throw FlutterError(
     'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
+    'that was used.',
   );
 }

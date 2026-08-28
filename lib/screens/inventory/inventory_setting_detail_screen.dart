@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../l10n/generated/app_localizations.dart';
 import '../../providers/theme_provider.dart';
 import '../../utils/screen_layout.dart';
 
@@ -42,6 +44,7 @@ class _InventorySettingDetailScreenState
             ? Colors.grey.shade400
             : Colors.grey.shade600;
         final divider = isDark ? Colors.grey.shade800 : Colors.grey.shade300;
+        final loc = AppLocalizations.of(context)!;
 
         return Scaffold(
           backgroundColor: bg,

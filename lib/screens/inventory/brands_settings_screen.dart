@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../services/product_repository.dart';
 
 /// إدارة العلامات التجارية — واجهة بحث/قائمة، بدون بيانات وهمية (من قاعدة البيانات فقط).
@@ -17,6 +18,8 @@ class _BrandsSettingsScreenState extends State<BrandsSettingsScreen> {
   bool _loading = true;
   bool _filterExpanded = true;
   bool _sortNameAsc = true;
+
+  AppLocalizations get loc => AppLocalizations.of(context)!;
 
   List<Map<String, dynamic>> _rows = [];
 
@@ -67,25 +70,25 @@ class _BrandsSettingsScreenState extends State<BrandsSettingsScreen> {
         return Directionality(
           textDirection: TextDirection.rtl,
           child: AlertDialog(
-            title: const Text('ماركة جديدة'),
+            title: Text(loc.newBrand),
             content: TextField(
               controller: ctrl,
               autofocus: true,
               textAlign: TextAlign.right,
-              decoration: const InputDecoration(
-                labelText: 'اسم الماركة',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: loc.brandNameLabel,
+                border: const OutlineInputBorder(),
               ),
               onSubmitted: (_) => Navigator.pop(ctx, ctrl.text),
             ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(ctx),
-                child: const Text('إلغاء'),
+                child: Text(loc.cancel),
               ),
               FilledButton(
                 onPressed: () => Navigator.pop(ctx, ctrl.text),
-                child: const Text('حفظ'),
+                child: Text(loc.save),
               ),
             ],
           ),
@@ -110,7 +113,7 @@ class _BrandsSettingsScreenState extends State<BrandsSettingsScreen> {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: const Text('تم حفظ الماركة'),
+        content: Text(loc.brandSaved),
         behavior: SnackBarBehavior.floating,
         backgroundColor: theme.colorScheme.primary,
       ),
@@ -123,15 +126,15 @@ class _BrandsSettingsScreenState extends State<BrandsSettingsScreen> {
       builder: (ctx) => Directionality(
         textDirection: TextDirection.rtl,
         child: AlertDialog(
-          title: const Text('حذف الماركة'),
-          content: Text('حذف «${row['name']}»؟'),
+          title: Text(loc.deleteBrand),
+          content: Text(loc.deleteBrandConfirm(row['name'] as String)),
           actions: [
             TextButton(
                 onPressed: () => Navigator.pop(ctx, false),
-                child: const Text('إلغاء')),
+                child: Text(loc.cancel)),
             FilledButton(
               onPressed: () => Navigator.pop(ctx, true),
-              child: const Text('حذف'),
+              child: Text(loc.delete),
             ),
           ],
         ),
@@ -144,8 +147,8 @@ class _BrandsSettingsScreenState extends State<BrandsSettingsScreen> {
     await _reload();
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('تم الحذف'),
+      SnackBar(
+        content: Text(loc.deleted),
         behavior: SnackBarBehavior.floating,
       ),
     );
@@ -164,8 +167,8 @@ class _BrandsSettingsScreenState extends State<BrandsSettingsScreen> {
           backgroundColor: cs.primary,
           foregroundColor: cs.onPrimary,
           elevation: 0,
-          title: const Text(
-            'العلامات التجارية',
+          title: Text(
+            loc.brandsTitle,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
           ),
           leading: IconButton(
@@ -183,7 +186,7 @@ class _BrandsSettingsScreenState extends State<BrandsSettingsScreen> {
                     child: FilledButton.icon(
                       onPressed: _showAddBrandDialog,
                       icon: const Icon(Icons.add_rounded, size: 20),
-                      label: const Text('ماركة جديدة'),
+                      label: Text(loc.newBrand),
                       style: FilledButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 18, vertical: 12),
@@ -234,6 +237,7 @@ class _SearchFilterCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
 
@@ -251,7 +255,7 @@ class _SearchFilterCard extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'بحث وتصفية',
+                  loc.searchAndFilter,
                   style: theme.textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.w700,
                   ),
@@ -262,8 +266,7 @@ class _SearchFilterCard extends StatelessWidget {
                   icon: Icon(
                     expanded ? Icons.horizontal_rule : Icons.add,
                     size: 18,
-                  ),
-                  label: Text(expanded ? 'إخفاء' : 'إظهار'),
+                  ),                   label: Text(expanded ? loc.hideLabel : loc.showLabel),
                 ),
               ],
             ),
@@ -276,8 +279,7 @@ class _SearchFilterCard extends StatelessWidget {
                     child: TextField(
                       controller: nameController,
                       textAlign: TextAlign.right,
-                      decoration: const InputDecoration(
-                        hintText: 'الاسم',
+                      decoration: InputDecoration(                         hintText: loc.nameLabel,
                         filled: true,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.zero,
@@ -296,13 +298,11 @@ class _SearchFilterCard extends StatelessWidget {
                       foregroundColor: cs.onPrimaryContainer,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 18, vertical: 14),
-                    ),
-                    child: const Text('بحث'),
+                    ),                     child: Text(loc.search),
                   ),
                   const SizedBox(width: 8),
                   TextButton(
-                    onPressed: onReset,
-                    child: const Text('إعادة تعيين'),
+                    onPressed: onReset,                     child: Text(loc.reset),
                   ),
                 ],
               ),
@@ -329,6 +329,7 @@ class _BrandsTableCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
 
@@ -362,8 +363,7 @@ class _BrandsTableCard extends StatelessWidget {
                           color: cs.primary,
                         ),
                         const SizedBox(width: 4),
-                        Text(
-                          'ترتيب',
+                        Text(                           loc.sortLabel,
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             color: cs.primary,
@@ -374,8 +374,7 @@ class _BrandsTableCard extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                Text(
-                  'الاسم',
+                Text(                   loc.nameLabel,
                   style: theme.textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.w700,
                   ),
@@ -387,8 +386,7 @@ class _BrandsTableCard extends StatelessWidget {
           if (rows.isEmpty)
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 36),
-              child: Text(
-                'لا توجد علامات تجارية بعد.\nاضغط «ماركة جديدة» لإضافة أول ماركة.',
+              child: Text(                 loc.noBrandsYet,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: cs.onSurfaceVariant,
@@ -421,9 +419,8 @@ class _BrandsTableCard extends StatelessWidget {
                             if (v == 'delete') onMenuDelete(row);
                           },
                           itemBuilder: (ctx) => [
-                            const PopupMenuItem(
-                              value: 'delete',
-                              child: Text('حذف'),
+                             PopupMenuItem(
+                              value: 'delete',                               child: Text(loc.delete),
                             ),
                           ],
                         ),

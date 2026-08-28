@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../services/inventory_product_settings.dart';
 
 /// حوار مركزي لإعدادات الترقيم التلقائي للمنتجات (عرض ثابت ~520px، قابل للتمرير).
@@ -114,7 +115,7 @@ class _ProductSkuNumberingDialogState extends State<_ProductSkuNumberingDialog> 
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      'الترقيم التلقائي لـ المنتجات',
+                      loc.autoNumberingTitle,
                       style: theme.textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
@@ -122,7 +123,7 @@ class _ProductSkuNumberingDialogState extends State<_ProductSkuNumberingDialog> 
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      'تحكم في إعدادات وتنسيق الترقيم التلقائي.',
+                      loc.autoNumberingDesc,
                       style: theme.textTheme.bodyMedium?.copyWith(
                         color: cs.onSurfaceVariant,
                         height: 1.4,
@@ -139,7 +140,7 @@ class _ProductSkuNumberingDialogState extends State<_ProductSkuNumberingDialog> 
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      _fieldLabel('الرقم التالي', cs),
+                      _fieldLabel(loc.nextNumberLabel, cs),
                       const SizedBox(height: 8),
                       TextField(
                         controller: _nextCtrl,
@@ -148,11 +149,11 @@ class _ProductSkuNumberingDialogState extends State<_ProductSkuNumberingDialog> 
                         decoration: _dec(cs),
                       ),
                       _footer(
-                        'الرقم الذي سيقوم النظام بتعيينه للعنصر التالي.',
+                        loc.nextNumberDesc,
                         cs,
                       ),
                       const SizedBox(height: 20),
-                      _fieldLabel('تنسيق الترقيم', cs),
+                      _fieldLabel(loc.numberingFormat, cs),
                       const SizedBox(height: 8),
                       DropdownButtonFormField<String>(
                         value: _format,
@@ -165,15 +166,15 @@ class _ProductSkuNumberingDialogState extends State<_ProductSkuNumberingDialog> 
                         items: const [
                           DropdownMenuItem(
                             value: 'numeric',
-                            child: Text('الأرقام الرقمية (0، 1، 2، …)'),
+                            child: Text(loc.numericFormat),
                           ),
                           DropdownMenuItem(
                             value: 'alpha',
-                            child: Text('حروف أبجدية'),
+                            child: Text(loc.alphaFormat),
                           ),
                           DropdownMenuItem(
                             value: 'alnum',
-                            child: Text('أرقام وحروف'),
+                            child: Text(loc.alnumFormat),
                           ),
                         ],
                         onChanged: (v) {
@@ -181,11 +182,11 @@ class _ProductSkuNumberingDialogState extends State<_ProductSkuNumberingDialog> 
                         },
                       ),
                       _footer(
-                        'اختر الصيغة المراد استخدامها في إنشاء الترقيم (أرقام، حروف، أو مزيج).',
+                        loc.formatDescription,
                         cs,
                       ),
                       const SizedBox(height: 20),
-                      _fieldLabel('عدد الأرقام', cs),
+                      _fieldLabel(loc.digitCountLabel, cs),
                       const SizedBox(height: 8),
                       TextField(
                         controller: _digitWidthCtrl,
@@ -194,11 +195,11 @@ class _ProductSkuNumberingDialogState extends State<_ProductSkuNumberingDialog> 
                         decoration: _dec(cs),
                       ),
                       _footer(
-                        'حدد عدد الخانات للرقم التسلسلي. إذا كان الرقم أقل من هذا العدد، تُضاف أصفار من اليسار. مثال: إن كان العدد 5 والرقم 3، يظهر 00003.',
+                        loc.digitCountDesc,
                         cs,
                       ),
                       const SizedBox(height: 20),
-                      _fieldLabel('غير مكرر', cs),
+                      _fieldLabel(loc.uniqueLabel, cs),
                       const SizedBox(height: 8),
                       Container(
                         padding: const EdgeInsets.symmetric(
@@ -211,17 +212,17 @@ class _ProductSkuNumberingDialogState extends State<_ProductSkuNumberingDialog> 
                         ),
                         child: SwitchListTile(
                           contentPadding: EdgeInsets.zero,
-                          title: Text(_unique ? 'مفعّل' : 'معطّل'),
+                          title: Text(_unique ? loc.enabledLabel : loc.disabledLabel),
                           value: _unique,
                           onChanged: (v) => setState(() => _unique = v),
                         ),
                       ),
                       _footer(
-                        'تأكد من أن يكون كل رقم في التسلسل فريداً وغير مكرر.',
+                        loc.uniqueDesc,
                         cs,
                       ),
                       const SizedBox(height: 20),
-                      _fieldLabel('البادئة', cs),
+                      _fieldLabel(loc.prefixLabel, cs),
                       const SizedBox(height: 8),
                       Container(
                         padding: const EdgeInsets.symmetric(
@@ -246,7 +247,7 @@ class _ProductSkuNumberingDialogState extends State<_ProductSkuNumberingDialog> 
                         enabled: _prefixEnabled,
                         textAlign: TextAlign.right,
                         decoration: _dec(cs).copyWith(
-                          hintText: 'مثال: PR أو INV',
+                          hintText: loc.prefixHint,
                         ),
                       ),
                       _footer(
@@ -265,12 +266,12 @@ class _ProductSkuNumberingDialogState extends State<_ProductSkuNumberingDialog> 
                     const Spacer(),
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      child: const Text('إلغاء'),
+                      child: Text(loc.cancel),
                     ),
                     const SizedBox(width: 8),
                     FilledButton(
                       onPressed: _save,
-                      child: const Text('حفظ'),
+                      child: Text(loc.save),
                     ),
                   ],
                 ),

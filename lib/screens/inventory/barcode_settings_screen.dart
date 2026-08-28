@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../l10n/generated/app_localizations.dart';
+
 import '../../services/app_settings_repository.dart';
 
 /// تهيئة الباركود — إعدادات حقيقية في [app_settings].
@@ -19,6 +21,8 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
 
   bool _loading = true;
   bool _saving = false;
+
+  AppLocalizations get loc => AppLocalizations.of(context)!;
   String _standard = 'code128';
   bool _weightEmbed = false;
 
@@ -399,7 +403,7 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
                               ),
                             )
                           : const Icon(Icons.save_rounded),
-                      label: Text(_saving ? 'جاري الحفظ…' : 'حفظ الإعدادات'),
+                      label: Text(_saving ? loc.savingLabel : loc.saveSettings),
                       style: FilledButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 14),
                         backgroundColor: cs.primary,

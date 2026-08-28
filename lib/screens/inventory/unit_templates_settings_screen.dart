@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../services/product_repository.dart';
 import 'unit_template_editor_screen.dart';
 
@@ -22,6 +23,8 @@ class _UnitTemplatesSettingsScreenState
 
   int? _filterTemplateId;
   bool _sortNameAsc = true;
+
+  AppLocalizations get loc => AppLocalizations.of(context)!;
 
   @override
   void initState() {
@@ -88,16 +91,16 @@ class _UnitTemplatesSettingsScreenState
       builder: (ctx) => Directionality(
         textDirection: TextDirection.rtl,
         child: AlertDialog(
-          title: const Text('حذف القالب'),
-          content: Text('حذف «${row['name']}»؟'),
+          title: Text(loc.deleteTemplate),
+          content: Text(loc.deleteTemplateConfirm(row['name'] as String)),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: const Text('إلغاء'),
+              child: Text(loc.cancel),
             ),
             FilledButton(
               onPressed: () => Navigator.pop(ctx, true),
-              child: const Text('حذف'),
+              child: Text(loc.delete),
             ),
           ],
         ),
@@ -109,8 +112,8 @@ class _UnitTemplatesSettingsScreenState
     await _reload();
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('تم الحذف'),
+      SnackBar(
+        content: Text(loc.deleted),
         behavior: SnackBarBehavior.floating,
       ),
     );
@@ -118,6 +121,7 @@ class _UnitTemplatesSettingsScreenState
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
     final bg = cs.brightness == Brightness.dark
@@ -127,9 +131,9 @@ class _UnitTemplatesSettingsScreenState
     final border = cs.outlineVariant;
 
     final nameItems = <DropdownMenuItem<int?>>[
-      const DropdownMenuItem<int?>(
+      DropdownMenuItem<int?>(
         value: null,
-        child: Text('الكل'),
+        child: Text(loc.all),
       ),
       ..._rows.map(
         (r) => DropdownMenuItem<int?>(
@@ -150,9 +154,9 @@ class _UnitTemplatesSettingsScreenState
           backgroundColor: const Color(0xFF1E3A5F),
           foregroundColor: Colors.white,
           elevation: 0,
-          title: const Text(
-            'قوالب الوحدات',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+          title: Text(
+            loc.unitTemplates,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
           ),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios_new, size: 18),
@@ -181,7 +185,7 @@ class _UnitTemplatesSettingsScreenState
                       FilledButton.icon(
                         onPressed: () => _openEditor(),
                         icon: const Icon(Icons.add_rounded, size: 20),
-                        label: const Text('قالب جديد'),
+                        label: Text(loc.newTemplate),
                         style: FilledButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 18,
@@ -233,6 +237,7 @@ class _SearchCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
 
@@ -249,7 +254,7 @@ class _SearchCard extends StatelessWidget {
           Align(
             alignment: Alignment.centerRight,
             child: Text(
-              'بحث',
+              loc.search,
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w700,
               ),
@@ -257,7 +262,7 @@ class _SearchCard extends StatelessWidget {
           ),
           const SizedBox(height: 14),
           _OutlineLabeledDropdown<int?>(
-            label: 'الاسم',
+            label: loc.nameLabel,
             value: filterTemplateId,
             items: nameItems,
             onChanged: onFilterChanged,
@@ -268,7 +273,7 @@ class _SearchCard extends StatelessWidget {
               const Spacer(),
               TextButton(
                 onPressed: onCancelFilter,
-                child: const Text('إلغاء الفلتر'),
+                child: Text(loc.cancelFilter),
               ),
               const SizedBox(width: 10),
               FilledButton.tonal(
@@ -277,7 +282,7 @@ class _SearchCard extends StatelessWidget {
                   backgroundColor: cs.primaryContainer,
                   foregroundColor: cs.onPrimaryContainer,
                 ),
-                child: const Text('بحث'),
+                child: Text(loc.search),
               ),
             ],
           ),
@@ -312,6 +317,7 @@ class _ResultsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
 
@@ -346,7 +352,7 @@ class _ResultsCard extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          'الترتيب حسب',
+                          loc.sortBy,
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             color: cs.primary,
@@ -358,7 +364,7 @@ class _ResultsCard extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  'النتائج',
+                  loc.results,
                   style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w700,
                   ),
@@ -371,7 +377,7 @@ class _ResultsCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 16),
               child: Text(
-                'لا توجد قوالب بعد.\nاضغط «قالب جديد» لإضافة قالب وربط وحدات البيع بالمنتجات.',
+                loc.noTemplatesYet,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: cs.onSurfaceVariant,
@@ -407,14 +413,14 @@ class _ResultsCard extends StatelessWidget {
                             if (v == 'edit') onEdit(row);
                             if (v == 'delete') onDelete(row);
                           },
-                          itemBuilder: (ctx) => const [
+                          itemBuilder: (ctx) => [
                             PopupMenuItem(
                               value: 'edit',
-                              child: Text('تعديل'),
+                              child: Text(loc.edit),
                             ),
                             PopupMenuItem(
                               value: 'delete',
-                              child: Text('حذف'),
+                              child: Text(loc.delete),
                             ),
                           ],
                         ),
@@ -430,7 +436,7 @@ class _ResultsCard extends StatelessWidget {
                           borderRadius: BorderRadius.zero,
                         ),
                         child: Text(
-                          active ? 'نشط' : 'غير نشط',
+                          active ? loc.activeStatus : loc.inactiveStatus,
                           style: TextStyle(
                             color: active ? Colors.white : cs.onSurfaceVariant,
                             fontSize: 12,

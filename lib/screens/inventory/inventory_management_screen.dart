@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/generated/app_localizations.dart';
 import 'package:intl/intl.dart';
 
 import '../../services/inventory_repository.dart';
@@ -26,6 +27,7 @@ class InventoryManagementScreen extends StatefulWidget {
 }
 
 class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
+  AppLocalizations get loc => AppLocalizations.of(context)!;
   String _filter = 'الكل';
   String _sortBy = 'الأحدث';
   final _searchCtrl = TextEditingController();
@@ -35,6 +37,27 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
 
   static const _filterOptions = ['الكل', 'إيداع', 'صرف', 'تحويل'];
   static const _sortOptions = ['الأحدث', 'الأقدم'];
+
+  String _filterLabel(String value) => switch (value) {
+    'الكل' => loc.filterAll,
+    'إيداع' => loc.filterDeposit,
+    'صرف' => loc.filterWithdraw,
+    'تحويل' => loc.filterTransfer,
+    _ => value,
+  };
+
+  String _sortLabel(String value) => switch (value) {
+    'الأحدث' => loc.sortNewest,
+    'الأقدم' => loc.sortOldest,
+    _ => value,
+  };
+
+  String _typeLabel(String type) => switch (type) {
+    'in' => loc.filterDeposit,
+    'out' => loc.filterWithdraw,
+    'transfer' => loc.filterTransfer,
+    _ => '',
+  };
 
   @override
   void initState() {
@@ -86,9 +109,8 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: _bg,
-      appBar: AppBar(
-        title: const Text(
-          'حركات المخزون',
+      appBar: AppBar(          title: Text(
+          loc.stockMovementsTitle,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
         ),
         backgroundColor: _navy,
@@ -101,9 +123,8 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
           context,
           MaterialPageRoute(builder: (_) => const StockVoucherScreen()),
         ),
-        icon: const Icon(Icons.add_rounded, color: Colors.white),
-        label: const Text(
-          'سند جديد',
+        icon: const Icon(Icons.add_rounded, color: Colors.white),          label: Text(
+          loc.newVoucher,
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
@@ -121,21 +142,21 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
             child: Row(
               children: [
                 _SummaryChip(
-                  label: 'إيداعات',
+                  label: loc.deposits,
                   value: _totalIn.toString(),
                   icon: Icons.arrow_downward_rounded,
                   color: _green,
                 ),
                 const SizedBox(width: 10),
                 _SummaryChip(
-                  label: 'مصروفات',
+                  label: loc.withdrawals,
                   value: _totalOut.toString(),
                   icon: Icons.arrow_upward_rounded,
                   color: _red,
                 ),
                 const SizedBox(width: 10),
                 _SummaryChip(
-                  label: 'تحويلات',
+                  label: loc.transfers,
                   value: _totalTransfer.toString(),
                   icon: Icons.swap_horiz_rounded,
                   color: _blue,
@@ -155,7 +176,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                     controller: _searchCtrl,
                     onChanged: (_) => _load(),
                     decoration: InputDecoration(
-                      hintText: 'بحث بالمنتج أو رقم السند...',
+                      hintText: loc.searchByProductOrVoucher,
                       hintStyle: TextStyle(
                         color: Colors.grey.shade400,
                         fontSize: 12,
@@ -195,7 +216,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                       style: const TextStyle(color: _t1, fontSize: 13),
                       items: _sortOptions
                           .map(
-                            (s) => DropdownMenuItem(value: s, child: Text(s)),
+                            (s) => DropdownMenuItem(value: s, child: Text(_sortLabel(s))),
                           )
                           .toList(),
                       onChanged: (v) => setState(() {
@@ -227,7 +248,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
                   return Padding(
                     padding: const EdgeInsetsDirectional.only(start: 8),
                     child: FilterChip(
-                      label: Text(f),
+                      label: Text(_filterLabel(f)),
                       selected: selected,
                       onSelected: (_) => setState(() {
                         _filter = f;
@@ -261,8 +282,8 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
             child: _loading
                 ? const Center(child: CircularProgressIndicator())
                 : _rows.isEmpty
-                ? const Center(
-                    child: Text('لا توجد حركات', style: TextStyle(color: _t2)),
+                ? Center(
+                    child: Text(loc.noMovements, style: const TextStyle(color: _t2)),
                   )
                 : ListView.separated(
                     padding: const EdgeInsets.fromLTRB(14, 14, 14, 100),
@@ -287,21 +308,22 @@ class _MovementCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final type = data['voucherType']?.toString() ?? '';
-    final (icon, color, label) = switch (type) {
-      'in' => (Icons.arrow_downward_rounded, _green, 'إيداع'),
-      'out' => (Icons.arrow_upward_rounded, _red, 'صرف'),
-      'transfer' => (Icons.swap_horiz_rounded, _blue, 'تحويل'),
-      _ => (Icons.circle, _t2, ''),
-    };
     final from = data['fromWarehouseName']?.toString() ?? '—';
     final to = data['toWarehouseName']?.toString() ?? '—';
-    final loc = switch (type) {
+    final appLoc = AppLocalizations.of(context)!;
+    final (icon, color, label) = switch (type) {
+      'in' => (Icons.arrow_downward_rounded, _green, appLoc.filterDeposit),
+      'out' => (Icons.arrow_upward_rounded, _red, appLoc.filterWithdraw),
+      'transfer' => (Icons.swap_horiz_rounded, _blue, appLoc.filterTransfer),
+      _ => (Icons.circle, _t2, ''),
+    };
+    final location = switch (type) {
       'in' => to,
       'out' => from,
       'transfer' => '$from → $to',
       _ => '—',
     };
-    final firstProduct = data['firstProductName']?.toString() ?? 'بدون بنود';
+    final firstProduct = data['firstProductName']?.toString() ?? appLoc.noItems;
     final totalQty = (data['totalQty'] as num?)?.toDouble() ?? 0;
     final qtyLabel = totalQty.toStringAsFixed(2);
     final createdAt = data['createdAt']?.toString();
@@ -386,7 +408,7 @@ class _MovementCard extends StatelessWidget {
                   children: [
                     const Icon(Icons.warehouse_outlined, size: 13, color: _t2),
                     const SizedBox(width: 4),
-                    Text(loc, style: const TextStyle(fontSize: 12, color: _t2)),
+                    Text(location, style: const TextStyle(fontSize: 12, color: _t2)),
                   ],
                 ),
               ],
