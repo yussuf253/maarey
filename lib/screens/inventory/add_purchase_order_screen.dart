@@ -25,7 +25,6 @@ const Color _kGreen  = Color(0xFF15803D);
 const int _kMaxAutoPoLines = 150;
 
 class AddPurchaseOrderScreen extends StatefulWidget {
-
   const AddPurchaseOrderScreen({super.key, this.poId, this.copyFromPoId});
 
   /// إذا كان [poId] غير null فهذا تعديل لأمر موجود.
@@ -39,11 +38,9 @@ class AddPurchaseOrderScreen extends StatefulWidget {
   @override
 
   State<AddPurchaseOrderScreen> createState() => _AddPurchaseOrderScreenState();
-
 }
 
 class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
-
   final _db     = DatabaseHelper();
 
   final _tenant = TenantContextService.instance;
@@ -83,27 +80,22 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
   @override
 
   void initState() {
-
     super.initState();
 
     _loadRefs();
-
   }
 
   @override
 
   void dispose() {
-
     _notesCtrl.dispose();
 
     _supplierCtrl.dispose();
 
     super.dispose();
-
   }
 
   Future<void> _loadRefs() async {
-
     setState(() => _loading = true);
 
     final db = await _db.database;
@@ -139,27 +131,21 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
     );
 
     if (_isEdit || _isCopy) {
-
       await _loadExistingPo(db, poId: _isEdit ? widget.poId : widget.copyFromPoId);
-
     }
 
     if (!mounted) return;
 
     setState(() {
-
       _suppliers = List.from(sups);
 
       _products  = List.from(prods);
 
       _loading   = false;
-
     });
-
   }
 
   Future<void> _loadExistingPo(Database db, {required int? poId}) async {
-
     final rows = await db.query(
 
       'purchase_orders',
@@ -185,17 +171,13 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
     _notesCtrl.text    = (po['notes'] as String? ?? '');
 
     try {
-
       _orderDate = DateTime.parse(po['orderDate'] as String? ?? '');
-
     } catch (_) {}
 
     try {
-
       final exp = po['expectedDate'] as String?;
 
       if (exp != null && exp.isNotEmpty) _expectedDate = DateTime.parse(exp);
-
     } catch (_) {}
 
     final items = await db.query(
@@ -209,7 +191,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
     ) as List<Map<String, dynamic>>;
 
     for (final item in items) {
-
       _lines.add(_PoLine(
 
         itemId:      item['id'] as int?,
@@ -237,11 +218,9 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
         ),
 
       ));
-
     }
 
     if (_isCopy) {
-
       // عند النسخ: نبدأ أمر جديد بمسودة وتاريخ اليوم، ونصفّر الاستلام.
 
       _status = 'draft';
@@ -251,13 +230,9 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
       _expectedDate = null;
 
       for (final l in _lines) {
-
         l.receivedQty = 0;
-
       }
-
     }
-
   }
 
   String _fmt2(double v) => v == 0 ? '' : v.toStringAsFixed(v.truncateToDouble() == v ? 0 : 3);
@@ -265,7 +240,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
   double get _grandTotal => _lines.fold(0.0, (s, l) => s + l.lineTotal);
 
   Future<void> _pickDate({required bool isOrder}) async {
-
     final initial  = isOrder ? _orderDate : (_expectedDate ?? _orderDate);
 
     final firstDate = isOrder ? DateTime(2020) : _orderDate;
@@ -285,27 +259,18 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
     if (d == null || !mounted) return;
 
     setState(() {
-
       if (isOrder) {
-
         _orderDate = d;
 
         if (_expectedDate != null && _expectedDate!.isBefore(d)) _expectedDate = null;
-
       } else {
-
         _expectedDate = d;
-
       }
-
     });
-
   }
 
   void _addLine() {
-
     setState(() {
-
       _lines.add(_PoLine(
 
         productName: '',
@@ -321,9 +286,7 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
         priceCtrl: TextEditingController(),
 
       ));
-
     });
-
   }
 
   /// يضيف أسطراً لمنتجات **تتبع مخزونها** ورصيدها عند أو تحت حد التنبيه (`qty <= lowStockThreshold`).
@@ -331,7 +294,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
   /// الكمية تُترك فارغة لتعبئتها يدوياً؛ سعر الوحدة يُملأ من `buyPrice` عند توفره.
 
   Future<void> _appendLowStockProductLines() async {
-
     final tid = _tenant.activeTenantId;
 
     final db = await _db.database;
@@ -339,7 +301,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
     List<Map<String, dynamic>> rows;
 
     try {
-
       rows = await db.rawQuery(
 
         '''
@@ -383,13 +344,10 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
         [tid, _kMaxAutoPoLines + 1],
 
       );
-
     } catch (_) {
-
       _snack(loc.failedToFetchLowItems, error: true);
 
       return;
-
     }
 
     final existingIds = _lines.map((l) => l.productId).whereType<int>().toSet();
@@ -409,15 +367,12 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
     var truncated = false;
 
     if (rows.length > _kMaxAutoPoLines) {
-
       truncated = true;
 
       rows = rows.sublist(0, _kMaxAutoPoLines);
-
     }
 
     for (final m in rows) {
-
       final id = m['id'] as int?;
 
       final name = (m['name'] as String?)?.trim() ?? '';
@@ -425,21 +380,17 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
       if (name.isEmpty) continue;
 
       if (id != null && existingIds.contains(id)) {
-
         skippedDup++;
 
         continue;
-
       }
 
       final key = name.toLowerCase();
 
       if (existingNames.contains(key)) {
-
         skippedDup++;
 
         continue;
-
       }
 
       if (id != null) existingIds.add(id);
@@ -477,7 +428,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
       ));
 
       added++;
-
     }
 
     if (!mounted) return;
@@ -485,27 +435,21 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
     setState(() {});
 
     if (added == 0) {
-
       if (skippedDup > 0) {
-
         _snack(
 
           loc.noNewItemsAllAdded,
 
         );
-
       } else {
-
         _snack(
 
           loc.noLowStockProducts,
 
         );
-
       }
 
       return;
-
     }
 
     var msg =
@@ -513,23 +457,17 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
         'تمت إضافة $added صنفاً من المخزون المنخفض/النافض. عُدّل الكميات ثم احفظ.';
 
     if (skippedDup > 0) {
-
       msg += ' (تُجاهل $skippedDup مكرراً)';
-
     }
 
     if (truncated) {
-
       msg += ' — عُرض أول $_kMaxAutoPoLines صنفاً فقط.';
-
     }
 
     _snack(msg);
-
   }
 
   void _removeLine(int i) {
-
     final line = _lines[i];
 
     line.qtyCtrl.dispose();
@@ -537,19 +475,15 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
     line.priceCtrl.dispose();
 
     setState(() => _lines.removeAt(i));
-
   }
 
   Future<void> _save() async {
-
     if (_saving) return;
 
     if (_lines.isEmpty) {
-
       _snack(loc.addAtLeastOne, error: true);
 
       return;
-
     }
 
     final validLines = _lines.where((l) =>
@@ -559,11 +493,9 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
         l.parsedQty > 0).toList();
 
     if (validLines.isEmpty) {
-
       _snack(loc.checkNameAndQty, error: true);
 
       return;
-
     }
 
     setState(() => _saving = true);
@@ -583,7 +515,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
         : _supplierCtrl.text.trim();
 
     final poData = {
-
       'tenantId':      tid,
 
       'supplierId':    _supplierId,
@@ -607,13 +538,10 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
           : 0,
 
       'updatedAt':     now,
-
     };
 
     try {
-
       if (_isEdit) {
-
         await db.update('purchase_orders', poData,
 
             where: 'id = ?', whereArgs: [widget.poId]);
@@ -625,9 +553,7 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
             where: 'poId = ?', whereArgs: [widget.poId]);
 
         for (final l in validLines) {
-
           await db.insert('purchase_order_items', {
-
             'tenantId':    tid,
 
             'poId':        widget.poId,
@@ -643,13 +569,9 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
             'unitPrice':   l.parsedPrice,
 
             'total':       l.lineTotal,
-
           });
-
         }
-
       } else {
-
         // رقم أمر تلقائي
 
         final count = await db.rawQuery(
@@ -661,19 +583,15 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
         final poNo = 'PO-${DateTime.now().year}-${n.toString().padLeft(4, '0')}';
 
         final poId = await db.insert('purchase_orders', {
-
           ...poData,
 
           'poNumber': poNo,
 
           'createdAt': now,
-
         });
 
         for (final l in validLines) {
-
           await db.insert('purchase_order_items', {
-
             'tenantId':    tid,
 
             'poId':        poId,
@@ -689,39 +607,27 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
             'unitPrice':   l.parsedPrice,
 
             'total':       l.lineTotal,
-
           });
-
         }
-
       }
 
       if (!mounted) return;
 
       try {
-
         unawaited(context.read<NotificationProvider>().refresh());
-
       } catch (_) {}
 
       Navigator.pop(context, true);
-
     } catch (e) {
-
       if (!mounted) return;
 
       _snack('حدث خطأ: $e', error: true);
-
     } finally {
-
       if (mounted) setState(() => _saving = false);
-
     }
-
   }
 
   Future<double?> _getExistingReceived(Database db) async {
-
     final r = await db.query('purchase_orders',
 
         columns: ['receivedAmount'],
@@ -729,11 +635,9 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
         where: 'id = ?', whereArgs: [widget.poId], limit: 1);
 
     return r.isEmpty ? null : (r.first['receivedAmount'] as num?)?.toDouble();
-
   }
 
   void _snack(String msg, {bool error = false}) {
-
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
 
       content: Text(msg),
@@ -743,13 +647,11 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
       behavior: SnackBarBehavior.floating,
 
     ));
-
   }
 
   @override
 
   Widget build(BuildContext context) {
-
     final loc = AppLocalizations.of(context)!;
     final fmtMoney = NumberFormat('#,##0.000', 'ar');
 
@@ -1124,7 +1026,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
                                     ),
 
                                     ...List.generate(_lines.length, (i) {
-
                                       final line = _lines[i];
 
                                       return _PoLineRow(
@@ -1140,7 +1041,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
                                         onChanged: () => setState(() {}),
 
                                       );
-
                                     }),
 
                                   ],
@@ -1200,11 +1100,9 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
       ),
 
     );
-
   }
 
   InputDecoration _dec(BuildContext context, String hint) {
-
     return InputDecoration(
 
       hintText: hint,
@@ -1216,17 +1114,13 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
       border: const OutlineInputBorder(borderRadius: BorderRadius.zero),
 
     );
-
   }
-
 }
 
 // ── بند في الأمر ──────────────────────────────────────────────────────────────
 
 class _PoLine {
-
   _PoLine({
-
     this.itemId,
 
     this.productId,
@@ -1242,7 +1136,6 @@ class _PoLine {
     required this.qtyCtrl,
 
     required this.priceCtrl,
-
   });
 
   int?   itemId;
@@ -1266,15 +1159,12 @@ class _PoLine {
   double get parsedPrice => double.tryParse(priceCtrl.text.replaceAll(',', '.')) ?? 0;
 
   double get lineTotal  => parsedQty * parsedPrice;
-
 }
 
 // ── صف بند في الجدول ─────────────────────────────────────────────────────────
 
 class _PoLineRow extends StatelessWidget {
-
   const _PoLineRow({
-
     required this.line,
 
     required this.products,
@@ -1284,7 +1174,6 @@ class _PoLineRow extends StatelessWidget {
     required this.onRemove,
 
     required this.onChanged,
-
   });
 
   final _PoLine                    line;
@@ -1300,7 +1189,6 @@ class _PoLineRow extends StatelessWidget {
   @override
 
   Widget build(BuildContext context) {
-
     final loc = AppLocalizations.of(context)!;
     return Container(
 
@@ -1331,7 +1219,6 @@ class _PoLineRow extends StatelessWidget {
               displayStringForOption: (m) => m['name'] as String? ?? '',
 
               optionsBuilder: (tv) {
-
                 final q = tv.text.toLowerCase();
 
                 if (q.isEmpty) return products.take(20);
@@ -1343,11 +1230,9 @@ class _PoLineRow extends StatelessWidget {
                         (p['name'] as String? ?? '').toLowerCase().contains(q))
 
                     .take(20);
-
               },
 
               onSelected: (m) {
-
                 line.productId   = m['id'] as int?;
 
                 line.productName = m['name'] as String? ?? '';
@@ -1355,19 +1240,15 @@ class _PoLineRow extends StatelessWidget {
                 final buyPrice   = (m['buyPrice'] as num?)?.toDouble() ?? 0;
 
                 if (buyPrice > 0 && line.priceCtrl.text.trim().isEmpty) {
-
                   line.priceCtrl.text =
 
                       buyPrice.toStringAsFixed(buyPrice.truncateToDouble() == buyPrice ? 0 : 3);
-
                 }
 
                 onChanged();
-
               },
 
               fieldViewBuilder: (ctx, ctrl, fn, onFieldSubmitted) {
-
                 return TextField(
 
                   controller: ctrl,
@@ -1401,15 +1282,12 @@ class _PoLineRow extends StatelessWidget {
                   ),
 
                   onChanged: (v) {
-
                     line.productName = v;
 
                     onChanged();
-
                   },
 
                 );
-
               },
 
             ),
@@ -1539,15 +1417,12 @@ class _PoLineRow extends StatelessWidget {
       ),
 
     );
-
   }
-
 }
 
 // ── مكونات مساعدة ────────────────────────────────────────────────────────────
 
 class _Section extends StatelessWidget {
-
   const _Section({required this.title, required this.child, this.trailing});
 
   final String  title;
@@ -1559,7 +1434,6 @@ class _Section extends StatelessWidget {
   @override
 
   Widget build(BuildContext context) {
-
     final cs = Theme.of(context).colorScheme;
 
     return Card(
@@ -1623,13 +1497,10 @@ class _Section extends StatelessWidget {
       ),
 
     );
-
   }
-
 }
 
 class _LabelField extends StatelessWidget {
-
   const _LabelField({required this.label, required this.child});
 
   final String label;
@@ -1639,7 +1510,6 @@ class _LabelField extends StatelessWidget {
   @override
 
   Widget build(BuildContext context) {
-
     return Column(
 
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -1657,15 +1527,11 @@ class _LabelField extends StatelessWidget {
       ],
 
     );
-
   }
-
 }
 
 class _DateTile extends StatelessWidget {
-
   const _DateTile({
-
     required this.date,
 
     required this.fmt,
@@ -1673,7 +1539,6 @@ class _DateTile extends StatelessWidget {
     required this.onTap,
 
     this.hint = '',
-
   });
 
   final DateTime?    date;
@@ -1687,7 +1552,6 @@ class _DateTile extends StatelessWidget {
   @override
 
   Widget build(BuildContext context) {
-
     return GestureDetector(
 
       onTap: onTap,
@@ -1735,7 +1599,5 @@ class _DateTile extends StatelessWidget {
       ),
 
     );
-
   }
-
 }

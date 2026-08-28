@@ -17,17 +17,14 @@ import 'warehouses_screen.dart';
 /// إعدادات المنتجات — أربعة أقسام: تهيئة، تتبع، أذون مخزنية، قيم افتراضية (تخزين في [app_settings]).
 
 class ProductSettingsScreen extends StatefulWidget {
-
   const ProductSettingsScreen({super.key});
 
   @override
 
   State<ProductSettingsScreen> createState() => _ProductSettingsScreenState();
-
 }
 
 class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
-
   final _repo = ProductRepository();
 
   final _settings = AppSettingsRepository.instance;
@@ -55,19 +52,15 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
   @override
 
   void initState() {
-
     super.initState();
 
     _load();
-
   }
 
   Future<void> _load() async {
-
     setState(() => _loading = true);
 
     try {
-
       _hintProductCode = _repo.defaultProductCodeDisplayHint();
 
       var d = await InventoryProductSettingsData.load(_settings);
@@ -83,11 +76,9 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
             (w) => (w['id'] as num).toInt() == d.defaultWarehouseId,
 
           )) {
-
         d = d.copyWith(clearWarehouseId: true);
 
         await d.save(_settings);
-
       }
 
       if (d.defaultPriceListId != null &&
@@ -97,11 +88,9 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
             (w) => (w['id'] as num).toInt() == d.defaultPriceListId,
 
           )) {
-
         d = d.copyWith(clearPriceListId: true);
 
         await d.save(_settings);
-
       }
 
       _d = d;
@@ -115,17 +104,12 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
       _suggestMarginCtrl.text = _fmtSettingNum(_d.suggestedMarginPercent);
 
       _minSellPctCtrl.text = _fmtSettingNum(_d.minSellPercentOfSell);
-
     } finally {
-
       if (mounted) setState(() => _loading = false);
-
     }
-
   }
 
   Future<void> _persist() async {
-
     _d = _d.copyWith(
 
       nextSkuText: _nextSkuCtrl.text.trim(),
@@ -135,13 +119,10 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
     );
 
     await _d.save(_settings);
-
   }
 
   Future<void> _patch(InventoryProductSettingsData next) async {
-
     setState(() {
-
       _d = next.copyWith(
 
         nextSkuText: _nextSkuCtrl.text.trim(),
@@ -149,17 +130,14 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
         nextTransferNo: _nextTransferCtrl.text.trim(),
 
       );
-
     });
 
     await _d.save(_settings);
-
   }
 
   /// أيقونة منع سريعة: إيقاف التعامل بالضريبة في شاشة إضافة المنتج (إخفاء الحقل).
 
   Widget _addProductTaxRow(ColorScheme cs) {
-
     final canUse = _d.addShowAdvancedPricing;
 
     final on = _d.addShowTaxField;
@@ -217,13 +195,11 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
       ),
 
     );
-
   }
 
   /// أيقونة منع سريعة: إيقاف التعامل بالخصم في شاشة إضافة المنتج (إخفاء الحقول).
 
   Widget _addProductDiscountRow(ColorScheme cs) {
-
     final canUse = _d.addShowAdvancedPricing;
 
     final on = _d.addShowDiscountFields;
@@ -281,19 +257,15 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
       ),
 
     );
-
   }
 
   static String _fmtSettingNum(double v) {
-
     if ((v - v.round()).abs() < 1e-9) return v.round().toString();
 
     return v.toString();
-
   }
 
   Future<void> _persistMarginSuggestFields() async {
-
     final m = double.tryParse(
 
           _suggestMarginCtrl.text.trim().replaceAll(',', '.')) ??
@@ -327,13 +299,11 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
     _suggestMarginCtrl.text = _fmtSettingNum(mc);
 
     _minSellPctCtrl.text = _fmtSettingNum(pc);
-
   }
 
   @override
 
   void dispose() {
-
     _nextSkuCtrl.dispose();
 
     _nextTransferCtrl.dispose();
@@ -343,13 +313,10 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
     _minSellPctCtrl.dispose();
 
     super.dispose();
-
   }
 
   Future<void> _openNumberingDialog({required bool forTransfer}) async {
-
     if (!forTransfer) {
-
       final result = await showProductSkuNumberingDialog(
 
         context,
@@ -363,17 +330,14 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
       );
 
       if (result != null && mounted) {
-
         setState(() => _d = result);
 
         _nextSkuCtrl.text = result.nextSkuText;
 
         await _d.save(_settings);
-
       }
 
       return;
-
     }
 
     final prefixCtrl = TextEditingController(text: _d.transferPrefix);
@@ -423,7 +387,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
             FilledButton(
 
               onPressed: () async {
-
                 await _patch(
 
                   _d.copyWith(transferPrefix: prefixCtrl.text.trim()),
@@ -431,7 +394,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                 );
 
                 if (ctx.mounted) Navigator.pop(ctx);
-
               },
 
               child: const Text('حفظ'),
@@ -445,13 +407,11 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
       ),
 
     );
-
   }
 
   @override
 
   Widget build(BuildContext context) {
-
     final cs = Theme.of(context).colorScheme;
 
     final bg = cs.brightness == Brightness.dark
@@ -563,11 +523,9 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
       ),
 
     );
-
   }
 
   Widget _tabInit(ColorScheme cs) {
-
     return SingleChildScrollView(
 
       padding: const EdgeInsets.all(16),
@@ -789,7 +747,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                     OutlinedButton.icon(
 
                       onPressed: () {
-
                         Navigator.of(context).push<void>(
 
                           MaterialPageRoute<void>(
@@ -799,7 +756,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                           ),
 
                         );
-
                       },
 
                       icon: const Icon(Icons.open_in_new_rounded, size: 18),
@@ -939,9 +895,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                   value: _d.addShowBarcodeField,
 
                   onChanged: (v) {
-
                     if (!v && _d.addRequireBarcode) {
-
                       _patch(
 
                         _d.copyWith(
@@ -955,11 +909,9 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                       );
 
                       return;
-
                     }
 
                     _patch(_d.copyWith(addShowBarcodeField: v));
-
                   },
 
                 ),
@@ -989,9 +941,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                   value: _d.addShowImageField,
 
                   onChanged: (v) {
-
                     if (!v && _d.addRequireImage) {
-
                       _patch(
 
                         _d.copyWith(
@@ -1005,11 +955,9 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                       );
 
                       return;
-
                     }
 
                     _patch(_d.copyWith(addShowImageField: v));
-
                   },
 
                 ),
@@ -1111,11 +1059,9 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
       ),
 
     );
-
   }
 
   Widget _unitRadio(String value, String title, String sub) {
-
     final sel = _d.defaultUnitView == value;
 
     return Padding(
@@ -1155,9 +1101,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
             groupValue: _d.defaultUnitView,
 
             onChanged: (v) {
-
               if (v != null) _patch(_d.copyWith(defaultUnitView: v));
-
             },
 
             title: Text(title, textAlign: TextAlign.right),
@@ -1177,11 +1121,9 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
       ),
 
     );
-
   }
 
   Widget _tabTrack(ColorScheme cs) {
-
     return SingleChildScrollView(
 
       padding: const EdgeInsets.all(16),
@@ -1305,11 +1247,9 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
       ),
 
     );
-
   }
 
   Widget _negRadio(String value, String title, String sub) {
-
     final sel = _d.negativeStockMode == value;
 
     return Padding(
@@ -1349,9 +1289,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
             groupValue: _d.negativeStockMode,
 
             onChanged: (v) {
-
               if (v != null) _patch(_d.copyWith(negativeStockMode: v));
-
             },
 
             title: Text(title, textAlign: TextAlign.right),
@@ -1371,11 +1309,9 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
       ),
 
     );
-
   }
 
   Widget _tabVouchers(ColorScheme cs) {
-
     return SingleChildScrollView(
 
       padding: const EdgeInsets.all(16),
@@ -1531,11 +1467,9 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
       ),
 
     );
-
   }
 
   Widget _tabDefaults(ColorScheme cs) {
-
     return SingleChildScrollView(
 
       padding: const EdgeInsets.all(16),
@@ -1615,7 +1549,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                 OutlinedButton.icon(
 
                   onPressed: () {
-
                     Navigator.of(context).push<void>(
 
                       MaterialPageRoute<void>(
@@ -1625,7 +1558,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                       ),
 
                     );
-
                   },
 
                   icon: const Icon(Icons.open_in_new_rounded, size: 18),
@@ -1671,17 +1603,11 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                     ],
 
                     onChanged: (v) {
-
                       if (v == null) {
-
                         _patch(_d.copyWith(clearWarehouseId: true));
-
                       } else {
-
                         _patch(_d.copyWith(defaultWarehouseId: v));
-
                       }
-
                     },
 
                   ),
@@ -1711,7 +1637,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                 OutlinedButton.icon(
 
                   onPressed: () {
-
                     Navigator.of(context).push<void>(
 
                       MaterialPageRoute<void>(
@@ -1721,7 +1646,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                       ),
 
                     );
-
                   },
 
                   icon: const Icon(Icons.open_in_new_rounded, size: 18),
@@ -1767,17 +1691,11 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                     ],
 
                     onChanged: (v) {
-
                       if (v == null) {
-
                         _patch(_d.copyWith(clearPriceListId: true));
-
                       } else {
-
                         _patch(_d.copyWith(defaultPriceListId: v));
-
                       }
-
                     },
 
                   ),
@@ -1807,7 +1725,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                 OutlinedButton(
 
                   onPressed: () {
-
                     ScaffoldMessenger.of(context).showSnackBar(
 
                       const SnackBar(
@@ -1821,7 +1738,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                       ),
 
                     );
-
                   },
 
                   child: const Text('إدارة الضرائب'),
@@ -1845,9 +1761,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                         .toList(),
 
                     onChanged: (v) {
-
                       if (v != null) _patch(_d.copyWith(defaultTax1: v));
-
                     },
 
                   ),
@@ -1877,7 +1791,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                 OutlinedButton(
 
                   onPressed: () {
-
                     ScaffoldMessenger.of(context).showSnackBar(
 
                       const SnackBar(
@@ -1891,7 +1804,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                       ),
 
                     );
-
                   },
 
                   child: const Text('إدارة الضرائب'),
@@ -1915,9 +1827,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                         .toList(),
 
                     onChanged: (v) {
-
                       if (v != null) _patch(_d.copyWith(defaultTax2: v));
-
                     },
 
                   ),
@@ -2009,11 +1919,9 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
       ),
 
     );
-
   }
 
   Widget _simpleRadio(String value, String title, String sub) {
-
     final sel = _d.returnCostMethod == value;
 
     return Padding(
@@ -2053,9 +1961,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
             groupValue: _d.returnCostMethod,
 
             onChanged: (v) {
-
               if (v != null) _patch(_d.copyWith(returnCostMethod: v));
-
             },
 
             title: Text(title, textAlign: TextAlign.right),
@@ -2075,11 +1981,9 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
       ),
 
     );
-
   }
 
   Widget _natureRadio(String value, String title, String sub) {
-
     final sel = _d.businessNature == value;
 
     return Padding(
@@ -2119,9 +2023,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
             groupValue: _d.businessNature,
 
             onChanged: (v) {
-
               if (v != null) _patch(_d.copyWith(businessNature: v));
-
             },
 
             title: Text(title, textAlign: TextAlign.right),
@@ -2141,11 +2043,9 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
       ),
 
     );
-
   }
 
   Widget _header(String title, String sub, ColorScheme cs) {
-
     return Column(
 
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -2193,21 +2093,17 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
       ],
 
     );
-
   }
 
   Widget _sectionCard(
 
     ColorScheme cs, {
-
     required String title,
 
     required Widget child,
 
     String footer = '',
-
   }) {
-
     return Container(
 
       padding: const EdgeInsets.all(14),
@@ -2271,11 +2167,9 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
       ),
 
     );
-
   }
 
   InputDecoration _outlineDec(String label) {
-
     return InputDecoration(
 
       labelText: label,
@@ -2285,7 +2179,5 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
       isDense: true,
 
     );
-
   }
-
 }

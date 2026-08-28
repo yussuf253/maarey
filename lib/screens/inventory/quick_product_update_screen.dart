@@ -35,25 +35,20 @@ import '../../widgets/inputs/app_price_input.dart';
 /// Intent for Ctrl+S
 
 final class _SaveIntent extends Intent {
-
   const _SaveIntent();
-
 }
 
 /// تعديل سريع لمنتجات موجودة: بحث + صفحات، ومسح باركود يُستهلك هنا (لا يُوجَّه للبيع).
 
 class QuickProductUpdateScreen extends StatefulWidget {
-
   const QuickProductUpdateScreen({super.key});
 
   @override
 
   State<QuickProductUpdateScreen> createState() => _QuickProductUpdateScreenState();
-
 }
 
 class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
-
   static const _pageSize = 40;
 
   final ProductRepository _repo = ProductRepository();
@@ -93,13 +88,11 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
   @override
 
   void initState() {
-
     super.initState();
 
     _scrollCtrl.addListener(_onScroll);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-
       if (!mounted) return;
 
       final bridge = context.read<GlobalBarcodeRouteBridge>();
@@ -109,17 +102,14 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       bridge.setBarcodePriorityHandler(this, _onGlobalBarcode);
 
       _searchFn.requestFocus();
-
     });
 
     unawaited(_reload(reset: true));
-
   }
 
   @override
 
   void dispose() {
-
     _debounce?.cancel();
 
     _searchCtrl.dispose();
@@ -133,7 +123,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     _barcodeBridge?.clearBarcodePriorityHandler(this);
 
     super.dispose();
-
   }
 
   bool get _anyDirty =>
@@ -141,19 +130,14 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       _draftById.values.any((d) => d.isDirty) && !_leavingConfirmed;
 
   void _disposeDrafts() {
-
     for (final d in _draftById.values) {
-
       d.dispose();
-
     }
 
     _draftById.clear();
-
   }
 
   Future<bool> _ensureCanLeaveIfDirty() async {
-
     if (!_anyDirty) return true;
 
     final ok = await showDialog<bool>(
@@ -193,49 +177,35 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     );
 
     return ok == true;
-
   }
 
   void _syncDrafts() {
-
     final ids = _rows.map((e) => e['id'] as int).toSet();
 
     for (final id in _draftById.keys.toList()) {
-
       if (!ids.contains(id)) {
-
         _draftById.remove(id)?.dispose();
-
       }
-
     }
 
     for (final r in _rows) {
-
       final id = r['id'] as int;
 
       _draftById.putIfAbsent(id, () => _RowDraft(r));
-
     }
-
   }
 
   void _onScroll() {
-
     if (!_hasMore || _loadingMore || _loading) return;
 
     final pos = _scrollCtrl.position;
 
     if (pos.pixels >= pos.maxScrollExtent - 240) {
-
       unawaited(_loadMore());
-
     }
-
   }
 
   Future<bool> _onGlobalBarcode(String raw) async {
-
     final code = raw.trim();
 
     if (code.isEmpty) return false;
@@ -245,7 +215,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     if (!mounted) return true;
 
     if (resolved == null) {
-
       ScaffoldMessenger.of(context).showSnackBar(
 
         SnackBar(content: Text(loc.noProductForBarcode)),
@@ -253,7 +222,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       );
 
       return true;
-
     }
 
     final prod = resolved['product'] as Map<String, dynamic>;
@@ -265,7 +233,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     if (!mounted) return true;
 
     if (row == null) {
-
       ScaffoldMessenger.of(context).showSnackBar(
 
         SnackBar(content: Text(loc.failedToLoadProduct)),
@@ -273,7 +240,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       );
 
       return true;
-
     }
 
     _disposeDrafts();
@@ -305,45 +271,33 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     );
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-
       final d = _draftById[id];
 
       d?.buyFn.requestFocus();
-
     });
 
     return true;
-
   }
 
   Future<void> _reload({required bool reset}) async {
-
     _debounce?.cancel();
 
     final qRaw = _searchCtrl.text.trim();
 
     if (qRaw.length == 1) {
-
       if (reset && mounted) {
-
         setState(() {
-
           _loading = false;
 
           _searchTooShort = true;
-
         });
-
       }
 
       return;
-
     }
 
     if (reset) {
-
       setState(() {
-
         _loading = true;
 
         _rows.clear();
@@ -353,9 +307,7 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
         _hasMore = true;
 
         _disposeDrafts();
-
       });
-
     }
 
     final q = qRaw;
@@ -363,7 +315,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     _appliedSearch = q;
 
     try {
-
       final batch = await _repo.queryProductsQuickEditPage(
 
         search: q,
@@ -379,7 +330,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       if (_appliedSearch != q) return;
 
       setState(() {
-
         _rows
 
           ..clear()
@@ -397,19 +347,14 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
         _loadingMore = false;
 
         _searchTooShort = false;
-
       });
-
     } catch (e) {
-
       if (!mounted) return;
 
       setState(() {
-
         _loading = false;
 
         _loadingMore = false;
-
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -423,13 +368,10 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
         ),
 
       );
-
     }
-
   }
 
   Future<void> _loadMore() async {
-
     if (!_hasMore || _loadingMore || _loading) return;
 
     setState(() => _loadingMore = true);
@@ -437,7 +379,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     final q = _appliedSearch;
 
     try {
-
       final batch = await _repo.queryProductsQuickEditPage(
 
         search: q,
@@ -453,7 +394,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       if (_appliedSearch != q) return;
 
       setState(() {
-
         _rows.addAll(batch);
 
         _offset += batch.length;
@@ -463,11 +403,8 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
         _syncDrafts();
 
         _loadingMore = false;
-
       });
-
     } catch (e) {
-
       if (!mounted) return;
 
       setState(() => _loadingMore = false);
@@ -483,45 +420,34 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
         ),
 
       );
-
     }
-
   }
 
   void _scheduleSearch() {
-
     _debounce?.cancel();
 
     _debounce = Timer(const Duration(milliseconds: 300), () {
-
       final t = _searchCtrl.text.trim();
 
       setState(() {
-
         _searchTooShort = t.length == 1;
-
       });
 
       if (t.length == 1) return;
 
       unawaited(_reload(reset: true));
-
     });
-
   }
 
   Future<void> _submitSearchFromKeyboard() async {
-
     _debounce?.cancel();
 
     final q = _searchCtrl.text.trim();
 
     if (q.length == 1) {
-
       setState(() => _searchTooShort = true);
 
       return;
-
     }
 
     await _reload(reset: true);
@@ -531,17 +457,13 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     final id = _rows.first['id'] as int;
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-
       if (!mounted) return;
 
       _draftById[id]?.nameFn.requestFocus();
-
     });
-
   }
 
   Future<void> _openCameraScan() async {
-
     final code = await BarcodeInputLauncher.captureBarcode(
 
       context,
@@ -553,15 +475,12 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     if (!mounted || code == null || code.trim().isEmpty) return;
 
     await _onGlobalBarcode(code.trim());
-
   }
 
   Future<void> _pickSuggestion(Map<String, dynamic> row) async {
-
     _searchCtrl.text = (row['name'] as String?) ?? '';
 
     setState(() {
-
       _loading = false;
 
       _hasMore = false;
@@ -581,47 +500,38 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       _syncDrafts();
 
       _searchTooShort = false;
-
     });
 
     FocusManager.instance.primaryFocus?.unfocus();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-
       final id = row['id'] as int;
 
       final d = _draftById[id];
 
       d?.qtyFn.requestFocus();
-
     });
-
   }
 
   Future<void> _openConflictProduct(int productId) async {
-
     final row = await _repo.getProductQuickEditRow(productId);
 
     if (!mounted || row == null) return;
 
     await _pickSuggestion(row);
-
   }
 
   Future<void> _invokeSavePrimary() async {
-
     if (_rows.isEmpty) return;
 
     final id = _rows.first['id'] as int;
 
     await _saveRow(id);
-
   }
 
   double _moneyToDb(int iqdRounded) => iqdRounded.toDouble();
 
   Future<void> _saveRow(int productId) async {
-
     final d = _draftById[productId];
 
     if (d == null) return;
@@ -629,7 +539,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     final name = d.name.text.trim();
 
     if (name.isEmpty) {
-
       ScaffoldMessenger.of(context).showSnackBar(
 
         SnackBar(
@@ -643,11 +552,9 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       );
 
       return;
-
     }
 
     if (name.length > 100) {
-
       ScaffoldMessenger.of(context).showSnackBar(
 
         SnackBar(
@@ -661,7 +568,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       );
 
       return;
-
     }
 
     final buy = NumericFormat.parseNumber(d.buy.text);
@@ -677,7 +583,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     final bcUpper = d.barcode.text.trim().toUpperCase();
 
     if (d.duplicateBarcodeProductId != null) {
-
       ScaffoldMessenger.of(context).showSnackBar(
 
         SnackBar(
@@ -691,11 +596,9 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       );
 
       return;
-
     }
 
     if (minSell > sell) {
-
       ScaffoldMessenger.of(context).showSnackBar(
 
         SnackBar(
@@ -709,11 +612,9 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       );
 
       return;
-
     }
 
     try {
-
       setState(() => _savingProductId = productId);
 
       await _repo.updateProductBasic(
@@ -759,11 +660,9 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       d.rebaseline();
 
       setState(() {
-
         _savingProductId = null;
 
         _leavingConfirmed = true;
-
       });
 
       await _reload(reset: true);
@@ -771,9 +670,7 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       if (!mounted) return;
 
       setState(() => _leavingConfirmed = false);
-
     } on StateError catch (e) {
-
       if (!mounted) return;
 
       setState(() => _savingProductId = null);
@@ -781,7 +678,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       final m = e.message;
 
       if (m == 'duplicate_barcode') {
-
         ScaffoldMessenger.of(context).showSnackBar(
 
           SnackBar(
@@ -793,9 +689,7 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
           ),
 
         );
-
       } else {
-
         ScaffoldMessenger.of(context).showSnackBar(
 
           SnackBar(
@@ -807,11 +701,8 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
           ),
 
         );
-
       }
-
     } catch (e) {
-
       if (!mounted) return;
 
       setState(() => _savingProductId = null);
@@ -827,19 +718,14 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
         ),
 
       );
-
     }
-
   }
 
   Widget _profitBox({
-
     required int buy,
 
     required int sell,
-
   }) {
-
     final profit = sell - buy;
 
     final marginPct =
@@ -853,27 +739,17 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     String lossSuffix = '';
 
     if (buy <= 0) {
-
       pctColor = cs.onSurfaceVariant;
-
     } else if (profit < 0) {
-
       pctColor = Colors.red.shade700;
 
       lossSuffix = loc.lossSuffix;
-
     } else if (marginPct < 10) {
-
       pctColor = Colors.red.shade700;
-
     } else if (marginPct <= 20) {
-
       pctColor = const Color(0xFFF59E0B);
-
     } else {
-
       pctColor = Colors.green.shade700;
-
     }
 
     final pctLabel =
@@ -949,13 +825,11 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       ),
 
     );
-
   }
 
   @override
 
   Widget build(BuildContext context) {
-
     final loc = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
 
@@ -994,29 +868,23 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       body: Shortcuts(
 
         shortcuts: const {
-
           SingleActivator(LogicalKeyboardKey.keyS, control: true):
 
               _SaveIntent(),
-
         },
 
         child: Actions(
 
           actions: {
-
             _SaveIntent: CallbackAction<_SaveIntent>(
 
               onInvoke: (_) {
-
                 unawaited(_invokeSavePrimary());
 
                 return null;
-
               },
 
             ),
-
           },
 
           child: Column(
@@ -1148,7 +1016,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
                                   const Divider(height: 1),
 
                               itemBuilder: (ctx, i) {
-
                                 final r = _rows[i];
 
                                 return ListTile(
@@ -1196,7 +1063,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
                                   onTap: () => unawaited(_pickSuggestion(r)),
 
                                 );
-
                               },
 
                             ),
@@ -1278,9 +1144,7 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
                                   _rows.length + (_loadingMore ? 1 : 0),
 
                               itemBuilder: (ctx, i) {
-
                                 if (i >= _rows.length) {
-
                                   return const Padding(
 
                                     padding: EdgeInsets.all(16),
@@ -1288,7 +1152,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
                                     child: Center(child: CircularProgressIndicator()),
 
                                   );
-
                                 }
 
                                 final id = _rows[i]['id'] as int;
@@ -1296,9 +1159,7 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
                                 final draft = _draftById[id];
 
                                 if (draft == null) {
-
                                   return const SizedBox.shrink();
-
                                 }
 
                                 return _QuickProductCard(
@@ -1322,7 +1183,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
                                   onConflictProductTap: _openConflictProduct,
 
                                 );
-
                               },
 
                             ),
@@ -1350,7 +1210,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
         canPop: !_anyDirty,
 
         onPopInvokedWithResult: (didPop, result) async {
-
           if (didPop) return;
 
           final leave = await _ensureCanLeaveIfDirty();
@@ -1358,13 +1217,10 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
           if (!mounted) return;
 
           if (leave && context.mounted) {
-
             _leavingConfirmed = true;
 
             Navigator.of(context).pop(result);
-
           }
-
         },
 
         child: bodyCore,
@@ -1372,15 +1228,11 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       ),
 
     );
-
   }
-
 }
 
 class _DraftBaseline {
-
   const _DraftBaseline({
-
     required this.name,
 
     required this.barcode,
@@ -1394,7 +1246,6 @@ class _DraftBaseline {
     required this.qty,
 
     required this.low,
-
   });
 
   final String name;
@@ -1410,27 +1261,21 @@ class _DraftBaseline {
   final String qty;
 
   final String low;
-
 }
 
 String _formattedMoney(dynamic v) {
-
   final n = (v as num?)?.toDouble() ?? 0.0;
 
   return NumericFormat.formatNumber(n.round().clamp(0, 999999999));
-
 }
 
 String _formattedQty(dynamic v) {
-
   final n = (v as num?)?.toDouble() ?? 0.0;
 
   return NumericFormat.formatNumber(n.round().clamp(0, 999999999));
-
 }
 
 class _RowDraft {
-
   _RowDraft(Map<String, dynamic> m)
 
       : productId = m['id'] as int,
@@ -1470,7 +1315,6 @@ class _RowDraft {
         lowFn = FocusNode(),
 
         saveFn = FocusNode() {
-
     baseline = _DraftBaseline(
 
       name: name.text,
@@ -1488,7 +1332,6 @@ class _RowDraft {
       low: low.text,
 
     );
-
   }
 
   final int productId;
@@ -1532,7 +1375,6 @@ class _RowDraft {
   late _DraftBaseline baseline;
 
   bool get isDirty {
-
     return baseline.name != name.text ||
 
         baseline.barcode != barcode.text ||
@@ -1546,11 +1388,9 @@ class _RowDraft {
         baseline.qty != qty.text ||
 
         baseline.low != low.text;
-
   }
 
   void rebaseline() {
-
     baseline = _DraftBaseline(
 
       name: name.text,
@@ -1568,11 +1408,9 @@ class _RowDraft {
       low: low.text,
 
     );
-
   }
 
   void dispose() {
-
     name.dispose();
 
     barcode.dispose();
@@ -1604,15 +1442,11 @@ class _RowDraft {
     lowFn.dispose();
 
     saveFn.dispose();
-
   }
-
 }
 
 class _QuickProductCard extends StatefulWidget {
-
   const _QuickProductCard({
-
     required this.row,
 
     required this.draft,
@@ -1628,7 +1462,6 @@ class _QuickProductCard extends StatefulWidget {
     required this.validatePriceLogicFn,
 
     required this.onConflictProductTap,
-
   });
 
   final Map<String, dynamic> row;
@@ -1644,13 +1477,11 @@ class _QuickProductCard extends StatefulWidget {
   final bool saving;
 
   final PriceLogicWarnings Function({
-
     required int buyIqd,
 
     required int sellIqd,
 
     required int minSellIqdParsed,
-
   }) validatePriceLogicFn;
 
   final Future<void> Function(int productId) onConflictProductTap;
@@ -1658,11 +1489,9 @@ class _QuickProductCard extends StatefulWidget {
   @override
 
   State<_QuickProductCard> createState() => _QuickProductCardState();
-
 }
 
 class _BarcodeAlnumUpperFormatter extends TextInputFormatter {
-
   @override
 
   TextEditingValue formatEditUpdate(
@@ -1672,21 +1501,16 @@ class _BarcodeAlnumUpperFormatter extends TextInputFormatter {
     TextEditingValue newValue,
 
   ) {
-
     final up = newValue.text.toUpperCase();
 
     final buf = StringBuffer();
 
     for (final c in up.runes) {
-
       final ch = String.fromCharCode(c);
 
       if (RegExp(r'[A-Z0-9]').hasMatch(ch)) {
-
         buf.write(ch);
-
       }
-
     }
 
     final s = buf.toString();
@@ -1698,9 +1522,7 @@ class _BarcodeAlnumUpperFormatter extends TextInputFormatter {
       selection: TextSelection.collapsed(offset: s.length),
 
     );
-
   }
-
 }
 
 class _QuickProductCardState extends State<_QuickProductCard> {
@@ -1709,7 +1531,6 @@ class _QuickProductCardState extends State<_QuickProductCard> {
   @override
 
   void initState() {
-
     super.initState();
 
     widget.draft.name.addListener(_tick);
@@ -1727,19 +1548,15 @@ class _QuickProductCardState extends State<_QuickProductCard> {
     widget.draft.low.addListener(_tick);
 
     widget.draft.nameFn.addListener(_nameFocusTrim);
-
   }
 
   void _nameFocusTrim() {
-
     if (!widget.draft.nameFn.hasFocus) {
-
       final t = widget.draft.name.text;
 
       final tr = t.trim();
 
       if (tr != t) {
-
         widget.draft.name.value = TextEditingValue(
 
           text: tr,
@@ -1747,17 +1564,13 @@ class _QuickProductCardState extends State<_QuickProductCard> {
           selection: TextSelection.collapsed(offset: tr.length),
 
         );
-
       }
-
     }
-
   }
 
   @override
 
   void dispose() {
-
     widget.draft.name.removeListener(_tick);
 
     widget.draft.barcode.removeListener(_onBarcodeChanged);
@@ -1775,17 +1588,13 @@ class _QuickProductCardState extends State<_QuickProductCard> {
     widget.draft.nameFn.removeListener(_nameFocusTrim);
 
     super.dispose();
-
   }
 
   void _tick() {
-
     if (mounted) setState(() {});
-
   }
 
   void _onBarcodeChanged() {
-
     widget.draft.barcodeCheck?.cancel();
 
     widget.draft.barcodeCheck = null;
@@ -1793,17 +1602,14 @@ class _QuickProductCardState extends State<_QuickProductCard> {
     final raw = widget.draft.barcode.text.trim().toUpperCase();
 
     if (raw.isEmpty) {
-
       setState(() => widget.draft.duplicateBarcodeProductId = null);
 
       return;
-
     }
 
     widget.draft.barcodeCheck =
 
         Timer(const Duration(milliseconds: 400), () async {
-
       final id = await widget.repo.findConflictingProductIdForBarcode(
 
         raw,
@@ -1815,19 +1621,14 @@ class _QuickProductCardState extends State<_QuickProductCard> {
       if (!mounted) return;
 
       setState(() {
-
         widget.draft.duplicateBarcodeProductId = id;
-
       });
-
     });
-
   }
 
   @override
 
   Widget build(BuildContext context) {
-
     final theme = Theme.of(context);
 
     final cs = theme.colorScheme;
@@ -1873,9 +1674,7 @@ class _QuickProductCardState extends State<_QuickProductCard> {
     String qtyWarn = '';
 
     if (d.track && qtyI <= 0) {
-
       qtyWarn = 'المنتج نفذ من المخزون';
-
     }
 
     final lowWarn = (d.track && lowI > 0 && qtyI <= lowI && qtyI >= 0)
@@ -1897,7 +1696,6 @@ class _QuickProductCardState extends State<_QuickProductCard> {
         child: LayoutBuilder(
 
           builder: (ctx, constraints) {
-
             final narrow = constraints.maxWidth < 520;
 
             Widget nameField() => AppInput(
@@ -2453,7 +2251,6 @@ class _QuickProductCardState extends State<_QuickProductCard> {
               ],
 
             );
-
           },
 
         ),
@@ -2461,7 +2258,5 @@ class _QuickProductCardState extends State<_QuickProductCard> {
       ),
 
     );
-
   }
-
 }

@@ -35,7 +35,6 @@ const Color _kGreen = Color(0xFF16A34A);
 const Color _kRed = Color(0xFFEF4444);
 
 class _PoStatus {
-
   static const draft    = 'draft';
 
   static const sent     = 'sent';
@@ -47,7 +46,6 @@ class _PoStatus {
   static const cancelled = 'cancelled';
 
   static String label(String s) => switch (s) {
-
     draft    => 'مسودة',
 
     sent     => 'مرسل',
@@ -59,11 +57,9 @@ class _PoStatus {
     cancelled => 'ملغى',
 
     _ => s,
-
   };
 
   static Color color(String s) => switch (s) {
-
     draft     => Colors.grey,
 
     sent      => _kAmber,
@@ -75,23 +71,18 @@ class _PoStatus {
     cancelled => _kRed,
 
     _         => Colors.grey,
-
   };
-
 }
 
 class PurchaseOrdersScreen extends StatefulWidget {
-
   const PurchaseOrdersScreen({super.key});
 
   @override
 
   State<PurchaseOrdersScreen> createState() => _PurchaseOrdersScreenState();
-
 }
 
 class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
-
   final _db      = DatabaseHelper();
 
   final _tenant  = TenantContextService.instance;
@@ -119,19 +110,16 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
   @override
 
   void initState() {
-
     super.initState();
 
     _load();
 
     _search.addListener(_onSearchChanged);
-
   }
 
   @override
 
   void dispose() {
-
     _debounce?.cancel();
 
     _search.dispose();
@@ -139,31 +127,23 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
     _searchFocus.dispose();
 
     super.dispose();
-
   }
 
   void _onSearchChanged() {
-
     _debounce?.cancel();
 
     _debounce = Timer(const Duration(milliseconds: 300), () {
-
       if (!mounted) return;
 
       setState(() {
-
         _debouncedQuery = _search.text.trim().toLowerCase();
-
       });
 
       _applyFilter();
-
     });
-
   }
 
   Future<void> _load() async {
-
     setState(() => _loading = true);
 
     final db = await _db.database;
@@ -189,27 +169,21 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
     if (!mounted) return;
 
     setState(() {
-
       _all     = List<Map<String, dynamic>>.from(rows);
 
       _loading = false;
-
     });
 
     _applyFilter();
-
   }
 
   void _applyFilter() {
-
     final q = _debouncedQuery;
 
     final shouldSearch = q.length >= 2;
 
     setState(() {
-
       _filtered = _all.where((po) {
-
         final effectiveStatus =
 
             _statFilter != 'all' ? _statFilter : _statusFilter;
@@ -241,36 +215,25 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
             od.contains(q) ||
 
             ex.contains(q);
-
       }).toList();
-
     });
-
   }
 
   String _formatDate(String? iso) {
-
     if (iso == null || iso.isEmpty) return '—';
 
     try {
-
       return _dateFmt.format(DateTime.parse(iso));
-
     } catch (_) {
-
       return iso;
-
     }
-
   }
 
   @override
 
   Widget build(BuildContext context) {
-
     final loc = AppLocalizations.of(context)!;
     return Consumer<ThemeProvider>(builder: (context, tp, _) {
-
       final isDark  = tp.isDarkMode;
 
       final layout = context.screenLayout;
@@ -300,7 +263,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
       );
 
       Future<void> openNew() async {
-
         final result = await Navigator.push<bool>(
 
           context,
@@ -310,7 +272,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
         );
 
         if (result == true) unawaited(_load());
-
       }
 
       return Directionality(
@@ -420,7 +381,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                       child: LayoutBuilder(
 
                         builder: (context, c) {
-
                           final narrow = c.maxWidth < 760;
 
                           final counters = <Widget>[
@@ -436,11 +396,9 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                               active: _statFilter == 'all',
 
                               onTap: () {
-
                                 setState(() => _statFilter = 'all');
 
                                 _applyFilter();
-
                               },
 
                             ),
@@ -456,11 +414,9 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                               active: _statFilter == _PoStatus.sent,
 
                               onTap: () {
-
                                 setState(() => _statFilter = _PoStatus.sent);
 
                                 _applyFilter();
-
                               },
 
                             ),
@@ -476,11 +432,9 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                               active: _statFilter == _PoStatus.partial,
 
                               onTap: () {
-
                                 setState(() => _statFilter = _PoStatus.partial);
 
                                 _applyFilter();
-
                               },
 
                             ),
@@ -496,11 +450,9 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                               active: _statFilter == _PoStatus.received,
 
                               onTap: () {
-
                                 setState(() => _statFilter = _PoStatus.received);
 
                                 _applyFilter();
-
                               },
 
                             ),
@@ -584,7 +536,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                             ],
 
                           );
-
                         },
 
                       ),
@@ -602,7 +553,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                       child: LayoutBuilder(
 
                         builder: (context, c) {
-
                           final narrow = c.maxWidth < 680;
 
                           final searchField = TextField(
@@ -630,7 +580,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                                         icon: const Icon(Icons.clear_rounded, size: 18),
 
                                         onPressed: () {
-
                                           _search.clear();
 
                                           setState(() => _debouncedQuery = '');
@@ -638,7 +587,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                                           _applyFilter();
 
                                           _searchFocus.requestFocus();
-
                                         },
 
                                       ),
@@ -678,11 +626,9 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                             value: _statusFilter,
 
                             onChanged: (v) {
-
                               setState(() => _statusFilter = v ?? 'all');
 
                               _applyFilter();
-
                             },
 
                             isDark: isDark,
@@ -690,7 +636,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                           );
 
                           if (narrow) {
-
                             return Column(
 
                               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -712,7 +657,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                               ],
 
                             );
-
                           }
 
                           return Row(
@@ -728,7 +672,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                             ],
 
                           );
-
                         },
 
                       ),
@@ -770,7 +713,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                               separatorBuilder: (_, __) => const SizedBox(height: 6),
 
                               itemBuilder: (_, i) {
-
                                 final po = _filtered[i];
 
                                 return _PoCard(
@@ -782,7 +724,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                                   fmtDate: _formatDate,
 
                                   onView: () async {
-
                                     final result = await Navigator.push<bool>(
 
                                       context,
@@ -800,11 +741,9 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                                     );
 
                                     if (result == true) unawaited(_load());
-
                                   },
 
                                   onEdit: () async {
-
                                     final result = await Navigator.push<bool>(
 
                                       context,
@@ -822,11 +761,9 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                                     );
 
                                     if (result == true) unawaited(_load());
-
                                   },
 
                                   onCopy: () async {
-
                                     final result = await Navigator.push<bool>(
 
                                       context,
@@ -844,11 +781,9 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                                     );
 
                                     if (result == true) unawaited(_load());
-
                                   },
 
                                   onCancel: () async {
-
                                     final ok = await showDialog<bool>(
 
                                       context: context,
@@ -898,11 +833,9 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                                       'purchase_orders',
 
                                       {
-
                                         'status': _PoStatus.cancelled,
 
                                         'updatedAt': DateTime.now().toIso8601String(),
-
                                       },
 
                                       where: 'id = ? AND tenantId = ?',
@@ -912,11 +845,9 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                                     );
 
                                     unawaited(_load());
-
                                   },
 
                                 );
-
                               },
 
                             ),
@@ -930,19 +861,14 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
               ),
 
       );
-
     });
-
   }
-
 }
 
 // ── مكونات الواجهة ─────────────────────────────────────────────────────────────
 
 class _StatCounter extends StatelessWidget {
-
   const _StatCounter({
-
     required this.label,
 
     required this.value,
@@ -952,7 +878,6 @@ class _StatCounter extends StatelessWidget {
     required this.active,
 
     required this.onTap,
-
   });
 
   final String label;
@@ -968,7 +893,6 @@ class _StatCounter extends StatelessWidget {
   @override
 
   Widget build(BuildContext context) {
-
     return Material(
 
       color: Colors.transparent,
@@ -1058,13 +982,10 @@ class _StatCounter extends StatelessWidget {
       ),
 
     );
-
   }
-
 }
 
 class _StatusFilterDropdown extends StatelessWidget {
-
   const _StatusFilterDropdown({required this.value, required this.onChanged, required this.isDark});
 
   final String               value;
@@ -1076,7 +997,6 @@ class _StatusFilterDropdown extends StatelessWidget {
   @override
 
   Widget build(BuildContext context) {
-
     final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
 
@@ -1125,11 +1045,9 @@ class _StatusFilterDropdown extends StatelessWidget {
       ),
 
     );
-
   }
 
   DropdownMenuItem<String> _statusItem(String v, String label, Color dot) {
-
     return DropdownMenuItem(
 
       value: v,
@@ -1165,15 +1083,11 @@ class _StatusFilterDropdown extends StatelessWidget {
       ),
 
     );
-
   }
-
 }
 
 class _PoCard extends StatelessWidget {
-
   const _PoCard({
-
     required this.po,
 
     required this.surface,
@@ -1187,7 +1101,6 @@ class _PoCard extends StatelessWidget {
     required this.onCopy,
 
     required this.onCancel,
-
   });
 
   final Map<String, dynamic>       po;
@@ -1207,7 +1120,6 @@ class _PoCard extends StatelessWidget {
   @override
 
   Widget build(BuildContext context) {
-
     final loc = AppLocalizations.of(context)!;
     final status   = (po['status'] as String?) ?? 'draft';
 
@@ -1428,21 +1340,16 @@ class _PoCard extends StatelessWidget {
         ),
 
     );
-
   }
-
 }
 
 class _PoEmptyState extends StatelessWidget {
-
   const _PoEmptyState({
-
     required this.hasAny,
 
     required this.textSec,
 
     required this.onCreate,
-
   });
 
   final bool hasAny;
@@ -1454,7 +1361,6 @@ class _PoEmptyState extends StatelessWidget {
   @override
 
   Widget build(BuildContext context) {
-
     final loc = AppLocalizations.of(context)!;
     return Center(
 
@@ -1527,7 +1433,5 @@ class _PoEmptyState extends StatelessWidget {
       ),
 
     );
-
   }
-
 }

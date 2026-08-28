@@ -41,19 +41,16 @@ const _red = Color(0xFFEF4444);
 // ══════════════════════════════════════════════════════════════════════════════
 
 class StocktakingScreen extends StatefulWidget {
-
   const StocktakingScreen({super.key});
 
   @override
 
   State<StocktakingScreen> createState() => _StocktakingScreenState();
-
 }
 
 class _StocktakingScreenState extends State<StocktakingScreen>
 
     with SingleTickerProviderStateMixin {
-
   late final TabController _tab;
 
   final _repo = InventoryRepository();
@@ -69,21 +66,17 @@ class _StocktakingScreenState extends State<StocktakingScreen>
   @override
 
   void initState() {
-
     super.initState();
 
     _tab = TabController(length: 2, vsync: this);
 
     _load();
-
   }
 
   Future<void> _load() async {
-
     setState(() => _loading = true);
 
     try {
-
       final openRows = await _repo.listStocktakingSessions(status: 'open');
 
       final closedRows = await _repo.listStocktakingSessions(status: 'closed');
@@ -91,33 +84,24 @@ class _StocktakingScreenState extends State<StocktakingScreen>
       if (!mounted) return;
 
       setState(() {
-
         _openSessions = openRows;
 
         _closedSessions = closedRows;
-
       });
-
     } finally {
-
       if (mounted) setState(() => _loading = false);
-
     }
-
   }
 
   @override
 
   void dispose() {
-
     _tab.dispose();
 
     super.dispose();
-
   }
 
   Future<void> _newSession() async {
-
     final result =
 
         await showModalBottomSheet<({String title, int warehouseId})>(
@@ -143,13 +127,11 @@ class _StocktakingScreenState extends State<StocktakingScreen>
     );
 
     await _load();
-
   }
 
   @override
 
   Widget build(BuildContext context) {
-
     final loc = AppLocalizations.of(context)!;
     return PermissionGuard(
 
@@ -250,11 +232,9 @@ class _StocktakingScreenState extends State<StocktakingScreen>
       ),
 
     );
-
   }
 
   void _closeSession(Map<String, dynamic> s) async {
-
     var postDiffs = true;
 
     final ok = await showDialog<bool>(
@@ -324,11 +304,8 @@ class _StocktakingScreenState extends State<StocktakingScreen>
     );
 
     if (ok == true) {
-
       if (postDiffs) {
-
         await _repo.postStocktakingAdjustments((s['id'] as num).toInt());
-
       }
 
       await _repo.closeStocktakingSession((s['id'] as num).toInt());
@@ -336,7 +313,6 @@ class _StocktakingScreenState extends State<StocktakingScreen>
       await _load();
 
       if (mounted) {
-
         ScaffoldMessenger.of(context).showSnackBar(
 
           SnackBar(
@@ -348,15 +324,11 @@ class _StocktakingScreenState extends State<StocktakingScreen>
           ),
 
         );
-
       }
-
     }
-
   }
 
   void _openCounting(BuildContext ctx, Map<String, dynamic> s) {
-
     Navigator.push(
 
       ctx,
@@ -364,11 +336,9 @@ class _StocktakingScreenState extends State<StocktakingScreen>
       MaterialPageRoute(builder: (_) => _CountingScreen(session: s)),
 
     );
-
   }
 
   void _openReport(BuildContext ctx, Map<String, dynamic> s) {
-
     showModalBottomSheet(
 
       context: ctx,
@@ -380,9 +350,7 @@ class _StocktakingScreenState extends State<StocktakingScreen>
       builder: (_) => _SessionReportSheet(session: s),
 
     );
-
   }
-
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -392,7 +360,6 @@ class _StocktakingScreenState extends State<StocktakingScreen>
 // ══════════════════════════════════════════════════════════════════════════════
 
 class _SessionList extends StatelessWidget {
-
   final List<Map<String, dynamic>> sessions;
 
   final void Function(Map<String, dynamic>) onTap;
@@ -400,28 +367,23 @@ class _SessionList extends StatelessWidget {
   final void Function(Map<String, dynamic>)? onClose;
 
   const _SessionList({
-
     required this.sessions,
 
     required this.onTap,
 
     this.onClose,
-
   });
 
   @override
 
   Widget build(BuildContext context) {
-
     final loc = AppLocalizations.of(context)!;
     if (sessions.isEmpty) {
-
       return Center(
 
         child: Text(loc.noSessionsYet, style: TextStyle(color: _t2)),
 
       );
-
     }
 
     return ListView.separated(
@@ -437,13 +399,10 @@ class _SessionList extends StatelessWidget {
           _SessionCard(data: sessions[i], onTap: onTap, onClose: onClose),
 
     );
-
   }
-
 }
 
 class _SessionCard extends StatelessWidget {
-
   final Map<String, dynamic> data;
 
   final void Function(Map<String, dynamic>) onTap;
@@ -455,7 +414,6 @@ class _SessionCard extends StatelessWidget {
   @override
 
   Widget build(BuildContext context) {
-
     final loc = AppLocalizations.of(context)!;
     final isOpen = data['status'] == 'open';
 
@@ -824,11 +782,9 @@ class _SessionCard extends StatelessWidget {
       ),
 
     );
-
   }
 
   static String _fmtDate(String? iso) {
-
     if (iso == null || iso.isEmpty) return '—';
 
     final dt = DateTime.tryParse(iso);
@@ -836,9 +792,7 @@ class _SessionCard extends StatelessWidget {
     if (dt == null) return iso;
 
     return DateFormat('yyyy-MM-dd').format(dt.toLocal());
-
   }
-
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -848,17 +802,14 @@ class _SessionCard extends StatelessWidget {
 // ══════════════════════════════════════════════════════════════════════════════
 
 class _NewSessionSheet extends StatefulWidget {
-
   const _NewSessionSheet();
 
   @override
 
   State<_NewSessionSheet> createState() => _NewSessionSheetState();
-
 }
 
 class _NewSessionSheetState extends State<_NewSessionSheet> {
-
   final _formKey = GlobalKey<FormState>();
 
   final _titleCtrl = TextEditingController();
@@ -872,15 +823,12 @@ class _NewSessionSheetState extends State<_NewSessionSheet> {
   @override
 
   void initState() {
-
     super.initState();
 
     _loadWarehouses();
-
   }
 
   Future<void> _loadWarehouses() async {
-
     final rows = await _db.listWarehousesActive(
 
       tenantId: TenantContextService.instance.activeTenantId,
@@ -890,7 +838,6 @@ class _NewSessionSheetState extends State<_NewSessionSheet> {
     if (!mounted) return;
 
     setState(() {
-
       _warehouses = rows;
 
       _warehouseId ??= rows.isNotEmpty
@@ -898,25 +845,20 @@ class _NewSessionSheetState extends State<_NewSessionSheet> {
           ? (rows.first['id'] as num).toInt()
 
           : null;
-
     });
-
   }
 
   @override
 
   void dispose() {
-
     _titleCtrl.dispose();
 
     super.dispose();
-
   }
 
   @override
 
   Widget build(BuildContext context) {
-
     final loc = AppLocalizations.of(context)!;
     return Container(
 
@@ -1113,7 +1055,6 @@ class _NewSessionSheetState extends State<_NewSessionSheet> {
             ElevatedButton.icon(
 
               onPressed: () {
-
                 if (!_formKey.currentState!.validate()) return;
 
                 Navigator.pop(context, (
@@ -1123,7 +1064,6 @@ class _NewSessionSheetState extends State<_NewSessionSheet> {
                   warehouseId: _warehouseId!,
 
                 ));
-
               },
 
               icon: Icon(Icons.fact_check_rounded, color: Colors.white),
@@ -1163,9 +1103,7 @@ class _NewSessionSheetState extends State<_NewSessionSheet> {
       ),
 
     );
-
   }
-
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -1175,7 +1113,6 @@ class _NewSessionSheetState extends State<_NewSessionSheet> {
 // ══════════════════════════════════════════════════════════════════════════════
 
 class _CountingScreen extends StatefulWidget {
-
   final Map<String, dynamic> session;
 
   const _CountingScreen({required this.session});
@@ -1183,11 +1120,9 @@ class _CountingScreen extends StatefulWidget {
   @override
 
   State<_CountingScreen> createState() => _CountingScreenState();
-
 }
 
 class _CountingScreenState extends State<_CountingScreen> {
-
   final _searchCtrl = TextEditingController();
 
   final _repo = InventoryRepository();
@@ -1201,15 +1136,12 @@ class _CountingScreenState extends State<_CountingScreen> {
   @override
 
   void initState() {
-
     super.initState();
 
     _load();
-
   }
 
   Future<void> _load() async {
-
     setState(() => _loading = true);
 
     final rows = await _repo.listStocktakingItems(
@@ -1223,17 +1155,13 @@ class _CountingScreenState extends State<_CountingScreen> {
     if (!mounted) return;
 
     setState(() {
-
       _items = rows;
 
       _loading = false;
-
     });
-
   }
 
   List<Map<String, dynamic>> get _filtered {
-
     final q = _searchCtrl.text.toLowerCase();
 
     if (q.isEmpty) return _items;
@@ -1251,7 +1179,6 @@ class _CountingScreenState extends State<_CountingScreen> {
         )
 
         .toList();
-
   }
 
   int get _countedItems => _items.where((i) => i['countedQty'] != null).length;
@@ -1259,17 +1186,14 @@ class _CountingScreenState extends State<_CountingScreen> {
   @override
 
   void dispose() {
-
     _searchCtrl.dispose();
 
     super.dispose();
-
   }
 
   @override
 
   Widget build(BuildContext context) {
-
     final loc = AppLocalizations.of(context)!;
     return Scaffold(
 
@@ -1424,7 +1348,6 @@ class _CountingScreenState extends State<_CountingScreen> {
                     separatorBuilder: (_, __) => const SizedBox(height: 8),
 
                     itemBuilder: (_, i) {
-
                       final item = _filtered[i];
 
                       return _CountItem(
@@ -1432,7 +1355,6 @@ class _CountingScreenState extends State<_CountingScreen> {
                         item: item,
 
                         onCount: (v) async {
-
                           await _repo.saveStocktakingCount(
 
                             itemId: (item['id'] as num).toInt(),
@@ -1442,11 +1364,9 @@ class _CountingScreenState extends State<_CountingScreen> {
                           );
 
                           await _load();
-
                         },
 
                       );
-
                     },
 
                   ),
@@ -1458,13 +1378,10 @@ class _CountingScreenState extends State<_CountingScreen> {
       ),
 
     );
-
   }
-
 }
 
 class _CountItem extends StatefulWidget {
-
   final Map<String, dynamic> item;
 
   final void Function(double) onCount;
@@ -1474,17 +1391,14 @@ class _CountItem extends StatefulWidget {
   @override
 
   State<_CountItem> createState() => _CountItemState();
-
 }
 
 class _CountItemState extends State<_CountItem> {
-
   late final TextEditingController _ctrl;
 
   @override
 
   void initState() {
-
     super.initState();
 
     final countedQty = widget.item['countedQty'];
@@ -1498,33 +1412,27 @@ class _CountItemState extends State<_CountItem> {
           : '',
 
     );
-
   }
 
   @override
 
   void dispose() {
-
     _ctrl.dispose();
 
     super.dispose();
-
   }
 
   double? get _diff {
-
     final c = double.tryParse(_ctrl.text);
 
     if (c == null) return null;
 
     return c - ((widget.item['systemQty'] as num?)?.toDouble() ?? 0);
-
   }
 
   @override
 
   Widget build(BuildContext context) {
-
     final loc = AppLocalizations.of(context)!;
     final isCounted = widget.item['countedQty'] != null;
 
@@ -1755,17 +1663,13 @@ class _CountItemState extends State<_CountItem> {
               ),
 
               onChanged: (v) {
-
                 final d = double.tryParse(v);
 
                 if (d != null) {
-
                   widget.onCount(d);
 
                   setState(() {});
-
                 }
-
               },
 
             ),
@@ -1777,9 +1681,7 @@ class _CountItemState extends State<_CountItem> {
       ),
 
     );
-
   }
-
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -1789,7 +1691,6 @@ class _CountItemState extends State<_CountItem> {
 // ══════════════════════════════════════════════════════════════════════════════
 
 class _SessionReportSheet extends StatelessWidget {
-
   final Map<String, dynamic> session;
 
   const _SessionReportSheet({required this.session});
@@ -1797,7 +1698,6 @@ class _SessionReportSheet extends StatelessWidget {
   @override
 
   Widget build(BuildContext context) {
-
     final loc = AppLocalizations.of(context)!;
     final total = (session['totalItems'] as num?)?.toInt() ?? 0;
 
@@ -1974,11 +1874,9 @@ class _SessionReportSheet extends StatelessWidget {
       ),
 
     );
-
   }
 
   Widget _diffRow(String name, int sys, int cnt, int diff) {
-
     final color = diff > 0 ? _green : _red;
 
     return Container(
@@ -2062,13 +1960,10 @@ class _SessionReportSheet extends StatelessWidget {
       ),
 
     );
-
   }
-
 }
 
 class _ReportBadge extends StatelessWidget {
-
   final String label;
 
   final String value;
@@ -2076,19 +1971,16 @@ class _ReportBadge extends StatelessWidget {
   final Color color;
 
   const _ReportBadge({
-
     required this.label,
 
     required this.value,
 
     required this.color,
-
   });
 
   @override
 
   Widget build(BuildContext context) {
-
     return Expanded(
 
       child: Container(
@@ -2144,7 +2036,5 @@ class _ReportBadge extends StatelessWidget {
       ),
 
     );
-
   }
-
 }

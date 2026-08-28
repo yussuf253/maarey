@@ -33,13 +33,10 @@ import '../../services/app_settings_repository.dart';
 import '../../services/business_setup_settings.dart';
 
 class _VariantEditRow {
-
   _VariantEditRow({
-
     required this.variantId,
 
     required this.isDefault,
-
   })  : unitName = TextEditingController(),
 
         unitSymbol = TextEditingController(),
@@ -69,7 +66,6 @@ class _VariantEditRow {
   final TextEditingController minSell;
 
   void dispose() {
-
     unitName.dispose();
 
     unitSymbol.dispose();
@@ -81,13 +77,10 @@ class _VariantEditRow {
     sell.dispose();
 
     minSell.dispose();
-
   }
-
 }
 
 class _NewUnitVariantDraft {
-
   _NewUnitVariantDraft()
 
       : unitName = TextEditingController(),
@@ -115,7 +108,6 @@ class _NewUnitVariantDraft {
   final TextEditingController minSell;
 
   void dispose() {
-
     unitName.dispose();
 
     unitSymbol.dispose();
@@ -127,21 +119,16 @@ class _NewUnitVariantDraft {
     sell.dispose();
 
     minSell.dispose();
-
   }
-
 }
 
 class _VariantSizeDraft {
-
   _VariantSizeDraft({
-
     String size = '',
 
     int qty = 0,
 
     String barcode = '',
-
   })  : sizeCtrl = TextEditingController(text: size),
 
         qtyCtrl = TextEditingController(text: '$qty'),
@@ -155,27 +142,21 @@ class _VariantSizeDraft {
   final TextEditingController barcodeCtrl;
 
   void dispose() {
-
     sizeCtrl.dispose();
 
     qtyCtrl.dispose();
 
     barcodeCtrl.dispose();
-
   }
-
 }
 
 class _VariantColorDraft {
-
   _VariantColorDraft({
-
     String name = '',
 
     String hex = '',
 
     List<_VariantSizeDraft>? sizes,
-
   })  : nameCtrl = TextEditingController(text: name),
 
         hexCtrl = TextEditingController(text: hex),
@@ -191,23 +172,17 @@ class _VariantColorDraft {
   bool nameManuallyEdited = false;
 
   void dispose() {
-
     nameCtrl.dispose();
 
     hexCtrl.dispose();
 
     for (final s in sizes) {
-
       s.dispose();
-
     }
-
   }
-
 }
 
 class ProductEditScreen extends StatefulWidget {
-
   const ProductEditScreen({super.key, required this.productId});
 
   final int productId;
@@ -215,11 +190,9 @@ class ProductEditScreen extends StatefulWidget {
   @override
 
   State<ProductEditScreen> createState() => _ProductEditScreenState();
-
 }
 
 class _ProductEditScreenState extends State<ProductEditScreen> {
-
   final ProductRepository _repo = ProductRepository();
 
   final DatabaseHelper _dbHelper = DatabaseHelper();
@@ -269,17 +242,14 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
   @override
 
   void initState() {
-
     super.initState();
 
     _bootstrap();
-
   }
 
   @override
 
   void dispose() {
-
     _name.dispose();
 
     _barcode.dispose();
@@ -295,91 +265,67 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
     _low.dispose();
 
     for (final r in _variantRows) {
-
       r.dispose();
-
     }
 
     for (final r in _newVariantDrafts) {
-
       r.dispose();
-
     }
 
     for (final c in _colorDrafts) {
-
       c.dispose();
-
     }
 
     super.dispose();
-
   }
 
   int _parseNonNegativeInt(String raw) {
-
     final t = raw.trim();
 
     final n = int.tryParse(t);
 
     return (n == null || n < 0) ? -1 : n;
-
   }
 
   int _totalQtyAllVariants() {
-
     var sum = 0;
 
     for (final c in _colorDrafts) {
-
       for (final s in c.sizes) {
-
         final q = _parseNonNegativeInt(s.qtyCtrl.text);
 
         if (q > 0) sum += q;
-
       }
-
     }
 
     return sum;
-
   }
 
   int _totalQtyForColor(_VariantColorDraft c) {
-
     var sum = 0;
 
     for (final s in c.sizes) {
-
       final q = _parseNonNegativeInt(s.qtyCtrl.text);
 
       if (q > 0) sum += q;
-
     }
 
     return sum;
-
   }
 
   String _variantsSummaryLine() {
-
     final colors = _colorDrafts.length;
 
     var sizes = 0;
 
     for (final c in _colorDrafts) {
-
       sizes += c.sizes.length;
-
     }
 
     return 'ألوان: $colors • مقاسات: $sizes • إجمالي: ${_totalQtyAllVariants()}';
-
   }
 
   Future<void> _openVariantsEditor() async {
-
     await showModalBottomSheet<void>(
 
       context: context,
@@ -391,7 +337,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       showDragHandle: true,
 
       builder: (ctx) {
-
         final cs = Theme.of(ctx).colorScheme;
 
         return Directionality(
@@ -401,7 +346,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
           child: LayoutBuilder(
 
             builder: (context, constraints) {
-
               final screenH = MediaQuery.sizeOf(ctx).height;
 
               final targetH = (screenH * 0.92).clamp(420.0, 900.0);
@@ -421,7 +365,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                 child: StatefulBuilder(
 
                   builder: (context, sheetSetState) {
-
                     return Material(
 
                       color: cs.surface,
@@ -547,19 +490,16 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                       ),
 
                     );
-
                   },
 
                 ),
 
               );
-
             },
 
           ),
 
         );
-
       },
 
     );
@@ -567,19 +507,15 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
     if (!mounted) return;
 
     setState(() {}); // تحديث الملخص بعد الإغلاق
-
   }
 
   Future<void> _bootstrap() async {
-
     try {
-
       final biz = await BusinessSetupSettingsData.load(AppSettingsRepository.instance);
 
       _enableWeightSales = biz.enableWeightSales;
 
       _enableClothingVariants = biz.enableClothingVariants;
-
     } catch (_) {}
 
     final p = await _repo.getProductDetailsById(widget.productId);
@@ -587,11 +523,9 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
     if (!mounted) return;
 
     if (p == null) {
-
       setState(() => _loading = false);
 
       return;
-
     }
 
     double dnum(Object? v) => (v as num?)?.toDouble() ?? 0.0;
@@ -619,7 +553,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
     // Load color+size variants (new system)
 
     try {
-
       final db = await _dbHelper.database;
 
       final tid = int.tryParse(TenantContext.instance.requireTenantId()) ?? 0;
@@ -633,9 +566,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
           await ProductVariantsSqlOps.listVariantsForProduct(db, tid, widget.productId);
 
       for (final c in _colorDrafts) {
-
         c.dispose();
-
       }
 
       _colorDrafts.clear();
@@ -643,7 +574,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       final draftByColorId = <int, _VariantColorDraft>{};
 
       for (final row in colors) {
-
         final id = (row['id'] as num?)?.toInt() ?? 0;
 
         if (id <= 0) continue;
@@ -659,11 +589,9 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
         draftByColorId[id] = d;
 
         _colorDrafts.add(d);
-
       }
 
       for (final v in variants) {
-
         final colorId = (v['colorId'] as num?)?.toInt() ?? 0;
 
         final cd = draftByColorId[colorId];
@@ -683,43 +611,33 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
           ),
 
         );
-
       }
 
       _multiVariantEnabled = _colorDrafts.isNotEmpty;
 
       if (_multiVariantEnabled) {
-
         _track = true;
-
       }
 
       _stockTypeUi = _multiVariantEnabled ? 2 : _stockBaseKind;
-
     } catch (_) {
-
       // ignore: fallback to no-variants UI
-
     }
 
     setState(() => _variantsLoading = true);
 
     try {
-
       final vs = await _repo.listActiveUnitVariantsForProduct(widget.productId);
 
       if (!mounted) return;
 
       for (final r in _variantRows) {
-
         r.dispose();
-
       }
 
       _variantRows.clear();
 
       for (final m in vs) {
-
         final id = (m['id'] as num?)?.toInt() ?? 0;
 
         if (id <= 0) continue;
@@ -749,47 +667,31 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
         if (mp is num) row.minSell.text = mp.toString();
 
         _variantRows.add(row);
-
       }
-
     } catch (_) {
-
       for (final r in _variantRows) {
-
         r.dispose();
-
       }
 
       _variantRows.clear();
-
     } finally {
-
       if (mounted) {
-
         setState(() {
-
           _variantsLoading = false;
 
           _loading = false;
-
         });
-
       }
-
     }
-
   }
 
   double _parseMoney(TextEditingController c) {
-
     final t = c.text.trim().replaceAll(',', '');
 
     return double.tryParse(t) ?? 0.0;
-
   }
 
   String? _validateVariantDrafts() {
-
     if (!_multiVariantEnabled) return null;
 
     if (_colorDrafts.isEmpty) return 'أضف لوناً واحداً على الأقل.';
@@ -797,7 +699,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
     final seenBarcodes = <String>{};
 
     for (final c in _colorDrafts) {
-
       final colorName = c.nameCtrl.text.trim();
 
       if (colorName.isEmpty) return 'اسم اللون مطلوب.';
@@ -807,7 +708,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       final seenSizesInColor = <String>{};
 
       for (final s in c.sizes) {
-
         final size = s.sizeCtrl.text.trim();
 
         if (size.isEmpty) return 'حقل المقاس مطلوب.';
@@ -815,9 +715,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
         final key = size.toLowerCase();
 
         if (!seenSizesInColor.add(key)) {
-
           return 'المقاس "$size" مكرر داخل اللون "$colorName".';
-
         }
 
         final q = _parseNonNegativeInt(s.qtyCtrl.text);
@@ -827,21 +725,15 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
         final bc = s.barcodeCtrl.text.trim().toUpperCase();
 
         if (bc.isNotEmpty) {
-
           if (!seenBarcodes.add(bc)) return 'يوجد باركود مكرر داخل المتغيرات.';
-
         }
-
       }
-
     }
 
     return null;
-
   }
 
   Future<void> _save() async {
-
     if (_saving) return;
 
     if (!(_formKey.currentState?.validate() ?? false)) return;
@@ -849,7 +741,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
     final variantErr = _validateVariantDrafts();
 
     if (variantErr != null) {
-
       ScaffoldMessenger.of(context).showSnackBar(
 
         SnackBar(
@@ -865,11 +756,9 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       );
 
       return;
-
     }
 
     for (final row in _newVariantDrafts) {
-
       final unit = row.unitName.text.trim();
 
       if (unit.isEmpty) continue;
@@ -877,7 +766,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       final f = double.tryParse(row.factor.text.trim().replaceAll(',', '.')) ?? 0;
 
       if (!(f > 0)) {
-
         ScaffoldMessenger.of(context).showSnackBar(
 
           const SnackBar(
@@ -891,15 +779,12 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
         );
 
         return;
-
       }
-
     }
 
     setState(() => _saving = true);
 
     try {
-
       final buy = _parseMoney(_buy);
 
       final sell = _parseMoney(_sell);
@@ -935,13 +820,11 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       );
 
       if (_multiVariantEnabled) {
-
         final db = await _dbHelper.database;
 
         final tid = int.tryParse(TenantContext.instance.requireTenantId()) ?? 0;
 
         await db.transaction((txn) async {
-
           // (1) soft-delete existing variants & colors for product
 
           final existingColors =
@@ -953,27 +836,19 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
               await ProductVariantsSqlOps.listVariantsForProduct(txn, tid, widget.productId);
 
           for (final v in existingVars) {
-
             final id = (v['id'] as num?)?.toInt() ?? 0;
 
             if (id > 0) {
-
               await ProductVariantsSqlOps.softDeleteVariant(txn, tid, id);
-
             }
-
           }
 
           for (final c in existingColors) {
-
             final id = (c['id'] as num?)?.toInt() ?? 0;
 
             if (id > 0) {
-
               await ProductVariantsSqlOps.softDeleteColor(txn, tid, id);
-
             }
-
           }
 
           // (2) insert new colors + variants (same transaction)
@@ -981,7 +856,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
           final now = DateTime.now().toUtc().toIso8601String();
 
           for (var colorIndex = 0; colorIndex < _colorDrafts.length; colorIndex++) {
-
             final c = _colorDrafts[colorIndex];
 
             final name = c.nameCtrl.text.trim();
@@ -989,7 +863,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
             final hex = c.hexCtrl.text.trim();
 
             final colorId = await ProductVariantsSqlOps.insertColor(txn, tid, {
-
               'productId': widget.productId,
 
               'name': name,
@@ -1001,11 +874,9 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
               'createdAt': now,
 
               'updatedAt': now,
-
             });
 
             for (final s in c.sizes) {
-
               final size = s.sizeCtrl.text.trim();
 
               final q = _parseNonNegativeInt(s.qtyCtrl.text);
@@ -1013,7 +884,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
               final bc = s.barcodeCtrl.text.trim().toUpperCase();
 
               if (bc.isNotEmpty) {
-
                 // ensure tenant-scoped uniqueness for variants
 
                 final taken = await ProductVariantsSqlOps.isBarcodeTakenInTenant(
@@ -1039,11 +909,8 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                   executor: txn,
 
                 )) {
-
                   throw StateError('duplicate_barcode');
-
                 }
-
               }
 
               final sku = ProductVariantsRepository.buildSku(
@@ -1057,7 +924,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
               );
 
               await ProductVariantsSqlOps.insertVariant(txn, tid, {
-
                 'productId': widget.productId,
 
                 'colorId': colorId,
@@ -1073,27 +939,19 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                 'createdAt': now,
 
                 'updatedAt': now,
-
               });
-
             }
-
           }
-
         });
-
       }
 
       for (final r in _variantRows) {
-
         if (r.isDefault) continue;
 
         final f = double.tryParse(r.factor.text.trim().replaceAll(',', '.')) ?? 0;
 
         if (!(f > 0)) {
-
           throw StateError('bad_unit_factor');
-
         }
 
         final bc = r.barcode.text.trim();
@@ -1119,11 +977,9 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
           minSellPrice: ms.isEmpty ? null : double.tryParse(ms.replaceAll(',', '.')),
 
         );
-
       }
 
       for (final row in _newVariantDrafts) {
-
         final unit = row.unitName.text.trim();
 
         if (unit.isEmpty) continue;
@@ -1157,7 +1013,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
           isDefault: false,
 
         );
-
       }
 
       if (!mounted) return;
@@ -1165,9 +1020,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       unawaited(context.read<NotificationProvider>().refresh());
 
       Navigator.pop(context, true);
-
     } catch (e) {
-
       if (!mounted) return;
 
       final msg = e.toString().contains('duplicate_barcode')
@@ -1189,29 +1042,20 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
         SnackBar(content: Text(msg), behavior: SnackBarBehavior.floating),
 
       );
-
     } finally {
-
       if (mounted) setState(() => _saving = false);
-
     }
-
   }
 
   Widget _buildVariantsSection(
 
     BuildContext context, {
-
     void Function(void Function())? setStateOverride,
-
   }) {
-
     void ss(void Function() fn) {
-
       final s = setStateOverride ?? setState;
 
       s(fn);
-
     }
 
     final theme = Theme.of(context);
@@ -1221,7 +1065,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
     final ac = context.appCorners;
 
     Future<void> pickColorFor(_VariantColorDraft c) async {
-
       final current = parseFlexibleHexColor(c.hexCtrl.text) ?? cs.primary;
 
       final chosen = await showAppColorPickerDialog(
@@ -1243,21 +1086,15 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
           '#${(chosen.toARGB32() & 0xFFFFFF).toRadixString(16).padLeft(6, '0').toUpperCase()}';
 
       ss(() {
-
         c.hexCtrl.text = hex;
 
         if (!c.nameManuallyEdited) {
-
           c.nameCtrl.text = arabicColorNameFor(chosen);
-
         }
-
       });
-
     }
 
     Future<void> pickSizeFor(_VariantSizeDraft s) async {
-
       final chosen = await showVariantSizePickerSheet(
 
         context,
@@ -1269,15 +1106,11 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       if (chosen == null) return;
 
       ss(() {
-
         s.sizeCtrl.text = chosen;
-
       });
-
     }
 
     Future<void> applyUniformQty() async {
-
       final ctrl = TextEditingController();
 
       final ok = await showDialog<bool>(
@@ -1333,7 +1166,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       final q = _parseNonNegativeInt(ctrl.text);
 
       if (q < 0) {
-
         ScaffoldMessenger.of(context).showSnackBar(
 
           SnackBar(
@@ -1353,33 +1185,23 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
         );
 
         return;
-
       }
 
       ss(() {
-
         for (final c in _colorDrafts) {
-
           for (final s in c.sizes) {
-
             s.qtyCtrl.text = '$q';
-
           }
-
         }
-
       });
-
     }
 
     Widget colorCard(_VariantColorDraft c) {
-
       final hexColor = parseFlexibleHexColor(c.hexCtrl.text);
 
       final preview = hexColor ?? cs.surfaceContainerHighest;
 
       Widget sizeRow(_VariantSizeDraft s, int sizeIndex) {
-
         return Padding(
 
           padding: EdgeInsetsDirectional.only(bottom: 8),
@@ -1501,15 +1323,11 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                 tooltip: loc.deleteTooltip,
 
                 onPressed: () {
-
                   ss(() {
-
                     final removed = c.sizes.removeAt(sizeIndex);
 
                     removed.dispose();
-
                   });
-
                 },
 
                 icon: const Icon(Icons.delete_outline, color: Colors.red),
@@ -1521,7 +1339,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
           ),
 
         );
-
       }
 
       return Material(
@@ -1569,11 +1386,9 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                       ),
 
                       onChanged: (_) {
-
                         c.nameManuallyEdited = true;
 
                         ss(() {});
-
                       },
 
                       textAlign: TextAlign.start,
@@ -1633,21 +1448,15 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                     tooltip: loc.deleteColorTooltip,
 
                     onPressed: () {
-
                       ss(() {
-
                         final idx = _colorDrafts.indexOf(c);
 
                         if (idx >= 0) {
-
                           final removed = _colorDrafts.removeAt(idx);
 
                           removed.dispose();
-
                         }
-
                       });
-
                     },
 
                     icon: const Icon(Icons.delete_outline, color: Colors.red),
@@ -1709,7 +1518,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                       LayoutBuilder(
 
                         builder: (ctx, constraints) {
-
                           final wide = constraints.maxWidth >= 760;
 
                           final list = Column(
@@ -1739,7 +1547,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                             ),
 
                           );
-
                         },
 
                       ),
@@ -1753,9 +1560,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                       child: OutlinedButton.icon(
 
                         onPressed: () {
-
                           ss(() => c.sizes.add(_VariantSizeDraft()));
-
                         },
 
                         icon: Icon(Icons.add, size: 18),
@@ -1797,7 +1602,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
         ),
 
       );
-
     }
 
     return Container(
@@ -1875,13 +1679,11 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
               FilledButton.icon(
 
                 onPressed: () => ss(() {
-
                   final c = _VariantColorDraft();
 
                   c.sizes.add(_VariantSizeDraft());
 
                   _colorDrafts.add(c);
-
                 }),
 
                 icon: Icon(Icons.add),
@@ -1939,13 +1741,11 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       ),
 
     );
-
   }
 
   @override
 
   Widget build(BuildContext context) {
-
     final loc = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
 
@@ -2268,15 +2068,12 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                             ],
 
                             onChanged: (v) {
-
                               final next = v ?? 0;
 
                               setState(() {
-
                                 _stockTypeUi = next;
 
                                 if (next == 2) {
-
                                   _multiVariantEnabled = true;
 
                                   _track = true;
@@ -2284,25 +2081,18 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                                   _stockBaseKind = 0;
 
                                   if (_colorDrafts.isEmpty) {
-
                                     final c = _VariantColorDraft();
 
                                     c.sizes.add(_VariantSizeDraft());
 
                                     _colorDrafts.add(c);
-
                                   }
-
                                 } else {
-
                                   _multiVariantEnabled = false;
 
                                   _stockBaseKind = next;
-
                                 }
-
                               });
-
                             },
 
                           ),
@@ -2704,17 +2494,13 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                                             tooltip: loc.cancelTooltip,
 
                                             onPressed: () => setState(() {
-
                                               final idx = _newVariantDrafts.indexOf(n);
 
                                               if (idx >= 0) {
-
                                                 final r = _newVariantDrafts.removeAt(idx);
 
                                                 r.dispose();
-
                                               }
-
                                             }),
 
                                             icon: const Icon(Icons.close, color: Colors.red),
@@ -3030,11 +2816,9 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       ),
 
     );
-
   }
 
   Widget _field({
-
     required String label,
 
     required TextEditingController controller,
@@ -3044,9 +2828,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
     TextInputType keyboard = TextInputType.text,
 
     String? Function(String?)? validator,
-
   }) {
-
     final cs = Theme.of(context).colorScheme;
 
     final ac = context.appCorners;
@@ -3088,8 +2870,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       ],
 
     );
-
   }
-
 }
 
