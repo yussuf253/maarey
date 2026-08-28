@@ -1,19 +1,11 @@
 import 'dart:async' show unawaited;
-
 import 'package:flutter/material.dart';
-
 import '../../l10n/generated/app_localizations.dart';
-
 import 'package:intl/intl.dart' hide TextDirection;
-
 import 'package:provider/provider.dart';
-
 import 'package:sqflite/sqflite.dart' show Database;
-
 import '../../providers/notification_provider.dart';
-
 import '../../services/database_helper.dart';
-
 import '../../services/tenant_context_service.dart';
 
 const Color _kAccent = Color(0xFF1E3A5F);
@@ -101,33 +93,20 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
     final db = await _db.database;
 
     final sups = await db.query(
-
       'suppliers',
-
       columns: ['id', 'name'],
-
       where: 'isActive = 1 AND tenantId = ?',
-
       whereArgs: [_tenant.activeTenantId],
-
       orderBy: 'name COLLATE NOCASE',
-
     );
 
     final prods = await db.query(
-
       'products',
-
       columns: ['id', 'name', 'buyPrice'],
-
       where: 'isActive = 1 AND tenantId = ?',
-
       whereArgs: [_tenant.activeTenantId],
-
       orderBy: 'name COLLATE NOCASE',
-
       limit: 500,
-
     );
 
     if (_isEdit || _isCopy) {
@@ -147,15 +126,10 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
   Future<void> _loadExistingPo(Database db, {required int? poId}) async {
     final rows = await db.query(
-
       'purchase_orders',
-
       where: 'id = ?',
-
       whereArgs: [poId],
-
       limit: 1,
-
     );
 
     if (rows.isEmpty) return;
@@ -181,42 +155,25 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
     } catch (_) {}
 
     final items = await db.query(
-
       'purchase_order_items',
-
       where: 'poId = ?',
-
       whereArgs: [poId],
-
     ) as List<Map<String, dynamic>>;
 
     for (final item in items) {
       _lines.add(_PoLine(
-
         itemId:      item['id'] as int?,
-
         productId:   item['productId'] as int?,
-
         productName: (item['productName'] as String?) ?? '',
-
         orderedQty:  (item['orderedQty'] as num?)?.toDouble() ?? 0,
-
         receivedQty: (item['receivedQty'] as num?)?.toDouble() ?? 0,
-
         unitPrice:   (item['unitPrice'] as num?)?.toDouble() ?? 0,
-
         qtyCtrl:     TextEditingController(
-
           text: _fmt2((item['orderedQty'] as num?)?.toDouble() ?? 0),
-
         ),
-
         priceCtrl: TextEditingController(
-
           text: _fmt2((item['unitPrice'] as num?)?.toDouble() ?? 0),
-
         ),
-
       ));
     }
 
@@ -245,15 +202,10 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
     final firstDate = isOrder ? DateTime(2020) : _orderDate;
 
     final d = await showDatePicker(
-
       context: context,
-
       initialDate: initial,
-
       firstDate: firstDate,
-
       lastDate: DateTime(2100),
-
     );
 
     if (d == null || !mounted) return;
@@ -272,19 +224,12 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
   void _addLine() {
     setState(() {
       _lines.add(_PoLine(
-
         productName: '',
-
         orderedQty:  0,
-
         receivedQty: 0,
-
         unitPrice:   0,
-
         qtyCtrl:   TextEditingController(),
-
         priceCtrl: TextEditingController(),
-
       ));
     });
   }
@@ -302,7 +247,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
     try {
       rows = await db.rawQuery(
-
         '''
 
         SELECT id, name, buyPrice, qty, lowStockThreshold, stockBaseKind
@@ -316,13 +260,11 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
           AND IFNULL(trackInventory, 1) = 1
 
           AND (
-
             qty <= 0
 
             OR (IFNULL(lowStockThreshold, 0) > 0 AND qty <= lowStockThreshold)
 
             OR (
-
               IFNULL(stockBaseKind, 0) = 1
 
               AND IFNULL(lowStockThreshold, 0) <= 0
@@ -330,9 +272,7 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
               AND qty > 0
 
               AND qty < 1
-
             )
-
           )
 
         ORDER BY qty ASC, name COLLATE NOCASE
@@ -340,9 +280,7 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
         LIMIT ?
 
         ''',
-
         [tid, _kMaxAutoPoLines + 1],
-
       );
     } catch (_) {
       _snack(loc.failedToFetchLowItems, error: true);
@@ -402,29 +340,19 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
       final priceText = buy > 0
 
           ? buy.toStringAsFixed(
-
               buy.truncateToDouble() == buy ? 0 : 3,
-
             )
 
           : '';
 
       _lines.add(_PoLine(
-
         productId: id,
-
         productName: name,
-
         orderedQty: 0,
-
         receivedQty: 0,
-
         unitPrice: buy,
-
         qtyCtrl: TextEditingController(),
-
         priceCtrl: TextEditingController(text: priceText),
-
       ));
 
       added++;
@@ -437,15 +365,11 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
     if (added == 0) {
       if (skippedDup > 0) {
         _snack(
-
           loc.noNewItemsAllAdded,
-
         );
       } else {
         _snack(
-
           loc.noLowStockProducts,
-
         );
       }
 
@@ -516,58 +440,40 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
     final poData = {
       'tenantId':      tid,
-
       'supplierId':    _supplierId,
-
       'supplierName':  supplierName,
-
       'status':        _status,
-
       'orderDate':     _orderDate.toIso8601String(),
-
       'expectedDate':  _expectedDate?.toIso8601String(),
-
       'notes':         _notesCtrl.text.trim().isEmpty ? null : _notesCtrl.text.trim(),
-
       'totalAmount':   _grandTotal,
-
       'receivedAmount': _isEdit
 
           ? (await _getExistingReceived(db) ?? 0)
 
           : 0,
-
       'updatedAt':     now,
     };
 
     try {
       if (_isEdit) {
         await db.update('purchase_orders', poData,
-
             where: 'id = ?', whereArgs: [widget.poId]);
 
         // حذف البنود القديمة ثم إعادة إدخالها
 
         await db.delete('purchase_order_items',
-
             where: 'poId = ?', whereArgs: [widget.poId]);
 
         for (final l in validLines) {
           await db.insert('purchase_order_items', {
             'tenantId':    tid,
-
             'poId':        widget.poId,
-
             'productId':   l.productId,
-
             'productName': l.productName.trim(),
-
             'orderedQty':  l.parsedQty,
-
             'receivedQty': l.receivedQty,
-
             'unitPrice':   l.parsedPrice,
-
             'total':       l.lineTotal,
           });
         }
@@ -575,7 +481,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
         // رقم أمر تلقائي
 
         final count = await db.rawQuery(
-
             'SELECT COUNT(*)+1 AS n FROM purchase_orders WHERE tenantId = ?', [tid]);
 
         final n = (count.first['n'] as num?)?.toInt() ?? 1;
@@ -584,28 +489,19 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
         final poId = await db.insert('purchase_orders', {
           ...poData,
-
           'poNumber': poNo,
-
           'createdAt': now,
         });
 
         for (final l in validLines) {
           await db.insert('purchase_order_items', {
             'tenantId':    tid,
-
             'poId':        poId,
-
             'productId':   l.productId,
-
             'productName': l.productName.trim(),
-
             'orderedQty':  l.parsedQty,
-
             'receivedQty': 0,
-
             'unitPrice':   l.parsedPrice,
-
             'total':       l.lineTotal,
           });
         }
@@ -629,9 +525,7 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
   Future<double?> _getExistingReceived(Database db) async {
     final r = await db.query('purchase_orders',
-
         columns: ['receivedAmount'],
-
         where: 'id = ?', whereArgs: [widget.poId], limit: 1);
 
     return r.isEmpty ? null : (r.first['receivedAmount'] as num?)?.toDouble();
@@ -639,13 +533,9 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
   void _snack(String msg, {bool error = false}) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-
       content: Text(msg),
-
       backgroundColor: error ? Colors.red.shade700 : _kGreen,
-
       behavior: SnackBarBehavior.floating,
-
     ));
   }
 
@@ -658,461 +548,264 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
     final cs = Theme.of(context).colorScheme;
 
     return Directionality(
-
       textDirection: TextDirection.rtl,
-
       child: Scaffold(
-
         appBar: AppBar(
-
           backgroundColor: _kAccent,
-
           elevation: 0,
-
           leading: IconButton(
-
             icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 18),
-
             onPressed: () => Navigator.pop(context),
-
           ),
-
           title: Text(
-
             _isEdit ? loc.editPurchaseOrder : loc.newPurchaseOrderTitle,
-
             style: const TextStyle(
-
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
-
           ),
-
           actions: [
 
             if (_saving)
 
               const Padding(
-
                 padding: EdgeInsets.symmetric(horizontal: 16),
-
                 child: SizedBox(
-
                     width: 20, height: 20,
-
                     child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white)),
-
               )
 
             else
 
               TextButton.icon(
-
                 onPressed: _save,
-
                 icon: Icon(Icons.save_outlined, color: Colors.white, size: 18),
-
                 label: Text(loc.save, style: TextStyle(color: Colors.white)),
-
               ),
-
           ],
-
         ),
-
         body: _loading
 
             ? const Center(child: CircularProgressIndicator())
 
             : Column(
-
                 children: [
 
                   Expanded(
-
                     child: ListView(
-
                       padding: EdgeInsets.all(16),
-
                       children: [
 
                         // ── معلومات الأمر ────────────────────────────────────
 
                         _Section(
-
                           title: loc.orderInfo,
-
                           child: Column(
-
                             children: [
 
                               // المورد
 
                               _LabelField(
-
                                 label: loc.supplierLabel,
-
                                 child: DropdownButtonFormField<int?>(
-
                                   value: _supplierId,
-
                                   isExpanded: true,
-
                                   decoration: _dec(context, loc.selectSupplierHint),
-
                                   items: [
 
                                     DropdownMenuItem(
-
                                         value: null, child: Text(loc.noSupplierText)),
-
                                     ..._suppliers.map((s) => DropdownMenuItem(
-
                                           value: s['id'] as int,
-
                                           child: Text(s['name'] as String? ?? ''),
-
                                         )),
-
                                   ],
-
                                   onChanged: (v) => setState(() => _supplierId = v),
-
                                 ),
-
                               ),
-
                               SizedBox(height: 12),
-
                               // التواريخ
 
                               Row(
-
                                 children: [
 
                                   Expanded(
-
                                     child: _LabelField(
-
                                       label: loc.orderDateLabel,
-
                                       child: _DateTile(
-
                                         date: _orderDate,
-
                                         fmt: _fmt,
-
                                         onTap: () => _pickDate(isOrder: true),
-
                                       ),
-
                                     ),
-
                                   ),
-
                                   SizedBox(width: 12),
-
                                   Expanded(
-
                                     child: _LabelField(
-
                                       label: loc.expectedDeliveryLabel,
-
                                       child: _DateTile(
-
                                         date: _expectedDate,
-
                                         fmt: _fmt,
-
                                         hint: loc.selectOptionalHint,
-
                                         onTap: () => _pickDate(isOrder: false),
-
                                       ),
-
                                     ),
-
                                   ),
-
                                 ],
-
                               ),
-
                               SizedBox(height: 12),
-
                               // الحالة
 
                               _LabelField(
-
                                 label: loc.statusLabel,
-
                                 child: DropdownButtonFormField<String>(
-
                                   value: _status,
-
                                   isExpanded: true,
-
                                   decoration: _dec(context, ''),
-
                                   items: [
 
                                     DropdownMenuItem(value: 'draft',    child: Text(loc.draftText)),
-
                                     DropdownMenuItem(value: 'sent',     child: Text(loc.sentText)),
-
                                     DropdownMenuItem(value: 'partial',  child: Text(loc.partialText)),
-
                                     DropdownMenuItem(value: 'received', child: Text(loc.receivedText)),
-
                                     DropdownMenuItem(value: 'cancelled',child: Text(loc.cancelledText)),
-
                                   ],
-
                                   onChanged: (v) { if (v != null) setState(() => _status = v); },
-
                                 ),
-
                               ),
-
                               SizedBox(height: 12),
-
                               // ملاحظات
 
                               _LabelField(
-
                                 label: loc.notesLabel,
-
                                 child: TextField(
-
                                   controller: _notesCtrl,
-
                                   textAlign: TextAlign.right,
-
                                   maxLines: 2,
-
                                   decoration: _dec(context, loc.notesHint),
-
                                 ),
-
                               ),
-
                             ],
-
                           ),
-
                         ),
-
                         SizedBox(height: 16),
-
                         // ── الأصناف ──────────────────────────────────────────
 
                         _Section(
-
                           title: loc.orderItems,
-
                           trailing: Wrap(
-
                             spacing: 4,
-
                             runSpacing: 4,
-
                             alignment: WrapAlignment.end,
-
                             children: [
 
                               TextButton.icon(
-
                                 onPressed: _appendLowStockProductLines,
-
                                 icon: Icon(Icons.inventory_2_outlined, size: 18),
-
                                 label: Text(loc.fillLowStock),
-
                                 style: TextButton.styleFrom(
-
                                   foregroundColor: _kGreen,
-
                                 ),
-
                               ),
-
                               TextButton.icon(
-
                                 onPressed: _addLine,
-
                                 icon: Icon(Icons.add, size: 18),
-
                                 label: Text(loc.addItem),
-
                                 style: TextButton.styleFrom(
-
                                   foregroundColor: _kAccent,
-
                                 ),
-
                               ),
-
                             ],
-
                           ),
-
                           child: _lines.isEmpty
 
                               ? Padding(
-
                                   padding: const EdgeInsets.symmetric(vertical: 16),
-
                                   child: Center(
-
                                     child: Column(
-
                                       children: [
 
                                         Icon(Icons.add_shopping_cart_outlined,
-
                                             size: 40, color: Colors.grey.shade400),
-
                                         SizedBox(height: 8),
-
                                         Text(
-
                                           loc.emptyListHint,
-
                                           textAlign: TextAlign.center,
-
                                           style: TextStyle(color: Colors.grey.shade500),
-
                                         ),
-
                                       ],
-
                                     ),
-
                                   ),
-
                                 )
 
                               : Column(
-
                                   children: [
 
                                     // رأس الجدول
 
                                     Container(
-
                                       padding: EdgeInsets.symmetric(
-
                                           vertical: 6, horizontal: 8),
-
                                       color: _kAccent.withOpacity(0.06),
-
                                       child: Row(
-
                                         children: [
 
                                           Expanded(flex: 4, child: Text(loc.itemCol,      style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700))),
-
                                           Expanded(flex: 2, child: Text(loc.qtyCol,     style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700), textAlign: TextAlign.center)),
-
                                           Expanded(flex: 2, child: Text(loc.unitPriceCol,style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700), textAlign: TextAlign.center)),
-
                                           Expanded(flex: 2, child: Text(loc.totalCol,  style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700), textAlign: TextAlign.end)),
-
                                           SizedBox(width: 32),
-
                                         ],
-
                                       ),
-
                                     ),
-
                                     ...List.generate(_lines.length, (i) {
                                       final line = _lines[i];
 
                                       return _PoLineRow(
-
                                         line:      line,
-
                                         products:  _products,
-
                                         fmtMoney:  fmtMoney,
-
                                         onRemove:  () => _removeLine(i),
-
                                         onChanged: () => setState(() {}),
-
                                       );
                                     }),
-
                                   ],
-
                                 ),
-
                         ),
-
                         const SizedBox(height: 16),
-
                       ],
-
                     ),
-
                   ),
-
                   // ── شريط الإجمالي ──────────────────────────────────────────
 
                   Container(
-
                     color: cs.surface,
-
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-
                     child: Row(
-
                       children: [
 
                         Text(loc.totalCol, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-
                         const Spacer(),
-
                         Text(
-
                           fmtMoney.format(_grandTotal),
-
                           style: const TextStyle(
-
                               fontSize: 20,
-
                               fontWeight: FontWeight.bold,
-
                               color: _kAccent),
-
                         ),
-
                       ],
-
                     ),
-
                   ),
-
                 ],
-
               ),
-
       ),
-
     );
   }
 
   InputDecoration _dec(BuildContext context, String hint) {
     return InputDecoration(
-
       hintText: hint,
-
       isDense: true,
-
       contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-
       border: const OutlineInputBorder(borderRadius: BorderRadius.zero),
-
     );
   }
 }
@@ -1122,19 +815,12 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 class _PoLine {
   _PoLine({
     this.itemId,
-
     this.productId,
-
     required this.productName,
-
     required this.orderedQty,
-
     required this.receivedQty,
-
     required this.unitPrice,
-
     required this.qtyCtrl,
-
     required this.priceCtrl,
   });
 
@@ -1166,13 +852,9 @@ class _PoLine {
 class _PoLineRow extends StatelessWidget {
   const _PoLineRow({
     required this.line,
-
     required this.products,
-
     required this.fmtMoney,
-
     required this.onRemove,
-
     required this.onChanged,
   });
 
@@ -1191,33 +873,21 @@ class _PoLineRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     return Container(
-
       decoration: BoxDecoration(
-
         border: Border(bottom: BorderSide(color: Colors.grey.shade200)),
-
       ),
-
       padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
-
       child: Row(
-
         crossAxisAlignment: CrossAxisAlignment.center,
-
         children: [
 
           // اسم الصنف (autocomplete)
 
           Expanded(
-
             flex: 4,
-
             child: Autocomplete<Map<String, dynamic>>(
-
               initialValue: TextEditingValue(text: line.productName),
-
               displayStringForOption: (m) => m['name'] as String? ?? '',
-
               optionsBuilder: (tv) {
                 final q = tv.text.toLowerCase();
 
@@ -1231,7 +901,6 @@ class _PoLineRow extends StatelessWidget {
 
                     .take(20);
               },
-
               onSelected: (m) {
                 line.productId   = m['id'] as int?;
 
@@ -1247,175 +916,97 @@ class _PoLineRow extends StatelessWidget {
 
                 onChanged();
               },
-
               fieldViewBuilder: (ctx, ctrl, fn, onFieldSubmitted) {
                 return TextField(
-
                   controller: ctrl,
-
                   focusNode: fn,
-
                   textAlign: TextAlign.right,
-
                   style: TextStyle(fontSize: 12),
-
                   decoration: InputDecoration(
-
                     isDense: true,
-
                     hintText: loc.itemNameHint,
-
                     hintStyle: const TextStyle(fontSize: 11),
-
                     contentPadding: const EdgeInsets.symmetric(
-
                         horizontal: 6, vertical: 8),
-
                     border: OutlineInputBorder(
-
                       borderRadius: BorderRadius.zero,
-
                       borderSide: BorderSide(color: Colors.grey.shade300),
-
                     ),
-
                   ),
-
                   onChanged: (v) {
                     line.productName = v;
 
                     onChanged();
                   },
-
                 );
               },
-
             ),
-
           ),
-
           const SizedBox(width: 6),
-
           // الكمية
 
           Expanded(
-
             flex: 2,
-
             child: TextField(
-
               controller: line.qtyCtrl,
-
               keyboardType: const TextInputType.numberWithOptions(decimal: true),
-
               textAlign: TextAlign.center,
-
               style: const TextStyle(fontSize: 12),
-
               decoration: InputDecoration(
-
                 isDense: true,
-
                 hintText: '0',
-
                 contentPadding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-
                 border: OutlineInputBorder(
-
                   borderRadius: BorderRadius.zero,
-
                   borderSide: BorderSide(color: Colors.grey.shade300),
-
                 ),
-
               ),
-
               onChanged: (_) => onChanged(),
-
             ),
-
           ),
-
           const SizedBox(width: 6),
-
           // سعر الوحدة
 
           Expanded(
-
             flex: 2,
-
             child: TextField(
-
               controller: line.priceCtrl,
-
               keyboardType: const TextInputType.numberWithOptions(decimal: true),
-
               textAlign: TextAlign.center,
-
               style: const TextStyle(fontSize: 12),
-
               decoration: InputDecoration(
-
                 isDense: true,
-
                 hintText: '0',
-
                 contentPadding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-
                 border: OutlineInputBorder(
-
                   borderRadius: BorderRadius.zero,
-
                   borderSide: BorderSide(color: Colors.grey.shade300),
-
                 ),
-
               ),
-
               onChanged: (_) => onChanged(),
-
             ),
-
           ),
-
           const SizedBox(width: 6),
-
           // الإجمالي
 
           Expanded(
-
             flex: 2,
-
             child: Text(
-
               fmtMoney.format(line.lineTotal),
-
               textAlign: TextAlign.end,
-
               style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-
             ),
-
           ),
-
           // حذف
 
           IconButton(
-
             icon: const Icon(Icons.close, size: 16, color: Colors.red),
-
             onPressed: onRemove,
-
             padding: EdgeInsets.zero,
-
             constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
-
           ),
-
         ],
-
       ),
-
     );
   }
 }
@@ -1437,65 +1028,37 @@ class _Section extends StatelessWidget {
     final cs = Theme.of(context).colorScheme;
 
     return Card(
-
       elevation: 0,
-
       color: cs.surface,
-
       shape: RoundedRectangleBorder(
-
         borderRadius: BorderRadius.zero,
-
         side: BorderSide(color: cs.outlineVariant),
-
       ),
-
       child: Padding(
-
         padding: const EdgeInsets.all(16),
-
         child: Column(
-
           crossAxisAlignment: CrossAxisAlignment.stretch,
-
           children: [
 
             Row(
-
               children: [
 
                 Text(title,
-
                     style: TextStyle(
-
                         fontSize: 14,
-
                         fontWeight: FontWeight.w700,
-
                         color: cs.primary)),
-
                 const Spacer(),
-
                 if (trailing != null) trailing!,
-
               ],
-
             ),
-
             Container(
-
                 height: 2, width: 40, color: cs.primary.withOpacity(0.3),
-
                 margin: const EdgeInsets.only(top: 4, bottom: 14)),
-
             child,
-
           ],
-
         ),
-
       ),
-
     );
   }
 }
@@ -1511,21 +1074,14 @@ class _LabelField extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Column(
-
       crossAxisAlignment: CrossAxisAlignment.end,
-
       children: [
 
         Text(label,
-
             style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
-
         const SizedBox(height: 6),
-
         child,
-
       ],
-
     );
   }
 }
@@ -1533,11 +1089,8 @@ class _LabelField extends StatelessWidget {
 class _DateTile extends StatelessWidget {
   const _DateTile({
     required this.date,
-
     required this.fmt,
-
     required this.onTap,
-
     this.hint = '',
   });
 
@@ -1553,51 +1106,29 @@ class _DateTile extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return GestureDetector(
-
       onTap: onTap,
-
       child: Container(
-
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-
         decoration: BoxDecoration(
-
           border: Border.all(color: Colors.grey.shade400),
-
           borderRadius: BorderRadius.zero,
-
         ),
-
         child: Row(
-
           children: [
 
             Expanded(
-
               child: Text(
-
                 date != null ? fmt.format(date!) : hint,
-
                 style: TextStyle(
-
                   fontSize: 13,
-
                   color: date != null ? null : Colors.grey,
-
                 ),
-
               ),
-
             ),
-
             const Icon(Icons.calendar_today_outlined, size: 16, color: Colors.grey),
-
           ],
-
         ),
-
       ),
-
     );
   }
 }

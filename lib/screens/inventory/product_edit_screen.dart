@@ -1,52 +1,30 @@
 import 'dart:async' show unawaited;
-
 import 'package:flutter/material.dart';
-
 import '../../l10n/generated/app_localizations.dart';
-
 import 'package:flutter/services.dart';
-
 import 'package:provider/provider.dart';
-
 import '../../providers/notification_provider.dart';
-
 import '../../services/database_helper.dart';
-
 import '../../services/product_repository.dart';
-
 import '../../services/product_variants_repository.dart';
-
 import '../../services/product_variants_sql_ops.dart';
-
 import '../../services/tenant_context.dart';
-
 import '../../utils/color_name_ar.dart';
-
 import '../../widgets/app_color_picker_dialog.dart';
-
 import '../../widgets/variants/variant_size_picker_sheet.dart';
-
 import '../../theme/app_corner_style.dart';
-
 import '../../services/app_settings_repository.dart';
-
 import '../../services/business_setup_settings.dart';
 
 class _VariantEditRow {
   _VariantEditRow({
     required this.variantId,
-
     required this.isDefault,
   })  : unitName = TextEditingController(),
-
         unitSymbol = TextEditingController(),
-
         factor = TextEditingController(),
-
         barcode = TextEditingController(),
-
         sell = TextEditingController(),
-
         minSell = TextEditingController();
 
   final int variantId;
@@ -84,15 +62,10 @@ class _NewUnitVariantDraft {
   _NewUnitVariantDraft()
 
       : unitName = TextEditingController(),
-
         unitSymbol = TextEditingController(),
-
         factor = TextEditingController(text: '1'),
-
         barcode = TextEditingController(),
-
         sell = TextEditingController(),
-
         minSell = TextEditingController();
 
   final TextEditingController unitName;
@@ -125,14 +98,10 @@ class _NewUnitVariantDraft {
 class _VariantSizeDraft {
   _VariantSizeDraft({
     String size = '',
-
     int qty = 0,
-
     String barcode = '',
   })  : sizeCtrl = TextEditingController(text: size),
-
         qtyCtrl = TextEditingController(text: '$qty'),
-
         barcodeCtrl = TextEditingController(text: barcode);
 
   final TextEditingController sizeCtrl;
@@ -153,14 +122,10 @@ class _VariantSizeDraft {
 class _VariantColorDraft {
   _VariantColorDraft({
     String name = '',
-
     String hex = '',
-
     List<_VariantSizeDraft>? sizes,
   })  : nameCtrl = TextEditingController(text: name),
-
         hexCtrl = TextEditingController(text: hex),
-
         sizes = sizes ?? <_VariantSizeDraft>[];
 
   final TextEditingController nameCtrl;
@@ -327,24 +292,16 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
   Future<void> _openVariantsEditor() async {
     await showModalBottomSheet<void>(
-
       context: context,
-
       useSafeArea: true,
-
       isScrollControlled: true,
-
       showDragHandle: true,
-
       builder: (ctx) {
         final cs = Theme.of(ctx).colorScheme;
 
         return Directionality(
-
           textDirection: TextDirection.rtl,
-
           child: LayoutBuilder(
-
             builder: (context, constraints) {
               final screenH = MediaQuery.sizeOf(ctx).height;
 
@@ -359,149 +316,82 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
               final sheetH = targetH > maxH ? maxH : targetH;
 
               return SizedBox(
-
                 height: sheetH,
-
                 child: StatefulBuilder(
-
                   builder: (context, sheetSetState) {
                     return Material(
-
                       color: cs.surface,
-
                       child: Column(
-
                         children: [
 
                           Padding(
-
                             padding: EdgeInsetsDirectional.fromSTEB(
-
                               16,
-
                               8,
-
                               16,
-
                               8,
-
                             ),
-
                             child: Row(
-
                               children: [
 
                                 Expanded(
-
                                   child: Text(
-
                                     loc.colorsAndSizes,
-
                                     style:
 
                                         TextStyle(fontWeight: FontWeight.w900),
-
                                   ),
-
                                 ),
-
                                 TextButton(
-
                                   onPressed: () => Navigator.pop(ctx),
-
                                   child: Text(loc.closeBtn),
-
                                 ),
-
                               ],
-
                             ),
-
                           ),
-
                           const Divider(height: 1),
-
                           Expanded(
-
                             child: SingleChildScrollView(
-
                               padding: const EdgeInsetsDirectional.fromSTEB(
-
                                 16,
-
                                 12,
-
                                 16,
-
                                 24,
-
                               ),
-
                               child: _buildVariantsSection(
-
                                 ctx,
-
                                 setStateOverride: sheetSetState,
-
                               ),
-
                             ),
-
                           ),
-
                           SafeArea(
-
                             top: false,
-
                             child: Padding(
-
                               padding: EdgeInsetsDirectional.fromSTEB(
-
                                 16,
-
                                 10,
-
                                 16,
-
                                 16,
-
                               ),
-
                               child: SizedBox(
-
                                 width: double.infinity,
-
                                 child: FilledButton(
-
                                   onPressed: () => Navigator.pop(ctx),
-
                                   child: Text(loc.doneBtn),
-
                                 ),
-
                               ),
-
                             ),
-
                           ),
-
                         ],
-
                       ),
-
                     );
                   },
-
                 ),
-
               );
             },
-
           ),
-
         );
       },
-
     );
 
     if (!mounted) return;
@@ -579,11 +469,8 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
         if (id <= 0) continue;
 
         final d = _VariantColorDraft(
-
           name: (row['name'] ?? '').toString(),
-
           hex: (row['hexCode'] ?? '').toString(),
-
         );
 
         draftByColorId[id] = d;
@@ -599,17 +486,11 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
         if (cd == null) continue;
 
         cd.sizes.add(
-
           _VariantSizeDraft(
-
             size: (v['size'] ?? '').toString(),
-
             qty: (v['quantity'] as num?)?.toInt() ?? 0,
-
             barcode: (v['barcode'] ?? '').toString(),
-
           ),
-
         );
       }
 
@@ -742,17 +623,11 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
     if (variantErr != null) {
       ScaffoldMessenger.of(context).showSnackBar(
-
         SnackBar(
-
           content: Text(variantErr),
-
           backgroundColor: Colors.red.shade700,
-
           behavior: SnackBarBehavior.floating,
-
         ),
-
       );
 
       return;
@@ -767,15 +642,10 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
       if (!(f > 0)) {
         ScaffoldMessenger.of(context).showSnackBar(
-
           const SnackBar(
-
             content: Text('عامل التحويل يجب أن يكون أكبر من 0 لكل وحدة جديدة.'),
-
             behavior: SnackBarBehavior.floating,
-
           ),
-
         );
 
         return;
@@ -796,27 +666,16 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       final low = _multiVariantEnabled ? 0.0 : _parseMoney(_low);
 
       await _repo.updateProductBasic(
-
         productId: widget.productId,
-
         name: _name.text,
-
         barcode: _barcode.text.trim().isEmpty ? null : _barcode.text.trim(),
-
         buyPrice: buy,
-
         sellPrice: sell,
-
         minSellPrice: minSell,
-
         qty: qty,
-
         lowStockThreshold: low,
-
         trackInventory: _track,
-
         stockBaseKind: _stockBaseKind,
-
       );
 
       if (_multiVariantEnabled) {
@@ -864,15 +723,10 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
             final colorId = await ProductVariantsSqlOps.insertColor(txn, tid, {
               'productId': widget.productId,
-
               'name': name,
-
               'hexCode': hex.isEmpty ? null : hex,
-
               'sortOrder': colorIndex,
-
               'createdAt': now,
-
               'updatedAt': now,
             });
 
@@ -887,13 +741,9 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                 // ensure tenant-scoped uniqueness for variants
 
                 final taken = await ProductVariantsSqlOps.isBarcodeTakenInTenant(
-
                   txn,
-
                   tid,
-
                   bc,
-
                 );
 
                 if (taken) throw StateError('duplicate_variant_barcode');
@@ -901,43 +751,28 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                 // ensure global uniqueness against products + unit variants
 
                 if (await _repo.isBarcodeTakenAnywhere(
-
                   bc,
-
                   excludeProductId: widget.productId,
-
                   executor: txn,
-
                 )) {
                   throw StateError('duplicate_barcode');
                 }
               }
 
               final sku = ProductVariantsRepository.buildSku(
-
                 productId: widget.productId,
-
                 colorIndex: colorIndex,
-
                 size: size,
-
               );
 
               await ProductVariantsSqlOps.insertVariant(txn, tid, {
                 'productId': widget.productId,
-
                 'colorId': colorId,
-
                 'size': size,
-
                 'quantity': q,
-
                 'barcode': bc.isEmpty ? null : bc,
-
                 'sku': sku,
-
                 'createdAt': now,
-
                 'updatedAt': now,
               });
             }
@@ -961,21 +796,13 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
         final ms = r.minSell.text.trim();
 
         await _repo.updateProductUnitVariant(
-
           id: r.variantId,
-
           unitName: r.unitName.text.trim(),
-
           unitSymbol: r.unitSymbol.text.trim(),
-
           factorToBase: f,
-
           barcode: bc,
-
           sellPrice: s.isEmpty ? null : double.tryParse(s.replaceAll(',', '.')),
-
           minSellPrice: ms.isEmpty ? null : double.tryParse(ms.replaceAll(',', '.')),
-
         );
       }
 
@@ -993,25 +820,16 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
         final ms = row.minSell.text.trim();
 
         await _repo.insertProductUnitVariant(
-
           productId: widget.productId,
-
           unitName: unit,
-
           unitSymbol:
 
               row.unitSymbol.text.trim().isEmpty ? null : row.unitSymbol.text.trim(),
-
           factorToBase: f,
-
           barcode: bc.isEmpty ? null : bc,
-
           sellPrice: s.isEmpty ? null : double.tryParse(s.replaceAll(',', '.')),
-
           minSellPrice: ms.isEmpty ? null : double.tryParse(ms.replaceAll(',', '.')),
-
           isDefault: false,
-
         );
       }
 
@@ -1038,9 +856,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
               : 'تعذر حفظ التعديلات';
 
       ScaffoldMessenger.of(context).showSnackBar(
-
         SnackBar(content: Text(msg), behavior: SnackBarBehavior.floating),
-
       );
     } finally {
       if (mounted) setState(() => _saving = false);
@@ -1048,7 +864,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
   }
 
   Widget _buildVariantsSection(
-
     BuildContext context, {
     void Function(void Function())? setStateOverride,
   }) {
@@ -1068,15 +883,10 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       final current = parseFlexibleHexColor(c.hexCtrl.text) ?? cs.primary;
 
       final chosen = await showAppColorPickerDialog(
-
         context: context,
-
         initialColor: current,
-
         title: 'اختيار لون',
-
         subtitle: 'اختر لوناً يمثّل هذا الخيار (اختياري).',
-
       );
 
       if (chosen == null || !mounted) return;
@@ -1096,11 +906,8 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
     Future<void> pickSizeFor(_VariantSizeDraft s) async {
       final chosen = await showVariantSizePickerSheet(
-
         context,
-
         current: s.sizeCtrl.text.trim(),
-
       );
 
       if (chosen == null) return;
@@ -1114,51 +921,29 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       final ctrl = TextEditingController();
 
       final ok = await showDialog<bool>(
-
         context: context,
-
         builder: (ctx) => AlertDialog(
-
           title: Text(loc.applyUniformQtyTitle),
-
           content: TextField(
-
             controller: ctrl,
-
             keyboardType: TextInputType.number,
-
             decoration: InputDecoration(
-
               hintText: loc.enterQtyHint,
-
               border: OutlineInputBorder(),
-
             ),
-
           ),
-
           actions: [
 
             TextButton(
-
               onPressed: () => Navigator.pop(ctx, false),
-
               child: Text(loc.cancelAction),
-
             ),
-
             FilledButton(
-
               onPressed: () => Navigator.pop(ctx, true),
-
               child: Text(loc.doneBtn),
-
             ),
-
           ],
-
         ),
-
       );
 
       if (ok != true || !mounted) return;
@@ -1167,21 +952,13 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
       if (q < 0) {
         ScaffoldMessenger.of(context).showSnackBar(
-
           SnackBar(
-
             content: Text(
-
               loc.qtyMustBePositive,
-
             ),
-
             backgroundColor: Colors.red.shade700,
-
             behavior: SnackBarBehavior.floating,
-
           ),
-
         );
 
         return;
@@ -1203,125 +980,66 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
       Widget sizeRow(_VariantSizeDraft s, int sizeIndex) {
         return Padding(
-
           padding: EdgeInsetsDirectional.only(bottom: 8),
-
           child: Row(
-
             crossAxisAlignment: CrossAxisAlignment.start,
-
             children: [
 
               Expanded(
-
                 flex: 3,
-
                 child: TextFormField(
-
                   controller: s.sizeCtrl,
-
                   readOnly: true,
-
                   canRequestFocus: false,
-
                   onTap: () => pickSizeFor(s),
-
                   decoration: InputDecoration(
-
                     labelText: loc.sizeLabel,
-
                     border: OutlineInputBorder(),
-
                     isDense: true,
-
                     suffixIcon: Icon(Icons.expand_more, color: cs.primary),
-
                   ),
-
                   textAlign: TextAlign.start,
-
                   textDirection: TextDirection.ltr,
-
                 ),
-
               ),
-
               SizedBox(width: 6),
-
               IconButton(
-
                 tooltip: loc.chooseSizeTooltip,
-
                 onPressed: () => pickSizeFor(s),
-
                 icon: Icon(Icons.view_module_outlined, color: cs.primary),
-
               ),
-
               SizedBox(width: 8),
-
               Expanded(
-
                 flex: 2,
-
                 child: TextFormField(
-
                   controller: s.qtyCtrl,
-
                   keyboardType: TextInputType.number,
-
                   decoration: InputDecoration(
-
                     labelText: loc.qtyLabel,
-
                     border: OutlineInputBorder(),
-
                     isDense: true,
-
                   ),
-
                   textDirection: TextDirection.ltr,
-
                   textAlign: TextAlign.end,
-
                 ),
-
               ),
-
               SizedBox(width: 8),
-
               Expanded(
-
                 flex: 4,
-
                 child: TextFormField(
-
                   controller: s.barcodeCtrl,
-
                   decoration: InputDecoration(
-
                     labelText: loc.barcodeOptional,
-
                     border: OutlineInputBorder(),
-
                     isDense: true,
-
                   ),
-
                   textDirection: TextDirection.ltr,
-
                   textAlign: TextAlign.start,
-
                 ),
-
               ),
-
               SizedBox(width: 6),
-
               IconButton(
-
                 tooltip: loc.deleteTooltip,
-
                 onPressed: () {
                   ss(() {
                     final removed = c.sizes.removeAt(sizeIndex);
@@ -1329,124 +1047,72 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                     removed.dispose();
                   });
                 },
-
                 icon: const Icon(Icons.delete_outline, color: Colors.red),
-
               ),
-
             ],
-
           ),
-
         );
       }
 
       return Material(
-
         color: cs.surface,
-
         borderRadius: ac.md,
-
         child: Container(
-
           padding: EdgeInsets.all(14),
-
           decoration: BoxDecoration(
-
             borderRadius: ac.md,
-
             border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.65)),
-
           ),
-
           child: Column(
-
             crossAxisAlignment: CrossAxisAlignment.stretch,
-
             children: [
 
               Row(
-
                 children: [
 
                   Expanded(
-
                     child: TextFormField(
-
                       controller: c.nameCtrl,
-
                       decoration: InputDecoration(
-
                         labelText: loc.colorNameLabel,
-
                         border: OutlineInputBorder(),
-
                         isDense: true,
-
                       ),
-
                       onChanged: (_) {
                         c.nameManuallyEdited = true;
 
                         ss(() {});
                       },
-
                       textAlign: TextAlign.start,
-
                     ),
-
                   ),
-
                   SizedBox(width: 10),
-
                   Tooltip(
-
                     message: loc.colorPickerTooltip,
-
                     child: InkWell(
-
                       onTap: () => pickColorFor(c),
-
                       child: Container(
-
                         width: 42,
-
                         height: 42,
-
                         decoration: BoxDecoration(
-
                           color: preview,
-
                           border: Border.all(color: cs.outlineVariant),
-
                           borderRadius: BorderRadius.zero,
-
                         ),
-
                         child: hexColor == null
 
                             ? Icon(
-
                                 Icons.color_lens_outlined,
-
                                 color: cs.onSurfaceVariant,
-
                               )
 
                             : null,
-
                       ),
-
                     ),
-
                   ),
-
                   SizedBox(width: 8),
-
                   IconButton(
-
                     tooltip: loc.deleteColorTooltip,
-
                     onPressed: () {
                       ss(() {
                         final idx = _colorDrafts.indexOf(c);
@@ -1458,226 +1124,131 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                         }
                       });
                     },
-
                     icon: const Icon(Icons.delete_outline, color: Colors.red),
-
                   ),
-
                 ],
-
               ),
-
               const SizedBox(height: 12),
-
               Container(
-
                 padding: const EdgeInsets.all(10),
-
                 decoration: BoxDecoration(
-
                   color: cs.surfaceContainerHighest.withValues(alpha: 0.30),
-
                   border: Border.all(color: cs.outlineVariant),
-
                 ),
-
                 child: Column(
-
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-
                   children: [
 
                     Text(
-
                       'المقاسات والكميات',
-
                       style: TextStyle(
-
                         fontWeight: FontWeight.w900,
-
                         color: cs.onSurface,
-
                       ),
-
                     ),
-
                     SizedBox(height: 10),
-
                     if (c.sizes.isEmpty)
 
                       Text(
-
                         loc.noSizesYet,
-
                         style: TextStyle(color: cs.onSurfaceVariant),
-
                       )
 
                     else
 
                       LayoutBuilder(
-
                         builder: (ctx, constraints) {
                           final wide = constraints.maxWidth >= 760;
 
                           final list = Column(
-
                             children: [
 
                               for (var i = 0; i < c.sizes.length; i++)
 
                                 sizeRow(c.sizes[i], i),
-
                             ],
-
                           );
 
                           if (wide) return list;
 
                           return SingleChildScrollView(
-
                             scrollDirection: Axis.horizontal,
-
                             child: ConstrainedBox(
-
                               constraints: BoxConstraints(minWidth: 760),
-
                               child: list,
-
                             ),
-
                           );
                         },
-
                       ),
-
                     SizedBox(height: 8),
-
                     Align(
-
                       alignment: AlignmentDirectional.centerEnd,
-
                       child: OutlinedButton.icon(
-
                         onPressed: () {
                           ss(() => c.sizes.add(_VariantSizeDraft()));
                         },
-
                         icon: Icon(Icons.add, size: 18),
-
                         label: Text(loc.addSizeBtn),
-
                       ),
-
                     ),
-
                     const SizedBox(height: 8),
-
                     Text(
-
                       'إجمالي اللون: ${_totalQtyForColor(c)}',
-
                       textAlign: TextAlign.end,
-
                       style: TextStyle(
-
                         fontWeight: FontWeight.w700,
-
                         color: cs.primary,
-
                       ),
-
                     ),
-
                   ],
-
                 ),
-
               ),
-
             ],
-
           ),
-
         ),
-
       );
     }
 
     return Container(
-
       padding: EdgeInsets.all(14),
-
       decoration: BoxDecoration(
-
         color: cs.surface,
-
         borderRadius: ac.md,
-
         border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.65)),
-
       ),
-
       child: Column(
-
         crossAxisAlignment: CrossAxisAlignment.stretch,
-
         children: [
 
           Row(
-
             children: [
 
               Expanded(
-
                 child: Text(
-
                   loc.colorsAndSizes,
-
                   style: TextStyle(
-
                     fontWeight: FontWeight.w900,
-
                     color: cs.onSurface,
-
                   ),
-
                 ),
-
               ),
-
               Text(
-
                 'الإجمالي: ${_totalQtyAllVariants()}',
-
                 style: TextStyle(
-
                   fontWeight: FontWeight.w800,
-
                   color: cs.onSurfaceVariant,
-
                 ),
-
               ),
-
             ],
-
           ),
-
           SizedBox(height: 10),
-
           Wrap(
-
             spacing: 8,
-
             runSpacing: 8,
-
             alignment: WrapAlignment.end,
-
             children: [
 
               FilledButton.icon(
-
                 onPressed: () => ss(() {
                   final c = _VariantColorDraft();
 
@@ -1685,61 +1256,36 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
                   _colorDrafts.add(c);
                 }),
-
                 icon: Icon(Icons.add),
-
                 label: Text(loc.addNewColor),
-
               ),
-
               OutlinedButton.icon(
-
                 onPressed: _colorDrafts.isEmpty ? null : applyUniformQty,
-
                 icon: Icon(Icons.auto_fix_high_outlined),
-
                 label: Text(loc.applyUniformQtyAllSizes),
-
               ),
-
             ],
-
           ),
-
           SizedBox(height: 12),
-
           if (_colorDrafts.isEmpty)
 
             Text(
-
               loc.noColorsYet,
-
               style: TextStyle(color: cs.onSurfaceVariant),
-
               textAlign: TextAlign.end,
-
             )
 
           else
 
             ListView.separated(
-
               shrinkWrap: true,
-
               physics: const NeverScrollableScrollPhysics(),
-
               itemCount: _colorDrafts.length,
-
               separatorBuilder: (_, __) => const SizedBox(height: 12),
-
               itemBuilder: (ctx, i) => colorCard(_colorDrafts[i]),
-
             ),
-
         ],
-
       ),
-
     );
   }
 
@@ -1754,319 +1300,182 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
     final ac = context.appCorners;
 
     return Directionality(
-
       textDirection: TextDirection.rtl,
-
       child: Scaffold(
-
         backgroundColor: theme.scaffoldBackgroundColor,
-
         appBar: AppBar(
-
           backgroundColor: cs.primary,
-
           foregroundColor: cs.onPrimary,
-
           title: Text(loc.editProductTitle, style: TextStyle(fontWeight: FontWeight.w900)),
-
           actions: [
 
             TextButton(
-
               onPressed: _saving ? null : _save,
-
               style: TextButton.styleFrom(foregroundColor: cs.onPrimary),
-
               child: _saving
 
                   ? SizedBox(
-
                       width: 18,
-
                       height: 18,
-
                       child: CircularProgressIndicator(strokeWidth: 2),
-
                     )
 
                   : Text(loc.saveBtn, style: TextStyle(fontWeight: FontWeight.w900)),
-
             ),
-
             const SizedBox(width: 6),
-
           ],
-
         ),
-
         body: _loading
 
             ? const Center(child: CircularProgressIndicator())
 
             : Form(
-
                 key: _formKey,
-
                 child: ListView(
-
                   padding: const EdgeInsets.fromLTRB(14, 12, 14, 24),
-
                   children: [
 
                     Container(
-
                       padding: const EdgeInsets.all(14),
-
                       decoration: BoxDecoration(
-
                         color: cs.surface,
-
                         borderRadius: ac.md,
-
                         border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.65)),
-
                         boxShadow: [
 
                           BoxShadow(
-
                             color: cs.shadow.withValues(alpha: 0.06),
-
                             blurRadius: 14,
-
                             offset: Offset(0, 4),
-
                           ),
-
                         ],
-
                       ),
-
                       child: Column(
-
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-
                         children: [
 
                           _field(
-
                             label: loc.productNameLabel,
-
                             controller: _name,
-
                             hint: loc.productNameHint,
-
                             validator: (v) => (v == null || v.trim().isEmpty)
 
                                 ? loc.nameRequired
 
                                 : null,
-
                           ),
-
                           SizedBox(height: 10),
-
                           _field(
-
                             label: loc.barcodeOptionalLabel,
-
                             controller: _barcode,
-
                             hint: 'SEED-...',
-
                             keyboard: TextInputType.number,
-
                           ),
-
                           SizedBox(height: 10),
-
                           SwitchListTile.adaptive(
-
                             value: _track,
-
                             onChanged: _multiVariantEnabled
 
                                 ? null
 
                                 : (v) => setState(() => _track = v),
-
                             contentPadding: EdgeInsets.zero,
-
                             title: Text(loc.trackStock, style: TextStyle(fontWeight: FontWeight.w800)),
-
                             subtitle: Text(
-
                               _track ? 'يحسب الكمية والتنبيه منخفض' : 'الكمية تُصبح 0 ولا تظهر تنبيهات مخزون',
-
                               style: TextStyle(color: cs.onSurfaceVariant, fontSize: 12),
-
                             ),
-
                           ),
-
                         ],
-
                       ),
-
                     ),
-
                     const SizedBox(height: 12),
-
                     Container(
-
                       padding: const EdgeInsets.all(14),
-
                       decoration: BoxDecoration(
-
                         color: cs.surface,
-
                         borderRadius: ac.md,
-
                         border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.65)),
-
                       ),
-
                       child: Column(
-
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-
                         children: [
 
                           Text('التسعير', style: TextStyle(fontWeight: FontWeight.w900, color: cs.onSurface)),
-
                           SizedBox(height: 10),
-
                           Row(
-
                             children: [
 
                               Expanded(
-
                                 child: _field(
-
                                   label: loc.salePriceLabel,
-
                                   controller: _sell,
-
                                   hint: '0',
-
                                   keyboard: TextInputType.number,
-
                                   validator: (v) => (_parseMoney(_sell) <= 0)
 
                                       ? loc.enterSalePrice
 
                                       : null,
-
                                 ),
-
                               ),
-
                               SizedBox(width: 10),
-
                               Expanded(
-
                                 child: _field(
-
                                   label: loc.purchasePriceLabel,
-
                                   controller: _buy,
-
                                   hint: '0',
-
                                   keyboard: TextInputType.number,
-
                                 ),
-
                               ),
-
                             ],
-
                           ),
-
                           SizedBox(height: 10),
-
                           _field(
-
                             label: loc.minSalePriceLabel,
-
                             controller: _minSell,
-
                             hint: '0',
-
                             keyboard: TextInputType.number,
-
                           ),
-
                         ],
-
                       ),
-
                     ),
-
                     SizedBox(height: 12),
-
                     Container(
-
                       padding: EdgeInsets.all(14),
-
                       decoration: BoxDecoration(
-
                         color: cs.surface,
-
                         borderRadius: ac.md,
-
                         border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.65)),
-
                       ),
-
                       child: Column(
-
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-
                         children: [
 
                           Text(
-
                             loc.baseStockType,
-
                             style: TextStyle(fontWeight: FontWeight.w900, color: cs.onSurface),
-
                           ),
-
                           SizedBox(height: 10),
-
                           DropdownButtonFormField<int>(
-
                             value: _stockTypeUi,
-
                             decoration: InputDecoration(
-
                               border: OutlineInputBorder(),
-
                               isDense: true,
-
                             ),
-
                             items: [
 
                               DropdownMenuItem(value: 0, child: Text(loc.stockTypePiece)),
-
                               if (_enableWeightSales || _stockTypeUi == 1)
 
                                 DropdownMenuItem(value: 1, child: Text(loc.stockTypeWeight)),
-
                               if (_enableClothingVariants || _stockTypeUi == 2)
 
                                 DropdownMenuItem(
-
                                   value: 2,
-
                                   child: Text(loc.stockTypeClothing),
-
                                 ),
-
                             ],
-
                             onChanged: (v) {
                               final next = v ?? 0;
 
@@ -2094,141 +1503,77 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                                 }
                               });
                             },
-
                           ),
-
                           if (_stockTypeUi == 2) ...[
 
                             SizedBox(height: 10),
-
                             Container(
-
                               padding: EdgeInsets.all(12),
-
                               decoration: BoxDecoration(
-
                                 color: cs.surfaceContainerHighest.withValues(alpha: 0.35),
-
                                 border: Border.all(color: cs.outlineVariant),
-
                               ),
-
                               child: Column(
-
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
-
                                 children: [
 
                                   Text(
-
                                     loc.colorsAndSizes,
-
                                     style: TextStyle(
-
                                       fontWeight: FontWeight.w900,
-
                                       color: cs.onSurface,
-
                                     ),
-
                                     textAlign: TextAlign.start,
-
                                   ),
-
                                   SizedBox(height: 6),
-
                                   Text(
-
                                     _variantsSummaryLine(),
-
                                     style: TextStyle(color: cs.onSurfaceVariant),
-
                                     textAlign: TextAlign.start,
-
                                   ),
-
                                   SizedBox(height: 10),
-
                                   Align(
-
                                     alignment: AlignmentDirectional.centerEnd,
-
                                     child: OutlinedButton.icon(
-
                                       onPressed: _openVariantsEditor,
-
                                       icon: Icon(Icons.palette_outlined, size: 18),
-
                                       label: Text(loc.editColorsSizesBtn),
-
                                     ),
-
                                   ),
-
                                 ],
-
                               ),
-
                             ),
-
                           ],
-
                         ],
-
                       ),
-
                     ),
-
                     SizedBox(height: 12),
-
                     Container(
-
                       padding: EdgeInsets.all(14),
-
                       decoration: BoxDecoration(
-
                         color: cs.surface,
-
                         borderRadius: ac.md,
-
                         border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.65)),
-
                       ),
-
                       child: Column(
-
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-
                         children: [
 
                           Text(
-
                             loc.salesUnitsBarcode,
-
                             style: TextStyle(fontWeight: FontWeight.w900, color: cs.onSurface),
-
                           ),
-
                           const SizedBox(height: 6),
-
                           Text(
-
                             'الوحدة الافتراضية تُدار تلقائياً مع المنتج؛ يمكنك تعديل الوحدات الإضافية أو إضافة وحدة جديدة.',
-
                             style: TextStyle(fontSize: 12, color: cs.onSurfaceVariant, height: 1.35),
-
                           ),
-
                           SizedBox(height: 10),
-
                           if (_variantsLoading)
 
                             Center(child: Padding(
-
                               padding: EdgeInsets.all(10),
-
                               child: CircularProgressIndicator(),
-
                             ))
 
                           else ...[
@@ -2238,261 +1583,142 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                               if (r.isDefault)
 
                                 ListTile(
-
                                   contentPadding: EdgeInsets.zero,
-
                                   title: Text(loc.defaultUnitTitle, style: TextStyle(fontWeight: FontWeight.w900)),
-
                                   subtitle: Text(
-
                                     '${r.unitName.text.trim()} — عامل ${r.factor.text.trim()}',
-
                                     style: TextStyle(color: cs.onSurfaceVariant),
-
                                   ),
-
                                 )
 
                               else ...[
 
                                 Text('وحدة #${r.variantId}', style: const TextStyle(fontWeight: FontWeight.w900)),
-
                                 const SizedBox(height: 8),
-
                                 Row(
-
                                   children: [
 
                                     Expanded(
-
                                       child: TextFormField(
-
                                         controller: r.unitName,
-
                                         textAlign: TextAlign.right,
-
                                         decoration: const InputDecoration(
-
                                           labelText: 'اسم الوحدة',
-
                                           border: OutlineInputBorder(),
-
                                           isDense: true,
-
                                         ),
-
                                       ),
-
                                     ),
-
                                     const SizedBox(width: 8),
-
                                     Expanded(
-
                                       child: TextFormField(
-
                                         controller: r.unitSymbol,
-
                                         textAlign: TextAlign.right,
-
                                         decoration: const InputDecoration(
-
                                           labelText: 'رمز',
-
                                           border: OutlineInputBorder(),
-
                                           isDense: true,
-
                                         ),
-
                                       ),
-
                                     ),
-
                                   ],
-
                                 ),
-
                                 const SizedBox(height: 8),
-
                                 Row(
-
                                   children: [
 
                                     Expanded(
-
                                       child: TextFormField(
-
                                         controller: r.factor,
-
                                         textAlign: TextAlign.right,
-
                                         keyboardType: const TextInputType.numberWithOptions(decimal: true),
-
                                         inputFormatters: [
 
                                           FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-
                                         ],
-
                                         decoration: const InputDecoration(
-
                                           labelText: 'عامل التحويل إلى الأساس',
-
                                           border: OutlineInputBorder(),
-
                                           isDense: true,
-
                                         ),
-
                                       ),
-
                                     ),
-
                                     const SizedBox(width: 8),
-
                                     Expanded(
-
                                       child: TextFormField(
-
                                         controller: r.barcode,
-
                                         textAlign: TextAlign.right,
-
                                         decoration: const InputDecoration(
-
                                           labelText: 'باركود (اختياري)',
-
                                           border: OutlineInputBorder(),
-
                                           isDense: true,
-
                                         ),
-
                                       ),
-
                                     ),
-
                                   ],
-
                                 ),
-
                                 const SizedBox(height: 8),
-
                                 Row(
-
                                   children: [
 
                                     Expanded(
-
                                       child: TextFormField(
-
                                         controller: r.sell,
-
                                         textAlign: TextAlign.right,
-
                                         keyboardType: TextInputType.number,
-
                                         decoration: const InputDecoration(
-
                                           labelText: 'سعر بيع الوحدة (اختياري)',
-
                                           border: OutlineInputBorder(),
-
                                           isDense: true,
-
                                         ),
-
                                       ),
-
                                     ),
-
                                     const SizedBox(width: 8),
-
                                     Expanded(
-
                                       child: TextFormField(
-
                                         controller: r.minSell,
-
                                         textAlign: TextAlign.right,
-
                                         keyboardType: TextInputType.number,
-
                                         decoration: const InputDecoration(
-
                                           labelText: 'أدنى سعر (اختياري)',
-
                                           border: OutlineInputBorder(),
-
                                           isDense: true,
-
                                         ),
-
                                       ),
-
                                     ),
-
                                   ],
-
                                 ),
-
                                 SizedBox(height: 12),
-
                               ],
-
                             ],
-
                             Align(
-
                               alignment: Alignment.centerRight,
-
                               child: OutlinedButton.icon(
-
                                 onPressed: () => setState(() => _newVariantDrafts.add(_NewUnitVariantDraft())),
-
                                 icon: Icon(Icons.add, size: 18),
-
                                 label: Text(loc.addNewUnitBtn),
-
                               ),
-
                             ),
-
                             for (final n in _newVariantDrafts) ...[
 
                               SizedBox(height: 10),
-
                               Material(
-
                                 color: cs.surfaceContainerHighest.withValues(alpha: 0.35),
-
                                 borderRadius: ac.sm,
-
                                 child: Padding(
-
                                   padding: EdgeInsets.all(10),
-
                                   child: Column(
-
                                     crossAxisAlignment: CrossAxisAlignment.stretch,
-
                                     children: [
 
                                       Row(
-
                                         children: [
 
                                           Expanded(
-
                                             child: Text(loc.newUnitTitle, style: TextStyle(fontWeight: FontWeight.w900)),
-
                                           ),
-
                                           IconButton(
-
                                             tooltip: loc.cancelTooltip,
-
                                             onPressed: () => setState(() {
                                               final idx = _newVariantDrafts.indexOf(n);
 
@@ -2502,331 +1728,179 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                                                 r.dispose();
                                               }
                                             }),
-
                                             icon: const Icon(Icons.close, color: Colors.red),
-
                                           ),
-
                                         ],
-
                                       ),
-
                                       const SizedBox(height: 8),
-
                                       Row(
-
                                         children: [
 
                                           Expanded(
-
                                             child: TextFormField(
-
                                               controller: n.unitName,
-
                                               textAlign: TextAlign.right,
-
                                               decoration: const InputDecoration(
-
                                                 labelText: 'اسم الوحدة',
-
                                                 border: OutlineInputBorder(),
-
                                                 isDense: true,
-
                                               ),
-
                                             ),
-
                                           ),
-
                                           const SizedBox(width: 8),
-
                                           Expanded(
-
                                             child: TextFormField(
-
                                               controller: n.unitSymbol,
-
                                               textAlign: TextAlign.right,
-
                                               decoration: const InputDecoration(
-
                                                 labelText: 'رمز',
-
                                                 border: OutlineInputBorder(),
-
                                                 isDense: true,
-
                                               ),
-
                                             ),
-
                                           ),
-
                                         ],
-
                                       ),
-
                                       const SizedBox(height: 8),
-
                                       Row(
-
                                         children: [
 
                                           Expanded(
-
                                             child: TextFormField(
-
                                               controller: n.factor,
-
                                               textAlign: TextAlign.right,
-
                                               keyboardType: const TextInputType.numberWithOptions(decimal: true),
-
                                               inputFormatters: [
 
                                                 FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-
                                               ],
-
                                               decoration: const InputDecoration(
-
                                                 labelText: 'عامل التحويل إلى الأساس',
-
                                                 border: OutlineInputBorder(),
-
                                                 isDense: true,
-
                                               ),
-
                                             ),
-
                                           ),
-
                                           const SizedBox(width: 8),
-
                                           Expanded(
-
                                             child: TextFormField(
-
                                               controller: n.barcode,
-
                                               textAlign: TextAlign.right,
-
                                               decoration: const InputDecoration(
-
                                                 labelText: 'باركود (اختياري)',
-
                                                 border: OutlineInputBorder(),
-
                                                 isDense: true,
-
                                               ),
-
                                             ),
-
                                           ),
-
                                         ],
-
                                       ),
-
                                       const SizedBox(height: 8),
-
                                       Row(
-
                                         children: [
 
                                           Expanded(
-
                                             child: TextFormField(
-
                                               controller: n.sell,
-
                                               textAlign: TextAlign.right,
-
                                               keyboardType: TextInputType.number,
-
                                               decoration: const InputDecoration(
-
                                                 labelText: 'سعر بيع الوحدة (اختياري)',
-
                                                 border: OutlineInputBorder(),
-
                                                 isDense: true,
-
                                               ),
-
                                             ),
-
                                           ),
-
                                           const SizedBox(width: 8),
-
                                           Expanded(
-
                                             child: TextFormField(
-
                                               controller: n.minSell,
-
                                               textAlign: TextAlign.right,
-
                                               keyboardType: TextInputType.number,
-
                                               decoration: const InputDecoration(
-
                                                 labelText: 'أدنى سعر (اختياري)',
-
                                                 border: OutlineInputBorder(),
-
                                                 isDense: true,
-
                                               ),
-
                                             ),
-
                                           ),
-
                                         ],
-
                                       ),
-
                                     ],
-
                                   ),
-
                                 ),
-
                               ),
-
                             ],
-
                           ],
-
                         ],
-
                       ),
-
                     ),
-
                     SizedBox(height: 12),
-
                     Container(
-
                       padding: EdgeInsets.all(14),
-
                       decoration: BoxDecoration(
-
                         color: cs.surface,
-
                         borderRadius: ac.md,
-
                         border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.65)),
-
                       ),
-
                       child: Column(
-
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-
                         children: [
 
                           Text(loc.stockTitle, style: TextStyle(fontWeight: FontWeight.w900, color: cs.onSurface)),
-
                           SizedBox(height: 10),
-
                           if (_multiVariantEnabled)
 
                             Text(
-
                               'المخزون يُدار عبر الألوان والمقاسات. الإجمالي الحالي: ${_totalQtyAllVariants()}',
-
                               textAlign: TextAlign.end,
-
                               style: TextStyle(color: cs.onSurfaceVariant),
-
                             )
 
                           else
 
                             Row(
-
                               children: [
 
                                 Expanded(
-
                                   child: _field(
-
                                     label: loc.quantityLabel,
-
                                     controller: _qty,
-
                                     hint: '0',
-
                                     keyboard: TextInputType.number,
-
                                   ),
-
                                 ),
-
                                 SizedBox(width: 10),
-
                                 Expanded(
-
                                   child: _field(
-
                                     label: loc.lowStockThreshold,
-
                                     controller: _low,
-
                                     hint: '0',
-
                                     keyboard: TextInputType.number,
-
                                   ),
-
                                 ),
-
                               ],
-
                             ),
-
                           SizedBox(height: 10),
-
                           FilledButton(
-
                             onPressed: _saving ? null : _save,
-
                             child: Text(loc.saveChangesBtn),
-
                           ),
-
                         ],
-
                       ),
-
                     ),
-
                   ],
-
                 ),
-
               ),
-
       ),
-
     );
   }
 
   Widget _field({
     required String label,
-
     required TextEditingController controller,
-
     required String hint,
-
     TextInputType keyboard = TextInputType.text,
-
     String? Function(String?)? validator,
   }) {
     final cs = Theme.of(context).colorScheme;
@@ -2834,41 +1908,24 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
     final ac = context.appCorners;
 
     return Column(
-
       crossAxisAlignment: CrossAxisAlignment.stretch,
-
       children: [
 
         Text(label, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: cs.onSurfaceVariant)),
-
         const SizedBox(height: 6),
-
         TextFormField(
-
           controller: controller,
-
           validator: validator,
-
           keyboardType: keyboard,
-
           textDirection: TextDirection.rtl,
-
           decoration: InputDecoration(
-
             hintText: hint,
-
             filled: true,
-
             fillColor: cs.surfaceContainerHighest.withValues(alpha: 0.55),
-
             border: OutlineInputBorder(borderRadius: ac.sm, borderSide: BorderSide.none),
-
           ),
-
         ),
-
       ],
-
     );
   }
 }

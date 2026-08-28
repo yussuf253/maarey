@@ -1,35 +1,19 @@
 import 'dart:async' show Timer, unawaited;
-
 import 'package:flutter/material.dart';
-
 import '../../l10n/generated/app_localizations.dart';
-
 import 'package:flutter/services.dart';
-
 import 'package:provider/provider.dart';
-
 import '../../providers/global_barcode_route_bridge.dart';
-
 import '../../providers/notification_provider.dart';
-
 import '../../providers/product_provider.dart';
-
 import '../../services/product_repository.dart';
-
 import '../../theme/design_tokens.dart';
-
 import '../../utils/numeric_format.dart';
-
 import '../../utils/screen_layout.dart';
-
 import '../../utils/validate_price_logic.dart';
-
 import '../../widgets/barcode_input_launcher.dart';
-
 import '../../widgets/inputs/app_input.dart';
-
 import '../../widgets/inputs/app_number_input.dart';
-
 import '../../widgets/inputs/app_price_input.dart';
 
 /// Intent for Ctrl+S
@@ -141,39 +125,23 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     if (!_anyDirty) return true;
 
     final ok = await showDialog<bool>(
-
       context: context,
-
       barrierDismissible: false,
-
       builder: (ctx) => AlertDialog(
-
         title: Text(loc.unsavedChanges),
-
         content: Text(loc.unsavedChangesConfirm),
-
         actions: [
 
           TextButton(
-
             onPressed: () => Navigator.of(ctx).pop(false),
-
             child: Text(loc.stayAction),
-
           ),
-
           FilledButton(
-
             onPressed: () => Navigator.of(ctx).pop(true),
-
             child: Text(loc.leaveAction),
-
           ),
-
         ],
-
       ),
-
     );
 
     return ok == true;
@@ -216,9 +184,7 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
     if (resolved == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-
         SnackBar(content: Text(loc.noProductForBarcode)),
-
       );
 
       return true;
@@ -234,9 +200,7 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
     if (row == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-
         SnackBar(content: Text(loc.failedToLoadProduct)),
-
       );
 
       return true;
@@ -265,9 +229,7 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     setState(() => _loading = false);
 
     ScaffoldMessenger.of(context).showSnackBar(
-
       SnackBar(content: Text('تم اختيار: ${row['name']}')),
-
     );
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -316,13 +278,9 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
     try {
       final batch = await _repo.queryProductsQuickEditPage(
-
         search: q,
-
         limit: _pageSize,
-
         offset: 0,
-
       );
 
       if (!mounted) return;
@@ -358,15 +316,10 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
-
         SnackBar(
-
           backgroundColor: Theme.of(context).colorScheme.error,
-
           content: Text('تعذّر التحميل: $e'),
-
         ),
-
       );
     }
   }
@@ -380,13 +333,9 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
     try {
       final batch = await _repo.queryProductsQuickEditPage(
-
         search: q,
-
         limit: _pageSize,
-
         offset: _offset,
-
       );
 
       if (!mounted) return;
@@ -410,15 +359,10 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       setState(() => _loadingMore = false);
 
       ScaffoldMessenger.of(context).showSnackBar(
-
         SnackBar(
-
           backgroundColor: Theme.of(context).colorScheme.error,
-
           content: Text('تعذّر تحميل المزيد: $e'),
-
         ),
-
       );
     }
   }
@@ -465,11 +409,8 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
   Future<void> _openCameraScan() async {
     final code = await BarcodeInputLauncher.captureBarcode(
-
       context,
-
       title: loc.clearProductBarcode,
-
     );
 
     if (!mounted || code == null || code.trim().isEmpty) return;
@@ -540,15 +481,10 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
     if (name.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-
         SnackBar(
-
           backgroundColor: Theme.of(context).colorScheme.error,
-
           content: Text(loc.nameEmpty),
-
         ),
-
       );
 
       return;
@@ -556,15 +492,10 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
     if (name.length > 100) {
       ScaffoldMessenger.of(context).showSnackBar(
-
         SnackBar(
-
           backgroundColor: Theme.of(context).colorScheme.error,
-
           content: Text(loc.nameTooLong),
-
         ),
-
       );
 
       return;
@@ -584,15 +515,10 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
     if (d.duplicateBarcodeProductId != null) {
       ScaffoldMessenger.of(context).showSnackBar(
-
         SnackBar(
-
           backgroundColor: Theme.of(context).colorScheme.error,
-
           content: Text(loc.barcodeAlreadyUsed),
-
         ),
-
       );
 
       return;
@@ -600,15 +526,10 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
     if (minSell > sell) {
       ScaffoldMessenger.of(context).showSnackBar(
-
         SnackBar(
-
           backgroundColor: Theme.of(context).colorScheme.error,
-
           content: Text(loc.minPriceExceedsSalePrice),
-
         ),
-
       );
 
       return;
@@ -618,25 +539,15 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       setState(() => _savingProductId = productId);
 
       await _repo.updateProductBasic(
-
         productId: productId,
-
         name: name,
-
         barcode: bcUpper.isEmpty ? null : bcUpper,
-
         buyPrice: _moneyToDb(buy),
-
         sellPrice: _moneyToDb(sell),
-
         minSellPrice: _moneyToDb(minSell),
-
         qty: d.track ? qty.toDouble() : 0,
-
         lowStockThreshold: d.track ? low.toDouble() : 0,
-
         trackInventory: d.track,
-
       );
 
       if (!mounted) return;
@@ -646,15 +557,10 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       unawaited(context.read<NotificationProvider>().refresh());
 
       ScaffoldMessenger.of(context).showSnackBar(
-
         SnackBar(
-
           backgroundColor: Colors.green.shade700,
-
           content: Text(loc.productUpdatedSuccess),
-
         ),
-
       );
 
       d.rebaseline();
@@ -679,27 +585,17 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
       if (m == 'duplicate_barcode') {
         ScaffoldMessenger.of(context).showSnackBar(
-
           SnackBar(
-
             backgroundColor: Theme.of(context).colorScheme.error,
-
             content: Text(loc.barcodeUsedByOther),
-
           ),
-
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-
           SnackBar(
-
             backgroundColor: Theme.of(context).colorScheme.error,
-
             content: Text(m),
-
           ),
-
         );
       }
     } catch (e) {
@@ -708,22 +604,16 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       setState(() => _savingProductId = null);
 
       ScaffoldMessenger.of(context).showSnackBar(
-
         SnackBar(
-
           backgroundColor: Theme.of(context).colorScheme.error,
-
           content: Text('تعذّر الحفظ: $e'),
-
         ),
-
       );
     }
   }
 
   Widget _profitBox({
     required int buy,
-
     required int sell,
   }) {
     final profit = sell - buy;
@@ -761,69 +651,38 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     final sign = profit < 0 ? '-' : '';
 
     return Container(
-
       width: double.infinity,
-
       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-
       decoration: BoxDecoration(
-
         borderRadius: BorderRadius.all(Radius.zero),
-
         border: Border.all(color: cs.outline.withValues(alpha: 0.45)),
-
         color: cs.surfaceContainerHighest.withValues(alpha: 0.35),
-
       ),
-
       child: Directionality(
-
         textDirection: TextDirection.rtl,
-
         child: Text.rich(
-
           TextSpan(
-
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-
                   fontWeight: FontWeight.w600,
-
                 ),
-
             children: [
 
               TextSpan(text: loc.profitMarginLabel),
-
               TextSpan(
-
                 text: '$pctLabel ',
-
                 style: TextStyle(color: pctColor),
-
               ),
-
               TextSpan(text: loc.profitLabel),
-
               TextSpan(
-
                 text: '$sign$profitLabel د.ع$lossSuffix',
-
                 style: TextStyle(
-
                   color: profit < 0 ? Colors.red.shade700 : pctColor,
-
                 ),
-
               ),
-
             ],
-
           ),
-
         ),
-
       ),
-
     );
   }
 
@@ -844,190 +703,113 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
         qTrim.length >= 2 && !_loading && !_searchTooShort;
 
     final bodyCore = Scaffold(
-
       appBar: AppBar(
-
         title: Text(loc.updateExistingProduct),
-
         actions: [
 
           IconButton(
-
             tooltip: loc.clearBarcodeCameraTooltip,
-
             onPressed: _loading ? null : _openCameraScan,
-
             icon: const Icon(Icons.qr_code_scanner_rounded),
-
           ),
-
         ],
-
       ),
-
       body: Shortcuts(
-
         shortcuts: const {
           SingleActivator(LogicalKeyboardKey.keyS, control: true):
 
               _SaveIntent(),
         },
-
         child: Actions(
-
           actions: {
             _SaveIntent: CallbackAction<_SaveIntent>(
-
               onInvoke: (_) {
                 unawaited(_invokeSavePrimary());
 
                 return null;
               },
-
             ),
           },
-
           child: Column(
-
             crossAxisAlignment: CrossAxisAlignment.stretch,
-
             children: [
 
               Padding(
-
                 padding: EdgeInsetsDirectional.only(
-
                   start: layout.pageHorizontalGap,
-
                   end: layout.pageHorizontalGap,
-
                   top: 12,
-
                   bottom: 8,
-
                 ),
-
                 child: AppInput(
-
                   label: loc.searchLabel,
-
                   controller: _searchCtrl,
-
                   focusNode: _searchFn,
-
                   hint: loc.searchHint,
-
                   prefixIcon: const Icon(Icons.search_rounded),
-
                   textInputAction: TextInputAction.search,
-
                   onChanged: (_) => _scheduleSearch(),
-
                   onFieldSubmitted: (_) =>
 
                       unawaited(_submitSearchFromKeyboard()),
-
                 ),
-
               ),
-
               if (_searchTooShort)
 
                 Padding(
-
                   padding: EdgeInsetsDirectional.only(
-
                     start: layout.pageHorizontalGap,
-
                     end: layout.pageHorizontalGap,
-
                     bottom: 4,
-
                   ),
-
                   child: Text(
-
                     loc.typeTwoCharsHint,
-
                     style: TextStyle(fontSize: 12, color: cs.onSurfaceVariant),
-
                   ),
-
                 ),
-
               if (showSuggest)
 
                 Padding(
-
                   padding: EdgeInsetsDirectional.only(
-
                     start: layout.pageHorizontalGap,
-
                     end: layout.pageHorizontalGap,
-
                     bottom: 6,
-
                   ),
-
                   child: Material(
-
                     elevation: 3,
-
                     color: cs.surfaceContainerLowest,
-
                     shape: RoundedRectangleBorder(
-
                       borderRadius: BorderRadius.zero,
-
                       side: BorderSide(color: Color(0x22000000)),
-
                     ),
-
                     child: ConstrainedBox(
-
                       constraints: BoxConstraints(maxHeight: 220),
-
                       child: _rows.isEmpty
 
                           ? Padding(
-
                               padding: EdgeInsets.all(14),
-
                               child: Align(
-
                                 alignment: AlignmentDirectional.centerStart,
-
                                 child: Text(loc.noResultsFound),
-
                               ),
-
                             )
 
                           : ListView.separated(
-
                               shrinkWrap: true,
-
                               itemCount:
 
                                   _rows.length > 12 ? 12 : _rows.length,
-
                               separatorBuilder: (_, __) =>
 
                                   const Divider(height: 1),
-
                               itemBuilder: (ctx, i) {
                                 final r = _rows[i];
 
                                 return ListTile(
-
                                   dense: true,
-
                                   title: Text(
-
                                       (r['name'] as String?) ?? ''),
-
                                   subtitle: Text(
-
                                     [
 
                                       if ((r['productCode'] ?? '')
@@ -1039,7 +821,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
                                               .isNotEmpty)
 
                                         r['productCode'].toString(),
-
                                       if ((r['barcode'] ?? '')
 
                                               .toString()
@@ -1049,58 +830,33 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
                                               .isNotEmpty)
 
                                         r['barcode'].toString(),
-
                                     ].where((x) => x.isNotEmpty).join(' • '),
-
                                     style: TextStyle(
-
                                         fontSize: 11,
-
                                         color: cs.onSurfaceVariant),
-
                                   ),
-
                                   onTap: () => unawaited(_pickSuggestion(r)),
-
                                 );
                               },
-
                             ),
-
                     ),
-
                   ),
-
                 ),
-
               Padding(
-
                 padding: EdgeInsetsDirectional.only(
-
                   start: layout.pageHorizontalGap,
-
                   end: layout.pageHorizontalGap,
-
                   bottom: 8,
-
                 ),
-
                 child: Text(
-
                   'في هذه الصفحة: قارئ الباركود (HID) يبحث عن المنتج هنا ولا يُوجَّه للبيع. '
 
                   'مرّر للأسفل لتحميل المزيد.',
-
                   style: TextStyle(
-
                       fontSize: 12, color: cs.onSurfaceVariant, height: 1.35),
-
                 ),
-
               ),
-
               Expanded(
-
                 child: _loading
 
                     ? Center(child: CircularProgressIndicator())
@@ -1108,49 +864,30 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
                     : _rows.isEmpty
 
                         ? Center(
-
                             child: Text(
-
                               loc.noResultsForText,
-
                               style: TextStyle(color: cs.onSurfaceVariant),
-
                             ),
-
                           )
 
                         : Scrollbar(
-
                             controller: _scrollCtrl,
-
                             child: ListView.builder(
-
                               controller: _scrollCtrl,
-
                               padding: EdgeInsetsDirectional.fromSTEB(
-
                                 layout.pageHorizontalGap,
-
                                 0,
-
                                 layout.pageHorizontalGap,
-
                                 24,
-
                               ),
-
                               itemCount:
 
                                   _rows.length + (_loadingMore ? 1 : 0),
-
                               itemBuilder: (ctx, i) {
                                 if (i >= _rows.length) {
                                   return const Padding(
-
                                     padding: EdgeInsets.all(16),
-
                                     child: Center(child: CircularProgressIndicator()),
-
                                   );
                                 }
 
@@ -1163,52 +900,31 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
                                 }
 
                                 return _QuickProductCard(
-
                                   repo: _repo,
-
                                   row: _rows[i],
-
                                   draft: draft,
-
                                   profitBox: ({required buy, required sell}) =>
 
                                       _profitBox(buy: buy, sell: sell),
-
                                   onSave: () => _saveRow(id),
-
                                   saving: _savingProductId == id,
-
                                   validatePriceLogicFn: validatePriceLogic,
-
                                   onConflictProductTap: _openConflictProduct,
-
                                 );
                               },
-
                             ),
-
                           ),
-
               ),
-
             ],
-
           ),
-
         ),
-
       ),
-
     );
 
     return Directionality(
-
       textDirection: TextDirection.rtl,
-
       child: PopScope<bool>(
-
         canPop: !_anyDirty,
-
         onPopInvokedWithResult: (didPop, result) async {
           if (didPop) return;
 
@@ -1222,11 +938,8 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
             Navigator.of(context).pop(result);
           }
         },
-
         child: bodyCore,
-
       ),
-
     );
   }
 }
@@ -1234,17 +947,11 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 class _DraftBaseline {
   const _DraftBaseline({
     required this.name,
-
     required this.barcode,
-
     required this.buy,
-
     required this.sell,
-
     required this.minSell,
-
     required this.qty,
-
     required this.low,
   });
 
@@ -1279,58 +986,32 @@ class _RowDraft {
   _RowDraft(Map<String, dynamic> m)
 
       : productId = m['id'] as int,
-
         track = ((m['trackInventory'] as num?)?.toInt() ?? 1) != 0,
-
         name = TextEditingController(text: (m['name'] as String?) ?? ''),
-
         barcode = TextEditingController(
-
             text: ((m['barcode'] as String?) ?? '').toUpperCase()),
-
         buy = TextEditingController(text: _formattedMoney(m['buy'])),
-
         sell = TextEditingController(text: _formattedMoney(m['sell'])),
-
         minSell = TextEditingController(text: _formattedMoney(m['minSell'])),
-
         qty = TextEditingController(text: _formattedQty(m['qty'])),
-
         low = TextEditingController(
-
             text: _formattedQty(m['lowStockThreshold'])),
-
         nameFn = FocusNode(),
-
         barcodeFn = FocusNode(),
-
         buyFn = FocusNode(),
-
         sellFn = FocusNode(),
-
         minSellFn = FocusNode(),
-
         qtyFn = FocusNode(),
-
         lowFn = FocusNode(),
-
         saveFn = FocusNode() {
     baseline = _DraftBaseline(
-
       name: name.text,
-
       barcode: barcode.text,
-
       buy: buy.text,
-
       sell: sell.text,
-
       minSell: minSell.text,
-
       qty: qty.text,
-
       low: low.text,
-
     );
   }
 
@@ -1392,21 +1073,13 @@ class _RowDraft {
 
   void rebaseline() {
     baseline = _DraftBaseline(
-
       name: name.text,
-
       barcode: barcode.text,
-
       buy: buy.text,
-
       sell: sell.text,
-
       minSell: minSell.text,
-
       qty: qty.text,
-
       low: low.text,
-
     );
   }
 
@@ -1448,19 +1121,12 @@ class _RowDraft {
 class _QuickProductCard extends StatefulWidget {
   const _QuickProductCard({
     required this.row,
-
     required this.draft,
-
     required this.onSave,
-
     required this.repo,
-
     required this.profitBox,
-
     required this.saving,
-
     required this.validatePriceLogicFn,
-
     required this.onConflictProductTap,
   });
 
@@ -1478,9 +1144,7 @@ class _QuickProductCard extends StatefulWidget {
 
   final PriceLogicWarnings Function({
     required int buyIqd,
-
     required int sellIqd,
-
     required int minSellIqdParsed,
   }) validatePriceLogicFn;
 
@@ -1495,11 +1159,8 @@ class _BarcodeAlnumUpperFormatter extends TextInputFormatter {
   @override
 
   TextEditingValue formatEditUpdate(
-
     TextEditingValue oldValue,
-
     TextEditingValue newValue,
-
   ) {
     final up = newValue.text.toUpperCase();
 
@@ -1516,11 +1177,8 @@ class _BarcodeAlnumUpperFormatter extends TextInputFormatter {
     final s = buf.toString();
 
     return TextEditingValue(
-
       text: s,
-
       selection: TextSelection.collapsed(offset: s.length),
-
     );
   }
 }
@@ -1558,11 +1216,8 @@ class _QuickProductCardState extends State<_QuickProductCard> {
 
       if (tr != t) {
         widget.draft.name.value = TextEditingValue(
-
           text: tr,
-
           selection: TextSelection.collapsed(offset: tr.length),
-
         );
       }
     }
@@ -1611,11 +1266,8 @@ class _QuickProductCardState extends State<_QuickProductCard> {
 
         Timer(const Duration(milliseconds: 400), () async {
       final id = await widget.repo.findConflictingProductIdForBarcode(
-
         raw,
-
         excludeProductId: widget.draft.productId,
-
       );
 
       if (!mounted) return;
@@ -1654,21 +1306,15 @@ class _QuickProductCardState extends State<_QuickProductCard> {
     final lowI = NumericFormat.parseNumber(d.low.text);
 
     final priceWarn = widget.validatePriceLogicFn(
-
       buyIqd: buyI,
-
       sellIqd: sellI,
-
       minSellIqdParsed: minSI,
-
     );
 
     final sellWarn = [
 
       priceWarn.sellVsBuyWarning,
-
       priceWarn.sellVsMinSellWarning,
-
     ].whereType<String>().join(' • ').trim();
 
     String qtyWarn = '';
@@ -1684,72 +1330,44 @@ class _QuickProductCardState extends State<_QuickProductCard> {
         : '';
 
     return Card(
-
       margin: EdgeInsets.only(bottom: 10),
-
       shape: RoundedRectangleBorder(borderRadius: AppShape.none),
-
       child: Padding(
-
         padding: EdgeInsets.all(12),
-
         child: LayoutBuilder(
-
           builder: (ctx, constraints) {
             final narrow = constraints.maxWidth < 520;
 
             Widget nameField() => AppInput(
-
                   label: loc.productNameLabel,
-
                   controller: d.name,
-
                   focusNode: d.nameFn,
-
                   isRequired: true,
-
                   maxLines: 1,
-
                   keyboardType: TextInputType.text,
-
                   textInputAction: TextInputAction.next,
-
                   inputFormatters: [
 
                     LengthLimitingTextInputFormatter(100),
-
                   ],
-
                   onFieldSubmitted: (_) =>
 
                       FocusScope.of(context).requestFocus(d.barcodeFn),
-
                 );
 
             Widget barcodeField() => Column(
-
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-
                   children: [
 
                     AppInput(
-
                       label: loc.barcodeLabel,
-
                       controller: d.barcode,
-
                       focusNode: d.barcodeFn,
-
                       isOptional: true,
-
                       keyboardType: TextInputType.visiblePassword,
-
                       textInputAction: TextInputAction.next,
-
                       inputFormatters: [_BarcodeAlnumUpperFormatter()],
-
                       onChanged: (_) => setState(() {}),
-
                       warningText:
 
                           d.duplicateBarcodeProductId != null
@@ -1757,506 +1375,293 @@ class _QuickProductCardState extends State<_QuickProductCard> {
                               ? loc.barcodeAlreadyUsedByOther
 
                               : null,
-
                       onFieldSubmitted: (_) =>
 
                           FocusScope.of(context).requestFocus(d.buyFn),
-
                     ),
-
                     if (d.duplicateBarcodeProductId != null)
 
                       Align(
-
                         alignment: AlignmentDirectional.centerStart,
-
                         child: TextButton(
-
                           onPressed: () =>
 
                               unawaited(widget.onConflictProductTap(
-
                                   d.duplicateBarcodeProductId!)),
-
                           child: Text(
-
                             loc.viewProductWithBarcode,
-
                           ),
-
                         ),
-
                       ),
-
                   ],
-
                 );
 
             Widget priceRowWide() => Row(
-
                   crossAxisAlignment: CrossAxisAlignment.start,
-
                   children: [
 
                     Expanded(
-
                       child: AppPriceInput(
-
                         label: loc.purchasePriceLabel,
-
                         controller: d.buy,
-
                         focusNode: d.buyFn,
-
                         isRequired: true,
-
                         textInputAction: TextInputAction.next,
-
                         onParsedChanged: (_) => setState(() {}),
-
                         onFieldSubmitted: (_) =>
 
                             FocusScope.of(context).requestFocus(d.sellFn),
-
                       ),
-
                     ),
-
                     SizedBox(width: 8),
-
                     Expanded(
-
                       child: AppPriceInput(
-
                         label: loc.salePriceLabel,
-
                         controller: d.sell,
-
                         focusNode: d.sellFn,
-
                         isRequired: true,
-
                         warningText:
 
                             sellWarn.isEmpty ? null : sellWarn,
-
                         textInputAction: TextInputAction.next,
-
                         onParsedChanged: (_) => setState(() {}),
-
                         onFieldSubmitted: (_) =>
 
                             FocusScope.of(context).requestFocus(d.minSellFn),
-
                       ),
-
                     ),
-
                     SizedBox(width: 8),
-
                     Expanded(
-
                       child: AppPriceInput(
-
                         label: loc.minSalePriceLabel,
-
                         controller: d.minSell,
-
                         focusNode: d.minSellFn,
-
                         isOptional: true,
-
                         textInputAction: TextInputAction.next,
-
                         onParsedChanged: (_) => setState(() {}),
-
                         onFieldSubmitted: (_) =>
 
                             FocusScope.of(context).requestFocus(d.qtyFn),
-
                       ),
-
                     ),
-
                   ],
-
                 );
 
             Widget priceColumn() => Column(
-
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-
                   children: [
 
                     AppPriceInput(
-
                       label: loc.purchasePriceLabel,
-
                       controller: d.buy,
-
                       focusNode: d.buyFn,
-
                       isRequired: true,
-
                       textInputAction: TextInputAction.next,
-
                       onParsedChanged: (_) => setState(() {}),
-
                       onFieldSubmitted: (_) =>
 
                           FocusScope.of(context).requestFocus(d.sellFn),
-
                     ),
-
                     SizedBox(height: 8),
-
                     AppPriceInput(
-
                       label: loc.salePriceLabel,
-
                       controller: d.sell,
-
                       focusNode: d.sellFn,
-
                       isRequired: true,
-
                       warningText:
 
                           sellWarn.isEmpty ? null : sellWarn,
-
                       textInputAction: TextInputAction.next,
-
                       onParsedChanged: (_) => setState(() {}),
-
                       onFieldSubmitted: (_) =>
 
                           FocusScope.of(context).requestFocus(d.minSellFn),
-
                     ),
-
                     SizedBox(height: 8),
-
                     AppPriceInput(
-
                       label: loc.minSalePriceLabel,
-
                       controller: d.minSell,
-
                       focusNode: d.minSellFn,
-
                       isOptional: true,
-
                       textInputAction: TextInputAction.next,
-
                       onParsedChanged: (_) => setState(() {}),
-
                       onFieldSubmitted: (_) =>
 
                           FocusScope.of(context).requestFocus(d.qtyFn),
-
                     ),
-
                   ],
-
                 );
 
             final qtyRow = narrow
 
                 ? Column(
-
                     crossAxisAlignment: CrossAxisAlignment.stretch,
-
                     children: [
 
                       AppNumberInput(
-
                         label: loc.quantityLabel,
-
                         suffixText: unitSuffix,
-
                         controller: d.qty,
-
                         focusNode: d.qtyFn,
-
                         isRequired: true,
-
                         warningText:
 
                             qtyWarn.isEmpty ? null : qtyWarn,
-
                         textInputAction: TextInputAction.next,
-
                         enabled: d.track,
-
                         onParsedChanged: (_) => setState(() {}),
-
                         onFieldSubmitted: (_) =>
 
                             FocusScope.of(context).requestFocus(d.lowFn),
-
                       ),
-
                       SizedBox(height: 8),
-
                       AppNumberInput(
-
                         label: loc.alertThresholdLabel,
-
                         controller: d.low,
-
                         focusNode: d.lowFn,
-
                         isOptional: true,
-
                         warningText:
 
                             lowWarn.isEmpty ? null : lowWarn,
-
                         textInputAction: TextInputAction.next,
-
                         enabled: d.track,
-
                         onParsedChanged: (_) => setState(() {}),
-
                         onFieldSubmitted: (_) =>
 
                             FocusScope.of(context).requestFocus(d.saveFn),
-
                       ),
-
                     ],
-
                   )
 
                 : Row(
-
                     crossAxisAlignment: CrossAxisAlignment.start,
-
                     children: [
 
                       Expanded(
-
                         child: AppNumberInput(
-
                           label: loc.quantityLabel,
-
                           suffixText: unitSuffix,
-
                           controller: d.qty,
-
                           focusNode: d.qtyFn,
-
                           isRequired: true,
-
                           warningText:
 
                               qtyWarn.isEmpty ? null : qtyWarn,
-
                           textInputAction: TextInputAction.next,
-
                           enabled: d.track,
-
                           onParsedChanged: (_) => setState(() {}),
-
                           onFieldSubmitted: (_) =>
 
                               FocusScope.of(context).requestFocus(d.lowFn),
-
                         ),
-
                       ),
-
                       SizedBox(width: 8),
-
                       Expanded(
-
                         child: AppNumberInput(
-
                           label: loc.alertThresholdLabel,
-
                           controller: d.low,
-
                           focusNode: d.lowFn,
-
                           isOptional: true,
-
                           warningText:
 
                               lowWarn.isEmpty ? null : lowWarn,
-
                           textInputAction: TextInputAction.next,
-
                           enabled: d.track,
-
                           onParsedChanged: (_) => setState(() {}),
-
                           onFieldSubmitted: (_) =>
 
                               FocusScope.of(context).requestFocus(d.saveFn),
-
                         ),
-
                       ),
-
                     ],
-
                   );
 
             return Column(
-
               crossAxisAlignment: CrossAxisAlignment.stretch,
-
               children: [
 
                 Row(
-
                   children: [
 
                     Expanded(
-
                       child: Text(
-
                         'رقم ${widget.row['id']}',
-
                         style: TextStyle(
-
                           fontWeight: FontWeight.w700,
-
                           color: cs.primary,
-
                         ),
-
                       ),
-
                     ),
-
                     if (code.isNotEmpty)
 
                       Text(
-
                         code,
-
                         style: TextStyle(
-
                             fontSize: 12, color: cs.onSurfaceVariant),
-
                       ),
-
                   ],
-
                 ),
-
                 const SizedBox(height: 10),
-
                 nameField(),
-
                 if (cat.isNotEmpty) ...[
 
                   const SizedBox(height: 4),
-
                   Text(
-
                     'التصنيف: $cat',
-
                     style: TextStyle(
-
                         fontSize: 12, color: cs.onSurfaceVariant),
-
                   ),
-
                 ],
-
                 const SizedBox(height: 12),
-
                 barcodeField(),
-
                 const SizedBox(height: 12),
-
                 if (narrow) priceColumn() else priceRowWide(),
-
                 const SizedBox(height: 10),
-
                 widget.profitBox(buy: buyI, sell: sellI),
-
                 const SizedBox(height: 12),
-
                 qtyRow,
-
                 if (!d.track)
 
                   Padding(
-
                     padding: const EdgeInsets.only(top: 6),
-
                     child: Text(
-
                       'تتبع المخزون معطّل لهذا الصنف — الكمية من قاعدة البيانات تبقى كما هي عند الحفظ.',
-
                       style:
 
                           TextStyle(fontSize: 11, color: cs.outline),
-
                     ),
-
                   ),
-
                 const SizedBox(height: 12),
-
                 Align(
-
                   alignment: AlignmentDirectional.centerStart,
-
                   child: Focus(
-
                     focusNode: d.saveFn,
-
                     child: FilledButton.icon(
-
                       onPressed: widget.saving ? null : widget.onSave,
-
                       icon: widget.saving
 
                           ? SizedBox(
-
                               width: 18,
-
                               height: 18,
-
                               child: CircularProgressIndicator(
-
                                 strokeWidth: 2,
-
                               ),
-
                             )
 
                           : Icon(Icons.save_rounded, size: 20),
-
                       label: Text(loc.saveLabel),
-
                       style: FilledButton.styleFrom(
-
                         shape: const RoundedRectangleBorder(
-
                             borderRadius: AppShape.none),
-
                       ),
-
                     ),
-
                   ),
-
                 ),
-
               ],
-
             );
           },
-
         ),
-
       ),
-
     );
   }
 }

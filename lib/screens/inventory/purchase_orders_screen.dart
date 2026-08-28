@@ -1,23 +1,13 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-
 import '../../l10n/generated/app_localizations.dart';
-
 import 'package:intl/intl.dart' hide TextDirection;
-
 import 'package:provider/provider.dart';
-
 import '../../providers/theme_provider.dart';
-
 import '../../services/database_helper.dart';
-
 import '../../services/tenant_context_service.dart';
-
 import '../../utils/iraqi_currency_format.dart';
-
 import '../../utils/screen_layout.dart';
-
 import 'add_purchase_order_screen.dart';
 
 // ── ألوان وثوابت ──────────────────────────────────────────────────────────────
@@ -47,29 +37,19 @@ class _PoStatus {
 
   static String label(String s) => switch (s) {
     draft    => 'مسودة',
-
     sent     => 'مرسل',
-
     partial  => 'مستلم جزئياً',
-
     received => 'مكتمل',
-
     cancelled => 'ملغى',
-
     _ => s,
   };
 
   static Color color(String s) => switch (s) {
     draft     => Colors.grey,
-
     sent      => _kAmber,
-
     partial   => _kOrange,
-
     received  => _kGreen,
-
     cancelled => _kRed,
-
     _         => Colors.grey,
   };
 }
@@ -151,9 +131,7 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
     final rows = await db.rawQuery('''
 
       SELECT po.*,
-
              s.name AS supplierDisplayName,
-
              (SELECT COUNT(*) FROM purchase_order_items i WHERE i.poId = po.id) AS itemCount
 
       FROM purchase_orders po
@@ -255,330 +233,201 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
       final completed = _all.where((p) => p['status'] == _PoStatus.received).length;
 
       final totalValue = _all.fold<num>(
-
         0,
-
         (s, p) => s + ((p['totalAmount'] as num?) ?? 0),
-
       );
 
       Future<void> openNew() async {
         final result = await Navigator.push<bool>(
-
           context,
-
           MaterialPageRoute(builder: (_) => const AddPurchaseOrderScreen()),
-
         );
 
         if (result == true) unawaited(_load());
       }
 
       return Directionality(
-
         textDirection: TextDirection.rtl,
-
         child: Scaffold(
-
               backgroundColor: bg,
-
               appBar: AppBar(
-
                 backgroundColor: _kAccent,
-
                 elevation: 0,
-
                 leading: IconButton(
-
                   icon: const Icon(
-
                     Icons.arrow_back_ios,
-
                     color: Colors.white,
-
                     size: 18,
-
                   ),
-
                   onPressed: () => Navigator.pop(context),
-
                 ),
-
                 title: Text(
-
                   loc.purchaseOrdersTitle,
-
                   style: const TextStyle(
-
                     color: Colors.white,
-
                     fontWeight: FontWeight.bold,
-
                     fontSize: 16,
-
                   ),
-
                 ),
-
                 actions: [
 
                   IconButton(
-
                     icon: const Icon(Icons.refresh_outlined, color: Colors.white),
-
                     onPressed: _load,
-
                     tooltip: loc.refreshTooltip,
-
                   ),
-
                   const SizedBox(width: 4),
-
                 ],
-
               ),
-
               floatingActionButton: FloatingActionButton.extended(
-
                 backgroundColor: _kAccent,
-
                 foregroundColor: Colors.white,
-
                 icon: const Icon(Icons.add),
-
                 label: Text(loc.newPurchaseOrder),
-
                 onPressed: () => unawaited(openNew()),
-
               ),
-
               body: _loading
 
                   ? const Center(child: CircularProgressIndicator())
 
                   : Column(
-
                   children: [
 
                     // ── شريط الإحصاءات ──────────────────────────────────────
 
                     Container(
-
                       color: _kAccent,
-
                       padding: EdgeInsetsDirectional.fromSTEB(
-
                         layout.pageHorizontalGap,
-
                         0,
-
                         layout.pageHorizontalGap,
-
                         12,
-
                       ),
-
                       child: LayoutBuilder(
-
                         builder: (context, c) {
                           final narrow = c.maxWidth < 760;
 
                           final counters = <Widget>[
 
                             _StatCounter(
-
                               label: loc.totalLabel,
-
                               value: total,
-
                               color: _kBlue,
-
                               active: _statFilter == 'all',
-
                               onTap: () {
                                 setState(() => _statFilter = 'all');
 
                                 _applyFilter();
                               },
-
                             ),
-
                             _StatCounter(
-
                               label: loc.sentLabel,
-
                               value: pending,
-
                               color: _kAmber,
-
                               active: _statFilter == _PoStatus.sent,
-
                               onTap: () {
                                 setState(() => _statFilter = _PoStatus.sent);
 
                                 _applyFilter();
                               },
-
                             ),
-
                             _StatCounter(
-
                               label: loc.partialLabel,
-
                               value: partial,
-
                               color: _kOrange,
-
                               active: _statFilter == _PoStatus.partial,
-
                               onTap: () {
                                 setState(() => _statFilter = _PoStatus.partial);
 
                                 _applyFilter();
                               },
-
                             ),
-
                             _StatCounter(
-
                               label: loc.completedLabel,
-
                               value: completed,
-
                               color: _kGreen,
-
                               active: _statFilter == _PoStatus.received,
-
                               onTap: () {
                                 setState(() => _statFilter = _PoStatus.received);
 
                                 _applyFilter();
                               },
-
                             ),
-
                           ];
 
                           return Column(
-
                             crossAxisAlignment: CrossAxisAlignment.stretch,
-
                             children: [
 
                               if (narrow)
 
                                 Wrap(
-
                                   spacing: 10,
-
                                   runSpacing: 10,
-
                                   children: counters
 
                                       .map(
-
                                         (w) => SizedBox(
-
                                           width: (c.maxWidth - 10) / 2,
-
                                           child: w,
-
                                         ),
-
                                       )
 
                                       .toList(),
-
                                 )
 
                               else
 
                                 Row(
-
                                   children: [
 
                                     for (var i = 0; i < counters.length; i++) ...[
 
                                       Expanded(child: counters[i]),
-
                                       if (i != counters.length - 1) const SizedBox(width: 10),
-
                                     ],
-
                                   ],
-
                                 ),
-
                               const SizedBox(height: 10),
-
                               Align(
-
                                 alignment: AlignmentDirectional.centerStart,
-
                                 child: Text(
-
                                   'القيمة الكلية: ${IraqiCurrencyFormat.formatIqd(totalValue)}',
-
                                   style: TextStyle(
-
                                     color: Colors.white.withOpacity(0.9),
-
                                     fontSize: 12,
-
                                     fontWeight: FontWeight.w600,
-
                                   ),
-
                                 ),
-
                               ),
-
                             ],
-
                           );
                         },
-
                       ),
-
                     ),
-
                     // ── شريط البحث والفلتر ───────────────────────────────────
 
                     Container(
-
                       color: surface,
-
                       padding: EdgeInsets.symmetric(horizontal: layout.pageHorizontalGap, vertical: 8),
-
                       child: LayoutBuilder(
-
                         builder: (context, c) {
                           final narrow = c.maxWidth < 680;
 
                           final searchField = TextField(
-
                               controller: _search,
-
                               focusNode: _searchFocus,
-
                               textAlign: TextAlign.right,
-
                               decoration: InputDecoration(
-
                                 hintText: 'بحث باسم المورد أو رقم الأمر أو التاريخ…',
-
                                 prefixIcon: const Icon(Icons.search, size: 20),
-
                                 suffixIcon: _search.text.trim().isEmpty
 
                                     ? null
 
                                     : IconButton(
-
                                         tooltip: loc.clearTooltip,
-
                                         icon: const Icon(Icons.clear_rounded, size: 18),
-
                                         onPressed: () {
                                           _search.clear();
 
@@ -588,240 +437,143 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
 
                                           _searchFocus.requestFocus();
                                         },
-
                                       ),
-
                                 isDense: true,
-
                                 contentPadding: const EdgeInsets.symmetric(
-
                                     vertical: 10, horizontal: 12),
-
                                 border: OutlineInputBorder(
-
                                   borderRadius: BorderRadius.circular(4),
-
                                   borderSide: BorderSide(color: Colors.grey.shade300),
-
                                 ),
-
                                 enabledBorder: OutlineInputBorder(
-
                                   borderRadius: BorderRadius.circular(4),
-
                                   borderSide: BorderSide(color: Colors.grey.shade300),
-
                                 ),
-
                                 filled: true,
-
                                 fillColor: isDark ? const Color(0xFF2A2A2A) : const Color(0xFFF8F9FA),
-
                               ),
-
                             );
 
                           final statusDropdown = _StatusFilterDropdown(
-
                             value: _statusFilter,
-
                             onChanged: (v) {
                               setState(() => _statusFilter = v ?? 'all');
 
                               _applyFilter();
                             },
-
                             isDark: isDark,
-
                           );
 
                           if (narrow) {
                             return Column(
-
                               crossAxisAlignment: CrossAxisAlignment.stretch,
-
                               children: [
 
                                 searchField,
-
                                 const SizedBox(height: 8),
-
                                 Align(
-
                                   alignment: AlignmentDirectional.centerEnd,
-
                                   child: statusDropdown,
-
                                 ),
-
                               ],
-
                             );
                           }
 
                           return Row(
-
                             children: [
 
                               Expanded(child: searchField),
-
                               const SizedBox(width: 8),
-
                               statusDropdown,
-
                             ],
-
                           );
                         },
-
                       ),
-
                     ),
-
                     // ── القائمة ──────────────────────────────────────────────
 
                     Expanded(
-
                       child: _filtered.isEmpty
 
                           ? _PoEmptyState(
-
                               hasAny: _all.isNotEmpty,
-
                               textSec: textSec,
-
                               onCreate: () => unawaited(openNew()),
-
                             )
 
                           : ListView.separated(
-
                               padding: EdgeInsetsDirectional.fromSTEB(
-
                                 layout.pageHorizontalGap,
-
                                 8,
-
                                 layout.pageHorizontalGap,
-
                                 100,
-
                               ),
-
                               itemCount: _filtered.length,
-
                               separatorBuilder: (_, __) => const SizedBox(height: 6),
-
                               itemBuilder: (_, i) {
                                 final po = _filtered[i];
 
                                 return _PoCard(
-
                                   po: po,
-
                                   surface: surface,
-
                                   fmtDate: _formatDate,
-
                                   onView: () async {
                                     final result = await Navigator.push<bool>(
-
                                       context,
-
                                       MaterialPageRoute(
-
                                         builder: (_) => AddPurchaseOrderScreen(
-
                                           poId: po['id'] as int?,
-
                                         ),
-
                                       ),
-
                                     );
 
                                     if (result == true) unawaited(_load());
                                   },
-
                                   onEdit: () async {
                                     final result = await Navigator.push<bool>(
-
                                       context,
-
                                       MaterialPageRoute(
-
                                         builder: (_) => AddPurchaseOrderScreen(
-
                                           poId: po['id'] as int?,
-
                                         ),
-
                                       ),
-
                                     );
 
                                     if (result == true) unawaited(_load());
                                   },
-
                                   onCopy: () async {
                                     final result = await Navigator.push<bool>(
-
                                       context,
-
                                       MaterialPageRoute(
-
                                         builder: (_) => AddPurchaseOrderScreen(
-
                                           copyFromPoId: po['id'] as int?,
-
                                         ),
-
                                       ),
-
                                     );
 
                                     if (result == true) unawaited(_load());
                                   },
-
                                   onCancel: () async {
                                     final ok = await showDialog<bool>(
-
                                       context: context,
-
                                       builder: (ctx) => AlertDialog(
-
                                         title: Text(loc.cancelOrder),
-
                                         content: Text(loc.cancelOrderConfirm),
-
                                         actions: [
 
                                           TextButton(
-
                                             onPressed: () => Navigator.pop(ctx, false),
-
                                             child: Text(loc.backAction),
-
                                           ),
-
                                           TextButton(
-
                                             onPressed: () => Navigator.pop(ctx, true),
-
                                             style: TextButton.styleFrom(
-
                                               foregroundColor: _kRed,
-
                                             ),
-
                                             child: Text(loc.cancelAction),
-
                                           ),
-
                                         ],
-
                                       ),
-
                                     );
 
                                     if (ok != true) return;
@@ -829,37 +581,24 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                                     final db = await _db.database;
 
                                     await db.update(
-
                                       'purchase_orders',
-
                                       {
                                         'status': _PoStatus.cancelled,
-
                                         'updatedAt': DateTime.now().toIso8601String(),
                                       },
-
                                       where: 'id = ? AND tenantId = ?',
-
                                       whereArgs: [po['id'], _tenant.activeTenantId],
-
                                     );
 
                                     unawaited(_load());
                                   },
-
                                 );
                               },
-
                             ),
-
                     ),
-
                   ],
-
                 ),
-
               ),
-
       );
     });
   }
@@ -870,13 +609,9 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
 class _StatCounter extends StatelessWidget {
   const _StatCounter({
     required this.label,
-
     required this.value,
-
     required this.color,
-
     required this.active,
-
     required this.onTap,
   });
 
@@ -894,93 +629,50 @@ class _StatCounter extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Material(
-
       color: Colors.transparent,
-
       child: InkWell(
-
         onTap: onTap,
-
         borderRadius: BorderRadius.circular(6),
-
         child: Container(
-
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-
           decoration: BoxDecoration(
-
             color: Colors.white.withOpacity(active ? 0.16 : 0.10),
-
             borderRadius: BorderRadius.circular(6),
-
           ),
-
           child: Column(
-
             crossAxisAlignment: CrossAxisAlignment.center,
-
             children: [
 
               Text(
-
                 IraqiCurrencyFormat.formatInt(value),
-
                 style: const TextStyle(
-
                   color: Colors.white,
-
                   fontWeight: FontWeight.bold,
-
                   fontSize: 16,
-
                 ),
-
               ),
-
               const SizedBox(height: 4),
-
               Text(
-
                 label,
-
                 style: TextStyle(
-
                   color: Colors.white.withOpacity(0.85),
-
                   fontSize: 11,
-
                 ),
-
               ),
-
               const SizedBox(height: 8),
-
               AnimatedContainer(
-
                 duration: const Duration(milliseconds: 180),
-
                 height: 3,
-
                 width: double.infinity,
-
                 decoration: BoxDecoration(
-
                   color: active ? color : Colors.transparent,
-
                   borderRadius: BorderRadius.circular(999),
-
                 ),
-
               ),
-
             ],
-
           ),
-
         ),
-
       ),
-
     );
   }
 }
@@ -1001,87 +693,50 @@ class _StatusFilterDropdown extends StatelessWidget {
     final cs = Theme.of(context).colorScheme;
 
     return Container(
-
       padding: const EdgeInsetsDirectional.only(start: 10, end: 6),
-
       decoration: BoxDecoration(
-
         color: isDark ? const Color(0xFF2A2A2A) : const Color(0xFFF8F9FA),
-
         border: Border.all(color: Colors.grey.shade300),
-
         borderRadius: BorderRadius.circular(4),
-
       ),
-
       child: DropdownButton<String>(
-
         value: value,
-
         isDense: true,
-
         underline: const SizedBox.shrink(),
-
         dropdownColor: cs.surface,
-
         items: [
 
           _statusItem('all', 'الكل', _kBlue),
-
           _statusItem(_PoStatus.draft, loc.draftStatus, Colors.grey),
-
           _statusItem(_PoStatus.sent, loc.sentStatus, _kAmber),
-
           _statusItem(_PoStatus.partial, loc.partialStatus, _kOrange),
-
           _statusItem(_PoStatus.received, loc.receivedStatus, _kGreen),
-
           _statusItem(_PoStatus.cancelled, loc.cancelledStatus, _kRed),
-
         ],
-
         onChanged: onChanged,
-
       ),
-
     );
   }
 
   DropdownMenuItem<String> _statusItem(String v, String label, Color dot) {
     return DropdownMenuItem(
-
       value: v,
-
       child: Row(
-
         mainAxisSize: MainAxisSize.min,
-
         children: [
 
           Container(
-
             width: 8,
-
             height: 8,
-
             decoration: BoxDecoration(
-
               color: dot,
-
               borderRadius: BorderRadius.circular(999),
-
             ),
-
           ),
-
           const SizedBox(width: 8),
-
           Text(label, style: const TextStyle(fontSize: 12)),
-
         ],
-
       ),
-
     );
   }
 }
@@ -1089,17 +744,11 @@ class _StatusFilterDropdown extends StatelessWidget {
 class _PoCard extends StatelessWidget {
   const _PoCard({
     required this.po,
-
     required this.surface,
-
     required this.fmtDate,
-
     required this.onView,
-
     required this.onEdit,
-
     required this.onCopy,
-
     required this.onCancel,
   });
 
@@ -1136,209 +785,114 @@ class _PoCard extends StatelessWidget {
         : (po['supplierName'] as String? ?? loc.noSupplier);
 
     return Container(
-
         decoration: BoxDecoration(
-
           color: surface,
-
           border: Border.all(color: Colors.grey.shade200),
-
           borderRadius: BorderRadius.zero,
-
         ),
-
         padding: const EdgeInsets.all(14),
-
         child: Column(
-
           crossAxisAlignment: CrossAxisAlignment.start,
-
           children: [
 
             Row(
-
               children: [
 
                 Expanded(
-
                   child: Text(
-
                     (po['poNumber'] as String? ?? ''),
-
                     style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-
                   ),
-
                 ),
-
                 Container(
-
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-
                   decoration: BoxDecoration(
-
                     color: _PoStatus.color(status).withOpacity(0.12),
-
                     borderRadius: BorderRadius.circular(4),
-
                   ),
-
                   child: Text(
-
                     _PoStatus.label(status),
-
                     style: TextStyle(
-
                       color: _PoStatus.color(status),
-
                       fontSize: 11,
-
                       fontWeight: FontWeight.w600,
-
                     ),
-
                   ),
-
                 ),
-
               ],
-
             ),
-
             const SizedBox(height: 6),
-
             Row(
-
               children: [
 
                 Icon(Icons.person_outline, size: 14, color: Colors.grey.shade500),
-
                 const SizedBox(width: 4),
-
                 Expanded(
-
                   child: Text(supplier,
-
                       style: TextStyle(fontSize: 12, color: Colors.grey.shade600)),
-
                 ),
-
                 Icon(Icons.calendar_today_outlined, size: 14, color: Colors.grey.shade500),
-
                 const SizedBox(width: 4),
-
                 Text(fmtDate(po['orderDate'] as String?),
-
                     style: TextStyle(fontSize: 12, color: Colors.grey.shade600)),
-
               ],
-
             ),
-
             const SizedBox(height: 8),
-
             Row(
-
               children: [
 
                 Expanded(
-
                   child: Column(
-
                     crossAxisAlignment: CrossAxisAlignment.start,
-
                     children: [
 
                       LinearProgressIndicator(
-
                         value: pct,
-
                         backgroundColor: Colors.grey.shade200,
-
                         color: _PoStatus.color(status),
-
                         minHeight: 4,
-
                         borderRadius: BorderRadius.zero,
-
                       ),
-
                       const SizedBox(height: 4),
-
                       Text(
-
                         'مستلم ${IraqiCurrencyFormat.formatIqd(received)} من ${IraqiCurrencyFormat.formatIqd(total)}',
-
                         style: TextStyle(fontSize: 11, color: Colors.grey.shade500),
-
                       ),
-
                     ],
-
                   ),
-
                 ),
-
                 const SizedBox(width: 12),
-
                 Column(
-
                   crossAxisAlignment: CrossAxisAlignment.end,
-
                   children: [
 
                     Text(IraqiCurrencyFormat.formatIqd(total),
-
                         style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-
                     Text('${po['itemCount'] ?? 0} صنف',
-
                         style: TextStyle(fontSize: 11, color: Colors.grey.shade500)),
-
                   ],
-
                 ),
-
               ],
-
             ),
-
             const SizedBox(height: 10),
-
             Wrap(
-
               spacing: 8,
-
               runSpacing: 6,
-
               alignment: WrapAlignment.end,
-
               children: [
 
                 TextButton(onPressed: onView, child: Text(loc.viewAction)),
-
                 TextButton(onPressed: onEdit, child: Text(loc.editAction)),
-
                 TextButton(onPressed: onCopy, child: Text(loc.copyAction)),
-
                 TextButton(
-
                   onPressed: status == _PoStatus.cancelled ? null : onCancel,
-
                   style: TextButton.styleFrom(foregroundColor: _kRed),
-
                   child: Text(loc.cancelAction),
-
                 ),
-
               ],
-
             ),
-
           ],
-
         ),
-
     );
   }
 }
@@ -1346,9 +900,7 @@ class _PoCard extends StatelessWidget {
 class _PoEmptyState extends StatelessWidget {
   const _PoEmptyState({
     required this.hasAny,
-
     required this.textSec,
-
     required this.onCreate,
   });
 
@@ -1363,75 +915,43 @@ class _PoEmptyState extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     return Center(
-
       child: Padding(
-
         padding: const EdgeInsets.all(28),
-
         child: Column(
-
           mainAxisSize: MainAxisSize.min,
-
           children: [
 
             Icon(Icons.receipt_long_outlined, size: 72, color: textSec),
-
             const SizedBox(height: 12),
-
             Text(
-
               hasAny ? 'لا توجد نتائج تطابق البحث' : 'لا توجد أوامر شراء بعد',
-
               textAlign: TextAlign.center,
-
               style: TextStyle(color: textSec, fontSize: 14),
-
             ),
-
             if (!hasAny) ...[
 
               const SizedBox(height: 18),
-
               FilledButton.icon(
-
                 onPressed: onCreate,
-
                 style: FilledButton.styleFrom(
-
                   backgroundColor: _kGreen,
-
                   foregroundColor: Colors.white,
-
                   padding:
 
                       const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-
                 ),
-
                 icon: const Icon(Icons.add),
-
                 label: Text(loc.createFirstOrder),
-
               ),
-
               const SizedBox(height: 10),
-
               Text(
-
                 loc.orPressCtrlN,
-
                 style: TextStyle(color: textSec, fontSize: 12),
-
               ),
-
             ],
-
           ],
-
         ),
-
       ),
-
     );
   }
 }
