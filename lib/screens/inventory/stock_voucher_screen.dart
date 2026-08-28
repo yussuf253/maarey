@@ -4,11 +4,7 @@ import 'package:intl/intl.dart' hide TextDirection;
 
 import 'package:provider/provider.dart';
 
-
-
 import 'dart:async' show unawaited;
-
-
 
 import '../../providers/auth_provider.dart';
 
@@ -28,15 +24,11 @@ import '../../services/tenant_context_service.dart';
 
 import '../../widgets/permission_guard.dart';
 
-
-
 const Color _kNavy = Color(0xFF1E3A5F);
 
 const Color _kGreen = Color(0xFF2E7D32);
 
 const Color _kBg = Color(0xFFECF0F4);
-
-
 
 /// سند مخزوني — إيداع / صرف / نقل
 
@@ -44,15 +36,11 @@ class StockVoucherScreen extends StatefulWidget {
 
   const StockVoucherScreen({super.key});
 
-
-
   @override
 
   State<StockVoucherScreen> createState() => _StockVoucherScreenState();
 
 }
-
-
 
 class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
@@ -61,8 +49,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
   String _voucherType = 'إذن إضافة مخزن';
 
   DateTime _selectedDate = DateTime.now();
-
-
 
   // ── Source data ───────────────────────────────────────────────────────
 
@@ -74,21 +60,15 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
   String _sourceType = 'supplier';
 
-
-
   // ── Other info ────────────────────────────────────────────────────────
 
   String _supplier = '';
 
   final _notesCtrl = TextEditingController();
 
-
-
   // ── Items table ───────────────────────────────────────────────────────
 
   final List<_VoucherItem> _items = [_VoucherItem()];
-
-
 
   static const _voucherTypes = [
 
@@ -102,8 +82,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
   ];
 
-
-
   static const _sourceTypes = <String, String>{
 
     'supplier': 'مورد',
@@ -116,11 +94,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
   };
 
-
-
   final _fmt = NumberFormat('#,##0', 'ar');
-
-
 
   final DatabaseHelper _db = DatabaseHelper();
 
@@ -156,11 +130,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
   bool _createSupplierReturnPayoutOnOutbound = true;
 
-
-
   double get _grandTotal => _items.fold(0, (s, item) => s + item.total);
-
-
 
   @override
 
@@ -171,8 +141,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
     _loadMeta();
 
   }
-
-
 
   Future<void> _loadMeta() async {
 
@@ -234,8 +202,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
   }
 
-
-
   Future<String> _allocateVoucherNo() async {
 
     final typeCode = switch (_voucherType) {
@@ -267,8 +233,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
     return 'SV-${DateTime.now().microsecondsSinceEpoch}';
 
   }
-
-
 
   // ── Actions ───────────────────────────────────────────────────────────
 
@@ -308,13 +272,9 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
     }
 
-
-
     var supplierId = await _db.findActiveSupplierIdByName(cleanSupplier);
 
     supplierId ??= await _db.insertSupplier(name: cleanSupplier);
-
-
 
     final billId = await _db.insertSupplierBill(
 
@@ -358,8 +318,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
   }
 
-
-
   Future<void> _maybeCreateSupplierReturnPayout({
 
     required String voucherNo,
@@ -390,8 +348,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
     }
 
-
-
     var supplierId = await _db.findActiveSupplierIdByName(cleanSupplier);
 
     supplierId ??= await _db.insertSupplier(name: cleanSupplier);
@@ -411,8 +367,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
     );
 
   }
-
-
 
   Future<void> _confirm() async {
 
@@ -441,8 +395,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
       return;
 
     }
-
-
 
     final lines = <({int productId, double qty, double unitPrice})>[];
 
@@ -576,8 +528,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
     }
 
-
-
     final voucherNo = await _allocateVoucherNo();
 
     if (!mounted) return;
@@ -600,8 +550,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
     final currentUserName = context.read<AuthProvider>().username.trim();
 
-
-
     if (_voucherType == 'إذن إضافة مخزن' &&
 
         _policy.requireSourceOnInbound &&
@@ -617,8 +565,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
       return;
 
     }
-
-
 
     setState(() => _saving = true);
 
@@ -722,8 +668,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
       }
 
-
-
       if (!mounted) return;
 
       if (!res.ok) {
@@ -816,8 +760,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
   }
 
-
-
   Future<void> _pickDate() async {
 
     final d = await showDatePicker(
@@ -842,8 +784,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
   }
 
-
-
   void _addItem() => setState(() => _items.add(_VoucherItem()));
 
   void _removeItem(int i) {
@@ -851,8 +791,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
     if (_items.length > 1) setState(() => _items.removeAt(i));
 
   }
-
-
 
   @override
 
@@ -869,8 +807,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
     super.dispose();
 
   }
-
-
 
   // ══════════════════════════════════════════════════════════════════════
 
@@ -1004,8 +940,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
   }
 
-
-
   // ── Action bar ────────────────────────────────────────────────────────
 
   Widget _buildActionBar() {
@@ -1099,8 +1033,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
     );
 
   }
-
-
 
   Widget _buildWarehousePanel() {
 
@@ -1234,8 +1166,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
   }
 
-
-
   Widget _warehouseDropdown(int? value, void Function(int?) onChanged) {
 
     return Container(
@@ -1289,8 +1219,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
     );
 
   }
-
-
 
   // ── Section 1: بيانات الإذن المخزني ──────────────────────────────────
 
@@ -1435,8 +1363,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
     );
 
   }
-
-
 
   // ── Section 2: بيانات المصدر ──────────────────────────────────────────
 
@@ -1650,8 +1576,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
   }
 
-
-
   // ── Section 3: معلومات أخرى ───────────────────────────────────────────
 
   Widget _buildOtherInfoPanel() {
@@ -1808,8 +1732,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
   }
 
-
-
   // ── Items Table ───────────────────────────────────────────────────────
 
   Widget _buildItemsTable() {
@@ -1880,13 +1802,9 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
           ),
 
-
-
           // ── Item rows
 
           ...List.generate(_items.length, (i) => _buildItemRow(i)),
-
-
 
           // ── Footer
 
@@ -1968,8 +1886,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
           ),
 
-
-
           // ── Add row button
 
           Padding(
@@ -2033,8 +1949,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
     );
 
   }
-
-
 
   Widget _buildItemRow(int i) {
 
@@ -2330,8 +2244,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
   }
 
-
-
   // ── Shared helpers ─────────────────────────────────────────────────────
 
   List<Widget> _colHeader(String text, {int flex = 2}) => [
@@ -2367,8 +2279,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
     ),
 
   ];
-
-
 
   Widget _editCell(
 
@@ -2423,8 +2333,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
     );
 
   }
-
-
 
   Widget _panel({required String title, required Widget child}) {
 
@@ -2494,8 +2402,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
   }
 
-
-
   Widget _fieldCol({
 
     required String label,
@@ -2550,8 +2456,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
   }
 
-
-
   Widget _label(String text) => Text(
 
     text,
@@ -2567,8 +2471,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
     ),
 
   );
-
-
 
   InputDecoration _dec(String hint) => InputDecoration(
 
@@ -2607,8 +2509,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
     ),
 
   );
-
-
 
   Widget _dropdown({
 
@@ -2692,8 +2592,6 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
 }
 
-
-
 // ── Item model ────────────────────────────────────────────────────────────
 
 class _VoucherItem {
@@ -2705,8 +2603,6 @@ class _VoucherItem {
   double unitPrice = 0;
 
   int qty = 0;
-
-
 
   double get total => unitPrice * qty;
 

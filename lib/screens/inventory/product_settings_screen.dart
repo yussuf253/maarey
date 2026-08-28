@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-
-
 import '../../services/app_settings_repository.dart';
 
 import '../../services/inventory_product_settings.dart';
@@ -16,15 +14,11 @@ import 'unit_templates_settings_screen.dart';
 
 import 'warehouses_screen.dart';
 
-
-
 /// إعدادات المنتجات — أربعة أقسام: تهيئة، تتبع، أذون مخزنية، قيم افتراضية (تخزين في [app_settings]).
 
 class ProductSettingsScreen extends StatefulWidget {
 
   const ProductSettingsScreen({super.key});
-
-
 
   @override
 
@@ -32,21 +26,15 @@ class ProductSettingsScreen extends StatefulWidget {
 
 }
 
-
-
 class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
 
   final _repo = ProductRepository();
 
   final _settings = AppSettingsRepository.instance;
 
-
-
   bool _loading = true;
 
   late InventoryProductSettingsData _d;
-
-
 
   final _nextSkuCtrl = TextEditingController();
 
@@ -56,19 +44,13 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
 
   final _minSellPctCtrl = TextEditingController();
 
-
-
   List<Map<String, dynamic>> _warehouses = [];
 
   List<Map<String, dynamic>> _priceLists = [];
 
   String _hintProductCode = 'N1-…';
 
-
-
   static const _taxChoices = <String>['معفى', '5', '10', '15', 'مخصص'];
-
-
 
   @override
 
@@ -79,8 +61,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
     _load();
 
   }
-
-
 
   Future<void> _load() async {
 
@@ -95,8 +75,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
       _warehouses = await _repo.listWarehouses();
 
       _priceLists = await _repo.listPriceListsForSettings();
-
-
 
       if (d.defaultWarehouseId != null &&
 
@@ -128,8 +106,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
 
       _d = d;
 
-
-
       _nextSkuCtrl.text =
 
           _d.nextSkuText.isNotEmpty ? _d.nextSkuText : _hintProductCode;
@@ -148,8 +124,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
 
   }
 
-
-
   Future<void> _persist() async {
 
     _d = _d.copyWith(
@@ -163,8 +137,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
     await _d.save(_settings);
 
   }
-
-
 
   Future<void> _patch(InventoryProductSettingsData next) async {
 
@@ -183,8 +155,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
     await _d.save(_settings);
 
   }
-
-
 
   /// أيقونة منع سريعة: إيقاف التعامل بالضريبة في شاشة إضافة المنتج (إخفاء الحقل).
 
@@ -250,8 +220,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
 
   }
 
-
-
   /// أيقونة منع سريعة: إيقاف التعامل بالخصم في شاشة إضافة المنتج (إخفاء الحقول).
 
   Widget _addProductDiscountRow(ColorScheme cs) {
@@ -316,8 +284,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
 
   }
 
-
-
   static String _fmtSettingNum(double v) {
 
     if ((v - v.round()).abs() < 1e-9) return v.round().toString();
@@ -325,8 +291,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
     return v.toString();
 
   }
-
-
 
   Future<void> _persistMarginSuggestFields() async {
 
@@ -366,8 +330,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
 
   }
 
-
-
   @override
 
   void dispose() {
@@ -383,8 +345,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
     super.dispose();
 
   }
-
-
 
   Future<void> _openNumberingDialog({required bool forTransfer}) async {
 
@@ -415,8 +375,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
       return;
 
     }
-
-
 
     final prefixCtrl = TextEditingController(text: _d.transferPrefix);
 
@@ -490,8 +448,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
 
   }
 
-
-
   @override
 
   Widget build(BuildContext context) {
@@ -503,8 +459,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
         ? const Color(0xFF121212)
 
         : const Color(0xFFF0F4F8);
-
-
 
     return Directionality(
 
@@ -611,8 +565,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
     );
 
   }
-
-
 
   Widget _tabInit(ColorScheme cs) {
 
@@ -1162,8 +1114,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
 
   }
 
-
-
   Widget _unitRadio(String value, String title, String sub) {
 
     final sel = _d.defaultUnitView == value;
@@ -1229,8 +1179,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
     );
 
   }
-
-
 
   Widget _tabTrack(ColorScheme cs) {
 
@@ -1360,8 +1308,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
 
   }
 
-
-
   Widget _negRadio(String value, String title, String sub) {
 
     final sel = _d.negativeStockMode == value;
@@ -1427,8 +1373,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
     );
 
   }
-
-
 
   Widget _tabVouchers(ColorScheme cs) {
 
@@ -1589,8 +1533,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
     );
 
   }
-
-
 
   Widget _tabDefaults(ColorScheme cs) {
 
@@ -2070,8 +2012,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
 
   }
 
-
-
   Widget _simpleRadio(String value, String title, String sub) {
 
     final sel = _d.returnCostMethod == value;
@@ -2137,8 +2077,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
     );
 
   }
-
-
 
   Widget _natureRadio(String value, String title, String sub) {
 
@@ -2206,8 +2144,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
 
   }
 
-
-
   Widget _header(String title, String sub, ColorScheme cs) {
 
     return Column(
@@ -2259,8 +2195,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
     );
 
   }
-
-
 
   Widget _sectionCard(
 
@@ -2339,8 +2273,6 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
     );
 
   }
-
-
 
   InputDecoration _outlineDec(String label) {
 

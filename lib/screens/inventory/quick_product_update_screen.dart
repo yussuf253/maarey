@@ -1,7 +1,5 @@
 import 'dart:async' show Timer, unawaited;
 
-
-
 import 'package:flutter/material.dart';
 
 import '../../l10n/generated/app_localizations.dart';
@@ -9,8 +7,6 @@ import '../../l10n/generated/app_localizations.dart';
 import 'package:flutter/services.dart';
 
 import 'package:provider/provider.dart';
-
-
 
 import '../../providers/global_barcode_route_bridge.dart';
 
@@ -36,8 +32,6 @@ import '../../widgets/inputs/app_number_input.dart';
 
 import '../../widgets/inputs/app_price_input.dart';
 
-
-
 /// Intent for Ctrl+S
 
 final class _SaveIntent extends Intent {
@@ -46,15 +40,11 @@ final class _SaveIntent extends Intent {
 
 }
 
-
-
 /// تعديل سريع لمنتجات موجودة: بحث + صفحات، ومسح باركود يُستهلك هنا (لا يُوجَّه للبيع).
 
 class QuickProductUpdateScreen extends StatefulWidget {
 
   const QuickProductUpdateScreen({super.key});
-
-
 
   @override
 
@@ -62,13 +52,9 @@ class QuickProductUpdateScreen extends StatefulWidget {
 
 }
 
-
-
 class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
   static const _pageSize = 40;
-
-
 
   final ProductRepository _repo = ProductRepository();
 
@@ -78,23 +64,15 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
   final _scrollCtrl = ScrollController();
 
-
-
   Timer? _debounce;
 
   GlobalBarcodeRouteBridge? _barcodeBridge;
-
-
 
   final List<Map<String, dynamic>> _rows = [];
 
   final Map<int, _RowDraft> _draftById = {};
 
-
-
   bool _loading = true;
-
-
 
   AppLocalizations get loc => AppLocalizations.of(context)!;
 
@@ -108,13 +86,9 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
   bool _searchTooShort = false;
 
-
-
   int? _savingProductId;
 
   bool _leavingConfirmed = false;
-
-
 
   @override
 
@@ -142,8 +116,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
   }
 
-
-
   @override
 
   void dispose() {
@@ -164,13 +136,9 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
   }
 
-
-
   bool get _anyDirty =>
 
       _draftById.values.any((d) => d.isDirty) && !_leavingConfirmed;
-
-
 
   void _disposeDrafts() {
 
@@ -183,8 +151,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     _draftById.clear();
 
   }
-
-
 
   Future<bool> _ensureCanLeaveIfDirty() async {
 
@@ -230,8 +196,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
   }
 
-
-
   void _syncDrafts() {
 
     final ids = _rows.map((e) => e['id'] as int).toSet();
@@ -256,8 +220,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
   }
 
-
-
   void _onScroll() {
 
     if (!_hasMore || _loadingMore || _loading) return;
@@ -271,8 +233,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     }
 
   }
-
-
 
   Future<bool> _onGlobalBarcode(String raw) async {
 
@@ -356,8 +316,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
   }
 
-
-
   Future<void> _reload({required bool reset}) async {
 
     _debounce?.cancel();
@@ -381,8 +339,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       return;
 
     }
-
-
 
     if (reset) {
 
@@ -472,8 +428,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
   }
 
-
-
   Future<void> _loadMore() async {
 
     if (!_hasMore || _loadingMore || _loading) return;
@@ -534,8 +488,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
   }
 
-
-
   void _scheduleSearch() {
 
     _debounce?.cancel();
@@ -557,8 +509,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     });
 
   }
-
-
 
   Future<void> _submitSearchFromKeyboard() async {
 
@@ -590,8 +540,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
   }
 
-
-
   Future<void> _openCameraScan() async {
 
     final code = await BarcodeInputLauncher.captureBarcode(
@@ -607,8 +555,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     await _onGlobalBarcode(code.trim());
 
   }
-
-
 
   Future<void> _pickSuggestion(Map<String, dynamic> row) async {
 
@@ -652,8 +598,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
   }
 
-
-
   Future<void> _openConflictProduct(int productId) async {
 
     final row = await _repo.getProductQuickEditRow(productId);
@@ -663,8 +607,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     await _pickSuggestion(row);
 
   }
-
-
 
   Future<void> _invokeSavePrimary() async {
 
@@ -676,11 +618,7 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
   }
 
-
-
   double _moneyToDb(int iqdRounded) => iqdRounded.toDouble();
-
-
 
   Future<void> _saveRow(int productId) async {
 
@@ -894,8 +832,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
   }
 
-
-
   Widget _profitBox({
 
     required int buy,
@@ -940,8 +876,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
     }
 
-
-
     final pctLabel =
 
         buy > 0 ? '${marginPct.round()}%' : '—';
@@ -949,8 +883,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     final profitLabel = NumericFormat.formatNumber(profit.abs());
 
     final sign = profit < 0 ? '-' : '';
-
-
 
     return Container(
 
@@ -1020,8 +952,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
   }
 
-
-
   @override
 
   Widget build(BuildContext context) {
@@ -1038,8 +968,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     final showSuggest =
 
         qTrim.length >= 2 && !_loading && !_searchTooShort;
-
-
 
     final bodyCore = Scaffold(
 
@@ -1413,8 +1341,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
     );
 
-
-
     return Directionality(
 
       textDirection: TextDirection.rtl,
@@ -1451,8 +1377,6 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
 }
 
-
-
 class _DraftBaseline {
 
   const _DraftBaseline({
@@ -1473,8 +1397,6 @@ class _DraftBaseline {
 
   });
 
-
-
   final String name;
 
   final String barcode;
@@ -1491,8 +1413,6 @@ class _DraftBaseline {
 
 }
 
-
-
 String _formattedMoney(dynamic v) {
 
   final n = (v as num?)?.toDouble() ?? 0.0;
@@ -1501,8 +1421,6 @@ String _formattedMoney(dynamic v) {
 
 }
 
-
-
 String _formattedQty(dynamic v) {
 
   final n = (v as num?)?.toDouble() ?? 0.0;
@@ -1510,8 +1428,6 @@ String _formattedQty(dynamic v) {
   return NumericFormat.formatNumber(n.round().clamp(0, 999999999));
 
 }
-
-
 
 class _RowDraft {
 
@@ -1575,8 +1491,6 @@ class _RowDraft {
 
   }
 
-
-
   final int productId;
 
   final bool track;
@@ -1595,8 +1509,6 @@ class _RowDraft {
 
   final TextEditingController low;
 
-
-
   final FocusNode nameFn;
 
   final FocusNode barcodeFn;
@@ -1613,19 +1525,11 @@ class _RowDraft {
 
   final FocusNode saveFn;
 
-
-
   Timer? barcodeCheck;
-
-
 
   int? duplicateBarcodeProductId;
 
-
-
   late _DraftBaseline baseline;
-
-
 
   bool get isDirty {
 
@@ -1644,8 +1548,6 @@ class _RowDraft {
         baseline.low != low.text;
 
   }
-
-
 
   void rebaseline() {
 
@@ -1668,8 +1570,6 @@ class _RowDraft {
     );
 
   }
-
-
 
   void dispose() {
 
@@ -1709,8 +1609,6 @@ class _RowDraft {
 
 }
 
-
-
 class _QuickProductCard extends StatefulWidget {
 
   const _QuickProductCard({
@@ -1732,8 +1630,6 @@ class _QuickProductCard extends StatefulWidget {
     required this.onConflictProductTap,
 
   });
-
-
 
   final Map<String, dynamic> row;
 
@@ -1759,15 +1655,11 @@ class _QuickProductCard extends StatefulWidget {
 
   final Future<void> Function(int productId) onConflictProductTap;
 
-
-
   @override
 
   State<_QuickProductCard> createState() => _QuickProductCardState();
 
 }
-
-
 
 class _BarcodeAlnumUpperFormatter extends TextInputFormatter {
 
@@ -1811,8 +1703,6 @@ class _BarcodeAlnumUpperFormatter extends TextInputFormatter {
 
 }
 
-
-
 class _QuickProductCardState extends State<_QuickProductCard> {
   AppLocalizations get loc => AppLocalizations.of(context)!;
 
@@ -1840,8 +1730,6 @@ class _QuickProductCardState extends State<_QuickProductCard> {
 
   }
 
-
-
   void _nameFocusTrim() {
 
     if (!widget.draft.nameFn.hasFocus) {
@@ -1865,8 +1753,6 @@ class _QuickProductCardState extends State<_QuickProductCard> {
     }
 
   }
-
-
 
   @override
 
@@ -1892,15 +1778,11 @@ class _QuickProductCardState extends State<_QuickProductCard> {
 
   }
 
-
-
   void _tick() {
 
     if (mounted) setState(() {});
 
   }
-
-
 
   void _onBarcodeChanged() {
 
@@ -1942,8 +1824,6 @@ class _QuickProductCardState extends State<_QuickProductCard> {
 
   }
 
-
-
   @override
 
   Widget build(BuildContext context) {
@@ -1962,8 +1842,6 @@ class _QuickProductCardState extends State<_QuickProductCard> {
 
     final unitSuffix = stockKind == 1 ? 'كجم' : 'قطعة';
 
-
-
     final buyI = NumericFormat.parseNumber(d.buy.text);
 
     final sellI = NumericFormat.parseNumber(d.sell.text);
@@ -1973,8 +1851,6 @@ class _QuickProductCardState extends State<_QuickProductCard> {
     final qtyI = NumericFormat.parseNumber(d.qty.text);
 
     final lowI = NumericFormat.parseNumber(d.low.text);
-
-
 
     final priceWarn = widget.validatePriceLogicFn(
 
@@ -1994,8 +1870,6 @@ class _QuickProductCardState extends State<_QuickProductCard> {
 
     ].whereType<String>().join(' • ').trim();
 
-
-
     String qtyWarn = '';
 
     if (d.track && qtyI <= 0) {
@@ -2009,8 +1883,6 @@ class _QuickProductCardState extends State<_QuickProductCard> {
         ? 'الكمية وصلت لحد التنبيه'
 
         : '';
-
-
 
     return Card(
 
@@ -2027,8 +1899,6 @@ class _QuickProductCardState extends State<_QuickProductCard> {
           builder: (ctx, constraints) {
 
             final narrow = constraints.maxWidth < 520;
-
-
 
             Widget nameField() => AppInput(
 
@@ -2057,8 +1927,6 @@ class _QuickProductCardState extends State<_QuickProductCard> {
                       FocusScope.of(context).requestFocus(d.barcodeFn),
 
                 );
-
-
 
             Widget barcodeField() => Column(
 
@@ -2125,8 +1993,6 @@ class _QuickProductCardState extends State<_QuickProductCard> {
                   ],
 
                 );
-
-
 
             Widget priceRowWide() => Row(
 
@@ -2218,8 +2084,6 @@ class _QuickProductCardState extends State<_QuickProductCard> {
 
                 );
 
-
-
             Widget priceColumn() => Column(
 
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -2297,8 +2161,6 @@ class _QuickProductCardState extends State<_QuickProductCard> {
                   ],
 
                 );
-
-
 
             final qtyRow = narrow
 
@@ -2441,8 +2303,6 @@ class _QuickProductCardState extends State<_QuickProductCard> {
                     ],
 
                   );
-
-
 
             return Column(
 

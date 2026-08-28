@@ -362,7 +362,6 @@ class ProductRepository {
     return null;
   }
 
-
   /// حذف تصنيف بعد التحقق من الفروع والمنتجات.
   Future<String?> deleteCategory(int id) async {
     final db = await _db;
@@ -406,7 +405,6 @@ class ProductRepository {
     CloudSyncService.instance.scheduleSyncSoon();
     return null;
   }
-
 
   /// علامات تجارية نشطة (لإدارة القائمة).
   Future<List<Map<String, dynamic>>> listBrandsForSettings() async {
@@ -457,7 +455,6 @@ class ProductRepository {
     return null;
   }
 
-
   /// حذف ماركة (المنتجات المرتبطة تُفرّغ brandId تلقائياً).
   Future<String?> deleteBrand(int id) async {
     final db = await _db;
@@ -481,7 +478,6 @@ class ProductRepository {
     CloudSyncService.instance.scheduleSyncSoon();
     return null;
   }
-
 
   Future<List<Map<String, dynamic>>> getProducts() async {
     final db = await _db;
@@ -806,7 +802,6 @@ class ProductRepository {
     });
     CloudSyncService.instance.scheduleSyncSoon();
   }
-
 
   /// صفحات لشاشة «تحديث منتج موجود»: بحث موحّد (اسم / باركود / رمز / معرف) أو كل الأصناف عند فراغ النص.
   Future<List<Map<String, dynamic>>> queryProductsQuickEditPage({
@@ -1493,7 +1488,6 @@ class ProductRepository {
     CloudSyncService.instance.scheduleSyncSoon();
   }
 
-
   /// حذف منطقي: تعطيل المنتج بدل حذفه لتفادي كسر روابط الفواتير.
   Future<void> deactivateProduct(int productId) async {
     final db = await _db;
@@ -1511,7 +1505,6 @@ class ProductRepository {
     });
     CloudSyncService.instance.scheduleSyncSoon();
   }
-
 
   Future<bool> isBarcodeTaken(String barcode) async {
     final bc = barcode.trim();
@@ -1991,7 +1984,6 @@ class ProductRepository {
       return newId;
     });
 
-
     // وحدة افتراضية للبيع/المسح (factor=1). تُكمّل مهاجرات قواعد قديمة لكنها لا تغطي المنتجات الجديدة بعد إنشاء الجدول.
     try {
       final su = nz(saleUnit);
@@ -2201,7 +2193,6 @@ class ProductRepository {
       });
       await _enqueueProductMutation(txn, id, 'INSERT');
 
-
       final defaultUnitName = k == 1 ? 'كيلوغرام' : 'قطعة';
       await txn.insert('product_unit_variants', {
         'productId': id,
@@ -2306,6 +2297,4 @@ class ProductRepository {
     );
   }
 }
-
-
 

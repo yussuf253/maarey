@@ -1,7 +1,5 @@
 import 'dart:async' show unawaited;
 
-
-
 import 'package:flutter/material.dart';
 
 import '../../l10n/generated/app_localizations.dart';
@@ -12,33 +10,23 @@ import 'package:provider/provider.dart';
 
 import 'package:sqflite/sqflite.dart' show Database;
 
-
-
 import '../../providers/notification_provider.dart';
 
 import '../../services/database_helper.dart';
 
 import '../../services/tenant_context_service.dart';
 
-
-
 const Color _kAccent = Color(0xFF1E3A5F);
 
 const Color _kGreen  = Color(0xFF15803D);
-
-
 
 /// أقصى عدد أسطر يُضاف دفعة واحدة من «الملء التلقائي» لتفادي بطء الواجهة.
 
 const int _kMaxAutoPoLines = 150;
 
-
-
 class AddPurchaseOrderScreen extends StatefulWidget {
 
   const AddPurchaseOrderScreen({super.key, this.poId, this.copyFromPoId});
-
-
 
   /// إذا كان [poId] غير null فهذا تعديل لأمر موجود.
 
@@ -48,15 +36,11 @@ class AddPurchaseOrderScreen extends StatefulWidget {
 
   final int? copyFromPoId;
 
-
-
   @override
 
   State<AddPurchaseOrderScreen> createState() => _AddPurchaseOrderScreenState();
 
 }
-
-
 
 class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
@@ -66,13 +50,9 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
   final _fmt    = DateFormat('dd/MM/yyyy');
 
-
-
   final _notesCtrl    = TextEditingController();
 
   final _supplierCtrl = TextEditingController();
-
-
 
   bool   _loading = true;
 
@@ -86,27 +66,19 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
   DateTime? _expectedDate;
 
-
-
   int?   _supplierId;
 
   List<Map<String, dynamic>> _suppliers = [];
 
   List<Map<String, dynamic>> _products  = [];
 
-
-
   // بنود الأمر
 
   final List<_PoLine> _lines = [];
 
-
-
   bool get _isEdit => widget.poId != null;
 
   bool get _isCopy => !_isEdit && widget.copyFromPoId != null;
-
-
 
   @override
 
@@ -117,8 +89,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
     _loadRefs();
 
   }
-
-
 
   @override
 
@@ -131,8 +101,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
     super.dispose();
 
   }
-
-
 
   Future<void> _loadRefs() async {
 
@@ -190,8 +158,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
   }
 
-
-
   Future<void> _loadExistingPo(Database db, {required int? poId}) async {
 
     final rows = await db.query(
@@ -231,8 +197,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
       if (exp != null && exp.isNotEmpty) _expectedDate = DateTime.parse(exp);
 
     } catch (_) {}
-
-
 
     final items = await db.query(
 
@@ -276,8 +240,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
     }
 
-
-
     if (_isCopy) {
 
       // عند النسخ: نبدأ أمر جديد بمسودة وتاريخ اليوم، ونصفّر الاستلام.
@@ -298,15 +260,9 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
   }
 
-
-
   String _fmt2(double v) => v == 0 ? '' : v.toStringAsFixed(v.truncateToDouble() == v ? 0 : 3);
 
-
-
   double get _grandTotal => _lines.fold(0.0, (s, l) => s + l.lineTotal);
-
-
 
   Future<void> _pickDate({required bool isOrder}) async {
 
@@ -346,8 +302,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
   }
 
-
-
   void _addLine() {
 
     setState(() {
@@ -371,8 +325,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
     });
 
   }
-
-
 
   /// يضيف أسطراً لمنتجات **تتبع مخزونها** ورصيدها عند أو تحت حد التنبيه (`qty <= lowStockThreshold`).
 
@@ -440,8 +392,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
     }
 
-
-
     final existingIds = _lines.map((l) => l.productId).whereType<int>().toSet();
 
     final existingNames = _lines
@@ -451,8 +401,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
         .where((s) => s.isNotEmpty)
 
         .toSet();
-
-
 
     var added = 0;
 
@@ -467,8 +415,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
       rows = rows.sublist(0, _kMaxAutoPoLines);
 
     }
-
-
 
     for (final m in rows) {
 
@@ -500,8 +446,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
       existingNames.add(key);
 
-
-
       final buy = (m['buyPrice'] as num?)?.toDouble() ?? 0;
 
       final priceText = buy > 0
@@ -513,8 +457,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
             )
 
           : '';
-
-
 
       _lines.add(_PoLine(
 
@@ -538,13 +480,9 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
     }
 
-
-
     if (!mounted) return;
 
     setState(() {});
-
-
 
     if (added == 0) {
 
@@ -570,8 +508,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
     }
 
-
-
     var msg =
 
         'تمت إضافة $added صنفاً من المخزون المنخفض/النافض. عُدّل الكميات ثم احفظ.';
@@ -592,8 +528,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
   }
 
-
-
   void _removeLine(int i) {
 
     final line = _lines[i];
@@ -605,8 +539,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
     setState(() => _lines.removeAt(i));
 
   }
-
-
 
   Future<void> _save() async {
 
@@ -634,8 +566,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
     }
 
-
-
     setState(() => _saving = true);
 
     final db  = await _db.database;
@@ -644,8 +574,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
     final tid = _tenant.activeTenantId;
 
-
-
     final supplierName = _supplierId != null
 
         ? (_suppliers
@@ -653,8 +581,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
             .firstWhere((s) => s['id'] == _supplierId, orElse: () => {})['name'] as String? ?? '')
 
         : _supplierCtrl.text.trim();
-
-
 
     final poData = {
 
@@ -683,8 +609,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
       'updatedAt':     now,
 
     };
-
-
 
     try {
 
@@ -735,8 +659,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
         final n = (count.first['n'] as num?)?.toInt() ?? 1;
 
         final poNo = 'PO-${DateTime.now().year}-${n.toString().padLeft(4, '0')}';
-
-
 
         final poId = await db.insert('purchase_orders', {
 
@@ -798,8 +720,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
   }
 
-
-
   Future<double?> _getExistingReceived(Database db) async {
 
     final r = await db.query('purchase_orders',
@@ -811,8 +731,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
     return r.isEmpty ? null : (r.first['receivedAmount'] as num?)?.toDouble();
 
   }
-
-
 
   void _snack(String msg, {bool error = false}) {
 
@@ -828,8 +746,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
   }
 
-
-
   @override
 
   Widget build(BuildContext context) {
@@ -838,8 +754,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
     final fmtMoney = NumberFormat('#,##0.000', 'ar');
 
     final cs = Theme.of(context).colorScheme;
-
-
 
     return Directionality(
 
@@ -1087,8 +1001,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
                         SizedBox(height: 16),
 
-
-
                         // ── الأصناف ──────────────────────────────────────────
 
                         _Section(
@@ -1245,8 +1157,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
                   ),
 
-
-
                   // ── شريط الإجمالي ──────────────────────────────────────────
 
                   Container(
@@ -1293,8 +1203,6 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
   }
 
-
-
   InputDecoration _dec(BuildContext context, String hint) {
 
     return InputDecoration(
@@ -1313,11 +1221,7 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
 
 }
 
-
-
 // ── بند في الأمر ──────────────────────────────────────────────────────────────
-
-
 
 class _PoLine {
 
@@ -1341,8 +1245,6 @@ class _PoLine {
 
   });
 
-
-
   int?   itemId;
 
   int?   productId;
@@ -1359,8 +1261,6 @@ class _PoLine {
 
   TextEditingController priceCtrl;
 
-
-
   double get parsedQty  => double.tryParse(qtyCtrl.text.replaceAll(',', '.')) ?? 0;
 
   double get parsedPrice => double.tryParse(priceCtrl.text.replaceAll(',', '.')) ?? 0;
@@ -1369,11 +1269,7 @@ class _PoLine {
 
 }
 
-
-
 // ── صف بند في الجدول ─────────────────────────────────────────────────────────
-
-
 
 class _PoLineRow extends StatelessWidget {
 
@@ -1391,8 +1287,6 @@ class _PoLineRow extends StatelessWidget {
 
   });
 
-
-
   final _PoLine                    line;
 
   final List<Map<String, dynamic>> products;
@@ -1402,8 +1296,6 @@ class _PoLineRow extends StatelessWidget {
   final VoidCallback               onRemove;
 
   final VoidCallback               onChanged;
-
-
 
   @override
 
@@ -1652,11 +1544,7 @@ class _PoLineRow extends StatelessWidget {
 
 }
 
-
-
 // ── مكونات مساعدة ────────────────────────────────────────────────────────────
-
-
 
 class _Section extends StatelessWidget {
 
@@ -1667,8 +1555,6 @@ class _Section extends StatelessWidget {
   final Widget  child;
 
   final Widget? trailing;
-
-
 
   @override
 
@@ -1742,8 +1628,6 @@ class _Section extends StatelessWidget {
 
 }
 
-
-
 class _LabelField extends StatelessWidget {
 
   const _LabelField({required this.label, required this.child});
@@ -1751,8 +1635,6 @@ class _LabelField extends StatelessWidget {
   final String label;
 
   final Widget child;
-
-
 
   @override
 
@@ -1780,8 +1662,6 @@ class _LabelField extends StatelessWidget {
 
 }
 
-
-
 class _DateTile extends StatelessWidget {
 
   const _DateTile({
@@ -1803,8 +1683,6 @@ class _DateTile extends StatelessWidget {
   final String       hint;
 
   final VoidCallback onTap;
-
-
 
   @override
 

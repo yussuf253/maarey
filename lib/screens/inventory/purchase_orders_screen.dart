@@ -1,7 +1,5 @@
 import 'dart:async';
 
-
-
 import 'package:flutter/material.dart';
 
 import '../../l10n/generated/app_localizations.dart';
@@ -9,8 +7,6 @@ import '../../l10n/generated/app_localizations.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
 import 'package:provider/provider.dart';
-
-
 
 import '../../providers/theme_provider.dart';
 
@@ -23,8 +19,6 @@ import '../../utils/iraqi_currency_format.dart';
 import '../../utils/screen_layout.dart';
 
 import 'add_purchase_order_screen.dart';
-
-
 
 // ── ألوان وثوابت ──────────────────────────────────────────────────────────────
 
@@ -40,8 +34,6 @@ const Color _kGreen = Color(0xFF16A34A);
 
 const Color _kRed = Color(0xFFEF4444);
 
-
-
 class _PoStatus {
 
   static const draft    = 'draft';
@@ -53,8 +45,6 @@ class _PoStatus {
   static const received = 'received';
 
   static const cancelled = 'cancelled';
-
-
 
   static String label(String s) => switch (s) {
 
@@ -71,8 +61,6 @@ class _PoStatus {
     _ => s,
 
   };
-
-
 
   static Color color(String s) => switch (s) {
 
@@ -92,21 +80,15 @@ class _PoStatus {
 
 }
 
-
-
 class PurchaseOrdersScreen extends StatefulWidget {
 
   const PurchaseOrdersScreen({super.key});
-
-
 
   @override
 
   State<PurchaseOrdersScreen> createState() => _PurchaseOrdersScreenState();
 
 }
-
-
 
 class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
 
@@ -120,13 +102,9 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
 
   final _searchFocus = FocusNode();
 
-
-
   Timer? _debounce;
 
   String _debouncedQuery = '';
-
-
 
   List<Map<String, dynamic>> _all      = [];
 
@@ -137,8 +115,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
   String _statFilter = 'all';
 
   bool   _loading      = true;
-
-
 
   @override
 
@@ -151,8 +127,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
     _search.addListener(_onSearchChanged);
 
   }
-
-
 
   @override
 
@@ -167,8 +141,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
     super.dispose();
 
   }
-
-
 
   void _onSearchChanged() {
 
@@ -189,8 +161,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
     });
 
   }
-
-
 
   Future<void> _load() async {
 
@@ -229,8 +199,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
     _applyFilter();
 
   }
-
-
 
   void _applyFilter() {
 
@@ -280,8 +248,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
 
   }
 
-
-
   String _formatDate(String? iso) {
 
     if (iso == null || iso.isEmpty) return '—';
@@ -297,8 +263,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
     }
 
   }
-
-
 
   @override
 
@@ -317,8 +281,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
 
       final textSec = isDark ? Colors.grey.shade500 : Colors.grey.shade500;
 
-
-
       // ── إحصاءات مختصرة ────────────────────────────────────────────────────
 
       final total     = _all.length;
@@ -329,8 +291,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
 
       final completed = _all.where((p) => p['status'] == _PoStatus.received).length;
 
-
-
       final totalValue = _all.fold<num>(
 
         0,
@@ -338,8 +298,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
         (s, p) => s + ((p['totalAmount'] as num?) ?? 0),
 
       );
-
-
 
       Future<void> openNew() async {
 
@@ -354,8 +312,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
         if (result == true) unawaited(_load());
 
       }
-
-
 
       return Directionality(
 
@@ -635,8 +591,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
 
                     ),
 
-
-
                     // ── شريط البحث والفلتر ───────────────────────────────────
 
                     Container(
@@ -780,8 +734,6 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                       ),
 
                     ),
-
-
 
                     // ── القائمة ──────────────────────────────────────────────
 
@@ -985,11 +937,7 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
 
 }
 
-
-
 // ── مكونات الواجهة ─────────────────────────────────────────────────────────────
-
-
 
 class _StatCounter extends StatelessWidget {
 
@@ -1007,8 +955,6 @@ class _StatCounter extends StatelessWidget {
 
   });
 
-
-
   final String label;
 
   final int value;
@@ -1018,8 +964,6 @@ class _StatCounter extends StatelessWidget {
   final bool active;
 
   final VoidCallback onTap;
-
-
 
   @override
 
@@ -1119,8 +1063,6 @@ class _StatCounter extends StatelessWidget {
 
 }
 
-
-
 class _StatusFilterDropdown extends StatelessWidget {
 
   const _StatusFilterDropdown({required this.value, required this.onChanged, required this.isDark});
@@ -1130,8 +1072,6 @@ class _StatusFilterDropdown extends StatelessWidget {
   final ValueChanged<String?> onChanged;
 
   final bool                 isDark;
-
-
 
   @override
 
@@ -1188,8 +1128,6 @@ class _StatusFilterDropdown extends StatelessWidget {
 
   }
 
-
-
   DropdownMenuItem<String> _statusItem(String v, String label, Color dot) {
 
     return DropdownMenuItem(
@@ -1232,8 +1170,6 @@ class _StatusFilterDropdown extends StatelessWidget {
 
 }
 
-
-
 class _PoCard extends StatelessWidget {
 
   const _PoCard({
@@ -1254,8 +1190,6 @@ class _PoCard extends StatelessWidget {
 
   });
 
-
-
   final Map<String, dynamic>       po;
 
   final Color                      surface;
@@ -1269,8 +1203,6 @@ class _PoCard extends StatelessWidget {
   final VoidCallback               onCopy;
 
   final VoidCallback               onCancel;
-
-
 
   @override
 
@@ -1290,8 +1222,6 @@ class _PoCard extends StatelessWidget {
         ? po['supplierDisplayName'] as String
 
         : (po['supplierName'] as String? ?? loc.noSupplier);
-
-
 
     return Container(
 
@@ -1503,8 +1433,6 @@ class _PoCard extends StatelessWidget {
 
 }
 
-
-
 class _PoEmptyState extends StatelessWidget {
 
   const _PoEmptyState({
@@ -1517,15 +1445,11 @@ class _PoEmptyState extends StatelessWidget {
 
   });
 
-
-
   final bool hasAny;
 
   final Color textSec;
 
   final VoidCallback onCreate;
-
-
 
   @override
 

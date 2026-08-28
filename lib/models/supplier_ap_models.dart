@@ -24,7 +24,6 @@ class Supplier {
   final DateTime? updatedAt;
 }
 
-
 /// ملخص رصيد مورد: مجموع وصولاتهم − مجموع ما دفعناه.
 class SupplierApSummary {
   const SupplierApSummary({
@@ -69,7 +68,6 @@ class SupplierBill {
   final DateTime? updatedAt;
   final String? createdByUserName;
 
-
   /// إذن مخزوني وارد مرتبط بهذا الوصل (إن وُجد).
   final int? linkedStockVoucherId;
   final String? linkedVoucherNo;
@@ -98,7 +96,6 @@ class SupplierPayout {
   final DateTime? updatedAt;
   final String? createdByUserName;
   final bool affectsCash;
-
 
   /// سند الفاتورة المرتبط (قائمة الفواتير) إن وُجد.
   final int? receiptInvoiceId;

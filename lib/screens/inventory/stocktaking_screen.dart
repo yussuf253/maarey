@@ -6,8 +6,6 @@ import 'package:flutter/services.dart';
 
 import 'package:intl/intl.dart';
 
-
-
 import '../../services/database_helper.dart';
 
 import '../../services/inventory_repository.dart';
@@ -19,8 +17,6 @@ import '../../services/permission_service.dart';
 import '../../services/tenant_context_service.dart';
 
 import '../../widgets/permission_guard.dart';
-
-
 
 const _navy = Color(0xFF1E3A5F);
 
@@ -42,23 +38,17 @@ const _orange = Color(0xFFF97316);
 
 const _red = Color(0xFFEF4444);
 
-
-
 // ══════════════════════════════════════════════════════════════════════════════
 
 class StocktakingScreen extends StatefulWidget {
 
   const StocktakingScreen({super.key});
 
-
-
   @override
 
   State<StocktakingScreen> createState() => _StocktakingScreenState();
 
 }
-
-
 
 class _StocktakingScreenState extends State<StocktakingScreen>
 
@@ -74,11 +64,7 @@ class _StocktakingScreenState extends State<StocktakingScreen>
 
   bool _loading = true;
 
-
-
   AppLocalizations get loc => AppLocalizations.of(context)!;
-
-
 
   @override
 
@@ -91,8 +77,6 @@ class _StocktakingScreenState extends State<StocktakingScreen>
     _load();
 
   }
-
-
 
   Future<void> _load() async {
 
@@ -122,8 +106,6 @@ class _StocktakingScreenState extends State<StocktakingScreen>
 
   }
 
-
-
   @override
 
   void dispose() {
@@ -133,8 +115,6 @@ class _StocktakingScreenState extends State<StocktakingScreen>
     super.dispose();
 
   }
-
-
 
   Future<void> _newSession() async {
 
@@ -165,8 +145,6 @@ class _StocktakingScreenState extends State<StocktakingScreen>
     await _load();
 
   }
-
-
 
   @override
 
@@ -275,8 +253,6 @@ class _StocktakingScreenState extends State<StocktakingScreen>
 
   }
 
-
-
   void _closeSession(Map<String, dynamic> s) async {
 
     var postDiffs = true;
@@ -379,8 +355,6 @@ class _StocktakingScreenState extends State<StocktakingScreen>
 
   }
 
-
-
   void _openCounting(BuildContext ctx, Map<String, dynamic> s) {
 
     Navigator.push(
@@ -392,8 +366,6 @@ class _StocktakingScreenState extends State<StocktakingScreen>
     );
 
   }
-
-
 
   void _openReport(BuildContext ctx, Map<String, dynamic> s) {
 
@@ -412,8 +384,6 @@ class _StocktakingScreenState extends State<StocktakingScreen>
   }
 
 }
-
-
 
 // ══════════════════════════════════════════════════════════════════════════════
 
@@ -438,8 +408,6 @@ class _SessionList extends StatelessWidget {
     this.onClose,
 
   });
-
-
 
   @override
 
@@ -474,8 +442,6 @@ class _SessionList extends StatelessWidget {
 
 }
 
-
-
 class _SessionCard extends StatelessWidget {
 
   final Map<String, dynamic> data;
@@ -485,8 +451,6 @@ class _SessionCard extends StatelessWidget {
   final void Function(Map<String, dynamic>)? onClose;
 
   const _SessionCard({required this.data, required this.onTap, this.onClose});
-
-
 
   @override
 
@@ -500,8 +464,6 @@ class _SessionCard extends StatelessWidget {
     final counted = (data['countedItems'] as num?)?.toInt() ?? 0;
 
     final progress = total > 0 ? counted / total : 0.0;
-
-
 
     return InkWell(
 
@@ -695,8 +657,6 @@ class _SessionCard extends StatelessWidget {
 
             const SizedBox(height: 14),
 
-
-
             // Progress bar
 
             Row(
@@ -754,8 +714,6 @@ class _SessionCard extends StatelessWidget {
             ),
 
             const SizedBox(height: 12),
-
-
 
             Row(
 
@@ -869,8 +827,6 @@ class _SessionCard extends StatelessWidget {
 
   }
 
-
-
   static String _fmtDate(String? iso) {
 
     if (iso == null || iso.isEmpty) return '—';
@@ -885,8 +841,6 @@ class _SessionCard extends StatelessWidget {
 
 }
 
-
-
 // ══════════════════════════════════════════════════════════════════════════════
 
 // New Session Sheet
@@ -897,15 +851,11 @@ class _NewSessionSheet extends StatefulWidget {
 
   const _NewSessionSheet();
 
-
-
   @override
 
   State<_NewSessionSheet> createState() => _NewSessionSheetState();
 
 }
-
-
 
 class _NewSessionSheetState extends State<_NewSessionSheet> {
 
@@ -919,8 +869,6 @@ class _NewSessionSheetState extends State<_NewSessionSheet> {
 
   int? _warehouseId;
 
-
-
   @override
 
   void initState() {
@@ -930,8 +878,6 @@ class _NewSessionSheetState extends State<_NewSessionSheet> {
     _loadWarehouses();
 
   }
-
-
 
   Future<void> _loadWarehouses() async {
 
@@ -957,8 +903,6 @@ class _NewSessionSheetState extends State<_NewSessionSheet> {
 
   }
 
-
-
   @override
 
   void dispose() {
@@ -968,8 +912,6 @@ class _NewSessionSheetState extends State<_NewSessionSheet> {
     super.dispose();
 
   }
-
-
 
   @override
 
@@ -1226,8 +1168,6 @@ class _NewSessionSheetState extends State<_NewSessionSheet> {
 
 }
 
-
-
 // ══════════════════════════════════════════════════════════════════════════════
 
 // Counting Screen
@@ -1240,15 +1180,11 @@ class _CountingScreen extends StatefulWidget {
 
   const _CountingScreen({required this.session});
 
-
-
   @override
 
   State<_CountingScreen> createState() => _CountingScreenState();
 
 }
-
-
 
 class _CountingScreenState extends State<_CountingScreen> {
 
@@ -1260,11 +1196,7 @@ class _CountingScreenState extends State<_CountingScreen> {
 
   bool _loading = true;
 
-
-
   AppLocalizations get loc => AppLocalizations.of(context)!;
-
-
 
   @override
 
@@ -1275,8 +1207,6 @@ class _CountingScreenState extends State<_CountingScreen> {
     _load();
 
   }
-
-
 
   Future<void> _load() async {
 
@@ -1302,8 +1232,6 @@ class _CountingScreenState extends State<_CountingScreen> {
 
   }
 
-
-
   List<Map<String, dynamic>> get _filtered {
 
     final q = _searchCtrl.text.toLowerCase();
@@ -1326,11 +1254,7 @@ class _CountingScreenState extends State<_CountingScreen> {
 
   }
 
-
-
   int get _countedItems => _items.where((i) => i['countedQty'] != null).length;
-
-
 
   @override
 
@@ -1341,8 +1265,6 @@ class _CountingScreenState extends State<_CountingScreen> {
     super.dispose();
 
   }
-
-
 
   @override
 
@@ -1541,8 +1463,6 @@ class _CountingScreenState extends State<_CountingScreen> {
 
 }
 
-
-
 class _CountItem extends StatefulWidget {
 
   final Map<String, dynamic> item;
@@ -1551,21 +1471,15 @@ class _CountItem extends StatefulWidget {
 
   const _CountItem({required this.item, required this.onCount});
 
-
-
   @override
 
   State<_CountItem> createState() => _CountItemState();
 
 }
 
-
-
 class _CountItemState extends State<_CountItem> {
 
   late final TextEditingController _ctrl;
-
-
 
   @override
 
@@ -1587,8 +1501,6 @@ class _CountItemState extends State<_CountItem> {
 
   }
 
-
-
   @override
 
   void dispose() {
@@ -1598,8 +1510,6 @@ class _CountItemState extends State<_CountItem> {
     super.dispose();
 
   }
-
-
 
   double? get _diff {
 
@@ -1611,8 +1521,6 @@ class _CountItemState extends State<_CountItem> {
 
   }
 
-
-
   @override
 
   Widget build(BuildContext context) {
@@ -1621,8 +1529,6 @@ class _CountItemState extends State<_CountItem> {
     final isCounted = widget.item['countedQty'] != null;
 
     final diff = _diff;
-
-
 
     return Container(
 
@@ -1706,8 +1612,6 @@ class _CountItemState extends State<_CountItem> {
 
           const SizedBox(width: 10),
 
-
-
           // Product info
 
           Expanded(
@@ -1779,8 +1683,6 @@ class _CountItemState extends State<_CountItem> {
             ),
 
           ),
-
-
 
           // Count input
 
@@ -1880,8 +1782,6 @@ class _CountItemState extends State<_CountItem> {
 
 }
 
-
-
 // ══════════════════════════════════════════════════════════════════════════════
 
 // Session Report Sheet
@@ -1893,8 +1793,6 @@ class _SessionReportSheet extends StatelessWidget {
   final Map<String, dynamic> session;
 
   const _SessionReportSheet({required this.session});
-
-
 
   @override
 
@@ -2079,8 +1977,6 @@ class _SessionReportSheet extends StatelessWidget {
 
   }
 
-
-
   Widget _diffRow(String name, int sys, int cnt, int diff) {
 
     final color = diff > 0 ? _green : _red;
@@ -2171,8 +2067,6 @@ class _SessionReportSheet extends StatelessWidget {
 
 }
 
-
-
 class _ReportBadge extends StatelessWidget {
 
   final String label;
@@ -2190,8 +2084,6 @@ class _ReportBadge extends StatelessWidget {
     required this.color,
 
   });
-
-
 
   @override
 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../widgets/adaptive/adaptive_destination.dart';
 import '../../widgets/adaptive/adaptive_scaffold.dart';
 
-
 class AdaptiveTestScreen extends StatefulWidget {
   const AdaptiveTestScreen({super.key});
 

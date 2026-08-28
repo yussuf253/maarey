@@ -244,7 +244,6 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
     });
   }
 
-
   int _smartCopiesForRow(Map<String, dynamic> r) {
     final track = ((r['trackInventory'] as num?)?.toInt() ?? 1) == 1;
     final qty = (r['qty'] as num?)?.toDouble() ?? 0;

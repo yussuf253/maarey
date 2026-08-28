@@ -1,7 +1,5 @@
 import 'dart:async' show unawaited;
 
-
-
 import 'package:flutter/material.dart';
 
 import '../../l10n/generated/app_localizations.dart';
@@ -9,8 +7,6 @@ import '../../l10n/generated/app_localizations.dart';
 import 'package:flutter/services.dart';
 
 import 'package:provider/provider.dart';
-
-
 
 import '../../providers/notification_provider.dart';
 
@@ -36,8 +32,6 @@ import '../../services/app_settings_repository.dart';
 
 import '../../services/business_setup_settings.dart';
 
-
-
 class _VariantEditRow {
 
   _VariantEditRow({
@@ -58,13 +52,9 @@ class _VariantEditRow {
 
         minSell = TextEditingController();
 
-
-
   final int variantId;
 
   final bool isDefault;
-
-
 
   final TextEditingController unitName;
 
@@ -77,8 +67,6 @@ class _VariantEditRow {
   final TextEditingController sell;
 
   final TextEditingController minSell;
-
-
 
   void dispose() {
 
@@ -97,8 +85,6 @@ class _VariantEditRow {
   }
 
 }
-
-
 
 class _NewUnitVariantDraft {
 
@@ -116,8 +102,6 @@ class _NewUnitVariantDraft {
 
         minSell = TextEditingController();
 
-
-
   final TextEditingController unitName;
 
   final TextEditingController unitSymbol;
@@ -129,8 +113,6 @@ class _NewUnitVariantDraft {
   final TextEditingController sell;
 
   final TextEditingController minSell;
-
-
 
   void dispose() {
 
@@ -150,8 +132,6 @@ class _NewUnitVariantDraft {
 
 }
 
-
-
 class _VariantSizeDraft {
 
   _VariantSizeDraft({
@@ -168,15 +148,11 @@ class _VariantSizeDraft {
 
         barcodeCtrl = TextEditingController(text: barcode);
 
-
-
   final TextEditingController sizeCtrl;
 
   final TextEditingController qtyCtrl;
 
   final TextEditingController barcodeCtrl;
-
-
 
   void dispose() {
 
@@ -189,8 +165,6 @@ class _VariantSizeDraft {
   }
 
 }
-
-
 
 class _VariantColorDraft {
 
@@ -208,19 +182,13 @@ class _VariantColorDraft {
 
         sizes = sizes ?? <_VariantSizeDraft>[];
 
-
-
   final TextEditingController nameCtrl;
 
   final TextEditingController hexCtrl;
 
   final List<_VariantSizeDraft> sizes;
 
-
-
   bool nameManuallyEdited = false;
-
-
 
   void dispose() {
 
@@ -238,15 +206,11 @@ class _VariantColorDraft {
 
 }
 
-
-
 class ProductEditScreen extends StatefulWidget {
 
   const ProductEditScreen({super.key, required this.productId});
 
   final int productId;
-
-
 
   @override
 
@@ -254,15 +218,11 @@ class ProductEditScreen extends StatefulWidget {
 
 }
 
-
-
 class _ProductEditScreenState extends State<ProductEditScreen> {
 
   final ProductRepository _repo = ProductRepository();
 
   final DatabaseHelper _dbHelper = DatabaseHelper();
-
-
 
   final _formKey = GlobalKey<FormState>();
 
@@ -280,15 +240,11 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
   final _low = TextEditingController();
 
-
-
   bool _track = true;
 
   bool _loading = true;
 
   bool _saving = false;
-
-
 
   AppLocalizations get loc => AppLocalizations.of(context)!;
 
@@ -302,8 +258,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
   final List<_NewUnitVariantDraft> _newVariantDrafts = [];
 
-
-
   bool _multiVariantEnabled = false;
 
   final List<_VariantColorDraft> _colorDrafts = [];
@@ -311,8 +265,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
   bool _enableWeightSales = true;
 
   bool _enableClothingVariants = false;
-
-
 
   @override
 
@@ -323,8 +275,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
     _bootstrap();
 
   }
-
-
 
   @override
 
@@ -366,8 +316,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
   }
 
-
-
   int _parseNonNegativeInt(String raw) {
 
     final t = raw.trim();
@@ -377,8 +325,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
     return (n == null || n < 0) ? -1 : n;
 
   }
-
-
 
   int _totalQtyAllVariants() {
 
@@ -400,8 +346,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
   }
 
-
-
   int _totalQtyForColor(_VariantColorDraft c) {
 
     var sum = 0;
@@ -418,8 +362,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
   }
 
-
-
   String _variantsSummaryLine() {
 
     final colors = _colorDrafts.length;
@@ -435,8 +377,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
     return 'ألوان: $colors • مقاسات: $sizes • إجمالي: ${_totalQtyAllVariants()}';
 
   }
-
-
 
   Future<void> _openVariantsEditor() async {
 
@@ -473,8 +413,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                   : targetH;
 
               final sheetH = targetH > maxH ? maxH : targetH;
-
-
 
               return SizedBox(
 
@@ -632,8 +570,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
   }
 
-
-
   Future<void> _bootstrap() async {
 
     try {
@@ -680,8 +616,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
     _stockTypeUi = _stockBaseKind;
 
-
-
     // Load color+size variants (new system)
 
     try {
@@ -698,8 +632,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
           await ProductVariantsSqlOps.listVariantsForProduct(db, tid, widget.productId);
 
-
-
       for (final c in _colorDrafts) {
 
         c.dispose();
@@ -707,8 +639,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       }
 
       _colorDrafts.clear();
-
-
 
       final draftByColorId = <int, _VariantColorDraft>{};
 
@@ -771,8 +701,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       // ignore: fallback to no-variants UI
 
     }
-
-
 
     setState(() => _variantsLoading = true);
 
@@ -852,8 +780,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
   }
 
-
-
   double _parseMoney(TextEditingController c) {
 
     final t = c.text.trim().replaceAll(',', '');
@@ -862,15 +788,11 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
   }
 
-
-
   String? _validateVariantDrafts() {
 
     if (!_multiVariantEnabled) return null;
 
     if (_colorDrafts.isEmpty) return 'أضف لوناً واحداً على الأقل.';
-
-
 
     final seenBarcodes = <String>{};
 
@@ -881,8 +803,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       if (colorName.isEmpty) return 'اسم اللون مطلوب.';
 
       if (c.sizes.isEmpty) return 'أضف مقاساً واحداً على الأقل لكل لون.';
-
-
 
       final seenSizesInColor = <String>{};
 
@@ -904,8 +824,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
         if (q < 0) return loc.qtyMustBePositive;
 
-
-
         final bc = s.barcodeCtrl.text.trim().toUpperCase();
 
         if (bc.isNotEmpty) {
@@ -922,15 +840,11 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
   }
 
-
-
   Future<void> _save() async {
 
     if (_saving) return;
 
     if (!(_formKey.currentState?.validate() ?? false)) return;
-
-
 
     final variantErr = _validateVariantDrafts();
 
@@ -953,8 +867,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       return;
 
     }
-
-
 
     for (final row in _newVariantDrafts) {
 
@@ -1022,8 +934,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
       );
 
-
-
       if (_multiVariantEnabled) {
 
         final db = await _dbHelper.database;
@@ -1065,8 +975,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
             }
 
           }
-
-
 
           // (2) insert new colors + variants (same transaction)
 
@@ -1176,8 +1084,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
       }
 
-
-
       for (final r in _variantRows) {
 
         if (r.isDefault) continue;
@@ -1215,8 +1121,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
         );
 
       }
-
-
 
       for (final row in _newVariantDrafts) {
 
@@ -1294,8 +1198,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
   }
 
-
-
   Widget _buildVariantsSection(
 
     BuildContext context, {
@@ -1317,8 +1219,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
     final cs = theme.colorScheme;
 
     final ac = context.appCorners;
-
-
 
     Future<void> pickColorFor(_VariantColorDraft c) async {
 
@@ -1356,8 +1256,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
     }
 
-
-
     Future<void> pickSizeFor(_VariantSizeDraft s) async {
 
       final chosen = await showVariantSizePickerSheet(
@@ -1377,8 +1275,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       });
 
     }
-
-
 
     Future<void> applyUniformQty() async {
 
@@ -1476,15 +1372,11 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
     }
 
-
-
     Widget colorCard(_VariantColorDraft c) {
 
       final hexColor = parseFlexibleHexColor(c.hexCtrl.text);
 
       final preview = hexColor ?? cs.surfaceContainerHighest;
-
-
 
       Widget sizeRow(_VariantSizeDraft s, int sizeIndex) {
 
@@ -1631,8 +1523,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
         );
 
       }
-
-
 
       return Material(
 
@@ -1910,8 +1800,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
     }
 
-
-
     return Container(
 
       padding: EdgeInsets.all(14),
@@ -2054,8 +1942,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
   }
 
-
-
   @override
 
   Widget build(BuildContext context) {
@@ -2066,8 +1952,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
     final cs = theme.colorScheme;
 
     final ac = context.appCorners;
-
-
 
     return Directionality(
 
@@ -3149,8 +3033,6 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
   }
 
-
-
   Widget _field({
 
     required String label,
@@ -3210,5 +3092,4 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
   }
 
 }
-
 

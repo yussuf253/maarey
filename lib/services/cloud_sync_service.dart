@@ -939,7 +939,6 @@ class CloudSyncService {
     if (user == null) return;
     if (_activeSnapshotUserId == user.id && _snapshotChannel != null) return;
 
-
     final old = _snapshotChannel;
     _snapshotChannel = null;
     if (old != null) {
@@ -1013,7 +1012,6 @@ class CloudSyncService {
     final user = client.auth.currentUser;
     if (user == null) return;
     if (_activeDeltaUserId == user.id && _syncNotificationsChannel != null) return;
-
 
     final old = _syncNotificationsChannel;
     _syncNotificationsChannel = null;

@@ -39,8 +39,6 @@ part 'db_product_variants.dart';
 part 'db_products_sync.dart';
 part 'db_financial_sync.dart';
 
-
-
 class DatabaseHelper {
   static final DatabaseHelper _instance = DatabaseHelper._internal();
   factory DatabaseHelper() => _instance;
