@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import '../../l10n/generated/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/invoice.dart';
@@ -77,12 +79,12 @@ class _PrintingScreenState extends State<PrintingScreen> {
   Future<void> _previewSample() async {
     final settings = _collect();
     final sample = Invoice(
-      customerName: 'عميل تجريبي',
+      customerName: AppLocalizations.of(context)!.testCustomerName,
       date: DateTime.now(),
       type: InvoiceType.cash,
       items: [
         InvoiceItem(
-          productName: 'صنف 1',
+          productName: AppLocalizations.of(context)!.testProductName,
           quantity: 2,
           price: 15000,
           total: 30000,
@@ -93,10 +95,10 @@ class _PrintingScreenState extends State<PrintingScreen> {
       tax: 0,
       advancePayment: 0,
       total: 30000,
-      createdByUserName: 'موظف',
+      createdByUserName: AppLocalizations.of(context)!.testEmployee,
       discountPercent: 0,
       deliveryAddress: settings.receiptShowBuyerAddressQr
-          ? 'بغداد، شارع تجريبي'
+          ? AppLocalizations.of(context)!.testAddress
           : null,
     );
     await SaleReceiptPdf.presentReceipt(
@@ -116,7 +118,7 @@ class _PrintingScreenState extends State<PrintingScreen> {
       child: Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
-          title: const Text('الطباعة والمستندات'),
+          title: Text(AppLocalizations.of(context)!.printingAndDocsTitle),
           backgroundColor: cs.primary,
           foregroundColor: cs.onPrimary,
           elevation: 0,
@@ -124,7 +126,7 @@ class _PrintingScreenState extends State<PrintingScreen> {
             TextButton.icon(
               onPressed: _dirty ? _save : null,
               icon: Icon(Icons.save_rounded, color: cs.onPrimary, size: 20),
-              label: Text('حفظ', style: TextStyle(color: cs.onPrimary)),
+              label: Text(AppLocalizations.of(context)!.saveButton, style: TextStyle(color: cs.onPrimary)),
             ),
           ],
         ),
@@ -136,10 +138,10 @@ class _PrintingScreenState extends State<PrintingScreen> {
             return ListView(
               padding: const EdgeInsets.all(16),
               children: [
-                const _HeroCard(),
-                const SizedBox(height: 14),
-                const _SectionTitle(icon: Icons.description_outlined, title: 'إيصال البيع'),
-                const SizedBox(height: 8),
+                _HeroCard(),
+                SizedBox(height: 14),
+                _SectionTitle(icon: Icons.description_outlined, title: AppLocalizations.of(context)!.salesReceiptSection),
+                SizedBox(height: 8),
                 Card(
                   elevation: 0,
                   shape: RoundedRectangleBorder(
@@ -153,28 +155,28 @@ class _PrintingScreenState extends State<PrintingScreen> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Text(
-                          'حجم الورق الافتراضي',
+                          AppLocalizations.of(context)!.defaultPaperSize,
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 13,
                             color: cs.onSurface,
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8),
                         DropdownButtonFormField<PrintPaperFormat>(
                           value: _paper,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             border: OutlineInputBorder(borderRadius: AppShape.none),
                             isDense: true,
                           ),
-                          items: const [
+                          items: [
                             DropdownMenuItem(
                               value: PrintPaperFormat.thermal58,
-                              child: Text('حراري 58 مم (ضيق)'),
+                              child: Text(AppLocalizations.of(context)!.thermal58mm),
                             ),
                             DropdownMenuItem(
                               value: PrintPaperFormat.thermal80,
-                              child: Text('حراري 80 مم (قياسي)'),
+                              child: Text(AppLocalizations.of(context)!.thermal80mm),
                             ),
                             DropdownMenuItem(
                               value: PrintPaperFormat.a4,
@@ -189,12 +191,12 @@ class _PrintingScreenState extends State<PrintingScreen> {
                             });
                           },
                         ),
-                        const SizedBox(height: 14),
+                        SizedBox(height: 14),
                         SwitchListTile(
                           contentPadding: EdgeInsets.zero,
-                          title: const Text('إظهار باركود رقم العملية'),
-                          subtitle: const Text(
-                            'CODE128 — يقرأه الماسح الضوئي بسرعة',
+                          title: Text(AppLocalizations.of(context)!.showTransactionBarcodeTitle),
+                          subtitle: Text(
+                            AppLocalizations.of(context)!.transactionBarcodeDesc,
                             style: TextStyle(fontSize: 12),
                           ),
                           value: _showBarcode,
@@ -207,9 +209,9 @@ class _PrintingScreenState extends State<PrintingScreen> {
                         ),
                         SwitchListTile(
                           contentPadding: EdgeInsets.zero,
-                          title: const Text('إظهار رمز QR'),
-                          subtitle: const Text(
-                            'ملخص نصي للعميل — يُوصى به للضريبة والمراجعة',
+                          title: Text(AppLocalizations.of(context)!.showQrCodeTitle),
+                          subtitle: Text(
+                            AppLocalizations.of(context)!.qrCodeDesc,
                             style: TextStyle(fontSize: 12),
                           ),
                           value: _showQr,
@@ -222,9 +224,9 @@ class _PrintingScreenState extends State<PrintingScreen> {
                         ),
                         SwitchListTile(
                           contentPadding: EdgeInsets.zero,
-                          title: const Text('QR لعنوان المشتري (خرائط)'),
-                          subtitle: const Text(
-                            'عند التفعيل يظهر حقل «عنوان المشتري» في البيع ويُطبَع QR يفتح الموقع على Google Maps',
+                          title: Text(AppLocalizations.of(context)!.qrBuyerAddressTitle),
+                          subtitle: Text(
+                            AppLocalizations.of(context)!.qrBuyerAddressDesc,
                             style: TextStyle(fontSize: 12),
                           ),
                           value: _showBuyerAddressQr,
@@ -235,22 +237,22 @@ class _PrintingScreenState extends State<PrintingScreen> {
                                 _dirty = true;
                               }),
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8),
                         TextField(
                           controller: _storeTitleCtrl,
                           onChanged: (_) => setState(() => _dirty = true),
-                          decoration: const InputDecoration(
-                            labelText: 'سطر فوق عنوان «إيصال بيع» (اسم المتجر)',
+                          decoration: InputDecoration(
+                            labelText: AppLocalizations.of(context)!.headerLineLabel,
                             border: OutlineInputBorder(borderRadius: AppShape.none),
                           ),
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12),
                         TextField(
                           controller: _footerCtrl,
                           maxLines: 3,
                           onChanged: (_) => setState(() => _dirty = true),
-                          decoration: const InputDecoration(
-                            labelText: 'تذييل إضافي (هاتف، شروط، شكر)',
+                          decoration: InputDecoration(
+                            labelText: AppLocalizations.of(context)!.footerLineLabel,
                             alignLabelWithHint: true,
                             border: OutlineInputBorder(borderRadius: AppShape.none),
                           ),
@@ -259,9 +261,9 @@ class _PrintingScreenState extends State<PrintingScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
-                const _SectionTitle(icon: Icons.link_rounded, title: 'ربط مع بقية النظام'),
-                const SizedBox(height: 8),
+                SizedBox(height: 20),
+                _SectionTitle(icon: Icons.link_rounded, title: AppLocalizations.of(context)!.barcodeLabelsSection),
+                SizedBox(height: 8),
                 Card(
                   elevation: 0,
                   shape: RoundedRectangleBorder(
@@ -274,9 +276,9 @@ class _PrintingScreenState extends State<PrintingScreen> {
                       ListTile(
                         leading: Icon(Icons.qr_code_2_rounded,
                             color: cs.secondary),
-                        title: const Text('إعدادات الباركود والملصقات'),
-                        subtitle: const Text(
-                          'تنسيق الباركود للمنتجات — يُستخدم عند الطباعة من المخزون',
+                        title: Text(AppLocalizations.of(context)!.barcodeLabelsSection),
+                        subtitle: Text(
+                            AppLocalizations.of(context)!.barcodeSettingsDesc,
                           style: TextStyle(fontSize: 12),
                         ),
                         trailing: const Icon(Icons.chevron_left, size: 20),
@@ -290,16 +292,16 @@ class _PrintingScreenState extends State<PrintingScreen> {
                       ListTile(
                         leading: Icon(Icons.store_rounded,
                             color: cs.primary),
-                        title: const Text('بيانات المتجر'),
-                        subtitle: const Text(
-                          'من الإعدادات — لاحقاً يمكن ربط اسم المتجر تلقائياً بالإيصال',
+                        title: Text(AppLocalizations.of(context)!.storeDataTitle),
+                        subtitle: Text(
+                            AppLocalizations.of(context)!.storeDataDesc,
                           style: TextStyle(fontSize: 12),
                         ),
                         onTap: () {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
+                            SnackBar(
                               content: Text(
-                                'استخدم حقل «اسم المتجر» أعلاه أو بطاقة بيانات المتجر من الإعدادات',
+                                AppLocalizations.of(context)!.storeDataHint,
                               ),
                             ),
                           );
@@ -308,28 +310,28 @@ class _PrintingScreenState extends State<PrintingScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 FilledButton.icon(
                   onPressed: _previewSample,
                   icon: const Icon(Icons.preview_outlined),
-                  label: const Text('معاينة إيصال تجريبي'),
+                  label: Text(AppLocalizations.of(context)!.previewReceiptButton),
                   style: FilledButton.styleFrom(
                     backgroundColor: cs.secondary,
                     foregroundColor: cs.onSecondary,
                     padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 OutlinedButton.icon(
                   onPressed: _save,
                   icon: const Icon(Icons.save_outlined),
-                  label: const Text('حفظ الإعدادات في قاعدة البيانات'),
+                  label: Text(AppLocalizations.of(context)!.saveSettingsButton),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: cs.primary,
                     padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 Text(
                   'البيانات تُخزَّن في جدول print_settings وتُطبَّق تلقائياً عند طباعة إيصال البيع بعد كل عملية.',
                   textAlign: TextAlign.center,
@@ -349,7 +351,7 @@ class _PrintingScreenState extends State<PrintingScreen> {
 }
 
 class _HeroCard extends StatelessWidget {
-  const _HeroCard();
+  _HeroCard();
 
   @override
   Widget build(BuildContext context) {
@@ -384,22 +386,22 @@ class _HeroCard extends StatelessWidget {
             ),
             child: Icon(Icons.print_rounded, color: onHero, size: 36),
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'مركز الطباعة الاحترافي',
+                  AppLocalizations.of(context)!.professionalPrintCenter,
                   style: TextStyle(
                     color: onHero,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 6),
+                SizedBox(height: 6),
                 Text(
-                  'ضبط أحجام الحرارية وA4، محتوى الإيصال، والربط مع المخزون — كل ذلك محفوظ محلياً.',
+                  AppLocalizations.of(context)!.printCenterDesc,
                   style: TextStyle(
                     color: onHero.withValues(alpha: 0.88),
                     fontSize: 13,
@@ -416,7 +418,7 @@ class _HeroCard extends StatelessWidget {
 }
 
 class _SectionTitle extends StatelessWidget {
-  const _SectionTitle({required this.icon, required this.title});
+  _SectionTitle({required this.icon, required this.title});
   final IconData icon;
   final String title;
 
@@ -426,7 +428,7 @@ class _SectionTitle extends StatelessWidget {
     return Row(
       children: [
         Icon(icon, size: 20, color: cs.secondary),
-        const SizedBox(width: 8),
+        SizedBox(width: 8),
         Text(
           title,
           style: TextStyle(

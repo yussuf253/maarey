@@ -244,7 +244,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
     final dvLabel = (p['defaultUnitLabel'] as String?)?.trim();
 
     if (dvId != null && dvId > 0 && dvFactor != null && dvFactor > 0) {
-      final label = (dvLabel == null || dvLabel.isEmpty) ? 'وحدة' : dvLabel;
+      final label = (dvLabel == null || dvLabel.isEmpty) ? AppLocalizations.of(context)!.unitFallback : dvLabel;
       return (
         stockBaseKind: stockBaseKind,
         unitVariantId: dvId,
@@ -257,7 +257,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       return (
         stockBaseKind: stockBaseKind,
         unitVariantId: null,
-        unitLabel: 'قطعة',
+        unitLabel: AppLocalizations.of(context)!.pieceFallback,
         unitFactor: 1.0,
       );
     }
@@ -269,7 +269,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       return (
         stockBaseKind: stockBaseKind,
         unitVariantId: null,
-        unitLabel: 'قطعة',
+        unitLabel: AppLocalizations.of(context)!.pieceFallback,
         unitFactor: 1.0,
       );
     }
@@ -279,7 +279,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
     final name = (v['unitName'] ?? '').toString().trim();
     final sym = (v['unitSymbol'] ?? '').toString().trim();
     final label = sym.isEmpty
-        ? (name.isEmpty ? 'قطعة' : name)
+        ? (name.isEmpty ? AppLocalizations.of(context)!.pieceFallback : name)
         : (name.isEmpty ? sym : '$name ($sym)');
     return (
       stockBaseKind: stockBaseKind,
@@ -292,7 +292,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
   String _variantChipLabel(Map<String, dynamic> v) {
     final name = (v['unitName'] ?? '').toString().trim();
     final sym = (v['unitSymbol'] ?? '').toString().trim();
-    if (name.isEmpty) return 'وحدة';
+    if (name.isEmpty) return AppLocalizations.of(context)!.unitFallback;
     if (sym.isEmpty) return name;
     return '$name ($sym)';
   }
@@ -365,7 +365,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
     final un = (v['unitName'] ?? '').toString().trim();
     final us = (v['unitSymbol'] ?? '').toString().trim();
     final label = us.isEmpty
-        ? (un.isEmpty ? 'وحدة' : un)
+        ? (un.isEmpty ? AppLocalizations.of(context)!.unitFallback : un)
         : (un.isEmpty ? us : '$un ($us)');
 
     final oldVid = line.unitVariantId;
@@ -426,7 +426,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
     _showSaleSnackBar(
       SnackBar(
         content: Text(
-          'تم ضبط الكمية إلى ${IraqiCurrencyFormat.formatDecimal2(maxEntered)} بسبب حد المخزون المتاح.',
+          AppLocalizations.of(context)!.qtyAdjustedToAvailableStock(IraqiCurrencyFormat.formatDecimal2(maxEntered)),
         ),
       ),
     );
@@ -884,7 +884,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
     _showSaleSnackBar(
       SnackBar(
         content: Text(
-          'الكمية غير متوفرة في المخزون. المتاح للبيع (أساس المخزون): ${IraqiCurrencyFormat.formatDecimal2(maxBase)} فقط (بعد احتساب الكميات في الأسطر الأخرى لنفس المنتج).',
+        AppLocalizations.of(context)!.stockNotAvailableDetails(IraqiCurrencyFormat.formatDecimal2(maxBase)),
         ),
       ),
     );
@@ -935,8 +935,8 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       SnackBar(
         content: Text(
           maxAdd <= 0
-              ? 'لا توجد كمية متوفرة في المخزون لهذا المنتج.'
-              : 'الكمية غير متوفرة. المتاح للبيع (أساس المخزون): ${IraqiCurrencyFormat.formatDecimal2(maxAdd)} فقط.',
+        ? AppLocalizations.of(context)!.noStockAvailableForProduct
+        : AppLocalizations.of(context)!.stockUnavailableAvailableIs(IraqiCurrencyFormat.formatDecimal2(maxAdd)),
         ),
       ),
     );
@@ -1096,7 +1096,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
     if (!suppressLineSnacks) {
       _showSaleSnackBar(
         SnackBar(
-          content: Text(newItemSnackText ?? 'تمت إضافة سطر جديد: $productName'),
+          content: Text(newItemSnackText ?? AppLocalizations.of(context)!.newLineAddedSnack(productName)),
         ),
       );
     }
@@ -1260,7 +1260,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
           _lines.add(
             _InvoiceLineState(
               lineId: _takeLineId(),
-              productName: name.isEmpty ? 'منتج' : name,
+              productName: name.isEmpty ? AppLocalizations.of(context)!.productFallback : name,
               quantity: 1.0,
               unitPrice: sell,
               sellPrice: sell,
@@ -1271,7 +1271,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
               isService: isService,
               stockBaseKind: baseKind,
               unitVariantId: null,
-              unitLabel: 'قطعة',
+              unitLabel: AppLocalizations.of(context)!.pieceFallback,
               unitFactor: 1.0,
             ),
           );
@@ -1508,7 +1508,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      'مخطط التقسيط',
+                      AppLocalizations.of(context)!.installmentPlanTitle,
                       style: TextStyle(
                         fontWeight: FontWeight.w800,
                         fontSize: 15,
@@ -1520,7 +1520,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
               ),
               const SizedBox(height: 4),
               Text(
-                'يُحسب على «الإجمالي بعد المقدّم». للمراجعة مع العميل — لا يُضاف للفاتورة إلا إذا رفعت الأسعار يدوياً.',
+              AppLocalizations.of(context)!.installmentCalcNote,
                 style: TextStyle(
                   fontSize: 11,
                   height: 1.35,
@@ -1533,7 +1533,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                 decoration: InputDecoration(
                   isDense: true,
                   labelText: AppLocalizations.of(context)!.advanceDownPaymentLabel,
-                  helperText: 'يُخصم من الإجمالي قبل حساب الفائدة والقسط',
+                  helperText: AppLocalizations.of(context)!.advanceDownPaymentHelper,
                   helperMaxLines: 2,
                 ),
                 keyboardType: TextInputType.number,
@@ -1554,7 +1554,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                         isDense: true,
                         labelText: AppLocalizations.of(context)!.installmentInterestLabel,
                         suffixText: '%',
-                        helperText: 'نسبة من المبلغ بعد المقدّم',
+                        helperText: AppLocalizations.of(context)!.interestRateHelper,
                       ),
                     ),
                   ),
@@ -1567,7 +1567,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                       decoration: InputDecoration(
                         isDense: true,
                         labelText: AppLocalizations.of(context)!.numberOfMonthsLabel,
-                        suffixText: 'شهراً',
+                        suffixText: AppLocalizations.of(context)!.monthsSuffix,
                       ),
                     ),
                   ),
@@ -1580,20 +1580,20 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                 scheme,
               ),
               _instSumRow(
-                'قيمة الفائدة (${c.interestPct.toStringAsFixed(1)}٪)',
+                AppLocalizations.of(context)!.interestAmountLabel(c.interestPct.toStringAsFixed(1)),
                 IraqiCurrencyFormat.formatIqd(c.interestAmt),
                 scheme,
               ),
               const Divider(height: 18),
               _instSumRow(
-                'الإجمالي مع الفائدة',
+                AppLocalizations.of(context)!.totalWithInterestLabel,
                 IraqiCurrencyFormat.formatIqd(c.totalWithInterest),
                 scheme,
                 strong: true,
               ),
               const SizedBox(height: 6),
               _instSumRow(
-                'القسط الشهري المقترح (${c.months} شهراً)',
+                AppLocalizations.of(context)!.suggestedMonthlyInstallment(c.months.toString()),
                 IraqiCurrencyFormat.formatIqd(c.monthly),
                 scheme,
                 strong: true,
@@ -1602,7 +1602,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
               if (c.financed < 1e-6) ...[
                 const SizedBox(height: 8),
                 Text(
-                  'المقدّم يساوي الإجمالي — لا يوجد مبلغ للتقسيط. خفّض المقدّم لرؤية الفائدة والقسط.',
+                AppLocalizations.of(context)!.advanceEqualsTotalHint,
                   style: TextStyle(
                     fontSize: 11,
                     color: scheme.onSurfaceVariant,
@@ -1837,7 +1837,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
     final baseSell = (p['sell'] as num?)?.toDouble() ?? 0;
     final baseMin = (p['minSell'] as num?)?.toDouble() ?? baseSell;
     final pid = (p['id'] as num?)?.toInt();
-    final display = name.isEmpty ? 'منتج' : name;
+    final display = name.isEmpty ? AppLocalizations.of(context)!.productFallback : name;
     final knownQty = (p['qty'] as num?)?.toDouble();
     final allowNeg = _anFromProductRow(p);
     final isService = ((p['isService'] as num?)?.toInt() ?? 0) == 1;
@@ -1856,7 +1856,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
           knownOnHandQty: null,
           stockBaseKind: 0,
           unitVariantId: null,
-          unitLabel: 'قطعة',
+          unitLabel: AppLocalizations.of(context)!.pieceFallback,
           unitFactor: 1.0,
           addQuantity: addQuantity,
           suppressLineSnacks: true,
@@ -1981,8 +1981,8 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
             ),
             label: Text(
               parkedCount > 0
-                  ? 'تعليق الفاتورة — تعليق ($parkedCount)'
-                  : 'تعليق الفاتورة — خدمة عميل آخر',
+                  ? AppLocalizations.of(context)!.parkInvoiceWithCount(parkedCount)
+                  : AppLocalizations.of(context)!.parkInvoiceOtherCustomer,
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: sl.showSaleBarcodeShortcut ? 13.5 : 14,
@@ -2022,7 +2022,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
             ),
             icon: const Icon(Icons.payments_rounded),
             label: Text(
-              'الدفع — ${IraqiCurrencyFormat.formatIqd(payableTotal)}',
+              AppLocalizations.of(context)!.payButtonLabel(IraqiCurrencyFormat.formatIqd(payableTotal)),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: sl.showSaleBarcodeShortcut ? 16 : 15,
@@ -2167,7 +2167,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
             },
             onHorizontalDragEnd: (_) => unawaited(_persistSaleQuickRailWidth()),
             child: Tooltip(
-              message: 'اسحب لتغيير عرض القائمة الجانبية',
+              message: AppLocalizations.of(context)!.swipeToResizeHint,
               child: Container(
                 width: 7,
                 color: Colors.transparent,
@@ -2216,7 +2216,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                       suffixIcon: _saleQuickRailSearchController.text.isEmpty
                           ? null
                           : IconButton(
-                              tooltip: 'مسح',
+                              tooltip: AppLocalizations.of(context)!.clearTooltip,
                               onPressed: () {
                                 setState(_saleQuickRailSearchController.clear);
                               },
@@ -2582,8 +2582,8 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
   ) {
     final showScan = ScreenLayout.of(context).showSaleBarcodeShortcut;
     final productsCaption = (!pos.enableInvoiceDiscount && !pos.enableTaxOnSale)
-        ? 'أسطر الفاتورة والكميات والأسعار — ثم راجع تفاصيل السعر وطريقة الدفع.'
-        : 'أسطر الفاتورة والكميات والأسعار — ثم انتقل لخصم الفاتورة والضريبة.';
+                  ? AppLocalizations.of(context)!.checkoutStepHintWithPayment
+                  : AppLocalizations.of(context)!.checkoutStepHintNoPayment;
     return Padding(
       padding: EdgeInsets.only(bottom: _saleFlowBlockGap(context)),
       child: Column(
@@ -2597,7 +2597,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
             trailing: showScan
                 ? Tooltip(
                     message:
-                        'إضافة صنف بالباركود، أو فتح مرتجع بمسح رقم الفاتورة (INV-)',
+                  'AppLocalizations.of(context)!.barcodeFieldHint',
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 180),
                       curve: Curves.easeOut,
@@ -2628,8 +2628,8 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                               ),
                               if (_saleScannerOpen) ...[
                                 const SizedBox(width: 8),
-                                const Text(
-                                  'الماسح',
+                                Text(
+                                  AppLocalizations.of(context)!.scannerTabLabel,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w800,
@@ -2727,9 +2727,9 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
           _saleFlowSectionTitle(
             context,
             palette,
-            title: 'ملخص البيع',
+            title: AppLocalizations.of(context)!.saleSummaryTitle,
             caption:
-                'الخصم والضريبة يُطبَّقان على إجمالي الفاتورة (وليس لكل صنف على حدة).',
+              'AppLocalizations.of(context)!.discountTaxNote',
           ),
           const SizedBox(height: 6),
           _saleFlowPanel(
@@ -2741,7 +2741,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
               children: [
                 if (pos.enableInvoiceDiscount) ...[
                   Text(
-                    'خصم الفاتورة',
+                    AppLocalizations.of(context)!.invoiceDiscountLabel,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 13,
@@ -2766,7 +2766,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                   const SizedBox(height: 14),
                 if (pos.enableTaxOnSale) ...[
                   Text(
-                    'الضريبة',
+                    AppLocalizations.of(context)!.taxLabel,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 13,
@@ -2775,7 +2775,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'أدخل مبلغ الضريبة بالدينار إن وُجد؛ يُضاف إلى المجموع بعد خصم الفاتورة.',
+                  'AppLocalizations.of(context)!.taxHelperHint',
                     style: TextStyle(
                       fontSize: 11,
                       height: 1.35,
@@ -2840,24 +2840,24 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                 ),
                 const SizedBox(height: 8),
                 _sumRow(
-                  'المبلغ الأصلي (مجموع البنود)',
+              'AppLocalizations.of(context)!.originalAmountLabel',
                   IraqiCurrencyFormat.formatIqd(subtotal),
                 ),
                 if (pos.enableInvoiceDiscount) ...[
                   const SizedBox(height: 6),
                   _sumRow(
-                    'قيمة خصم الفاتورة',
+              'AppLocalizations.of(context)!.invoiceDiscountAmountLabel',
                     IraqiCurrencyFormat.formatIqd(discountValue),
                   ),
                   const SizedBox(height: 4),
                   _sumRow(
-                    'المجموع بعد الخصم (قبل الضريبة)',
+              'AppLocalizations.of(context)!.subtotalAfterDiscountLabel',
                     IraqiCurrencyFormat.formatIqd(_subtotalAfterDiscount),
                   ),
                 ],
                 if (pos.enableTaxOnSale) ...[
                   const SizedBox(height: 6),
-                  _sumRow('الضريبة', IraqiCurrencyFormat.formatIqd(_tax)),
+                  _sumRow(AppLocalizations.of(context)!.taxLabel, IraqiCurrencyFormat.formatIqd(_tax)),
                 ],
                 if (type != InvoiceType.cash &&
                     type != InvoiceType.credit &&
@@ -2880,7 +2880,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                     _loyaltyDiscountAmount(loyaltyCfg) > 0) ...[
                   const SizedBox(height: 8),
                   _sumRow(
-                    'خصم ولاء (نقاط)',
+                    AppLocalizations.of(context)!.loyaltyDiscountLabel,
                     '-${IraqiCurrencyFormat.formatInt(_loyaltyDiscountAmount(loyaltyCfg))} د.ع',
                   ),
                 ],
@@ -2889,7 +2889,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                   color: palette.navy.withValues(alpha: 0.12),
                 ),
                 _sumRow(
-                  'الإجمالي النهائي',
+                  AppLocalizations.of(context)!.grandTotalLabel,
                   IraqiCurrencyFormat.formatIqd(payableTotal),
                   strong: true,
                   labelColor: _salePanelPrimaryText(context, palette),
@@ -2913,10 +2913,10 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
   }) {
     final scheme = Theme.of(context).colorScheme;
     final paymentOptions = <String>[
-      'نقدي',
-      if (salePos.allowCredit) 'دين',
-      if (salePos.allowInstallment) 'تقسيط',
-      if (salePos.allowDelivery) 'توصيل',
+      AppLocalizations.of(context)!.cashLabel,
+      if (salePos.allowCredit) AppLocalizations.of(context)!.creditLabel,
+      if (salePos.allowInstallment) AppLocalizations.of(context)!.installmentLabel,
+      if (salePos.allowDelivery) AppLocalizations.of(context)!.deliveryLabel,
     ];
     final customerCaption =
         'اختر ${paymentOptions.join(' أو ')}، ثم أكمل بيانات العميل والحقول المرتبطة بنوع الدفع.';
@@ -2928,7 +2928,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
           _saleFlowSectionTitle(
             context,
             palette,
-            title: 'العميل وطريقة الدفع',
+            title: AppLocalizations.of(context)!.customerAndPaymentTitle,
             caption: customerCaption,
           ),
           const SizedBox(height: 6),
@@ -2940,7 +2940,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  'طريقة الدفع',
+                  AppLocalizations.of(context)!.paymentMethodLabel,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 13,
@@ -2958,7 +2958,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                       palette,
                       salePos,
                       InvoiceType.cash,
-                      'نقدي',
+                      AppLocalizations.of(context)!.cashLabel,
                     ),
                     if (salePos.allowCredit)
                       _paymentTypeChip(
@@ -2966,7 +2966,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                         palette,
                         salePos,
                         InvoiceType.credit,
-                        'دين',
+                        AppLocalizations.of(context)!.creditLabel,
                       ),
                     if (salePos.allowInstallment)
                       _paymentTypeChip(
@@ -2974,7 +2974,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                         palette,
                         salePos,
                         InvoiceType.installment,
-                        'تقسيط',
+                        AppLocalizations.of(context)!.installmentLabel,
                       ),
                     if (salePos.allowDelivery)
                       _paymentTypeChip(
@@ -2982,7 +2982,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                         palette,
                         salePos,
                         InvoiceType.delivery,
-                        'توصيل',
+                        AppLocalizations.of(context)!.deliveryLabel,
                       ),
                   ],
                 ),
@@ -3006,7 +3006,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                           if (_needsCustomerNameFor &&
                               (v == null || v.trim().isEmpty)) {
                             return type == InvoiceType.delivery
-                                ? 'اسم العميل مطلوب للتوصيل'
+                    ? AppLocalizations.of(context)!.customerNameRequiredForDelivery
                                 : 'مطلوب للدين/التقسيط';
                           }
                           return null;
@@ -3017,7 +3017,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 6),
                       child: Tooltip(
-                        message: 'إضافة عميل جديد دون مغادرة البيع',
+                        message: AppLocalizations.of(context)!.addNewCustomerMessage,
                         child: Material(
                           color: scheme.surfaceContainerHighest.withValues(
                             alpha: 0.95,
@@ -3104,17 +3104,17 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                         labelText:
                             type == InvoiceType.delivery &&
                                 buyerAddressQrEnabled
-                            ? 'عنوان التوصيل والموقع (QR خرائط)'
+                        ? AppLocalizations.of(context)!.deliveryAddressWithMapQR
                             : type == InvoiceType.delivery
-                            ? 'عنوان التوصيل'
-                            : 'عنوان المشتري (QR للخرائط على الإيصال)',
+                    ? AppLocalizations.of(context)!.deliveryAddressLabel
+                    : AppLocalizations.of(context)!.buyerAddressWithMapQR,
                         helperText:
                             buyerAddressQrEnabled &&
                                 type != InvoiceType.delivery
-                            ? 'اختياري — وصف أو عنوان يظهر في Google Maps عند مسح الرمز'
+                    ? AppLocalizations.of(context)!.addressMapDescriptionOptional
                             : (buyerAddressQrEnabled
                                   ? (type == InvoiceType.delivery
-                                        ? 'مطلوب — يُطبَع QR للخرائط عند وجود نص؛ اكتب عنوان التوصيل بوضوح'
+                    ? AppLocalizations.of(context)!.addressMapRequired
                                         : 'يُطبَع QR يفتح الخرائط عند المسح')
                                   : null),
                         isDense: true,
@@ -3123,7 +3123,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                       validator: (v) {
                         if (type == InvoiceType.delivery &&
                             (v == null || v.trim().isEmpty)) {
-                          return 'عنوان التوصيل مطلوب';
+        return AppLocalizations.of(context)!.deliveryAddressRequired;
                         }
                         return null;
                       },
@@ -3135,8 +3135,8 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                     alignment: Alignment.centerRight,
                     child: Text(
                       _linkedCustomerId == null
-                          ? 'لاستخدام النقاط: اختر عميلاً مسجّلاً من القائمة المقترحة.'
-                          : 'رصيد نقاط العميل: $_customerLoyaltyBalance',
+                    ? AppLocalizations.of(context)!.loyaltyPointsRequiresCustomer
+                    : AppLocalizations.of(context)!.customerLoyaltyBalance(_customerLoyaltyBalance.toString()),
                       style: TextStyle(
                         fontSize: 12,
                         color: scheme.onSurfaceVariant,
@@ -3154,7 +3154,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                             decoration: InputDecoration(
                               isDense: true,
                               labelText:
-                                  'نقاط للاستبدال (حد أقصى ${LoyaltyMath.maxRedeemablePoints(balance: _customerLoyaltyBalance, netBeforeLoyalty: _netBeforeLoyaltySale, s: loyaltyCfg)})',
+                AppLocalizations.of(context)!.loyaltyPointsToRedeem(LoyaltyMath.maxRedeemablePoints(balance: _customerLoyaltyBalance, netBeforeLoyalty: _netBeforeLoyaltySale, s: loyaltyCfg)),
                             ),
                             keyboardType: TextInputType.number,
                           ),
@@ -3620,8 +3620,8 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
             ],
             autofocus: true,
             decoration: InputDecoration(
-              labelText: isWeight ? 'الكمية (كيلوغرام)' : 'الكمية',
-              hintText: isWeight ? 'مثال: 0.25 أو 1.5 أو 3' : 'مثال: 2',
+              labelText: isWeight ? AppLocalizations.of(context)!.quantityKgLabel : AppLocalizations.of(context)!.quantityLabel,
+              hintText: isWeight ? AppLocalizations.of(context)!.quantityHintWeight : AppLocalizations.of(context)!.quantityHintPiece,
             ),
             onSubmitted: (_) async {
               await _applyQuantityFromDialog(ctx, item, ctrl.text);
@@ -3656,7 +3656,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         SnackBar(
           content: Text(
             item.stockBaseKind == 1
-                ? 'أدخل كمية أكبر من 0 (يمكن كسور للوزن).'
+                    ? AppLocalizations.of(context)!.quantityErrorWeight
                 : 'أدخل عدداً صحيحاً 1 فما فوق',
           ),
         ),
@@ -3752,7 +3752,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         out.add(
           _InvoiceLineState(
             lineId: lid,
-            productName: e['productName']?.toString() ?? 'صنف',
+            productName: e['productName']?.toString() ?? AppLocalizations.of(context)!.itemFallbackShort,
             quantity: (e['quantity'] as num?)?.toDouble() ?? 1.0,
             unitPrice: (e['unitPrice'] as num?)?.toDouble() ?? 0,
             sellPrice:
@@ -3854,23 +3854,23 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
     try {
       final rawPayload = row['payload'];
       if (rawPayload is! String || rawPayload.isEmpty) {
-        failureReason = 'الحمولة فارغة أو ليست نصاً';
+        failureReason = AppLocalizations.of(context)!.payloadEmptyOrNotText;
       } else {
         final decoded = jsonDecode(rawPayload);
         if (decoded is! Map) {
-          failureReason = 'الحمولة ليست object JSON صالحاً';
+        failureReason = AppLocalizations.of(context)!.payloadNotValidJson;
         } else {
           parsedMap = decoded.map((k, v) => MapEntry(k.toString(), v));
           final ver = (parsedMap['v'] as num?)?.toInt();
           if (ver == null) {
-            failureReason = 'لا يوجد حقل إصدار (v) في الحمولة';
+        failureReason = AppLocalizations.of(context)!.payloadNoVersionField;
           } else if (ver != 1) {
-            failureReason = 'إصدار الحمولة $ver غير مدعوم (المتوقع 1)';
+        failureReason = AppLocalizations.of(context)!.payloadUnsupportedVersion(ver);
           }
         }
       }
     } catch (e, st) {
-      failureReason = 'خطأ في فك التشفير: $e';
+        failureReason = AppLocalizations.of(context)!.decryptionError(e.toString());
       debugPrint('[ParkedSale] JSON decode failed: $e\n$st');
     }
 
@@ -3881,7 +3881,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       _showSaleSnackBar(
         SnackBar(
           content: Text(
-            'تعذر فتح الفاتورة المعلّقة: ${failureReason ?? 'سبب غير معروف'}',
+          AppLocalizations.of(context)!.failedToOpenParkedInvoice(failureReason ?? AppLocalizations.of(context)!.unknownReason),
           ),
           duration: const Duration(seconds: 5),
         ),
@@ -3923,7 +3923,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       return;
     }
     final defaultTitle = _customerController.text.trim().isEmpty
-        ? 'فاتورة (${_lines.length} صنف)'
+        ? AppLocalizations.of(context)!.invoiceWithItemCount(_lines.length)
         : _customerController.text.trim();
     final theme = Theme.of(context);
     final salePos = context.read<SalePosSettingsProvider>().data;
@@ -3976,8 +3976,8 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         SnackBar(
           content: Text(
             _activeParkedSaleId != null
-                ? 'تم تحديث الفاتورة المعلّقة'
-                : 'تم تعليق الفاتورة — يمكنك استئنافها من قائمة الفواتير',
+        ? AppLocalizations.of(context)!.parkedInvoiceUpdated
+        : AppLocalizations.of(context)!.invoiceParkedMessage,
           ),
         ),
         useCompactSnackOverride: snackCompact,
@@ -4012,7 +4012,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         subtotalBeforeDiscount: subtotalBefore,
       );
     } catch (e, st) {
-      AppLogger.error('Invoice', 'فشل طباعة إيصال البيع', e, st);
+      AppLogger.error('Invoice', AppLocalizations.of(context)!.receiptPrintFailed, e, st);
     }
   }
 
@@ -4024,7 +4024,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
     for (final it in items) {
       if (i++ >= 25) break;
       out.add({
-        'name': it.productName.trim().isEmpty ? 'صنف' : it.productName.trim(),
+        'name': it.productName.trim().isEmpty ? AppLocalizations.of(context)!.itemFallbackShort : it.productName.trim(),
         'qty': it.enteredQty,
         'lineTotal': it.total,
         if (it.productId != null) 'productId': it.productId,
@@ -4088,7 +4088,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       _showSaleSnackBar(
         const SnackBar(
           content: Text(
-            'أكمل الحقول المطلوبة: للدين أو التقسيط أدخل اسم العميل، وللتوصيل أدخل اسم العميل وعنوان التوصيل. راجع الحقول المظللة بالأحمر.',
+          'AppLocalizations.of(context)!.requiredFieldsMessage',
           ),
           duration: Duration(seconds: 5),
         ),
@@ -4101,7 +4101,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       _showSaleSnackBar(
         const SnackBar(
           content: Text(
-            'طريقة الدفع الحالية غير مسموحة — راجع «الفواتير → إعدادات نقطة البيع» أو اختر نقدي.',
+          'AppLocalizations.of(context)!.paymentMethodNotAllowed',
           ),
         ),
       );
@@ -4113,7 +4113,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       _showSaleSnackBar(
         SnackBar(
           content: Text(
-            'نسبة الخصم أعلى من المسموح. الحد الأقصى ${_maxAllowedDiscountPercent.toStringAsFixed(2)}%',
+          'AppLocalizations.of(context)!.discountExceedsMaximum(_maxAllowedDiscountPercent.toStringAsFixed(2))',
           ),
         ),
       );
@@ -4143,10 +4143,9 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         customerId == null) {
       if (mounted) {
         _showSaleSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(
-              'للمبيع بالدين أو التقسيط: اختر عميلاً مسجّلاً من القائمة المقترحة أسفل حقل الاسم '
-              '(أو أضفه من «العملاء» أولاً) حتى تُربط الفاتورة ببطاقة العميل وتظهر لاحقاً في الديون والأقساط.',
+          AppLocalizations.of(context)!.creditInstallmentMustSelectCustomer,
             ),
             duration: Duration(seconds: 6),
           ),
@@ -4162,7 +4161,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         _showSaleSnackBar(
           const SnackBar(
             content: Text(
-              'لاستبدال النقاط اختر العميل من القائمة أو أدخل اسماً يطابق سجلاً واحداً في العملاء.',
+          'AppLocalizations.of(context)!.loyaltyRedeemMustSelectCustomer',
             ),
           ),
         );
@@ -4445,7 +4444,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       final after = (m['qty'] as num?)?.toDouble() ?? 0;
       if (after >= -1e-9) continue;
       final before = after + e.value;
-      final nm = (m['name'] as String?)?.trim() ?? 'منتج';
+      final nm = (m['name'] as String?)?.trim() ?? AppLocalizations.of(context)!.productFallback;
       negLines.add({
         'name': nm,
         'productId': e.key,
@@ -4583,7 +4582,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
           messenger,
           const SnackBar(
             content: Text(
-              'تم حفظ الفاتورة وإنشاء خطة التقسيط — يمكنك ضبط الجدول أو الرجوع',
+          'AppLocalizations.of(context)!.installmentPlanCreated',
             ),
           ),
         );
@@ -4621,7 +4620,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         messenger,
         const SnackBar(
           content: Text(
-            'تم حفظ فاتورة التقسيط وربطها بخطة (لا أقساط متبقية لأن المبلغ محصّل بالكامل).',
+        'AppLocalizations.of(context)!.installmentPlanSavedNoRemaining',
           ),
         ),
       );
@@ -4674,7 +4673,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
     final ti = _parseTrackInvMap(m);
     final an = _parseAllowNegMap(m);
     if (!mounted) return;
-    final display = name.isEmpty ? 'منتج' : name;
+    final display = name.isEmpty ? AppLocalizations.of(context)!.productFallback : name;
     final knownQty = (m['qty'] as num?)?.toDouble();
     final isService = ((m['isService'] as num?)?.toInt() ?? 0) == 1;
     final addQuantity = (m['addQuantity'] as num?)?.toDouble() ?? 1.0;
@@ -4708,7 +4707,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
   Future<void> _openSaleBarcodeCapture() async {
     final raw = await BarcodeInputLauncher.captureBarcode(
       context,
-      title: 'باركود صنف أو فاتورة للمرتجع',
+      title: AppLocalizations.of(context)!.barcodeOrInvoiceForReturn,
       preferCompactHandsetOverlay: true,
     );
     if (!mounted) return;
@@ -4731,7 +4730,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       }
       if (inv.isReturned) {
         _showSaleSnackBar(
-          const SnackBar(content: Text('هذه الفاتورة مرتجع مسبقاً')),
+      SnackBar(content: Text(AppLocalizations.of(context)!.alreadyReturned)),
         // TODO: Localize with AppLocalizations
         );
         return;
@@ -4752,7 +4751,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                 ),
                 FilledButton(
                   onPressed: () => Navigator.pop(ctx, true),
-                  child: const Text('مرتجع'),
+                  child: Text(AppLocalizations.of(context)!.returnButton),
                 ),
               ],
             ),
@@ -4780,7 +4779,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       final pid = (product['id'] as num?)?.toInt();
       final ti = _tiFromProductRow(product);
       final an = _anFromProductRow(product);
-      final display = name.isEmpty ? 'منتج غير مسمى' : name;
+      final display = name.isEmpty ? AppLocalizations.of(context)!.unnamedProduct : name;
       final isService = ((product['isService'] as num?)?.toInt() ?? 0) == 1;
 
       final baseSell = (product['sellPrice'] as num?)?.toDouble() ?? 0;
@@ -4795,14 +4794,14 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       if (clothingVariant != null) {
         unitVariantId = null;
         unitFactor = 1.0;
-        unitLabel = 'قطعة';
+        unitLabel = AppLocalizations.of(context)!.pieceFallback;
       } else if (variant != null) {
         unitVariantId = (variant['id'] as num?)?.toInt();
         unitFactor = (variant['factorToBase'] as num?)?.toDouble() ?? 1.0;
         final un = (variant['unitName'] ?? '').toString().trim();
         final us = (variant['unitSymbol'] ?? '').toString().trim();
         unitLabel = us.isEmpty
-            ? (un.isEmpty ? 'وحدة' : un)
+            ? (un.isEmpty ? AppLocalizations.of(context)!.unitFallback : un)
             : (un.isEmpty ? us : '$un ($us)');
       } else {
         final u = await _unitSelectionForCatalogProduct(product);
@@ -4827,10 +4826,10 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
             knownOnHandQty: null,
             stockBaseKind: 0,
             unitVariantId: null,
-            unitLabel: 'قطعة',
+            unitLabel: AppLocalizations.of(context)!.pieceFallback,
             unitFactor: 1.0,
             newItemSnackText:
-                'تمت إضافة المنتج: ${name.isEmpty ? barcode : name}',
+                AppLocalizations.of(context)!.productAddedSnack(name.isEmpty ? barcode : name),
             clothingPending: true,
           );
           unawaited(_ensureClothingVariantsLoadedForProduct(pid));
@@ -4855,10 +4854,10 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
           knownOnHandQty: q.toDouble(),
           stockBaseKind: 0,
           unitVariantId: null,
-          unitLabel: 'قطعة',
+          unitLabel: AppLocalizations.of(context)!.pieceFallback,
           unitFactor: 1.0,
           newItemSnackText:
-              'تمت إضافة المنتج: ${name.isEmpty ? barcode : name}',
+          AppLocalizations.of(context)!.productAddedSnack(name.isEmpty ? barcode : name),
           productVariantId: vId,
           variantColorNameSnapshot: colorName.isEmpty ? null : colorName,
           variantSizeSnapshot: size.isEmpty ? null : size,
@@ -4888,7 +4887,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         unitVariantId: unitVariantId,
         unitLabel: unitLabel,
         unitFactor: unitFactor,
-        newItemSnackText: 'تمت إضافة المنتج: ${name.isEmpty ? barcode : name}',
+        newItemSnackText: AppLocalizations.of(context)!.productAddedSnack(name.isEmpty ? barcode : name),
       );
       return;
     }
@@ -4899,7 +4898,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
           builder: (_) => AlertDialog(
             title: Text(AppLocalizations.of(context)!.productNotFoundTitle),
             content: const Text(
-              'هذا الباركود غير موجود في المنتجات. هل تريد فتح شاشة إضافة منتج جديد؟',
+          'AppLocalizations.of(context)!.barcodeNotFoundAddNew',
             ),
             actions: [
               TextButton(
@@ -4936,7 +4935,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       final ti = _tiFromProductRow(afterAdd);
       final an = _anFromProductRow(afterAdd);
       final isService = ((afterAdd['isService'] as num?)?.toInt() ?? 0) == 1;
-      final display = name.isEmpty ? 'منتج جديد' : name;
+      final display = name.isEmpty ? AppLocalizations.of(context)!.newProductFallback : name;
       final u = await _unitSelectionForCatalogProduct(afterAdd);
       if (!mounted) return;
       // السعر للوحدة الافتراضية المختارة = سعر الأساس × factor (لا variantSell هنا).
@@ -4959,7 +4958,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         unitVariantId: u.unitVariantId,
         unitLabel: u.unitLabel,
         unitFactor: u.unitFactor,
-        newItemSnackText: 'تمت إضافة المنتج: ${name.isEmpty ? barcode : name}',
+        newItemSnackText: AppLocalizations.of(context)!.productAddedSnack(name.isEmpty ? barcode : name),
       );
     }
   }
@@ -5154,7 +5153,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                 children: [
                   Expanded(
                     child: Text(
-                      'اختيار اللون والمقاس',
+                      AppLocalizations.of(context)!.selectColorAndSize,
                       style: theme.textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.w900,
                         color: cs.primary,
@@ -5162,7 +5161,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                     ),
                   ),
                   Text(
-                    'لا يمكن تغيير الكمية قبل الاختيار',
+                    AppLocalizations.of(context)!.cannotChangeQtyBeforeSelection,
                     style: TextStyle(
                       fontSize: 11,
                       color: cs.onSurfaceVariant,
@@ -5184,7 +5183,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                 )
               else ...[
                 Text(
-                  'الألوان',
+                  AppLocalizations.of(context)!.colorsTitle,
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
                     color: cs.onSurfaceVariant,
@@ -5204,7 +5203,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                           final colorDisabled = rem <= 0 && !allowNeg;
                           return chipBox(
                         title: (e.value['colorName'] ?? '').toString().trim().isEmpty
-                            ? 'لون'
+                            ? AppLocalizations.of(context)!.colorLabel
                             : (e.value['colorName'] ?? '').toString().trim(),
                         subtitle: 'المتاح: $rem',
                         disabled: colorDisabled,
@@ -5232,7 +5231,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                       ),
                       const Spacer(),
                       Text(
-                        'المقاسات',
+                        AppLocalizations.of(context)!.sizesTitle,
                         style: TextStyle(
                           fontWeight: FontWeight.w800,
                           color: cs.onSurfaceVariant,
@@ -5252,7 +5251,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                             final dbQ = (v['quantity'] as num?)?.toInt() ?? 0;
                             final size =
                                 (v['size'] ?? '').toString().trim().isEmpty
-                                    ? 'مقاس'
+                                    ? AppLocalizations.of(context)!.sizeLabel
                                     : (v['size'] ?? '').toString().trim();
                             final vId = (v['id'] as num?)?.toInt();
                             // إجمالي المأخوذ من هذا الـ variant في السلة (للعرض: المتبقي فعلياً).
@@ -5443,7 +5442,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                                       ],
                                       Expanded(
                                         child: Text(
-                                          label.isEmpty ? 'لون/مقاس' : label,
+                                          label.isEmpty ? AppLocalizations.of(context)!.colorOrSize : label,
                                           style: const TextStyle(
                                             fontWeight: FontWeight.w800,
                                           ),
@@ -5468,7 +5467,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                   ],
                 ] else
                   Text(
-                    'اختر لوناً أولاً لإظهار المقاسات.',
+              'AppLocalizations.of(context)!.selectColorFirst',
                     style: TextStyle(
                       color: cs.onSurfaceVariant,
                       fontWeight: FontWeight.w600,
@@ -5713,9 +5712,9 @@ class _SaleParkInvoiceDialogState extends State<_SaleParkInvoiceDialog> {
                       size: 22,
                     ),
                     const SizedBox(width: 10),
-                    const Expanded(
+                    Expanded(
                       child: Text(
-                        'تعليق الفاتورة',
+                        AppLocalizations.of(context)!.parkInvoiceDialogTitle,
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w700,
@@ -5815,8 +5814,8 @@ class _SaleParkInvoiceDialogState extends State<_SaleParkInvoiceDialog> {
                             borderRadius: AppShape.none,
                           ),
                         ),
-                        child: const Text(
-                          'إلغاء',
+                        child: Text(
+                          AppLocalizations.of(context)!.cancelAction,
                           style: TextStyle(fontWeight: FontWeight.w600),
                         ),
                       ),
@@ -5834,8 +5833,8 @@ class _SaleParkInvoiceDialogState extends State<_SaleParkInvoiceDialog> {
                             borderRadius: AppShape.none,
                           ),
                         ),
-                        child: const Text(
-                          'حفظ التعليق',
+                        child: Text(
+                          AppLocalizations.of(context)!.saveParkButton,
                           style: TextStyle(fontWeight: FontWeight.w700),
                         ),
                       ),
@@ -5978,13 +5977,13 @@ class _SaleInlineScannerCard extends StatelessWidget {
               children: [
                 const SizedBox(width: 6),
                 IconButton(
-                  tooltip: 'إغلاق',
+                  tooltip: AppLocalizations.of(context)!.closeTooltip,
                   onPressed: onClose,
                   icon: const Icon(Icons.close_rounded),
                 ),
                 Expanded(
                   child: Text(
-                    'ماسح الباركود',
+                    AppLocalizations.of(context)!.barcodeScannerTitle,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -5993,12 +5992,12 @@ class _SaleInlineScannerCard extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  tooltip: 'فلاش',
+                  tooltip: AppLocalizations.of(context)!.flashTooltip,
                   onPressed: () => controller.toggleTorch(),
                   icon: Icon(Icons.flash_on_rounded, color: palette.gold),
                 ),
                 IconButton(
-                  tooltip: 'تبديل الكاميرا',
+                  tooltip: AppLocalizations.of(context)!.switchCameraTooltip,
                   onPressed: () => controller.switchCamera(),
                   icon: Icon(Icons.cameraswitch_rounded, color: palette.gold),
                 ),

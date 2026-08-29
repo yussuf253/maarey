@@ -1,3 +1,4 @@
+import '../../l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -70,7 +71,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
   final FocusNode _searchFocus = FocusNode();
   Timer? _searchDebounce;
 
-  String _filterStatus = 'الكل';
+  String _filterStatus = '';
   _CustomerSort _sort = _CustomerSort.nameAsc;
 
   /// العميل المختار حالياً للعرض في لوحة التفاصيل (MasterDetail).
@@ -82,6 +83,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
   @override
   void initState() {
     super.initState();
+    _filterStatus = AppLocalizations.of(context)!.all;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       context.read<CustomersProvider>().refresh();
@@ -185,14 +187,14 @@ class _CustomersScreenState extends State<CustomersScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
-            child: const Text('إلغاء'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(ctx, true),
             style: TextButton.styleFrom(
               foregroundColor: AppSemanticColors.danger,
             ),
-            child: const Text('حذف'),
+            child: Text(AppLocalizations.of(context)!.delete),
           ),
         ],
       ),
@@ -220,14 +222,14 @@ class _CustomersScreenState extends State<CustomersScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
-            child: const Text('إلغاء'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(ctx, true),
             style: TextButton.styleFrom(
               foregroundColor: AppSemanticColors.danger,
             ),
-            child: const Text('حذف'),
+            child: Text(AppLocalizations.of(context)!.delete),
           ),
         ],
       ),
@@ -535,8 +537,8 @@ class _CustomersScreenState extends State<CustomersScreen> {
       foregroundColor: _onPrimary,
       elevation: 0,
       centerTitle: false,
-      title: const Text(
-        'العملاء',
+      title: Text(
+                              AppLocalizations.of(context)!.customersTitle,
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
       ),
       actions: [
@@ -822,7 +824,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
                     onPressed: () {
                       setState(() {
                         _searchCtrl.clear();
-                        _filterStatus = 'الكل';
+                        _filterStatus = AppLocalizations.of(context)!.all;
                         _sort = _CustomerSort.nameAsc;
                       });
                       _syncFilters();
@@ -866,7 +868,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
             FilledButton.icon(
               onPressed: () => _openEditor(),
               icon: const Icon(Icons.add),
-              label: const Text('إضافة أول عميل'),
+              label: Text(AppLocalizations.of(context)!.addFirstCustomer),
             ),
           ],
         ],
@@ -1095,14 +1097,14 @@ class _CustomersScreenState extends State<CustomersScreen> {
               if (v == 'delete') _confirmDelete(c);
             },
             itemBuilder: (_) => [
-              const PopupMenuItem(value: 'view', child: Text('عرض التفاصيل')),
+              PopupMenuItem(value: 'view', child: Text(AppLocalizations.of(context)!.viewDetails)),
               const PopupMenuItem(value: 'edit', child: Text('تعديل البيانات')),
               const PopupMenuDivider(),
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'delete',
                 child: Text(
-                  'حذف',
-                  style: TextStyle(color: AppSemanticColors.danger),
+                  AppLocalizations.of(context)!.delete,
+                  style: const TextStyle(color: AppSemanticColors.danger),
                 ),
               ),
             ],
@@ -1337,18 +1339,18 @@ class _StatusChipsStrip extends StatelessWidget {
   final ValueChanged<String> onSelected;
   final Color? primary;
 
-  int _badgeForLabel(String label) => switch (label) {
-    'الكل' => tabCounts.all,
-    'مديون' => tabCounts.indebted,
-    'دائن' => tabCounts.creditor,
-    _ => tabCounts.distinguished,
-  };
+  int _badgeForLabel(BuildContext context, String label) {
+    if (label == AppLocalizations.of(context)!.all) return tabCounts.all;
+    if (label == 'مديون') return tabCounts.indebted;
+    if (label == 'دائن') return tabCounts.creditor;
+    return tabCounts.distinguished;
+  }
 
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final effectivePrimary = primary ?? cs.primary;
-    const statusOptions = ['الكل', 'مديون', 'دائن', 'مميز'];
+    final statusOptions = [AppLocalizations.of(context)!.all, 'مديون', 'دائن', 'مميز'];
 
     return Focus(
       onKeyEvent: (node, event) {
@@ -1391,7 +1393,7 @@ class _StatusChipsStrip extends StatelessWidget {
                         Text(s),
                         const SizedBox(width: 6),
                         _TabCountBadge(
-                          count: _badgeForLabel(s),
+                          count: _badgeForLabel(context, s),
                           urgentRed: s == 'مديون',
                           goldAccent: s == 'مميز',
                           fallback: effectivePrimary,
@@ -1535,7 +1537,7 @@ class _CustomersStatsBar extends StatelessWidget {
     final chips = <Widget>[
       _StatChip(
         icon: Icons.groups_2_rounded,
-        label: 'إجمالي العملاء',
+        label: AppLocalizations.of(context)!.totalCustomers,
         value: fmt.format(totalAll),
         color: cs.primary,
       ),

@@ -3947,7 +3947,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get totalWithInterestLabel => 'Total avec intérêt';
 
   @override
-  String get suggestedMonthlyInstallment => 'Mensualité suggérée';
+  String suggestedMonthlyInstallment(Object months) {
+    return 'Mensualité suggérée ($months mois)';
+  }
 
   @override
   String get selectInvoicePrompt =>
@@ -4236,7 +4238,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sizeFallback => 'taille';
 
   @override
-  String get unitFallback => 'unité';
+  String get unitFallback => 'Unité';
 
   @override
   String get pieceUnitFallback => 'pièce';
@@ -4464,4 +4466,1215 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get parkedInvoiceSnackbarHint =>
       'Enregistré localement. Vous pouvez reprendre depuis Factures > En attente.';
+
+  @override
+  String get pieceFallback => 'Pièce';
+
+  @override
+  String get unnamedProduct => 'Produit sans nom';
+
+  @override
+  String get newProductFallback => 'Nouveau produit';
+
+  @override
+  String qtyAdjustedToAvailableStock(Object qty) {
+    return 'Quantité ajustée à $qty en raison de la limite de stock disponible.';
+  }
+
+  @override
+  String stockNotAvailableDetails(Object max) {
+    return 'Stock non disponible. Disponible à la vente (base stock) : $max uniquement (après comptabilisation des quantités dans les autres lignes).';
+  }
+
+  @override
+  String get noStockAvailableForProduct =>
+      'Aucun stock disponible pour ce produit.';
+
+  @override
+  String stockUnavailableAvailableIs(Object max) {
+    return 'Stock indisponible. Disponible à la vente (base stock) : $max uniquement.';
+  }
+
+  @override
+  String newLineAddedSnack(Object name) {
+    return 'Nouvelle ligne ajoutée : $name';
+  }
+
+  @override
+  String get installmentPlanTitle => 'Plan de versements';
+
+  @override
+  String get installmentCalcNote =>
+      'Calculé sur « Total après acompte ». À vérifier avec le client — non ajouté à la facture sauf si vous augmentez les prix manuellement.';
+
+  @override
+  String get advanceDownPaymentHelper =>
+      'Déduit du total avant calcul des intérêts et de la mensualité.';
+
+  @override
+  String get monthsSuffix => 'mois';
+
+  @override
+  String interestAmountLabel(Object pct) {
+    return 'Montant des intérêts ($pct%)';
+  }
+
+  @override
+  String get advanceEqualsTotalHint =>
+      'L\'acompte est égal au total — aucun montant à verser. Réduisez l\'acompte pour voir les intérêts et la mensualité.';
+
+  @override
+  String parkInvoiceWithCount(Object count) {
+    return 'Mettre en attente — en attente ($count)';
+  }
+
+  @override
+  String get parkInvoiceOtherCustomer =>
+      'Mettre en attente — servir un autre client';
+
+  @override
+  String payButtonLabel(Object amount) {
+    return 'Payer — $amount';
+  }
+
+  @override
+  String get swipeToResizeHint =>
+      'Glisser pour modifier la largeur de la barre latérale';
+
+  @override
+  String get checkoutStepHintWithPayment =>
+      'Lignes de facture, quantités et prix — puis vérifier les détails du prix et le mode de paiement.';
+
+  @override
+  String get checkoutStepHintNoPayment =>
+      'Lignes de facture, quantités et prix — puis passer à la remise et la taxe.';
+
+  @override
+  String get productsTitle => 'Produits';
+
+  @override
+  String get barcodeFieldHint =>
+      'Ajouter un article par code-barres, ou ouvrir un retour en scannant le numéro de facture (INV-)';
+
+  @override
+  String get scannerTabLabel => 'Scanner';
+
+  @override
+  String get noItemsYetWithScanner =>
+      'Aucun article pour le moment.\nScannez le code-barres ci-dessus ou ajoutez depuis la recherche.\nRecherchez un produit ou scannez le code-barres pour ajouter.';
+
+  @override
+  String get noItemsYetNoScanner =>
+      'Aucun article pour le moment.\nAjoutez des produits depuis la recherche.\nRecherchez un produit ou scannez le code-barres pour ajouter.';
+
+  @override
+  String get saleSummaryTitle => 'Résumé de la vente';
+
+  @override
+  String get discountTaxNote =>
+      'La remise et la taxe sont appliquées au total de la facture (et non par article).';
+
+  @override
+  String maxDiscountAllowedHint(Object max) {
+    return 'Maximum autorisé : $max% — calculé à partir du prix minimum par article.';
+  }
+
+  @override
+  String get taxHelperHint =>
+      'Entrez le montant de la taxe en dinars si applicable ; ajouté au sous-total après remise facture.';
+
+  @override
+  String get priceDetailStepHintWithPayment =>
+      'Résultat des chiffres et du premier versement le cas échéant, avant de passer aux données client.';
+
+  @override
+  String get priceDetailStepHintNoPayment =>
+      'Résultat des chiffres après remise et taxe, et du premier versement le cas échéant, avant de passer aux données client.';
+
+  @override
+  String get priceDetailsTitle => 'Détails du prix';
+
+  @override
+  String get amountBreakdownTitle => 'Ventilation des montants';
+
+  @override
+  String get originalAmountLabel => 'Montant original (somme des articles)';
+
+  @override
+  String get invoiceDiscountAmountLabel => 'Montant de la remise facture';
+
+  @override
+  String get subtotalAfterDiscountLabel =>
+      'Sous-total après remise (avant taxe)';
+
+  @override
+  String get iqdCurrencySymbol => 'IQD';
+
+  @override
+  String get grandTotalLabel => 'Total général';
+
+  @override
+  String get cashLabel => 'Espèces';
+
+  @override
+  String get creditLabel => 'Crédit';
+
+  @override
+  String get installmentLabel => 'Versement';
+
+  @override
+  String get deliveryLabel => 'Livraison';
+
+  @override
+  String selectPaymentMethodHint(Object options) {
+    return 'Choisissez $options, puis complétez les données client et les champs liés au type de paiement.';
+  }
+
+  @override
+  String get customerAndPaymentTitle => 'Client & Mode de paiement';
+
+  @override
+  String get paymentMethodLabel => 'Mode de paiement';
+
+  @override
+  String get customerNameRequiredForDelivery =>
+      'Nom du client requis pour la livraison';
+
+  @override
+  String get requiredForCreditInstallment => 'Requis pour crédit/versement';
+
+  @override
+  String get addNewCustomerMessage =>
+      'Ajouter un nouveau client sans quitter la vente';
+
+  @override
+  String get deliveryAddressWithMapQR =>
+      'Adresse de livraison et emplacement (QR cartes)';
+
+  @override
+  String get buyerAddressWithMapQR =>
+      'Adresse de l\'acheteur (QR pour cartes sur le reçu)';
+
+  @override
+  String get addressMapDescriptionOptional =>
+      'Optionnel — description ou adresse affichée dans Google Maps lors du scan du code';
+
+  @override
+  String get addressMapRequired =>
+      'Requis — le QR cartes est imprimé si du texte est présent ; écrivez l\'adresse de livraison clairement';
+
+  @override
+  String get qrOpensMapsOnScan => 'Le QR ouvre les cartes lors du scan';
+
+  @override
+  String get deliveryAddressRequired => 'L\'adresse de livraison est requise';
+
+  @override
+  String get loyaltyPointsRequiresCustomer =>
+      'Pour utiliser les points : sélectionnez un client enregistré dans la liste suggérée.';
+
+  @override
+  String customerLoyaltyBalance(Object balance) {
+    return 'Solde de points de fidélité du client : $balance';
+  }
+
+  @override
+  String loyaltyPointsToRedeem(Object max) {
+    return 'Points à échanger (max $max)';
+  }
+
+  @override
+  String get deliveryInstruction =>
+      'Pour la livraison : entrez le nom du client et l\'adresse de livraison (les deux requis). Des suggestions de noms apparaissent de la base clients pendant la saisie.';
+
+  @override
+  String get creditInstallmentCustomerTip =>
+      'Important : Pour crédit et versement, cliquez sur le nom du client dans la liste suggérée pour lier la vente à sa carte (taper le nom manuellement ne suffit pas s\'il ne correspond pas exactement à un enregistrement).';
+
+  @override
+  String get hideDetailsLabel => 'Masquer les détails';
+
+  @override
+  String get priceDiscountDetailsLabel => 'Détails du prix et de la remise';
+
+  @override
+  String priceAndMinLabel(Object min, Object price) {
+    return 'Prix $price · Min $min';
+  }
+
+  @override
+  String lineTotalLabel(Object total) {
+    return 'Total : $total';
+  }
+
+  @override
+  String get unitSellPriceLabel => 'Prix de vente (par unité)';
+
+  @override
+  String get lineTotalBeforeDiscount =>
+      'Total de la ligne avant remise facture';
+
+  @override
+  String get lineDiscountShare => 'Part de la remise facture pour cette ligne';
+
+  @override
+  String get lineTotalAfterDiscount =>
+      'Total de la ligne après remise facture (cette ligne)';
+
+  @override
+  String get percentageDiscountDistributionNote =>
+      'La remise en pourcentage est répartie sur les lignes selon la contribution de chaque ligne au total des articles.';
+
+  @override
+  String get quantityKgLabel => 'Quantité (kilogrammes)';
+
+  @override
+  String get quantityHintWeight => 'ex. : 0.25 ou 1.5 ou 3';
+
+  @override
+  String get quantityHintPiece => 'ex. : 2';
+
+  @override
+  String get quantityErrorWeight =>
+      'Entrez une quantité supérieure à 0 (décimales autorisées pour le poids).';
+
+  @override
+  String get quantityErrorPiece => 'Entrez un nombre entier 1 ou plus';
+
+  @override
+  String get itemFallbackShort => 'Article';
+
+  @override
+  String get payloadEmptyOrNotText =>
+      'La charge est vide ou n\'est pas du texte';
+
+  @override
+  String get payloadNotValidJson => 'La charge n\'est pas un objet JSON valide';
+
+  @override
+  String get payloadNoVersionField =>
+      'Pas de champ de version (v) dans la charge';
+
+  @override
+  String payloadUnsupportedVersion(Object ver) {
+    return 'La version de charge $ver n\'est pas supportée (attendu 1)';
+  }
+
+  @override
+  String decryptionError(Object error) {
+    return 'Erreur de déchiffrement : $error';
+  }
+
+  @override
+  String failedToOpenParkedInvoice(Object reason) {
+    return 'Échec de l\'ouverture de la facture en attente : $reason';
+  }
+
+  @override
+  String get unknownReason => 'raison inconnue';
+
+  @override
+  String invoiceWithItemCount(Object count) {
+    return 'Facture ($count articles)';
+  }
+
+  @override
+  String get invoiceParkedMessage =>
+      'Facture mise en attente — vous pouvez la reprendre depuis la liste des factures';
+
+  @override
+  String get requiredFieldsMessage =>
+      'Remplissez les champs requis : pour crédit ou versement entrez le nom du client, pour livraison entrez le nom et l\'adresse. Vérifiez les champs surlignés en rouge.';
+
+  @override
+  String get paymentMethodNotAllowed =>
+      'Le mode de paiement actuel n\'est pas autorisé — vérifiez « Factures → Paramètres Caisse » ou choisissez espèces.';
+
+  @override
+  String discountExceedsMaximum(Object max) {
+    return 'Le pourcentage de remise dépasse le maximum. La limite est de $max%';
+  }
+
+  @override
+  String get creditInstallmentMustSelectCustomer =>
+      'Pour une vente à crédit ou en versement : sélectionnez un client enregistré dans la liste suggérée sous le champ nom (ou ajoutez depuis « Clients » d\'abord) pour lier la facture à sa carte.';
+
+  @override
+  String get loyaltyRedeemMustSelectCustomer =>
+      'Pour échanger les points, sélectionnez le client dans la liste ou entrez un nom correspondant exactement à un enregistrement.';
+
+  @override
+  String invoiceDebtLimitExceeded(Object cap, Object rem) {
+    return 'Limite de dette facture : le reste ($rem) dépasse le plafond $cap. Ajustez le total, le montant payé, ou « Dettes → Paramètres de dette ».';
+  }
+
+  @override
+  String customerDebtLimitExceeded(Object cap, Object existing, Object rem) {
+    return 'Limite de dette client : total restant ≈ $existing, et cette facture ajoute $rem (dépasse $cap).';
+  }
+
+  @override
+  String get debtLimitActionHint =>
+      'Liez le client depuis la liste, réduisez le montant, ou vérifiez les paramètres de dette.';
+
+  @override
+  String invoiceSaveFailed(Object error) {
+    return 'Échec de l\'enregistrement de la facture — $error. Vérifiez les articles et le total avant de réessayer.';
+  }
+
+  @override
+  String get maintenanceTicketUpdateFailed =>
+      'Note : La facture a été enregistrée mais la mise à jour automatique du ticket de maintenance a échoué. Veuillez le vérifier manuellement.';
+
+  @override
+  String get installmentPlanCreated =>
+      'Facture enregistrée et plan de versement créé — vous pouvez ajuster l\'échéancier ou revenir en arrière';
+
+  @override
+  String get installmentPlanSavedNoRemaining =>
+      'Facture de versement enregistrée et liée à un plan (aucun versement restant car le montant est intégralement collecté).';
+
+  @override
+  String get barcodeOrInvoiceForReturn =>
+      'Code-barres article ou facture pour retour';
+
+  @override
+  String get alreadyReturned => 'Cette facture a déjà été retournée';
+
+  @override
+  String invoiceNumberLabel(Object id) {
+    return 'Facture #$id';
+  }
+
+  @override
+  String openReturnScreenConfirm(Object total) {
+    return 'Ouvrir l\'écran de retour (articles uniquement) ?\nTotal original : $total';
+  }
+
+  @override
+  String get returnButton => 'Retour';
+
+  @override
+  String get selectColorAndSize => 'Sélectionner Couleur & Taille';
+
+  @override
+  String get cannotChangeQtyBeforeSelection =>
+      'Impossible de modifier la quantité avant la sélection';
+
+  @override
+  String get loadingColorsAndSizes => 'Chargement des couleurs et tailles…';
+
+  @override
+  String get colorsTitle => 'Couleurs';
+
+  @override
+  String availableLabel(Object rem) {
+    return 'Disponible : $rem';
+  }
+
+  @override
+  String get sizesTitle => 'Tailles';
+
+  @override
+  String get currentlySelected => 'Sélection actuelle';
+
+  @override
+  String get colorOrSize => 'Couleur/Taille';
+
+  @override
+  String get selectColorFirst =>
+      'Sélectionnez d\'abord une couleur pour afficher les tailles.';
+
+  @override
+  String get parkInvoiceDialogTitle => 'Mettre en attente la facture';
+
+  @override
+  String get parkInvoiceDescription =>
+      'Enregistré localement sur cet appareil. Vous pouvez reprendre la vente plus tard depuis Factures → En attente.';
+
+  @override
+  String get saveParkButton => 'Enregistrer en attente';
+
+  @override
+  String get barcodeScannerTitle => 'Scanner code-barres';
+
+  @override
+  String get flashTooltip => 'Flash';
+
+  @override
+  String get switchCameraTooltip => 'Changer de caméra';
+
+  @override
+  String get scanToAddAuto =>
+      'Scannez — les articles seront ajoutés automatiquement';
+
+  @override
+  String get passOriginalInvoiceOrId => 'Passez originalInvoice ou invoiceId';
+
+  @override
+  String get deductedFromVault => 'Déduit de la caisse.';
+
+  @override
+  String get deductedFromInstallmentTotal => 'Déduit du total des versements.';
+
+  @override
+  String get switchInvoiceLabel => 'Changer de facture (INV-numéro)';
+
+  @override
+  String get scanAnotherReceiptHint => 'Scannez un autre reçu puis Entrez';
+
+  @override
+  String get barcodeNotFoundAddNew =>
+      'Ce code-barres n\'existe pas dans les produits. Voulez-vous ouvrir l\'écran d\'ajout de produit ?';
+
+  @override
+  String get receiptPrintFailed => 'Échec de l\'impression du reçu';
+
+  @override
+  String get royalNavyScheme => 'Bleu marine — Or — Ivoire (défaut)';
+
+  @override
+  String get midnightScheme => 'Minuit — Argent — Gris clair';
+
+  @override
+  String get oceanScheme => 'Océan — Or sable — Crémeux';
+
+  @override
+  String get forestScheme => 'Forêt — Bronze — Menthe claire';
+
+  @override
+  String get wineScheme => 'Vin — Or chaud — Blanc rosé';
+
+  @override
+  String get charcoalScheme => 'Charbon — Ambre — Blanc bleuté';
+
+  @override
+  String get slateScheme => 'Ardoise — Bleu ciel — Blanc froid';
+
+  @override
+  String get copperScheme => 'Cuivre — Cuivre rouge — Sable';
+
+  @override
+  String get customScheme => 'Personnalisé — Studio de couleurs interactif';
+
+  @override
+  String get appAppearance => 'Apparence de l\'application';
+
+  @override
+  String get posSettings => 'Paramètres de caisse';
+
+  @override
+  String get paymentMethodsSection => 'Modes de paiement';
+
+  @override
+  String get creditSaleTitle => 'Vente à crédit';
+
+  @override
+  String get creditSaleSubtitle =>
+      'Désactiver masque l\'option «crédit» sur l\'écran de vente.';
+
+  @override
+  String get installmentSaleTitle => 'Vente en versements';
+
+  @override
+  String get installmentSaleSubtitle =>
+      'Désactiver masque l\'option «versement».';
+
+  @override
+  String get deliverySaleTitle => 'Vente avec livraison';
+
+  @override
+  String get deliverySaleSubtitle => 'Désactiver masque l\'option «livraison».';
+
+  @override
+  String get cashCustomerSection => 'Client en vente en espèces';
+
+  @override
+  String get showBuyerAddressCashTitle =>
+      'Afficher le champ adresse de l\'acheteur en mode espèces';
+
+  @override
+  String get showBuyerAddressCashDesc =>
+      'Affiché uniquement si «QR pour adresse acheteur» est activé. Désactivé, le champ reste pour la livraison.';
+
+  @override
+  String get stockInSaleSection => 'Stock en vente';
+
+  @override
+  String get preventOversellTitle =>
+      'Empêcher la vente quand le solde affiché est dépassé';
+
+  @override
+  String get preventOversellDesc =>
+      'Activé : la quantité ne dépasse pas le stock. Désactivé : la vente est autorisée même si le solde est négatif, et le négatif est annulé à la sauvegarde.';
+
+  @override
+  String get discountTaxSection => 'Remise & Taxe';
+
+  @override
+  String get invoiceDiscountPercentTitle =>
+      'Champ remise facture (pourcentage)';
+
+  @override
+  String get invoiceDiscountPercentSubtitle =>
+      'Désactivé : la remise est fixée à 0 et le champ est masqué.';
+
+  @override
+  String get taxFieldTitle => 'Champ taxe';
+
+  @override
+  String get taxFieldSubtitle =>
+      'Désactivé : la taxe est fixée à 0 et le champ est masqué.';
+
+  @override
+  String get brandColorsTitle =>
+      'Couleurs d\'identité de marque au lieu du thème';
+
+  @override
+  String get brandColorsDesc =>
+      'Désactivé : le thème général (clair/sombre) reste sur toutes les pages, avec la même forme de coins ci-dessous.';
+
+  @override
+  String get colorSchemesTitle => 'Palettes de couleurs';
+
+  @override
+  String get colorSchemesDesc =>
+      'Toutes les palettes professionnelles sont prêtes ; «Personnalisé» ouvre un studio de couleurs interactif (teinte, saturation, luminosité, prêt, HEX) pour chaque couleur.';
+
+  @override
+  String get primaryColorLabel =>
+      'Couleur principale (barre de titre & boutons)';
+
+  @override
+  String get accentColorLabel => 'Couleur d\'accent (or/en vedette)';
+
+  @override
+  String get lightSurfaceLabel => 'Arrière-plan des surfaces claires';
+
+  @override
+  String get darkSurfaceLabel => 'Arrière-plan surfaces mode sombre';
+
+  @override
+  String get saleCardShapeTitle => 'Forme des cartes de vente';
+
+  @override
+  String get saleCardShapeDesc =>
+      'Aperçu simple à côté de chaque option — à quoi ressemblent les coins et les lignes de produits.';
+
+  @override
+  String get sharpCornersTitle => 'Coins pointus';
+
+  @override
+  String get roundedCornersTitle => 'Coins arrondis';
+
+  @override
+  String get fontAndSizeTitle => 'Police et taille de l\'application';
+
+  @override
+  String get fontAndSizeDesc =>
+      'Appliqué à tous les écrans et menus, multiplié par la taille de police du système.';
+
+  @override
+  String get fontStyleTitle => 'Style de police';
+
+  @override
+  String get fontSizeTitle => 'Taille de police';
+
+  @override
+  String get textColorTitle => 'Couleur du texte';
+
+  @override
+  String get textColorDesc =>
+      'Optionnel — studio de couleurs complet pour chaque mode (clair/sombre) ; appliqué au texte principal et aux listes.';
+
+  @override
+  String get textLightLabel => 'Couleur texte — Mode clair';
+
+  @override
+  String get textLightDesc =>
+      'Actif en thème clair. Appuyez pour modifier, ou «Défaut» pour effacer la couleur personnalisée.';
+
+  @override
+  String get textDarkLabel => 'Couleur texte — Mode sombre';
+
+  @override
+  String get textDarkDesc =>
+      'Actif en thème sombre. Appuyez pour modifier, ou «Défaut» pour effacer la couleur personnalisée.';
+
+  @override
+  String get resetTextColorLabel =>
+      'Réinitialiser la couleur du texte pour les deux modes';
+
+  @override
+  String get royalNavyDefaultDesc =>
+      'Référence des couleurs «Bleu marine» par défaut — les autres palettes ci-dessus.';
+
+  @override
+  String get wideSaleLayoutTitle =>
+      'Disposition de l\'espace de vente (écran large)';
+
+  @override
+  String get wideSaleLayoutSwitchTitle =>
+      'Diviser l\'écran de vente en deux colonnes (écran large)';
+
+  @override
+  String get wideSaleLayoutSwitchDesc =>
+      'Désactivé : «Nouvelle vente» revient à une seule colonne même sur écran large. Le ratio est sauvegardé.';
+
+  @override
+  String get wideSaleLayoutDesc =>
+      'Quand la fenêtre fait 700+ points de large et n\'est pas un écran téléphone, l\'écran «Nouvelle vente» se divise en deux colonnes.';
+
+  @override
+  String productsColumnRatioLabel(Object products, Object summary) {
+    return 'Colonne produits : $products — Résumé & client : $summary';
+  }
+
+  @override
+  String productsSummaryLabel(Object products, Object summary) {
+    return 'Produits $products · Reste de l\'écran $summary';
+  }
+
+  @override
+  String get wideSalePreviewLabel =>
+      'Aperçu en direct (petit espace — comment la disposition change) :';
+
+  @override
+  String get wideSaleDragHint =>
+      'Dans l\'écran «Nouvelle vente» en large : survolez la fine bande entre les colonnes et glissez horizontalement.';
+
+  @override
+  String get saleSpaceLayoutLabel => 'Disposition de l\'espace de vente';
+
+  @override
+  String get phoneLayoutDesc =>
+      'Sur cette taille (téléphone), «Nouvelle vente» s\'affiche toujours en colonne unique.';
+
+  @override
+  String get appearanceNote =>
+      'Les couleurs et coins s\'appliquent immédiatement. Les politiques de vente restent dans «Paramètres de caisse».';
+
+  @override
+  String get posNote =>
+      'Les politiques de vente s\'appliquent immédiatement. L\'apparence est configurée dans «Apparence de l\'application».';
+
+  @override
+  String get resetAppearanceTitle => 'Restaurer l\'apparence par défaut ?';
+
+  @override
+  String get resetAppearanceDesc =>
+      'Rétablira la police, la taille du texte, les couleurs personnalisées, la palette, les coins et l\'identité de marque. Les politiques de vente ne sont pas affectées.';
+
+  @override
+  String get cancelLabel => 'Annuler';
+
+  @override
+  String get restoreLabel => 'Restaurer';
+
+  @override
+  String get appearanceRestoredSnack =>
+      'Paramètres d\'apparence par défaut restaurés';
+
+  @override
+  String get resetAppearanceLog =>
+      'Restaurer l\'apparence par défaut (police, couleurs, palette, coins)';
+
+  @override
+  String get summaryCustomerLabel => 'Résumé\n& client';
+
+  @override
+  String customColorLabel(Object hex) {
+    return '$hex — Personnalisé';
+  }
+
+  @override
+  String get themeDefaultLabel => 'Défaut du thème';
+
+  @override
+  String get colorStudioDesc =>
+      'Boîte de saturation/luminosité, barre de spectre, couleurs prêtes, ou HEX — puis confirmer.';
+
+  @override
+  String get appIdentityTitle => 'Identité de l\'application';
+
+  @override
+  String get appIdentityDesc =>
+      'Configurez les couleurs d\'identité et la forme des coins pour l\'application entière. Les politiques de paiement, stock et remise restent dans «Paramètres de caisse».';
+
+  @override
+  String get saleControlTitle => 'Contrôle centralisé des ventes';
+
+  @override
+  String get saleControlDesc =>
+      'Activez ou désactivez les modes de paiement et champs financiers sans modifier le code. L\'apparence est configurée séparément.';
+
+  @override
+  String get printSettingsSaved => 'Paramètres d\'impression enregistrés';
+
+  @override
+  String printSettingsSaveError(Object error) {
+    return 'Erreur d\'enregistrement : $error';
+  }
+
+  @override
+  String get testCustomerName => 'Client test';
+
+  @override
+  String get testProductName => 'Produit 1';
+
+  @override
+  String get testEmployee => 'Employé';
+
+  @override
+  String get testAddress => 'Bagdad, Rue test';
+
+  @override
+  String get printingAndDocsTitle => 'Impression & Documents';
+
+  @override
+  String get saveButton => 'Enregistrer';
+
+  @override
+  String get salesReceiptSection => 'Reçu de vente';
+
+  @override
+  String get defaultPaperSize => 'Taille de papier par défaut';
+
+  @override
+  String get thermal58mm => 'Thermique 58mm (étroit)';
+
+  @override
+  String get thermal80mm => 'Thermique 80mm (standard)';
+
+  @override
+  String get showTransactionBarcodeTitle =>
+      'Afficher le code-barres de transaction';
+
+  @override
+  String get transactionBarcodeDesc => 'CODE128 — lu rapidement par le scanner';
+
+  @override
+  String get showQrCodeTitle => 'Afficher le code QR';
+
+  @override
+  String get qrCodeDesc =>
+      'Résumé texte pour le client — recommandé pour la taxe et la vérification';
+
+  @override
+  String get qrBuyerAddressTitle => 'QR pour l\'adresse acheteur (cartes)';
+
+  @override
+  String get qrBuyerAddressDesc =>
+      'Quand activé, affiche le champ adresse acheteur et imprime un QR qui ouvre la position sur Google Maps';
+
+  @override
+  String get headerLineLabel =>
+      'Ligne au-dessus du titre \"Reçu de vente\" (nom du magasin)';
+
+  @override
+  String get footerLineLabel =>
+      'Pied de page supplémentaire (téléphone, conditions, remerciements)';
+
+  @override
+  String get barcodeLabelsSection => 'Paramètres code-barres & étiquettes';
+
+  @override
+  String get storeDataTitle => 'Données du magasin';
+
+  @override
+  String get storeDataDesc =>
+      'Depuis les paramètres — peut être lié automatiquement au reçu';
+
+  @override
+  String get storeDataHint =>
+      'Utilisez le champ \"Nom du magasin\" ci-dessus ou la fiche données du magasin';
+
+  @override
+  String get previewReceiptButton => 'Aperçu reçu test';
+
+  @override
+  String get saveSettingsButton => 'Enregistrer les paramètres en base';
+
+  @override
+  String get printSettingsDesc =>
+      'Données stockées dans print_settings et appliquées automatiquement lors de l\'impression.';
+
+  @override
+  String get professionalPrintCenter => 'Centre d\'impression professionnel';
+
+  @override
+  String get printCenterDesc =>
+      'Configure les tailles thermique et A4, le contenu du reçu, et les liens inventaire — tout est sauvegardé localement.';
+
+  @override
+  String get close => 'Fermer';
+
+  @override
+  String get loading => 'Chargement...';
+
+  @override
+  String get actions => 'Actions';
+
+  @override
+  String get confirm => 'Confirmer';
+
+  @override
+  String get yes => 'Oui';
+
+  @override
+  String get no => 'Non';
+
+  @override
+  String get next => 'Suivant';
+
+  @override
+  String get total => 'Total';
+
+  @override
+  String get count => 'Nombre';
+
+  @override
+  String get status => 'Statut';
+
+  @override
+  String get date => 'Date';
+
+  @override
+  String get amount => 'Montant';
+
+  @override
+  String get number => 'Numéro';
+
+  @override
+  String get details => 'Détails';
+
+  @override
+  String get name => 'Nom';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get notes => 'Notes';
+
+  @override
+  String get add => 'Ajouter';
+
+  @override
+  String get remove => 'Retirer';
+
+  @override
+  String get show => 'Afficher';
+
+  @override
+  String get hide => 'Masquer';
+
+  @override
+  String get filter => 'Filtrer';
+
+  @override
+  String get sort => 'Trier';
+
+  @override
+  String get refresh => 'Actualiser';
+
+  @override
+  String get export => 'Exporter';
+
+  @override
+  String get print => 'Imprimer';
+
+  @override
+  String get copy => 'Copier';
+
+  @override
+  String get active => 'Actif';
+
+  @override
+  String get inactive => 'Inactif';
+
+  @override
+  String get pending => 'En attente';
+
+  @override
+  String get completed => 'Terminé';
+
+  @override
+  String get cancelled => 'Annulé';
+
+  @override
+  String get paid => 'Payé';
+
+  @override
+  String get unpaid => 'Impayé';
+
+  @override
+  String get cash => 'Espèces';
+
+  @override
+  String get credit => 'Crédit';
+
+  @override
+  String get installment => 'Versement';
+
+  @override
+  String get delivery => 'Livraison';
+
+  @override
+  String get customersTitle => 'Clients';
+
+  @override
+  String get customersManagement => 'Gestion complète des clients';
+
+  @override
+  String get addCustomer => 'Ajouter un client';
+
+  @override
+  String get addNewCustomer => 'Ajouter un nouveau client';
+
+  @override
+  String get editCustomer => 'Modifier les données du client';
+
+  @override
+  String get deleteCustomer => 'Supprimer le client';
+
+  @override
+  String confirmDeleteCustomer(Object name) {
+    return 'Supprimer \"$name\" ?';
+  }
+
+  @override
+  String get customerNameHint => 'Entrez le nom du client';
+
+  @override
+  String get phoneHint => 'Entrez le numéro de téléphone';
+
+  @override
+  String get emailHint => 'Entrez l\'adresse email';
+
+  @override
+  String get addressLabel => 'Adresse';
+
+  @override
+  String get addressHint => 'Entrez l\'adresse';
+
+  @override
+  String get totalCustomers => 'Total clients';
+
+  @override
+  String customerCount(Object count) {
+    return 'Clients : $count';
+  }
+
+  @override
+  String get noCustomersYet => 'Aucun client pour le moment';
+
+  @override
+  String get addFirstCustomer => 'Ajouter le premier client';
+
+  @override
+  String get loyaltyPoints => 'Points de fidélité';
+
+  @override
+  String get customerSince => 'Client depuis';
+
+  @override
+  String get lastActivity => 'Dernière activité';
+
+  @override
+  String get totalPurchases => 'Total achats';
+
+  @override
+  String get contactAdded => 'Contact ajouté';
+
+  @override
+  String get contactDeleted => 'Contact supprimé';
+
+  @override
+  String get contactUpdated => 'Contact mis à jour';
+
+  @override
+  String get addContact => 'Ajouter un contact';
+
+  @override
+  String get deleteContact => 'Supprimer le contact';
+
+  @override
+  String confirmDeleteContact(Object name) {
+    return 'Supprimer \"$name\" du système ?';
+  }
+
+  @override
+  String get contactType => 'Type de contact';
+
+  @override
+  String get primaryContact => 'Contact principal';
+
+  @override
+  String get secondaryContact => 'Contact secondaire';
+
+  @override
+  String get financialDetails => 'Détails financiers';
+
+  @override
+  String get fullDebtScreen => 'Écran dettes complet (règlement et détails)';
+
+  @override
+  String get creditSales => 'Ventes à crédit (dette)';
+
+  @override
+  String get creditSalesDesc =>
+      'Chaque facture liée à un reçu de vente — cliquez pour voir les détails';
+
+  @override
+  String get noCreditInvoices =>
+      'Aucune facture «crédit» liée à ce client. Utilisez la vente à crédit en sélectionnant le client depuis';
+
+  @override
+  String get installments => 'Versements';
+
+  @override
+  String get installmentSales => 'Ventes en versements';
+
+  @override
+  String get installmentSalesDesc =>
+      'Factures avec plans de versement — cliquez pour voir les détails';
+
+  @override
+  String get noInstallmentInvoices =>
+      'Aucune facture de versement liée à ce client.';
+
+  @override
+  String get totalDebt => 'Dette totale';
+
+  @override
+  String get totalPaid => 'Total payé';
+
+  @override
+  String get remainingBalance => 'Solde restant';
+
+  @override
+  String get settleDebt => 'Régler la dette';
+
+  @override
+  String get debtHistory => 'Historique des dettes';
+
+  @override
+  String get paymentHistory => 'Historique des paiements';
+
+  @override
+  String get saleReceipt => 'Reçu de vente';
+
+  @override
+  String get viewDetails => 'Voir les détails';
+
+  @override
+  String get amountDue => 'Montant dû';
+
+  @override
+  String get amountPaid => 'Montant payé';
+
+  @override
+  String get dueDate => 'Date d\'échéance';
+
+  @override
+  String get paymentDate => 'Date de paiement';
+
+  @override
+  String get paymentMethod => 'Mode de paiement';
+
+  @override
+  String get remaining => 'Restant';
+
+  @override
+  String get settled => 'Réglé';
+
+  @override
+  String get overdue => 'En retard';
+
+  @override
+  String get dueSoon => 'Bientôt dû';
+
+  @override
+  String get customerForm => 'Formulaire client';
+
+  @override
+  String get saveCustomer => 'Enregistrer le client';
+
+  @override
+  String get updateCustomer => 'Mettre à jour le client';
+
+  @override
+  String get customerSaved => 'Client enregistré avec succès';
+
+  @override
+  String get customerUpdated => 'Client mis à jour avec succès';
+
+  @override
+  String get customerDeleted => 'Client supprimé avec succès';
+
+  @override
+  String failedToSave(Object error) {
+    return 'Échec de l\'enregistrement : $error';
+  }
+
+  @override
+  String get phoneRequired => 'Le numéro de téléphone est requis';
+
+  @override
+  String get emailInvalid => 'Adresse email invalide';
+
+  @override
+  String get duplicatePhone => 'Ce numéro de téléphone existe déjà';
+
+  @override
+  String get duplicateEmail => 'Cet email existe déjà';
+
+  @override
+  String get addAnotherPhone => 'Ajouter un autre numéro';
+
+  @override
+  String get loyaltyPointsLabel => 'Points de fidélité';
+
+  @override
+  String get customerType => 'Type de client';
+
+  @override
+  String get retail => 'Détail';
+
+  @override
+  String get wholesale => 'Gros';
+
+  @override
+  String get lastUpdateNow => 'Dernière mise à jour : à l\'instant — F5';
+
+  @override
+  String lastUpdateHours(Object hours) {
+    return 'Dernière mise à jour : il y a environ ${hours}h — F5';
+  }
+
+  @override
+  String lastUpdateMinutes(Object minutes) {
+    return 'Dernière mise à jour : il y a environ ${minutes}min — F5';
+  }
+
+  @override
+  String totalCustomersCount(Object displayed, Object total) {
+    return 'Total clients : $total · Affichés : $displayed';
+  }
+
+  @override
+  String get closePanelEsc => 'Fermer le panneau (Échap)';
+
+  @override
+  String get salesByCash => 'Ventes en espèces';
+
+  @override
+  String get salesByCredit => 'Ventes à crédit';
+
+  @override
+  String get totalSales => 'Total ventes';
+
+  @override
+  String get currentBalance => 'Solde actuel';
 }

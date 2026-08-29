@@ -7,6 +7,7 @@ import '../../providers/sale_pos_settings_provider.dart';
 import '../../theme/design_tokens.dart';
 import '../../theme/sale_brand.dart';
 import '../../utils/screen_layout.dart';
+import '../../l10n/generated/app_localizations.dart';
 import '../../widgets/app_color_picker_dialog.dart';
 
 /// إعدادات نقطة البيع — سياسات البيع، الخصم والضريبة، وتقسيم العرض العريض.
@@ -124,7 +125,7 @@ class SalePosSettingsScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            appearanceOnly ? 'مظهر التطبيق' : 'إعدادات نقطة البيع',
+            appearanceOnly ? AppLocalizations.of(context)!.appAppearance : AppLocalizations.of(context)!.posSettings,
           ),
           backgroundColor: scheme.primary,
         ),
@@ -138,14 +139,14 @@ class SalePosSettingsScreen extends StatelessWidget {
             if (!appearanceOnly) ...[
             _IntroCard(scheme: scheme),
             const SizedBox(height: 20),
-            _SectionLabel('طرق الدفع', Icons.payments_outlined, scheme),
+            _SectionLabel(AppLocalizations.of(context)!.paymentMethodsSection, Icons.payments_outlined, scheme),
             const SizedBox(height: 8),
             _PolicyCard(
               scheme: scheme,
               children: [
                 _PolicySwitch(
-                  title: 'البيع بالدين (آجل)',
-                  subtitle: 'إيقافه يخفي خيار «دين» في شاشة البيع.',
+                  title: AppLocalizations.of(context)!.creditSaleTitle,
+                  subtitle: AppLocalizations.of(context)!.creditSaleSubtitle,
                   value: d.allowCredit,
                   onChanged: (v) {
                     if (v == null) return;
@@ -154,8 +155,8 @@ class SalePosSettingsScreen extends StatelessWidget {
                 ),
                 const Divider(height: 1),
                 _PolicySwitch(
-                  title: 'البيع بالتقسيط',
-                  subtitle: 'إيقافه يخفي خيار «تقسيط».',
+                  title: AppLocalizations.of(context)!.installmentSaleTitle,
+                  subtitle: AppLocalizations.of(context)!.installmentSaleSubtitle,
                   value: d.allowInstallment,
                   onChanged: (v) {
                     if (v == null) return;
@@ -164,8 +165,8 @@ class SalePosSettingsScreen extends StatelessWidget {
                 ),
                 const Divider(height: 1),
                 _PolicySwitch(
-                  title: 'البيع مع التوصيل',
-                  subtitle: 'إيقافه يخفي خيار «توصيل».',
+                  title: AppLocalizations.of(context)!.deliverySaleTitle,
+                  subtitle: AppLocalizations.of(context)!.deliverySaleSubtitle,
                   value: d.allowDelivery,
                   onChanged: (v) {
                     if (v == null) return;
@@ -175,15 +176,16 @@ class SalePosSettingsScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 22),
-            _SectionLabel('العميل في البيع النقدي', Icons.person_pin_circle_outlined, scheme),
+            _SectionLabel(AppLocalizations.of(context)!.cashCustomerSection, Icons.person_pin_circle_outlined, scheme),
             const SizedBox(height: 8),
             _PolicyCard(
               scheme: scheme,
               children: [
                 _PolicySwitch(
-                  title: 'إظهار حقل عنوان المشتري عند النقدي',
+                  title: AppLocalizations.of(context)!.showBuyerAddressCashTitle,
                   subtitle:
-                      'يظهر فقط إذا فعّلت «QR لعنوان المشتري» في إعدادات الطباعة. عند الإيقاف يبقى الحقل للتوصيل كما هو.',
+              AppLocalizations.of(context)!.showBuyerAddressCashDesc,
+
                   value: d.showBuyerAddressOnCash,
                   onChanged: (v) {
                     if (v == null) return;
@@ -193,15 +195,16 @@ class SalePosSettingsScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 22),
-            _SectionLabel('المخزون في البيع', Icons.inventory_2_outlined, scheme),
+            _SectionLabel(AppLocalizations.of(context)!.stockInSaleSection, Icons.inventory_2_outlined, scheme),
             const SizedBox(height: 8),
             _PolicyCard(
               scheme: scheme,
               children: [
                 _PolicySwitch(
-                  title: 'منع البيع عند تجاوز الرصيد المعروض',
+                  title: AppLocalizations.of(context)!.preventOversellTitle,
                   subtitle:
-                      'عند التفعيل لا تزيد الكمية في الفاتورة فوق المتاح. عند الإيقاف يُسمح بالبيع حتى لو أصبح الرصيد سالباً، فيُلغى السالب عند تسجيل وارد لاحقاً (حقل كمية المنتج في قاعدة البيانات).',
+              AppLocalizations.of(context)!.preventOversellDesc,
+
                   value: d.enforceAvailableQtyAtSale,
                   onChanged: (v) {
                     if (v == null) return;
@@ -211,14 +214,14 @@ class SalePosSettingsScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 22),
-            _SectionLabel('الخصم والضريبة', Icons.percent_outlined, scheme),
+            _SectionLabel(AppLocalizations.of(context)!.discountTaxSection, Icons.percent_outlined, scheme),
             const SizedBox(height: 8),
             _PolicyCard(
               scheme: scheme,
               children: [
                 _PolicySwitch(
-                  title: 'حقل خصم الفاتورة (نسبة)',
-                  subtitle: 'عند الإيقاف يُثبَّت الخصم على 0 ويُخفى الحقل.',
+                  title: AppLocalizations.of(context)!.invoiceDiscountPercentTitle,
+                  subtitle: AppLocalizations.of(context)!.invoiceDiscountPercentSubtitle,
                   value: d.enableInvoiceDiscount,
                   onChanged: (v) {
                     if (v == null) return;
@@ -227,8 +230,8 @@ class SalePosSettingsScreen extends StatelessWidget {
                 ),
                 const Divider(height: 1),
                 _PolicySwitch(
-                  title: 'حقل الضريبة',
-                  subtitle: 'عند الإيقاف يُثبَّت الضريبة على 0 ويُخفى الحقل.',
+                  title: AppLocalizations.of(context)!.taxFieldTitle,
+                  subtitle: AppLocalizations.of(context)!.taxFieldSubtitle,
                   value: d.enableTaxOnSale,
                   onChanged: (v) {
                     if (v == null) return;
@@ -241,7 +244,7 @@ class SalePosSettingsScreen extends StatelessWidget {
             if (appearanceOnly) ...[
             const SizedBox(height: 22),
             _SectionLabel(
-              'مظهر التطبيق',
+              AppLocalizations.of(context)!.appAppearance,
               Icons.palette_outlined,
               scheme,
             ),
@@ -250,9 +253,10 @@ class SalePosSettingsScreen extends StatelessWidget {
               scheme: scheme,
               children: [
                 _PolicySwitch(
-                  title: 'ألوان هوية الشعار بدل ثيم التطبيق',
+                  title: AppLocalizations.of(context)!.brandColorsTitle,
                   subtitle:
-                      'عند الإيقاف يبقى ثيم التطبيق العام (فاتح/داكن) في كل الصفحات، مع نفس شكل الزوايا أدناه.',
+              AppLocalizations.of(context)!.brandColorsDesc,
+
                   value: d.useSaleBrandSkin,
                   onChanged: (v) {
                     if (v == null) return;
@@ -267,7 +271,7 @@ class SalePosSettingsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Text(
-                          'مخطط الألوان',
+                          AppLocalizations.of(context)!.colorSchemesTitle,
                           style: TextStyle(
                             fontWeight: FontWeight.w700,
                             fontSize: 13,
@@ -276,7 +280,8 @@ class SalePosSettingsScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          'كل مخطط ألوان احترافي جاهز؛ «مخصص» يفتح استوديو ألوان تفاعلياً (طيف، تشبع، سطوع، جاهز، HEX) لكل لون.',
+              AppLocalizations.of(context)!.colorSchemesDesc,
+
                           style: TextStyle(
                             fontSize: 11.5,
                             height: 1.35,
@@ -351,7 +356,7 @@ class SalePosSettingsScreen extends StatelessWidget {
                         if (d.salePaletteId == SalePaletteIds.custom) ...[
                           const SizedBox(height: 14),
                           _CustomColorRow(
-                            label: 'اللون الرئيسي (شريط العنوان والأزرار)',
+                            label: AppLocalizations.of(context)!.primaryColorLabel,
                             color: Color(
                               d.customPrimaryArgb ?? 0xFF152B47,
                             ),
@@ -361,7 +366,7 @@ class SalePosSettingsScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           _CustomColorRow(
-                            label: 'لون التمييز (ذهبي/مميز)',
+                            label: AppLocalizations.of(context)!.accentColorLabel,
                             color: Color(d.customAccentArgb ?? 0xFFC9A85C),
                             onColor: (c) => prov.save(
                               d.copyWith(customAccentArgb: c.toARGB32()),
@@ -369,7 +374,7 @@ class SalePosSettingsScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           _CustomColorRow(
-                            label: 'خلفية اللوحات الفاتحة',
+                            label: AppLocalizations.of(context)!.lightSurfaceLabel,
                             color: Color(d.customSurfaceArgb ?? 0xFFF7F4EF),
                             onColor: (c) => prov.save(
                               d.copyWith(customSurfaceArgb: c.toARGB32()),
@@ -377,7 +382,7 @@ class SalePosSettingsScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           _CustomColorRow(
-                            label: 'خلفية الوضع الداكن للوحات',
+                            label: AppLocalizations.of(context)!.darkSurfaceLabel,
                             color: Color(d.customSurfaceDarkArgb ?? 0xFF1A2433),
                             onColor: (c) => prov.save(
                               d.copyWith(customSurfaceDarkArgb: c.toARGB32()),
@@ -395,7 +400,7 @@ class SalePosSettingsScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        'شكل بطاقات البيع',
+                        AppLocalizations.of(context)!.saleCardShapeTitle,
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 13,
@@ -404,7 +409,8 @@ class SalePosSettingsScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        'معاينة بسيطة بجانب كل خيار — كيف تبدو زوايا اللوحات وأسطر المنتجات.',
+              AppLocalizations.of(context)!.saleCardShapeDesc,
+
                         style: TextStyle(
                           fontSize: 11.5,
                           height: 1.35,
@@ -416,7 +422,7 @@ class SalePosSettingsScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: _CornerChoiceTile(
-                              title: 'زوايا حادة',
+                              title: AppLocalizations.of(context)!.sharpCornersTitle,
                               selected:
                                   d.panelCornerStyle == SalePanelCornerStyle.sharp,
                               scheme: scheme,
@@ -431,7 +437,7 @@ class SalePosSettingsScreen extends StatelessWidget {
                           const SizedBox(width: 10),
                           Expanded(
                             child: _CornerChoiceTile(
-                              title: 'زوايا مستديرة',
+                              title: AppLocalizations.of(context)!.roundedCornersTitle,
                               selected: d.panelCornerStyle ==
                                   SalePanelCornerStyle.rounded,
                               scheme: scheme,
@@ -456,7 +462,7 @@ class SalePosSettingsScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        'خط التطبيق وحجمه',
+                        AppLocalizations.of(context)!.fontAndSizeTitle,
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 13,
@@ -465,7 +471,7 @@ class SalePosSettingsScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'يُطبَّق على كل الشاشات والقوائم، ويُضرب مع حجم خط النظام (إن وُجد).',
+                        AppLocalizations.of(context)!.fontAndSizeDesc,
                         style: TextStyle(
                           fontSize: 11.5,
                           height: 1.35,
@@ -474,7 +480,7 @@ class SalePosSettingsScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                       Text(
-                        'شكل الخط',
+                        AppLocalizations.of(context)!.fontStyleTitle,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 12,
@@ -523,7 +529,7 @@ class SalePosSettingsScreen extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            'حجم الخط',
+                            AppLocalizations.of(context)!.fontSizeTitle,
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 12,
@@ -552,7 +558,7 @@ class SalePosSettingsScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 18),
                       Text(
-                        'لون النص',
+                        AppLocalizations.of(context)!.textColorTitle,
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 13,
@@ -561,7 +567,8 @@ class SalePosSettingsScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'اختياري — استوديو ألوان كامل لكل وضع (فاتح/داكن)؛ يُطبَّق على النصوص الرئيسية والقوائم.',
+              AppLocalizations.of(context)!.textColorDesc,
+
                         style: TextStyle(
                           fontSize: 11.5,
                           height: 1.35,
@@ -570,9 +577,10 @@ class SalePosSettingsScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 10),
                       _AppTextColorRow(
-                        label: 'لون النص — الوضع الفاتح',
+                        label: AppLocalizations.of(context)!.textLightLabel,
                         hint:
-                            'عند تشغيل الثيم الفاتح. اضغط للتعديل، أو «افتراضي» لإلغاء اللون المخصص.',
+              AppLocalizations.of(context)!.textLightDesc,
+
                         argb: d.appTextColorLightArgb,
                         defaultColor: ColorScheme.fromSeed(
                           seedColor: scheme.primary,
@@ -587,9 +595,10 @@ class SalePosSettingsScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       _AppTextColorRow(
-                        label: 'لون النص — الوضع الداكن',
+                        label: AppLocalizations.of(context)!.textDarkLabel,
                         hint:
-                            'عند تشغيل الثيم الداكن. اضغط للتعديل، أو «افتراضي» لإلغاء اللون المخصص.',
+              AppLocalizations.of(context)!.textDarkDesc,
+
                         argb: d.appTextColorDarkArgb,
                         defaultColor: ColorScheme.fromSeed(
                           seedColor: scheme.primary,
@@ -609,8 +618,8 @@ class SalePosSettingsScreen extends StatelessWidget {
                             onPressed: () =>
                                 prov.save(d.clearAppTextColors()),
                             icon: const Icon(Icons.restart_alt_rounded, size: 18),
-                            label: const Text(
-                              'إعادة ضبط لون النص للوضعين (الثيم الافتراضي)',
+                            label: Text(
+                              AppLocalizations.of(context)!.resetTextColorLabel,
                             ),
                           ),
                         ),
@@ -646,7 +655,7 @@ class SalePosSettingsScreen extends StatelessWidget {
                         const SizedBox(width: 10),
                         Expanded(
                           child: Text(
-                            'مرجع ألوان «الكحلي الملكي» الافتراضية — المخططات الأخرى أعلاه.',
+                            AppLocalizations.of(context)!.royalNavyDefaultDesc,
                             style: TextStyle(
                               fontSize: 11,
                               color: scheme.onSurfaceVariant,
@@ -664,7 +673,7 @@ class SalePosSettingsScreen extends StatelessWidget {
             if (!appearanceOnly && showWideSaleLayoutControls) ...[
               const SizedBox(height: 22),
               _SectionLabel(
-                'تقسيم مساحة البيع (عرض عريض)',
+                AppLocalizations.of(context)!.wideSaleLayoutTitle,
                 Icons.view_column_outlined,
                 scheme,
               ),
@@ -673,9 +682,10 @@ class SalePosSettingsScreen extends StatelessWidget {
                 scheme: scheme,
                 children: [
                   _PolicySwitch(
-                    title: 'تقسيم شاشة البيع إلى عمودين (عرض عريض)',
+                    title: AppLocalizations.of(context)!.wideSaleLayoutSwitchTitle,
                     subtitle:
-                        'عند الإيقاف تعود «بيع جديد» إلى عمود واحد كالمعتاد حتى على الشاشة الواسعة. النسبة تُحفظ ولا تُفقد عند التعطيل.',
+              AppLocalizations.of(context)!.wideSaleLayoutSwitchDesc,
+
                     value: d.enableWideSalePartition,
                     onChanged: (v) {
                       if (v == null) return;
@@ -688,7 +698,8 @@ class SalePosSettingsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Text(
-                          'عندما يكون عرض النافذة ٧٠٠ نقطة فأكثر وليست شاشة هاتف، ومع تشغيل الخيار أعلاه، تُقسَّم شاشة «بيع جديد» إلى عمودين: المنتجات، ثم الملخص والعميل. يمكنك سحب الشريط الرفيع الذهبي بين العمودين، أو ضبط النسبة من هنا (لا يغيّر الحسابات).',
+            AppLocalizations.of(context)!.summaryCustomerLabel,
+
                           style: TextStyle(
                             fontSize: 12,
                             height: 1.45,
@@ -707,7 +718,8 @@ class SalePosSettingsScreen extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        'عمود المنتجات: ${d.wideSaleProductsFlex} — الملخص والعميل: ${d.wideSaleSideFlex}',
+            AppLocalizations.of(context)!.summaryCustomerLabel,
+
                                         style: TextStyle(
                                           fontWeight: FontWeight.w700,
                                           fontSize: 13,
@@ -725,7 +737,7 @@ class SalePosSettingsScreen extends StatelessWidget {
                                           ),
                                         );
                                       },
-                                      child: const Text('افتراضي'),
+                                      child: Text(AppLocalizations.of(context)!.defaultLabel),
                                     ),
                                   ],
                                 ),
@@ -736,7 +748,7 @@ class SalePosSettingsScreen extends StatelessWidget {
                                   divisions: SaleWideLayoutFlexBounds.max -
                                       SaleWideLayoutFlexBounds.min,
                                   label:
-                                      'منتجات ${d.wideSaleProductsFlex} · باقي الشاشة ${d.wideSaleSideFlex}',
+                                      AppLocalizations.of(context)!.productsSummaryLabel(d.wideSaleProductsFlex.toString(), d.wideSaleSideFlex.toString()),
                                   onChanged: (v) {
                                     prov.save(
                                       d.copyWith(
@@ -747,7 +759,8 @@ class SalePosSettingsScreen extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 12),
                                 Text(
-                                  'معاينة مباشرة (مساحة صغيرة — كيف يتغيّر التقسيم عند تحريك المنزلق أو السحب في البيع):',
+              AppLocalizations.of(context)!.wideSalePreviewLabel,
+
                                   style: TextStyle(
                                     fontSize: 11,
                                     height: 1.35,
@@ -763,7 +776,8 @@ class SalePosSettingsScreen extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 6),
                                 Text(
-                                  'في شاشة «بيع جديد» على عرض عريض: مرّر المؤشر على الشريط الرفيع بين العمودين ثم اسحب أفقياً — يوسّع عمود «المنتجات» أو يضيّقه بنفس فكرة المعاينة أعلاه.',
+              AppLocalizations.of(context)!.wideSaleDragHint,
+
                                   style: TextStyle(
                                     fontSize: 10.5,
                                     height: 1.4,
@@ -783,7 +797,7 @@ class SalePosSettingsScreen extends StatelessWidget {
             ] else if (!appearanceOnly) ...[
               const SizedBox(height: 22),
               _SectionLabel(
-                'تقسيم مساحة البيع',
+                AppLocalizations.of(context)!.saleSpaceLayoutLabel,
                 Icons.smartphone_outlined,
                 scheme,
               ),
@@ -794,7 +808,8 @@ class SalePosSettingsScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
                     child: Text(
-                      'على هذا الحجم (هاتف) تُعرض شاشة «بيع جديد» دائماً في عمود واحد. تقسيم المنتجات والملخص إلى عمودين مع سحب المساحة يظهر من التابلت أو الشاشة الأوسع فقط.',
+              AppLocalizations.of(context)!.phoneLayoutDesc,
+
                       style: TextStyle(
                         fontSize: 12,
                         height: 1.45,
@@ -808,8 +823,8 @@ class SalePosSettingsScreen extends StatelessWidget {
             const SizedBox(height: 24),
             Text(
               appearanceOnly
-                  ? 'تُطبَّق الألوان والزوايا فوراً على كامل التطبيق (عبر ثيم النظام). سياسات البيع تبقى من «إعدادات نقطة البيع» في القائمة الجانبية.'
-                  : 'تُطبَّق سياسات البيع والتقسيم فوراً على شاشة «بيع جديد». المظهر (الألوان، الخط، الزوايا، لون النص) يُضبط من الإعدادات الرئيسية > مظهر التطبيق.',
+                  ? AppLocalizations.of(context)!.appearanceNote
+                  : AppLocalizations.of(context)!.posNote,
               style: TextStyle(
                 fontSize: 12,
                 height: 1.45,
@@ -825,18 +840,19 @@ class SalePosSettingsScreen extends StatelessWidget {
                     final ok = await showDialog<bool>(
                       context: context,
                       builder: (ctx) => AlertDialog(
-                        title: const Text('استرجاع المظهر الافتراضي؟'),
-                        content: const Text(
-                          'سيتم إرجاع نوع الخط، حجم النص، ألوان النص المخصصة، مخطط الألوان، الزوايا، وهوية الشعار إلى القيم الأساسية. لا يتغير البيع بالدين أو الضريبة أو المخزون.',
+                        title: Text(AppLocalizations.of(context)!.resetAppearanceTitle),
+                        content: Text(
+                              AppLocalizations.of(context)!.resetAppearanceDesc,
+
                         ),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(ctx, false),
-                            child: const Text('إلغاء'),
+                            child: Text(AppLocalizations.of(context)!.cancelLabel),
                           ),
                           FilledButton(
                             onPressed: () => Navigator.pop(ctx, true),
-                            child: const Text('استرجاع'),
+                            child: Text(AppLocalizations.of(context)!.restoreLabel),
                           ),
                         ],
                       ),
@@ -845,15 +861,15 @@ class SalePosSettingsScreen extends StatelessWidget {
                     await prov.save(d.withAppearanceResetToDefaults());
                     if (!context.mounted) return;
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
+                      SnackBar(
                         content:
-                            Text('تم استرجاع إعدادات المظهر الافتراضية'),
+                            Text(AppLocalizations.of(context)!.appearanceRestoredSnack),
                       ),
                     );
                   },
                   icon: const Icon(Icons.restore_rounded),
-                  label: const Text(
-                    'استرجاع المظهر الافتراضي (خط، ألوان، مخطط، زوايا)',
+                  label: Text(
+                              AppLocalizations.of(context)!.resetAppearanceLog,
                   ),
                 ),
               ),
@@ -897,7 +913,7 @@ class _WideSaleLayoutPreviewMini extends StatelessWidget {
                 color: scheme.primary.withValues(alpha: 0.14),
                 child: Center(
                   child: Text(
-                    'منتجات',
+                    AppLocalizations.of(context)!.productsLabel,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 10.5,
@@ -918,7 +934,8 @@ class _WideSaleLayoutPreviewMini extends StatelessWidget {
                 color: scheme.surfaceContainerHighest.withValues(alpha: 0.65),
                 child: Center(
                   child: Text(
-                    'ملخص\nوعميل',
+            AppLocalizations.of(context)!.summaryCustomerLabel,
+
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 9.5,
@@ -1138,7 +1155,7 @@ class _AppTextColorRow extends StatelessWidget {
         ),
         title: Text(label, style: const TextStyle(fontSize: 12.5)),
         subtitle: Text(
-          hex != null ? '$hex — مخصص' : 'افتراضي الثيم',
+          hex != null ? AppLocalizations.of(context)!.customColorLabel(hex) : AppLocalizations.of(context)!.themeDefaultLabel,
           style: TextStyle(fontSize: 11, color: scheme.onSurfaceVariant),
         ),
         trailing: Row(
@@ -1147,7 +1164,7 @@ class _AppTextColorRow extends StatelessWidget {
             if (argb != null)
               TextButton(
                 onPressed: onClear,
-                child: const Text('افتراضي'),
+                child: Text(AppLocalizations.of(context)!.defaultLabel),
               ),
             const Icon(Icons.palette_outlined, size: 22),
           ],
@@ -1175,7 +1192,8 @@ class _CustomColorRow extends StatelessWidget {
       initialColor: color,
       title: label,
       subtitle:
-          'مربع التشبع/السطوع، شريط الطيف، ألوان جاهزة، أو HEX — ثم تأكيد.',
+              AppLocalizations.of(context)!.colorStudioDesc,
+
     );
     if (next != null) onColor(next);
   }
@@ -1223,7 +1241,7 @@ class _GlobalBrandIntroCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'هوية التطبيق',
+            AppLocalizations.of(context)!.appIdentityTitle,
             style: TextStyle(
               fontWeight: FontWeight.w800,
               fontSize: 15,
@@ -1232,8 +1250,7 @@ class _GlobalBrandIntroCard extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            'هنا تضبط ألوان الهوية وشكل الزوايا ليُطبَّق على كامل التطبيق. '
-            'سياسات الدفع والمخزون والخصم تبقى في «إعدادات نقطة البيع» من القائمة الجانبية.',
+              AppLocalizations.of(context)!.appIdentityDesc,
             style: TextStyle(
               fontSize: 12.5,
               height: 1.45,
@@ -1264,7 +1281,7 @@ class _IntroCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'تحكّم مركزي بالبيع',
+            AppLocalizations.of(context)!.saleControlTitle,
             style: TextStyle(
               fontWeight: FontWeight.w800,
               fontSize: 15,
@@ -1273,7 +1290,8 @@ class _IntroCard extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            'فعّل أو عطّل طرق الدفع والحقول المالية دون تعديل الكود — مناسب للسياسات المتغيرة أو أجهزة نقطة بيع مخصصة. المظهر يُضبط من الإعدادات الرئيسية.',
+              AppLocalizations.of(context)!.saleControlDesc,
+
             style: TextStyle(
               fontSize: 12.5,
               height: 1.45,

@@ -1,3 +1,4 @@
+import '../../l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
@@ -392,7 +393,7 @@ class _SummaryCard extends StatelessWidget {
             'رصيد المحفظة',
             IraqiCurrencyFormat.formatIqd(customer.balance),
           ),
-          _kv('نقاط الولاء', '${customer.loyaltyPoints}'),
+          _kv(AppLocalizations.of(context)!.loyaltyPoints, '${customer.loyaltyPoints}'),
         ],
       ),
     );
@@ -609,7 +610,7 @@ class _InstallmentPlanTile extends StatelessWidget {
                   child: TextButton.icon(
                     onPressed: onReceipt,
                     icon: const Icon(Icons.receipt_long_outlined, size: 20),
-                    label: const Text('إيصال البيع'),
+                    label: Text(AppLocalizations.of(context)!.saleReceipt),
                   ),
                 ),
                 if (onPlanDetails != null)

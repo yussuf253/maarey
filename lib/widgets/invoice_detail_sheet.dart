@@ -414,7 +414,7 @@ class _InvoiceDetailContent extends StatelessWidget {
                                  currency: loc.iqdCurrency),
                                 if (inv.installmentSuggestedMonthly > 1e-9)
                                   _totalRow(
-                                    loc.suggestedMonthlyInstallment,
+                                    loc.suggestedMonthlyInstallment(inv.installmentPlannedMonths.toString()),
                                     inv.installmentSuggestedMonthly,
                                    currency: loc.iqdCurrency),
                               ],

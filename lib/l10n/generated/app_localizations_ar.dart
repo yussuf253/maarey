@@ -3871,7 +3871,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get totalWithInterestLabel => 'الإجمالي مع الفائدة';
 
   @override
-  String get suggestedMonthlyInstallment => 'القسط الشهري المقترح';
+  String suggestedMonthlyInstallment(Object months) {
+    return 'القسط الشهري المقترح ($months شهراً)';
+  }
 
   @override
   String get selectInvoicePrompt => 'اختر فاتورة لعرض تفاصيلها';
@@ -4371,4 +4373,1187 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get parkedInvoiceSnackbarHint =>
       'يُحفظ محلياً. يمكنك الاستئناف من الفواتير معلّقة.';
+
+  @override
+  String get pieceFallback => 'قطعة';
+
+  @override
+  String get unnamedProduct => 'منتج غير مسمى';
+
+  @override
+  String get newProductFallback => 'منتج جديد';
+
+  @override
+  String qtyAdjustedToAvailableStock(Object qty) {
+    return 'تم ضبط الكمية إلى $qty بسبب حد المخزون المتاح.';
+  }
+
+  @override
+  String stockNotAvailableDetails(Object max) {
+    return 'الكمية غير متوفرة في المخزون. المتاح للبيع (أساس المخزون): $max فقط (بعد احتساب الكميات في الأسطر الأخرى).';
+  }
+
+  @override
+  String get noStockAvailableForProduct =>
+      'لا توجد كمية متوفرة في المخزون لهذا المنتج.';
+
+  @override
+  String stockUnavailableAvailableIs(Object max) {
+    return 'الكمية غير متوفرة. المتاح للبيع (أساس المخزون): $max فقط.';
+  }
+
+  @override
+  String newLineAddedSnack(Object name) {
+    return 'تمت إضافة سطر جديد: $name';
+  }
+
+  @override
+  String get installmentPlanTitle => 'مخطط التقسيط';
+
+  @override
+  String get installmentCalcNote =>
+      'يُحسب على «الإجمالي بعد المقدّم». للمراجعة مع العميل — لا يُضاف للفاتورة إلا إذا رفعت الأسعار يدوياً.';
+
+  @override
+  String get advanceDownPaymentHelper =>
+      'يُخصم من الإجمالي قبل حساب الفائدة والقسط';
+
+  @override
+  String get monthsSuffix => 'شهراً';
+
+  @override
+  String interestAmountLabel(Object pct) {
+    return 'قيمة الفائدة ($pct٪)';
+  }
+
+  @override
+  String get advanceEqualsTotalHint =>
+      'المقدّم يساوي الإجمالي — لا يوجد مبلغ للتقسيط. خفّض المقدّم لرؤية الفائدة والقسط.';
+
+  @override
+  String parkInvoiceWithCount(Object count) {
+    return 'تعليق الفاتورة — تعليق ($count)';
+  }
+
+  @override
+  String get parkInvoiceOtherCustomer => 'تعليق الفاتورة — خدمة عميل آخر';
+
+  @override
+  String payButtonLabel(Object amount) {
+    return 'الدفع — $amount';
+  }
+
+  @override
+  String get swipeToResizeHint => 'اسحب لتغيير عرض القائمة الجانبية';
+
+  @override
+  String get checkoutStepHintWithPayment =>
+      'أسطر الفاتورة والكميات والأسعار — ثم راجع تفاصيل السعر وطريقة الدفع.';
+
+  @override
+  String get checkoutStepHintNoPayment =>
+      'أسطر الفاتورة والكميات والأسعار — ثم انتقل لخصم الفاتورة والضريبة.';
+
+  @override
+  String get productsTitle => 'المنتجات';
+
+  @override
+  String get barcodeFieldHint =>
+      'إضافة صنف بالباركود، أو فتح مرتجع بمسح رقم الفاتورة (INV-)';
+
+  @override
+  String get scannerTabLabel => 'الماسح';
+
+  @override
+  String get noItemsYetWithScanner =>
+      'لا توجد أصناف بعد.\nامسح الباركود أعلاه أو أضف من البحث في الشاشة الرئيسية.\nابحث عن منتج أو امسح الباركود للإضافة.';
+
+  @override
+  String get noItemsYetNoScanner =>
+      'لا توجد أصناف بعد.\nأضف منتجات من البحث في الشاشة الرئيسية.\nابحث عن منتج أو امسح الباركود للإضافة.';
+
+  @override
+  String get saleSummaryTitle => 'ملخص البيع';
+
+  @override
+  String get discountTaxNote =>
+      'الخصم والضريبة يُطبَّقان على إجمالي الفاتورة (وليس لكل صنف على حدة).';
+
+  @override
+  String maxDiscountAllowedHint(Object max) {
+    return 'الحد الأقصى المسموح حالياً: $max٪ — يُحسب من أدنى سعر لكل صنف.';
+  }
+
+  @override
+  String get taxHelperHint =>
+      'أدخل مبلغ الضريبة بالدينار إن وُجد؛ يُضاف إلى المجموع بعد خصم الفاتورة.';
+
+  @override
+  String get priceDetailStepHintWithPayment =>
+      'نتيجة الأرقام والدفعة الأولى إن وُجدت، قبل الانتقال لبيانات العميل.';
+
+  @override
+  String get priceDetailStepHintNoPayment =>
+      'نتيجة الأرقام بعد الخصم والضريبة، والدفعة الأولى إن وُجدت، قبل الانتقال لبيانات العميل.';
+
+  @override
+  String get priceDetailsTitle => 'تفاصيل السعر';
+
+  @override
+  String get amountBreakdownTitle => 'تفصيل المبالغ';
+
+  @override
+  String get originalAmountLabel => 'المبلغ الأصلي (مجموع البنود)';
+
+  @override
+  String get invoiceDiscountAmountLabel => 'قيمة خصم الفاتورة';
+
+  @override
+  String get subtotalAfterDiscountLabel => 'المجموع بعد الخصم (قبل الضريبة)';
+
+  @override
+  String get iqdCurrencySymbol => 'د.ع';
+
+  @override
+  String get grandTotalLabel => 'الإجمالي النهائي';
+
+  @override
+  String get cashLabel => 'نقدي';
+
+  @override
+  String get creditLabel => 'دين';
+
+  @override
+  String get installmentLabel => 'تقسيط';
+
+  @override
+  String get deliveryLabel => 'توصيل';
+
+  @override
+  String selectPaymentMethodHint(Object options) {
+    return 'اختر $options، ثم أكمل بيانات العميل والحقول المرتبطة بنوع الدفع.';
+  }
+
+  @override
+  String get customerAndPaymentTitle => 'العميل وطريقة الدفع';
+
+  @override
+  String get paymentMethodLabel => 'طريقة الدفع';
+
+  @override
+  String get customerNameRequiredForDelivery => 'اسم العميل مطلوب للتوصيل';
+
+  @override
+  String get requiredForCreditInstallment => 'مطلوب للدين/التقسيط';
+
+  @override
+  String get addNewCustomerMessage => 'إضافة عميل جديد دون مغادرة البيع';
+
+  @override
+  String get deliveryAddressWithMapQR => 'عنوان التوصيل والموقع (QR خرائط)';
+
+  @override
+  String get buyerAddressWithMapQR => 'عنوان المشتري (QR للخرائط على الإيصال)';
+
+  @override
+  String get addressMapDescriptionOptional =>
+      'اختياري — وصف أو عنوان يظهر في Google Maps عند مسح الرمز';
+
+  @override
+  String get addressMapRequired =>
+      'مطلوب — يُطبَع QR للخرائط عند وجود نص؛ اكتب عنوان التوصيل بوضوح';
+
+  @override
+  String get qrOpensMapsOnScan => 'يُطبَع QR يفتح الخرائط عند المسح';
+
+  @override
+  String get deliveryAddressRequired => 'عنوان التوصيل مطلوب';
+
+  @override
+  String get loyaltyPointsRequiresCustomer =>
+      'لاستخدام النقاط: اختر عميلاً مسجّلاً من القائمة المقترحة.';
+
+  @override
+  String customerLoyaltyBalance(Object balance) {
+    return 'رصيد نقاط العميل: $balance';
+  }
+
+  @override
+  String loyaltyPointsToRedeem(Object max) {
+    return 'نقاط للاستبدال (حد أقصى $max)';
+  }
+
+  @override
+  String get deliveryInstruction =>
+      'للتوصيل: أدخل اسم العميل وعنوان التوصيل (كلاهما مطلوب). يظهر اقتراح للاسم من قاعدة العملاء أثناء الكتابة.';
+
+  @override
+  String get creditInstallmentCustomerTip =>
+      'مهم: للدين والتقسيط اضغط على اسم العميل من القائمة المقترحة لربط البيع ببطاقته (لا يكفي كتابة الاسم يدوياً إن لم يُطابق سجلاً واحداً بالضبط).';
+
+  @override
+  String get hideDetailsLabel => 'إخفاء التفاصيل';
+
+  @override
+  String get priceDiscountDetailsLabel => 'تفاصيل السعر والخصم';
+
+  @override
+  String priceAndMinLabel(Object min, Object price) {
+    return 'سعر $price · أدنى $min';
+  }
+
+  @override
+  String lineTotalLabel(Object total) {
+    return 'الإجمالي: $total';
+  }
+
+  @override
+  String get unitSellPriceLabel => 'سعر البيع (للوحدة)';
+
+  @override
+  String get lineTotalBeforeDiscount => 'إجمالي السطر قبل خصم الفاتورة';
+
+  @override
+  String get lineDiscountShare => 'حصة خصم الفاتورة لهذا السطر';
+
+  @override
+  String get lineTotalAfterDiscount => 'الإجمالي بعد خصم الفاتورة (لهذا السطر)';
+
+  @override
+  String get percentageDiscountDistributionNote =>
+      'يُوزَّع خصم النسبة على الأسطر بحسب مساهمة كل سطر في إجمالي البنود.';
+
+  @override
+  String get quantityKgLabel => 'الكمية (كيلوغرام)';
+
+  @override
+  String get quantityHintWeight => 'مثال: 0.25 أو 1.5 أو 3';
+
+  @override
+  String get quantityHintPiece => 'مثال: 2';
+
+  @override
+  String get quantityErrorWeight => 'أدخل كمية أكبر من 0 (يمكن كسور للوزن).';
+
+  @override
+  String get quantityErrorPiece => 'أدخل عدداً صحيحاً 1 فما فوق';
+
+  @override
+  String get itemFallbackShort => 'صنف';
+
+  @override
+  String get payloadEmptyOrNotText => 'الحمولة فارغة أو ليست نصاً';
+
+  @override
+  String get payloadNotValidJson => 'الحمولة ليست object JSON صالحاً';
+
+  @override
+  String get payloadNoVersionField => 'لا يوجد حقل إصدار (v) في الحمولة';
+
+  @override
+  String payloadUnsupportedVersion(Object ver) {
+    return 'إصدار الحمولة $ver غير مدعوم (المتوقع 1)';
+  }
+
+  @override
+  String decryptionError(Object error) {
+    return 'خطأ في فك التشفير: $error';
+  }
+
+  @override
+  String failedToOpenParkedInvoice(Object reason) {
+    return 'تعذر فتح الفاتورة المعلّقة: $reason';
+  }
+
+  @override
+  String get unknownReason => 'سبب غير معروف';
+
+  @override
+  String invoiceWithItemCount(Object count) {
+    return 'فاتورة ($count صنف)';
+  }
+
+  @override
+  String get invoiceParkedMessage =>
+      'تم تعليق الفاتورة — يمكنك استئنافها من قائمة الفواتير';
+
+  @override
+  String get requiredFieldsMessage =>
+      'أكمل الحقول المطلوبة: للدين أو التقسيط أدخل اسم العميل، وللتوصيل أدخل اسم العميل وعنوان التوصيل. راجع الحقول المظللة بالأحمر.';
+
+  @override
+  String get paymentMethodNotAllowed =>
+      'طريقة الدفع الحالية غير مسموحة — راجع «الفواتير ← إعدادات نقطة البيع» أو اختر نقدي.';
+
+  @override
+  String discountExceedsMaximum(Object max) {
+    return 'نسبة الخصم أعلى من المسموح. الحد الأقصى $max%';
+  }
+
+  @override
+  String get creditInstallmentMustSelectCustomer =>
+      'للمبيع بالدين أو التقسيط: اختر عميلاً مسجّلاً من القائمة المقترحة أسفل حقل الاسم (أو أضفه من «العملاء» أولاً) حتى تُربط الفاتورة ببطاقة العميل وتظهر لاحقاً في الديون والأقساط.';
+
+  @override
+  String get loyaltyRedeemMustSelectCustomer =>
+      'لاستبدال النقاط اختر العميل من القائمة أو أدخل اسماً يطابق سجلاً واحداً في العملاء.';
+
+  @override
+  String invoiceDebtLimitExceeded(Object cap, Object rem) {
+    return 'حد الدين للفاتورة: المتبقي ($rem) يتجاوز السقف $cap. عدّل الإجمالي أو المبلغ الواصل أو «الديون ← إعدادات الدين».';
+  }
+
+  @override
+  String customerDebtLimitExceeded(Object cap, Object existing, Object rem) {
+    return 'حد الدين للعميل: مجموع المتبقي الحالي ≈ $existing، والفاتورة تضيف $rem (يتجاوز $cap).';
+  }
+
+  @override
+  String get debtLimitActionHint =>
+      'اربط العميل من القائمة، أو خفّض المبلغ، أو راجع إعدادات الديون.';
+
+  @override
+  String invoiceSaveFailed(Object error) {
+    return 'تعذر حفظ الفاتورة — $error. راجع الأصناف والإجمالي قبل إعادة المحاولة.';
+  }
+
+  @override
+  String get maintenanceTicketUpdateFailed =>
+      'تنبيه: حُفظت الفاتورة ولكن تعذر تلقائياً تحديث حالة تذكرة الصيانة. يرجى مراجعتها يدوياً.';
+
+  @override
+  String get installmentPlanCreated =>
+      'تم حفظ الفاتورة وإنشاء خطة التقسيط — يمكنك ضبط الجدول أو الرجوع';
+
+  @override
+  String get installmentPlanSavedNoRemaining =>
+      'تم حفظ فاتورة التقسيط وربطها بخطة (لا أقساط متبقية لأن المبلغ محصّل بالكامل).';
+
+  @override
+  String get barcodeOrInvoiceForReturn => 'باركود صنف أو فاتورة للمرتجع';
+
+  @override
+  String get alreadyReturned => 'هذه الفاتورة مرتجع مسبقاً';
+
+  @override
+  String invoiceNumberLabel(Object id) {
+    return 'فاتورة #$id';
+  }
+
+  @override
+  String openReturnScreenConfirm(Object total) {
+    return 'فتح شاشة المرتجع (منتجات فقط)؟\nالإجمالي الأصلي: $total';
+  }
+
+  @override
+  String get returnButton => 'مرتجع';
+
+  @override
+  String get selectColorAndSize => 'اختيار اللون والمقاس';
+
+  @override
+  String get cannotChangeQtyBeforeSelection =>
+      'لا يمكن تغيير الكمية قبل الاختيار';
+
+  @override
+  String get loadingColorsAndSizes => 'جارٍ تحميل الألوان والمقاسات…';
+
+  @override
+  String get colorsTitle => 'الألوان';
+
+  @override
+  String availableLabel(Object rem) {
+    return 'المتاح: $rem';
+  }
+
+  @override
+  String get sizesTitle => 'المقاسات';
+
+  @override
+  String get currentlySelected => 'المحدد حالياً';
+
+  @override
+  String get colorOrSize => 'لون/مقاس';
+
+  @override
+  String get selectColorFirst => 'اختر لوناً أولاً لإظهار المقاسات.';
+
+  @override
+  String get parkInvoiceDialogTitle => 'تعليق الفاتورة';
+
+  @override
+  String get parkInvoiceDescription =>
+      'يُحفظ محلياً على هذا الجهاز. يمكنك استئناف البيع لاحقاً من «الفواتير ← معلّقة مؤقتاً».';
+
+  @override
+  String get saveParkButton => 'حفظ التعليق';
+
+  @override
+  String get barcodeScannerTitle => 'ماسح الباركود';
+
+  @override
+  String get flashTooltip => 'فلاش';
+
+  @override
+  String get switchCameraTooltip => 'تبديل الكاميرا';
+
+  @override
+  String get scanToAddAuto => 'امسح — سيتم الإضافة تلقائيًا';
+
+  @override
+  String get passOriginalInvoiceOrId => 'مرّر originalInvoice أو invoiceId';
+
+  @override
+  String get deductedFromVault => 'خُصم من الصندوق.';
+
+  @override
+  String get deductedFromInstallmentTotal => 'خُصم من إجمالي التقسيط.';
+
+  @override
+  String get switchInvoiceLabel => 'تبديل الفاتورة (INV-رقم)';
+
+  @override
+  String get scanAnotherReceiptHint => 'امسح باركود إيصال آخر ثم Enter';
+
+  @override
+  String get barcodeNotFoundAddNew =>
+      'هذا الباركود غير موجود في المنتجات. هل تريد فتح شاشة إضافة منتج جديد؟';
+
+  @override
+  String get receiptPrintFailed => 'فشل طباعة إيصال البيع';
+
+  @override
+  String get royalNavyScheme => 'كحلي ملكي — ذهبي — عاجي (الافتراضي)';
+
+  @override
+  String get midnightScheme => 'منتصف ليل — فضي — رمادي فاتح';
+
+  @override
+  String get oceanScheme => 'محيط — رملي ذهبي — كريمي';
+
+  @override
+  String get forestScheme => 'غابة — برونزي — نعناعي فاتح';
+
+  @override
+  String get wineScheme => 'نبيذي — ذهبي دافئ — أبيض وردي';
+
+  @override
+  String get charcoalScheme => 'فحمي — عنبر — أبيض مزرق';
+
+  @override
+  String get slateScheme => 'أردوازي — سماوي — أبيض بارد';
+
+  @override
+  String get copperScheme => 'نحاسي — نحاس محمر — رمل';
+
+  @override
+  String get customScheme => 'مخصص — استوديو ألوان تفاعلي';
+
+  @override
+  String get appAppearance => 'مظهر التطبيق';
+
+  @override
+  String get posSettings => 'إعدادات نقطة البيع';
+
+  @override
+  String get paymentMethodsSection => 'طرق الدفع';
+
+  @override
+  String get creditSaleTitle => 'البيع بالدين (آجل)';
+
+  @override
+  String get creditSaleSubtitle => 'إيقافه يخفي خيار «دين» في شاشة البيع.';
+
+  @override
+  String get installmentSaleTitle => 'البيع بالتقسيط';
+
+  @override
+  String get installmentSaleSubtitle => 'إيقافه يخفي خيار «تقسيط».';
+
+  @override
+  String get deliverySaleTitle => 'البيع مع التوصيل';
+
+  @override
+  String get deliverySaleSubtitle => 'إيقافه يخفي خيار «توصيل».';
+
+  @override
+  String get cashCustomerSection => 'العميل في البيع النقدي';
+
+  @override
+  String get showBuyerAddressCashTitle => 'إظهار حقل عنوان المشتري عند النقدي';
+
+  @override
+  String get showBuyerAddressCashDesc =>
+      'يظهر فقط إذا فعّلت «QR لعنوان المشتري» في إعدادات الطباعة. عند الإيقاف يبقى الحقل للتوصيل كما هو.';
+
+  @override
+  String get stockInSaleSection => 'المخزون في البيع';
+
+  @override
+  String get preventOversellTitle => 'منع البيع عند تجاوز الرصيد المعروض';
+
+  @override
+  String get preventOversellDesc =>
+      'عند التفعيل لا تزيد الكمية في الفاتورة فوق المتاح. عند الإيقاف يُسمح بالبيع حتى لو أصبح الرصيد سالباً، فيُلغى السالب عند الحفظ.';
+
+  @override
+  String get discountTaxSection => 'الخصم والضريبة';
+
+  @override
+  String get invoiceDiscountPercentTitle => 'حقل خصم الفاتورة (نسبة)';
+
+  @override
+  String get invoiceDiscountPercentSubtitle =>
+      'عند الإيقاف يُثبَّت الخصم على 0 ويُخفى الحقل.';
+
+  @override
+  String get taxFieldTitle => 'حقل الضريبة';
+
+  @override
+  String get taxFieldSubtitle =>
+      'عند الإيقاف يُثبَّت الضريبة على 0 ويُخفى الحقل.';
+
+  @override
+  String get brandColorsTitle => 'ألوان هوية الشعار بدل ثيم التطبيق';
+
+  @override
+  String get brandColorsDesc =>
+      'عند الإيقاف يبقى ثيم التطبيق العام (فاتح/داكن) في كل الصفحات، مع نفس شكل الزوايا أدناه.';
+
+  @override
+  String get colorSchemesTitle => 'مخطط الألوان';
+
+  @override
+  String get colorSchemesDesc =>
+      'كل مخطط ألوان احترافي جاهز؛ «مخصص» يفتح استوديو ألوان تفاعلياً (طيف، تشبع، سطوع، جاهز، HEX) لكل لون.';
+
+  @override
+  String get primaryColorLabel => 'اللون الرئيسي (شريط العنوان والأزرار)';
+
+  @override
+  String get accentColorLabel => 'لون التمييز (ذهبي/مميز)';
+
+  @override
+  String get lightSurfaceLabel => 'خلفية اللوحات الفاتحة';
+
+  @override
+  String get darkSurfaceLabel => 'خلفية الوضع الداكن للوحات';
+
+  @override
+  String get saleCardShapeTitle => 'شكل بطاقات البيع';
+
+  @override
+  String get saleCardShapeDesc =>
+      'معاينة بسيطة بجانب كل خيار — كيف تبدو زوايا اللوحات وأسطر المنتجات.';
+
+  @override
+  String get sharpCornersTitle => 'زوايا حادة';
+
+  @override
+  String get roundedCornersTitle => 'زوايا مستديرة';
+
+  @override
+  String get fontAndSizeTitle => 'خط التطبيق وحجمه';
+
+  @override
+  String get fontAndSizeDesc =>
+      'يُطبَّق على كل الشاشات والقوائم، ويُضرب مع حجم خط النظام (إن وُجد).';
+
+  @override
+  String get fontStyleTitle => 'شكل الخط';
+
+  @override
+  String get fontSizeTitle => 'حجم الخط';
+
+  @override
+  String get textColorTitle => 'لون النص';
+
+  @override
+  String get textColorDesc =>
+      'اختياري — استوديو ألوان كامل لكل وضع (فاتح/داكن)؛ يُطبَّق على النصوص الرئيسية والقوائم.';
+
+  @override
+  String get textLightLabel => 'لون النص — الوضع الفاتح';
+
+  @override
+  String get textLightDesc =>
+      'عند تشغيل الثيم الفاتح. اضغط للتعديل، أو «افتراضي» لإلغاء اللون المخصص.';
+
+  @override
+  String get textDarkLabel => 'لون النص — الوضع الداكن';
+
+  @override
+  String get textDarkDesc =>
+      'عند تشغيل الثيم الداكن. اضغط للتعديل، أو «افتراضي» لإلغاء اللون المخصص.';
+
+  @override
+  String get resetTextColorLabel =>
+      'إعادة ضبط لون النص للوضعين (الثيم الافتراضي)';
+
+  @override
+  String get royalNavyDefaultDesc =>
+      'مرجع ألوان «الكحلي الملكي» الافتراضية — المخططات الأخرى أعلاه.';
+
+  @override
+  String get wideSaleLayoutTitle => 'تقسيم مساحة البيع (عرض عريض)';
+
+  @override
+  String get wideSaleLayoutSwitchTitle =>
+      'تقسيم شاشة البيع إلى عمودين (عرض عريض)';
+
+  @override
+  String get wideSaleLayoutSwitchDesc =>
+      'عند الإيقاف تعود «بيع جديد» إلى عمود واحد كالمعتاد حتى على الشاشة الواسعة. النسبة تُحفظ ولا تُفقد عند التعطيل.';
+
+  @override
+  String get wideSaleLayoutDesc =>
+      'عندما يكون عرض النافذة ٧٠٠ نقطة فأكثر وليست شاشة هاتف، ومع تشغيل الخيار أعلاه، تُقسَّم شاشة «بيع جديد» إلى عمودين: منتجات واختيار والملخص والعميل.';
+
+  @override
+  String productsColumnRatioLabel(Object products, Object summary) {
+    return 'عمود المنتجات: $products — الملخص والعميل: $summary';
+  }
+
+  @override
+  String productsSummaryLabel(Object products, Object summary) {
+    return 'منتجات $products · باقي الشاشة $summary';
+  }
+
+  @override
+  String get wideSalePreviewLabel =>
+      'معاينة مباشرة (مساحة صغيرة — كيف يتغيّر التقسيم عند تحريك المنزلق أو السحب في البيع):';
+
+  @override
+  String get wideSaleDragHint =>
+      'في شاشة «بيع جديد» على عرض عريض: مرّر المؤشر على الشريط الرفيع بين العمودين ثم اسحب أفقياً — يوسّع عمود «المنتجات» أو عمود الملخص والعميل.';
+
+  @override
+  String get saleSpaceLayoutLabel => 'تقسيم مساحة البيع';
+
+  @override
+  String get phoneLayoutDesc =>
+      'على هذا الحجم (هاتف) تُعرض شاشة «بيع جديد» دائماً في عمود واحد. تقسيم المنتجات والملخص إلى عمودين مع سحب المساحة يظهر فقط على الشاشات العريضة.';
+
+  @override
+  String get appearanceNote =>
+      'تُطبَّق الألوان والزوايا فوراً على كامل التطبيق (عبر ثيم النظام). سياسات البيع تبقى من «إعدادات نقطة البيع» في القائمة الجانبية.';
+
+  @override
+  String get posNote =>
+      'تُطبَّق سياسات البيع والتقسيم فوراً على شاشة «بيع جديد». المظهر (الألوان، الخط، الزوايا، لون النص) يُضبط من إعدادات «مظهر التطبيق».';
+
+  @override
+  String get resetAppearanceTitle => 'استرجاع المظهر الافتراضي؟';
+
+  @override
+  String get resetAppearanceDesc =>
+      'سيتم إرجاع نوع الخط، حجم النص، ألوان النص المخصصة، مخطط الألوان، الزوايا، وهوية الشعار إلى القيم الأساسية. لا يتغير policies البيع.';
+
+  @override
+  String get cancelLabel => 'إلغاء';
+
+  @override
+  String get restoreLabel => 'استرجاع';
+
+  @override
+  String get appearanceRestoredSnack => 'تم استرجاع إعدادات المظهر الافتراضية';
+
+  @override
+  String get resetAppearanceLog =>
+      'استرجاع المظهر الافتراضي (خط، ألوان، مخطط، زوايا)';
+
+  @override
+  String get summaryCustomerLabel => 'ملخص\nوعميل';
+
+  @override
+  String customColorLabel(Object hex) {
+    return '$hex — مخصص';
+  }
+
+  @override
+  String get themeDefaultLabel => 'افتراضي الثيم';
+
+  @override
+  String get colorStudioDesc =>
+      'مربع التشبع/السطوع، شريط الطيف، ألوان جاهزة، أو HEX — ثم تأكيد.';
+
+  @override
+  String get appIdentityTitle => 'هوية التطبيق';
+
+  @override
+  String get appIdentityDesc =>
+      'هنا تضبط ألوان الهوية وشكل الزوايا ليُطبَّق على كامل التطبيق. سياسات الدفع والمخزون والخصم تبقى في «إعدادات نقطة البيع» من القائمة الجانبية.';
+
+  @override
+  String get saleControlTitle => 'تحكّم مركزي بالبيع';
+
+  @override
+  String get saleControlDesc =>
+      'فعّل أو عطّل طرق الدفع والحقول المالية دون تعديل الكود — مناسب للسياسات المتغيرة أو أجهزة نقطة بيع مخصصة. المظهر يُضبط منفصل.';
+
+  @override
+  String get printSettingsSaved => 'تم حفظ إعدادات الطباعة';
+
+  @override
+  String printSettingsSaveError(Object error) {
+    return 'تعذر الحفظ: $error';
+  }
+
+  @override
+  String get testCustomerName => 'عميل تجريبي';
+
+  @override
+  String get testProductName => 'صنف 1';
+
+  @override
+  String get testEmployee => 'موظف';
+
+  @override
+  String get testAddress => 'بغداد، شارع تجريبي';
+
+  @override
+  String get printingAndDocsTitle => 'الطباعة والمستندات';
+
+  @override
+  String get saveButton => 'حفظ';
+
+  @override
+  String get salesReceiptSection => 'إيصال البيع';
+
+  @override
+  String get defaultPaperSize => 'حجم الورق الافتراضي';
+
+  @override
+  String get thermal58mm => 'حراري 58 مم (ضيق)';
+
+  @override
+  String get thermal80mm => 'حراري 80 مم (قياسي)';
+
+  @override
+  String get showTransactionBarcodeTitle => 'إظهار باركود رقم العملية';
+
+  @override
+  String get transactionBarcodeDesc => 'CODE128 — يقرأه الماسح الضوئي بسرعة';
+
+  @override
+  String get showQrCodeTitle => 'إظهار رمز QR';
+
+  @override
+  String get qrCodeDesc => 'ملخص نصي للعميل — يُوصى به للضريبة والمراجعة';
+
+  @override
+  String get qrBuyerAddressTitle => 'QR لعنوان المشتري (خرائط)';
+
+  @override
+  String get qrBuyerAddressDesc =>
+      'عند التفعيل يظهر حقل «عنوان المشتري» في البيع ويُطبَع QR يفتح الموقع على Google Maps';
+
+  @override
+  String get headerLineLabel => 'سطر فوق عنوان «إيصال بيع» (اسم المتجر)';
+
+  @override
+  String get footerLineLabel => 'تذييل إضافي (هاتف، شروط، شكر)';
+
+  @override
+  String get barcodeLabelsSection => 'إعدادات الباركود والملصقات';
+
+  @override
+  String get storeDataTitle => 'بيانات المتجر';
+
+  @override
+  String get storeDataDesc =>
+      'من الإعدادات — لاحقاً يمكن ربط اسم المتجر تلقائياً بالإيصال';
+
+  @override
+  String get storeDataHint =>
+      'استخدم حقل «اسم المتجر» أعلاه أو بطاقة بيانات المتجر من الإعدادات';
+
+  @override
+  String get previewReceiptButton => 'معاينة إيصال تجريبي';
+
+  @override
+  String get saveSettingsButton => 'حفظ الإعدادات في قاعدة البيانات';
+
+  @override
+  String get printSettingsDesc =>
+      'البيانات تُخزَّن في جدول print_settings وتُطبَّق تلقائياً عند طباعة إيصال البيع بعد كل عملية.';
+
+  @override
+  String get professionalPrintCenter => 'مركز الطباعة الاحترافي';
+
+  @override
+  String get printCenterDesc =>
+      'ضبط أحجام الحرارية وA4، محتوى الإيصال، والربط مع المخزون — كل ذلك محفوظ محلياً.';
+
+  @override
+  String get close => 'إغلاق';
+
+  @override
+  String get loading => 'جارٍ التحميل...';
+
+  @override
+  String get actions => 'إجراءات';
+
+  @override
+  String get confirm => 'تأكيد';
+
+  @override
+  String get yes => 'نعم';
+
+  @override
+  String get no => 'لا';
+
+  @override
+  String get next => 'التالي';
+
+  @override
+  String get total => 'الإجمالي';
+
+  @override
+  String get count => 'العدد';
+
+  @override
+  String get status => 'الحالة';
+
+  @override
+  String get date => 'التاريخ';
+
+  @override
+  String get amount => 'المبلغ';
+
+  @override
+  String get number => 'رقم';
+
+  @override
+  String get details => 'التفاصيل';
+
+  @override
+  String get name => 'الاسم';
+
+  @override
+  String get email => 'البريد الإلكتروني';
+
+  @override
+  String get notes => 'ملاحظات';
+
+  @override
+  String get add => 'إضافة';
+
+  @override
+  String get remove => 'إزالة';
+
+  @override
+  String get show => 'إظهار';
+
+  @override
+  String get hide => 'إخفاء';
+
+  @override
+  String get filter => 'تصفية';
+
+  @override
+  String get sort => 'ترتيب';
+
+  @override
+  String get refresh => 'تحديث';
+
+  @override
+  String get export => 'تصدير';
+
+  @override
+  String get print => 'طباعة';
+
+  @override
+  String get copy => 'نسخ';
+
+  @override
+  String get active => 'نشط';
+
+  @override
+  String get inactive => 'غير نشط';
+
+  @override
+  String get pending => 'معلق';
+
+  @override
+  String get completed => 'مكتمل';
+
+  @override
+  String get cancelled => 'ملغي';
+
+  @override
+  String get paid => 'مدفوع';
+
+  @override
+  String get unpaid => 'غير مدفوع';
+
+  @override
+  String get cash => 'نقداً';
+
+  @override
+  String get credit => 'آجل';
+
+  @override
+  String get installment => 'تقسيط';
+
+  @override
+  String get delivery => 'توصيل';
+
+  @override
+  String get customersTitle => 'العملاء';
+
+  @override
+  String get customersManagement => 'إدارة العملاء الكاملة';
+
+  @override
+  String get addCustomer => 'إضافة عميل';
+
+  @override
+  String get addNewCustomer => 'إضافة عميل جديد';
+
+  @override
+  String get editCustomer => 'تعديل بيانات العميل';
+
+  @override
+  String get deleteCustomer => 'حذف عميل';
+
+  @override
+  String confirmDeleteCustomer(Object name) {
+    return 'هل تريد حذف \"$name\"؟';
+  }
+
+  @override
+  String get customerNameHint => 'أدخل اسم العميل';
+
+  @override
+  String get phoneHint => 'أدخل رقم الهاتف';
+
+  @override
+  String get emailHint => 'أدخل البريد الإلكتروني';
+
+  @override
+  String get addressLabel => 'العنوان';
+
+  @override
+  String get addressHint => 'أدخل العنوان';
+
+  @override
+  String get totalCustomers => 'إجمالي العملاء';
+
+  @override
+  String customerCount(Object count) {
+    return 'العملاء: $count';
+  }
+
+  @override
+  String get noCustomersYet => 'لا يوجد عملاء بعد';
+
+  @override
+  String get addFirstCustomer => 'إضافة أول عميل';
+
+  @override
+  String get loyaltyPoints => 'نقاط الولاء';
+
+  @override
+  String get customerSince => 'عميل منذ';
+
+  @override
+  String get lastActivity => 'آخر نشاط';
+
+  @override
+  String get totalPurchases => 'إجمالي المشتريات';
+
+  @override
+  String get contactAdded => 'تمت إضافة جهة الاتصال';
+
+  @override
+  String get contactDeleted => 'تم حذف جهة الاتصال';
+
+  @override
+  String get contactUpdated => 'تم تحديث جهة الاتصال';
+
+  @override
+  String get addContact => 'إضافة جهة اتصال';
+
+  @override
+  String get deleteContact => 'حذف جهة اتصال';
+
+  @override
+  String confirmDeleteContact(Object name) {
+    return 'حذف \"$name\" من النظام؟';
+  }
+
+  @override
+  String get contactType => 'نوع جهة الاتصال';
+
+  @override
+  String get primaryContact => 'جهة اتصال أساسية';
+
+  @override
+  String get secondaryContact => 'جهة اتصال ثانوية';
+
+  @override
+  String get financialDetails => 'التفاصيل المالية';
+
+  @override
+  String get fullDebtScreen => 'شاشة الديون الكاملة (تسديد وتفاصيل)';
+
+  @override
+  String get creditSales => 'مبيعات بالأجل (دين)';
+
+  @override
+  String get creditSalesDesc =>
+      'كل فاتورة مرتبطة بإيصال البيع — اضغط لعرض التفاصيل';
+
+  @override
+  String get noCreditInvoices =>
+      'لا توجد فواتير «آجل» مربوطة بهذا العميل. استخدم البيع بالدين مع اختيار العميل من';
+
+  @override
+  String get installments => 'التقسيط';
+
+  @override
+  String get installmentSales => 'مبيعات التقسيط';
+
+  @override
+  String get installmentSalesDesc =>
+      'فواتير ذات خطط تقسيط — اضغط لعرض تفاصيل الخطة';
+
+  @override
+  String get noInstallmentInvoices =>
+      'لا توجد فواتير تقسيط مربوطة بهذا العميل.';
+
+  @override
+  String get totalDebt => 'إجمالي الدين';
+
+  @override
+  String get totalPaid => 'إجمالي المدفوع';
+
+  @override
+  String get remainingBalance => 'الرصيد المتبقي';
+
+  @override
+  String get settleDebt => 'تسديد الدين';
+
+  @override
+  String get debtHistory => 'سجل الديون';
+
+  @override
+  String get paymentHistory => 'سجل المدفوعات';
+
+  @override
+  String get saleReceipt => 'إيصال البيع';
+
+  @override
+  String get viewDetails => 'عرض التفاصيل';
+
+  @override
+  String get amountDue => 'المبلغ المستحق';
+
+  @override
+  String get amountPaid => 'المبلغ المدفوع';
+
+  @override
+  String get dueDate => 'تاريخ الاستحقاق';
+
+  @override
+  String get paymentDate => 'تاريخ الدفع';
+
+  @override
+  String get paymentMethod => 'طريقة الدفع';
+
+  @override
+  String get remaining => 'المتبقي';
+
+  @override
+  String get settled => 'مسدّد';
+
+  @override
+  String get overdue => 'متأخر';
+
+  @override
+  String get dueSoon => 'قريب الاستحقاق';
+
+  @override
+  String get customerForm => 'نموذج العميل';
+
+  @override
+  String get saveCustomer => 'حفظ العميل';
+
+  @override
+  String get updateCustomer => 'تحديث العميل';
+
+  @override
+  String get customerSaved => 'تم حفظ العميل بنجاح';
+
+  @override
+  String get customerUpdated => 'تم تحديث العميل بنجاح';
+
+  @override
+  String get customerDeleted => 'تم حذف العميل بنجاح';
+
+  @override
+  String failedToSave(Object error) {
+    return 'تعذر الحفظ: $error';
+  }
+
+  @override
+  String get phoneRequired => 'رقم الهاتف مطلوب';
+
+  @override
+  String get emailInvalid => 'البريد الإلكتروني غير صالح';
+
+  @override
+  String get duplicatePhone => 'رقم الهاتف هذا موجود بالفعل';
+
+  @override
+  String get duplicateEmail => 'البريد الإلكتروني هذا موجود بالفعل';
+
+  @override
+  String get addAnotherPhone => 'إضافة رقم آخر';
+
+  @override
+  String get loyaltyPointsLabel => 'نقاط الولاء';
+
+  @override
+  String get customerType => 'نوع العميل';
+
+  @override
+  String get retail => 'تجزئة';
+
+  @override
+  String get wholesale => 'جملة';
+
+  @override
+  String get lastUpdateNow => 'آخر تحديث: الآن تقريباً — F5';
+
+  @override
+  String lastUpdateHours(Object hours) {
+    return 'آخر تحديث: منذ $hours ساعة تقريباً — F5';
+  }
+
+  @override
+  String lastUpdateMinutes(Object minutes) {
+    return 'آخر تحديث: منذ $minutes دقيقة — F5';
+  }
+
+  @override
+  String totalCustomersCount(Object displayed, Object total) {
+    return 'إجمالي العملاء: $total · معروض: $displayed';
+  }
+
+  @override
+  String get closePanelEsc => 'إغلاق اللوحة (Esc)';
+
+  @override
+  String get salesByCash => 'مبيعات نقدية';
+
+  @override
+  String get salesByCredit => 'مبيعات آجلة';
+
+  @override
+  String get totalSales => 'إجمالي المبيعات';
+
+  @override
+  String get currentBalance => 'الرصيد الحالي';
 }

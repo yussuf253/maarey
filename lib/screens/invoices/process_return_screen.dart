@@ -320,11 +320,11 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
       case InvoiceType.delivery:
       case InvoiceType.debtCollection:
       case InvoiceType.installmentCollection:
-        return 'يُسجَّل خروجاً من الصندوق بنفس المبلغ.';
+        return loc.cashReturnHint;
       case InvoiceType.installment:
-        return 'يُحدَّث إجمالي خطة التقسيط المرتبطة بهذه الفاتورة؛ ويُسجَّل خروج نقدي إن وُجد مقدم يُسترد.';
+        return loc.installmentReturnHint;
       case InvoiceType.credit:
-        return 'يُسجَّل المرتجع كفاتورة مرتبطة بالأصل؛ راجع قائمة الفواتير لحالة الدين.';
+        return loc.creditReturnHintLabel;
       case InvoiceType.supplierPayment:
         return loc.notApplicableForType;
     }
@@ -487,9 +487,9 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
       case InvoiceType.delivery:
       case InvoiceType.debtCollection:
       case InvoiceType.installmentCollection:
-        return 'خُصم من الصندوق.';
+        return AppLocalizations.of(context)!.deductedFromVault;
       case InvoiceType.installment:
-        return 'خُصم من إجمالي التقسيط.';
+        return AppLocalizations.of(context)!.deductedFromInstallmentTotal;
       case InvoiceType.credit:
         return '';
       case InvoiceType.supplierPayment:
@@ -1026,8 +1026,8 @@ class _BarcodeSwitchField extends StatelessWidget {
       textInputAction: TextInputAction.search,
       style: TextStyle(color: scheme.onSurface),
       decoration: InputDecoration(
-        labelText: 'تبديل الفاتورة (INV-رقم)',
-        hintText: 'امسح باركود إيصال آخر ثم Enter',
+        labelText: AppLocalizations.of(context)!.switchInvoiceLabel,
+        hintText: AppLocalizations.of(context)!.scanAnotherReceiptHint,
         prefixIcon: Icon(
           Icons.qr_code_scanner_rounded,
           color: scheme.primary,

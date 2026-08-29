@@ -1,3 +1,4 @@
+import '../../l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
@@ -179,7 +180,7 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
           foregroundColor: cs.onPrimary,
           elevation: 0,
           title: Text(
-            _isEdit ? 'تعديل بيانات العميل' : 'إضافة عميل جديد',
+            _isEdit ? 'تعديل بيانات العميل' : AppLocalizations.of(context)!.addNewCustomer,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           leading: IconButton(
@@ -225,7 +226,7 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
                       const SizedBox(height: 16),
                       _CustomerFormField(
                         controller: _nameCtrl,
-                        label: 'اسم العميل',
+                        label: AppLocalizations.of(context)!.customerNameLabel,
                         hint: 'الاسم الكامل كما يظهر في الفواتير',
                         icon: Icons.person_outline,
                         autofocus: !_isEdit,
@@ -347,7 +348,7 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
                           onPressed: _saving
                               ? null
                               : () => Navigator.pop(context),
-                          child: const Text('إلغاء'),
+                          child: Text(AppLocalizations.of(context)!.cancel),
                         ),
                         const SizedBox(width: 8),
                         FilledButton(
@@ -370,7 +371,7 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
                                     color: cs.onPrimary,
                                   ),
                                 )
-                              : const Text('حفظ'),
+                              : Text(AppLocalizations.of(context)!.save),
                         ),
                       ],
                     ),

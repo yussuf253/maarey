@@ -1,3 +1,4 @@
+import '../../l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'dart:async' show unawaited;
 import 'package:provider/provider.dart';
@@ -111,7 +112,7 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
       context.read<CustomersProvider>().setFilters(
             query: _appliedText,
             idQuery: _appliedId,
-            statusArabic: 'الكل',
+            statusArabic: AppLocalizations.of(context)!.all,
             sortKey: _sort == _ContactSort.balanceDesc ? 'balance_desc' : 'name_asc',
           ),
     );
@@ -130,7 +131,7 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
       context.read<CustomersProvider>().setFilters(
             query: '',
             idQuery: '',
-            statusArabic: 'الكل',
+            statusArabic: AppLocalizations.of(context)!.all,
             sortKey: 'name_asc',
           ),
     );
@@ -164,12 +165,12 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
-            child: const Text('إلغاء'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(ctx, true),
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('حذف'),
+            child: Text(AppLocalizations.of(context)!.delete),
           ),
         ],
       ),
@@ -462,7 +463,7 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
                 onPressed: _openAdvancedCustomers,
                 icon: Icon(Icons.manage_accounts_outlined, color: _primary, size: 20),
                 label: Text(
-                  'إدارة العملاء الكاملة',
+                  AppLocalizations.of(context)!.customersManagement,
                   style: TextStyle(color: _primary, fontWeight: FontWeight.w600),
                 ),
               ),
@@ -489,7 +490,7 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
           children: [
             _buildFilterChip(
               filter: _ContactFilter.all,
-              label: 'الكل',
+              label: AppLocalizations.of(context)!.all,
             ),
             const SizedBox(width: 10),
             _buildFilterChip(
@@ -539,7 +540,7 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
             FilledButton.icon(
               onPressed: () => _openEditor(),
               icon: const Icon(Icons.add),
-              label: const Text('إضافة أول عميل'),
+              label: Text(AppLocalizations.of(context)!.addFirstCustomer),
             ),
           ],
         ],
@@ -901,7 +902,7 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
     return SizedBox(
       width: 44,
       child: PopupMenuButton<String>(
-        tooltip: 'إجراءات',
+        tooltip: AppLocalizations.of(context)!.actions,
         shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
         onSelected: (v) {
           if (v == 'edit') _openEditor(customer: c);
@@ -909,12 +910,12 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
           if (v == 'delete') _confirmDelete(c);
         },
         itemBuilder: (ctx) => [
-          const PopupMenuItem(value: 'detail', child: Text('التفاصيل المالية')),
+          PopupMenuItem(value: 'detail', child: Text(AppLocalizations.of(context)!.financialDetails)),
           const PopupMenuItem(value: 'edit', child: Text('تعديل البيانات')),
           const PopupMenuDivider(),
-          const PopupMenuItem(
+          PopupMenuItem(
             value: 'delete',
-            child: Text('حذف', style: TextStyle(color: Colors.red)),
+            child: Text(AppLocalizations.of(context)!.delete, style: const TextStyle(color: Colors.red)),
           ),
         ],
         child: Padding(
