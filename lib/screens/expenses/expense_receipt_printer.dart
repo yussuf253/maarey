@@ -1,10 +1,12 @@
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
 import '../../models/expense.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 /// يطبع/يعاين إيصال مصروف بتصميم مبسط (A6 عمودي).
 class ExpenseReceiptPrinter {
@@ -61,7 +63,7 @@ class ExpenseReceiptPrinter {
             children: [
               pw.Center(
                 child: pw.Text(
-                  'إيصال مصروف',
+                  AppLocalizations.of(context as BuildContext)!.expenseReceipt,
                   style: pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold),
                 ),
               ),
@@ -73,17 +75,17 @@ class ExpenseReceiptPrinter {
                 ),
               ),
               pw.Divider(thickness: 0.6, color: PdfColors.grey400),
-              row('الفئة', entry.categoryName),
-              if (entry.employeeName.isNotEmpty) row('المستفيد', entry.employeeName),
-              row('التاريخ', _dateFmt.format(entry.occurredAt)),
-              row('الحالة', entry.status == ExpenseStatus.paid ? 'مدفوع' : 'معلق'),
-              if (entry.description.isNotEmpty) row('الوصف', entry.description),
+              row(AppLocalizations.of(context as BuildContext)!.category, entry.categoryName),
+              if (entry.employeeName.isNotEmpty) row(AppLocalizations.of(context as BuildContext)!.beneficiary, entry.employeeName),
+              row(AppLocalizations.of(context as BuildContext)!.expenseDate, _dateFmt.format(entry.occurredAt)),
+              row(AppLocalizations.of(context as BuildContext)!.expenseStatus, entry.status == ExpenseStatus.paid ? AppLocalizations.of(context as BuildContext)!.paidLabel2 : AppLocalizations.of(context as BuildContext)!.pendingLabel2),
+              if (entry.description.isNotEmpty) row(AppLocalizations.of(context as BuildContext)!.expenseDescription, entry.description),
               if (entry.isRecurring)
-                row('تكرار شهري', 'يوم ${entry.recurringDay ?? '-'}'),
+                row(AppLocalizations.of(context as BuildContext)!.monthlyRepeat, 'يوم ${entry.recurringDay ?? '-'}'),
               if (entry.affectsCash)
-                row('أثر على الصندوق', 'نعم (خصم)')
+                row(AppLocalizations.of(context as BuildContext)!.affectedCashBox, AppLocalizations.of(context as BuildContext)!.yesDeduction)
               else
-                row('أثر على الصندوق', 'لا'),
+                row(AppLocalizations.of(context as BuildContext)!.affectedCashBox, AppLocalizations.of(context as BuildContext)!.noLabel),
               pw.Divider(thickness: 0.6, color: PdfColors.grey400),
               pw.SizedBox(height: 6),
               pw.Container(
@@ -95,7 +97,7 @@ class ExpenseReceiptPrinter {
                 child: pw.Row(
                   children: [
                     pw.Text(
-                      'الإجمالي:',
+                      AppLocalizations.of(context as BuildContext)!.totalLabelColon,
                       style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
                     ),
                     pw.Spacer(),
@@ -113,7 +115,7 @@ class ExpenseReceiptPrinter {
               pw.Spacer(),
               pw.Center(
                 child: pw.Text(
-                  'شكرًا لاستخدام NaBoo',
+                  AppLocalizations.of(context as BuildContext)!.thankYouForUsing,
                   style: const pw.TextStyle(fontSize: 9, color: PdfColors.grey600),
                 ),
               ),

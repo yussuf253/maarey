@@ -12,6 +12,7 @@ import '../../services/cloud_sync_service.dart';
 import '../../theme/app_corner_style.dart';
 import '../../theme/design_tokens.dart';
 import '../../utils/screen_layout.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 final _numFmt = NumberFormat('#,##0', 'ar');
 final _dateFmt = DateFormat('dd/MM/yyyy', 'en');
@@ -271,7 +272,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
   Widget _buildSectionContent() {
     final d = _data;
     if (d == null) {
-      return const Center(child: Text('لا توجد بيانات'));
+      return Center(child: Text('لا توجد بيانات'));
     }
     switch (_section) {
       case 0:
@@ -383,7 +384,7 @@ class _ReportsSideRailState extends State<_ReportsSideRail> {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        'أقسام التقارير',
+                        AppLocalizations.of(context)!.reportSections,
                         style: TextStyle(
                           fontSize: 12.5,
                           fontWeight: FontWeight.w800,
@@ -506,7 +507,7 @@ class _ReportsSideRailState extends State<_ReportsSideRail> {
                                     ),
                                   ),
                                   PopupMenuButton<String>(
-                                    tooltip: 'خيارات القسم',
+                                    tooltip: AppLocalizations.of(context)!.sectionOptions,
                                     icon: Icon(
                                       Icons.more_horiz_rounded,
                                       size: 18,
@@ -544,7 +545,7 @@ class _ReportsSideRailState extends State<_ReportsSideRail> {
                                                 TextButton(
                                                   onPressed: () =>
                                                       Navigator.of(ctx).pop(),
-                                                  child: const Text('حسنًا'),
+                                                  child: Text(AppLocalizations.of(context)!.okLabel),
                                                 ),
                                               ],
                                             );
@@ -553,32 +554,32 @@ class _ReportsSideRailState extends State<_ReportsSideRail> {
                                       }
                                     },
                                     itemBuilder: (_) => [
-                                      const PopupMenuItem<String>(
+                                      PopupMenuItem<String>(
                                         value: 'open',
                                         child: ListTile(
                                           dense: true,
-                                          leading: Icon(
+                                          leading: const Icon(
                                             Icons.open_in_new_rounded,
                                           ),
-                                          title: Text('فتح القسم'),
+                                          title: Text(AppLocalizations.of(context)!.openSection),
                                         ),
                                       ),
-                                      const PopupMenuItem<String>(
+                                      PopupMenuItem<String>(
                                         value: 'copy',
                                         child: ListTile(
                                           dense: true,
-                                          leading: Icon(Icons.copy_rounded),
-                                          title: Text('نسخ اسم القسم'),
+                                          leading: const Icon(Icons.copy_rounded),
+                                          title: Text(AppLocalizations.of(context)!.copySectionName),
                                         ),
                                       ),
-                                      const PopupMenuItem<String>(
+                                      PopupMenuItem<String>(
                                         value: 'about',
                                         child: ListTile(
                                           dense: true,
-                                          leading: Icon(
+                                          leading: const Icon(
                                             Icons.info_outline_rounded,
                                           ),
-                                          title: Text('عرض وصف القسم'),
+                                          title: Text(AppLocalizations.of(context)!.viewSectionDescription),
                                         ),
                                       ),
                                     ],
@@ -651,7 +652,7 @@ class _DateStrip extends StatelessWidget {
 
     Widget sectionMenu({required bool compact}) {
       return PopupMenuButton<int>(
-        tooltip: 'أقسام التقارير',
+        tooltip: AppLocalizations.of(context)!.reportSections,
         initialValue: selectedSection,
         onSelected: onSectionChanged,
         itemBuilder: (context) => [
@@ -696,13 +697,13 @@ class _DateStrip extends StatelessWidget {
 
     Widget rangeButton({required bool compact}) {
       return Tooltip(
-        message: 'نطاق الفترة',
+        message: AppLocalizations.of(context)!.dateRange,
         child: InkWell(
           borderRadius: ac.sm,
           onTap: openRange,
           child: _TopSlimMenuButton(
             icon: Icons.date_range_rounded,
-            label: 'نطاق الفترة',
+            label: AppLocalizations.of(context)!.dateRange,
             compact: compact,
           ),
         ),
@@ -721,7 +722,7 @@ class _DateStrip extends StatelessWidget {
             ),
           ),
           IconButton(
-            tooltip: 'تحديث البيانات',
+            tooltip: AppLocalizations.of(context)!.refreshData,
             visualDensity: VisualDensity.compact,
             onPressed: onRefresh,
             icon: const Icon(Icons.refresh_rounded, size: 18),
@@ -738,7 +739,7 @@ class _DateStrip extends StatelessWidget {
           rangeButton(compact: false),
           const SizedBox(width: 6),
           IconButton(
-            tooltip: 'تحديث البيانات',
+            tooltip: AppLocalizations.of(context)!.refreshData,
             visualDensity: VisualDensity.compact,
             onPressed: onRefresh,
             icon: const Icon(Icons.refresh_rounded, size: 18),
@@ -1212,7 +1213,7 @@ class _FigmaLikeRangeDialogState extends State<_FigmaLikeRangeDialog> {
               children: [
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  child: const Text('إلغاء'),
+                  child: Text('إلغاء'),
                 ),
                 const Spacer(),
                 FilledButton(
@@ -1223,7 +1224,7 @@ class _FigmaLikeRangeDialogState extends State<_FigmaLikeRangeDialog> {
                       context,
                     ).pop(DateTimeRange(start: start, end: end));
                   },
-                  child: const Text('تطبيق'),
+                  child: Text('تطبيق'),
                 ),
               ],
             ),
@@ -1378,31 +1379,31 @@ class _PanelDashboard extends StatelessWidget {
           _KpiGrid(
             children: [
               _KpiCard(
-                title: 'صافي مبيعات الفترة',
+                title: AppLocalizations.of(context)!.periodNetSales,
                 value: '${_numFmt.format(data.salesNet)} د.ع',
                 icon: Icons.trending_up_rounded,
                 color: const Color(0xFF2563EB),
               ),
               _KpiCard(
-                title: 'إجمالي المرتجعات',
+                title: AppLocalizations.of(context)!.totalReturns,
                 value: '${_numFmt.format(data.returnsTotal)} د.ع',
                 icon: Icons.undo_rounded,
                 color: const Color(0xFFDC2626),
               ),
               _KpiCard(
-                title: 'صافي تقريبي (بيع − مرتجع)',
+                title: AppLocalizations.of(context)!.approxNet,
                 value: '${_numFmt.format(netApprox)} د.ع',
                 icon: Icons.balance_rounded,
                 color: const Color(0xFF059669),
               ),
               _KpiCard(
-                title: 'إجمالي المصروفات',
+                title: AppLocalizations.of(context)!.totalExpenses,
                 value: '${_numFmt.format(data.expensesTotal)} د.ع',
                 icon: Icons.payments_outlined,
                 color: const Color(0xFF0F766E),
               ),
               _KpiCard(
-                title: 'صافي بعد المصروفات',
+                title: AppLocalizations.of(context)!.netAfterExpenses,
                 value: '${_numFmt.format(netAfterExpenses)} د.ع',
                 icon: Icons.savings_outlined,
                 color: netAfterExpenses >= 0
@@ -1410,7 +1411,7 @@ class _PanelDashboard extends StatelessWidget {
                     : const Color(0xFFDC2626),
               ),
               _KpiCard(
-                title: 'فواتير / مرتجعات',
+                title: AppLocalizations.of(context)!.invoicesReturns,
                 value: '${data.invoiceCount} / ${data.returnCount}',
                 icon: Icons.receipt_long_rounded,
                 color: const Color(0xFFD97706),
@@ -1419,34 +1420,34 @@ class _PanelDashboard extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           _AnalyticsCard(
-            title: 'مبيعات يومية ضمن الفترة',
+            title: AppLocalizations.of(context)!.dailySalesInRange,
             subtitle: 'مخطط أعمدة — يوضح اتجاه المبيعات بين تاريخي الفترة',
             child: _DailyBars(points: data.dailySales, maxY: maxDay),
           ),
           const SizedBox(height: 18),
           _CategoryGaugesCard(
-            title: 'مؤشرات أداء رئيسية (Gauges)',
+            title: AppLocalizations.of(context)!.mainPerformanceIndicators,
             subtitle:
                 'نسبة كل مؤشر من صافي المبيعات — متزامنة مع بطاقات KPI أعلاه',
             total: data.salesNet <= 0 ? 1 : data.salesNet,
             items: [
               _GaugeItem(
-                label: 'صافي المبيعات',
+                label: AppLocalizations.of(context)!.netSales,
                 value: data.salesNet,
                 color: const Color(0xFF2563EB),
               ),
               _GaugeItem(
-                label: 'المرتجعات',
+                label: AppLocalizations.of(context)!.returns,
                 value: data.returnsTotal,
                 color: const Color(0xFFDC2626),
               ),
               _GaugeItem(
-                label: 'المصروفات',
+                label: AppLocalizations.of(context)!.expensesTitle,
                 value: data.expensesTotal,
                 color: const Color(0xFF0F766E),
               ),
               _GaugeItem(
-                label: 'صافي بعد المصروفات',
+                label: AppLocalizations.of(context)!.netAfterExpenses,
                 value: netAfterExpenses < 0 ? 0 : netAfterExpenses,
                 color: const Color(0xFF16A34A),
               ),
@@ -1472,18 +1473,18 @@ class _PanelDashboard extends StatelessWidget {
               };
               final series = <_AreaSeries>[
                 _AreaSeries(
-                  name: 'مبيعات',
+                  name: AppLocalizations.of(context)!.sales,
                   color: const Color(0xFF2563EB),
                   values: [for (final d in dates) salesMap[d] ?? 0.0],
                 ),
                 _AreaSeries(
-                  name: 'مصروفات',
+                  name: AppLocalizations.of(context)!.expenses,
                   color: const Color(0xFF0F766E),
                   values: [for (final d in dates) expensesMap[d] ?? 0.0],
                 ),
               ];
               return _StackedAreaCard(
-                title: 'المبيعات مقابل المصروفات — اتجاه يومي',
+                title: AppLocalizations.of(context)!.salesVsExpensesDailyTrend,
                 subtitle:
                     'مكدّس من بيانات الفواتير والمصروفات (SQL GROUP BY يومي)',
                 series: series,
@@ -1493,10 +1494,10 @@ class _PanelDashboard extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           _AnalyticsCard(
-            title: 'أعلى العملاء إنفاقاً',
-            subtitle: 'ترتيب حسب إجمالي المبيعات المسجّلة على الفواتير',
+            title: AppLocalizations.of(context)!.topCustomersBySpending,
+            subtitle: AppLocalizations.of(context)!.topEmployeesBySales,
             child: _SimpleTable(
-              headers: const ['العميل', 'إجمالي', 'عدد الفواتير'],
+              headers: [AppLocalizations.of(context)!.customerLabel2, 'إجمالي', AppLocalizations.of(context)!.invoiceCount],
               rows: data.topCustomers.take(8).map((e) {
                 return [
                   e.name,
@@ -1522,7 +1523,7 @@ class _PanelSales extends StatelessWidget {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
 
-    // "مبيعات" فقط (نقدي/دين/تقسيط/توصيل) — باقي الأنواع سندات ولا تُعرض هنا.
+    // AppLocalizations.of(context)!.sales فقط (نقدي/دين/تقسيط/توصيل) — باقي الأنواع سندات ولا تُعرض هنا.
     final salesTypes = <InvoiceType>[
       InvoiceType.cash,
       InvoiceType.credit,
@@ -1550,7 +1551,7 @@ class _PanelSales extends StatelessWidget {
     // بطاقات KPI الأربعة محولة إلى مخطط بيتزا موحّد بالقيم المالية.
     final kpiPie = <_PieSlice>[
       _PieSlice(
-        label: 'مبيعات (غير مرتجع)',
+        label: AppLocalizations.of(context)!.salesOnly,
         value: math.max(0, data.salesNet),
         color: const Color(0xFF2563EB),
       ),
@@ -1560,7 +1561,7 @@ class _PanelSales extends StatelessWidget {
         color: const Color(0xFFDC2626),
       ),
       _PieSlice(
-        label: 'صافي تقريبي',
+        label: AppLocalizations.of(context)!.netApprox,
         value: math.max(0, netApprox),
         color: const Color(0xFF059669),
       ),
@@ -1573,9 +1574,9 @@ class _PanelSales extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _AnalyticsCard(
-            title: 'نظرة عامة على المبيعات',
+            title: AppLocalizations.of(context)!.salesOverview,
             subtitle:
-                'بيتزا موحّدة للمؤشرات المالية الأساسية — مبيعات/مرتجعات/صافي',
+                AppLocalizations.of(context)!.kpiPieDescription,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -1585,7 +1586,7 @@ class _PanelSales extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     child: Center(
                       child: Text(
-                        'لا توجد مبيعات في هذه الفترة',
+                        AppLocalizations.of(context)!.noSalesInPeriod,
                         style: TextStyle(color: cs.onSurfaceVariant),
                       ),
                     ),
@@ -1608,14 +1609,14 @@ class _PanelSales extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           _AnalyticsCard(
-            title: 'توزيع المبيعات حسب نوع الدفع',
+            title: AppLocalizations.of(context)!.salesByPaymentType,
             subtitle: 'مخطط بيتزا تفاعلي — من فواتير البيع فقط (بدون السندات)',
             child: list.isEmpty || salesTotal <= 0
                 ? Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     child: Center(
                       child: Text(
-                        'لا توجد مبيعات في هذه الفترة',
+                        AppLocalizations.of(context)!.noSalesInPeriod,
                         style: TextStyle(color: cs.onSurfaceVariant),
                       ),
                     ),
@@ -1637,7 +1638,7 @@ class _PanelSales extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           _CategoryGaugesCard(
-            title: 'نسبة كل نوع دفع من المبيعات',
+            title: AppLocalizations.of(context)!.paymentTypeRatio,
             subtitle: 'Gauges — متسقة مع نسب المخطط الدائري والجدول',
             total: salesTotal <= 0 ? 1 : salesTotal,
             items: [
@@ -1677,7 +1678,7 @@ class _PanelSales extends StatelessWidget {
                   ),
               ];
               return _StackedAreaCard(
-                title: 'اتجاه أنواع الدفع عبر الزمن',
+                title: AppLocalizations.of(context)!.paymentTypesTrendOverTime,
                 subtitle: 'مكدّس — يبني كل يوم مجموع كل نوع دفع مباشرة من SQL',
                 series: series,
                 dates: dates,
@@ -1685,10 +1686,10 @@ class _PanelSales extends StatelessWidget {
             },
           ),
           const SizedBox(height: 18),
-          const _AnalyticsCard(
-            title: 'ملاحظات الدقّة',
-            subtitle: 'حتى لا تختلط المبيعات مع السندات',
-            child: Column(
+          _AnalyticsCard(
+            title: AppLocalizations.of(context)!.accuracyNotes,
+            subtitle: AppLocalizations.of(context)!.salesNotMixedWithReceipts,
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 _BulletLine(
@@ -1835,15 +1836,15 @@ class _SalesByTypeTableState extends State<_SalesByTypeTable> {
                   ),
                   columns: [
                     DataColumn(
-                      label: const Text('نوع الدفع'),
+                      label: Text(AppLocalizations.of(context)!.paymentType),
                       onSort: (_, asc) => _sortByLabel(ascending: asc),
                     ),
                     DataColumn(
-                      label: const Text('الإجمالي'),
+                      label: Text(AppLocalizations.of(context)!.totalAmountLabel),
                       numeric: true,
                       onSort: (_, asc) => _sortByTotal(ascending: asc),
                     ),
-                    const DataColumn(label: Text('النسبة'), numeric: true),
+                    DataColumn(label: Text(AppLocalizations.of(context)!.percentageLabel), numeric: true),
                   ],
                   source: _ds,
                 ),
@@ -2250,7 +2251,7 @@ class _PanelCustomers extends StatelessWidget {
             title: 'أكثر العملاء شراءً (حسب اسم الفاتورة)',
             subtitle: 'ترتيب حسب الإجمالي — من بيانات الفواتير في الفترة',
             child: _SimpleTable(
-              headers: const ['العميل', 'الإجمالي', 'الفواتير'],
+              headers: ['العميل', AppLocalizations.of(context)!.totalAmountLabel, AppLocalizations.of(context)!.salesInvoices],
               rows: sorted
                   .map(
                     (e) => [
@@ -2290,13 +2291,13 @@ class _PanelDebts extends StatelessWidget {
           _KpiGrid(
             children: [
               _KpiCard(
-                title: 'إجمالي الديون المسجّلة',
+                title: AppLocalizations.of(context)!.totalRecordedDebts,
                 value: '${_numFmt.format(total)} د.ع',
                 icon: Icons.warning_amber_rounded,
                 color: const Color(0xFFB45309),
               ),
               _KpiCard(
-                title: 'عدد العملاء المدينين',
+                title: AppLocalizations.of(context)!.debtorCustomerCount,
                 value: '${data.debtors.length}',
                 icon: Icons.people_outline_rounded,
                 color: Theme.of(context).colorScheme.primary,
@@ -2305,10 +2306,10 @@ class _PanelDebts extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           _AnalyticsCard(
-            title: 'قائمة العملاء (رصيد دائن على المحل)',
+            title: AppLocalizations.of(context)!.customerBalanceList,
             subtitle: 'جدول — أرصدة مسجّلة في سجل العملاء',
             child: _SimpleTable(
-              headers: const ['#', 'العميل', 'الرصيد'],
+              headers: ['#', AppLocalizations.of(context)!.customerLabel2, AppLocalizations.of(context)!.balance],
               rows: data.debtors
                   .map(
                     (e) => [
@@ -2344,19 +2345,19 @@ class _PanelInstallments extends StatelessWidget {
           _KpiGrid(
             children: [
               _KpiCard(
-                title: 'خطط أقساط (فواتير ضمن الفترة)',
+                title: AppLocalizations.of(context)!.installmentPlansInPeriod,
                 value: '${t.planCount}',
                 icon: Icons.list_alt_rounded,
                 color: cs.secondary,
               ),
               _KpiCard(
-                title: 'إجمالي قيمة الخطط',
+                title: AppLocalizations.of(context)!.totalPlanValue,
                 value: '${_numFmt.format(t.totalDue)} د.ع',
                 icon: Icons.payments_rounded,
                 color: const Color(0xFF2563EB),
               ),
               _KpiCard(
-                title: 'المدفوع / المتبقي',
+                title: AppLocalizations.of(context)!.paidRemaining,
                 value:
                     '${_numFmt.format(t.totalPaid)} / ${_numFmt.format(t.totalRemaining)}',
                 icon: Icons.pie_chart_outline_rounded,
@@ -2369,12 +2370,12 @@ class _PanelInstallments extends StatelessWidget {
             title: 'تفاصيل الخطط',
             subtitle: 'جدول — خطط الأقساط المرتبطة بفواتير الفترة',
             child: _SimpleTable(
-              headers: const [
-                'الخطة',
-                'العميل',
-                'الإجمالي',
-                'المدفوع',
-                'المتبقي',
+              headers: [
+                AppLocalizations.of(context)!.planLabel,
+                AppLocalizations.of(context)!.customerLabel2,
+                AppLocalizations.of(context)!.totalAmountLabel,
+                AppLocalizations.of(context)!.paidLabel,
+                AppLocalizations.of(context)!.remainingLabel,
               ],
               rows: data.installmentPlansInRange
                   .map(
@@ -2502,7 +2503,7 @@ class _PanelStaff extends StatelessWidget {
                 )[d.dayLabel] = d.amount;
               }
 
-              // نستخدم نفس أعلى الموظفين الظاهرين في البيتزا (بدون "آخرون") كبناء للسلاسل.
+              // نستخدم نفس أعلى الموظفين الظاهرين في البيتزا (بدون 'آخرون') كبناء للسلاسل.
               final topLabels = <String>[];
               for (final sl in slices) {
                 if (sl.label == 'آخرون') continue;
@@ -2532,7 +2533,7 @@ class _PanelStaff extends StatelessWidget {
             title: 'فواتير مسجّلة باسم الموظف (حقل الفاتورة)',
             subtitle: 'جدول — أداء التسجيل حسب اسم الموظف على الفاتورة',
             child: _SimpleTable(
-              headers: const ['الموظف / المسجّل', 'عدد الفواتير', 'إجمالي'],
+              headers: ['الموظف / المسجّل', AppLocalizations.of(context)!.invoiceCount, 'إجمالي'],
               rows: data.staffSales
                   .map(
                     (s) => [
@@ -2580,37 +2581,37 @@ class _PanelAnalytics extends StatelessWidget {
           _KpiGrid(
             children: [
               _KpiCard(
-                title: 'إيراد الفترة',
+                title: AppLocalizations.of(context)!.periodRevenue,
                 value: '${_numFmt.format(ms.revenueNet)} د.ع',
                 icon: Icons.sell_rounded,
                 color: const Color(0xFF2563EB),
               ),
               _KpiCard(
-                title: 'تكلفة البضاعة المباعة (COGS)',
+                title: AppLocalizations.of(context)!.cogs,
                 value: '${_numFmt.format(ms.cost)} د.ع',
                 icon: Icons.inventory_2_rounded,
                 color: const Color(0xFF8E3CF7),
               ),
               _KpiCard(
-                title: 'الهامش الإجمالي',
+                title: AppLocalizations.of(context)!.grossMargin,
                 value: '${_numFmt.format(ms.grossMargin)} د.ع',
                 icon: Icons.trending_up_rounded,
                 color: grossColor,
               ),
               _KpiCard(
-                title: 'نسبة الهامش %',
+                title: AppLocalizations.of(context)!.marginPercent,
                 value: marginPctTxt,
                 icon: Icons.percent_rounded,
                 color: const Color(0xFF0EA5E9),
               ),
               _KpiCard(
-                title: 'إجمالي المصروفات',
+                title: AppLocalizations.of(context)!.totalExpenses,
                 value: '${_numFmt.format(ms.expenses)} د.ع',
                 icon: Icons.receipt_long_rounded,
                 color: const Color(0xFFDC2626),
               ),
               _KpiCard(
-                title: 'الصافي (هامش − مصروفات)',
+                title: AppLocalizations.of(context)!.netProfit,
                 value: '${_numFmt.format(ms.netProfit)} د.ع',
                 icon: Icons.savings_rounded,
                 color: netColor,
@@ -2620,17 +2621,17 @@ class _PanelAnalytics extends StatelessWidget {
           const SizedBox(height: 18),
           // ─── تركيب الإيراد (تكلفة + هامش) — Gauges متسقة مع KPI
           _CategoryGaugesCard(
-            title: 'تركيب الإيراد: تكلفة + هامش',
+            title: AppLocalizations.of(context)!.revenueComposition,
             subtitle: 'Gauges — توزيع نسبي يوضح أين تذهب كل وحدة إيراد',
             total: ms.revenueNet <= 0 ? 1 : ms.revenueNet,
             items: [
               _GaugeItem(
-                label: 'تكلفة',
+                label: AppLocalizations.of(context)!.cost,
                 value: math.max(0.0, ms.cost),
                 color: const Color(0xFF8E3CF7),
               ),
               _GaugeItem(
-                label: 'هامش',
+                label: AppLocalizations.of(context)!.margin,
                 value: math.max(0.0, ms.grossMargin),
                 color: const Color(0xFF059669),
               ),
@@ -2647,14 +2648,14 @@ class _PanelAnalytics extends StatelessWidget {
                   .toList();
               final series = <_AreaSeries>[
                 _AreaSeries(
-                  name: 'تكلفة',
+                  name: AppLocalizations.of(context)!.cost,
                   color: const Color(0xFF8E3CF7),
                   values: [
                     for (final d in data.dailyMargin) math.max(0.0, d.cost),
                   ],
                 ),
                 _AreaSeries(
-                  name: 'هامش',
+                  name: AppLocalizations.of(context)!.margin,
                   color: const Color(0xFF059669),
                   values: [
                     for (final d in data.dailyMargin) math.max(0.0, d.margin),
@@ -2667,14 +2668,14 @@ class _PanelAnalytics extends StatelessWidget {
               if (expensesByDay.isNotEmpty) {
                 series.add(
                   _AreaSeries(
-                    name: 'مصروفات',
+                    name: AppLocalizations.of(context)!.expenses,
                     color: const Color(0xFFDC2626),
                     values: [for (final d in dates) (expensesByDay[d] ?? 0.0)],
                   ),
                 );
               }
               return _StackedAreaCard(
-                title: 'اتجاه الإيراد: تكلفة + هامش + مصروفات يومياً',
+                title: AppLocalizations.of(context)!.revenueTrend,
                 subtitle: cs2.brightness == Brightness.dark
                     ? 'مكدّس — كل يوم يوضح تركيب الإيراد ومقابله المصروفات'
                     : 'مكدّس — كل يوم يوضح تركيب الإيراد ومقابله المصروفات',
@@ -2695,21 +2696,21 @@ class _PanelAnalytics extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   _AnalyticsCard(
-                    title: 'أعلى 10 منتجات ربحاً',
+                    title: AppLocalizations.of(context)!.top10ProfitProducts,
                     subtitle:
                         'ترتيب حسب الهامش الصافي (إيراد − تكلفة) بعد توزيع الخصومات وطرح المرتجعات',
                     child: top.isEmpty
-                        ? const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 16),
-                            child: Center(child: Text('لا توجد بيانات')),
+                        ? Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            child: Center(child: Text(AppLocalizations.of(context)!.noDataAvailable)),
                           )
                         : _SimpleTable(
-                            headers: const [
-                              'المنتج',
-                              'الكمية',
-                              'الإيراد',
-                              'التكلفة',
-                              'الهامش',
+                            headers: [
+                              AppLocalizations.of(context)!.productLabel,
+                              AppLocalizations.of(context)!.quantityDialogTitle,
+                              AppLocalizations.of(context)!.revenueLabel,
+                              AppLocalizations.of(context)!.costLabel,
+                              AppLocalizations.of(context)!.marginLabel,
                               'الهامش %',
                             ],
                             rows: top
@@ -2730,21 +2731,21 @@ class _PanelAnalytics extends StatelessWidget {
                   ),
                   const SizedBox(height: 18),
                   _AnalyticsCard(
-                    title: 'أدنى 10 منتجات ربحاً (مراجعة تسعير)',
+                    title: AppLocalizations.of(context)!.bottom10ProfitProducts,
                     subtitle:
-                        'منتجات هامشها منخفض أو سالب — قد تحتاج مراجعة السعر أو التكلفة',
+                        AppLocalizations.of(context)!.lowMarginDesc,
                     child: bottom.isEmpty
-                        ? const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 16),
-                            child: Center(child: Text('لا توجد بيانات')),
+                        ? Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            child: Center(child: Text(AppLocalizations.of(context)!.noDataAvailable)),
                           )
                         : _SimpleTable(
-                            headers: const [
-                              'المنتج',
-                              'الكمية',
-                              'الإيراد',
-                              'التكلفة',
-                              'الهامش',
+                            headers: [
+                              AppLocalizations.of(context)!.productLabel,
+                              AppLocalizations.of(context)!.quantityDialogTitle,
+                              AppLocalizations.of(context)!.revenueLabel,
+                              AppLocalizations.of(context)!.costLabel,
+                              AppLocalizations.of(context)!.marginLabel,
                               'الهامش %',
                             ],
                             rows: bottom
@@ -2772,8 +2773,8 @@ class _PanelAnalytics extends StatelessWidget {
           _DataQualityCard(stats: ms),
           const SizedBox(height: 18),
           _AnalyticsCard(
-            title: 'ولاء (ضمن الفترة)',
-            subtitle: 'ملخص نقاط وخصومات الولاء',
+            title: AppLocalizations.of(context)!.loyaltyInRange,
+            subtitle: AppLocalizations.of(context)!.loyaltySummary,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -2787,10 +2788,10 @@ class _PanelAnalytics extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 18),
-          const _AnalyticsCard(
-            title: 'كيف يُحسب الهامش؟',
-            subtitle: 'شفافية كاملة — هذه هي القواعد المعتمدة',
-            child: Column(
+          _AnalyticsCard(
+            title: AppLocalizations.of(context)!.howMarginCalculated,
+            subtitle: AppLocalizations.of(context)!.fullTransparency,
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 _BulletLine(
@@ -2816,10 +2817,10 @@ class _PanelAnalytics extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           _AnalyticsCard(
-            title: 'أكثر الأصناف مبيعاً (حسب إيراد البنود)',
+            title: AppLocalizations.of(context)!.topItemsByRevenue,
             subtitle: 'جدول — ترتيب حسب إيراد البنود في الفترة',
             child: _SimpleTable(
-              headers: const ['الصنف', 'الكمية', 'الإيراد'],
+              headers: [AppLocalizations.of(context)!.itemLabel2, AppLocalizations.of(context)!.quantityDialogTitle, AppLocalizations.of(context)!.revenueLabel],
               rows: data.topProducts
                   .map(
                     (p) => [
@@ -2858,7 +2859,7 @@ class _DataQualityCard extends StatelessWidget {
         : const Color(0xFFDC2626);
 
     return _AnalyticsCard(
-      title: 'جودة بيانات الهامش (Coverage)',
+      title: AppLocalizations.of(context)!.marginDataQuality,
       subtitle: 'كلما ارتفعت نسبة السطور ذات التكلفة المثبّتة، زادت دقة الرقم',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -2877,7 +2878,7 @@ class _DataQualityCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   total == 0
-                      ? 'لا توجد بنود في هذه الفترة.'
+                      ? AppLocalizations.of(context)!.noItemsInPeriod
                       : 'من أصل ${_numFmt.format(total)} سطر بيع في الفترة، '
                             '${_numFmt.format(stamped + fb)} تملك تكلفة معروفة.',
                   style: TextStyle(fontSize: 12.5, color: cs.onSurfaceVariant),
@@ -3014,7 +3015,7 @@ class _PanelSettingsState extends State<_PanelSettings> {
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 520),
         child: _AnalyticsCard(
-          title: 'الفترة الافتراضية عند فتح التقارير',
+          title: AppLocalizations.of(context)!.defaultReportPeriod,
           subtitle: 'عند الحفظ تُحدَّث الفترة الحالية وتُخزَّن للمرّة القادمة.',
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -3023,9 +3024,9 @@ class _PanelSettingsState extends State<_PanelSettings> {
                 children: [
                   Expanded(
                     child: TextField(
-                      decoration: const InputDecoration(
-                        labelText: 'عدد الأيام (1–365)',
-                        border: OutlineInputBorder(borderRadius: AppShape.none),
+                      decoration: InputDecoration(
+                        labelText: AppLocalizations.of(context)!.dayCount,
+                        border: const OutlineInputBorder(borderRadius: AppShape.none),
                       ),
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -3044,11 +3045,11 @@ class _PanelSettingsState extends State<_PanelSettings> {
                 style: FilledButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
-                child: const Text('حفظ وتطبيق'),
+                child: Text(AppLocalizations.of(context)!.saveAndApply),
               ),
               const SizedBox(height: 24),
               Text(
-                'مستقبلاً: تصدير PDF/Excel، جدولة تقارير، وصلاحيات عرض حسب الدور.',
+                AppLocalizations.of(context)!.futureFeatures,
                 style: TextStyle(
                   fontSize: 11,
                   color: cs.onSurfaceVariant.withValues(alpha: 0.85),
@@ -3087,7 +3088,7 @@ class _ErrorPane extends StatelessWidget {
             const SizedBox(height: 16),
             FilledButton(
               onPressed: onRetry,
-              child: const Text('إعادة المحاولة'),
+              child: Text(AppLocalizations.of(context)!.retryAction),
             ),
           ],
         ),
@@ -3245,13 +3246,13 @@ class _InvoiceCountBadge extends StatelessWidget {
       children: [
         tile(
           icon: Icons.receipt_long_rounded,
-          label: 'عدد الفواتير',
+          label: AppLocalizations.of(context)!.invoiceCount,
           value: '$invoiceCount',
           color: const Color(0xFFD97706),
         ),
         tile(
           icon: Icons.undo_rounded,
-          label: 'عدد المرتجعات',
+          label: AppLocalizations.of(context)!.returnCountLabel,
           value: '$returnCount',
           color: const Color(0xFFDC2626),
         ),
@@ -3372,7 +3373,7 @@ class _DailyBars extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: Center(
           child: Text(
-            'لا بيانات يومية في هذه الفترة',
+            AppLocalizations.of(context)!.noDailyDataInPeriod,
             style: TextStyle(color: cs.onSurfaceVariant),
           ),
         ),

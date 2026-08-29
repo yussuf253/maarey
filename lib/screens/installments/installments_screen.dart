@@ -8,6 +8,7 @@ import '../../services/database_helper.dart';
 import '../../theme/design_tokens.dart';
 import '../../utils/screen_layout.dart';
 import 'installment_details_screen.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 final _numFmt = NumberFormat('#,##0', 'en');
 final _dateFmt = DateFormat('dd/MM/yyyy', 'en');
@@ -64,7 +65,7 @@ class InstallmentsScreen extends StatefulWidget {
 
 class _InstallmentsScreenState extends State<InstallmentsScreen>
     with SingleTickerProviderStateMixin {
-  static const _tabLabels = ['الكل', 'نشطة', 'متأخرة', 'مكتملة'];
+  static final _tabLabels = ['الكل', 'نشطة', 'متأخرة', 'مكتملة'];
 
   final DatabaseHelper _db = DatabaseHelper();
   final TextEditingController _search = TextEditingController();
@@ -195,18 +196,18 @@ class _InstallmentsScreenState extends State<InstallmentsScreen>
         child: Scaffold(
           backgroundColor: theme.scaffoldBackgroundColor,
           appBar: AppBar(
-            title: const Text(
-              'خطط التقسيط',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            title: Text(
+              AppLocalizations.of(context)!.installmentPlans,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
             backgroundColor: cs.primary,
             foregroundColor: cs.onPrimary,
             elevation: 0,
             actions: [
-              const IconButton(
-                tooltip: 'تحديث',
+              IconButton(
+                tooltip: AppLocalizations.of(context)!.updateAction,
                 onPressed: null,
-                icon: Icon(Icons.refresh_rounded),
+                icon: const Icon(Icons.refresh_rounded),
               ),
             ],
           ),
@@ -231,16 +232,16 @@ class _InstallmentsScreenState extends State<InstallmentsScreen>
       child: Scaffold(
         backgroundColor: theme.scaffoldBackgroundColor,
         appBar: AppBar(
-          title: const Text(
-            'خطط التقسيط',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          title: Text(
+            AppLocalizations.of(context)!.installmentPlans,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           ),
           backgroundColor: cs.primary,
           foregroundColor: cs.onPrimary,
           elevation: 0,
           actions: [
             IconButton(
-              tooltip: 'تحديث',
+              tooltip: AppLocalizations.of(context)!.updateAction,
               onPressed: _refreshFromServer,
               icon: const Icon(Icons.refresh_rounded),
             ),
@@ -426,7 +427,7 @@ class _InstallmentStatsBar extends StatelessWidget {
                     const SizedBox(width: 8),
                     Expanded(
                       child: _InstStatChip(
-                        label: 'خطط نشطة',
+                        label: AppLocalizations.of(context)!.activePlans,
                         value: '$activePlans',
                         color: const Color(0xFF0E7490),
                         icon: Icons.schedule_rounded,
@@ -440,7 +441,7 @@ class _InstallmentStatsBar extends StatelessWidget {
                   children: [
                     Expanded(
                       child: _InstStatChip(
-                        label: 'متأخرة',
+                        label: AppLocalizations.of(context)!.overdueLabel,
                         value: '$overduePlans',
                         color: overduePlans > 0
                             ? const Color(0xFFDC2626)
@@ -475,7 +476,7 @@ class _InstallmentStatsBar extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               _InstStatChip(
-                label: 'خطط نشطة',
+                label: AppLocalizations.of(context)!.activePlans,
                 value: '$activePlans',
                 color: const Color(0xFF0E7490),
                 icon: Icons.schedule_rounded,
@@ -483,7 +484,7 @@ class _InstallmentStatsBar extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               _InstStatChip(
-                label: 'متأخرة',
+                label: AppLocalizations.of(context)!.overdueLabel,
                 value: '$overduePlans',
                 color: overduePlans > 0
                     ? const Color(0xFFDC2626)
@@ -597,7 +598,7 @@ class _InstallmentSearchBar extends StatelessWidget {
             style: TextStyle(color: cs.onSurface),
             cursorColor: cs.primary,
             decoration: InputDecoration(
-              hintText: 'بحث: عميل، منتج، رقم خطة، رقم فاتورة…',
+              hintText: AppLocalizations.of(context)!.searchPlaceholder,
               hintStyle: TextStyle(fontSize: 13, color: cs.onSurfaceVariant),
               prefixIcon: Icon(
                 Icons.search_rounded,
@@ -617,7 +618,7 @@ class _InstallmentSearchBar extends StatelessWidget {
               suffixIcon: value.text.isNotEmpty
                   ? IconButton(
                       icon: const Icon(Icons.close_rounded, size: 18),
-                      tooltip: 'مسح البحث',
+                      tooltip: AppLocalizations.of(context)!.clearSearchLabel,
                       onPressed: controller.clear,
                     )
                   : null,
@@ -796,7 +797,7 @@ class _PlanListTile extends StatelessWidget {
     final statusColor = overdue
         ? const Color(0xFFDC2626)
         : (settled ? const Color(0xFF15803D) : const Color(0xFF3B82F6));
-    final statusLabel = settled ? 'مكتملة' : (overdue ? 'متأخرة' : 'نشطة');
+    final statusLabel = settled ? 'مكتملة' : (overdue ? AppLocalizations.of(context)!.overdueLabel : 'نشطة');
 
     final fill = isDark ? AppColors.cardDark : colorScheme.surface;
     final r = BorderRadius.circular(12);
@@ -805,7 +806,7 @@ class _PlanListTile extends StatelessWidget {
         : 0.0;
     final ratio = ratioRaw.isFinite ? ratioRaw : 0.0;
 
-    final prod = (productSummary ?? 'جاري تحميل أصناف الفاتورة…').trim();
+    final prod = (productSummary ?? AppLocalizations.of(context)!.loadingInvoiceItems).trim();
 
     /// Material بلون سطحي + InkWell بلا موجة — يتفادى طبقة مواد شفافة فوق الديكور (مشاكل عرض على الويب).
     return Material(
@@ -934,7 +935,7 @@ class _PlanListTile extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'المتبقي',
+                              AppLocalizations.of(context)!.remainingLabel,
                               style: _planTextStyle(
                                 context,
                                 fontSize: 11,
@@ -959,7 +960,7 @@ class _PlanListTile extends StatelessWidget {
                       ),
                       Expanded(
                         child: _AmountChip(
-                          label: 'المدفوع',
+                          label: AppLocalizations.of(context)!.paidLabel,
                           amount: '${_numFmt.format(plan.paidAmount)} د.ع',
                           labelColor: mutedC,
                           valueColor: titleC,
@@ -967,7 +968,7 @@ class _PlanListTile extends StatelessWidget {
                       ),
                       Expanded(
                         child: _AmountChip(
-                          label: 'الإجمالي',
+                          label: AppLocalizations.of(context)!.totalAmountLabel,
                           amount: '${_numFmt.format(plan.totalAmount)} د.ع',
                           labelColor: mutedC,
                           valueColor: titleC,
@@ -1047,7 +1048,7 @@ class _PlanListTile extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 6),
                       child: Text(
-                        'تنبيه: يوجد قسط متأخر',
+                        AppLocalizations.of(context)!.overdueInstallmentWarning,
                         style: _planTextStyle(
                           context,
                           fontSize: 12,
@@ -1058,7 +1059,7 @@ class _PlanListTile extends StatelessWidget {
                     ),
                   const SizedBox(height: 4),
                   Text(
-                    'اضغط للتفاصيل الكاملة والجدول',
+                    AppLocalizations.of(context)!.tapForFullDetails,
                     style: _planTextStyle(
                       context,
                       fontSize: 11,
@@ -1164,17 +1165,17 @@ class _EmptyState extends StatelessWidget {
             Text(
               hasPlans
                   ? (filterActive
-                        ? 'لا توجد خطط ضمن البحث أو التصفية الحالية'
-                        : 'لا نتائج')
-                  : 'لا توجد خطط تقسيط',
+                        ? AppLocalizations.of(context)!.noPlansInCurrentFilter
+                        : AppLocalizations.of(context)!.filterNone)
+                  : AppLocalizations.of(context)!.noInstallmentPlans,
               textAlign: TextAlign.center,
               style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
             ),
             const SizedBox(height: 8),
             Text(
               hasPlans
-                  ? 'امسح البحث (×) أو انتقل لتبويب «الكل» أو غيّر التبويب أعلاه.'
-                  : 'بعد حفظ فاتورة تقسيط تُنشأ الخطة تلقائياً وتظهر هنا.',
+                  ? AppLocalizations.of(context)!.clearSearchOrChangeTab
+                  : AppLocalizations.of(context)!.planAutoCreatedAfterSave,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: colorScheme.onSurfaceVariant,

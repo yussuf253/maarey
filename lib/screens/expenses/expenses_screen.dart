@@ -20,6 +20,7 @@ import '../../widgets/inputs/app_input.dart';
 import '../../widgets/inputs/app_price_input.dart';
 import 'expense_receipt_printer.dart';
 import 'expense_report_printer.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 final _dateDispFmt = DateFormat('dd/MM/yyyy', 'en');
 
@@ -244,8 +245,8 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
     final sb = StringBuffer(bom);
     sb.writeln('الفئة,الوصف,المبلغ,التاريخ,الحالة,متكرر,الموظف');
     for (final e in _items) {
-      final status = e.status == ExpenseStatus.paid ? 'مدفوع' : 'غير مدفوع';
-      final rec = e.isRecurring ? 'نعم' : 'لا';
+      final status = e.status == ExpenseStatus.paid ? AppLocalizations.of(context)!.paidLabel2 : AppLocalizations.of(context)!.unpaidLabel;
+      final rec = e.isRecurring ? AppLocalizations.of(context)!.yesLabel : AppLocalizations.of(context)!.noLabel;
       final desc = e.description.replaceAll(',', '،');
       final emp = e.employeeName.replaceAll(',', '،');
       sb.writeln(
@@ -255,8 +256,8 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
     await Clipboard.setData(ClipboardData(text: sb.toString()));
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('تم نسخ الجدول إلى الحافظة (لصق في Excel).'),
+      SnackBar(
+        content: Text(AppLocalizations.of(context)!.tableCopiedToClipboard),
       ),
     );
   }
@@ -311,16 +312,16 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
         return Directionality(
           textDirection: TextDirection.rtl,
           child: AlertDialog(
-            title: const Text('حذف المصروف؟'),
-            content: const Text('هل تريد حذف هذا المصروف؟ لا يمكن التراجع.'),
+            title: Text(AppLocalizations.of(context)!.deleteExpenseLabel),
+            content: Text(AppLocalizations.of(context)!.deleteExpenseConfirm),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(ctx, false),
-                child: const Text('إلغاء'),
+                child: Text(AppLocalizations.of(context)!.cancelLabel2),
               ),
               FilledButton(
                 onPressed: () => Navigator.pop(ctx, true),
-                child: const Text('حذف'),
+                child: Text(AppLocalizations.of(context)!.deleteLabel),
               ),
             ],
           ),
@@ -398,19 +399,19 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
               child: Scaffold(
                 backgroundColor: cs.surfaceContainerLowest,
                 appBar: AppBar(
-                  title: const Text('المصروفات'),
+                  title: Text(AppLocalizations.of(context)!.expensesTitle),
                   // AppBar Consolidation (Golden §9.7):
                   // - على الموبايل: refresh + overflow menu (export + print).
                   // - على tablet/desktop: refresh + export + print كأيقونات منفصلة.
                   actions: isPhone
                       ? [
                           IconButton(
-                            tooltip: 'تحديث (F5)',
+                            tooltip: AppLocalizations.of(context)!.refreshButton,
                             onPressed: _loading ? null : _refreshFromServer,
                             icon: const Icon(Icons.refresh_rounded),
                           ),
                           PopupMenuButton<String>(
-                            tooltip: 'المزيد',
+                            tooltip: AppLocalizations.of(context)!.more,
                             icon: const Icon(Icons.more_vert_rounded),
                             onSelected: (v) {
                               if (v == 'export' && !_loading) {
@@ -419,12 +420,12 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                 _openReportDialog();
                               }
                             },
-                            itemBuilder: (_) => const [
+                            itemBuilder: (_) => [
                               PopupMenuItem(
                                 value: 'export',
                                 child: ListTile(
-                                  leading: Icon(Icons.table_chart_outlined),
-                                  title: Text('تصدير (نسخ Excel)'),
+                                  leading: const Icon(Icons.table_chart_outlined),
+                                  title: Text(AppLocalizations.of(context)!.exportExcel),
                                   contentPadding: EdgeInsets.zero,
                                   dense: true,
                                 ),
@@ -432,8 +433,8 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                               PopupMenuItem(
                                 value: 'print',
                                 child: ListTile(
-                                  leading: Icon(Icons.print_outlined),
-                                  title: Text('طباعة تقرير فترة'),
+                                  leading: const Icon(Icons.print_outlined),
+                                  title: Text(AppLocalizations.of(context)!.printPeriodReport),
                                   contentPadding: EdgeInsets.zero,
                                   dense: true,
                                 ),
@@ -443,26 +444,26 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                         ]
                       : [
                           IconButton(
-                            tooltip: 'تصدير (نسخ لـ Excel)',
+                            tooltip: AppLocalizations.of(context)!.exportToExcel,
                             onPressed:
                                 _loading ? null : _exportExpensesToClipboard,
                             icon: const Icon(Icons.table_chart_outlined),
                           ),
                           IconButton(
-                            tooltip: 'طباعة تقرير فترة',
+                            tooltip: AppLocalizations.of(context)!.printPeriodReport,
                             onPressed: _openReportDialog,
                             icon: const Icon(Icons.print_outlined),
                           ),
                           IconButton(
-                            tooltip: 'تحديث (F5)',
+                            tooltip: AppLocalizations.of(context)!.refreshButton,
                             onPressed: _loading ? null : _refreshFromServer,
                             icon: const Icon(Icons.refresh_rounded),
                           ),
                         ],
-                  bottom: const TabBar(
+                  bottom: TabBar(
                     tabs: [
-                      Tab(text: 'السجل'),
-                      Tab(text: 'تحليلات'),
+                      Tab(text: AppLocalizations.of(context)!.history),
+                      Tab(text: AppLocalizations.of(context)!.analytics),
                     ],
                   ),
                 ),
@@ -471,7 +472,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                   heroTag: 'exp_add_btn',
                   onPressed: () => unawaited(_openEditor()),
                   icon: const Icon(Icons.add_rounded),
-                  label: const Text('إضافة مصروف'),
+                  label: Text(AppLocalizations.of(context)!.addExpense),
                 ),
               body: TabBarView(
                 children: [
@@ -623,7 +624,7 @@ class _ExpensesLedgerTab extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Text(
-                                'إجمالي المصروفات ضمن الفترة',
+                                AppLocalizations.of(context)!.totalExpensesInPeriod,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w800,
                                   color: cs.onSurface,
@@ -653,7 +654,7 @@ class _ExpensesLedgerTab extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Text(
-                                'إجمالي المصروفات ضمن الفترة',
+                                AppLocalizations.of(context)!.totalExpensesInPeriod,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w800,
                                   color: cs.onSurface,
@@ -747,25 +748,25 @@ class _ExpensesLedgerTab extends StatelessWidget {
                             onPressed: () => unawaited(
                               onPickPreset(_ExpenseDatePreset.today),
                             ),
-                            child: const Text('اليوم'),
+                            child: Text(AppLocalizations.of(context)!.today),
                           ),
                           OutlinedButton(
                             onPressed: () => unawaited(
                               onPickPreset(_ExpenseDatePreset.thisWeek),
                             ),
-                            child: const Text('هذا الأسبوع'),
+                            child: Text(AppLocalizations.of(context)!.weekLabel),
                           ),
                           OutlinedButton(
                             onPressed: () => unawaited(
                               onPickPreset(_ExpenseDatePreset.thisMonth),
                             ),
-                            child: const Text('هذا الشهر'),
+                            child: Text(AppLocalizations.of(context)!.monthLabel),
                           ),
                           OutlinedButton(
                             onPressed: () => unawaited(
                               onPickPreset(_ExpenseDatePreset.thisYear),
                             ),
-                            child: const Text('هذا العام'),
+                            child: Text(AppLocalizations.of(context)!.yearLabel),
                           ),
                         ],
                       ),
@@ -782,9 +783,9 @@ class _ExpensesLedgerTab extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: AppInput(
-                                    label: 'بحث',
+                                    label: AppLocalizations.of(context)!.searchLabel,
                                     showLabel: false,
-                                    hint: 'بحث (وصف أو فئة)',
+                                    hint: AppLocalizations.of(context)!.searchDescriptionOrCategory,
                                     controller: searchCtrl,
                                     focusNode: searchFocus,
                                     prefixIcon: const Icon(
@@ -794,7 +795,7 @@ class _ExpensesLedgerTab extends StatelessWidget {
                                 ),
                                 if (tv.text.trim().isNotEmpty)
                                   IconButton(
-                                    tooltip: 'مسح البحث',
+                                    tooltip: AppLocalizations.of(context)!.clearSearchLabel,
                                     onPressed: () {
                                       searchCtrl.clear();
                                       searchFocus.requestFocus();
@@ -811,14 +812,14 @@ class _ExpensesLedgerTab extends StatelessWidget {
                             value: categoryId,
                             isExpanded: true,
                             borderRadius: ac.md,
-                            hint: const Text('الفئة'),
+                            hint: Text(AppLocalizations.of(context)!.category),
                             items: [
-                              const DropdownMenuItem<int?>(
+                              DropdownMenuItem<int?>(
                                 value: null,
                                 child: Row(
                                   children: [
-                                    Text('🔵 '),
-                                    Expanded(child: Text('كل الفئات')),
+                                    const Text('🔵 '),
+                                    Expanded(child: Text(AppLocalizations.of(context)!.allCategoriesLabel)),
                                   ],
                                 ),
                               ),
@@ -850,22 +851,22 @@ class _ExpensesLedgerTab extends StatelessWidget {
                             value: status,
                             isExpanded: true,
                             borderRadius: ac.md,
-                            items: const [
+                            items: [
                               DropdownMenuItem(
                                 value: 'all',
-                                child: Text('الكل'),
+                                child: Text(AppLocalizations.of(context)!.allFilter),
                               ),
                               DropdownMenuItem(
                                 value: 'paid',
-                                child: Text('مدفوع'),
+                                child: Text(AppLocalizations.of(context)!.paidLabel2),
                               ),
                               DropdownMenuItem(
                                 value: 'pending',
-                                child: Text('غير مدفوع'),
+                                child: Text(AppLocalizations.of(context)!.unpaidLabel),
                               ),
                               DropdownMenuItem(
                                 value: 'recurring',
-                                child: Text('متكرر'),
+                                child: Text(AppLocalizations.of(context)!.recurringLabel),
                               ),
                             ],
                             onChanged: (v) {
@@ -921,7 +922,7 @@ class _ExpensesLedgerTab extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'لا توجد مصروفات ضمن هذه الفترة',
+                  AppLocalizations.of(context)!.noExpensesInPeriod,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
@@ -930,7 +931,7 @@ class _ExpensesLedgerTab extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'جرّب تغيير نطاق التاريخ أو الفلتر',
+                  AppLocalizations.of(context)!.tryChangingDateRange,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 12.5,
@@ -941,7 +942,7 @@ class _ExpensesLedgerTab extends StatelessWidget {
                 FilledButton.icon(
                   onPressed: onAddExpense,
                   icon: const Icon(Icons.add_rounded),
-                  label: const Text('إضافة مصروف'),
+                  label: Text(AppLocalizations.of(context)!.addExpense),
                 ),
               ],
             ),
@@ -1023,9 +1024,9 @@ class _ExpensesLedgerTab extends StatelessWidget {
                                         .withValues(alpha: 0.22),
                                     borderRadius: BorderRadius.circular(999),
                                   ),
-                                  child: const Text(
-                                    'متكرر',
-                                    style: TextStyle(
+                                  child: Text(
+                                    AppLocalizations.of(context)!.recurringLabel,
+                                    style: const TextStyle(
                                       fontWeight: FontWeight.w800,
                                       fontSize: 10.5,
                                       color: AppSemanticColors.supplier,
@@ -1048,7 +1049,7 @@ class _ExpensesLedgerTab extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(999),
                                 ),
                                 child: Text(
-                                  pending ? 'غير مدفوع' : 'مدفوع',
+                                  pending ? AppLocalizations.of(context)!.unpaidLabel : AppLocalizations.of(context)!.paidLabel2,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w800,
                                     fontSize: 10.5,
@@ -1115,7 +1116,7 @@ class _ExpensesLedgerTab extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 2),
                                 Text(
-                                  'فاتورة مرفقة',
+                                  AppLocalizations.of(context)!.invoiceAttached,
                                   style: TextStyle(
                                     fontSize: 11,
                                     color: cs.onSurfaceVariant,
@@ -1144,7 +1145,7 @@ class _ExpensesLedgerTab extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             IconButton(
-                              tooltip: 'تعديل',
+                              tooltip: AppLocalizations.of(context)!.editLabel,
                               visualDensity: VisualDensity.compact,
                               constraints: const BoxConstraints(
                                 minWidth: 40,
@@ -1157,7 +1158,7 @@ class _ExpensesLedgerTab extends StatelessWidget {
                               ),
                             ),
                             IconButton(
-                              tooltip: 'طباعة إيصال',
+                              tooltip: AppLocalizations.of(context)!.printReceipt,
                               visualDensity: VisualDensity.compact,
                               constraints: const BoxConstraints(
                                 minWidth: 40,
@@ -1167,7 +1168,7 @@ class _ExpensesLedgerTab extends StatelessWidget {
                               icon: const Icon(Icons.print_rounded),
                             ),
                             IconButton(
-                              tooltip: 'حذف',
+                              tooltip: AppLocalizations.of(context)!.deleteLabel,
                               visualDensity: VisualDensity.compact,
                               constraints: const BoxConstraints(
                                 minWidth: 40,
@@ -1253,7 +1254,7 @@ class _ExpensesAnalyticsTab extends StatelessWidget {
                   const SizedBox(width: 10),
                   Expanded(
                     child: Text(
-                      'تحليلات المصروفات ضمن الفترة',
+                      AppLocalizations.of(context)!.expenseBreakdown,
                       style: TextStyle(
                         fontWeight: FontWeight.w800,
                         color: cs.onSurface,
@@ -1297,7 +1298,7 @@ class _ExpensesAnalyticsTab extends StatelessWidget {
                   if (slices.isNotEmpty) const SizedBox(height: 12),
                   if (byCategory.isEmpty)
                     Text(
-                      'لا توجد بيانات.',
+                      AppLocalizations.of(context)!.noCategoryData,
                       style: TextStyle(color: cs.onSurfaceVariant),
                     )
                   else
@@ -1321,7 +1322,7 @@ class _ExpensesAnalyticsTab extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    'اتجاه يومي',
+                    AppLocalizations.of(context)!.dailyTrend,
                     style: TextStyle(
                       fontWeight: FontWeight.w800,
                       color: cs.onSurface,
@@ -1402,7 +1403,7 @@ class _ExpensesAnalyticsTab extends StatelessWidget {
                       Icon(Icons.stacked_line_chart_rounded, color: cs.primary),
                       const SizedBox(width: 8),
                       Text(
-                        'اتجاه الفئات المكدّس عبر الزمن',
+                        AppLocalizations.of(context)!.categoryStacked,
                         style: TextStyle(
                           fontWeight: FontWeight.w800,
                           color: cs.onSurface,
@@ -1520,7 +1521,7 @@ class _MiniBars extends StatelessWidget {
     if (points.isEmpty) {
       return Center(
         child: Text(
-          'لا توجد بيانات.',
+          AppLocalizations.of(context)!.noCategoryData,
           style: TextStyle(color: cs.onSurfaceVariant),
         ),
       );
@@ -2433,7 +2434,7 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
       if (!mounted) return;
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('تعذر اختيار الصورة.')));
+      ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.imageSelectionFailed)));
     }
   }
 
@@ -2511,7 +2512,7 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
   }
 
   String? _extraTaxDb() {
-    if (_currentCategoryName() != 'ضرائب') return null;
+    if (_currentCategoryName() != AppLocalizations.of(context)!.taxes) return null;
     final s = _taxKindCtrl.text.trim();
     return s.isEmpty ? null : s;
   }
@@ -2542,16 +2543,16 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
       builder: (ctx) => Directionality(
         textDirection: TextDirection.rtl,
         child: AlertDialog(
-          title: const Text('إغلاق النموذج؟'),
-          content: const Text('هل تريد إغلاق النموذج؟ البيانات لن تُحفظ'),
+          title: Text(AppLocalizations.of(context)!.closeForm),
+          content: Text(AppLocalizations.of(context)!.closeFormConfirm),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: const Text('البقاء'),
+              child: Text(AppLocalizations.of(context)!.stay),
             ),
             FilledButton(
               onPressed: () => Navigator.pop(ctx, true),
-              child: const Text('إغلاق'),
+              child: Text(AppLocalizations.of(context)!.closeLabel),
             ),
           ],
         ),
@@ -2578,7 +2579,7 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
     if (_wizardStep != 2 || _categoryId <= 0 || amount == null) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('يرجى اختيار فئة وإدخال مبلغ صحيح.')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.selectCategoryAndAmount)),
       );
       return;
     }
@@ -2610,7 +2611,7 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
         );
         if (!mounted) return;
         messenger.showSnackBar(
-          const SnackBar(content: Text('تم تسجيل المصروف بنجاح')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.expenseSaved)),
         );
         Navigator.of(context).pop((ok: true, newId: newId));
       } else {
@@ -2631,7 +2632,7 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
         );
         if (!mounted) return;
         messenger.showSnackBar(
-          const SnackBar(content: Text('تم تحديث المصروف بنجاح')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.expenseUpdated)),
         );
         Navigator.of(context).pop((ok: true, newId: existing.id));
       }
@@ -2647,7 +2648,7 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final ac = context.appCorners;
-    final title = widget.existing == null ? 'إضافة مصروف' : 'تعديل مصروف';
+    final title = widget.existing == null ? AppLocalizations.of(context)!.addExpense : AppLocalizations.of(context)!.editExpense;
     final catName = _currentCategoryName();
     final td = DateTime(
       DateTime.now().year,
@@ -2742,7 +2743,7 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
                     color: cs.primary,
                   ),
                   label: Text(
-                    'اختيار فئة أخرى',
+                    AppLocalizations.of(context)!.chooseOtherCategory,
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       color: cs.primary,
@@ -2752,7 +2753,7 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
               ),
             DropdownButtonFormField<int>(
               value: _categoryId <= 0 ? null : _categoryId,
-              decoration: const InputDecoration(labelText: 'الفئة *'),
+              decoration: InputDecoration(labelText: AppLocalizations.of(context)!.categoryRequired),
               items: [
                 for (final c in widget.categories)
                   DropdownMenuItem<int>(
@@ -2774,17 +2775,17 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
               ],
               onChanged: _onCategoryChanged,
             ),
-            if (catName == 'رواتب') ...[
+            if (catName == AppLocalizations.of(context)!.salaries) ...[
               const SizedBox(height: 10),
               Row(
                 children: [
                   Text(
-                    'الموظف (المستفيد)',
+                    AppLocalizations.of(context)!.employeeBeneficiary,
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    '(اختياري)',
+                    AppLocalizations.of(context)!.optional,
                     style: TextStyle(
                       fontSize: 11.5,
                       color: cs.onSurfaceVariant,
@@ -2806,7 +2807,7 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
                     suffixIcon: const Icon(Icons.search_rounded),
                   ),
                   child: Text(
-                    _employeeLabel.isEmpty ? 'اختر موظفاً' : _employeeLabel,
+                    _employeeLabel.isEmpty ? AppLocalizations.of(context)!.selectEmployee : _employeeLabel,
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       color: _employeeLabel.isEmpty
@@ -2822,31 +2823,31 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
               AppInput(
                 label: 'رقم الفاتورة',
                 isOptional: true,
-                hint: 'رقم فاتورة الخدمة',
+                hint: AppLocalizations.of(context)!.serviceInvoiceNumber,
                 controller: _invoiceRefCtrl,
               ),
             ],
             if (catName == 'إيجار') ...[
               const SizedBox(height: 12),
               AppInput(
-                label: 'اسم العقار / الجهة',
+                label: AppLocalizations.of(context)!.propertyOrEntity,
                 isOptional: true,
-                hint: 'اسم المالك أو العقار',
+                hint: AppLocalizations.of(context)!.ownerOrProperty,
                 controller: _landlordCtrl,
               ),
             ],
-            if (catName == 'ضرائب') ...[
+            if (catName == AppLocalizations.of(context)!.taxes) ...[
               const SizedBox(height: 12),
               AppInput(
-                label: 'نوع الضريبة',
+                label: AppLocalizations.of(context)!.taxType,
                 isOptional: true,
-                hint: 'مثال: ضريبة الدخل، ضريبة القيمة المضافة',
+                hint: AppLocalizations.of(context)!.taxTypeExample,
                 controller: _taxKindCtrl,
               ),
             ],
             const SizedBox(height: 12),
             AppPriceInput(
-              label: 'المبلغ (د.ع)',
+              label: AppLocalizations.of(context)!.amountIQD,
               isRequired: true,
               controller: _amountCtrl,
               focusNode: _amountFocus,
@@ -2863,7 +2864,7 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
                       Row(
                         children: [
                           Text(
-                            'تاريخ الدفع',
+                            AppLocalizations.of(context)!.paymentDate,
                             style: Theme.of(context).textTheme.titleSmall,
                           ),
                           Text(
@@ -2913,11 +2914,11 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
                         ),
                       ),
                       if (warnFuturePaid)
-                        const Padding(
-                          padding: EdgeInsets.only(top: 6),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 6),
                           child: Text(
-                            'هل المصروف مدفوع مسبقاً؟',
-                            style: TextStyle(
+                            AppLocalizations.of(context)!.isExpensePrepaid,
+                            style: const TextStyle(
                               fontSize: 11.5,
                               color: AppSemanticColors.warning,
                               fontWeight: FontWeight.w600,
@@ -2931,16 +2932,16 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
                 SizedBox(
                   width: 130,
                   child: DropdownButtonFormField<ExpenseStatus>(
-                    decoration: const InputDecoration(labelText: 'الحالة'),
+                    decoration: InputDecoration(labelText: AppLocalizations.of(context)!.expenseStatus),
                     value: _status,
-                    items: const [
+                    items: [
                       DropdownMenuItem(
                         value: ExpenseStatus.paid,
-                        child: Text('مدفوع'),
+                        child: Text(AppLocalizations.of(context)!.paidLabel2),
                       ),
                       DropdownMenuItem(
                         value: ExpenseStatus.pending,
-                        child: Text('غير مدفوع'),
+                        child: Text(AppLocalizations.of(context)!.unpaidLabel),
                       ),
                     ],
                     onChanged: (v) =>
@@ -2970,11 +2971,11 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
             ],
             const SizedBox(height: 12),
             AppInput(
-              label: catName == 'مصاريف متنوعة'
-                  ? 'سبب الصرف (يُطبع مع الإيصال)'
-                  : 'الوصف',
+              label: catName == AppLocalizations.of(context)!.miscExpenses
+                  ? AppLocalizations.of(context)!.expenseReason
+                  : AppLocalizations.of(context)!.expenseDescription,
               isOptional: true,
-              hint: 'الوصف (اختياري)',
+              hint: AppLocalizations.of(context)!.descriptionOptional,
               controller: _descCtrl,
               minLines: 1,
               maxLines: 3,
@@ -3031,7 +3032,7 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
                     Align(
                       alignment: AlignmentDirectional.centerStart,
                       child: IconButton(
-                        tooltip: 'إغلاق',
+                        tooltip: AppLocalizations.of(context)!.closeLabel,
                         icon: Icon(Icons.close_rounded, color: cs.onSurface),
                         onPressed: _saving
                             ? null
@@ -3058,7 +3059,7 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
                   child: Align(
                     alignment: AlignmentDirectional.centerStart,
                     child: Text(
-                      'اختر فئة المصروف',
+                      AppLocalizations.of(context)!.selectInvoiceCategory,
                       style: TextStyle(
                         color: cs.onSurfaceVariant,
                         fontWeight: FontWeight.w700,
@@ -3093,8 +3094,8 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
                             ),
                       label: Text(
                         _saving
-                            ? 'جارٍ الحفظ...'
-                            : (widget.existing == null ? 'حفظ' : 'تحديث'),
+                            ? AppLocalizations.of(context)!.saving
+                            : (widget.existing == null ? AppLocalizations.of(context)!.saveAction : AppLocalizations.of(context)!.updateAction),
                       ),
                     ),
                   ),
@@ -3162,8 +3163,8 @@ class _AttachmentPicker extends StatelessWidget {
               children: [
                 Text(
                   has
-                      ? 'تم إرفاق صورة الفاتورة'
-                      : 'إرفاق صورة الفاتورة (اختياري)',
+                      ? AppLocalizations.of(context)!.invoiceImageAttached
+                      : AppLocalizations.of(context)!.attachInvoiceImageOptional,
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     color: cs.onSurface,
@@ -3171,8 +3172,8 @@ class _AttachmentPicker extends StatelessWidget {
                 ),
                 Text(
                   has
-                      ? 'يمكنك تغييرها أو إزالتها في أي وقت.'
-                      : 'مفيد لفواتير الماء/الكهرباء/الضرائب.',
+                      ? AppLocalizations.of(context)!.changeOrRemoveAnytime
+                      : AppLocalizations.of(context)!.usefulForUtilityBills,
                   style: TextStyle(fontSize: 11.5, color: cs.onSurfaceVariant),
                 ),
               ],
@@ -3181,14 +3182,14 @@ class _AttachmentPicker extends StatelessWidget {
           const SizedBox(width: 8),
           if (has)
             IconButton(
-              tooltip: 'إزالة',
+              tooltip: AppLocalizations.of(context)!.remove,
               onPressed: onClear,
               icon: Icon(Icons.close_rounded, color: cs.error),
             ),
           FilledButton.tonalIcon(
             onPressed: onPick,
             icon: const Icon(Icons.photo_library_outlined, size: 18),
-            label: Text(has ? 'تغيير' : 'اختيار'),
+            label: Text(has ? AppLocalizations.of(context)!.change : AppLocalizations.of(context)!.choose),
           ),
         ],
       ),
@@ -3226,10 +3227,10 @@ class _RecurringPicker extends StatelessWidget {
             children: [
               Icon(Icons.replay_rounded, color: cs.primary),
               const SizedBox(width: 8),
-              const Expanded(
+              Expanded(
                 child: Text(
-                  'مصروف شهري متكرر',
-                  style: TextStyle(fontWeight: FontWeight.w700),
+                  AppLocalizations.of(context)!.monthlyRecurringExpense,
+                  style: const TextStyle(fontWeight: FontWeight.w700),
                 ),
               ),
               Switch(value: enabled, onChanged: onToggle),
@@ -3240,7 +3241,7 @@ class _RecurringPicker extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'يُستحق يوم',
+                  AppLocalizations.of(context)!.dueDay,
                   style: TextStyle(color: cs.onSurfaceVariant),
                 ),
                 const SizedBox(width: 10),
@@ -3260,7 +3261,7 @@ class _RecurringPicker extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                Text('من كل شهر', style: TextStyle(color: cs.onSurfaceVariant)),
+                Text(AppLocalizations.of(context)!.everyMonth, style: TextStyle(color: cs.onSurfaceVariant)),
               ],
             ),
           ],
@@ -3312,7 +3313,7 @@ class _EmployeePickerDialogState extends State<_EmployeePickerDialog> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: AlertDialog(
-        title: const Text('اختيار موظف'),
+        title: Text(AppLocalizations.of(context)!.selectEmployeeTitle),
         content: SizedBox(
           width: 520,
           height: 420,
@@ -3320,9 +3321,9 @@ class _EmployeePickerDialogState extends State<_EmployeePickerDialog> {
             children: [
               TextField(
                 controller: _searchCtrl,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.search_rounded),
-                  hintText: 'ابحث بالاسم أو اسم المستخدم أو الهاتف',
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.search_rounded),
+                  hintText: AppLocalizations.of(context)!.searchByNameOrPhone,
                 ),
               ),
               const SizedBox(height: 10),
@@ -3332,7 +3333,7 @@ class _EmployeePickerDialogState extends State<_EmployeePickerDialog> {
                     : _items.isEmpty
                     ? Center(
                         child: Text(
-                          'لا توجد نتائج.',
+                          AppLocalizations.of(context)!.noSearchResults,
                           style: TextStyle(color: cs.onSurfaceVariant),
                         ),
                       )
@@ -3374,7 +3375,7 @@ class _EmployeePickerDialogState extends State<_EmployeePickerDialog> {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('إلغاء'),
+            child: Text(AppLocalizations.of(context)!.cancelLabel2),
           ),
         ],
       ),
@@ -3435,13 +3436,13 @@ class _ExpensesStatsBar extends StatelessWidget {
     final chips = <Widget>[
       _ExpenseStatChip(
         icon: Icons.today_rounded,
-        label: 'مصروف اليوم',
+        label: AppLocalizations.of(context)!.todayExpenses,
         value: IraqiCurrencyFormat.formatIqd(todayTotal),
         color: cs.primary,
       ),
       _ExpenseStatChip(
         icon: Icons.calendar_view_month_rounded,
-        label: 'هذا الشهر',
+        label: AppLocalizations.of(context)!.monthLabel,
         value: IraqiCurrencyFormat.formatIqd(monthTotal),
         color: AppSemanticColors.info,
       ),
@@ -3453,7 +3454,7 @@ class _ExpensesStatsBar extends StatelessWidget {
       ),
       _ExpenseStatChip(
         icon: Icons.receipt_long_rounded,
-        label: 'عدد المصروفات',
+        label: AppLocalizations.of(context)!.expenseCount,
         value: NumberFormat.decimalPattern('en').format(items.length),
         color: AppSemanticColors.supplier,
       ),

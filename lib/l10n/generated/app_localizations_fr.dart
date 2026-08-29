@@ -5677,4 +5677,1804 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get currentBalance => 'Solde actuel';
+
+  @override
+  String get reportsTitle => 'Rapports';
+
+  @override
+  String get reportsSections => 'Sections de rapports';
+
+  @override
+  String get defaultPeriod => 'Période par défaut';
+
+  @override
+  String get exportToExcel => 'Exporter (copier vers Excel)';
+
+  @override
+  String get printReport => 'Imprimer rapport de période';
+
+  @override
+  String get salesOverview => 'Aperçu des ventes';
+
+  @override
+  String get financialGauges => 'Indicateurs de performance';
+
+  @override
+  String get gaugesConsistent =>
+      'Cohérent avec les ratios du diagramme circulaire et du tableau';
+
+  @override
+  String get gaugesRelative =>
+      'Distribution relative montrant où va chaque unité de revenu';
+
+  @override
+  String get reportSettings => 'Paramètres de rapports';
+
+  @override
+  String get reportPreferences => 'فترة افتراضية وتفضيلات';
+
+  @override
+  String get periodApplied =>
+      'عند الحفظ تُحدَّث الفترة الحالية وتُخزَّن للمرّة القادمة';
+
+  @override
+  String get currentPeriod => 'الفترة المختارة:';
+
+  @override
+  String get yesterday => 'Hier';
+
+  @override
+  String get thisWeek => 'Cette semaine';
+
+  @override
+  String get thisMonth => 'Ce mois-ci';
+
+  @override
+  String get thisYear => 'Cette année';
+
+  @override
+  String get lastQuarter => 'Trimestre dernier';
+
+  @override
+  String get dailyTrend => 'Tendance quotidienne';
+
+  @override
+  String get weekly => 'Hebdomadaire';
+
+  @override
+  String get monthly => 'Mensuel';
+
+  @override
+  String get quarterly => 'Trimestriel';
+
+  @override
+  String get yearly => 'Annuel';
+
+  @override
+  String get custom => 'Personnalisé';
+
+  @override
+  String get noData => 'Aucune donnée';
+
+  @override
+  String get noDataPeriod => 'Aucune donnée pour cette période';
+
+  @override
+  String get noDailyData => 'Aucune donnée quotidienne';
+
+  @override
+  String get noTrendData => 'Aucune donnée de tendance';
+
+  @override
+  String get noMetricsData => 'لا توجد بيانات لعرض المقاييس';
+
+  @override
+  String get tryDateRange =>
+      'Essayez de modifier la plage de dates ou le filtre';
+
+  @override
+  String get filterNone => 'لا نتائج';
+
+  @override
+  String get clearSearch => 'Effacer la recherche';
+
+  @override
+  String get searchDescriptionCategory => 'بحث (وصف أو فئة)';
+
+  @override
+  String get searchCustomerProductPlan =>
+      'بحث: عميل، منتج، رقم خطة، رقم فاتورة...';
+
+  @override
+  String get salesInvoices => 'Ventes';
+
+  @override
+  String get salesOnly => 'Ventes (non retournées)';
+
+  @override
+  String get dailySales => 'Ventes quotidiennes';
+
+  @override
+  String get totalRevenue => 'Revenu total';
+
+  @override
+  String get totalSalesCount => 'عدد الفواتير';
+
+  @override
+  String get totalReturns => 'Retours totaux';
+
+  @override
+  String get totalExpenses => 'Dépenses totales';
+
+  @override
+  String get netSales => 'Ventes nettes';
+
+  @override
+  String get netAfterExpenses => 'Net après dépenses';
+
+  @override
+  String get netApprox => 'Net approximatif';
+
+  @override
+  String get netApproxDesc => 'صافي تقريبي (بيع − مرتجع)';
+
+  @override
+  String get netSalesPeriod => 'Ventes nettes de la période';
+
+  @override
+  String get salesVsExpenses => 'Ventes vs Dépenses — tendance quotidienne';
+
+  @override
+  String get paymentTypeTrend => 'اتجاه أنواع الدفع عبر الزمن';
+
+  @override
+  String get categoryStacked => 'اتجاه الفئات المكدّس عبر الزمن';
+
+  @override
+  String get employeeSalesTrend => 'اتجاه مبيعات الموظفين عبر الزمن';
+
+  @override
+  String get salesByPaymentType => 'توزيع المبيعات حسب نوع الدفع';
+
+  @override
+  String get salesByCategory => 'توزيع المبيعات حسب الفئة';
+
+  @override
+  String get salesByCustomer => 'توزيع المبيعات على العملاء';
+
+  @override
+  String get salesByEmployee => 'توزيع المبيعات على الموظفين';
+
+  @override
+  String get topProducts => 'Produits les plus vendus';
+
+  @override
+  String get topProductsByRevenue => 'أكثر الأصناف مبيعاً (حسب إيراد البنود)';
+
+  @override
+  String get topCustomers => 'Meilleurs clients';
+
+  @override
+  String get topCustomersByPurchase => 'أكثر العملاء شراءً (حسب اسم الفاتورة)';
+
+  @override
+  String get topEmployees => 'Meilleurs employés';
+
+  @override
+  String get topEmployeesBySales =>
+      'ترتيب حسب إجمالي المبيعات المسجّلة على الفواتير';
+
+  @override
+  String get topCategories => 'أعلى الفئات إيراداً';
+
+  @override
+  String topCategory(Object name) {
+    return 'أعلى فئة: $name';
+  }
+
+  @override
+  String get moreItems => 'Autres';
+
+  @override
+  String get reportAccuracyNote => 'ملاحظات الدقّة';
+
+  @override
+  String get marginAccuracyDesc =>
+      'نسبة تغطية التكلفة — كلما ارتفعت زادت الدقة';
+
+  @override
+  String get fixedCostRatio => 'نسبة السطور ذات التكلفة المثبّتة من الإجمالي';
+
+  @override
+  String costFixedAtSale(Object amount) {
+    return 'مثبّتة وقت البيع: $amount';
+  }
+
+  @override
+  String noCostZeros(Object count) {
+    return 'بدون تكلفة (تُعامَل 0): $count';
+  }
+
+  @override
+  String get expenseAnalysis => 'تحليلات';
+
+  @override
+  String get expenseBreakdown => 'تحليلات المصروفات ضمن الفترة';
+
+  @override
+  String get topExpenses => 'أدنى 10 منتجات ربحاً (مراجعة تسعير)';
+
+  @override
+  String get lowMarginProducts => 'منتجات هامشها منخفض أو سالب';
+
+  @override
+  String get lowMarginDesc =>
+      'منتجات هامشها منخفض أو سالب — قد تحتاج مراجعة السعر أو التكلفة';
+
+  @override
+  String get customerBalances => 'أرصدة العملاء';
+
+  @override
+  String get customerBalancesDesc => 'أرصدة مسجّلة في سجل العملاء';
+
+  @override
+  String get installmentPlans => 'خطط التقسيط';
+
+  @override
+  String get installmentPlansDesc => 'خطط أقساط (فواتير ضمن الفترة)';
+
+  @override
+  String get activePlans => 'خطط نشطة';
+
+  @override
+  String get noInstallmentPlans => 'Aucun plan de versement';
+
+  @override
+  String get noInstallmentSearch => 'لا توجد خطط ضمن البحث أو التصفية الحالية';
+
+  @override
+  String get salesFlowItems => 'فواتير ومبيعات (قيود مرتبطة بفاتورة)';
+
+  @override
+  String get salesInvoicesReturns => 'فواتير / مرتجعات';
+
+  @override
+  String filteredPeriod(Object from, Object to) {
+    return 'الفترة: $from → $to';
+  }
+
+  @override
+  String filteredPlansCount(Object filtered, Object total) {
+    return 'القائمة: $filtered من $total خطة';
+  }
+
+  @override
+  String get employeePerformance =>
+      'جدول — أداء التسجيل حسب اسم الموظف على الفاتورة';
+
+  @override
+  String get employeePerformanceDesc =>
+      'فواتير مسجّلة باسم الموظف (حقل الفاتورة)';
+
+  @override
+  String get loyaltySummary => 'ملخص نقاط وخصومات الولاء';
+
+  @override
+  String get loyaltyGranted =>
+      'نقاط ممنوحة (مجموع النقاط المسجّلة على الفواتير)';
+
+  @override
+  String get loyaltyRedeemed =>
+      'نقاط ممنوحة (مجموع النقاط المسجّلة على الفواتير)';
+
+  @override
+  String get loyaltyDiscounts => 'خصومات ولاء على الفواتير';
+
+  @override
+  String get bestSales => 'تحليل وهامش';
+
+  @override
+  String get bestSalesDesc => 'تحليلات تفاصيل البضاعة والهامش والصافي';
+
+  @override
+  String get backToHome => 'Retour à l\'accueil';
+
+  @override
+  String get selectEmployee => 'اختر موظفاً';
+
+  @override
+  String get selectCustomer => 'اختر عميلاً مسجّلاً';
+
+  @override
+  String get selectCustomerFromList => 'اختيار عميل من القائمة';
+
+  @override
+  String get updateButton => 'تحديث';
+
+  @override
+  String get refreshButton => 'تحديث (F5)';
+
+  @override
+  String get refreshData => 'تحديث البيانات';
+
+  @override
+  String get noItemsRecorded => 'لا توجد أصناف مسجّلة في الفاتورة';
+
+  @override
+  String get salesOnlySection =>
+      'هذا القسم يعرض المبيعات فقط: نقدي/دين/تقسيط/توصيل';
+
+  @override
+  String get thankYou => 'Merci d\'utiliser NaBoo';
+
+  @override
+  String get cashTitle => 'Caisse';
+
+  @override
+  String get cashDrawer => 'الصندوق';
+
+  @override
+  String get openShift => 'Ouvrir le quart';
+
+  @override
+  String get closeShift => 'Fermer le quart';
+
+  @override
+  String get shiftDetails => 'Détails du quart';
+
+  @override
+  String get shiftIdentity => 'هوية الوردية والجلسة';
+
+  @override
+  String get openTime => 'Heure d\'ouverture';
+
+  @override
+  String get closeTime => 'Heure de fermeture';
+
+  @override
+  String get declaredOnOpen => 'النقد المُعلَن عند الفتح (الجرد)';
+
+  @override
+  String get declaredAfterWithdrawal => 'النقد المُعلَن في الصندوق بعد السحب';
+
+  @override
+  String get systemBalanceOpen => 'رصيد النظام عند فتح الوردية';
+
+  @override
+  String get systemBalanceClose => 'رصيد النظام عند الإغلاق';
+
+  @override
+  String get withdrawnOnClose => 'المسحوب عند الإغلاق';
+
+  @override
+  String get pendingDeclared => 'المُعلَن متبقيًّا في الصندوق';
+
+  @override
+  String get shiftMovements => 'الحركات';
+
+  @override
+  String totalMovements(Object count) {
+    return 'إجمالي ما يظهر من حركات في الصندوق لهذه المجموعة: $count حركة';
+  }
+
+  @override
+  String get inflow => 'Entrée';
+
+  @override
+  String get outflow => 'Sortie';
+
+  @override
+  String get inflowLabel => 'وارد (إدخال)';
+
+  @override
+  String get outflowLabel => 'صادر (إخراج)';
+
+  @override
+  String get inflowLineByLine => 'الوارد — سطر بسطر';
+
+  @override
+  String get outflowLineByLine => 'الصادر — سطر بسطر';
+
+  @override
+  String get manualEntry => 'قيد يدوي';
+
+  @override
+  String get manualDeposit => 'إيداع يدوي';
+
+  @override
+  String get manualWithdrawal => 'سحب يدوي';
+
+  @override
+  String get affectsCashbox => 'أثر على الصندوق';
+
+  @override
+  String get cashSales => 'بيع نقدي';
+
+  @override
+  String get creditSalesLabel => 'دين';
+
+  @override
+  String get noOutflowMovements => 'لا توجد حركات صادر في هذه المجموعة';
+
+  @override
+  String get noInflowMovements => 'لا توجد حركات وارد في هذه المجموعة';
+
+  @override
+  String get noLinkedMovements =>
+      'لا توجد في هذه المجموعة حركات مرتبطة برقم فاتورة';
+
+  @override
+  String get otherMovements => 'حركات أخرى';
+
+  @override
+  String get movement => 'حركة';
+
+  @override
+  String get printReceipt => 'طباعة إيصال';
+
+  @override
+  String get depositEntry => 'Dépôt';
+
+  @override
+  String get withdrawalEntry => 'Retrait';
+
+  @override
+  String get cashSummary => 'ملخص الصندوق';
+
+  @override
+  String get summaryInflowOutflow => 'ملخص الوارد والصادر (هذه القائمة)';
+
+  @override
+  String get loyaltyRange => 'ولاء (ضمن الفترة)';
+
+  @override
+  String noShift(Object count) {
+    return 'بدون وردية · $count حركة';
+  }
+
+  @override
+  String get invoiceAttached => 'فاتورة مرفقة';
+
+  @override
+  String get linkedInvoice => 'الفاتورة المرتبطة';
+
+  @override
+  String get expensesTitle => 'Dépenses';
+
+  @override
+  String get addExpense => 'Ajouter une dépense';
+
+  @override
+  String get editExpense => 'Modifier la dépense';
+
+  @override
+  String get deleteExpense => 'Supprimer cette dépense ?';
+
+  @override
+  String get confirmDeleteExpense => 'هل تريد حذف هذا المصروف؟ لا يمكن التراجع';
+
+  @override
+  String get expenseCategory => 'Catégorie *';
+
+  @override
+  String get expenseDescription => 'الوصف';
+
+  @override
+  String get expenseAmount => 'Montant';
+
+  @override
+  String get expenseDate => 'Date';
+
+  @override
+  String get expenseStatus => 'الحالة';
+
+  @override
+  String get expensePaid => 'Payé';
+
+  @override
+  String get expenseUnpaid => 'Impayé';
+
+  @override
+  String get expenseReceipt => 'Reçu de dépense';
+
+  @override
+  String get expenseReport => 'فاتورة تقرير المصروفات';
+
+  @override
+  String get printExpenseReport => 'Imprimer le rapport de dépenses';
+
+  @override
+  String get expensesWithinPeriod => 'المصروفات ضمن الفترة';
+
+  @override
+  String get allCategories => 'كل الفئات';
+
+  @override
+  String get selectCategory => 'اختر فئة المصروف';
+
+  @override
+  String get selectOtherCategory => 'اختيار فئة أخرى';
+
+  @override
+  String get categoryOptions => 'خيارات القسم';
+
+  @override
+  String get showCategoryDescription => 'عرض وصف القسم';
+
+  @override
+  String get copyCategoryName => 'نسخ اسم القسم';
+
+  @override
+  String categoryCopied(Object name) {
+    return 'تم نسخ اسم القسم: $name';
+  }
+
+  @override
+  String get todayExpense => 'مصروف اليوم';
+
+  @override
+  String get monthlyRecurring => 'مصروف شهري متكرر';
+
+  @override
+  String get recurringDay => 'تكرار شهري';
+
+  @override
+  String get selectMonthDay => 'عدد الأيام (1–365)';
+
+  @override
+  String get duplicateRecurring => 'تكرار شهري';
+
+  @override
+  String get expenseSaved => 'تم تسجيل المصروف بنجاح';
+
+  @override
+  String get expenseUpdated => 'تم تحديث المصروف بنجاح';
+
+  @override
+  String expenseSaveError(Object error) {
+    return 'تعذر الحفظ: $error';
+  }
+
+  @override
+  String get attachmentOptional => 'إرفاق صورة الفاتورة (اختياري)';
+
+  @override
+  String get imageAttached => 'تم إرفاق صورة الفاتورة';
+
+  @override
+  String get imageError => 'تعذر اختيار الصورة';
+
+  @override
+  String get noExpensesPeriod => 'لا توجد مصروفات ضمن هذه الفترة';
+
+  @override
+  String get noCategoryData => 'لا توجد بيانات.';
+
+  @override
+  String get selectCategoryAmount => 'يرجى اختيار فئة وإدخال مبلغ صحيح.';
+
+  @override
+  String get installmentsTitle => 'Versements';
+
+  @override
+  String get addInstallmentPlan => 'Ajouter un plan de versement';
+
+  @override
+  String get planDetails => 'Détails du plan';
+
+  @override
+  String get installmentSchedule => 'Échéancier';
+
+  @override
+  String get installmentSettings => 'Paramètres de versement';
+
+  @override
+  String get paymentSchedule => 'الجدولة وتواريخ الاستحقاق';
+
+  @override
+  String get dueDates => 'الاستحقاق';
+
+  @override
+  String get monthlyPaymentLabel => 'القسط الشهري المقترح';
+
+  @override
+  String get interestRateLabel => 'نسبة الفائدة';
+
+  @override
+  String get downPaymentLabel => 'المقدّم';
+
+  @override
+  String get downPaymentRequired => 'إلزام مقدّم دفع لفاتورة التقسيط';
+
+  @override
+  String get advanceAmountLabel => 'المبلغ المموّل';
+
+  @override
+  String get minAdvancePercentLabel => 'أقل نسبة مقدّم من إجمالي الفاتورة (%)';
+
+  @override
+  String get minAdvancePercentDesc =>
+      'مثال: 10 تعني ألا يقل المقدّم عن 10٪ من الإجمالي';
+
+  @override
+  String get useCalendarMonthsLabel => 'استخدام أشهر تقويمية لتواريخ الاستحقاق';
+
+  @override
+  String get useCalendarMonthsDesc =>
+      'مفعّل: إضافة شهر تقويمي من تاريخ المرجع. معطّل: تقريب 30 يوماً لكل فترة.';
+
+  @override
+  String get referenceDateLabel => 'مرجع الجدولة (بداية العدّ)';
+
+  @override
+  String get fromInvoiceDateLabel => 'من تاريخ الفاتورة';
+
+  @override
+  String get fromSessionOpenLabel => 'من فتح الجلسة في النظام';
+
+  @override
+  String get linkCustomerLabel => 'ربط العميل';
+
+  @override
+  String get selectRegisteredCustomer => 'اختر عميلاً مسجّلاً';
+
+  @override
+  String customerBalanceLabel(Object amount) {
+    return 'رصيد العميل المسجّل: $amount';
+  }
+
+  @override
+  String planCreatedAtLabel(Object date) {
+    return 'تم الإنشاء: $date';
+  }
+
+  @override
+  String get totalInstallmentsLabel => 'عدد الأقساط';
+
+  @override
+  String get remainingInstallmentsLabel => 'عدد أقساط المتبقي';
+
+  @override
+  String get paidAmountLabel => 'Montant payé';
+
+  @override
+  String get remainingAmountLabel => 'المتبقي';
+
+  @override
+  String get nextInstallmentLabel => 'القسط التالي';
+
+  @override
+  String nextDueLabel(Object amount, Object date) {
+    return 'القسط التالي: $amount — $date';
+  }
+
+  @override
+  String firstDueLabel(Object date) {
+    return 'أول استحقاق: $date';
+  }
+
+  @override
+  String installmentPaidLabel(Object date) {
+    return 'سُدد: $date';
+  }
+
+  @override
+  String get installmentPendingLabel => 'المعلق';
+
+  @override
+  String get installmentOverdueLabel => 'متأخرة';
+
+  @override
+  String get installmentCompletedLabel => 'مكتملة';
+
+  @override
+  String get settleInstallmentLabel => 'تسديد قسط';
+
+  @override
+  String settleInstallmentDesc(Object amount) {
+    return 'يجب تسديد قيمة القسط كاملة ($amount)';
+  }
+
+  @override
+  String get cantRescheduleLabel =>
+      'لا يمكن إعادة جدولة الأقساط بعد تسديد قسط من هذه الخطة';
+
+  @override
+  String get planAlreadyExistsLabel =>
+      'الخطة مسجّلة بالفعل وتظهر تحت «خطط التقسيط»';
+
+  @override
+  String get planCreatedLabel => 'تم حفظ الجدول وربط العميل';
+
+  @override
+  String get scheduleSavedLabel => 'تم حفظ جدول الأقساط';
+
+  @override
+  String get planLoadErrorLabel => 'تعذر تحميل خطة التقسيط';
+
+  @override
+  String get paymentRecordErrorLabel => 'تعذر التسجيل (قد يكون القسط مدفوعاً)';
+
+  @override
+  String planIdLabel(Object id) {
+    return 'خطة #$id';
+  }
+
+  @override
+  String installmentNumberLabel(Object index) {
+    return 'القسط #$index';
+  }
+
+  @override
+  String planMonthsLabel(Object count) {
+    return 'عدد الأشهر: $count';
+  }
+
+  @override
+  String planSuggestedMonthlyLabel(Object amount) {
+    return 'القسط الشهري المقترح: $amount';
+  }
+
+  @override
+  String planFinancedAtSaleLabel(Object amount) {
+    return 'المبلغ المموّل: $amount';
+  }
+
+  @override
+  String planInterestAmountLabel(Object amount) {
+    return 'قيمة الفائدة: $amount';
+  }
+
+  @override
+  String planProgressLabel(Object paid, Object total) {
+    return 'تقدّم السداد: $paid / $total';
+  }
+
+  @override
+  String get noRemainingAfterAdvanceLabel =>
+      'لا يوجد مبلغ متبقٍ للتقسيط بعد المقدم';
+
+  @override
+  String calendarScheduleLabel(Object step) {
+    return 'جدولة: شهر تقويمي × $step لكل قسط من المرجع';
+  }
+
+  @override
+  String roundScheduleLabel(Object step) {
+    return 'جدولة: تقريب 30 يوماً × $step لكل قسط من المرجع';
+  }
+
+  @override
+  String get dueDayLabel => 'يُستحق يوم';
+
+  @override
+  String get dueDayDesc => 'يحدده البائع من التقويم (اتفاق)';
+
+  @override
+  String get installmentSettingsSavedLabel => 'تم حفظ إعدادات التقسيط';
+
+  @override
+  String get requiredInstallmentsLabel => 'عدد الأقساط يجب أن يكون 1 على الأقل';
+
+  @override
+  String get validAmountLabel => 'قيمة غير صالحة';
+
+  @override
+  String get debtCollectionLabel => 'Recouvrement';
+
+  @override
+  String get supplierPaymentLabel => 'Paiement fournisseur';
+
+  @override
+  String get salaryLabel => 'رواتب';
+
+  @override
+  String get rentLabel => 'إيجار';
+
+  @override
+  String get waterLabel => 'ماء';
+
+  @override
+  String get electricityLabel => 'كهرباء';
+
+  @override
+  String get otherLabel => 'آخرون';
+
+  @override
+  String get updateAction => 'Mettre à jour';
+
+  @override
+  String get saveAction => 'Enregistrer';
+
+  @override
+  String get printAction => 'Imprimer';
+
+  @override
+  String get retryAction => 'Réessayer';
+
+  @override
+  String get reloadFromDb => 'Recharger depuis la base';
+
+  @override
+  String get amountLabel => 'Montant';
+
+  @override
+  String get employeeLabel => 'Employé';
+
+  @override
+  String get paidLabel => 'Payé';
+
+  @override
+  String get remainingLabel => 'Restant';
+
+  @override
+  String get salesTitle => 'Ventes';
+
+  @override
+  String get installmentSettingsTitle => 'Paramètres de versement';
+
+  @override
+  String get createPlan => 'Créer le plan';
+
+  @override
+  String get accuracyNotes => 'Notes de précision';
+
+  @override
+  String get addEntry => 'Ajouter une entrée';
+
+  @override
+  String get advanceAndTerms => 'Avance et conditions';
+
+  @override
+  String get advanceFirstPayment => 'Avance / Premier paiement';
+
+  @override
+  String get advancePayment => 'Avance';
+
+  @override
+  String get advancePercentExample =>
+      'Exemple : 10 signifie que l\'avance doit être d\'au moins 10% du total.';
+
+  @override
+  String get advancePercentRange =>
+      'Le pourcentage d\'avance doit être entre 0 et 100';
+
+  @override
+  String get affectedCashBox => 'Affecté à la caisse';
+
+  @override
+  String get amountAddedAtOpen => 'Montant ajouté à l\'ouverture';
+
+  @override
+  String get amountIQD => 'Montant (IQD)';
+
+  @override
+  String get analysisAndMargin => 'Analyse et marge';
+
+  @override
+  String get analytics => 'Analyses';
+
+  @override
+  String get apply => 'Appliquer';
+
+  @override
+  String get approxNet => 'Net approx. (Vente − Retour)';
+
+  @override
+  String get attachInvoiceImageOptional =>
+      'Joindre l\'image de la facture (optionnel)';
+
+  @override
+  String get balance => 'Solde';
+
+  @override
+  String get beneficiary => 'Bénéficiaire';
+
+  @override
+  String get bottom10ProfitProducts =>
+      '10 derniers produits par profit (Révision des prix)';
+
+  @override
+  String get calendarMonthsExplanation =>
+      'ACTIVÉ : ajoute un mois calendrier. DÉSACTIVÉ : arrondit à 30 jours.';
+
+  @override
+  String get cannotRescheduleAfterPayment =>
+      'Impossible de reprogrammer après un paiement sur ce plan.';
+
+  @override
+  String get cashBox => 'Caisse';
+
+  @override
+  String get cashSale => 'Vente au comptant';
+
+  @override
+  String get category => 'Catégorie';
+
+  @override
+  String get categoryRequired => 'Catégorie *';
+
+  @override
+  String get change => 'Changer';
+
+  @override
+  String get changeOrRemoveAnytime =>
+      'Vous pouvez la changer ou la supprimer à tout moment.';
+
+  @override
+  String get choose => 'Choisir';
+
+  @override
+  String get chooseOtherCategory => 'Choisir une autre catégorie';
+
+  @override
+  String get clearSearchOrChangeTab =>
+      'Effacer la recherche (×) ou passer à l\'onglet Tous.';
+
+  @override
+  String get closeForm => 'Fermer le formulaire ?';
+
+  @override
+  String get closeFormConfirm =>
+      'Fermer le formulaire ? Les données ne seront pas sauvegardées.';
+
+  @override
+  String get cogs => 'Coût des marchandises vendues (CMV)';
+
+  @override
+  String get controlAdvanceRequirements =>
+      'Contrôler l\'avance obligatoire et le pourcentage minimum.';
+
+  @override
+  String get copySectionName => 'Copier le nom de la section';
+
+  @override
+  String get cost => 'Coût';
+
+  @override
+  String get countByEntryType => 'Décompte par type d\'entrée';
+
+  @override
+  String get customer => 'Client';
+
+  @override
+  String get customerBalanceList => 'Liste des clients (Solde dû au magasin)';
+
+  @override
+  String get daily => 'Journalier';
+
+  @override
+  String get dailySalesInRange => 'Ventes journalières dans la période';
+
+  @override
+  String get dashboardTitle => 'Tableau de bord';
+
+  @override
+  String get dateRange => 'Plage de dates';
+
+  @override
+  String get dayCount => 'Nombre de jours (1–365)';
+
+  @override
+  String get debtorCustomerCount => 'Nombre de clients débiteurs';
+
+  @override
+  String get debts => 'Dettes';
+
+  @override
+  String get declaredCashAfterWithdrawal =>
+      'Espèces déclarées dans la caisse après retrait';
+
+  @override
+  String get declaredCashAtOpen =>
+      'Espèces déclarées à l\'ouverture (Inventaire)';
+
+  @override
+  String get defaultInstallmentCountRange =>
+      'Nombre d\'acomptes par défaut entre 1 et 120';
+
+  @override
+  String get defaultInstallmentInterestRate =>
+      'Taux d\'intérêt par défaut pour les ventes à tempérament (%)';
+
+  @override
+  String get defaultInterestRange =>
+      'Taux d\'intérêt par défaut entre 0 et 100';
+
+  @override
+  String get defaultPeriodAndPreferences => 'Période par défaut et préférences';
+
+  @override
+  String get defaultRemainingInstallments =>
+      'Acomptes restants par défaut (lors de la création d\'un plan)';
+
+  @override
+  String get defaultReportPeriod =>
+      'Période par défaut lors de l\'ouverture des rapports';
+
+  @override
+  String get deleteExpenseConfirm =>
+      'Supprimer cette dépense ? Cette action est irréversible.';
+
+  @override
+  String get descriptionOptional => 'Description (Optionnel)';
+
+  @override
+  String get dueDay => 'Jour d\'échéance';
+
+  @override
+  String get employeeBeneficiary => 'Employé (Bénéficiaire)';
+
+  @override
+  String get employeeRecorder => 'Employé / Enregistreur';
+
+  @override
+  String get employees => 'Employés';
+
+  @override
+  String get enterAmountGreaterThanZero => 'Entrez un montant supérieur à zéro';
+
+  @override
+  String get enterInstallmentCount => 'Entrez le nombre d\'acomptes';
+
+  @override
+  String get enterMovementDescription =>
+      'Entrez une description pour le mouvement';
+
+  @override
+  String get entry => 'Entrée';
+
+  @override
+  String get everyMonth => 'Chaque mois';
+
+  @override
+  String get exit => 'Sortie';
+
+  @override
+  String get expenseCount => 'Nombre de dépenses';
+
+  @override
+  String get expenseReason => 'Motif de la dépense (imprimé sur le reçu)';
+
+  @override
+  String get expenseReportInvoice => 'Facture du rapport de dépenses';
+
+  @override
+  String get expenses => 'Dépenses';
+
+  @override
+  String get exportExcel => 'Exporter (Copier Excel)';
+
+  @override
+  String get failedToLoadInstallmentPlan =>
+      'Échec du chargement du plan de paiement.';
+
+  @override
+  String get firstDueReferenceDate => 'Date de référence de première échéance';
+
+  @override
+  String get fullTransparency =>
+      'Transparence totale — voici les règles adoptées';
+
+  @override
+  String get futureFeatures =>
+      'Bientôt : export PDF/Excel, planification des rapports et accès par rôle.';
+
+  @override
+  String get grossMargin => 'Marge brute';
+
+  @override
+  String get history => 'Historique';
+
+  @override
+  String get howMarginCalculated => 'Comment la marge est-elle calculée ?';
+
+  @override
+  String get imageSelectionFailed => 'Échec de la sélection de l\'image.';
+
+  @override
+  String get inbound => 'Entrant';
+
+  @override
+  String get inboundEntry => 'Entrant (Saisie)';
+
+  @override
+  String get inboundLineByLine => 'Entrant — Ligne par ligne';
+
+  @override
+  String get inboundOutboundSummary =>
+      'Résumé entrées et sorties (Cette liste)';
+
+  @override
+  String get inboundTotal => 'Entrant';
+
+  @override
+  String get indicatorsAndPeriod => 'Indicateurs et période';
+
+  @override
+  String get installmentPeriodMethod =>
+      'Période des acomptes, méthode de calcul du mois et date de référence.';
+
+  @override
+  String get installmentPeriodRange =>
+      'Période entre les acomptes : 1 à 24 mois';
+
+  @override
+  String get installmentPlanDetails => 'Détails du plan de paiement';
+
+  @override
+  String get installmentPlansInPeriod =>
+      'Plans de paiement (Factures dans la période)';
+
+  @override
+  String get installmentScheduleSaved => 'Planning des acomptes sauvegardé';
+
+  @override
+  String get interestInfoAtSale => 'Info d\'intérêt (À la vente)';
+
+  @override
+  String get invalidValue => 'Valeur invalide';
+
+  @override
+  String get inventoryAndCashbox => 'Inventaire et Caisse (Registre système)';
+
+  @override
+  String get inventoryWithdrawn => 'Marchandises retirées de l\'inventaire';
+
+  @override
+  String get invoiceCount => 'Nombre de factures';
+
+  @override
+  String get invoiceImageAttached => 'Image de facture jointe';
+
+  @override
+  String get invoiceSummary => 'Résumé de la facture';
+
+  @override
+  String get invoicesAndSales => 'Factures et ventes (Écritures liées)';
+
+  @override
+  String get invoicesInMovements => 'Factures dans ces mouvements';
+
+  @override
+  String get invoicesReturns => 'Factures / Retours';
+
+  @override
+  String get isExpensePrepaid => 'La dépense est-elle prépayée ?';
+
+  @override
+  String get item => 'Article';
+
+  @override
+  String get itemLabel => 'Article';
+
+  @override
+  String get itemsSoldWithStock =>
+      'Articles vendus avec le solde de stock actuel.';
+
+  @override
+  String get kpiPieDescription =>
+      'Graphique unifié pour les indicateurs financiers — ventes/retours/net';
+
+  @override
+  String get loadingInvoiceItems => 'Chargement des articles…';
+
+  @override
+  String get loyaltyInRange => 'Fidélité (Dans la période)';
+
+  @override
+  String get mainPerformanceIndicators =>
+      'Indicateurs de performance principaux';
+
+  @override
+  String get manualDepositReceipt =>
+      'Reçu de dépôt manuel (Total des entrées de dépôt)';
+
+  @override
+  String get manualDepositWithdrawalGroup =>
+      'Dépôt et retrait manuels (Ce groupe)';
+
+  @override
+  String get manualDepositWithdrawalInShift =>
+      'Dépôt et retrait manuels dans le quart de travail';
+
+  @override
+  String get manualWithdrawalReceipt =>
+      'Reçu de retrait manuel (Total des entrées de retrait)';
+
+  @override
+  String get margin => 'Marge';
+
+  @override
+  String get marginDataQuality => 'Qualité des données de marge (Couverture)';
+
+  @override
+  String get marginPercent => 'Marge %';
+
+  @override
+  String get minOneInstallment =>
+      'Le nombre d\'acomptes doit être d\'au moins 1';
+
+  @override
+  String get minimumAdvancePercent =>
+      'Pourcentage minimum d\'avance du total de la facture';
+
+  @override
+  String get miscExpenses => 'Dépenses diverses';
+
+  @override
+  String get monthlyRecurringExpense => 'Dépense mensuelle récurrente';
+
+  @override
+  String get monthlyRepeat => 'Répétition mensuelle';
+
+  @override
+  String get more => 'Plus';
+
+  @override
+  String get movementsWithoutShift =>
+      'Détails des mouvements (Sans quart de travail)';
+
+  @override
+  String get netProfit => 'Bénéfice net (Marge − Dépenses)';
+
+  @override
+  String get noComment =>
+      'Pas de commentaire — recommander d\'ajouter un motif.';
+
+  @override
+  String get noDailyDataInPeriod =>
+      'Pas de données journalières pour cette période';
+
+  @override
+  String get noDataAvailable => 'Aucune donnée disponible';
+
+  @override
+  String get noExpensesInPeriod => 'Aucune dépense dans cette période';
+
+  @override
+  String get noInboundMovements => 'Aucun mouvement entrant dans ce groupe.';
+
+  @override
+  String get noInvoiceLinkedMovements =>
+      'Aucun mouvement lié à une facture dans ce groupe.';
+
+  @override
+  String get noItemsInPeriod => 'Aucun article dans cette période.';
+
+  @override
+  String get noLinkUseInvoiceName =>
+      'Sans lien — utiliser le nom de la facture';
+
+  @override
+  String get noMovementsInGroup => 'Aucun mouvement dans ce groupe.';
+
+  @override
+  String get noOutboundMovements => 'Aucun mouvement sortant dans ce groupe.';
+
+  @override
+  String get noPlansInCurrentFilter =>
+      'Aucun plan ne correspond à la recherche ou au filtre actuel';
+
+  @override
+  String get noSalesInPeriod => 'Aucune vente dans cette période';
+
+  @override
+  String get okay => 'OK';
+
+  @override
+  String get open => 'Ouverte';
+
+  @override
+  String get openSection => 'Ouvrir la section';
+
+  @override
+  String get option => 'Option';
+
+  @override
+  String get optional => '(Optionnel)';
+
+  @override
+  String get others => 'Autres';
+
+  @override
+  String get outbound => 'Sortant';
+
+  @override
+  String get outboundExit => 'Sortant (Sortie)';
+
+  @override
+  String get outboundLineByLine => 'Sortant — Ligne par ligne';
+
+  @override
+  String get outboundTotal => 'Sortant';
+
+  @override
+  String get overdueInstallmentWarning => 'Attention : Acompte en retard';
+
+  @override
+  String get ownerOrProperty => 'Propriétaire ou Bien';
+
+  @override
+  String get paidCappedAtTotal =>
+      '\'Payé\' est plafonné au total du plan en cas de conflit.';
+
+  @override
+  String get paidRemaining => 'Payé / Restant';
+
+  @override
+  String get payInstallment => 'Payer l\'acompte';
+
+  @override
+  String get paymentProgress => 'Progression des paiements';
+
+  @override
+  String get paymentType => 'Type de paiement';
+
+  @override
+  String get paymentTypeRatio =>
+      'Ratio de chaque type de paiement par rapport aux ventes';
+
+  @override
+  String get paymentTypesAndReturns => 'Types de paiement et retours';
+
+  @override
+  String get paymentTypesTrendOverTime =>
+      'Évolution des types de paiement dans le temps';
+
+  @override
+  String get pendingLabel => 'En attente';
+
+  @override
+  String get percentage => 'Pourcentage';
+
+  @override
+  String get periodBetweenDueDates => 'Période entre les échéances (en mois)';
+
+  @override
+  String get periodExplanation => '1 = mensuel, 2 = tous les 2 mois, etc.';
+
+  @override
+  String get periodNetSales => 'Ventes nettes de la période';
+
+  @override
+  String get periodPlans => 'Plans de la période';
+
+  @override
+  String get periodRevenue => 'Revenu de la période';
+
+  @override
+  String get plan => 'Plan';
+
+  @override
+  String get planAutoCreatedAfterSave =>
+      'Après la sauvegarde d\'une facture à tempérament, le plan est créé automatiquement.';
+
+  @override
+  String get preferRegisteredCustomer =>
+      'Préférez sélectionner un client enregistré pour un suivi plus facile.';
+
+  @override
+  String get printPeriodReport => 'Imprimer le rapport de période';
+
+  @override
+  String get productsAndEstimatedMargin => 'Produits et marge estimée';
+
+  @override
+  String get propertyOrEntity => 'Nom du bien / Entité';
+
+  @override
+  String get recordingPerformance => 'Performance d\'enregistrement';
+
+  @override
+  String get recurring => 'Récurrent';
+
+  @override
+  String get registeredCustomer => 'Client enregistré';
+
+  @override
+  String get remainingInstallmentsCount => 'Nombre d\'acomptes restants';
+
+  @override
+  String get reportSections => 'Sections des rapports';
+
+  @override
+  String get requireAdvanceForInstallment =>
+      'Exiger une avance pour les factures à tempérament';
+
+  @override
+  String get returnCount => 'Nombre de retours';
+
+  @override
+  String get returnItem => 'Retour';
+
+  @override
+  String get returns => 'Retours';
+
+  @override
+  String get revenueComposition => 'Composition du revenu : Coût + Marge';
+
+  @override
+  String get revenueTrend =>
+      'Tendance du revenu : Coût + Marge + Dépenses journalières';
+
+  @override
+  String get salaries => 'Salaires';
+
+  @override
+  String get sale => 'Vente';
+
+  @override
+  String get saleScreenInstallmentCard => 'Écran de vente et carte d\'acompte';
+
+  @override
+  String get sales => 'Ventes';
+
+  @override
+  String get salesNotMixedWithReceipts =>
+      'Pour que les ventes ne soient pas mêlées aux reçus';
+
+  @override
+  String get salesVsExpensesDailyTrend =>
+      'Ventes vs Dépenses — Tendance journalière';
+
+  @override
+  String get saveAndApply => 'Enregistrer et appliquer';
+
+  @override
+  String get saveScheduleChanges => 'Enregistrer les modifications du planning';
+
+  @override
+  String get saving => 'Enregistrement...';
+
+  @override
+  String get scheduleReference => 'Référence du planning (Début du comptage)';
+
+  @override
+  String get schedulingAndDueDates => 'Planification et dates d\'échéance';
+
+  @override
+  String get searchByNameOrPhone =>
+      'Rechercher par nom, identifiant ou téléphone';
+
+  @override
+  String get searchByNameOrPhoneOrNumber =>
+      'Rechercher par nom, téléphone ou numéro…';
+
+  @override
+  String get searchDescriptionOrCategory =>
+      'Recherche (description ou catégorie)';
+
+  @override
+  String get searchPlaceholder =>
+      'Recherche : client, produit, numéro de plan, facture…';
+
+  @override
+  String get sectionOptions => 'Options de la section';
+
+  @override
+  String get selectCategoryAndAmount =>
+      'Veuillez sélectionner une catégorie et entrer un montant valide.';
+
+  @override
+  String get selectEmployeeTitle => 'Sélectionner un employé';
+
+  @override
+  String get selectExpenseCategory => 'Choisir la catégorie de dépense';
+
+  @override
+  String get selectPeriodForReport =>
+      'Sélectionnez la période pour le rapport :';
+
+  @override
+  String get selectedPeriod => 'Période sélectionnée :';
+
+  @override
+  String get sellerChosenFromCalendar =>
+      'Choisi par le vendeur du calendrier (accord)';
+
+  @override
+  String get serviceInvoiceNumber => 'Numéro de facture de service';
+
+  @override
+  String get sessionOpenedBy => 'Session ouverte par';
+
+  @override
+  String get setupInstallmentSchedule => 'Configurer le planning des acomptes';
+
+  @override
+  String get showCalculatorCard =>
+      'Afficher la carte calculatrice et les valeurs par défaut.';
+
+  @override
+  String get showInstallmentCardInSale =>
+      'Afficher la carte « Plan d\'acomptes » dans l\'écran de vente';
+
+  @override
+  String get stay => 'Rester';
+
+  @override
+  String get systemBalanceAtClose => 'Solde système à la fermeture';
+
+  @override
+  String get systemBalanceAtOpen => 'Solde système à l\'ouverture';
+
+  @override
+  String get tableCopiedToClipboard =>
+      'Tableau copié dans le presse-papiers (collez dans Excel).';
+
+  @override
+  String get tapForFullDetails => 'Appuyez pour les détails complets';
+
+  @override
+  String get taxType => 'Type de taxe';
+
+  @override
+  String get taxTypeExample => 'ex. Impôt sur le revenu, TVA';
+
+  @override
+  String get taxes => 'Taxes';
+
+  @override
+  String get thankYouForUsing => 'Merci d\'utiliser NaBoo';
+
+  @override
+  String get today => 'Aujourd\'hui';
+
+  @override
+  String get todayExpenses => 'Dépenses du jour';
+
+  @override
+  String get top10ProfitProducts => 'Top 10 des produits par profit';
+
+  @override
+  String get topBuyers => 'Meilleurs acheteurs';
+
+  @override
+  String get topCustomersBySpending => 'Meilleurs clients par dépenses';
+
+  @override
+  String get topItemsByRevenue => 'Meilleurs articles par revenu';
+
+  @override
+  String get totalExpensesInPeriod => 'Total des dépenses dans la période';
+
+  @override
+  String get totalPlanValue => 'Valeur totale des plans';
+
+  @override
+  String get totalRecordedDebts => 'Total des dettes enregistrées';
+
+  @override
+  String get transactionCount => 'Nombre de transactions';
+
+  @override
+  String get tryChangingDateRange =>
+      'Essayez de changer la plage de dates ou le filtre';
+
+  @override
+  String get unlinked => 'Non lié';
+
+  @override
+  String get usefulForUtilityBills =>
+      'Utile pour les factures d\'eau/électricité/taxes.';
+
+  @override
+  String get viewSectionDescription => 'Voir la description de la section';
+
+  @override
+  String get warning => 'Attention';
+
+  @override
+  String get withdrawnAtClose => 'Retiré à la fermeture';
+
+  @override
+  String get withoutName => 'Sans nom';
+
+  @override
+  String get yesDeduction => 'Oui (Déduction)';
+
+  @override
+  String get deleteExpenseLabel => 'Supprimer la dépense ?';
+
+  @override
+  String get planNotFound => 'Plan introuvable';
+
+  @override
+  String get weekLabel => 'Cette semaine';
+
+  @override
+  String get monthLabel => 'Ce mois-ci';
+
+  @override
+  String get yearLabel => 'Cette année';
+
+  @override
+  String get allCategoriesLabel => 'Toutes les catégories';
+
+  @override
+  String get noSearchResults => 'Aucun résultat de recherche.';
+
+  @override
+  String get clearSearchLabel => 'Effacer la recherche';
+
+  @override
+  String get selectInvoiceCategory => 'Choisir la catégorie de dépense';
+
+  @override
+  String get cashBoxLabel => 'Caisse';
+
+  @override
+  String get manualEntryLabel => 'Écriture manuelle';
+
+  @override
+  String get depositLabel => 'Dépôt';
+
+  @override
+  String get withdrawalLabel => 'Retrait';
+
+  @override
+  String get currentBalanceLabel => 'Solde actuel';
+
+  @override
+  String get unpaidLabel => 'Impayé';
+
+  @override
+  String get recurringLabel => 'Récurrent';
+
+  @override
+  String get installmentPaymentLabel => 'Paiement d\'acompte';
+
+  @override
+  String get customerLabel2 => 'Client';
+
+  @override
+  String get percentageLabel => 'Pourcentage';
+
+  @override
+  String get revenueLabel => 'Revenu';
+
+  @override
+  String get salesLabel => 'Ventes';
+
+  @override
+  String get othersLabel => 'Autres';
+
+  @override
+  String get withoutNameLabel => 'Sans nom';
+
+  @override
+  String get paidLabel2 => 'Payé';
+
+  @override
+  String get pendingLabel2 => 'En attente';
+
+  @override
+  String get openLabel => 'Ouverte';
+
+  @override
+  String get costLabel => 'Coût';
+
+  @override
+  String get marginLabel => 'Marge';
+
+  @override
+  String get itemLabel2 => 'Article';
+
+  @override
+  String get productLabel => 'Produit';
+
+  @override
+  String get planLabel => 'Plan';
+
+  @override
+  String get returnCountLabel => 'Nombre de retours';
+
+  @override
+  String get optionLabel => 'Option';
+
+  @override
+  String get inboundLabel => 'Entrant';
+
+  @override
+  String get outboundLabel => 'Sortant';
+
+  @override
+  String get cashboxLabel => 'Caisse';
+
+  @override
+  String get dailyLabel => 'Journalier';
+
+  @override
+  String get weeklyLabel => 'Hebdomadaire';
+
+  @override
+  String get monthlyLabel => 'Mensuel';
+
+  @override
+  String get yearlyLabel => 'Annuel';
+
+  @override
+  String get customLabel => 'Personnalisé';
+
+  @override
+  String get pageLabel => 'Page';
+
+  @override
+  String get createdLabel => 'Créé :';
+
+  @override
+  String get totalAmountLabel => 'Total';
+
+  @override
+  String get overdueLabel => 'En retard';
+
+  @override
+  String get invoiceLabel => 'Facture';
+
+  @override
+  String get scheduleLabel => 'Planning';
+
+  @override
+  String get cancelLabel2 => 'Annuler';
+
+  @override
+  String get confirmLabel => 'Confirmer';
+
+  @override
+  String get addLabel => 'Ajouter';
+
+  @override
+  String get editLabel => 'Modifier';
+
+  @override
+  String get deleteLabel => 'Supprimer';
+
+  @override
+  String get filterLabel => 'Filtrer';
+
+  @override
+  String get exportLabel => 'Exporter';
+
+  @override
+  String get printLabel => 'Imprimer';
+
+  @override
+  String get yesLabel => 'Oui';
+
+  @override
+  String get noLabel => 'Non';
+
+  @override
+  String get okLabel => 'OK';
+
+  @override
+  String get backLabel => 'Retour';
+
+  @override
+  String get nextLabel => 'Suivant';
+
+  @override
+  String get doneLabel => 'Terminé';
+
+  @override
+  String get closeLabel => 'Fermer';
+
+  @override
+  String get openLabel2 => 'Ouvrir';
+
+  @override
+  String get loadingLabel => 'Chargement...';
+
+  @override
+  String get errorLabel => 'Erreur';
+
+  @override
+  String get warningLabel => 'Avertissement';
+
+  @override
+  String get successLabel => 'Succès';
+
+  @override
+  String get infoLabel => 'Info';
 }

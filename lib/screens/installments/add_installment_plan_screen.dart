@@ -9,6 +9,7 @@ import '../../services/database_helper.dart';
 import '../../theme/design_tokens.dart';
 import '../../utils/screen_layout.dart';
 import '../../widgets/adaptive/adaptive_form_container.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 final _numFmt = NumberFormat('#,##0', 'en');
 final _dateFmt = DateFormat('dd/MM/yyyy', 'en');
@@ -74,7 +75,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
     if (!mounted) return;
     if (loaded == null) {
       setState(() {
-        _loadError = 'تعذر تحميل خطة التقسيط.';
+        _loadError = AppLocalizations.of(context)!.failedToLoadInstallmentPlan;
         _loading = false;
       });
       return;
@@ -110,7 +111,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
 
   String get _linkedCustomerSummary {
     if (_linkedCustomerId == null) {
-      return 'بدون ربط — الاعتماد على الاسم من الفاتورة';
+      return AppLocalizations.of(context)!.noLinkUseInvoiceName;
     }
     final r = _linkedCustomerRow;
     if (r == null) {
@@ -175,7 +176,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
     final n = int.tryParse(_countCtrl.text.trim()) ?? 0;
     if (n < 1) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('عدد الأقساط يجب أن يكون 1 على الأقل')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.minOneInstallment)),
       );
       return;
     }
@@ -216,9 +217,9 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
     if (!mounted) return;
     if (!ok) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text(
-            'لا يمكن إعادة جدولة الأقساط بعد تسديد قسط من هذه الخطة.',
+            AppLocalizations.of(context)!.cannotRescheduleAfterPayment,
           ),
         ),
       );
@@ -230,7 +231,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
         content: Text(
           _linkedCustomerId != null
               ? 'تم حفظ الجدول وربط العميل #$_linkedCustomerId'
-              : 'تم حفظ جدول الأقساط',
+              : AppLocalizations.of(context)!.installmentScheduleSaved,
         ),
       ),
     );
@@ -250,7 +251,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
         child: Scaffold(
           backgroundColor: bg,
           appBar: AppBar(
-            title: const Text('ضبط جدول الأقساط'),
+            title: Text(AppLocalizations.of(context)!.setupInstallmentSchedule),
             backgroundColor: AppColors.primary,
             foregroundColor: Colors.white,
           ),
@@ -265,7 +266,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
         child: Scaffold(
           backgroundColor: bg,
           appBar: AppBar(
-            title: const Text('ضبط جدول الأقساط'),
+            title: Text(AppLocalizations.of(context)!.setupInstallmentSchedule),
             backgroundColor: AppColors.primary,
             foregroundColor: Colors.white,
           ),
@@ -280,7 +281,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
                   FilledButton(
                     onPressed: () =>
                         Navigator.popUntil(context, (r) => r.isFirst),
-                    child: const Text('العودة للرئيسية'),
+                    child: Text(AppLocalizations.of(context)!.backToHome),
                   ),
                 ],
               ),
@@ -298,7 +299,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
       child: Scaffold(
         backgroundColor: bg,
         appBar: AppBar(
-          title: const Text('ضبط جدول الأقساط'),
+          title: Text(AppLocalizations.of(context)!.setupInstallmentSchedule),
           backgroundColor: AppColors.primary,
           foregroundColor: Colors.white,
         ),
@@ -330,7 +331,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'ملخص الفاتورة',
+                        AppLocalizations.of(context)!.invoiceSummary,
                         style: theme.textTheme.titleSmall?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -338,15 +339,15 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
                       const SizedBox(height: 10),
                       _SummaryRow('رقم الفاتورة', '#${widget.invoiceId}'),
                       _SummaryRow(
-                        'العميل',
+                        AppLocalizations.of(context)!.customerLabel2,
                         widget.customerName.isEmpty ? '—' : widget.customerName,
                       ),
                       _SummaryRow(
-                        'الإجمالي',
+                        AppLocalizations.of(context)!.totalAmountLabel,
                         '${_numFmt.format(widget.totalAmount)} د.ع',
                       ),
                       _SummaryRow(
-                        'المقدّم',
+                        AppLocalizations.of(context)!.advancePayment,
                         '${_numFmt.format(widget.paidAmount)} د.ع',
                       ),
                       const Divider(height: 20),
@@ -370,7 +371,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
               ),
               const SizedBox(height: 6),
               Text(
-                'يُفضّل اختيار عميل مسجّل لتسهيل المتابعة والتقارير.',
+                AppLocalizations.of(context)!.preferRegisteredCustomer,
                 style: TextStyle(
                   fontSize: 12,
                   color: theme.hintColor,
@@ -390,7 +391,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        'عميل مسجّل',
+                        AppLocalizations.of(context)!.registeredCustomer,
                         style: TextStyle(
                           fontSize: 12,
                           color: theme.hintColor,
@@ -409,7 +410,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
                       OutlinedButton.icon(
                         onPressed: _openCustomerPicker,
                         icon: const Icon(Icons.person_search_rounded, size: 20),
-                        label: const Text('اختيار عميل من القائمة'),
+                        label: Text(AppLocalizations.of(context)!.selectCustomerFromList),
                         style: OutlinedButton.styleFrom(
                           alignment: Alignment.centerRight,
                           shape: const RoundedRectangleBorder(
@@ -426,15 +427,15 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
                 controller: _countCtrl,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  labelText: 'عدد أقساط المتبقي',
+                  labelText: AppLocalizations.of(context)!.remainingInstallmentsCount,
                   border: const OutlineInputBorder(borderRadius: AppShape.none),
                   helperText:
                       'التوزيع بالتساوي؛ آخر قسط يستوعب فرق الفلس. الفترة بين الأقساط من الإعدادات: $step شهر/أشهر.',
                 ),
                 validator: (v) {
-                  if (v == null || v.trim().isEmpty) return 'أدخل عدد الأقساط';
+                  if (v == null || v.trim().isEmpty) return AppLocalizations.of(context)!.enterInstallmentCount;
                   final x = int.tryParse(v.trim());
-                  if (x == null || x < 1) return 'قيمة غير صالحة';
+                  if (x == null || x < 1) return AppLocalizations.of(context)!.invalidValue;
                   return null;
                 },
               ),
@@ -461,7 +462,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'مرجع الجدولة (بداية العدّ)',
+                                AppLocalizations.of(context)!.scheduleReference,
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: theme.hintColor,
@@ -510,7 +511,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
                     borderRadius: AppShape.none,
                   ),
                 ),
-                child: const Text('حفظ التعديلات على الجدول'),
+                child: Text(AppLocalizations.of(context)!.saveScheduleChanges),
               ),
             ],
           ),
@@ -590,7 +591,7 @@ class _InstallmentCustomerPickerSheetState
     setState(() => _loading = true);
     final rows = await widget.db.queryCustomersPage(
       query: q,
-      statusArabic: 'الكل',
+      statusArabic: AppLocalizations.of(context)!.allFilter,
       sortKey: 'name_asc',
       limit: 80,
       offset: 0,
@@ -629,7 +630,7 @@ class _InstallmentCustomerPickerSheetState
                   bottom: 8,
                 ),
                 child: Text(
-                  'اختر عميلاً مسجّلاً',
+                  AppLocalizations.of(context)!.selectRegisteredCustomer,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -641,10 +642,10 @@ class _InstallmentCustomerPickerSheetState
                 ),
                 child: TextField(
                   controller: _searchCtrl,
-                  decoration: const InputDecoration(
-                    hintText: 'ابحث بالاسم أو الهاتف أو الرقم…',
-                    prefixIcon: Icon(Icons.search_rounded),
-                    border: OutlineInputBorder(borderRadius: AppShape.none),
+                  decoration: InputDecoration(
+                    hintText: AppLocalizations.of(context)!.searchByNameOrPhoneOrNumber,
+                    prefixIcon: const Icon(Icons.search_rounded),
+                    border: const OutlineInputBorder(borderRadius: AppShape.none),
                     isDense: true,
                   ),
                   onChanged: _onSearchChanged,
@@ -653,7 +654,7 @@ class _InstallmentCustomerPickerSheetState
               const SizedBox(height: 8),
               ListTile(
                 leading: const Icon(Icons.link_off_rounded),
-                title: const Text('بدون ربط — الاعتماد على الاسم من الفاتورة'),
+                title: Text(AppLocalizations.of(context)!.noLinkUseInvoiceName),
                 onTap: () => Navigator.pop(context, _unlinkCustomerSentinel),
               ),
               const Divider(height: 1),

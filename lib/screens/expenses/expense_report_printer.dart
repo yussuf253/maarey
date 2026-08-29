@@ -7,6 +7,7 @@ import 'package:printing/printing.dart';
 
 import '../../models/expense.dart';
 import '../../services/database_helper.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 /// نافذة اختيار فترة فاتورة التقرير.
 class _ReportRangeQuickOption {
@@ -92,7 +93,7 @@ class _ReportRangePickerDialogState extends State<_ReportRangePickerDialog> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: AlertDialog(
-        title: const Text('طباعة تقرير مصروفات'),
+        title: Text('طباعة تقرير مصروفات'),
         content: SizedBox(
           width: 460,
           child: Column(
@@ -117,7 +118,7 @@ class _ReportRangePickerDialogState extends State<_ReportRangePickerDialog> {
                   OutlinedButton.icon(
                     onPressed: _pickCustom,
                     icon: const Icon(Icons.edit_calendar_rounded, size: 16),
-                    label: const Text('مخصص'),
+                    label: Text('مخصص'),
                   ),
                 ],
               ),
@@ -135,9 +136,9 @@ class _ReportRangePickerDialogState extends State<_ReportRangePickerDialog> {
                   children: [
                     Icon(Icons.date_range_rounded, color: cs.primary),
                     const SizedBox(width: 8),
-                    const Text(
+                    Text(
                       'الفترة المختارة:',
-                      style: TextStyle(fontWeight: FontWeight.w700),
+                      style: const TextStyle(fontWeight: FontWeight.w700),
                     ),
                     const Spacer(),
                     Text(
@@ -154,12 +155,12 @@ class _ReportRangePickerDialogState extends State<_ReportRangePickerDialog> {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('إلغاء'),
+            child: Text('إلغاء'),
           ),
           FilledButton.icon(
             onPressed: () => Navigator.of(context).pop(_range),
             icon: const Icon(Icons.print_rounded, size: 16),
-            label: const Text('طباعة'),
+            label: Text('طباعة'),
           ),
         ],
       ),

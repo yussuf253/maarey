@@ -6,6 +6,7 @@ import '../../services/cloud_sync_service.dart';
 import '../../services/database_helper.dart';
 import '../../theme/design_tokens.dart';
 import '../../utils/screen_layout.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 final _pctFmt = NumberFormat('#,##0.#', 'en');
 
@@ -105,26 +106,26 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
         double.tryParse(_saleDefInterest.text.replaceAll(',', '').trim()) ?? 0;
     if (minP < 0 || minP > 100) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('نسبة المقدّم يجب أن تكون بين 0 و 100')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.advancePercentRange)),
       );
       return;
     }
     if (cnt < 1 || cnt > 120) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('عدد الأقساط الافتراضي بين 1 و 120')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.defaultInstallmentCountRange)),
       );
       return;
     }
     if (iv < 1 || iv > 24) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('الفترة بين الأقساط: بين 1 و 24 شهراً')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.installmentPeriodRange)),
       );
       return;
     }
     if (saleInt < 0 || saleInt > 100) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('نسبة الفائدة الافتراضية في البيع بين 0 و 100'),
+        SnackBar(
+          content: Text(AppLocalizations.of(context)!.defaultInterestRange),
         ),
       );
       return;
@@ -150,14 +151,14 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
       foregroundColor: _onPrimary,
       elevation: 0,
       centerTitle: false,
-      title: const Text(
-        'إعدادات تقسيط',
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+      title: Text(
+        AppLocalizations.of(context)!.installmentSettingsTitle,
+        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
       ),
       actions: [
         IconButton(
           icon: const Icon(Icons.refresh_rounded),
-          tooltip: 'إعادة التحميل من القاعدة',
+          tooltip: AppLocalizations.of(context)!.reloadFromDb,
           onPressed: _loading ? null : _load,
         ),
         const SizedBox(width: 4),
@@ -336,12 +337,12 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
                         const SizedBox(height: 20),
                         _section(
                           icon: Icons.account_balance_wallet_outlined,
-                          title: 'المقدّم وشروط البيع',
+                          title: AppLocalizations.of(context)!.advanceAndTerms,
                           subtitle:
-                              'التحكم في إلزامية المقدّم وأقل نسبة مسموحة من إجمالي الفاتورة.',
+                              AppLocalizations.of(context)!.controlAdvanceRequirements,
                           children: [
                             _switchTile(
-                              title: 'إلزام مقدّم دفع لفاتورة التقسيط',
+                              title: AppLocalizations.of(context)!.requireAdvanceForInstallment,
                               subtitle:
                                   'يمنع حفظ فاتورة تقسيط إذا كان المقدّم أقل من النسبة المحددة أدناه (من إجمالي الفاتورة بعد الخصم والضريبة).',
                               value: _data.requireDownPaymentForInstallmentSale,
@@ -359,9 +360,9 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
                                     decimal: true,
                                   ),
                               decoration: _fieldDecoration(
-                                label: 'أقل نسبة مقدّم من إجمالي الفاتورة (%)',
+                                label: AppLocalizations.of(context)!.minimumAdvancePercent,
                                 helper:
-                                    'مثال: 10 تعني ألا يقل المقدّم عن 10٪ من الإجمالي.',
+                                    AppLocalizations.of(context)!.advancePercentExample,
                                 prefixIcon: Icon(
                                   Icons.percent,
                                   size: 20,
@@ -374,12 +375,12 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
                         const SizedBox(height: 16),
                         _section(
                           icon: Icons.point_of_sale_outlined,
-                          title: 'شاشة البيع وبطاقة التقسيط',
+                          title: AppLocalizations.of(context)!.saleScreenInstallmentCard,
                           subtitle:
-                              'عرض بطاقة الحاسبة، والقيم الافتراضية للأقساط والفائدة.',
+                              AppLocalizations.of(context)!.showCalculatorCard,
                           children: [
                             _switchTile(
-                              title: 'إظهار بطاقة «مخطط التقسيط» في شاشة البيع',
+                              title: AppLocalizations.of(context)!.showInstallmentCardInSale,
                               subtitle:
                                   'تُظهر المقدّم، نسبة الفائدة، عدد الأشهر، والقسط المقترح. عند الإيقاف يظهر المقدّم مع «تفصيل المبالغ» فقط، وتُحسب الفائدة من الإعدادات أدناه عند الحفظ.',
                               value: _data.showInstallmentCalculatorOnSale,
@@ -395,7 +396,7 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
                               keyboardType: TextInputType.number,
                               decoration: _fieldDecoration(
                                 label:
-                                    'عدد أقساط المتبقي (افتراضي عند إنشاء الخطة)',
+                                    AppLocalizations.of(context)!.defaultRemainingInstallments,
                                 helper:
                                     'يُستخدم كعدد أشهر افتراضي في بطاقة «مخطط التقسيط» عند البيع؛ وعند إخفاء البطاقة يُحسب ما يُحفظ مع الفاتورة.',
                                 helperMaxLines: 3,
@@ -415,7 +416,7 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
                                   ),
                               decoration: _fieldDecoration(
                                 label:
-                                    'نسبة الفائدة الافتراضية في بيع التقسيط (%)',
+                                    AppLocalizations.of(context)!.defaultInstallmentInterestRate,
                                 helper:
                                     'تُملأ خانة الفائدة عند اختيار «تقسيط»؛ وعند إخفاء البطاقة تُستخدم عند حفظ الفاتورة.',
                                 prefixIcon: Icon(
@@ -430,16 +431,16 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
                         const SizedBox(height: 16),
                         _section(
                           icon: Icons.date_range_outlined,
-                          title: 'الجدولة وتواريخ الاستحقاق',
+                          title: AppLocalizations.of(context)!.schedulingAndDueDates,
                           subtitle:
-                              'فترة الأقساط، طريقة احتساب الشهر، ومرجع أول تاريخ استحقاق.',
+                              AppLocalizations.of(context)!.installmentPeriodMethod,
                           children: [
                             TextField(
                               controller: _interval,
                               keyboardType: TextInputType.number,
                               decoration: _fieldDecoration(
-                                label: 'فترة بين كل استحقاق وآخر (بالأشهر)',
-                                helper: '1 = قسط شهري، 2 = كل شهرين، وهكذا.',
+                                label: AppLocalizations.of(context)!.periodBetweenDueDates,
+                                helper: AppLocalizations.of(context)!.periodExplanation,
                                 prefixIcon: Icon(
                                   Icons.more_time_outlined,
                                   size: 20,
@@ -451,7 +452,7 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
                             _switchTile(
                               title: 'استخدام أشهر تقويمية لتواريخ الاستحقاق',
                               subtitle:
-                                  'مفعّل: إضافة شهر تقويمي من تاريخ المرجع. معطّل: تقريب 30 يوماً لكل فترة.',
+                                  AppLocalizations.of(context)!.calendarMonthsExplanation,
                               value: _data.useCalendarMonths,
                               onChanged: (v) => setState(
                                 () => _data = _data.copyWith(
@@ -461,7 +462,7 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
                             ),
                             const SizedBox(height: 12),
                             Text(
-                              'تاريخ مرجع أول قسط (عند فتح شاشة الخطة)',
+                              AppLocalizations.of(context)!.firstDueReferenceDate,
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 13,
@@ -475,11 +476,11 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
                               ),
                               initialValue: _data.defaultFirstDueAnchor,
                               decoration: _fieldDecoration(
-                                label: 'الخيار',
+                                label: AppLocalizations.of(context)!.optionLabel,
                                 helper: null,
                               ),
-                              items: const [
-                                DropdownMenuItem(
+                              items: [
+                                const DropdownMenuItem(
                                   value:
                                       InstallmentSettingsData.anchorInvoiceDate,
                                   child: Text('من تاريخ الفاتورة'),
@@ -487,7 +488,7 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
                                 DropdownMenuItem(
                                   value: InstallmentSettingsData.anchorCustom,
                                   child: Text(
-                                    'يحدده البائع من التقويم (اتفاق)',
+                                    AppLocalizations.of(context)!.sellerChosenFromCalendar,
                                   ),
                                 ),
                               ],
@@ -506,11 +507,11 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
                         FilledButton.icon(
                           onPressed: _save,
                           icon: const Icon(Icons.save_outlined, size: 22),
-                          label: const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 4),
+                          label: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4),
                             child: Text(
-                              'حفظ الإعدادات',
-                              style: TextStyle(
+                              AppLocalizations.of(context)!.saveSettings,
+                              style: const TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16,
                               ),

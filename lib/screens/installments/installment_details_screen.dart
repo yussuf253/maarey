@@ -13,6 +13,7 @@ import '../../theme/design_tokens.dart';
 import '../../utils/sale_receipt_pdf.dart';
 import '../../utils/customer_phone_launch.dart';
 import '../../widgets/customer_contact_bar.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 final _numFmt = NumberFormat('#,##0', 'ar');
 final _dateFmt = DateFormat('dd/MM/yyyy', 'ar');
@@ -115,7 +116,7 @@ class _InstallmentDetailsScreenState extends State<InstallmentDetailsScreen> {
         textDirection: TextDirection.rtl,
         child: AlertDialog(
           shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
-          title: const Text('تسديد قسط'),
+          title: Text(AppLocalizations.of(context)!.installmentPaymentLabel),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -133,15 +134,15 @@ class _InstallmentDetailsScreenState extends State<InstallmentDetailsScreen> {
               TextField(
                 controller: amountController,
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'المبلغ المدفوع',
-                  border: OutlineInputBorder(borderRadius: AppShape.none),
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.amountPaid,
+                  border: const OutlineInputBorder(borderRadius: AppShape.none),
                 ),
               ),
             ],
           ),
           actions: [
-            TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('إلغاء')),
+            TextButton(onPressed: () => Navigator.pop(ctx), child: Text(AppLocalizations.of(context)!.cancelLabel2)),
             FilledButton(
               onPressed: () async {
                 final paid =
@@ -164,7 +165,7 @@ class _InstallmentDetailsScreenState extends State<InstallmentDetailsScreen> {
                   );
                 }
               },
-              child: const Text('تأكيد'),
+              child: Text(AppLocalizations.of(context)!.confirmLabel),
             ),
           ],
         ),
@@ -202,7 +203,7 @@ class _InstallmentDetailsScreenState extends State<InstallmentDetailsScreen> {
       child: Scaffold(
         backgroundColor: bg,
         appBar: AppBar(
-          title: const Text('تفاصيل خطة التقسيط'),
+          title: Text(AppLocalizations.of(context)!.installmentPlanDetails),
           actions: [
             IconButton(onPressed: _loading ? null : _load, icon: const Icon(Icons.refresh_rounded)),
           ],
@@ -210,7 +211,7 @@ class _InstallmentDetailsScreenState extends State<InstallmentDetailsScreen> {
         body: _loading
             ? const Center(child: CircularProgressIndicator())
             : _plan == null
-                ? const Center(child: Text('الخطة غير موجودة'))
+                ? Center(child: Text(AppLocalizations.of(context)!.planNotFound))
                 : Column(
                     children: [
                       Expanded(
@@ -259,7 +260,7 @@ class _InstallmentDetailsScreenState extends State<InstallmentDetailsScreen> {
                         ),
                         const SizedBox(height: 18),
                         Text(
-                          'جدول الأقساط',
+                          AppLocalizations.of(context)!.installmentSchedule,
                           style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 10),
@@ -391,7 +392,7 @@ class _InvoicePanel extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('الفاتورة المرتبطة', style: TextStyle(fontWeight: FontWeight.bold)),
+          Text(AppLocalizations.of(context)!.linkedInvoice, style: TextStyle(fontWeight: FontWeight.bold)),
           const SizedBox(height: 8),
           Text('رقم الفاتورة: #${invoice.id}'),
           Text('التاريخ: ${_dateFmt.format(invoice.date)}'),
@@ -428,16 +429,16 @@ class _ItemsPanel extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
-              Icon(Icons.inventory_2_outlined, size: 20, color: AppColors.accent),
-              SizedBox(width: 8),
-              Text('البضاعة المسحوبة من المخزون', style: TextStyle(fontWeight: FontWeight.bold)),
+              const Icon(Icons.inventory_2_outlined, size: 20, color: AppColors.accent),
+              const SizedBox(width: 8),
+              Text(AppLocalizations.of(context)!.inventoryWithdrawn, style: const TextStyle(fontWeight: FontWeight.bold)),
             ],
           ),
           const SizedBox(height: 4),
           Text(
-            'الكميات المباعة من الفاتورة مع رصيد المخزون الحالي للمنتج المرتبط.',
+            AppLocalizations.of(context)!.itemsSoldWithStock,
             style: TextStyle(fontSize: 11, color: Theme.of(context).hintColor),
           ),
           const SizedBox(height: 10),
@@ -463,7 +464,7 @@ class _ItemsPanel extends StatelessWidget {
                     child: Text(
                       pid == null
                           ? '—'
-                          : (q != null ? 'مخزون: ${_numFmt.format(q)}' : 'غير مرتبط'),
+                          : (q != null ? 'مخزون: ${_numFmt.format(q)}' : AppLocalizations.of(context)!.unlinked),
                       textAlign: TextAlign.end,
                       style: TextStyle(
                         fontSize: 12,
@@ -509,7 +510,7 @@ class _SaleFinanceSnapshotPanel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'معلومات الفائدة (عند البيع)',
+            AppLocalizations.of(context)!.interestInfoAtSale,
             style: TextStyle(
               fontWeight: FontWeight.w800,
               fontSize: 14,
@@ -585,7 +586,7 @@ class _ProgressPanel extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('تقدّم السداد', style: TextStyle(fontWeight: FontWeight.bold)),
+          Text(AppLocalizations.of(context)!.paymentProgress, style: TextStyle(fontWeight: FontWeight.bold)),
           const SizedBox(height: 10),
           ClipRect(
             child: LinearProgressIndicator(
@@ -615,7 +616,7 @@ class _ProgressPanel extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 6),
               child: Text(
-                'يُقصى «المدفوع» على إجمالي الخطة عند التعارض.',
+                AppLocalizations.of(context)!.paidCappedAtTotal,
                 style: TextStyle(
                   fontSize: 10,
                   height: 1.3,
@@ -687,8 +688,8 @@ class _InstallmentRow extends StatelessWidget {
             children: [
               Text('${_numFmt.format(installment.amount)} د.ع', style: const TextStyle(fontWeight: FontWeight.w600)),
               if (paid)
-                const Chip(
-                  label: Text('مدفوع', style: TextStyle(fontSize: 11)),
+                Chip(
+                  label: Text(AppLocalizations.of(context)!.paidLabel2, style: const TextStyle(fontSize: 11)),
                   padding: EdgeInsets.zero,
                   visualDensity: VisualDensity.compact,
                 )

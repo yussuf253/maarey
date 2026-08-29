@@ -10033,6 +10033,3348 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'الرصيد الحالي'**
   String get currentBalance;
+
+  /// No description provided for @reportsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'التقارير'**
+  String get reportsTitle;
+
+  /// No description provided for @reportsSections.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقسام التقارير'**
+  String get reportsSections;
+
+  /// No description provided for @defaultPeriod.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفترة الافتراضية عند فتح التقارير'**
+  String get defaultPeriod;
+
+  /// No description provided for @exportToExcel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تصدير (نسخ لـ Excel)'**
+  String get exportToExcel;
+
+  /// No description provided for @printReport.
+  ///
+  /// In ar, this message translates to:
+  /// **'طباعة تقرير فترة'**
+  String get printReport;
+
+  /// No description provided for @salesOverview.
+  ///
+  /// In ar, this message translates to:
+  /// **'نظرة عامة على المبيعات'**
+  String get salesOverview;
+
+  /// No description provided for @financialGauges.
+  ///
+  /// In ar, this message translates to:
+  /// **'مؤشرات أداء رئيسية'**
+  String get financialGauges;
+
+  /// No description provided for @gaugesConsistent.
+  ///
+  /// In ar, this message translates to:
+  /// **'متسقة مع نسب المخطط الدائري والجدول'**
+  String get gaugesConsistent;
+
+  /// No description provided for @gaugesRelative.
+  ///
+  /// In ar, this message translates to:
+  /// **'توزيع نسبي يوضح أين تذهب كل وحدة إيراد'**
+  String get gaugesRelative;
+
+  /// No description provided for @reportSettings.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات التقارير'**
+  String get reportSettings;
+
+  /// No description provided for @reportPreferences.
+  ///
+  /// In ar, this message translates to:
+  /// **'فترة افتراضية وتفضيلات'**
+  String get reportPreferences;
+
+  /// No description provided for @periodApplied.
+  ///
+  /// In ar, this message translates to:
+  /// **'عند الحفظ تُحدَّث الفترة الحالية وتُخزَّن للمرّة القادمة'**
+  String get periodApplied;
+
+  /// No description provided for @currentPeriod.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفترة المختارة:'**
+  String get currentPeriod;
+
+  /// No description provided for @yesterday.
+  ///
+  /// In ar, this message translates to:
+  /// **'أمس'**
+  String get yesterday;
+
+  /// No description provided for @thisWeek.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الأسبوع'**
+  String get thisWeek;
+
+  /// No description provided for @thisMonth.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الشهر'**
+  String get thisMonth;
+
+  /// No description provided for @thisYear.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا العام'**
+  String get thisYear;
+
+  /// No description provided for @lastQuarter.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر ربع سنة'**
+  String get lastQuarter;
+
+  /// No description provided for @dailyTrend.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتجاه يومي'**
+  String get dailyTrend;
+
+  /// No description provided for @weekly.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسبوعي'**
+  String get weekly;
+
+  /// No description provided for @monthly.
+  ///
+  /// In ar, this message translates to:
+  /// **'شهري'**
+  String get monthly;
+
+  /// No description provided for @quarterly.
+  ///
+  /// In ar, this message translates to:
+  /// **'ربع سنوي'**
+  String get quarterly;
+
+  /// No description provided for @yearly.
+  ///
+  /// In ar, this message translates to:
+  /// **'سنوي'**
+  String get yearly;
+
+  /// No description provided for @custom.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخصص'**
+  String get custom;
+
+  /// No description provided for @noData.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد بيانات'**
+  String get noData;
+
+  /// No description provided for @noDataPeriod.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد بيانات في هذه الفترة'**
+  String get noDataPeriod;
+
+  /// No description provided for @noDailyData.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا بيانات يومية في هذه الفترة'**
+  String get noDailyData;
+
+  /// No description provided for @noTrendData.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد بيانات اتجاه عبر الزمن لعرضها'**
+  String get noTrendData;
+
+  /// No description provided for @noMetricsData.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد بيانات لعرض المقاييس'**
+  String get noMetricsData;
+
+  /// No description provided for @tryDateRange.
+  ///
+  /// In ar, this message translates to:
+  /// **'جرّب تغيير نطاق التاريخ أو الفلتر'**
+  String get tryDateRange;
+
+  /// No description provided for @filterNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا نتائج'**
+  String get filterNone;
+
+  /// No description provided for @clearSearch.
+  ///
+  /// In ar, this message translates to:
+  /// **'امسح البحث (×) أو انتقل لتبويب «الكل» أو غيّر التبويب أعلاه'**
+  String get clearSearch;
+
+  /// No description provided for @searchDescriptionCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث (وصف أو فئة)'**
+  String get searchDescriptionCategory;
+
+  /// No description provided for @searchCustomerProductPlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث: عميل، منتج، رقم خطة، رقم فاتورة...'**
+  String get searchCustomerProductPlan;
+
+  /// No description provided for @salesInvoices.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفواتير'**
+  String get salesInvoices;
+
+  /// No description provided for @salesOnly.
+  ///
+  /// In ar, this message translates to:
+  /// **'مبيعات (غير مرتجع)'**
+  String get salesOnly;
+
+  /// No description provided for @dailySales.
+  ///
+  /// In ar, this message translates to:
+  /// **'مبيعات يومية ضمن الفترة'**
+  String get dailySales;
+
+  /// No description provided for @totalRevenue.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي الإيراد'**
+  String get totalRevenue;
+
+  /// No description provided for @totalSalesCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الفواتير'**
+  String get totalSalesCount;
+
+  /// No description provided for @totalReturns.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي المرتجعات'**
+  String get totalReturns;
+
+  /// No description provided for @totalExpenses.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي المصروفات'**
+  String get totalExpenses;
+
+  /// No description provided for @netSales.
+  ///
+  /// In ar, this message translates to:
+  /// **'صافي المبيعات'**
+  String get netSales;
+
+  /// No description provided for @netAfterExpenses.
+  ///
+  /// In ar, this message translates to:
+  /// **'صافي بعد المصروفات'**
+  String get netAfterExpenses;
+
+  /// No description provided for @netApprox.
+  ///
+  /// In ar, this message translates to:
+  /// **'صافي تقريبي'**
+  String get netApprox;
+
+  /// No description provided for @netApproxDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'صافي تقريبي (بيع − مرتجع)'**
+  String get netApproxDesc;
+
+  /// No description provided for @netSalesPeriod.
+  ///
+  /// In ar, this message translates to:
+  /// **'صافي مبيعات الفترة'**
+  String get netSalesPeriod;
+
+  /// No description provided for @salesVsExpenses.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبيعات مقابل المصروفات — اتجاه يومي'**
+  String get salesVsExpenses;
+
+  /// No description provided for @paymentTypeTrend.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتجاه أنواع الدفع عبر الزمن'**
+  String get paymentTypeTrend;
+
+  /// No description provided for @categoryStacked.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتجاه الفئات المكدّس عبر الزمن'**
+  String get categoryStacked;
+
+  /// No description provided for @employeeSalesTrend.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتجاه مبيعات الموظفين عبر الزمن'**
+  String get employeeSalesTrend;
+
+  /// No description provided for @salesByPaymentType.
+  ///
+  /// In ar, this message translates to:
+  /// **'توزيع المبيعات حسب نوع الدفع'**
+  String get salesByPaymentType;
+
+  /// No description provided for @salesByCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'توزيع المبيعات حسب الفئة'**
+  String get salesByCategory;
+
+  /// No description provided for @salesByCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'توزيع المبيعات على العملاء'**
+  String get salesByCustomer;
+
+  /// No description provided for @salesByEmployee.
+  ///
+  /// In ar, this message translates to:
+  /// **'توزيع المبيعات على الموظفين'**
+  String get salesByEmployee;
+
+  /// No description provided for @topProducts.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكثر الأصناف مبيعاً'**
+  String get topProducts;
+
+  /// No description provided for @topProductsByRevenue.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكثر الأصناف مبيعاً (حسب إيراد البنود)'**
+  String get topProductsByRevenue;
+
+  /// No description provided for @topCustomers.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكثر المشترين'**
+  String get topCustomers;
+
+  /// No description provided for @topCustomersByPurchase.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكثر العملاء شراءً (حسب اسم الفاتورة)'**
+  String get topCustomersByPurchase;
+
+  /// No description provided for @topEmployees.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموظفون'**
+  String get topEmployees;
+
+  /// No description provided for @topEmployeesBySales.
+  ///
+  /// In ar, this message translates to:
+  /// **'ترتيب حسب إجمالي المبيعات المسجّلة على الفواتير'**
+  String get topEmployeesBySales;
+
+  /// No description provided for @topCategories.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعلى الفئات إيراداً'**
+  String get topCategories;
+
+  /// No description provided for @topCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعلى فئة: {name}'**
+  String topCategory(Object name);
+
+  /// No description provided for @moreItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخرون'**
+  String get moreItems;
+
+  /// No description provided for @reportAccuracyNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظات الدقّة'**
+  String get reportAccuracyNote;
+
+  /// No description provided for @marginAccuracyDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة تغطية التكلفة — كلما ارتفعت زادت الدقة'**
+  String get marginAccuracyDesc;
+
+  /// No description provided for @fixedCostRatio.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة السطور ذات التكلفة المثبّتة من الإجمالي'**
+  String get fixedCostRatio;
+
+  /// No description provided for @costFixedAtSale.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثبّتة وقت البيع: {amount}'**
+  String costFixedAtSale(Object amount);
+
+  /// No description provided for @noCostZeros.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدون تكلفة (تُعامَل 0): {count}'**
+  String noCostZeros(Object count);
+
+  /// No description provided for @expenseAnalysis.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحليلات'**
+  String get expenseAnalysis;
+
+  /// No description provided for @expenseBreakdown.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحليلات المصروفات ضمن الفترة'**
+  String get expenseBreakdown;
+
+  /// No description provided for @topExpenses.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدنى 10 منتجات ربحاً (مراجعة تسعير)'**
+  String get topExpenses;
+
+  /// No description provided for @lowMarginProducts.
+  ///
+  /// In ar, this message translates to:
+  /// **'منتجات هامشها منخفض أو سالب'**
+  String get lowMarginProducts;
+
+  /// No description provided for @lowMarginDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'منتجات هامشها منخفض أو سالب — قد تحتاج مراجعة السعر أو التكلفة'**
+  String get lowMarginDesc;
+
+  /// No description provided for @customerBalances.
+  ///
+  /// In ar, this message translates to:
+  /// **'أرصدة العملاء'**
+  String get customerBalances;
+
+  /// No description provided for @customerBalancesDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'أرصدة مسجّلة في سجل العملاء'**
+  String get customerBalancesDesc;
+
+  /// No description provided for @installmentPlans.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطط التقسيط'**
+  String get installmentPlans;
+
+  /// No description provided for @installmentPlansDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطط أقساط (فواتير ضمن الفترة)'**
+  String get installmentPlansDesc;
+
+  /// No description provided for @activePlans.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطط نشطة'**
+  String get activePlans;
+
+  /// No description provided for @noInstallmentPlans.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد خطط تقسيط'**
+  String get noInstallmentPlans;
+
+  /// No description provided for @noInstallmentSearch.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد خطط ضمن البحث أو التصفية الحالية'**
+  String get noInstallmentSearch;
+
+  /// No description provided for @salesFlowItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'فواتير ومبيعات (قيود مرتبطة بفاتورة)'**
+  String get salesFlowItems;
+
+  /// No description provided for @salesInvoicesReturns.
+  ///
+  /// In ar, this message translates to:
+  /// **'فواتير / مرتجعات'**
+  String get salesInvoicesReturns;
+
+  /// No description provided for @filteredPeriod.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفترة: {from} → {to}'**
+  String filteredPeriod(Object from, Object to);
+
+  /// No description provided for @filteredPlansCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'القائمة: {filtered} من {total} خطة'**
+  String filteredPlansCount(Object filtered, Object total);
+
+  /// No description provided for @employeePerformance.
+  ///
+  /// In ar, this message translates to:
+  /// **'جدول — أداء التسجيل حسب اسم الموظف على الفاتورة'**
+  String get employeePerformance;
+
+  /// No description provided for @employeePerformanceDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'فواتير مسجّلة باسم الموظف (حقل الفاتورة)'**
+  String get employeePerformanceDesc;
+
+  /// No description provided for @loyaltySummary.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخص نقاط وخصومات الولاء'**
+  String get loyaltySummary;
+
+  /// No description provided for @loyaltyGranted.
+  ///
+  /// In ar, this message translates to:
+  /// **'نقاط ممنوحة (مجموع النقاط المسجّلة على الفواتير)'**
+  String get loyaltyGranted;
+
+  /// No description provided for @loyaltyRedeemed.
+  ///
+  /// In ar, this message translates to:
+  /// **'نقاط ممنوحة (مجموع النقاط المسجّلة على الفواتير)'**
+  String get loyaltyRedeemed;
+
+  /// No description provided for @loyaltyDiscounts.
+  ///
+  /// In ar, this message translates to:
+  /// **'خصومات ولاء على الفواتير'**
+  String get loyaltyDiscounts;
+
+  /// No description provided for @bestSales.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحليل وهامش'**
+  String get bestSales;
+
+  /// No description provided for @bestSalesDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحليلات تفاصيل البضاعة والهامش والصافي'**
+  String get bestSalesDesc;
+
+  /// No description provided for @backToHome.
+  ///
+  /// In ar, this message translates to:
+  /// **'العودة للرئيسية'**
+  String get backToHome;
+
+  /// No description provided for @selectEmployee.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر موظفاً'**
+  String get selectEmployee;
+
+  /// No description provided for @selectCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر عميلاً مسجّلاً'**
+  String get selectCustomer;
+
+  /// No description provided for @selectCustomerFromList.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيار عميل من القائمة'**
+  String get selectCustomerFromList;
+
+  /// No description provided for @updateButton.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديث'**
+  String get updateButton;
+
+  /// No description provided for @refreshButton.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديث (F5)'**
+  String get refreshButton;
+
+  /// No description provided for @refreshData.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديث البيانات'**
+  String get refreshData;
+
+  /// No description provided for @noItemsRecorded.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد أصناف مسجّلة في الفاتورة'**
+  String get noItemsRecorded;
+
+  /// No description provided for @salesOnlySection.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا القسم يعرض المبيعات فقط: نقدي/دين/تقسيط/توصيل'**
+  String get salesOnlySection;
+
+  /// No description provided for @thankYou.
+  ///
+  /// In ar, this message translates to:
+  /// **'شكرًا لاستخدام NaBoo'**
+  String get thankYou;
+
+  /// No description provided for @cashTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصندوق'**
+  String get cashTitle;
+
+  /// No description provided for @cashDrawer.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصندوق'**
+  String get cashDrawer;
+
+  /// No description provided for @openShift.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح الوردية'**
+  String get openShift;
+
+  /// No description provided for @closeShift.
+  ///
+  /// In ar, this message translates to:
+  /// **'إغلاق الوردية'**
+  String get closeShift;
+
+  /// No description provided for @shiftDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل الوردية'**
+  String get shiftDetails;
+
+  /// No description provided for @shiftIdentity.
+  ///
+  /// In ar, this message translates to:
+  /// **'هوية الوردية والجلسة'**
+  String get shiftIdentity;
+
+  /// No description provided for @openTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت الفتح'**
+  String get openTime;
+
+  /// No description provided for @closeTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'وقت الإغلاق'**
+  String get closeTime;
+
+  /// No description provided for @declaredOnOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'النقد المُعلَن عند الفتح (الجرد)'**
+  String get declaredOnOpen;
+
+  /// No description provided for @declaredAfterWithdrawal.
+  ///
+  /// In ar, this message translates to:
+  /// **'النقد المُعلَن في الصندوق بعد السحب'**
+  String get declaredAfterWithdrawal;
+
+  /// No description provided for @systemBalanceOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'رصيد النظام عند فتح الوردية'**
+  String get systemBalanceOpen;
+
+  /// No description provided for @systemBalanceClose.
+  ///
+  /// In ar, this message translates to:
+  /// **'رصيد النظام عند الإغلاق'**
+  String get systemBalanceClose;
+
+  /// No description provided for @withdrawnOnClose.
+  ///
+  /// In ar, this message translates to:
+  /// **'المسحوب عند الإغلاق'**
+  String get withdrawnOnClose;
+
+  /// No description provided for @pendingDeclared.
+  ///
+  /// In ar, this message translates to:
+  /// **'المُعلَن متبقيًّا في الصندوق'**
+  String get pendingDeclared;
+
+  /// No description provided for @shiftMovements.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحركات'**
+  String get shiftMovements;
+
+  /// No description provided for @totalMovements.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي ما يظهر من حركات في الصندوق لهذه المجموعة: {count} حركة'**
+  String totalMovements(Object count);
+
+  /// No description provided for @inflow.
+  ///
+  /// In ar, this message translates to:
+  /// **'وارد'**
+  String get inflow;
+
+  /// No description provided for @outflow.
+  ///
+  /// In ar, this message translates to:
+  /// **'صادر'**
+  String get outflow;
+
+  /// No description provided for @inflowLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'وارد (إدخال)'**
+  String get inflowLabel;
+
+  /// No description provided for @outflowLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'صادر (إخراج)'**
+  String get outflowLabel;
+
+  /// No description provided for @inflowLineByLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوارد — سطر بسطر'**
+  String get inflowLineByLine;
+
+  /// No description provided for @outflowLineByLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصادر — سطر بسطر'**
+  String get outflowLineByLine;
+
+  /// No description provided for @manualEntry.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيد يدوي'**
+  String get manualEntry;
+
+  /// No description provided for @manualDeposit.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيداع يدوي'**
+  String get manualDeposit;
+
+  /// No description provided for @manualWithdrawal.
+  ///
+  /// In ar, this message translates to:
+  /// **'سحب يدوي'**
+  String get manualWithdrawal;
+
+  /// No description provided for @affectsCashbox.
+  ///
+  /// In ar, this message translates to:
+  /// **'أثر على الصندوق'**
+  String get affectsCashbox;
+
+  /// No description provided for @cashSales.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع نقدي'**
+  String get cashSales;
+
+  /// No description provided for @creditSalesLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'دين'**
+  String get creditSalesLabel;
+
+  /// No description provided for @noOutflowMovements.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد حركات صادر في هذه المجموعة'**
+  String get noOutflowMovements;
+
+  /// No description provided for @noInflowMovements.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد حركات وارد في هذه المجموعة'**
+  String get noInflowMovements;
+
+  /// No description provided for @noLinkedMovements.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد في هذه المجموعة حركات مرتبطة برقم فاتورة'**
+  String get noLinkedMovements;
+
+  /// No description provided for @otherMovements.
+  ///
+  /// In ar, this message translates to:
+  /// **'حركات أخرى'**
+  String get otherMovements;
+
+  /// No description provided for @movement.
+  ///
+  /// In ar, this message translates to:
+  /// **'حركة'**
+  String get movement;
+
+  /// No description provided for @printReceipt.
+  ///
+  /// In ar, this message translates to:
+  /// **'طباعة إيصال'**
+  String get printReceipt;
+
+  /// No description provided for @depositEntry.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيداع'**
+  String get depositEntry;
+
+  /// No description provided for @withdrawalEntry.
+  ///
+  /// In ar, this message translates to:
+  /// **'سحب'**
+  String get withdrawalEntry;
+
+  /// No description provided for @cashSummary.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخص الصندوق'**
+  String get cashSummary;
+
+  /// No description provided for @summaryInflowOutflow.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخص الوارد والصادر (هذه القائمة)'**
+  String get summaryInflowOutflow;
+
+  /// No description provided for @loyaltyRange.
+  ///
+  /// In ar, this message translates to:
+  /// **'ولاء (ضمن الفترة)'**
+  String get loyaltyRange;
+
+  /// No description provided for @noShift.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدون وردية · {count} حركة'**
+  String noShift(Object count);
+
+  /// No description provided for @invoiceAttached.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة مرفقة'**
+  String get invoiceAttached;
+
+  /// No description provided for @linkedInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفاتورة المرتبطة'**
+  String get linkedInvoice;
+
+  /// No description provided for @expensesTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'المصروفات'**
+  String get expensesTitle;
+
+  /// No description provided for @addExpense.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة مصروف'**
+  String get addExpense;
+
+  /// No description provided for @editExpense.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل مصروف'**
+  String get editExpense;
+
+  /// No description provided for @deleteExpense.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف المصروف؟'**
+  String get deleteExpense;
+
+  /// No description provided for @confirmDeleteExpense.
+  ///
+  /// In ar, this message translates to:
+  /// **'هل تريد حذف هذا المصروف؟ لا يمكن التراجع'**
+  String get confirmDeleteExpense;
+
+  /// No description provided for @expenseCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفئة *'**
+  String get expenseCategory;
+
+  /// No description provided for @expenseDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوصف'**
+  String get expenseDescription;
+
+  /// No description provided for @expenseAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ (د.ع)'**
+  String get expenseAmount;
+
+  /// No description provided for @expenseDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ'**
+  String get expenseDate;
+
+  /// No description provided for @expenseStatus.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحالة'**
+  String get expenseStatus;
+
+  /// No description provided for @expensePaid.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدفوع'**
+  String get expensePaid;
+
+  /// No description provided for @expenseUnpaid.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير مدفوع'**
+  String get expenseUnpaid;
+
+  /// No description provided for @expenseReceipt.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيصال مصروف'**
+  String get expenseReceipt;
+
+  /// No description provided for @expenseReport.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة تقرير المصروفات'**
+  String get expenseReport;
+
+  /// No description provided for @printExpenseReport.
+  ///
+  /// In ar, this message translates to:
+  /// **'طباعة تقرير مصروفات'**
+  String get printExpenseReport;
+
+  /// No description provided for @expensesWithinPeriod.
+  ///
+  /// In ar, this message translates to:
+  /// **'المصروفات ضمن الفترة'**
+  String get expensesWithinPeriod;
+
+  /// No description provided for @allCategories.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل الفئات'**
+  String get allCategories;
+
+  /// No description provided for @selectCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر فئة المصروف'**
+  String get selectCategory;
+
+  /// No description provided for @selectOtherCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيار فئة أخرى'**
+  String get selectOtherCategory;
+
+  /// No description provided for @categoryOptions.
+  ///
+  /// In ar, this message translates to:
+  /// **'خيارات القسم'**
+  String get categoryOptions;
+
+  /// No description provided for @showCategoryDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض وصف القسم'**
+  String get showCategoryDescription;
+
+  /// No description provided for @copyCategoryName.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخ اسم القسم'**
+  String get copyCategoryName;
+
+  /// No description provided for @categoryCopied.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم نسخ اسم القسم: {name}'**
+  String categoryCopied(Object name);
+
+  /// No description provided for @todayExpense.
+  ///
+  /// In ar, this message translates to:
+  /// **'مصروف اليوم'**
+  String get todayExpense;
+
+  /// No description provided for @monthlyRecurring.
+  ///
+  /// In ar, this message translates to:
+  /// **'مصروف شهري متكرر'**
+  String get monthlyRecurring;
+
+  /// No description provided for @recurringDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'تكرار شهري'**
+  String get recurringDay;
+
+  /// No description provided for @selectMonthDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الأيام (1–365)'**
+  String get selectMonthDay;
+
+  /// No description provided for @duplicateRecurring.
+  ///
+  /// In ar, this message translates to:
+  /// **'تكرار شهري'**
+  String get duplicateRecurring;
+
+  /// No description provided for @expenseSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم تسجيل المصروف بنجاح'**
+  String get expenseSaved;
+
+  /// No description provided for @expenseUpdated.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم تحديث المصروف بنجاح'**
+  String get expenseUpdated;
+
+  /// No description provided for @expenseSaveError.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر الحفظ: {error}'**
+  String expenseSaveError(Object error);
+
+  /// No description provided for @attachmentOptional.
+  ///
+  /// In ar, this message translates to:
+  /// **'إرفاق صورة الفاتورة (اختياري)'**
+  String get attachmentOptional;
+
+  /// No description provided for @imageAttached.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم إرفاق صورة الفاتورة'**
+  String get imageAttached;
+
+  /// No description provided for @imageError.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر اختيار الصورة'**
+  String get imageError;
+
+  /// No description provided for @noExpensesPeriod.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد مصروفات ضمن هذه الفترة'**
+  String get noExpensesPeriod;
+
+  /// No description provided for @noCategoryData.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد بيانات.'**
+  String get noCategoryData;
+
+  /// No description provided for @selectCategoryAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'يرجى اختيار فئة وإدخال مبلغ صحيح.'**
+  String get selectCategoryAmount;
+
+  /// No description provided for @installmentsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأقساط'**
+  String get installmentsTitle;
+
+  /// No description provided for @addInstallmentPlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة خطة تقسيط'**
+  String get addInstallmentPlan;
+
+  /// No description provided for @planDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل خطة التقسيط'**
+  String get planDetails;
+
+  /// No description provided for @installmentSchedule.
+  ///
+  /// In ar, this message translates to:
+  /// **'جدول الأقساط'**
+  String get installmentSchedule;
+
+  /// No description provided for @installmentSettings.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات تقسيط'**
+  String get installmentSettings;
+
+  /// No description provided for @paymentSchedule.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجدولة وتواريخ الاستحقاق'**
+  String get paymentSchedule;
+
+  /// No description provided for @dueDates.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاستحقاق'**
+  String get dueDates;
+
+  /// No description provided for @monthlyPaymentLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'القسط الشهري المقترح'**
+  String get monthlyPaymentLabel;
+
+  /// No description provided for @interestRateLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة الفائدة'**
+  String get interestRateLabel;
+
+  /// No description provided for @downPaymentLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المقدّم'**
+  String get downPaymentLabel;
+
+  /// No description provided for @downPaymentRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلزام مقدّم دفع لفاتورة التقسيط'**
+  String get downPaymentRequired;
+
+  /// No description provided for @advanceAmountLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ المموّل'**
+  String get advanceAmountLabel;
+
+  /// No description provided for @minAdvancePercentLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقل نسبة مقدّم من إجمالي الفاتورة (%)'**
+  String get minAdvancePercentLabel;
+
+  /// No description provided for @minAdvancePercentDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: 10 تعني ألا يقل المقدّم عن 10٪ من الإجمالي'**
+  String get minAdvancePercentDesc;
+
+  /// No description provided for @useCalendarMonthsLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدام أشهر تقويمية لتواريخ الاستحقاق'**
+  String get useCalendarMonthsLabel;
+
+  /// No description provided for @useCalendarMonthsDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفعّل: إضافة شهر تقويمي من تاريخ المرجع. معطّل: تقريب 30 يوماً لكل فترة.'**
+  String get useCalendarMonthsDesc;
+
+  /// No description provided for @referenceDateLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرجع الجدولة (بداية العدّ)'**
+  String get referenceDateLabel;
+
+  /// No description provided for @fromInvoiceDateLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'من تاريخ الفاتورة'**
+  String get fromInvoiceDateLabel;
+
+  /// No description provided for @fromSessionOpenLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'من فتح الجلسة في النظام'**
+  String get fromSessionOpenLabel;
+
+  /// No description provided for @linkCustomerLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'ربط العميل'**
+  String get linkCustomerLabel;
+
+  /// No description provided for @selectRegisteredCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر عميلاً مسجّلاً'**
+  String get selectRegisteredCustomer;
+
+  /// No description provided for @customerBalanceLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'رصيد العميل المسجّل: {amount}'**
+  String customerBalanceLabel(Object amount);
+
+  /// No description provided for @planCreatedAtLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم الإنشاء: {date}'**
+  String planCreatedAtLabel(Object date);
+
+  /// No description provided for @totalInstallmentsLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الأقساط'**
+  String get totalInstallmentsLabel;
+
+  /// No description provided for @remainingInstallmentsLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد أقساط المتبقي'**
+  String get remainingInstallmentsLabel;
+
+  /// No description provided for @paidAmountLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المدفوع'**
+  String get paidAmountLabel;
+
+  /// No description provided for @remainingAmountLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتبقي'**
+  String get remainingAmountLabel;
+
+  /// No description provided for @nextInstallmentLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'القسط التالي'**
+  String get nextInstallmentLabel;
+
+  /// No description provided for @nextDueLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'القسط التالي: {amount} — {date}'**
+  String nextDueLabel(Object amount, Object date);
+
+  /// No description provided for @firstDueLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'أول استحقاق: {date}'**
+  String firstDueLabel(Object date);
+
+  /// No description provided for @installmentPaidLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'سُدد: {date}'**
+  String installmentPaidLabel(Object date);
+
+  /// No description provided for @installmentPendingLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المعلق'**
+  String get installmentPendingLabel;
+
+  /// No description provided for @installmentOverdueLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'متأخرة'**
+  String get installmentOverdueLabel;
+
+  /// No description provided for @installmentCompletedLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكتملة'**
+  String get installmentCompletedLabel;
+
+  /// No description provided for @settleInstallmentLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسديد قسط'**
+  String get settleInstallmentLabel;
+
+  /// No description provided for @settleInstallmentDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'يجب تسديد قيمة القسط كاملة ({amount})'**
+  String settleInstallmentDesc(Object amount);
+
+  /// No description provided for @cantRescheduleLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يمكن إعادة جدولة الأقساط بعد تسديد قسط من هذه الخطة'**
+  String get cantRescheduleLabel;
+
+  /// No description provided for @planAlreadyExistsLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطة مسجّلة بالفعل وتظهر تحت «خطط التقسيط»'**
+  String get planAlreadyExistsLabel;
+
+  /// No description provided for @planCreatedLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم حفظ الجدول وربط العميل'**
+  String get planCreatedLabel;
+
+  /// No description provided for @scheduleSavedLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم حفظ جدول الأقساط'**
+  String get scheduleSavedLabel;
+
+  /// No description provided for @planLoadErrorLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر تحميل خطة التقسيط'**
+  String get planLoadErrorLabel;
+
+  /// No description provided for @paymentRecordErrorLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر التسجيل (قد يكون القسط مدفوعاً)'**
+  String get paymentRecordErrorLabel;
+
+  /// No description provided for @planIdLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطة #{id}'**
+  String planIdLabel(Object id);
+
+  /// No description provided for @installmentNumberLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'القسط #{index}'**
+  String installmentNumberLabel(Object index);
+
+  /// No description provided for @planMonthsLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الأشهر: {count}'**
+  String planMonthsLabel(Object count);
+
+  /// No description provided for @planSuggestedMonthlyLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'القسط الشهري المقترح: {amount}'**
+  String planSuggestedMonthlyLabel(Object amount);
+
+  /// No description provided for @planFinancedAtSaleLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ المموّل: {amount}'**
+  String planFinancedAtSaleLabel(Object amount);
+
+  /// No description provided for @planInterestAmountLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيمة الفائدة: {amount}'**
+  String planInterestAmountLabel(Object amount);
+
+  /// No description provided for @planProgressLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تقدّم السداد: {paid} / {total}'**
+  String planProgressLabel(Object paid, Object total);
+
+  /// No description provided for @noRemainingAfterAdvanceLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد مبلغ متبقٍ للتقسيط بعد المقدم'**
+  String get noRemainingAfterAdvanceLabel;
+
+  /// No description provided for @calendarScheduleLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'جدولة: شهر تقويمي × {step} لكل قسط من المرجع'**
+  String calendarScheduleLabel(Object step);
+
+  /// No description provided for @roundScheduleLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'جدولة: تقريب 30 يوماً × {step} لكل قسط من المرجع'**
+  String roundScheduleLabel(Object step);
+
+  /// No description provided for @dueDayLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُستحق يوم'**
+  String get dueDayLabel;
+
+  /// No description provided for @dueDayDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'يحدده البائع من التقويم (اتفاق)'**
+  String get dueDayDesc;
+
+  /// No description provided for @installmentSettingsSavedLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم حفظ إعدادات التقسيط'**
+  String get installmentSettingsSavedLabel;
+
+  /// No description provided for @requiredInstallmentsLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الأقساط يجب أن يكون 1 على الأقل'**
+  String get requiredInstallmentsLabel;
+
+  /// No description provided for @validAmountLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيمة غير صالحة'**
+  String get validAmountLabel;
+
+  /// No description provided for @debtCollectionLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحصيل دين'**
+  String get debtCollectionLabel;
+
+  /// No description provided for @supplierPaymentLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'دفع مورد'**
+  String get supplierPaymentLabel;
+
+  /// No description provided for @salaryLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'رواتب'**
+  String get salaryLabel;
+
+  /// No description provided for @rentLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيجار'**
+  String get rentLabel;
+
+  /// No description provided for @waterLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'ماء'**
+  String get waterLabel;
+
+  /// No description provided for @electricityLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'كهرباء'**
+  String get electricityLabel;
+
+  /// No description provided for @otherLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخرون'**
+  String get otherLabel;
+
+  /// No description provided for @updateAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديث'**
+  String get updateAction;
+
+  /// No description provided for @saveAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get saveAction;
+
+  /// No description provided for @printAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'طباعة'**
+  String get printAction;
+
+  /// No description provided for @retryAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة المحاولة'**
+  String get retryAction;
+
+  /// No description provided for @reloadFromDb.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة التحميل من القاعدة'**
+  String get reloadFromDb;
+
+  /// No description provided for @amountLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ'**
+  String get amountLabel;
+
+  /// No description provided for @employeeLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموظف'**
+  String get employeeLabel;
+
+  /// No description provided for @paidLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المدفوع'**
+  String get paidLabel;
+
+  /// No description provided for @remainingLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتبقي'**
+  String get remainingLabel;
+
+  /// No description provided for @salesTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبيعات'**
+  String get salesTitle;
+
+  /// No description provided for @installmentSettingsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات تقسيط'**
+  String get installmentSettingsTitle;
+
+  /// No description provided for @createPlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنشاء خطة'**
+  String get createPlan;
+
+  /// No description provided for @accuracyNotes.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظات الدقّة'**
+  String get accuracyNotes;
+
+  /// No description provided for @addEntry.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة القيد'**
+  String get addEntry;
+
+  /// No description provided for @advanceAndTerms.
+  ///
+  /// In ar, this message translates to:
+  /// **'المقدّم وشروط البيع'**
+  String get advanceAndTerms;
+
+  /// No description provided for @advanceFirstPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'مقدم / دفعة أولى'**
+  String get advanceFirstPayment;
+
+  /// No description provided for @advancePayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'المقدّم'**
+  String get advancePayment;
+
+  /// No description provided for @advancePercentExample.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: 10 تعني ألا يقل المقدّم عن 10٪ من الإجمالي.'**
+  String get advancePercentExample;
+
+  /// No description provided for @advancePercentRange.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة المقدّم يجب أن تكون بين 0 و 100'**
+  String get advancePercentRange;
+
+  /// No description provided for @affectedCashBox.
+  ///
+  /// In ar, this message translates to:
+  /// **'أثر على الصندوق'**
+  String get affectedCashBox;
+
+  /// No description provided for @amountAddedAtOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ المُضاف عند الفتح'**
+  String get amountAddedAtOpen;
+
+  /// No description provided for @amountIQD.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ (د.ع)'**
+  String get amountIQD;
+
+  /// No description provided for @analysisAndMargin.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحليل وهامش'**
+  String get analysisAndMargin;
+
+  /// No description provided for @analytics.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحليلات'**
+  String get analytics;
+
+  /// No description provided for @apply.
+  ///
+  /// In ar, this message translates to:
+  /// **'تطبيق'**
+  String get apply;
+
+  /// No description provided for @approxNet.
+  ///
+  /// In ar, this message translates to:
+  /// **'صافي تقريبي (بيع − مرتجع)'**
+  String get approxNet;
+
+  /// No description provided for @attachInvoiceImageOptional.
+  ///
+  /// In ar, this message translates to:
+  /// **'إرفاق صورة الفاتورة (اختياري)'**
+  String get attachInvoiceImageOptional;
+
+  /// No description provided for @balance.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرصيد'**
+  String get balance;
+
+  /// No description provided for @beneficiary.
+  ///
+  /// In ar, this message translates to:
+  /// **'المستفيد'**
+  String get beneficiary;
+
+  /// No description provided for @bottom10ProfitProducts.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدنى 10 منتجات ربحاً (مراجعة تسعير)'**
+  String get bottom10ProfitProducts;
+
+  /// No description provided for @calendarMonthsExplanation.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفعّل: إضافة شهر تقويمي من تاريخ المرجع. معطّل: تقريب 30 يوماً لكل فترة.'**
+  String get calendarMonthsExplanation;
+
+  /// No description provided for @cannotRescheduleAfterPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يمكن إعادة جدولة الأقساط بعد تسديد قسط من هذه الخطة.'**
+  String get cannotRescheduleAfterPayment;
+
+  /// No description provided for @cashBox.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصندوق'**
+  String get cashBox;
+
+  /// No description provided for @cashSale.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع نقدي'**
+  String get cashSale;
+
+  /// No description provided for @category.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفئة'**
+  String get category;
+
+  /// No description provided for @categoryRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفئة *'**
+  String get categoryRequired;
+
+  /// No description provided for @change.
+  ///
+  /// In ar, this message translates to:
+  /// **'تغيير'**
+  String get change;
+
+  /// No description provided for @changeOrRemoveAnytime.
+  ///
+  /// In ar, this message translates to:
+  /// **'يمكنك تغييرها أو إزالتها في أي وقت.'**
+  String get changeOrRemoveAnytime;
+
+  /// No description provided for @choose.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيار'**
+  String get choose;
+
+  /// No description provided for @chooseOtherCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيار فئة أخرى'**
+  String get chooseOtherCategory;
+
+  /// No description provided for @clearSearchOrChangeTab.
+  ///
+  /// In ar, this message translates to:
+  /// **'امسح البحث (×) أو انتقل لتبويب «الكل» أو غيّر التبويب أعلاه.'**
+  String get clearSearchOrChangeTab;
+
+  /// No description provided for @closeForm.
+  ///
+  /// In ar, this message translates to:
+  /// **'إغلاق النموذج؟'**
+  String get closeForm;
+
+  /// No description provided for @closeFormConfirm.
+  ///
+  /// In ar, this message translates to:
+  /// **'هل تريد إغلاق النموذج؟ البيانات لن تُحفظ'**
+  String get closeFormConfirm;
+
+  /// No description provided for @cogs.
+  ///
+  /// In ar, this message translates to:
+  /// **'تكلفة البضاعة المباعة (COGS)'**
+  String get cogs;
+
+  /// No description provided for @controlAdvanceRequirements.
+  ///
+  /// In ar, this message translates to:
+  /// **'التحكم في إلزامية المقدّم وأقل نسبة مسموحة من إجمالي الفاتورة.'**
+  String get controlAdvanceRequirements;
+
+  /// No description provided for @copySectionName.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخ اسم القسم'**
+  String get copySectionName;
+
+  /// No description provided for @cost.
+  ///
+  /// In ar, this message translates to:
+  /// **'تكلفة'**
+  String get cost;
+
+  /// No description provided for @countByEntryType.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعداد حسب نوع القيد'**
+  String get countByEntryType;
+
+  /// No description provided for @customer.
+  ///
+  /// In ar, this message translates to:
+  /// **'العميل'**
+  String get customer;
+
+  /// No description provided for @customerBalanceList.
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة العملاء (رصيد دائن على المحل)'**
+  String get customerBalanceList;
+
+  /// No description provided for @daily.
+  ///
+  /// In ar, this message translates to:
+  /// **'يومي'**
+  String get daily;
+
+  /// No description provided for @dailySalesInRange.
+  ///
+  /// In ar, this message translates to:
+  /// **'مبيعات يومية ضمن الفترة'**
+  String get dailySalesInRange;
+
+  /// No description provided for @dashboardTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لوحة تنفيذية'**
+  String get dashboardTitle;
+
+  /// No description provided for @dateRange.
+  ///
+  /// In ar, this message translates to:
+  /// **'نطاق الفترة'**
+  String get dateRange;
+
+  /// No description provided for @dayCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الأيام (1–365)'**
+  String get dayCount;
+
+  /// No description provided for @debtorCustomerCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد العملاء المدينين'**
+  String get debtorCustomerCount;
+
+  /// No description provided for @debts.
+  ///
+  /// In ar, this message translates to:
+  /// **'الديون'**
+  String get debts;
+
+  /// No description provided for @declaredCashAfterWithdrawal.
+  ///
+  /// In ar, this message translates to:
+  /// **'النقد المُعلَن في الصندوق بعد السحب'**
+  String get declaredCashAfterWithdrawal;
+
+  /// No description provided for @declaredCashAtOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'النقد المُعلَن عند الفتح (الجرد)'**
+  String get declaredCashAtOpen;
+
+  /// No description provided for @defaultInstallmentCountRange.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الأقساط الافتراضي بين 1 و 120'**
+  String get defaultInstallmentCountRange;
+
+  /// No description provided for @defaultInstallmentInterestRate.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة الفائدة الافتراضية في بيع التقسيط (%)'**
+  String get defaultInstallmentInterestRate;
+
+  /// No description provided for @defaultInterestRange.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة الفائدة الافتراضية في البيع بين 0 و 100'**
+  String get defaultInterestRange;
+
+  /// No description provided for @defaultPeriodAndPreferences.
+  ///
+  /// In ar, this message translates to:
+  /// **'فترة افتراضية وتفضيلات'**
+  String get defaultPeriodAndPreferences;
+
+  /// No description provided for @defaultRemainingInstallments.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد أقساط المتبقي (افتراضي عند إنشاء الخطة)'**
+  String get defaultRemainingInstallments;
+
+  /// No description provided for @defaultReportPeriod.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفترة الافتراضية عند فتح التقارير'**
+  String get defaultReportPeriod;
+
+  /// No description provided for @deleteExpenseConfirm.
+  ///
+  /// In ar, this message translates to:
+  /// **'هل تريد حذف هذا المصروف؟ لا يمكن التراجع.'**
+  String get deleteExpenseConfirm;
+
+  /// No description provided for @descriptionOptional.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوصف (اختياري)'**
+  String get descriptionOptional;
+
+  /// No description provided for @dueDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُستحق يوم'**
+  String get dueDay;
+
+  /// No description provided for @employeeBeneficiary.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموظف (المستفيد)'**
+  String get employeeBeneficiary;
+
+  /// No description provided for @employeeRecorder.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموظف / المسجّل'**
+  String get employeeRecorder;
+
+  /// No description provided for @employees.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموظفون'**
+  String get employees;
+
+  /// No description provided for @enterAmountGreaterThanZero.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل مبلغاً أكبر من صفر'**
+  String get enterAmountGreaterThanZero;
+
+  /// No description provided for @enterInstallmentCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل عدد الأقساط'**
+  String get enterInstallmentCount;
+
+  /// No description provided for @enterMovementDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل وصفاً للحركة'**
+  String get enterMovementDescription;
+
+  /// No description provided for @entry.
+  ///
+  /// In ar, this message translates to:
+  /// **'إدخال'**
+  String get entry;
+
+  /// No description provided for @everyMonth.
+  ///
+  /// In ar, this message translates to:
+  /// **'من كل شهر'**
+  String get everyMonth;
+
+  /// No description provided for @exit.
+  ///
+  /// In ar, this message translates to:
+  /// **'إخراج'**
+  String get exit;
+
+  /// No description provided for @expenseCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد المصروفات'**
+  String get expenseCount;
+
+  /// No description provided for @expenseReason.
+  ///
+  /// In ar, this message translates to:
+  /// **'سبب الصرف (يُطبع مع الإيصال)'**
+  String get expenseReason;
+
+  /// No description provided for @expenseReportInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة تقرير المصروفات'**
+  String get expenseReportInvoice;
+
+  /// No description provided for @expenses.
+  ///
+  /// In ar, this message translates to:
+  /// **'مصروفات'**
+  String get expenses;
+
+  /// No description provided for @exportExcel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تصدير (نسخ Excel)'**
+  String get exportExcel;
+
+  /// No description provided for @failedToLoadInstallmentPlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر تحميل خطة التقسيط.'**
+  String get failedToLoadInstallmentPlan;
+
+  /// No description provided for @firstDueReferenceDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ مرجع أول قسط (عند فتح شاشة الخطة)'**
+  String get firstDueReferenceDate;
+
+  /// No description provided for @fullTransparency.
+  ///
+  /// In ar, this message translates to:
+  /// **'شفافية كاملة — هذه هي القواعد المعتمدة'**
+  String get fullTransparency;
+
+  /// No description provided for @futureFeatures.
+  ///
+  /// In ar, this message translates to:
+  /// **'مستقبلاً: تصدير PDF/Excel، جدولة تقارير، وصلاحيات عرض حسب الدور.'**
+  String get futureFeatures;
+
+  /// No description provided for @grossMargin.
+  ///
+  /// In ar, this message translates to:
+  /// **'الهامش الإجمالي'**
+  String get grossMargin;
+
+  /// No description provided for @history.
+  ///
+  /// In ar, this message translates to:
+  /// **'السجل'**
+  String get history;
+
+  /// No description provided for @howMarginCalculated.
+  ///
+  /// In ar, this message translates to:
+  /// **'كيف يُحسب الهامش؟'**
+  String get howMarginCalculated;
+
+  /// No description provided for @imageSelectionFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر اختيار الصورة.'**
+  String get imageSelectionFailed;
+
+  /// No description provided for @inbound.
+  ///
+  /// In ar, this message translates to:
+  /// **'وارد'**
+  String get inbound;
+
+  /// No description provided for @inboundEntry.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوارد (إدخال)'**
+  String get inboundEntry;
+
+  /// No description provided for @inboundLineByLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوارد — سطر بسطر'**
+  String get inboundLineByLine;
+
+  /// No description provided for @inboundOutboundSummary.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخص الوارد والصادر (هذه القائمة)'**
+  String get inboundOutboundSummary;
+
+  /// No description provided for @inboundTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوارد'**
+  String get inboundTotal;
+
+  /// No description provided for @indicatorsAndPeriod.
+  ///
+  /// In ar, this message translates to:
+  /// **'مؤشرات وفترة'**
+  String get indicatorsAndPeriod;
+
+  /// No description provided for @installmentPeriodMethod.
+  ///
+  /// In ar, this message translates to:
+  /// **'فترة الأقساط، طريقة احتساب الشهر، ومرجع أول تاريخ استحقاق.'**
+  String get installmentPeriodMethod;
+
+  /// No description provided for @installmentPeriodRange.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفترة بين الأقساط: بين 1 و 24 شهراً'**
+  String get installmentPeriodRange;
+
+  /// No description provided for @installmentPlanDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل خطة التقسيط'**
+  String get installmentPlanDetails;
+
+  /// No description provided for @installmentPlansInPeriod.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطط أقساط (فواتير ضمن الفترة)'**
+  String get installmentPlansInPeriod;
+
+  /// No description provided for @installmentScheduleSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم حفظ جدول الأقساط'**
+  String get installmentScheduleSaved;
+
+  /// No description provided for @interestInfoAtSale.
+  ///
+  /// In ar, this message translates to:
+  /// **'معلومات الفائدة (عند البيع)'**
+  String get interestInfoAtSale;
+
+  /// No description provided for @invalidValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيمة غير صالحة'**
+  String get invalidValue;
+
+  /// No description provided for @inventoryAndCashbox.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجرد والصندوق (سجل النظام)'**
+  String get inventoryAndCashbox;
+
+  /// No description provided for @inventoryWithdrawn.
+  ///
+  /// In ar, this message translates to:
+  /// **'البضاعة المسحوبة من المخزون'**
+  String get inventoryWithdrawn;
+
+  /// No description provided for @invoiceCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الفواتير'**
+  String get invoiceCount;
+
+  /// No description provided for @invoiceImageAttached.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم إرفاق صورة الفاتورة'**
+  String get invoiceImageAttached;
+
+  /// No description provided for @invoiceSummary.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخص الفاتورة'**
+  String get invoiceSummary;
+
+  /// No description provided for @invoicesAndSales.
+  ///
+  /// In ar, this message translates to:
+  /// **'فواتير ومبيعات (قيود مرتبطة بفاتورة)'**
+  String get invoicesAndSales;
+
+  /// No description provided for @invoicesInMovements.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفواتير في هذه الحركات'**
+  String get invoicesInMovements;
+
+  /// No description provided for @invoicesReturns.
+  ///
+  /// In ar, this message translates to:
+  /// **'فواتير / مرتجعات'**
+  String get invoicesReturns;
+
+  /// No description provided for @isExpensePrepaid.
+  ///
+  /// In ar, this message translates to:
+  /// **'هل المصروف مدفوع مسبقاً؟'**
+  String get isExpensePrepaid;
+
+  /// No description provided for @item.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصنف'**
+  String get item;
+
+  /// No description provided for @itemLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'صنف'**
+  String get itemLabel;
+
+  /// No description provided for @itemsSoldWithStock.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكميات المباعة من الفاتورة مع رصيد المخزون الحالي للمنتج المرتبط.'**
+  String get itemsSoldWithStock;
+
+  /// No description provided for @kpiPieDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيتزا موحّدة للمؤشرات المالية الأساسية — مبيعات/مرتجعات/صافي'**
+  String get kpiPieDescription;
+
+  /// No description provided for @loadingInvoiceItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'جاري تحميل أصناف الفاتورة…'**
+  String get loadingInvoiceItems;
+
+  /// No description provided for @loyaltyInRange.
+  ///
+  /// In ar, this message translates to:
+  /// **'ولاء (ضمن الفترة)'**
+  String get loyaltyInRange;
+
+  /// No description provided for @mainPerformanceIndicators.
+  ///
+  /// In ar, this message translates to:
+  /// **'مؤشرات أداء رئيسية (Gauges)'**
+  String get mainPerformanceIndicators;
+
+  /// No description provided for @manualDepositReceipt.
+  ///
+  /// In ar, this message translates to:
+  /// **'وصل الإيداع اليدوي (مجموع قيود الإيداع)'**
+  String get manualDepositReceipt;
+
+  /// No description provided for @manualDepositWithdrawalGroup.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيداع يدوي وسحب يدوي (هذه المجموعة)'**
+  String get manualDepositWithdrawalGroup;
+
+  /// No description provided for @manualDepositWithdrawalInShift.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيداع يدوي وسحب يدوي خلال الوردية'**
+  String get manualDepositWithdrawalInShift;
+
+  /// No description provided for @manualWithdrawalReceipt.
+  ///
+  /// In ar, this message translates to:
+  /// **'وصل السحب اليدوي (مجموع قيود السحب)'**
+  String get manualWithdrawalReceipt;
+
+  /// No description provided for @margin.
+  ///
+  /// In ar, this message translates to:
+  /// **'هامش'**
+  String get margin;
+
+  /// No description provided for @marginDataQuality.
+  ///
+  /// In ar, this message translates to:
+  /// **'جودة بيانات الهامش (Coverage)'**
+  String get marginDataQuality;
+
+  /// No description provided for @marginPercent.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة الهامش %'**
+  String get marginPercent;
+
+  /// No description provided for @minOneInstallment.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الأقساط يجب أن يكون 1 على الأقل'**
+  String get minOneInstallment;
+
+  /// No description provided for @minimumAdvancePercent.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقل نسبة مقدّم من إجمالي الفاتورة (%)'**
+  String get minimumAdvancePercent;
+
+  /// No description provided for @miscExpenses.
+  ///
+  /// In ar, this message translates to:
+  /// **'مصاريف متنوعة'**
+  String get miscExpenses;
+
+  /// No description provided for @monthlyRecurringExpense.
+  ///
+  /// In ar, this message translates to:
+  /// **'مصروف شهري متكرر'**
+  String get monthlyRecurringExpense;
+
+  /// No description provided for @monthlyRepeat.
+  ///
+  /// In ar, this message translates to:
+  /// **'تكرار شهري'**
+  String get monthlyRepeat;
+
+  /// No description provided for @more.
+  ///
+  /// In ar, this message translates to:
+  /// **'المزيد'**
+  String get more;
+
+  /// No description provided for @movementsWithoutShift.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل الحركات (بدون وردية)'**
+  String get movementsWithoutShift;
+
+  /// No description provided for @netProfit.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصافي (هامش − مصروفات)'**
+  String get netProfit;
+
+  /// No description provided for @noComment.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدون تعليق - يُنصح بإضافة سبب الصرف.'**
+  String get noComment;
+
+  /// No description provided for @noDailyDataInPeriod.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا بيانات يومية في هذه الفترة'**
+  String get noDailyDataInPeriod;
+
+  /// No description provided for @noDataAvailable.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد بيانات'**
+  String get noDataAvailable;
+
+  /// No description provided for @noExpensesInPeriod.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد مصروفات ضمن هذه الفترة'**
+  String get noExpensesInPeriod;
+
+  /// No description provided for @noInboundMovements.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد حركات وارد في هذه المجموعة.'**
+  String get noInboundMovements;
+
+  /// No description provided for @noInvoiceLinkedMovements.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد في هذه المجموعة حركات مرتبطة برقم فاتورة.'**
+  String get noInvoiceLinkedMovements;
+
+  /// No description provided for @noItemsInPeriod.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد بنود في هذه الفترة.'**
+  String get noItemsInPeriod;
+
+  /// No description provided for @noLinkUseInvoiceName.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدون ربط — الاعتماد على الاسم من الفاتورة'**
+  String get noLinkUseInvoiceName;
+
+  /// No description provided for @noMovementsInGroup.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد حركات في هذه المجموعة.'**
+  String get noMovementsInGroup;
+
+  /// No description provided for @noOutboundMovements.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد حركات صادر في هذه المجموعة.'**
+  String get noOutboundMovements;
+
+  /// No description provided for @noPlansInCurrentFilter.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد خطط ضمن البحث أو التصفية الحالية'**
+  String get noPlansInCurrentFilter;
+
+  /// No description provided for @noSalesInPeriod.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد مبيعات في هذه الفترة'**
+  String get noSalesInPeriod;
+
+  /// No description provided for @okay.
+  ///
+  /// In ar, this message translates to:
+  /// **'حسنًا'**
+  String get okay;
+
+  /// No description provided for @open.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفتوحة'**
+  String get open;
+
+  /// No description provided for @openSection.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح القسم'**
+  String get openSection;
+
+  /// No description provided for @option.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخيار'**
+  String get option;
+
+  /// No description provided for @optional.
+  ///
+  /// In ar, this message translates to:
+  /// **'(اختياري)'**
+  String get optional;
+
+  /// No description provided for @others.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخرون'**
+  String get others;
+
+  /// No description provided for @outbound.
+  ///
+  /// In ar, this message translates to:
+  /// **'صادر'**
+  String get outbound;
+
+  /// No description provided for @outboundExit.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصادر (إخراج)'**
+  String get outboundExit;
+
+  /// No description provided for @outboundLineByLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصادر — سطر بسطر'**
+  String get outboundLineByLine;
+
+  /// No description provided for @outboundTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصادر'**
+  String get outboundTotal;
+
+  /// No description provided for @overdueInstallmentWarning.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه: يوجد قسط متأخر'**
+  String get overdueInstallmentWarning;
+
+  /// No description provided for @ownerOrProperty.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم المالك أو العقار'**
+  String get ownerOrProperty;
+
+  /// No description provided for @paidCappedAtTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُقصى «المدفوع» على إجمالي الخطة عند التعارض.'**
+  String get paidCappedAtTotal;
+
+  /// No description provided for @paidRemaining.
+  ///
+  /// In ar, this message translates to:
+  /// **'المدفوع / المتبقي'**
+  String get paidRemaining;
+
+  /// No description provided for @payInstallment.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسديد قسط'**
+  String get payInstallment;
+
+  /// No description provided for @paymentProgress.
+  ///
+  /// In ar, this message translates to:
+  /// **'تقدّم السداد'**
+  String get paymentProgress;
+
+  /// No description provided for @paymentType.
+  ///
+  /// In ar, this message translates to:
+  /// **'نوع الدفع'**
+  String get paymentType;
+
+  /// No description provided for @paymentTypeRatio.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة كل نوع دفع من المبيعات'**
+  String get paymentTypeRatio;
+
+  /// No description provided for @paymentTypesAndReturns.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنواع الدفع والمرتجعات'**
+  String get paymentTypesAndReturns;
+
+  /// No description provided for @paymentTypesTrendOverTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتجاه أنواع الدفع عبر الزمن'**
+  String get paymentTypesTrendOverTime;
+
+  /// No description provided for @pendingLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المعلق'**
+  String get pendingLabel;
+
+  /// No description provided for @percentage.
+  ///
+  /// In ar, this message translates to:
+  /// **'النسبة'**
+  String get percentage;
+
+  /// No description provided for @periodBetweenDueDates.
+  ///
+  /// In ar, this message translates to:
+  /// **'فترة بين كل استحقاق وآخر (بالأشهر)'**
+  String get periodBetweenDueDates;
+
+  /// No description provided for @periodExplanation.
+  ///
+  /// In ar, this message translates to:
+  /// **'1 = قسط شهري، 2 = كل شهرين، وهكذا.'**
+  String get periodExplanation;
+
+  /// No description provided for @periodNetSales.
+  ///
+  /// In ar, this message translates to:
+  /// **'صافي مبيعات الفترة'**
+  String get periodNetSales;
+
+  /// No description provided for @periodPlans.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطط الفترة'**
+  String get periodPlans;
+
+  /// No description provided for @periodRevenue.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيراد الفترة'**
+  String get periodRevenue;
+
+  /// No description provided for @plan.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطة'**
+  String get plan;
+
+  /// No description provided for @planAutoCreatedAfterSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد حفظ فاتورة تقسيط تُنشأ الخطة تلقائياً وتظهر هنا.'**
+  String get planAutoCreatedAfterSave;
+
+  /// No description provided for @preferRegisteredCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُفضّل اختيار عميل مسجّل لتسهيل المتابعة والتقارير.'**
+  String get preferRegisteredCustomer;
+
+  /// No description provided for @printPeriodReport.
+  ///
+  /// In ar, this message translates to:
+  /// **'طباعة تقرير فترة'**
+  String get printPeriodReport;
+
+  /// No description provided for @productsAndEstimatedMargin.
+  ///
+  /// In ar, this message translates to:
+  /// **'منتجات وهامش تقديري'**
+  String get productsAndEstimatedMargin;
+
+  /// No description provided for @propertyOrEntity.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم العقار / الجهة'**
+  String get propertyOrEntity;
+
+  /// No description provided for @recordingPerformance.
+  ///
+  /// In ar, this message translates to:
+  /// **'أداء التسجيل'**
+  String get recordingPerformance;
+
+  /// No description provided for @recurring.
+  ///
+  /// In ar, this message translates to:
+  /// **'متكرر'**
+  String get recurring;
+
+  /// No description provided for @registeredCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'عميل مسجّل'**
+  String get registeredCustomer;
+
+  /// No description provided for @remainingInstallmentsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد أقساط المتبقي'**
+  String get remainingInstallmentsCount;
+
+  /// No description provided for @reportSections.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقسام التقارير'**
+  String get reportSections;
+
+  /// No description provided for @requireAdvanceForInstallment.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلزام مقدّم دفع لفاتورة التقسيط'**
+  String get requireAdvanceForInstallment;
+
+  /// No description provided for @returnCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد المرتجعات'**
+  String get returnCount;
+
+  /// No description provided for @returnItem.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتجع'**
+  String get returnItem;
+
+  /// No description provided for @returns.
+  ///
+  /// In ar, this message translates to:
+  /// **'المرتجعات'**
+  String get returns;
+
+  /// No description provided for @revenueComposition.
+  ///
+  /// In ar, this message translates to:
+  /// **'تركيب الإيراد: تكلفة + هامش'**
+  String get revenueComposition;
+
+  /// No description provided for @revenueTrend.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتجاه الإيراد: تكلفة + هامش + مصروفات يومياً'**
+  String get revenueTrend;
+
+  /// No description provided for @salaries.
+  ///
+  /// In ar, this message translates to:
+  /// **'رواتب'**
+  String get salaries;
+
+  /// No description provided for @sale.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع'**
+  String get sale;
+
+  /// No description provided for @saleScreenInstallmentCard.
+  ///
+  /// In ar, this message translates to:
+  /// **'شاشة البيع وبطاقة التقسيط'**
+  String get saleScreenInstallmentCard;
+
+  /// No description provided for @sales.
+  ///
+  /// In ar, this message translates to:
+  /// **'مبيعات'**
+  String get sales;
+
+  /// No description provided for @salesNotMixedWithReceipts.
+  ///
+  /// In ar, this message translates to:
+  /// **'حتى لا تختلط المبيعات مع السندات'**
+  String get salesNotMixedWithReceipts;
+
+  /// No description provided for @salesVsExpensesDailyTrend.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبيعات مقابل المصروفات — اتجاه يومي'**
+  String get salesVsExpensesDailyTrend;
+
+  /// No description provided for @saveAndApply.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ وتطبيق'**
+  String get saveAndApply;
+
+  /// No description provided for @saveScheduleChanges.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ التعديلات على الجدول'**
+  String get saveScheduleChanges;
+
+  /// No description provided for @saving.
+  ///
+  /// In ar, this message translates to:
+  /// **'جارٍ الحفظ...'**
+  String get saving;
+
+  /// No description provided for @scheduleReference.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرجع الجدولة (بداية العدّ)'**
+  String get scheduleReference;
+
+  /// No description provided for @schedulingAndDueDates.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجدولة وتواريخ الاستحقاق'**
+  String get schedulingAndDueDates;
+
+  /// No description provided for @searchByNameOrPhone.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابحث بالاسم أو اسم المستخدم أو الهاتف'**
+  String get searchByNameOrPhone;
+
+  /// No description provided for @searchByNameOrPhoneOrNumber.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابحث بالاسم أو الهاتف أو الرقم…'**
+  String get searchByNameOrPhoneOrNumber;
+
+  /// No description provided for @searchDescriptionOrCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث (وصف أو فئة)'**
+  String get searchDescriptionOrCategory;
+
+  /// No description provided for @searchPlaceholder.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث: عميل، منتج، رقم خطة، رقم فاتورة…'**
+  String get searchPlaceholder;
+
+  /// No description provided for @sectionOptions.
+  ///
+  /// In ar, this message translates to:
+  /// **'خيارات القسم'**
+  String get sectionOptions;
+
+  /// No description provided for @selectCategoryAndAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'يرجى اختيار فئة وإدخال مبلغ صحيح.'**
+  String get selectCategoryAndAmount;
+
+  /// No description provided for @selectEmployeeTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيار موظف'**
+  String get selectEmployeeTitle;
+
+  /// No description provided for @selectExpenseCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر فئة المصروف'**
+  String get selectExpenseCategory;
+
+  /// No description provided for @selectPeriodForReport.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر الفترة الزمنية للفاتورة:'**
+  String get selectPeriodForReport;
+
+  /// No description provided for @selectedPeriod.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفترة المختارة:'**
+  String get selectedPeriod;
+
+  /// No description provided for @sellerChosenFromCalendar.
+  ///
+  /// In ar, this message translates to:
+  /// **'يحدده البائع من التقويم (اتفاق)'**
+  String get sellerChosenFromCalendar;
+
+  /// No description provided for @serviceInvoiceNumber.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم فاتورة الخدمة'**
+  String get serviceInvoiceNumber;
+
+  /// No description provided for @sessionOpenedBy.
+  ///
+  /// In ar, this message translates to:
+  /// **'من فتح الجلسة في النظام'**
+  String get sessionOpenedBy;
+
+  /// No description provided for @setupInstallmentSchedule.
+  ///
+  /// In ar, this message translates to:
+  /// **'ضبط جدول الأقساط'**
+  String get setupInstallmentSchedule;
+
+  /// No description provided for @showCalculatorCard.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض بطاقة الحاسبة، والقيم الافتراضية للأقساط والفائدة.'**
+  String get showCalculatorCard;
+
+  /// No description provided for @showInstallmentCardInSale.
+  ///
+  /// In ar, this message translates to:
+  /// **'إظهار بطاقة «مخطط التقسيط» في شاشة البيع'**
+  String get showInstallmentCardInSale;
+
+  /// No description provided for @stay.
+  ///
+  /// In ar, this message translates to:
+  /// **'البقاء'**
+  String get stay;
+
+  /// No description provided for @systemBalanceAtClose.
+  ///
+  /// In ar, this message translates to:
+  /// **'رصيد النظام عند الإغلاق'**
+  String get systemBalanceAtClose;
+
+  /// No description provided for @systemBalanceAtOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'رصيد النظام عند فتح الوردية'**
+  String get systemBalanceAtOpen;
+
+  /// No description provided for @tableCopiedToClipboard.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم نسخ الجدول إلى الحافظة (لصق في Excel).'**
+  String get tableCopiedToClipboard;
+
+  /// No description provided for @tapForFullDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط للتفاصيل الكاملة والجدول'**
+  String get tapForFullDetails;
+
+  /// No description provided for @taxType.
+  ///
+  /// In ar, this message translates to:
+  /// **'نوع الضريبة'**
+  String get taxType;
+
+  /// No description provided for @taxTypeExample.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: ضريبة الدخل، ضريبة القيمة المضافة'**
+  String get taxTypeExample;
+
+  /// No description provided for @taxes.
+  ///
+  /// In ar, this message translates to:
+  /// **'ضرائب'**
+  String get taxes;
+
+  /// No description provided for @thankYouForUsing.
+  ///
+  /// In ar, this message translates to:
+  /// **'شكرًا لاستخدام NaBoo'**
+  String get thankYouForUsing;
+
+  /// No description provided for @today.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get today;
+
+  /// No description provided for @todayExpenses.
+  ///
+  /// In ar, this message translates to:
+  /// **'مصروف اليوم'**
+  String get todayExpenses;
+
+  /// No description provided for @top10ProfitProducts.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعلى 10 منتجات ربحاً'**
+  String get top10ProfitProducts;
+
+  /// No description provided for @topBuyers.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكثر المشترين'**
+  String get topBuyers;
+
+  /// No description provided for @topCustomersBySpending.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعلى العملاء إنفاقاً'**
+  String get topCustomersBySpending;
+
+  /// No description provided for @topItemsByRevenue.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكثر الأصناف مبيعاً (حسب إيراد البنود)'**
+  String get topItemsByRevenue;
+
+  /// No description provided for @totalExpensesInPeriod.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي المصروفات ضمن الفترة'**
+  String get totalExpensesInPeriod;
+
+  /// No description provided for @totalPlanValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي قيمة الخطط'**
+  String get totalPlanValue;
+
+  /// No description provided for @totalRecordedDebts.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي الديون المسجّلة'**
+  String get totalRecordedDebts;
+
+  /// No description provided for @transactionCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد العمليات'**
+  String get transactionCount;
+
+  /// No description provided for @tryChangingDateRange.
+  ///
+  /// In ar, this message translates to:
+  /// **'جرّب تغيير نطاق التاريخ أو الفلتر'**
+  String get tryChangingDateRange;
+
+  /// No description provided for @unlinked.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير مرتبط'**
+  String get unlinked;
+
+  /// No description provided for @usefulForUtilityBills.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفيد لفواتير الماء/الكهرباء/الضرائب.'**
+  String get usefulForUtilityBills;
+
+  /// No description provided for @viewSectionDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض وصف القسم'**
+  String get viewSectionDescription;
+
+  /// No description provided for @warning.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه'**
+  String get warning;
+
+  /// No description provided for @withdrawnAtClose.
+  ///
+  /// In ar, this message translates to:
+  /// **'المسحوب عند الإغلاق'**
+  String get withdrawnAtClose;
+
+  /// No description provided for @withoutName.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدون اسم'**
+  String get withoutName;
+
+  /// No description provided for @yesDeduction.
+  ///
+  /// In ar, this message translates to:
+  /// **'نعم (خصم)'**
+  String get yesDeduction;
+
+  /// No description provided for @deleteExpenseLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف المصروف؟'**
+  String get deleteExpenseLabel;
+
+  /// No description provided for @planNotFound.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطة غير موجودة'**
+  String get planNotFound;
+
+  /// No description provided for @weekLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الأسبوع'**
+  String get weekLabel;
+
+  /// No description provided for @monthLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الشهر'**
+  String get monthLabel;
+
+  /// No description provided for @yearLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا العام'**
+  String get yearLabel;
+
+  /// No description provided for @allCategoriesLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل الفئات'**
+  String get allCategoriesLabel;
+
+  /// No description provided for @noSearchResults.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد نتائج.'**
+  String get noSearchResults;
+
+  /// No description provided for @clearSearchLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح البحث'**
+  String get clearSearchLabel;
+
+  /// No description provided for @selectInvoiceCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر فئة المصروف'**
+  String get selectInvoiceCategory;
+
+  /// No description provided for @cashBoxLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصندوق'**
+  String get cashBoxLabel;
+
+  /// No description provided for @manualEntryLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيد يدوي'**
+  String get manualEntryLabel;
+
+  /// No description provided for @depositLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيداع'**
+  String get depositLabel;
+
+  /// No description provided for @withdrawalLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'سحب'**
+  String get withdrawalLabel;
+
+  /// No description provided for @currentBalanceLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرصيد الحالي'**
+  String get currentBalanceLabel;
+
+  /// No description provided for @unpaidLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير مدفوع'**
+  String get unpaidLabel;
+
+  /// No description provided for @recurringLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'متكرر'**
+  String get recurringLabel;
+
+  /// No description provided for @installmentPaymentLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسديد قسط'**
+  String get installmentPaymentLabel;
+
+  /// No description provided for @customerLabel2.
+  ///
+  /// In ar, this message translates to:
+  /// **'العميل'**
+  String get customerLabel2;
+
+  /// No description provided for @percentageLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'النسبة'**
+  String get percentageLabel;
+
+  /// No description provided for @revenueLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإيراد'**
+  String get revenueLabel;
+
+  /// No description provided for @salesLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبيعات'**
+  String get salesLabel;
+
+  /// No description provided for @othersLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخرون'**
+  String get othersLabel;
+
+  /// No description provided for @withoutNameLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدون اسم'**
+  String get withoutNameLabel;
+
+  /// No description provided for @paidLabel2.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدفوع'**
+  String get paidLabel2;
+
+  /// No description provided for @pendingLabel2.
+  ///
+  /// In ar, this message translates to:
+  /// **'معلق'**
+  String get pendingLabel2;
+
+  /// No description provided for @openLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفتوحة'**
+  String get openLabel;
+
+  /// No description provided for @costLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'التكلفة'**
+  String get costLabel;
+
+  /// No description provided for @marginLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الهامش'**
+  String get marginLabel;
+
+  /// No description provided for @itemLabel2.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصنف'**
+  String get itemLabel2;
+
+  /// No description provided for @productLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المنتج'**
+  String get productLabel;
+
+  /// No description provided for @planLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطة'**
+  String get planLabel;
+
+  /// No description provided for @returnCountLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد المرتجعات'**
+  String get returnCountLabel;
+
+  /// No description provided for @optionLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخيار'**
+  String get optionLabel;
+
+  /// No description provided for @inboundLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوارد'**
+  String get inboundLabel;
+
+  /// No description provided for @outboundLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصادر'**
+  String get outboundLabel;
+
+  /// No description provided for @cashboxLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصندوق'**
+  String get cashboxLabel;
+
+  /// No description provided for @dailyLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'يومي'**
+  String get dailyLabel;
+
+  /// No description provided for @weeklyLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسبوعي'**
+  String get weeklyLabel;
+
+  /// No description provided for @monthlyLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'شهري'**
+  String get monthlyLabel;
+
+  /// No description provided for @yearlyLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'سنوي'**
+  String get yearlyLabel;
+
+  /// No description provided for @customLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخصص'**
+  String get customLabel;
+
+  /// No description provided for @pageLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'صفحة'**
+  String get pageLabel;
+
+  /// No description provided for @createdLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم الإنشاء:'**
+  String get createdLabel;
+
+  /// No description provided for @totalAmountLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإجمالي'**
+  String get totalAmountLabel;
+
+  /// No description provided for @overdueLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'متأخرة'**
+  String get overdueLabel;
+
+  /// No description provided for @invoiceLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفاتورة'**
+  String get invoiceLabel;
+
+  /// No description provided for @scheduleLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجدول'**
+  String get scheduleLabel;
+
+  /// No description provided for @cancelLabel2.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get cancelLabel2;
+
+  /// No description provided for @confirmLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكيد'**
+  String get confirmLabel;
+
+  /// No description provided for @addLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة'**
+  String get addLabel;
+
+  /// No description provided for @editLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل'**
+  String get editLabel;
+
+  /// No description provided for @deleteLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف'**
+  String get deleteLabel;
+
+  /// No description provided for @filterLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تصفية'**
+  String get filterLabel;
+
+  /// No description provided for @exportLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تصدير'**
+  String get exportLabel;
+
+  /// No description provided for @printLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'طباعة'**
+  String get printLabel;
+
+  /// No description provided for @yesLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'نعم'**
+  String get yesLabel;
+
+  /// No description provided for @noLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا'**
+  String get noLabel;
+
+  /// No description provided for @okLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'حسنًا'**
+  String get okLabel;
+
+  /// No description provided for @backLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'رجوع'**
+  String get backLabel;
+
+  /// No description provided for @nextLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'التالي'**
+  String get nextLabel;
+
+  /// No description provided for @doneLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم'**
+  String get doneLabel;
+
+  /// No description provided for @closeLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إغلاق'**
+  String get closeLabel;
+
+  /// No description provided for @openLabel2.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح'**
+  String get openLabel2;
+
+  /// No description provided for @loadingLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'جارٍ التحميل...'**
+  String get loadingLabel;
+
+  /// No description provided for @errorLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطأ'**
+  String get errorLabel;
+
+  /// No description provided for @warningLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه'**
+  String get warningLabel;
+
+  /// No description provided for @successLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'نجاح'**
+  String get successLabel;
+
+  /// No description provided for @infoLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'معلومات'**
+  String get infoLabel;
 }
 
 class _AppLocalizationsDelegate
