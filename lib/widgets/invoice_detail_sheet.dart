@@ -3,6 +3,7 @@ import 'package:intl/intl.dart' hide TextDirection;
 
 import '../models/invoice.dart';
 import '../services/database_helper.dart';
+import '../l10n/generated/app_localizations.dart';
 import '../theme/design_tokens.dart';
 import '../utils/screen_layout.dart';
 
@@ -19,22 +20,22 @@ bool _invoiceShowsStoredInstallmentFinance(Invoice inv) {
       inv.installmentSuggestedMonthly.abs() > 1e-9;
 }
 
-String _invoiceTypeAr(InvoiceType t) {
+String _invoiceTypeTranslated(AppLocalizations loc, InvoiceType t) {
   switch (t) {
     case InvoiceType.cash:
-      return 'نقدي';
+      return loc.paymentTypeCash;
     case InvoiceType.credit:
-      return 'آجل';
+      return loc.paymentTypeCredit;
     case InvoiceType.installment:
-      return 'تقسيط';
+      return loc.paymentTypeInstallment;
     case InvoiceType.delivery:
-      return 'توصيل';
+      return loc.paymentTypeDelivery;
     case InvoiceType.debtCollection:
-      return 'سند تحصيل دين';
+      return loc.paymentTypeDebtCollection;
     case InvoiceType.installmentCollection:
-      return 'سند تسديد قسط';
+      return loc.paymentTypeInstallmentCollection;
     case InvoiceType.supplierPayment:
-      return 'سند دفع مورد';
+      return loc.paymentTypeSupplierPayment;
   }
 }
 
@@ -52,7 +53,7 @@ Future<void> showInvoiceDetailSheet(
   if (!context.mounted) return;
   if (inv == null) {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('الفاتورة غير موجودة')),
+      SnackBar(content: Text(AppLocalizations.of(context)!.invoiceNotFoundMsg)),
     );
     return;
   }
@@ -159,6 +160,7 @@ class _InvoiceDetailPanelState extends State<InvoiceDetailPanel> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final cs = Theme.of(context).colorScheme;
 
@@ -173,7 +175,7 @@ class _InvoiceDetailPanelState extends State<InvoiceDetailPanel> {
                   size: 64, color: cs.onSurfaceVariant.withValues(alpha: 0.4)),
               const SizedBox(height: 16),
               Text(
-                'اختر فاتورة لعرض تفاصيلها',
+                loc.selectInvoicePrompt,
                 style: TextStyle(
                   fontSize: 14,
                   color: cs.onSurfaceVariant,
@@ -221,6 +223,7 @@ class _InvoiceDetailContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final inv = invoice;
     final border = isDark ? AppColors.borderDark : AppColors.borderLight;
     final itemsSum = inv.items.fold<double>(0, (s, e) => s + e.total);
@@ -244,7 +247,7 @@ class _InvoiceDetailContent extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  'فاتورة #${inv.id}',
+                  loc.invoiceNumber(inv.id.toString()),
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
@@ -255,7 +258,7 @@ class _InvoiceDetailContent extends StatelessWidget {
                 IconButton(
                   onPressed: onClose,
                   icon: const Icon(Icons.close_rounded),
-                  tooltip: 'إغلاق',
+                  tooltip: loc.closeTooltip,
                 ),
             ],
           ),
@@ -265,37 +268,37 @@ class _InvoiceDetailContent extends StatelessWidget {
             controller: scrollController,
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 28),
             children: [
-                        _kv('العميل', inv.customerName.isEmpty ? '—' : inv.customerName),
-                        _kv('التاريخ', _dateFmt.format(inv.date)),
-                        _kv('نوع الفاتورة', _invoiceTypeAr(inv.type)),
+                        _kv(loc.customerLabel, inv.customerName.isEmpty ? '—' : inv.customerName),
+                        _kv(loc.dateLabel, _dateFmt.format(inv.date)),
+                        _kv(loc.invoiceTypeLabel, _invoiceTypeTranslated(loc, inv.type)),
                         if (inv.createdByUserName != null &&
                             inv.createdByUserName!.trim().isNotEmpty)
-                          _kv('سجّلها', inv.createdByUserName!.trim()),
+                          _kv(loc.recordedByLabel, inv.createdByUserName!.trim()),
                         if (inv.workShiftId != null)
-                          _kv('الوردية', '#${inv.workShiftId}'),
+                          _kv(loc.shiftLabel, '#${inv.workShiftId}'),
                         if (inv.customerId != null)
-                          _kv('معرّف العميل', '${inv.customerId}'),
+                          _kv(loc.customerIdLabel, '${inv.customerId}'),
                         if (inv.isReturned) ...[
                           const SizedBox(height: 6),
-                          const Text(
-                            'مرتجع',
-                            style: TextStyle(
+                          Text(
+                            loc.returnStatusLabel,
+                            style: const TextStyle(
                               color: Colors.red,
                               fontWeight: FontWeight.w700,
                             ),
                           ),
                           if (inv.originalInvoiceId != null)
-                            _kv('فاتورة الأصل', '#${inv.originalInvoiceId}'),
+                            _kv(loc.originalInvoiceLabel, '#${inv.originalInvoiceId}'),
                         ],
                         if (inv.deliveryAddress != null &&
                             inv.deliveryAddress!.trim().isNotEmpty)
-                          _kv('عنوان التوصيل', inv.deliveryAddress!.trim()),
+                          _kv(loc.deliveryAddressLabel, inv.deliveryAddress!.trim()),
                         if (inv.discountPercent > 0)
-                          _kv('نسبة الخصم %', _numFmt.format(inv.discountPercent)),
+                          _kv(loc.discountPercentLabel, _numFmt.format(inv.discountPercent)),
                         const SizedBox(height: 14),
-                        const Text(
-                          'البنود',
-                          style: TextStyle(
+                        Text(
+                          loc.itemsLabel,
+                          style: const TextStyle(
                             fontWeight: FontWeight.w800,
                             fontSize: 15,
                           ),
@@ -303,7 +306,7 @@ class _InvoiceDetailContent extends StatelessWidget {
                         const SizedBox(height: 8),
                         if (inv.items.isEmpty)
                           Text(
-                            'لا توجد بنود',
+                            loc.noItemsLabel,
                             style: TextStyle(color: Colors.grey.shade600),
                           )
                         else
@@ -329,7 +332,7 @@ class _InvoiceDetailContent extends StatelessWidget {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          'الكمية: ${it.quantity} × ${_numFmt.format(it.price)} د.ع',
+                                          loc.quantityTimesPrice(it.quantity.toString(), _numFmt.format(it.price)),
                                           style: TextStyle(
                                             fontSize: 12,
                                             color: Colors.grey.shade700,
@@ -337,7 +340,7 @@ class _InvoiceDetailContent extends StatelessWidget {
                                         ),
                                       ),
                                       Text(
-                                        '${_numFmt.format(it.total)} د.ع',
+                                        '${_numFmt.format(it.total)} ${loc.iqdCurrency}',
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 13,
@@ -350,18 +353,18 @@ class _InvoiceDetailContent extends StatelessWidget {
                             );
                           }),
                         const Divider(height: 28),
-                        _totalRow('مجموع البنود', itemsSum),
+                        _totalRow(loc.itemsSubtotalLabel, itemsSum, currency: loc.iqdCurrency),
                         if (inv.discount > 0)
-                          _totalRow('خصم الفاتورة', -inv.discount, negative: true),
+                          _totalRow(loc.invoiceDiscountLabel, -inv.discount, negative: true, currency: loc.iqdCurrency),
                         if (inv.loyaltyDiscount > 0)
-                          _totalRow('خصم الولاء', -inv.loyaltyDiscount, negative: true),
+                          _totalRow(loc.loyaltyDiscountLabel, -inv.loyaltyDiscount, negative: true, currency: loc.iqdCurrency),
                         if (inv.loyaltyPointsRedeemed > 0)
-                          _kv('نقاط مُستبدَلة', '${inv.loyaltyPointsRedeemed}'),
+                          _kv(loc.redeemedPointsLabel, '${inv.loyaltyPointsRedeemed}'),
                         if (inv.loyaltyPointsEarned > 0)
-                          _kv('نقاط مُكتسبة', '${inv.loyaltyPointsEarned}'),
-                        if (inv.tax > 0) _totalRow('الضريبة', inv.tax),
+                          _kv(loc.earnedPointsLabel, '${inv.loyaltyPointsEarned}'),
+                        if (inv.tax > 0) _totalRow(loc.taxLabel, inv.tax, currency: loc.iqdCurrency),
                         if (inv.advancePayment > 0)
-                          _totalRow('المقدم / الدفعة الأولى', inv.advancePayment),
+                          _totalRow(loc.advanceFirstPaymentLabel, inv.advancePayment, currency: loc.iqdCurrency),
                         if (_invoiceShowsStoredInstallmentFinance(inv)) ...[
                           const SizedBox(height: 14),
                           Container(
@@ -376,9 +379,9 @@ class _InvoiceDetailContent extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  'معلومات الفائدة (محفوظة عند البيع)',
-                                  style: TextStyle(
+                                Text(
+                                  loc.interestInfoSavedAtSale,
+                                  style: const TextStyle(
                                     fontWeight: FontWeight.w800,
                                     fontSize: 14,
                                     color: AppColors.primary,
@@ -386,34 +389,34 @@ class _InvoiceDetailContent extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 8),
                                 _kv(
-                                  'نسبة الفائدة %',
+                                  loc.interestRatePercent,
                                   inv.installmentInterestPct % 1 == 0
                                       ? '${inv.installmentInterestPct.toInt()}'
                                       : inv.installmentInterestPct
                                           .toStringAsFixed(2),
                                 ),
                                 _kv(
-                                  'عدد الأشهر',
+                                  loc.monthsCountLabel,
                                   '${inv.installmentPlannedMonths}',
                                 ),
                                 _totalRow(
-                                  'المبلغ المموّل',
+                                  loc.financedAmountLabel,
                                   inv.installmentFinancedAmount,
-                                ),
+                                 currency: loc.iqdCurrency),
                                 if (inv.installmentInterestAmount > 1e-9)
                                   _totalRow(
-                                    'قيمة الفائدة',
+                                    loc.interestValueLabel,
                                     inv.installmentInterestAmount,
-                                  ),
+                                   currency: loc.iqdCurrency),
                                 _totalRow(
-                                  'الإجمالي مع الفائدة',
+                                  loc.totalWithInterestLabel,
                                   inv.installmentTotalWithInterest,
-                                ),
+                                 currency: loc.iqdCurrency),
                                 if (inv.installmentSuggestedMonthly > 1e-9)
                                   _totalRow(
-                                    'القسط الشهري المقترح',
+                                    loc.suggestedMonthlyInstallment,
                                     inv.installmentSuggestedMonthly,
-                                  ),
+                                   currency: loc.iqdCurrency),
                               ],
                             ),
                           ),
@@ -430,8 +433,8 @@ class _InvoiceDetailContent extends StatelessWidget {
                           ),
                           child: Row(
                             children: [
-                              const Text(
-                                'الإجمالي',
+                              Text(
+                                loc.totalLabel,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w800,
                                   fontSize: 16,
@@ -439,7 +442,7 @@ class _InvoiceDetailContent extends StatelessWidget {
                               ),
                               const Spacer(),
               Text(
-                '${_numFmt.format(inv.total)} د.ع',
+                '${_numFmt.format(inv.total)} ${loc.iqdCurrency}',
                 style: const TextStyle(
                   fontWeight: FontWeight.w800,
                   fontSize: 17,
@@ -482,7 +485,7 @@ Widget _kv(String k, String v) {
   );
 }
 
-Widget _totalRow(String label, double amount, {bool negative = false}) {
+Widget _totalRow(String label, double amount, {bool negative = false, required String currency}) {
   final prefix = negative ? '−' : '';
   final abs = amount.abs();
   return Padding(
@@ -491,7 +494,7 @@ Widget _totalRow(String label, double amount, {bool negative = false}) {
       children: [
         Expanded(child: Text(label, style: const TextStyle(fontSize: 13))),
         Text(
-          '$prefix${_numFmt.format(abs)} د.ع',
+          '$prefix${_numFmt.format(abs)} $currency',
           style: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 13,

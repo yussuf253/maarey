@@ -3251,7 +3251,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get printListCleared => 'Print list cleared';
 
   @override
-  String get itemFallback => 'item';
+  String get itemFallback => 'Item';
 
   @override
   String get kgUnit => 'kg';
@@ -3817,4 +3817,598 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get saveChangesBtn => 'Save Changes';
+
+  @override
+  String invoiceNumber(Object number) {
+    return 'Invoice #$number';
+  }
+
+  @override
+  String get closeTooltip => 'Close';
+
+  @override
+  String get customerLabel => 'Customer';
+
+  @override
+  String get dateLabel => 'Date';
+
+  @override
+  String get invoiceTypeLabel => 'Invoice type';
+
+  @override
+  String get recordedByLabel => 'Recorded by';
+
+  @override
+  String get customerIdLabel => 'Customer ID';
+
+  @override
+  String get returnStatusLabel => 'Return';
+
+  @override
+  String get originalInvoiceLabel => 'Original invoice';
+
+  @override
+  String get deliveryAddressLabel => 'Delivery address';
+
+  @override
+  String get discountPercentLabel => 'Discount %';
+
+  @override
+  String get noItemsLabel => 'No items';
+
+  @override
+  String quantityTimesPrice(Object price, Object qty) {
+    return '$qty × $price IQD';
+  }
+
+  @override
+  String get itemsSubtotalLabel => 'Items subtotal';
+
+  @override
+  String get invoiceDiscountLabel => 'Invoice discount';
+
+  @override
+  String get loyaltyDiscountLabel => 'Loyalty discount';
+
+  @override
+  String get redeemedPointsLabel => 'Redeemed points';
+
+  @override
+  String get earnedPointsLabel => 'Earned points';
+
+  @override
+  String get taxLabel => 'Tax';
+
+  @override
+  String get advanceFirstPaymentLabel => 'Advance / First payment';
+
+  @override
+  String get interestInfoSavedAtSale => 'Interest info (saved at sale)';
+
+  @override
+  String get interestRatePercent => 'Interest rate %';
+
+  @override
+  String get monthsCountLabel => 'Number of months';
+
+  @override
+  String get financedAmountLabel => 'Financed amount';
+
+  @override
+  String get interestValueLabel => 'Interest value';
+
+  @override
+  String get totalWithInterestLabel => 'Total with interest';
+
+  @override
+  String get suggestedMonthlyInstallment => 'Suggested monthly installment';
+
+  @override
+  String get selectInvoicePrompt => 'Select an invoice to view its details';
+
+  @override
+  String get invoiceNotFoundMsg => 'Invoice not found';
+
+  @override
+  String get iqdCurrency => 'IQD';
+
+  @override
+  String get customerNameLabel => 'Customer name';
+
+  @override
+  String get saleTitle => 'Sale';
+
+  @override
+  String get parkInvoiceTooltip => 'Park invoice';
+
+  @override
+  String get insufficientStockForUnit => 'Insufficient stock for this unit.';
+
+  @override
+  String qtyAdjustedToStock(Object qty) {
+    return 'Quantity adjusted to $qty due to stock limit.';
+  }
+
+  @override
+  String serviceAlreadyAdded(Object name) {
+    return 'Service already added: $name';
+  }
+
+  @override
+  String quantityIncreased(Object name) {
+    return 'Quantity increased: $name';
+  }
+
+  @override
+  String get serviceQtyFixed =>
+      'Service quantity is fixed and cannot be changed.';
+
+  @override
+  String get okAction => 'OK';
+
+  @override
+  String get addAtLeastOneToSell =>
+      'Add at least one item to complete the sale';
+
+  @override
+  String get addAtLeastOneToPark => 'Add at least one item to park the invoice';
+
+  @override
+  String get fillRequiredFields =>
+      'Complete required fields: for credit or installment enter customer name, for delivery enter customer name and address.';
+
+  @override
+  String get paymentTypeNotAllowed =>
+      'Current payment type is not allowed. Check Invoices > POS settings or select cash.';
+
+  @override
+  String discountExceedsMax(Object limit) {
+    return 'Discount exceeds the maximum allowed: $limit%';
+  }
+
+  @override
+  String get creditInstallmentNeedCustomer =>
+      'For credit or installment: select a registered customer from the suggestions list below the name field (or add one from Customers first).';
+
+  @override
+  String get loyaltyRedeemNeedCustomer =>
+      'To redeem points, select the customer from the list or enter a name matching a customer record.';
+
+  @override
+  String installmentMinAdvanceError(Object amount, Object percent) {
+    return 'Installment sale: advance must be at least $percent% of total ($amount).';
+  }
+
+  @override
+  String invoiceDebtCapExceeded(Object limit, Object remaining) {
+    return 'Debt limit per invoice exceeded: remaining ($remaining) exceeds cap ($limit).';
+  }
+
+  @override
+  String customerDebtCapExceeded(Object adding, Object existing, Object limit) {
+    return 'Customer debt limit exceeded: current remaining ~$existing, invoice adds $adding (exceeds $limit).';
+  }
+
+  @override
+  String failedToSaveInvoice(Object error) {
+    return 'Failed to save invoice: $error';
+  }
+
+  @override
+  String invoiceImbalanceError(Object error) {
+    return 'Invoice imbalance: $error';
+  }
+
+  @override
+  String invoiceBalanceError(Object error) {
+    return 'Failed to save -- $error. Review items and total before retrying.';
+  }
+
+  @override
+  String get serviceOrderUpdateFailed =>
+      'Warning: Invoice saved but failed to update the service ticket status. Please review it manually.';
+
+  @override
+  String installmentPlanCreationFailed(Object error) {
+    return 'Invoice saved but failed to create installment plan: $error';
+  }
+
+  @override
+  String get invoiceSavedWithPlan =>
+      'Invoice saved and installment plan created -- you can adjust the schedule';
+
+  @override
+  String get installmentFullyPaid =>
+      'Installment invoice saved and linked (no remaining installments as amount is fully paid).';
+
+  @override
+  String get invoiceSavedSuccess =>
+      'Invoice saved and inventory/cash register updated';
+
+  @override
+  String get failedToLoadParkedInvoice => 'Failed to find the parked invoice';
+
+  @override
+  String failedToApplyParkedInvoice(Object error) {
+    return 'Failed to apply parked invoice: $error';
+  }
+
+  @override
+  String get clearCartTitle => 'Clear cart?';
+
+  @override
+  String get clearCartBody =>
+      'All items will be removed from the current invoice.';
+
+  @override
+  String get clearCartAction => 'Clear';
+
+  @override
+  String get returnDialogAction => 'Return';
+
+  @override
+  String get productNotFoundTitle => 'Product not found';
+
+  @override
+  String get productNotFoundBody =>
+      'This barcode is not found in products. Do you want to open the add product screen?';
+
+  @override
+  String get addProductAction => 'Add product';
+
+  @override
+  String productAddedSnack(Object name) {
+    return 'Product added: $name';
+  }
+
+  @override
+  String get searchCustomerHint => 'Search from first letter...';
+
+  @override
+  String get addNewCustomerTooltip => 'Add new customer without leaving sale';
+
+  @override
+  String get discountOnTotalSaleLabel => 'Discount on total sale %';
+
+  @override
+  String discountPercentHelper(Object limit) {
+    return 'Maximum allowed: $limit% -- calculated from minimum price per item';
+  }
+
+  @override
+  String get taxSectionLabel => 'Tax';
+
+  @override
+  String get taxDescription =>
+      'Enter the tax amount in dinars if applicable; added to total after invoice discount.';
+
+  @override
+  String get taxAmountLabel => 'Tax amount (IQD)';
+
+  @override
+  String get discountSectionLabel => 'Invoice discount';
+
+  @override
+  String get advanceDownPaymentLabel => 'Advance / Down payment (IQD)';
+
+  @override
+  String get advancePaymentHelper =>
+      'Deducted from total before calculating interest and installment';
+
+  @override
+  String get installmentInterestLabel => 'Interest on amount to be financed';
+
+  @override
+  String get interestRateHelper => 'Percentage of amount after advance';
+
+  @override
+  String get numberOfMonthsLabel => 'Number of months';
+
+  @override
+  String get receivedAmountLabel => 'Amount received (IQD)';
+
+  @override
+  String get advanceDescription =>
+      'Calculated on total after advance. For customer review -- not added to invoice unless you manually raise prices.';
+
+  @override
+  String get priceSummaryCaptionNoDiscount =>
+      'Summary of numbers and advance (if any), before proceeding to customer details.';
+
+  @override
+  String get priceSummaryCaptionWithDiscount =>
+      'Summary after discount and tax, and advance (if any), before proceeding to customer details.';
+
+  @override
+  String get financedAmountBasis => 'Amount after advance (installment basis)';
+
+  @override
+  String get parkedInvoiceDialogHint =>
+      'Saved locally on this device. You can resume later from Invoices > Parked sales.';
+
+  @override
+  String get parkedInvoiceNameLabel =>
+      'Name for identification (shown in list)';
+
+  @override
+  String get saveParkingAction => 'Save parking';
+
+  @override
+  String get quantityDialogTitle => 'Quantity';
+
+  @override
+  String get maxAction => 'Max';
+
+  @override
+  String get changeColorAction => 'Change color';
+
+  @override
+  String get filterListHint => 'Filter list...';
+
+  @override
+  String get sizesLabel => 'Sizes';
+
+  @override
+  String get selectColorFirstHint => 'Select a color first to show sizes.';
+
+  @override
+  String priceMinLine(Object min, Object price) {
+    return 'Price $price / Min $min';
+  }
+
+  @override
+  String itemTotalLine(Object total) {
+    return 'Total: $total';
+  }
+
+  @override
+  String get parkedInvoiceUpdated => 'Parked invoice updated';
+
+  @override
+  String get parkedInvoiceCreated =>
+      'Invoice parked -- you can resume from the invoices list';
+
+  @override
+  String get barcodeScanTitle => 'Item or invoice barcode for return';
+
+  @override
+  String get productFallback => 'Product';
+
+  @override
+  String get colorLabel => 'Color';
+
+  @override
+  String get colorSizeFallback => 'color/size';
+
+  @override
+  String get sizeFallback => 'size';
+
+  @override
+  String get unitFallback => 'unit';
+
+  @override
+  String get pieceUnitFallback => 'piece';
+
+  @override
+  String availableQtyChipLabel(Object qty) {
+    return 'Available: $qty';
+  }
+
+  @override
+  String get cashDiscountNote => 'Deducted from cash register.';
+
+  @override
+  String get installmentDiscountNote => 'Deducted from installment total.';
+
+  @override
+  String get returnScreenTitle => 'Return';
+
+  @override
+  String returnInvoiceTitle(Object id) {
+    return 'Return -- invoice #$id';
+  }
+
+  @override
+  String get vouchersNotReturnable =>
+      'Receipt vouchers or supplier payments cannot be processed from the return screen.';
+
+  @override
+  String get noInvoiceNumber => 'No invoice number';
+
+  @override
+  String get invoiceNotFoundReturn => 'Invoice not found';
+
+  @override
+  String get alreadyReturnedReturn =>
+      'This invoice is already recorded as returned';
+
+  @override
+  String get cashPaymentType => 'Cash';
+
+  @override
+  String get creditPaymentTypeLabel => 'Credit (deferred)';
+
+  @override
+  String get installmentPaymentTypeLabel => 'Installment';
+
+  @override
+  String get deliveryPaymentType => 'Delivery';
+
+  @override
+  String get debtCollectionType => 'Debt collection voucher';
+
+  @override
+  String get installmentCollectionType => 'Installment payment voucher';
+
+  @override
+  String get supplierPaymentTypeLabel => 'Supplier payment voucher';
+
+  @override
+  String get cashReturnHint =>
+      'Recorded as cash withdrawal of the same amount.';
+
+  @override
+  String get installmentReturnHint =>
+      'Updates the installment plan total; records cash withdrawal if advance is being refunded.';
+
+  @override
+  String get creditReturnHintLabel =>
+      'Return recorded as linked to original; check invoices list for debt status.';
+
+  @override
+  String get notApplicableForType => 'Not applicable for this type.';
+
+  @override
+  String get selectAtLeastOneReturnQty =>
+      'Select a return quantity of at least one';
+
+  @override
+  String returnSaveFailed(Object error) {
+    return 'Save failed: $error';
+  }
+
+  @override
+  String get returnUseBarcodeOnly =>
+      'For returns, use the invoice barcode only (e.g. INV-12)';
+
+  @override
+  String get sameInvoiceDisplayed =>
+      'This is the same invoice currently displayed';
+
+  @override
+  String noInvoiceWithIdReturn(Object id) {
+    return 'No invoice with number $id';
+  }
+
+  @override
+  String get alreadyReturnedInvoiceReturn => 'Invoice already returned';
+
+  @override
+  String navigateToInvoiceTitle(Object id) {
+    return 'Navigate to invoice #$id?';
+  }
+
+  @override
+  String get navigateToInvoiceBody =>
+      'The displayed products will be replaced with another invoice.';
+
+  @override
+  String allItemsReturnedBanner(Object id) {
+    return 'All items of invoice #$id have been fully returned in previous returns. Nothing left to return.';
+  }
+
+  @override
+  String get noItemsInInvoice => 'No items in this invoice';
+
+  @override
+  String get noItemsInInvoiceHint =>
+      'Verify the invoice number, or use the barcode field to select another invoice.';
+
+  @override
+  String get itemsSelectReturnQty => 'Items -- select return quantity';
+
+  @override
+  String get fullReturnAction => 'Full return';
+
+  @override
+  String get switchInvoiceHint => 'Switch invoice (INV-number)';
+
+  @override
+  String get scanReceiptBarcodeHint =>
+      'Scan another receipt barcode then Enter';
+
+  @override
+  String originalInvoiceHashLabel(Object id) {
+    return 'Original invoice #$id';
+  }
+
+  @override
+  String dateLabelReturn(Object date) {
+    return 'Date: $date';
+  }
+
+  @override
+  String customerLabelReturn(Object name) {
+    return 'Customer: $name';
+  }
+
+  @override
+  String originalSellerLabel(Object name) {
+    return 'Original seller: $name';
+  }
+
+  @override
+  String currentRecorderLabel(Object name) {
+    return 'Currently recorded by: $name';
+  }
+
+  @override
+  String get fullyReturnedBadge => 'Fully returned';
+
+  @override
+  String get partiallyReturnedBadge => 'Partially returned';
+
+  @override
+  String soldQtyTimesPrice(Object price, Object qty) {
+    return 'Sold: $qty x $price';
+  }
+
+  @override
+  String previouslyReturnedRemaining(Object remaining, Object returned) {
+    return 'Previously returned: $returned -- Remaining: $remaining';
+  }
+
+  @override
+  String get returnQuantityLabel => 'Return quantity';
+
+  @override
+  String get returnSummaryTitle => 'Return summary';
+
+  @override
+  String get linesSubtotalLabel => 'Lines subtotal';
+
+  @override
+  String get invoiceDiscountShareLabel => 'Invoice discount';
+
+  @override
+  String get taxShareLabel => 'Tax share';
+
+  @override
+  String get refundAmountLabel => 'Refund amount to customer';
+
+  @override
+  String get confirmReturnAction => 'Confirm return';
+
+  @override
+  String returnedInOtherInvoice(Object name, Object qty) {
+    return '$name was returned in another invoice since this screen opened. Remaining: $qty. Reload and try again.';
+  }
+
+  @override
+  String returnRecordedSuccess(Object hint, Object id, Object originalId) {
+    return 'Return #$id recorded -- linked to original invoice #$originalId. $hint';
+  }
+
+  @override
+  String get deleteReturnTitle => 'Delete return?';
+
+  @override
+  String get deleteReturnConfirm =>
+      'Are you sure you want to delete this return?';
+
+  @override
+  String get amountDueLabel => 'Amount due (IQD)';
+
+  @override
+  String get discountOnTotalSaleTitle => 'Invoice discount';
+
+  @override
+  String get advanceFirstPaymentShortLabel => 'Down payment';
+
+  @override
+  String get parkingInvoiceTitle => 'Park invoice';
+
+  @override
+  String get parkedInvoiceSnackbarHint =>
+      'Saved locally. You can resume from Invoices > Parked.';
 }

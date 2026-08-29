@@ -6949,6 +6949,996 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'حفظ التعديلات'**
   String get saveChangesBtn;
+
+  /// No description provided for @invoiceNumber.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة #{number}'**
+  String invoiceNumber(Object number);
+
+  /// No description provided for @closeTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'إغلاق'**
+  String get closeTooltip;
+
+  /// No description provided for @customerLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'العميل'**
+  String get customerLabel;
+
+  /// No description provided for @dateLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ'**
+  String get dateLabel;
+
+  /// No description provided for @invoiceTypeLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'نوع الفاتورة'**
+  String get invoiceTypeLabel;
+
+  /// No description provided for @recordedByLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّلها'**
+  String get recordedByLabel;
+
+  /// No description provided for @customerIdLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'معرّف العميل'**
+  String get customerIdLabel;
+
+  /// No description provided for @returnStatusLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتجع'**
+  String get returnStatusLabel;
+
+  /// No description provided for @originalInvoiceLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة الأصل'**
+  String get originalInvoiceLabel;
+
+  /// No description provided for @deliveryAddressLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'عنوان التوصيل'**
+  String get deliveryAddressLabel;
+
+  /// No description provided for @discountPercentLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة الخصم %'**
+  String get discountPercentLabel;
+
+  /// No description provided for @noItemsLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد بنود'**
+  String get noItemsLabel;
+
+  /// No description provided for @quantityTimesPrice.
+  ///
+  /// In ar, this message translates to:
+  /// **'{qty} × {price} د.ع'**
+  String quantityTimesPrice(Object price, Object qty);
+
+  /// No description provided for @itemsSubtotalLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مجموع البنود'**
+  String get itemsSubtotalLabel;
+
+  /// No description provided for @invoiceDiscountLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'خصم الفاتورة'**
+  String get invoiceDiscountLabel;
+
+  /// No description provided for @loyaltyDiscountLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'خصم الولاء'**
+  String get loyaltyDiscountLabel;
+
+  /// No description provided for @redeemedPointsLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'نقاط مُستبدَلة'**
+  String get redeemedPointsLabel;
+
+  /// No description provided for @earnedPointsLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'نقاط مُكتسبة'**
+  String get earnedPointsLabel;
+
+  /// No description provided for @taxLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الضريبة'**
+  String get taxLabel;
+
+  /// No description provided for @advanceFirstPaymentLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المقدم / الدفعة الأولى'**
+  String get advanceFirstPaymentLabel;
+
+  /// No description provided for @interestInfoSavedAtSale.
+  ///
+  /// In ar, this message translates to:
+  /// **'معلومات الفائدة (محفوظة عند البيع)'**
+  String get interestInfoSavedAtSale;
+
+  /// No description provided for @interestRatePercent.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة الفائدة %'**
+  String get interestRatePercent;
+
+  /// No description provided for @monthsCountLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الأشهر'**
+  String get monthsCountLabel;
+
+  /// No description provided for @financedAmountLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ المموّل'**
+  String get financedAmountLabel;
+
+  /// No description provided for @interestValueLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيمة الفائدة'**
+  String get interestValueLabel;
+
+  /// No description provided for @totalWithInterestLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإجمالي مع الفائدة'**
+  String get totalWithInterestLabel;
+
+  /// No description provided for @suggestedMonthlyInstallment.
+  ///
+  /// In ar, this message translates to:
+  /// **'القسط الشهري المقترح'**
+  String get suggestedMonthlyInstallment;
+
+  /// No description provided for @selectInvoicePrompt.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر فاتورة لعرض تفاصيلها'**
+  String get selectInvoicePrompt;
+
+  /// No description provided for @invoiceNotFoundMsg.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفاتورة غير موجودة'**
+  String get invoiceNotFoundMsg;
+
+  /// No description provided for @iqdCurrency.
+  ///
+  /// In ar, this message translates to:
+  /// **'د.ع'**
+  String get iqdCurrency;
+
+  /// No description provided for @customerNameLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم العميل'**
+  String get customerNameLabel;
+
+  /// No description provided for @saleTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'البيع'**
+  String get saleTitle;
+
+  /// No description provided for @parkInvoiceTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعليق الفاتورة'**
+  String get parkInvoiceTooltip;
+
+  /// No description provided for @insufficientStockForUnit.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يتوفر مخزون كافٍ لهذه الوحدة.'**
+  String get insufficientStockForUnit;
+
+  /// No description provided for @qtyAdjustedToStock.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم ضبط الكمية إلى {qty} بسبب حد المخزون المتاح.'**
+  String qtyAdjustedToStock(Object qty);
+
+  /// No description provided for @serviceAlreadyAdded.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخدمة مضافة بالفعل: {name}'**
+  String serviceAlreadyAdded(Object name);
+
+  /// No description provided for @quantityIncreased.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمت زيادة الكمية: {name}'**
+  String quantityIncreased(Object name);
+
+  /// No description provided for @serviceQtyFixed.
+  ///
+  /// In ar, this message translates to:
+  /// **'كمية الخدمة ثابتة ولا يمكن تعديلها.'**
+  String get serviceQtyFixed;
+
+  /// No description provided for @okAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'موافق'**
+  String get okAction;
+
+  /// No description provided for @addAtLeastOneToSell.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف صنفاً واحداً على الأقل لإتمام البيع'**
+  String get addAtLeastOneToSell;
+
+  /// No description provided for @addAtLeastOneToPark.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف صنفاً واحداً على الأقل لتعليق الفاتورة'**
+  String get addAtLeastOneToPark;
+
+  /// No description provided for @fillRequiredFields.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكمل الحقول المطلوبة: للدين أو التقسيط أدخل اسم العميل، وللتوصيل أدخل اسم العميل وعنوان التوصيل.'**
+  String get fillRequiredFields;
+
+  /// No description provided for @paymentTypeNotAllowed.
+  ///
+  /// In ar, this message translates to:
+  /// **'طريقة الدفع الحالية غير مسموحة — راجع الفواتير إعدادات نقطة البيع أو اختر نقدي.'**
+  String get paymentTypeNotAllowed;
+
+  /// No description provided for @discountExceedsMax.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة الخصم أعلى من المسموح. الحد الأقصى {limit}%'**
+  String discountExceedsMax(Object limit);
+
+  /// No description provided for @creditInstallmentNeedCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'للمبيع بالدين أو التقسيط: اختر عميلاً مسجّلاً من القائمة المقترحة أسفل حقل الاسم (أو أضفه من العملاء أولاً).'**
+  String get creditInstallmentNeedCustomer;
+
+  /// No description provided for @loyaltyRedeemNeedCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'لاستبدال النقاط اختر العميل من القائمة أو أدخل اسماً يطابق سجلاً واحداً في العملاء.'**
+  String get loyaltyRedeemNeedCustomer;
+
+  /// No description provided for @installmentMinAdvanceError.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع التقسيط: المقدّم يجب ألا يقل عن {percent}% من إجمالي الفاتورة ({amount}).'**
+  String installmentMinAdvanceError(Object amount, Object percent);
+
+  /// No description provided for @invoiceDebtCapExceeded.
+  ///
+  /// In ar, this message translates to:
+  /// **'حد الدين للفاتورة: المتبقي ({remaining}) يتجاوز السقف ({limit}).'**
+  String invoiceDebtCapExceeded(Object limit, Object remaining);
+
+  /// No description provided for @customerDebtCapExceeded.
+  ///
+  /// In ar, this message translates to:
+  /// **'حد الدين للعميل: مجموع المتبقي الحالي ≈ {existing}، والفاتورة تضيف {adding} (يتجاوز {limit}).'**
+  String customerDebtCapExceeded(Object adding, Object existing, Object limit);
+
+  /// No description provided for @failedToSaveInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر حفظ الفاتورة: {error}'**
+  String failedToSaveInvoice(Object error);
+
+  /// No description provided for @invoiceImbalanceError.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدم توازن الفاتورة: {error}'**
+  String invoiceImbalanceError(Object error);
+
+  /// No description provided for @invoiceBalanceError.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر الحفظ — {error}. راجع الأصناف والإجمالي قبل إعادة المحاولة.'**
+  String invoiceBalanceError(Object error);
+
+  /// No description provided for @serviceOrderUpdateFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه: حُفظت الفاتورة ولكن تعذر تلقائياً تحديث حالة تذكرة الصيانة. يرجى مراجعتها يدوياً.'**
+  String get serviceOrderUpdateFailed;
+
+  /// No description provided for @installmentPlanCreationFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم حفظ الفاتورة لكن تعذّر إنشاء خطة التقسيط: {error}'**
+  String installmentPlanCreationFailed(Object error);
+
+  /// No description provided for @invoiceSavedWithPlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم حفظ الفاتورة وإنشاء خطة التقسيط — يمكنك ضبط الجدول'**
+  String get invoiceSavedWithPlan;
+
+  /// No description provided for @installmentFullyPaid.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم حفظ فاتورة التقسيط وربطها بخطة (لا أقساط متبقية لأن المبلغ محصّل بالكامل).'**
+  String get installmentFullyPaid;
+
+  /// No description provided for @invoiceSavedSuccess.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم تسجيل الفاتورة وتحديث المخزون والصندوق'**
+  String get invoiceSavedSuccess;
+
+  /// No description provided for @failedToLoadParkedInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر العثور على الفاتورة المعلّقة'**
+  String get failedToLoadParkedInvoice;
+
+  /// No description provided for @failedToApplyParkedInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'فشل تطبيق الفاتورة المعلّقة: {error}'**
+  String failedToApplyParkedInvoice(Object error);
+
+  /// No description provided for @clearCartTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إفراغ السلة؟'**
+  String get clearCartTitle;
+
+  /// No description provided for @clearCartBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيتم إزالة جميع الأصناف من الفاتورة الحالية.'**
+  String get clearCartBody;
+
+  /// No description provided for @clearCartAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'إفراغ'**
+  String get clearCartAction;
+
+  /// No description provided for @returnDialogAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتجع'**
+  String get returnDialogAction;
+
+  /// No description provided for @productNotFoundTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'المنتج غير موجود'**
+  String get productNotFoundTitle;
+
+  /// No description provided for @productNotFoundBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الباركود غير موجود في المنتجات. هل تريد فتح شاشة إضافة منتج جديد؟'**
+  String get productNotFoundBody;
+
+  /// No description provided for @addProductAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة منتج'**
+  String get addProductAction;
+
+  /// No description provided for @productAddedSnack.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمت إضافة المنتج: {name}'**
+  String productAddedSnack(Object name);
+
+  /// No description provided for @searchCustomerHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابحث من أول حرف…'**
+  String get searchCustomerHint;
+
+  /// No description provided for @addNewCustomerTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة عميل جديد دون مغادرة البيع'**
+  String get addNewCustomerTooltip;
+
+  /// No description provided for @discountOnTotalSaleLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة الخصم على إجمالي البيع %'**
+  String get discountOnTotalSaleLabel;
+
+  /// No description provided for @discountPercentHelper.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحد الأقصى المسموح: {limit}٪ — يُحسب من أدنى سعر لكل صنف'**
+  String discountPercentHelper(Object limit);
+
+  /// No description provided for @taxSectionLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الضريبة'**
+  String get taxSectionLabel;
+
+  /// No description provided for @taxDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل مبلغ الضريبة بالدينار إن وُجد؛ يُضاف إلى المجموع بعد خصم الفاتورة.'**
+  String get taxDescription;
+
+  /// No description provided for @taxAmountLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مبلغ الضريبة (د.ع)'**
+  String get taxAmountLabel;
+
+  /// No description provided for @discountSectionLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'خصم الفاتورة'**
+  String get discountSectionLabel;
+
+  /// No description provided for @advanceDownPaymentLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المقدّم / الدفعة الأولى (د.ع)'**
+  String get advanceDownPaymentLabel;
+
+  /// No description provided for @advancePaymentHelper.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُخصم من الإجمالي قبل حساب الفائدة والقسط'**
+  String get advancePaymentHelper;
+
+  /// No description provided for @installmentInterestLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'فائدة على المبلغ المراد تقسيطه'**
+  String get installmentInterestLabel;
+
+  /// No description provided for @interestRateHelper.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة من المبلغ بعد المقدّم'**
+  String get interestRateHelper;
+
+  /// No description provided for @numberOfMonthsLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الأشهر'**
+  String get numberOfMonthsLabel;
+
+  /// No description provided for @receivedAmountLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ الواصل (د.ع)'**
+  String get receivedAmountLabel;
+
+  /// No description provided for @advanceDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُحسب على الإجمالي بعد المقدّم. للمراجعة مع العميل — لا يُضاف للفاتورة إلا إذا رفعت الأسعار يدوياً.'**
+  String get advanceDescription;
+
+  /// No description provided for @priceSummaryCaptionNoDiscount.
+  ///
+  /// In ar, this message translates to:
+  /// **'نتيجة الأرقام والدفعة الأولى إن وُجدت، قبل الانتقال لبيانات العميل.'**
+  String get priceSummaryCaptionNoDiscount;
+
+  /// No description provided for @priceSummaryCaptionWithDiscount.
+  ///
+  /// In ar, this message translates to:
+  /// **'نتيجة الأرقام بعد الخصم والضريبة، والدفعة الأولى إن وُجدت، قبل الانتقال لبيانات العميل.'**
+  String get priceSummaryCaptionWithDiscount;
+
+  /// No description provided for @financedAmountBasis.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ بعد المقدّم (أساس التقسيط)'**
+  String get financedAmountBasis;
+
+  /// No description provided for @parkedInvoiceDialogHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُحفظ محلياً على هذا الجهاز. يمكنك استئناف البيع لاحقاً من الفواتير معلّقة مؤقتاً.'**
+  String get parkedInvoiceDialogHint;
+
+  /// No description provided for @parkedInvoiceNameLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم للتعريف (يظهر في القائمة)'**
+  String get parkedInvoiceNameLabel;
+
+  /// No description provided for @saveParkingAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ التعليق'**
+  String get saveParkingAction;
+
+  /// No description provided for @quantityDialogTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكمية'**
+  String get quantityDialogTitle;
+
+  /// No description provided for @maxAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأقصى'**
+  String get maxAction;
+
+  /// No description provided for @changeColorAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'تغيير اللون'**
+  String get changeColorAction;
+
+  /// No description provided for @filterListHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تصفية القائمة…'**
+  String get filterListHint;
+
+  /// No description provided for @sizesLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المقاسات'**
+  String get sizesLabel;
+
+  /// No description provided for @selectColorFirstHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر لوناً أولاً لإظهار المقاسات.'**
+  String get selectColorFirstHint;
+
+  /// No description provided for @priceMinLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'سعر {price} · أدنى {min}'**
+  String priceMinLine(Object min, Object price);
+
+  /// No description provided for @itemTotalLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإجمالي: {total}'**
+  String itemTotalLine(Object total);
+
+  /// No description provided for @parkedInvoiceUpdated.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم تحديث الفاتورة المعلّقة'**
+  String get parkedInvoiceUpdated;
+
+  /// No description provided for @parkedInvoiceCreated.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم تعليق الفاتورة — يمكنك استئنافها من قائمة الفواتير'**
+  String get parkedInvoiceCreated;
+
+  /// No description provided for @barcodeScanTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'باركود صنف أو فاتورة للمرتجع'**
+  String get barcodeScanTitle;
+
+  /// No description provided for @productFallback.
+  ///
+  /// In ar, this message translates to:
+  /// **'منتج'**
+  String get productFallback;
+
+  /// No description provided for @colorLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'لون'**
+  String get colorLabel;
+
+  /// No description provided for @colorSizeFallback.
+  ///
+  /// In ar, this message translates to:
+  /// **'لون/مقاس'**
+  String get colorSizeFallback;
+
+  /// No description provided for @sizeFallback.
+  ///
+  /// In ar, this message translates to:
+  /// **'مقاس'**
+  String get sizeFallback;
+
+  /// No description provided for @unitFallback.
+  ///
+  /// In ar, this message translates to:
+  /// **'وحدة'**
+  String get unitFallback;
+
+  /// No description provided for @pieceUnitFallback.
+  ///
+  /// In ar, this message translates to:
+  /// **'قطعة'**
+  String get pieceUnitFallback;
+
+  /// No description provided for @availableQtyChipLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتاح: {qty}'**
+  String availableQtyChipLabel(Object qty);
+
+  /// No description provided for @cashDiscountNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'خُصم من الصندوق.'**
+  String get cashDiscountNote;
+
+  /// No description provided for @installmentDiscountNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'خُصم من إجمالي التقسيط.'**
+  String get installmentDiscountNote;
+
+  /// No description provided for @returnScreenTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتجع'**
+  String get returnScreenTitle;
+
+  /// No description provided for @returnInvoiceTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتجع — فاتورة #{id}'**
+  String returnInvoiceTitle(Object id);
+
+  /// No description provided for @vouchersNotReturnable.
+  ///
+  /// In ar, this message translates to:
+  /// **'سندات القبض أو دفع المورد لا تُعالج من شاشة المرتجع.'**
+  String get vouchersNotReturnable;
+
+  /// No description provided for @noInvoiceNumber.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد رقم فاتورة'**
+  String get noInvoiceNumber;
+
+  /// No description provided for @invoiceNotFoundReturn.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفاتورة غير موجودة'**
+  String get invoiceNotFoundReturn;
+
+  /// No description provided for @alreadyReturnedReturn.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذه الفاتورة مسجّلة كمرتجع مسبقاً'**
+  String get alreadyReturnedReturn;
+
+  /// No description provided for @cashPaymentType.
+  ///
+  /// In ar, this message translates to:
+  /// **'نقدي'**
+  String get cashPaymentType;
+
+  /// No description provided for @creditPaymentTypeLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'دين (آجل)'**
+  String get creditPaymentTypeLabel;
+
+  /// No description provided for @installmentPaymentTypeLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تقسيط'**
+  String get installmentPaymentTypeLabel;
+
+  /// No description provided for @deliveryPaymentType.
+  ///
+  /// In ar, this message translates to:
+  /// **'توصيل'**
+  String get deliveryPaymentType;
+
+  /// No description provided for @debtCollectionType.
+  ///
+  /// In ar, this message translates to:
+  /// **'سند تحصيل دين'**
+  String get debtCollectionType;
+
+  /// No description provided for @installmentCollectionType.
+  ///
+  /// In ar, this message translates to:
+  /// **'سند تسديد قسط'**
+  String get installmentCollectionType;
+
+  /// No description provided for @supplierPaymentTypeLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'سند دفع مورد'**
+  String get supplierPaymentTypeLabel;
+
+  /// No description provided for @cashReturnHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُسجَّل خروجاً من الصندوق بنفس المبلغ.'**
+  String get cashReturnHint;
+
+  /// No description provided for @installmentReturnHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُحدَّث إجمالي خطة التقسيط المرتبطة بهذه الفاتورة؛ ويُسجَّل خروج نقدي إن وُجد مقدم يُسترد.'**
+  String get installmentReturnHint;
+
+  /// No description provided for @creditReturnHintLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُسجَّل المرتجع كفاتورة مرتبطة بالأصل؛ راجع قائمة الفواتير لحالة الدين.'**
+  String get creditReturnHintLabel;
+
+  /// No description provided for @notApplicableForType.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يُستعمل لهذا النوع.'**
+  String get notApplicableForType;
+
+  /// No description provided for @selectAtLeastOneReturnQty.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر كمية إرجاع واحدة على الأقل'**
+  String get selectAtLeastOneReturnQty;
+
+  /// No description provided for @returnSaveFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر الحفظ: {error}'**
+  String returnSaveFailed(Object error);
+
+  /// No description provided for @returnUseBarcodeOnly.
+  ///
+  /// In ar, this message translates to:
+  /// **'للمرتجع استخدم باركود الفاتورة فقط (مثل INV-12)'**
+  String get returnUseBarcodeOnly;
+
+  /// No description provided for @sameInvoiceDisplayed.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذه هي نفس الفاتورة المعروضة'**
+  String get sameInvoiceDisplayed;
+
+  /// No description provided for @noInvoiceWithIdReturn.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد فاتورة برقم {id}'**
+  String noInvoiceWithIdReturn(Object id);
+
+  /// No description provided for @alreadyReturnedInvoiceReturn.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة مرتجعة مسبقاً'**
+  String get alreadyReturnedInvoiceReturn;
+
+  /// No description provided for @navigateToInvoiceTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الانتقال إلى فاتورة #{id}؟'**
+  String navigateToInvoiceTitle(Object id);
+
+  /// No description provided for @navigateToInvoiceBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيتم استبدال المنتجات المعروضة بفاتورة أخرى.'**
+  String get navigateToInvoiceBody;
+
+  /// No description provided for @allItemsReturnedBanner.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم إرجاع جميع بنود الفاتورة #{id} بالكامل في فواتير مرتجع سابقة. لا يوجد ما يمكن إرجاعه إضافياً.'**
+  String allItemsReturnedBanner(Object id);
+
+  /// No description provided for @noItemsInInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد أصناف في هذه الفاتورة'**
+  String get noItemsInInvoice;
+
+  /// No description provided for @noItemsInInvoiceHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكّد من رقم الفاتورة، أو استعمل حقل تبديل الباركود لاختيار فاتورة أخرى.'**
+  String get noItemsInInvoiceHint;
+
+  /// No description provided for @itemsSelectReturnQty.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأصناف — اختر كمية الإرجاع'**
+  String get itemsSelectReturnQty;
+
+  /// No description provided for @fullReturnAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'إرجاع كامل'**
+  String get fullReturnAction;
+
+  /// No description provided for @switchInvoiceHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تبديل الفاتورة (INV-رقم)'**
+  String get switchInvoiceHint;
+
+  /// No description provided for @scanReceiptBarcodeHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'امسح باركود إيصال آخر ثم Enter'**
+  String get scanReceiptBarcodeHint;
+
+  /// No description provided for @originalInvoiceHashLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفاتورة الأصلية #{id}'**
+  String originalInvoiceHashLabel(Object id);
+
+  /// No description provided for @dateLabelReturn.
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ: {date}'**
+  String dateLabelReturn(Object date);
+
+  /// No description provided for @customerLabelReturn.
+  ///
+  /// In ar, this message translates to:
+  /// **'العميل: {name}'**
+  String customerLabelReturn(Object name);
+
+  /// No description provided for @originalSellerLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'بائع أصلي: {name}'**
+  String originalSellerLabel(Object name);
+
+  /// No description provided for @currentRecorderLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المُسجِّل الآن: {name}'**
+  String currentRecorderLabel(Object name);
+
+  /// No description provided for @fullyReturnedBadge.
+  ///
+  /// In ar, this message translates to:
+  /// **'مُرجَع بالكامل'**
+  String get fullyReturnedBadge;
+
+  /// No description provided for @partiallyReturnedBadge.
+  ///
+  /// In ar, this message translates to:
+  /// **'مُرجَع جزئياً'**
+  String get partiallyReturnedBadge;
+
+  /// No description provided for @soldQtyTimesPrice.
+  ///
+  /// In ar, this message translates to:
+  /// **'المباع: {qty} × {price}'**
+  String soldQtyTimesPrice(Object price, Object qty);
+
+  /// No description provided for @previouslyReturnedRemaining.
+  ///
+  /// In ar, this message translates to:
+  /// **'مُرجَع سابقاً: {returned} • المتبقي: {remaining}'**
+  String previouslyReturnedRemaining(Object remaining, Object returned);
+
+  /// No description provided for @returnQuantityLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'كمية الإرجاع'**
+  String get returnQuantityLabel;
+
+  /// No description provided for @returnSummaryTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخص المرتجع'**
+  String get returnSummaryTitle;
+
+  /// No description provided for @linesSubtotalLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مجموع الأسطر'**
+  String get linesSubtotalLabel;
+
+  /// No description provided for @invoiceDiscountShareLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'خصم نسبة الفاتورة'**
+  String get invoiceDiscountShareLabel;
+
+  /// No description provided for @taxShareLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'حصة الضريبة'**
+  String get taxShareLabel;
+
+  /// No description provided for @refundAmountLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ المسترد للعميل'**
+  String get refundAmountLabel;
+
+  /// No description provided for @confirmReturnAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكيد المرتجع'**
+  String get confirmReturnAction;
+
+  /// No description provided for @returnedInOtherInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم إرجاع \"{name}\" في فاتورة أخرى منذ فتح هذه الشاشة. المتبقي: {qty}. أعِد تحميل الشاشة وحاول مجدداً.'**
+  String returnedInOtherInvoice(Object name, Object qty);
+
+  /// No description provided for @returnRecordedSuccess.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم تسجيل المرتجع #{id} ← مرتبط بالفاتورة الأصلية #{originalId}. {hint}'**
+  String returnRecordedSuccess(Object hint, Object id, Object originalId);
+
+  /// No description provided for @deleteReturnTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف المرتجع؟'**
+  String get deleteReturnTitle;
+
+  /// No description provided for @deleteReturnConfirm.
+  ///
+  /// In ar, this message translates to:
+  /// **'هل أنت متأكد من حذف هذا المرتجع؟'**
+  String get deleteReturnConfirm;
+
+  /// No description provided for @amountDueLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ المستحق (د.ع)'**
+  String get amountDueLabel;
+
+  /// No description provided for @discountOnTotalSaleTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'خصم الفاتورة'**
+  String get discountOnTotalSaleTitle;
+
+  /// No description provided for @advanceFirstPaymentShortLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المقدم'**
+  String get advanceFirstPaymentShortLabel;
+
+  /// No description provided for @parkingInvoiceTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعليق الفاتورة'**
+  String get parkingInvoiceTitle;
+
+  /// No description provided for @parkedInvoiceSnackbarHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُحفظ محلياً. يمكنك الاستئناف من الفواتير معلّقة.'**
+  String get parkedInvoiceSnackbarHint;
 }
 
 class _AppLocalizationsDelegate

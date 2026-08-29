@@ -3279,7 +3279,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get printListCleared => 'Liste d\'impression vidée';
 
   @override
-  String get itemFallback => 'article';
+  String get itemFallback => 'Article';
 
   @override
   String get kgUnit => 'kg';
@@ -3862,4 +3862,606 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get saveChangesBtn => 'Enregistrer les modifications';
+
+  @override
+  String invoiceNumber(Object number) {
+    return 'Facture #$number';
+  }
+
+  @override
+  String get closeTooltip => 'Fermer';
+
+  @override
+  String get customerLabel => 'Client';
+
+  @override
+  String get dateLabel => 'Date';
+
+  @override
+  String get invoiceTypeLabel => 'Type de facture';
+
+  @override
+  String get recordedByLabel => 'Enregistrée par';
+
+  @override
+  String get customerIdLabel => 'ID client';
+
+  @override
+  String get returnStatusLabel => 'Retour';
+
+  @override
+  String get originalInvoiceLabel => 'Facture d\'origine';
+
+  @override
+  String get deliveryAddressLabel => 'Adresse de livraison';
+
+  @override
+  String get discountPercentLabel => 'Remise %';
+
+  @override
+  String get noItemsLabel => 'Aucun article';
+
+  @override
+  String quantityTimesPrice(Object price, Object qty) {
+    return '$qty × $price IQD';
+  }
+
+  @override
+  String get itemsSubtotalLabel => 'Sous-total des articles';
+
+  @override
+  String get invoiceDiscountLabel => 'Remise sur facture';
+
+  @override
+  String get loyaltyDiscountLabel => 'Remise fidélité';
+
+  @override
+  String get redeemedPointsLabel => 'Points échangés';
+
+  @override
+  String get earnedPointsLabel => 'Points gagnés';
+
+  @override
+  String get taxLabel => 'Taxe';
+
+  @override
+  String get advanceFirstPaymentLabel => 'Avance / Premier paiement';
+
+  @override
+  String get interestInfoSavedAtSale =>
+      'Info d\'intérêt (enregistrée à la vente)';
+
+  @override
+  String get interestRatePercent => 'Taux d\'intérêt %';
+
+  @override
+  String get monthsCountLabel => 'Nombre de mois';
+
+  @override
+  String get financedAmountLabel => 'Montant financé';
+
+  @override
+  String get interestValueLabel => 'Valeur de l\'intérêt';
+
+  @override
+  String get totalWithInterestLabel => 'Total avec intérêt';
+
+  @override
+  String get suggestedMonthlyInstallment => 'Mensualité suggérée';
+
+  @override
+  String get selectInvoicePrompt =>
+      'Sélectionnez une facture pour voir les détails';
+
+  @override
+  String get invoiceNotFoundMsg => 'Facture introuvable';
+
+  @override
+  String get iqdCurrency => 'IQD';
+
+  @override
+  String get customerNameLabel => 'Nom du client';
+
+  @override
+  String get saleTitle => 'Vente';
+
+  @override
+  String get parkInvoiceTooltip => 'Mettre la facture en attente';
+
+  @override
+  String get insufficientStockForUnit => 'Stock insuffisant pour cette unité.';
+
+  @override
+  String qtyAdjustedToStock(Object qty) {
+    return 'Quantité ajustée à $qty en raison de la limite de stock.';
+  }
+
+  @override
+  String serviceAlreadyAdded(Object name) {
+    return 'Service déjà ajouté : $name';
+  }
+
+  @override
+  String quantityIncreased(Object name) {
+    return 'Quantité augmentée : $name';
+  }
+
+  @override
+  String get serviceQtyFixed =>
+      'La quantité du service est fixe et ne peut pas être modifiée.';
+
+  @override
+  String get okAction => 'OK';
+
+  @override
+  String get addAtLeastOneToSell =>
+      'Ajoutez au moins un article pour finaliser la vente';
+
+  @override
+  String get addAtLeastOneToPark =>
+      'Ajoutez au moins un article pour mettre la facture en attente';
+
+  @override
+  String get fillRequiredFields =>
+      'Remplissez les champs requis : pour le crédit ou l\'échéancier, entrez le nom du client ; pour la livraison, entrez le nom et l\'adresse.';
+
+  @override
+  String get paymentTypeNotAllowed =>
+      'Le type de paiement actuel n\'est pas autorisé. Vérifiez Factures > Paramètres Caisse ou sélectionnez espèces.';
+
+  @override
+  String discountExceedsMax(Object limit) {
+    return 'La remise dépasse le maximum autorisé : $limit%';
+  }
+
+  @override
+  String get creditInstallmentNeedCustomer =>
+      'Pour la vente à crédit ou à échéancier : sélectionnez un client enregistré dans la liste sous le champ de nom (ou ajoutez-en un depuis Clients d\'abord).';
+
+  @override
+  String get loyaltyRedeemNeedCustomer =>
+      'Pour échanger les points, sélectionnez le client dans la liste ou entrez un nom correspondant à un enregistrement client.';
+
+  @override
+  String installmentMinAdvanceError(Object amount, Object percent) {
+    return 'Vente à échéancier : l\'avance doit être d\'au moins $percent% du total ($amount).';
+  }
+
+  @override
+  String invoiceDebtCapExceeded(Object limit, Object remaining) {
+    return 'Limite de dette par facture dépassée : le reste ($remaining) dépasse le plafond ($limit).';
+  }
+
+  @override
+  String customerDebtCapExceeded(Object adding, Object existing, Object limit) {
+    return 'Limite de dette client dépassée : reste actuel ≈ $existing, la facture ajoute $adding (dépasse $limit).';
+  }
+
+  @override
+  String failedToSaveInvoice(Object error) {
+    return 'Échec de l\'enregistrement de la facture : $error';
+  }
+
+  @override
+  String invoiceImbalanceError(Object error) {
+    return 'Déséquilibre de facture : $error';
+  }
+
+  @override
+  String invoiceBalanceError(Object error) {
+    return 'Échec de l\'enregistrement — $error. Vérifiez les articles et le total avant de réessayer.';
+  }
+
+  @override
+  String get serviceOrderUpdateFailed =>
+      'Attention : Facture enregistrée mais échec de la mise à jour du statut du ticket de service. Veuillez le vérifier manuellement.';
+
+  @override
+  String installmentPlanCreationFailed(Object error) {
+    return 'Facture enregistrée mais échec de création du plan d\'échéancier : $error';
+  }
+
+  @override
+  String get invoiceSavedWithPlan =>
+      'Facture enregistrée et plan d\'échéancier créé — vous pouvez ajuster le calendrier';
+
+  @override
+  String get installmentFullyPaid =>
+      'Facture à échéancier enregistrée et liée (aucune échéance restante car le montant est entièrement payé).';
+
+  @override
+  String get invoiceSavedSuccess =>
+      'Facture enregistrée et inventaire/caisse mis à jour';
+
+  @override
+  String get failedToLoadParkedInvoice =>
+      'Impossible de trouver la facture en attente';
+
+  @override
+  String failedToApplyParkedInvoice(Object error) {
+    return 'Échec de l\'application de la facture en attente : $error';
+  }
+
+  @override
+  String get clearCartTitle => 'Vider le panier ?';
+
+  @override
+  String get clearCartBody =>
+      'Tous les articles seront supprimés de la facture en cours.';
+
+  @override
+  String get clearCartAction => 'Vider';
+
+  @override
+  String get returnDialogAction => 'Retour';
+
+  @override
+  String get productNotFoundTitle => 'Produit introuvable';
+
+  @override
+  String get productNotFoundBody =>
+      'Ce code-barres n\'existe pas dans les produits. Voulez-vous ouvrir l\'écran d\'ajout de produit ?';
+
+  @override
+  String get addProductAction => 'Ajouter un produit';
+
+  @override
+  String productAddedSnack(Object name) {
+    return 'Produit ajouté : $name';
+  }
+
+  @override
+  String get searchCustomerHint => 'Recherchez à partir de la première lettre…';
+
+  @override
+  String get addNewCustomerTooltip =>
+      'Ajouter un nouveau client sans quitter la vente';
+
+  @override
+  String get discountOnTotalSaleLabel => 'Remise sur le total de la vente %';
+
+  @override
+  String discountPercentHelper(Object limit) {
+    return 'Maximum autorisé : $limit% — calculé à partir du prix minimum par article';
+  }
+
+  @override
+  String get taxSectionLabel => 'Taxe';
+
+  @override
+  String get taxDescription =>
+      'Entrez le montant de la taxe en dinars si applicable ; ajouté au total après la remise de facture.';
+
+  @override
+  String get taxAmountLabel => 'Montant de la taxe (IQD)';
+
+  @override
+  String get discountSectionLabel => 'Remise facture';
+
+  @override
+  String get advanceDownPaymentLabel => 'Avance / Acompte (IQD)';
+
+  @override
+  String get advancePaymentHelper =>
+      'Déduit du total avant le calcul des intérêts et de l\'échéancier';
+
+  @override
+  String get installmentInterestLabel => 'Intérêt sur le montant à financer';
+
+  @override
+  String get interestRateHelper => 'Pourcentage du montant après avance';
+
+  @override
+  String get numberOfMonthsLabel => 'Nombre de mois';
+
+  @override
+  String get receivedAmountLabel => 'Montant reçu (IQD)';
+
+  @override
+  String get advanceDescription =>
+      'Calculé sur le total après avance. Pour revue client — pas ajouté à la facture sauf si vous augmentez les prix manuellement.';
+
+  @override
+  String get priceSummaryCaptionNoDiscount =>
+      'Résumé des chiffres et de l\'avance (le cas échéant), avant de passer aux détails du client.';
+
+  @override
+  String get priceSummaryCaptionWithDiscount =>
+      'Résumé après remise et taxe, et avance (le cas échéant), avant de passer aux détails du client.';
+
+  @override
+  String get financedAmountBasis => 'Montant après avance (base d\'échéancier)';
+
+  @override
+  String get parkedInvoiceDialogHint =>
+      'Enregistré localement sur cet appareil. Vous pouvez reprendre plus tard depuis Factures > Ventes en attente.';
+
+  @override
+  String get parkedInvoiceNameLabel =>
+      'Nom pour identification (affiché dans la liste)';
+
+  @override
+  String get saveParkingAction => 'Enregistrer la mise en attente';
+
+  @override
+  String get quantityDialogTitle => 'Quantité';
+
+  @override
+  String get maxAction => 'Max';
+
+  @override
+  String get changeColorAction => 'Changer la couleur';
+
+  @override
+  String get filterListHint => 'Filtrer la liste…';
+
+  @override
+  String get sizesLabel => 'Tailles';
+
+  @override
+  String get selectColorFirstHint =>
+      'Sélectionnez d\'abord une couleur pour afficher les tailles.';
+
+  @override
+  String priceMinLine(Object min, Object price) {
+    return 'Prix $price · Min $min';
+  }
+
+  @override
+  String itemTotalLine(Object total) {
+    return 'Total : $total';
+  }
+
+  @override
+  String get parkedInvoiceUpdated => 'Facture en attente mise à jour';
+
+  @override
+  String get parkedInvoiceCreated =>
+      'Facture mise en attente — vous pouvez la reprendre depuis la liste des factures';
+
+  @override
+  String get barcodeScanTitle =>
+      'Code-barres d\'article ou facture pour retour';
+
+  @override
+  String get productFallback => 'Produit';
+
+  @override
+  String get colorLabel => 'Couleur';
+
+  @override
+  String get colorSizeFallback => 'couleur/taille';
+
+  @override
+  String get sizeFallback => 'taille';
+
+  @override
+  String get unitFallback => 'unité';
+
+  @override
+  String get pieceUnitFallback => 'pièce';
+
+  @override
+  String availableQtyChipLabel(Object qty) {
+    return 'Disponible : $qty';
+  }
+
+  @override
+  String get cashDiscountNote => 'Déduit de la caisse.';
+
+  @override
+  String get installmentDiscountNote => 'Déduit du total de l\'échéancier.';
+
+  @override
+  String get returnScreenTitle => 'Retour';
+
+  @override
+  String returnInvoiceTitle(Object id) {
+    return 'Retour — facture #$id';
+  }
+
+  @override
+  String get vouchersNotReturnable =>
+      'Les reçus ou paiements fournisseurs ne peuvent pas être traités depuis l\'écran de retour.';
+
+  @override
+  String get noInvoiceNumber => 'Pas de numéro de facture';
+
+  @override
+  String get invoiceNotFoundReturn => 'Facture introuvable';
+
+  @override
+  String get alreadyReturnedReturn =>
+      'Cette facture est déjà enregistrée comme retournée';
+
+  @override
+  String get cashPaymentType => 'Espèces';
+
+  @override
+  String get creditPaymentTypeLabel => 'Crédit (différé)';
+
+  @override
+  String get installmentPaymentTypeLabel => 'Échéancier';
+
+  @override
+  String get deliveryPaymentType => 'Livraison';
+
+  @override
+  String get debtCollectionType => 'Reçu de recouvrement';
+
+  @override
+  String get installmentCollectionType => 'Reçu de paiement échéancier';
+
+  @override
+  String get supplierPaymentTypeLabel => 'Reçu de paiement fournisseur';
+
+  @override
+  String get cashReturnHint =>
+      'Enregistré comme retrait de caisse du même montant.';
+
+  @override
+  String get installmentReturnHint =>
+      'Met à jour le total du plan d\'échéancier ; enregistre un retrait de caisse si une avance est remboursée.';
+
+  @override
+  String get creditReturnHintLabel =>
+      'Retour enregistré comme lié à l\'original ; vérifiez la liste des factures pour le statut de la dette.';
+
+  @override
+  String get notApplicableForType => 'Non applicable pour ce type.';
+
+  @override
+  String get selectAtLeastOneReturnQty =>
+      'Sélectionnez une quantité de retour d\'au moins une';
+
+  @override
+  String returnSaveFailed(Object error) {
+    return 'Échec de l\'enregistrement : $error';
+  }
+
+  @override
+  String get returnUseBarcodeOnly =>
+      'Pour les retours, utilisez uniquement le code-barres de la facture (ex. INV-12)';
+
+  @override
+  String get sameInvoiceDisplayed =>
+      'C\'est la même facture actuellement affichée';
+
+  @override
+  String noInvoiceWithIdReturn(Object id) {
+    return 'Aucune facture avec le numéro $id';
+  }
+
+  @override
+  String get alreadyReturnedInvoiceReturn => 'Facture déjà retournée';
+
+  @override
+  String navigateToInvoiceTitle(Object id) {
+    return 'Naviguer vers la facture #$id ?';
+  }
+
+  @override
+  String get navigateToInvoiceBody =>
+      'Les produits affichés seront remplacés par une autre facture.';
+
+  @override
+  String allItemsReturnedBanner(Object id) {
+    return 'Tous les articles de la facture #$id ont été entièrement retournés dans des retours précédents. Rien à retourner.';
+  }
+
+  @override
+  String get noItemsInInvoice => 'Aucun article dans cette facture';
+
+  @override
+  String get noItemsInInvoiceHint =>
+      'Vérifiez le numéro de facture, ou utilisez le champ code-barres pour sélectionner une autre facture.';
+
+  @override
+  String get itemsSelectReturnQty =>
+      'Articles — sélectionnez la quantité à retourner';
+
+  @override
+  String get fullReturnAction => 'Retour complet';
+
+  @override
+  String get switchInvoiceHint => 'Changer de facture (INV-numéro)';
+
+  @override
+  String get scanReceiptBarcodeHint =>
+      'Scannez un autre code-barres de reçu puis Entrez';
+
+  @override
+  String originalInvoiceHashLabel(Object id) {
+    return 'Facture originale #$id';
+  }
+
+  @override
+  String dateLabelReturn(Object date) {
+    return 'Date : $date';
+  }
+
+  @override
+  String customerLabelReturn(Object name) {
+    return 'Client : $name';
+  }
+
+  @override
+  String originalSellerLabel(Object name) {
+    return 'Vendeur original : $name';
+  }
+
+  @override
+  String currentRecorderLabel(Object name) {
+    return 'Enregistré actuellement par : $name';
+  }
+
+  @override
+  String get fullyReturnedBadge => 'Entièrement retourné';
+
+  @override
+  String get partiallyReturnedBadge => 'Partiellement retourné';
+
+  @override
+  String soldQtyTimesPrice(Object price, Object qty) {
+    return 'Vendu : $qty × $price';
+  }
+
+  @override
+  String previouslyReturnedRemaining(Object remaining, Object returned) {
+    return 'Précédemment retourné : $returned — Restant : $remaining';
+  }
+
+  @override
+  String get returnQuantityLabel => 'Quantité à retourner';
+
+  @override
+  String get returnSummaryTitle => 'Résumé du retour';
+
+  @override
+  String get linesSubtotalLabel => 'Sous-total des lignes';
+
+  @override
+  String get invoiceDiscountShareLabel => 'Remise facture';
+
+  @override
+  String get taxShareLabel => 'Part de taxe';
+
+  @override
+  String get refundAmountLabel => 'Montant remboursé au client';
+
+  @override
+  String get confirmReturnAction => 'Confirmer le retour';
+
+  @override
+  String returnedInOtherInvoice(Object name, Object qty) {
+    return '$name a été retourné dans une autre facture depuis l\'ouverture de cet écran. Restant : $qty. Rechargez et réessayez.';
+  }
+
+  @override
+  String returnRecordedSuccess(Object hint, Object id, Object originalId) {
+    return 'Retour #$id enregistré — lié à la facture originale #$originalId. $hint';
+  }
+
+  @override
+  String get deleteReturnTitle => 'Supprimer le retour ?';
+
+  @override
+  String get deleteReturnConfirm =>
+      'Êtes-vous sûr de vouloir supprimer ce retour ?';
+
+  @override
+  String get amountDueLabel => 'Montant dû (IQD)';
+
+  @override
+  String get discountOnTotalSaleTitle => 'Remise facture';
+
+  @override
+  String get advanceFirstPaymentShortLabel => 'Acompte';
+
+  @override
+  String get parkingInvoiceTitle => 'Mettre en attente la facture';
+
+  @override
+  String get parkedInvoiceSnackbarHint =>
+      'Enregistré localement. Vous pouvez reprendre depuis Factures > En attente.';
 }

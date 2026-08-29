@@ -30,6 +30,7 @@ import '../../services/product_variants_repository.dart';
 import '../../services/service_orders_repository.dart';
 import '../../services/app_settings_repository.dart';
 import '../../services/business_setup_settings.dart';
+import '../../l10n/generated/app_localizations.dart';
 import '../../theme/design_tokens.dart';
 import '../../theme/sale_brand.dart';
 import '../../utils/app_logger.dart';
@@ -408,7 +409,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         line.quantity = entered;
       });
       _showSaleSnackBar(
-        const SnackBar(content: Text('لا يتوفر مخزون كافٍ لهذه الوحدة.')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.insufficientStockForUnit)),
       );
       return;
     }
@@ -1014,7 +1015,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
           // الخدمة ثابتة بكمية 1 — لا نزيد الكمية ولا ندمج زيادات.
           if (!suppressLineSnacks) {
             _showSaleSnackBar(
-              SnackBar(content: Text('الخدمة مضافة بالفعل: $productName')),
+              SnackBar(content: Text(AppLocalizations.of(context)!.serviceAlreadyAdded(productName))),
             );
           }
           return;
@@ -1024,7 +1025,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         if (!ok || !mounted) return;
         if (!suppressLineSnacks) {
           _showSaleSnackBar(
-            SnackBar(content: Text('تمت زيادة الكمية: $productName')),
+            SnackBar(content: Text(AppLocalizations.of(context)!.quantityIncreased(productName))),
           );
         }
         _lastCartAddUndo = _CartUndoOp(
@@ -1529,9 +1530,9 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
               const SizedBox(height: 12),
               TextFormField(
                 controller: _advanceController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   isDense: true,
-                  labelText: 'المقدّم / الدفعة الأولى (د.ع)',
+                  labelText: AppLocalizations.of(context)!.advanceDownPaymentLabel,
                   helperText: 'يُخصم من الإجمالي قبل حساب الفائدة والقسط',
                   helperMaxLines: 2,
                 ),
@@ -1549,9 +1550,9 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                       keyboardType: const TextInputType.numberWithOptions(
                         decimal: true,
                       ),
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         isDense: true,
-                        labelText: 'فائدة على المبلغ المراد تقسيطه',
+                        labelText: AppLocalizations.of(context)!.installmentInterestLabel,
                         suffixText: '%',
                         helperText: 'نسبة من المبلغ بعد المقدّم',
                       ),
@@ -1563,9 +1564,9 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                     child: TextFormField(
                       controller: _instMonths,
                       keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         isDense: true,
-                        labelText: 'عدد الأشهر',
+                        labelText: AppLocalizations.of(context)!.numberOfMonthsLabel,
                         suffixText: 'شهراً',
                       ),
                     ),
@@ -1688,7 +1689,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       child: Scaffold(
         backgroundColor: saleLightBg,
         appBar: AppBar(
-          title: const Text('البيع'),
+          title: Text(AppLocalizations.of(context)!.saleTitle),
           backgroundColor: palette.navy,
           foregroundColor: Colors.white,
           surfaceTintColor: Colors.transparent,
@@ -1696,7 +1697,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
             IconButton(
               icon: const Icon(Icons.pause_circle_outline_rounded),
               color: palette.gold,
-              tooltip: 'تعليق الفاتورة',
+              tooltip: AppLocalizations.of(context)!.parkInvoiceTooltip,
               onPressed: _parkInvoice,
             ),
           ],
@@ -2202,7 +2203,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                     style: TextStyle(fontSize: 13, color: text1),
                     decoration: InputDecoration(
                       isDense: true,
-                      hintText: 'تصفية القائمة…',
+                      hintText: AppLocalizations.of(context)!.filterListHint,
                       hintStyle: TextStyle(color: text2, fontSize: 12.5),
                       filled: true,
                       fillColor: isDark
@@ -2752,7 +2753,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                     controller: _discountPercentController,
                     decoration: InputDecoration(
                       isDense: true,
-                      labelText: 'نسبة الخصم على إجمالي البيع %',
+                      labelText: AppLocalizations.of(context)!.discountOnTotalSaleLabel,
                       helperText:
                           'الحد الأقصى المسموح حالياً: ${_maxAllowedDiscountPercent.toStringAsFixed(1)}٪ — يُحسب من أدنى سعر لكل صنف.',
                       helperMaxLines: 3,
@@ -2784,9 +2785,9 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                   const SizedBox(height: 8),
                   TextFormField(
                     controller: _taxController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       isDense: true,
-                      labelText: 'مبلغ الضريبة (د.ع)',
+                      labelText: AppLocalizations.of(context)!.taxAmountLabel,
                     ),
                     keyboardType: TextInputType.number,
                     onChanged: (_) => setState(() {}),
@@ -2866,9 +2867,9 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                   const SizedBox(height: 10),
                   TextFormField(
                     controller: _advanceController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       isDense: true,
-                      labelText: 'المقدم (د.ع)',
+                      labelText: AppLocalizations.of(context)!.advanceFirstPaymentShortLabel,
                     ),
                     keyboardType: TextInputType.number,
                     onChanged: (_) => setState(() {}),
@@ -2992,10 +2993,10 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                     Expanded(
                       child: TextFormField(
                         controller: _customerController,
-                        decoration: const InputDecoration(
-                          labelText: 'اسم العميل',
+                        decoration: InputDecoration(
+                          labelText: AppLocalizations.of(context)!.customerNameLabel,
                           isDense: true,
-                          hintText: 'ابحث من أول حرف…',
+                          hintText: AppLocalizations.of(context)!.searchCustomerHint,
                         ),
                         onChanged: (_) {
                           setState(() => _linkedCustomerId = null);
@@ -3044,9 +3045,9 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                   const SizedBox(height: 8),
                   TextFormField(
                     controller: _advanceController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       isDense: true,
-                      labelText: 'المبلغ الواصل (د.ع)',
+                      labelText: AppLocalizations.of(context)!.receivedAmountLabel,
                     ),
                     keyboardType: TextInputType.number,
                     onChanged: (_) => setState(() {}),
@@ -3180,7 +3181,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                                   ),
                               side: BorderSide(color: palette.gold, width: 1.1),
                             ),
-                            child: const Text('الأقصى'),
+                            child: Text(AppLocalizations.of(context)!.maxAction),
                           ),
                         ),
                       ],
@@ -3383,7 +3384,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                               runSpacing: 6,
                               children: [
                                 ActionChip(
-                                  label: const Text('+¼ كغ'),
+                                  label: const Text('+¼ kg'),
                                   onPressed: () => unawaited(
                                     _trySetLineQuantity(
                                       item,
@@ -3392,7 +3393,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                                   ),
                                 ),
                                 ActionChip(
-                                  label: const Text('+½ كغ'),
+                                  label: const Text('+½ kg'),
                                   onPressed: () => unawaited(
                                     _trySetLineQuantity(
                                       item,
@@ -3401,7 +3402,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                                   ),
                                 ),
                                 ActionChip(
-                                  label: const Text('+1 كغ'),
+                                  label: const Text('+1 kg'),
                                   onPressed: () => unawaited(
                                     _trySetLineQuantity(
                                       item,
@@ -3597,7 +3598,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
   void _promptEditQuantity(_InvoiceLineState item) {
     if (item.isService) {
       _showSaleSnackBar(
-        const SnackBar(content: Text('كمية الخدمة ثابتة ولا يمكن تعديلها.')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.serviceQtyFixed)),
       );
       return;
     }
@@ -3607,7 +3608,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       context: context,
       builder: (ctx) {
         return AlertDialog(
-          title: const Text('الكمية'),
+          title: Text(AppLocalizations.of(context)!.quantityDialogTitle),
           content: TextField(
             controller: ctrl,
             keyboardType: const TextInputType.numberWithOptions(
@@ -3635,7 +3636,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
               onPressed: () async {
                 await _applyQuantityFromDialog(ctx, item, ctrl.text);
               },
-              child: const Text('موافق'),
+              child: Text(AppLocalizations.of(context)!.okAction),
             ),
           ],
         );
@@ -3843,7 +3844,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         setState(() => _blockSaleDraftUntilResumeApplied = false);
       }
       _showSaleSnackBar(
-        const SnackBar(content: Text('تعذر العثور على الفاتورة المعلّقة')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.failedToLoadParkedInvoice)),
       );
       return;
     }
@@ -3905,7 +3906,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       setState(() => _blockSaleDraftUntilResumeApplied = false);
       _showSaleSnackBar(
         SnackBar(
-          content: Text('فشل تطبيق الفاتورة المعلّقة: $e'),
+          content: Text(AppLocalizations.of(context)!.failedToApplyParkedInvoice(e.toString())),
           duration: const Duration(seconds: 5),
         ),
       );
@@ -3915,8 +3916,8 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
   Future<void> _parkInvoice() async {
     if (_lines.isEmpty) {
       _showSaleSnackBar(
-        const SnackBar(
-          content: Text('أضف صنفاً واحداً على الأقل لتعليق الفاتورة'),
+        SnackBar(
+          content: Text(AppLocalizations.of(context)!.addAtLeastOneToPark),
         ),
       );
       return;
@@ -3984,7 +3985,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
     } catch (_) {
       if (!mounted) return;
       _showSaleSnackBar(
-        const SnackBar(content: Text('تعذر حفظ الفاتورة المعلّقة')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.failedToLoadParkedInvoice)),
       );
     }
   }
@@ -4076,8 +4077,8 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
   Future<void> _saveInvoice() async {
     if (_lines.isEmpty) {
       _showSaleSnackBar(
-        const SnackBar(
-          content: Text('أضف صنفاً واحداً على الأقل لإتمام البيع'),
+        SnackBar(
+          content: Text(AppLocalizations.of(context)!.addAtLeastOneToSell),
         ),
       );
       return;
@@ -4377,13 +4378,13 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
     } on InvoiceValidationException catch (e) {
       if (mounted) {
         _showSaleSnackBar(
-          SnackBar(content: Text('عدم توازن الفاتورة: ${e.message}')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.invoiceImbalanceError(e.message ?? ''))),
         );
       }
       return;
     } catch (e) {
       if (mounted) {
-        _showSaleSnackBar(SnackBar(content: Text('تعذر حفظ الفاتورة: $e')));
+        _showSaleSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.failedToSaveInvoice(e.toString()))));
       }
       return;
     }
@@ -4556,7 +4557,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
           _showSnackBarViaMessenger(
             messenger,
             SnackBar(
-              content: Text('تم حفظ الفاتورة لكن تعذّر إنشاء خطة التقسيط: $e'),
+              content: Text(AppLocalizations.of(context)!.installmentPlanCreationFailed(e.toString())),
             ),
           );
         }
@@ -4644,8 +4645,8 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
     _resetSaleForNextInvoice();
     _showSnackBarViaMessenger(
       messenger,
-      const SnackBar(
-        content: Text('تم تسجيل الفاتورة وتحديث المخزون والصندوق'),
+      SnackBar(
+        content: Text(AppLocalizations.of(context)!.invoiceSavedSuccess),
       ),
     );
 
@@ -4724,13 +4725,14 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       if (!mounted) return;
       if (inv == null) {
         _showSaleSnackBar(
-          SnackBar(content: Text('لا توجد فاتورة برقم $invId')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.noInvoiceWithIdReturn(invId.toString()))),
         );
         return;
       }
       if (inv.isReturned) {
         _showSaleSnackBar(
           const SnackBar(content: Text('هذه الفاتورة مرتجع مسبقاً')),
+        // TODO: Localize with AppLocalizations
         );
         return;
       }
@@ -4895,7 +4897,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         await showDialog<bool>(
           context: context,
           builder: (_) => AlertDialog(
-            title: const Text('المنتج غير موجود'),
+            title: Text(AppLocalizations.of(context)!.productNotFoundTitle),
             content: const Text(
               'هذا الباركود غير موجود في المنتجات. هل تريد فتح شاشة إضافة منتج جديد؟',
             ),
@@ -4906,7 +4908,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
               ),
               FilledButton(
                 onPressed: () => Navigator.pop(context, true),
-                child: const Text('إضافة منتج'),
+                child: Text(AppLocalizations.of(context)!.addProductAction),
               ),
             ],
           ),
@@ -5226,7 +5228,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                       TextButton.icon(
                         onPressed: () => setState(() => line.pendingColorId = null),
                         icon: const Icon(Icons.arrow_forward, size: 16),
-                        label: const Text('تغيير اللون'),
+                        label: Text(AppLocalizations.of(context)!.changeColorAction),
                       ),
                       const Spacer(),
                       Text(
@@ -5512,8 +5514,8 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       showDialog<void>(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: const Text('إفراغ السلة؟'),
-          content: const Text('سيتم إزالة جميع الأصناف من الفاتورة الحالية.'),
+          title: Text(AppLocalizations.of(context)!.clearCartTitle),
+          content: Text(AppLocalizations.of(context)!.clearCartBody),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx),
@@ -5528,7 +5530,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                   _lastCartAddUndo = null;
                 });
               },
-              child: const Text('إفراغ'),
+              child: Text(AppLocalizations.of(context)!.clearCartAction),
             ),
           ],
         ),
@@ -5546,7 +5548,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
     }
     if (_lines.any((l) => l.isClothingPending)) {
       _showSaleSnackBar(
-        const SnackBar(content: Text('اختر اللون والمقاس لكل الملابس')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.selectColorFirstHint)),
       );
       return;
     }
@@ -5762,7 +5764,7 @@ class _SaleParkInvoiceDialogState extends State<_SaleParkInvoiceDialog> {
                             fontFamily: AppFontFamilies.tajawal,
                           ),
                           decoration: InputDecoration(
-                            labelText: 'اسم للتعريف (يظهر في القائمة)',
+                            labelText: AppLocalizations.of(context)!.parkedInvoiceNameLabel,
                             labelStyle: TextStyle(
                               color: muted,
                               fontFamily: AppFontFamilies.tajawal,

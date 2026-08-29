@@ -10,6 +10,7 @@ import '../../providers/invoice_provider.dart';
 import '../../providers/notification_provider.dart';
 import '../../providers/product_provider.dart';
 import '../../services/database_helper.dart';
+import '../../l10n/generated/app_localizations.dart';
 import '../../theme/app_corner_style.dart';
 import '../../theme/design_tokens.dart';
 import '../../utils/invoice_barcode.dart';
@@ -122,7 +123,7 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
         setState(() {
           _loading = false;
           _loadError =
-              'سندات القبض أو دفع المورد لا تُعالج من شاشة المرتجع.';
+              AppLocalizations.of(context)!.vouchersNotReturnable;
         });
         return;
       }
@@ -143,7 +144,7 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
     if (id == null) {
       setState(() {
         _loading = false;
-        _loadError = 'لا يوجد رقم فاتورة';
+        _loadError = AppLocalizations.of(context)!.noInvoiceNumber;
       });
       return;
     }
@@ -153,14 +154,14 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
       if (inv == null) {
         setState(() {
           _loading = false;
-          _loadError = 'الفاتورة غير موجودة';
+          _loadError = AppLocalizations.of(context)!.invoiceNotFoundReturn;
         });
         return;
       }
       if (inv.isReturned) {
         setState(() {
           _loading = false;
-          _loadError = 'هذه الفاتورة مسجّلة كمرتجع مسبقاً';
+          _loadError = AppLocalizations.of(context)!.alreadyReturnedReturn;
         });
         return;
       }
@@ -170,7 +171,7 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
         setState(() {
           _loading = false;
           _loadError =
-              'سندات القبض أو دفع المورد لا تُعالج من شاشة المرتجع.';
+              AppLocalizations.of(context)!.vouchersNotReturnable;
         });
         return;
       }
@@ -293,25 +294,27 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
   }
 
   String _paymentLabel(InvoiceType t) {
+    final loc = AppLocalizations.of(context)!;
     switch (t) {
       case InvoiceType.cash:
-        return 'نقدي';
+        return loc.cashPaymentType;
       case InvoiceType.credit:
-        return 'دين (آجل)';
+        return loc.creditPaymentTypeLabel;
       case InvoiceType.installment:
-        return 'تقسيط';
+        return loc.installmentPaymentTypeLabel;
       case InvoiceType.delivery:
-        return 'توصيل';
+        return loc.deliveryPaymentType;
       case InvoiceType.debtCollection:
-        return 'سند تحصيل دين';
+        return loc.debtCollectionType;
       case InvoiceType.installmentCollection:
-        return 'سند تسديد قسط';
+        return loc.installmentCollectionType;
       case InvoiceType.supplierPayment:
-        return 'سند دفع مورد';
+        return loc.supplierPaymentTypeLabel;
     }
   }
 
   String _refundHint(InvoiceType t) {
+    final loc = AppLocalizations.of(context)!;
     switch (t) {
       case InvoiceType.cash:
       case InvoiceType.delivery:
@@ -323,7 +326,7 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
       case InvoiceType.credit:
         return 'يُسجَّل المرتجع كفاتورة مرتبطة بالأصل؛ راجع قائمة الفواتير لحالة الدين.';
       case InvoiceType.supplierPayment:
-        return 'لا يُستعمل لهذا النوع.';
+        return loc.notApplicableForType;
     }
   }
 
@@ -332,7 +335,7 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
     if (o == null || o.id == null) return;
     if (_refundTotal <= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('اختر كمية إرجاع واحدة على الأقل')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.selectAtLeastOneReturnQty)),
       );
       return;
     }
@@ -357,9 +360,7 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                'تم إرجاع "${l.productName}" في فاتورة أخرى منذ فتح هذه الشاشة. '
-                'المتبقي القابل للإرجاع: ${_formatReturnQty(freshMax)}. '
-                'أعِد تحميل الشاشة وحاول مجدداً.',
+                AppLocalizations.of(context)!.returnedInOtherInvoice(l.productName, _formatReturnQty(freshMax)),
               ),
               duration: const Duration(seconds: 6),
             ),
@@ -436,7 +437,7 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'تم تسجيل المرتجع #$newId ← مرتبط صراحة بالفاتورة الأصلية #${o.id}. ${_refundSnack(o.type)}',
+            AppLocalizations.of(context)!.returnRecordedSuccess(newId.toString(), o.id.toString(), _refundSnack(o.type)),
           ),
           duration: const Duration(seconds: 5),
         ),
@@ -445,7 +446,7 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('تعذر الحفظ: $e')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.returnSaveFailed(e.toString()))),
       );
     }
   }
@@ -500,15 +501,15 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
     final id = tryParseInvoiceIdFromBarcode(raw);
     if (id == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('للمرتجع استخدم باركود الفاتورة فقط (مثل INV-12)'),
+        SnackBar(
+          content: Text(AppLocalizations.of(context)!.returnUseBarcodeOnly),
         ),
       );
       return;
     }
     if (id == _original?.id) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('هذه هي نفس الفاتورة المعروضة')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.sameInvoiceDisplayed)),
       );
       return;
     }
@@ -516,13 +517,13 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
     if (!mounted) return;
     if (inv == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('لا توجد فاتورة برقم $id')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.noInvoiceWithIdReturn(id.toString()))),
       );
       return;
     }
     if (inv.isReturned) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('فاتورة مرتجعة مسبقاً')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.alreadyReturnedInvoiceReturn)),
       );
       return;
     }
@@ -534,11 +535,11 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
             return AlertDialog(
               shape: RoundedRectangleBorder(borderRadius: ac.lg),
               title: Text(
-                'الانتقال إلى فاتورة #$id؟',
+                AppLocalizations.of(context)!.navigateToInvoiceTitle(id.toString()),
                 style: TextStyle(color: cs.onSurface, fontWeight: FontWeight.w800),
               ),
               content: Text(
-                'سيتم استبدال المنتجات المعروضة بفاتورة أخرى.',
+                AppLocalizations.of(context)!.navigateToInvoiceBody,
                 style: TextStyle(
                   color: cs.onSurfaceVariant,
                   height: 1.4,
@@ -547,11 +548,11 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(ctx, false),
-                  child: const Text('إلغاء'),
+                  child: Text(AppLocalizations.of(context)!.cancelAction),
                 ),
                 FilledButton(
                   onPressed: () => Navigator.pop(ctx, true),
-                  child: const Text('موافق'),
+                  child: Text(AppLocalizations.of(context)!.okAction),
                 ),
               ],
             );
@@ -596,7 +597,7 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
         textDirection: TextDirection.rtl,
         child: Scaffold(
           backgroundColor: scheme.surface,
-          appBar: _returnAppBar(context, 'مرتجع'),
+          appBar: _returnAppBar(context, AppLocalizations.of(context)!.returnScreenTitle),
           body: Center(
             child: CircularProgressIndicator(
               color: scheme.primary,
@@ -611,7 +612,7 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
         textDirection: TextDirection.rtl,
         child: Scaffold(
           backgroundColor: scheme.surface,
-          appBar: _returnAppBar(context, 'مرتجع'),
+          appBar: _returnAppBar(context, AppLocalizations.of(context)!.returnScreenTitle),
           body: Center(
             child: Padding(
               padding: const EdgeInsets.all(24),
@@ -673,7 +674,7 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
         backgroundColor: scheme.surface,
         appBar: _returnAppBar(
           context,
-          'مرتجع — فاتورة #${o.id}',
+          AppLocalizations.of(context)!.returnInvoiceTitle(o.id.toString()),
         ),
         body: Column(
           children: [
@@ -872,8 +873,7 @@ class _FullyReturnedBanner extends StatelessWidget {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              'تم إرجاع جميع بنود الفاتورة #$invoiceId بالكامل في فواتير '
-              'مرتجع سابقة. لا يوجد ما يمكن إرجاعه إضافياً من هذه الفاتورة.',
+              AppLocalizations.of(context)!.allItemsReturnedBanner(invoiceId.toString()),
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
@@ -911,7 +911,7 @@ class _LinesEmptyState extends StatelessWidget {
             ),
             const SizedBox(height: 14),
             Text(
-              'لا توجد أصناف في هذه الفاتورة',
+              AppLocalizations.of(context)!.noItemsInInvoice,
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w700,
@@ -921,8 +921,7 @@ class _LinesEmptyState extends StatelessWidget {
             ),
             const SizedBox(height: 6),
             Text(
-              'تأكّد من رقم الفاتورة، أو استعمل حقل تبديل الباركود لاختيار '
-              'فاتورة أخرى تحتوي بنوداً قابلة للإرجاع.',
+              AppLocalizations.of(context)!.noItemsInInvoiceHint,
               style: TextStyle(
                 fontSize: 12.5,
                 height: 1.5,
@@ -969,7 +968,7 @@ class _ItemsHeader extends StatelessWidget {
           const SizedBox(width: 8),
           Expanded(
             child: Text(
-              'الأصناف — اختر كمية الإرجاع',
+              AppLocalizations.of(context)!.itemsSelectReturnQty,
               style: TextStyle(
                 fontWeight: FontWeight.w800,
                 fontSize: 15,
@@ -980,7 +979,7 @@ class _ItemsHeader extends StatelessWidget {
           TextButton.icon(
             onPressed: allMaxed ? null : onFullReturn,
             icon: const Icon(Icons.select_all_rounded, size: 18),
-            label: const Text('إرجاع كامل'),
+            label: Text(AppLocalizations.of(context)!.fullReturnAction),
             style: TextButton.styleFrom(
               foregroundColor: AppSemanticColors.danger,
               padding: const EdgeInsets.symmetric(
@@ -1093,7 +1092,7 @@ class _OriginalInvoiceCard extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
-                  'الفاتورة الأصلية #${invoice.id}',
+                  AppLocalizations.of(context)!.originalInvoiceHashLabel(invoice.id.toString()),
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
                     fontSize: 16,
@@ -1123,7 +1122,7 @@ class _OriginalInvoiceCard extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            'التاريخ: ${dateFormat.format(invoice.date)}',
+            AppLocalizations.of(context)!.dateLabelReturn(dateFormat.format(invoice.date)),
             style: TextStyle(
               fontSize: 13,
               color: scheme.onSurfaceVariant,
@@ -1132,7 +1131,7 @@ class _OriginalInvoiceCard extends StatelessWidget {
           if (invoice.customerName.trim().isNotEmpty) ...[
             const SizedBox(height: 4),
             Text(
-              'العميل: ${invoice.customerName}',
+              AppLocalizations.of(context)!.customerLabelReturn(invoice.customerName),
               style: TextStyle(
                 fontSize: 13,
                 color: scheme.onSurface,
@@ -1143,7 +1142,7 @@ class _OriginalInvoiceCard extends StatelessWidget {
               invoice.createdByUserName!.trim().isNotEmpty) ...[
             const SizedBox(height: 4),
             Text(
-              'بائع أصلي: ${invoice.createdByUserName}',
+              AppLocalizations.of(context)!.originalSellerLabel(invoice.createdByUserName!),
               style: TextStyle(
                 fontSize: 12,
                 color: scheme.onSurfaceVariant,
@@ -1156,7 +1155,7 @@ class _OriginalInvoiceCard extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.only(top: 4),
                 child: Text(
-                  'المُسجِّل الآن: ${u.isEmpty ? '—' : u}',
+                  AppLocalizations.of(context)!.currentRecorderLabel(u.isEmpty ? '—' : u),
                   style: TextStyle(
                     fontSize: 12,
                     color: scheme.onSurfaceVariant,
@@ -1237,7 +1236,7 @@ class _ReturnLineCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      line.productName.isEmpty ? 'صنف' : line.productName,
+                      line.productName.isEmpty ? AppLocalizations.of(context)!.itemFallback : line.productName,
                       style: TextStyle(
                         fontWeight: FontWeight.w800,
                         fontSize: 15,
@@ -1246,14 +1245,14 @@ class _ReturnLineCard extends StatelessWidget {
                     ),
                   ),
                   if (isFullyReturned)
-                    const _LineStatusBadge(
-                      label: 'مُرجَع بالكامل',
+                    _LineStatusBadge(
+                      label: AppLocalizations.of(context)!.fullyReturnedBadge,
                       color: AppSemanticColors.success,
                       icon: Icons.check_circle_rounded,
                     )
                   else if (hasPriorReturns)
-                    const _LineStatusBadge(
-                      label: 'مُرجَع جزئياً',
+                    _LineStatusBadge(
+                      label: AppLocalizations.of(context)!.partiallyReturnedBadge,
                       color: AppSemanticColors.warning,
                       icon: Icons.history_rounded,
                     ),
@@ -1261,7 +1260,7 @@ class _ReturnLineCard extends StatelessWidget {
               ),
               const SizedBox(height: 6),
               Text(
-                'المباع: ${formatQty(line.soldEnteredQty)} × ${IraqiCurrencyFormat.formatIqd(line.unitPrice)}',
+                AppLocalizations.of(context)!.soldQtyTimesPrice(formatQty(line.soldEnteredQty), IraqiCurrencyFormat.formatIqd(line.unitPrice)),
                 style: TextStyle(
                   fontSize: 12.5,
                   color: scheme.onSurfaceVariant,
@@ -1270,8 +1269,7 @@ class _ReturnLineCard extends StatelessWidget {
               if (hasPriorReturns) ...[
                 const SizedBox(height: 4),
                 Text(
-                  'مُرجَع سابقاً: ${formatQty(line.alreadyReturnedEnteredQty)}'
-                  '   •   المتبقي: ${formatQty(line.maxReturnableEnteredQty)}',
+                  AppLocalizations.of(context)!.previouslyReturnedRemaining(formatQty(line.alreadyReturnedEnteredQty), formatQty(line.maxReturnableEnteredQty)),
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -1285,7 +1283,7 @@ class _ReturnLineCard extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'كمية الإرجاع',
+                    AppLocalizations.of(context)!.returnQuantityLabel,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 13,
@@ -1475,7 +1473,7 @@ class _ReturnSummaryPanel extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      'ملخص المرتجع',
+                      AppLocalizations.of(context)!.returnSummaryTitle,
                       style: TextStyle(
                         fontWeight: FontWeight.w800,
                         fontSize: 16,
@@ -1485,12 +1483,12 @@ class _ReturnSummaryPanel extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 10),
-                _SummaryRow(label: 'مجموع الأسطر', value: gross),
-                _SummaryRow(label: 'خصم نسبة الفاتورة', value: discount),
-                _SummaryRow(label: 'حصة الضريبة', value: tax),
+                _SummaryRow(label: AppLocalizations.of(context)!.linesSubtotalLabel, value: gross),
+                _SummaryRow(label: AppLocalizations.of(context)!.invoiceDiscountShareLabel, value: discount),
+                _SummaryRow(label: AppLocalizations.of(context)!.taxShareLabel, value: tax),
                 Divider(height: 20, color: scheme.outlineVariant),
                 _SummaryRow(
-                  label: 'المبلغ المسترد للعميل',
+                  label: AppLocalizations.of(context)!.refundAmountLabel,
                   value: refund,
                   strong: true,
                 ),
@@ -1513,8 +1511,8 @@ class _ReturnSummaryPanel extends StatelessWidget {
             child: FilledButton.icon(
               onPressed: canSubmit ? onSubmit : null,
               icon: const Icon(Icons.assignment_turned_in_rounded),
-              label: const Text(
-                'تأكيد المرتجع',
+              label: Text(
+                AppLocalizations.of(context)!.confirmReturnAction,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,

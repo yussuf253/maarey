@@ -3787,4 +3787,588 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get saveChangesBtn => 'حفظ التعديلات';
+
+  @override
+  String invoiceNumber(Object number) {
+    return 'فاتورة #$number';
+  }
+
+  @override
+  String get closeTooltip => 'إغلاق';
+
+  @override
+  String get customerLabel => 'العميل';
+
+  @override
+  String get dateLabel => 'التاريخ';
+
+  @override
+  String get invoiceTypeLabel => 'نوع الفاتورة';
+
+  @override
+  String get recordedByLabel => 'سجّلها';
+
+  @override
+  String get customerIdLabel => 'معرّف العميل';
+
+  @override
+  String get returnStatusLabel => 'مرتجع';
+
+  @override
+  String get originalInvoiceLabel => 'فاتورة الأصل';
+
+  @override
+  String get deliveryAddressLabel => 'عنوان التوصيل';
+
+  @override
+  String get discountPercentLabel => 'نسبة الخصم %';
+
+  @override
+  String get noItemsLabel => 'لا توجد بنود';
+
+  @override
+  String quantityTimesPrice(Object price, Object qty) {
+    return '$qty × $price د.ع';
+  }
+
+  @override
+  String get itemsSubtotalLabel => 'مجموع البنود';
+
+  @override
+  String get invoiceDiscountLabel => 'خصم الفاتورة';
+
+  @override
+  String get loyaltyDiscountLabel => 'خصم الولاء';
+
+  @override
+  String get redeemedPointsLabel => 'نقاط مُستبدَلة';
+
+  @override
+  String get earnedPointsLabel => 'نقاط مُكتسبة';
+
+  @override
+  String get taxLabel => 'الضريبة';
+
+  @override
+  String get advanceFirstPaymentLabel => 'المقدم / الدفعة الأولى';
+
+  @override
+  String get interestInfoSavedAtSale => 'معلومات الفائدة (محفوظة عند البيع)';
+
+  @override
+  String get interestRatePercent => 'نسبة الفائدة %';
+
+  @override
+  String get monthsCountLabel => 'عدد الأشهر';
+
+  @override
+  String get financedAmountLabel => 'المبلغ المموّل';
+
+  @override
+  String get interestValueLabel => 'قيمة الفائدة';
+
+  @override
+  String get totalWithInterestLabel => 'الإجمالي مع الفائدة';
+
+  @override
+  String get suggestedMonthlyInstallment => 'القسط الشهري المقترح';
+
+  @override
+  String get selectInvoicePrompt => 'اختر فاتورة لعرض تفاصيلها';
+
+  @override
+  String get invoiceNotFoundMsg => 'الفاتورة غير موجودة';
+
+  @override
+  String get iqdCurrency => 'د.ع';
+
+  @override
+  String get customerNameLabel => 'اسم العميل';
+
+  @override
+  String get saleTitle => 'البيع';
+
+  @override
+  String get parkInvoiceTooltip => 'تعليق الفاتورة';
+
+  @override
+  String get insufficientStockForUnit => 'لا يتوفر مخزون كافٍ لهذه الوحدة.';
+
+  @override
+  String qtyAdjustedToStock(Object qty) {
+    return 'تم ضبط الكمية إلى $qty بسبب حد المخزون المتاح.';
+  }
+
+  @override
+  String serviceAlreadyAdded(Object name) {
+    return 'الخدمة مضافة بالفعل: $name';
+  }
+
+  @override
+  String quantityIncreased(Object name) {
+    return 'تمت زيادة الكمية: $name';
+  }
+
+  @override
+  String get serviceQtyFixed => 'كمية الخدمة ثابتة ولا يمكن تعديلها.';
+
+  @override
+  String get okAction => 'موافق';
+
+  @override
+  String get addAtLeastOneToSell => 'أضف صنفاً واحداً على الأقل لإتمام البيع';
+
+  @override
+  String get addAtLeastOneToPark =>
+      'أضف صنفاً واحداً على الأقل لتعليق الفاتورة';
+
+  @override
+  String get fillRequiredFields =>
+      'أكمل الحقول المطلوبة: للدين أو التقسيط أدخل اسم العميل، وللتوصيل أدخل اسم العميل وعنوان التوصيل.';
+
+  @override
+  String get paymentTypeNotAllowed =>
+      'طريقة الدفع الحالية غير مسموحة — راجع الفواتير إعدادات نقطة البيع أو اختر نقدي.';
+
+  @override
+  String discountExceedsMax(Object limit) {
+    return 'نسبة الخصم أعلى من المسموح. الحد الأقصى $limit%';
+  }
+
+  @override
+  String get creditInstallmentNeedCustomer =>
+      'للمبيع بالدين أو التقسيط: اختر عميلاً مسجّلاً من القائمة المقترحة أسفل حقل الاسم (أو أضفه من العملاء أولاً).';
+
+  @override
+  String get loyaltyRedeemNeedCustomer =>
+      'لاستبدال النقاط اختر العميل من القائمة أو أدخل اسماً يطابق سجلاً واحداً في العملاء.';
+
+  @override
+  String installmentMinAdvanceError(Object amount, Object percent) {
+    return 'بيع التقسيط: المقدّم يجب ألا يقل عن $percent% من إجمالي الفاتورة ($amount).';
+  }
+
+  @override
+  String invoiceDebtCapExceeded(Object limit, Object remaining) {
+    return 'حد الدين للفاتورة: المتبقي ($remaining) يتجاوز السقف ($limit).';
+  }
+
+  @override
+  String customerDebtCapExceeded(Object adding, Object existing, Object limit) {
+    return 'حد الدين للعميل: مجموع المتبقي الحالي ≈ $existing، والفاتورة تضيف $adding (يتجاوز $limit).';
+  }
+
+  @override
+  String failedToSaveInvoice(Object error) {
+    return 'تعذر حفظ الفاتورة: $error';
+  }
+
+  @override
+  String invoiceImbalanceError(Object error) {
+    return 'عدم توازن الفاتورة: $error';
+  }
+
+  @override
+  String invoiceBalanceError(Object error) {
+    return 'تعذر الحفظ — $error. راجع الأصناف والإجمالي قبل إعادة المحاولة.';
+  }
+
+  @override
+  String get serviceOrderUpdateFailed =>
+      'تنبيه: حُفظت الفاتورة ولكن تعذر تلقائياً تحديث حالة تذكرة الصيانة. يرجى مراجعتها يدوياً.';
+
+  @override
+  String installmentPlanCreationFailed(Object error) {
+    return 'تم حفظ الفاتورة لكن تعذّر إنشاء خطة التقسيط: $error';
+  }
+
+  @override
+  String get invoiceSavedWithPlan =>
+      'تم حفظ الفاتورة وإنشاء خطة التقسيط — يمكنك ضبط الجدول';
+
+  @override
+  String get installmentFullyPaid =>
+      'تم حفظ فاتورة التقسيط وربطها بخطة (لا أقساط متبقية لأن المبلغ محصّل بالكامل).';
+
+  @override
+  String get invoiceSavedSuccess => 'تم تسجيل الفاتورة وتحديث المخزون والصندوق';
+
+  @override
+  String get failedToLoadParkedInvoice => 'تعذر العثور على الفاتورة المعلّقة';
+
+  @override
+  String failedToApplyParkedInvoice(Object error) {
+    return 'فشل تطبيق الفاتورة المعلّقة: $error';
+  }
+
+  @override
+  String get clearCartTitle => 'إفراغ السلة؟';
+
+  @override
+  String get clearCartBody => 'سيتم إزالة جميع الأصناف من الفاتورة الحالية.';
+
+  @override
+  String get clearCartAction => 'إفراغ';
+
+  @override
+  String get returnDialogAction => 'مرتجع';
+
+  @override
+  String get productNotFoundTitle => 'المنتج غير موجود';
+
+  @override
+  String get productNotFoundBody =>
+      'هذا الباركود غير موجود في المنتجات. هل تريد فتح شاشة إضافة منتج جديد؟';
+
+  @override
+  String get addProductAction => 'إضافة منتج';
+
+  @override
+  String productAddedSnack(Object name) {
+    return 'تمت إضافة المنتج: $name';
+  }
+
+  @override
+  String get searchCustomerHint => 'ابحث من أول حرف…';
+
+  @override
+  String get addNewCustomerTooltip => 'إضافة عميل جديد دون مغادرة البيع';
+
+  @override
+  String get discountOnTotalSaleLabel => 'نسبة الخصم على إجمالي البيع %';
+
+  @override
+  String discountPercentHelper(Object limit) {
+    return 'الحد الأقصى المسموح: $limit٪ — يُحسب من أدنى سعر لكل صنف';
+  }
+
+  @override
+  String get taxSectionLabel => 'الضريبة';
+
+  @override
+  String get taxDescription =>
+      'أدخل مبلغ الضريبة بالدينار إن وُجد؛ يُضاف إلى المجموع بعد خصم الفاتورة.';
+
+  @override
+  String get taxAmountLabel => 'مبلغ الضريبة (د.ع)';
+
+  @override
+  String get discountSectionLabel => 'خصم الفاتورة';
+
+  @override
+  String get advanceDownPaymentLabel => 'المقدّم / الدفعة الأولى (د.ع)';
+
+  @override
+  String get advancePaymentHelper =>
+      'يُخصم من الإجمالي قبل حساب الفائدة والقسط';
+
+  @override
+  String get installmentInterestLabel => 'فائدة على المبلغ المراد تقسيطه';
+
+  @override
+  String get interestRateHelper => 'نسبة من المبلغ بعد المقدّم';
+
+  @override
+  String get numberOfMonthsLabel => 'عدد الأشهر';
+
+  @override
+  String get receivedAmountLabel => 'المبلغ الواصل (د.ع)';
+
+  @override
+  String get advanceDescription =>
+      'يُحسب على الإجمالي بعد المقدّم. للمراجعة مع العميل — لا يُضاف للفاتورة إلا إذا رفعت الأسعار يدوياً.';
+
+  @override
+  String get priceSummaryCaptionNoDiscount =>
+      'نتيجة الأرقام والدفعة الأولى إن وُجدت، قبل الانتقال لبيانات العميل.';
+
+  @override
+  String get priceSummaryCaptionWithDiscount =>
+      'نتيجة الأرقام بعد الخصم والضريبة، والدفعة الأولى إن وُجدت، قبل الانتقال لبيانات العميل.';
+
+  @override
+  String get financedAmountBasis => 'المبلغ بعد المقدّم (أساس التقسيط)';
+
+  @override
+  String get parkedInvoiceDialogHint =>
+      'يُحفظ محلياً على هذا الجهاز. يمكنك استئناف البيع لاحقاً من الفواتير معلّقة مؤقتاً.';
+
+  @override
+  String get parkedInvoiceNameLabel => 'اسم للتعريف (يظهر في القائمة)';
+
+  @override
+  String get saveParkingAction => 'حفظ التعليق';
+
+  @override
+  String get quantityDialogTitle => 'الكمية';
+
+  @override
+  String get maxAction => 'الأقصى';
+
+  @override
+  String get changeColorAction => 'تغيير اللون';
+
+  @override
+  String get filterListHint => 'تصفية القائمة…';
+
+  @override
+  String get sizesLabel => 'المقاسات';
+
+  @override
+  String get selectColorFirstHint => 'اختر لوناً أولاً لإظهار المقاسات.';
+
+  @override
+  String priceMinLine(Object min, Object price) {
+    return 'سعر $price · أدنى $min';
+  }
+
+  @override
+  String itemTotalLine(Object total) {
+    return 'الإجمالي: $total';
+  }
+
+  @override
+  String get parkedInvoiceUpdated => 'تم تحديث الفاتورة المعلّقة';
+
+  @override
+  String get parkedInvoiceCreated =>
+      'تم تعليق الفاتورة — يمكنك استئنافها من قائمة الفواتير';
+
+  @override
+  String get barcodeScanTitle => 'باركود صنف أو فاتورة للمرتجع';
+
+  @override
+  String get productFallback => 'منتج';
+
+  @override
+  String get colorLabel => 'لون';
+
+  @override
+  String get colorSizeFallback => 'لون/مقاس';
+
+  @override
+  String get sizeFallback => 'مقاس';
+
+  @override
+  String get unitFallback => 'وحدة';
+
+  @override
+  String get pieceUnitFallback => 'قطعة';
+
+  @override
+  String availableQtyChipLabel(Object qty) {
+    return 'المتاح: $qty';
+  }
+
+  @override
+  String get cashDiscountNote => 'خُصم من الصندوق.';
+
+  @override
+  String get installmentDiscountNote => 'خُصم من إجمالي التقسيط.';
+
+  @override
+  String get returnScreenTitle => 'مرتجع';
+
+  @override
+  String returnInvoiceTitle(Object id) {
+    return 'مرتجع — فاتورة #$id';
+  }
+
+  @override
+  String get vouchersNotReturnable =>
+      'سندات القبض أو دفع المورد لا تُعالج من شاشة المرتجع.';
+
+  @override
+  String get noInvoiceNumber => 'لا يوجد رقم فاتورة';
+
+  @override
+  String get invoiceNotFoundReturn => 'الفاتورة غير موجودة';
+
+  @override
+  String get alreadyReturnedReturn => 'هذه الفاتورة مسجّلة كمرتجع مسبقاً';
+
+  @override
+  String get cashPaymentType => 'نقدي';
+
+  @override
+  String get creditPaymentTypeLabel => 'دين (آجل)';
+
+  @override
+  String get installmentPaymentTypeLabel => 'تقسيط';
+
+  @override
+  String get deliveryPaymentType => 'توصيل';
+
+  @override
+  String get debtCollectionType => 'سند تحصيل دين';
+
+  @override
+  String get installmentCollectionType => 'سند تسديد قسط';
+
+  @override
+  String get supplierPaymentTypeLabel => 'سند دفع مورد';
+
+  @override
+  String get cashReturnHint => 'يُسجَّل خروجاً من الصندوق بنفس المبلغ.';
+
+  @override
+  String get installmentReturnHint =>
+      'يُحدَّث إجمالي خطة التقسيط المرتبطة بهذه الفاتورة؛ ويُسجَّل خروج نقدي إن وُجد مقدم يُسترد.';
+
+  @override
+  String get creditReturnHintLabel =>
+      'يُسجَّل المرتجع كفاتورة مرتبطة بالأصل؛ راجع قائمة الفواتير لحالة الدين.';
+
+  @override
+  String get notApplicableForType => 'لا يُستعمل لهذا النوع.';
+
+  @override
+  String get selectAtLeastOneReturnQty => 'اختر كمية إرجاع واحدة على الأقل';
+
+  @override
+  String returnSaveFailed(Object error) {
+    return 'تعذر الحفظ: $error';
+  }
+
+  @override
+  String get returnUseBarcodeOnly =>
+      'للمرتجع استخدم باركود الفاتورة فقط (مثل INV-12)';
+
+  @override
+  String get sameInvoiceDisplayed => 'هذه هي نفس الفاتورة المعروضة';
+
+  @override
+  String noInvoiceWithIdReturn(Object id) {
+    return 'لا توجد فاتورة برقم $id';
+  }
+
+  @override
+  String get alreadyReturnedInvoiceReturn => 'فاتورة مرتجعة مسبقاً';
+
+  @override
+  String navigateToInvoiceTitle(Object id) {
+    return 'الانتقال إلى فاتورة #$id؟';
+  }
+
+  @override
+  String get navigateToInvoiceBody =>
+      'سيتم استبدال المنتجات المعروضة بفاتورة أخرى.';
+
+  @override
+  String allItemsReturnedBanner(Object id) {
+    return 'تم إرجاع جميع بنود الفاتورة #$id بالكامل في فواتير مرتجع سابقة. لا يوجد ما يمكن إرجاعه إضافياً.';
+  }
+
+  @override
+  String get noItemsInInvoice => 'لا توجد أصناف في هذه الفاتورة';
+
+  @override
+  String get noItemsInInvoiceHint =>
+      'تأكّد من رقم الفاتورة، أو استعمل حقل تبديل الباركود لاختيار فاتورة أخرى.';
+
+  @override
+  String get itemsSelectReturnQty => 'الأصناف — اختر كمية الإرجاع';
+
+  @override
+  String get fullReturnAction => 'إرجاع كامل';
+
+  @override
+  String get switchInvoiceHint => 'تبديل الفاتورة (INV-رقم)';
+
+  @override
+  String get scanReceiptBarcodeHint => 'امسح باركود إيصال آخر ثم Enter';
+
+  @override
+  String originalInvoiceHashLabel(Object id) {
+    return 'الفاتورة الأصلية #$id';
+  }
+
+  @override
+  String dateLabelReturn(Object date) {
+    return 'التاريخ: $date';
+  }
+
+  @override
+  String customerLabelReturn(Object name) {
+    return 'العميل: $name';
+  }
+
+  @override
+  String originalSellerLabel(Object name) {
+    return 'بائع أصلي: $name';
+  }
+
+  @override
+  String currentRecorderLabel(Object name) {
+    return 'المُسجِّل الآن: $name';
+  }
+
+  @override
+  String get fullyReturnedBadge => 'مُرجَع بالكامل';
+
+  @override
+  String get partiallyReturnedBadge => 'مُرجَع جزئياً';
+
+  @override
+  String soldQtyTimesPrice(Object price, Object qty) {
+    return 'المباع: $qty × $price';
+  }
+
+  @override
+  String previouslyReturnedRemaining(Object remaining, Object returned) {
+    return 'مُرجَع سابقاً: $returned • المتبقي: $remaining';
+  }
+
+  @override
+  String get returnQuantityLabel => 'كمية الإرجاع';
+
+  @override
+  String get returnSummaryTitle => 'ملخص المرتجع';
+
+  @override
+  String get linesSubtotalLabel => 'مجموع الأسطر';
+
+  @override
+  String get invoiceDiscountShareLabel => 'خصم نسبة الفاتورة';
+
+  @override
+  String get taxShareLabel => 'حصة الضريبة';
+
+  @override
+  String get refundAmountLabel => 'المبلغ المسترد للعميل';
+
+  @override
+  String get confirmReturnAction => 'تأكيد المرتجع';
+
+  @override
+  String returnedInOtherInvoice(Object name, Object qty) {
+    return 'تم إرجاع \"$name\" في فاتورة أخرى منذ فتح هذه الشاشة. المتبقي: $qty. أعِد تحميل الشاشة وحاول مجدداً.';
+  }
+
+  @override
+  String returnRecordedSuccess(Object hint, Object id, Object originalId) {
+    return 'تم تسجيل المرتجع #$id ← مرتبط بالفاتورة الأصلية #$originalId. $hint';
+  }
+
+  @override
+  String get deleteReturnTitle => 'حذف المرتجع؟';
+
+  @override
+  String get deleteReturnConfirm => 'هل أنت متأكد من حذف هذا المرتجع؟';
+
+  @override
+  String get amountDueLabel => 'المبلغ المستحق (د.ع)';
+
+  @override
+  String get discountOnTotalSaleTitle => 'خصم الفاتورة';
+
+  @override
+  String get advanceFirstPaymentShortLabel => 'المقدم';
+
+  @override
+  String get parkingInvoiceTitle => 'تعليق الفاتورة';
+
+  @override
+  String get parkedInvoiceSnackbarHint =>
+      'يُحفظ محلياً. يمكنك الاستئناف من الفواتير معلّقة.';
 }
