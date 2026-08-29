@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../services/inventory_repository.dart';
 import '../../services/permission_service.dart';
 import '../../utils/iraqi_currency_format.dart';
@@ -54,6 +55,7 @@ class WarehousesScreen extends StatefulWidget {
 }
 
 class _WarehousesScreenState extends State<WarehousesScreen> {
+  AppLocalizations get loc => AppLocalizations.of(context)!;
   final _search = TextEditingController();
   final _searchFocus = FocusNode();
   final _repo = InventoryRepository();
@@ -102,7 +104,7 @@ class _WarehousesScreenState extends State<WarehousesScreen> {
       if (!mounted) return;
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('تعذر تحميل المستودعات: $e')));
+      ).showSnackBar(SnackBar(content: Text(loc.whFailedToLoad(e.toString()))));
     } finally {
       if (mounted) setState(() => _loading = false);
     }
@@ -199,8 +201,8 @@ class _WarehousesScreenState extends State<WarehousesScreen> {
     }
 
     String successMessage() {
-      if (!outcome.wasCreate) return 'تم حفظ التعديلات بنجاح';
-      final buf = StringBuffer('تم إنشاء المستودع بنجاح');
+      if (!outcome.wasCreate) return loc.whEditsSavedSuccess;
+      final buf = StringBuffer(loc.whCreatedSuccess);
       final first = outcome.firstWarehouseInfo;
       if (first != null && first.isNotEmpty) {
         buf.writeln();
@@ -209,7 +211,7 @@ class _WarehousesScreenState extends State<WarehousesScreen> {
       final code = outcome.generatedCodeDisplay;
       if (code != null && code.isNotEmpty) {
         buf.writeln();
-        buf.write('الكود: $code');
+        buf.write(loc.whCodeLabel(code));
       }
       return buf.toString();
     }
@@ -223,17 +225,17 @@ class _WarehousesScreenState extends State<WarehousesScreen> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('حذف المستودع'),
-        content: Text('هل أنت متأكد من حذف المستودع «${w['name']}»؟'),
+        title: Text(loc.whDeleteTitle),
+        content: Text(loc.whDeleteConfirm(w['name']?.toString() ?? '')),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('إلغاء'),
+            child: Text(loc.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
             style: TextButton.styleFrom(foregroundColor: _red),
-            child: const Text('حذف'),
+            child: Text(loc.whDeleteAction),
           ),
         ],
       ),
@@ -246,7 +248,7 @@ class _WarehousesScreenState extends State<WarehousesScreen> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('تعذر حذف المستودع (قد يكون مرتبطا بحركات): $e'),
+          content: Text(loc.whDeleteFailed(e.toString())),
           backgroundColor: _red,
         ),
       );
@@ -260,18 +262,16 @@ class _WarehousesScreenState extends State<WarehousesScreen> {
       final ok = await showDialog<bool>(
         context: context,
         builder: (_) => AlertDialog(
-          title: const Text('تعطيل المستودع'),
-          content: const Text(
-            'لن يُستخدم هذا المستودع في عمليات البيع والشراء حتى يُفعَّل من جديد.',
-          ),
+          title: Text(loc.whDeactivateTitle),
+          content: Text(loc.whDeactivateContent),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context, false),
-              child: const Text('إلغاء'),
+              child: Text(loc.cancel),
             ),
             TextButton(
               onPressed: () => Navigator.pop(context, true),
-              child: const Text('تعطيل'),
+              child: Text(loc.whDeactivateAction),
             ),
           ],
         ),
@@ -284,7 +284,7 @@ class _WarehousesScreenState extends State<WarehousesScreen> {
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('تعذر تحديث الحالة: $e'), backgroundColor: _red),
+        SnackBar(content: Text(loc.whStatusUpdateFailed(e.toString())), backgroundColor: _red),
       );
     }
   }
@@ -307,7 +307,7 @@ class _WarehousesScreenState extends State<WarehousesScreen> {
         child: Scaffold(
           backgroundColor: _bg,
           appBar: AppBar(
-            title: const Text('المستودعات'),
+            title: Text(loc.whScreenTitle),
             backgroundColor: _navy,
             foregroundColor: Colors.white,
           ),
@@ -315,8 +315,7 @@ class _WarehousesScreenState extends State<WarehousesScreen> {
             backgroundColor: _teal,
             onPressed: () => _openSheet(null),
             icon: const Icon(Icons.add_rounded, color: Colors.white),
-            label: const Text(
-              'مستودع جديد',
+            label: Text(loc.whNewWarehouse,
               style: TextStyle(color: Colors.white),
             ),
           ),
@@ -329,7 +328,7 @@ class _WarehousesScreenState extends State<WarehousesScreen> {
                   children: [
                     _StatSummaryCard(
                       accent: _blue,
-                      label: 'القيمة الإجمالية',
+                      label: loc.whTotalValue,
                       selected: _statMode == _StatTapMode.byTotalValue,
                       onTap: () => _onStatCardTap(_StatTapMode.byTotalValue),
                       child: _loading
@@ -350,7 +349,7 @@ class _WarehousesScreenState extends State<WarehousesScreen> {
                     const SizedBox(width: 12),
                     _StatSummaryCard(
                       accent: _greenStat,
-                      label: 'إجمالي الأصناف',
+                      label: loc.whTotalItems,
                       selected: _statMode == _StatTapMode.byTotalItems,
                       onTap: () => _onStatCardTap(_StatTapMode.byTotalItems),
                       child: _loading
@@ -372,7 +371,7 @@ class _WarehousesScreenState extends State<WarehousesScreen> {
                     const SizedBox(width: 12),
                     _StatSummaryCard(
                       accent: _purple,
-                      label: 'المستودعات',
+                      label: loc.whScreenTitle,
                       selected: _statMode == _StatTapMode.none,
                       onTap: _clearStatSort,
                       child: _loading
@@ -405,10 +404,10 @@ class _WarehousesScreenState extends State<WarehousesScreen> {
                       textAlign: TextAlign.start,
                       onChanged: (_) => setState(() {}),
                       decoration: InputDecoration(
-                        hintText: 'بحث بالاسم أو الكود...',
+                        hintText: loc.whSearchHint,
                         suffixIcon: value.text.isNotEmpty
                             ? IconButton(
-                                tooltip: 'مسح',
+                                tooltip: loc.whClearSearch,
                                 onPressed: () {
                                   _search.clear();
                                   setState(() {
@@ -570,6 +569,7 @@ class _EmptyWarehouseState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(32),
@@ -583,7 +583,7 @@ class _EmptyWarehouseState extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              'لا توجد مستودعات بعد',
+              loc.whNoWarehousesYet,
               style: TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.w600,
@@ -602,7 +602,7 @@ class _EmptyWarehouseState extends StatelessWidget {
                 ),
               ),
               icon: const Icon(Icons.add_rounded),
-              label: const Text('إنشاء أول مستودع'),
+              label: Text(loc.whCreateFirst),
             ),
           ],
         ),
@@ -630,6 +630,7 @@ class _WarehouseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final isDefault = (data['isDefault'] as num? ?? 0) == 1;
     final isActive = (data['isActive'] as num? ?? 1) == 1;
     final whValue = (data['value'] as num?)?.toDouble() ?? 0;
@@ -693,10 +694,10 @@ class _WarehouseCard extends StatelessWidget {
                               ),
                             ),
                           ),
-                          if (isDefault) _chip('افتراضي', _green),
+                          if (isDefault) _chip(loc.whDefaultChip, _green),
                           const SizedBox(width: 6),
                           _chip(
-                            isActive ? 'نشط' : 'معطّل',
+                            isActive ? loc.whActiveChip : loc.whInactiveChip,
                             isActive ? _green : _t2,
                           ),
                         ],
@@ -743,13 +744,13 @@ class _WarehouseCard extends StatelessWidget {
               children: [
                 _InfoCell(
                   icon: Icons.inventory_2_outlined,
-                  label: 'عدد الأصناف',
+                  label: loc.whItemsCount,
                   value: '$items',
                 ),
                 const SizedBox(width: 20),
                 _InfoCell(
                   icon: Icons.payments_outlined,
-                  label: 'القيمة الإجمالية',
+                  label: loc.whTotalValue,
                   value: IraqiCurrencyFormat.formatCompactWarehouseValue(
                     whValue,
                   ),
@@ -764,15 +765,15 @@ class _WarehouseCard extends StatelessWidget {
               runSpacing: 4,
               alignment: WrapAlignment.end,
               children: [
-                TextButton(onPressed: onEdit, child: const Text('تعديل')),
+                TextButton(onPressed: onEdit, child: Text(loc.whEditAction)),
                 TextButton(
                   onPressed: onToggleActive,
-                  child: Text(isActive ? 'تعطيل' : 'تفعيل'),
+                  child: Text(isActive ? loc.whDeactivateAction : loc.whActivate),
                 ),
                 TextButton(
                   onPressed: onDelete,
                   style: TextButton.styleFrom(foregroundColor: _red),
-                  child: const Text('حذف'),
+                  child: Text(loc.whDeleteAction),
                 ),
               ],
             ),
@@ -785,9 +786,9 @@ class _WarehouseCard extends StatelessWidget {
               child: OutlinedButton.icon(
                 onPressed: onViewStock,
                 icon: const Icon(Icons.visibility_outlined, size: 15),
-                label: const Text(
-                  'عرض المخزون',
-                  style: TextStyle(fontSize: 12),
+                label: Text(
+                  loc.whViewStock,
+                  style: const TextStyle(fontSize: 12),
                 ),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: _teal,
@@ -883,6 +884,7 @@ class _WarehouseSheet extends StatefulWidget {
 }
 
 class _WarehouseSheetState extends State<_WarehouseSheet> {
+  AppLocalizations get loc => AppLocalizations.of(context)!;
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _name;
   late final TextEditingController _code;
@@ -980,7 +982,7 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
     );
     if (!mounted) return;
     setState(() {
-      _nameDuplicateError = exists ? 'يوجد مستودع بهذا الاسم مسبقاً' : null;
+      _nameDuplicateError = exists ? loc.whNameDuplicateError : null;
     });
     _formKey.currentState?.validate();
   }
@@ -997,7 +999,7 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
     );
     if (!mounted) return;
     setState(() {
-      _codeDuplicateError = exists ? 'الكود مستخدم مسبقاً' : null;
+      _codeDuplicateError = exists ? loc.whCodeDuplicateError : null;
     });
     _formKey.currentState?.validate();
   }
@@ -1021,18 +1023,16 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
       final confirmed = await showDialog<bool>(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: const Text('تعيين افتراضي'),
-          content: const Text(
-            'سيتم إزالة الافتراضي من المستودع الحالي وتحديد هذا المستودع كافتراضي.',
-          ),
+          title: Text(loc.whSetDefaultTitle),
+          content: Text(loc.whSetDefaultContent),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: const Text('إلغاء'),
+              child: Text(loc.cancel),
             ),
             TextButton(
               onPressed: () => Navigator.pop(ctx, true),
-              child: const Text('تأكيد'),
+              child: Text(loc.whConfirmAction),
             ),
           ],
         ),
@@ -1050,16 +1050,15 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
     final r = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('إغلاق النموذج'),
-        content: const Text('هل تريد إغلاق النموذج؟ البيانات لن تُحفظ'),
+        title: Text(loc.whCloseFormTitle),
+        content: Text(loc.whCloseFormContent),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(ctx, false),
-            child: const Text('إلغاء'),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(ctx, true),
-            child: const Text('إغلاق'),
+            onPressed: () => Navigator.pop(ctx, false),            child: Text(loc.cancel),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, true),
+              child: Text(loc.whCloseAction),
           ),
         ],
       ),
@@ -1076,7 +1075,7 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
   Future<void> _submit() async {
     if (_submitting) return;
     if (_branchRequired && _branchId == null && widget.branches.length > 5) {
-      setState(() => _branchSelectError = 'اختر فرعاً');
+      setState(() => _branchSelectError = loc.whSelectBranchError);
       return;
     }
     setState(() => _branchSelectError = null);
@@ -1090,7 +1089,7 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
 
     setState(() => _submitting = true);
     try {
-      final loc = _location.text.trim();
+      final locationText = _location.text.trim();
       var codeOut = _code.text.trim().toUpperCase();
       if (widget.existing != null && codeOut.isEmpty) {
         codeOut = widget.existing!['code']?.toString() ?? '';
@@ -1102,7 +1101,7 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
         final result = await widget.repo.createWarehouse(
           name: name,
           code: codeOut,
-          location: loc,
+          location: locationText,
           branchId: _branchId,
           isActive: _active,
           isDefault: makeDefault,
@@ -1115,7 +1114,7 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
             newWarehouseId: result.id,
             generatedCodeDisplay: result.resolvedCode,
             firstWarehouseInfo: widget.isFirstWarehouseCreation
-                ? 'تم تعيينه افتراضياً تلقائياً لأنه المستودع الأول'
+                ? loc.whAutoDefaultFirst
                 : null,
           ),
         );
@@ -1124,7 +1123,7 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
           id: _editingId!,
           name: name,
           code: codeOut,
-          location: loc,
+          location: locationText,
           branchId: _branchId,
           isActive: _active,
           isDefault: makeDefault,
@@ -1139,7 +1138,7 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
       Navigator.of(context).pop(
         _WarehouseSaveOutcome(
           success: false,
-          errorMessage: 'تعذر حفظ المستودع: $e',
+          errorMessage: loc.whSaveFailed(e.toString()),
         ),
       );
     } finally {
@@ -1148,7 +1147,7 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
   }
 
   String? _validateNameField(String? v) {
-    if (v == null || v.trim().isEmpty) return 'مطلوب';
+    if (v == null || v.trim().isEmpty) return loc.whRequiredField;
     if (_nameDuplicateError != null) return _nameDuplicateError;
     return null;
   }
@@ -1159,7 +1158,7 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
   }
 
   String? _validateBranch(int? v) {
-    if (_branchRequired && v == null) return 'اختر فرعاً';
+    if (_branchRequired && v == null) return loc.whSelectBranchError;
     return null;
   }
 
@@ -1181,7 +1180,7 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
   Future<void> _scanCode() async {
     final raw = await BarcodeInputLauncher.captureBarcode(
       context,
-      title: 'مسح كود المستودع',
+      title: loc.whScanWarehouseCode,
     );
     if (raw == null || !mounted) return;
     final sanitized = raw
@@ -1239,7 +1238,7 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
             children: [
               Expanded(
                 child: Text(
-                  isEdit ? 'تعديل المستودع' : 'مستودع جديد',
+                  isEdit ? loc.whEditWarehouse : loc.whNewWarehouse,
                   style: const TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
@@ -1248,7 +1247,7 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
                 ),
               ),
               IconButton(
-                tooltip: 'إغلاق',
+                tooltip: loc.whCloseAction,
                 onPressed: () => unawaited(_tryClose()),
                 icon: const Icon(Icons.close_rounded),
               ),
@@ -1260,11 +1259,11 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
               child: Material(
                 color: _blue.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(6),
-                child: const Padding(
-                  padding: EdgeInsets.all(10),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
                   child: Text(
-                    'تم تعيينه افتراضياً تلقائياً لأنه المستودع الأول',
-                    style: TextStyle(fontSize: 12, color: _blue),
+                    loc.whAutoDefaultFirst,
+                    style: const TextStyle(fontSize: 12, color: _blue),
                     textAlign: TextAlign.right,
                   ),
                 ),
@@ -1275,11 +1274,11 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
               if (!has) unawaited(_checkNameOnBlur());
             },
             child: AppInput(
-              label: 'اسم المستودع',
+              label: loc.whWarehouseNameLabel,
               isRequired: true,
               controller: _name,
               focusNode: _nameFn,
-              hint: 'مثال: مستودع الرئيسي، مستودع الفرع الشمالي',
+              hint: loc.whWarehouseNameHint,
               prefixIcon: const Icon(Icons.warehouse_outlined, size: 20),
               textInputAction: TextInputAction.next,
               inputFormatters: [LengthLimitingTextInputFormatter(60)],
@@ -1297,11 +1296,11 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
                     if (!has) unawaited(_checkCodeOnBlur());
                   },
                   child: AppInput(
-                    label: 'كود المستودع',
+                    label: loc.whWarehouseCodeLabel,
                     isOptional: true,
                     controller: _code,
                     focusNode: _codeFn,
-                    hint: 'مثال: WH-001',
+                    hint: loc.whWarehouseCodeHint,
                     prefixIcon: const Icon(Icons.qr_code_rounded, size: 20),
                     textInputAction: TextInputAction.next,
                     inputFormatters: [
@@ -1324,18 +1323,18 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
                 child: IconButton.filledTonal(
                   onPressed: () => unawaited(_scanCode()),
                   icon: const Icon(Icons.qr_code_scanner_rounded, size: 22),
-                  tooltip: 'مسح',
+                  tooltip: loc.whClearSearch,
                 ),
               ),
             ],
           ),
           const SizedBox(height: 12),
           AppInput(
-            label: 'الموقع',
+            label: loc.whLocationLabel,
             isOptional: true,
             controller: _location,
             focusNode: _locationFn,
-            hint: 'العنوان أو وصف الموقع',
+            hint: loc.whLocationHint,
             prefixIcon: const Icon(Icons.location_on_outlined, size: 20),
             textInputAction: TextInputAction.done,
             inputFormatters: [LengthLimitingTextInputFormatter(100)],
@@ -1349,7 +1348,7 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
             children: [
               Flexible(
                 child: Text(
-                  'الفرع',
+                  loc.whBranchLabel,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
@@ -1459,22 +1458,22 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
                   });
                 },
               ),
-              const Expanded(
+              Expanded(
                 child: Text(
-                  'مستودع نشط',
+                  loc.whActiveWarehouse,
                   textAlign: TextAlign.end,
-                  style: TextStyle(fontSize: 14, color: _t1),
+                  style: const TextStyle(fontSize: 14, color: _t1),
                 ),
               ),
             ],
           ),
           if (!_active) ...[
             const SizedBox(height: 6),
-            const Align(
+            Align(
               alignment: AlignmentDirectional.centerStart,
               child: Text(
-                'المستودع المعطّل لن يظهر في عمليات البيع والشراء',
-                style: TextStyle(fontSize: 12, color: _amber),
+                loc.whInactiveWarning,
+                style: const TextStyle(fontSize: 12, color: _amber),
               ),
             ),
           ],
@@ -1489,11 +1488,11 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
                     ? null
                     : (v) => unawaited(_onDefaultToggleRequest(v)),
               ),
-              const Expanded(
+              Expanded(
                 child: Text(
-                  'افتراضي',
+                  loc.whDefaultChip,
                   textAlign: TextAlign.end,
-                  style: TextStyle(fontSize: 14, color: _t1),
+                  style: const TextStyle(fontSize: 14, color: _t1),
                 ),
               ),
             ],
@@ -1526,11 +1525,11 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
                           ),
                         ),
                         const SizedBox(width: 10),
-                        Text(isEdit ? 'جاري الحفظ...' : 'جارٍ الإنشاء...'),
+                        Text(isEdit ? loc.whSaving : loc.whCreating),
                       ],
                     )
                   : Text(
-                      isEdit ? 'حفظ التعديلات' : 'إنشاء المستودع',
+                      isEdit ? loc.whSaveEdits : loc.whCreateWarehouse,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
@@ -1593,7 +1592,7 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
         return _branchLine(b);
       }
     }
-    return 'اختر الفرع';
+    return loc.whChooseBranch;
   }
 }
 
@@ -1621,6 +1620,7 @@ class _BranchSearchSheet extends StatefulWidget {
 }
 
 class _BranchSearchSheetState extends State<_BranchSearchSheet> {
+  AppLocalizations get loc => AppLocalizations.of(context)!;
   final _q = TextEditingController();
 
   @override
@@ -1664,8 +1664,8 @@ class _BranchSearchSheetState extends State<_BranchSearchSheet> {
                 child: TextField(
                   controller: _q,
                   onChanged: (_) => setState(() {}),
-                  decoration: const InputDecoration(
-                    hintText: 'بحث بالاسم أو رمز الفرع...',
+                  decoration: InputDecoration(
+                    hintText: loc.whBranchSearchHint,
                     prefixIcon: Icon(Icons.search_rounded),
                     border: OutlineInputBorder(),
                   ),
@@ -1701,6 +1701,7 @@ class _StockDetailSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final repo = InventoryRepository();
     final warehouseId = (warehouse['id'] as num?)?.toInt() ?? -1;
     return Directionality(
@@ -1732,7 +1733,7 @@ class _StockDetailSheet extends StatelessWidget {
                   const SizedBox(width: 10),
                   Expanded(
                     child: Text(
-                      'مخزون ${warehouse['name']}',
+                      loc.whStockTitle(warehouse['name']?.toString() ?? ''),
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -1754,8 +1755,8 @@ class _StockDetailSheet extends StatelessWidget {
                   }
                   final rows = snap.data!;
                   if (rows.isEmpty) {
-                    return const Center(
-                      child: Text('لا توجد كميات في هذا المستودع'),
+                    return Center(
+                      child: Text(loc.whNoStockInWarehouse),
                     );
                   }
                   return ListView.separated(
@@ -1777,7 +1778,7 @@ class _StockDetailSheet extends StatelessWidget {
                         ),
                         title: Text(row['name']?.toString() ?? ''),
                         subtitle: Text(
-                          qty <= 0 ? 'نفد' : (qty < 5 ? 'منخفض' : 'في المخزون'),
+                          qty <= 0 ? loc.whStockOut : (qty < 5 ? loc.whStockLow : loc.whStockInStock),
                           style: TextStyle(color: statusColor),
                         ),
                         trailing: Text(

@@ -7388,4 +7388,895 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get infoLabel => 'Info';
+
+  @override
+  String whFailedToLoad(Object error) {
+    return 'Failed to load warehouses: $error';
+  }
+
+  @override
+  String get whEditsSavedSuccess => 'Changes saved successfully';
+
+  @override
+  String get whCreatedSuccess => 'Warehouse created successfully';
+
+  @override
+  String whCodeLabel(Object code) {
+    return 'Code: $code';
+  }
+
+  @override
+  String get whDeleteTitle => 'Delete warehouse';
+
+  @override
+  String whDeleteConfirm(Object name) {
+    return 'Are you sure you want to delete warehouse «$name»?';
+  }
+
+  @override
+  String get whDeleteAction => 'Delete';
+
+  @override
+  String whDeleteFailed(Object error) {
+    return 'Failed to delete warehouse (may be linked to movements): $error';
+  }
+
+  @override
+  String get whDeactivateTitle => 'Deactivate warehouse';
+
+  @override
+  String get whDeactivateContent =>
+      'This warehouse won\'t be used in sales and purchase operations until reactivated.';
+
+  @override
+  String get whActivate => 'Activate';
+
+  @override
+  String get whDeactivateAction => 'Deactivate';
+
+  @override
+  String whStatusUpdateFailed(Object error) {
+    return 'Failed to update status: $error';
+  }
+
+  @override
+  String get whScreenTitle => 'Warehouses';
+
+  @override
+  String get whNewWarehouse => 'New warehouse';
+
+  @override
+  String get whTotalValue => 'Total value';
+
+  @override
+  String get whTotalItems => 'Total items';
+
+  @override
+  String get whSearchHint => 'Search by name or code...';
+
+  @override
+  String get whClearSearch => 'Clear';
+
+  @override
+  String get whNoWarehousesYet => 'No warehouses yet';
+
+  @override
+  String get whCreateFirst => 'Create first warehouse';
+
+  @override
+  String get whDefaultChip => 'Default';
+
+  @override
+  String get whActiveChip => 'Active';
+
+  @override
+  String get whInactiveChip => 'Inactive';
+
+  @override
+  String get whItemsCount => 'Items count';
+
+  @override
+  String get whEditAction => 'Edit';
+
+  @override
+  String get whViewStock => 'View stock';
+
+  @override
+  String get whNameDuplicateError =>
+      'A warehouse with this name already exists';
+
+  @override
+  String get whCodeDuplicateError => 'Code already in use';
+
+  @override
+  String get whSetDefaultTitle => 'Set as default';
+
+  @override
+  String get whSetDefaultContent =>
+      'The default will be removed from the current warehouse and this warehouse will be set as default.';
+
+  @override
+  String get whConfirmAction => 'Confirm';
+
+  @override
+  String get whCloseFormTitle => 'Close form';
+
+  @override
+  String get whCloseFormContent =>
+      'Do you want to close the form? Data will not be saved.';
+
+  @override
+  String get whCloseAction => 'Close';
+
+  @override
+  String get whSelectBranchError => 'Select a branch';
+
+  @override
+  String get whAutoDefaultFirst =>
+      'Automatically set as default since it\'s the first warehouse';
+
+  @override
+  String whSaveFailed(Object error) {
+    return 'Failed to save warehouse: $error';
+  }
+
+  @override
+  String get whRequiredField => 'Required';
+
+  @override
+  String get whScanWarehouseCode => 'Scan warehouse code';
+
+  @override
+  String get whEditWarehouse => 'Edit warehouse';
+
+  @override
+  String get whWarehouseNameLabel => 'Warehouse name';
+
+  @override
+  String get whWarehouseNameHint =>
+      'e.g.: Main warehouse, Northern branch warehouse';
+
+  @override
+  String get whWarehouseCodeLabel => 'Warehouse code';
+
+  @override
+  String get whWarehouseCodeHint => 'e.g.: WH-001';
+
+  @override
+  String get whLocationLabel => 'Location';
+
+  @override
+  String get whLocationHint => 'Address or location description';
+
+  @override
+  String get whBranchLabel => 'Branch';
+
+  @override
+  String get whActiveWarehouse => 'Active warehouse';
+
+  @override
+  String get whInactiveWarning =>
+      'Deactivated warehouse won\'t appear in sales and purchase operations';
+
+  @override
+  String get whSaving => 'Saving...';
+
+  @override
+  String get whCreating => 'Creating...';
+
+  @override
+  String get whSaveEdits => 'Save changes';
+
+  @override
+  String get whCreateWarehouse => 'Create warehouse';
+
+  @override
+  String get whChooseBranch => 'Choose branch';
+
+  @override
+  String get whBranchSearchHint => 'Search by branch name or code...';
+
+  @override
+  String whStockTitle(Object name) {
+    return 'Stock: $name';
+  }
+
+  @override
+  String get whNoStockInWarehouse => 'No quantities in this warehouse';
+
+  @override
+  String get whStockOut => 'Out of stock';
+
+  @override
+  String get whStockLow => 'Low';
+
+  @override
+  String get whStockInStock => 'In stock';
+
+  @override
+  String get ipAllCategories => 'All categories';
+
+  @override
+  String get ipAllBrands => 'All brands';
+
+  @override
+  String get ipAllStatus => 'All';
+
+  @override
+  String get ipProductManagement => 'Product management';
+
+  @override
+  String get ipSettingsTooltip => 'Settings';
+
+  @override
+  String get ipMoreTooltip => 'More';
+
+  @override
+  String get ipPrintBarcodes => 'Print barcode labels';
+
+  @override
+  String get ipProductSavedSnackbar => 'Product saved and list updated';
+
+  @override
+  String get ipNewProductBtn => '+ New product';
+
+  @override
+  String get ipStatusActive => 'Active';
+
+  @override
+  String get ipStatusLowStock => 'Low stock';
+
+  @override
+  String get ipStatusOutOfStock => 'Out of stock';
+
+  @override
+  String get ipStatusInactive => 'Inactive';
+
+  @override
+  String get ipSearchAndMatch => 'Search & match';
+
+  @override
+  String get ipCategoryFilter => 'Category';
+
+  @override
+  String get ipBrandFilter => 'Brand';
+
+  @override
+  String get ipAdvancedSearch => 'Advanced search';
+
+  @override
+  String ipClearFilterCount(Object count) {
+    return 'Clear filter ($count)';
+  }
+
+  @override
+  String get ipClearFilter => 'Clear filter';
+
+  @override
+  String get ipSearchAction => 'Search';
+
+  @override
+  String get ipKeywordSearch => 'Search by keyword';
+
+  @override
+  String get ipKeywordHint => 'Enter name, code, or barcode';
+
+  @override
+  String get ipBarcodeFilter => 'Barcode';
+
+  @override
+  String get ipScanOrType => 'Scan or type';
+
+  @override
+  String get ipProductCode => 'Product code';
+
+  @override
+  String get ipSalePriceRange => 'Sale price range (IQD)';
+
+  @override
+  String get ipPriceTo => 'To';
+
+  @override
+  String get ipPriceFrom => 'From';
+
+  @override
+  String get ipStatusFilter => 'Status';
+
+  @override
+  String get ipResultsName => 'Name';
+
+  @override
+  String get ipResultsPrice => 'Price';
+
+  @override
+  String get ipResultsQty => 'Quantity';
+
+  @override
+  String get ipResultsAddedDate => 'Date added';
+
+  @override
+  String get ipSortLabel => 'Sort';
+
+  @override
+  String get ipSortAsc => 'Ascending';
+
+  @override
+  String get ipSortDesc => 'Descending';
+
+  @override
+  String get ipNoProductsYet => 'No products yet';
+
+  @override
+  String get ipNoProductsMatch => 'No products match your search';
+
+  @override
+  String get ipAddFirstHint => 'Start by adding your first item to inventory.';
+
+  @override
+  String get ipTryChangeSearch =>
+      'Try changing your search terms or clearing the filter.';
+
+  @override
+  String get ipAddFirstBtn => '+ Add first product';
+
+  @override
+  String get ipUnpinFromHome => 'Unpin from Home';
+
+  @override
+  String get ipPinToHome => 'Pin to Home';
+
+  @override
+  String get ipPrintBarcode => 'Print barcode';
+
+  @override
+  String get ipDeactivate => 'Deactivate';
+
+  @override
+  String get ipActivate => 'Activate';
+
+  @override
+  String get ipDeleteProduct => 'Delete';
+
+  @override
+  String get ipNotTracked => 'Not tracked';
+
+  @override
+  String get ipDeleteProductTitle => 'Delete product';
+
+  @override
+  String get ipDeleteProductContent =>
+      'Product will be hidden from lists (soft delete) without breaking linked invoices.';
+
+  @override
+  String get ipProductType => 'Product';
+
+  @override
+  String get ipTechnicalService => 'Technical service';
+
+  @override
+  String ipAvailableQty(Object qty) {
+    return 'Available quantity: $qty';
+  }
+
+  @override
+  String get ipOutOfStock => 'Out';
+
+  @override
+  String get ipProductOptions => 'Product options';
+
+  @override
+  String ipShowingResults(Object extra, Object matched, Object shown) {
+    return 'Showing $shown of $matched products$extra';
+  }
+
+  @override
+  String ipExtraCatalogInfo(Object total) {
+    return ' · Total active: $total';
+  }
+
+  @override
+  String get addProductTitle => 'Add new product';
+
+  @override
+  String get apUnsavedChanges => 'Unsaved changes';
+
+  @override
+  String get apUnsavedConfirm =>
+      'You haven\'t saved the product. Do you want to save before leaving?';
+
+  @override
+  String get apLeaveWithoutSaving => 'Leave without saving';
+
+  @override
+  String get apSaveProduct => 'Save product';
+
+  @override
+  String get apColorSizeTitle => 'Colors & Sizes';
+
+  @override
+  String get apDone => 'Done';
+
+  @override
+  String get apLoadFormFailed => 'Failed to load product form data';
+
+  @override
+  String apLoadFormFailedDetail(Object error) {
+    return 'Couldn\'t load form data. Field will work in manual mode.\\n$error';
+  }
+
+  @override
+  String apImagePickFailed(Object error) {
+    return 'Failed to pick image: $error';
+  }
+
+  @override
+  String get apPercentDiscountMax => 'Percentage discount cannot exceed 100%.';
+
+  @override
+  String get apBarcodeRequired => 'Barcode field is required per settings.';
+
+  @override
+  String get apSupplierRequired => 'Supplier field is required per settings.';
+
+  @override
+  String get apWarehouseRequired =>
+      'Warehouse selection is required per settings.';
+
+  @override
+  String get apImageRequired => 'Product image is required per settings.';
+
+  @override
+  String get apMfgDateFormatError =>
+      'Invalid manufacturing date format. Use day/month/year (e.g. 15/01/2026).';
+
+  @override
+  String get apExpDateFormatError =>
+      'Invalid expiry date format. Use day/month/year (e.g. 15/01/2026).';
+
+  @override
+  String get apExpDateAfterMfg =>
+      'Expiry date must be on or after the manufacturing date.';
+
+  @override
+  String get apConversionFactorGt0 =>
+      'Conversion factor must be greater than 0 for each extra unit.';
+
+  @override
+  String get apAddAtLeastOneColor => 'Add at least one color.';
+
+  @override
+  String get apColorNameRequired => 'Color name is required.';
+
+  @override
+  String get apAddAtLeastOneSize => 'Add at least one size per color.';
+
+  @override
+  String get apSizeRequired => 'Size field is required.';
+
+  @override
+  String apDuplicateSize(Object color, Object size) {
+    return 'Size \"$size\" is duplicated within color \"$color\".';
+  }
+
+  @override
+  String get apQtyMustBeNonNeg =>
+      'Quantity must be a whole number greater than or equal to 0.';
+
+  @override
+  String get apDuplicateBarcodeVariants =>
+      'Duplicate barcode found in variants.';
+
+  @override
+  String get apBarcodeUsedByOther => 'This barcode is used by another product.';
+
+  @override
+  String get apVariantBarcodeTaken => 'Variant barcode already in use.';
+
+  @override
+  String get apDuplicateSizeInColor =>
+      'Size is duplicated within the same color.';
+
+  @override
+  String get apQtyMustBeGe0 => 'Quantity must be greater than or equal to 0.';
+
+  @override
+  String get apBarcodeAlreadyUsed => 'Barcode already in use.';
+
+  @override
+  String apSaveFailed(Object error) {
+    return 'Failed to save product: $error';
+  }
+
+  @override
+  String get apProductSaved => 'Product saved. You can enter a new product.';
+
+  @override
+  String get apChooseColorTitle => 'Choose color';
+
+  @override
+  String get apChooseColorSubtitle =>
+      'Choose a color to represent this option (optional).';
+
+  @override
+  String get apApplyUniformQty => 'Apply uniform quantity';
+
+  @override
+  String get apEnterQtyHint => 'Enter quantity (0 or more)';
+
+  @override
+  String get apSizeLabel => 'Size';
+
+  @override
+  String get apChooseSizeTooltip => 'Choose size';
+
+  @override
+  String get apQtyLabel => 'Quantity';
+
+  @override
+  String get apBarcodeOptional => 'Barcode (optional)';
+
+  @override
+  String get apDeleteAction => 'Delete';
+
+  @override
+  String get apColorNameLabel => 'Color name';
+
+  @override
+  String get apColorPickerTooltip => 'Choose color (HEX)';
+
+  @override
+  String get apDeleteColorTooltip => 'Delete color';
+
+  @override
+  String get apSizesAndQuantities => 'Sizes & Quantities';
+
+  @override
+  String get apNoSizesYet => 'No sizes yet. Add at least one size.';
+
+  @override
+  String get apAddSizeBtn => 'Add size';
+
+  @override
+  String apColorTotal(Object count) {
+    return 'Color total: $count';
+  }
+
+  @override
+  String get apAddNewColor => 'Add new color';
+
+  @override
+  String get apApplyQtyAllSizes => 'Apply uniform quantity to all sizes';
+
+  @override
+  String get apNoColorsYet => 'No colors yet. Add a color to start.';
+
+  @override
+  String apProductCodeHint(Object code) {
+    return 'Product code: $code';
+  }
+
+  @override
+  String get apCancelTooltip => 'Cancel';
+
+  @override
+  String get apSavingLabel => 'Saving...';
+
+  @override
+  String get apSaveAndAddNew => 'Save & add new';
+
+  @override
+  String get apProductData => 'Product data';
+
+  @override
+  String get apProductNameLabel => 'Product name';
+
+  @override
+  String get apNameRequired => 'Name is required';
+
+  @override
+  String get apDescriptionLabel => 'Description';
+
+  @override
+  String get apProductImage => 'Product image';
+
+  @override
+  String get apCategoryLabel => 'Category';
+
+  @override
+  String get apCategoryHint => 'Type or choose from the list';
+
+  @override
+  String get apBrandLabel => 'Brand';
+
+  @override
+  String get apBrandHint => 'Type or choose from the list';
+
+  @override
+  String get apGradeLabel => 'Grade / Quality';
+
+  @override
+  String get apGradeHint => 'Choose grade (optional)';
+
+  @override
+  String get apNoCategory => '— No category —';
+
+  @override
+  String get apGradeA => 'Grade A — Excellent';
+
+  @override
+  String get apGradeB => 'Grade B — Very good';
+
+  @override
+  String get apGradeC => 'Grade C — Good';
+
+  @override
+  String get apGradeFirst => 'First grade';
+
+  @override
+  String get apGradeSecond => 'Second grade';
+
+  @override
+  String get apGradeThird => 'Third grade';
+
+  @override
+  String get apCommercial => 'Commercial item';
+
+  @override
+  String get apEconomical => 'Economical item';
+
+  @override
+  String get apWarehouseLabel => 'Warehouse';
+
+  @override
+  String get apNoWarehousesInDb => 'No warehouses in database';
+
+  @override
+  String get apChooseWarehouse => 'Choose warehouse';
+
+  @override
+  String get apNoWarehouseLink => '— No warehouse link —';
+
+  @override
+  String get apStockBaseType => 'Base stock type';
+
+  @override
+  String get apStockTypePiece => 'Count (piece as base)';
+
+  @override
+  String get apStockTypeWeight => 'Weight (kilogram as base)';
+
+  @override
+  String get apStockTypeClothing => 'Clothing (colors & sizes)';
+
+  @override
+  String get apEditColorsSizes => 'Edit colors & sizes';
+
+  @override
+  String get apSupplierInfo => 'Supplier info';
+
+  @override
+  String get apSupplierLabel => 'Supplier';
+
+  @override
+  String get apSupplierHint => 'Type or choose from records';
+
+  @override
+  String get apSupplierCodeOptional => 'Supplier code (optional)';
+
+  @override
+  String get apExtraUnitsOptional => 'Additional sale units (optional)';
+
+  @override
+  String get apExtraUnitsDesc =>
+      'e.g.: Carton, layer, kilogram… each with optional barcode and conversion factor to base stock.';
+
+  @override
+  String get apAddUnit => 'Add unit';
+
+  @override
+  String get apNoExtraUnits => 'No additional units yet.';
+
+  @override
+  String apUnitNumber(Object number) {
+    return 'Unit #$number';
+  }
+
+  @override
+  String get apUnitNameLabel => 'Unit name';
+
+  @override
+  String get apSymbolLabel => 'Symbol';
+
+  @override
+  String get apConversionFactor => 'Conversion factor to base';
+
+  @override
+  String get apBarcodeOptionalLabel => 'Barcode (optional)';
+
+  @override
+  String get apBarcodeEan13 => 'Barcode (EAN-13)';
+
+  @override
+  String get apBarcodeCode128 => 'Barcode (Code 128)';
+
+  @override
+  String get apBarcodeValue => 'Barcode value';
+
+  @override
+  String get apCaptureFromCamera => 'Capture from camera';
+
+  @override
+  String get apReadFromScanner => 'Read from barcode scanner';
+
+  @override
+  String get apScanProductBarcode => 'Scan product barcode';
+
+  @override
+  String get apGenerateNewBarcode => 'Generate new numeric barcode';
+
+  @override
+  String get apWeightPriceNote =>
+      'Calculated per one kilogram (weight-based stock).';
+
+  @override
+  String get apPricingSection => 'Pricing';
+
+  @override
+  String get apPurchasePriceLabel => 'Purchase price';
+
+  @override
+  String get apSuggestedFromCost => 'Suggested from purchase price';
+
+  @override
+  String get apSellPriceLabel => 'Sell price';
+
+  @override
+  String get apSellBelowBuyWarning =>
+      'Warning: sell price is below purchase price (you can continue).';
+
+  @override
+  String get apTaxSection => 'Tax';
+
+  @override
+  String get apTaxExempt => 'Exempt';
+
+  @override
+  String get apCustomTax => 'Custom';
+
+  @override
+  String get apTaxExemptFull => 'Tax exempt';
+
+  @override
+  String get apTax5 => 'Tax 5%';
+
+  @override
+  String get apTax10 => 'Tax 10%';
+
+  @override
+  String get apTax15 => 'Tax 15%';
+
+  @override
+  String get apCustomRate => 'Custom rate';
+
+  @override
+  String get apTaxPercentLabel => 'Tax rate %';
+
+  @override
+  String apSellIncludingTax(Object amount) {
+    return 'Sell including tax (approx.): $amount';
+  }
+
+  @override
+  String get apDiscountType => 'Discount type';
+
+  @override
+  String get apPercentDiscount => 'Percentage (%)';
+
+  @override
+  String get apFixedAmountDiscount => 'Amount (IQD)';
+
+  @override
+  String get apDiscountValue => 'Discount value';
+
+  @override
+  String apExampleNumber(Object number) {
+    return 'e.g.: $number';
+  }
+
+  @override
+  String get apMinSellPrice => 'Minimum sell price';
+
+  @override
+  String get apOptionalLabel => 'Optional';
+
+  @override
+  String get apProfitMargin => 'Profit margin (sell vs purchase price)';
+
+  @override
+  String get apInventorySection => 'Inventory management';
+
+  @override
+  String get apTrackInventory => 'Track inventory';
+
+  @override
+  String get apTrackInventoryOff =>
+      'When off, quantities won\'t be recorded for this product';
+
+  @override
+  String get apWeightSales =>
+      'By kilogram — supports decimals (0.25, 0.5, 1.5…)';
+
+  @override
+  String get apWeightThreshold =>
+      'By kilogram (e.g.: 1 = alert when below 1 kg)';
+
+  @override
+  String get apStockQty => 'Stock quantity';
+
+  @override
+  String get apAlertThreshold => 'Alert when below';
+
+  @override
+  String apVariantsStockInfo(Object total) {
+    return 'Stock managed via colors & sizes. Current total: $total';
+  }
+
+  @override
+  String get apNetWeightLabel => 'Net weight (grams) — optional';
+
+  @override
+  String get apNetWeightHint =>
+      'Auto-filled from GS1 barcode or embedded weight';
+
+  @override
+  String get apMfgDateLabel => 'Manufacturing date — optional';
+
+  @override
+  String get apPickFromCalendar => 'Pick from calendar';
+
+  @override
+  String get apDateFormat => 'day/month/year';
+
+  @override
+  String get apExpDateLabel => 'Expiry date — optional';
+
+  @override
+  String get apExpiryAlertDays => 'Expiry alert days before';
+
+  @override
+  String get apExpiryAlertHint =>
+      'When expiry date is set: 1–365 (empty = default from settings)';
+
+  @override
+  String get apExpiryAlertNote =>
+      'Used only with \'expiry date\'; alert appears in notification panel within this period before the date.';
+
+  @override
+  String get apInternalNotes => 'Internal notes';
+
+  @override
+  String get apInternalNotesHint => 'Not shown to customers — for team only';
+
+  @override
+  String get apTags => 'Tags';
+
+  @override
+  String get apTagsHint =>
+      'Separated by commas or spaces — for search and filtering';
+
+  @override
+  String get apChooseFromList => 'Choose from list';
+
+  @override
+  String get apImageSelected => 'Image selected (web preview not available)';
+
+  @override
+  String get apTapToAddImage => 'Tap to add an image from gallery';
+
+  @override
+  String get apManualEditActive =>
+      'Manual edit active — sell price won\'t update automatically when cost changes.';
+
+  @override
+  String get apRelinkToCost => ' Re-link to purchase cost';
 }

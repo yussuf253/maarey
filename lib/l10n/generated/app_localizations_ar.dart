@@ -7319,4 +7319,885 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get infoLabel => 'معلومات';
+
+  @override
+  String whFailedToLoad(Object error) {
+    return 'تعذر تحميل المستودعات: $error';
+  }
+
+  @override
+  String get whEditsSavedSuccess => 'تم حفظ التعديلات بنجاح';
+
+  @override
+  String get whCreatedSuccess => 'تم إنشاء المستودع بنجاح';
+
+  @override
+  String whCodeLabel(Object code) {
+    return 'الكود: $code';
+  }
+
+  @override
+  String get whDeleteTitle => 'حذف المستودع';
+
+  @override
+  String whDeleteConfirm(Object name) {
+    return 'هل أنت متأكد من حذف المستودع «$name»؟';
+  }
+
+  @override
+  String get whDeleteAction => 'حذف';
+
+  @override
+  String whDeleteFailed(Object error) {
+    return 'تعذر حذف المستودع (قد يكون مرتبطا بحركات): $error';
+  }
+
+  @override
+  String get whDeactivateTitle => 'تعطيل المستودع';
+
+  @override
+  String get whDeactivateContent =>
+      'لن يُستخدم هذا المستودع في عمليات البيع والشراء حتى يُفعَّل من جديد.';
+
+  @override
+  String get whActivate => 'تفعيل';
+
+  @override
+  String get whDeactivateAction => 'تعطيل';
+
+  @override
+  String whStatusUpdateFailed(Object error) {
+    return 'تعذر تحديث الحالة: $error';
+  }
+
+  @override
+  String get whScreenTitle => 'المستودعات';
+
+  @override
+  String get whNewWarehouse => 'مستودع جديد';
+
+  @override
+  String get whTotalValue => 'القيمة الإجمالية';
+
+  @override
+  String get whTotalItems => 'إجمالي الأصناف';
+
+  @override
+  String get whSearchHint => 'بحث بالاسم أو الكود...';
+
+  @override
+  String get whClearSearch => 'مسح';
+
+  @override
+  String get whNoWarehousesYet => 'لا توجد مستودعات بعد';
+
+  @override
+  String get whCreateFirst => 'إنشاء أول مستودع';
+
+  @override
+  String get whDefaultChip => 'افتراضي';
+
+  @override
+  String get whActiveChip => 'نشط';
+
+  @override
+  String get whInactiveChip => 'معطّل';
+
+  @override
+  String get whItemsCount => 'عدد الأصناف';
+
+  @override
+  String get whEditAction => 'تعديل';
+
+  @override
+  String get whViewStock => 'عرض المخزون';
+
+  @override
+  String get whNameDuplicateError => 'يوجد مستودع بهذا الاسم مسبقاً';
+
+  @override
+  String get whCodeDuplicateError => 'الكود مستخدم مسبقاً';
+
+  @override
+  String get whSetDefaultTitle => 'تعيين افتراضي';
+
+  @override
+  String get whSetDefaultContent =>
+      'سيتم إزالة الافتراضي من المستودع الحالي وتحديد هذا المستودع كافتراضي.';
+
+  @override
+  String get whConfirmAction => 'تأكيد';
+
+  @override
+  String get whCloseFormTitle => 'إغلاق النموذج';
+
+  @override
+  String get whCloseFormContent => 'هل تريد إغلاق النموذج؟ البيانات لن تُحفظ';
+
+  @override
+  String get whCloseAction => 'إغلاق';
+
+  @override
+  String get whSelectBranchError => 'اختر فرعاً';
+
+  @override
+  String get whAutoDefaultFirst =>
+      'تم تعيينه افتراضياً تلقائياً لأنه المستودع الأول';
+
+  @override
+  String whSaveFailed(Object error) {
+    return 'تعذر حفظ المستودع: $error';
+  }
+
+  @override
+  String get whRequiredField => 'مطلوب';
+
+  @override
+  String get whScanWarehouseCode => 'مسح كود المستودع';
+
+  @override
+  String get whEditWarehouse => 'تعديل المستودع';
+
+  @override
+  String get whWarehouseNameLabel => 'اسم المستودع';
+
+  @override
+  String get whWarehouseNameHint =>
+      'مثال: مستودع الرئيسي، مستودع الفرع الشمالي';
+
+  @override
+  String get whWarehouseCodeLabel => 'كود المستودع';
+
+  @override
+  String get whWarehouseCodeHint => 'مثال: WH-001';
+
+  @override
+  String get whLocationLabel => 'الموقع';
+
+  @override
+  String get whLocationHint => 'العنوان أو وصف الموقع';
+
+  @override
+  String get whBranchLabel => 'الفرع';
+
+  @override
+  String get whActiveWarehouse => 'مستودع نشط';
+
+  @override
+  String get whInactiveWarning =>
+      'المستودع المعطّل لن يظهر في عمليات البيع والشراء';
+
+  @override
+  String get whSaving => 'جاري الحفظ...';
+
+  @override
+  String get whCreating => 'جارٍ الإنشاء...';
+
+  @override
+  String get whSaveEdits => 'حفظ التعديلات';
+
+  @override
+  String get whCreateWarehouse => 'إنشاء المستودع';
+
+  @override
+  String get whChooseBranch => 'اختر الفرع';
+
+  @override
+  String get whBranchSearchHint => 'بحث بالاسم أو رمز الفرع...';
+
+  @override
+  String whStockTitle(Object name) {
+    return 'مخزون $name';
+  }
+
+  @override
+  String get whNoStockInWarehouse => 'لا توجد كميات في هذا المستودع';
+
+  @override
+  String get whStockOut => 'نفد';
+
+  @override
+  String get whStockLow => 'منخفض';
+
+  @override
+  String get whStockInStock => 'في المخزون';
+
+  @override
+  String get ipAllCategories => 'جميع التصنيفات';
+
+  @override
+  String get ipAllBrands => 'جميع الماركات';
+
+  @override
+  String get ipAllStatus => 'الكل';
+
+  @override
+  String get ipProductManagement => 'إدارة المنتجات';
+
+  @override
+  String get ipSettingsTooltip => 'الإعدادات';
+
+  @override
+  String get ipMoreTooltip => 'المزيد';
+
+  @override
+  String get ipPrintBarcodes => 'طباعة ملصقات باركود';
+
+  @override
+  String get ipProductSavedSnackbar => 'تم حفظ المنتج وتحديث القائمة';
+
+  @override
+  String get ipNewProductBtn => '+ منتج جديد';
+
+  @override
+  String get ipStatusActive => 'نشط';
+
+  @override
+  String get ipStatusLowStock => 'مخزون منخفض';
+
+  @override
+  String get ipStatusOutOfStock => 'نفذ من المخزون';
+
+  @override
+  String get ipStatusInactive => 'معطّل';
+
+  @override
+  String get ipSearchAndMatch => 'بحث ومطابقة';
+
+  @override
+  String get ipCategoryFilter => 'التصنيف';
+
+  @override
+  String get ipBrandFilter => 'الماركة';
+
+  @override
+  String get ipAdvancedSearch => 'بحث متقدم';
+
+  @override
+  String ipClearFilterCount(Object count) {
+    return 'إلغاء الفلتر ($count)';
+  }
+
+  @override
+  String get ipClearFilter => 'إلغاء الفلتر';
+
+  @override
+  String get ipSearchAction => 'بحث';
+
+  @override
+  String get ipKeywordSearch => 'البحث بكلمة مفتاحية';
+
+  @override
+  String get ipKeywordHint => 'ادخل الاسم أو الكود أو الباركود';
+
+  @override
+  String get ipBarcodeFilter => 'باركود';
+
+  @override
+  String get ipScanOrType => 'مسح أو الكتابة';
+
+  @override
+  String get ipProductCode => 'كود المنتج';
+
+  @override
+  String get ipSalePriceRange => 'نطاق سعر البيع (دينار)';
+
+  @override
+  String get ipPriceTo => 'إلى';
+
+  @override
+  String get ipPriceFrom => 'من';
+
+  @override
+  String get ipStatusFilter => 'الحالة';
+
+  @override
+  String get ipResultsName => 'الاسم';
+
+  @override
+  String get ipResultsPrice => 'السعر';
+
+  @override
+  String get ipResultsQty => 'الكمية';
+
+  @override
+  String get ipResultsAddedDate => 'تاريخ الإضافة';
+
+  @override
+  String get ipSortLabel => 'الفرز';
+
+  @override
+  String get ipSortAsc => 'تصاعدي';
+
+  @override
+  String get ipSortDesc => 'تنازلي';
+
+  @override
+  String get ipNoProductsYet => 'لا توجد منتجات بعد';
+
+  @override
+  String get ipNoProductsMatch => 'لا توجد منتجات تطابق بحثك';
+
+  @override
+  String get ipAddFirstHint => 'ابدأ بإضافة أول صنف إلى المخزون.';
+
+  @override
+  String get ipTryChangeSearch => 'جرّب تغيير كلمات البحث أو إلغاء الفلتر.';
+
+  @override
+  String get ipAddFirstBtn => '+ إضافة أول منتج';
+
+  @override
+  String get ipUnpinFromHome => 'إلغاء التثبيت من الرئيسية';
+
+  @override
+  String get ipPinToHome => 'تثبيت في الرئيسية';
+
+  @override
+  String get ipPrintBarcode => 'طباعة باركود';
+
+  @override
+  String get ipDeactivate => 'تعطيل';
+
+  @override
+  String get ipActivate => 'تفعيل';
+
+  @override
+  String get ipDeleteProduct => 'حذف';
+
+  @override
+  String get ipNotTracked => 'غير متتبّع';
+
+  @override
+  String get ipDeleteProductTitle => 'حذف المنتج';
+
+  @override
+  String get ipDeleteProductContent =>
+      'سيتم إخفاء المنتج من القوائم (حذف منطقي) بدون كسر الفواتير المرتبطة.';
+
+  @override
+  String get ipProductType => 'منتج';
+
+  @override
+  String get ipTechnicalService => 'خدمة فنية';
+
+  @override
+  String ipAvailableQty(Object qty) {
+    return 'الكمية المتاحة: $qty';
+  }
+
+  @override
+  String get ipOutOfStock => 'نفذ';
+
+  @override
+  String get ipProductOptions => 'خيارات المنتج';
+
+  @override
+  String ipShowingResults(Object extra, Object matched, Object shown) {
+    return 'عرض $shown من أصل $matched منتج$extra';
+  }
+
+  @override
+  String ipExtraCatalogInfo(Object total) {
+    return ' · إجمالي النشط: $total';
+  }
+
+  @override
+  String get addProductTitle => 'إضافة منتج جديد';
+
+  @override
+  String get apUnsavedChanges => 'تغييرات غير محفوظة';
+
+  @override
+  String get apUnsavedConfirm =>
+      'لم تقم بحفظ المنتج. هل تريد الحفظ قبل المغادرة؟';
+
+  @override
+  String get apLeaveWithoutSaving => 'مغادرة بدون حفظ';
+
+  @override
+  String get apSaveProduct => 'حفظ المنتج';
+
+  @override
+  String get apColorSizeTitle => 'الألوان والمقاسات';
+
+  @override
+  String get apDone => 'تم';
+
+  @override
+  String get apLoadFormFailed => 'فشل تحميل بيانات نموذج المنتج';
+
+  @override
+  String apLoadFormFailedDetail(Object error) {
+    return 'تعذر تحميل بيانات النموذج. سيعمل الحقل بالوضع اليدوي.\\n$error';
+  }
+
+  @override
+  String apImagePickFailed(Object error) {
+    return 'تعذر اختيار الصورة: $error';
+  }
+
+  @override
+  String get apPercentDiscountMax =>
+      'خصم النسبة المئوية لا يمكن أن يتعدّى 100٪.';
+
+  @override
+  String get apBarcodeRequired => 'حقل الباركود إلزامي حسب الإعدادات.';
+
+  @override
+  String get apSupplierRequired => 'حقل المورد إلزامي حسب الإعدادات.';
+
+  @override
+  String get apWarehouseRequired => 'اختيار المخزن إلزامي حسب الإعدادات.';
+
+  @override
+  String get apImageRequired => 'صورة المنتج إلزامية حسب الإعدادات.';
+
+  @override
+  String get apMfgDateFormatError =>
+      'صيغة تاريخ الإنتاج غير صحيحة. استخدم يوم/شهر/سنة (مثال 15/01/2026).';
+
+  @override
+  String get apExpDateFormatError =>
+      'صيغة تاريخ الانتهاء غير صحيحة. استخدم يوم/شهر/سنة (مثال 15/01/2026).';
+
+  @override
+  String get apExpDateAfterMfg =>
+      'تاريخ الانتهاء يجب أن يكون بعد أو يساوي تاريخ الإنتاج.';
+
+  @override
+  String get apConversionFactorGt0 =>
+      'عامل التحويل يجب أن يكون أكبر من 0 لكل وحدة إضافية.';
+
+  @override
+  String get apAddAtLeastOneColor => 'أضف لوناً واحداً على الأقل.';
+
+  @override
+  String get apColorNameRequired => 'اسم اللون مطلوب.';
+
+  @override
+  String get apAddAtLeastOneSize => 'أضف مقاساً واحداً على الأقل لكل لون.';
+
+  @override
+  String get apSizeRequired => 'حقل المقاس مطلوب.';
+
+  @override
+  String apDuplicateSize(Object color, Object size) {
+    return 'المقاس \"$size\" مكرر داخل اللون \"$color\".';
+  }
+
+  @override
+  String get apQtyMustBeNonNeg =>
+      'الكمية يجب أن تكون رقماً صحيحاً أكبر أو يساوي 0.';
+
+  @override
+  String get apDuplicateBarcodeVariants => 'يوجد باركود مكرر داخل المتغيرات.';
+
+  @override
+  String get apBarcodeUsedByOther => 'هذا الباركود مستخدم لمنتج آخر.';
+
+  @override
+  String get apVariantBarcodeTaken => 'باركود المتغير مستخدم مسبقاً.';
+
+  @override
+  String get apDuplicateSizeInColor => 'المقاس مكرر داخل نفس اللون.';
+
+  @override
+  String get apQtyMustBeGe0 => 'الكمية يجب أن تكون أكبر أو تساوي 0.';
+
+  @override
+  String get apBarcodeAlreadyUsed => 'الباركود مستخدم مسبقاً.';
+
+  @override
+  String apSaveFailed(Object error) {
+    return 'تعذر حفظ المنتج: $error';
+  }
+
+  @override
+  String get apProductSaved => 'تم حفظ المنتج. يمكنك إدخال منتج جديد.';
+
+  @override
+  String get apChooseColorTitle => 'اختيار لون';
+
+  @override
+  String get apChooseColorSubtitle => 'اختر لوناً يمثّل هذا الخيار (اختياري).';
+
+  @override
+  String get apApplyUniformQty => 'تطبيق كمية موحدة';
+
+  @override
+  String get apEnterQtyHint => 'أدخل كمية (0 أو أكثر)';
+
+  @override
+  String get apSizeLabel => 'المقاس';
+
+  @override
+  String get apChooseSizeTooltip => 'اختيار مقاس';
+
+  @override
+  String get apQtyLabel => 'الكمية';
+
+  @override
+  String get apBarcodeOptional => 'الباركود (اختياري)';
+
+  @override
+  String get apDeleteAction => 'حذف';
+
+  @override
+  String get apColorNameLabel => 'اسم اللون';
+
+  @override
+  String get apColorPickerTooltip => 'اختيار لون (HEX)';
+
+  @override
+  String get apDeleteColorTooltip => 'حذف اللون';
+
+  @override
+  String get apSizesAndQuantities => 'المقاسات والكميات';
+
+  @override
+  String get apNoSizesYet => 'لا توجد مقاسات بعد. أضف مقاساً واحداً على الأقل.';
+
+  @override
+  String get apAddSizeBtn => 'إضافة مقاس';
+
+  @override
+  String apColorTotal(Object count) {
+    return 'إجمالي اللون: $count';
+  }
+
+  @override
+  String get apAddNewColor => 'إضافة لون جديد';
+
+  @override
+  String get apApplyQtyAllSizes => 'تطبيق كمية موحدة على كل المقاسات';
+
+  @override
+  String get apNoColorsYet => 'لا توجد ألوان بعد. أضف لوناً للبدء.';
+
+  @override
+  String apProductCodeHint(Object code) {
+    return 'رمز المنتج: $code';
+  }
+
+  @override
+  String get apCancelTooltip => 'إلغاء';
+
+  @override
+  String get apSavingLabel => 'جاري الحفظ…';
+
+  @override
+  String get apSaveAndAddNew => 'حفظ وإضافة جديد';
+
+  @override
+  String get apProductData => 'بيانات المنتج';
+
+  @override
+  String get apProductNameLabel => 'اسم المنتج';
+
+  @override
+  String get apNameRequired => 'الاسم مطلوب';
+
+  @override
+  String get apDescriptionLabel => 'الوصف';
+
+  @override
+  String get apProductImage => 'صورة المنتج';
+
+  @override
+  String get apCategoryLabel => 'التصنيف';
+
+  @override
+  String get apCategoryHint => 'اكتب أو اختر من القائمة';
+
+  @override
+  String get apBrandLabel => 'الماركة';
+
+  @override
+  String get apBrandHint => 'اكتب أو اختر من القائمة';
+
+  @override
+  String get apGradeLabel => 'الرتبة / درجة الجودة';
+
+  @override
+  String get apGradeHint => 'اختر الدرجة (اختياري)';
+
+  @override
+  String get apNoCategory => '— بدون تصنيف —';
+
+  @override
+  String get apGradeA => 'درجة A — ممتاز';
+
+  @override
+  String get apGradeB => 'درجة B — جيد جداً';
+
+  @override
+  String get apGradeC => 'درجة C — جيد';
+
+  @override
+  String get apGradeFirst => 'درجة أولى';
+
+  @override
+  String get apGradeSecond => 'درجة ثانية';
+
+  @override
+  String get apGradeThird => 'درجة ثالثة';
+
+  @override
+  String get apCommercial => 'صنف تجاري';
+
+  @override
+  String get apEconomical => 'صنف اقتصادي';
+
+  @override
+  String get apWarehouseLabel => 'المخزن';
+
+  @override
+  String get apNoWarehousesInDb => 'لا توجد مستودعات في قاعدة البيانات';
+
+  @override
+  String get apChooseWarehouse => 'اختر المخزن';
+
+  @override
+  String get apNoWarehouseLink => '— بدون ربط بمخزن —';
+
+  @override
+  String get apStockBaseType => 'نوع المخزون الأساسي';
+
+  @override
+  String get apStockTypePiece => 'عدد (قطعة كأساس)';
+
+  @override
+  String get apStockTypeWeight => 'وزن (كيلوغرام كأساس)';
+
+  @override
+  String get apStockTypeClothing => 'ملابس (ألوان ومقاسات)';
+
+  @override
+  String get apEditColorsSizes => 'تعديل الألوان والمقاسات';
+
+  @override
+  String get apSupplierInfo => 'معلومات المورد';
+
+  @override
+  String get apSupplierLabel => 'المورد';
+
+  @override
+  String get apSupplierHint => 'اكتب أو اختر من السجل';
+
+  @override
+  String get apSupplierCodeOptional => 'كود المورد (اختياري)';
+
+  @override
+  String get apExtraUnitsOptional => 'وحدات بيع إضافية (اختياري)';
+
+  @override
+  String get apExtraUnitsDesc =>
+      'مثال: كرتون، طبقة، كيلوغرام… لكل وحدة باركود اختياري وعامل تحويل إلى أساس المخزون.';
+
+  @override
+  String get apAddUnit => 'إضافة وحدة';
+
+  @override
+  String get apNoExtraUnits => 'لا توجد وحدات إضافية بعد.';
+
+  @override
+  String apUnitNumber(Object number) {
+    return 'وحدة #$number';
+  }
+
+  @override
+  String get apUnitNameLabel => 'اسم الوحدة';
+
+  @override
+  String get apSymbolLabel => 'رمز';
+
+  @override
+  String get apConversionFactor => 'عامل التحويل إلى الأساس';
+
+  @override
+  String get apBarcodeOptionalLabel => 'باركود (اختياري)';
+
+  @override
+  String get apBarcodeEan13 => 'الباركود (EAN-13)';
+
+  @override
+  String get apBarcodeCode128 => 'الباركود (Code 128)';
+
+  @override
+  String get apBarcodeValue => 'قيمة الباركود';
+
+  @override
+  String get apCaptureFromCamera => 'التاطق من الكاميرا';
+
+  @override
+  String get apReadFromScanner => 'قراءة من جهاز قارئ الباركود';
+
+  @override
+  String get apScanProductBarcode => 'قراءة باركود المنتج';
+
+  @override
+  String get apGenerateNewBarcode => 'توليد باركود رقمي جديد';
+
+  @override
+  String get apWeightPriceNote =>
+      'يُحسب لكل كيلوغرام واحد (أساس المخزون بالوزن).';
+
+  @override
+  String get apPricingSection => 'التسعير';
+
+  @override
+  String get apPurchasePriceLabel => 'سعر الشراء';
+
+  @override
+  String get apSuggestedFromCost => 'اقتراح من سعر الشراء';
+
+  @override
+  String get apSellPriceLabel => 'سعر البيع';
+
+  @override
+  String get apSellBelowBuyWarning =>
+      'تحذير: سعر البيع أقل من سعر الشراء (يمكن الإكمال).';
+
+  @override
+  String get apTaxSection => 'الضريبة';
+
+  @override
+  String get apTaxExempt => 'معفى';
+
+  @override
+  String get apCustomTax => 'مخصص';
+
+  @override
+  String get apTaxExemptFull => 'معفى من الضريبة';
+
+  @override
+  String get apTax5 => 'ضريبة 5٪';
+
+  @override
+  String get apTax10 => 'ضريبة 10٪';
+
+  @override
+  String get apTax15 => 'ضريبة 15٪';
+
+  @override
+  String get apCustomRate => 'نسبة مخصصة';
+
+  @override
+  String get apTaxPercentLabel => 'نسبة الضريبة %';
+
+  @override
+  String apSellIncludingTax(Object amount) {
+    return 'البيع شاملاً الضريبة (تقريبي): $amount';
+  }
+
+  @override
+  String get apDiscountType => 'نوع الخصم';
+
+  @override
+  String get apPercentDiscount => 'نسبة مئوية (٪)';
+
+  @override
+  String get apFixedAmountDiscount => 'عمولة / مبلغ (د.ع)';
+
+  @override
+  String get apDiscountValue => 'قيمة الخصم';
+
+  @override
+  String apExampleNumber(Object number) {
+    return 'مثال: $number';
+  }
+
+  @override
+  String get apMinSellPrice => 'أقل سعر بيع';
+
+  @override
+  String get apOptionalLabel => 'اختياري';
+
+  @override
+  String get apProfitMargin => 'هامش الربح (سعر البيع مقابل الشراء)';
+
+  @override
+  String get apInventorySection => 'إدارة المخزون';
+
+  @override
+  String get apTrackInventory => 'تتبع المخزون';
+
+  @override
+  String get apTrackInventoryOff => 'عند الإيقاف لا تُسجَّل كميات لهذا المنتج';
+
+  @override
+  String get apWeightSales => 'بالكيلوغرام — يدعم الكسور (0.25، 0.5، 1.5…)';
+
+  @override
+  String get apWeightThreshold =>
+      'بالكيلوغرام (مثال: 1 = تنبيه عند أقل من 1 كغ)';
+
+  @override
+  String get apStockQty => 'الكمية في المخزون';
+
+  @override
+  String get apAlertThreshold => 'تنبيه عند أقل من';
+
+  @override
+  String apVariantsStockInfo(Object total) {
+    return 'المخزون يُدار عبر الألوان والمقاسات. الإجمالي الحالي: $total';
+  }
+
+  @override
+  String get apNetWeightLabel => 'الوزن الصافي (غرام) — اختياري';
+
+  @override
+  String get apNetWeightHint => 'يُملأ تلقائياً من باركود GS1 أو الوزن المدمج';
+
+  @override
+  String get apMfgDateLabel => 'تاريخ الإنتاج — اختياري';
+
+  @override
+  String get apPickFromCalendar => 'اختر من التقويم';
+
+  @override
+  String get apDateFormat => 'يوم/شهر/سنة';
+
+  @override
+  String get apExpDateLabel => 'تاريخ الانتهاء — اختياري';
+
+  @override
+  String get apExpiryAlertDays => 'تنبيه قبل انتهاء الصلاحية (عدد الأيام)';
+
+  @override
+  String get apExpiryAlertHint =>
+      'عند تسجيل تاريخ انتهاء: 1–365 (فارغ = الافتراضي من الإعدادات)';
+
+  @override
+  String get apExpiryAlertNote =>
+      'يُستخدم مع «تاريخ الانتهاء» فقط؛ يظهر التنبيه في لوحة الإشعارات خلال هذه المدة قبل التاريخ.';
+
+  @override
+  String get apInternalNotes => 'ملاحظات داخلية';
+
+  @override
+  String get apInternalNotesHint => 'لا تظهر للعميل — للفريق فقط';
+
+  @override
+  String get apTags => 'وسوم';
+
+  @override
+  String get apTagsHint => 'مفصولة بفواصل أو مسافات — للبحث والتصفية';
+
+  @override
+  String get apChooseFromList => 'اختر من القائمة';
+
+  @override
+  String get apImageSelected => 'تم اختيار صورة (معاينة على الويب غير متاحة)';
+
+  @override
+  String get apTapToAddImage => 'اضغط لإضافة صورة من المعرض';
+
+  @override
+  String get apManualEditActive =>
+      'التعديل اليدوي نشط — لن يُحدَّث سعر البيع تلقائياً عند تغيير التكلفة.';
+
+  @override
+  String get apRelinkToCost => ' إعادة الربط بتكلفة الشراء';
 }

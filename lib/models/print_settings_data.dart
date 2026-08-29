@@ -4,6 +4,8 @@ import 'package:pdf/pdf.dart';
 
 /// أحجام ورق شائعة في أنظمة البيع بالتجزئة.
 enum PrintPaperFormat {
+
+  thermal76x297,
   /// حراري ضيق (~58 مم)
   thermal58,
 
@@ -55,6 +57,8 @@ class PrintSettingsData {
         return const PdfPageFormat(58 * mm, 320 * mm);
       case PrintPaperFormat.thermal80:
         return const PdfPageFormat(80 * mm, 320 * mm);
+      case PrintPaperFormat.thermal76x297:
+        return const PdfPageFormat(76 * mm, 297 * mm);
       case PrintPaperFormat.a4:
         return PdfPageFormat.a4;
     }

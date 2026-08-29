@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 import '../../providers/global_barcode_route_bridge.dart';
 import '../../providers/theme_provider.dart';
+import '../../l10n/generated/app_localizations.dart';
 import '../../providers/inventory_products_provider.dart';
 import '../../services/product_repository.dart';
 import '../../services/product_variants_repository.dart';
@@ -60,6 +61,7 @@ class InventoryProductsScreen extends StatefulWidget {
 
 class _InventoryProductsScreenState extends State<InventoryProductsScreen>
     with SingleTickerProviderStateMixin {
+  AppLocalizations get loc => AppLocalizations.of(context)!;
   final _keyword = TextEditingController();
   final _barcode = TextEditingController();
   final _prodCode = TextEditingController();
@@ -72,15 +74,15 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
   GlobalBarcodeRouteBridge? _barcodeBridge;
 
   // filter state
-  String _category = 'جميع التصنيفات';
-  String _brand = 'جميع الماركات';
-  String _status = 'الكل';
-  String _sortBy = 'الاسم';
+  String _category = '';
+  String _brand = '';
+  String _status = '';
+  String _sortBy = '';
   bool _sortAscending = true;
   bool _advanced = false;
 
-  List<String> _categoryItems = const ['جميع التصنيفات'];
-  List<String> _brandItems = const ['جميع الماركات'];
+  List<String> _categoryItems = const [];
+  List<String> _brandItems = const [];
 
   final ProductRepository _productRepo = ProductRepository();
 
@@ -94,22 +96,22 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
       if (!mounted) return;
       setState(() {
         _categoryItems = [
-          'جميع التصنيفات',
+          loc.ipAllCategories,
           ...cats
               .map((r) => '${r['name'] ?? ''}'.trim())
               .where((e) => e.isNotEmpty),
         ];
         _brandItems = [
-          'جميع الماركات',
+          loc.ipAllBrands,
           ...brs
               .map((r) => '${r['name'] ?? ''}'.trim())
               .where((e) => e.isNotEmpty),
         ];
         if (!_categoryItems.contains(_category)) {
-          _category = 'جميع التصنيفات';
+          _category = loc.ipAllCategories;
         }
         if (!_brandItems.contains(_brand)) {
-          _brand = 'جميع الماركات';
+          _brand = loc.ipAllBrands;
         }
       });
     } catch (_) {
@@ -182,8 +184,8 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
             _parsePriceIqdOptional(_priceTo) != null)) {
       n++;
     }
-    if (_category != 'جميع التصنيفات') n++;
-    if (_brand != 'جميع الماركات') n++;
+    if (_category != loc.ipAllCategories) n++;
+    if (_brand != loc.ipAllBrands) n++;
     if (_status != 'الكل') n++;
     return n;
   }
@@ -263,8 +265,8 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
       _prodCode.clear();
       _priceFrom.clear();
       _priceTo.clear();
-      _category = 'جميع التصنيفات';
-      _brand = 'جميع الماركات';
+      _category = loc.ipAllCategories;
+      _brand = loc.ipAllBrands;
       _status = 'الكل';
     });
     _pushFiltersToProvider();
@@ -293,14 +295,14 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
           backgroundColor: _kNavy,
           foregroundColor: Colors.white,
           elevation: 0,
-          title: const Text(
-            'إدارة المنتجات',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+          title: Text(
+            loc.ipProductManagement,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
           ),
           actions: [
             IconButton(
               icon: const Icon(Icons.settings_outlined, size: 22),
-              tooltip: 'الإعدادات',
+              tooltip: loc.ipSettingsTooltip,
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -309,7 +311,7 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
               ),
             ),
             PopupMenuButton<String>(
-              tooltip: 'المزيد',
+              tooltip: loc.ipMoreTooltip,
               onSelected: (v) async {
                 if (v == 'print_barcodes') {
                   await Navigator.push<void>(
@@ -320,14 +322,14 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
                   );
                 }
               },
-              itemBuilder: (_) => const [
+              itemBuilder: (_) => [
                 PopupMenuItem(
                   value: 'print_barcodes',
                   child: Row(
                     children: [
-                      Icon(Icons.qr_code_rounded, size: 18),
-                      SizedBox(width: 10),
-                      Text('طباعة ملصقات باركود'),
+                      const Icon(Icons.qr_code_rounded, size: 18),
+                      const SizedBox(width: 10),
+                      Text(loc.ipPrintBarcodes),
                     ],
                   ),
                 ),
@@ -352,8 +354,8 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
                       await products.refresh();
                       if (!mounted) return;
                       messenger.showSnackBar(
-                        const SnackBar(
-                          content: Text('تم حفظ المنتج وتحديث القائمة'),
+                        SnackBar(
+                          content: Text(loc.ipProductSavedSnackbar),
                           backgroundColor: _kGreen,
                           behavior: SnackBarBehavior.floating,
                           shape: RoundedRectangleBorder(
@@ -365,8 +367,8 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
                     }
                   },
                   icon: const Icon(Icons.add_rounded, size: 16),
-                  label: const Text(
-                    '+ منتج جديد',
+                  label: Text(
+                    loc.ipNewProductBtn,
                     style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                   ),
                   style: ElevatedButton.styleFrom(
@@ -443,6 +445,7 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
                     slivers: [
                       SliverToBoxAdapter(
                         child: _SearchCard(
+                          loc: loc,
                           keyword: _keyword,
                           keywordFn: _keywordFn,
                           barcode: _barcode,
@@ -489,6 +492,7 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
                       ),
                       SliverToBoxAdapter(
                         child: _ResultsHeader(
+                          loc: loc,
                           shownCount: filtered.length,
                           matchedTotal: matched,
                           catalogTotal: catalogTotal,
@@ -532,6 +536,7 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
                                 ),
                             delegate: SliverChildBuilderDelegate(
                                   (context, i) => _ProductCardSkeleton(
+                                  loc: loc,
                                   surface: surface,
                                   border: border,
                                   text2: text2,
@@ -546,6 +551,7 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
                         SliverFillRemaining(
                           hasScrollBody: false,
                           child: _ProductsEmptyBlock(
+                            loc: loc,
                             isDark: _isDark,
                             catalogTotal: catalogTotal,
                             matchedTotal: matched,
@@ -569,6 +575,7 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
                             80,
                           ),
                           sliver: _ProductGridSliver(
+                            loc: loc,
                             products: filtered,
                             isLoadingMore: provider.isLoadingMore,
                                     surface: surface,
@@ -595,6 +602,7 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
 // ══════════════════════════════════════════════════════════════════════════════
 class _ProductGridSliver extends StatelessWidget {
   const _ProductGridSliver({
+    required this.loc,
     required this.products,
     required this.isLoadingMore,
     required this.surface,
@@ -611,6 +619,7 @@ class _ProductGridSliver extends StatelessWidget {
   final Color text2;
   final Color border;
   final bool isDark;
+  final AppLocalizations loc;
 
   @override
   Widget build(BuildContext context) {
@@ -635,6 +644,7 @@ class _ProductGridSliver extends StatelessWidget {
                 );
               }
               return _ProductCard(
+                loc: loc,
                 product: products[i],
                 surface: surface,
                 text1: text1,
@@ -656,6 +666,7 @@ class _ProductGridSliver extends StatelessWidget {
 // ══════════════════════════════════════════════════════════════════════════════
 class _SearchCard extends StatelessWidget {
   const _SearchCard({
+    required this.loc,
     required this.keyword,
     required this.keywordFn,
     required this.barcode,
@@ -716,14 +727,9 @@ class _SearchCard extends StatelessWidget {
   final VoidCallback onSearch;
   final VoidCallback onClear;
   final VoidCallback onToggleAdvanced;
+  final AppLocalizations loc;
 
-  static const List<String> _statusItems = [
-    'الكل',
-    'نشط',
-    'مخزون منخفض',
-    'نفذ من المخزون',
-    'معطّل',
-  ];
+  static const List<String> _statusItems = ['الكل', 'نشط', 'مخزون منخفض', 'نفذ من المخزون', 'معطّل'];
 
   @override
   Widget build(BuildContext context) {
@@ -762,7 +768,7 @@ class _SearchCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  'بحث ومطابقة',
+                  loc.ipSearchAndMatch,
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.bold,
@@ -793,7 +799,7 @@ class _SearchCard extends StatelessWidget {
                         child: _pickDropdownWide(
                           categoryItems,
                           category,
-                          'التصنيف',
+                          loc.ipCategoryFilter,
                           onCategoryChanged,
                         ),
                       ),
@@ -802,7 +808,7 @@ class _SearchCard extends StatelessWidget {
                         child: _pickDropdownWide(
                           brandItems,
                           brand,
-                          'الماركة',
+                          loc.ipBrandFilter,
                           onBrandChanged,
                         ),
                       ),
@@ -815,14 +821,14 @@ class _SearchCard extends StatelessWidget {
                     _pickDropdownWide(
                             categoryItems,
                             category,
-                            'التصنيف',
+                            loc.ipCategoryFilter,
                             onCategoryChanged,
                           ),
                     const SizedBox(height: 10),
                     _pickDropdownWide(
                             brandItems,
                             brand,
-                            'الماركة',
+                            loc.ipBrandFilter,
                             onBrandChanged,
                     ),
                   ],
@@ -898,8 +904,8 @@ class _SearchCard extends StatelessWidget {
                         : Icons.tune_rounded,
                     size: 15,
                   ),
-                  label: const Text(
-                    'بحث متقدم',
+                  label: Text(
+                    loc.ipAdvancedSearch,
                     style: TextStyle(fontSize: 12),
                   ),
                   style: OutlinedButton.styleFrom(
@@ -939,8 +945,8 @@ class _SearchCard extends StatelessWidget {
                         ),
                         child: Text(
                           activeFiltersCount > 0
-                              ? 'إلغاء الفلتر ($activeFiltersCount)'
-                              : 'إلغاء الفلتر',
+                              ? loc.ipClearFilterCount(activeFiltersCount)
+                              : loc.ipClearFilter,
                           style: const TextStyle(fontSize: 12),
                         ),
                       ),
@@ -952,9 +958,9 @@ class _SearchCard extends StatelessWidget {
                           size: 15,
                           color: Colors.white,
                         ),
-                        label: const Text(
-                          'بحث',
-                          style: TextStyle(fontSize: 12, color: Colors.white),
+                        label: Text(
+                          loc.ipSearchAction,
+                          style: const TextStyle(fontSize: 12, color: Colors.white),
                         ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: _kNavy,
@@ -1012,7 +1018,7 @@ class _SearchCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'البحث بكلمة مفتاحية',
+              loc.ipKeywordSearch,
               style: TextStyle(
                 fontSize: 11,
                 fontWeight: FontWeight.w600,
@@ -1033,7 +1039,7 @@ class _SearchCard extends StatelessWidget {
                 onChanged: (_) => onKeywordChanged(),
                 onSubmitted: (_) => onKeywordSubmitImmediate(),
                 decoration: InputDecoration(
-                  hintText: 'ادخل الاسم أو الكود أو الباركود',
+                  hintText: loc.ipKeywordHint,
                   hintStyle: TextStyle(fontSize: 12, color: text2),
                   filled: true,
                   fillColor: fill,
@@ -1053,7 +1059,7 @@ class _SearchCard extends StatelessWidget {
                       : Icon(Icons.search_rounded, size: 16, color: text2),
                   suffixIcon: val.text.isNotEmpty
                       ? IconButton(
-                          tooltip: 'مسح',
+                          tooltip: loc.clearTooltip,
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             keyword.clear();
@@ -1091,6 +1097,7 @@ class _SearchCard extends StatelessWidget {
   ) {
     if (items.where((e) => e.trim().isNotEmpty).length > 8) {
       return _AutocompletePick(
+        loc: loc,
         label: label,
         value: value,
         options: items,
@@ -1102,6 +1109,7 @@ class _SearchCard extends StatelessWidget {
       );
     }
     return _SearchDropdownCore(
+      loc: loc,
       label: label,
       value: value,
       items: items,
@@ -1129,7 +1137,7 @@ class _SearchCard extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          'الحالة',
+          loc.ipStatusFilter,
           style: TextStyle(
             fontSize: 11,
             fontWeight: FontWeight.w600,
@@ -1226,7 +1234,7 @@ class _SearchCard extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          'باركود',
+          loc.ipBarcodeFilter,
           style: TextStyle(
             fontSize: 11,
             fontWeight: FontWeight.w600,
@@ -1243,7 +1251,7 @@ class _SearchCard extends StatelessWidget {
             textDirection: TextDirection.ltr,
             style: TextStyle(fontSize: 13, color: text1),
             decoration: InputDecoration(
-              hintText: 'مسح أو الكتابة',
+              hintText: loc.ipScanOrType,
               hintStyle: TextStyle(fontSize: 11, color: text2),
               filled: true,
               fillColor: fill,
@@ -1271,7 +1279,7 @@ class _SearchCard extends StatelessWidget {
   Widget _prod() => _SearchFieldCore(
     controller: prodCode,
     hint: '',
-    label: 'كود المنتج',
+    label: loc.ipProductCode,
     icon: Icons.tag_rounded,
     text1: text1,
     text2: text2,
@@ -1284,7 +1292,7 @@ class _SearchCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Text(
-          'نطاق سعر البيع (دينار)',
+          loc.ipSalePriceRange,
           style: TextStyle(
             fontSize: 11,
             fontWeight: FontWeight.w600,
@@ -1297,7 +1305,7 @@ class _SearchCard extends StatelessWidget {
             Expanded(
               child: _SearchFieldCore(
                 controller: priceTo,
-                hint: 'إلى',
+                hint: loc.ipPriceTo,
                 label: '',
                 icon: null,
                 text1: text1,
@@ -1314,7 +1322,7 @@ class _SearchCard extends StatelessWidget {
             Expanded(
               child: _SearchFieldCore(
                 controller: priceFrom,
-                hint: 'من',
+                hint: loc.ipPriceFrom,
                 label: '',
                 icon: null,
                 text1: text1,
@@ -1424,6 +1432,7 @@ class _SearchDropdownCore extends StatelessWidget {
   final Color text2;
   final Color border;
   final bool isDark;
+  final AppLocalizations loc;
 
   const _SearchDropdownCore({
     required this.label,
@@ -1434,6 +1443,7 @@ class _SearchDropdownCore extends StatelessWidget {
     required this.text2,
     required this.border,
     required this.isDark,
+    required this.loc,
   });
 
   @override
@@ -1496,6 +1506,7 @@ class _SearchDropdownCore extends StatelessWidget {
 
 class _AutocompletePick extends StatelessWidget {
   const _AutocompletePick({
+    required this.loc,
     required this.label,
     required this.value,
     required this.options,
@@ -1513,6 +1524,7 @@ class _AutocompletePick extends StatelessWidget {
   final Color text2;
   final Color border;
   final bool isDark;
+  final AppLocalizations loc;
 
   @override
   Widget build(BuildContext context) {
@@ -1615,6 +1627,7 @@ class _ResultsHeader extends StatelessWidget {
   final bool isDark;
   final ValueChanged<String> onSortChanged;
   final VoidCallback onSortDirectionToggle;
+  final AppLocalizations loc;
 
   const _ResultsHeader({
     required this.shownCount,
@@ -1629,17 +1642,18 @@ class _ResultsHeader extends StatelessWidget {
     required this.isDark,
     required this.onSortChanged,
     required this.onSortDirectionToggle,
+    required this.loc,
   });
 
-  static const _sortChoices = ['الاسم', 'السعر', 'الكمية', 'تاريخ الإضافة'];
+  List<String> get _sortChoices => [loc.ipResultsName, loc.ipResultsPrice, loc.ipResultsQty, loc.ipResultsAddedDate];
 
   @override
   Widget build(BuildContext context) {
     final layout = context.screenLayout;
     final extraCatalog = catalogTotal != matchedTotal && catalogTotal > 0
-        ? ' · إجمالي النشط: $catalogTotal'
+        ? loc.ipExtraCatalogInfo(catalogTotal.toString())
         : '';
-    final sum = 'عرض $shownCount من أصل $matchedTotal منتج$extraCatalog';
+    final sum = loc.ipShowingResults(shownCount, matchedTotal, extraCatalog);
     return Container(
       margin: EdgeInsetsDirectional.fromSTEB(
         layout.pageHorizontalGap,
@@ -1659,7 +1673,7 @@ class _ResultsHeader extends StatelessWidget {
           final sortControls = Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('الفرز', style: TextStyle(fontSize: 11, color: text2)),
+              Text(loc.ipSortLabel, style: TextStyle(fontSize: 11, color: text2)),
               const SizedBox(width: 8),
               Container(
                 height: 32,
@@ -1674,7 +1688,7 @@ class _ResultsHeader extends StatelessWidget {
                 alignment: AlignmentDirectional.centerEnd,
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<String>(
-                    value: _sortChoices.contains(sortBy) ? sortBy : 'الاسم',
+                    value: _sortChoices.contains(sortBy) ? sortBy : loc.ipResultsName,
                     isDense: true,
                     icon: Icon(Icons.sort_rounded, size: 16, color: text2),
                     style: TextStyle(
@@ -1700,7 +1714,7 @@ class _ResultsHeader extends StatelessWidget {
                 ),
               ),
               IconButton(
-                tooltip: sortAscending ? 'تصاعدي' : 'تنازلي',
+                tooltip: sortAscending ? loc.ipSortAsc : loc.ipSortDesc,
                 constraints: const BoxConstraints(minWidth: 34, minHeight: 34),
                 padding: EdgeInsets.zero,
                 visualDensity: VisualDensity.compact,
@@ -1769,6 +1783,7 @@ class _ResultsHeader extends StatelessWidget {
 // ══════════════════════════════════════════════════════════════════════════════
 class _ProductCardSkeleton extends StatelessWidget {
   const _ProductCardSkeleton({
+    required this.loc,
     required this.surface,
     required this.border,
     required this.text2,
@@ -1777,6 +1792,7 @@ class _ProductCardSkeleton extends StatelessWidget {
   final Color surface;
   final Color border;
   final Color text2;
+  final AppLocalizations loc;
 
   @override
   Widget build(BuildContext context) {
@@ -1866,6 +1882,7 @@ class _ProductCardSkeleton extends StatelessWidget {
 
 class _ProductsEmptyBlock extends StatelessWidget {
   const _ProductsEmptyBlock({
+    required this.loc,
     required this.isDark,
     required this.catalogTotal,
     required this.matchedTotal,
@@ -1873,6 +1890,7 @@ class _ProductsEmptyBlock extends StatelessWidget {
     required this.onAddFirst,
   });
 
+  final AppLocalizations loc;
   final bool isDark;
   final int catalogTotal;
   final int matchedTotal;
@@ -1883,11 +1901,11 @@ class _ProductsEmptyBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     final txt = Theme.of(context).colorScheme.onSurfaceVariant;
     final title = catalogTotal == 0
-        ? 'لا توجد منتجات بعد'
-        : 'لا توجد منتجات تطابق بحثك';
+        ? loc.ipNoProductsYet
+        : loc.ipNoProductsMatch;
     final sub = catalogTotal == 0
-        ? 'ابدأ بإضافة أول صنف إلى المخزون.'
-        : 'جرّب تغيير كلمات البحث أو إلغاء الفلتر.';
+        ? loc.ipAddFirstHint
+        : loc.ipTryChangeSearch;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(28),
@@ -1948,7 +1966,7 @@ class _ProductsEmptyBlock extends StatelessWidget {
                   style: OutlinedButton.styleFrom(
                     side: BorderSide(color: borderColor(context)),
                   ),
-                  child: const Text('إلغاء الفلتر'),
+                  child: Text(loc.ipClearFilter),
                 ),
             ],
           ],
@@ -1962,6 +1980,7 @@ class _ProductsEmptyBlock extends StatelessWidget {
 }
 
 List<PopupMenuEntry<String>> _productPopupMenuEntries({
+  required AppLocalizations loc,
   required bool isPinned,
   required bool active,
   required bool hasTogglePin,
@@ -1971,29 +1990,29 @@ List<PopupMenuEntry<String>> _productPopupMenuEntries({
       PopupMenuItem(
         value: isPinned ? 'unpin' : 'pin',
         child: Text(
-          isPinned ? 'إلغاء التثبيت من الرئيسية' : 'تثبيت في الرئيسية',
+          isPinned ? loc.ipUnpinFromHome : loc.ipPinToHome,
         ),
       ),
       const PopupMenuDivider(),
     ],
-    const PopupMenuItem(value: 'edit', child: Text('تعديل')),
-    const PopupMenuItem(value: 'print_bc', child: Text('طباعة باركود')),
+    PopupMenuItem(value: 'edit', child: Text(loc.edit)),
+    PopupMenuItem(value: 'print_bc', child: Text(loc.ipPrintBarcode)),
     PopupMenuItem(
       value: 'toggle_active',
-      child: Text(active ? 'تعطيل' : 'تفعيل'),
+      child: Text(active ? loc.ipDeactivate : loc.ipActivate),
     ),
     const PopupMenuDivider(),
-    const PopupMenuItem(
+    PopupMenuItem(
       value: 'delete',
-      child: Text('حذف', style: TextStyle(color: Colors.red)),
+      child: Text(loc.ipDeleteProduct, style: TextStyle(color: Colors.red)),
     ),
   ];
 }
 
 /// نفس منطق عرض الكمية في بطاقات المنتجات المثبّتة بالرئيسية (`wide_home_product_rail`).
-String _inventoryProductStockLine(Map<String, dynamic> p) {
+String _inventoryProductStockLine(AppLocalizations loc, Map<String, dynamic> p) {
   final track = ((p['trackInventory'] as num?)?.toInt() ?? 1) != 0;
-  if (!track) return 'غير متتبّع';
+  if (!track) return loc.ipNotTracked;
   final q = p['qty'];
   if (q == null) return '—';
   final n = (q as num).toDouble();
@@ -2113,6 +2132,7 @@ class _ProductCard extends StatefulWidget {
   final Color text2;
   final Color border;
   final bool isDark;
+  final AppLocalizations loc;
 
   const _ProductCard({
     required this.product,
@@ -2121,6 +2141,7 @@ class _ProductCard extends StatefulWidget {
     required this.text2,
     required this.border,
     required this.isDark,
+    required this.loc,
   });
 
   @override
@@ -2128,6 +2149,7 @@ class _ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<_ProductCard> {
+  AppLocalizations get loc => widget.loc;
   bool _hover = false;
   Offset? _lastPointer;
   final ProductRepository _repo = ProductRepository();
@@ -2220,21 +2242,21 @@ class _ProductCardState extends State<_ProductCard> {
       final ok = await showDialog<bool>(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: const Text('حذف المنتج'),
-          content: const Text(
-            'سيتم إخفاء المنتج من القوائم (حذف منطقي) بدون كسر الفواتير المرتبطة.',
+          title: Text(loc.ipDeleteProductTitle),
+          content: Text(
+            loc.ipDeleteProductContent,
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: const Text('إلغاء'),
+              child: Text(loc.cancel),
             ),
             FilledButton(
               onPressed: () => Navigator.pop(ctx, true),
               style: FilledButton.styleFrom(
                 backgroundColor: Colors.red.shade700,
               ),
-              child: const Text('حذف'),
+              child: Text(loc.ipDeleteProduct),
             ),
           ],
         ),
@@ -2262,13 +2284,13 @@ class _ProductCardState extends State<_ProductCard> {
         : rawQty;
     final stock = needsVariantFix && variantSum != null
         ? IraqiCurrencyFormat.formatInt(effectiveQty)
-        : _inventoryProductStockLine(p);
+        : _inventoryProductStockLine(loc, p);
     final outOfStock = track && effectiveQty <= 0;
 
     final sellN = (p['sell'] as num?)?.toDouble() ?? 0;
     final name = (p['name'] as String?)?.trim().isNotEmpty == true
         ? '${p['name']}'.trim()
-        : 'منتج';
+        : loc.ipProductType;
     final priceLabel = IraqiCurrencyFormat.formatIqd(sellN);
 
     final border2 = widget.isDark
@@ -2303,6 +2325,7 @@ class _ProductCardState extends State<_ProductCard> {
         context: context,
         position: pos,
         items: _productPopupMenuEntries(
+          loc: loc,
           isPinned: pinned,
           active: active,
           hasTogglePin: true,
@@ -2475,7 +2498,7 @@ class _ProductCardState extends State<_ProductCard> {
                                                 ),
                                               ),
                                               child: Text(
-                                                'خدمة فنية',
+                                                loc.ipTechnicalService,
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
                                                 textAlign: TextAlign.center,
@@ -2491,7 +2514,7 @@ class _ProductCardState extends State<_ProductCard> {
                                               ),
                                             )
                                           : Text(
-                                              'الكمية المتاحة: $stock',
+                                              loc.ipAvailableQty(stock.toString()),
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                               textAlign: TextAlign.center,
@@ -2511,6 +2534,7 @@ class _ProductCardState extends State<_ProductCard> {
                     top: 4,
                     start: 4,
                     child: _OptionsBtn(
+                      loc: loc,
                       isDark: widget.isDark,
                       border: widget.border,
                       isPinned: pinned,
@@ -2532,8 +2556,8 @@ class _ProductCardState extends State<_ProductCard> {
                           color: Colors.black.withValues(alpha: 0.72),
                           borderRadius: BorderRadius.circular(6),
                                       ),
-                        child: const Text(
-                                      'نفذ',
+                        child: Text(
+                                      loc.ipOutOfStock,
                                       style: TextStyle(
                             color: Colors.white,
                             fontSize: 9.5,
@@ -2558,6 +2582,7 @@ class _OptionsBtn extends StatelessWidget {
   final bool isPinned;
   final bool isActive;
   final bool hasTogglePin;
+  final AppLocalizations loc;
   final void Function(String value) onMenuChoice;
 
   const _OptionsBtn({
@@ -2566,6 +2591,7 @@ class _OptionsBtn extends StatelessWidget {
     required this.isPinned,
     required this.isActive,
     required this.hasTogglePin,
+    required this.loc,
     required this.onMenuChoice,
   });
 
@@ -2583,7 +2609,7 @@ class _OptionsBtn extends StatelessWidget {
       ),
       child: PopupMenuButton<String>(
         padding: EdgeInsets.zero,
-        tooltip: 'خيارات المنتج',
+        tooltip: loc.ipProductOptions,
         icon: Icon(
           Icons.more_horiz_rounded,
           size: 18,
@@ -2591,6 +2617,7 @@ class _OptionsBtn extends StatelessWidget {
         ),
         onSelected: (v) => onMenuChoice(v),
         itemBuilder: (_) => _productPopupMenuEntries(
+          loc: loc,
           isPinned: isPinned,
           active: isActive,
           hasTogglePin: hasTogglePin,

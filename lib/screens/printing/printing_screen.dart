@@ -139,9 +139,9 @@ class _PrintingScreenState extends State<PrintingScreen> {
               padding: const EdgeInsets.all(16),
               children: [
                 _HeroCard(),
-                SizedBox(height: 14),
+                const SizedBox(height: 14),
                 _SectionTitle(icon: Icons.description_outlined, title: AppLocalizations.of(context)!.salesReceiptSection),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Card(
                   elevation: 0,
                   shape: RoundedRectangleBorder(
@@ -162,14 +162,18 @@ class _PrintingScreenState extends State<PrintingScreen> {
                             color: cs.onSurface,
                           ),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         DropdownButtonFormField<PrintPaperFormat>(
                           value: _paper,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(borderRadius: AppShape.none),
                             isDense: true,
                           ),
                           items: [
+                            const DropdownMenuItem(
+                              value: PrintPaperFormat.thermal76x297,
+                              child: Text('حراري 76×297 مم'),
+                              ),
                             DropdownMenuItem(
                               value: PrintPaperFormat.thermal58,
                               child: Text(AppLocalizations.of(context)!.thermal58mm),
@@ -178,7 +182,7 @@ class _PrintingScreenState extends State<PrintingScreen> {
                               value: PrintPaperFormat.thermal80,
                               child: Text(AppLocalizations.of(context)!.thermal80mm),
                             ),
-                            DropdownMenuItem(
+                            const DropdownMenuItem(
                               value: PrintPaperFormat.a4,
                               child: Text('A4'),
                             ),
@@ -191,13 +195,13 @@ class _PrintingScreenState extends State<PrintingScreen> {
                             });
                           },
                         ),
-                        SizedBox(height: 14),
+                        const SizedBox(height: 14),
                         SwitchListTile(
                           contentPadding: EdgeInsets.zero,
                           title: Text(AppLocalizations.of(context)!.showTransactionBarcodeTitle),
                           subtitle: Text(
                             AppLocalizations.of(context)!.transactionBarcodeDesc,
-                            style: TextStyle(fontSize: 12),
+                            style: const TextStyle(fontSize: 12),
                           ),
                           value: _showBarcode,
                           activeThumbColor: cs.primary,
@@ -212,7 +216,7 @@ class _PrintingScreenState extends State<PrintingScreen> {
                           title: Text(AppLocalizations.of(context)!.showQrCodeTitle),
                           subtitle: Text(
                             AppLocalizations.of(context)!.qrCodeDesc,
-                            style: TextStyle(fontSize: 12),
+                            style: const TextStyle(fontSize: 12),
                           ),
                           value: _showQr,
                           activeThumbColor: cs.primary,
@@ -227,7 +231,7 @@ class _PrintingScreenState extends State<PrintingScreen> {
                           title: Text(AppLocalizations.of(context)!.qrBuyerAddressTitle),
                           subtitle: Text(
                             AppLocalizations.of(context)!.qrBuyerAddressDesc,
-                            style: TextStyle(fontSize: 12),
+                            style: const TextStyle(fontSize: 12),
                           ),
                           value: _showBuyerAddressQr,
                           activeThumbColor: cs.primary,
@@ -237,16 +241,16 @@ class _PrintingScreenState extends State<PrintingScreen> {
                                 _dirty = true;
                               }),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         TextField(
                           controller: _storeTitleCtrl,
                           onChanged: (_) => setState(() => _dirty = true),
                           decoration: InputDecoration(
                             labelText: AppLocalizations.of(context)!.headerLineLabel,
-                            border: OutlineInputBorder(borderRadius: AppShape.none),
+                            border: const OutlineInputBorder(borderRadius: AppShape.none),
                           ),
                         ),
-                        SizedBox(height: 12),
+                        const SizedBox(height: 12),
                         TextField(
                           controller: _footerCtrl,
                           maxLines: 3,
@@ -254,16 +258,16 @@ class _PrintingScreenState extends State<PrintingScreen> {
                           decoration: InputDecoration(
                             labelText: AppLocalizations.of(context)!.footerLineLabel,
                             alignLabelWithHint: true,
-                            border: OutlineInputBorder(borderRadius: AppShape.none),
+                            border: const OutlineInputBorder(borderRadius: AppShape.none),
                           ),
                         ),
                       ],
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 _SectionTitle(icon: Icons.link_rounded, title: AppLocalizations.of(context)!.barcodeLabelsSection),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Card(
                   elevation: 0,
                   shape: RoundedRectangleBorder(
@@ -279,7 +283,7 @@ class _PrintingScreenState extends State<PrintingScreen> {
                         title: Text(AppLocalizations.of(context)!.barcodeLabelsSection),
                         subtitle: Text(
                             AppLocalizations.of(context)!.barcodeSettingsDesc,
-                          style: TextStyle(fontSize: 12),
+                          style: const TextStyle(fontSize: 12),
                         ),
                         trailing: const Icon(Icons.chevron_left, size: 20),
                         onTap: () => Navigator.of(context).push(
@@ -295,7 +299,7 @@ class _PrintingScreenState extends State<PrintingScreen> {
                         title: Text(AppLocalizations.of(context)!.storeDataTitle),
                         subtitle: Text(
                             AppLocalizations.of(context)!.storeDataDesc,
-                          style: TextStyle(fontSize: 12),
+                          style: const TextStyle(fontSize: 12),
                         ),
                         onTap: () {
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -310,7 +314,7 @@ class _PrintingScreenState extends State<PrintingScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 FilledButton.icon(
                   onPressed: _previewSample,
                   icon: const Icon(Icons.preview_outlined),
@@ -321,7 +325,7 @@ class _PrintingScreenState extends State<PrintingScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 OutlinedButton.icon(
                   onPressed: _save,
                   icon: const Icon(Icons.save_outlined),
@@ -331,7 +335,7 @@ class _PrintingScreenState extends State<PrintingScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 Text(
                   'البيانات تُخزَّن في جدول print_settings وتُطبَّق تلقائياً عند طباعة إيصال البيع بعد كل عملية.',
                   textAlign: TextAlign.center,
@@ -386,7 +390,7 @@ class _HeroCard extends StatelessWidget {
             ),
             child: Icon(Icons.print_rounded, color: onHero, size: 36),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -399,7 +403,7 @@ class _HeroCard extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 6),
+                const SizedBox(height: 6),
                 Text(
                   AppLocalizations.of(context)!.printCenterDesc,
                   style: TextStyle(
@@ -428,7 +432,7 @@ class _SectionTitle extends StatelessWidget {
     return Row(
       children: [
         Icon(icon, size: 20, color: cs.secondary),
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
         Text(
           title,
           style: TextStyle(

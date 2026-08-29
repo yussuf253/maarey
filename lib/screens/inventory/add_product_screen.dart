@@ -14,6 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
 import '../../models/new_product_extra_unit.dart';
+import '../../l10n/generated/app_localizations.dart';
 import '../../providers/product_provider.dart';
 import '../../providers/notification_provider.dart';
 import '../../services/app_settings_repository.dart';
@@ -39,7 +40,7 @@ import '../../widgets/variants/variant_size_picker_sheet.dart';
 import '../../navigation/app_route_observer.dart';
 
 const Color _kGreen = Color(0xFF15803D);
-const String _hintIqd = '0 د.ع';
+const String _hintIqd = '0 IQD';
 
 class _ExtraUnitVariantDraft {
   _ExtraUnitVariantDraft()
@@ -129,6 +130,7 @@ class AddProductScreen extends StatefulWidget {
 }
 
 class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
+  AppLocalizations get loc => AppLocalizations.of(context)!;
   final _formKey = GlobalKey<FormState>();
 
   final ProductRepository _productRepo = ProductRepository();
@@ -231,7 +233,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
     if (_stockBaseKind != 0) return true;
     if (_stockTypeUi != 0) return true;
     if (_discountType != '%') return true;
-    if (_taxMode != 'معفى') return true;
+    if (_taxMode != loc.apTaxExempt) return true;
     if (!_trackInventory) return true;
     if (_multiVariantEnabled) return true;
     if (_colorDrafts.isNotEmpty) return true;
@@ -278,22 +280,22 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                 child: Icon(Icons.save_outlined, color: cs.primary),
               ),
               const SizedBox(width: 10),
-              const Expanded(child: Text('تغييرات غير محفوظة')),
+              Expanded(child: Text(loc.apUnsavedChanges)),
             ],
           ),
-          content: const Text('لم تقم بحفظ المنتج. هل تريد الحفظ قبل المغادرة؟'),
+          content: Text(loc.apUnsavedConfirm),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, 0),
-              child: const Text('إلغاء'),
+              child: Text(loc.cancel),
             ),
             TextButton(
               onPressed: () => Navigator.pop(ctx, 1),
-              child: const Text('مغادرة بدون حفظ'),
+              child: Text(loc.apLeaveWithoutSaving),
             ),
             FilledButton(
               onPressed: () => Navigator.pop(ctx, 2),
-              child: const Text('حفظ المنتج'),
+              child: Text(loc.apSaveProduct),
             ),
           ],
         );
@@ -483,16 +485,16 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                             ),
                             child: Row(
                               children: [
-                                const Expanded(
+                                Expanded(
                                   child: Text(
-                                    'الألوان والمقاسات',
+                                    loc.apColorSizeTitle,
                                     style:
-                                        TextStyle(fontWeight: FontWeight.w900),
+                                        const TextStyle(fontWeight: FontWeight.w900),
                                   ),
                                 ),
                                 TextButton(
                                   onPressed: () => Navigator.pop(ctx),
-                                  child: const Text('إغلاق'),
+                                  child: Text(loc.apDone),
                                 ),
                               ],
                             ),
@@ -525,7 +527,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                                 width: double.infinity,
                                 child: FilledButton(
                                   onPressed: () => Navigator.pop(ctx),
-                                  child: const Text('تم'),
+                                  child: Text(loc.apDone),
                                 ),
                               ),
                             ),
@@ -568,7 +570,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
   void _goAfterSell() {
     if (_uiSettings.addShowAdvancedPricing &&
         _uiSettings.addShowTaxField &&
-        _taxMode == 'مخصص') {
+        _taxMode == loc.apCustomTax) {
       _focusCustomTax.requestFocus();
     } else {
       _goAfterTaxTowardDiscountThenMin();
@@ -622,9 +624,8 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
         return 10;
       case '15':
         return 15;
-      case 'مخصص':
-        return double.tryParse(_customTaxCtrl.text.replaceAll(',', '.')) ?? 0;
       default:
+        if (_taxMode == loc.apCustomTax) return double.tryParse(_customTaxCtrl.text.replaceAll(',', '.')) ?? 0;
         return 0;
     }
   }
@@ -710,12 +711,12 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
         }
         if (defTax != null &&
             defTax.isNotEmpty &&
-            {'معفى', '5', '10', '15', 'مخصص'}.contains(defTax)) {
+            {loc.apTaxExempt, '5', '10', '15', loc.apCustomTax}.contains(defTax)) {
           _taxMode = defTax;
         }
       });
     } catch (e, st) {
-      AppLogger.error('Product', 'فشل تحميل بيانات نموذج المنتج', e, st);
+      AppLogger.error('Product', loc.apLoadFormFailed, e, st);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -925,7 +926,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
         if (p != null && p > 100) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: const Text('خصم النسبة المئوية لا يمكن أن يتعدّى 100٪.'),
+              content: Text(loc.apPercentDiscountMax),
               backgroundColor: Colors.red.shade700,
               behavior: SnackBarBehavior.floating,
             ),
@@ -962,7 +963,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
         barcode.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('حقل الباركود إلزامي حسب الإعدادات.'),
+          content: Text(loc.apBarcodeRequired),
           backgroundColor: Colors.red.shade700,
           behavior: SnackBarBehavior.floating,
         ),
@@ -972,7 +973,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
     if (_uiSettings.addRequireSupplier && supplier.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('حقل المورد إلزامي حسب الإعدادات.'),
+          content: Text(loc.apSupplierRequired),
           backgroundColor: Colors.red.shade700,
           behavior: SnackBarBehavior.floating,
         ),
@@ -982,7 +983,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
     if (_uiSettings.addRequireWarehouse && _warehouseId == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('اختيار المخزن إلزامي حسب الإعدادات.'),
+          content: Text(loc.apWarehouseRequired),
           backgroundColor: Colors.red.shade700,
           behavior: SnackBarBehavior.floating,
         ),
@@ -994,7 +995,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
         (_imagePath == null || _imagePath!.trim().isEmpty)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('صورة المنتج إلزامية حسب الإعدادات.'),
+          content: Text(loc.apImageRequired),
           backgroundColor: Colors.red.shade700,
           behavior: SnackBarBehavior.floating,
         ),
@@ -1008,8 +1009,8 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
       if (_mfgDateCtrl.text.trim().isNotEmpty && mfgD == null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Text(
-              'صيغة تاريخ الإنتاج غير صحيحة. استخدم يوم/شهر/سنة (مثال 15/01/2026).',
+            content: Text(
+              loc.apMfgDateFormatError,
             ),
             backgroundColor: Colors.red.shade700,
             behavior: SnackBarBehavior.floating,
@@ -1020,8 +1021,8 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
       if (_expDateCtrl.text.trim().isNotEmpty && expD == null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Text(
-              'صيغة تاريخ الانتهاء غير صحيحة. استخدم يوم/شهر/سنة (مثال 15/01/2026).',
+            content: Text(
+              loc.apExpDateFormatError,
             ),
             backgroundColor: Colors.red.shade700,
             behavior: SnackBarBehavior.floating,
@@ -1032,8 +1033,8 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
       if (mfgD != null && expD != null && expD.isBefore(mfgD)) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Text(
-              'تاريخ الانتهاء يجب أن يكون بعد أو يساوي تاريخ الإنتاج.',
+            content: Text(
+              loc.apExpDateAfterMfg,
             ),
             backgroundColor: Colors.red.shade700,
             behavior: SnackBarBehavior.floating,
@@ -1070,9 +1071,9 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
           double.tryParse(row.factor.text.trim().replaceAll(',', '.')) ?? 0;
       if (!(f > 0)) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(
-              'عامل التحويل يجب أن يكون أكبر من 0 لكل وحدة إضافية.',
+              loc.apConversionFactorGt0,
             ),
             backgroundColor: Colors.red,
             behavior: SnackBarBehavior.floating,
@@ -1085,30 +1086,30 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
     String? validateVariantDrafts() {
       if (!_multiVariantEnabled) return null;
       if (_colorDrafts.isEmpty) {
-        return 'أضف لوناً واحداً على الأقل.';
+        return loc.apAddAtLeastOneColor;
       }
 
       final seenBarcodes = <String>{};
       for (final c in _colorDrafts) {
         final colorName = c.nameCtrl.text.trim();
-        if (colorName.isEmpty) return 'اسم اللون مطلوب.';
-        if (c.sizes.isEmpty) return 'أضف مقاساً واحداً على الأقل لكل لون.';
+        if (colorName.isEmpty) return loc.apColorNameRequired;
+        if (c.sizes.isEmpty) return loc.apAddAtLeastOneSize;
 
         final seenSizesInColor = <String>{};
         for (final s in c.sizes) {
           final size = s.sizeCtrl.text.trim();
-          if (size.isEmpty) return 'حقل المقاس مطلوب.';
+          if (size.isEmpty) return loc.apSizeRequired;
           final key = size.toLowerCase();
           if (!seenSizesInColor.add(key)) {
-            return 'المقاس "$size" مكرر داخل اللون "$colorName".';
+            return loc.apDuplicateSize(colorName, size);
           }
 
           final q = _parseNonNegativeInt(s.qtyCtrl.text);
-          if (q < 0) return 'الكمية يجب أن تكون رقماً صحيحاً أكبر أو يساوي 0.';
+          if (q < 0) return loc.apQtyMustBeNonNeg;
 
           final bc = s.barcodeCtrl.text.trim().toUpperCase();
           if (bc.isNotEmpty) {
-            if (!seenBarcodes.add(bc)) return 'يوجد باركود مكرر داخل المتغيرات.';
+            if (!seenBarcodes.add(bc)) return loc.apDuplicateBarcodeVariants;
           }
         }
       }
@@ -1315,24 +1316,24 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
       }
     } on StateError catch (e) {
       if (e.message == 'duplicate_barcode') {
-        err = 'هذا الباركود مستخدم لمنتج آخر.';
+        err = loc.apBarcodeUsedByOther;
       } else if (e.message == 'variant_barcode_taken') {
-        err = 'باركود المتغير مستخدم مسبقاً.';
+        err = loc.apVariantBarcodeTaken;
       } else if (e.message == 'color_name_required') {
-        err = 'اسم اللون مطلوب.';
+        err = loc.apColorNameRequired;
       } else if (e.message == 'size_required') {
-        err = 'حقل المقاس مطلوب.';
+        err = loc.apSizeRequired;
       } else if (e.message == 'duplicate_size') {
-        err = 'المقاس مكرر داخل نفس اللون.';
+        err = loc.apDuplicateSizeInColor;
       } else if (e.message == 'bad_quantity') {
-        err = 'الكمية يجب أن تكون أكبر أو تساوي 0.';
+        err = loc.apQtyMustBeGe0;
       } else if (e.message == 'duplicate_barcode') {
-        err = 'الباركود مستخدم مسبقاً.';
+        err = loc.apBarcodeAlreadyUsed;
       } else {
         err = e.message;
       }
     } catch (e) {
-      err = 'تعذر حفظ المنتج: $e';
+      err = loc.apSaveFailed(e.toString());
     }
     if (!mounted) return;
     setState(() => _saving = false);
@@ -1361,8 +1362,8 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
     } else {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('تم حفظ المنتج. يمكنك إدخال منتج جديد.'),
+        SnackBar(
+          content: Text(loc.apProductSaved),
           behavior: SnackBarBehavior.floating,
           backgroundColor: _kGreen,
         ),
@@ -1401,7 +1402,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
     _extraUnitVariants.clear();
     _stockBaseKind = 0;
     _stockTypeUi = 0;
-    _taxMode = 'معفى';
+    _taxMode = loc.apTaxExempt;
     _discountType = '%';
     _trackInventory = _uiSettings.addDefaultTrackInventory;
     _multiVariantEnabled = false;
@@ -1464,7 +1465,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
         }
         if (defTax2 != null &&
             defTax2.isNotEmpty &&
-            {'معفى', '5', '10', '15', 'مخصص'}.contains(defTax2)) {
+            {loc.apTaxExempt, '5', '10', '15', loc.apCustomTax}.contains(defTax2)) {
           _taxMode = defTax2;
         }
       });
@@ -1503,8 +1504,8 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
       final chosen = await showAppColorPickerDialog(
         context: context,
         initialColor: current,
-        title: 'اختيار لون',
-        subtitle: 'اختر لوناً يمثّل هذا الخيار (اختياري).',
+        title: loc.apChooseColorTitle,
+        subtitle: loc.apChooseColorSubtitle,
       );
       if (chosen == null || !mounted) return;
       final hex =
@@ -1543,23 +1544,23 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
       final ok = await showDialog<bool>(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: const Text('تطبيق كمية موحدة'),
+          title: Text(loc.apApplyUniformQty),
           content: TextField(
             controller: ctrl,
             keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              hintText: 'أدخل كمية (0 أو أكثر)',
+            decoration: InputDecoration(
+                    hintText: loc.apEnterQtyHint,
               border: OutlineInputBorder(),
             ),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: const Text('إلغاء'),
+              child: Text(loc.cancel),
             ),
             FilledButton(
               onPressed: () => Navigator.pop(ctx, true),
-              child: const Text('تطبيق'),
+              child: Text(loc.apDone),
             ),
           ],
         ),
@@ -1607,7 +1608,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                   canRequestFocus: false,
                   onTap: () => pickSizeFor(s),
                   decoration: InputDecoration(
-                    labelText: 'المقاس',
+                    labelText: loc.apSizeLabel,
                     border: const OutlineInputBorder(),
                     isDense: true,
                     suffixIcon: Icon(Icons.expand_more, color: cs.primary),
@@ -1618,7 +1619,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
               ),
               const SizedBox(width: 6),
               IconButton(
-                tooltip: 'اختيار مقاس',
+                tooltip: loc.apChooseSizeTooltip,
                 onPressed: () => pickSizeFor(s),
                 icon: Icon(Icons.view_module_outlined, color: cs.primary),
               ),
@@ -1628,9 +1629,9 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                 child: TextFormField(
                   controller: s.qtyCtrl,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    labelText: 'الكمية',
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    labelText: loc.apQtyLabel,
+                    border: const OutlineInputBorder(),
                     isDense: true,
                   ),
                   textDirection: TextDirection.ltr,
@@ -1642,9 +1643,9 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                 flex: 4,
                 child: TextFormField(
                   controller: s.barcodeCtrl,
-                  decoration: const InputDecoration(
-                    labelText: 'الباركود (اختياري)',
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    labelText: loc.apBarcodeOptional,
+                    border: const OutlineInputBorder(),
                     isDense: true,
                   ),
                   textDirection: TextDirection.ltr,
@@ -1653,7 +1654,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
               ),
               const SizedBox(width: 6),
               IconButton(
-                tooltip: 'حذف',
+                tooltip: loc.delete,
                 onPressed: () {
                   ss(() {
                     final removed = c.sizes.removeAt(sizeIndex);
@@ -1684,9 +1685,9 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                   Expanded(
                     child: TextFormField(
                       controller: c.nameCtrl,
-                      decoration: const InputDecoration(
-                        labelText: 'اسم اللون',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: loc.apColorNameLabel,
+                        border: const OutlineInputBorder(),
                         isDense: true,
                       ),
                       onChanged: (_) {
@@ -1698,7 +1699,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                   ),
                   const SizedBox(width: 10),
                   Tooltip(
-                    message: 'اختيار لون (HEX)',
+                    message: loc.apColorPickerTooltip,
                     child: InkWell(
                       onTap: () => pickColorFor(c),
                       child: Container(
@@ -1720,7 +1721,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                   ),
                   const SizedBox(width: 8),
                   IconButton(
-                    tooltip: 'حذف اللون',
+                    tooltip: loc.apDeleteColorTooltip,
                     onPressed: () {
                       ss(() {
                         final idx = _colorDrafts.indexOf(c);
@@ -1745,7 +1746,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      'المقاسات والكميات',
+                      loc.apSizesAndQuantities,
                       style: TextStyle(
                         fontWeight: FontWeight.w800,
                         color: cs.onSurface,
@@ -1754,7 +1755,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                     const SizedBox(height: 10),
                     if (c.sizes.isEmpty)
                       Text(
-                        'لا توجد مقاسات بعد. أضف مقاساً واحداً على الأقل.',
+                        loc.apNoSizesYet,
                         style: TextStyle(color: cs.onSurfaceVariant),
                       )
                     else
@@ -1782,7 +1783,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                           ss(() => c.sizes.add(_VariantSizeDraft()));
                         },
                         icon: const Icon(Icons.add, size: 18),
-                        label: const Text('إضافة مقاس'),
+                        label: Text(loc.apAddSizeBtn),
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -1818,7 +1819,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
               children: [
                 Expanded(
                   child: Text(
-                    'الألوان والمقاسات',
+                    loc.apColorSizeTitle,
                     style: theme.textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.w800,
                       color: cs.primary,
@@ -1847,19 +1848,19 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                     _colorDrafts.add(c);
                   }),
                   icon: const Icon(Icons.add),
-                  label: const Text('إضافة لون جديد'),
+                  label: Text(loc.apAddNewColor),
                 ),
                 OutlinedButton.icon(
                   onPressed: _colorDrafts.isEmpty ? null : applyUniformQty,
                   icon: const Icon(Icons.auto_fix_high_outlined),
-                  label: const Text('تطبيق كمية موحدة على كل المقاسات'),
+                  label: Text(loc.apApplyQtyAllSizes),
                 ),
               ],
             ),
             const SizedBox(height: 12),
             if (_colorDrafts.isEmpty)
               Text(
-                'لا توجد ألوان بعد. أضف لوناً للبدء.',
+                loc.apNoColorsYet,
                 style: TextStyle(color: cs.onSurfaceVariant),
                 textAlign: TextAlign.end,
               )
@@ -1923,7 +1924,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
             foregroundColor: cs.onPrimary,
             elevation: 0,
             title: Text(
-              'إضافة منتج جديد',
+              loc.addProductTitle,
               style: theme.textTheme.titleMedium?.copyWith(
                 color: cs.onPrimary,
                 fontWeight: FontWeight.w600,
@@ -2050,7 +2051,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
               children: [
                 OutlinedButton(
                   onPressed: _saving ? null : () => Navigator.pop(context),
-                  child: const Text('إلغاء'),
+                  child: Text(loc.cancel),
                 ),
                 FilledButton.icon(
                   onPressed: _saving ? null : () => _submit(popAfter: true),
@@ -2072,7 +2073,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                           ),
                         )
                       : const Icon(Icons.check_rounded, size: 20),
-                  label: Text(_saving ? 'جاري الحفظ…' : 'حفظ المنتج'),
+                  label: Text(_saving ? loc.apSavingLabel : 'حفظ المنتج'),
                 ),
                 FilledButton.tonalIcon(
                   onPressed: _saving ? null : () => _submit(popAfter: false),
@@ -2083,7 +2084,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                     ),
                   ),
                   icon: const Icon(Icons.add_circle_outline_rounded, size: 20),
-                  label: const Text('حفظ وإضافة جديد'),
+                  label: Text(loc.apSaveAndAddNew),
                 ),
               ],
             ),
@@ -2098,7 +2099,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
   Widget _buildIdentityCard(BuildContext context) {
     return _sectionCard(
       context,
-      title: 'بيانات المنتج',
+      title: loc.apProductData,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -2108,7 +2109,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
               Expanded(
                 flex: 3,
                 child: AppInput(
-                  label: 'اسم المنتج',
+                  label: loc.productNameLabel,
                   isRequired: true,
                   controller: _nameCtrl,
                   focusNode: _focusName,
@@ -2116,7 +2117,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                   onFieldSubmitted: (_) => _focusDesc.requestFocus(),
                   textAlign: TextAlign.right,
                   validator: (v) =>
-                      (v == null || v.trim().isEmpty) ? 'الاسم مطلوب' : null,
+                      (v == null || v.trim().isEmpty) ? loc.apNameRequired : null,
                 ),
               ),
               const SizedBox(width: 12),
@@ -2157,7 +2158,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
           ),
           const SizedBox(height: 14),
           AppInput(
-            label: 'الوصف',
+            label: loc.descriptionLabel,
             controller: _descCtrl,
             focusNode: _focusDesc,
             textAlign: TextAlign.right,
@@ -2168,7 +2169,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
           if (_uiSettings.addShowImageField) ...[
             _labeledField(
               context,
-              label: 'صورة المنتج',
+              label: loc.apProductImage,
               requiredField: _uiSettings.addRequireImage,
               child: _imageTile(context),
             ),
@@ -2179,19 +2180,19 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
               final row = c.maxWidth >= 520;
               final cat = _comboField(
                 context,
-                label: 'التصنيف',
+                label: loc.apCategoryLabel,
                 controller: _categoryCtrl,
                 options: _categoryOptions,
-                hint: 'اكتب أو اختر من القائمة',
+                hint: loc.apCategoryHint,
                 focusNode: _focusCategory,
                 onFieldSubmitted: (_) => _focusBrand.requestFocus(),
               );
               final br = _comboField(
                 context,
-                label: 'الماركة',
+                label: loc.apBrandLabel,
                 controller: _brandCtrl,
                 options: _brandOptions,
-                hint: 'اكتب أو اختر من القائمة',
+                hint: loc.apCategoryHint,
                 focusNode: _focusBrand,
                 onFieldSubmitted: (_) => _focusSupplier.requestFocus(),
               );
@@ -2213,35 +2214,35 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
             const SizedBox(height: 14),
             _labeledField(
               context,
-              label: 'الرتبة / درجة الجودة',
+              label: loc.apGradeLabel,
               child: DropdownButtonFormField<String?>(
                 value: _grade,
                 isExpanded: true,
-                decoration: _inputDecOf(context, hint: 'اختر الدرجة (اختياري)'),
-                items: const [
-                  DropdownMenuItem(value: null, child: Text('— بدون تصنيف —')),
-                  DropdownMenuItem(value: 'A', child: Text('درجة A — ممتاز')),
+                decoration: _inputDecOf(context, hint: loc.apGradeHint),
+                items: [
+                  DropdownMenuItem(value: null, child: Text(loc.apNoCategory)),
+                  DropdownMenuItem(value: 'A', child: Text(loc.apGradeA)),
                   DropdownMenuItem(
                     value: 'B',
-                    child: Text('درجة B — جيد جداً'),
+                    child: Text(loc.apGradeB),
                   ),
-                  DropdownMenuItem(value: 'C', child: Text('درجة C — جيد')),
+                  DropdownMenuItem(value: 'C', child: Text(loc.apGradeC)),
                   DropdownMenuItem(
-                    value: 'درجة أولى',
-                    child: Text('درجة أولى'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'درجة ثانية',
-                    child: Text('درجة ثانية'),
+                    value: loc.apGradeFirst,
+                    child: Text(loc.apGradeFirst),
                   ),
                   DropdownMenuItem(
-                    value: 'درجة ثالثة',
-                    child: Text('درجة ثالثة'),
+                    value: loc.apGradeSecond,
+                    child: Text(loc.apGradeSecond),
                   ),
-                  DropdownMenuItem(value: 'تجاري', child: Text('صنف تجاري')),
                   DropdownMenuItem(
-                    value: 'اقتصادي',
-                    child: Text('صنف اقتصادي'),
+                    value: loc.apGradeThird,
+                    child: Text(loc.apGradeThird),
+                  ),
+                  DropdownMenuItem(value: 'تجاري', child: Text(loc.apCommercial)),
+                  DropdownMenuItem(
+                    value: loc.apEconomical,
+                    child: Text(loc.apEconomical),
                   ),
                 ],
                 onChanged: (v) => setState(() => _grade = v),
@@ -2251,7 +2252,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
           const SizedBox(height: 14),
           _labeledField(
             context,
-            label: 'المخزن',
+            label: loc.apWarehouseLabel,
             requiredField: _uiSettings.addRequireWarehouse,
             child: DropdownButtonFormField<int?>(
               value: _warehouseId,
@@ -2259,19 +2260,19 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
               decoration: _inputDecOf(context, hint: ''),
               hint: Text(
                 _warehouseRows.isEmpty
-                    ? 'لا توجد مستودعات في قاعدة البيانات'
-                    : 'اختر المخزن',
+                    ? loc.apNoWarehousesInDb
+                    : loc.apChooseWarehouse,
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                   fontSize: 13,
                 ),
               ),
               items: [
-                const DropdownMenuItem<int?>(
+                DropdownMenuItem<int?>(
                   value: null,
                   child: Text(
-                    '— بدون ربط بمخزن —',
-                    style: TextStyle(fontSize: 13),
+                    loc.apNoWarehouseLink,
+                    style: const TextStyle(fontSize: 13),
                   ),
                 ),
                 ..._warehouseRows.map(
@@ -2292,17 +2293,17 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
           const SizedBox(height: 14),
           _labeledField(
             context,
-            label: 'نوع المخزون الأساسي',
+            label: loc.apStockBaseType,
             child: DropdownButtonFormField<int>(
               value: _stockTypeUi,
               isExpanded: true,
               decoration: _inputDecOf(context, hint: ''),
               items: [
-                const DropdownMenuItem(value: 0, child: Text('عدد (قطعة كأساس)')),
+                DropdownMenuItem(value: 0, child: Text(loc.apStockTypePiece)),
                 if (_enableWeightSales)
-                  const DropdownMenuItem(value: 1, child: Text('وزن (كيلوغرام كأساس)')),
+                  DropdownMenuItem(value: 1, child: Text(loc.apStockTypeWeight)),
                 if (_enableClothingVariants)
-                  const DropdownMenuItem(value: 2, child: Text('ملابس (ألوان ومقاسات)')),
+                  DropdownMenuItem(value: 2, child: Text(loc.apStockTypeClothing)),
               ],
               onChanged: (v) {
                 final next = v ?? 0;
@@ -2342,7 +2343,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    'الألوان والمقاسات',
+                    loc.apColorSizeTitle,
                     style: TextStyle(
                       fontWeight: FontWeight.w900,
                       color: Theme.of(context).colorScheme.onSurface,
@@ -2363,7 +2364,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                     child: OutlinedButton.icon(
                       onPressed: _openVariantsEditor,
                       icon: const Icon(Icons.palette_outlined, size: 18),
-                      label: const Text('تعديل الألوان والمقاسات'),
+                      label: Text(loc.apEditColorsSizes),
                     ),
                   ),
                 ],
@@ -2374,7 +2375,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
           if (_stockTypeUi != 2) _saleExtraUnitsEditor(context),
           const SizedBox(height: 14),
           Text(
-            'معلومات المورد',
+            loc.apSupplierInfo,
             style: TextStyle(
               fontWeight: FontWeight.w900,
               color: Theme.of(context).colorScheme.onSurface,
@@ -2384,10 +2385,10 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
           const SizedBox(height: 8),
           _comboField(
             context,
-            label: 'المورد',
+            label: loc.apSupplierLabel,
             controller: _supplierCtrl,
             options: _supplierOptions,
-            hint: 'اكتب أو اختر من السجل',
+            hint: loc.apSupplierHint,
             requiredField: _uiSettings.addRequireSupplier,
             focusNode: _focusSupplier,
             onFieldSubmitted: (_) => _focusSupplierCode.requestFocus(),
@@ -2395,7 +2396,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
           const SizedBox(height: 14),
           _labeledField(
             context,
-            label: 'كود المورد (اختياري)',
+            label: loc.apSupplierCodeOptional,
             child: AppInput(
               label: '',
               showLabel: false,
@@ -2427,12 +2428,12 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            'وحدات بيع إضافية (اختياري)',
+            loc.apExtraUnitsOptional,
             style: TextStyle(fontWeight: FontWeight.w900, color: cs.onSurface),
           ),
           const SizedBox(height: 6),
           Text(
-            'مثال: كرتون، طبقة، كيلوغرام… لكل وحدة باركود اختياري وعامل تحويل إلى أساس المخزون.',
+            loc.apExtraUnitsDesc,
             style: TextStyle(
               fontSize: 12,
               color: cs.onSurfaceVariant,
@@ -2447,14 +2448,14 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                 () => _extraUnitVariants.add(_ExtraUnitVariantDraft()),
               ),
               icon: const Icon(Icons.add, size: 18),
-              label: const Text('إضافة وحدة'),
+              label: Text(loc.apAddUnit),
             ),
           ),
           if (_extraUnitVariants.isEmpty)
             Padding(
               padding: const EdgeInsets.only(top: 8),
               child: Text(
-                'لا توجد وحدات إضافية بعد.',
+                loc.apNoExtraUnits,
                 style: TextStyle(color: cs.onSurfaceVariant, fontSize: 12.5),
               ),
             )
@@ -2485,7 +2486,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                               ),
                             ),
                             IconButton(
-                              tooltip: 'حذف',
+                              tooltip: loc.delete,
                               onPressed: () => setState(() {
                                 final r = _extraUnitVariants.removeAt(i);
                                 r.dispose();
@@ -2507,7 +2508,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                                 showLabel: false,
                                 controller: row.unitName,
                                 textAlign: TextAlign.right,
-                                hint: 'اسم الوحدة',
+                                hint: loc.apUnitNameLabel,
                               ),
                             ),
                             const SizedBox(width: 8),
@@ -2518,7 +2519,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                                 showLabel: false,
                                 controller: row.unitSymbol,
                                 textAlign: TextAlign.right,
-                                hint: 'رمز',
+                                hint: loc.symbolLabel,
                               ),
                             ),
                           ],
@@ -2535,7 +2536,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                                 keyboardType: const TextInputType.numberWithOptions(
                                   decimal: true,
                                 ),
-                                hint: 'عامل التحويل إلى الأساس',
+                                hint: loc.apConversionFactor,
                               ),
                             ),
                             const SizedBox(width: 8),
@@ -2545,7 +2546,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                                 showLabel: false,
                                 controller: row.barcode,
                                 textAlign: TextAlign.right,
-                                hint: 'باركود (اختياري)',
+                                hint: loc.apBarcodeOptionalLabel,
                               ),
                             ),
                           ],
@@ -2617,7 +2618,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Text(
-                isEan ? 'الباركود (EAN-13)' : 'الباركود (Code 128)',
+                isEan ? loc.apBarcodeEan13 : loc.apBarcodeCode128,
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
@@ -2682,7 +2683,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                         LengthLimitingTextInputFormatter(13),
                       ]
                     : [LengthLimitingTextInputFormatter(48)],
-                hint: 'قيمة الباركود',
+                hint: loc.apBarcodeValue,
                 prefixIcon: Icon(
                   Icons.barcode_reader,
                   color: cs.onSurfaceVariant,
@@ -2694,8 +2695,8 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
             const SizedBox(width: 12),
             Tooltip(
               message: BarcodeInputLauncher.useCamera(context)
-                  ? 'التقاط من الكاميرا'
-                  : 'قراءة من جهاز قارئ الباركود',
+                  ? loc.apCaptureFromCamera
+                  : loc.apReadFromScanner,
               child: Material(
                 color: cs.primaryContainer.withValues(alpha: 0.6),
                 shape: const CircleBorder(),
@@ -2704,7 +2705,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                   onTap: () async {
                     final code = await BarcodeInputLauncher.captureBarcode(
                       context,
-                      title: 'قراءة باركود المنتج',
+                      title: loc.apScanProductBarcode,
                     );
                     if (!mounted || code == null || code.trim().isEmpty) return;
                     setState(() => _barcodeCtrl.text = code.trim());
@@ -2725,7 +2726,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
             ),
             const SizedBox(width: 8),
             Tooltip(
-              message: 'توليد باركود رقمي جديد',
+              message: loc.apGenerateNewBarcode,
               child: Material(
                 color: cs.primaryContainer.withValues(alpha: 0.6),
                 shape: const CircleBorder(),
@@ -2753,17 +2754,17 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
   Widget _buildPricingCard(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final perKgHint = _stockBaseKind == 1
-        ? 'يُحسب لكل كيلوغرام واحد (أساس المخزون بالوزن).'
+        ? loc.apWeightPriceNote
         : null;
     return _sectionCard(
       context,
-      title: 'التسعير',
+      title: loc.apPricingSection,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _labeledField(
             context,
-            label: 'سعر الشراء',
+            label: loc.purchasePriceLabel,
             subtitle: perKgHint,
             child: AppPriceInput(
               label: '',
@@ -2803,7 +2804,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'اقتراح من سعر الشراء',
+                                loc.apSuggestedFromCost,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w800,
                                   fontSize: 13,
@@ -2833,7 +2834,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                         child: TextButton.icon(
                           onPressed: _relinkSuggestedPricesToCost,
                           icon: const Icon(Icons.link_rounded, size: 18),
-                          label: const Text('إعادة الربط بتكلفة الشراء'),
+                          label: Text(loc.apRelinkToCost),
                         ),
                       ),
                     ],
@@ -2845,7 +2846,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
           const SizedBox(height: 14),
           _labeledField(
             context,
-            label: 'سعر البيع',
+            label: loc.apSellPriceLabel,
             subtitle: perKgHint,
             child: AppPriceInput(
               label: '',
@@ -2856,7 +2857,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
               textInputAction: TextInputAction.next,
               onFieldSubmitted: (_) => _goAfterSell(),
               warningText: _sellBelowBuy
-                  ? 'تحذير: سعر البيع أقل من سعر الشراء (يمكن الإكمال).'
+                  ? loc.apSellBelowBuyWarning
                   : null,
               onParsedChanged: (_) => setState(() {}),
             ),
@@ -2866,7 +2867,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
               _uiSettings.addShowTaxField) ...[
             _labeledField(
               context,
-              label: 'الضريبة',
+              label: loc.apTaxSection,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -2875,11 +2876,11 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                       if (c.maxWidth >= 520) {
                         return SegmentedButton<String>(
                           segments: const [
-                            ButtonSegment(value: 'معفى', label: Text('معفى')),
-                            ButtonSegment(value: '5', label: Text('5٪')),
-                            ButtonSegment(value: '10', label: Text('10٪')),
-                            ButtonSegment(value: '15', label: Text('15٪')),
-                            ButtonSegment(value: 'مخصص', label: Text('مخصص')),
+                            ButtonSegment(value: 'exempt', label: Text('Exempt')),
+                            ButtonSegment(value: '5', label: Text('5%')),
+                            ButtonSegment(value: '10', label: Text('10%')),
+                            ButtonSegment(value: '15', label: Text('15%')),
+                            ButtonSegment(value: 'custom', label: Text('Custom')),
                           ],
                           selected: {_taxMode},
                           onSelectionChanged: (s) {
@@ -2891,32 +2892,32 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                         value: _taxMode,
                         isExpanded: true,
                         decoration: _inputDecOf(context, hint: ''),
-                        items: const [
+                        items: [
                           DropdownMenuItem(
-                            value: 'معفى',
-                            child: Text('معفى من الضريبة'),
+                            value: loc.apTaxExempt,
+                            child: Text(loc.apTaxExemptFull),
                           ),
-                          DropdownMenuItem(value: '5', child: Text('ضريبة 5٪')),
+                          DropdownMenuItem(value: '5', child: Text(loc.apTax5)),
                           DropdownMenuItem(
                             value: '10',
-                            child: Text('ضريبة 10٪'),
+                            child: Text(loc.apTax10),
                           ),
                           DropdownMenuItem(
                             value: '15',
-                            child: Text('ضريبة 15٪'),
+                            child: Text(loc.apTax15),
                           ),
                           DropdownMenuItem(
-                            value: 'مخصص',
-                            child: Text('نسبة مخصصة'),
+                            value: loc.apCustomTax,
+                            child: Text(loc.apCustomRate),
                           ),
                         ],
                         onChanged: (v) {
-                          setState(() => _taxMode = v ?? 'معفى');
+                          setState(() => _taxMode = v ?? loc.apTaxExempt);
                         },
                       );
                     },
                   ),
-                  if (_taxMode == 'مخصص') ...[
+                  if (_taxMode == 'custom') ...[
                     const SizedBox(height: 10),
                     AppInput(
                       label: '',
@@ -2933,7 +2934,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
                       ],
-                      hint: 'نسبة الضريبة %',
+                      hint: loc.apTaxPercentLabel,
                       onChanged: (_) => setState(() {}),
                     ),
                   ],
@@ -2961,7 +2962,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    'نوع الخصم',
+                    loc.apDiscountType,
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
@@ -2973,11 +2974,11 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                     value: _discountType,
                     isExpanded: true,
                     decoration: _inputDecOf(context, hint: ''),
-                    selectedItemBuilder: (context) => const [
+                    selectedItemBuilder: (context) => [
                       Align(
                         alignment: Alignment.centerRight,
                         child: Text(
-                          'نسبة مئوية (٪)',
+                          loc.apPercentDiscount,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -2985,30 +2986,30 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                       Align(
                         alignment: Alignment.centerRight,
                         child: Text(
-                          'عمولة / مبلغ (د.ع)',
+                          loc.apFixedAmountDiscount,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
-                    items: const [
+                    items: [
                       DropdownMenuItem(
                         value: '%',
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: Text(
-                            'نسبة مئوية (٪)',
+                            loc.apPercentDiscount,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ),
                       DropdownMenuItem(
-                        value: 'د.ع',
+                        value: '',
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: Text(
-                            'عمولة / مبلغ (د.ع)',
+                            loc.apFixedAmountDiscount,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -3029,7 +3030,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
               );
               final discVal = _labeledField(
                 context,
-                label: 'قيمة الخصم',
+                label: loc.apDiscountValue,
                 child: AppInput(
                   label: '',
                   showLabel: false,
@@ -3048,18 +3049,18 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                           FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
                         ]
                       : [IraqiCurrencyFormat.moneyInputFormatter()],
-                  hint: _discountType == '%' ? 'مثال: 15' : _hintIqd,
-                  suffixText: _discountType == '%' ? '٪' : 'د.ع',
+                  hint: _discountType == '%' ? loc.apExampleNumber('15') : _hintIqd,
+                  suffixText: _discountType == '%' ? '٪' : '',
                 ),
               );
               final minP = _labeledField(
                 context,
-                label: 'أقل سعر بيع',
+                label: loc.apMinSellPrice,
                 subtitle: perKgHint,
                 child: AppPriceInput(
                   label: '',
                   paddingZeroOverride: true,
-                  hint: 'اختياري',
+                  hint: loc.apOptionalLabel,
                   controller: _minSellPriceCtrl,
                   focusNode: _focusMin,
                   isOptional: true,
@@ -3100,7 +3101,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
             const SizedBox(height: 14),
             _labeledField(
               context,
-              label: 'هامش الربح (سعر البيع مقابل الشراء)',
+              label: loc.apProfitMargin,
               child: Builder(
                 builder: (context) {
                   final buyN = NumericFormat.parseNumber(_buyPriceCtrl.text);
@@ -3146,15 +3147,15 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
     final cs = Theme.of(context).colorScheme;
     return _sectionCard(
       context,
-      title: 'إدارة المخزون',
+      title: loc.apInventorySection,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
-            title: const Text(
-              'تتبع المخزون',
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+            title: Text(
+              loc.apTrackInventory,
+              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
             ),
             subtitle: Text(
               'عند الإيقاف لا تُسجَّل كميات لهذا المنتج',
@@ -3171,14 +3172,14 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
               builder: (_, c) {
                 final row = c.maxWidth >= 480;
                 final qtyHint = _stockBaseKind == 1
-                    ? 'بالكيلوغرام — يدعم الكسور (0.25، 0.5، 1.5…)'
+                    ? loc.apWeightSales
                     : null;
                 final lowHint = _stockBaseKind == 1
-                    ? 'بالكيلوغرام (مثال: 1 = تنبيه عند أقل من 1 كغ)'
+                    ? loc.apWeightThreshold
                     : null;
                 final q = _labeledField(
                   context,
-                  label: 'الكمية في المخزون',
+                  label: loc.apStockQty,
                   child: AppInput(
                     label: '',
                     showLabel: false,
@@ -3198,7 +3199,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                 );
                 final low = _labeledField(
                   context,
-                  label: 'تنبيه عند أقل من',
+                  label: loc.apAlertThreshold,
                   child: AppInput(
                     label: '',
                     showLabel: false,
@@ -3239,7 +3240,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
             const SizedBox(height: 12),
             _labeledField(
               context,
-              label: 'الوزن الصافي (غرام) — اختياري',
+              label: loc.apNetWeightLabel,
               child: AppInput(
                 label: '',
                 showLabel: false,
@@ -3247,7 +3248,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                 textAlign: TextAlign.right,
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
-                hint: 'يُملأ تلقائياً من باركود GS1 أو الوزن المدمج',
+                hint: loc.apNetWeightHint,
               ),
             ),
             const SizedBox(height: 12),
@@ -3256,7 +3257,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                 final row = c.maxWidth >= 480;
                 Widget mfgField() => _labeledField(
                   context,
-                  label: 'تاريخ الإنتاج — اختياري',
+                  label: loc.apMfgDateLabel,
                   child: AppInput(
                     label: '',
                     showLabel: false,
@@ -3268,14 +3269,14 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                         size: 20,
                       ),
                       onPressed: () => _pickProductDate(_mfgDateCtrl),
-                      tooltip: 'اختر من التقويم',
+                      tooltip: loc.apPickFromCalendar,
                     ),
-                    hint: 'يوم/شهر/سنة',
+                    hint: loc.apDateFormat,
                   ),
                 );
                 Widget expField() => _labeledField(
                   context,
-                  label: 'تاريخ الانتهاء — اختياري',
+                  label: loc.apExpDateLabel,
                   child: AppInput(
                     label: '',
                     showLabel: false,
@@ -3287,9 +3288,9 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                         size: 20,
                       ),
                       onPressed: () => _pickProductDate(_expDateCtrl),
-                      tooltip: 'اختر من التقويم',
+                      tooltip: loc.apPickFromCalendar,
                     ),
-                    hint: 'يوم/شهر/سنة',
+                    hint: loc.apDateFormat,
                   ),
                 );
                 if (row) {
@@ -3314,7 +3315,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
             const SizedBox(height: 12),
             _labeledField(
               context,
-              label: 'تنبيه قبل انتهاء الصلاحية (عدد الأيام)',
+              label: loc.apExpiryAlertDays,
               child: AppInput(
                 label: '',
                 showLabel: false,
@@ -3323,13 +3324,13 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: false),
                 hint:
-                    'عند تسجيل تاريخ انتهاء: 1–365 (فارغ = الافتراضي من الإعدادات)',
+                    loc.apExpiryAlertHint,
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 6, bottom: 4),
               child: Text(
-                'يُستخدم مع «تاريخ الانتهاء» فقط؛ يظهر التنبيه في لوحة الإشعارات خلال هذه المدة قبل التاريخ.',
+                loc.apExpiryAlertNote,
                 style: TextStyle(
                   fontSize: 11,
                   height: 1.35,
@@ -3341,7 +3342,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
             const SizedBox(height: 12),
             _labeledField(
               context,
-              label: 'ملاحظات داخلية',
+              label: loc.apInternalNotes,
               child: AppInput(
                 label: '',
                 showLabel: false,
@@ -3349,19 +3350,19 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                 textAlign: TextAlign.right,
                 minLines: 2,
                 maxLines: 4,
-                hint: 'لا تظهر للعميل — للفريق فقط',
+                hint: loc.apInternalNotesHint,
               ),
             ),
             const SizedBox(height: 14),
             _labeledField(
               context,
-              label: 'وسوم',
+              label: loc.apTags,
               child: AppInput(
                 label: '',
                 showLabel: false,
                 controller: _tagsCtrl,
                 textAlign: TextAlign.right,
-                hint: 'مفصولة بفواصل أو مسافات — للبحث والتصفية',
+                hint: loc.apTagsHint,
               ),
             ),
           ],
@@ -3485,7 +3486,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                 Icons.arrow_drop_down_circle_outlined,
                 color: cs.onSurfaceVariant,
               ),
-              tooltip: 'اختر من القائمة',
+              tooltip: loc.apChooseFromList,
               itemBuilder: (ctx) =>
                   options.map((e) => PopupMenuItem(value: e, child: Text(e))).toList(),
               onSelected: (v) {
@@ -3521,7 +3522,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                           child: Padding(
                             padding: const EdgeInsets.all(12),
                             child: Text(
-                              'تم اختيار صورة (معاينة على الويب غير متاحة)',
+                              loc.apImageSelected,
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 12,
@@ -3548,7 +3549,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                     const SizedBox(width: 12),
                     Flexible(
                       child: Text(
-                        'اضغط لإضافة صورة من المعرض',
+                        loc.apTapToAddImage,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 13,

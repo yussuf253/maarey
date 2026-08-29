@@ -7477,4 +7477,913 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get infoLabel => 'Info';
+
+  @override
+  String whFailedToLoad(Object error) {
+    return 'Échec du chargement des entrepôts : $error';
+  }
+
+  @override
+  String get whEditsSavedSuccess => 'Modifications enregistrées avec succès';
+
+  @override
+  String get whCreatedSuccess => 'Entrepôt créé avec succès';
+
+  @override
+  String whCodeLabel(Object code) {
+    return 'Code : $code';
+  }
+
+  @override
+  String get whDeleteTitle => 'Supprimer l\'entrepôt';
+
+  @override
+  String whDeleteConfirm(Object name) {
+    return 'Êtes-vous sûr de vouloir supprimer l\'entrepôt «$name» ?';
+  }
+
+  @override
+  String get whDeleteAction => 'Supprimer';
+
+  @override
+  String whDeleteFailed(Object error) {
+    return 'Échec de la suppression de l\'entrepôt (peut être lié à des mouvements) : $error';
+  }
+
+  @override
+  String get whDeactivateTitle => 'Désactiver l\'entrepôt';
+
+  @override
+  String get whDeactivateContent =>
+      'Cet entrepôt ne sera pas utilisé dans les opérations de vente et d\'achat jusqu\'à sa réactivation.';
+
+  @override
+  String get whActivate => 'Activer';
+
+  @override
+  String get whDeactivateAction => 'Désactiver';
+
+  @override
+  String whStatusUpdateFailed(Object error) {
+    return 'Échec de la mise à jour du statut : $error';
+  }
+
+  @override
+  String get whScreenTitle => 'Entrepôts';
+
+  @override
+  String get whNewWarehouse => 'Nouvel entrepôt';
+
+  @override
+  String get whTotalValue => 'Valeur totale';
+
+  @override
+  String get whTotalItems => 'Total des articles';
+
+  @override
+  String get whSearchHint => 'Rechercher par nom ou code...';
+
+  @override
+  String get whClearSearch => 'Effacer';
+
+  @override
+  String get whNoWarehousesYet => 'Aucun entrepôt pour le moment';
+
+  @override
+  String get whCreateFirst => 'Créer le premier entrepôt';
+
+  @override
+  String get whDefaultChip => 'Par défaut';
+
+  @override
+  String get whActiveChip => 'Actif';
+
+  @override
+  String get whInactiveChip => 'Inactif';
+
+  @override
+  String get whItemsCount => 'Nombre d\'articles';
+
+  @override
+  String get whEditAction => 'Modifier';
+
+  @override
+  String get whViewStock => 'Voir le stock';
+
+  @override
+  String get whNameDuplicateError => 'Un entrepôt avec ce nom existe déjà';
+
+  @override
+  String get whCodeDuplicateError => 'Code déjà utilisé';
+
+  @override
+  String get whSetDefaultTitle => 'Définir par défaut';
+
+  @override
+  String get whSetDefaultContent =>
+      'La valeur par défaut sera retirée de l\'entrepôt actuel et cet entrepôt sera défini par défaut.';
+
+  @override
+  String get whConfirmAction => 'Confirmer';
+
+  @override
+  String get whCloseFormTitle => 'Fermer le formulaire';
+
+  @override
+  String get whCloseFormContent =>
+      'Voulez-vous fermer le formulaire ? Les données ne seront pas enregistrées.';
+
+  @override
+  String get whCloseAction => 'Fermer';
+
+  @override
+  String get whSelectBranchError => 'Sélectionnez une succursale';
+
+  @override
+  String get whAutoDefaultFirst =>
+      'Défini automatiquement par défaut car c\'est le premier entrepôt';
+
+  @override
+  String whSaveFailed(Object error) {
+    return 'Échec de l\'enregistrement de l\'entrepôt : $error';
+  }
+
+  @override
+  String get whRequiredField => 'Obligatoire';
+
+  @override
+  String get whScanWarehouseCode => 'Scanner le code entrepôt';
+
+  @override
+  String get whEditWarehouse => 'Modifier l\'entrepôt';
+
+  @override
+  String get whWarehouseNameLabel => 'Nom de l\'entrepôt';
+
+  @override
+  String get whWarehouseNameHint =>
+      'ex. : Entrepôt principal, Entrepôt succursale nord';
+
+  @override
+  String get whWarehouseCodeLabel => 'Code entrepôt';
+
+  @override
+  String get whWarehouseCodeHint => 'ex. : WH-001';
+
+  @override
+  String get whLocationLabel => 'Emplacement';
+
+  @override
+  String get whLocationHint => 'Adresse ou description de l\'emplacement';
+
+  @override
+  String get whBranchLabel => 'Succursale';
+
+  @override
+  String get whActiveWarehouse => 'Entrepôt actif';
+
+  @override
+  String get whInactiveWarning =>
+      'L\'entrepôt désactivé n\'apparaîtra pas dans les opérations de vente et d\'achat';
+
+  @override
+  String get whSaving => 'Enregistrement...';
+
+  @override
+  String get whCreating => 'Création...';
+
+  @override
+  String get whSaveEdits => 'Enregistrer les modifications';
+
+  @override
+  String get whCreateWarehouse => 'Créer l\'entrepôt';
+
+  @override
+  String get whChooseBranch => 'Choisir la succursale';
+
+  @override
+  String get whBranchSearchHint =>
+      'Rechercher par nom ou code de succursale...';
+
+  @override
+  String whStockTitle(Object name) {
+    return 'Stock : $name';
+  }
+
+  @override
+  String get whNoStockInWarehouse => 'Aucune quantité dans cet entrepôt';
+
+  @override
+  String get whStockOut => 'Rupture';
+
+  @override
+  String get whStockLow => 'Bas';
+
+  @override
+  String get whStockInStock => 'En stock';
+
+  @override
+  String get ipAllCategories => 'Toutes les catégories';
+
+  @override
+  String get ipAllBrands => 'Toutes les marques';
+
+  @override
+  String get ipAllStatus => 'Tout';
+
+  @override
+  String get ipProductManagement => 'Gestion des produits';
+
+  @override
+  String get ipSettingsTooltip => 'Paramètres';
+
+  @override
+  String get ipMoreTooltip => 'Plus';
+
+  @override
+  String get ipPrintBarcodes => 'Imprimer les étiquettes de codes-barres';
+
+  @override
+  String get ipProductSavedSnackbar =>
+      'Produit enregistré et liste mise à jour';
+
+  @override
+  String get ipNewProductBtn => '+ Nouveau produit';
+
+  @override
+  String get ipStatusActive => 'Actif';
+
+  @override
+  String get ipStatusLowStock => 'Stock bas';
+
+  @override
+  String get ipStatusOutOfStock => 'Rupture de stock';
+
+  @override
+  String get ipStatusInactive => 'Inactif';
+
+  @override
+  String get ipSearchAndMatch => 'Recherche et correspondance';
+
+  @override
+  String get ipCategoryFilter => 'Catégorie';
+
+  @override
+  String get ipBrandFilter => 'Marque';
+
+  @override
+  String get ipAdvancedSearch => 'Recherche avancée';
+
+  @override
+  String ipClearFilterCount(Object count) {
+    return 'Effacer le filtre ($count)';
+  }
+
+  @override
+  String get ipClearFilter => 'Effacer le filtre';
+
+  @override
+  String get ipSearchAction => 'Rechercher';
+
+  @override
+  String get ipKeywordSearch => 'Recherche par mot-clé';
+
+  @override
+  String get ipKeywordHint => 'Entrez le nom, le code ou le code-barres';
+
+  @override
+  String get ipBarcodeFilter => 'Code-barres';
+
+  @override
+  String get ipScanOrType => 'Scanner ou taper';
+
+  @override
+  String get ipProductCode => 'Code produit';
+
+  @override
+  String get ipSalePriceRange => 'Fourchette de prix de vente (IQD)';
+
+  @override
+  String get ipPriceTo => 'À';
+
+  @override
+  String get ipPriceFrom => 'De';
+
+  @override
+  String get ipStatusFilter => 'Statut';
+
+  @override
+  String get ipResultsName => 'Nom';
+
+  @override
+  String get ipResultsPrice => 'Prix';
+
+  @override
+  String get ipResultsQty => 'Quantité';
+
+  @override
+  String get ipResultsAddedDate => 'Date d\'ajout';
+
+  @override
+  String get ipSortLabel => 'Tri';
+
+  @override
+  String get ipSortAsc => 'Croissant';
+
+  @override
+  String get ipSortDesc => 'Décroissant';
+
+  @override
+  String get ipNoProductsYet => 'Aucun produit pour le moment';
+
+  @override
+  String get ipNoProductsMatch =>
+      'Aucun produit ne correspond à votre recherche';
+
+  @override
+  String get ipAddFirstHint =>
+      'Commencez par ajouter votre premier article à l\'inventaire.';
+
+  @override
+  String get ipTryChangeSearch =>
+      'Essayez de modifier vos termes de recherche ou d\'effacer le filtre.';
+
+  @override
+  String get ipAddFirstBtn => '+ Ajouter le premier produit';
+
+  @override
+  String get ipUnpinFromHome => 'Désépingler de l\'accueil';
+
+  @override
+  String get ipPinToHome => 'Épingler à l\'accueil';
+
+  @override
+  String get ipPrintBarcode => 'Imprimer le code-barres';
+
+  @override
+  String get ipDeactivate => 'Désactiver';
+
+  @override
+  String get ipActivate => 'Activer';
+
+  @override
+  String get ipDeleteProduct => 'Supprimer';
+
+  @override
+  String get ipNotTracked => 'Non suivi';
+
+  @override
+  String get ipDeleteProductTitle => 'Supprimer le produit';
+
+  @override
+  String get ipDeleteProductContent =>
+      'Le produit sera masqué des listes (suppression logique) sans affecter les factures liées.';
+
+  @override
+  String get ipProductType => 'Produit';
+
+  @override
+  String get ipTechnicalService => 'Service technique';
+
+  @override
+  String ipAvailableQty(Object qty) {
+    return 'Quantité disponible : $qty';
+  }
+
+  @override
+  String get ipOutOfStock => 'Épuisé';
+
+  @override
+  String get ipProductOptions => 'Options du produit';
+
+  @override
+  String ipShowingResults(Object extra, Object matched, Object shown) {
+    return 'Affichage de $shown sur $matched produits$extra';
+  }
+
+  @override
+  String ipExtraCatalogInfo(Object total) {
+    return ' · Total actif : $total';
+  }
+
+  @override
+  String get addProductTitle => 'Ajouter un nouveau produit';
+
+  @override
+  String get apUnsavedChanges => 'Modifications non enregistrées';
+
+  @override
+  String get apUnsavedConfirm =>
+      'Vous n\'avez pas enregistré le produit. Voulez-vous enregistrer avant de partir ?';
+
+  @override
+  String get apLeaveWithoutSaving => 'Quitter sans enregistrer';
+
+  @override
+  String get apSaveProduct => 'Enregistrer le produit';
+
+  @override
+  String get apColorSizeTitle => 'Couleurs et tailles';
+
+  @override
+  String get apDone => 'Terminé';
+
+  @override
+  String get apLoadFormFailed =>
+      'Échec du chargement des données du formulaire produit';
+
+  @override
+  String apLoadFormFailedDetail(Object error) {
+    return 'Impossible de charger les données du formulaire. Le champ fonctionnera en mode manuel.\\n$error';
+  }
+
+  @override
+  String apImagePickFailed(Object error) {
+    return 'Échec de la sélection de l\'image : $error';
+  }
+
+  @override
+  String get apPercentDiscountMax =>
+      'La remise en pourcentage ne peut pas dépasser 100%.';
+
+  @override
+  String get apBarcodeRequired =>
+      'Le champ code-barres est obligatoire selon les paramètres.';
+
+  @override
+  String get apSupplierRequired =>
+      'Le champ fournisseur est obligatoire selon les paramètres.';
+
+  @override
+  String get apWarehouseRequired =>
+      'La sélection de l\'entrepôt est obligatoire selon les paramètres.';
+
+  @override
+  String get apImageRequired =>
+      'L\'image du produit est obligatoire selon les paramètres.';
+
+  @override
+  String get apMfgDateFormatError =>
+      'Format de date de fabrication invalide. Utilisez jour/mois/année (ex. 15/01/2026).';
+
+  @override
+  String get apExpDateFormatError =>
+      'Format de date d\'expiration invalide. Utilisez jour/mois/année (ex. 15/01/2026).';
+
+  @override
+  String get apExpDateAfterMfg =>
+      'La date d\'expiration doit être postérieure ou égale à la date de fabrication.';
+
+  @override
+  String get apConversionFactorGt0 =>
+      'Le facteur de conversion doit être supérieur à 0 pour chaque unité supplémentaire.';
+
+  @override
+  String get apAddAtLeastOneColor => 'Ajoutez au moins une couleur.';
+
+  @override
+  String get apColorNameRequired => 'Le nom de la couleur est obligatoire.';
+
+  @override
+  String get apAddAtLeastOneSize => 'Ajoutez au moins une taille par couleur.';
+
+  @override
+  String get apSizeRequired => 'Le champ taille est obligatoire.';
+
+  @override
+  String apDuplicateSize(Object color, Object size) {
+    return 'La taille \"$size\" est en double dans la couleur \"$color\".';
+  }
+
+  @override
+  String get apQtyMustBeNonNeg =>
+      'La quantité doit être un nombre entier supérieur ou égal à 0.';
+
+  @override
+  String get apDuplicateBarcodeVariants =>
+      'Code-barres en double trouvé dans les variantes.';
+
+  @override
+  String get apBarcodeUsedByOther =>
+      'Ce code-barres est utilisé par un autre produit.';
+
+  @override
+  String get apVariantBarcodeTaken =>
+      'Le code-barres de la variante est déjà utilisé.';
+
+  @override
+  String get apDuplicateSizeInColor =>
+      'La taille est en double dans la même couleur.';
+
+  @override
+  String get apQtyMustBeGe0 => 'La quantité doit être supérieure ou égale à 0.';
+
+  @override
+  String get apBarcodeAlreadyUsed => 'Code-barres déjà utilisé.';
+
+  @override
+  String apSaveFailed(Object error) {
+    return 'Échec de l\'enregistrement du produit : $error';
+  }
+
+  @override
+  String get apProductSaved =>
+      'Produit enregistré. Vous pouvez saisir un nouveau produit.';
+
+  @override
+  String get apChooseColorTitle => 'Choisir une couleur';
+
+  @override
+  String get apChooseColorSubtitle =>
+      'Choisissez une couleur pour représenter cette option (facultatif).';
+
+  @override
+  String get apApplyUniformQty => 'Appliquer une quantité uniforme';
+
+  @override
+  String get apEnterQtyHint => 'Entrez la quantité (0 ou plus)';
+
+  @override
+  String get apSizeLabel => 'Taille';
+
+  @override
+  String get apChooseSizeTooltip => 'Choisir la taille';
+
+  @override
+  String get apQtyLabel => 'Quantité';
+
+  @override
+  String get apBarcodeOptional => 'Code-barres (facultatif)';
+
+  @override
+  String get apDeleteAction => 'Supprimer';
+
+  @override
+  String get apColorNameLabel => 'Nom de la couleur';
+
+  @override
+  String get apColorPickerTooltip => 'Choisir la couleur (HEX)';
+
+  @override
+  String get apDeleteColorTooltip => 'Supprimer la couleur';
+
+  @override
+  String get apSizesAndQuantities => 'Tailles et quantités';
+
+  @override
+  String get apNoSizesYet =>
+      'Aucune taille pour le moment. Ajoutez au moins une taille.';
+
+  @override
+  String get apAddSizeBtn => 'Ajouter une taille';
+
+  @override
+  String apColorTotal(Object count) {
+    return 'Total couleur : $count';
+  }
+
+  @override
+  String get apAddNewColor => 'Ajouter une nouvelle couleur';
+
+  @override
+  String get apApplyQtyAllSizes =>
+      'Appliquer une quantité uniforme à toutes les tailles';
+
+  @override
+  String get apNoColorsYet =>
+      'Aucune couleur pour le moment. Ajoutez une couleur pour commencer.';
+
+  @override
+  String apProductCodeHint(Object code) {
+    return 'Code produit : $code';
+  }
+
+  @override
+  String get apCancelTooltip => 'Annuler';
+
+  @override
+  String get apSavingLabel => 'Enregistrement...';
+
+  @override
+  String get apSaveAndAddNew => 'Enregistrer et ajouter';
+
+  @override
+  String get apProductData => 'Données du produit';
+
+  @override
+  String get apProductNameLabel => 'Nom du produit';
+
+  @override
+  String get apNameRequired => 'Le nom est obligatoire';
+
+  @override
+  String get apDescriptionLabel => 'Description';
+
+  @override
+  String get apProductImage => 'Image du produit';
+
+  @override
+  String get apCategoryLabel => 'Catégorie';
+
+  @override
+  String get apCategoryHint => 'Tapez ou choisissez dans la liste';
+
+  @override
+  String get apBrandLabel => 'Marque';
+
+  @override
+  String get apBrandHint => 'Tapez ou choisissez dans la liste';
+
+  @override
+  String get apGradeLabel => 'Classe / Qualité';
+
+  @override
+  String get apGradeHint => 'Choisissez la classe (facultatif)';
+
+  @override
+  String get apNoCategory => '— Sans catégorie —';
+
+  @override
+  String get apGradeA => 'Classe A — Excellent';
+
+  @override
+  String get apGradeB => 'Classe B — Très bien';
+
+  @override
+  String get apGradeC => 'Classe C — Bien';
+
+  @override
+  String get apGradeFirst => 'Première qualité';
+
+  @override
+  String get apGradeSecond => 'Deuxième qualité';
+
+  @override
+  String get apGradeThird => 'Troisième qualité';
+
+  @override
+  String get apCommercial => 'Article commercial';
+
+  @override
+  String get apEconomical => 'Article économique';
+
+  @override
+  String get apWarehouseLabel => 'Entrepôt';
+
+  @override
+  String get apNoWarehousesInDb => 'Aucun entrepôt dans la base de données';
+
+  @override
+  String get apChooseWarehouse => 'Choisir l\'entrepôt';
+
+  @override
+  String get apNoWarehouseLink => '— Sans lien d\'entrepôt —';
+
+  @override
+  String get apStockBaseType => 'Type de stock de base';
+
+  @override
+  String get apStockTypePiece => 'Nombre (pièce comme base)';
+
+  @override
+  String get apStockTypeWeight => 'Poids (kilogramme comme base)';
+
+  @override
+  String get apStockTypeClothing => 'Vêtements (couleurs & tailles)';
+
+  @override
+  String get apEditColorsSizes => 'Modifier les couleurs et tailles';
+
+  @override
+  String get apSupplierInfo => 'Informations fournisseur';
+
+  @override
+  String get apSupplierLabel => 'Fournisseur';
+
+  @override
+  String get apSupplierHint => 'Tapez ou choisissez dans les enregistrements';
+
+  @override
+  String get apSupplierCodeOptional => 'Code fournisseur (facultatif)';
+
+  @override
+  String get apExtraUnitsOptional =>
+      'Unités de vente supplémentaires (facultatif)';
+
+  @override
+  String get apExtraUnitsDesc =>
+      'ex. : Carton, couche, kilogramme… chacun avec code-barres optionnel et facteur de conversion vers le stock de base.';
+
+  @override
+  String get apAddUnit => 'Ajouter une unité';
+
+  @override
+  String get apNoExtraUnits => 'Aucune unité supplémentaire pour le moment.';
+
+  @override
+  String apUnitNumber(Object number) {
+    return 'Unité #$number';
+  }
+
+  @override
+  String get apUnitNameLabel => 'Nom de l\'unité';
+
+  @override
+  String get apSymbolLabel => 'Symbole';
+
+  @override
+  String get apConversionFactor => 'Facteur de conversion vers la base';
+
+  @override
+  String get apBarcodeOptionalLabel => 'Code-barres (facultatif)';
+
+  @override
+  String get apBarcodeEan13 => 'Code-barres (EAN-13)';
+
+  @override
+  String get apBarcodeCode128 => 'Code-barres (Code 128)';
+
+  @override
+  String get apBarcodeValue => 'Valeur du code-barres';
+
+  @override
+  String get apCaptureFromCamera => 'Capture depuis la caméra';
+
+  @override
+  String get apReadFromScanner => 'Lire depuis le scanner de codes-barres';
+
+  @override
+  String get apScanProductBarcode => 'Scanner le code-barres du produit';
+
+  @override
+  String get apGenerateNewBarcode => 'Générer un nouveau code-barres numérique';
+
+  @override
+  String get apWeightPriceNote =>
+      'Calculé par kilogramme (stock basé sur le poids).';
+
+  @override
+  String get apPricingSection => 'Tarification';
+
+  @override
+  String get apPurchasePriceLabel => 'Prix d\'achat';
+
+  @override
+  String get apSuggestedFromCost => 'Suggéré depuis le prix d\'achat';
+
+  @override
+  String get apSellPriceLabel => 'Prix de vente';
+
+  @override
+  String get apSellBelowBuyWarning =>
+      'Avertissement : le prix de vente est inférieur au prix d\'achat (vous pouvez continuer).';
+
+  @override
+  String get apTaxSection => 'Taxe';
+
+  @override
+  String get apTaxExempt => 'Exonéré';
+
+  @override
+  String get apCustomTax => 'Personnalisé';
+
+  @override
+  String get apTaxExemptFull => 'Exonéré de taxe';
+
+  @override
+  String get apTax5 => 'Taxe 5%';
+
+  @override
+  String get apTax10 => 'Taxe 10%';
+
+  @override
+  String get apTax15 => 'Taxe 15%';
+
+  @override
+  String get apCustomRate => 'Taux personnalisé';
+
+  @override
+  String get apTaxPercentLabel => 'Taux de taxe %';
+
+  @override
+  String apSellIncludingTax(Object amount) {
+    return 'Vente TTC (approx.) : $amount';
+  }
+
+  @override
+  String get apDiscountType => 'Type de remise';
+
+  @override
+  String get apPercentDiscount => 'Pourcentage (%)';
+
+  @override
+  String get apFixedAmountDiscount => 'Montant (IQD)';
+
+  @override
+  String get apDiscountValue => 'Valeur de la remise';
+
+  @override
+  String apExampleNumber(Object number) {
+    return 'ex. : $number';
+  }
+
+  @override
+  String get apMinSellPrice => 'Prix de vente minimum';
+
+  @override
+  String get apOptionalLabel => 'Facultatif';
+
+  @override
+  String get apProfitMargin => 'Marge bénéficiaire (prix de vente vs achat)';
+
+  @override
+  String get apInventorySection => 'Gestion de l\'inventaire';
+
+  @override
+  String get apTrackInventory => 'Suivi de l\'inventaire';
+
+  @override
+  String get apTrackInventoryOff =>
+      'Lorsque désactivé, les quantités ne seront pas enregistrées pour ce produit';
+
+  @override
+  String get apWeightSales =>
+      'Par kilogramme — supporte les décimales (0,25, 0,5, 1,5…)';
+
+  @override
+  String get apWeightThreshold =>
+      'Par kilogramme (ex. : 1 = alerte en dessous de 1 kg)';
+
+  @override
+  String get apStockQty => 'Quantité en stock';
+
+  @override
+  String get apAlertThreshold => 'Alerter en dessous de';
+
+  @override
+  String apVariantsStockInfo(Object total) {
+    return 'Stock géré via les couleurs et tailles. Total actuel : $total';
+  }
+
+  @override
+  String get apNetWeightLabel => 'Poids net (grammes) — facultatif';
+
+  @override
+  String get apNetWeightHint =>
+      'Rempli automatiquement depuis le code-barres GS1 ou le poids intégré';
+
+  @override
+  String get apMfgDateLabel => 'Date de fabrication — facultatif';
+
+  @override
+  String get apPickFromCalendar => 'Choisir dans le calendrier';
+
+  @override
+  String get apDateFormat => 'jour/mois/année';
+
+  @override
+  String get apExpDateLabel => 'Date d\'expiration — facultatif';
+
+  @override
+  String get apExpiryAlertDays => 'Jours d\'alerte avant expiration';
+
+  @override
+  String get apExpiryAlertHint =>
+      'Lorsque la date d\'expiration est définie : 1–365 (vide = par défaut des paramètres)';
+
+  @override
+  String get apExpiryAlertNote =>
+      'Utilisé uniquement avec la «date d\'expiration» ; l\'alerte apparaît dans le panneau de notification dans cette période avant la date.';
+
+  @override
+  String get apInternalNotes => 'Notes internes';
+
+  @override
+  String get apInternalNotesHint =>
+      'Non visible par les clients — pour l\'équipe uniquement';
+
+  @override
+  String get apTags => 'Étiquettes';
+
+  @override
+  String get apTagsHint =>
+      'Séparées par des virgules ou des espaces — pour la recherche et le filtrage';
+
+  @override
+  String get apChooseFromList => 'Choisir dans la liste';
+
+  @override
+  String get apImageSelected =>
+      'Image sélectionnée (aperçu web non disponible)';
+
+  @override
+  String get apTapToAddImage =>
+      'Appuyez pour ajouter une image depuis la galerie';
+
+  @override
+  String get apManualEditActive =>
+      'Modification manuelle active — le prix de vente ne se mettra pas à jour automatiquement lorsque le coût change.';
+
+  @override
+  String get apRelinkToCost => ' Relier au coût d\'achat';
 }
