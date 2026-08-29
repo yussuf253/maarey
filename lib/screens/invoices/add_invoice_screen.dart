@@ -83,6 +83,7 @@ class AddInvoiceScreen extends StatefulWidget {
 }
 
 class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
+  AppLocalizations get loc => AppLocalizations.of(context)!;
   bool _saleRouteRegistered = false;
   bool _saleDraftListenerAttached = false;
   bool _initialSaleDraftDrainScheduled = false;
@@ -1575,7 +1576,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
               ),
               const SizedBox(height: 12),
               _instSumRow(
-                'المبلغ بعد المقدّم (أساس التقسيط)',
+                loc.aiBaseForInstallments,
                 IraqiCurrencyFormat.formatIqd(c.financed),
                 scheme,
               ),
@@ -2592,7 +2593,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
           _saleFlowSectionTitle(
             context,
             palette,
-            title: 'المنتجات',
+            title: loc.aiProductsTab,
             caption: productsCaption,
             trailing: showScan
                 ? Tooltip(
@@ -2687,8 +2688,8 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                     const SizedBox(height: 12),
                     Text(
                       showScan
-                          ? 'لا توجد أصناف بعد.\nامسح الباركود أعلاه أو أضف من البحث في الشاشة الرئيسية.\nابحث عن منتج أو امسح الباركود للإضافة.'
-                          : 'لا توجد أصناف بعد.\nأضف منتجات من البحث في الشاشة الرئيسية.\nابحث عن منتج أو امسح الباركود للإضافة.',
+                          ? loc.aiNoItemsWithBarcode
+                          : loc.aiNoItemsWithoutBarcode,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 13,
@@ -2755,7 +2756,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                       isDense: true,
                       labelText: AppLocalizations.of(context)!.discountOnTotalSaleLabel,
                       helperText:
-                          'الحد الأقصى المسموح حالياً: ${_maxAllowedDiscountPercent.toStringAsFixed(1)}٪ — يُحسب من أدنى سعر لكل صنف.',
+                          loc.aiMaxDiscountHint(_maxAllowedDiscountPercent.toStringAsFixed(1)),
                       helperMaxLines: 3,
                     ),
                     keyboardType: TextInputType.number,
@@ -2809,8 +2810,8 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
   ) {
     final payableTotal = saleTotal(loyaltyCfg);
     final priceCaption = (!pos.enableInvoiceDiscount && !pos.enableTaxOnSale)
-        ? 'نتيجة الأرقام والدفعة الأولى إن وُجدت، قبل الانتقال لبيانات العميل.'
-        : 'نتيجة الأرقام بعد الخصم والضريبة، والدفعة الأولى إن وُجدت، قبل الانتقال لبيانات العميل.';
+        ? loc.aiNumbersResultHint
+        : loc.aiNumbersResultWithDiscountHint;
     return Padding(
       padding: EdgeInsets.only(bottom: _saleFlowBlockGap(context)),
       child: Column(
@@ -2819,7 +2820,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
           _saleFlowSectionTitle(
             context,
             palette,
-            title: 'تفاصيل السعر',
+            title: loc.aiPriceDetails,
             caption: priceCaption,
           ),
           const SizedBox(height: 6),
@@ -2831,7 +2832,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  'تفصيل المبالغ',
+                  loc.aiAmountBreakdown,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 13,
@@ -2881,7 +2882,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                   const SizedBox(height: 8),
                   _sumRow(
                     AppLocalizations.of(context)!.loyaltyDiscountLabel,
-                    '-${IraqiCurrencyFormat.formatInt(_loyaltyDiscountAmount(loyaltyCfg))} د.ع',
+                    loc.aiLoyaltyDiscountLabel(IraqiCurrencyFormat.formatInt(_loyaltyDiscountAmount(loyaltyCfg))),
                   ),
                 ],
                 Divider(
@@ -2919,7 +2920,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       if (salePos.allowDelivery) AppLocalizations.of(context)!.deliveryLabel,
     ];
     final customerCaption =
-        'اختر ${paymentOptions.join(' أو ')}، ثم أكمل بيانات العميل والحقول المرتبطة بنوع الدفع.';
+        loc.aiSelectPaymentMethod(paymentOptions.join(' أو '));
     return Padding(
       padding: const EdgeInsets.only(bottom: 4),
       child: Column(
@@ -3007,7 +3008,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                               (v == null || v.trim().isEmpty)) {
                             return type == InvoiceType.delivery
                     ? AppLocalizations.of(context)!.customerNameRequiredForDelivery
-                                : 'مطلوب للدين/التقسيط';
+                                : loc.aiRequiredForDebtInstallment;
                           }
                           return null;
                         },
@@ -3115,7 +3116,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                             : (buyerAddressQrEnabled
                                   ? (type == InvoiceType.delivery
                     ? AppLocalizations.of(context)!.addressMapRequired
-                                        : 'يُطبَع QR يفتح الخرائط عند المسح')
+                                        : loc.aiQRMapHint)
                                   : null),
                         isDense: true,
                       ),
@@ -3193,8 +3194,8 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                     padding: const EdgeInsets.only(top: 8),
                     child: Text(
                       type == InvoiceType.delivery
-                          ? 'للتوصيل: أدخل اسم العميل وعنوان التوصيل (كلاهما مطلوب). يظهر اقتراح للاسم من قاعدة العملاء أثناء الكتابة.'
-                          : 'مهم: للدين والتقسيط اضغط على اسم العميل من القائمة المقترحة لربط البيع ببطاقته (لا يكفي كتابة الاسم يدوياً إن لم يُطابق سجلاً واحداً بالضبط).',
+                          ? loc.aiDeliveryHint
+                          : loc.aiDebtInstallmentHint,
                       style: TextStyle(fontSize: 11, color: scheme.error),
                     ),
                   ),
@@ -3322,8 +3323,8 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                         size: 22,
                       ),
                       tooltip: expanded
-                          ? 'إخفاء التفاصيل'
-                          : 'تفاصيل السعر والخصم',
+                          ? loc.aiHideDetails
+                          : loc.aiPriceDetailsAndDiscount,
                       onPressed: () {
                         setState(() {
                           if (expanded) {
@@ -3415,7 +3416,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                             const SizedBox(height: 6),
                           ],
                           Text(
-                            'سعر ${IraqiCurrencyFormat.formatInt(item.unitPrice)} · أدنى ${IraqiCurrencyFormat.formatInt(item.minSellPrice)}',
+                            loc.aiItemPriceSummary(IraqiCurrencyFormat.formatInt(item.minSellPrice), IraqiCurrencyFormat.formatInt(item.unitPrice)),
                             style: TextStyle(
                               fontSize: 11,
                               color: scheme.onSurfaceVariant,
@@ -3424,7 +3425,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                           if (!expanded) ...[
                             const SizedBox(height: 2),
                             Text(
-                              'الإجمالي: ${IraqiCurrencyFormat.formatIqd(gross)}',
+                              loc.aiItemGrossTotal(IraqiCurrencyFormat.formatIqd(gross)),
                               style: const TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
@@ -3526,26 +3527,26 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       _lineDetailRow(
-                        'سعر البيع (للوحدة)',
+                        loc.aiSellPricePerUnit,
                         IraqiCurrencyFormat.formatIqd(item.unitPrice),
                       ),
                       _lineDetailRow(
-                        'إجمالي السطر قبل خصم الفاتورة',
+                        loc.aiInvoiceLineBeforeDiscount,
                         IraqiCurrencyFormat.formatIqd(gross),
                       ),
                       _lineDetailRow(
-                        'حصة خصم الفاتورة لهذا السطر',
+                        loc.aiInvoiceLineDiscountShare,
                         IraqiCurrencyFormat.formatIqd(share),
                         emphasize: share > 0,
                       ),
                       _lineDetailRow(
-                        'الإجمالي بعد خصم الفاتورة (لهذا السطر)',
+                        loc.aiInvoiceLineAfterDiscount,
                         IraqiCurrencyFormat.formatIqd(net),
                         strong: true,
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'يُوزَّع خصم النسبة على الأسطر بحسب مساهمة كل سطر في إجمالي البنود.',
+                        loc.aiPercentDiscountDistribution,
                         style: TextStyle(
                           fontSize: 10,
                           height: 1.25,
@@ -3630,7 +3631,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx),
-              child: const Text('إلغاء'),
+              child: Text(loc.aiCancel),
             ),
             FilledButton(
               onPressed: () async {
@@ -3657,7 +3658,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
           content: Text(
             item.stockBaseKind == 1
                     ? AppLocalizations.of(context)!.quantityErrorWeight
-                : 'أدخل عدداً صحيحاً 1 فما فوق',
+                : loc.aiEnterValidQuantity,
           ),
         ),
       );
@@ -4254,7 +4255,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
             _showSaleSnackBar(
               SnackBar(
                 content: Text(
-                  'بيع التقسيط: المقدّم يجب ألا يقل عن ${instSettingsForSave.minDownPaymentPercent}% من إجمالي الفاتورة (يُقارب ${IraqiCurrencyFormat.formatIqd(minAdv)}). عدّل حقل المقدّم أو راجع «الأقساط → إعدادات تقسيط».',
+                  loc.aiInstallmentMinDownPaymentError(IraqiCurrencyFormat.formatIqd(minAdv), instSettingsForSave.minDownPaymentPercent.toString()),
                 ),
                 duration: const Duration(seconds: 6),
               ),
@@ -4278,8 +4279,8 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
           _showSaleSnackBar(
             SnackBar(
               content: Text(
-                'حد الدين للفاتورة: المتبقي (${IraqiCurrencyFormat.formatIqd(rem)}) يتجاوز السقف '
-                '${IraqiCurrencyFormat.formatIqd(cap)}. عدّل الإجمالي أو المبلغ الواصل أو «الديون → إعدادات الدين».',
+                loc.aiDebtCapExceededInvoice(IraqiCurrencyFormat.formatIqd(cap), IraqiCurrencyFormat.formatIqd(rem)),
+
               ),
               duration: const Duration(seconds: 7),
             ),
@@ -4304,9 +4305,9 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
             _showSaleSnackBar(
               SnackBar(
                 content: Text(
-                  'حد الدين للعميل: مجموع المتبقي الحالي ≈ ${IraqiCurrencyFormat.formatIqd(existing)}، '
-                  'والفاتورة تضيف ${IraqiCurrencyFormat.formatIqd(rem)} (يتجاوز ${IraqiCurrencyFormat.formatIqd(cap)}). '
-                  'اربط العميل من القائمة، أو خفّض المبلغ، أو راجع إعدادات الديون.',
+                  loc.aiDebtCapExceededCustomer(IraqiCurrencyFormat.formatIqd(cap), IraqiCurrencyFormat.formatIqd(existing), IraqiCurrencyFormat.formatIqd(rem)),
+
+
                 ),
                 duration: const Duration(seconds: 8),
               ),
@@ -4361,8 +4362,8 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         _showSaleSnackBar(
           SnackBar(
             content: Text(
-              'تعذر حفظ الفاتورة — ${balance.errorMessage}. راجع الأصناف '
-              'والإجمالي قبل إعادة المحاولة.',
+              loc.aiInvoiceSaveFailed(balance.errorMessage ?? ''),
+
             ),
             duration: const Duration(seconds: 6),
           ),
@@ -4399,14 +4400,11 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
           invoiceId: invoiceId,
         );
       } catch (e, st) {
-        AppLogger.error('Invoice', 'فشل إغلاق تذكرة الصيانة المرتبطة $sOrderId', e, st);
+        AppLogger.error('Invoice', loc.aiServiceOrderCloseFailed(sOrderId), e, st);
         if (mounted) {
           _showSaleSnackBar(
-            const SnackBar(
-              content: Text(
-                'تنبيه: حُفظت الفاتورة ولكن تعذر تلقائياً تحديث حالة تذكرة الصيانة. '
-                'يرجى مراجعتها يدوياً.',
-              ),
+            SnackBar(
+              content: Text(loc.aiServiceOrderUpdateWarning),
             ),
           );
         }
@@ -4739,15 +4737,15 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
           await showDialog<bool>(
             context: context,
             builder: (ctx) => AlertDialog(
-              title: Text('فاتورة #${inv.id}'),
+              title: Text(loc.aiReturnScreenTitle(inv.id ?? 0)),
               content: Text(
-                'فتح شاشة المرتجع (منتجات فقط)؟\n'
-                'الإجمالي الأصلي: ${IraqiCurrencyFormat.formatIqd(inv.total)}',
+                loc.aiOpenReturnScreen(IraqiCurrencyFormat.formatIqd(inv.total)),
+
               ),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(ctx, false),
-                  child: const Text('إلغاء'),
+                  child: Text(loc.aiCancel),
                 ),
                 FilledButton(
                   onPressed: () => Navigator.pop(ctx, true),
@@ -4903,7 +4901,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context, false),
-                child: const Text('إلغاء'),
+                child: Text(loc.aiCancel),
               ),
               FilledButton(
                 onPressed: () => Navigator.pop(context, true),
@@ -5174,7 +5172,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
 
               if (variants.isEmpty)
                 Text(
-                  'جارٍ تحميل الألوان والمقاسات…',
+                  loc.aiLoadingColorsSizes,
                   style: TextStyle(
                     color: cs.onSurfaceVariant,
                     fontWeight: FontWeight.w600,
@@ -5205,7 +5203,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                         title: (e.value['colorName'] ?? '').toString().trim().isEmpty
                             ? AppLocalizations.of(context)!.colorLabel
                             : (e.value['colorName'] ?? '').toString().trim(),
-                        subtitle: 'المتاح: $rem',
+                        subtitle: loc.aiAvailableQuantity(rem),
                         disabled: colorDisabled,
                         selected: selectedColorId == e.key,
                         onTap: () {
@@ -5292,7 +5290,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                                 children: [
                                   chipBox(
                                     title: size,
-                                    subtitle: 'المتاح: $q',
+                                    subtitle: loc.aiAvailableQuantity(q),
                                     disabled: disabled,
                                     selected: isSelected,
                                     showOutOfStockX: q <= 0,
@@ -5398,7 +5396,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Text(
-                            'المحدد حالياً',
+                            loc.aiCurrentlySelected,
                             style: TextStyle(
                               fontWeight: FontWeight.w900,
                               color: cs.primary,
@@ -5518,7 +5516,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx),
-              child: const Text('إلغاء'),
+              child: Text(loc.aiCancel),
             ),
             FilledButton(
               onPressed: () {
@@ -5645,6 +5643,7 @@ class _SaleParkInvoiceDialog extends StatefulWidget {
 }
 
 class _SaleParkInvoiceDialogState extends State<_SaleParkInvoiceDialog> {
+  AppLocalizations get loc => AppLocalizations.of(context)!;
   late final TextEditingController _controller;
 
   @override
@@ -5741,7 +5740,7 @@ class _SaleParkInvoiceDialogState extends State<_SaleParkInvoiceDialog> {
                           bottom: 8,
                         ),
                         child: Text(
-                          'يُحفظ محلياً على هذا الجهاز. يمكنك استئناف البيع لاحقاً من «الفواتير ← معلّقة مؤقتاً».',
+                          loc.aiParkedSalesHint,
                           style: TextStyle(
                             fontSize: 12.5,
                             height: 1.38,
@@ -5901,7 +5900,7 @@ class _InvoiceLineState {
     this.pendingColorId,
     Map<int, int>? clothingVariantQty,
   }) : unitLabel = (unitLabel == null || unitLabel.trim().isEmpty)
-           ? 'قطعة'
+           ? 'PC'
            : unitLabel.trim(),
        clothingVariantQty = clothingVariantQty ?? <int, int>{};
 
@@ -5953,6 +5952,7 @@ class _SaleInlineScannerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     final outline = cs.outlineVariant.withValues(alpha: 0.8);
 
@@ -6062,8 +6062,8 @@ class _SaleInlineScannerCard extends StatelessWidget {
                                 color: Colors.black.withValues(alpha: 0.55),
                                 borderRadius: BorderRadius.circular(999),
                               ),
-                              child: const Text(
-                                'امسح — سيتم الإضافة تلقائيًا',
+                              child: Text(
+                                loc.aiScanToAdd,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 12,

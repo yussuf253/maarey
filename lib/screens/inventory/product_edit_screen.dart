@@ -287,7 +287,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       sizes += c.sizes.length;
     }
 
-    return 'ألوان: $colors • مقاسات: $sizes • إجمالي: ${_totalQtyAllVariants()}';
+    return loc.peVariantSummary(colors.toString(), sizes.toString(), _totalQtyAllVariants().toString());
   }
 
   Future<void> _openVariantsEditor() async {
@@ -575,28 +575,28 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
   String? _validateVariantDrafts() {
     if (!_multiVariantEnabled) return null;
 
-    if (_colorDrafts.isEmpty) return 'أضف لوناً واحداً على الأقل.';
+    if (_colorDrafts.isEmpty) return loc.apAddAtLeastOneColor;
 
     final seenBarcodes = <String>{};
 
     for (final c in _colorDrafts) {
       final colorName = c.nameCtrl.text.trim();
 
-      if (colorName.isEmpty) return 'اسم اللون مطلوب.';
+      if (colorName.isEmpty) return loc.apColorNameRequired;
 
-      if (c.sizes.isEmpty) return 'أضف مقاساً واحداً على الأقل لكل لون.';
+      if (c.sizes.isEmpty) return loc.apAddAtLeastOneSize;
 
       final seenSizesInColor = <String>{};
 
       for (final s in c.sizes) {
         final size = s.sizeCtrl.text.trim();
 
-        if (size.isEmpty) return 'حقل المقاس مطلوب.';
+        if (size.isEmpty) return loc.apSizeRequired;
 
         final key = size.toLowerCase();
 
         if (!seenSizesInColor.add(key)) {
-          return 'المقاس "$size" مكرر داخل اللون "$colorName".';
+          return loc.peDuplicateSizeInColor(colorName, size);
         }
 
         final q = _parseNonNegativeInt(s.qtyCtrl.text);
@@ -606,7 +606,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
         final bc = s.barcodeCtrl.text.trim().toUpperCase();
 
         if (bc.isNotEmpty) {
-          if (!seenBarcodes.add(bc)) return 'يوجد باركود مكرر داخل المتغيرات.';
+          if (!seenBarcodes.add(bc)) return loc.apDuplicateBarcodeVariants;
         }
       }
     }
@@ -642,8 +642,8 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
       if (!(f > 0)) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('عامل التحويل يجب أن يكون أكبر من 0 لكل وحدة جديدة.'),
+          SnackBar(
+            content: Text(loc.apConversionFactorGt0),
             behavior: SnackBarBehavior.floating,
           ),
         );
@@ -843,17 +843,17 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
       final msg = e.toString().contains('duplicate_barcode')
 
-          ? 'الباركود مستخدم لمنتج/وحدة أخرى'
+          ? loc.apBarcodeUsedByOther
 
           : e.toString().contains('duplicate_variant_barcode')
 
-              ? 'باركود المتغير مستخدم مسبقاً'
+              ? loc.apVariantBarcodeTaken
 
           : (e is StateError && e.message == 'bad_unit_factor')
 
-              ? 'عامل التحويل يجب أن يكون أكبر من 0'
+              ? loc.apConversionFactorGt0
 
-              : 'تعذر حفظ التعديلات';
+              : loc.apSaveFailed('');
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(msg), behavior: SnackBarBehavior.floating),
@@ -885,8 +885,8 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
       final chosen = await showAppColorPickerDialog(
         context: context,
         initialColor: current,
-        title: 'اختيار لون',
-        subtitle: 'اختر لوناً يمثّل هذا الخيار (اختياري).',
+        title: loc.apChooseColorTitle,
+        subtitle: loc.apChooseColorSubtitle,
       );
 
       if (chosen == null || !mounted) return;
@@ -1140,7 +1140,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                   children: [
 
                     Text(
-                      'المقاسات والكميات',
+                      loc.apSizesAndQuantities,
                       style: TextStyle(
                         fontWeight: FontWeight.w900,
                         color: cs.onSurface,
@@ -1193,7 +1193,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'إجمالي اللون: ${_totalQtyForColor(c)}',
+                      loc.apColorTotal(_totalQtyForColor(c).toString()),
                       textAlign: TextAlign.end,
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
@@ -1233,7 +1233,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                 ),
               ),
               Text(
-                'الإجمالي: ${_totalQtyAllVariants()}',
+                loc.peGrandTotal(_totalQtyAllVariants().toString()),
                 style: TextStyle(
                   fontWeight: FontWeight.w800,
                   color: cs.onSurfaceVariant,
@@ -1382,7 +1382,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                             contentPadding: EdgeInsets.zero,
                             title: Text(loc.trackStock, style: TextStyle(fontWeight: FontWeight.w800)),
                             subtitle: Text(
-                              _track ? 'يحسب الكمية والتنبيه منخفض' : 'الكمية تُصبح 0 ولا تظهر تنبيهات مخزون',
+                              _track ? loc.apTrackStock : loc.apNoTrackDesc,
                               style: TextStyle(color: cs.onSurfaceVariant, fontSize: 12),
                             ),
                           ),
@@ -1401,7 +1401,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
 
-                          Text('التسعير', style: TextStyle(fontWeight: FontWeight.w900, color: cs.onSurface)),
+                          Text(loc.apPricingSection, style: TextStyle(fontWeight: FontWeight.w900, color: cs.onSurface)),
                           SizedBox(height: 10),
                           Row(
                             children: [
@@ -1565,7 +1565,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                           ),
                           const SizedBox(height: 6),
                           Text(
-                            'الوحدة الافتراضية تُدار تلقائياً مع المنتج؛ يمكنك تعديل الوحدات الإضافية أو إضافة وحدة جديدة.',
+                            loc.unitsDesc,
                             style: TextStyle(fontSize: 12, color: cs.onSurfaceVariant, height: 1.35),
                           ),
                           SizedBox(height: 10),
@@ -1586,14 +1586,14 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                                   contentPadding: EdgeInsets.zero,
                                   title: Text(loc.defaultUnitTitle, style: TextStyle(fontWeight: FontWeight.w900)),
                                   subtitle: Text(
-                                    '${r.unitName.text.trim()} — عامل ${r.factor.text.trim()}',
+                                    loc.peUnitFactor(r.factor.text.trim(), r.unitName.text.trim()),
                                     style: TextStyle(color: cs.onSurfaceVariant),
                                   ),
                                 )
 
                               else ...[
 
-                                Text('وحدة #${r.variantId}', style: const TextStyle(fontWeight: FontWeight.w900)),
+                                Text(loc.unitNumber(r.variantId), style: const TextStyle(fontWeight: FontWeight.w900)),
                                 const SizedBox(height: 8),
                                 Row(
                                   children: [
@@ -1602,8 +1602,8 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                                       child: TextFormField(
                                         controller: r.unitName,
                                         textAlign: TextAlign.right,
-                                        decoration: const InputDecoration(
-                                          labelText: 'اسم الوحدة',
+                                        decoration: InputDecoration(
+                                          labelText: loc.apUnitNameLabel,
                                           border: OutlineInputBorder(),
                                           isDense: true,
                                         ),
@@ -1614,8 +1614,8 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                                       child: TextFormField(
                                         controller: r.unitSymbol,
                                         textAlign: TextAlign.right,
-                                        decoration: const InputDecoration(
-                                          labelText: 'رمز',
+                                        decoration: InputDecoration(
+                                          labelText: loc.symbolLabel,
                                           border: OutlineInputBorder(),
                                           isDense: true,
                                         ),
@@ -1636,8 +1636,8 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
                                           FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
                                         ],
-                                        decoration: const InputDecoration(
-                                          labelText: 'عامل التحويل إلى الأساس',
+                                        decoration: InputDecoration(
+                                          labelText: loc.apConversionFactor,
                                           border: OutlineInputBorder(),
                                           isDense: true,
                                         ),
@@ -1648,8 +1648,8 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                                       child: TextFormField(
                                         controller: r.barcode,
                                         textAlign: TextAlign.right,
-                                        decoration: const InputDecoration(
-                                          labelText: 'باركود (اختياري)',
+                                        decoration: InputDecoration(
+                                          labelText: loc.apBarcodeOptionalLabel,
                                           border: OutlineInputBorder(),
                                           isDense: true,
                                         ),
@@ -1666,8 +1666,8 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                                         controller: r.sell,
                                         textAlign: TextAlign.right,
                                         keyboardType: TextInputType.number,
-                                        decoration: const InputDecoration(
-                                          labelText: 'سعر بيع الوحدة (اختياري)',
+                                        decoration: InputDecoration(
+                                          labelText: loc.unitSellPriceLabel,
                                           border: OutlineInputBorder(),
                                           isDense: true,
                                         ),
@@ -1679,8 +1679,8 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                                         controller: r.minSell,
                                         textAlign: TextAlign.right,
                                         keyboardType: TextInputType.number,
-                                        decoration: const InputDecoration(
-                                          labelText: 'أدنى سعر (اختياري)',
+                                        decoration: InputDecoration(
+                                          labelText: loc.apMinSellPrice,
                                           border: OutlineInputBorder(),
                                           isDense: true,
                                         ),
@@ -1740,8 +1740,8 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                                             child: TextFormField(
                                               controller: n.unitName,
                                               textAlign: TextAlign.right,
-                                              decoration: const InputDecoration(
-                                                labelText: 'اسم الوحدة',
+                                              decoration: InputDecoration(
+                                                labelText: loc.apUnitNameLabel,
                                                 border: OutlineInputBorder(),
                                                 isDense: true,
                                               ),
@@ -1752,8 +1752,8 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                                             child: TextFormField(
                                               controller: n.unitSymbol,
                                               textAlign: TextAlign.right,
-                                              decoration: const InputDecoration(
-                                                labelText: 'رمز',
+                                              decoration: InputDecoration(
+                                                labelText: loc.symbolLabel,
                                                 border: OutlineInputBorder(),
                                                 isDense: true,
                                               ),
@@ -1774,8 +1774,8 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
                                                 FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
                                               ],
-                                              decoration: const InputDecoration(
-                                                labelText: 'عامل التحويل إلى الأساس',
+                                              decoration: InputDecoration(
+                                                labelText: loc.apConversionFactor,
                                                 border: OutlineInputBorder(),
                                                 isDense: true,
                                               ),
@@ -1786,8 +1786,8 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                                             child: TextFormField(
                                               controller: n.barcode,
                                               textAlign: TextAlign.right,
-                                              decoration: const InputDecoration(
-                                                labelText: 'باركود (اختياري)',
+                                              decoration: InputDecoration(
+                                                labelText: loc.apBarcodeOptionalLabel,
                                                 border: OutlineInputBorder(),
                                                 isDense: true,
                                               ),
@@ -1804,8 +1804,8 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                                               controller: n.sell,
                                               textAlign: TextAlign.right,
                                               keyboardType: TextInputType.number,
-                                              decoration: const InputDecoration(
-                                                labelText: 'سعر بيع الوحدة (اختياري)',
+                                              decoration: InputDecoration(
+                                                labelText: loc.unitSellPriceLabel,
                                                 border: OutlineInputBorder(),
                                                 isDense: true,
                                               ),
@@ -1817,8 +1817,8 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                                               controller: n.minSell,
                                               textAlign: TextAlign.right,
                                               keyboardType: TextInputType.number,
-                                              decoration: const InputDecoration(
-                                                labelText: 'أدنى سعر (اختياري)',
+                                              decoration: InputDecoration(
+                                                labelText: loc.apMinSellPrice,
                                                 border: OutlineInputBorder(),
                                                 isDense: true,
                                               ),
@@ -1852,7 +1852,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                           if (_multiVariantEnabled)
 
                             Text(
-                              'المخزون يُدار عبر الألوان والمقاسات. الإجمالي الحالي: ${_totalQtyAllVariants()}',
+                              loc.peColorSizeInventoryHint(_totalQtyAllVariants().toString()),
                               textAlign: TextAlign.end,
                               style: TextStyle(color: cs.onSurfaceVariant),
                             )

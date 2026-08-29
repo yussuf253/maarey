@@ -186,7 +186,7 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
     }
     if (_category != loc.ipAllCategories) n++;
     if (_brand != loc.ipAllBrands) n++;
-    if (_status != 'الكل') n++;
+    if (_status != 'all') n++;
     return n;
   }
 
@@ -267,7 +267,7 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
       _priceTo.clear();
       _category = loc.ipAllCategories;
       _brand = loc.ipAllBrands;
-      _status = 'الكل';
+      _status = 'all';
     });
     _pushFiltersToProvider();
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -729,7 +729,7 @@ class _SearchCard extends StatelessWidget {
   final VoidCallback onToggleAdvanced;
   final AppLocalizations loc;
 
-  static const List<String> _statusItems = ['الكل', 'نشط', 'مخزون منخفض', 'نفذ من المخزون', 'معطّل'];
+  static const List<String> _statusItems = ['all', 'active', 'low_stock', 'out_of_stock', 'disabled'];
 
   @override
   Widget build(BuildContext context) {
@@ -1125,11 +1125,19 @@ class _SearchCard extends StatelessWidget {
     final fill = isDark
         ? Colors.white.withValues(alpha: 0.05)
         : const Color(0xFFF8FAFC);
+    String statusLabel(String s) => switch (s) {
+      'all' => loc.allLabel,
+      'active' => loc.ipStatusActive,
+      'low_stock' => loc.ipStatusLowStock,
+      'out_of_stock' => loc.ipStatusOutOfStock,
+      'disabled' => loc.ipStatusDisabled,
+      _ => s,
+    };
     Color dot(String s) => switch (s) {
-      'نشط' => _kGreen,
-      'مخزون منخفض' => _kOrange,
-      'نفذ من المخزون' => Colors.red.shade700,
-      'معطّل' => _kText3,
+      'active' => _kGreen,
+      'low_stock' => _kOrange,
+      'out_of_stock' => Colors.red.shade700,
+      'disabled' => _kText3,
       _ => Colors.transparent,
     };
     return Column(
@@ -1155,7 +1163,7 @@ class _SearchCard extends StatelessWidget {
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
-              value: _statusItems.contains(status) ? status : 'الكل',
+              value: _statusItems.contains(status) ? status : 'all',
               isExpanded: true,
               isDense: true,
               icon: Icon(
@@ -1172,7 +1180,7 @@ class _SearchCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Flexible(
-                            child: Text(s, overflow: TextOverflow.ellipsis),
+                            child: Text(statusLabel(s), overflow: TextOverflow.ellipsis),
                           ),
                           const SizedBox(width: 8),
                           if (dot(s) != Colors.transparent)
@@ -1199,7 +1207,7 @@ class _SearchCard extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text(s),
+                          Text(statusLabel(s)),
                           const SizedBox(width: 10),
                           if (dot(s) != Colors.transparent)
                             Container(
@@ -1945,7 +1953,7 @@ class _ProductsEmptyBlock extends StatelessWidget {
               ElevatedButton.icon(
                 onPressed: onAddFirst,
                 icon: const Icon(Icons.add_rounded, size: 18),
-                label: const Text('+ إضافة أول منتج'),
+                label: Text(loc.addFirstProduct),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: _kGreen,
                   foregroundColor: Colors.white,

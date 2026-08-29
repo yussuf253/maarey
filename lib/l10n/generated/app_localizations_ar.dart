@@ -8200,4 +8200,234 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get apRelinkToCost => ' إعادة الربط بتكلفة الشراء';
+
+  @override
+  String peVariantSummary(Object colors, Object sizes, Object total) {
+    return 'ألوان: $colors • مقاسات: $sizes • إجمالي: $total';
+  }
+
+  @override
+  String peDuplicateSizeInColor(Object colorName, Object size) {
+    return 'المقاس \"$size\" مكرر داخل اللون \"$colorName\".';
+  }
+
+  @override
+  String peGrandTotal(Object total) {
+    return 'الإجمالي: $total';
+  }
+
+  @override
+  String peUnitFactor(Object factor, Object unitName) {
+    return '$unitName — عامل $factor';
+  }
+
+  @override
+  String peColorSizeInventoryHint(Object total) {
+    return 'المخزون يُدار عبر الألوان والمقاسات. الإجمالي الحالي: $total';
+  }
+
+  @override
+  String get aiBaseForInstallments => 'المبلغ بعد المقدّم (أساس التقسيط)';
+
+  @override
+  String get aiProductsTab => 'المنتجات';
+
+  @override
+  String get aiNoItemsWithBarcode =>
+      'لا توجد أصناف بعد.\nامسح الباركود أعلاه أو أضف من البحث في الشاشة الرئيسية.\nابحث عن منتج أو امسح الباركود للإضافة.';
+
+  @override
+  String get aiNoItemsWithoutBarcode =>
+      'لا توجد أصناف بعد.\nأضف منتجات من البحث في الشاشة الرئيسية.\nابحث عن منتج أو امسح الباركود للإضافة.';
+
+  @override
+  String aiMaxDiscountHint(Object percent) {
+    return 'الحد الأقصى المسموح حالياً: $percent٪ — يُحسب من أدنى سعر لكل صنف.';
+  }
+
+  @override
+  String get aiNumbersResultHint =>
+      'نتيجة الأرقام والدفعة الأولى إن وُجدت، قبل الانتقال لبيانات العميل.';
+
+  @override
+  String get aiNumbersResultWithDiscountHint =>
+      'نتيجة الأرقام بعد الخصم والضريبة، والدفعة الأولى إن وُجدت، قبل الانتقال لبيانات العميل.';
+
+  @override
+  String get aiPriceDetails => 'تفاصيل السعر';
+
+  @override
+  String get aiAmountBreakdown => 'تفصيل المبالغ';
+
+  @override
+  String aiLoyaltyDiscountLabel(Object amount) {
+    return 'خصم الولاء: -$amount د.ع';
+  }
+
+  @override
+  String aiSelectPaymentMethod(Object methods) {
+    return 'اختر $methods، ثم أكمل بيانات العميل والحقول المرتبطة بنوع الدفع.';
+  }
+
+  @override
+  String get aiRequiredForDebtInstallment => 'مطلوب للدين/التقسيط';
+
+  @override
+  String get aiQRMapHint => 'يُطبَع QR يفتح الخرائط عند المسح';
+
+  @override
+  String get aiDeliveryHint =>
+      'للتوصيل: أدخل اسم العميل وعنوان التوصيل (كلاهما مطلوب). يظهر اقتراح للاسم من قاعدة العملاء أثناء الكتابة.';
+
+  @override
+  String get aiDebtInstallmentHint =>
+      'مهم: للدين والتقسيط اضغط على اسم العميل من القائمة المقترحة لربط البيع ببطاقته (لا يكفي كتابة الاسم يدوياً إن لم يُطابق سجلاً واحداً بالضبط).';
+
+  @override
+  String get aiHideDetails => 'إخفاء التفاصيل';
+
+  @override
+  String get aiPriceDetailsAndDiscount => 'تفاصيل السعر والخصم';
+
+  @override
+  String aiItemPriceSummary(Object min, Object price) {
+    return 'سعر $price · أدنى $min';
+  }
+
+  @override
+  String aiItemGrossTotal(Object total) {
+    return 'الإجمالي: $total';
+  }
+
+  @override
+  String get aiSellPricePerUnit => 'سعر البيع (للوحدة)';
+
+  @override
+  String get aiInvoiceLineBeforeDiscount => 'إجمالي السطر قبل خصم الفاتورة';
+
+  @override
+  String get aiInvoiceLineDiscountShare => 'حصة خصم الفاتورة لهذا السطر';
+
+  @override
+  String get aiInvoiceLineAfterDiscount =>
+      'الإجمالي بعد خصم الفاتورة (لهذا السطر)';
+
+  @override
+  String get aiPercentDiscountDistribution =>
+      'يُوزَّع خصم النسبة على الأسطر بحسب مساهمة كل سطر في إجمالي البنود.';
+
+  @override
+  String get aiCancel => 'إلغاء';
+
+  @override
+  String get aiEnterValidQuantity => 'أدخل عدداً صحيحاً 1 فما فوق';
+
+  @override
+  String aiInstallmentMinDownPaymentError(Object amount, Object percent) {
+    return 'بيع التقسيط: المقدّم يجب ألا يقل عن $percent% من إجمالي الفاتورة (يُقارب $amount). عدّل حقل المقدّم أو راجع «الأقساط → إعدادات تقسيط».';
+  }
+
+  @override
+  String aiDebtCapExceededInvoice(Object cap, Object remaining) {
+    return 'حد الدين للفاتورة: المتبقي ($remaining) يتجاوز السقف $cap. عدّل الإجمالي أو المبلغ الواصل أو «الديون → إعدادات الدين».';
+  }
+
+  @override
+  String aiDebtCapExceededCustomer(
+    Object cap,
+    Object existing,
+    Object invoice,
+  ) {
+    return 'حد الدين للعميل: مجموع المتبقي الحالي ≈ $existing، والفاتورة تضيف $invoice (يتجاوز $cap). اربط العميل من القائمة، أو خفّض المبلغ، أو راجع إعدادات الديون.';
+  }
+
+  @override
+  String aiInvoiceSaveFailed(Object error) {
+    return 'تعذر حفظ الفاتورة — $error. راجع الأصناف والإجمالي قبل إعادة المحاولة.';
+  }
+
+  @override
+  String aiServiceOrderCloseFailed(Object orderId) {
+    return 'فشل إغلاق تذكرة الصيانة المرتبطة $orderId';
+  }
+
+  @override
+  String get aiServiceOrderUpdateWarning =>
+      'تنبيه: حُفظت الفاتورة ولكن تعذر تلقائياً تحديث حالة تذكرة الصيانة. يرجى مراجعتها يدوياً.';
+
+  @override
+  String aiReturnScreenTitle(Object id) {
+    return 'فاتورة #$id';
+  }
+
+  @override
+  String aiOpenReturnScreen(Object total) {
+    return 'فتح شاشة المرتجع (منتجات فقط)؟\nالإجمالي الأصلي: $total';
+  }
+
+  @override
+  String get aiLoadingColorsSizes => 'جارٍ تحميل الألوان والمقاسات…';
+
+  @override
+  String aiAvailableQuantity(Object qty) {
+    return 'المتاح: $qty';
+  }
+
+  @override
+  String get aiCurrentlySelected => 'المحدد حالياً';
+
+  @override
+  String get aiUnitPiece => 'قطعة';
+
+  @override
+  String get aiParkedSalesHint =>
+      'يُحفظ محلياً على هذا الجهاز. يمكنك استئناف البيع لاحقاً من «الفواتير ← معلّقة مؤقتاً».';
+
+  @override
+  String get aiScanToAdd => 'امسح — سيتم الإضافة تلقائيًا';
+
+  @override
+  String get apTrackStock => 'يحسب الكمية والتنبيه منخفض';
+
+  @override
+  String get apNoTrackDesc => 'الكمية تُصبح 0 ولا تظهر تنبيهات مخزون';
+
+  @override
+  String get ipStatusDisabled => 'معطّل';
+
+  @override
+  String get addFirstProduct => '+ إضافة أول منتج';
+
+  @override
+  String apLoadTemplateFailed(Object error) {
+    return 'تعذر تحميل بيانات النموذج. سيعمل الحقل بالوضع اليدوي.\n$error';
+  }
+
+  @override
+  String apVariantSummaryLine(Object colors, Object sizes, Object total) {
+    return 'ألوان: $colors • مقاسات: $sizes • إجمالي: $total';
+  }
+
+  @override
+  String apMarginHint(Object min, Object percent) {
+    return 'هامش $percent٠ على التكلفة؛ أقل سعر = $min';
+  }
+
+  @override
+  String apMarginPctValue(Object value) {
+    return '$value٠';
+  }
+
+  @override
+  String get apTrackDisabledHint => 'عند الإيقاف لا تُسجَّل كميات لهذا المنتج';
+
+  @override
+  String apOptionalHintIQD(Object amount) {
+    return 'اختياري — $amount';
+  }
+
+  @override
+  String apMinSellPriceHintIQD(Object amount) {
+    return 'أدنى سعر بيع — $amount';
+  }
 }

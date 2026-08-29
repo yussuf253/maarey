@@ -8279,4 +8279,238 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get apRelinkToCost => ' Re-link to purchase cost';
+
+  @override
+  String peVariantSummary(Object colors, Object sizes, Object total) {
+    return 'Colors: $colors • Sizes: $sizes • Total: $total';
+  }
+
+  @override
+  String peDuplicateSizeInColor(Object colorName, Object size) {
+    return 'Size \"$size\" is duplicated within color \"$colorName\".';
+  }
+
+  @override
+  String peGrandTotal(Object total) {
+    return 'Total: $total';
+  }
+
+  @override
+  String peUnitFactor(Object factor, Object unitName) {
+    return '$unitName — factor $factor';
+  }
+
+  @override
+  String peColorSizeInventoryHint(Object total) {
+    return 'Inventory managed via colors and sizes. Current total: $total';
+  }
+
+  @override
+  String get aiBaseForInstallments =>
+      'Amount after down payment (installment base)';
+
+  @override
+  String get aiProductsTab => 'Products';
+
+  @override
+  String get aiNoItemsWithBarcode =>
+      'No items yet.\nScan the barcode above or add from the main screen search.\nSearch for a product or scan a barcode to add.';
+
+  @override
+  String get aiNoItemsWithoutBarcode =>
+      'No items yet.\nAdd products from the main screen search.\nSearch for a product or scan a barcode to add.';
+
+  @override
+  String aiMaxDiscountHint(Object percent) {
+    return 'Maximum allowed: $percent% — calculated from the minimum price per item.';
+  }
+
+  @override
+  String get aiNumbersResultHint =>
+      'Numbers result and first payment if any, before moving to customer data.';
+
+  @override
+  String get aiNumbersResultWithDiscountHint =>
+      'Numbers result after discount and tax, and first payment if any, before moving to customer data.';
+
+  @override
+  String get aiPriceDetails => 'Price Details';
+
+  @override
+  String get aiAmountBreakdown => 'Amount Breakdown';
+
+  @override
+  String aiLoyaltyDiscountLabel(Object amount) {
+    return 'Loyalty discount: -$amount IQD';
+  }
+
+  @override
+  String aiSelectPaymentMethod(Object methods) {
+    return 'Select $methods, then complete customer data and fields related to the payment type.';
+  }
+
+  @override
+  String get aiRequiredForDebtInstallment => 'Required for debt/installment';
+
+  @override
+  String get aiQRMapHint => 'Printed QR opens maps when scanned';
+
+  @override
+  String get aiDeliveryHint =>
+      'For delivery: enter customer name and delivery address (both required). Name suggestions appear from the customer database as you type.';
+
+  @override
+  String get aiDebtInstallmentHint =>
+      'Important: for debt/installment, tap the customer name from the suggestions to link the sale to their card (typing the name manually is not enough if it doesn\'t match exactly one record).';
+
+  @override
+  String get aiHideDetails => 'Hide details';
+
+  @override
+  String get aiPriceDetailsAndDiscount => 'Price and Discount Details';
+
+  @override
+  String aiItemPriceSummary(Object min, Object price) {
+    return 'Price $price · Min $min';
+  }
+
+  @override
+  String aiItemGrossTotal(Object total) {
+    return 'Total: $total';
+  }
+
+  @override
+  String get aiSellPricePerUnit => 'Sell Price (per unit)';
+
+  @override
+  String get aiInvoiceLineBeforeDiscount =>
+      'Invoice line total before invoice discount';
+
+  @override
+  String get aiInvoiceLineDiscountShare =>
+      'This line\'s share of the invoice discount';
+
+  @override
+  String get aiInvoiceLineAfterDiscount =>
+      'Total after invoice discount (for this line)';
+
+  @override
+  String get aiPercentDiscountDistribution =>
+      'Percentage discount is distributed across lines based on each line\'s contribution to the item total.';
+
+  @override
+  String get aiCancel => 'Cancel';
+
+  @override
+  String get aiEnterValidQuantity => 'Enter a valid number 1 or above';
+
+  @override
+  String aiInstallmentMinDownPaymentError(Object amount, Object percent) {
+    return 'Installment sale: the down payment must be at least $percent% of the invoice total (≈$amount). Adjust the down payment field or check \"Installments → Installment Settings\".';
+  }
+
+  @override
+  String aiDebtCapExceededInvoice(Object cap, Object remaining) {
+    return 'Invoice debt limit: the remaining ($remaining) exceeds the cap $cap. Adjust the total, amount received, or \"Debts → Debt Settings\".';
+  }
+
+  @override
+  String aiDebtCapExceededCustomer(
+    Object cap,
+    Object existing,
+    Object invoice,
+  ) {
+    return 'Customer debt limit: current remaining total ≈ $existing, invoice adds $invoice (exceeds $cap). Link the customer from the list, reduce the amount, or check debt settings.';
+  }
+
+  @override
+  String aiInvoiceSaveFailed(Object error) {
+    return 'Failed to save invoice — $error. Check the items and total before retrying.';
+  }
+
+  @override
+  String aiServiceOrderCloseFailed(Object orderId) {
+    return 'Failed to close linked service ticket $orderId';
+  }
+
+  @override
+  String get aiServiceOrderUpdateWarning =>
+      'Warning: the invoice was saved but the linked service ticket status could not be updated automatically. Please review it manually.';
+
+  @override
+  String aiReturnScreenTitle(Object id) {
+    return 'Invoice #$id';
+  }
+
+  @override
+  String aiOpenReturnScreen(Object total) {
+    return 'Open the return screen (products only)?\nOriginal total: $total';
+  }
+
+  @override
+  String get aiLoadingColorsSizes => 'Loading colors and sizes…';
+
+  @override
+  String aiAvailableQuantity(Object qty) {
+    return 'Available: $qty';
+  }
+
+  @override
+  String get aiCurrentlySelected => 'Currently selected';
+
+  @override
+  String get aiUnitPiece => 'Piece';
+
+  @override
+  String get aiParkedSalesHint =>
+      'Saved locally on this device. You can resume the sale later from \"Invoices → Parked Sales\".';
+
+  @override
+  String get aiScanToAdd => 'Scan — will be added automatically';
+
+  @override
+  String get apTrackStock => 'Tracks quantity and low stock alerts';
+
+  @override
+  String get apNoTrackDesc => 'Quantity becomes 0, no stock alerts shown';
+
+  @override
+  String get ipStatusDisabled => 'Disabled';
+
+  @override
+  String get addFirstProduct => '+ Add first product';
+
+  @override
+  String apLoadTemplateFailed(Object error) {
+    return 'Failed to load template data. Field will work in manual mode.\n$error';
+  }
+
+  @override
+  String apVariantSummaryLine(Object colors, Object sizes, Object total) {
+    return 'Colors: $colors • Sizes: $sizes • Total: $total';
+  }
+
+  @override
+  String apMarginHint(Object min, Object percent) {
+    return 'Margin $percent% on cost; min price = $min';
+  }
+
+  @override
+  String apMarginPctValue(Object value) {
+    return '$value%';
+  }
+
+  @override
+  String get apTrackDisabledHint =>
+      'When disabled, quantities are not tracked for this product';
+
+  @override
+  String apOptionalHintIQD(Object amount) {
+    return 'Optional — $amount';
+  }
+
+  @override
+  String apMinSellPriceHintIQD(Object amount) {
+    return 'Min sell price — $amount';
+  }
 }

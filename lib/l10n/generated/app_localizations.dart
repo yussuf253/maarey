@@ -15013,6 +15013,342 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **' إعادة الربط بتكلفة الشراء'**
   String get apRelinkToCost;
+
+  /// No description provided for @peVariantSummary.
+  ///
+  /// In ar, this message translates to:
+  /// **'ألوان: {colors} • مقاسات: {sizes} • إجمالي: {total}'**
+  String peVariantSummary(Object colors, Object sizes, Object total);
+
+  /// No description provided for @peDuplicateSizeInColor.
+  ///
+  /// In ar, this message translates to:
+  /// **'المقاس \"{size}\" مكرر داخل اللون \"{colorName}\".'**
+  String peDuplicateSizeInColor(Object colorName, Object size);
+
+  /// No description provided for @peGrandTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإجمالي: {total}'**
+  String peGrandTotal(Object total);
+
+  /// No description provided for @peUnitFactor.
+  ///
+  /// In ar, this message translates to:
+  /// **'{unitName} — عامل {factor}'**
+  String peUnitFactor(Object factor, Object unitName);
+
+  /// No description provided for @peColorSizeInventoryHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'المخزون يُدار عبر الألوان والمقاسات. الإجمالي الحالي: {total}'**
+  String peColorSizeInventoryHint(Object total);
+
+  /// No description provided for @aiBaseForInstallments.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ بعد المقدّم (أساس التقسيط)'**
+  String get aiBaseForInstallments;
+
+  /// No description provided for @aiProductsTab.
+  ///
+  /// In ar, this message translates to:
+  /// **'المنتجات'**
+  String get aiProductsTab;
+
+  /// No description provided for @aiNoItemsWithBarcode.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد أصناف بعد.\nامسح الباركود أعلاه أو أضف من البحث في الشاشة الرئيسية.\nابحث عن منتج أو امسح الباركود للإضافة.'**
+  String get aiNoItemsWithBarcode;
+
+  /// No description provided for @aiNoItemsWithoutBarcode.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد أصناف بعد.\nأضف منتجات من البحث في الشاشة الرئيسية.\nابحث عن منتج أو امسح الباركود للإضافة.'**
+  String get aiNoItemsWithoutBarcode;
+
+  /// No description provided for @aiMaxDiscountHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحد الأقصى المسموح حالياً: {percent}٪ — يُحسب من أدنى سعر لكل صنف.'**
+  String aiMaxDiscountHint(Object percent);
+
+  /// No description provided for @aiNumbersResultHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'نتيجة الأرقام والدفعة الأولى إن وُجدت، قبل الانتقال لبيانات العميل.'**
+  String get aiNumbersResultHint;
+
+  /// No description provided for @aiNumbersResultWithDiscountHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'نتيجة الأرقام بعد الخصم والضريبة، والدفعة الأولى إن وُجدت، قبل الانتقال لبيانات العميل.'**
+  String get aiNumbersResultWithDiscountHint;
+
+  /// No description provided for @aiPriceDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل السعر'**
+  String get aiPriceDetails;
+
+  /// No description provided for @aiAmountBreakdown.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفصيل المبالغ'**
+  String get aiAmountBreakdown;
+
+  /// No description provided for @aiLoyaltyDiscountLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'خصم الولاء: -{amount} د.ع'**
+  String aiLoyaltyDiscountLabel(Object amount);
+
+  /// No description provided for @aiSelectPaymentMethod.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر {methods}، ثم أكمل بيانات العميل والحقول المرتبطة بنوع الدفع.'**
+  String aiSelectPaymentMethod(Object methods);
+
+  /// No description provided for @aiRequiredForDebtInstallment.
+  ///
+  /// In ar, this message translates to:
+  /// **'مطلوب للدين/التقسيط'**
+  String get aiRequiredForDebtInstallment;
+
+  /// No description provided for @aiQRMapHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُطبَع QR يفتح الخرائط عند المسح'**
+  String get aiQRMapHint;
+
+  /// No description provided for @aiDeliveryHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'للتوصيل: أدخل اسم العميل وعنوان التوصيل (كلاهما مطلوب). يظهر اقتراح للاسم من قاعدة العملاء أثناء الكتابة.'**
+  String get aiDeliveryHint;
+
+  /// No description provided for @aiDebtInstallmentHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مهم: للدين والتقسيط اضغط على اسم العميل من القائمة المقترحة لربط البيع ببطاقته (لا يكفي كتابة الاسم يدوياً إن لم يُطابق سجلاً واحداً بالضبط).'**
+  String get aiDebtInstallmentHint;
+
+  /// No description provided for @aiHideDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'إخفاء التفاصيل'**
+  String get aiHideDetails;
+
+  /// No description provided for @aiPriceDetailsAndDiscount.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل السعر والخصم'**
+  String get aiPriceDetailsAndDiscount;
+
+  /// No description provided for @aiItemPriceSummary.
+  ///
+  /// In ar, this message translates to:
+  /// **'سعر {price} · أدنى {min}'**
+  String aiItemPriceSummary(Object min, Object price);
+
+  /// No description provided for @aiItemGrossTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإجمالي: {total}'**
+  String aiItemGrossTotal(Object total);
+
+  /// No description provided for @aiSellPricePerUnit.
+  ///
+  /// In ar, this message translates to:
+  /// **'سعر البيع (للوحدة)'**
+  String get aiSellPricePerUnit;
+
+  /// No description provided for @aiInvoiceLineBeforeDiscount.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي السطر قبل خصم الفاتورة'**
+  String get aiInvoiceLineBeforeDiscount;
+
+  /// No description provided for @aiInvoiceLineDiscountShare.
+  ///
+  /// In ar, this message translates to:
+  /// **'حصة خصم الفاتورة لهذا السطر'**
+  String get aiInvoiceLineDiscountShare;
+
+  /// No description provided for @aiInvoiceLineAfterDiscount.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإجمالي بعد خصم الفاتورة (لهذا السطر)'**
+  String get aiInvoiceLineAfterDiscount;
+
+  /// No description provided for @aiPercentDiscountDistribution.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُوزَّع خصم النسبة على الأسطر بحسب مساهمة كل سطر في إجمالي البنود.'**
+  String get aiPercentDiscountDistribution;
+
+  /// No description provided for @aiCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get aiCancel;
+
+  /// No description provided for @aiEnterValidQuantity.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل عدداً صحيحاً 1 فما فوق'**
+  String get aiEnterValidQuantity;
+
+  /// No description provided for @aiInstallmentMinDownPaymentError.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع التقسيط: المقدّم يجب ألا يقل عن {percent}% من إجمالي الفاتورة (يُقارب {amount}). عدّل حقل المقدّم أو راجع «الأقساط → إعدادات تقسيط».'**
+  String aiInstallmentMinDownPaymentError(Object amount, Object percent);
+
+  /// No description provided for @aiDebtCapExceededInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'حد الدين للفاتورة: المتبقي ({remaining}) يتجاوز السقف {cap}. عدّل الإجمالي أو المبلغ الواصل أو «الديون → إعدادات الدين».'**
+  String aiDebtCapExceededInvoice(Object cap, Object remaining);
+
+  /// No description provided for @aiDebtCapExceededCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'حد الدين للعميل: مجموع المتبقي الحالي ≈ {existing}، والفاتورة تضيف {invoice} (يتجاوز {cap}). اربط العميل من القائمة، أو خفّض المبلغ، أو راجع إعدادات الديون.'**
+  String aiDebtCapExceededCustomer(Object cap, Object existing, Object invoice);
+
+  /// No description provided for @aiInvoiceSaveFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر حفظ الفاتورة — {error}. راجع الأصناف والإجمالي قبل إعادة المحاولة.'**
+  String aiInvoiceSaveFailed(Object error);
+
+  /// No description provided for @aiServiceOrderCloseFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'فشل إغلاق تذكرة الصيانة المرتبطة {orderId}'**
+  String aiServiceOrderCloseFailed(Object orderId);
+
+  /// No description provided for @aiServiceOrderUpdateWarning.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه: حُفظت الفاتورة ولكن تعذر تلقائياً تحديث حالة تذكرة الصيانة. يرجى مراجعتها يدوياً.'**
+  String get aiServiceOrderUpdateWarning;
+
+  /// No description provided for @aiReturnScreenTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة #{id}'**
+  String aiReturnScreenTitle(Object id);
+
+  /// No description provided for @aiOpenReturnScreen.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح شاشة المرتجع (منتجات فقط)؟\nالإجمالي الأصلي: {total}'**
+  String aiOpenReturnScreen(Object total);
+
+  /// No description provided for @aiLoadingColorsSizes.
+  ///
+  /// In ar, this message translates to:
+  /// **'جارٍ تحميل الألوان والمقاسات…'**
+  String get aiLoadingColorsSizes;
+
+  /// No description provided for @aiAvailableQuantity.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتاح: {qty}'**
+  String aiAvailableQuantity(Object qty);
+
+  /// No description provided for @aiCurrentlySelected.
+  ///
+  /// In ar, this message translates to:
+  /// **'المحدد حالياً'**
+  String get aiCurrentlySelected;
+
+  /// No description provided for @aiUnitPiece.
+  ///
+  /// In ar, this message translates to:
+  /// **'قطعة'**
+  String get aiUnitPiece;
+
+  /// No description provided for @aiParkedSalesHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُحفظ محلياً على هذا الجهاز. يمكنك استئناف البيع لاحقاً من «الفواتير ← معلّقة مؤقتاً».'**
+  String get aiParkedSalesHint;
+
+  /// No description provided for @aiScanToAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'امسح — سيتم الإضافة تلقائيًا'**
+  String get aiScanToAdd;
+
+  /// No description provided for @apTrackStock.
+  ///
+  /// In ar, this message translates to:
+  /// **'يحسب الكمية والتنبيه منخفض'**
+  String get apTrackStock;
+
+  /// No description provided for @apNoTrackDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكمية تُصبح 0 ولا تظهر تنبيهات مخزون'**
+  String get apNoTrackDesc;
+
+  /// No description provided for @ipStatusDisabled.
+  ///
+  /// In ar, this message translates to:
+  /// **'معطّل'**
+  String get ipStatusDisabled;
+
+  /// No description provided for @addFirstProduct.
+  ///
+  /// In ar, this message translates to:
+  /// **'+ إضافة أول منتج'**
+  String get addFirstProduct;
+
+  /// No description provided for @apLoadTemplateFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر تحميل بيانات النموذج. سيعمل الحقل بالوضع اليدوي.\n{error}'**
+  String apLoadTemplateFailed(Object error);
+
+  /// No description provided for @apVariantSummaryLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'ألوان: {colors} • مقاسات: {sizes} • إجمالي: {total}'**
+  String apVariantSummaryLine(Object colors, Object sizes, Object total);
+
+  /// No description provided for @apMarginHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'هامش {percent}٠ على التكلفة؛ أقل سعر = {min}'**
+  String apMarginHint(Object min, Object percent);
+
+  /// No description provided for @apMarginPctValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'{value}٠'**
+  String apMarginPctValue(Object value);
+
+  /// No description provided for @apTrackDisabledHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'عند الإيقاف لا تُسجَّل كميات لهذا المنتج'**
+  String get apTrackDisabledHint;
+
+  /// No description provided for @apOptionalHintIQD.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختياري — {amount}'**
+  String apOptionalHintIQD(Object amount);
+
+  /// No description provided for @apMinSellPriceHintIQD.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدنى سعر بيع — {amount}'**
+  String apMinSellPriceHintIQD(Object amount);
 }
 
 class _AppLocalizationsDelegate

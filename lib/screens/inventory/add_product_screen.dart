@@ -166,7 +166,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
   int _stockBaseKind = 0; // 0 عدد (قطعة) | 1 وزن (كيلوغرام أساس المخزون)
   int _stockTypeUi = 0; // 0 عدد | 1 وزن | 2 ملابس (ألوان ومقاسات)
   String _discountType = '%';
-  String _taxMode = 'معفى';
+  String _taxMode = 'exempt';
 
   bool _trackInventory = true;
   bool _multiVariantEnabled = false;
@@ -419,7 +419,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
     for (final c in _colorDrafts) {
       sizes += c.sizes.length;
     }
-    return 'ألوان: $colors • مقاسات: $sizes • إجمالي: ${_totalQtyAllVariants()}';
+    return loc.apVariantSummaryLine(colors.toString(), sizes.toString(), _totalQtyAllVariants().toString());
   }
 
   Future<void> _openVariantsEditor() async {
@@ -721,7 +721,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              'تعذر تحميل بيانات النموذج. سيعمل الحقل بالوضع اليدوي.\n$e',
+              loc.apLoadTemplateFailed(e),
             ),
             behavior: SnackBarBehavior.floating,
           ),
@@ -906,7 +906,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('تعذر اختيار الصورة: $e'),
+          content: Text(loc.apImagePickFailed(e)),
           behavior: SnackBarBehavior.floating,
         ),
       );
@@ -1571,8 +1571,8 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
       if (q < 0) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Text(
-              'الكمية يجب أن تكون رقماً صحيحاً أكبر أو يساوي 0.',
+            content: Text(
+              loc.apQtyMustBeGe0,
             ),
             backgroundColor: Colors.red.shade700,
             behavior: SnackBarBehavior.floating,
@@ -1788,7 +1788,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'إجمالي اللون: ${_totalQtyForColor(c)}',
+                      loc.apColorTotal(_totalQtyForColor(c).toString()),
                       textAlign: TextAlign.end,
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
@@ -1827,7 +1827,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                   ),
                 ),
                 Text(
-                  'الإجمالي: ${_totalQtyAllVariants()}',
+                  loc.peGrandTotal(_totalQtyAllVariants().toString()),
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     color: cs.onSurfaceVariant,
@@ -2038,7 +2038,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             Text(
-              'رمز المنتج: $_productCodeHint',
+              loc.apProductCodeHint(_productCodeHint),
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 fontWeight: FontWeight.w600,
                 color: cs.onSurfaceVariant,
@@ -2073,7 +2073,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                           ),
                         )
                       : const Icon(Icons.check_rounded, size: 20),
-                  label: Text(_saving ? loc.apSavingLabel : 'حفظ المنتج'),
+                  label: Text(_saving ? loc.apSavingLabel : loc.apSaveProduct),
                 ),
                 FilledButton.tonalIcon(
                   onPressed: _saving ? null : () => _submit(popAfter: false),
@@ -2239,7 +2239,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                     value: loc.apGradeThird,
                     child: Text(loc.apGradeThird),
                   ),
-                  DropdownMenuItem(value: 'تجاري', child: Text(loc.apCommercial)),
+                  DropdownMenuItem(value: 'commercial', child: Text(loc.apCommercial)),
                   DropdownMenuItem(
                     value: loc.apEconomical,
                     child: Text(loc.apEconomical),
@@ -2479,7 +2479,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                           children: [
                             Expanded(
                               child: Text(
-                                'وحدة ${i + 1}',
+                                loc.apUnitNumber(i + 1),
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w900,
                                 ),
@@ -2558,7 +2558,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                               child: AppPriceInput(
                                 label: '',
                                 paddingZeroOverride: true,
-                                hint: 'اختياري — $_hintIqd',
+                                hint: loc.apOptionalHintIQD(_hintIqd),
                                 controller: row.sell,
                               ),
                             ),
@@ -2567,7 +2567,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                               child: AppPriceInput(
                                 label: '',
                                 paddingZeroOverride: true,
-                                hint: 'أدنى سعر بيع — $_hintIqd',
+                                hint: loc.apMinSellPriceHintIQD(_hintIqd),
                                 controller: row.minSell,
                               ),
                             ),
@@ -2814,7 +2814,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                               const SizedBox(height: 4),
                               Text(
                                 _costDrivesSuggestedPrices
-                                    ? 'هامش ${_marginPercentUiLabel()}٪ على التكلفة؛ أقل سعر = ${_minSellPercentUiLabel()}٪ من سعر البيع. تعديل سعر البيع أو أقل سعر يوقف التحديث التلقائي.'
+                                    ? loc.apMarginHint(_marginPercentUiLabel(), _minSellPercentUiLabel())
                                     : 'التعديل اليدوي نشط — لن يُحدَّث سعر البيع تلقائياً عند تغيير التكلفة.',
                                 style: TextStyle(
                                   fontSize: 11.5,
@@ -2940,8 +2940,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                   ],
                   if (_effectiveTaxPercent > 0) ...[
                     const SizedBox(height: 10),
-                    Text(
-                      'البيع شاملاً الضريبة (تقريبي): ${IraqiCurrencyFormat.formatIqd(_sellAfterTaxApprox)}',
+                    Text(                          loc.apSellIncludingTax(IraqiCurrencyFormat.formatIqd(_sellAfterTaxApprox)),
                       textAlign: TextAlign.right,
                       style: TextStyle(
                         fontSize: 12.5,
@@ -3230,8 +3229,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
           ],
           if (_trackInventory && _multiVariantEnabled) ...[
             const SizedBox(height: 8),
-            Text(
-              'المخزون يُدار عبر الألوان والمقاسات. الإجمالي الحالي: ${_totalQtyAllVariants()}',
+            Text(                              loc.peColorSizeInventoryHint(_totalQtyAllVariants().toString()),
               textAlign: TextAlign.end,
               style: TextStyle(color: cs.onSurfaceVariant),
             ),

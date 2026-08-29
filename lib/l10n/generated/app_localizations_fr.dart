@@ -8386,4 +8386,239 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get apRelinkToCost => ' Relier au coût d\'achat';
+
+  @override
+  String peVariantSummary(Object colors, Object sizes, Object total) {
+    return 'Couleurs: $colors • Tailles: $sizes • Total: $total';
+  }
+
+  @override
+  String peDuplicateSizeInColor(Object colorName, Object size) {
+    return 'La taille \"$size\" est dupliquée dans la couleur \"$colorName\".';
+  }
+
+  @override
+  String peGrandTotal(Object total) {
+    return 'Total: $total';
+  }
+
+  @override
+  String peUnitFactor(Object factor, Object unitName) {
+    return '$unitName — facteur $factor';
+  }
+
+  @override
+  String peColorSizeInventoryHint(Object total) {
+    return 'Gestion des stocks par couleurs et tailles. Total actuel: $total';
+  }
+
+  @override
+  String get aiBaseForInstallments =>
+      'Montant après l\'avance (base de l\'échelonnement)';
+
+  @override
+  String get aiProductsTab => 'Produits';
+
+  @override
+  String get aiNoItemsWithBarcode =>
+      'Aucun article pour le moment.\nScannez le code-barres ci-dessus ou ajoutez via la recherche de l\'écran principal.\nRecherchez un produit ou scannez un code-barres pour ajouter.';
+
+  @override
+  String get aiNoItemsWithoutBarcode =>
+      'Aucun article pour le moment.\nAjoutez des produits via la recherche de l\'écran principal.\nRecherchez un produit ou scannez un code-barres pour ajouter.';
+
+  @override
+  String aiMaxDiscountHint(Object percent) {
+    return 'Maximum autorisé: $percent% — calculé à partir du prix minimum par article.';
+  }
+
+  @override
+  String get aiNumbersResultHint =>
+      'Résultat des chiffres et premier versement le cas échéant, avant de passer aux données client.';
+
+  @override
+  String get aiNumbersResultWithDiscountHint =>
+      'Résultat des chiffres après remise et taxe, et premier versement le cas échéant, avant de passer aux données client.';
+
+  @override
+  String get aiPriceDetails => 'Détails du prix';
+
+  @override
+  String get aiAmountBreakdown => 'Ventilation des montants';
+
+  @override
+  String aiLoyaltyDiscountLabel(Object amount) {
+    return 'Remise fidélité: -$amount IQD';
+  }
+
+  @override
+  String aiSelectPaymentMethod(Object methods) {
+    return 'Sélectionnez $methods, puis complétez les données client et les champs liés au type de paiement.';
+  }
+
+  @override
+  String get aiRequiredForDebtInstallment => 'Requis pour dette/échelonnement';
+
+  @override
+  String get aiQRMapHint => 'QR imprimé ouvre les cartes lors du scan';
+
+  @override
+  String get aiDeliveryHint =>
+      'Pour la livraison: entrez le nom du client et l\'adresse de livraison (tous deux requis). Des suggestions de nom apparaissent de la base de données clients pendant la saisie.';
+
+  @override
+  String get aiDebtInstallmentHint =>
+      'Important: pour la dette/l\'échelonnement, appuyez sur le nom du client dans les suggestions pour lier la vente à sa carte (taper le nom manuellement ne suffit pas s\'il ne correspond pas exactement à un enregistrement).';
+
+  @override
+  String get aiHideDetails => 'Masquer les détails';
+
+  @override
+  String get aiPriceDetailsAndDiscount => 'Détails du prix et de la remise';
+
+  @override
+  String aiItemPriceSummary(Object min, Object price) {
+    return 'Prix $price · Min $min';
+  }
+
+  @override
+  String aiItemGrossTotal(Object total) {
+    return 'Total: $total';
+  }
+
+  @override
+  String get aiSellPricePerUnit => 'Prix de vente (par unité)';
+
+  @override
+  String get aiInvoiceLineBeforeDiscount =>
+      'Total de la ligne avant remise facture';
+
+  @override
+  String get aiInvoiceLineDiscountShare =>
+      'Part de la remise facture pour cette ligne';
+
+  @override
+  String get aiInvoiceLineAfterDiscount =>
+      'Total après remise facture (pour cette ligne)';
+
+  @override
+  String get aiPercentDiscountDistribution =>
+      'La remise en pourcentage est répartie sur les lignes selon la contribution de chaque ligne au total des articles.';
+
+  @override
+  String get aiCancel => 'Annuler';
+
+  @override
+  String get aiEnterValidQuantity => 'Entrez un nombre valide 1 ou plus';
+
+  @override
+  String aiInstallmentMinDownPaymentError(Object amount, Object percent) {
+    return 'Vente à tempérament: l\'avance doit être d\'au moins $percent% du total de la facture (≈$amount). Ajustez le champ d\'avance ou vérifiez «Échelonnement → Paramètres d\'échelonnement».';
+  }
+
+  @override
+  String aiDebtCapExceededInvoice(Object cap, Object remaining) {
+    return 'Limite de dette facture: le reste ($remaining) dépasse le plafond $cap. Ajustez le total, le montant reçu, ou «Dettes → Paramètres de dette».';
+  }
+
+  @override
+  String aiDebtCapExceededCustomer(
+    Object cap,
+    Object existing,
+    Object invoice,
+  ) {
+    return 'Limite de dette client: total restant actuel ≈ $existing, la facture ajoute $invoice (dépasse $cap). Liez le client depuis la liste, réduisez le montant, ou vérifiez les paramètres de dette.';
+  }
+
+  @override
+  String aiInvoiceSaveFailed(Object error) {
+    return 'Échec de l\'enregistrement de la facture — $error. Vérifiez les articles et le total avant de réessayer.';
+  }
+
+  @override
+  String aiServiceOrderCloseFailed(Object orderId) {
+    return 'Échec de la fermeture du ticket de maintenance lié $orderId';
+  }
+
+  @override
+  String get aiServiceOrderUpdateWarning =>
+      'Attention: la facture a été enregistrée mais le statut du ticket de maintenance lié n\'a pas pu être mis à jour automatiquement. Veuillez le vérifier manuellement.';
+
+  @override
+  String aiReturnScreenTitle(Object id) {
+    return 'Facture #$id';
+  }
+
+  @override
+  String aiOpenReturnScreen(Object total) {
+    return 'Ouvrir l\'écran de retour (produits uniquement) ?\nTotal original: $total';
+  }
+
+  @override
+  String get aiLoadingColorsSizes => 'Chargement des couleurs et tailles…';
+
+  @override
+  String aiAvailableQuantity(Object qty) {
+    return 'Disponible: $qty';
+  }
+
+  @override
+  String get aiCurrentlySelected => 'Sélectionné actuellement';
+
+  @override
+  String get aiUnitPiece => 'Pièce';
+
+  @override
+  String get aiParkedSalesHint =>
+      'Enregistré localement sur cet appareil. Vous pouvez reprendre la vente plus tard depuis «Factures ← Ventes en attente».';
+
+  @override
+  String get aiScanToAdd => 'Scannez — sera ajouté automatiquement';
+
+  @override
+  String get apTrackStock => 'Gère la quantité et les alertes de stock bas';
+
+  @override
+  String get apNoTrackDesc =>
+      'La quantité devient 0, aucune alerte de stock affichée';
+
+  @override
+  String get ipStatusDisabled => 'Désactivé';
+
+  @override
+  String get addFirstProduct => '+ Ajouter le premier produit';
+
+  @override
+  String apLoadTemplateFailed(Object error) {
+    return 'Échec du chargement du modèle. Le champ fonctionnera en mode manuel.\n$error';
+  }
+
+  @override
+  String apVariantSummaryLine(Object colors, Object sizes, Object total) {
+    return 'Couleurs: $colors • Tailles: $sizes • Total: $total';
+  }
+
+  @override
+  String apMarginHint(Object min, Object percent) {
+    return 'Marge $percent% sur le coût; prix min = $min';
+  }
+
+  @override
+  String apMarginPctValue(Object value) {
+    return '$value%';
+  }
+
+  @override
+  String get apTrackDisabledHint =>
+      'Lorsque désactivé, les quantités ne sont pas suivies pour ce produit';
+
+  @override
+  String apOptionalHintIQD(Object amount) {
+    return 'Optionnel — $amount';
+  }
+
+  @override
+  String apMinSellPriceHintIQD(Object amount) {
+    return 'Prix de vente min — $amount';
+  }
 }
