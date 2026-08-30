@@ -60,6 +60,26 @@ String _customerLineValue(Invoice invoice) {
   return v;
 }
 
+/// اتجاة كتابة الإيصال: عربي ⇒ RTL، بقية اللغات (إنجليزي/فرنسي…) ⇒ LTR.
+bool _isArabicLocale(Locale? locale) {
+  final code = locale?.languageCode.toLowerCase();
+  return code == 'ar' || code == 'he' || code == 'fa' || code == 'ur';
+}
+
+ui.TextDirection _uiDirectionForLocale(Locale? locale) =>
+    _isArabicLocale(locale) ? ui.TextDirection.rtl : ui.TextDirection.ltr;
+
+pw.TextDirection _pwDirectionForLocale(Locale? locale) =>
+    _isArabicLocale(locale) ? pw.TextDirection.rtl : pw.TextDirection.ltr;
+
+/// موفّر لغة intl حسب اللغة: لاتيني ⇒ 'en'، فرنسي ⇒ 'fr'، عربي ⇒ 'ar' — وإلا 'en'.
+String _intlLocaleTag(Locale? locale) {
+  final code = locale?.languageCode.toLowerCase() ?? 'en';
+  if (code == 'fr') return 'fr_FR';
+  if (code == 'ar') return 'ar';
+  return 'en_US';
+}
+
 bool _omitReceiptPaymentLine(Invoice invoice, PrintSettingsData s) {
   return invoice.type == InvoiceType.delivery && s.receiptShowBuyerAddressQr;
 }

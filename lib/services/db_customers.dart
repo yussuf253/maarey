@@ -105,10 +105,10 @@ Future<void> ensureCustomersGlobalIdSchema(Database db) async {
 /// فلترة التبويب: يجب أن تكون متّسقة مع [CustomerRecord.statusLabel].
 String? _customerTabBalancePredicate(String statusArabic) {
   final st = statusArabic.trim();
-  if (st.isEmpty || st == 'الكل') return null;
-  if (st == 'مديون' || st.contains('مدين')) return 'customers.balance > 0.01';
-  if (st.contains('دائن')) return 'customers.balance < -0.01';
-  if (st.contains('مميز')) return 'ABS(customers.balance) < 1e-6';
+  if (st.isEmpty || st == 'الكل' || st == 'All' || st == 'Toutes') return null;
+  if (st == 'indebted' || st == 'مديون' || st.contains('مدين')) return 'customers.balance > 0.01';
+  if (st == 'creditor' || st.contains('دائن')) return 'customers.balance < -0.01';
+  if (st == 'distinguished' || st.contains('مميز')) return 'ABS(customers.balance) < 1e-6';
   if (st.contains('مصفّى') || st.contains('صفر')) {
     return 'ABS(customers.balance) < 1e-9';
   }

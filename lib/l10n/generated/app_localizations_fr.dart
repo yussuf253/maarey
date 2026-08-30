@@ -8624,4 +8624,209 @@ class AppLocalizationsFr extends AppLocalizations {
   String apMinSellPriceHintIQD(Object amount) {
     return 'Prix de vente min — $amount';
   }
+
+  @override
+  String get csStatusIndebted => 'Débiteur';
+
+  @override
+  String get csStatusCreditor => 'Créancier';
+
+  @override
+  String get csStatusDistinguished => 'Distingué';
+
+  @override
+  String get csClearFilter => 'Effacer le filtre';
+
+  @override
+  String get csIndebtedPlural => 'Débiteurs';
+
+  @override
+  String get csCreditorPlural => 'Créanciers';
+
+  @override
+  String get csDistinguishedPlural => 'Distingués';
+
+  @override
+  String get csNoDues => 'Aucune dette';
+
+  @override
+  String get csDebtPrefix => 'Dette';
+
+  @override
+  String get csCreditPrefix => 'Crédit';
+
+  @override
+  String get csDeleteCustomer => 'Supprimer le client';
+
+  @override
+  String csDeleteCustomerConfirm(Object name) {
+    return 'Supprimer « $name » ?';
+  }
+
+  @override
+  String csDeleteFailed(Object error) {
+    return 'Échec de la suppression : $error';
+  }
+
+  @override
+  String get csDeleteSelectedCustomers => 'Supprimer les clients sélectionnés';
+
+  @override
+  String csDeleteSelectedConfirm(Object count) {
+    return '$count client(s) seront supprimés. Êtes-vous sûr ?';
+  }
+
+  @override
+  String get csAlertsTooltip =>
+      'Alertes : retards, factures crédit, stock et échéanciers';
+
+  @override
+  String get csRefreshFromCloud =>
+      'Rafraîchir la liste depuis le cloud & synchroniser — F5';
+
+  @override
+  String get csLastUpdatedNow => 'Dernière mise à jour : à l\'instant — F5';
+
+  @override
+  String csLastUpdatedMinutesAgo(Object minutes) {
+    return 'Dernière mise à jour : il y a $minutes min — F5';
+  }
+
+  @override
+  String csLastUpdatedHoursAgo(Object hours) {
+    return 'Dernière mise à jour : il y a $hours h — F5';
+  }
+
+  @override
+  String csTotalShowing(Object shown, Object total) {
+    return 'Total : $total · affichés : $shown';
+  }
+
+  @override
+  String csTotalCustomersShowing(Object shown, Object total) {
+    return 'Total clients : $total | affichés : $shown';
+  }
+
+  @override
+  String csSelectedCount(Object selected, Object total) {
+    return 'Sélectionné : $selected / $total';
+  }
+
+  @override
+  String csSelectedCountPage(Object selected, Object total) {
+    return 'Sélectionné : $selected — affichés sur la page : $total';
+  }
+
+  @override
+  String get csDeleteSelectedTooltip => 'Supprimer la sélection';
+
+  @override
+  String get csDeleteSelectedLabel => 'Supprimer la sélection';
+
+  @override
+  String get csAddCustomer => 'Ajouter un client';
+
+  @override
+  String get csSearchFilter => 'Recherche et filtre';
+
+  @override
+  String get csSearchDescription =>
+      'Recherche par nom, téléphone ou email. Les ventes à crédit et les échéanciers sont liés au client depuis l\'écran de vente.';
+
+  @override
+  String get csSearchInputHint => 'Recherche par nom, téléphone ou email…';
+
+  @override
+  String get csSearchApplyHint =>
+      'Appliqué automatiquement en une fraction de seconde — Entrée ou bouton Appliquer pour plus de clarté. Raccourci : Ctrl+F';
+
+  @override
+  String get csSortLabel => 'Trier';
+
+  @override
+  String get csSortNameAZ => 'Nom (A–Z)';
+
+  @override
+  String get csSortNameZA => 'Nom (Z–A)';
+
+  @override
+  String get csSortMostPurchased => 'Plus acheté';
+
+  @override
+  String get csSortLargestDebts => 'Dettes les plus élevées';
+
+  @override
+  String get csSortNewest => 'Plus récent';
+
+  @override
+  String get csSearch => 'Recherche';
+
+  @override
+  String get csClearTooltip => 'Effacer';
+
+  @override
+  String get csApplySearchLabel => 'Appliquer la recherche';
+
+  @override
+  String get csNoCustomersYet => 'Aucun client pour le moment';
+
+  @override
+  String get csNoMatchingCustomers =>
+      'Aucun client ne correspond à la recherche ou au filtre';
+
+  @override
+  String get csColName => 'Client';
+
+  @override
+  String get csColPhone => 'Téléphone';
+
+  @override
+  String get csColTotalPurchases => 'Achats totaux';
+
+  @override
+  String get csColDueBalance => 'Solde dû';
+
+  @override
+  String get csColStatus => 'Statut';
+
+  @override
+  String csDebtsLabel(Object count) {
+    return 'Dettes ×$count';
+  }
+
+  @override
+  String get csOpenDebtsTooltip => 'Ouvrir les dettes crédit liées';
+
+  @override
+  String csInstallmentsLabel(Object count) {
+    return 'Échéanciers ×$count';
+  }
+
+  @override
+  String get csOpenInstallmentsTooltip => 'Ouvrir les plans d\'échéance';
+
+  @override
+  String get csCallLabel => 'Appeler';
+
+  @override
+  String csCallTooltip(Object phone) {
+    return 'Appeler $phone';
+  }
+
+  @override
+  String csCustomerInfo(Object date, Object id, Object loyalty) {
+    return '$id · fidélité $loyalty · $date';
+  }
+
+  @override
+  String get csMoreTooltip => 'Plus';
+
+  @override
+  String get csEditData => 'Modifier les données';
+
+  @override
+  String get csCall => 'Appeler';
+
+  @override
+  String get csSortTooltip => 'Recherche';
 }

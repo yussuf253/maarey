@@ -8433,4 +8433,206 @@ class AppLocalizationsAr extends AppLocalizations {
   String apMinSellPriceHintIQD(Object amount) {
     return 'أدنى سعر بيع — $amount';
   }
+
+  @override
+  String get csStatusIndebted => 'مديون';
+
+  @override
+  String get csStatusCreditor => 'دائن';
+
+  @override
+  String get csStatusDistinguished => 'مميز';
+
+  @override
+  String get csClearFilter => 'مسح التصفية';
+
+  @override
+  String get csIndebtedPlural => 'مديونون';
+
+  @override
+  String get csCreditorPlural => 'دائنون';
+
+  @override
+  String get csDistinguishedPlural => 'مميزون';
+
+  @override
+  String get csNoDues => 'لا ديون';
+
+  @override
+  String get csDebtPrefix => 'دين';
+
+  @override
+  String get csCreditPrefix => 'دائن';
+
+  @override
+  String get csDeleteCustomer => 'حذف عميل';
+
+  @override
+  String csDeleteCustomerConfirm(Object name) {
+    return 'هل تريد حذف «$name»؟';
+  }
+
+  @override
+  String csDeleteFailed(Object error) {
+    return 'تعذر الحذف: $error';
+  }
+
+  @override
+  String get csDeleteSelectedCustomers => 'حذف العملاء المحددين';
+
+  @override
+  String csDeleteSelectedConfirm(Object count) {
+    return 'سيتم حذف $count عميل. هل أنت متأكد؟';
+  }
+
+  @override
+  String get csAlertsTooltip => 'التنبيهات: متأخرات، فواتير آجل، مخزون وأقساط';
+
+  @override
+  String get csRefreshFromCloud => 'تحديث القائمة من السحابة والمزامنة — F5';
+
+  @override
+  String get csLastUpdatedNow => 'آخر تحديث: الآن تقريباً — F5';
+
+  @override
+  String csLastUpdatedMinutesAgo(Object minutes) {
+    return 'آخر تحديث: منذ $minutes دقيقة — F5';
+  }
+
+  @override
+  String csLastUpdatedHoursAgo(Object hours) {
+    return 'آخر تحديث: منذ $hours ساعة تقريباً — F5';
+  }
+
+  @override
+  String csTotalShowing(Object shown, Object total) {
+    return 'إجمالي: $total · معروض: $shown';
+  }
+
+  @override
+  String csTotalCustomersShowing(Object shown, Object total) {
+    return 'إجمالي العملاء: $total | معروض: $shown';
+  }
+
+  @override
+  String csSelectedCount(Object selected, Object total) {
+    return 'محدد: $selected / $total';
+  }
+
+  @override
+  String csSelectedCountPage(Object selected, Object total) {
+    return 'محدد: $selected — المعروض في الصفحة: $total';
+  }
+
+  @override
+  String get csDeleteSelectedTooltip => 'حذف المحدد';
+
+  @override
+  String get csDeleteSelectedLabel => 'حذف المحدد';
+
+  @override
+  String get csAddCustomer => 'إضافة عميل';
+
+  @override
+  String get csSearchFilter => 'بحث وتصفية';
+
+  @override
+  String get csSearchDescription =>
+      'ابحث بالاسم أو الهاتف أو البريد. مبيعات الدين والتقسيط تُربط بالعميل من شاشة البيع.';
+
+  @override
+  String get csSearchInputHint => 'ابحث بالاسم أو رقم الهاتف أو البريد…';
+
+  @override
+  String get csSearchApplyHint =>
+      'الإدخال يُطبَّق تلقائياً خلال جزء ثانٍ — Enter أو زر التطبيق لتحسين الوضوح. اختصار: Ctrl+F';
+
+  @override
+  String get csSortLabel => 'ترتيب العرض';
+
+  @override
+  String get csSortNameAZ => 'الاسم (أ-ي)';
+
+  @override
+  String get csSortNameZA => 'الاسم (ي-أ)';
+
+  @override
+  String get csSortMostPurchased => 'الأكثر شراءً';
+
+  @override
+  String get csSortLargestDebts => 'الديون الأكبر';
+
+  @override
+  String get csSortNewest => 'الأحدث تسجيلاً';
+
+  @override
+  String get csSearch => 'البحث';
+
+  @override
+  String get csClearTooltip => 'مسح';
+
+  @override
+  String get csApplySearchLabel => 'تطبيق البحث';
+
+  @override
+  String get csNoCustomersYet => 'لا يوجد عملاء بعد';
+
+  @override
+  String get csNoMatchingCustomers => 'لا يوجد عملاء يطابقون البحث أو التصفية';
+
+  @override
+  String get csColName => 'العميل';
+
+  @override
+  String get csColPhone => 'الهاتف';
+
+  @override
+  String get csColTotalPurchases => 'إجمالي المشتريات';
+
+  @override
+  String get csColDueBalance => 'الرصيد المستحق';
+
+  @override
+  String get csColStatus => 'الحالة';
+
+  @override
+  String csDebtsLabel(Object count) {
+    return 'ديون ×$count';
+  }
+
+  @override
+  String get csOpenDebtsTooltip => 'فتح ديون الآجل المرتبطة';
+
+  @override
+  String csInstallmentsLabel(Object count) {
+    return 'تقسيط ×$count';
+  }
+
+  @override
+  String get csOpenInstallmentsTooltip => 'فتح خطط التقسيط';
+
+  @override
+  String get csCallLabel => 'اتصال';
+
+  @override
+  String csCallTooltip(Object phone) {
+    return 'اتصال بـ $phone';
+  }
+
+  @override
+  String csCustomerInfo(Object date, Object id, Object loyalty) {
+    return '$id · ولاء $loyalty · $date';
+  }
+
+  @override
+  String get csMoreTooltip => 'المزيد';
+
+  @override
+  String get csEditData => 'تعديل البيانات';
+
+  @override
+  String get csCall => 'اتصال';
+
+  @override
+  String get csSortTooltip => 'البحث';
 }

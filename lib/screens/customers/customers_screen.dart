@@ -57,6 +57,7 @@ class CustomersScreen extends StatefulWidget {
 }
 
 class _CustomersScreenState extends State<CustomersScreen> {
+  AppLocalizations get loc => loc;
   Color get _pageBg => Theme.of(context).scaffoldBackgroundColor;
   Color get _surface => Theme.of(context).colorScheme.surface;
   Color get _primary => Theme.of(context).colorScheme.primary;
@@ -72,6 +73,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
   Timer? _searchDebounce;
 
   String _filterStatus = '';
+  bool _didInitFilter = false;
   _CustomerSort _sort = _CustomerSort.nameAsc;
 
   /// العميل المختار حالياً للعرض في لوحة التفاصيل (MasterDetail).
@@ -83,7 +85,6 @@ class _CustomersScreenState extends State<CustomersScreen> {
   @override
   void initState() {
     super.initState();
-    _filterStatus = AppLocalizations.of(context)!.all;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       context.read<CustomersProvider>().refresh();
@@ -102,6 +103,15 @@ class _CustomersScreenState extends State<CustomersScreen> {
       });
       setState(() {});
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_didInitFilter) {
+      _didInitFilter = true;
+      _filterStatus = loc.all;
+    }
   }
 
   @override
@@ -182,19 +192,19 @@ class _CustomersScreenState extends State<CustomersScreen> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('حذف عميل'),
-        content: Text('هل تريد حذف «${c.name}»؟'),
+        title: Text(loc.csDeleteCustomer),
+        content: Text('${loc.csDeleteCustomerConfirm(c.name)}'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
-            child: Text(AppLocalizations.of(context)!.cancel),
+            child: Text(loc.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(ctx, true),
             style: TextButton.styleFrom(
               foregroundColor: AppSemanticColors.danger,
             ),
-            child: Text(AppLocalizations.of(context)!.delete),
+            child: Text(loc.delete),
           ),
         ],
       ),
@@ -207,7 +217,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
       context.read<CustomersProvider>().onCustomerChanged();
     } catch (e) {
       if (mounted) {
-        AppMessenger.error(context, message: 'تعذر الحذف: $e');
+        AppMessenger.error(context, message: loc.csDeleteFailed(e.toString()));
       }
     }
   }
@@ -217,19 +227,19 @@ class _CustomersScreenState extends State<CustomersScreen> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('حذف العملاء المحددين'),
-        content: Text('سيتم حذف ${_selectedIds.length} عميل. هل أنت متأكد؟'),
+        title: Text(loc.csDeleteSelectedCustomers),
+        content: Text('${loc.csDeleteSelectedConfirm(_selectedIds.length.toString())}'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
-            child: Text(AppLocalizations.of(context)!.cancel),
+            child: Text(loc.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(ctx, true),
             style: TextButton.styleFrom(
               foregroundColor: AppSemanticColors.danger,
             ),
-            child: Text(AppLocalizations.of(context)!.delete),
+            child: Text(loc.delete),
           ),
         ],
       ),
@@ -241,19 +251,21 @@ class _CustomersScreenState extends State<CustomersScreen> {
       context.read<CustomersProvider>().onCustomerChanged();
     } catch (e) {
       if (mounted) {
-        AppMessenger.error(context, message: 'تعذر الحذف: $e');
+        AppMessenger.error(context, message: loc.csDeleteFailed(e.toString()));
       }
     }
   }
 
   Color _statusColor(String label) {
     switch (label) {
-      case 'مديون':
+      case 'indebted':
         return AppSemanticColors.warning;
-      case 'دائن':
+      case 'creditor':
         return AppSemanticColors.info;
-      default:
+      case 'distinguished':
         return AppSemanticColors.success;
+      default:
+        return AppSemanticColors.info;
     }
   }
 
@@ -538,7 +550,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
       elevation: 0,
       centerTitle: false,
       title: Text(
-                              AppLocalizations.of(context)!.customersTitle,
+                              loc.customersTitle,
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
       ),
       actions: [
@@ -549,7 +561,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
         ),
         IconButton(
           icon: const Icon(Icons.notifications_outlined),
-          tooltip: 'التنبيهات: متأخرات، فواتير آجل، مخزون وأقساط',
+          tooltip: loc.csAlertsTooltip,
           onPressed: () => showAppNotificationsSheet(context),
         ),
         const SizedBox(width: 4),
@@ -558,12 +570,12 @@ class _CustomersScreenState extends State<CustomersScreen> {
   }
 
   String _refreshHint(DateTime? t) {
-    if (t == null) return 'تحديث القائمة من السحابة والمزامنة — F5';
+    if (t == null) return loc.csRefreshFromCloud;
     final secs = DateTime.now().difference(t).inSeconds;
-    if (secs < 40) return 'آخر تحديث: الآن تقريباً — F5';
-    if (secs < 3600) return 'آخر تحديث: منذ ${secs ~/ 60} دقيقة — F5';
+    if (secs < 40) return loc.csLastUpdatedNow;
+    if (secs < 3600) return loc.csLastUpdatedMinutesAgo((secs ~/ 60).toString());
     final h = secs ~/ 3600;
-    return 'آخر تحديث: منذ $h ساعة تقريباً — F5';
+    return loc.csLastUpdatedHoursAgo(h.toString());
   }
 
   Future<void> _dialCustomer(String? raw) async {
@@ -601,11 +613,11 @@ class _CustomersScreenState extends State<CustomersScreen> {
                   child: Text(
                     sel == 0
                         ? (isNarrow
-                              ? 'إجمالي: ${prov.totalCustomersInDb} · معروض: ${prov.matchingCount}'
-                              : 'إجمالي العملاء: ${prov.totalCustomersInDb} | معروض: ${prov.matchingCount}')
+                              ? '${loc.csTotalShowing(prov.totalCustomersInDb.toString(), prov.matchingCount.toString())}'
+                              : '${loc.csTotalCustomersShowing(prov.totalCustomersInDb.toString(), prov.matchingCount.toString())}')
                         : (isNarrow
-                              ? 'محدد: $sel / $total'
-                              : 'محدد: $sel — المعروض في الصفحة: $total'),
+                              ? '${loc.csSelectedCount(sel.toString(), total.toString())}'
+                              : '${loc.csSelectedCountPage(sel.toString(), total.toString())}'),
                     style: TextStyle(fontSize: 13, color: _textSecondary),
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -613,7 +625,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
                 if (sel > 0) ...[
                   if (isNarrow)
                     IconButton(
-                      tooltip: 'حذف المحدد',
+                      tooltip: loc.csDeleteSelectedTooltip,
                       onPressed: _confirmDeleteSelected,
                       icon: const Icon(
                         Icons.delete_outline,
@@ -624,7 +636,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
                     TextButton.icon(
                       onPressed: _confirmDeleteSelected,
                       icon: const Icon(Icons.delete_outline, size: 20),
-                      label: const Text('حذف المحدد'),
+                      label: Text(loc.csDeleteSelectedLabel),
                       style: TextButton.styleFrom(
                         foregroundColor: AppSemanticColors.danger,
                       ),
@@ -661,8 +673,8 @@ class _CustomersScreenState extends State<CustomersScreen> {
                       ),
                     ),
                     icon: const Icon(Icons.person_add_alt_1_outlined, size: 20),
-                    label: const Text(
-                      'إضافة عميل',
+                    label: Text(
+                      loc.csAddCustomer,
                       style: TextStyle(fontWeight: FontWeight.w600),
                     ),
                   ),
@@ -685,7 +697,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'بحث وتصفية',
+              loc.csSearchFilter,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 15,
@@ -694,7 +706,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
             ),
             const SizedBox(height: 4),
             Text(
-              'ابحث بالاسم أو الهاتف أو البريد. مبيعات الدين والتقسيط تُربط بالعميل من شاشة البيع.',
+              loc.csSearchDescription,
               style: TextStyle(fontSize: 12.5, color: _textSecondary),
             ),
           ],
@@ -704,7 +716,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              'ترتيب العرض',
+              loc.csSortLabel,
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
@@ -723,26 +735,26 @@ class _CustomersScreenState extends State<CustomersScreen> {
                 child: DropdownButton<_CustomerSort>(
                   isExpanded: true,
                   value: _sort,
-                  items: const [
+                  items: [
                     DropdownMenuItem(
                       value: _CustomerSort.nameAsc,
-                      child: Text('الاسم (أ-ي)'),
+                      child: Text(loc.csSortNameAZ),
                     ),
                     DropdownMenuItem(
                       value: _CustomerSort.nameDesc,
-                      child: Text('الاسم (ي-أ)'),
+                      child: Text(loc.csSortNameZA),
                     ),
                     DropdownMenuItem(
                       value: _CustomerSort.totalPurchasesDesc,
-                      child: Text('الأكثر شراءً'),
+                      child: Text(loc.csSortMostPurchased),
                     ),
                     DropdownMenuItem(
                       value: _CustomerSort.balanceDesc,
-                      child: Text('الديون الأكبر'),
+                      child: Text(loc.csSortLargestDebts),
                     ),
                     DropdownMenuItem(
                       value: _CustomerSort.dateDesc,
-                      child: Text('الأحدث تسجيلاً'),
+                      child: Text(loc.csSortNewest),
                     ),
                   ],
                   onChanged: (v) {
@@ -781,17 +793,16 @@ class _CustomersScreenState extends State<CustomersScreen> {
                 ),
               const SizedBox(height: 14),
               AppInput(
-                label: 'البحث',
-                subtitle:
-                    'الإدخال يُطبَّق تلقائياً خلال جزء ثانٍ — Enter أو زر التطبيق لتحسين الوضوح. اختصار: Ctrl+F',
-                hint: 'ابحث بالاسم أو رقم الهاتف أو البريد…',
+                label: loc.csSearch,
+                                subtitle: loc.csSearchApplyHint,
+                hint: loc.csSearchInputHint,
                 controller: _searchCtrl,
                 focusNode: _searchFocus,
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: _searchCtrl.text.trim().isEmpty
                     ? null
                     : IconButton(
-                        tooltip: 'مسح',
+                        tooltip: loc.csClearTooltip,
                         onPressed: () {
                           _searchCtrl.clear();
                           _syncFilters();
@@ -810,7 +821,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
                       _syncFilters();
                     },
                     icon: const Icon(Icons.search, size: 18),
-                    label: const Text('تطبيق البحث'),
+                    label: Text(loc.csApplySearchLabel),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: _textPrimary,
                       side: BorderSide(color: _outline),
@@ -824,13 +835,13 @@ class _CustomersScreenState extends State<CustomersScreen> {
                     onPressed: () {
                       setState(() {
                         _searchCtrl.clear();
-                        _filterStatus = AppLocalizations.of(context)!.all;
+                        _filterStatus = loc.all;
                         _sort = _CustomerSort.nameAsc;
                       });
                       _syncFilters();
                     },
                     child: Text(
-                      'مسح التصفية',
+                      loc.csClearFilter,
                       style: TextStyle(color: _primary),
                     ),
                   ),
@@ -858,8 +869,8 @@ class _CustomersScreenState extends State<CustomersScreen> {
           const SizedBox(height: 12),
           Text(
             noData
-                ? 'لا يوجد عملاء بعد'
-                : 'لا يوجد عملاء يطابقون البحث أو التصفية',
+                ? loc.csNoCustomersYet
+                : loc.csNoMatchingCustomers,
             textAlign: TextAlign.center,
             style: TextStyle(color: _textSecondary, fontSize: 15),
           ),
@@ -868,7 +879,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
             FilledButton.icon(
               onPressed: () => _openEditor(),
               icon: const Icon(Icons.add),
-              label: Text(AppLocalizations.of(context)!.addFirstCustomer),
+              label: Text(loc.addFirstCustomer),
             ),
           ],
         ],
@@ -891,41 +902,41 @@ class _CustomersScreenState extends State<CustomersScreen> {
               onChanged: _toggleSelectAllVisible,
             ),
           ),
-          const Expanded(
+          Expanded(
             flex: 3,
             child: Text(
-              'العميل',
+              loc.csColName,
               style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
             ),
           ),
-          const Expanded(
+          Expanded(
             flex: 2,
             child: Text(
-              'الهاتف',
+              loc.csColPhone,
               textAlign: TextAlign.center,
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
             ),
           ),
-          const Expanded(
+          Expanded(
             flex: 2,
             child: Text(
-              'إجمالي المشتريات',
+              loc.csColTotalPurchases,
               textAlign: TextAlign.center,
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
             ),
           ),
-          const Expanded(
+          Expanded(
             flex: 2,
             child: Text(
-              'الرصيد المستحق',
+              loc.csColDueBalance,
               textAlign: TextAlign.center,
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
             ),
           ),
-          const SizedBox(
+          SizedBox(
             width: 88,
             child: Text(
-              'الحالة',
+              loc.csColStatus,
               textAlign: TextAlign.center,
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
             ),
@@ -993,25 +1004,25 @@ class _CustomersScreenState extends State<CustomersScreen> {
           if (fin.creditInvoices > 0)
             _CustomerActionPill(
               icon: Icons.account_balance_wallet_rounded,
-              label: 'ديون ×${fin.creditInvoices}',
+              label: loc.csDebtsLabel(fin.creditInvoices.toString()),
               color: AppSemanticColors.warning,
-              tooltip: 'فتح ديون الآجل المرتبطة',
+              tooltip: loc.csOpenDebtsTooltip,
               onPressed: () => _openDebtDetail(c),
             ),
           if (fin.installmentPlans > 0)
             _CustomerActionPill(
               icon: Icons.event_repeat_rounded,
-              label: 'تقسيط ×${fin.installmentPlans}',
+              label: loc.csInstallmentsLabel(fin.installmentPlans.toString()),
               color: AppSemanticColors.info,
-              tooltip: 'فتح خطط التقسيط',
+              tooltip: loc.csOpenInstallmentsTooltip,
               onPressed: () => _openInstallmentsForCustomer(c),
             ),
           if (hasPhone)
             _CustomerActionPill(
               icon: Icons.call_rounded,
-              label: 'اتصال',
+              label: loc.csCallLabel,
               color: Theme.of(context).colorScheme.primary,
-              tooltip: 'اتصال بـ ${c.phone}',
+              tooltip: loc.csCallTooltip(c.phone ?? ''),
               onPressed: () => unawaited(_dialCustomer(c.phone)),
             ),
         ];
@@ -1040,7 +1051,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
             ),
             const SizedBox(height: 2),
             Text(
-              '$idStr · ولاء ${c.loyaltyPoints} · ${_shortDate(c.createdAt)}',
+              loc.csCustomerInfo(idStr.toString(), c.loyaltyPoints.toString(), _shortDate(c.createdAt) ?? ''),
               style: TextStyle(fontSize: 11.5, color: _textSecondary),
               overflow: TextOverflow.ellipsis,
             ),
@@ -1090,20 +1101,20 @@ class _CustomersScreenState extends State<CustomersScreen> {
           child: PopupMenuButton<String>(
             padding: EdgeInsets.zero,
             icon: Icon(Icons.more_vert, color: _textSecondary, size: 22),
-            tooltip: 'المزيد',
+            tooltip: loc.csMoreTooltip,
             onSelected: (v) {
               if (v == 'view') _openCustomerFinancialDetail(c);
               if (v == 'edit') _openEditor(customer: c);
               if (v == 'delete') _confirmDelete(c);
             },
             itemBuilder: (_) => [
-              PopupMenuItem(value: 'view', child: Text(AppLocalizations.of(context)!.viewDetails)),
-              const PopupMenuItem(value: 'edit', child: Text('تعديل البيانات')),
+              PopupMenuItem(value: 'view', child: Text(loc.viewDetails)),
+              PopupMenuItem(value: 'edit', child: Text(loc.csEditData)),
               const PopupMenuDivider(),
               PopupMenuItem(
                 value: 'delete',
                 child: Text(
-                  AppLocalizations.of(context)!.delete,
+                  loc.delete,
                   style: const TextStyle(color: AppSemanticColors.danger),
                 ),
               ),
@@ -1174,7 +1185,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
                     Expanded(
                       flex: 2,
                       child: Tooltip(
-                        message: 'اتصال',
+                        message: loc.csCall,
                         child: InkWell(
                           onTap: () => _dialCustomer(c.phone),
                           borderRadius: AppShape.none,
@@ -1229,10 +1240,10 @@ class _CustomersScreenState extends State<CustomersScreen> {
                         children: [
                           Text(
                             c.balance.abs() < 0.01
-                                ? 'لا ديون'
+                                ? loc.csNoDues
                                 : (c.balance > 0.01
-                                      ? 'دين: ${IraqiCurrencyFormat.formatIqd(c.balance)}'
-                                      : 'دائن: ${IraqiCurrencyFormat.formatIqd(-c.balance)}'),
+                                      ? '${loc.csDebtPrefix}: ${IraqiCurrencyFormat.formatIqd(c.balance)}'
+                                      : '${loc.csCreditPrefix}: ${IraqiCurrencyFormat.formatIqd(-c.balance)}'),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 13,
@@ -1340,17 +1351,19 @@ class _StatusChipsStrip extends StatelessWidget {
   final Color? primary;
 
   int _badgeForLabel(BuildContext context, String label) {
-    if (label == AppLocalizations.of(context)!.all) return tabCounts.all;
-    if (label == 'مديون') return tabCounts.indebted;
-    if (label == 'دائن') return tabCounts.creditor;
+    final l = AppLocalizations.of(context)!;
+    if (label == l.all) return tabCounts.all;
+    if (label == 'indebted') return tabCounts.indebted;
+    if (label == 'creditor') return tabCounts.creditor;
     return tabCounts.distinguished;
   }
 
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    final l = AppLocalizations.of(context)!;
     final effectivePrimary = primary ?? cs.primary;
-    final statusOptions = [AppLocalizations.of(context)!.all, 'مديون', 'دائن', 'مميز'];
+    final statusOptions = [l.all, 'indebted', 'creditor', 'distinguished'];
 
     return Focus(
       onKeyEvent: (node, event) {
@@ -1394,8 +1407,8 @@ class _StatusChipsStrip extends StatelessWidget {
                         const SizedBox(width: 6),
                         _TabCountBadge(
                           count: _badgeForLabel(context, s),
-                          urgentRed: s == 'مديون',
-                          goldAccent: s == 'مميز',
+                          urgentRed: s == 'indebted',
+                          goldAccent: s == 'distinguished',
                           fallback: effectivePrimary,
                         ),
                       ],
@@ -1532,30 +1545,31 @@ class _CustomersStatsBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final layout = ScreenLayout.of(context);
     final cs = Theme.of(context).colorScheme;
+    final l = AppLocalizations.of(context)!;
     final fmt = NumberFormat.decimalPattern('en');
 
     final chips = <Widget>[
       _StatChip(
         icon: Icons.groups_2_rounded,
-        label: AppLocalizations.of(context)!.totalCustomers,
+        label: l.totalCustomers,
         value: fmt.format(totalAll),
         color: cs.primary,
       ),
       _StatChip(
         icon: Icons.warning_amber_rounded,
-        label: 'مديونون',
+        label: l.csIndebtedPlural,
         value: fmt.format(indebted),
         color: AppSemanticColors.warning,
       ),
       _StatChip(
         icon: Icons.savings_rounded,
-        label: 'دائنون',
+        label: l.csCreditorPlural,
         value: fmt.format(creditor),
         color: AppSemanticColors.info,
       ),
       _StatChip(
         icon: Icons.workspace_premium_rounded,
-        label: 'مميزون',
+        label: l.csDistinguishedPlural,
         value: fmt.format(distinguished),
         color: AppColors.accentGold,
       ),

@@ -15355,6 +15355,354 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'أدنى سعر بيع — {amount}'**
   String apMinSellPriceHintIQD(Object amount);
+
+  /// No description provided for @csStatusIndebted.
+  ///
+  /// In ar, this message translates to:
+  /// **'مديون'**
+  String get csStatusIndebted;
+
+  /// No description provided for @csStatusCreditor.
+  ///
+  /// In ar, this message translates to:
+  /// **'دائن'**
+  String get csStatusCreditor;
+
+  /// No description provided for @csStatusDistinguished.
+  ///
+  /// In ar, this message translates to:
+  /// **'مميز'**
+  String get csStatusDistinguished;
+
+  /// No description provided for @csClearFilter.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح التصفية'**
+  String get csClearFilter;
+
+  /// No description provided for @csIndebtedPlural.
+  ///
+  /// In ar, this message translates to:
+  /// **'مديونون'**
+  String get csIndebtedPlural;
+
+  /// No description provided for @csCreditorPlural.
+  ///
+  /// In ar, this message translates to:
+  /// **'دائنون'**
+  String get csCreditorPlural;
+
+  /// No description provided for @csDistinguishedPlural.
+  ///
+  /// In ar, this message translates to:
+  /// **'مميزون'**
+  String get csDistinguishedPlural;
+
+  /// No description provided for @csNoDues.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا ديون'**
+  String get csNoDues;
+
+  /// No description provided for @csDebtPrefix.
+  ///
+  /// In ar, this message translates to:
+  /// **'دين'**
+  String get csDebtPrefix;
+
+  /// No description provided for @csCreditPrefix.
+  ///
+  /// In ar, this message translates to:
+  /// **'دائن'**
+  String get csCreditPrefix;
+
+  /// No description provided for @csDeleteCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف عميل'**
+  String get csDeleteCustomer;
+
+  /// No description provided for @csDeleteCustomerConfirm.
+  ///
+  /// In ar, this message translates to:
+  /// **'هل تريد حذف «{name}»؟'**
+  String csDeleteCustomerConfirm(Object name);
+
+  /// No description provided for @csDeleteFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر الحذف: {error}'**
+  String csDeleteFailed(Object error);
+
+  /// No description provided for @csDeleteSelectedCustomers.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف العملاء المحددين'**
+  String get csDeleteSelectedCustomers;
+
+  /// No description provided for @csDeleteSelectedConfirm.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيتم حذف {count} عميل. هل أنت متأكد؟'**
+  String csDeleteSelectedConfirm(Object count);
+
+  /// No description provided for @csAlertsTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'التنبيهات: متأخرات، فواتير آجل، مخزون وأقساط'**
+  String get csAlertsTooltip;
+
+  /// No description provided for @csRefreshFromCloud.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديث القائمة من السحابة والمزامنة — F5'**
+  String get csRefreshFromCloud;
+
+  /// No description provided for @csLastUpdatedNow.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر تحديث: الآن تقريباً — F5'**
+  String get csLastUpdatedNow;
+
+  /// No description provided for @csLastUpdatedMinutesAgo.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر تحديث: منذ {minutes} دقيقة — F5'**
+  String csLastUpdatedMinutesAgo(Object minutes);
+
+  /// No description provided for @csLastUpdatedHoursAgo.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر تحديث: منذ {hours} ساعة تقريباً — F5'**
+  String csLastUpdatedHoursAgo(Object hours);
+
+  /// No description provided for @csTotalShowing.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي: {total} · معروض: {shown}'**
+  String csTotalShowing(Object shown, Object total);
+
+  /// No description provided for @csTotalCustomersShowing.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي العملاء: {total} | معروض: {shown}'**
+  String csTotalCustomersShowing(Object shown, Object total);
+
+  /// No description provided for @csSelectedCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'محدد: {selected} / {total}'**
+  String csSelectedCount(Object selected, Object total);
+
+  /// No description provided for @csSelectedCountPage.
+  ///
+  /// In ar, this message translates to:
+  /// **'محدد: {selected} — المعروض في الصفحة: {total}'**
+  String csSelectedCountPage(Object selected, Object total);
+
+  /// No description provided for @csDeleteSelectedTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف المحدد'**
+  String get csDeleteSelectedTooltip;
+
+  /// No description provided for @csDeleteSelectedLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف المحدد'**
+  String get csDeleteSelectedLabel;
+
+  /// No description provided for @csAddCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة عميل'**
+  String get csAddCustomer;
+
+  /// No description provided for @csSearchFilter.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث وتصفية'**
+  String get csSearchFilter;
+
+  /// No description provided for @csSearchDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابحث بالاسم أو الهاتف أو البريد. مبيعات الدين والتقسيط تُربط بالعميل من شاشة البيع.'**
+  String get csSearchDescription;
+
+  /// No description provided for @csSearchInputHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابحث بالاسم أو رقم الهاتف أو البريد…'**
+  String get csSearchInputHint;
+
+  /// No description provided for @csSearchApplyHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإدخال يُطبَّق تلقائياً خلال جزء ثانٍ — Enter أو زر التطبيق لتحسين الوضوح. اختصار: Ctrl+F'**
+  String get csSearchApplyHint;
+
+  /// No description provided for @csSortLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'ترتيب العرض'**
+  String get csSortLabel;
+
+  /// No description provided for @csSortNameAZ.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم (أ-ي)'**
+  String get csSortNameAZ;
+
+  /// No description provided for @csSortNameZA.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم (ي-أ)'**
+  String get csSortNameZA;
+
+  /// No description provided for @csSortMostPurchased.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأكثر شراءً'**
+  String get csSortMostPurchased;
+
+  /// No description provided for @csSortLargestDebts.
+  ///
+  /// In ar, this message translates to:
+  /// **'الديون الأكبر'**
+  String get csSortLargestDebts;
+
+  /// No description provided for @csSortNewest.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأحدث تسجيلاً'**
+  String get csSortNewest;
+
+  /// No description provided for @csSearch.
+  ///
+  /// In ar, this message translates to:
+  /// **'البحث'**
+  String get csSearch;
+
+  /// No description provided for @csClearTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح'**
+  String get csClearTooltip;
+
+  /// No description provided for @csApplySearchLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تطبيق البحث'**
+  String get csApplySearchLabel;
+
+  /// No description provided for @csNoCustomersYet.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد عملاء بعد'**
+  String get csNoCustomersYet;
+
+  /// No description provided for @csNoMatchingCustomers.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد عملاء يطابقون البحث أو التصفية'**
+  String get csNoMatchingCustomers;
+
+  /// No description provided for @csColName.
+  ///
+  /// In ar, this message translates to:
+  /// **'العميل'**
+  String get csColName;
+
+  /// No description provided for @csColPhone.
+  ///
+  /// In ar, this message translates to:
+  /// **'الهاتف'**
+  String get csColPhone;
+
+  /// No description provided for @csColTotalPurchases.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي المشتريات'**
+  String get csColTotalPurchases;
+
+  /// No description provided for @csColDueBalance.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرصيد المستحق'**
+  String get csColDueBalance;
+
+  /// No description provided for @csColStatus.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحالة'**
+  String get csColStatus;
+
+  /// No description provided for @csDebtsLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'ديون ×{count}'**
+  String csDebtsLabel(Object count);
+
+  /// No description provided for @csOpenDebtsTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح ديون الآجل المرتبطة'**
+  String get csOpenDebtsTooltip;
+
+  /// No description provided for @csInstallmentsLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تقسيط ×{count}'**
+  String csInstallmentsLabel(Object count);
+
+  /// No description provided for @csOpenInstallmentsTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح خطط التقسيط'**
+  String get csOpenInstallmentsTooltip;
+
+  /// No description provided for @csCallLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتصال'**
+  String get csCallLabel;
+
+  /// No description provided for @csCallTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتصال بـ {phone}'**
+  String csCallTooltip(Object phone);
+
+  /// No description provided for @csCustomerInfo.
+  ///
+  /// In ar, this message translates to:
+  /// **'{id} · ولاء {loyalty} · {date}'**
+  String csCustomerInfo(Object date, Object id, Object loyalty);
+
+  /// No description provided for @csMoreTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'المزيد'**
+  String get csMoreTooltip;
+
+  /// No description provided for @csEditData.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل البيانات'**
+  String get csEditData;
+
+  /// No description provided for @csCall.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتصال'**
+  String get csCall;
+
+  /// No description provided for @csSortTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'البحث'**
+  String get csSortTooltip;
 }
 
 class _AppLocalizationsDelegate
