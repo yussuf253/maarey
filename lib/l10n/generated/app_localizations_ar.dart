@@ -9106,4 +9106,60 @@ class AppLocalizationsAr extends AppLocalizations {
   String svVoucherSaved(Object id, Object number) {
     return 'تم حفظ السند #$id ($number)';
   }
+
+  @override
+  String get usRoleAdmin => 'مدير';
+
+  @override
+  String get usRoleEmployee => 'موظف';
+
+  @override
+  String get usNoPermission =>
+      'لا صلاحية — المدير فقط يضيف أو يعدّل المستخدمين';
+
+  @override
+  String get usCannotDisableSelf => 'لا يمكن تعطيل حسابك وأنت مسجّل الدخول';
+
+  @override
+  String get usDisableUserTitle => 'تعطيل المستخدم';
+
+  @override
+  String get usDisableUserDesc => 'سيتم إيقاف الحساب ولن يستطيع تسجيل الدخول.';
+
+  @override
+  String get usCancel => 'إلغاء';
+
+  @override
+  String get usDisable => 'تعطيل';
+
+  @override
+  String get usDisabled => 'تم التعطيل';
+
+  @override
+  String get usTitle => 'المستخدمون';
+
+  @override
+  String get usRefresh => 'تحديث';
+
+  @override
+  String get usNewUser => 'مستخدم جديد';
+
+  @override
+  String get usNoActiveUsers => 'لا يوجد مستخدمون نشطون';
+
+  @override
+  String get usNoActiveUsersHintAdmin =>
+      'اضغط على زر الإضافة لإنشاء مستخدم جديد';
+
+  @override
+  String get usNoActiveUsersHintManager => 'سجّل دخول المدير لإضافة مستخدمين';
+
+  @override
+  String get usIdCard => 'بطاقة الهوية';
+
+  @override
+  String get usEdit => 'تعديل';
+
+  @override
+  String get usDisableButton => 'تعطيل';
 }

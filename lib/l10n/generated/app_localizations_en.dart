@@ -9196,4 +9196,62 @@ class AppLocalizationsEn extends AppLocalizations {
   String svVoucherSaved(Object id, Object number) {
     return 'Voucher #$id ($number) saved';
   }
+
+  @override
+  String get usRoleAdmin => 'Admin';
+
+  @override
+  String get usRoleEmployee => 'Employee';
+
+  @override
+  String get usNoPermission =>
+      'No permission — only admins can add or edit users';
+
+  @override
+  String get usCannotDisableSelf =>
+      'You cannot disable your own account while logged in';
+
+  @override
+  String get usDisableUserTitle => 'Disable user';
+
+  @override
+  String get usDisableUserDesc =>
+      'The account will be stopped and they won\'t be able to log in.';
+
+  @override
+  String get usCancel => 'Cancel';
+
+  @override
+  String get usDisable => 'Disable';
+
+  @override
+  String get usDisabled => 'Disabled';
+
+  @override
+  String get usTitle => 'Users';
+
+  @override
+  String get usRefresh => 'Refresh';
+
+  @override
+  String get usNewUser => 'New user';
+
+  @override
+  String get usNoActiveUsers => 'No active users';
+
+  @override
+  String get usNoActiveUsersHintAdmin =>
+      'Tap the add button to create a new user';
+
+  @override
+  String get usNoActiveUsersHintManager => 'Log in as admin to add users';
+
+  @override
+  String get usIdCard => 'ID card';
+
+  @override
+  String get usEdit => 'Edit';
+
+  @override
+  String get usDisableButton => 'Disable';
 }

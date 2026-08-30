@@ -16555,6 +16555,114 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'تم حفظ السند #{id} ({number})'**
   String svVoucherSaved(Object id, Object number);
+
+  /// No description provided for @usRoleAdmin.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدير'**
+  String get usRoleAdmin;
+
+  /// No description provided for @usRoleEmployee.
+  ///
+  /// In ar, this message translates to:
+  /// **'موظف'**
+  String get usRoleEmployee;
+
+  /// No description provided for @usNoPermission.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا صلاحية — المدير فقط يضيف أو يعدّل المستخدمين'**
+  String get usNoPermission;
+
+  /// No description provided for @usCannotDisableSelf.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يمكن تعطيل حسابك وأنت مسجّل الدخول'**
+  String get usCannotDisableSelf;
+
+  /// No description provided for @usDisableUserTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعطيل المستخدم'**
+  String get usDisableUserTitle;
+
+  /// No description provided for @usDisableUserDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيتم إيقاف الحساب ولن يستطيع تسجيل الدخول.'**
+  String get usDisableUserDesc;
+
+  /// No description provided for @usCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get usCancel;
+
+  /// No description provided for @usDisable.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعطيل'**
+  String get usDisable;
+
+  /// No description provided for @usDisabled.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم التعطيل'**
+  String get usDisabled;
+
+  /// No description provided for @usTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'المستخدمون'**
+  String get usTitle;
+
+  /// No description provided for @usRefresh.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديث'**
+  String get usRefresh;
+
+  /// No description provided for @usNewUser.
+  ///
+  /// In ar, this message translates to:
+  /// **'مستخدم جديد'**
+  String get usNewUser;
+
+  /// No description provided for @usNoActiveUsers.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد مستخدمون نشطون'**
+  String get usNoActiveUsers;
+
+  /// No description provided for @usNoActiveUsersHintAdmin.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط على زر الإضافة لإنشاء مستخدم جديد'**
+  String get usNoActiveUsersHintAdmin;
+
+  /// No description provided for @usNoActiveUsersHintManager.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل دخول المدير لإضافة مستخدمين'**
+  String get usNoActiveUsersHintManager;
+
+  /// No description provided for @usIdCard.
+  ///
+  /// In ar, this message translates to:
+  /// **'بطاقة الهوية'**
+  String get usIdCard;
+
+  /// No description provided for @usEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل'**
+  String get usEdit;
+
+  /// No description provided for @usDisableButton.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعطيل'**
+  String get usDisableButton;
 }
 
 class _AppLocalizationsDelegate

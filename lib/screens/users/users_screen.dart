@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../providers/auth_provider.dart';
 import '../../services/cloud_sync_service.dart';
 import '../../services/database_helper.dart';
@@ -16,6 +17,7 @@ class UsersScreen extends StatefulWidget {
 }
 
 class _UsersScreenState extends State<UsersScreen> {
+  AppLocalizations get loc => AppLocalizations.of(context)!;
   final DatabaseHelper _db = DatabaseHelper();
   List<Map<String, dynamic>> _rows = [];
   bool _loading = true;
@@ -57,9 +59,9 @@ class _UsersScreenState extends State<UsersScreen> {
   String _roleAr(String? r) {
     switch (r) {
       case 'admin':
-        return 'مدير';
+        return loc.usRoleAdmin;
       default:
-        return 'موظف';
+        return loc.usRoleEmployee;
     }
   }
 
@@ -67,8 +69,8 @@ class _UsersScreenState extends State<UsersScreen> {
     final auth = context.read<AuthProvider>();
     if (!auth.isAdmin) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('لا صلاحية — المدير فقط يضيف أو يعدّل المستخدمين'),
+        SnackBar(
+          content: Text(loc.usNoPermission),
         ),
       );
       return;
@@ -109,7 +111,7 @@ class _UsersScreenState extends State<UsersScreen> {
     final id = row['id'] as int;
     if (id == auth.userId) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('لا يمكن تعطيل حسابك وأنت مسجّل الدخول')),
+        SnackBar(content: Text(loc.usCannotDisableSelf)),
       );
       return;
     }
@@ -118,17 +120,17 @@ class _UsersScreenState extends State<UsersScreen> {
       builder: (ctx) => Directionality(
         textDirection: TextDirection.rtl,
         child: AlertDialog(
-          title: const Text('تعطيل المستخدم'),
-          content: const Text('سيتم إيقاف الحساب ولن يستطيع تسجيل الدخول.'),
+          title: Text(loc.usDisableUserTitle),
+          content: Text(loc.usDisableUserDesc),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: const Text('إلغاء'),
+              child: Text(loc.usCancel),
             ),
             FilledButton(
               onPressed: () => Navigator.pop(ctx, true),
               style: FilledButton.styleFrom(backgroundColor: Colors.red),
-              child: const Text('تعطيل'),
+              child: Text(loc.usDisable),
             ),
           ],
         ),
@@ -139,7 +141,7 @@ class _UsersScreenState extends State<UsersScreen> {
     if (!mounted) return;
     ScaffoldMessenger.of(
       context,
-    ).showSnackBar(const SnackBar(content: Text('تم التعطيل')));
+    ).showSnackBar(SnackBar(content: Text(loc.usDisabled)));
     await _load();
   }
 
@@ -155,9 +157,9 @@ class _UsersScreenState extends State<UsersScreen> {
       child: Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
-          title: const Text(
-            'المستخدمون',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          title: Text(
+            loc.usTitle,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           ),
           backgroundColor: cs.primary,
           foregroundColor: cs.onPrimary,
@@ -165,7 +167,7 @@ class _UsersScreenState extends State<UsersScreen> {
           actions: [
             IconButton(
               icon: const Icon(Icons.refresh_rounded),
-              tooltip: 'تحديث',
+              tooltip: loc.usRefresh,
               onPressed: _loading ? null : _refreshFromServer,
             ),
             const SizedBox(width: 4),
@@ -194,7 +196,7 @@ class _UsersScreenState extends State<UsersScreen> {
                   color: cs.onPrimary,
                 ),
                 label: Text(
-                  'مستخدم جديد',
+                  loc.usNewUser,
                   style: TextStyle(
                     color: cs.onPrimary,
                     fontWeight: FontWeight.w700,
@@ -217,7 +219,7 @@ class _UsersScreenState extends State<UsersScreen> {
             Icon(Icons.people_outline, size: 80, color: Colors.grey.shade400),
             const SizedBox(height: 16),
             Text(
-              'لا يوجد مستخدمون نشطون',
+              loc.usNoActiveUsers,
               style: TextStyle(fontSize: 18, color: Colors.grey.shade600),
             ),
             const SizedBox(height: 8),
@@ -226,8 +228,8 @@ class _UsersScreenState extends State<UsersScreen> {
                 final admin = context.watch<AuthProvider>().isAdmin;
                 return Text(
                   admin
-                      ? 'اضغط على زر الإضافة لإنشاء مستخدم جديد'
-                      : 'سجّل دخول المدير لإضافة مستخدمين',
+                      ? loc.usNoActiveUsersHintAdmin
+                      : loc.usNoActiveUsersHintManager,
                   style: TextStyle(fontSize: 13, color: Colors.grey.shade400),
                 );
               },
@@ -301,13 +303,13 @@ class _UsersScreenState extends State<UsersScreen> {
             if (v == 'delete') _deactivate(user);
           },
           itemBuilder: (_) => [
-            const PopupMenuItem(value: 'identity', child: Text('بطاقة الهوية')),
+            PopupMenuItem(value: 'identity', child: Text(loc.usIdCard)),
             if (auth.isAdmin)
-              const PopupMenuItem(value: 'edit', child: Text('تعديل')),
+              PopupMenuItem(value: 'edit', child: Text(loc.usEdit)),
             if (auth.isAdmin)
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'delete',
-                child: Text('تعطيل', style: TextStyle(color: Colors.red)),
+                child: Text(loc.usDisable, style: const TextStyle(color: Colors.red)),
               ),
           ],
         ),
@@ -316,7 +318,7 @@ class _UsersScreenState extends State<UsersScreen> {
   }
 
   Widget _roleBadge(String role) {
-    final color = role == 'مدير' ? Colors.purple : Colors.blue;
+    final color = role == loc.usRoleAdmin ? Colors.purple : Colors.blue;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(

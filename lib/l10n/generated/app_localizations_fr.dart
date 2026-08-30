@@ -9310,4 +9310,63 @@ class AppLocalizationsFr extends AppLocalizations {
   String svVoucherSaved(Object id, Object number) {
     return 'Bon #$id ($number) enregistré';
   }
+
+  @override
+  String get usRoleAdmin => 'Admin';
+
+  @override
+  String get usRoleEmployee => 'Employé';
+
+  @override
+  String get usNoPermission =>
+      'Pas de permission — seuls les admins peuvent ajouter ou modifier les utilisateurs';
+
+  @override
+  String get usCannotDisableSelf =>
+      'Vous ne pouvez pas désactiver votre propre compte tant que vous êtes connecté';
+
+  @override
+  String get usDisableUserTitle => 'Désactiver l\'utilisateur';
+
+  @override
+  String get usDisableUserDesc =>
+      'Le compte sera arrêté et ils ne pourront plus se connecter.';
+
+  @override
+  String get usCancel => 'Annuler';
+
+  @override
+  String get usDisable => 'Désactiver';
+
+  @override
+  String get usDisabled => 'Désactivé';
+
+  @override
+  String get usTitle => 'Utilisateurs';
+
+  @override
+  String get usRefresh => 'Actualiser';
+
+  @override
+  String get usNewUser => 'Nouvel utilisateur';
+
+  @override
+  String get usNoActiveUsers => 'Aucun utilisateur actif';
+
+  @override
+  String get usNoActiveUsersHintAdmin =>
+      'Appuyez sur le bouton ajouter pour créer un nouvel utilisateur';
+
+  @override
+  String get usNoActiveUsersHintManager =>
+      'Connectez-vous en tant qu\'admin pour ajouter des utilisateurs';
+
+  @override
+  String get usIdCard => 'Carte d\'identité';
+
+  @override
+  String get usEdit => 'Modifier';
+
+  @override
+  String get usDisableButton => 'Désactiver';
 }
