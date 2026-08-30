@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import '../../l10n/generated/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:path/path.dart' as p;
@@ -416,6 +417,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
     await SaleReceiptPdf.presentSupplierPaymentReceipt(
       context,
         locale: Localizations.localeOf(context),
+        loc: AppLocalizations.of(context)!,
       supplierDisplayName: _supplier?.name ?? '',
       amountPaid: amt,
       payableBefore: payableBefore,
@@ -521,6 +523,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
     await SaleReceiptPdf.presentSupplierPaymentReceipt(
       context,
         locale: Localizations.localeOf(context),
+        loc: AppLocalizations.of(context)!,
       supplierDisplayName: _supplier?.name ?? '',
       amountPaid: amt,
       payableBefore: payableBefore,

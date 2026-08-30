@@ -9437,4 +9437,483 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get swPrevWeek => 'Previous week';
+
+  @override
+  String get rpSaleReceipt => 'Sale receipt';
+
+  @override
+  String rpOperationNumber(Object id) {
+    return 'Operation #$id';
+  }
+
+  @override
+  String rpDateTime(Object date) {
+    return 'Date: $date';
+  }
+
+  @override
+  String get rpCustomer => 'Customer';
+
+  @override
+  String rpCustomerWithValue(Object name) {
+    return 'Customer: $name';
+  }
+
+  @override
+  String get rpDeliveryReceipt =>
+      'Delivery receipt — location details via QR at bottom';
+
+  @override
+  String rpPaymentMethod(Object method) {
+    return 'Payment: $method';
+  }
+
+  @override
+  String rpEmployee(Object name) {
+    return 'Staff: $name';
+  }
+
+  @override
+  String get rpItems => 'Items:';
+
+  @override
+  String rpBeforeDiscount(Object amount) {
+    return 'Before discount: $amount IQD';
+  }
+
+  @override
+  String rpDiscount(Object amount) {
+    return 'Discount: $amount IQD';
+  }
+
+  @override
+  String rpTax(Object amount) {
+    return 'Tax: $amount IQD';
+  }
+
+  @override
+  String rpLoyaltyDiscount(Object amount) {
+    return 'Loyalty discount: $amount IQD';
+  }
+
+  @override
+  String rpTotal(Object amount) {
+    return 'Total: $amount IQD';
+  }
+
+  @override
+  String rpBarcode(Object code) {
+    return 'Barcode: $code';
+  }
+
+  @override
+  String rpItemLine(Object name, Object qty, Object total) {
+    return '• $name  |  Qty: $qty  |  $total';
+  }
+
+  @override
+  String rpMoreItems(Object count) {
+    return '… and $count more items (details in app)';
+  }
+
+  @override
+  String get rpDeliveryShort => 'Delivery receipt — location QR at bottom';
+
+  @override
+  String rpPaymentShort(Object method) {
+    return 'Payment: $method';
+  }
+
+  @override
+  String get rpCash => 'Cash';
+
+  @override
+  String get rpCredit => 'Credit';
+
+  @override
+  String get rpInstallment => 'Installment';
+
+  @override
+  String get rpDeliveryType => 'Delivery';
+
+  @override
+  String get rpCreditCollection => 'Credit collection';
+
+  @override
+  String get rpInstallmentPayment => 'Installment payment';
+
+  @override
+  String get rpSupplierPayment => 'Supplier payment';
+
+  @override
+  String get rpCreditSummary => 'Credit sale summary';
+
+  @override
+  String rpInvoiceTotal(Object amount) {
+    return 'Invoice total: $amount IQD';
+  }
+
+  @override
+  String rpAmountPaid(Object amount) {
+    return 'Paid now: $amount IQD';
+  }
+
+  @override
+  String rpRemaining(Object amount) {
+    return 'Remaining balance: $amount IQD';
+  }
+
+  @override
+  String get rpInstallmentSummary =>
+      'Installment summary (sale price & interest)';
+
+  @override
+  String rpSalePriceTotal(Object amount) {
+    return 'Invoice total (sale price): $amount IQD';
+  }
+
+  @override
+  String rpAdvancePayment(Object amount) {
+    return 'Advance / first payment: $amount IQD';
+  }
+
+  @override
+  String rpFinancedAmount(Object amount) {
+    return 'Amount after advance (interest basis): $amount IQD';
+  }
+
+  @override
+  String rpInterestRate(Object rate) {
+    return 'Interest rate: $rate%';
+  }
+
+  @override
+  String rpInterestValue(Object amount) {
+    return 'Interest amount: $amount IQD';
+  }
+
+  @override
+  String rpTotalWithInterest(Object amount) {
+    return 'Total with interest: $amount IQD';
+  }
+
+  @override
+  String rpPlannedMonths(Object count) {
+    return 'Planned months: $count';
+  }
+
+  @override
+  String rpSuggestedMonthly(Object amount) {
+    return 'Suggested monthly installment: $amount IQD';
+  }
+
+  @override
+  String get rpInvoiceDetails => 'Invoice details';
+
+  @override
+  String get rpScanToOpen => 'Scan to open details in app';
+
+  @override
+  String get rpReceiptTextSummary => 'Receipt text summary';
+
+  @override
+  String get rpDebtorProfile => 'Debtor profile';
+
+  @override
+  String get rpDebtDetails => 'Debt details';
+
+  @override
+  String get rpReceiptSummary => 'Receipt summary';
+
+  @override
+  String get rpInstallmentPlan => 'Installment plan';
+
+  @override
+  String get rpInstallmentSchedule => 'Payment schedule & due dates';
+
+  @override
+  String get rpDeliveryMap => 'Delivery map';
+
+  @override
+  String get rpOpenInGoogleMaps => 'Open in Google Maps';
+
+  @override
+  String get rpDetails => 'Details';
+
+  @override
+  String get rpVoucherDetails => 'Voucher details';
+
+  @override
+  String get rpScanToOpenVoucher => 'Scan to open voucher details in app';
+
+  @override
+  String get rpReturnItems => 'Return items';
+
+  @override
+  String get rpBuyerAddressQr => 'Buyer address QR';
+
+  @override
+  String get rpScanToOpenMap => 'Scan to open location on maps';
+
+  @override
+  String get rpOpNumber => 'Operation #';
+
+  @override
+  String rpDateTimeFull(Object date) {
+    return 'Date & time: $date';
+  }
+
+  @override
+  String get rpDeliveryNote =>
+      'Delivery receipt — location via QR at bottom of page.';
+
+  @override
+  String rpAddress(Object address) {
+    return 'Address: $address';
+  }
+
+  @override
+  String get rpItem => 'Item';
+
+  @override
+  String get rpQuantity => 'Qty';
+
+  @override
+  String get rpPrice => 'Price';
+
+  @override
+  String get rpSubtotal => 'Subtotal';
+
+  @override
+  String rpSubtotalBeforeDiscount(Object amount) {
+    return 'Subtotal before discount: $amount IQD';
+  }
+
+  @override
+  String rpPercentDiscount(Object amount, Object percent) {
+    return 'Discount $percent%: $amount IQD';
+  }
+
+  @override
+  String rpFinalTotal(Object amount) {
+    return 'Final total: $amount IQD';
+  }
+
+  @override
+  String get rpInstallmentTable => 'Installment schedule (by due date)';
+
+  @override
+  String get rpDueDate => 'Due date';
+
+  @override
+  String get rpAmount => 'Amount';
+
+  @override
+  String get rpStatus => 'Status';
+
+  @override
+  String get rpPaidDate => 'Paid on';
+
+  @override
+  String get rpPaid => 'Paid';
+
+  @override
+  String get rpDue => 'Due';
+
+  @override
+  String get rpInstallmentReceipt => 'Installment payment receipt';
+
+  @override
+  String rpInstallmentPlanRef(Object id) {
+    return 'Installment plan #$id';
+  }
+
+  @override
+  String rpOriginalInvoice(Object id) {
+    return 'Original invoice #$id';
+  }
+
+  @override
+  String rpReceiptVoucher(Object id) {
+    return 'Receipt voucher (invoice list) #$id';
+  }
+
+  @override
+  String get rpPaidInstallments => 'Paid installments (chronological)';
+
+  @override
+  String get rpNoPaidInstallments => '— No installments paid yet —';
+
+  @override
+  String get rpRemainingInstallments => 'Remaining installments & due dates';
+
+  @override
+  String get rpAllInstallmentsPaid =>
+      'All installments for this plan have been paid.';
+
+  @override
+  String get rpScanToOpenInvoice => 'Scan to open invoice & items in app';
+
+  @override
+  String get rpPlanRef => 'Plan reference';
+
+  @override
+  String get rpDebtPaymentReceipt => 'Debt payment receipt';
+
+  @override
+  String get rpDebtDetailsAndPayments => 'Debt & payment details';
+
+  @override
+  String get rpScanToOpenDebtVoucher =>
+      'Scan to open collection voucher in app';
+
+  @override
+  String get rpPaymentRef => 'Payment reference';
+
+  @override
+  String rpRegisteredInCustomers(Object id) {
+    return 'Registered in customers #$id';
+  }
+
+  @override
+  String rpRecordedBy(Object name) {
+    return 'Recorded by: $name';
+  }
+
+  @override
+  String rpAmountPaidInThis(Object amount) {
+    return 'Amount paid this transaction: $amount IQD';
+  }
+
+  @override
+  String rpDebtBefore(Object amount) {
+    return 'Total debt before payment: $amount IQD';
+  }
+
+  @override
+  String rpDebtAfter(Object amount) {
+    return 'Remaining after payment: $amount IQD';
+  }
+
+  @override
+  String get rpAutoDistribute =>
+      'Payments are auto-distributed to credit invoices oldest first.';
+
+  @override
+  String rpPaymentRecord(Object id) {
+    return 'Payment record #$id';
+  }
+
+  @override
+  String get rpAllDebtPaid =>
+      'All credit debt for this customer has been settled.';
+
+  @override
+  String get rpSupplierPaymentReceipt => 'Supplier payment receipt';
+
+  @override
+  String rpPaidAmount(Object amount) {
+    return 'Amount paid: $amount IQD';
+  }
+
+  @override
+  String rpPayableBefore(Object amount) {
+    return 'Payable before payment: $amount IQD';
+  }
+
+  @override
+  String rpPayableAfter(Object amount) {
+    return 'Payable after payment: $amount IQD';
+  }
+
+  @override
+  String get rpDeductedFromCash => 'Amount deducted from cash drawer.';
+
+  @override
+  String get rpNotDeductedFromCash =>
+      'Not deducted from cash drawer (external/bank payment).';
+
+  @override
+  String rpNote(Object text) {
+    return 'Note: $text';
+  }
+
+  @override
+  String rpVoucherRecord(Object id) {
+    return 'Voucher record #$id';
+  }
+
+  @override
+  String rpInvoiceVoucher(Object id) {
+    return 'Invoice voucher #$id';
+  }
+
+  @override
+  String get rpClose => 'Close';
+
+  @override
+  String get rpSaleReceiptTitle => 'Sale receipt';
+
+  @override
+  String get rpFullInvoiceDetails => 'Full invoice details';
+
+  @override
+  String get rpNoPrinter =>
+      'No printer found. Please check printer connection.';
+
+  @override
+  String get rpNoPrinterFound =>
+      'No printer found. Please connect a printer to continue.';
+
+  @override
+  String get rpPrintError =>
+      'Direct printing failed. Please check your printer settings.';
+
+  @override
+  String rpInstallmentDetail(Object amount, Object date, Object number) {
+    return 'Installment #$number ($amount IQD) due on $date';
+  }
+
+  @override
+  String rpInstallmentLine(
+    Object amount,
+    Object date,
+    Object number,
+    Object paidStatus,
+  ) {
+    return 'Installment $number — $amount IQD — Due $date — $paidStatus';
+  }
+
+  @override
+  String rpDebtPaymentReceiptTitle(Object name) {
+    return 'Credit payment — $name';
+  }
+
+  @override
+  String get rpSupplierDefaultName => 'Supplier';
+
+  @override
+  String get rpCustomerDefaultName => 'Customer';
+
+  @override
+  String get rpRemainingInstallmentsReminder =>
+      'Remaining installments (due date reminders)';
+
+  @override
+  String rpReceiptItemsAmount(Object amount) {
+    return '$amount IQD';
+  }
+
+  @override
+  String rpInvoicePlanRef(Object id) {
+    return 'Installment plan #$id';
+  }
+
+  @override
+  String rpMonthCount(Object count) {
+    return 'Number of months: $count';
+  }
+
+  @override
+  String get rpTodayIndicator => '  (today\'s transaction)';
 }

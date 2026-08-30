@@ -1,6 +1,7 @@
 import 'dart:async' show unawaited;
 
 import 'package:flutter/material.dart';
+import '../../l10n/generated/app_localizations.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:provider/provider.dart';
 
@@ -202,6 +203,7 @@ class _CustomerDebtDetailScreenState extends State<CustomerDebtDetailScreen> {
       await SaleReceiptPdf.presentCustomerDebtPaymentReceipt(
         context,
         locale: Localizations.localeOf(context),
+        loc: AppLocalizations.of(context)!,
         customerDisplayName: p.displayName,
         customerId: p.customerId,
         amountApplied: res.amountApplied,

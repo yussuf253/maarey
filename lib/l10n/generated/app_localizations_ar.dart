@@ -9345,4 +9345,481 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get swPrevWeek => 'الأسبوع السابق';
+
+  @override
+  String get rpSaleReceipt => 'إيصال بيع';
+
+  @override
+  String rpOperationNumber(Object id) {
+    return 'رقم العملية: $id';
+  }
+
+  @override
+  String rpDateTime(Object date) {
+    return 'التاريخ: $date';
+  }
+
+  @override
+  String get rpCustomer => 'العميل';
+
+  @override
+  String rpCustomerWithValue(Object name) {
+    return 'العميل: $name';
+  }
+
+  @override
+  String get rpDeliveryReceipt =>
+      'إيصال توصيل — تفاصيل الموقع عبر الرمز أسفل الإيصال';
+
+  @override
+  String rpPaymentMethod(Object method) {
+    return 'طريقة الدفع: $method';
+  }
+
+  @override
+  String rpEmployee(Object name) {
+    return 'الموظف: $name';
+  }
+
+  @override
+  String get rpItems => 'الأصناف:';
+
+  @override
+  String rpBeforeDiscount(Object amount) {
+    return 'قبل الخصم: $amount دينار عراقي';
+  }
+
+  @override
+  String rpDiscount(Object amount) {
+    return 'الخصم: $amount د.ع';
+  }
+
+  @override
+  String rpTax(Object amount) {
+    return 'الضريبة: $amount د.ع';
+  }
+
+  @override
+  String rpLoyaltyDiscount(Object amount) {
+    return 'خصم ولاء: $amount د.ع';
+  }
+
+  @override
+  String rpTotal(Object amount) {
+    return 'الإجمالي: $amount د.ع';
+  }
+
+  @override
+  String rpBarcode(Object code) {
+    return 'رمز الشريط: $code';
+  }
+
+  @override
+  String rpItemLine(Object name, Object qty, Object total) {
+    return '• $name  |  العدد: $qty  |  $total';
+  }
+
+  @override
+  String rpMoreItems(Object count) {
+    return '… و$count صنفاً آخر (التفاصيل في النظام)';
+  }
+
+  @override
+  String get rpDeliveryShort => 'إيصال توصيل — رمز الموقع أسفل الإيصال';
+
+  @override
+  String rpPaymentShort(Object method) {
+    return 'الدفع: $method';
+  }
+
+  @override
+  String get rpCash => 'نقدي';
+
+  @override
+  String get rpCredit => 'دين';
+
+  @override
+  String get rpInstallment => 'تقسيط';
+
+  @override
+  String get rpDeliveryType => 'توصيل';
+
+  @override
+  String get rpCreditCollection => 'تحصيل دين';
+
+  @override
+  String get rpInstallmentPayment => 'تسديد قسط';
+
+  @override
+  String get rpSupplierPayment => 'دفع مورد';
+
+  @override
+  String get rpCreditSummary => 'ملخص البيع بالدين';
+
+  @override
+  String rpInvoiceTotal(Object amount) {
+    return 'الإجمالي على الفاتورة: $amount د.ع';
+  }
+
+  @override
+  String rpAmountPaid(Object amount) {
+    return 'الواصل (المدفوع الآن): $amount د.ع';
+  }
+
+  @override
+  String rpRemaining(Object amount) {
+    return 'المتبقي على الحساب: $amount د.ع';
+  }
+
+  @override
+  String get rpInstallmentSummary => 'ملخص التقسيط (سعر البيع والفائدة)';
+
+  @override
+  String rpSalePriceTotal(Object amount) {
+    return 'إجمالي الفاتورة (سعر البيع): $amount د.ع';
+  }
+
+  @override
+  String rpAdvancePayment(Object amount) {
+    return 'المقدّم / الدفعة الأولى: $amount د.ع';
+  }
+
+  @override
+  String rpFinancedAmount(Object amount) {
+    return 'المبلغ بعد المقدّم (أساس الفائدة): $amount د.ع';
+  }
+
+  @override
+  String rpInterestRate(Object rate) {
+    return 'نسبة الفائدة: $rate٪';
+  }
+
+  @override
+  String rpInterestValue(Object amount) {
+    return 'قيمة الفائدة: $amount د.ع';
+  }
+
+  @override
+  String rpTotalWithInterest(Object amount) {
+    return 'الإجمالي مع الفائدة: $amount د.ع';
+  }
+
+  @override
+  String rpPlannedMonths(Object count) {
+    return 'عدد الأشهر المخططة: $count';
+  }
+
+  @override
+  String rpSuggestedMonthly(Object amount) {
+    return 'القسط الشهري المقترح: $amount د.ع';
+  }
+
+  @override
+  String get rpInvoiceDetails => 'تفاصيل الفاتورة';
+
+  @override
+  String get rpScanToOpen => 'امسح لفتح التفاصيل في التطبيق';
+
+  @override
+  String get rpReceiptTextSummary => 'ملخص الإيصال كنص';
+
+  @override
+  String get rpDebtorProfile => 'ملف العميل المدين';
+
+  @override
+  String get rpDebtDetails => 'تفاصيل الدين';
+
+  @override
+  String get rpReceiptSummary => 'ملخص الإيصال';
+
+  @override
+  String get rpInstallmentPlan => 'خطة التقسيط';
+
+  @override
+  String get rpInstallmentSchedule => 'جدول الأقساط ومواعيد الاستحقاق';
+
+  @override
+  String get rpDeliveryMap => 'خريطة التوصيل';
+
+  @override
+  String get rpOpenInGoogleMaps => 'فتح في خرائط Google';
+
+  @override
+  String get rpDetails => 'تفاصيل';
+
+  @override
+  String get rpVoucherDetails => 'تفاصيل السند';
+
+  @override
+  String get rpScanToOpenVoucher => 'امسح لفتح تفاصيل السند في التطبيق';
+
+  @override
+  String get rpReturnItems => 'استرجاع المواد';
+
+  @override
+  String get rpBuyerAddressQr => 'QR عنوان المشتري';
+
+  @override
+  String get rpScanToOpenMap => 'امسح لفتح الموقع على الخرائط';
+
+  @override
+  String get rpOpNumber => 'رقم العملية';
+
+  @override
+  String rpDateTimeFull(Object date) {
+    return 'التاريخ والوقت: $date';
+  }
+
+  @override
+  String get rpDeliveryNote =>
+      'إيصال توصيل — تفاصيل الموقع عبر الرمز في أسفل الصفحة.';
+
+  @override
+  String rpAddress(Object address) {
+    return 'العنوان: $address';
+  }
+
+  @override
+  String get rpItem => 'الصنف';
+
+  @override
+  String get rpQuantity => 'الكمية';
+
+  @override
+  String get rpPrice => 'السعر';
+
+  @override
+  String get rpSubtotal => 'المجموع';
+
+  @override
+  String rpSubtotalBeforeDiscount(Object amount) {
+    return 'المجموع قبل الخصم: $amount د.ع';
+  }
+
+  @override
+  String rpPercentDiscount(Object amount, Object percent) {
+    return 'خصم $percent٪: $amount د.ع';
+  }
+
+  @override
+  String rpFinalTotal(Object amount) {
+    return 'الإجمالي النهائي: $amount د.ع';
+  }
+
+  @override
+  String get rpInstallmentTable => 'جدول الأقساط (حسب تاريخ الاستحقاق)';
+
+  @override
+  String get rpDueDate => 'الاستحقاق';
+
+  @override
+  String get rpAmount => 'المبلغ';
+
+  @override
+  String get rpStatus => 'الحالة';
+
+  @override
+  String get rpPaidDate => 'تاريخ التسديد';
+
+  @override
+  String get rpPaid => 'مسدد';
+
+  @override
+  String get rpDue => 'مستحق';
+
+  @override
+  String get rpInstallmentReceipt => 'إيصال تسديد قسط';
+
+  @override
+  String rpInstallmentPlanRef(Object id) {
+    return 'خطة التقسيط: #$id';
+  }
+
+  @override
+  String rpOriginalInvoice(Object id) {
+    return 'الفاتورة الأصلية: #$id';
+  }
+
+  @override
+  String rpReceiptVoucher(Object id) {
+    return 'سند القبض (قائمة الفواتير): #$id';
+  }
+
+  @override
+  String get rpPaidInstallments => 'الأقساط المسددة (بالترتيب الزمني للتسديد)';
+
+  @override
+  String get rpNoPaidInstallments => '— لا توجد أقساط مسددة بعد —';
+
+  @override
+  String get rpRemainingInstallments => 'الأقساط المتبقية ومواعيد الاستحقاق';
+
+  @override
+  String get rpAllInstallmentsPaid => 'اكتمل سداد جميع الأقساط لهذه الخطة.';
+
+  @override
+  String get rpScanToOpenInvoice =>
+      'امسح لفتح تفاصيل الفاتورة والأصناف في التطبيق';
+
+  @override
+  String get rpPlanRef => 'مرجع الخطة';
+
+  @override
+  String get rpDebtPaymentReceipt => 'إيصال تسديد دين آجل';
+
+  @override
+  String get rpDebtDetailsAndPayments => 'تفاصيل الدين والدفعات';
+
+  @override
+  String get rpScanToOpenDebtVoucher =>
+      'امسح لفتح تفاصيل سند التحصيل في التطبيق';
+
+  @override
+  String get rpPaymentRef => 'مرجع العملية';
+
+  @override
+  String rpRegisteredInCustomers(Object id) {
+    return 'مسجّل في العملاء: #$id';
+  }
+
+  @override
+  String rpRecordedBy(Object name) {
+    return 'سجّل العملية: $name';
+  }
+
+  @override
+  String rpAmountPaidInThis(Object amount) {
+    return 'المبلغ المُسدَّد في هذه العملية: $amount د.ع';
+  }
+
+  @override
+  String rpDebtBefore(Object amount) {
+    return 'إجمالي الدين قبل التسديد: $amount د.ع';
+  }
+
+  @override
+  String rpDebtAfter(Object amount) {
+    return 'المتبقي بعد التسديد: $amount د.ع';
+  }
+
+  @override
+  String get rpAutoDistribute =>
+      'تُوزَّع الدفعات تلقائياً على فواتير الآجل من الأقدم إلى الأحدث.';
+
+  @override
+  String rpPaymentRecord(Object id) {
+    return 'سجل الدفعة: #$id';
+  }
+
+  @override
+  String get rpAllDebtPaid => 'اكتمل سداد دين الآجل لهذا العميل.';
+
+  @override
+  String get rpSupplierPaymentReceipt => 'إيصال دفع مورد';
+
+  @override
+  String rpPaidAmount(Object amount) {
+    return 'المبلغ المدفوع: $amount د.ع';
+  }
+
+  @override
+  String rpPayableBefore(Object amount) {
+    return 'الذمة قبل الدفعة: $amount د.ع';
+  }
+
+  @override
+  String rpPayableAfter(Object amount) {
+    return 'الذمة بعد الدفعة: $amount د.ع';
+  }
+
+  @override
+  String get rpDeductedFromCash => 'تم خصم المبلغ من الصندوق.';
+
+  @override
+  String get rpNotDeductedFromCash =>
+      'لم يُخصم من الصندوق (دفع خارج النظام أو بنكي).';
+
+  @override
+  String rpNote(Object text) {
+    return 'ملاحظة: $text';
+  }
+
+  @override
+  String rpVoucherRecord(Object id) {
+    return 'سجل الدفعة: #$id';
+  }
+
+  @override
+  String rpInvoiceVoucher(Object id) {
+    return 'سند القائمة (فواتير): #$id';
+  }
+
+  @override
+  String get rpClose => 'إغلاق';
+
+  @override
+  String get rpSaleReceiptTitle => 'إيصال البيع';
+
+  @override
+  String get rpFullInvoiceDetails => 'تفاصيل الفاتورة كاملة';
+
+  @override
+  String get rpNoPrinter =>
+      'لم يتم العثور على طابعة متصلة بالجهاز. يرجى مراجعة توصيل الطابعة.';
+
+  @override
+  String get rpNoPrinterFound =>
+      'لم يتم العثور على أي طابعة متصلة بالجهاز. يرجى توصيل طابعة للمتابعة.';
+
+  @override
+  String get rpPrintError =>
+      'تعذر تشغيل الطباعة المباشرة. يرجى مراجعة إعدادات جهاز الطباعة لديك.';
+
+  @override
+  String rpInstallmentDetail(Object amount, Object date, Object number) {
+    return 'القسط رقم $number ($amount د.ع) مستحق في $date';
+  }
+
+  @override
+  String rpInstallmentLine(
+    Object amount,
+    Object date,
+    Object number,
+    Object paidStatus,
+  ) {
+    return 'القسط $number — $amount د.ع — استحق $date — سُدد $paidStatus';
+  }
+
+  @override
+  String rpDebtPaymentReceiptTitle(Object name) {
+    return 'تسديد دين آجل — $name';
+  }
+
+  @override
+  String get rpSupplierDefaultName => 'مورد';
+
+  @override
+  String get rpCustomerDefaultName => 'عميل';
+
+  @override
+  String get rpRemainingInstallmentsReminder =>
+      'الأقساط المتبقية (تذكير بالمواعيد)';
+
+  @override
+  String rpReceiptItemsAmount(Object amount) {
+    return '$amount د.ع';
+  }
+
+  @override
+  String rpInvoicePlanRef(Object id) {
+    return 'خطة تقسيط #$id';
+  }
+
+  @override
+  String rpMonthCount(Object count) {
+    return 'عدد الأشهر: $count';
+  }
+
+  @override
+  String get rpTodayIndicator => '  (عملية اليوم)';
 }

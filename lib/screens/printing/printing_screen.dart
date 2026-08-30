@@ -104,6 +104,7 @@ class _PrintingScreenState extends State<PrintingScreen> {
     await SaleReceiptPdf.presentReceipt(
       context,
         locale: Localizations.localeOf(context),
+        loc: AppLocalizations.of(context)!,
       invoice: sample,
       subtotalBeforeDiscount: 30000,
       printSettings: settings,

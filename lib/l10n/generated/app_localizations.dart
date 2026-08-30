@@ -16999,6 +16999,731 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'الأسبوع السابق'**
   String get swPrevWeek;
+
+  /// No description provided for @rpSaleReceipt.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيصال بيع'**
+  String get rpSaleReceipt;
+
+  /// No description provided for @rpOperationNumber.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم العملية: {id}'**
+  String rpOperationNumber(Object id);
+
+  /// No description provided for @rpDateTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ: {date}'**
+  String rpDateTime(Object date);
+
+  /// No description provided for @rpCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'العميل'**
+  String get rpCustomer;
+
+  /// No description provided for @rpCustomerWithValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'العميل: {name}'**
+  String rpCustomerWithValue(Object name);
+
+  /// No description provided for @rpDeliveryReceipt.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيصال توصيل — تفاصيل الموقع عبر الرمز أسفل الإيصال'**
+  String get rpDeliveryReceipt;
+
+  /// No description provided for @rpPaymentMethod.
+  ///
+  /// In ar, this message translates to:
+  /// **'طريقة الدفع: {method}'**
+  String rpPaymentMethod(Object method);
+
+  /// No description provided for @rpEmployee.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموظف: {name}'**
+  String rpEmployee(Object name);
+
+  /// No description provided for @rpItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأصناف:'**
+  String get rpItems;
+
+  /// No description provided for @rpBeforeDiscount.
+  ///
+  /// In ar, this message translates to:
+  /// **'قبل الخصم: {amount} دينار عراقي'**
+  String rpBeforeDiscount(Object amount);
+
+  /// No description provided for @rpDiscount.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخصم: {amount} د.ع'**
+  String rpDiscount(Object amount);
+
+  /// No description provided for @rpTax.
+  ///
+  /// In ar, this message translates to:
+  /// **'الضريبة: {amount} د.ع'**
+  String rpTax(Object amount);
+
+  /// No description provided for @rpLoyaltyDiscount.
+  ///
+  /// In ar, this message translates to:
+  /// **'خصم ولاء: {amount} د.ع'**
+  String rpLoyaltyDiscount(Object amount);
+
+  /// No description provided for @rpTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإجمالي: {amount} د.ع'**
+  String rpTotal(Object amount);
+
+  /// No description provided for @rpBarcode.
+  ///
+  /// In ar, this message translates to:
+  /// **'رمز الشريط: {code}'**
+  String rpBarcode(Object code);
+
+  /// No description provided for @rpItemLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'• {name}  |  العدد: {qty}  |  {total}'**
+  String rpItemLine(Object name, Object qty, Object total);
+
+  /// No description provided for @rpMoreItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'… و{count} صنفاً آخر (التفاصيل في النظام)'**
+  String rpMoreItems(Object count);
+
+  /// No description provided for @rpDeliveryShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيصال توصيل — رمز الموقع أسفل الإيصال'**
+  String get rpDeliveryShort;
+
+  /// No description provided for @rpPaymentShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدفع: {method}'**
+  String rpPaymentShort(Object method);
+
+  /// No description provided for @rpCash.
+  ///
+  /// In ar, this message translates to:
+  /// **'نقدي'**
+  String get rpCash;
+
+  /// No description provided for @rpCredit.
+  ///
+  /// In ar, this message translates to:
+  /// **'دين'**
+  String get rpCredit;
+
+  /// No description provided for @rpInstallment.
+  ///
+  /// In ar, this message translates to:
+  /// **'تقسيط'**
+  String get rpInstallment;
+
+  /// No description provided for @rpDeliveryType.
+  ///
+  /// In ar, this message translates to:
+  /// **'توصيل'**
+  String get rpDeliveryType;
+
+  /// No description provided for @rpCreditCollection.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحصيل دين'**
+  String get rpCreditCollection;
+
+  /// No description provided for @rpInstallmentPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسديد قسط'**
+  String get rpInstallmentPayment;
+
+  /// No description provided for @rpSupplierPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'دفع مورد'**
+  String get rpSupplierPayment;
+
+  /// No description provided for @rpCreditSummary.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخص البيع بالدين'**
+  String get rpCreditSummary;
+
+  /// No description provided for @rpInvoiceTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإجمالي على الفاتورة: {amount} د.ع'**
+  String rpInvoiceTotal(Object amount);
+
+  /// No description provided for @rpAmountPaid.
+  ///
+  /// In ar, this message translates to:
+  /// **'الواصل (المدفوع الآن): {amount} د.ع'**
+  String rpAmountPaid(Object amount);
+
+  /// No description provided for @rpRemaining.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتبقي على الحساب: {amount} د.ع'**
+  String rpRemaining(Object amount);
+
+  /// No description provided for @rpInstallmentSummary.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخص التقسيط (سعر البيع والفائدة)'**
+  String get rpInstallmentSummary;
+
+  /// No description provided for @rpSalePriceTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي الفاتورة (سعر البيع): {amount} د.ع'**
+  String rpSalePriceTotal(Object amount);
+
+  /// No description provided for @rpAdvancePayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'المقدّم / الدفعة الأولى: {amount} د.ع'**
+  String rpAdvancePayment(Object amount);
+
+  /// No description provided for @rpFinancedAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ بعد المقدّم (أساس الفائدة): {amount} د.ع'**
+  String rpFinancedAmount(Object amount);
+
+  /// No description provided for @rpInterestRate.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة الفائدة: {rate}٪'**
+  String rpInterestRate(Object rate);
+
+  /// No description provided for @rpInterestValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيمة الفائدة: {amount} د.ع'**
+  String rpInterestValue(Object amount);
+
+  /// No description provided for @rpTotalWithInterest.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإجمالي مع الفائدة: {amount} د.ع'**
+  String rpTotalWithInterest(Object amount);
+
+  /// No description provided for @rpPlannedMonths.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الأشهر المخططة: {count}'**
+  String rpPlannedMonths(Object count);
+
+  /// No description provided for @rpSuggestedMonthly.
+  ///
+  /// In ar, this message translates to:
+  /// **'القسط الشهري المقترح: {amount} د.ع'**
+  String rpSuggestedMonthly(Object amount);
+
+  /// No description provided for @rpInvoiceDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل الفاتورة'**
+  String get rpInvoiceDetails;
+
+  /// No description provided for @rpScanToOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'امسح لفتح التفاصيل في التطبيق'**
+  String get rpScanToOpen;
+
+  /// No description provided for @rpReceiptTextSummary.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخص الإيصال كنص'**
+  String get rpReceiptTextSummary;
+
+  /// No description provided for @rpDebtorProfile.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملف العميل المدين'**
+  String get rpDebtorProfile;
+
+  /// No description provided for @rpDebtDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل الدين'**
+  String get rpDebtDetails;
+
+  /// No description provided for @rpReceiptSummary.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخص الإيصال'**
+  String get rpReceiptSummary;
+
+  /// No description provided for @rpInstallmentPlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطة التقسيط'**
+  String get rpInstallmentPlan;
+
+  /// No description provided for @rpInstallmentSchedule.
+  ///
+  /// In ar, this message translates to:
+  /// **'جدول الأقساط ومواعيد الاستحقاق'**
+  String get rpInstallmentSchedule;
+
+  /// No description provided for @rpDeliveryMap.
+  ///
+  /// In ar, this message translates to:
+  /// **'خريطة التوصيل'**
+  String get rpDeliveryMap;
+
+  /// No description provided for @rpOpenInGoogleMaps.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح في خرائط Google'**
+  String get rpOpenInGoogleMaps;
+
+  /// No description provided for @rpDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل'**
+  String get rpDetails;
+
+  /// No description provided for @rpVoucherDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل السند'**
+  String get rpVoucherDetails;
+
+  /// No description provided for @rpScanToOpenVoucher.
+  ///
+  /// In ar, this message translates to:
+  /// **'امسح لفتح تفاصيل السند في التطبيق'**
+  String get rpScanToOpenVoucher;
+
+  /// No description provided for @rpReturnItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'استرجاع المواد'**
+  String get rpReturnItems;
+
+  /// No description provided for @rpBuyerAddressQr.
+  ///
+  /// In ar, this message translates to:
+  /// **'QR عنوان المشتري'**
+  String get rpBuyerAddressQr;
+
+  /// No description provided for @rpScanToOpenMap.
+  ///
+  /// In ar, this message translates to:
+  /// **'امسح لفتح الموقع على الخرائط'**
+  String get rpScanToOpenMap;
+
+  /// No description provided for @rpOpNumber.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم العملية'**
+  String get rpOpNumber;
+
+  /// No description provided for @rpDateTimeFull.
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ والوقت: {date}'**
+  String rpDateTimeFull(Object date);
+
+  /// No description provided for @rpDeliveryNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيصال توصيل — تفاصيل الموقع عبر الرمز في أسفل الصفحة.'**
+  String get rpDeliveryNote;
+
+  /// No description provided for @rpAddress.
+  ///
+  /// In ar, this message translates to:
+  /// **'العنوان: {address}'**
+  String rpAddress(Object address);
+
+  /// No description provided for @rpItem.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصنف'**
+  String get rpItem;
+
+  /// No description provided for @rpQuantity.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكمية'**
+  String get rpQuantity;
+
+  /// No description provided for @rpPrice.
+  ///
+  /// In ar, this message translates to:
+  /// **'السعر'**
+  String get rpPrice;
+
+  /// No description provided for @rpSubtotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'المجموع'**
+  String get rpSubtotal;
+
+  /// No description provided for @rpSubtotalBeforeDiscount.
+  ///
+  /// In ar, this message translates to:
+  /// **'المجموع قبل الخصم: {amount} د.ع'**
+  String rpSubtotalBeforeDiscount(Object amount);
+
+  /// No description provided for @rpPercentDiscount.
+  ///
+  /// In ar, this message translates to:
+  /// **'خصم {percent}٪: {amount} د.ع'**
+  String rpPercentDiscount(Object amount, Object percent);
+
+  /// No description provided for @rpFinalTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإجمالي النهائي: {amount} د.ع'**
+  String rpFinalTotal(Object amount);
+
+  /// No description provided for @rpInstallmentTable.
+  ///
+  /// In ar, this message translates to:
+  /// **'جدول الأقساط (حسب تاريخ الاستحقاق)'**
+  String get rpInstallmentTable;
+
+  /// No description provided for @rpDueDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاستحقاق'**
+  String get rpDueDate;
+
+  /// No description provided for @rpAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ'**
+  String get rpAmount;
+
+  /// No description provided for @rpStatus.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحالة'**
+  String get rpStatus;
+
+  /// No description provided for @rpPaidDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ التسديد'**
+  String get rpPaidDate;
+
+  /// No description provided for @rpPaid.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسدد'**
+  String get rpPaid;
+
+  /// No description provided for @rpDue.
+  ///
+  /// In ar, this message translates to:
+  /// **'مستحق'**
+  String get rpDue;
+
+  /// No description provided for @rpInstallmentReceipt.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيصال تسديد قسط'**
+  String get rpInstallmentReceipt;
+
+  /// No description provided for @rpInstallmentPlanRef.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطة التقسيط: #{id}'**
+  String rpInstallmentPlanRef(Object id);
+
+  /// No description provided for @rpOriginalInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفاتورة الأصلية: #{id}'**
+  String rpOriginalInvoice(Object id);
+
+  /// No description provided for @rpReceiptVoucher.
+  ///
+  /// In ar, this message translates to:
+  /// **'سند القبض (قائمة الفواتير): #{id}'**
+  String rpReceiptVoucher(Object id);
+
+  /// No description provided for @rpPaidInstallments.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأقساط المسددة (بالترتيب الزمني للتسديد)'**
+  String get rpPaidInstallments;
+
+  /// No description provided for @rpNoPaidInstallments.
+  ///
+  /// In ar, this message translates to:
+  /// **'— لا توجد أقساط مسددة بعد —'**
+  String get rpNoPaidInstallments;
+
+  /// No description provided for @rpRemainingInstallments.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأقساط المتبقية ومواعيد الاستحقاق'**
+  String get rpRemainingInstallments;
+
+  /// No description provided for @rpAllInstallmentsPaid.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتمل سداد جميع الأقساط لهذه الخطة.'**
+  String get rpAllInstallmentsPaid;
+
+  /// No description provided for @rpScanToOpenInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'امسح لفتح تفاصيل الفاتورة والأصناف في التطبيق'**
+  String get rpScanToOpenInvoice;
+
+  /// No description provided for @rpPlanRef.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرجع الخطة'**
+  String get rpPlanRef;
+
+  /// No description provided for @rpDebtPaymentReceipt.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيصال تسديد دين آجل'**
+  String get rpDebtPaymentReceipt;
+
+  /// No description provided for @rpDebtDetailsAndPayments.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل الدين والدفعات'**
+  String get rpDebtDetailsAndPayments;
+
+  /// No description provided for @rpScanToOpenDebtVoucher.
+  ///
+  /// In ar, this message translates to:
+  /// **'امسح لفتح تفاصيل سند التحصيل في التطبيق'**
+  String get rpScanToOpenDebtVoucher;
+
+  /// No description provided for @rpPaymentRef.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرجع العملية'**
+  String get rpPaymentRef;
+
+  /// No description provided for @rpRegisteredInCustomers.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسجّل في العملاء: #{id}'**
+  String rpRegisteredInCustomers(Object id);
+
+  /// No description provided for @rpRecordedBy.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل العملية: {name}'**
+  String rpRecordedBy(Object name);
+
+  /// No description provided for @rpAmountPaidInThis.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ المُسدَّد في هذه العملية: {amount} د.ع'**
+  String rpAmountPaidInThis(Object amount);
+
+  /// No description provided for @rpDebtBefore.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي الدين قبل التسديد: {amount} د.ع'**
+  String rpDebtBefore(Object amount);
+
+  /// No description provided for @rpDebtAfter.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتبقي بعد التسديد: {amount} د.ع'**
+  String rpDebtAfter(Object amount);
+
+  /// No description provided for @rpAutoDistribute.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُوزَّع الدفعات تلقائياً على فواتير الآجل من الأقدم إلى الأحدث.'**
+  String get rpAutoDistribute;
+
+  /// No description provided for @rpPaymentRecord.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل الدفعة: #{id}'**
+  String rpPaymentRecord(Object id);
+
+  /// No description provided for @rpAllDebtPaid.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتمل سداد دين الآجل لهذا العميل.'**
+  String get rpAllDebtPaid;
+
+  /// No description provided for @rpSupplierPaymentReceipt.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيصال دفع مورد'**
+  String get rpSupplierPaymentReceipt;
+
+  /// No description provided for @rpPaidAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ المدفوع: {amount} د.ع'**
+  String rpPaidAmount(Object amount);
+
+  /// No description provided for @rpPayableBefore.
+  ///
+  /// In ar, this message translates to:
+  /// **'الذمة قبل الدفعة: {amount} د.ع'**
+  String rpPayableBefore(Object amount);
+
+  /// No description provided for @rpPayableAfter.
+  ///
+  /// In ar, this message translates to:
+  /// **'الذمة بعد الدفعة: {amount} د.ع'**
+  String rpPayableAfter(Object amount);
+
+  /// No description provided for @rpDeductedFromCash.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم خصم المبلغ من الصندوق.'**
+  String get rpDeductedFromCash;
+
+  /// No description provided for @rpNotDeductedFromCash.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يُخصم من الصندوق (دفع خارج النظام أو بنكي).'**
+  String get rpNotDeductedFromCash;
+
+  /// No description provided for @rpNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة: {text}'**
+  String rpNote(Object text);
+
+  /// No description provided for @rpVoucherRecord.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل الدفعة: #{id}'**
+  String rpVoucherRecord(Object id);
+
+  /// No description provided for @rpInvoiceVoucher.
+  ///
+  /// In ar, this message translates to:
+  /// **'سند القائمة (فواتير): #{id}'**
+  String rpInvoiceVoucher(Object id);
+
+  /// No description provided for @rpClose.
+  ///
+  /// In ar, this message translates to:
+  /// **'إغلاق'**
+  String get rpClose;
+
+  /// No description provided for @rpSaleReceiptTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيصال البيع'**
+  String get rpSaleReceiptTitle;
+
+  /// No description provided for @rpFullInvoiceDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل الفاتورة كاملة'**
+  String get rpFullInvoiceDetails;
+
+  /// No description provided for @rpNoPrinter.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يتم العثور على طابعة متصلة بالجهاز. يرجى مراجعة توصيل الطابعة.'**
+  String get rpNoPrinter;
+
+  /// No description provided for @rpNoPrinterFound.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يتم العثور على أي طابعة متصلة بالجهاز. يرجى توصيل طابعة للمتابعة.'**
+  String get rpNoPrinterFound;
+
+  /// No description provided for @rpPrintError.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر تشغيل الطباعة المباشرة. يرجى مراجعة إعدادات جهاز الطباعة لديك.'**
+  String get rpPrintError;
+
+  /// No description provided for @rpInstallmentDetail.
+  ///
+  /// In ar, this message translates to:
+  /// **'القسط رقم {number} ({amount} د.ع) مستحق في {date}'**
+  String rpInstallmentDetail(Object amount, Object date, Object number);
+
+  /// No description provided for @rpInstallmentLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'القسط {number} — {amount} د.ع — استحق {date} — سُدد {paidStatus}'**
+  String rpInstallmentLine(
+    Object amount,
+    Object date,
+    Object number,
+    Object paidStatus,
+  );
+
+  /// No description provided for @rpDebtPaymentReceiptTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسديد دين آجل — {name}'**
+  String rpDebtPaymentReceiptTitle(Object name);
+
+  /// No description provided for @rpSupplierDefaultName.
+  ///
+  /// In ar, this message translates to:
+  /// **'مورد'**
+  String get rpSupplierDefaultName;
+
+  /// No description provided for @rpCustomerDefaultName.
+  ///
+  /// In ar, this message translates to:
+  /// **'عميل'**
+  String get rpCustomerDefaultName;
+
+  /// No description provided for @rpRemainingInstallmentsReminder.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأقساط المتبقية (تذكير بالمواعيد)'**
+  String get rpRemainingInstallmentsReminder;
+
+  /// No description provided for @rpReceiptItemsAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{amount} د.ع'**
+  String rpReceiptItemsAmount(Object amount);
+
+  /// No description provided for @rpInvoicePlanRef.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطة تقسيط #{id}'**
+  String rpInvoicePlanRef(Object id);
+
+  /// No description provided for @rpMonthCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الأشهر: {count}'**
+  String rpMonthCount(Object count);
+
+  /// No description provided for @rpTodayIndicator.
+  ///
+  /// In ar, this message translates to:
+  /// **'  (عملية اليوم)'**
+  String get rpTodayIndicator;
 }
 
 class _AppLocalizationsDelegate

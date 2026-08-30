@@ -183,6 +183,7 @@ class _InstallmentDetailsScreenState extends State<InstallmentDetailsScreen> {
         await SaleReceiptPdf.presentInstallmentPaymentReceipt(
           context,
         locale: Localizations.localeOf(context),
+        loc: AppLocalizations.of(context)!,
           plan: planAfter,
           justPaidInstallmentId: paidId,
           invoice: _invoice,
