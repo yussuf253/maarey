@@ -176,7 +176,7 @@ extension DbNotifications on DatabaseHelper {
     );
   }
 
-  /// عملاء (بمعرّف) مجموع ديونهم الآجلة المفتوحة ≥ [customerCap] (د.ع).
+  /// عملاء (بمعرّف) مجموع ديونهم الآجلة المفتوحة ≥ [customerCap] (Fdj).
   Future<List<Map<String, dynamic>>> getCreditDebtCustomerTotalCapBreaches({
     required int tenantId,
     required double customerCap,
@@ -235,7 +235,7 @@ extension DbNotifications on DatabaseHelper {
     );
   }
 
-  /// فواتير دين مفتوحة متبقياتها ≥ [perInvoiceCap] (د.ع).
+  /// فواتير دين مفتوحة متبقياتها ≥ [perInvoiceCap] (Fdj).
   Future<List<Map<String, dynamic>>> getCreditDebtInvoiceCapBreaches({
     required int tenantId,
     required double perInvoiceCap,

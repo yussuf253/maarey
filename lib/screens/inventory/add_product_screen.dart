@@ -40,7 +40,7 @@ import '../../widgets/variants/variant_size_picker_sheet.dart';
 import '../../navigation/app_route_observer.dart';
 
 const Color _kGreen = Color(0xFF15803D);
-const String _hintIqd = '0 IQD';
+const String _hintIqd = '0 FDJ';
 
 class _ExtraUnitVariantDraft {
   _ExtraUnitVariantDraft()

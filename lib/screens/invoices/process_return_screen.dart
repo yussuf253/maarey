@@ -1534,7 +1534,7 @@ class _ReturnSummaryPanel extends StatelessWidget {
   }
 }
 
-/// سطر داخل ملخص المرتجع: تسمية + قيمة بصيغة د.ع.
+/// سطر داخل ملخص المرتجع: تسمية + قيمة بصيغة Fdj.
 class _SummaryRow extends StatelessWidget {
   const _SummaryRow({
     required this.label,

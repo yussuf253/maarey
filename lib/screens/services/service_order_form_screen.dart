@@ -858,7 +858,7 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
                   child: TextFormField(
                     controller: _agreed,
                     decoration: const InputDecoration(
-                      labelText: 'السعر المتفق عليه (د.ع)',
+                      labelText: 'السعر المتفق عليه (Fdj)',
                       border: OutlineInputBorder(),
                       helperText: 'المكان الوحيد لتعديل السعر',
                     ),
@@ -884,7 +884,7 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
                   child: TextFormField(
                     controller: _advance,
                     decoration: const InputDecoration(
-                      labelText: 'عربون/دفعة مقدمة (د.ع)',
+                      labelText: 'عربون/دفعة مقدمة (Fdj)',
                       border: OutlineInputBorder(),
                     ),
                     keyboardType:

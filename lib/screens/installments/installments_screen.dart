@@ -418,7 +418,7 @@ class _InstallmentStatsBar extends StatelessWidget {
                     Expanded(
                       child: _InstStatChip(
                         label: 'متبقي الكل',
-                        value: '${_numFmt.format(totalDebt)} د.ع',
+                        value: '${_numFmt.format(totalDebt)} Fdj',
                         color: cs.primary,
                         icon: Icons.account_balance_wallet_outlined,
                         onTap: () => tabController.animateTo(0),
@@ -469,7 +469,7 @@ class _InstallmentStatsBar extends StatelessWidget {
             children: [
               _InstStatChip(
                 label: 'متبقي الكل',
-                value: '${_numFmt.format(totalDebt)} د.ع',
+                value: '${_numFmt.format(totalDebt)} Fdj',
                 color: cs.primary,
                 icon: Icons.account_balance_wallet_outlined,
                 onTap: () => tabController.animateTo(0),
@@ -916,7 +916,7 @@ class _PlanListTile extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'تقدّم السداد: ${_numFmt.format(plan.paidAmount)} / ${_numFmt.format(plan.totalAmount)} د.ع',
+                    'تقدّم السداد: ${_numFmt.format(plan.paidAmount)} / ${_numFmt.format(plan.totalAmount)} Fdj',
                     style: _planTextStyle(
                       context,
                       fontSize: 11,
@@ -944,7 +944,7 @@ class _PlanListTile extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '${_numFmt.format(rem)} د.ع',
+                              '${_numFmt.format(rem)} Fdj',
                               style: _planTextStyle(
                                 context,
                                 fontSize: 20,
@@ -961,7 +961,7 @@ class _PlanListTile extends StatelessWidget {
                       Expanded(
                         child: _AmountChip(
                           label: AppLocalizations.of(context)!.paidLabel,
-                          amount: '${_numFmt.format(plan.paidAmount)} د.ع',
+                          amount: '${_numFmt.format(plan.paidAmount)} Fdj',
                           labelColor: mutedC,
                           valueColor: titleC,
                         ),
@@ -969,7 +969,7 @@ class _PlanListTile extends StatelessWidget {
                       Expanded(
                         child: _AmountChip(
                           label: AppLocalizations.of(context)!.totalAmountLabel,
-                          amount: '${_numFmt.format(plan.totalAmount)} د.ع',
+                          amount: '${_numFmt.format(plan.totalAmount)} Fdj',
                           labelColor: mutedC,
                           valueColor: titleC,
                         ),
@@ -1035,7 +1035,7 @@ class _PlanListTile extends StatelessWidget {
                   if (nextDue != null && !settled) ...[
                     const SizedBox(height: 8),
                     Text(
-                      'القسط التالي: ${_numFmt.format(nextDue.amount)} د.ع — ${_dateFmt.format(nextDue.dueDate)}',
+                      'القسط التالي: ${_numFmt.format(nextDue.amount)} Fdj — ${_dateFmt.format(nextDue.dueDate)}',
                       style: _planTextStyle(
                         context,
                         fontSize: 12,

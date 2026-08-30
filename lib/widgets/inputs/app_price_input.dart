@@ -3,7 +3,7 @@ import '../../theme/erp_input_constants.dart';
 import '../../utils/iraqi_currency_format.dart';
 import '../../utils/numeric_format.dart';
 
-/// حقل سعر بدينار عراقي — «د.ع» لاحقة داخل الإطار، فواصل أثناء الكتابة، قيمًا صحيحة فقط بدون سالب أو كسر.
+/// حقل سعر بدينار عراقي — «Fdj» لاحقة داخل الإطار، فواصل أثناء الكتابة، قيمًا صحيحة فقط بدون سالب أو كسر.
 ///
 /// استدعاء [onParsedChanged] بقيمة [int] مُحمّاة قبل الحفظ.
 class AppPriceInput extends StatefulWidget {
@@ -11,7 +11,7 @@ class AppPriceInput extends StatefulWidget {
     super.key,
     required this.label,
     this.subtitle,
-    this.hint = '0 د.ع',
+    this.hint = '0 Fdj',
     required this.controller,
     this.focusNode,
     this.onParsedChanged,
@@ -154,7 +154,7 @@ class _AppPriceInputState extends State<AppPriceInput> {
       filled: true,
       fillColor: fill,
       hintText: widget.hint,
-      suffixText: 'د.ع',
+      suffixText: 'Fdj',
       suffixStyle:
           TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: cs.primary),
       hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(

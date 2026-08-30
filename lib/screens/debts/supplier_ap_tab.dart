@@ -191,7 +191,7 @@ class _SupplierApTabState extends State<SupplierApTab> {
                         ),
                         const SizedBox(height: 10),
                         Text(
-                          'إجمالي ما علينا للموردين: ${_numFmt.format(totalOpen)} د.ع',
+                          'إجمالي ما علينا للموردين: ${_numFmt.format(totalOpen)} Fdj',
                           style: TextStyle(
                             fontWeight: FontWeight.w800,
                             fontSize: 16,
@@ -367,7 +367,7 @@ class _SupplierApTabState extends State<SupplierApTab> {
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       Text(
-                                        '${_numFmt.format(s.openPayable)} د.ع',
+                                        '${_numFmt.format(s.openPayable)} Fdj',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w800,
                                           fontSize: 15,

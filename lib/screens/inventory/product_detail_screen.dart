@@ -190,9 +190,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   child: Column(
                     children: [
                       _kv(loc.availableQtyLabel, qty.toStringAsFixed(qty % 1 == 0 ? 0 : 2)),
-                      _kv(loc.salePrice, '${sell.toStringAsFixed(0)} د.ع'),
-                      _kv(loc.minSalePrice, '${minSell.toStringAsFixed(0)} د.ع'),
-                      _kv(loc.purchasePrice, '${buy.toStringAsFixed(0)} د.ع'),
+                      _kv(loc.salePrice, '${sell.toStringAsFixed(0)} Fdj'),
+                      _kv(loc.minSalePrice, '${minSell.toStringAsFixed(0)} Fdj'),
+                      _kv(loc.purchasePrice, '${buy.toStringAsFixed(0)} Fdj'),
                     ],
                   ),
                 ),

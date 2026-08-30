@@ -1225,7 +1225,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingStep2Example1.
   ///
   /// In ar, this message translates to:
-  /// **'مثال: كل 10,000 د.ع تمنح 10 نقاط حسب القاعدة التي تختارها.'**
+  /// **'مثال: كل 10,000 Fdj تمنح 10 نقاط حسب القاعدة التي تختارها.'**
   String get onboardingStep2Example1;
 
   /// No description provided for @onboardingStep2Example2.
@@ -1273,7 +1273,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingStep3Example1.
   ///
   /// In ar, this message translates to:
-  /// **'مثال: فاتورة قيمتها 100,000 د.ع وتضيف عليها نسبة ضريبة محددة.'**
+  /// **'مثال: فاتورة قيمتها 100,000 Fdj وتضيف عليها نسبة ضريبة محددة.'**
   String get onboardingStep3Example1;
 
   /// No description provided for @onboardingStep3Example2.
@@ -1315,7 +1315,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingStep4Example1.
   ///
   /// In ar, this message translates to:
-  /// **'مثال: تمنح خصماً عاماً 5,000 د.ع على فاتورة كبيرة.'**
+  /// **'مثال: تمنح خصماً عاماً 5,000 Fdj على فاتورة كبيرة.'**
   String get onboardingStep4Example1;
 
   /// No description provided for @onboardingStep4Example2.
@@ -1399,7 +1399,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingStep6Example1.
   ///
   /// In ar, this message translates to:
-  /// **'مثال: جهاز قيمته 600,000 د.ع يُدفع على 6 دفعات شهرية.'**
+  /// **'مثال: جهاز قيمته 600,000 Fdj يُدفع على 6 دفعات شهرية.'**
   String get onboardingStep6Example1;
 
   /// No description provided for @onboardingStep6Example2.
@@ -2135,7 +2135,7 @@ abstract class AppLocalizations {
   /// No description provided for @sellPriceIqd.
   ///
   /// In ar, this message translates to:
-  /// **'بيع {price} د.ع'**
+  /// **'بيع {price} Fdj'**
   String sellPriceIqd(Object price);
 
   /// No description provided for @viewCustomersLabel.
@@ -2255,7 +2255,7 @@ abstract class AppLocalizations {
   /// No description provided for @parkedSaleSummaryLine.
   ///
   /// In ar, this message translates to:
-  /// **'{count} صنف · ≈ {total} د.ع'**
+  /// **'{count} صنف · ≈ {total} Fdj'**
   String parkedSaleSummaryLine(Object count, Object total);
 
   /// No description provided for @lastUpdatedLabel.
@@ -2423,13 +2423,13 @@ abstract class AppLocalizations {
   /// No description provided for @totalIqd.
   ///
   /// In ar, this message translates to:
-  /// **'{amount} د.ع'**
+  /// **'{amount} Fdj'**
   String totalIqd(Object amount);
 
   /// No description provided for @itemsAndDiscountLine.
   ///
   /// In ar, this message translates to:
-  /// **'{count} صنف · خصم {discount} د.ع'**
+  /// **'{count} صنف · خصم {discount} Fdj'**
   String itemsAndDiscountLine(Object count, Object discount);
 
   /// No description provided for @shiftColonLabel.
@@ -3791,7 +3791,7 @@ abstract class AppLocalizations {
   /// No description provided for @currencyLabel.
   ///
   /// In ar, this message translates to:
-  /// **'د.ع'**
+  /// **'Fdj'**
   String get currencyLabel;
 
   /// No description provided for @perMonthLabel.
@@ -5249,7 +5249,7 @@ abstract class AppLocalizations {
   /// No description provided for @iqd.
   ///
   /// In ar, this message translates to:
-  /// **'د.ع'**
+  /// **'Fdj'**
   String get iqd;
 
   /// No description provided for @warehouseLabel.
@@ -6143,7 +6143,7 @@ abstract class AppLocalizations {
   /// No description provided for @priceFormat.
   ///
   /// In ar, this message translates to:
-  /// **'{price} د.ع'**
+  /// **'{price} Fdj'**
   String priceFormat(Object price);
 
   /// No description provided for @autoBarcodeNote.
@@ -7025,7 +7025,7 @@ abstract class AppLocalizations {
   /// No description provided for @quantityTimesPrice.
   ///
   /// In ar, this message translates to:
-  /// **'{qty} × {price} د.ع'**
+  /// **'{qty} × {price} Fdj'**
   String quantityTimesPrice(Object price, Object qty);
 
   /// No description provided for @itemsSubtotalLabel.
@@ -7127,7 +7127,7 @@ abstract class AppLocalizations {
   /// No description provided for @iqdCurrency.
   ///
   /// In ar, this message translates to:
-  /// **'د.ع'**
+  /// **'Fdj'**
   String get iqdCurrency;
 
   /// No description provided for @customerNameLabel.
@@ -7391,7 +7391,7 @@ abstract class AppLocalizations {
   /// No description provided for @taxAmountLabel.
   ///
   /// In ar, this message translates to:
-  /// **'مبلغ الضريبة (د.ع)'**
+  /// **'مبلغ الضريبة (Fdj)'**
   String get taxAmountLabel;
 
   /// No description provided for @discountSectionLabel.
@@ -7403,7 +7403,7 @@ abstract class AppLocalizations {
   /// No description provided for @advanceDownPaymentLabel.
   ///
   /// In ar, this message translates to:
-  /// **'المقدّم / الدفعة الأولى (د.ع)'**
+  /// **'المقدّم / الدفعة الأولى (Fdj)'**
   String get advanceDownPaymentLabel;
 
   /// No description provided for @advancePaymentHelper.
@@ -7433,7 +7433,7 @@ abstract class AppLocalizations {
   /// No description provided for @receivedAmountLabel.
   ///
   /// In ar, this message translates to:
-  /// **'المبلغ الواصل (د.ع)'**
+  /// **'المبلغ الواصل (Fdj)'**
   String get receivedAmountLabel;
 
   /// No description provided for @advanceDescription.
@@ -7913,7 +7913,7 @@ abstract class AppLocalizations {
   /// No description provided for @amountDueLabel.
   ///
   /// In ar, this message translates to:
-  /// **'المبلغ المستحق (د.ع)'**
+  /// **'المبلغ المستحق (Fdj)'**
   String get amountDueLabel;
 
   /// No description provided for @discountOnTotalSaleTitle.
@@ -8159,7 +8159,7 @@ abstract class AppLocalizations {
   /// No description provided for @iqdCurrencySymbol.
   ///
   /// In ar, this message translates to:
-  /// **'د.ع'**
+  /// **'Fdj'**
   String get iqdCurrencySymbol;
 
   /// No description provided for @grandTotalLabel.
@@ -10949,7 +10949,7 @@ abstract class AppLocalizations {
   /// No description provided for @expenseAmount.
   ///
   /// In ar, this message translates to:
-  /// **'المبلغ (د.ع)'**
+  /// **'المبلغ (Fdj)'**
   String get expenseAmount;
 
   /// No description provided for @expenseDate.
@@ -11639,7 +11639,7 @@ abstract class AppLocalizations {
   /// No description provided for @amountIQD.
   ///
   /// In ar, this message translates to:
-  /// **'المبلغ (د.ع)'**
+  /// **'المبلغ (Fdj)'**
   String get amountIQD;
 
   /// No description provided for @analysisAndMargin.
@@ -14831,7 +14831,7 @@ abstract class AppLocalizations {
   /// No description provided for @apFixedAmountDiscount.
   ///
   /// In ar, this message translates to:
-  /// **'عمولة / مبلغ (د.ع)'**
+  /// **'عمولة / مبلغ (Fdj)'**
   String get apFixedAmountDiscount;
 
   /// No description provided for @apDiscountValue.
@@ -15107,7 +15107,7 @@ abstract class AppLocalizations {
   /// No description provided for @aiLoyaltyDiscountLabel.
   ///
   /// In ar, this message translates to:
-  /// **'خصم الولاء: -{amount} د.ع'**
+  /// **'خصم الولاء: -{amount} Fdj'**
   String aiLoyaltyDiscountLabel(Object amount);
 
   /// No description provided for @aiSelectPaymentMethod.
@@ -16067,7 +16067,7 @@ abstract class AppLocalizations {
   /// No description provided for @lsPointsPerThousand.
   ///
   /// In ar, this message translates to:
-  /// **'نقاط لكل 1000 د.ع من صافي الفاتورة المؤهّل'**
+  /// **'نقاط لكل 1000 Fdj من صافي الفاتورة المؤهّل'**
   String get lsPointsPerThousand;
 
   /// No description provided for @lsRedemptionValue.
@@ -17057,31 +17057,31 @@ abstract class AppLocalizations {
   /// No description provided for @rpBeforeDiscount.
   ///
   /// In ar, this message translates to:
-  /// **'قبل الخصم: {amount} دينار عراقي'**
+  /// **'قبل الخصم: {amount} franc djiboutien'**
   String rpBeforeDiscount(Object amount);
 
   /// No description provided for @rpDiscount.
   ///
   /// In ar, this message translates to:
-  /// **'الخصم: {amount} د.ع'**
+  /// **'الخصم: {amount} Fdj'**
   String rpDiscount(Object amount);
 
   /// No description provided for @rpTax.
   ///
   /// In ar, this message translates to:
-  /// **'الضريبة: {amount} د.ع'**
+  /// **'الضريبة: {amount} Fdj'**
   String rpTax(Object amount);
 
   /// No description provided for @rpLoyaltyDiscount.
   ///
   /// In ar, this message translates to:
-  /// **'خصم ولاء: {amount} د.ع'**
+  /// **'خصم ولاء: {amount} Fdj'**
   String rpLoyaltyDiscount(Object amount);
 
   /// No description provided for @rpTotal.
   ///
   /// In ar, this message translates to:
-  /// **'الإجمالي: {amount} د.ع'**
+  /// **'الإجمالي: {amount} Fdj'**
   String rpTotal(Object amount);
 
   /// No description provided for @rpBarcode.
@@ -17165,19 +17165,19 @@ abstract class AppLocalizations {
   /// No description provided for @rpInvoiceTotal.
   ///
   /// In ar, this message translates to:
-  /// **'الإجمالي على الفاتورة: {amount} د.ع'**
+  /// **'الإجمالي على الفاتورة: {amount} Fdj'**
   String rpInvoiceTotal(Object amount);
 
   /// No description provided for @rpAmountPaid.
   ///
   /// In ar, this message translates to:
-  /// **'الواصل (المدفوع الآن): {amount} د.ع'**
+  /// **'الواصل (المدفوع الآن): {amount} Fdj'**
   String rpAmountPaid(Object amount);
 
   /// No description provided for @rpRemaining.
   ///
   /// In ar, this message translates to:
-  /// **'المتبقي على الحساب: {amount} د.ع'**
+  /// **'المتبقي على الحساب: {amount} Fdj'**
   String rpRemaining(Object amount);
 
   /// No description provided for @rpInstallmentSummary.
@@ -17189,19 +17189,19 @@ abstract class AppLocalizations {
   /// No description provided for @rpSalePriceTotal.
   ///
   /// In ar, this message translates to:
-  /// **'إجمالي الفاتورة (سعر البيع): {amount} د.ع'**
+  /// **'إجمالي الفاتورة (سعر البيع): {amount} Fdj'**
   String rpSalePriceTotal(Object amount);
 
   /// No description provided for @rpAdvancePayment.
   ///
   /// In ar, this message translates to:
-  /// **'المقدّم / الدفعة الأولى: {amount} د.ع'**
+  /// **'المقدّم / الدفعة الأولى: {amount} Fdj'**
   String rpAdvancePayment(Object amount);
 
   /// No description provided for @rpFinancedAmount.
   ///
   /// In ar, this message translates to:
-  /// **'المبلغ بعد المقدّم (أساس الفائدة): {amount} د.ع'**
+  /// **'المبلغ بعد المقدّم (أساس الفائدة): {amount} Fdj'**
   String rpFinancedAmount(Object amount);
 
   /// No description provided for @rpInterestRate.
@@ -17213,13 +17213,13 @@ abstract class AppLocalizations {
   /// No description provided for @rpInterestValue.
   ///
   /// In ar, this message translates to:
-  /// **'قيمة الفائدة: {amount} د.ع'**
+  /// **'قيمة الفائدة: {amount} Fdj'**
   String rpInterestValue(Object amount);
 
   /// No description provided for @rpTotalWithInterest.
   ///
   /// In ar, this message translates to:
-  /// **'الإجمالي مع الفائدة: {amount} د.ع'**
+  /// **'الإجمالي مع الفائدة: {amount} Fdj'**
   String rpTotalWithInterest(Object amount);
 
   /// No description provided for @rpPlannedMonths.
@@ -17231,7 +17231,7 @@ abstract class AppLocalizations {
   /// No description provided for @rpSuggestedMonthly.
   ///
   /// In ar, this message translates to:
-  /// **'القسط الشهري المقترح: {amount} د.ع'**
+  /// **'القسط الشهري المقترح: {amount} Fdj'**
   String rpSuggestedMonthly(Object amount);
 
   /// No description provided for @rpInvoiceDetails.
@@ -17381,19 +17381,19 @@ abstract class AppLocalizations {
   /// No description provided for @rpSubtotalBeforeDiscount.
   ///
   /// In ar, this message translates to:
-  /// **'المجموع قبل الخصم: {amount} د.ع'**
+  /// **'المجموع قبل الخصم: {amount} Fdj'**
   String rpSubtotalBeforeDiscount(Object amount);
 
   /// No description provided for @rpPercentDiscount.
   ///
   /// In ar, this message translates to:
-  /// **'خصم {percent}٪: {amount} د.ع'**
+  /// **'خصم {percent}٪: {amount} Fdj'**
   String rpPercentDiscount(Object amount, Object percent);
 
   /// No description provided for @rpFinalTotal.
   ///
   /// In ar, this message translates to:
-  /// **'الإجمالي النهائي: {amount} د.ع'**
+  /// **'الإجمالي النهائي: {amount} Fdj'**
   String rpFinalTotal(Object amount);
 
   /// No description provided for @rpInstallmentTable.
@@ -17537,19 +17537,19 @@ abstract class AppLocalizations {
   /// No description provided for @rpAmountPaidInThis.
   ///
   /// In ar, this message translates to:
-  /// **'المبلغ المُسدَّد في هذه العملية: {amount} د.ع'**
+  /// **'المبلغ المُسدَّد في هذه العملية: {amount} Fdj'**
   String rpAmountPaidInThis(Object amount);
 
   /// No description provided for @rpDebtBefore.
   ///
   /// In ar, this message translates to:
-  /// **'إجمالي الدين قبل التسديد: {amount} د.ع'**
+  /// **'إجمالي الدين قبل التسديد: {amount} Fdj'**
   String rpDebtBefore(Object amount);
 
   /// No description provided for @rpDebtAfter.
   ///
   /// In ar, this message translates to:
-  /// **'المتبقي بعد التسديد: {amount} د.ع'**
+  /// **'المتبقي بعد التسديد: {amount} Fdj'**
   String rpDebtAfter(Object amount);
 
   /// No description provided for @rpAutoDistribute.
@@ -17579,19 +17579,19 @@ abstract class AppLocalizations {
   /// No description provided for @rpPaidAmount.
   ///
   /// In ar, this message translates to:
-  /// **'المبلغ المدفوع: {amount} د.ع'**
+  /// **'المبلغ المدفوع: {amount} Fdj'**
   String rpPaidAmount(Object amount);
 
   /// No description provided for @rpPayableBefore.
   ///
   /// In ar, this message translates to:
-  /// **'الذمة قبل الدفعة: {amount} د.ع'**
+  /// **'الذمة قبل الدفعة: {amount} Fdj'**
   String rpPayableBefore(Object amount);
 
   /// No description provided for @rpPayableAfter.
   ///
   /// In ar, this message translates to:
-  /// **'الذمة بعد الدفعة: {amount} د.ع'**
+  /// **'الذمة بعد الدفعة: {amount} Fdj'**
   String rpPayableAfter(Object amount);
 
   /// No description provided for @rpDeductedFromCash.
@@ -17663,13 +17663,13 @@ abstract class AppLocalizations {
   /// No description provided for @rpInstallmentDetail.
   ///
   /// In ar, this message translates to:
-  /// **'القسط رقم {number} ({amount} د.ع) مستحق في {date}'**
+  /// **'القسط رقم {number} ({amount} Fdj) مستحق في {date}'**
   String rpInstallmentDetail(Object amount, Object date, Object number);
 
   /// No description provided for @rpInstallmentLine.
   ///
   /// In ar, this message translates to:
-  /// **'القسط {number} — {amount} د.ع — استحق {date} — سُدد {paidStatus}'**
+  /// **'القسط {number} — {amount} Fdj — استحق {date} — سُدد {paidStatus}'**
   String rpInstallmentLine(
     Object amount,
     Object date,
@@ -17704,7 +17704,7 @@ abstract class AppLocalizations {
   /// No description provided for @rpReceiptItemsAmount.
   ///
   /// In ar, this message translates to:
-  /// **'{amount} د.ع'**
+  /// **'{amount} Fdj'**
   String rpReceiptItemsAmount(Object amount);
 
   /// No description provided for @rpInvoicePlanRef.
@@ -18064,7 +18064,7 @@ abstract class AppLocalizations {
   /// No description provided for @npTotalLine.
   ///
   /// In ar, this message translates to:
-  /// **'الإجمالي: {total} د.ع — الواصل: {advance} د.ع — المتبقي: {remaining} د.ع'**
+  /// **'الإجمالي: {total} Fdj — الواصل: {advance} Fdj — المتبقي: {remaining} Fdj'**
   String npTotalLine(Object advance, Object remaining, Object total);
 
   /// No description provided for @npInstallmentPlanError.
@@ -18088,25 +18088,25 @@ abstract class AppLocalizations {
   /// No description provided for @npMonthlyEstimate.
   ///
   /// In ar, this message translates to:
-  /// **'قسط شهري تقريبي: {amount} د.ع'**
+  /// **'قسط شهري تقريبي: {amount} Fdj'**
   String npMonthlyEstimate(Object amount);
 
   /// No description provided for @npFinancedFromSale.
   ///
   /// In ar, this message translates to:
-  /// **'الممول من البيع: {amount} د.ع'**
+  /// **'الممول من البيع: {amount} Fdj'**
   String npFinancedFromSale(Object amount);
 
   /// No description provided for @npTotalWithInterest.
   ///
   /// In ar, this message translates to:
-  /// **'الإجمالي مع الفائدة (إن وُجدت): {amount} د.ع'**
+  /// **'الإجمالي مع الفائدة (إن وُجدت): {amount} Fdj'**
   String npTotalWithInterest(Object amount);
 
   /// No description provided for @npItemLine.
   ///
   /// In ar, this message translates to:
-  /// **'• {name} — #{pid} — {qty} — {total} د.ع'**
+  /// **'• {name} — #{pid} — {qty} — {total} Fdj'**
   String npItemLine(Object name, Object pid, Object qty, Object total);
 
   /// No description provided for @npMoreItemsInInvoice.
@@ -18160,7 +18160,7 @@ abstract class AppLocalizations {
   /// No description provided for @npCustomerDebtBody.
   ///
   /// In ar, this message translates to:
-  /// **'{name}{extra} — المتبقي {balance} د.ع (آجل غير المقسّط).'**
+  /// **'{name}{extra} — المتبقي {balance} Fdj (آجل غير المقسّط).'**
   String npCustomerDebtBody(Object balance, Object extra, Object name);
 
   /// No description provided for @npDebtAgeTitle.
@@ -18203,13 +18203,13 @@ abstract class AppLocalizations {
   /// No description provided for @npCustomerCapBody.
   ///
   /// In ar, this message translates to:
-  /// **'حسب إعدادات الدين: مجموع الآجل المفتوح لـ «{name}» {amount} د.ع (السقف {cap} د.ع).'**
+  /// **'حسب إعدادات الدين: مجموع الآجل المفتوح لـ «{name}» {amount} Fdj (السقف {cap} Fdj).'**
   String npCustomerCapBody(Object amount, Object cap, Object name);
 
   /// No description provided for @npCustomerCapBodyNoCard.
   ///
   /// In ar, this message translates to:
-  /// **'حسب إعدادات الدين (بدون بطاقة عميل): «{name}» — {amount} د.ع (السقف {cap} د.ع).'**
+  /// **'حسب إعدادات الدين (بدون بطاقة عميل): «{name}» — {amount} Fdj (السقف {cap} Fdj).'**
   String npCustomerCapBodyNoCard(Object amount, Object cap, Object name);
 
   /// No description provided for @npInvoiceCapTitle.
@@ -18221,7 +18221,7 @@ abstract class AppLocalizations {
   /// No description provided for @npInvoiceCapBody.
   ///
   /// In ar, this message translates to:
-  /// **'حسب إعدادات الدين: فاتورة #{id} — {customer} — المتبقي {remaining} د.ع (السقف {cap} د.ع) — تاريخ {date}.'**
+  /// **'حسب إعدادات الدين: فاتورة #{id} — {customer} — المتبقي {remaining} Fdj (السقف {cap} Fdj) — تاريخ {date}.'**
   String npInvoiceCapBody(
     Object cap,
     Object customer,
@@ -18340,7 +18340,7 @@ abstract class AppLocalizations {
   /// No description provided for @npReturnBody.
   ///
   /// In ar, this message translates to:
-  /// **'فاتورة مرتجعة #{id}{orig} — {customer} — {count} صنف — {total} د.ع'**
+  /// **'فاتورة مرتجعة #{id}{orig} — {customer} — {count} صنف — {total} Fdj'**
   String npReturnBody(
     Object count,
     Object customer,
@@ -18364,7 +18364,7 @@ abstract class AppLocalizations {
   /// No description provided for @npDailySummaryBody.
   ///
   /// In ar, this message translates to:
-  /// **'إجمالي فواتير البيع (بدون مرتجعات) لهذا اليوم: {total} د.ع'**
+  /// **'إجمالي فواتير البيع (بدون مرتجعات) لهذا اليوم: {total} Fdj'**
   String npDailySummaryBody(Object total);
 
   /// No description provided for @npLoggerNotifyFail.

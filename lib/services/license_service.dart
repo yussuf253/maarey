@@ -38,7 +38,7 @@ class SubscriptionPlan {
 
   String get priceLabel => isIntroTrialTier
       ? 'مجاناً — 15 يوماً'
-      : '${_fmt(priceIQD)} د.ع / شهر';
+      : '${_fmt(priceIQD)} Fdj / شهر';
 
   static String _fmt(int p) {
     final s = p.toString();

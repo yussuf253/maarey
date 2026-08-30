@@ -169,7 +169,7 @@ Widget _dialogMovementBullet(_CashTx t) {
           ),
           TextSpan(text: ' — $type$inv — '),
           TextSpan(
-            text: '$sign$amt د.ع',
+            text: '$sign$amt Fdj',
             style: TextStyle(fontWeight: FontWeight.w700, color: color),
           ),
           TextSpan(
@@ -395,11 +395,11 @@ Future<void> _showCashShiftDetailDialog(
                     children: [
                       _detailLine(
                         AppLocalizations.of(context)!.manualDepositReceipt,
-                        '${_numFmt.format(manualTotals.depositSum)} د.ع — ${manualTotals.depositCount} حركة',
+                        '${_numFmt.format(manualTotals.depositSum)} Fdj — ${manualTotals.depositCount} حركة',
                       ),
                       _detailLine(
                         AppLocalizations.of(context)!.manualWithdrawalReceipt,
-                        '${_numFmt.format(manualTotals.withdrawSum)} د.ع — ${manualTotals.withdrawCount} حركة',
+                        '${_numFmt.format(manualTotals.withdrawSum)} Fdj — ${manualTotals.withdrawCount} حركة',
                       ),
                     ],
                   ),
@@ -551,7 +551,7 @@ Widget _detailLine(String label, String value) {
 
 Widget _detailMoneyLine(String label, double? value) {
   if (value == null) return const SizedBox.shrink();
-  return _detailLine(label, '${_numFmt.format(value)} د.ع');
+  return _detailLine(label, '${_numFmt.format(value)} Fdj');
 }
 
 String _ledgerTypeLabelAr(String transactionType) {
@@ -894,7 +894,7 @@ class _BalanceCard extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            '${_numFmt.format(balance)} د.ع',
+            '${_numFmt.format(balance)} Fdj',
             style: const TextStyle(
               color: Colors.white,
               fontSize: 32,
@@ -967,7 +967,7 @@ class _MiniStat extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          '$value د.ع',
+          '$value Fdj',
           style: TextStyle(
             color: color,
             fontWeight: FontWeight.bold,
@@ -1191,7 +1191,7 @@ class _ShiftCashBreakdown {
   }
 
   String get summaryLine =>
-      'وارد ${_numFmt.format(wared)} د.ع  •  صادر ${_numFmt.format(sader)} د.ع  •  '
+      'وارد ${_numFmt.format(wared)} Fdj  •  صادر ${_numFmt.format(sader)} Fdj  •  '
       'إدخال $edkhalCount  •  إخراج $ikhrajCount  •  يدوي $manualCount  •  فواتير $invoiceLinkedCount';
 }
 
@@ -1605,7 +1605,7 @@ class _TxCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    '${isIn ? '+' : '-'}${_numFmt.format(tx.amount.abs())} د.ع',
+                    '${isIn ? '+' : '-'}${_numFmt.format(tx.amount.abs())} Fdj',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 14,

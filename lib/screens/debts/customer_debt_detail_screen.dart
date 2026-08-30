@@ -138,7 +138,7 @@ class _CustomerDebtDetailScreenState extends State<CustomerDebtDetailScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                'المتبقي الحالي: ${_numFmt.format(_openTotal)} د.ع',
+                'المتبقي الحالي: ${_numFmt.format(_openTotal)} Fdj',
                 style: const TextStyle(fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 12),
@@ -146,7 +146,7 @@ class _CustomerDebtDetailScreenState extends State<CustomerDebtDetailScreen> {
                 controller: ctrl,
                 keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
-                  labelText: 'المبلغ (د.ع)',
+                  labelText: 'المبلغ (Fdj)',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -371,7 +371,7 @@ class _SummaryHeader extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            '${_numFmt.format(openTotal)} د.ع',
+            '${_numFmt.format(openTotal)} Fdj',
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.w800,
@@ -465,7 +465,7 @@ class _InvoiceMiniTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      '${_numFmt.format(inv.remaining)} د.ع',
+                      '${_numFmt.format(inv.remaining)} Fdj',
                       style: TextStyle(
                         fontWeight: FontWeight.w800,
                         color: settled
@@ -555,7 +555,7 @@ class _ProductDebtTile extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                '${_numFmt.format(line.lineTotal)} د.ع',
+                '${_numFmt.format(line.lineTotal)} Fdj',
                 style: const TextStyle(fontWeight: FontWeight.w800),
               ),
             ],
@@ -597,7 +597,7 @@ class _PayBar extends StatelessWidget {
             icon: const Icon(Icons.payments_rounded),
             label: Text(
               enabled
-                  ? 'تسديد دين (متبقٍّ ${_numFmt.format(openTotal)} د.ع)'
+                  ? 'تسديد دين (متبقٍّ ${_numFmt.format(openTotal)} Fdj)'
                   : 'لا يوجد متبقٍ',
               style: const TextStyle(fontWeight: FontWeight.w700),
             ),

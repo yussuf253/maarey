@@ -491,14 +491,14 @@ class _ProductPriceTable extends StatelessWidget {
                 DataCell(Text(p.$1, style: const TextStyle(fontSize: 13))),
                 DataCell(
                   Text(
-                    '${p.$2.toInt()} د.ع',
+                    '${p.$2.toInt()} Fdj',
                     style: const TextStyle(fontSize: 13, color: _t2),
                   ),
                 ),
                 // Retail: +30%
                 DataCell(
                   Text(
-                    '${(p.$2 * 1.30).toInt()} د.ع',
+                    '${(p.$2 * 1.30).toInt()} Fdj',
                     style: const TextStyle(
                       fontSize: 13,
                       color: _blue,
@@ -509,7 +509,7 @@ class _ProductPriceTable extends StatelessWidget {
                 // Wholesale: +15%
                 DataCell(
                   Text(
-                    '${(p.$2 * 1.15).toInt()} د.ع',
+                    '${(p.$2 * 1.15).toInt()} Fdj',
                     style: const TextStyle(
                       fontSize: 13,
                       color: _green,
@@ -520,7 +520,7 @@ class _ProductPriceTable extends StatelessWidget {
                 // VIP: +20%
                 DataCell(
                   Text(
-                    '${(p.$2 * 1.20).toInt()} د.ع',
+                    '${(p.$2 * 1.20).toInt()} Fdj',
                     style: const TextStyle(
                       fontSize: 13,
                       color: _purple,
@@ -676,7 +676,7 @@ class _PriceItemsSheet extends StatelessWidget {
                         Expanded(
                           flex: 3,
                           child: Text(
-                            '${item.$2} د.ع',
+                            '${item.$2} Fdj',
                             style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.bold,
@@ -688,7 +688,7 @@ class _PriceItemsSheet extends StatelessWidget {
                         Expanded(
                           flex: 3,
                           child: Text(
-                            '${item.$3} د.ع',
+                            '${item.$3} Fdj',
                             style: const TextStyle(fontSize: 12, color: _t2),
                             textAlign: TextAlign.center,
                           ),

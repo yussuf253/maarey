@@ -232,7 +232,7 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
                       child: TextField(
                         controller: priceCtrl,
                         keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                        decoration: const InputDecoration(labelText: 'سعر البيع (د.ع)'),
+                        decoration: const InputDecoration(labelText: 'سعر البيع (Fdj)'),
                         textDirection: TextDirection.ltr,
                         textAlign: TextAlign.start,
                       ),

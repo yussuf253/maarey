@@ -340,9 +340,9 @@ class ExpenseReportPrinter {
 
     return pw.Row(
       children: [
-        box('الإجمالي', '${_moneyFmt.format(total)} د.ع', color: PdfColors.indigo900),
-        box('المدفوع', '${_moneyFmt.format(paid)} د.ع', color: PdfColors.green800),
-        box('المعلق', '${_moneyFmt.format(pending)} د.ع', color: PdfColors.amber900),
+        box('الإجمالي', '${_moneyFmt.format(total)} Fdj', color: PdfColors.indigo900),
+        box('المدفوع', '${_moneyFmt.format(paid)} Fdj', color: PdfColors.green800),
+        box('المعلق', '${_moneyFmt.format(pending)} Fdj', color: PdfColors.amber900),
         box('عدد العمليات', '$count'),
       ],
     );
@@ -375,7 +375,7 @@ class ExpenseReportPrinter {
           pw.TableRow(children: [
             _pdfCell(key),
             _pdfCell(
-              '${_moneyFmt.format(byCategory[key]!.fold<double>(0, (s, e) => s + e.amount))} د.ع',
+              '${_moneyFmt.format(byCategory[key]!.fold<double>(0, (s, e) => s + e.amount))} Fdj',
               ltr: true,
             ),
             _pdfCell(
@@ -438,7 +438,7 @@ class ExpenseReportPrinter {
         for (final e in list)
           pw.TableRow(children: [
             _pdfCell(_dateFmt.format(e.occurredAt), ltr: true),
-            _pdfCell('${_moneyFmt.format(e.amount)} د.ع', ltr: true),
+            _pdfCell('${_moneyFmt.format(e.amount)} Fdj', ltr: true),
             _pdfCell(e.description.isEmpty ? '-' : e.description),
           ]),
       ],
@@ -468,7 +468,7 @@ class ExpenseReportPrinter {
           pw.TableRow(children: [
             _pdfCell(e.employeeName.isEmpty ? '-' : e.employeeName),
             _pdfCell(_dateFmt.format(e.occurredAt), ltr: true),
-            _pdfCell('${_moneyFmt.format(e.amount)} د.ع', ltr: true),
+            _pdfCell('${_moneyFmt.format(e.amount)} Fdj', ltr: true),
             _pdfCell(e.description.isEmpty ? '-' : e.description),
           ]),
       ],
@@ -495,7 +495,7 @@ class ExpenseReportPrinter {
         for (final e in list)
           pw.TableRow(children: [
             _pdfCell(_dateFmt.format(e.occurredAt), ltr: true),
-            _pdfCell('${_moneyFmt.format(e.amount)} د.ع', ltr: true),
+            _pdfCell('${_moneyFmt.format(e.amount)} Fdj', ltr: true),
             _pdfCell(
               e.description.isEmpty
                   ? 'بدون تعليق - يُنصح بإضافة سبب الصرف.'

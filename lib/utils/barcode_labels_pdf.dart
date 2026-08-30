@@ -132,8 +132,8 @@ class BarcodeLabelsPdf {
                 if (showPrice)
                   pw.Text(
                     isWeight
-                        ? '${_fmtIqd(price)} د.ع/كغم'
-                        : '${_fmtIqd(price)} د.ع',
+                        ? '${_fmtIqd(price)} Fdj/كغم'
+                        : '${_fmtIqd(price)} Fdj',
                     style: smallStyle,
                     textDirection: pw.TextDirection.rtl,
                   ),

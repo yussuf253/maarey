@@ -644,7 +644,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get onboardingStep2Example1 =>
-      'مثال: كل 10,000 د.ع تمنح 10 نقاط حسب القاعدة التي تختارها.';
+      'مثال: كل 10,000 Fdj تمنح 10 نقاط حسب القاعدة التي تختارها.';
 
   @override
   String get onboardingStep2Example2 =>
@@ -674,7 +674,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get onboardingStep3Example1 =>
-      'مثال: فاتورة قيمتها 100,000 د.ع وتضيف عليها نسبة ضريبة محددة.';
+      'مثال: فاتورة قيمتها 100,000 Fdj وتضيف عليها نسبة ضريبة محددة.';
 
   @override
   String get onboardingStep3Example2 =>
@@ -700,7 +700,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get onboardingStep4Example1 =>
-      'مثال: تمنح خصماً عاماً 5,000 د.ع على فاتورة كبيرة.';
+      'مثال: تمنح خصماً عاماً 5,000 Fdj على فاتورة كبيرة.';
 
   @override
   String get onboardingStep4Example2 =>
@@ -752,7 +752,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get onboardingStep6Example1 =>
-      'مثال: جهاز قيمته 600,000 د.ع يُدفع على 6 دفعات شهرية.';
+      'مثال: جهاز قيمته 600,000 Fdj يُدفع على 6 دفعات شهرية.';
 
   @override
   String get onboardingStep6Example2 =>
@@ -1155,7 +1155,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String sellPriceIqd(Object price) {
-    return 'بيع $price د.ع';
+    return 'بيع $price Fdj';
   }
 
   @override
@@ -1224,7 +1224,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String parkedSaleSummaryLine(Object count, Object total) {
-    return '$count صنف · ≈ $total د.ع';
+    return '$count صنف · ≈ $total Fdj';
   }
 
   @override
@@ -1323,12 +1323,12 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String totalIqd(Object amount) {
-    return '$amount د.ع';
+    return '$amount Fdj';
   }
 
   @override
   String itemsAndDiscountLine(Object count, Object discount) {
-    return '$count صنف · خصم $discount د.ع';
+    return '$count صنف · خصم $discount Fdj';
   }
 
   @override
@@ -2051,7 +2051,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get trialDaysLabel => '15 يوماً';
 
   @override
-  String get currencyLabel => 'د.ع';
+  String get currencyLabel => 'Fdj';
 
   @override
   String get perMonthLabel => 'شهرياً';
@@ -2835,7 +2835,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get items => 'صنف';
 
   @override
-  String get iqd => 'د.ع';
+  String get iqd => 'Fdj';
 
   @override
   String get warehouseLabel => 'المستودع';
@@ -3353,7 +3353,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String priceFormat(Object price) {
-    return '$price د.ع';
+    return '$price Fdj';
   }
 
   @override
@@ -3828,7 +3828,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String quantityTimesPrice(Object price, Object qty) {
-    return '$qty × $price د.ع';
+    return '$qty × $price Fdj';
   }
 
   @override
@@ -3882,7 +3882,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get invoiceNotFoundMsg => 'الفاتورة غير موجودة';
 
   @override
-  String get iqdCurrency => 'د.ع';
+  String get iqdCurrency => 'Fdj';
 
   @override
   String get customerNameLabel => 'اسم العميل';
@@ -4052,13 +4052,13 @@ class AppLocalizationsAr extends AppLocalizations {
       'أدخل مبلغ الضريبة بالدينار إن وُجد؛ يُضاف إلى المجموع بعد خصم الفاتورة.';
 
   @override
-  String get taxAmountLabel => 'مبلغ الضريبة (د.ع)';
+  String get taxAmountLabel => 'مبلغ الضريبة (Fdj)';
 
   @override
   String get discountSectionLabel => 'خصم الفاتورة';
 
   @override
-  String get advanceDownPaymentLabel => 'المقدّم / الدفعة الأولى (د.ع)';
+  String get advanceDownPaymentLabel => 'المقدّم / الدفعة الأولى (Fdj)';
 
   @override
   String get advancePaymentHelper =>
@@ -4074,7 +4074,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get numberOfMonthsLabel => 'عدد الأشهر';
 
   @override
-  String get receivedAmountLabel => 'المبلغ الواصل (د.ع)';
+  String get receivedAmountLabel => 'المبلغ الواصل (Fdj)';
 
   @override
   String get advanceDescription =>
@@ -4359,7 +4359,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get deleteReturnConfirm => 'هل أنت متأكد من حذف هذا المرتجع؟';
 
   @override
-  String get amountDueLabel => 'المبلغ المستحق (د.ع)';
+  String get amountDueLabel => 'المبلغ المستحق (Fdj)';
 
   @override
   String get discountOnTotalSaleTitle => 'خصم الفاتورة';
@@ -4512,7 +4512,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get subtotalAfterDiscountLabel => 'المجموع بعد الخصم (قبل الضريبة)';
 
   @override
-  String get iqdCurrencySymbol => 'د.ع';
+  String get iqdCurrencySymbol => 'Fdj';
 
   @override
   String get grandTotalLabel => 'الإجمالي النهائي';
@@ -6040,7 +6040,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get expenseDescription => 'الوصف';
 
   @override
-  String get expenseAmount => 'المبلغ (د.ع)';
+  String get expenseAmount => 'المبلغ (Fdj)';
 
   @override
   String get expenseDate => 'التاريخ';
@@ -6425,7 +6425,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get amountAddedAtOpen => 'المبلغ المُضاف عند الفتح';
 
   @override
-  String get amountIQD => 'المبلغ (د.ع)';
+  String get amountIQD => 'المبلغ (Fdj)';
 
   @override
   String get analysisAndMargin => 'تحليل وهامش';
@@ -8101,7 +8101,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get apPercentDiscount => 'نسبة مئوية (٪)';
 
   @override
-  String get apFixedAmountDiscount => 'عمولة / مبلغ (د.ع)';
+  String get apFixedAmountDiscount => 'عمولة / مبلغ (Fdj)';
 
   @override
   String get apDiscountValue => 'قيمة الخصم';
@@ -8264,7 +8264,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String aiLoyaltyDiscountLabel(Object amount) {
-    return 'خصم الولاء: -$amount د.ع';
+    return 'خصم الولاء: -$amount Fdj';
   }
 
   @override
@@ -8840,7 +8840,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get lsPointsPerThousand =>
-      'نقاط لكل 1000 د.ع من صافي الفاتورة المؤهّل';
+      'نقاط لكل 1000 Fdj من صافي الفاتورة المؤهّل';
 
   @override
   String get lsRedemptionValue => 'قيمة الخصم بالدينار لكل نقطة عند الاستبدال';
@@ -9386,27 +9386,27 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String rpBeforeDiscount(Object amount) {
-    return 'قبل الخصم: $amount دينار عراقي';
+    return 'قبل الخصم: $amount franc djiboutien';
   }
 
   @override
   String rpDiscount(Object amount) {
-    return 'الخصم: $amount د.ع';
+    return 'الخصم: $amount Fdj';
   }
 
   @override
   String rpTax(Object amount) {
-    return 'الضريبة: $amount د.ع';
+    return 'الضريبة: $amount Fdj';
   }
 
   @override
   String rpLoyaltyDiscount(Object amount) {
-    return 'خصم ولاء: $amount د.ع';
+    return 'خصم ولاء: $amount Fdj';
   }
 
   @override
   String rpTotal(Object amount) {
-    return 'الإجمالي: $amount د.ع';
+    return 'الإجمالي: $amount Fdj';
   }
 
   @override
@@ -9458,17 +9458,17 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String rpInvoiceTotal(Object amount) {
-    return 'الإجمالي على الفاتورة: $amount د.ع';
+    return 'الإجمالي على الفاتورة: $amount Fdj';
   }
 
   @override
   String rpAmountPaid(Object amount) {
-    return 'الواصل (المدفوع الآن): $amount د.ع';
+    return 'الواصل (المدفوع الآن): $amount Fdj';
   }
 
   @override
   String rpRemaining(Object amount) {
-    return 'المتبقي على الحساب: $amount د.ع';
+    return 'المتبقي على الحساب: $amount Fdj';
   }
 
   @override
@@ -9476,17 +9476,17 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String rpSalePriceTotal(Object amount) {
-    return 'إجمالي الفاتورة (سعر البيع): $amount د.ع';
+    return 'إجمالي الفاتورة (سعر البيع): $amount Fdj';
   }
 
   @override
   String rpAdvancePayment(Object amount) {
-    return 'المقدّم / الدفعة الأولى: $amount د.ع';
+    return 'المقدّم / الدفعة الأولى: $amount Fdj';
   }
 
   @override
   String rpFinancedAmount(Object amount) {
-    return 'المبلغ بعد المقدّم (أساس الفائدة): $amount د.ع';
+    return 'المبلغ بعد المقدّم (أساس الفائدة): $amount Fdj';
   }
 
   @override
@@ -9496,12 +9496,12 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String rpInterestValue(Object amount) {
-    return 'قيمة الفائدة: $amount د.ع';
+    return 'قيمة الفائدة: $amount Fdj';
   }
 
   @override
   String rpTotalWithInterest(Object amount) {
-    return 'الإجمالي مع الفائدة: $amount د.ع';
+    return 'الإجمالي مع الفائدة: $amount Fdj';
   }
 
   @override
@@ -9511,7 +9511,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String rpSuggestedMonthly(Object amount) {
-    return 'القسط الشهري المقترح: $amount د.ع';
+    return 'القسط الشهري المقترح: $amount Fdj';
   }
 
   @override
@@ -9593,17 +9593,17 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String rpSubtotalBeforeDiscount(Object amount) {
-    return 'المجموع قبل الخصم: $amount د.ع';
+    return 'المجموع قبل الخصم: $amount Fdj';
   }
 
   @override
   String rpPercentDiscount(Object amount, Object percent) {
-    return 'خصم $percent٪: $amount د.ع';
+    return 'خصم $percent٪: $amount Fdj';
   }
 
   @override
   String rpFinalTotal(Object amount) {
-    return 'الإجمالي النهائي: $amount د.ع';
+    return 'الإجمالي النهائي: $amount Fdj';
   }
 
   @override
@@ -9689,17 +9689,17 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String rpAmountPaidInThis(Object amount) {
-    return 'المبلغ المُسدَّد في هذه العملية: $amount د.ع';
+    return 'المبلغ المُسدَّد في هذه العملية: $amount Fdj';
   }
 
   @override
   String rpDebtBefore(Object amount) {
-    return 'إجمالي الدين قبل التسديد: $amount د.ع';
+    return 'إجمالي الدين قبل التسديد: $amount Fdj';
   }
 
   @override
   String rpDebtAfter(Object amount) {
-    return 'المتبقي بعد التسديد: $amount د.ع';
+    return 'المتبقي بعد التسديد: $amount Fdj';
   }
 
   @override
@@ -9719,17 +9719,17 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String rpPaidAmount(Object amount) {
-    return 'المبلغ المدفوع: $amount د.ع';
+    return 'المبلغ المدفوع: $amount Fdj';
   }
 
   @override
   String rpPayableBefore(Object amount) {
-    return 'الذمة قبل الدفعة: $amount د.ع';
+    return 'الذمة قبل الدفعة: $amount Fdj';
   }
 
   @override
   String rpPayableAfter(Object amount) {
-    return 'الذمة بعد الدفعة: $amount د.ع';
+    return 'الذمة بعد الدفعة: $amount Fdj';
   }
 
   @override
@@ -9777,7 +9777,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String rpInstallmentDetail(Object amount, Object date, Object number) {
-    return 'القسط رقم $number ($amount د.ع) مستحق في $date';
+    return 'القسط رقم $number ($amount Fdj) مستحق في $date';
   }
 
   @override
@@ -9787,7 +9787,7 @@ class AppLocalizationsAr extends AppLocalizations {
     Object number,
     Object paidStatus,
   ) {
-    return 'القسط $number — $amount د.ع — استحق $date — سُدد $paidStatus';
+    return 'القسط $number — $amount Fdj — استحق $date — سُدد $paidStatus';
   }
 
   @override
@@ -9807,7 +9807,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String rpReceiptItemsAmount(Object amount) {
-    return '$amount د.ع';
+    return '$amount Fdj';
   }
 
   @override
@@ -10015,7 +10015,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String npTotalLine(Object advance, Object remaining, Object total) {
-    return 'الإجمالي: $total د.ع — الواصل: $advance د.ع — المتبقي: $remaining د.ع';
+    return 'الإجمالي: $total Fdj — الواصل: $advance Fdj — المتبقي: $remaining Fdj';
   }
 
   @override
@@ -10034,22 +10034,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String npMonthlyEstimate(Object amount) {
-    return 'قسط شهري تقريبي: $amount د.ع';
+    return 'قسط شهري تقريبي: $amount Fdj';
   }
 
   @override
   String npFinancedFromSale(Object amount) {
-    return 'الممول من البيع: $amount د.ع';
+    return 'الممول من البيع: $amount Fdj';
   }
 
   @override
   String npTotalWithInterest(Object amount) {
-    return 'الإجمالي مع الفائدة (إن وُجدت): $amount د.ع';
+    return 'الإجمالي مع الفائدة (إن وُجدت): $amount Fdj';
   }
 
   @override
   String npItemLine(Object name, Object pid, Object qty, Object total) {
-    return '• $name — #$pid — $qty — $total د.ع';
+    return '• $name — #$pid — $qty — $total Fdj';
   }
 
   @override
@@ -10084,7 +10084,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String npCustomerDebtBody(Object balance, Object extra, Object name) {
-    return '$name$extra — المتبقي $balance د.ع (آجل غير المقسّط).';
+    return '$name$extra — المتبقي $balance Fdj (آجل غير المقسّط).';
   }
 
   @override
@@ -10113,12 +10113,12 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String npCustomerCapBody(Object amount, Object cap, Object name) {
-    return 'حسب إعدادات الدين: مجموع الآجل المفتوح لـ «$name» $amount د.ع (السقف $cap د.ع).';
+    return 'حسب إعدادات الدين: مجموع الآجل المفتوح لـ «$name» $amount Fdj (السقف $cap Fdj).';
   }
 
   @override
   String npCustomerCapBodyNoCard(Object amount, Object cap, Object name) {
-    return 'حسب إعدادات الدين (بدون بطاقة عميل): «$name» — $amount د.ع (السقف $cap د.ع).';
+    return 'حسب إعدادات الدين (بدون بطاقة عميل): «$name» — $amount Fdj (السقف $cap Fdj).';
   }
 
   @override
@@ -10132,7 +10132,7 @@ class AppLocalizationsAr extends AppLocalizations {
     Object id,
     Object remaining,
   ) {
-    return 'حسب إعدادات الدين: فاتورة #$id — $customer — المتبقي $remaining د.ع (السقف $cap د.ع) — تاريخ $date.';
+    return 'حسب إعدادات الدين: فاتورة #$id — $customer — المتبقي $remaining Fdj (السقف $cap Fdj) — تاريخ $date.';
   }
 
   @override
@@ -10211,7 +10211,7 @@ class AppLocalizationsAr extends AppLocalizations {
     Object orig,
     Object total,
   ) {
-    return 'فاتورة مرتجعة #$id$orig — $customer — $count صنف — $total د.ع';
+    return 'فاتورة مرتجعة #$id$orig — $customer — $count صنف — $total Fdj';
   }
 
   @override
@@ -10224,7 +10224,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String npDailySummaryBody(Object total) {
-    return 'إجمالي فواتير البيع (بدون مرتجعات) لهذا اليوم: $total د.ع';
+    return 'إجمالي فواتير البيع (بدون مرتجعات) لهذا اليوم: $total Fdj';
   }
 
   @override

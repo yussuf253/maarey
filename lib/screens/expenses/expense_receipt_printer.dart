@@ -102,7 +102,7 @@ class ExpenseReceiptPrinter {
                     ),
                     pw.Spacer(),
                     pw.Text(
-                      '${_moneyFmt.format(entry.amount)} د.ع',
+                      '${_moneyFmt.format(entry.amount)} Fdj',
                       textDirection: pw.TextDirection.ltr,
                       style: pw.TextStyle(
                         fontWeight: pw.FontWeight.bold,

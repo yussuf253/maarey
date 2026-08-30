@@ -333,7 +333,7 @@ class _DebtSettingsScreenState extends State<DebtSettingsScreen> {
                               controller: _maxPerCustomer,
                               keyboardType: TextInputType.number,
                               decoration: _fieldDecoration(
-                                label: 'أقصى مجموع متبقٍ لكل عميل (د.ع)',
+                                label: 'أقصى مجموع متبقٍ لكل عميل (Fdj)',
                                 helper:
                                     'مجموع المتبقي عبر كل فواتير الدين المفتوحة لنفس العميل. يمنع للعميل تجاوز السقف عند التفعيل أدناه.',
                                 helperMaxLines: 3,
@@ -349,7 +349,7 @@ class _DebtSettingsScreenState extends State<DebtSettingsScreen> {
                               controller: _maxPerInvoice,
                               keyboardType: TextInputType.number,
                               decoration: _fieldDecoration(
-                                label: 'أقصى متبقٍ لفاتورة دين واحدة (د.ع)',
+                                label: 'أقصى متبقٍ لفاتورة دين واحدة (Fdj)',
                                 helper: 'إجمالي الفاتورة − المقدّم (النقدي).',
                                 prefixIcon: Icon(
                                   Icons.receipt_long_outlined,

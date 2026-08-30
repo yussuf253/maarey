@@ -673,7 +673,7 @@ class _CustomerDebtSummaryCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    '${_numFmt.format(summary.openRemaining)} د.ع',
+                    '${_numFmt.format(summary.openRemaining)} Fdj',
                     style: const TextStyle(
                       fontFamily: 'Tajawal',
                       fontSize: 20,
@@ -825,7 +825,7 @@ class _SummaryStrip extends StatelessWidget {
         Expanded(
           child: _MetricBox(
             title: 'إجمالي المتبقي',
-            value: '${_numFmt.format(totalOpen)} د.ع',
+            value: '${_numFmt.format(totalOpen)} Fdj',
             icon: Icons.account_balance_wallet_outlined,
             colorScheme: colorScheme,
             isDark: isDark,
@@ -1093,7 +1093,7 @@ class _DebtCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'المقدّم ${_numFmt.format(row.advancePayment)} / ${_numFmt.format(row.total)} د.ع',
+                    'المقدّم ${_numFmt.format(row.advancePayment)} / ${_numFmt.format(row.total)} Fdj',
                     style: TextStyle(
                       fontFamily: 'Tajawal',
                       fontSize: 11,
@@ -1112,7 +1112,7 @@ class _DebtCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${_numFmt.format(rem)} د.ع',
+                    '${_numFmt.format(rem)} Fdj',
                     style: TextStyle(
                       fontFamily: 'Tajawal',
                       fontSize: 22,

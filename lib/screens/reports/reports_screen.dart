@@ -1380,31 +1380,31 @@ class _PanelDashboard extends StatelessWidget {
             children: [
               _KpiCard(
                 title: AppLocalizations.of(context)!.periodNetSales,
-                value: '${_numFmt.format(data.salesNet)} د.ع',
+                value: '${_numFmt.format(data.salesNet)} Fdj',
                 icon: Icons.trending_up_rounded,
                 color: const Color(0xFF2563EB),
               ),
               _KpiCard(
                 title: AppLocalizations.of(context)!.totalReturns,
-                value: '${_numFmt.format(data.returnsTotal)} د.ع',
+                value: '${_numFmt.format(data.returnsTotal)} Fdj',
                 icon: Icons.undo_rounded,
                 color: const Color(0xFFDC2626),
               ),
               _KpiCard(
                 title: AppLocalizations.of(context)!.approxNet,
-                value: '${_numFmt.format(netApprox)} د.ع',
+                value: '${_numFmt.format(netApprox)} Fdj',
                 icon: Icons.balance_rounded,
                 color: const Color(0xFF059669),
               ),
               _KpiCard(
                 title: AppLocalizations.of(context)!.totalExpenses,
-                value: '${_numFmt.format(data.expensesTotal)} د.ع',
+                value: '${_numFmt.format(data.expensesTotal)} Fdj',
                 icon: Icons.payments_outlined,
                 color: const Color(0xFF0F766E),
               ),
               _KpiCard(
                 title: AppLocalizations.of(context)!.netAfterExpenses,
-                value: '${_numFmt.format(netAfterExpenses)} د.ع',
+                value: '${_numFmt.format(netAfterExpenses)} Fdj',
                 icon: Icons.savings_outlined,
                 color: netAfterExpenses >= 0
                     ? const Color(0xFF16A34A)
@@ -1501,7 +1501,7 @@ class _PanelDashboard extends StatelessWidget {
               rows: data.topCustomers.take(8).map((e) {
                 return [
                   e.name,
-                  '${_numFmt.format(e.amount)} د.ع',
+                  '${_numFmt.format(e.amount)} Fdj',
                   '${e.count ?? '—'}',
                 ];
               }).toList(),
@@ -1880,7 +1880,7 @@ class _SalesByTypeDataSource extends DataTableSource {
       index: index,
       cells: [
         DataCell(Text(_invoiceTypeLabel(r.type))),
-        DataCell(Text('${_numFmt.format(r.total)} د.ع')),
+        DataCell(Text('${_numFmt.format(r.total)} Fdj')),
         DataCell(Text(_formatSharePercent(pct))),
       ],
     );
@@ -2256,7 +2256,7 @@ class _PanelCustomers extends StatelessWidget {
                   .map(
                     (e) => [
                       e.name,
-                      '${_numFmt.format(e.amount)} د.ع',
+                      '${_numFmt.format(e.amount)} Fdj',
                       '${e.count ?? '—'}',
                     ],
                   )
@@ -2292,7 +2292,7 @@ class _PanelDebts extends StatelessWidget {
             children: [
               _KpiCard(
                 title: AppLocalizations.of(context)!.totalRecordedDebts,
-                value: '${_numFmt.format(total)} د.ع',
+                value: '${_numFmt.format(total)} Fdj',
                 icon: Icons.warning_amber_rounded,
                 color: const Color(0xFFB45309),
               ),
@@ -2315,7 +2315,7 @@ class _PanelDebts extends StatelessWidget {
                     (e) => [
                       '${e.customerId}',
                       e.name,
-                      '${_numFmt.format(e.balance)} د.ع',
+                      '${_numFmt.format(e.balance)} Fdj',
                     ],
                   )
                   .toList(),
@@ -2352,7 +2352,7 @@ class _PanelInstallments extends StatelessWidget {
               ),
               _KpiCard(
                 title: AppLocalizations.of(context)!.totalPlanValue,
-                value: '${_numFmt.format(t.totalDue)} د.ع',
+                value: '${_numFmt.format(t.totalDue)} Fdj',
                 icon: Icons.payments_rounded,
                 color: const Color(0xFF2563EB),
               ),
@@ -2382,9 +2382,9 @@ class _PanelInstallments extends StatelessWidget {
                     (p) => [
                       '#${p.planId}',
                       p.customerName,
-                      '${_numFmt.format(p.totalAmount)} د.ع',
-                      '${_numFmt.format(p.paidAmount)} د.ع',
-                      '${_numFmt.format(p.remaining)} د.ع',
+                      '${_numFmt.format(p.totalAmount)} Fdj',
+                      '${_numFmt.format(p.paidAmount)} Fdj',
+                      '${_numFmt.format(p.remaining)} Fdj',
                     ],
                   )
                   .toList(),
@@ -2539,7 +2539,7 @@ class _PanelStaff extends StatelessWidget {
                     (s) => [
                       s.staffLabel,
                       '${s.invoiceCount}',
-                      '${_numFmt.format(s.salesTotal)} د.ع',
+                      '${_numFmt.format(s.salesTotal)} Fdj',
                     ],
                   )
                   .toList(),
@@ -2582,19 +2582,19 @@ class _PanelAnalytics extends StatelessWidget {
             children: [
               _KpiCard(
                 title: AppLocalizations.of(context)!.periodRevenue,
-                value: '${_numFmt.format(ms.revenueNet)} د.ع',
+                value: '${_numFmt.format(ms.revenueNet)} Fdj',
                 icon: Icons.sell_rounded,
                 color: const Color(0xFF2563EB),
               ),
               _KpiCard(
                 title: AppLocalizations.of(context)!.cogs,
-                value: '${_numFmt.format(ms.cost)} د.ع',
+                value: '${_numFmt.format(ms.cost)} Fdj',
                 icon: Icons.inventory_2_rounded,
                 color: const Color(0xFF8E3CF7),
               ),
               _KpiCard(
                 title: AppLocalizations.of(context)!.grossMargin,
-                value: '${_numFmt.format(ms.grossMargin)} د.ع',
+                value: '${_numFmt.format(ms.grossMargin)} Fdj',
                 icon: Icons.trending_up_rounded,
                 color: grossColor,
               ),
@@ -2606,13 +2606,13 @@ class _PanelAnalytics extends StatelessWidget {
               ),
               _KpiCard(
                 title: AppLocalizations.of(context)!.totalExpenses,
-                value: '${_numFmt.format(ms.expenses)} د.ع',
+                value: '${_numFmt.format(ms.expenses)} Fdj',
                 icon: Icons.receipt_long_rounded,
                 color: const Color(0xFFDC2626),
               ),
               _KpiCard(
                 title: AppLocalizations.of(context)!.netProfit,
-                value: '${_numFmt.format(ms.netProfit)} د.ع',
+                value: '${_numFmt.format(ms.netProfit)} Fdj',
                 icon: Icons.savings_rounded,
                 color: netColor,
               ),
@@ -2718,9 +2718,9 @@ class _PanelAnalytics extends StatelessWidget {
                                   (r) => [
                                     r.name,
                                     _numFmt.format(r.qty),
-                                    '${_numFmt.format(r.revenue)} د.ع',
-                                    '${_numFmt.format(r.cost)} د.ع',
-                                    '${_numFmt.format(r.margin)} د.ع',
+                                    '${_numFmt.format(r.revenue)} Fdj',
+                                    '${_numFmt.format(r.cost)} Fdj',
+                                    '${_numFmt.format(r.margin)} Fdj',
                                     r.marginPct == null
                                         ? '—'
                                         : '${r.marginPct!.toStringAsFixed(1)}%',
@@ -2753,9 +2753,9 @@ class _PanelAnalytics extends StatelessWidget {
                                   (r) => [
                                     r.name,
                                     _numFmt.format(r.qty),
-                                    '${_numFmt.format(r.revenue)} د.ع',
-                                    '${_numFmt.format(r.cost)} د.ع',
-                                    '${_numFmt.format(r.margin)} د.ع',
+                                    '${_numFmt.format(r.revenue)} Fdj',
+                                    '${_numFmt.format(r.cost)} Fdj',
+                                    '${_numFmt.format(r.margin)} Fdj',
                                     r.marginPct == null
                                         ? '—'
                                         : '${r.marginPct!.toStringAsFixed(1)}%',
@@ -2779,7 +2779,7 @@ class _PanelAnalytics extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 _BulletLine(
-                  'خصومات ولاء على الفواتير: ${_numFmt.format(data.loyaltyRedeemedInRange)} د.ع',
+                  'خصومات ولاء على الفواتير: ${_numFmt.format(data.loyaltyRedeemedInRange)} Fdj',
                 ),
                 _BulletLine(
                   'نقاط ممنوحة (مجموع النقاط المسجّلة على الفواتير): ${_numFmt.format(data.loyaltyEarnedInRange)}',
@@ -2826,7 +2826,7 @@ class _PanelAnalytics extends StatelessWidget {
                     (p) => [
                       p.name,
                       _numFmt.format(p.qty),
-                      '${_numFmt.format(p.revenue)} د.ع',
+                      '${_numFmt.format(p.revenue)} Fdj',
                     ],
                   )
                   .toList(),
@@ -3396,7 +3396,7 @@ class _DailyBars extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Tooltip(
-                message: '${p.dayLabel}\n${_numFmt.format(p.amount)} د.ع',
+                message: '${p.dayLabel}\n${_numFmt.format(p.amount)} Fdj',
                 child: Container(
                   width: 11,
                   height: h.clamp(4, maxH),

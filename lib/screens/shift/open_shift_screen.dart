@@ -568,7 +568,7 @@ class _SystemCashCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 6),
                     Text(
-                      'د.ع',
+                      'Fdj',
                       style: TextStyle(
                         fontSize: compact ? 12 : 13,
                         fontWeight: FontWeight.w700,
@@ -657,7 +657,7 @@ class _MoneyGlassField extends StatelessWidget {
                   child: Center(
                     widthFactor: 1,
                     child: Text(
-                      'د.ع',
+                      'Fdj',
                       style: TextStyle(
                         color: AppColors.accentGold.withValues(alpha: 0.88),
                         fontWeight: FontWeight.w800,

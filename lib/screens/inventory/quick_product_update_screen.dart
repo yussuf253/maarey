@@ -674,7 +674,7 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
               ),
               TextSpan(text: loc.profitLabel),
               TextSpan(
-                text: '$sign$profitLabel د.ع$lossSuffix',
+                text: '$sign$profitLabel Fdj$lossSuffix',
                 style: TextStyle(
                   color: profit < 0 ? Colors.red.shade700 : pctColor,
                 ),

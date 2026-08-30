@@ -228,16 +228,16 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
     final detailBuf = StringBuffer()
       ..writeln('موظف الوردية: $staffLabel')
       ..writeln(
-        'رصيد النظام لحظة الإغلاق: ${IraqiCurrencyFormat.formatInt(systemNow.round())} د.ع',
+        'رصيد النظام لحظة الإغلاق: ${IraqiCurrencyFormat.formatInt(systemNow.round())} Fdj',
       )
       ..writeln(
-        'المبلغ المُعلَن في الصندوق: ${IraqiCurrencyFormat.formatInt(inBox.round())} د.ع',
+        'المبلغ المُعلَن في الصندوق: ${IraqiCurrencyFormat.formatInt(inBox.round())} Fdj',
       )
       ..writeln(
-        'المبلغ المسحوب: ${IraqiCurrencyFormat.formatInt(withdraw.round())} د.ع',
+        'المبلغ المسحوب: ${IraqiCurrencyFormat.formatInt(withdraw.round())} Fdj',
       )
       ..writeln(
-        'المتبقّي في الصندوق بعد السحب: ${IraqiCurrencyFormat.formatInt(remaining.round())} د.ع',
+        'المتبقّي في الصندوق بعد السحب: ${IraqiCurrencyFormat.formatInt(remaining.round())} Fdj',
       );
     final detail = detailBuf.toString().trim();
 
@@ -395,7 +395,7 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
                             _BalanceHero(
                               label: 'رصيد الصندوق (حسب النظام)',
                               amountIQD:
-                                  '${IraqiCurrencyFormat.formatInt(_systemBalance.round())} د.ع',
+                                  '${IraqiCurrencyFormat.formatInt(_systemBalance.round())} Fdj',
                               onRefresh: _reload,
                             ),
                             const SizedBox(height: 10),
@@ -409,7 +409,7 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
                             const SizedBox(height: 16),
                             AppPriceInput(
                               label: 'المبلغ في الصندوق',
-                              hint: '0 د.ع',
+                              hint: '0 Fdj',
                               controller: _inBoxCtrl,
                               focusNode: _focusInBox,
                               textInputAction: TextInputAction.next,
@@ -425,7 +425,7 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
                             ),
                             AppPriceInput(
                               label: 'المبلغ الذي تريد أخذه',
-                              hint: '0 د.ع',
+                              hint: '0 Fdj',
                               controller: _withdrawCtrl,
                               focusNode: _focusWithdraw,
                               warningText: _withdrawWarn(),
@@ -466,7 +466,7 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
                                             ?.copyWith(fontSize: 13),
                                       ),
                                       Text(
-                                        '${IraqiCurrencyFormat.formatInt(rem)} د.ع',
+                                        '${IraqiCurrencyFormat.formatInt(rem)} Fdj',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w800,
                                           fontSize: 15,

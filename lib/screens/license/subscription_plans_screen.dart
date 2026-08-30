@@ -684,7 +684,7 @@ class _PlanCard extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         const Text(
-                          'د.ع',
+                          'Fdj',
                           style: TextStyle(
                             color: _SubPlanText.secondary,
                             fontSize: 11,

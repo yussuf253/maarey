@@ -122,7 +122,7 @@ class _InstallmentDetailsScreenState extends State<InstallmentDetailsScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                'المستحق: ${_numFmt.format(installment.amount)} د.ع',
+                'المستحق: ${_numFmt.format(installment.amount)} Fdj',
                 style: const TextStyle(fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 6),
@@ -158,7 +158,7 @@ class _InstallmentDetailsScreenState extends State<InstallmentDetailsScreen> {
                     SnackBar(
                       content: Text(
                         paid + 1e-6 < installment.amount
-                            ? 'يجب تسديد قيمة القسط كاملة (${_numFmt.format(installment.amount)} د.ع)'
+                            ? 'يجب تسديد قيمة القسط كاملة (${_numFmt.format(installment.amount)} Fdj)'
                             : 'تعذر التسجيل (قد يكون القسط مدفوعاً)',
                       ),
                     ),
@@ -342,7 +342,7 @@ class _CustomerPanel extends StatelessWidget {
             if (email != null && email.isNotEmpty) _InfoLine(Icons.email_outlined, email),
             if (address != null && address.isNotEmpty) _InfoLine(Icons.location_on_outlined, address),
             if (balance != null)
-              _InfoLine(Icons.account_balance_wallet_outlined, 'رصيد العميل المسجّل: ${_numFmt.format(balance)} د.ع'),
+              _InfoLine(Icons.account_balance_wallet_outlined, 'رصيد العميل المسجّل: ${_numFmt.format(balance)} Fdj'),
           ] else ...[
             const SizedBox(height: 8),
             Text(
@@ -398,9 +398,9 @@ class _InvoicePanel extends StatelessWidget {
           const SizedBox(height: 8),
           Text('رقم الفاتورة: #${invoice.id}'),
           Text('التاريخ: ${_dateFmt.format(invoice.date)}'),
-          Text('الإجمالي: ${_numFmt.format(invoice.total)} د.ع'),
+          Text('الإجمالي: ${_numFmt.format(invoice.total)} Fdj'),
           if (invoice.advancePayment > 0)
-            Text('المقدم المحصّل: ${_numFmt.format(invoice.advancePayment)} د.ع'),
+            Text('المقدم المحصّل: ${_numFmt.format(invoice.advancePayment)} Fdj'),
         ],
       ),
     );
@@ -522,15 +522,15 @@ class _SaleFinanceSnapshotPanel extends StatelessWidget {
           const SizedBox(height: 8),
           Text('نسبة الفائدة: $pctStr%'),
           Text('عدد الأشهر: ${plan.plannedMonths}'),
-          Text('المبلغ المموّل: ${_numFmt.format(plan.financedAtSale)} د.ع'),
+          Text('المبلغ المموّل: ${_numFmt.format(plan.financedAtSale)} Fdj'),
           if (plan.interestAmount > 1e-9)
-            Text('قيمة الفائدة: ${_numFmt.format(plan.interestAmount)} د.ع'),
+            Text('قيمة الفائدة: ${_numFmt.format(plan.interestAmount)} Fdj'),
           Text(
-            'الإجمالي مع الفائدة: ${_numFmt.format(plan.totalWithInterest)} د.ع',
+            'الإجمالي مع الفائدة: ${_numFmt.format(plan.totalWithInterest)} Fdj',
           ),
           if (plan.suggestedMonthly > 1e-9)
             Text(
-              'القسط الشهري المقترح: ${_numFmt.format(plan.suggestedMonthly)} د.ع',
+              'القسط الشهري المقترح: ${_numFmt.format(plan.suggestedMonthly)} Fdj',
             ),
           const SizedBox(height: 8),
           Text(
@@ -571,8 +571,8 @@ class _ProgressPanel extends StatelessWidget {
     final hasAdvance = advance > 1e-6;
     final hasSchedule = schedulePaid > 1e-6;
     final rawParts = <String>[
-      if (hasAdvance) 'مقدّم: ${_numFmt.format(advance)} د.ع',
-      if (hasSchedule) 'أقساط من الجدول: ${_numFmt.format(schedulePaid)} د.ع',
+      if (hasAdvance) 'مقدّم: ${_numFmt.format(advance)} Fdj',
+      if (hasSchedule) 'أقساط من الجدول: ${_numFmt.format(schedulePaid)} Fdj',
     ];
     final combinedRaw = advance + schedulePaid;
     final capped =
@@ -600,7 +600,7 @@ class _ProgressPanel extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'المدفوع: ${_numFmt.format(plan.paidAmount)} / ${_numFmt.format(plan.totalAmount)} د.ع',
+            'المدفوع: ${_numFmt.format(plan.paidAmount)} / ${_numFmt.format(plan.totalAmount)} Fdj',
             style: const TextStyle(fontWeight: FontWeight.w600),
           ),
           if (rawParts.isNotEmpty) ...[
@@ -627,7 +627,7 @@ class _ProgressPanel extends StatelessWidget {
               ),
             ),
           const SizedBox(height: 4),
-          Text('المتبقي: ${_numFmt.format(rem)} د.ع'),
+          Text('المتبقي: ${_numFmt.format(rem)} Fdj'),
         ],
       ),
     );
@@ -688,7 +688,7 @@ class _InstallmentRow extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text('${_numFmt.format(installment.amount)} د.ع', style: const TextStyle(fontWeight: FontWeight.w600)),
+              Text('${_numFmt.format(installment.amount)} Fdj', style: const TextStyle(fontWeight: FontWeight.w600)),
               if (paid)
                 Chip(
                   label: Text(AppLocalizations.of(context)!.paidLabel2, style: const TextStyle(fontSize: 11)),

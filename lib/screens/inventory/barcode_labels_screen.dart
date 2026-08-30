@@ -1273,7 +1273,7 @@ class _TogglePreviewRibbon extends StatelessWidget {
 class NumberFormatHelper {
   static String line(Map<String, dynamic> r) {
     final sell = (r['sellPrice'] as num?)?.toDouble() ?? 0;
-    return '${NumericFormat.formatNumber(sell.round().clamp(0, 999999999))} د.ع';
+    return '${NumericFormat.formatNumber(sell.round().clamp(0, 999999999))} Fdj';
   }
 }
 

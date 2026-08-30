@@ -653,7 +653,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get onboardingStep2Example1 =>
-      'Exemple : chaque 10 000 IQD rapporte 10 points selon la règle choisie.';
+      'Exemple : chaque 10 000 FDJ rapporte 10 points selon la règle choisie.';
 
   @override
   String get onboardingStep2Example2 =>
@@ -684,7 +684,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get onboardingStep3Example1 =>
-      'Exemple : une facture de 100 000 IQD à laquelle un pourcentage de taxe déterminé est ajouté.';
+      'Exemple : une facture de 100 000 FDJ à laquelle un pourcentage de taxe déterminé est ajouté.';
 
   @override
   String get onboardingStep3Example2 =>
@@ -712,7 +712,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get onboardingStep4Example1 =>
-      'Exemple : vous accordez une remise globale de 5 000 IQD sur une grosse facture.';
+      'Exemple : vous accordez une remise globale de 5 000 FDJ sur une grosse facture.';
 
   @override
   String get onboardingStep4Example2 =>
@@ -768,7 +768,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get onboardingStep6Example1 =>
-      'Exemple : un appareil d\'une valeur de 600 000 IQD payé en 6 mensualités.';
+      'Exemple : un appareil d\'une valeur de 600 000 FDJ payé en 6 mensualités.';
 
   @override
   String get onboardingStep6Example2 =>
@@ -1181,7 +1181,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String sellPriceIqd(Object price) {
-    return 'Vente $price IQD';
+    return 'Vente $price FDJ';
   }
 
   @override
@@ -1250,7 +1250,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String parkedSaleSummaryLine(Object count, Object total) {
-    return '$count articles · ≈ $total IQD';
+    return '$count articles · ≈ $total FDJ';
   }
 
   @override
@@ -1350,12 +1350,12 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String totalIqd(Object amount) {
-    return '$amount IQD';
+    return '$amount FDJ';
   }
 
   @override
   String itemsAndDiscountLine(Object count, Object discount) {
-    return '$count articles · remise $discount IQD';
+    return '$count articles · remise $discount FDJ';
   }
 
   @override
@@ -2091,7 +2091,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get trialDaysLabel => '15 يوماً';
 
   @override
-  String get currencyLabel => 'د.ع';
+  String get currencyLabel => 'Fdj';
 
   @override
   String get perMonthLabel => 'شهرياً';
@@ -2886,7 +2886,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get items => 'articles';
 
   @override
-  String get iqd => 'IQD';
+  String get iqd => 'FDJ';
 
   @override
   String get warehouseLabel => 'Entrepôt';
@@ -3413,7 +3413,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String priceFormat(Object price) {
-    return '$price IQD';
+    return '$price FDJ';
   }
 
   @override
@@ -3903,7 +3903,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String quantityTimesPrice(Object price, Object qty) {
-    return '$qty × $price IQD';
+    return '$qty × $price FDJ';
   }
 
   @override
@@ -3959,7 +3959,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get invoiceNotFoundMsg => 'Facture introuvable';
 
   @override
-  String get iqdCurrency => 'IQD';
+  String get iqdCurrency => 'FDJ';
 
   @override
   String get customerNameLabel => 'Nom du client';
@@ -4132,16 +4132,16 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get taxDescription =>
-      'Entrez le montant de la taxe en dinars si applicable ; ajouté au total après la remise de facture.';
+      'Entrez le montant de la taxe en francs si applicable ; ajouté au total après la remise de facture.';
 
   @override
-  String get taxAmountLabel => 'Montant de la taxe (IQD)';
+  String get taxAmountLabel => 'Montant de la taxe (FDJ)';
 
   @override
   String get discountSectionLabel => 'Remise facture';
 
   @override
-  String get advanceDownPaymentLabel => 'Avance / Acompte (IQD)';
+  String get advanceDownPaymentLabel => 'Avance / Acompte (FDJ)';
 
   @override
   String get advancePaymentHelper =>
@@ -4157,7 +4157,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get numberOfMonthsLabel => 'Nombre de mois';
 
   @override
-  String get receivedAmountLabel => 'Montant reçu (IQD)';
+  String get receivedAmountLabel => 'Montant reçu (FDJ)';
 
   @override
   String get advanceDescription =>
@@ -4452,7 +4452,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Êtes-vous sûr de vouloir supprimer ce retour ?';
 
   @override
-  String get amountDueLabel => 'Montant dû (IQD)';
+  String get amountDueLabel => 'Montant dû (FDJ)';
 
   @override
   String get discountOnTotalSaleTitle => 'Remise facture';
@@ -4581,7 +4581,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get taxHelperHint =>
-      'Entrez le montant de la taxe en dinars si applicable ; ajouté au sous-total après remise facture.';
+      'Entrez le montant de la taxe en francs si applicable ; ajouté au sous-total après remise facture.';
 
   @override
   String get priceDetailStepHintWithPayment =>
@@ -4608,7 +4608,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Sous-total après remise (avant taxe)';
 
   @override
-  String get iqdCurrencySymbol => 'IQD';
+  String get iqdCurrencySymbol => 'FDJ';
 
   @override
   String get grandTotalLabel => 'Total général';
@@ -6549,7 +6549,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get amountAddedAtOpen => 'Montant ajouté à l\'ouverture';
 
   @override
-  String get amountIQD => 'Montant (IQD)';
+  String get amountIQD => 'Montant (FDJ)';
 
   @override
   String get analysisAndMargin => 'Analyse et marge';
@@ -7764,7 +7764,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ipProductCode => 'Code produit';
 
   @override
-  String get ipSalePriceRange => 'Fourchette de prix de vente (IQD)';
+  String get ipSalePriceRange => 'Fourchette de prix de vente (FDJ)';
 
   @override
   String get ipPriceTo => 'À';
@@ -8280,7 +8280,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get apPercentDiscount => 'Pourcentage (%)';
 
   @override
-  String get apFixedAmountDiscount => 'Montant (IQD)';
+  String get apFixedAmountDiscount => 'Montant (FDJ)';
 
   @override
   String get apDiscountValue => 'Valeur de la remise';
@@ -8451,7 +8451,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String aiLoyaltyDiscountLabel(Object amount) {
-    return 'Remise fidélité: -$amount IQD';
+    return 'Remise fidélité: -$amount FDJ';
   }
 
   @override
@@ -9037,11 +9037,11 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get lsPointsPerThousand =>
-      'Points pour 1 000 IQD de net de facture éligible';
+      'Points pour 1 000 FDJ de net de facture éligible';
 
   @override
   String get lsRedemptionValue =>
-      'Valeur de réduction en dinars par point lors de la rédemption';
+      'Valeur de réduction en francs par point lors de la rédemption';
 
   @override
   String get lsMinRedemption =>
@@ -9598,27 +9598,27 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String rpBeforeDiscount(Object amount) {
-    return 'Avant remise : $amount IQD';
+    return 'Avant remise : $amount FDJ';
   }
 
   @override
   String rpDiscount(Object amount) {
-    return 'Remise : $amount IQD';
+    return 'Remise : $amount FDJ';
   }
 
   @override
   String rpTax(Object amount) {
-    return 'Taxe : $amount IQD';
+    return 'Taxe : $amount FDJ';
   }
 
   @override
   String rpLoyaltyDiscount(Object amount) {
-    return 'Remise fidélité : $amount IQD';
+    return 'Remise fidélité : $amount FDJ';
   }
 
   @override
   String rpTotal(Object amount) {
-    return 'Total : $amount IQD';
+    return 'Total : $amount FDJ';
   }
 
   @override
@@ -9670,17 +9670,17 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String rpInvoiceTotal(Object amount) {
-    return 'Total facture : $amount IQD';
+    return 'Total facture : $amount FDJ';
   }
 
   @override
   String rpAmountPaid(Object amount) {
-    return 'Payé maintenant : $amount IQD';
+    return 'Payé maintenant : $amount FDJ';
   }
 
   @override
   String rpRemaining(Object amount) {
-    return 'Solde restant : $amount IQD';
+    return 'Solde restant : $amount FDJ';
   }
 
   @override
@@ -9688,17 +9688,17 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String rpSalePriceTotal(Object amount) {
-    return 'Total facture (prix de vente) : $amount IQD';
+    return 'Total facture (prix de vente) : $amount FDJ';
   }
 
   @override
   String rpAdvancePayment(Object amount) {
-    return 'Avance / 1er versement : $amount IQD';
+    return 'Avance / 1er versement : $amount FDJ';
   }
 
   @override
   String rpFinancedAmount(Object amount) {
-    return 'Montant après avance (base intérêt) : $amount IQD';
+    return 'Montant après avance (base intérêt) : $amount FDJ';
   }
 
   @override
@@ -9708,12 +9708,12 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String rpInterestValue(Object amount) {
-    return 'Montant intérêt : $amount IQD';
+    return 'Montant intérêt : $amount FDJ';
   }
 
   @override
   String rpTotalWithInterest(Object amount) {
-    return 'Total avec intérêts : $amount IQD';
+    return 'Total avec intérêts : $amount FDJ';
   }
 
   @override
@@ -9723,7 +9723,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String rpSuggestedMonthly(Object amount) {
-    return 'Échéance mensuelle suggérée : $amount IQD';
+    return 'Échéance mensuelle suggérée : $amount FDJ';
   }
 
   @override
@@ -9805,17 +9805,17 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String rpSubtotalBeforeDiscount(Object amount) {
-    return 'Sous-total avant remise : $amount IQD';
+    return 'Sous-total avant remise : $amount FDJ';
   }
 
   @override
   String rpPercentDiscount(Object amount, Object percent) {
-    return 'Remise $percent% : $amount IQD';
+    return 'Remise $percent% : $amount FDJ';
   }
 
   @override
   String rpFinalTotal(Object amount) {
-    return 'Total final : $amount IQD';
+    return 'Total final : $amount FDJ';
   }
 
   @override
@@ -9901,17 +9901,17 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String rpAmountPaidInThis(Object amount) {
-    return 'Montant payé cette transaction : $amount IQD';
+    return 'Montant payé cette transaction : $amount FDJ';
   }
 
   @override
   String rpDebtBefore(Object amount) {
-    return 'Total dette avant paiement : $amount IQD';
+    return 'Total dette avant paiement : $amount FDJ';
   }
 
   @override
   String rpDebtAfter(Object amount) {
-    return 'Restant après paiement : $amount IQD';
+    return 'Restant après paiement : $amount FDJ';
   }
 
   @override
@@ -9931,17 +9931,17 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String rpPaidAmount(Object amount) {
-    return 'Montant payé : $amount IQD';
+    return 'Montant payé : $amount FDJ';
   }
 
   @override
   String rpPayableBefore(Object amount) {
-    return 'Dû avant paiement : $amount IQD';
+    return 'Dû avant paiement : $amount FDJ';
   }
 
   @override
   String rpPayableAfter(Object amount) {
-    return 'Dû après paiement : $amount IQD';
+    return 'Dû après paiement : $amount FDJ';
   }
 
   @override
@@ -9988,7 +9988,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String rpInstallmentDetail(Object amount, Object date, Object number) {
-    return 'Tranche #$number ($amount IQD) échéance le $date';
+    return 'Tranche #$number ($amount FDJ) échéance le $date';
   }
 
   @override
@@ -9998,7 +9998,7 @@ class AppLocalizationsFr extends AppLocalizations {
     Object number,
     Object paidStatus,
   ) {
-    return 'Tranche $number — $amount IQD — Échéance $date — $paidStatus';
+    return 'Tranche $number — $amount FDJ — Échéance $date — $paidStatus';
   }
 
   @override
@@ -10018,7 +10018,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String rpReceiptItemsAmount(Object amount) {
-    return '$amount IQD';
+    return '$amount FDJ';
   }
 
   @override
@@ -10227,7 +10227,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String npTotalLine(Object advance, Object remaining, Object total) {
-    return 'Total : $total IQD — Payé : $advance IQD — Reste : $remaining IQD';
+    return 'Total : $total FDJ — Payé : $advance FDJ — Reste : $remaining FDJ';
   }
 
   @override
@@ -10246,22 +10246,22 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String npMonthlyEstimate(Object amount) {
-    return 'Tranche mensuelle estimée : $amount IQD';
+    return 'Tranche mensuelle estimée : $amount FDJ';
   }
 
   @override
   String npFinancedFromSale(Object amount) {
-    return 'Financé par la vente : $amount IQD';
+    return 'Financé par la vente : $amount FDJ';
   }
 
   @override
   String npTotalWithInterest(Object amount) {
-    return 'Total avec intérêts (le cas échéant) : $amount IQD';
+    return 'Total avec intérêts (le cas échéant) : $amount FDJ';
   }
 
   @override
   String npItemLine(Object name, Object pid, Object qty, Object total) {
-    return '• $name — #$pid — $qty — $total IQD';
+    return '• $name — #$pid — $qty — $total FDJ';
   }
 
   @override
@@ -10296,7 +10296,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String npCustomerDebtBody(Object balance, Object extra, Object name) {
-    return '$name$extra — reste $balance IQD (différé, non tranche).';
+    return '$name$extra — reste $balance FDJ (différé, non tranche).';
   }
 
   @override
@@ -10325,12 +10325,12 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String npCustomerCapBody(Object amount, Object cap, Object name) {
-    return 'Selon les paramètres : total différé ouvert pour \"$name\" est $amount IQD (plafond $cap IQD).';
+    return 'Selon les paramètres : total différé ouvert pour \"$name\" est $amount FDJ (plafond $cap FDJ).';
   }
 
   @override
   String npCustomerCapBodyNoCard(Object amount, Object cap, Object name) {
-    return 'Selon les paramètres (sans fiche client) : \"$name\" — $amount IQD (plafond $cap IQD).';
+    return 'Selon les paramètres (sans fiche client) : \"$name\" — $amount FDJ (plafond $cap FDJ).';
   }
 
   @override
@@ -10344,7 +10344,7 @@ class AppLocalizationsFr extends AppLocalizations {
     Object id,
     Object remaining,
   ) {
-    return 'Selon les paramètres : facture #$id — $customer — reste $remaining IQD (plafond $cap IQD) — date $date.';
+    return 'Selon les paramètres : facture #$id — $customer — reste $remaining FDJ (plafond $cap FDJ) — date $date.';
   }
 
   @override
@@ -10423,7 +10423,7 @@ class AppLocalizationsFr extends AppLocalizations {
     Object orig,
     Object total,
   ) {
-    return 'Facture retournée #$id$orig — $customer — $count articles — $total IQD';
+    return 'Facture retournée #$id$orig — $customer — $count articles — $total FDJ';
   }
 
   @override
@@ -10436,7 +10436,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String npDailySummaryBody(Object total) {
-    return 'Total des factures de vente (hors retours) pour aujourd\'hui : $total IQD';
+    return 'Total des factures de vente (hors retours) pour aujourd\'hui : $total FDJ';
   }
 
   @override

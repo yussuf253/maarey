@@ -29,8 +29,8 @@ void main() {
       expect(IraqiCurrencyFormat.formatDecimal2(0), '0.00');
     });
 
-    test('formatIqd يُضيف لاحقة د.ع', () {
-      expect(IraqiCurrencyFormat.formatIqd(5000), '5,000 د.ع');
+    test('formatIqd يُضيف لاحقة Fdj', () {
+      expect(IraqiCurrencyFormat.formatIqd(5000), '5,000 Fdj');
     });
   });
 
@@ -81,7 +81,7 @@ void main() {
         netBeforeLoyalty: 10000,
         s: settings,
       );
-      // 10% من 10,000 = 1,000 د.ع. وكل نقطة = 100 د.ع → 10 نقاط.
+      // 10% من 10,000 = 1,000 Fdj. وكل نقطة = 100 Fdj → 10 نقاط.
       expect(max, 10);
     });
 

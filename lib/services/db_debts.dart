@@ -568,7 +568,7 @@ extension DbDebts on DatabaseHelper {
 
       final loyaltySettings = await _readLoyaltySettings(txn);
       var meta =
-          'دين قبل التسديد: ${debtBefore.toStringAsFixed(0)} د.ع — متبقي بعد: ${debtAfter.toStringAsFixed(0)} د.ع';
+          'دين قبل التسديد: ${debtBefore.toStringAsFixed(0)} Fdj — متبقي بعد: ${debtAfter.toStringAsFixed(0)} Fdj';
       final n = note?.trim();
       if (n != null && n.isNotEmpty) meta = '$meta — ملاحظة: $n';
       if (meta.length > 900) meta = meta.substring(0, 900);

@@ -193,7 +193,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                     controller: amountCtrl,
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
-                      labelText: 'المبلغ (د.ع) *',
+                      labelText: 'المبلغ (Fdj) *',
                       border: OutlineInputBorder(borderRadius: AppShape.none),
                     ),
                   ),
@@ -335,7 +335,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                     controller: amountCtrl,
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
-                      labelText: 'المبلغ (د.ع)',
+                      labelText: 'المبلغ (Fdj)',
                       border: OutlineInputBorder(borderRadius: AppShape.none),
                     ),
                   ),
@@ -451,7 +451,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                     controller: amountCtrl,
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
-                      labelText: 'المبلغ (د.ع)',
+                      labelText: 'المبلغ (Fdj)',
                       border: OutlineInputBorder(borderRadius: AppShape.none),
                     ),
                   ),
@@ -546,7 +546,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
           title: const Text('عكس الدفعة؟'),
           content: Text(
             p.affectsCash
-                ? 'سيُحذف سجل الدفعة ويُسجَّل في الصندوق إيداع قدره ${_numFmt.format(p.amount)} د.ع (عكس الخصم السابق).'
+                ? 'سيُحذف سجل الدفعة ويُسجَّل في الصندوق إيداع قدره ${_numFmt.format(p.amount)} Fdj (عكس الخصم السابق).'
                 : 'سيُحذف سجل الدفعة فقط (لم تكن مرتبطة بالصندوق).',
           ),
           actions: [
@@ -974,8 +974,8 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                         const SizedBox(height: 6),
                         Text(
                           _openPayable < -1e-6
-                              ? '${_numFmt.format(-_openPayable)} د.ع'
-                              : '${_numFmt.format(_openPayable)} د.ع',
+                              ? '${_numFmt.format(-_openPayable)} Fdj'
+                              : '${_numFmt.format(_openPayable)} Fdj',
                           style: TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.w900,
@@ -1170,7 +1170,7 @@ class _BillTile extends StatelessWidget {
                 ),
               ),
               Text(
-                '${_numFmt.format(bill.amount)} د.ع',
+                '${_numFmt.format(bill.amount)} Fdj',
                 style: const TextStyle(fontWeight: FontWeight.w700),
               ),
               if (linked)
@@ -1276,7 +1276,7 @@ class _PayoutTile extends StatelessWidget {
                 ),
               ),
               Text(
-                '${_numFmt.format(payout.amount)} د.ع',
+                '${_numFmt.format(payout.amount)} Fdj',
                 style: const TextStyle(fontWeight: FontWeight.w700),
               ),
               IconButton(

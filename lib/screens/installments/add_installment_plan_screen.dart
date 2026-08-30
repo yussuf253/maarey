@@ -344,15 +344,15 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
                       ),
                       _SummaryRow(
                         AppLocalizations.of(context)!.totalAmountLabel,
-                        '${_numFmt.format(widget.totalAmount)} د.ع',
+                        '${_numFmt.format(widget.totalAmount)} Fdj',
                       ),
                       _SummaryRow(
                         AppLocalizations.of(context)!.advancePayment,
-                        '${_numFmt.format(widget.paidAmount)} د.ع',
+                        '${_numFmt.format(widget.paidAmount)} Fdj',
                       ),
                       const Divider(height: 20),
                       Text(
-                        'متبقٍّ للتقسيط: ${_numFmt.format(widget.totalAmount - widget.paidAmount)} د.ع',
+                        'متبقٍّ للتقسيط: ${_numFmt.format(widget.totalAmount - widget.paidAmount)} Fdj',
                         style: theme.textTheme.titleSmall?.copyWith(
                           fontWeight: FontWeight.w600,
                           color: AppColors.accent,
