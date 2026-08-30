@@ -182,6 +182,7 @@ class _InstallmentDetailsScreenState extends State<InstallmentDetailsScreen> {
       if (planAfter != null) {
         await SaleReceiptPdf.presentInstallmentPaymentReceipt(
           context,
+        locale: Localizations.localeOf(context),
           plan: planAfter,
           justPaidInstallmentId: paidId,
           invoice: _invoice,

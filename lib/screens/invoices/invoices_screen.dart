@@ -202,6 +202,7 @@ class _InvoicesScreenState extends State<InvoicesScreen>
       if (!mounted) return;
       await SaleReceiptPdf.presentReceipt(
         context,
+        locale: Localizations.localeOf(context),
         invoice: full,
         subtotalBeforeDiscount: subtotalBeforeDiscount,
         onOpenDetailsFromPdf: (pdfCtx) {

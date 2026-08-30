@@ -201,6 +201,7 @@ class _CustomerDebtDetailScreenState extends State<CustomerDebtDetailScreen> {
       if (!mounted) return;
       await SaleReceiptPdf.presentCustomerDebtPaymentReceipt(
         context,
+        locale: Localizations.localeOf(context),
         customerDisplayName: p.displayName,
         customerId: p.customerId,
         amountApplied: res.amountApplied,

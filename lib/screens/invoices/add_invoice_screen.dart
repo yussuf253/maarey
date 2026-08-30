@@ -4009,6 +4009,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
     try {
       await SaleReceiptPdf.presentReceipt(
         navigatorContext,
+        locale: Localizations.localeOf(context),
         invoice: invoice,
         subtotalBeforeDiscount: subtotalBefore,
       );

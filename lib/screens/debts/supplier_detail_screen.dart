@@ -415,6 +415,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
     if (!mounted) return;
     await SaleReceiptPdf.presentSupplierPaymentReceipt(
       context,
+        locale: Localizations.localeOf(context),
       supplierDisplayName: _supplier?.name ?? '',
       amountPaid: amt,
       payableBefore: payableBefore,
@@ -519,6 +520,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
     if (!mounted) return;
     await SaleReceiptPdf.presentSupplierPaymentReceipt(
       context,
+        locale: Localizations.localeOf(context),
       supplierDisplayName: _supplier?.name ?? '',
       amountPaid: amt,
       payableBefore: payableBefore,

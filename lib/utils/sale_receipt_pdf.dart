@@ -61,8 +61,11 @@ String _customerLineValue(Invoice invoice) {
 }
 
 /// اتجاة كتابة الإيصال: عربي ⇒ RTL، بقية اللغات (إنجليزي/فرنسي…) ⇒ LTR.
+/// Returns true for Arabic-family locales. Null locale defaults to Arabic
+/// (backward-compatible since receipts were historically Arabic-only).
 bool _isArabicLocale(Locale? locale) {
-  final code = locale?.languageCode.toLowerCase();
+  if (locale == null) return true; // backward-compatible default
+  final code = locale.languageCode.toLowerCase();
   return code == 'ar' || code == 'he' || code == 'fa' || code == 'ur';
 }
 
@@ -453,6 +456,8 @@ Future<({pw.Font regular, pw.Font bold})> _loadReceiptFonts() async {
 
 /// طباعة إيصال بيع: باركود رقمي + QR يحمل نصاً عربياً مرتباً.
 class SaleReceiptPdf {
+  /// Current locale used by helper functions during PDF generation.
+  static Locale? _currentLocale;
   /// صفّ استرجاع (Code128 على `INV-{id}`) + QR — يسار QR، يمين الباركود.
   /// [barcodeInvoiceId] ≤ 0 يخفي عمود الباركود حتى لو [showBarcode] = true.
   static List<pw.Widget> _receiptCodesFooterRow({
@@ -474,7 +479,7 @@ class SaleReceiptPdf {
               'استرجاع المواد',
               style: pw.TextStyle(font: fontBold, fontSize: 9),
               textAlign: pw.TextAlign.center,
-              textDirection: pw.TextDirection.rtl,
+              textDirection: _pwDirectionForLocale(_currentLocale),
             ),
             pw.SizedBox(height: 4),
             pw.Center(
@@ -491,7 +496,7 @@ class SaleReceiptPdf {
               child: pw.Text(
                 'INV-$barcodeInvoiceId',
                 style: pw.TextStyle(font: font, fontSize: 10),
-                textDirection: pw.TextDirection.ltr,
+                textDirection: _pwDirectionForLocale(_currentLocale),
               ),
             ),
           ],
@@ -503,7 +508,7 @@ class SaleReceiptPdf {
               secondaryTitle,
               style: pw.TextStyle(font: fontBold, fontSize: 9),
               textAlign: pw.TextAlign.center,
-              textDirection: pw.TextDirection.rtl,
+              textDirection: _pwDirectionForLocale(_currentLocale),
             ),
             pw.SizedBox(height: 4),
             pw.Center(
@@ -520,7 +525,7 @@ class SaleReceiptPdf {
               secondarySubtitle,
               style: pw.TextStyle(font: font, fontSize: 8),
               textAlign: pw.TextAlign.center,
-              textDirection: pw.TextDirection.rtl,
+              textDirection: _pwDirectionForLocale(_currentLocale),
             ),
           ],
         );
@@ -578,7 +583,9 @@ class SaleReceiptPdf {
     required double subtotalBeforeDiscount,
     PdfPageFormat pageFormat = PdfPageFormat.a4,
     PrintSettingsData? settings,
+    Locale? locale,
   }) async {
+        _currentLocale = locale;
     final s = settings ?? PrintSettingsData.defaults();
     final fonts = await _loadReceiptFonts();
     final font = fonts.regular;
@@ -631,7 +638,7 @@ class SaleReceiptPdf {
                     'QR عنوان المشتري',
                     style: pw.TextStyle(font: fontBold, fontSize: 10),
                     textAlign: pw.TextAlign.center,
-                    textDirection: pw.TextDirection.rtl,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 ),
                 pw.SizedBox(height: 6),
@@ -650,7 +657,7 @@ class SaleReceiptPdf {
                     'امسح لفتح الموقع على الخرائط',
                     style: pw.TextStyle(font: font, fontSize: 9),
                     textAlign: pw.TextAlign.center,
-                    textDirection: pw.TextDirection.rtl,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 ),
                 if (addrLine.isNotEmpty) ...[
@@ -660,8 +667,8 @@ class SaleReceiptPdf {
                         ? '${addrLine.substring(0, 200)}…'
                         : addrLine,
                     style: pw.TextStyle(font: font, fontSize: 8),
-                    textAlign: pw.TextAlign.right,
-                    textDirection: pw.TextDirection.rtl,
+                    textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                     maxLines: 5,
                     overflow: pw.TextOverflow.clip,
                   ),
@@ -680,7 +687,7 @@ class SaleReceiptPdf {
                     child: pw.Text(
                       _receiptSafe(s.storeTitleLine),
                       style: pw.TextStyle(font: fontBold, fontSize: 14),
-                      textDirection: pw.TextDirection.rtl,
+                      textDirection: _pwDirectionForLocale(_currentLocale),
                     ),
                   ),
                   pw.SizedBox(height: 6),
@@ -689,7 +696,7 @@ class SaleReceiptPdf {
                   child: pw.Text(
                     'إيصال بيع',
                     style: pw.TextStyle(font: fontBold, fontSize: 18),
-                    textDirection: pw.TextDirection.rtl,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 ),
                 pw.SizedBox(height: 10),
@@ -708,8 +715,8 @@ class SaleReceiptPdf {
                       pw.Text(
                         'رقم العملية',
                         style: pw.TextStyle(font: font, fontSize: 11),
-                        textAlign: pw.TextAlign.right,
-                        textDirection: pw.TextDirection.rtl,
+                        textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                        textDirection: _pwDirectionForLocale(_currentLocale),
                       ),
                       pw.SizedBox(height: 4),
                       pw.Center(
@@ -719,7 +726,7 @@ class SaleReceiptPdf {
                             font: fontBold,
                             fontSize: 22,
                           ),
-                          textDirection: pw.TextDirection.ltr,
+                          textDirection: _pwDirectionForLocale(_currentLocale),
                         ),
                       ),
                     ],
@@ -729,44 +736,44 @@ class SaleReceiptPdf {
                 pw.Text(
                   'التاريخ والوقت: ${df.format(invoice.date)}',
                   style: pw.TextStyle(font: font, fontSize: 11),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 if (customerVal.isEmpty)
                   pw.Text(
                     'العميل:',
                     style: pw.TextStyle(font: font, fontSize: 11),
-                    textAlign: pw.TextAlign.right,
-                    textDirection: pw.TextDirection.rtl,
+                    textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   )
                 else
                   pw.Text(
                     'العميل: $customerVal',
                     style: pw.TextStyle(font: font, fontSize: 11),
-                    textAlign: pw.TextAlign.right,
-                    textDirection: pw.TextDirection.rtl,
+                    textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 if (!omitPayPdf)
                   pw.Text(
                     'طريقة الدفع: ${salePaymentLabel(invoice.type)}',
                     style: pw.TextStyle(font: font, fontSize: 11),
-                    textAlign: pw.TextAlign.right,
-                    textDirection: pw.TextDirection.rtl,
+                    textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   )
                 else
                   pw.Text(
                     'إيصال توصيل — تفاصيل الموقع عبر الرمز في أسفل الصفحة.',
                     style: pw.TextStyle(font: font, fontSize: 11),
-                    textAlign: pw.TextAlign.right,
-                    textDirection: pw.TextDirection.rtl,
+                    textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 if (_receiptSafe(invoice.deliveryAddress).isNotEmpty) ...[
                   pw.SizedBox(height: 4),
                   pw.Text(
                     'العنوان: ${_receiptSafe(invoice.deliveryAddress)}',
                     style: pw.TextStyle(font: font, fontSize: 10),
-                    textAlign: pw.TextAlign.right,
-                    textDirection: pw.TextDirection.rtl,
+                    textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                     maxLines: 6,
                     overflow: pw.TextOverflow.clip,
                   ),
@@ -775,8 +782,8 @@ class SaleReceiptPdf {
                   pw.Text(
                     'الموظف: ${_receiptSafe(invoice.createdByUserName)}',
                     style: pw.TextStyle(font: font, fontSize: 11),
-                    textAlign: pw.TextAlign.right,
-                    textDirection: pw.TextDirection.rtl,
+                    textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 pw.SizedBox(height: 10),
                 pw.Divider(thickness: 0.7, color: PdfColors.grey600),
@@ -833,36 +840,36 @@ class SaleReceiptPdf {
                 pw.Text(
                   'المجموع قبل الخصم: ${subtotalBeforeDiscount.toStringAsFixed(0)} د.ع',
                   style: pw.TextStyle(font: font, fontSize: 11),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 pw.Text(
                   'خصم ${invoice.discountPercent.toStringAsFixed(2)}٪: ${invoice.discount.toStringAsFixed(0)} د.ع',
                   style: pw.TextStyle(font: font, fontSize: 11),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 pw.Text(
                   'الضريبة: ${invoice.tax.toStringAsFixed(0)} د.ع',
                   style: pw.TextStyle(font: font, fontSize: 11),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 if (invoice.loyaltyDiscount > 0) ...[
                   pw.SizedBox(height: 2),
                   pw.Text(
                     'خصم ولاء: ${invoice.loyaltyDiscount.toStringAsFixed(0)} د.ع',
                     style: pw.TextStyle(font: font, fontSize: 11),
-                    textAlign: pw.TextAlign.right,
-                    textDirection: pw.TextDirection.rtl,
+                    textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 ],
                 pw.SizedBox(height: 4),
                 pw.Text(
                   'الإجمالي النهائي: ${invoice.total.toStringAsFixed(0)} د.ع',
                   style: pw.TextStyle(font: fontBold, fontSize: 13),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 ..._receiptInstallmentFinanceWidgets(invoice, font, fontBold),
                 ...SaleReceiptPdf._receiptInstallmentScheduleTableWidgets(
@@ -880,7 +887,7 @@ class SaleReceiptPdf {
                     _receiptSafe(s.footerExtra),
                     style: pw.TextStyle(font: font, fontSize: 9),
                     textAlign: pw.TextAlign.center,
-                    textDirection: pw.TextDirection.rtl,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 ],
                 ...SaleReceiptPdf._receiptSaleCodesFooter(
@@ -951,8 +958,8 @@ class SaleReceiptPdf {
       pw.Text(
         'جدول الأقساط (حسب تاريخ الاستحقاق)',
         style: pw.TextStyle(font: fontBold, fontSize: 12),
-        textAlign: pw.TextAlign.right,
-        textDirection: pw.TextDirection.rtl,
+        textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+        textDirection: _pwDirectionForLocale(_currentLocale),
       ),
       pw.SizedBox(height: 6),
       pw.Table(
@@ -1005,8 +1012,8 @@ class SaleReceiptPdf {
             child: pw.Text(
               'القسط رقم ${k + 1} (${i.amount.toStringAsFixed(0)} د.ع) مستحق في ${_installmentDayFmt(i.dueDate)}',
               style: pw.TextStyle(font: font, fontSize: 10),
-              textAlign: pw.TextAlign.right,
-              textDirection: pw.TextDirection.rtl,
+              textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+              textDirection: _pwDirectionForLocale(_currentLocale),
             ),
           ),
         );
@@ -1018,8 +1025,8 @@ class SaleReceiptPdf {
         pw.Text(
           'الأقساط المتبقية (تذكير بالمواعيد)',
           style: pw.TextStyle(font: fontBold, fontSize: 11),
-          textAlign: pw.TextAlign.right,
-          textDirection: pw.TextDirection.rtl,
+          textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+          textDirection: _pwDirectionForLocale(_currentLocale),
         ),
         ...unpaidHints,
       ]);
@@ -1035,7 +1042,9 @@ class SaleReceiptPdf {
     int? receiptInvoiceId,
     PdfPageFormat pageFormat = PdfPageFormat.a4,
     PrintSettingsData? settings,
+    Locale? locale,
   }) async {
+        _currentLocale = locale;
     final s = settings ?? PrintSettingsData.defaults();
     final fonts = await _loadReceiptFonts();
     final font = fonts.regular;
@@ -1077,8 +1086,8 @@ class SaleReceiptPdf {
                     font: isToday ? fontBold : font,
                     fontSize: isToday ? 10.5 : 10,
                   ),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
               ),
             );
@@ -1094,8 +1103,8 @@ class SaleReceiptPdf {
                   child: pw.Text(
                     'القسط رقم ${k + 1} (${ins.amount.toStringAsFixed(0)} د.ع) مستحق في ${_installmentDayFmt(ins.dueDate)}',
                     style: pw.TextStyle(font: font, fontSize: 10),
-                    textAlign: pw.TextAlign.right,
-                    textDirection: pw.TextDirection.rtl,
+                    textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 ),
               );
@@ -1112,7 +1121,7 @@ class SaleReceiptPdf {
                     child: pw.Text(
                       _receiptSafe(s.storeTitleLine),
                       style: pw.TextStyle(font: fontBold, fontSize: 14),
-                      textDirection: pw.TextDirection.rtl,
+                      textDirection: _pwDirectionForLocale(_currentLocale),
                     ),
                   ),
                   pw.SizedBox(height: 6),
@@ -1121,41 +1130,41 @@ class SaleReceiptPdf {
                   child: pw.Text(
                     'إيصال تسديد قسط',
                     style: pw.TextStyle(font: fontBold, fontSize: 18),
-                    textDirection: pw.TextDirection.rtl,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 ),
                 pw.SizedBox(height: 10),
                 pw.Text(
                   'التاريخ والوقت: ${df.format(now)}',
                   style: pw.TextStyle(font: font, fontSize: 11),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 pw.Text(
                   'خطة التقسيط: #${plan.id ?? '—'}',
                   style: pw.TextStyle(font: font, fontSize: 11),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 if (invId > 0)
                   pw.Text(
                     'الفاتورة الأصلية: #$invId',
                     style: pw.TextStyle(font: fontBold, fontSize: 11),
-                    textAlign: pw.TextAlign.right,
-                    textDirection: pw.TextDirection.rtl,
+                    textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 if (receiptInvoiceId != null && receiptInvoiceId > 0)
                   pw.Text(
                     'سند القبض (قائمة الفواتير): #$receiptInvoiceId',
                     style: pw.TextStyle(font: fontBold, fontSize: 11),
-                    textAlign: pw.TextAlign.right,
-                    textDirection: pw.TextDirection.rtl,
+                    textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 pw.Text(
                   'العميل: ${_receiptSafe(plan.customerName.isEmpty ? 'عميل' : plan.customerName)}',
                   style: pw.TextStyle(font: font, fontSize: 11),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 pw.SizedBox(height: 8),
                 pw.Divider(color: PdfColors.grey600),
@@ -1163,15 +1172,15 @@ class SaleReceiptPdf {
                 pw.Text(
                   'الأقساط المسددة (بالترتيب الزمني للتسديد)',
                   style: pw.TextStyle(font: fontBold, fontSize: 12),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 if (paidLines.isEmpty)
                   pw.Text(
                     '— لا توجد أقساط مسددة بعد —',
                     style: pw.TextStyle(font: font, fontSize: 10),
-                    textAlign: pw.TextAlign.right,
-                    textDirection: pw.TextDirection.rtl,
+                    textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   )
                 else
                   ...paidLines,
@@ -1182,8 +1191,8 @@ class SaleReceiptPdf {
                   pw.Text(
                     'الأقساط المتبقية ومواعيد الاستحقاق',
                     style: pw.TextStyle(font: fontBold, fontSize: 12),
-                    textAlign: pw.TextAlign.right,
-                    textDirection: pw.TextDirection.rtl,
+                    textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                   ...unpaidBlock,
                 ] else ...[
@@ -1195,8 +1204,8 @@ class SaleReceiptPdf {
                       fontSize: 11,
                       color: PdfColors.green800,
                     ),
-                    textAlign: pw.TextAlign.right,
-                    textDirection: pw.TextDirection.rtl,
+                    textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 ],
                 pw.SizedBox(height: 16),
@@ -1218,7 +1227,7 @@ class SaleReceiptPdf {
                           : 'مرجع الخطة',
                       style: pw.TextStyle(font: font, fontSize: 9),
                       textAlign: pw.TextAlign.center,
-                      textDirection: pw.TextDirection.rtl,
+                      textDirection: _pwDirectionForLocale(_currentLocale),
                     ),
                   ),
                 ],
@@ -1233,6 +1242,7 @@ class SaleReceiptPdf {
 
   static Future<void> presentInstallmentPaymentReceipt(
     BuildContext context, {
+    Locale? locale,
     required InstallmentPlan plan,
     required int justPaidInstallmentId,
     Invoice? invoice,
@@ -1248,7 +1258,7 @@ class SaleReceiptPdf {
         fullscreenDialog: true,
         builder: (ctx) {
           return Directionality(
-            textDirection: ui.TextDirection.rtl,
+            textDirection: _uiDirectionForLocale(_currentLocale),
             child: Scaffold(
               appBar: AppBar(
                 title: const Text('إيصال تسديد قسط'),
@@ -1319,7 +1329,9 @@ class SaleReceiptPdf {
     String? recordedByUserName,
     PdfPageFormat pageFormat = PdfPageFormat.a4,
     PrintSettingsData? settings,
+    Locale? locale,
   }) async {
+        _currentLocale = locale;
     final s = settings ?? PrintSettingsData.defaults();
     final fonts = await _loadReceiptFonts();
     final font = fonts.regular;
@@ -1361,7 +1373,7 @@ class SaleReceiptPdf {
                     child: pw.Text(
                       _receiptSafe(s.storeTitleLine),
                       style: pw.TextStyle(font: fontBold, fontSize: 14),
-                      textDirection: pw.TextDirection.rtl,
+                      textDirection: _pwDirectionForLocale(_currentLocale),
                     ),
                   ),
                   pw.SizedBox(height: 6),
@@ -1370,35 +1382,35 @@ class SaleReceiptPdf {
                   child: pw.Text(
                     'إيصال تسديد دين آجل',
                     style: pw.TextStyle(font: fontBold, fontSize: 18),
-                    textDirection: pw.TextDirection.rtl,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 ),
                 pw.SizedBox(height: 10),
                 pw.Text(
                   'التاريخ والوقت: ${df.format(now)}',
                   style: pw.TextStyle(font: font, fontSize: 11),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 pw.Text(
                   'العميل: ${_receiptSafe(customerDisplayName.isEmpty ? 'عميل' : customerDisplayName)}',
                   style: pw.TextStyle(font: fontBold, fontSize: 11),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 if (customerId != null && customerId > 0)
                   pw.Text(
                     'مسجّل في العملاء: #$customerId',
                     style: pw.TextStyle(font: font, fontSize: 10),
-                    textAlign: pw.TextAlign.right,
-                    textDirection: pw.TextDirection.rtl,
+                    textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 if (_receiptSafe(recordedByUserName).isNotEmpty)
                   pw.Text(
                     'سجّل العملية: ${_receiptSafe(recordedByUserName)}',
                     style: pw.TextStyle(font: font, fontSize: 10),
-                    textAlign: pw.TextAlign.right,
-                    textDirection: pw.TextDirection.rtl,
+                    textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 pw.SizedBox(height: 8),
                 pw.Divider(color: PdfColors.grey600),
@@ -1406,42 +1418,42 @@ class SaleReceiptPdf {
                 pw.Text(
                   'المبلغ المُسدَّد في هذه العملية: ${amountApplied.toStringAsFixed(0)} د.ع',
                   style: pw.TextStyle(font: fontBold, fontSize: 12),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 pw.SizedBox(height: 6),
                 pw.Text(
                   'إجمالي الدين قبل التسديد: ${debtBefore.toStringAsFixed(0)} د.ع',
                   style: pw.TextStyle(font: font, fontSize: 11),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 pw.Text(
                   'المتبقي بعد التسديد: ${debtAfter.toStringAsFixed(0)} د.ع',
                   style: pw.TextStyle(font: font, fontSize: 11),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 pw.SizedBox(height: 8),
                 pw.Text(
                   'تُوزَّع الدفعات تلقائياً على فواتير الآجل من الأقدم إلى الأحدث.',
                   style: pw.TextStyle(font: font, fontSize: 9, color: PdfColors.grey700),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 pw.SizedBox(height: 10),
                 pw.Text(
                   'سجل الدفعة: #$paymentRowId',
                   style: pw.TextStyle(font: font, fontSize: 10),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 if (receiptInvoiceId != null && receiptInvoiceId > 0)
                   pw.Text(
                     'سند القبض (قائمة الفواتير): #$receiptInvoiceId',
                     style: pw.TextStyle(font: fontBold, fontSize: 11),
-                    textAlign: pw.TextAlign.right,
-                    textDirection: pw.TextDirection.rtl,
+                    textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 if (debtAfter < 1e-6) ...[
                   pw.SizedBox(height: 10),
@@ -1452,8 +1464,8 @@ class SaleReceiptPdf {
                       fontSize: 11,
                       color: PdfColors.green800,
                     ),
-                    textAlign: pw.TextAlign.right,
-                    textDirection: pw.TextDirection.rtl,
+                    textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 ],
                 if (_receiptSafe(s.footerExtra).isNotEmpty) ...[
@@ -1464,7 +1476,7 @@ class SaleReceiptPdf {
                     _receiptSafe(s.footerExtra),
                       style: pw.TextStyle(font: font, fontSize: 9),
                       textAlign: pw.TextAlign.center,
-                      textDirection: pw.TextDirection.rtl,
+                      textDirection: _pwDirectionForLocale(_currentLocale),
                     ),
                 ],
                 ...SaleReceiptPdf._receiptCodesFooterRow(
@@ -1488,6 +1500,7 @@ class SaleReceiptPdf {
 
   static Future<void> presentCustomerDebtPaymentReceipt(
     BuildContext context, {
+    Locale? locale,
     required String customerDisplayName,
     int? customerId,
     required double amountApplied,
@@ -1509,7 +1522,7 @@ class SaleReceiptPdf {
           final w = MediaQuery.sizeOf(ctx).width;
           final maxPage = math.min(w - 16, 920.0).clamp(200.0, w);
           return Directionality(
-            textDirection: ui.TextDirection.rtl,
+            textDirection: _uiDirectionForLocale(_currentLocale),
             child: Scaffold(
               appBar: AppBar(
                 leading: IconButton(
@@ -1590,6 +1603,7 @@ class SaleReceiptPdf {
   static Future<void> presentReceipt(
     BuildContext context, {
     required Invoice invoice,
+    Locale? locale,
     required double subtotalBeforeDiscount,
     PrintSettingsData? printSettings,
     void Function(BuildContext pdfContext)? onOpenDetailsFromPdf,
@@ -1609,7 +1623,7 @@ class SaleReceiptPdf {
             final w = MediaQuery.sizeOf(ctx).width;
             final maxPage = math.min(w - 16, 920.0).clamp(200.0, w);
             return Directionality(
-              textDirection: ui.TextDirection.rtl,
+              textDirection: _uiDirectionForLocale(_currentLocale),
               child: Scaffold(
                 appBar: AppBar(
                   leading: IconButton(
@@ -1696,7 +1710,7 @@ class SaleReceiptPdf {
         final openDetails = onOpenDetailsFromPdf;
 
         return Directionality(
-          textDirection: ui.TextDirection.rtl,
+          textDirection: _uiDirectionForLocale(_currentLocale),
           child: Dialog(
             insetPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 18),
             shape: const RoundedRectangleBorder(
@@ -1807,7 +1821,9 @@ class SaleReceiptPdf {
     String? recordedByUserName,
     PdfPageFormat pageFormat = PdfPageFormat.a4,
     PrintSettingsData? settings,
+    Locale? locale,
   }) async {
+        _currentLocale = locale;
     final s = settings ?? PrintSettingsData.defaults();
     final fonts = await _loadReceiptFonts();
     final font = fonts.regular;
@@ -1833,7 +1849,7 @@ class SaleReceiptPdf {
                     child: pw.Text(
                       _receiptSafe(s.storeTitleLine),
                       style: pw.TextStyle(font: fontBold, fontSize: 14),
-                      textDirection: pw.TextDirection.rtl,
+                      textDirection: _pwDirectionForLocale(_currentLocale),
                     ),
                   ),
                   pw.SizedBox(height: 6),
@@ -1842,28 +1858,28 @@ class SaleReceiptPdf {
                   child: pw.Text(
                     'إيصال دفع مورد',
                     style: pw.TextStyle(font: fontBold, fontSize: 18),
-                    textDirection: pw.TextDirection.rtl,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 ),
                 pw.SizedBox(height: 10),
                 pw.Text(
                   'التاريخ والوقت: ${df.format(now)}',
                   style: pw.TextStyle(font: font, fontSize: 11),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 pw.Text(
                   'المورد: ${_receiptSafe(supplierDisplayName.isEmpty ? 'مورد' : supplierDisplayName)}',
                   style: pw.TextStyle(font: fontBold, fontSize: 11),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 if (_receiptSafe(recordedByUserName).isNotEmpty)
                   pw.Text(
                     'سجّل العملية: ${_receiptSafe(recordedByUserName)}',
                     style: pw.TextStyle(font: font, fontSize: 10),
-                    textAlign: pw.TextAlign.right,
-                    textDirection: pw.TextDirection.rtl,
+                    textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 pw.SizedBox(height: 8),
                 pw.Divider(color: PdfColors.grey600),
@@ -1871,21 +1887,21 @@ class SaleReceiptPdf {
                 pw.Text(
                   'المبلغ المدفوع: ${amountPaid.toStringAsFixed(0)} د.ع',
                   style: pw.TextStyle(font: fontBold, fontSize: 12),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 pw.SizedBox(height: 6),
                 pw.Text(
                   'الذمة قبل الدفعة: ${payableBefore.toStringAsFixed(0)} د.ع',
                   style: pw.TextStyle(font: font, fontSize: 11),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 pw.Text(
                   'الذمة بعد الدفعة: ${payableAfter.toStringAsFixed(0)} د.ع',
                   style: pw.TextStyle(font: font, fontSize: 11),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 pw.SizedBox(height: 6),
                 pw.Text(
@@ -1897,30 +1913,30 @@ class SaleReceiptPdf {
                     fontSize: 10,
                     color: PdfColors.grey800,
                   ),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 if (_receiptSafe(note).isNotEmpty) ...[
                   pw.SizedBox(height: 6),
                   pw.Text(
                     'ملاحظة: ${_receiptSafe(note)}',
                     style: pw.TextStyle(font: font, fontSize: 10),
-                    textAlign: pw.TextAlign.right,
-                    textDirection: pw.TextDirection.rtl,
+                    textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                    textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 ],
                 pw.SizedBox(height: 10),
                 pw.Text(
                   'سجل الدفعة: #$payoutRowId',
                   style: pw.TextStyle(font: font, fontSize: 10),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 pw.Text(
                   'سند القائمة (فواتير): #$receiptInvoiceId',
                   style: pw.TextStyle(font: fontBold, fontSize: 11),
-                  textAlign: pw.TextAlign.right,
-                  textDirection: pw.TextDirection.rtl,
+                  textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
+                  textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 pw.SizedBox(height: 16),
                 if (s.receiptShowQr) ...[
@@ -1939,7 +1955,7 @@ class SaleReceiptPdf {
                       'امسح لفتح تفاصيل السند في التطبيق',
                       style: pw.TextStyle(font: font, fontSize: 9),
                       textAlign: pw.TextAlign.center,
-                      textDirection: pw.TextDirection.rtl,
+                      textDirection: _pwDirectionForLocale(_currentLocale),
                     ),
                   ),
                 ],
@@ -1954,6 +1970,7 @@ class SaleReceiptPdf {
 
   static Future<void> presentSupplierPaymentReceipt(
     BuildContext context, {
+    Locale? locale,
     required String supplierDisplayName,
     required double amountPaid,
     required double payableBefore,
@@ -1974,7 +1991,7 @@ class SaleReceiptPdf {
         fullscreenDialog: true,
         builder: (ctx) {
           return Directionality(
-            textDirection: ui.TextDirection.rtl,
+            textDirection: _uiDirectionForLocale(_currentLocale),
             child: Scaffold(
               appBar: AppBar(
                 title: const Text('إيصال دفع مورد'),
@@ -2015,6 +2032,7 @@ class SaleReceiptPdf {
                     return cache.putIfAbsent(
                       key,
                       () => buildSupplierPaymentReceiptBytes(
+                        locale: locale,
                         supplierDisplayName: supplierDisplayName,
                         amountPaid: amountPaid,
                         payableBefore: payableBefore,
