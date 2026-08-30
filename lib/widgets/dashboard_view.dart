@@ -2484,13 +2484,13 @@ class _PinnedProductsRailState extends State<_PinnedProductsRail> {
                                       // فنعطي تخطيطاً متكيفاً لمنع overflow.
                                       final tight = box.maxHeight < 72;
                                       final nameStyle = TextStyle(
-                                        fontSize: tight ? 10.5 : 12,
+                                        fontSize: tight ? 9.5 : 12,
                                         fontWeight: FontWeight.w800,
                                         color: text1,
                                         height: 1.15,
                                       );
                                       final priceStyle = TextStyle(
-                                        fontSize: tight ? 10.0 : 11.5,
+                                        fontSize: tight ? 9.0 : 11.5,
                                         fontWeight: FontWeight.w800,
                                         color:
                                             widget.isDark ? Colors.white70 : _kTeal,
@@ -2513,7 +2513,7 @@ class _PinnedProductsRailState extends State<_PinnedProductsRail> {
                                             textAlign: TextAlign.center,
                                             style: nameStyle,
                                           ),
-                                          SizedBox(height: tight ? 2 : 6),
+                                          SizedBox(height: tight ? 1 : 4),
                                           Text(
                                             IraqiCurrencyFormat.formatIqd(sell),
                                             maxLines: 1,

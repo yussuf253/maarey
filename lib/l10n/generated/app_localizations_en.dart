@@ -9916,4 +9916,421 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get rpTodayIndicator => '  (today\'s transaction)';
+
+  @override
+  String get anHideAlert => 'Hide Alert';
+
+  @override
+  String get anHideConfirm =>
+      'This is an important alert. Are you sure you want to hide it from the list?';
+
+  @override
+  String get anCancel => 'Cancel';
+
+  @override
+  String get anConfirm => 'Confirm';
+
+  @override
+  String get anNotifications => 'Notifications';
+
+  @override
+  String get anRefresh => 'Refresh';
+
+  @override
+  String get anMarkAllRead => 'Mark all as read';
+
+  @override
+  String anRefreshError(Object error) {
+    return 'Refresh failed: $error';
+  }
+
+  @override
+  String get anEmpty => 'No notifications yet';
+
+  @override
+  String get anHiddenNotifications => 'Hidden notifications';
+
+  @override
+  String get anShow => 'Show';
+
+  @override
+  String get anHide => 'Hide';
+
+  @override
+  String get nnInvoices => 'Invoices';
+
+  @override
+  String get nnProducts => 'Products';
+
+  @override
+  String get nnInstallments => 'Installments';
+
+  @override
+  String get nnDebts => 'Debts';
+
+  @override
+  String get nnReports => 'Reports';
+
+  @override
+  String get nnCash => 'Cash';
+
+  @override
+  String get npInstallmentDue => 'Installment due';
+
+  @override
+  String get npInstallmentLate => 'Late installment';
+
+  @override
+  String get npStock => 'Stock';
+
+  @override
+  String get npNegativeSale => 'Negative sale';
+
+  @override
+  String get npExpiryHint => 'Expiry hint';
+
+  @override
+  String get npDeferredSave => 'Deferred save';
+
+  @override
+  String get npReturn => 'Return';
+
+  @override
+  String get npSummary => 'Summary';
+
+  @override
+  String get npCash => 'Cash';
+
+  @override
+  String get npCustomerDebt => 'Customer debt';
+
+  @override
+  String get npDebtAge => 'Debt age';
+
+  @override
+  String get npCustomerCap => 'Customer cap';
+
+  @override
+  String get npInvoiceCap => 'Invoice cap';
+
+  @override
+  String get npFinancedSale => 'Financed sale';
+
+  @override
+  String get npSystem => 'System';
+
+  @override
+  String get npNow => 'Now';
+
+  @override
+  String get npMinuteAgo => '1 minute ago';
+
+  @override
+  String get npTwoMinutesAgo => '2 minutes ago';
+
+  @override
+  String npMinutesAgo(Object count) {
+    return '$count minutes ago';
+  }
+
+  @override
+  String get npHourAgo => 'about 1 hour ago';
+
+  @override
+  String get npTwoHoursAgo => '2 hours ago';
+
+  @override
+  String npHoursAgo(Object count) {
+    return '$count hours ago';
+  }
+
+  @override
+  String npYesterday(Object time) {
+    return 'Yesterday $time';
+  }
+
+  @override
+  String get npTwoDaysAgo => '2 days ago';
+
+  @override
+  String npDaysAgo(Object count) {
+    return '$count days ago';
+  }
+
+  @override
+  String npSaleInvoiceLine(Object date, Object id) {
+    return 'Sale invoice #$id — $date';
+  }
+
+  @override
+  String npSeller(Object name) {
+    return 'Seller: $name';
+  }
+
+  @override
+  String npCustomer(Object name) {
+    return 'Customer: $name';
+  }
+
+  @override
+  String get npItem => 'Item';
+
+  @override
+  String npItemId(Object id) {
+    return ' — ID #$id';
+  }
+
+  @override
+  String npSoldInInvoice(Object after, Object before, Object qty) {
+    return '  Sold in invoice: $qty — Balance before: $before → after: $after';
+  }
+
+  @override
+  String get npNegativeSaleTitle => 'Sale resulted in negative balance';
+
+  @override
+  String get npShift => 'Shift';
+
+  @override
+  String get npCreditSaleSaved => 'Installment sale — invoice saved';
+
+  @override
+  String get npCreditSaleRegistered => 'Installment sale — registered';
+
+  @override
+  String get npCreditSaleTitle => 'Credit sale (deferred) — registered';
+
+  @override
+  String get npRegisteredAt => 'Registered at: New Sale screen (POS)';
+
+  @override
+  String npInvoiceLine(Object date, Object id) {
+    return 'Invoice #$id — $date';
+  }
+
+  @override
+  String npTotalLine(Object advance, Object remaining, Object total) {
+    return 'Total: $total IQD — Paid: $advance IQD — Remaining: $remaining IQD';
+  }
+
+  @override
+  String get npInstallmentPlanError =>
+      'Warning: Could not auto-create installment plan — check Installments and link the invoice.';
+
+  @override
+  String npInstallmentPlanRef(Object id) {
+    return 'Installment plan: #$id';
+  }
+
+  @override
+  String npPlannedMonths(Object count) {
+    return 'Planned months: $count';
+  }
+
+  @override
+  String npMonthlyEstimate(Object amount) {
+    return 'Estimated monthly installment: $amount IQD';
+  }
+
+  @override
+  String npFinancedFromSale(Object amount) {
+    return 'Financed from sale: $amount IQD';
+  }
+
+  @override
+  String npTotalWithInterest(Object amount) {
+    return 'Total with interest (if any): $amount IQD';
+  }
+
+  @override
+  String npItemLine(Object name, Object pid, Object qty, Object total) {
+    return '• $name — #$pid — $qty — $total IQD';
+  }
+
+  @override
+  String get npMoreItemsInInvoice => '… and more items in the invoice.';
+
+  @override
+  String get npLateInstallmentTitle => 'Late installment — reminder';
+
+  @override
+  String npLateInstallmentBody(Object date, Object name, Object planRef) {
+    return '$name$planRef — due $date';
+  }
+
+  @override
+  String get npCustomerLabel => 'Customer';
+
+  @override
+  String npPlanRef(Object id) {
+    return ' — plan #$id';
+  }
+
+  @override
+  String get npUpcomingTitle => 'Upcoming installment — reminder';
+
+  @override
+  String npUpcomingBody(Object date, Object name, Object planRef) {
+    return '$name$planRef — $date';
+  }
+
+  @override
+  String get npCustomerDebtTitle => 'Customer debt';
+
+  @override
+  String npCustomerDebtBody(Object balance, Object extra, Object name) {
+    return '$name$extra — remaining $balance IQD (deferred, not installment).';
+  }
+
+  @override
+  String get npDebtAgeTitle => 'Deferred invoice — age warning';
+
+  @override
+  String npDebtAgeBody(
+    Object age,
+    Object ageWord,
+    Object customer,
+    Object date,
+    Object days,
+    Object id,
+  ) {
+    return 'Per debt settings ($days days): invoice #$id — $customer — since $date ($age $ageWord).';
+  }
+
+  @override
+  String get npDay => 'day';
+
+  @override
+  String get npDays => 'days';
+
+  @override
+  String get npCustomerCapTitle => 'Customer debt cap exceeded';
+
+  @override
+  String npCustomerCapBody(Object amount, Object cap, Object name) {
+    return 'Per debt settings: total open deferred for \"$name\" is $amount IQD (cap $cap IQD).';
+  }
+
+  @override
+  String npCustomerCapBodyNoCard(Object amount, Object cap, Object name) {
+    return 'Per debt settings (no customer card): \"$name\" — $amount IQD (cap $cap IQD).';
+  }
+
+  @override
+  String get npInvoiceCapTitle => 'Deferred invoice cap exceeded';
+
+  @override
+  String npInvoiceCapBody(
+    Object cap,
+    Object customer,
+    Object date,
+    Object id,
+    Object remaining,
+  ) {
+    return 'Per debt settings: invoice #$id — $customer — remaining $remaining IQD (cap $cap IQD) — date $date.';
+  }
+
+  @override
+  String get npWithoutName => 'unnamed';
+
+  @override
+  String get npProductLabel => 'Product';
+
+  @override
+  String get npNegativeStockTitle => 'Negative stock balance';
+
+  @override
+  String npNegativeStockBody(
+    Object name,
+    Object over,
+    Object qty,
+    Object unitWord,
+  ) {
+    return '\"$name\" — current quantity $qty (oversold by $over $unitWord).';
+  }
+
+  @override
+  String get npOutOfStockTitle => 'Out of stock';
+
+  @override
+  String npOutOfStockBody(Object name) {
+    return '\"$name\" — stock is zero.';
+  }
+
+  @override
+  String get npLowStockTitle => 'Low stock alert';
+
+  @override
+  String npLowStockBody(Object name, Object qty, Object threshold) {
+    return '\"$name\" — quantity $qty (threshold $threshold).';
+  }
+
+  @override
+  String get npUnit => 'unit';
+
+  @override
+  String get npUnits => 'units';
+
+  @override
+  String get npExpiredTitle => 'Item shelf life expired';
+
+  @override
+  String npExpiredBody(Object date, Object name) {
+    return '\"$name\" — past the recorded date ($date). Check display or disposal per store policy.';
+  }
+
+  @override
+  String get npLastDay => 'Today is the last day for storage';
+
+  @override
+  String npDaysRemaining(Object count) {
+    return '$count remaining until expiry';
+  }
+
+  @override
+  String get npNearExpiryTitle => 'Approaching expiry';
+
+  @override
+  String npNearExpiryBody(Object date, Object name, Object period) {
+    return '\"$name\" — storage expires on $date ($period).';
+  }
+
+  @override
+  String get npReturnTitle => 'Return registered';
+
+  @override
+  String npReturnBody(
+    Object count,
+    Object customer,
+    Object id,
+    Object orig,
+    Object total,
+  ) {
+    return 'Returned invoice #$id$orig — $customer — $count items — $total IQD';
+  }
+
+  @override
+  String npOrigRef(Object id) {
+    return ' ← original #$id';
+  }
+
+  @override
+  String get npDailySummaryTitle => 'Daily sales summary';
+
+  @override
+  String npDailySummaryBody(Object total) {
+    return 'Total sales invoices (excluding returns) for today: $total IQD';
+  }
+
+  @override
+  String get npLoggerNotifyFail => 'Failed to refresh notifications list';
+
+  @override
+  String get npRefreshHidden => 'Hidden notifications';
+
+  @override
+  String get npShow => 'Show';
+
+  @override
+  String get npHide => 'Hide';
 }

@@ -510,7 +510,7 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
       if (!mounted) return;
 
       try {
-        unawaited(context.read<NotificationProvider>().refresh());
+        unawaited(context.read<NotificationProvider>().refresh(loc: AppLocalizations.of(context)!));
       } catch (_) {}
 
       Navigator.pop(context, true);

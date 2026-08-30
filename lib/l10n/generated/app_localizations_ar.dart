@@ -9822,4 +9822,420 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get rpTodayIndicator => '  (عملية اليوم)';
+
+  @override
+  String get anHideAlert => 'إخفاء التنبيه';
+
+  @override
+  String get anHideConfirm => 'هذا تنبيه مهم. هل تريد تأكيد إخفائه من القائمة؟';
+
+  @override
+  String get anCancel => 'إلغاء';
+
+  @override
+  String get anConfirm => 'تأكيد';
+
+  @override
+  String get anNotifications => 'التنبيهات';
+
+  @override
+  String get anRefresh => 'تحديث';
+
+  @override
+  String get anMarkAllRead => 'تعليم الكل مقروءاً';
+
+  @override
+  String anRefreshError(Object error) {
+    return 'تعذر التحديث: $error';
+  }
+
+  @override
+  String get anEmpty => 'لا توجد تنبيهات حالياً';
+
+  @override
+  String get anHiddenNotifications => 'الإشعارات المخفية';
+
+  @override
+  String get anShow => 'إظهار';
+
+  @override
+  String get anHide => 'إخفاء';
+
+  @override
+  String get nnInvoices => 'الفواتير';
+
+  @override
+  String get nnProducts => 'المنتجات';
+
+  @override
+  String get nnInstallments => 'الأقساط';
+
+  @override
+  String get nnDebts => 'الديون';
+
+  @override
+  String get nnReports => 'التقارير';
+
+  @override
+  String get nnCash => 'الصندوق';
+
+  @override
+  String get npInstallmentDue => 'قسط مستحق';
+
+  @override
+  String get npInstallmentLate => 'قسط متأخر';
+
+  @override
+  String get npStock => 'مخزون';
+
+  @override
+  String get npNegativeSale => 'بيع سالب';
+
+  @override
+  String get npExpiryHint => 'همس الصلاحية';
+
+  @override
+  String get npDeferredSave => 'أجل الحفظ';
+
+  @override
+  String get npReturn => 'مرتجع';
+
+  @override
+  String get npSummary => 'ملخص';
+
+  @override
+  String get npCash => 'صندوق';
+
+  @override
+  String get npCustomerDebt => 'دين عميل';
+
+  @override
+  String get npDebtAge => 'عمر دين';
+
+  @override
+  String get npCustomerCap => 'سقف عميل';
+
+  @override
+  String get npInvoiceCap => 'سقف فاتورة';
+
+  @override
+  String get npFinancedSale => 'بيع مموّل';
+
+  @override
+  String get npSystem => 'النظام';
+
+  @override
+  String get npNow => 'الآن';
+
+  @override
+  String get npMinuteAgo => 'منذ دقيقة';
+
+  @override
+  String get npTwoMinutesAgo => 'منذ دقيقتين';
+
+  @override
+  String npMinutesAgo(Object count) {
+    return 'منذ $count دقيقة';
+  }
+
+  @override
+  String get npHourAgo => 'منذ ساعة تقريباً';
+
+  @override
+  String get npTwoHoursAgo => 'منذ ساعتين';
+
+  @override
+  String npHoursAgo(Object count) {
+    return 'منذ $count ساعة';
+  }
+
+  @override
+  String npYesterday(Object time) {
+    return 'أمس $time';
+  }
+
+  @override
+  String get npTwoDaysAgo => 'منذ يومين';
+
+  @override
+  String npDaysAgo(Object count) {
+    return 'منذ $count أيام';
+  }
+
+  @override
+  String npSaleInvoiceLine(Object date, Object id) {
+    return 'فاتورة بيع #$id — $date';
+  }
+
+  @override
+  String npSeller(Object name) {
+    return 'البائع: $name';
+  }
+
+  @override
+  String npCustomer(Object name) {
+    return 'العميل: $name';
+  }
+
+  @override
+  String get npItem => 'صنف';
+
+  @override
+  String npItemId(Object id) {
+    return ' — مُعرّف #$id';
+  }
+
+  @override
+  String npSoldInInvoice(Object after, Object before, Object qty) {
+    return '  مُباع في الفاتورة: $qty — الرصيد قبل: $before → بعد: $after';
+  }
+
+  @override
+  String get npNegativeSaleTitle => 'بيع أدى إلى رصيد سالب';
+
+  @override
+  String get npShift => 'وردية';
+
+  @override
+  String get npCreditSaleSaved => 'بيع بالتقسيط — فاتورة محفوظة';
+
+  @override
+  String get npCreditSaleRegistered => 'بيع بالتقسيط — تم التسجيل';
+
+  @override
+  String get npCreditSaleTitle => 'بيع بالدين (آجل) — تم التسجيل';
+
+  @override
+  String get npRegisteredAt => 'مكان التسجيل: شاشة «بيع جديد» (نقطة البيع)';
+
+  @override
+  String npInvoiceLine(Object date, Object id) {
+    return 'فاتورة #$id — $date';
+  }
+
+  @override
+  String npTotalLine(Object advance, Object remaining, Object total) {
+    return 'الإجمالي: $total د.ع — الواصل: $advance د.ع — المتبقي: $remaining د.ع';
+  }
+
+  @override
+  String get npInstallmentPlanError =>
+      'تنبيه: تعذّر إنشاء خطة التقسيط تلقائياً — راجع «الأقساط» واربط الفاتورة بخطة.';
+
+  @override
+  String npInstallmentPlanRef(Object id) {
+    return 'خطة التقسيط: #$id';
+  }
+
+  @override
+  String npPlannedMonths(Object count) {
+    return 'عدد الأشهر المخطط: $count';
+  }
+
+  @override
+  String npMonthlyEstimate(Object amount) {
+    return 'قسط شهري تقريبي: $amount د.ع';
+  }
+
+  @override
+  String npFinancedFromSale(Object amount) {
+    return 'الممول من البيع: $amount د.ع';
+  }
+
+  @override
+  String npTotalWithInterest(Object amount) {
+    return 'الإجمالي مع الفائدة (إن وُجدت): $amount د.ع';
+  }
+
+  @override
+  String npItemLine(Object name, Object pid, Object qty, Object total) {
+    return '• $name — #$pid — $qty — $total د.ع';
+  }
+
+  @override
+  String get npMoreItemsInInvoice => '… وباقي الأسطر في الفاتورة.';
+
+  @override
+  String get npLateInstallmentTitle => 'قسط متأخر — تذكير';
+
+  @override
+  String npLateInstallmentBody(Object date, Object name, Object planRef) {
+    return '$name$planRef — مستحق $date';
+  }
+
+  @override
+  String get npCustomerLabel => 'عميل';
+
+  @override
+  String npPlanRef(Object id) {
+    return ' — خطة #$id';
+  }
+
+  @override
+  String get npUpcomingTitle => 'قسط قريب الاستحقاق — تذكير';
+
+  @override
+  String npUpcomingBody(Object date, Object name, Object planRef) {
+    return '$name$planRef — $date';
+  }
+
+  @override
+  String get npCustomerDebtTitle => 'دين على عميل';
+
+  @override
+  String npCustomerDebtBody(Object balance, Object extra, Object name) {
+    return '$name$extra — المتبقي $balance د.ع (آجل غير المقسّط).';
+  }
+
+  @override
+  String get npDebtAgeTitle => 'فاتورة آجل — تحذير عمر';
+
+  @override
+  String npDebtAgeBody(
+    Object age,
+    Object ageWord,
+    Object customer,
+    Object date,
+    Object days,
+    Object id,
+  ) {
+    return 'حسب إعدادات الدين ($days يوماً): فاتورة #$id — $customer — منذ $date ($age $ageWord).';
+  }
+
+  @override
+  String get npDay => 'يوماً';
+
+  @override
+  String get npDays => 'أياماً';
+
+  @override
+  String get npCustomerCapTitle => 'تجاوز سقف الدين للعميل';
+
+  @override
+  String npCustomerCapBody(Object amount, Object cap, Object name) {
+    return 'حسب إعدادات الدين: مجموع الآجل المفتوح لـ «$name» $amount د.ع (السقف $cap د.ع).';
+  }
+
+  @override
+  String npCustomerCapBodyNoCard(Object amount, Object cap, Object name) {
+    return 'حسب إعدادات الدين (بدون بطاقة عميل): «$name» — $amount د.ع (السقف $cap د.ع).';
+  }
+
+  @override
+  String get npInvoiceCapTitle => 'تجاوز سقف فاتورة آجل';
+
+  @override
+  String npInvoiceCapBody(
+    Object cap,
+    Object customer,
+    Object date,
+    Object id,
+    Object remaining,
+  ) {
+    return 'حسب إعدادات الدين: فاتورة #$id — $customer — المتبقي $remaining د.ع (السقف $cap د.ع) — تاريخ $date.';
+  }
+
+  @override
+  String get npWithoutName => 'بدون اسم';
+
+  @override
+  String get npProductLabel => 'منتج';
+
+  @override
+  String get npNegativeStockTitle => 'رصيد سالب في المخزون';
+
+  @override
+  String npNegativeStockBody(
+    Object name,
+    Object over,
+    Object qty,
+    Object unitWord,
+  ) {
+    return '«$name» — الكمية الحالية $qty (أي بيع زائد نحو $over $unitWord).';
+  }
+
+  @override
+  String get npOutOfStockTitle => 'منتج منفد';
+
+  @override
+  String npOutOfStockBody(Object name) {
+    return '«$name» — المخزون صفر.';
+  }
+
+  @override
+  String get npLowStockTitle => 'تنبيه مخزون منخفض';
+
+  @override
+  String npLowStockBody(Object name, Object qty, Object threshold) {
+    return '«$name» — الكمية $qty (الحد $threshold).';
+  }
+
+  @override
+  String get npUnit => 'وحدة';
+
+  @override
+  String get npUnits => 'وحدات';
+
+  @override
+  String get npExpiredTitle => 'انتهى أجل ما على العبوة';
+
+  @override
+  String npExpiredBody(Object date, Object name) {
+    return '«$name» — تجاوز التاريخ المدوَّن ($date). راجع العرض أو الإتلاف حسب سياسة المتجر.';
+  }
+
+  @override
+  String get npLastDay => 'اليوم آخرُ الأيام المسماة للحفظ';
+
+  @override
+  String npDaysRemaining(Object count) {
+    return 'بقي $count على أجل الانتهاء';
+  }
+
+  @override
+  String get npNearExpiryTitle => 'في أفق الصلاحية';
+
+  @override
+  String npNearExpiryBody(Object date, Object name, Object period) {
+    return '«$name» — ينتهي أجل الحفظ عند $date ($period).';
+  }
+
+  @override
+  String get npReturnTitle => 'تم تسجيل مرتجع';
+
+  @override
+  String npReturnBody(
+    Object count,
+    Object customer,
+    Object id,
+    Object orig,
+    Object total,
+  ) {
+    return 'فاتورة مرتجعة #$id$orig — $customer — $count صنف — $total د.ع';
+  }
+
+  @override
+  String npOrigRef(Object id) {
+    return ' ← أصل #$id';
+  }
+
+  @override
+  String get npDailySummaryTitle => 'ملخص مبيعات اليوم';
+
+  @override
+  String npDailySummaryBody(Object total) {
+    return 'إجمالي فواتير البيع (بدون مرتجعات) لهذا اليوم: $total د.ع';
+  }
+
+  @override
+  String get npLoggerNotifyFail => 'فشل تحديث قائمة الإشعارات';
+
+  @override
+  String get npRefreshHidden => 'الإشعارات المخفية';
+
+  @override
+  String get npShow => 'إظهار';
+
+  @override
+  String get npHide => 'إخفاء';
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../l10n/generated/app_localizations.dart';
 import '../providers/notification_provider.dart';
 import 'notification_navigation.dart';
 
@@ -24,16 +25,16 @@ Future<bool> _confirmDismissImportant(
     context: ctx,
     barrierDismissible: true,
     builder: (dCtx) => AlertDialog(
-      title: const Text('إخفاء التنبيه'),
-      content: const Text('هذا تنبيه مهم. هل تريد تأكيد إخفائه من القائمة؟'),
+      title: Text(AppLocalizations.of(ctx)!.anHideAlert),
+      content: Text(AppLocalizations.of(ctx)!.anHideConfirm),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(dCtx, false),
-          child: const Text('إلغاء'),
+          child: Text(AppLocalizations.of(ctx)!.anCancel),
         ),
         TextButton(
           onPressed: () => Navigator.pop(dCtx, true),
-          child: const Text('تأكيد'),
+          child: Text(AppLocalizations.of(ctx)!.anConfirm),
         ),
       ],
     ),
@@ -63,7 +64,7 @@ Future<void> showAppNotificationsSheet(
   NavigatorState? contentNavigator,
 }) async {
   final notifier = context.read<NotificationProvider>();
-  await notifier.refresh();
+  await notifier.refresh(loc: AppLocalizations.of(context)!);
   if (!context.mounted) return;
 
   await showModalBottomSheet<void>(
@@ -88,6 +89,7 @@ class _NotificationsSheet extends StatefulWidget {
 }
 
 class _NotificationsSheetState extends State<_NotificationsSheet> {
+  AppLocalizations get loc => AppLocalizations.of(context)!;
   final Set<String> _hiddenIds = {};
 
   @override
@@ -140,7 +142,7 @@ class _NotificationsSheetState extends State<_NotificationsSheet> {
                             child: Align(
                               alignment: AlignmentDirectional.centerEnd,
                               child: Text(
-                                'التنبيهات',
+                                loc.anNotifications,
                                 style: theme.textTheme.titleMedium?.copyWith(
                                   fontWeight: FontWeight.w800,
                                 ),
@@ -149,12 +151,12 @@ class _NotificationsSheetState extends State<_NotificationsSheet> {
                           ),
                           TextButton(
                             onPressed: n.isLoading ? null : () => n.refresh(),
-                            child: const Text('تحديث'),
+                            child: Text(loc.anRefresh),
                           ),
                           if (n.unreadCount > 0)
                             TextButton(
                               onPressed: () => n.markAllAsRead(),
-                              child: const Text('تعليم الكل مقروءاً'),
+                              child: Text(loc.anMarkAllRead),
                             ),
                         ],
                       ),
@@ -171,7 +173,7 @@ class _NotificationsSheetState extends State<_NotificationsSheet> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
-                        'تعذر التحديث: ${n.lastError}',
+                        loc.anRefreshError(n.lastError ?? ''),
                         style: TextStyle(
                           color: theme.colorScheme.error,
                           fontSize: 12,
@@ -195,7 +197,7 @@ class _NotificationsSheetState extends State<_NotificationsSheet> {
                                   ),
                                   const SizedBox(height: 14),
                                   Text(
-                                    'لا توجد تنبيهات حالياً',
+                                    loc.anEmpty,
                                     textAlign: TextAlign.center,
                                     style: theme.textTheme.titleMedium
                                         ?.copyWith(

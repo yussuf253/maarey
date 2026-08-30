@@ -1316,6 +1316,8 @@ class SaleReceiptPdf {
                         receiptInvoiceId: receiptInvoiceId,
                         pageFormat: format,
                         settings: settings,
+                        locale: locale,
+                        loc: loc,
                       ),
                     );
                   };
@@ -1597,6 +1599,8 @@ class SaleReceiptPdf {
                         recordedByUserName: recordedByUserName,
                         pageFormat: format,
                         settings: settings,
+                        locale: locale,
+                        loc: loc,
                       ),
                     );
                   };
@@ -1701,6 +1705,8 @@ class SaleReceiptPdf {
                             subtotalBeforeDiscount: subtotalBeforeDiscount,
                             pageFormat: format,
                             settings: settings,
+                            locale: locale,
+                            loc: loc,
                           ),
                         );
                       };
@@ -1813,6 +1819,7 @@ class SaleReceiptPdf {
                         },
                         build: (format) => buildPdfBytes(
                           locale: locale,
+                          loc: loc,
                           invoice: invoice,
                           subtotalBeforeDiscount: subtotalBeforeDiscount,
                           pageFormat: format,
@@ -2059,6 +2066,7 @@ class SaleReceiptPdf {
                       key,
                       () => buildSupplierPaymentReceiptBytes(
                         locale: locale,
+                        loc: loc,
                         supplierDisplayName: supplierDisplayName,
                         amountPaid: amountPaid,
                         payableBefore: payableBefore,

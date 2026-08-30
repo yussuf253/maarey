@@ -197,7 +197,7 @@ class _CustomerDebtDetailScreenState extends State<CustomerDebtDetailScreen> {
         return;
       }
       unawaited(context.read<InvoiceProvider>().refresh());
-      unawaited(context.read<NotificationProvider>().refresh());
+      unawaited(context.read<NotificationProvider>().refresh(loc: AppLocalizations.of(context)!));
       await _load();
       if (!mounted) return;
       await SaleReceiptPdf.presentCustomerDebtPaymentReceipt(

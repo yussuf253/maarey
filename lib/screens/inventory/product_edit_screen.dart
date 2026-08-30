@@ -835,7 +835,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
       if (!mounted) return;
 
-      unawaited(context.read<NotificationProvider>().refresh());
+      unawaited(context.read<NotificationProvider>().refresh(loc: AppLocalizations.of(context)!));
 
       Navigator.pop(context, true);
     } catch (e) {

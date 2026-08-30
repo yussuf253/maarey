@@ -10033,4 +10033,422 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get rpTodayIndicator => '  (transaction du jour)';
+
+  @override
+  String get anHideAlert => 'Masquer l\'alerte';
+
+  @override
+  String get anHideConfirm =>
+      'C\'est une alerte importante. Voulez-vous vraiment la masquer de la liste ?';
+
+  @override
+  String get anCancel => 'Annuler';
+
+  @override
+  String get anConfirm => 'Confirmer';
+
+  @override
+  String get anNotifications => 'Notifications';
+
+  @override
+  String get anRefresh => 'Actualiser';
+
+  @override
+  String get anMarkAllRead => 'Tout marquer comme lu';
+
+  @override
+  String anRefreshError(Object error) {
+    return 'Échec de l\'actualisation : $error';
+  }
+
+  @override
+  String get anEmpty => 'Aucune notification pour le moment';
+
+  @override
+  String get anHiddenNotifications => 'Notifications masquées';
+
+  @override
+  String get anShow => 'Afficher';
+
+  @override
+  String get anHide => 'Masquer';
+
+  @override
+  String get nnInvoices => 'Factures';
+
+  @override
+  String get nnProducts => 'Produits';
+
+  @override
+  String get nnInstallments => 'Tranches';
+
+  @override
+  String get nnDebts => 'Dettes';
+
+  @override
+  String get nnReports => 'Rapports';
+
+  @override
+  String get nnCash => 'Caisse';
+
+  @override
+  String get npInstallmentDue => 'Tranche due';
+
+  @override
+  String get npInstallmentLate => 'Tranche en retard';
+
+  @override
+  String get npStock => 'Stock';
+
+  @override
+  String get npNegativeSale => 'Vente négative';
+
+  @override
+  String get npExpiryHint => 'Rappel péremption';
+
+  @override
+  String get npDeferredSave => 'Sauvegarde différée';
+
+  @override
+  String get npReturn => 'Retour';
+
+  @override
+  String get npSummary => 'Résumé';
+
+  @override
+  String get npCash => 'Caisse';
+
+  @override
+  String get npCustomerDebt => 'Dette client';
+
+  @override
+  String get npDebtAge => 'Âge de la dette';
+
+  @override
+  String get npCustomerCap => 'Plafond client';
+
+  @override
+  String get npInvoiceCap => 'Plafond facture';
+
+  @override
+  String get npFinancedSale => 'Vente financée';
+
+  @override
+  String get npSystem => 'Système';
+
+  @override
+  String get npNow => 'Maintenant';
+
+  @override
+  String get npMinuteAgo => 'Il y a 1 minute';
+
+  @override
+  String get npTwoMinutesAgo => 'Il y a 2 minutes';
+
+  @override
+  String npMinutesAgo(Object count) {
+    return 'Il y a $count minutes';
+  }
+
+  @override
+  String get npHourAgo => 'il y a environ 1 heure';
+
+  @override
+  String get npTwoHoursAgo => 'Il y a 2 heures';
+
+  @override
+  String npHoursAgo(Object count) {
+    return 'Il y a $count heures';
+  }
+
+  @override
+  String npYesterday(Object time) {
+    return 'Hier $time';
+  }
+
+  @override
+  String get npTwoDaysAgo => 'Il y a 2 jours';
+
+  @override
+  String npDaysAgo(Object count) {
+    return 'Il y a $count jours';
+  }
+
+  @override
+  String npSaleInvoiceLine(Object date, Object id) {
+    return 'Facture de vente #$id — $date';
+  }
+
+  @override
+  String npSeller(Object name) {
+    return 'Vendeur : $name';
+  }
+
+  @override
+  String npCustomer(Object name) {
+    return 'Client : $name';
+  }
+
+  @override
+  String get npItem => 'Article';
+
+  @override
+  String npItemId(Object id) {
+    return ' — ID #$id';
+  }
+
+  @override
+  String npSoldInInvoice(Object after, Object before, Object qty) {
+    return '  Vendu dans la facture : $qty — Solde avant : $before → après : $after';
+  }
+
+  @override
+  String get npNegativeSaleTitle => 'La vente a entraîné un solde négatif';
+
+  @override
+  String get npShift => 'Quart';
+
+  @override
+  String get npCreditSaleSaved => 'Vente en tranche — facture enregistrée';
+
+  @override
+  String get npCreditSaleRegistered => 'Vente en tranche — enregistrée';
+
+  @override
+  String get npCreditSaleTitle => 'Vente à crédit (différé) — enregistrée';
+
+  @override
+  String get npRegisteredAt => 'Enregistré dans : écran Vente (PDV)';
+
+  @override
+  String npInvoiceLine(Object date, Object id) {
+    return 'Facture #$id — $date';
+  }
+
+  @override
+  String npTotalLine(Object advance, Object remaining, Object total) {
+    return 'Total : $total IQD — Payé : $advance IQD — Reste : $remaining IQD';
+  }
+
+  @override
+  String get npInstallmentPlanError =>
+      'Attention : impossible de créer automatiquement le plan — vérifiez les Tranches et liez la facture.';
+
+  @override
+  String npInstallmentPlanRef(Object id) {
+    return 'Plan de paiement : #$id';
+  }
+
+  @override
+  String npPlannedMonths(Object count) {
+    return 'Mois prévus : $count';
+  }
+
+  @override
+  String npMonthlyEstimate(Object amount) {
+    return 'Tranche mensuelle estimée : $amount IQD';
+  }
+
+  @override
+  String npFinancedFromSale(Object amount) {
+    return 'Financé par la vente : $amount IQD';
+  }
+
+  @override
+  String npTotalWithInterest(Object amount) {
+    return 'Total avec intérêts (le cas échéant) : $amount IQD';
+  }
+
+  @override
+  String npItemLine(Object name, Object pid, Object qty, Object total) {
+    return '• $name — #$pid — $qty — $total IQD';
+  }
+
+  @override
+  String get npMoreItemsInInvoice => '… et d\'autres articles dans la facture.';
+
+  @override
+  String get npLateInstallmentTitle => 'Tranche en retard — rappel';
+
+  @override
+  String npLateInstallmentBody(Object date, Object name, Object planRef) {
+    return '$name$planRef — échéance $date';
+  }
+
+  @override
+  String get npCustomerLabel => 'Client';
+
+  @override
+  String npPlanRef(Object id) {
+    return ' — plan #$id';
+  }
+
+  @override
+  String get npUpcomingTitle => 'Tranche à venir — rappel';
+
+  @override
+  String npUpcomingBody(Object date, Object name, Object planRef) {
+    return '$name$planRef — $date';
+  }
+
+  @override
+  String get npCustomerDebtTitle => 'Dette client';
+
+  @override
+  String npCustomerDebtBody(Object balance, Object extra, Object name) {
+    return '$name$extra — reste $balance IQD (différé, non tranche).';
+  }
+
+  @override
+  String get npDebtAgeTitle => 'Facture différée — avertissement';
+
+  @override
+  String npDebtAgeBody(
+    Object age,
+    Object ageWord,
+    Object customer,
+    Object date,
+    Object days,
+    Object id,
+  ) {
+    return 'Selon les paramètres de dette ($days jours) : facture #$id — $customer — depuis le $date ($age $ageWord).';
+  }
+
+  @override
+  String get npDay => 'jour';
+
+  @override
+  String get npDays => 'jours';
+
+  @override
+  String get npCustomerCapTitle => 'Plafond de dette client dépassé';
+
+  @override
+  String npCustomerCapBody(Object amount, Object cap, Object name) {
+    return 'Selon les paramètres : total différé ouvert pour \"$name\" est $amount IQD (plafond $cap IQD).';
+  }
+
+  @override
+  String npCustomerCapBodyNoCard(Object amount, Object cap, Object name) {
+    return 'Selon les paramètres (sans fiche client) : \"$name\" — $amount IQD (plafond $cap IQD).';
+  }
+
+  @override
+  String get npInvoiceCapTitle => 'Plafond de facture différée dépassé';
+
+  @override
+  String npInvoiceCapBody(
+    Object cap,
+    Object customer,
+    Object date,
+    Object id,
+    Object remaining,
+  ) {
+    return 'Selon les paramètres : facture #$id — $customer — reste $remaining IQD (plafond $cap IQD) — date $date.';
+  }
+
+  @override
+  String get npWithoutName => 'sans nom';
+
+  @override
+  String get npProductLabel => 'Produit';
+
+  @override
+  String get npNegativeStockTitle => 'Solde de stock négatif';
+
+  @override
+  String npNegativeStockBody(
+    Object name,
+    Object over,
+    Object qty,
+    Object unitWord,
+  ) {
+    return '\"$name\" — quantité actuelle $qty (survente de $over $unitWord).';
+  }
+
+  @override
+  String get npOutOfStockTitle => 'Rupture de stock';
+
+  @override
+  String npOutOfStockBody(Object name) {
+    return '\"$name\" — stock est zéro.';
+  }
+
+  @override
+  String get npLowStockTitle => 'Alerte stock bas';
+
+  @override
+  String npLowStockBody(Object name, Object qty, Object threshold) {
+    return '\"$name\" — quantité $qty (seuil $threshold).';
+  }
+
+  @override
+  String get npUnit => 'unité';
+
+  @override
+  String get npUnits => 'unités';
+
+  @override
+  String get npExpiredTitle => 'Durée de vie expirée';
+
+  @override
+  String npExpiredBody(Object date, Object name) {
+    return '\"$name\" — date dépassée ($date). Vérifiez l\'exposition ou l\'élimination selon la politique.';
+  }
+
+  @override
+  String get npLastDay => 'Aujourd\'hui est le dernier jour de conservation';
+
+  @override
+  String npDaysRemaining(Object count) {
+    return '$count restant(s) jusqu\'à expiration';
+  }
+
+  @override
+  String get npNearExpiryTitle => 'Proche de la péremption';
+
+  @override
+  String npNearExpiryBody(Object date, Object name, Object period) {
+    return '\"$name\" — conservation jusqu\'au $date ($period).';
+  }
+
+  @override
+  String get npReturnTitle => 'Retour enregistré';
+
+  @override
+  String npReturnBody(
+    Object count,
+    Object customer,
+    Object id,
+    Object orig,
+    Object total,
+  ) {
+    return 'Facture retournée #$id$orig — $customer — $count articles — $total IQD';
+  }
+
+  @override
+  String npOrigRef(Object id) {
+    return ' ← original #$id';
+  }
+
+  @override
+  String get npDailySummaryTitle => 'Résumé des ventes du jour';
+
+  @override
+  String npDailySummaryBody(Object total) {
+    return 'Total des factures de vente (hors retours) pour aujourd\'hui : $total IQD';
+  }
+
+  @override
+  String get npLoggerNotifyFail =>
+      'Échec de l\'actualisation des notifications';
+
+  @override
+  String get npRefreshHidden => 'Notifications masquées';
+
+  @override
+  String get npShow => 'Afficher';
+
+  @override
+  String get npHide => 'Masquer';
 }

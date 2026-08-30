@@ -502,7 +502,7 @@ loc.svItemsSkipped(missing.join(', '), lines.length.toString()),
 
         await context.read<ProductProvider>().loadProducts();
 
-        unawaited(context.read<NotificationProvider>().refresh());
+        unawaited(context.read<NotificationProvider>().refresh(loc: AppLocalizations.of(context)!));
       } catch (_) {}
 
       if (!mounted) return;

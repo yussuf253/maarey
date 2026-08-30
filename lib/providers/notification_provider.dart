@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../l10n/generated/app_localizations.dart';
 import '../services/database_helper.dart';
 import '../services/system_notification_service.dart';
 import '../services/tenant_context_service.dart';
@@ -63,6 +64,7 @@ enum NotificationType {
 }
 
 class AppNotification {
+  static AppLocalizations? loc;
   final String id;
   final String title;
   final String body;
@@ -152,35 +154,35 @@ class AppNotification {
   String get typeLabel {
     switch (type) {
       case NotificationType.installmentDue:
-        return 'قسط مستحق';
+        return loc!.npInstallmentDue;
       case NotificationType.installmentLate:
-        return 'قسط متأخر';
+        return loc!.npInstallmentLate;
       case NotificationType.lowInventory:
-        return 'مخزون';
+        return loc!.npStock;
       case NotificationType.negativeStockSale:
-        return 'بيع سالب';
+        return loc!.npNegativeSale;
       case NotificationType.expirySoon:
-        return 'همس الصلاحية';
+        return loc!.npExpiryHint;
       case NotificationType.expiredProduct:
-        return 'أجل الحفظ';
+        return loc!.npDeferredSave;
       case NotificationType.saleReturn:
-        return 'مرتجع';
+        return loc!.npReturn;
       case NotificationType.newReport:
-        return 'ملخص';
+        return loc!.npSummary;
       case NotificationType.cashAlert:
-        return 'صندوق';
+        return loc!.npCash;
       case NotificationType.customerDebt:
-        return 'دين عميل';
+        return loc!.npCustomerDebt;
       case NotificationType.debtInvoiceAged:
-        return 'عمر دين';
+        return loc!.npDebtAge;
       case NotificationType.debtCustomerCeiling:
-        return 'سقف عميل';
+        return loc!.npCustomerCap;
       case NotificationType.debtInvoiceCeiling:
-        return 'سقف فاتورة';
+        return loc!.npInvoiceCap;
       case NotificationType.financedSale:
-        return 'بيع مموّل';
+        return loc!.npFinancedSale;
       case NotificationType.systemInfo:
-        return 'النظام';
+        return loc!.npSystem;
     }
   }
 
@@ -190,11 +192,11 @@ class AppNotification {
     if (diff.isNegative) {
       return DateFormat('dd/MM/yyyy HH:mm', 'ar').format(time);
     }
-    if (diff.inSeconds < 45) return 'الآن';
+    if (diff.inSeconds < 45) return AppNotification.loc!.npNow;
     if (diff.inMinutes < 60) {
       final m = diff.inMinutes;
-      if (m <= 1) return 'منذ دقيقة';
-      if (m == 2) return 'منذ دقيقتين';
+      if (m <= 1) return AppNotification.loc!.npMinuteAgo;
+      if (m == 2) return AppNotification.loc!.npTwoMinutesAgo;
       return 'منذ $m دقيقة';
     }
 
@@ -204,14 +206,14 @@ class AppNotification {
 
     if (calendarDays <= 0) {
       final h = diff.inHours;
-      if (h <= 1) return 'منذ ساعة تقريباً';
-      if (h == 2) return 'منذ ساعتين';
+      if (h <= 1) return AppNotification.loc!.npHourAgo;
+      if (h == 2) return AppNotification.loc!.npTwoHoursAgo;
       return 'منذ $h ساعة';
     }
     if (calendarDays == 1) {
-      return 'أمس ${DateFormat('HH:mm', 'ar').format(time)}';
+      return AppNotification.loc!.npYesterday(DateFormat('HH:mm').format(time));
     }
-    if (calendarDays == 2) return 'منذ يومين';
+    if (calendarDays == 2) return AppNotification.loc!.npTwoDaysAgo;
     if (calendarDays < 7) return 'منذ $calendarDays أيام';
     if (time.year == now.year) {
       return DateFormat('d MMM', 'ar').format(time);
@@ -222,6 +224,7 @@ class AppNotification {
 
 /// يبني الإشعارات من [DatabaseHelper] ويحترم تفضيلات المستخدم.
 class NotificationProvider extends ChangeNotifier {
+  AppLocalizations? _loc;
   NotificationProvider() {
     Future.microtask(() => refresh());
   }
@@ -450,7 +453,7 @@ class NotificationProvider extends ChangeNotifier {
       built.add(
         AppNotification(
           id: id,
-          title: 'بيع أدى إلى رصيد سالب',
+          title: _loc!.npNegativeSaleTitle,
           body: buf.toString().trimRight(),
           type: NotificationType.negativeStockSale,
           time: at,
@@ -786,7 +789,8 @@ class NotificationProvider extends ChangeNotifier {
   // TODO(perf): refresh() runs many SQLite queries on the UI isolate — can jank/freeze
   // after user actions. Split phases, cache, or offload heavy aggregation (track in a
   // dedicated issue/PR; do not mix with sync_queue PoC work).
-  Future<void> refresh() async {
+  Future<void> refresh({AppLocalizations? loc}) async {
+    if (loc != null) { _loc = loc; AppNotification.loc = loc; }
     _loading = true;
     _lastError = null;
     notifyListeners();
@@ -835,7 +839,7 @@ class NotificationProvider extends ChangeNotifier {
           built.add(
             AppNotification(
               id: nid,
-              title: 'قسط متأخر — تذكير',
+              title: _loc!.npLateInstallmentTitle,
               body:
                   '${name == null || name.isEmpty ? 'عميل' : name}${pid != null && pid > 0 ? ' — خطة #$pid' : ''} — مستحق ${dateFmt.format(dueDt)} — ${numFmt.format(amt)} د.ع',
               type: NotificationType.installmentLate,
@@ -865,7 +869,7 @@ class NotificationProvider extends ChangeNotifier {
           built.add(
             AppNotification(
               id: nid,
-              title: 'قسط قريب الاستحقاق — تذكير',
+              title: _loc!.npUpcomingTitle,
               body:
                   '${name == null || name.isEmpty ? 'عميل' : name}${pid != null && pid > 0 ? ' — خطة #$pid' : ''} — ${dateFmt.format(dueDt)} — ${numFmt.format(amt)} د.ع',
               type: NotificationType.installmentDue,
@@ -883,14 +887,14 @@ class NotificationProvider extends ChangeNotifier {
             await _db.getCustomersWithDebtForNotifications(tenantId: tenantId);
         for (final row in debtRows) {
           final cid = row['id'];
-          final name = (row['name'] as String?)?.trim() ?? 'عميل';
+          final name = (row['name'] as String?)?.trim() ?? _loc!.npCustomerLabel;
           final bal = (row['balance'] as num?)?.toDouble() ?? 0;
           final phone = (row['phone'] as String?)?.trim();
           final extra = (phone != null && phone.isNotEmpty) ? ' — $phone' : '';
           built.add(
             AppNotification(
               id: 'debt_cust_$cid',
-              title: 'دين على عميل',
+              title: _loc!.npCustomerDebtTitle,
               body:
                   '$name$extra — المتبقي ${numFmt.format(bal)} د.ع (آجل غير المقسّط).',
               type: NotificationType.customerDebt,
@@ -915,7 +919,7 @@ class NotificationProvider extends ChangeNotifier {
             built.add(
               AppNotification(
                 id: 'debt_set_age_$invId',
-                title: 'فاتورة آجل — تحذير عمر',
+                title: _loc!.npDebtAgeTitle,
                 body:
                     'حسب إعدادات الدين ($warnDays يوماً): فاتورة #$invId — '
                     '${cust.isEmpty ? 'بدون اسم' : cust} — منذ ${dateFmt.format(invDate)} '
@@ -936,7 +940,7 @@ class NotificationProvider extends ChangeNotifier {
           );
           for (final row in byId) {
             final cid = row['customerId'];
-            final name = (row['customerName'] as String?)?.trim() ?? 'عميل';
+            final name = (row['customerName'] as String?)?.trim() ?? _loc!.npCustomerLabel;
             final open = (row['openTotal'] as num?)?.toDouble() ?? 0;
             built.add(
               AppNotification(
@@ -957,7 +961,7 @@ class NotificationProvider extends ChangeNotifier {
           );
           for (final row in byName) {
             final nameKey = (row['nameKey'] as String?)?.trim() ?? '';
-            final name = (row['customerName'] as String?)?.trim() ?? 'عميل';
+            final name = (row['customerName'] as String?)?.trim() ?? _loc!.npCustomerLabel;
             final open = (row['openTotal'] as num?)?.toDouble() ?? 0;
             final nid =
                 'debt_set_cap_n_${tenantId}_${nameKey.hashCode}';
@@ -991,7 +995,7 @@ class NotificationProvider extends ChangeNotifier {
             built.add(
               AppNotification(
                 id: 'debt_set_cap_i_$invId',
-                title: 'تجاوز سقف فاتورة آجل',
+                title: _loc!.npInvoiceCapTitle,
                 body:
                     'حسب إعدادات الدين: فاتورة #$invId — '
                     '${cust.isEmpty ? 'بدون اسم' : cust} — المتبقي '
@@ -1012,21 +1016,21 @@ class NotificationProvider extends ChangeNotifier {
         );
         for (final row in rows) {
           final pid = row['id'];
-          final name = (row['name'] as String?) ?? 'منتج';
+          final name = (row['name'] as String?) ?? _loc!.npProductLabel;
           final qty = (row['qty'] as num?)?.toDouble() ?? 0;
           final th = (row['lowStockThreshold'] as num?)?.toDouble() ?? 0;
           late final String title;
           late final String body;
           if (qty < -1e-9) {
-            title = 'رصيد سالب في المخزون';
+            title = _loc!.npNegativeStockTitle;
             final over = qty.abs();
             body =
                 '"$name" — الكمية الحالية ${numFmt.format(qty)} (أي بيع زائد نحو ${numFmt.format(over)} ${over == 1 ? 'وحدة' : 'وحدات'} عن الرصيد عند آخر تحديث).';
           } else if (qty <= 1e-9) {
-            title = 'منتج منفد';
+            title = _loc!.npOutOfStockTitle;
             body = '"$name" — المخزون صفر.';
           } else {
-            title = 'تنبيه مخزون منخفض';
+            title = _loc!.npLowStockTitle;
             body =
                 '"$name" — الكمية ${numFmt.format(qty)} (الحد ${numFmt.format(th)}).';
           }
@@ -1053,7 +1057,7 @@ class NotificationProvider extends ChangeNotifier {
         );
         for (final row in rows) {
           final pid = row['id'];
-          final name = (row['name'] as String?) ?? 'منتج';
+          final name = (row['name'] as String?) ?? _loc!.npProductLabel;
           final expRaw = row['expiryDate']?.toString();
           final days = _daysUntilExpiry(expRaw);
 
@@ -1075,7 +1079,7 @@ class NotificationProvider extends ChangeNotifier {
             built.add(
               AppNotification(
                 id: 'exp_past_$pid',
-                title: 'انتهى أجل ما على العبوة',
+                title: _loc!.npExpiredTitle,
                 body:
                     '«$name» — تجاوز التاريخ المدوَّن ($expLabel). راجع العرض أو الإتلاف حسب سياسة المتجر.',
                 type: NotificationType.expiredProduct,
@@ -1090,7 +1094,7 @@ class NotificationProvider extends ChangeNotifier {
             built.add(
               AppNotification(
                 id: 'exp_soon_$pid',
-                title: 'في أفق الصلاحية',
+                title: _loc!.npNearExpiryTitle,
                 body:
                     '«$name» — ينتهي أجل الحفظ عند $expLabel ($daysPhrase).',
                 type: NotificationType.expirySoon,
@@ -1118,7 +1122,7 @@ class NotificationProvider extends ChangeNotifier {
           built.add(
             AppNotification(
               id: 'ret_$invId',
-              title: 'تم تسجيل مرتجع',
+              title: _loc!.npReturnTitle,
               body:
                   'فاتورة مرتجعة #$invId${orig != null ? ' ← أصل #$orig' : ''} — ${cust == null || cust.isEmpty ? 'بدون اسم' : cust} — ${numFmt.format(total)} د.ع',
               type: NotificationType.saleReturn,
@@ -1138,7 +1142,7 @@ class NotificationProvider extends ChangeNotifier {
         built.add(
           AppNotification(
             id: 'daily_$dayKey',
-            title: 'ملخص مبيعات اليوم',
+            title: _loc!.npDailySummaryTitle,
             body:
                 'إجمالي فواتير البيع (بدون مرتجعات) لهذا اليوم: ${numFmt.format(total)} د.ع',
             type: NotificationType.newReport,
@@ -1182,7 +1186,7 @@ class NotificationProvider extends ChangeNotifier {
 
       _emitNewToAndroidSystemTray(built);
     } catch (e, st) {
-      AppLogger.error('Notify', 'فشل تحديث قائمة الإشعارات', e, st);
+      AppLogger.error('Notify', _loc?.npLoggerNotifyFail ?? 'Failed to refresh notifications', e, st);
       _lastError = e.toString();
     } finally {
       _loading = false;

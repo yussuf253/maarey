@@ -2,6 +2,7 @@ import 'dart:async' show unawaited;
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
+import 'package:naboo/l10n/generated/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/debt_settings_data.dart';
@@ -124,7 +125,7 @@ class _DebtSettingsScreenState extends State<DebtSettingsScreen> {
     CloudSyncService.instance.scheduleSyncSoon();
     if (!mounted) return;
     try {
-      unawaited(context.read<NotificationProvider>().refresh());
+      unawaited(context.read<NotificationProvider>().refresh(loc: AppLocalizations.of(context)!));
     } catch (_) {}
     setState(() => _data = next);
     ScaffoldMessenger.of(

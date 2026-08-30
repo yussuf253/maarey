@@ -554,7 +554,7 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
 
       unawaited(context.read<ProductProvider>().loadProducts(seedIfEmpty: false));
 
-      unawaited(context.read<NotificationProvider>().refresh());
+      unawaited(context.read<NotificationProvider>().refresh(loc: AppLocalizations.of(context)!));
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

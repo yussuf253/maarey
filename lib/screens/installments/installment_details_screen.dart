@@ -173,7 +173,7 @@ class _InstallmentDetailsScreenState extends State<InstallmentDetailsScreen> {
     );
     if (payOutcome != null && payOutcome.success) {
       if (!mounted) return;
-      unawaited(context.read<NotificationProvider>().refresh());
+      unawaited(context.read<NotificationProvider>().refresh(loc: AppLocalizations.of(context)!));
       unawaited(context.read<InvoiceProvider>().refresh());
       final paidId = installment.id;
       await _load();

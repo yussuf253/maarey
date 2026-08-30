@@ -1358,7 +1358,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
       unawaited(context.read<ProductProvider>().loadProducts());
     }
 
-    unawaited(context.read<NotificationProvider>().refresh());
+    unawaited(context.read<NotificationProvider>().refresh(loc: AppLocalizations.of(context)!));
 
     if (popAfter) {
       Navigator.of(context).pop(true);

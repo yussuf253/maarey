@@ -4522,7 +4522,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
 
     void scheduleBackgroundRefresh() {
       unawaited(productProvForBg.loadProducts());
-      unawaited(notifProvForBg.refresh());
+      unawaited(notifProvForBg.refresh(loc: AppLocalizations.of(context)!));
     }
 
     final hasFinanceBalance = advancePayment < payTotal - 1e-6;

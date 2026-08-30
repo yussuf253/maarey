@@ -802,7 +802,7 @@ class _HomeScreenState extends State<HomeScreen>
     } catch (_) {}
     if (!mounted) return;
     try {
-      await context.read<NotificationProvider>().refresh();
+      await context.read<NotificationProvider>().refresh(loc: AppLocalizations.of(context)!);
     } catch (_) {}
   }
 

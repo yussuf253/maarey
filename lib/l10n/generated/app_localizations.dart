@@ -17724,6 +17724,672 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'  (عملية اليوم)'**
   String get rpTodayIndicator;
+
+  /// No description provided for @anHideAlert.
+  ///
+  /// In ar, this message translates to:
+  /// **'إخفاء التنبيه'**
+  String get anHideAlert;
+
+  /// No description provided for @anHideConfirm.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا تنبيه مهم. هل تريد تأكيد إخفائه من القائمة؟'**
+  String get anHideConfirm;
+
+  /// No description provided for @anCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get anCancel;
+
+  /// No description provided for @anConfirm.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكيد'**
+  String get anConfirm;
+
+  /// No description provided for @anNotifications.
+  ///
+  /// In ar, this message translates to:
+  /// **'التنبيهات'**
+  String get anNotifications;
+
+  /// No description provided for @anRefresh.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديث'**
+  String get anRefresh;
+
+  /// No description provided for @anMarkAllRead.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعليم الكل مقروءاً'**
+  String get anMarkAllRead;
+
+  /// No description provided for @anRefreshError.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر التحديث: {error}'**
+  String anRefreshError(Object error);
+
+  /// No description provided for @anEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد تنبيهات حالياً'**
+  String get anEmpty;
+
+  /// No description provided for @anHiddenNotifications.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإشعارات المخفية'**
+  String get anHiddenNotifications;
+
+  /// No description provided for @anShow.
+  ///
+  /// In ar, this message translates to:
+  /// **'إظهار'**
+  String get anShow;
+
+  /// No description provided for @anHide.
+  ///
+  /// In ar, this message translates to:
+  /// **'إخفاء'**
+  String get anHide;
+
+  /// No description provided for @nnInvoices.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفواتير'**
+  String get nnInvoices;
+
+  /// No description provided for @nnProducts.
+  ///
+  /// In ar, this message translates to:
+  /// **'المنتجات'**
+  String get nnProducts;
+
+  /// No description provided for @nnInstallments.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأقساط'**
+  String get nnInstallments;
+
+  /// No description provided for @nnDebts.
+  ///
+  /// In ar, this message translates to:
+  /// **'الديون'**
+  String get nnDebts;
+
+  /// No description provided for @nnReports.
+  ///
+  /// In ar, this message translates to:
+  /// **'التقارير'**
+  String get nnReports;
+
+  /// No description provided for @nnCash.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصندوق'**
+  String get nnCash;
+
+  /// No description provided for @npInstallmentDue.
+  ///
+  /// In ar, this message translates to:
+  /// **'قسط مستحق'**
+  String get npInstallmentDue;
+
+  /// No description provided for @npInstallmentLate.
+  ///
+  /// In ar, this message translates to:
+  /// **'قسط متأخر'**
+  String get npInstallmentLate;
+
+  /// No description provided for @npStock.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخزون'**
+  String get npStock;
+
+  /// No description provided for @npNegativeSale.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع سالب'**
+  String get npNegativeSale;
+
+  /// No description provided for @npExpiryHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'همس الصلاحية'**
+  String get npExpiryHint;
+
+  /// No description provided for @npDeferredSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'أجل الحفظ'**
+  String get npDeferredSave;
+
+  /// No description provided for @npReturn.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتجع'**
+  String get npReturn;
+
+  /// No description provided for @npSummary.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخص'**
+  String get npSummary;
+
+  /// No description provided for @npCash.
+  ///
+  /// In ar, this message translates to:
+  /// **'صندوق'**
+  String get npCash;
+
+  /// No description provided for @npCustomerDebt.
+  ///
+  /// In ar, this message translates to:
+  /// **'دين عميل'**
+  String get npCustomerDebt;
+
+  /// No description provided for @npDebtAge.
+  ///
+  /// In ar, this message translates to:
+  /// **'عمر دين'**
+  String get npDebtAge;
+
+  /// No description provided for @npCustomerCap.
+  ///
+  /// In ar, this message translates to:
+  /// **'سقف عميل'**
+  String get npCustomerCap;
+
+  /// No description provided for @npInvoiceCap.
+  ///
+  /// In ar, this message translates to:
+  /// **'سقف فاتورة'**
+  String get npInvoiceCap;
+
+  /// No description provided for @npFinancedSale.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع مموّل'**
+  String get npFinancedSale;
+
+  /// No description provided for @npSystem.
+  ///
+  /// In ar, this message translates to:
+  /// **'النظام'**
+  String get npSystem;
+
+  /// No description provided for @npNow.
+  ///
+  /// In ar, this message translates to:
+  /// **'الآن'**
+  String get npNow;
+
+  /// No description provided for @npMinuteAgo.
+  ///
+  /// In ar, this message translates to:
+  /// **'منذ دقيقة'**
+  String get npMinuteAgo;
+
+  /// No description provided for @npTwoMinutesAgo.
+  ///
+  /// In ar, this message translates to:
+  /// **'منذ دقيقتين'**
+  String get npTwoMinutesAgo;
+
+  /// No description provided for @npMinutesAgo.
+  ///
+  /// In ar, this message translates to:
+  /// **'منذ {count} دقيقة'**
+  String npMinutesAgo(Object count);
+
+  /// No description provided for @npHourAgo.
+  ///
+  /// In ar, this message translates to:
+  /// **'منذ ساعة تقريباً'**
+  String get npHourAgo;
+
+  /// No description provided for @npTwoHoursAgo.
+  ///
+  /// In ar, this message translates to:
+  /// **'منذ ساعتين'**
+  String get npTwoHoursAgo;
+
+  /// No description provided for @npHoursAgo.
+  ///
+  /// In ar, this message translates to:
+  /// **'منذ {count} ساعة'**
+  String npHoursAgo(Object count);
+
+  /// No description provided for @npYesterday.
+  ///
+  /// In ar, this message translates to:
+  /// **'أمس {time}'**
+  String npYesterday(Object time);
+
+  /// No description provided for @npTwoDaysAgo.
+  ///
+  /// In ar, this message translates to:
+  /// **'منذ يومين'**
+  String get npTwoDaysAgo;
+
+  /// No description provided for @npDaysAgo.
+  ///
+  /// In ar, this message translates to:
+  /// **'منذ {count} أيام'**
+  String npDaysAgo(Object count);
+
+  /// No description provided for @npSaleInvoiceLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة بيع #{id} — {date}'**
+  String npSaleInvoiceLine(Object date, Object id);
+
+  /// No description provided for @npSeller.
+  ///
+  /// In ar, this message translates to:
+  /// **'البائع: {name}'**
+  String npSeller(Object name);
+
+  /// No description provided for @npCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'العميل: {name}'**
+  String npCustomer(Object name);
+
+  /// No description provided for @npItem.
+  ///
+  /// In ar, this message translates to:
+  /// **'صنف'**
+  String get npItem;
+
+  /// No description provided for @npItemId.
+  ///
+  /// In ar, this message translates to:
+  /// **' — مُعرّف #{id}'**
+  String npItemId(Object id);
+
+  /// No description provided for @npSoldInInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'  مُباع في الفاتورة: {qty} — الرصيد قبل: {before} → بعد: {after}'**
+  String npSoldInInvoice(Object after, Object before, Object qty);
+
+  /// No description provided for @npNegativeSaleTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع أدى إلى رصيد سالب'**
+  String get npNegativeSaleTitle;
+
+  /// No description provided for @npShift.
+  ///
+  /// In ar, this message translates to:
+  /// **'وردية'**
+  String get npShift;
+
+  /// No description provided for @npCreditSaleSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع بالتقسيط — فاتورة محفوظة'**
+  String get npCreditSaleSaved;
+
+  /// No description provided for @npCreditSaleRegistered.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع بالتقسيط — تم التسجيل'**
+  String get npCreditSaleRegistered;
+
+  /// No description provided for @npCreditSaleTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع بالدين (آجل) — تم التسجيل'**
+  String get npCreditSaleTitle;
+
+  /// No description provided for @npRegisteredAt.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكان التسجيل: شاشة «بيع جديد» (نقطة البيع)'**
+  String get npRegisteredAt;
+
+  /// No description provided for @npInvoiceLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة #{id} — {date}'**
+  String npInvoiceLine(Object date, Object id);
+
+  /// No description provided for @npTotalLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإجمالي: {total} د.ع — الواصل: {advance} د.ع — المتبقي: {remaining} د.ع'**
+  String npTotalLine(Object advance, Object remaining, Object total);
+
+  /// No description provided for @npInstallmentPlanError.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه: تعذّر إنشاء خطة التقسيط تلقائياً — راجع «الأقساط» واربط الفاتورة بخطة.'**
+  String get npInstallmentPlanError;
+
+  /// No description provided for @npInstallmentPlanRef.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطة التقسيط: #{id}'**
+  String npInstallmentPlanRef(Object id);
+
+  /// No description provided for @npPlannedMonths.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الأشهر المخطط: {count}'**
+  String npPlannedMonths(Object count);
+
+  /// No description provided for @npMonthlyEstimate.
+  ///
+  /// In ar, this message translates to:
+  /// **'قسط شهري تقريبي: {amount} د.ع'**
+  String npMonthlyEstimate(Object amount);
+
+  /// No description provided for @npFinancedFromSale.
+  ///
+  /// In ar, this message translates to:
+  /// **'الممول من البيع: {amount} د.ع'**
+  String npFinancedFromSale(Object amount);
+
+  /// No description provided for @npTotalWithInterest.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإجمالي مع الفائدة (إن وُجدت): {amount} د.ع'**
+  String npTotalWithInterest(Object amount);
+
+  /// No description provided for @npItemLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'• {name} — #{pid} — {qty} — {total} د.ع'**
+  String npItemLine(Object name, Object pid, Object qty, Object total);
+
+  /// No description provided for @npMoreItemsInInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'… وباقي الأسطر في الفاتورة.'**
+  String get npMoreItemsInInvoice;
+
+  /// No description provided for @npLateInstallmentTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'قسط متأخر — تذكير'**
+  String get npLateInstallmentTitle;
+
+  /// No description provided for @npLateInstallmentBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'{name}{planRef} — مستحق {date}'**
+  String npLateInstallmentBody(Object date, Object name, Object planRef);
+
+  /// No description provided for @npCustomerLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'عميل'**
+  String get npCustomerLabel;
+
+  /// No description provided for @npPlanRef.
+  ///
+  /// In ar, this message translates to:
+  /// **' — خطة #{id}'**
+  String npPlanRef(Object id);
+
+  /// No description provided for @npUpcomingTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'قسط قريب الاستحقاق — تذكير'**
+  String get npUpcomingTitle;
+
+  /// No description provided for @npUpcomingBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'{name}{planRef} — {date}'**
+  String npUpcomingBody(Object date, Object name, Object planRef);
+
+  /// No description provided for @npCustomerDebtTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'دين على عميل'**
+  String get npCustomerDebtTitle;
+
+  /// No description provided for @npCustomerDebtBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'{name}{extra} — المتبقي {balance} د.ع (آجل غير المقسّط).'**
+  String npCustomerDebtBody(Object balance, Object extra, Object name);
+
+  /// No description provided for @npDebtAgeTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة آجل — تحذير عمر'**
+  String get npDebtAgeTitle;
+
+  /// No description provided for @npDebtAgeBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'حسب إعدادات الدين ({days} يوماً): فاتورة #{id} — {customer} — منذ {date} ({age} {ageWord}).'**
+  String npDebtAgeBody(
+    Object age,
+    Object ageWord,
+    Object customer,
+    Object date,
+    Object days,
+    Object id,
+  );
+
+  /// No description provided for @npDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'يوماً'**
+  String get npDay;
+
+  /// No description provided for @npDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'أياماً'**
+  String get npDays;
+
+  /// No description provided for @npCustomerCapTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجاوز سقف الدين للعميل'**
+  String get npCustomerCapTitle;
+
+  /// No description provided for @npCustomerCapBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'حسب إعدادات الدين: مجموع الآجل المفتوح لـ «{name}» {amount} د.ع (السقف {cap} د.ع).'**
+  String npCustomerCapBody(Object amount, Object cap, Object name);
+
+  /// No description provided for @npCustomerCapBodyNoCard.
+  ///
+  /// In ar, this message translates to:
+  /// **'حسب إعدادات الدين (بدون بطاقة عميل): «{name}» — {amount} د.ع (السقف {cap} د.ع).'**
+  String npCustomerCapBodyNoCard(Object amount, Object cap, Object name);
+
+  /// No description provided for @npInvoiceCapTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجاوز سقف فاتورة آجل'**
+  String get npInvoiceCapTitle;
+
+  /// No description provided for @npInvoiceCapBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'حسب إعدادات الدين: فاتورة #{id} — {customer} — المتبقي {remaining} د.ع (السقف {cap} د.ع) — تاريخ {date}.'**
+  String npInvoiceCapBody(
+    Object cap,
+    Object customer,
+    Object date,
+    Object id,
+    Object remaining,
+  );
+
+  /// No description provided for @npWithoutName.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدون اسم'**
+  String get npWithoutName;
+
+  /// No description provided for @npProductLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'منتج'**
+  String get npProductLabel;
+
+  /// No description provided for @npNegativeStockTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'رصيد سالب في المخزون'**
+  String get npNegativeStockTitle;
+
+  /// No description provided for @npNegativeStockBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{name}» — الكمية الحالية {qty} (أي بيع زائد نحو {over} {unitWord}).'**
+  String npNegativeStockBody(
+    Object name,
+    Object over,
+    Object qty,
+    Object unitWord,
+  );
+
+  /// No description provided for @npOutOfStockTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'منتج منفد'**
+  String get npOutOfStockTitle;
+
+  /// No description provided for @npOutOfStockBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{name}» — المخزون صفر.'**
+  String npOutOfStockBody(Object name);
+
+  /// No description provided for @npLowStockTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه مخزون منخفض'**
+  String get npLowStockTitle;
+
+  /// No description provided for @npLowStockBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{name}» — الكمية {qty} (الحد {threshold}).'**
+  String npLowStockBody(Object name, Object qty, Object threshold);
+
+  /// No description provided for @npUnit.
+  ///
+  /// In ar, this message translates to:
+  /// **'وحدة'**
+  String get npUnit;
+
+  /// No description provided for @npUnits.
+  ///
+  /// In ar, this message translates to:
+  /// **'وحدات'**
+  String get npUnits;
+
+  /// No description provided for @npExpiredTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهى أجل ما على العبوة'**
+  String get npExpiredTitle;
+
+  /// No description provided for @npExpiredBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{name}» — تجاوز التاريخ المدوَّن ({date}). راجع العرض أو الإتلاف حسب سياسة المتجر.'**
+  String npExpiredBody(Object date, Object name);
+
+  /// No description provided for @npLastDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم آخرُ الأيام المسماة للحفظ'**
+  String get npLastDay;
+
+  /// No description provided for @npDaysRemaining.
+  ///
+  /// In ar, this message translates to:
+  /// **'بقي {count} على أجل الانتهاء'**
+  String npDaysRemaining(Object count);
+
+  /// No description provided for @npNearExpiryTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'في أفق الصلاحية'**
+  String get npNearExpiryTitle;
+
+  /// No description provided for @npNearExpiryBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'«{name}» — ينتهي أجل الحفظ عند {date} ({period}).'**
+  String npNearExpiryBody(Object date, Object name, Object period);
+
+  /// No description provided for @npReturnTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم تسجيل مرتجع'**
+  String get npReturnTitle;
+
+  /// No description provided for @npReturnBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة مرتجعة #{id}{orig} — {customer} — {count} صنف — {total} د.ع'**
+  String npReturnBody(
+    Object count,
+    Object customer,
+    Object id,
+    Object orig,
+    Object total,
+  );
+
+  /// No description provided for @npOrigRef.
+  ///
+  /// In ar, this message translates to:
+  /// **' ← أصل #{id}'**
+  String npOrigRef(Object id);
+
+  /// No description provided for @npDailySummaryTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخص مبيعات اليوم'**
+  String get npDailySummaryTitle;
+
+  /// No description provided for @npDailySummaryBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي فواتير البيع (بدون مرتجعات) لهذا اليوم: {total} د.ع'**
+  String npDailySummaryBody(Object total);
+
+  /// No description provided for @npLoggerNotifyFail.
+  ///
+  /// In ar, this message translates to:
+  /// **'فشل تحديث قائمة الإشعارات'**
+  String get npLoggerNotifyFail;
+
+  /// No description provided for @npRefreshHidden.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإشعارات المخفية'**
+  String get npRefreshHidden;
+
+  /// No description provided for @npShow.
+  ///
+  /// In ar, this message translates to:
+  /// **'إظهار'**
+  String get npShow;
+
+  /// No description provided for @npHide.
+  ///
+  /// In ar, this message translates to:
+  /// **'إخفاء'**
+  String get npHide;
 }
 
 class _AppLocalizationsDelegate

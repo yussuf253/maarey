@@ -432,7 +432,7 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
       if (!mounted) return;
       await context.read<ProductProvider>().loadProducts();
       if (!mounted) return;
-      unawaited(context.read<NotificationProvider>().refresh());
+      unawaited(context.read<NotificationProvider>().refresh(loc: AppLocalizations.of(context)!));
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

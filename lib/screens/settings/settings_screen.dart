@@ -1755,7 +1755,7 @@ class _NotificationsScreenState extends State<_NotificationsScreen> {
     final p = await SharedPreferences.getInstance();
     await p.setInt(NotificationPrefs.defaultExpiryAlertDays, v);
     if (mounted) {
-      await context.read<NotificationProvider>().refresh();
+      await context.read<NotificationProvider>().refresh(loc: AppLocalizations.of(context)!);
     }
   }
 
@@ -1763,7 +1763,7 @@ class _NotificationsScreenState extends State<_NotificationsScreen> {
     final p = await SharedPreferences.getInstance();
     await p.setBool(key, value);
     if (mounted) {
-      await context.read<NotificationProvider>().refresh();
+      await context.read<NotificationProvider>().refresh(loc: AppLocalizations.of(context)!);
     }
   }
 

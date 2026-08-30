@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/generated/app_localizations.dart';
 import '../navigation/content_navigation.dart';
 import '../providers/notification_provider.dart';
 import '../screens/cash/cash_screen.dart';
@@ -19,7 +20,7 @@ void navigateFromAppNotification(NavigatorState nav, AppNotification n) {
         nav.push(
           contentMaterialRoute(
             routeId: AppContentRoutes.invoices,
-            breadcrumbTitle: 'الفواتير',
+            breadcrumbTitle: AppLocalizations.of(nav.context)!.nnInvoices,
             builder: (_) => InvoicesScreen(openInvoiceIdAfterLoad: invId),
           ),
         );
@@ -31,7 +32,7 @@ void navigateFromAppNotification(NavigatorState nav, AppNotification n) {
         nav.push(
           contentMaterialRoute(
             routeId: AppContentRoutes.invoices,
-            breadcrumbTitle: 'الفواتير',
+            breadcrumbTitle: AppLocalizations.of(nav.context)!.nnInvoices,
             builder: (_) => InvoicesScreen(openInvoiceIdAfterLoad: invId),
           ),
         );
@@ -43,7 +44,7 @@ void navigateFromAppNotification(NavigatorState nav, AppNotification n) {
         nav.push(
           contentMaterialRoute(
             routeId: AppContentRoutes.invoices,
-            breadcrumbTitle: 'الفواتير',
+            breadcrumbTitle: AppLocalizations.of(nav.context)!.nnInvoices,
             builder: (_) => InvoicesScreen(openInvoiceIdAfterLoad: invId),
           ),
         );
@@ -55,7 +56,7 @@ void navigateFromAppNotification(NavigatorState nav, AppNotification n) {
       nav.push(
         contentMaterialRoute(
           routeId: AppContentRoutes.inventoryProducts,
-          breadcrumbTitle: 'المنتجات',
+          breadcrumbTitle: AppLocalizations.of(nav.context)!.nnProducts,
           builder: (_) => const InventoryProductsScreen(),
         ),
       );
@@ -68,7 +69,7 @@ void navigateFromAppNotification(NavigatorState nav, AppNotification n) {
         nav.push(
           contentMaterialRoute(
             routeId: AppContentRoutes.installments,
-            breadcrumbTitle: 'الأقساط',
+            breadcrumbTitle: AppLocalizations.of(nav.context)!.nnInstallments,
             builder: (_) => InstallmentDetailsScreen(planId: planFromId),
           ),
         );
@@ -76,7 +77,7 @@ void navigateFromAppNotification(NavigatorState nav, AppNotification n) {
         nav.push(
           contentMaterialRoute(
             routeId: AppContentRoutes.installments,
-            breadcrumbTitle: 'الأقساط',
+            breadcrumbTitle: AppLocalizations.of(nav.context)!.nnInstallments,
             builder: (_) => const InstallmentsScreen(),
           ),
         );
@@ -89,7 +90,7 @@ void navigateFromAppNotification(NavigatorState nav, AppNotification n) {
       nav.push(
         contentMaterialRoute(
           routeId: AppContentRoutes.debts,
-          breadcrumbTitle: 'الديون',
+          breadcrumbTitle: AppLocalizations.of(nav.context)!.nnDebts,
           builder: (_) => const DebtsScreen(),
         ),
       );
@@ -98,7 +99,7 @@ void navigateFromAppNotification(NavigatorState nav, AppNotification n) {
       nav.push(
         contentMaterialRoute(
           routeId: AppContentRoutes.reports(0),
-          breadcrumbTitle: 'التقارير',
+          breadcrumbTitle: AppLocalizations.of(nav.context)!.nnReports,
           builder: (_) => const ReportsScreen(initialSection: 0),
         ),
       );
@@ -107,7 +108,7 @@ void navigateFromAppNotification(NavigatorState nav, AppNotification n) {
       nav.push(
         contentMaterialRoute(
           routeId: AppContentRoutes.cash,
-          breadcrumbTitle: 'الصندوق',
+          breadcrumbTitle: AppLocalizations.of(nav.context)!.nnCash,
           builder: (_) => const CashScreen(),
         ),
       );
