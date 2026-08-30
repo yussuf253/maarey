@@ -1520,6 +1520,7 @@
   "defaultPaperSize": "Default paper size",
   "thermal58mm": "Thermal 58mm (narrow)",
   "thermal80mm": "Thermal 80mm (standard)",
+  "thermal76x297mm": "Thermal 76×297mm (receipt)",
   "showTransactionBarcodeTitle": "Show transaction barcode",
   "transactionBarcodeDesc": "CODE128 — reads quickly with scanner",
   "showQrCodeTitle": "Show QR code",

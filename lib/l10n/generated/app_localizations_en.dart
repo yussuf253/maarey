@@ -5183,6 +5183,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get thermal80mm => 'Thermal 80mm (standard)';
 
   @override
+  String get thermal76x297mm => 'Thermal 76×297mm (receipt)';
+
+  @override
   String get showTransactionBarcodeTitle => 'Show transaction barcode';
 
   @override

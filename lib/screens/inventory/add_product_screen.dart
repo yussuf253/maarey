@@ -233,7 +233,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
     if (_stockBaseKind != 0) return true;
     if (_stockTypeUi != 0) return true;
     if (_discountType != '%') return true;
-    if (_taxMode != loc.apTaxExempt) return true;
+    if (_taxMode != 'exempt') return true;
     if (!_trackInventory) return true;
     if (_multiVariantEnabled) return true;
     if (_colorDrafts.isNotEmpty) return true;
@@ -570,7 +570,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
   void _goAfterSell() {
     if (_uiSettings.addShowAdvancedPricing &&
         _uiSettings.addShowTaxField &&
-        _taxMode == loc.apCustomTax) {
+        _taxMode == 'custom') {
       _focusCustomTax.requestFocus();
     } else {
       _goAfterTaxTowardDiscountThenMin();
@@ -625,7 +625,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
       case '15':
         return 15;
       default:
-        if (_taxMode == loc.apCustomTax) return double.tryParse(_customTaxCtrl.text.replaceAll(',', '.')) ?? 0;
+        if (_taxMode == 'custom') return double.tryParse(_customTaxCtrl.text.replaceAll(',', '.')) ?? 0;
         return 0;
     }
   }
@@ -709,10 +709,13 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
           final id = _warehouseRows.first['id'];
           _warehouseId = id is int ? id : (id as num).toInt();
         }
-        if (defTax != null &&
-            defTax.isNotEmpty &&
-            {loc.apTaxExempt, '5', '10', '15', loc.apCustomTax}.contains(defTax)) {
-          _taxMode = defTax;
+        if (defTax != null && defTax.isNotEmpty) {
+          const taxMap = {
+            'exempt': 'exempt', 'custom': 'custom',
+            '5': '5', '10': '10', '15': '15',
+          };
+          final mapped = taxMap[defTax] ?? (defTax == loc.apTaxExempt ? 'exempt' : defTax == loc.apCustomTax ? 'custom' : null);
+          if (mapped != null) _taxMode = mapped;
         }
       });
     } catch (e, st) {
@@ -1402,7 +1405,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
     _extraUnitVariants.clear();
     _stockBaseKind = 0;
     _stockTypeUi = 0;
-    _taxMode = loc.apTaxExempt;
+    _taxMode = 'exempt';
     _discountType = '%';
     _trackInventory = _uiSettings.addDefaultTrackInventory;
     _multiVariantEnabled = false;
@@ -1463,10 +1466,13 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
           final id = _warehouseRows.first['id'];
           _warehouseId = id is int ? id : (id as num).toInt();
         }
-        if (defTax2 != null &&
-            defTax2.isNotEmpty &&
-            {loc.apTaxExempt, '5', '10', '15', loc.apCustomTax}.contains(defTax2)) {
-          _taxMode = defTax2;
+        if (defTax2 != null && defTax2.isNotEmpty) {
+          const taxMap2 = {
+            'exempt': 'exempt', 'custom': 'custom',
+            '5': '5', '10': '10', '15': '15',
+          };
+          final mapped2 = taxMap2[defTax2] ?? (defTax2 == loc.apTaxExempt ? 'exempt' : defTax2 == loc.apCustomTax ? 'custom' : null);
+          if (mapped2 != null) _taxMode = mapped2;
         }
       });
     } catch (_) {
@@ -2228,20 +2234,20 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                   ),
                   DropdownMenuItem(value: 'C', child: Text(loc.apGradeC)),
                   DropdownMenuItem(
-                    value: loc.apGradeFirst,
+                    value: 'first',
                     child: Text(loc.apGradeFirst),
                   ),
                   DropdownMenuItem(
-                    value: loc.apGradeSecond,
+                    value: 'second',
                     child: Text(loc.apGradeSecond),
                   ),
                   DropdownMenuItem(
-                    value: loc.apGradeThird,
+                    value: 'third',
                     child: Text(loc.apGradeThird),
                   ),
                   DropdownMenuItem(value: 'commercial', child: Text(loc.apCommercial)),
                   DropdownMenuItem(
-                    value: loc.apEconomical,
+                    value: 'economical',
                     child: Text(loc.apEconomical),
                   ),
                 ],
@@ -2815,7 +2821,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                               Text(
                                 _costDrivesSuggestedPrices
                                     ? loc.apMarginHint(_marginPercentUiLabel(), _minSellPercentUiLabel())
-                                    : 'التعديل اليدوي نشط — لن يُحدَّث سعر البيع تلقائياً عند تغيير التكلفة.',
+                                    : loc.apManualEditActive,
                                 style: TextStyle(
                                   fontSize: 11.5,
                                   height: 1.35,
@@ -2894,7 +2900,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                         decoration: _inputDecOf(context, hint: ''),
                         items: [
                           DropdownMenuItem(
-                            value: loc.apTaxExempt,
+                            value: 'exempt',
                             child: Text(loc.apTaxExemptFull),
                           ),
                           DropdownMenuItem(value: '5', child: Text(loc.apTax5)),
@@ -2907,12 +2913,12 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                             child: Text(loc.apTax15),
                           ),
                           DropdownMenuItem(
-                            value: loc.apCustomTax,
+                            value: 'custom',
                             child: Text(loc.apCustomRate),
                           ),
                         ],
                         onChanged: (v) {
-                          setState(() => _taxMode = v ?? loc.apTaxExempt);
+                          setState(() => _taxMode = v ?? 'exempt');
                         },
                       );
                     },
@@ -3125,7 +3131,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                       border: Border.all(color: cs2.outlineVariant),
                     ),
                     child: Text(
-                      buyN > 0 ? '${_profitMarginPct.toStringAsFixed(1)}٪' : '—',
+                      buyN > 0 ? '${loc.apMarginPctValue(_profitMarginPct.toStringAsFixed(1))}' : '—',
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 14,
@@ -3157,8 +3163,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
               style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
             ),
             subtitle: Text(
-              'عند الإيقاف لا تُسجَّل كميات لهذا المنتج',
-              style: TextStyle(fontSize: 12, color: cs.onSurfaceVariant),
+              loc.apTrackDisabledHint,
             ),
             value: _trackInventory,
             activeThumbColor: cs.primary,

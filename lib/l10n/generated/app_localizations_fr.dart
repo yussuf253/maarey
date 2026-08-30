@@ -5247,6 +5247,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get thermal80mm => 'Thermique 80mm (standard)';
 
   @override
+  String get thermal76x297mm => 'Thermique 76×297mm (reçu)';
+
+  @override
   String get showTransactionBarcodeTitle =>
       'Afficher le code-barres de transaction';
 

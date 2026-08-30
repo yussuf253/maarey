@@ -5130,6 +5130,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get thermal80mm => 'حراري 80 مم (قياسي)';
 
   @override
+  String get thermal76x297mm => 'حراري 76×297 مم (إيصال)';
+
+  @override
   String get showTransactionBarcodeTitle => 'إظهار باركود رقم العملية';
 
   @override

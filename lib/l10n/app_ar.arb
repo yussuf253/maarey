@@ -1520,6 +1520,7 @@
   "defaultPaperSize": "حجم الورق الافتراضي",
   "thermal58mm": "حراري 58 مم (ضيق)",
   "thermal80mm": "حراري 80 مم (قياسي)",
+  "thermal76x297mm": "حراري 76×297 مم (إيصال)",
   "showTransactionBarcodeTitle": "إظهار باركود رقم العملية",
   "transactionBarcodeDesc": "CODE128 — يقرأه الماسح الضوئي بسرعة",
   "showQrCodeTitle": "إظهار رمز QR",

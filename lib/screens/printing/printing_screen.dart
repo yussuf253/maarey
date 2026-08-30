@@ -170,10 +170,10 @@ class _PrintingScreenState extends State<PrintingScreen> {
                             isDense: true,
                           ),
                           items: [
-                            const DropdownMenuItem(
+                            DropdownMenuItem(
                               value: PrintPaperFormat.thermal76x297,
-                              child: Text('حراري 76×297 مم'),
-                              ),
+                              child: Text(AppLocalizations.of(context)!.thermal76x297mm),
+                            ),
                             DropdownMenuItem(
                               value: PrintPaperFormat.thermal58,
                               child: Text(AppLocalizations.of(context)!.thermal58mm),

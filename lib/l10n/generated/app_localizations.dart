@@ -9224,6 +9224,12 @@ abstract class AppLocalizations {
   /// **'حراري 80 مم (قياسي)'**
   String get thermal80mm;
 
+  /// No description provided for @thermal76x297mm.
+  ///
+  /// In ar, this message translates to:
+  /// **'حراري 76×297 مم (إيصال)'**
+  String get thermal76x297mm;
+
   /// No description provided for @showTransactionBarcodeTitle.
   ///
   /// In ar, this message translates to:
