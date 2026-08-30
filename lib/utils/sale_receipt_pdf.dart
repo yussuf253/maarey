@@ -61,13 +61,8 @@ String _customerLineValue(Invoice invoice) {
 }
 
 /// اتجاة كتابة الإيصال: عربي ⇒ RTL، بقية اللغات (إنجليزي/فرنسي…) ⇒ LTR.
-/// Returns true for Arabic-family locales. Null locale defaults to Arabic
-/// (backward-compatible since receipts were historically Arabic-only).
-bool _isArabicLocale(Locale? locale) {
-  if (locale == null) return true; // backward-compatible default
-  final code = locale.languageCode.toLowerCase();
-  return code == 'ar' || code == 'he' || code == 'fa' || code == 'ur';
-}
+/// Receipts are always rendered in Arabic for now.
+bool _isArabicLocale(Locale? locale) => true;
 
 ui.TextDirection _uiDirectionForLocale(Locale? locale) =>
     _isArabicLocale(locale) ? ui.TextDirection.rtl : ui.TextDirection.ltr;
@@ -1257,11 +1252,12 @@ class SaleReceiptPdf {
       MaterialPageRoute<void>(
         fullscreenDialog: true,
         builder: (ctx) {
+          _currentLocale = locale;
           return Directionality(
             textDirection: _uiDirectionForLocale(_currentLocale),
             child: Scaffold(
               appBar: AppBar(
-                title: const Text('إيصال تسديد قسط'),
+                title: const Text('Installment payment receipt'),
               ),
               body: printing.PdfPreview(
                 maxPageWidth: 720,
@@ -1521,6 +1517,7 @@ class SaleReceiptPdf {
         builder: (ctx) {
           final w = MediaQuery.sizeOf(ctx).width;
           final maxPage = math.min(w - 16, 920.0).clamp(200.0, w);
+          _currentLocale = locale;
           return Directionality(
             textDirection: _uiDirectionForLocale(_currentLocale),
             child: Scaffold(
@@ -1530,7 +1527,7 @@ class SaleReceiptPdf {
                   tooltip: 'إغلاق',
                   onPressed: () => Navigator.of(ctx).pop(),
                 ),
-                title: const Text('إيصال تسديد دين'),
+                title: const Text('Debt payment receipt'),
               ),
               body: ColoredBox(
                 color: Theme.of(ctx).colorScheme.surface,
@@ -1622,16 +1619,17 @@ class SaleReceiptPdf {
           builder: (ctx) {
             final w = MediaQuery.sizeOf(ctx).width;
             final maxPage = math.min(w - 16, 920.0).clamp(200.0, w);
+            _currentLocale = locale;
             return Directionality(
               textDirection: _uiDirectionForLocale(_currentLocale),
               child: Scaffold(
                 appBar: AppBar(
                   leading: IconButton(
                     icon: const Icon(Icons.close_rounded),
-                    tooltip: 'إغلاق',
+                    tooltip: 'Close',
                     onPressed: () => Navigator.of(ctx).pop(),
                   ),
-                  title: const Text('إيصال البيع'),
+                  title: const Text('Sale receipt'),
                   actions: [
                     if (openDetails != null)
                       IconButton(
@@ -1663,8 +1661,7 @@ class SaleReceiptPdf {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text(
-                            'لم يتم العثور على طابعة متصلة بالجهاز. يرجى مراجعة توصيل الطابعة.',
-                            style: TextStyle(fontFamily: 'NotoNaskhArabic'),
+                            'No printer found. Please check printer connection.',
                           ),
                           backgroundColor: Colors.redAccent,
                           behavior: SnackBarBehavior.floating,
@@ -1709,6 +1706,7 @@ class SaleReceiptPdf {
             math.min(sz.height * 0.88, 720.0).clamp(280.0, sz.height - 24);
         final openDetails = onOpenDetailsFromPdf;
 
+        _currentLocale = locale;
         return Directionality(
           textDirection: _uiDirectionForLocale(_currentLocale),
           child: Dialog(
@@ -1792,6 +1790,7 @@ class SaleReceiptPdf {
                           );
                         },
                         build: (format) => buildPdfBytes(
+                          locale: locale,
                           invoice: invoice,
                           subtotalBeforeDiscount: subtotalBeforeDiscount,
                           pageFormat: format,
@@ -1990,11 +1989,12 @@ class SaleReceiptPdf {
       MaterialPageRoute<void>(
         fullscreenDialog: true,
         builder: (ctx) {
+          _currentLocale = locale;
           return Directionality(
             textDirection: _uiDirectionForLocale(_currentLocale),
             child: Scaffold(
               appBar: AppBar(
-                title: const Text('إيصال دفع مورد'),
+                title: const Text('Supplier payment receipt'),
               ),
               body: printing.PdfPreview(
                 maxPageWidth: 720,
