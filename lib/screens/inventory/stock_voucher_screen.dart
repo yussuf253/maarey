@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:provider/provider.dart';
 import 'dart:async' show unawaited;
+import '../../l10n/generated/app_localizations.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/notification_provider.dart';
 import '../../providers/product_provider.dart';
@@ -29,9 +30,10 @@ class StockVoucherScreen extends StatefulWidget {
 }
 
 class _StockVoucherScreenState extends State<StockVoucherScreen> {
+  AppLocalizations get loc => AppLocalizations.of(context)!;
   // ── Header state ──────────────────────────────────────────────────────
 
-  String _voucherType = 'إذن إضافة مخزن';
+  String _voucherType = '';
 
   DateTime _selectedDate = DateTime.now();
 
@@ -55,19 +57,18 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
   final List<_VoucherItem> _items = [_VoucherItem()];
 
-  static const _voucherTypes = [
-
-    'إذن إضافة مخزن',
-    'إذن صرف مخزن',
-    'نقل بين مخازن',
-    'جرد مخزن',
+  List<String> get _voucherTypes => [
+    loc.svAddReceipt,
+    loc.svDispenseReceipt,
+    loc.svTransferBetween,
+    loc.svStocktaking,
   ];
 
-  static const _sourceTypes = <String, String>{
-    'supplier': 'مورد',
-    'branch': 'فرع/محل آخر',
-    'mobile_vendor': 'مورد متنقل',
-    'manual': 'يدوي',
+  Map<String, String> get _sourceTypes => {
+    'supplier': loc.svSource,
+    'branch': loc.svBranchShop,
+    'mobile_vendor': loc.svMobileSupplier,
+    'manual': loc.svManual,
   };
 
   final _fmt = NumberFormat('#,##0', 'ar');
@@ -82,14 +83,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
   int? _warehouseFromId;
 
-  List<String> _supplierItems = const [
-
-    '',
-    'mbw',
-    'مورد رئيسي',
-    'مورد 1',
-    'مورد 2',
-  ];
+  List<String> _supplierItems = [];
 
   bool _metaLoaded = false;
 
@@ -116,7 +110,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
       tenantId: TenantContextService.instance.activeTenantId,
     );
 
-    List<String> sup = const ['', 'mbw', 'مورد رئيسي', 'مورد 1', 'مورد 2'];
+    List<String> sup = ['', 'mbw', loc.svMainSupplier, loc.svSupplier1, loc.svSupplier2];
 
     try {
       sup = await _db.listActiveSupplierNamesForStockUi();
@@ -158,12 +152,16 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
   }
 
   Future<String> _allocateVoucherNo() async {
-    final typeCode = switch (_voucherType) {
-      'إذن إضافة مخزن' => 'IN',
-      'إذن صرف مخزن' => 'OUT',
-      'نقل بين مخازن' => 'TRF',
-      _ => 'SV',
-    };
+    String typeCode;
+    if (_voucherType == loc.svAddReceipt) {
+      typeCode = 'IN';
+    } else if (_voucherType == loc.svDispenseReceipt) {
+      typeCode = 'OUT';
+    } else if (_voucherType == loc.svTransferBetween) {
+      typeCode = 'TRF';
+    } else {
+      typeCode = 'SV';
+    }
 
     final base = '$typeCode-${DateTime.now().millisecondsSinceEpoch}';
 
@@ -196,7 +194,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
         !_createSupplierBillOnInbound ||
 
-        _voucherType != 'إذن إضافة مخزن' ||
+        _voucherType != loc.svAddReceipt ||
 
         _sourceType != 'supplier' ||
 
@@ -221,7 +219,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
           ? note!.trim()
 
-          : 'من إذن وارد #$voucherNo',
+          : loc.svFromReceipt(voucherNo.toString()),
       createdByUserName: createdByUserName?.trim().isNotEmpty == true
 
           ? createdByUserName!.trim()
@@ -250,7 +248,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
         !_createSupplierReturnPayoutOnOutbound ||
 
-        _voucherType != 'إذن صرف مخزن' ||
+        _voucherType != loc.svDispenseReceipt ||
 
         _sourceType != 'supplier' ||
 
@@ -265,7 +263,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
     await _db.recordSupplierPayout(
       supplierId: supplierId,
       amount: amount,
-      note: 'مرتجع مورد عبر سند صرف #$voucherNo',
+      note: loc.svSupplierReturnNote(voucherNo.toString()),
       affectsCash: false,
       recordedByUserName: (createdByUserName ?? '').trim(),
     );
@@ -276,15 +274,15 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
     if (!_metaLoaded || _warehouses.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('لا يوجد مخزن نشط — أضف مخزناً أولاً')),
+        SnackBar(content: Text(loc.svNoActiveWarehouse)),
       );
 
       return;
     }
 
-    if (_voucherType == 'جرد مخزن') {
+    if (_voucherType == loc.svStocktaking) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('حفظ «جرد مخزن» غير مفعّل بعد')),
+        SnackBar(content: Text(loc.svStocktakingDisabled)),
       );
 
       return;
@@ -310,7 +308,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
       final nm = it.name.trim();
 
       if (nm.isEmpty) {
-        missing.add('بند بلا اسم');
+        missing.add(loc.svUnnamedItem);
 
         continue;
       }
@@ -338,9 +336,9 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
           content: Text(
             missing.isEmpty
 
-                ? 'أدخل بنوداً بكميات وأسماء مطابقة لمنتجات مسجّلة'
+                ? loc.svEnterMatchingItems
 
-                : 'لم تُعثر على منتجات بالأسماء: ${missing.join('، ')}',
+                : loc.svProductsNotFound(missing.join(', ')),
           ),
         ),
       );
@@ -354,21 +352,19 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
       final go = await showDialog<bool>(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: const Text('تنبيه'),
+          title: Text(loc.svWarning),
           content: Text(
-            'بنود تُجاهل لعدم مطابقة الاسم: ${missing.join('، ')}\n'
-
-            'المتابعة تحفظ ${lines.length} بنداً فقط.',
+loc.svItemsSkipped(missing.join(', '), lines.length.toString()),
           ),
           actions: [
 
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: const Text('إلغاء'),
+              child: Text(loc.svCancel),
             ),
             FilledButton(
               onPressed: () => Navigator.pop(ctx, true),
-              child: const Text('متابعة'),
+              child: Text(loc.svContinue),
             ),
           ],
         ),
@@ -401,13 +397,13 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
     final currentUserName = context.read<AuthProvider>().username.trim();
 
-    if (_voucherType == 'إذن إضافة مخزن' &&
+    if (_voucherType == loc.svAddReceipt &&
 
         _policy.requireSourceOnInbound &&
 
         sourceName.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('يرجى تعبئة اسم مصدر الإذن الوارد')),
+        SnackBar(content: Text(loc.svPleaseFillSourceName)),
       );
 
       return;
@@ -418,7 +414,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
     try {
       late final ({bool ok, String message, int? voucherId}) res;
 
-      if (_voucherType == 'إذن إضافة مخزن') {
+      if (_voucherType == loc.svAddReceipt) {
         if (_warehouseToId == null) return;
 
         res = await _db.commitInboundStockVoucherWithLines(
@@ -434,7 +430,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
           notes: notes.isEmpty ? null : notes,
           lines: lines,
         );
-      } else if (_voucherType == 'إذن صرف مخزن') {
+      } else if (_voucherType == loc.svDispenseReceipt) {
         if (_warehouseFromId == null) return;
 
         res = await _db.commitOutboundStockVoucherWithLines(
@@ -450,7 +446,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
           notes: notes.isEmpty ? null : notes,
           lines: lines,
         );
-      } else if (_voucherType == 'نقل بين مخازن') {
+      } else if (_voucherType == loc.svTransferBetween) {
         if (_warehouseFromId == null || _warehouseToId == null) return;
 
         res = await _db.commitTransferStockVoucherWithLines(
@@ -515,7 +511,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('تم حفظ السند #${res.voucherId} ($voucherNo)'),
+          content: Text(loc.svVoucherSaved(res.voucherId.toString(), voucherNo.toString())),
           backgroundColor: _kGreen,
           behavior: SnackBarBehavior.floating,
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
@@ -580,9 +576,9 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
               icon: const Icon(Icons.arrow_back_ios, size: 18),
               onPressed: () => Navigator.pop(context),
             ),
-            title: const Text(
-              'سند مخزوني',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            title: Text(
+              loc.svVoucherDocument,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             actions: [
 
@@ -659,7 +655,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
                 : const Icon(Icons.check_circle_outline, size: 18),
             label: Text(
-              _saving ? 'جاري الحفظ…' : 'تأكيد',
+              _saving ? loc.svSaving : loc.svConfirm,
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
             ),
             style: ElevatedButton.styleFrom(
@@ -674,7 +670,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
           OutlinedButton.icon(
             onPressed: () => Navigator.pop(context),
             icon: const Icon(Icons.close, size: 16),
-            label: const Text('إلغاء'),
+            label: Text(loc.svCancel),
             style: OutlinedButton.styleFrom(
               foregroundColor: Colors.grey.shade700,
               side: BorderSide(color: Colors.grey.shade300),
@@ -690,7 +686,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
   Widget _buildWarehousePanel() {
     if (!_metaLoaded) {
       return _panel(
-        title: 'المخزن',
+        title: loc.svWarehouse,
         child: const Center(
           child: Padding(
             padding: EdgeInsets.all(16),
@@ -702,17 +698,17 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
     if (_warehouses.isEmpty) {
       return _panel(
-        title: 'المخزن',
+        title: loc.svWarehouse,
         child: Text(
-          'لا يوجد مخزن نشط. أضف مخزناً من «المخازن».',
+          loc.svNoActiveWarehouseAdd,
           style: TextStyle(color: Colors.red.shade700, fontSize: 13),
         ),
       );
     }
 
-    if (_voucherType == 'إذن إضافة مخزن') {
+    if (_voucherType == loc.svAddReceipt) {
       return _panel(
-        title: 'المخزن المستقبل',
+        title: loc.svReceivingWarehouse,
         child: _warehouseDropdown(
           _warehouseToId,
           (v) => setState(() => _warehouseToId = v),
@@ -720,9 +716,9 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
       );
     }
 
-    if (_voucherType == 'إذن صرف مخزن') {
+    if (_voucherType == loc.svDispenseReceipt) {
       return _panel(
-        title: 'من مخزن',
+        title: loc.svFromWarehouse,
         child: _warehouseDropdown(
           _warehouseFromId,
           (v) => setState(() => _warehouseFromId = v),
@@ -730,15 +726,15 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
       );
     }
 
-    if (_voucherType == 'نقل بين مخازن') {
+    if (_voucherType == loc.svTransferBetween) {
       return _panel(
-        title: 'المخازن',
+        title: loc.svWarehouses,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
 
             _fieldCol(
-              label: 'من مخزن',
+              label: loc.svFromWarehouse,
               child: _warehouseDropdown(
                 _warehouseFromId,
                 (v) => setState(() => _warehouseFromId = v),
@@ -746,7 +742,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
             ),
             const SizedBox(height: 12),
             _fieldCol(
-              label: 'إلى مخزن',
+              label: loc.svToWarehouse,
               child: _warehouseDropdown(
                 _warehouseToId,
                 (v) => setState(() => _warehouseToId = v),
@@ -773,7 +769,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
         child: DropdownButton<int>(
           isExpanded: true,
           value: value,
-          hint: const Text('اختر', style: TextStyle(fontSize: 13)),
+          hint: Text(loc.svChoose, style: const TextStyle(fontSize: 13)),
           style: const TextStyle(fontSize: 13, color: Color(0xFF1E293B)),
           items: [
 
@@ -794,7 +790,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
   Widget _buildVoucherDataPanel() {
     return _panel(
-      title: 'بيانات الإذن المخزني',
+      title: loc.svVoucherData,
       child: Row(
         children: [
 
@@ -802,7 +798,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
           Expanded(
             child: _fieldCol(
-              label: 'نوع الأذن',
+              label: loc.svVoucherType,
               child: _dropdown(
                 value: _voucherType,
                 items: _voucherTypes,
@@ -816,7 +812,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
                     _warehouseToId ??= a;
 
-                    if (_voucherType == 'نقل بين مخازن' &&
+                    if (_voucherType == loc.svTransferBetween &&
 
                         _warehouseFromId == _warehouseToId &&
 
@@ -833,7 +829,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
           Expanded(
             child: _fieldCol(
-              label: 'التاريخ',
+              label: loc.svDate,
               child: GestureDetector(
                 onTap: _pickDate,
                 child: Container(
@@ -879,7 +875,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
   Widget _buildSourcePanel() {
     return _panel(
-      title: 'بيانات المصدر',
+      title: loc.svSourceData,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
@@ -889,7 +885,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
               Expanded(
                 child: _fieldCol(
-                  label: 'نوع المصدر',
+                  label: loc.svSourceType,
                   child: _dropdown(
                     value: _sourceType,
                     items: _sourceTypes.keys.toList(),
@@ -911,13 +907,13 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
               const SizedBox(width: 12),
               Expanded(
                 child: _fieldCol(
-                  label: 'مرجع المصدر (ID اختياري)',
+                  label: loc.svSourceRefOptional,
                   child: TextFormField(
                     controller: _sourceRefIdCtrl,
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.right,
                     style: const TextStyle(fontSize: 13),
-                    decoration: _dec('مثال: 15'),
+                    decoration: _dec(loc.svSourceRefExample),
                   ),
                 ),
               ),
@@ -925,13 +921,13 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
           ),
           const SizedBox(height: 12),
           _fieldCol(
-            label: 'اسم المصدر',
+            label: loc.svSourceName,
             child: TextFormField(
               controller: _sourceNameCtrl,
               textAlign: TextAlign.right,
               style: const TextStyle(fontSize: 13),
               decoration: _dec(
-                _sourceType == 'supplier' ? 'اسم المورد' : 'اسم الجهة المصدر',
+                _sourceType == 'supplier' ? loc.svSupplierName : loc.svSourceEntityName,
               ),
             ),
           ),
@@ -949,11 +945,11 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
                   color: Colors.grey.shade500,
                   size: 20,
                 ),
-                tooltip: 'إعدادات المرجع',
+                tooltip: loc.svReferenceSettings,
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(),
               ),
-              _label('المرجع'),
+              _label(loc.svReference),
             ],
           ),
           const SizedBox(height: 6),
@@ -969,7 +965,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
               textAlign: TextAlign.right,
               style: const TextStyle(fontSize: 13),
               decoration: InputDecoration(
-                hintText: 'رقم المرجع...',
+                hintText: loc.svReferenceHint,
                 hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 13),
                 border: InputBorder.none,
                 contentPadding: const EdgeInsets.symmetric(
@@ -993,7 +989,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
   Widget _buildOtherInfoPanel() {
     return _panel(
-      title: 'معلومات أخرى',
+      title: loc.svOtherInfo,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
@@ -1006,7 +1002,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
               Expanded(
                 child: _fieldCol(
-                  label: 'المورد',
+                  label: loc.svSupplier,
                   child: _dropdown(
                     value: _supplier,
                     items: _supplierItems,
@@ -1028,7 +1024,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
 
               Expanded(
                 child: _fieldCol(
-                  label: 'الملاحظات',
+                  label: loc.svNotes,
                   child: TextFormField(
                     controller: _notesCtrl,
                     textAlign: TextAlign.right,
@@ -1040,17 +1036,17 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
               ),
             ],
           ),
-          if (_voucherType == 'إذن إضافة مخزن' &&
+          if (_voucherType == loc.svAddReceipt &&
 
               _sourceType == 'supplier') ...[
 
             const SizedBox(height: 8),
             CheckboxListTile(
               contentPadding: EdgeInsets.zero,
-              title: const Text('إنشاء وصل مورد تلقائي وربطه بالسند'),
-              subtitle: const Text(
-                'يسجّل وصلاً في الذمم بنفس مبلغ السند ثم يربطه به.',
-                style: TextStyle(fontSize: 12),
+              title: Text(loc.svAutoSupplierReceipt),
+              subtitle: Text(
+                loc.svAutoSupplierReceiptDesc,
+                style: const TextStyle(fontSize: 12),
               ),
               value: _createSupplierBillOnInbound,
               onChanged: (v) =>
@@ -1058,15 +1054,15 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
                   setState(() => _createSupplierBillOnInbound = v ?? true),
             ),
           ],
-          if (_voucherType == 'إذن صرف مخزن' && _sourceType == 'supplier') ...[
+          if (_voucherType == loc.svDispenseReceipt && _sourceType == 'supplier') ...[
 
             const SizedBox(height: 8),
             CheckboxListTile(
               contentPadding: EdgeInsets.zero,
-              title: const Text('تسجيل مرتجع المورد تلقائيًا في الذمم'),
-              subtitle: const Text(
-                'يسجّل دفعة مورد بدون صندوق لتخفيض الذمة عند صرف بضاعة كمردود.',
-                style: TextStyle(fontSize: 12),
+              title: Text(loc.svAutoReturnRecord),
+              subtitle: Text(
+                loc.svAutoReturnRecordDesc,
+                style: const TextStyle(fontSize: 12),
               ),
               value: _createSupplierReturnPayoutOnOutbound,
               onChanged: (v) => setState(
@@ -1113,10 +1109,10 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
                 // remove placeholder
 
                 const SizedBox(width: 44),
-                ..._colHeader('الإجمالي', flex: 2),
-                ..._colHeader('الكمية', flex: 2),
-                ..._colHeader('سعر الوحدة', flex: 2),
-                ..._colHeader('البنود', flex: 3),
+                ..._colHeader(loc.svTotal, flex: 2),
+                ..._colHeader(loc.svQuantity, flex: 2),
+                ..._colHeader(loc.svUnitPrice, flex: 2),
+                ..._colHeader(loc.svItems, flex: 3),
               ],
             ),
           ),
@@ -1151,12 +1147,12 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
                   ),
                 ),
                 const Spacer(flex: 4),
-                const Expanded(
+                Expanded(
                   flex: 3,
                   child: Text(
-                    'الإجمالي',
+                    loc.svTotal,
                     textAlign: TextAlign.right,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF1E293B),
@@ -1180,7 +1176,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
                   size: 18,
                 ),
                 label: Text(
-                  'إضافة بند',
+                  loc.svAddItem,
                   style: TextStyle(color: Colors.blue.shade700, fontSize: 13),
                 ),
                 style: TextButton.styleFrom(
@@ -1223,7 +1219,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
                 color: Colors.red.shade400,
                 size: 20,
               ),
-              tooltip: 'حذف البند',
+              tooltip: loc.svDeleteItem,
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(),
             ),
@@ -1261,7 +1257,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
             flex: 2,
             child: _editCell(
               item.qty > 0 ? item.qty.toString() : '',
-              hint: 'الكمية',
+              hint: loc.svQuantity,
               onChanged: (v) => setState(() => item.qty = int.tryParse(v) ?? 0),
             ),
           ),
@@ -1272,7 +1268,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
             flex: 2,
             child: _editCell(
               item.unitPrice > 0 ? item.unitPrice.toString() : '',
-              hint: 'سعر الوحدة',
+              hint: loc.svUnitPrice,
               onChanged: (v) =>
 
                   setState(() => item.unitPrice = double.tryParse(v) ?? 0),
@@ -1298,17 +1294,17 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
                     child: DropdownButton<int?>(
                       isExpanded: true,
                       value: item.productId,
-                      hint: const Text(
-                        'اختر منتجاً',
+                      hint: Text(
+                        loc.svChooseProduct,
                         style: TextStyle(fontSize: 11),
                       ),
                       items: [
 
-                        const DropdownMenuItem<int?>(
+                        DropdownMenuItem<int?>(
                           value: null,
                           child: Text(
-                            'اختيار يدوي',
-                            style: TextStyle(fontSize: 11),
+                            loc.svManualSelection,
+                            style: const TextStyle(fontSize: 11),
                           ),
                         ),
                         ..._products.map(
@@ -1350,7 +1346,7 @@ class _StockVoucherScreenState extends State<StockVoucherScreen> {
                 const SizedBox(height: 4),
                 _editCell(
                   item.name,
-                  hint: 'اسم البند اليدوي',
+                  hint: loc.svManualItemName,
                   onChanged: (v) {
                     setState(() {
                       item.name = v;

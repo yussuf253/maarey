@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:naboo/l10n/generated/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/loyalty_settings_data.dart';
@@ -15,6 +16,7 @@ class LoyaltySettingsScreen extends StatefulWidget {
 }
 
 class _LoyaltySettingsScreenState extends State<LoyaltySettingsScreen> {
+  AppLocalizations get loc => AppLocalizations.of(context)!;
   late bool _enabled;
   late TextEditingController _per1000Ctrl;
   late TextEditingController _iqdPerPointCtrl;
@@ -74,14 +76,14 @@ class _LoyaltySettingsScreenState extends State<LoyaltySettingsScreen> {
       if (!mounted) return;
       setState(() => _dirty = false);
       nav.showSnackBar(
-        const SnackBar(
-          content: Text('تم حفظ إعدادات الولاء'),
+        SnackBar(
+          content: Text(loc.lsSaveSuccess),
           behavior: SnackBarBehavior.floating,
         ),
       );
     } catch (e) {
       if (mounted) {
-        nav.showSnackBar(SnackBar(content: Text('تعذر الحفظ: $e')));
+        nav.showSnackBar(SnackBar(content: Text(loc.lsSaveFailed(e.toString()))));
       }
     }
   }
@@ -91,11 +93,11 @@ class _LoyaltySettingsScreenState extends State<LoyaltySettingsScreen> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('إعدادات ولاء العملاء'),
+        title: Text(loc.lsTitle),
         actions: [
           FilledButton(
             onPressed: _dirty ? _save : null,
-            child: const Text('حفظ'),
+            child: Text(loc.lsSave),
           ),
           const SizedBox(width: 8),
         ],
@@ -117,15 +119,14 @@ class _LoyaltySettingsScreenState extends State<LoyaltySettingsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    'لماذا لا «يُفسد» الأرباح؟',
+                    loc.lsWhyNotSpoilTitle,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'النقاط منحة تسويقية: تُسجَّل كخصم ولاء منفصل عن هامش البضاعة. '
-                    'منح النقاط لا يغيّر تكلفة الشراء؛ الاستبدال يقلّل ما يدفعه العميل نقداً وفق قواعدك.',
+                    loc.lsWhyNotSpoilBody,
                     style: TextStyle(
                       fontSize: 13,
                       color: isDark ? Colors.grey.shade400 : Colors.grey.shade700,
@@ -138,8 +139,8 @@ class _LoyaltySettingsScreenState extends State<LoyaltySettingsScreen> {
           ),
           const SizedBox(height: 16),
           SwitchListTile(
-            title: const Text('تفعيل برنامج النقاط'),
-            subtitle: const Text('عند الإيقاف تُحفظ الفواتير دون جمع أو استبدال'),
+            title: Text(loc.lsEnablePoints),
+            subtitle: Text(loc.lsEnablePointsSubtitle),
             value: _enabled,
             activeThumbColor: AppColors.primary,
             onChanged: (v) => setState(() {
@@ -155,9 +156,9 @@ class _LoyaltySettingsScreenState extends State<LoyaltySettingsScreen> {
               FilteringTextInputFormatter.allow(RegExp(r'[\d.]')),
             ],
             onChanged: (_) => setState(() => _dirty = true),
-            decoration: const InputDecoration(
-              labelText: 'نقاط لكل 1000 د.ع من صافي الفاتورة المؤهّل',
-              border: OutlineInputBorder(borderRadius: AppShape.none),
+            decoration: InputDecoration(
+              labelText: loc.lsPointsPerThousand,
+              border: const OutlineInputBorder(borderRadius: AppShape.none),
             ),
           ),
           const SizedBox(height: 12),
@@ -168,9 +169,9 @@ class _LoyaltySettingsScreenState extends State<LoyaltySettingsScreen> {
               FilteringTextInputFormatter.allow(RegExp(r'[\d.]')),
             ],
             onChanged: (_) => setState(() => _dirty = true),
-            decoration: const InputDecoration(
-              labelText: 'قيمة الخصم بالدينار لكل نقطة عند الاستبدال',
-              border: OutlineInputBorder(borderRadius: AppShape.none),
+            decoration: InputDecoration(
+              labelText: loc.lsRedemptionValue,
+              border: const OutlineInputBorder(borderRadius: AppShape.none),
             ),
           ),
           const SizedBox(height: 12),
@@ -179,9 +180,9 @@ class _LoyaltySettingsScreenState extends State<LoyaltySettingsScreen> {
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             onChanged: (_) => setState(() => _dirty = true),
-            decoration: const InputDecoration(
-              labelText: 'أقل عدد نقاط لعملية استبدال واحدة (0 = بدون حد)',
-              border: OutlineInputBorder(borderRadius: AppShape.none),
+            decoration: InputDecoration(
+              labelText: loc.lsMinRedemption,
+              border: const OutlineInputBorder(borderRadius: AppShape.none),
             ),
           ),
           const SizedBox(height: 12),
@@ -192,18 +193,18 @@ class _LoyaltySettingsScreenState extends State<LoyaltySettingsScreen> {
               FilteringTextInputFormatter.allow(RegExp(r'[\d.]')),
             ],
             onChanged: (_) => setState(() => _dirty = true),
-            decoration: const InputDecoration(
-              labelText: 'أقصى % من صافي الفاتورة يُغطّى بالنقاط',
-              border: OutlineInputBorder(borderRadius: AppShape.none),
+            decoration: InputDecoration(
+              labelText: loc.lsMaxRedemptionPercent,
+              border: const OutlineInputBorder(borderRadius: AppShape.none),
             ),
           ),
           const SizedBox(height: 8),
-          const Text(
-            'متى تُمنح النقاط؟',
-            style: TextStyle(fontWeight: FontWeight.w600),
+          Text(
+            loc.lsAwardWhenTitle,
+            style: const TextStyle(fontWeight: FontWeight.w600),
           ),
           SwitchListTile(
-            title: const Text('البيع النقدي'),
+            title: Text(loc.lsAwardCashSale),
             value: _earnCash,
             activeThumbColor: AppColors.primary,
             onChanged: (v) => setState(() {
@@ -212,7 +213,7 @@ class _LoyaltySettingsScreenState extends State<LoyaltySettingsScreen> {
             }),
           ),
           SwitchListTile(
-            title: const Text('التوصيل'),
+            title: Text(loc.lsAwardDelivery),
             value: _earnDelivery,
             activeThumbColor: AppColors.primary,
             onChanged: (v) => setState(() {
@@ -221,7 +222,7 @@ class _LoyaltySettingsScreenState extends State<LoyaltySettingsScreen> {
             }),
           ),
           SwitchListTile(
-            title: const Text('التقسيط'),
+            title: Text(loc.lsAwardInstallment),
             value: _earnInstallment,
             activeThumbColor: AppColors.primary,
             onChanged: (v) => setState(() {
@@ -230,7 +231,7 @@ class _LoyaltySettingsScreenState extends State<LoyaltySettingsScreen> {
             }),
           ),
           SwitchListTile(
-            title: const Text('البيع الآجل عند وجود مقدّم دفع'),
+            title: Text(loc.lsAwardCreditWithAdvance),
             value: _earnCreditDown,
             activeThumbColor: AppColors.primary,
             onChanged: (v) => setState(() {

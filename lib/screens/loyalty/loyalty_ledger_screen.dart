@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../services/database_helper.dart';
 
 /// سجل حركات نقاط الولاء (جميع العملاء أو حسب التصفية لاحقاً).
@@ -12,6 +13,7 @@ class LoyaltyLedgerScreen extends StatefulWidget {
 }
 
 class _LoyaltyLedgerScreenState extends State<LoyaltyLedgerScreen> {
+  AppLocalizations get loc => AppLocalizations.of(context)!;
   final DatabaseHelper _db = DatabaseHelper();
   List<Map<String, dynamic>> _rows = [];
   Map<int, String> _names = {};
@@ -41,7 +43,7 @@ class _LoyaltyLedgerScreenState extends State<LoyaltyLedgerScreen> {
       if (!mounted) return;
       setState(() => _loading = false);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('تعذر التحميل: $e')),
+        SnackBar(content: Text(loc.llLoadFailed(e.toString()))),
       );
     }
   }
@@ -49,9 +51,9 @@ class _LoyaltyLedgerScreenState extends State<LoyaltyLedgerScreen> {
   String _kindLabel(String? k) {
     switch (k) {
       case 'earn':
-        return 'منح';
+        return loc.llGranted;
       case 'redeem':
-        return 'استبدال';
+        return loc.llRedeemed;
       default:
         return k ?? '';
     }
@@ -62,12 +64,12 @@ class _LoyaltyLedgerScreenState extends State<LoyaltyLedgerScreen> {
     final df = DateFormat('yyyy/MM/dd HH:mm', 'en');
     return Scaffold(
       appBar: AppBar(
-        title: const Text('سجل نقاط الولاء'),
+        title: Text(loc.llTitle),
         actions: [
           IconButton(
             onPressed: _loading ? null : _load,
             icon: const Icon(Icons.refresh_rounded),
-            tooltip: 'تحديث',
+            tooltip: loc.llRefresh,
           ),
         ],
       ),
@@ -76,7 +78,7 @@ class _LoyaltyLedgerScreenState extends State<LoyaltyLedgerScreen> {
           : _rows.isEmpty
               ? Center(
                   child: Text(
-                    'لا توجد حركات بعد — فعّل الولاء من الإعدادات وسجّل مبيعات مرتبطة بعملاء.',
+                    loc.llNoData,
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.grey.shade600),
                   ),
@@ -88,7 +90,7 @@ class _LoyaltyLedgerScreenState extends State<LoyaltyLedgerScreen> {
                   itemBuilder: (context, i) {
                     final r = _rows[i];
                     final cid = r['customerId'] as int? ?? 0;
-                    final name = _names[cid] ?? 'عميل #$cid';
+                    final name = _names[cid] ?? loc.llCustomerId(cid.toString());
                     final pts = (r['points'] as num?)?.toInt() ?? 0;
                     final bal = (r['balanceAfter'] as num?)?.toInt() ?? 0;
                     final note = r['note']?.toString() ?? '';
@@ -132,7 +134,7 @@ class _LoyaltyLedgerScreenState extends State<LoyaltyLedgerScreen> {
                             ),
                           ),
                           Text(
-                            'رصيد $bal',
+                            loc.llBalance(bal.toString()),
                             style: TextStyle(
                               fontSize: 11,
                               color: Colors.grey.shade600,

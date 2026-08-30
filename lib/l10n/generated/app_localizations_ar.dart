@@ -8635,4 +8635,475 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get csSortTooltip => 'البحث';
+
+  @override
+  String get cfLoadFailedAfterAdd => 'تعذر تحميل بيانات العميل بعد الإضافة';
+
+  @override
+  String get cfLoadFailed => 'تعذر تحميل بيانات العميل';
+
+  @override
+  String get cfTitleEdit => 'تعديل بيانات العميل';
+
+  @override
+  String get cfFillBasic =>
+      'املأ البيانات الأساسية. يمكن ترك الحقول الاختيارية فارغة.';
+
+  @override
+  String get cfNameHint => 'الاسم الكامل كما يظهر في الفواتير';
+
+  @override
+  String get cfPhoneHint => 'رقم الهاتف (اختياري)';
+
+  @override
+  String get cfPhone2Hint => 'رقم هاتف إضافي';
+
+  @override
+  String get cfPhonePrimaryExample =>
+      'مثال: 07701234567 — لا يُكرَّر لعميل آخر (يُميّز الأسماء المتشابهة)';
+
+  @override
+  String get cfPhone2Example => 'مثال: 07801234567';
+
+  @override
+  String get cfDeleteNumber => 'حذف الرقم';
+
+  @override
+  String get cfAddAnotherNumber => 'إضافة رقم آخر';
+
+  @override
+  String get cfAddressHint => 'العنوان (اختياري)';
+
+  @override
+  String get cfAddressExample => 'المدينة، المنطقة';
+
+  @override
+  String get cfEmailHint => 'البريد الإلكتروني (اختياري)';
+
+  @override
+  String get cfNotesHint => 'ملاحظات (اختياري)';
+
+  @override
+  String get cfNotesDescription => 'تفضيلات العميل، ملاحظات داخلية…';
+
+  @override
+  String cfSaveFailed(Object error) {
+    return 'تعذر الحفظ: $error';
+  }
+
+  @override
+  String cfRegisteredSince(Object date) {
+    return 'مسجّل منذ $date';
+  }
+
+  @override
+  String get ctDeleteContact => 'حذف جهة الاتصال';
+
+  @override
+  String get ctIndebted => 'مديون';
+
+  @override
+  String get ctCreditor => 'دائن';
+
+  @override
+  String get ctTitle => 'جهات اتصال العملاء';
+
+  @override
+  String get ctRefresh => 'تحديث';
+
+  @override
+  String get ctNewCustomer => 'عميل جديد';
+
+  @override
+  String get ctSort => 'ترتيب';
+
+  @override
+  String get ctSortNameAZ => 'الاسم (أ-ي)';
+
+  @override
+  String get ctSortBalanceSize => 'حجم الرصيد';
+
+  @override
+  String get ctSearchHint => 'بحث بالاسم أو الهاتف أو البريد';
+
+  @override
+  String get ctSearchExample => 'مثال: محمد، 077…، name@…';
+
+  @override
+  String get ctIdSearchLabel => 'رقم المعرف / الكود';
+
+  @override
+  String get ctIdSearchExample => 'مثال: 12 أو 000012';
+
+  @override
+  String get ctApplySearch => 'تطبيق البحث';
+
+  @override
+  String get ctClearFilter => 'مسح التصفية';
+
+  @override
+  String get ctDebtOverdueLabel => 'عليهم دين أو آجل';
+
+  @override
+  String get ctDebtOverdueDescription =>
+      'فواتير بيع آجل غير مرتجعة، أو رصيد مدين على الحساب — للاتصال بخصوص الدين.';
+
+  @override
+  String get ctInstallmentsLabel => 'عليهم أقساط';
+
+  @override
+  String get ctInstallmentsDescription =>
+      'لديهم خطة تقسيط مسجّلة — للاتصال بخصوص الأقساط.';
+
+  @override
+  String get ctNoContactsYet => 'لا توجد جهات اتصال بعد';
+
+  @override
+  String get ctNoResults => 'لا توجد نتائج مطابقة. غيّر البحث أو أضف عميلاً.';
+
+  @override
+  String get ctColBalance => 'الرصيد';
+
+  @override
+  String get ctColCustomer => 'العميل';
+
+  @override
+  String get ctColStatus => 'الحالة';
+
+  @override
+  String get ctColBalanceHeader => 'الرصيد';
+
+  @override
+  String get ctColEmail => 'البريد';
+
+  @override
+  String get ctColPhone => 'الهاتف';
+
+  @override
+  String get ctColCustomerHeader => 'العميل';
+
+  @override
+  String get ctEditData => 'تعديل البيانات';
+
+  @override
+  String ctDeleteConfirm(Object name) {
+    return 'حذف «$name» من النظام؟';
+  }
+
+  @override
+  String ctDeleteFailed(Object error) {
+    return 'تعذر الحذف: $error';
+  }
+
+  @override
+  String ctShowing(Object count) {
+    return 'المعروض: $count';
+  }
+
+  @override
+  String ctCreditSaleLabel(Object count) {
+    return 'بيع آجل ×$count';
+  }
+
+  @override
+  String ctInstallmentLabel(Object count) {
+    return 'تقسيط ×$count';
+  }
+
+  @override
+  String get lsSaveSuccess => 'تم حفظ إعدادات الولاء';
+
+  @override
+  String lsSaveFailed(Object error) {
+    return 'تعذر الحفظ: $error';
+  }
+
+  @override
+  String get lsTitle => 'إعدادات ولاء العملاء';
+
+  @override
+  String get lsSave => 'حفظ';
+
+  @override
+  String get lsWhyNotSpoilTitle => 'لماذا لا «يُفسد» الأرباح؟';
+
+  @override
+  String get lsWhyNotSpoilBody =>
+      'النقاط منحة تسويقية: تُسجَّل كخصم ولاء منفصل عن هامش البضاعة. منح النقاط لا يغيّر تكلفة الشراء؛ الاستبدال يقلّل ما يدفعه العميل نقداً وفق قواعدك.';
+
+  @override
+  String get lsEnablePoints => 'تفعيل برنامج النقاط';
+
+  @override
+  String get lsEnablePointsSubtitle =>
+      'عند الإيقاف تُحفظ الفواتير دون جمع أو استبدال';
+
+  @override
+  String get lsPointsPerThousand =>
+      'نقاط لكل 1000 د.ع من صافي الفاتورة المؤهّل';
+
+  @override
+  String get lsRedemptionValue => 'قيمة الخصم بالدينار لكل نقطة عند الاستبدال';
+
+  @override
+  String get lsMinRedemption =>
+      'أقل عدد نقاط لعملية استبدال واحدة (0 = بدون حد)';
+
+  @override
+  String get lsMaxRedemptionPercent => 'أقصى % من صافي الفاتورة يُغطّى بالنقاط';
+
+  @override
+  String get lsAwardWhenTitle => 'متى تُمنح النقاط؟';
+
+  @override
+  String get lsAwardCashSale => 'البيع النقدي';
+
+  @override
+  String get lsAwardDelivery => 'التوصيل';
+
+  @override
+  String get lsAwardInstallment => 'التقسيط';
+
+  @override
+  String get lsAwardCreditWithAdvance => 'البيع الآجل عند وجود مقدّم دفع';
+
+  @override
+  String llLoadFailed(Object error) {
+    return 'تعذر التحميل: $error';
+  }
+
+  @override
+  String get llGranted => 'منح';
+
+  @override
+  String get llRedeemed => 'استبدال';
+
+  @override
+  String get llTitle => 'سجل نقاط الولاء';
+
+  @override
+  String get llRefresh => 'تحديث';
+
+  @override
+  String get llNoData =>
+      'لا توجد حركات بعد — فعّل الولاء من الإعدادات وسجّل مبيعات مرتبطة بعملاء.';
+
+  @override
+  String llCustomerId(Object id) {
+    return 'عميل #$id';
+  }
+
+  @override
+  String llBalance(Object balance) {
+    return 'رصيد $balance';
+  }
+
+  @override
+  String get svAddReceipt => 'إذن إضافة مخزن';
+
+  @override
+  String get svDispenseReceipt => 'إذن صرف مخزن';
+
+  @override
+  String get svTransferBetween => 'نقل بين مخازن';
+
+  @override
+  String get svStocktaking => 'جرد مخزن';
+
+  @override
+  String get svSource => 'مورد';
+
+  @override
+  String get svBranchShop => 'فرع/محل آخر';
+
+  @override
+  String get svMobileSupplier => 'مورد متنقل';
+
+  @override
+  String get svManual => 'يدوي';
+
+  @override
+  String get svMainSupplier => 'مورد رئيسي';
+
+  @override
+  String get svSupplier1 => 'مورد 1';
+
+  @override
+  String get svSupplier2 => 'مورد 2';
+
+  @override
+  String get svNoActiveWarehouse => 'لا يوجد مخزن نشط — أضف مخزناً أولاً';
+
+  @override
+  String get svStocktakingDisabled => 'حفظ «جرد مخزن» غير مفعّل بعد';
+
+  @override
+  String get svUnnamedItem => 'بند بلا اسم';
+
+  @override
+  String get svEnterMatchingItems =>
+      'أدخل بنوداً بكميات وأسماء مطابقة لمنتجات مسجّلة';
+
+  @override
+  String get svWarning => 'تنبيه';
+
+  @override
+  String get svCancel => 'إلغاء';
+
+  @override
+  String get svContinue => 'متابعة';
+
+  @override
+  String get svPleaseFillSourceName => 'يرجى تعبئة اسم مصدر الإذن الوارد';
+
+  @override
+  String get svVoucherDocument => 'سند مخزوني';
+
+  @override
+  String get svSaving => 'جاري الحفظ…';
+
+  @override
+  String get svConfirm => 'تأكيد';
+
+  @override
+  String get svWarehouse => 'المخزن';
+
+  @override
+  String get svNoActiveWarehouseAdd =>
+      'لا يوجد مخزن نشط. أضف مخزناً من «المخازن».';
+
+  @override
+  String get svReceivingWarehouse => 'المخزن المستقبل';
+
+  @override
+  String get svFromWarehouse => 'من مخزن';
+
+  @override
+  String get svWarehouses => 'المخازن';
+
+  @override
+  String get svToWarehouse => 'إلى مخزن';
+
+  @override
+  String get svChoose => 'اختر';
+
+  @override
+  String get svVoucherData => 'بيانات الإذن المخزني';
+
+  @override
+  String get svVoucherType => 'نوع الأذن';
+
+  @override
+  String get svDate => 'التاريخ';
+
+  @override
+  String get svSourceData => 'بيانات المصدر';
+
+  @override
+  String get svSourceType => 'نوع المصدر';
+
+  @override
+  String get svSourceRefOptional => 'مرجع المصدر (ID اختياري)';
+
+  @override
+  String get svSourceRefExample => 'مثال: 15';
+
+  @override
+  String get svSourceName => 'اسم المصدر';
+
+  @override
+  String get svSupplierName => 'اسم المورد';
+
+  @override
+  String get svSourceEntityName => 'اسم الجهة المصدر';
+
+  @override
+  String get svReferenceSettings => 'إعدادات المرجع';
+
+  @override
+  String get svReference => 'المرجع';
+
+  @override
+  String get svReferenceHint => 'رقم المرجع...';
+
+  @override
+  String get svOtherInfo => 'معلومات أخرى';
+
+  @override
+  String get svSupplier => 'المورد';
+
+  @override
+  String get svNotes => 'الملاحظات';
+
+  @override
+  String get svAutoSupplierReceipt => 'إنشاء وصل مورد تلقائي وربطه بالسند';
+
+  @override
+  String get svAutoSupplierReceiptDesc =>
+      'يسجّل وصلاً في الذمم بنفس مبلغ السند ثم يربطه به.';
+
+  @override
+  String get svAutoReturnRecord => 'تسجيل مرتجع المورد تلقائيًا في الذمم';
+
+  @override
+  String get svAutoReturnRecordDesc =>
+      'يسجّل دفعة مورد بدون صندوق لتخفيض الذمة عند صرف بضاعة كمردود.';
+
+  @override
+  String get svTotal => 'الإجمالي';
+
+  @override
+  String get svQuantity => 'الكمية';
+
+  @override
+  String get svUnitPrice => 'سعر الوحدة';
+
+  @override
+  String get svItems => 'البنود';
+
+  @override
+  String get svAddItem => 'إضافة بند';
+
+  @override
+  String get svDeleteItem => 'حذف البند';
+
+  @override
+  String get svItemQuantity => 'الكمية';
+
+  @override
+  String get svItemUnitPrice => 'سعر الوحدة';
+
+  @override
+  String get svChooseProduct => 'اختر منتجاً';
+
+  @override
+  String get svManualSelection => 'اختيار يدوي';
+
+  @override
+  String get svManualItemName => 'اسم البند اليدوي';
+
+  @override
+  String svFromReceipt(Object number) {
+    return 'من إذن وارد #$number';
+  }
+
+  @override
+  String svSupplierReturnNote(Object number) {
+    return 'مرتجع مورد عبر سند صرف #$number';
+  }
+
+  @override
+  String svProductsNotFound(Object names) {
+    return 'لم تُعثر على منتجات بالأسماء: $names';
+  }
+
+  @override
+  String svItemsSkipped(Object count, Object names) {
+    return 'بنود تُجاهل لعدم مطابقة الاسم: $names\nالمتابعة تحفظ $count بنداً فقط.';
+  }
+
+  @override
+  String svVoucherSaved(Object id, Object number) {
+    return 'تم حفظ السند #$id ($number)';
+  }
 }

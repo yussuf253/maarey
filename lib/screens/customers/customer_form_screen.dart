@@ -23,6 +23,7 @@ class CustomerFormScreen extends StatefulWidget {
 }
 
 class _CustomerFormScreenState extends State<CustomerFormScreen> {
+  AppLocalizations get loc => AppLocalizations.of(context)!;
   final _formKey = GlobalKey<FormState>();
   final DatabaseHelper _db = DatabaseHelper();
 
@@ -141,7 +142,7 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
         final row = await _db.getCustomerById(newId);
         if (!mounted) return;
         if (row == null) {
-          throw StateError('تعذر تحميل بيانات العميل بعد الإضافة');
+          throw StateError(loc.cfLoadFailedAfterAdd);
         }
         Navigator.pop(context, CustomerRecord.fromMap(row));
         return;
@@ -150,13 +151,13 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
       final id = widget.existing!.id;
       final row = await _db.getCustomerById(id);
       if (!mounted) return;
-      if (row == null) throw StateError('تعذر تحميل بيانات العميل');
+      if (row == null) throw StateError(loc.cfLoadFailed);
       Navigator.pop(context, CustomerRecord.fromMap(row));
     } catch (e) {
       if (mounted) {
         final msg = e is DuplicateCustomerPhoneException
             ? e.message
-            : 'تعذر الحفظ: $e';
+            : loc.cfSaveFailed(e.toString());
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(SnackBar(content: Text(msg)));
@@ -180,7 +181,7 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
           foregroundColor: cs.onPrimary,
           elevation: 0,
           title: Text(
-            _isEdit ? 'تعديل بيانات العميل' : AppLocalizations.of(context)!.addNewCustomer,
+            _isEdit ? loc.cfTitleEdit : loc.addNewCustomer,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           leading: IconButton(
@@ -208,7 +209,7 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 12),
                           child: Text(
-                            'مسجّل منذ ${DateFormat('yyyy/MM/dd', 'en').format(created)}',
+                            loc.cfRegisteredSince(DateFormat('yyyy/MM/dd', 'en').format(created)),
                             style: TextStyle(
                               fontSize: 13,
                               color: cs.onSurfaceVariant,
@@ -216,7 +217,7 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
                           ),
                         ),
                       Text(
-                        'املأ البيانات الأساسية. يمكن ترك الحقول الاختيارية فارغة.',
+                        loc.cfFillBasic,
                         style: TextStyle(
                           fontSize: 13,
                           height: 1.45,
@@ -226,8 +227,8 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
                       const SizedBox(height: 16),
                       _CustomerFormField(
                         controller: _nameCtrl,
-                        label: AppLocalizations.of(context)!.customerNameLabel,
-                        hint: 'الاسم الكامل كما يظهر في الفواتير',
+                        label: loc.customerNameLabel,
+                        hint: loc.cfNameHint,
                         icon: Icons.person_outline,
                         autofocus: !_isEdit,
                         validator: _validateName,
@@ -244,11 +245,11 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
                                   child: _CustomerFormField(
                                     controller: _phoneCtrls[idx],
                                     label: idx == 0
-                                        ? 'رقم الهاتف (اختياري)'
-                                        : 'رقم هاتف إضافي',
+                                        ? loc.cfPhoneHint
+                                        : loc.cfPhone2Hint,
                                     hint: idx == 0
-                                        ? 'مثال: 07701234567 — لا يُكرَّر لعميل آخر (يُميّز الأسماء المتشابهة)'
-                                        : 'مثال: 07801234567',
+                                        ? loc.cfPhonePrimaryExample
+                                        : loc.cfPhone2Example,
                                     icon: Icons.phone_outlined,
                                     keyboardType: TextInputType.phone,
                                     validator: _validatePhone,
@@ -259,7 +260,7 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
                                   Padding(
                                     padding: const EdgeInsets.only(top: 28),
                                     child: IconButton(
-                                      tooltip: 'حذف الرقم',
+                                      tooltip: loc.cfDeleteNumber,
                                       onPressed: _saving
                                           ? null
                                           : () {
@@ -288,7 +289,7 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
                                 color: cs.primary,
                               ),
                               label: Text(
-                                'إضافة رقم آخر',
+                                loc.cfAddAnotherNumber,
                                 style: TextStyle(
                                   color: cs.primary,
                                   fontWeight: FontWeight.w700,
@@ -301,14 +302,14 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
                       ],
                       _CustomerFormField(
                         controller: _addressCtrl,
-                        label: 'العنوان (اختياري)',
-                        hint: 'المدينة، المنطقة',
+                        label: loc.cfAddressHint,
+                        hint: loc.cfAddressExample,
                         icon: Icons.location_on_outlined,
                       ),
                       const SizedBox(height: 14),
                       _CustomerFormField(
                         controller: _emailCtrl,
-                        label: 'البريد الإلكتروني (اختياري)',
+                        label: loc.cfEmailHint,
                         hint: 'example@domain.com',
                         icon: Icons.email_outlined,
                         keyboardType: TextInputType.emailAddress,
@@ -317,8 +318,8 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
                       const SizedBox(height: 14),
                       _CustomerFormField(
                         controller: _notesCtrl,
-                        label: 'ملاحظات (اختياري)',
-                        hint: 'تفضيلات العميل، ملاحظات داخلية…',
+                        label: loc.cfNotesHint,
+                        hint: loc.cfNotesDescription,
                         icon: Icons.notes_outlined,
                         maxLines: 3,
                       ),
@@ -348,7 +349,7 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
                           onPressed: _saving
                               ? null
                               : () => Navigator.pop(context),
-                          child: Text(AppLocalizations.of(context)!.cancel),
+                          child: Text(loc.cancel),
                         ),
                         const SizedBox(width: 8),
                         FilledButton(
@@ -371,7 +372,7 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
                                     color: cs.onPrimary,
                                   ),
                                 )
-                              : Text(AppLocalizations.of(context)!.save),
+                              : Text(loc.save),
                         ),
                       ],
                     ),

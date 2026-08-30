@@ -3588,39 +3588,41 @@ class _HomeScreenState extends State<HomeScreen>
               ),
             ],
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Handle bar
-              Container(
-                margin: const EdgeInsets.only(top: 10, bottom: 4),
-                width: 36,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade400,
-                  borderRadius: ac.radius(2),
+          child: Material(
+            color: Colors.transparent,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Handle bar
+                Container(
+                  margin: const EdgeInsets.only(top: 10, bottom: 4),
+                  width: 36,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade400,
+                    borderRadius: ac.radius(2),
+                  ),
                 ),
-              ),
-              // Header
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 10,
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 36,
-                      height: 36,
-                      decoration: BoxDecoration(
-                        color: module.iconColor.withOpacity(0.12),
-                        borderRadius: ac.sm,
-                      ),
-                      child: Icon(
-                        module.icon,
-                        color: module.iconColor,
-                        size: 20,
-                      ),
+                // Header
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 10,
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 36,
+                        height: 36,
+                        decoration: BoxDecoration(
+                          color: module.iconColor.withOpacity(0.12),
+                          borderRadius: ac.sm,
+                        ),
+                        child: Icon(
+                          module.icon,
+                          color: module.iconColor,
+                          size: 20,
+                        ),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
@@ -3718,6 +3720,7 @@ class _HomeScreenState extends State<HomeScreen>
           ),
         ),
       ),
+    ),
     );
   }
 }
@@ -3898,17 +3901,17 @@ class _BottomNavTileState extends State<_BottomNavTile> {
                                 color: Colors.white.withValues(alpha: 0.14),
                               )
                             : null,
-                        boxShadow: selected && useGlassDock
+                        boxShadow: useGlassDock
                             ? [
                                 BoxShadow(
                                   color: widget.module.iconColor.withValues(
-                                    alpha: 0.20,
+                                    alpha: selected ? 0.20 : 0.0,
                                   ),
                                   blurRadius: 16,
                                   offset: const Offset(0, 5),
                                 ),
                               ]
-                            : null,
+                            : [],
                       ),
                       child: _BottomNavIcon(
                         module: widget.module,

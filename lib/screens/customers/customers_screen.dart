@@ -57,7 +57,7 @@ class CustomersScreen extends StatefulWidget {
 }
 
 class _CustomersScreenState extends State<CustomersScreen> {
-  AppLocalizations get loc => loc;
+  AppLocalizations get loc => AppLocalizations.of(context)!;
   Color get _pageBg => Theme.of(context).scaffoldBackgroundColor;
   Color get _surface => Theme.of(context).colorScheme.surface;
   Color get _primary => Theme.of(context).colorScheme.primary;
@@ -94,15 +94,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
         }
       });
     });
-    _searchCtrl.addListener(() {
-      if (!mounted) return;
-      _searchDebounce?.cancel();
-      _searchDebounce = Timer(const Duration(milliseconds: 300), () {
-        if (!mounted) return;
-        _syncFilters();
-      });
-      setState(() {});
-    });
+    _searchCtrl.addListener(_onSearchChanged);
   }
 
   @override
@@ -114,10 +106,20 @@ class _CustomersScreenState extends State<CustomersScreen> {
     }
   }
 
+  void _onSearchChanged() {
+    if (!mounted) return;
+    _searchDebounce?.cancel();
+    _searchDebounce = Timer(const Duration(milliseconds: 300), () {
+      if (!mounted) return;
+      _syncFilters();
+    });
+    setState(() {});
+  }
+
   @override
   void dispose() {
     _searchDebounce?.cancel();
-    _searchCtrl.removeListener(() {});
+    _searchCtrl.removeListener(_onSearchChanged);
     _searchCtrl.dispose();
     _searchFocus.dispose();
     super.dispose();

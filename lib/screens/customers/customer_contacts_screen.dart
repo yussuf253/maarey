@@ -38,6 +38,7 @@ class CustomerContactsScreen extends StatefulWidget {
 }
 
 class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
+  AppLocalizations get _loc => AppLocalizations.of(context)!;
   final TextEditingController _searchCtrl = TextEditingController();
   final TextEditingController _idCtrl = TextEditingController();
 
@@ -112,7 +113,7 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
       context.read<CustomersProvider>().setFilters(
             query: _appliedText,
             idQuery: _appliedId,
-            statusArabic: AppLocalizations.of(context)!.all,
+            statusArabic: _loc.all,
             sortKey: _sort == _ContactSort.balanceDesc ? 'balance_desc' : 'name_asc',
           ),
     );
@@ -131,7 +132,7 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
       context.read<CustomersProvider>().setFilters(
             query: '',
             idQuery: '',
-            statusArabic: AppLocalizations.of(context)!.all,
+            statusArabic: _loc.all,
             sortKey: 'name_asc',
           ),
     );
@@ -160,17 +161,17 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('حذف جهة الاتصال'),
+        title: Text(_loc.ctDeleteContact),
         content: Text('حذف «${c.name}» من النظام؟'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
-            child: Text(AppLocalizations.of(context)!.cancel),
+            child: Text(_loc.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(ctx, true),
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: Text(AppLocalizations.of(context)!.delete),
+            child: Text(_loc.delete),
           ),
         ],
       ),
@@ -225,14 +226,14 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
       foregroundColor: _onPrimary,
           elevation: 0,
       centerTitle: false,
-          title: const Text(
-            'جهات اتصال العملاء',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          title: Text(
+            _loc.ctTitle,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           ),
       actions: [
         IconButton(
           icon: const Icon(Icons.refresh_rounded),
-          tooltip: 'تحديث',
+          tooltip: _loc.ctRefresh,
           onPressed: () => context.read<CustomersProvider>().refresh(),
         ),
         const SizedBox(width: 4),
@@ -263,9 +264,9 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
                 shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
               ),
               icon: const Icon(Icons.person_add_alt_1_outlined, size: 20),
-                  label: const Text(
-                    'عميل جديد',
-                    style: TextStyle(fontWeight: FontWeight.w600),
+                  label: Text(
+                    _loc.ctNewCustomer,
+                    style: const TextStyle(fontWeight: FontWeight.w600),
                   ),
                 ),
           ],
@@ -328,7 +329,7 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      'ترتيب',
+                      _loc.ctSort,
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
@@ -349,14 +350,14 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
                         child: DropdownButton<_ContactSort>(
                           isExpanded: true,
                           value: _sort,
-                          items: const [
+                          items: [
                             DropdownMenuItem(
                               value: _ContactSort.nameAsc,
-                              child: Text('الاسم (أ-ي)'),
+                              child: Text(_loc.ctSortNameAZ),
                             ),
                             DropdownMenuItem(
                               value: _ContactSort.balanceDesc,
-                              child: Text('حجم الرصيد'),
+                              child: Text(_loc.ctSortBalanceSize),
                             ),
                           ],
                           onChanged: (v) {
@@ -379,8 +380,8 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
                 controller: _searchCtrl,
                 onSubmitted: (_) => _applySearch(),
                 decoration: InputDecoration(
-                  labelText: 'بحث بالاسم أو الهاتف أو البريد',
-                  hintText: 'مثال: محمد، 077…، name@…',
+                  labelText: _loc.ctSearchHint,
+                  hintText: _loc.ctSearchExample,
                   filled: true,
                   fillColor: _surface,
                   isDense: true,
@@ -400,8 +401,8 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
                 onSubmitted: (_) => _applySearch(),
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  labelText: 'رقم المعرف / الكود',
-                  hintText: 'مثال: 12 أو 000012',
+                  labelText: _loc.ctIdSearchLabel,
+                  hintText: _loc.ctIdSearchExample,
                   filled: true,
                   fillColor: _surface,
                   isDense: true,
@@ -444,7 +445,7 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
               FilledButton.icon(
                 onPressed: _applySearch,
                 icon: const Icon(Icons.search, size: 18),
-                label: const Text('تطبيق البحث'),
+                label: Text(_loc.ctApplySearch),
                 style: FilledButton.styleFrom(
                   shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
                 ),
@@ -452,7 +453,7 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
               OutlinedButton.icon(
                 onPressed: _clearFilters,
                 icon: const Icon(Icons.filter_alt_off_outlined, size: 18),
-                label: const Text('مسح التصفية'),
+                label: Text(_loc.ctClearFilter),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: _textPrimary,
                   side: BorderSide(color: _outline),
@@ -463,7 +464,7 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
                 onPressed: _openAdvancedCustomers,
                 icon: Icon(Icons.manage_accounts_outlined, color: _primary, size: 20),
                 label: Text(
-                  AppLocalizations.of(context)!.customersManagement,
+                  _loc.customersManagement,
                   style: TextStyle(color: _primary, fontWeight: FontWeight.w600),
                 ),
               ),
@@ -490,7 +491,7 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
           children: [
             _buildFilterChip(
               filter: _ContactFilter.all,
-              label: AppLocalizations.of(context)!.all,
+              label: _loc.all,
             ),
             const SizedBox(width: 10),
             _buildFilterChip(
@@ -530,8 +531,8 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
           const SizedBox(height: 12),
           Text(
             noData
-                ? 'لا توجد جهات اتصال بعد'
-                : 'لا توجد نتائج مطابقة. غيّر البحث أو أضف عميلاً.',
+                ? _loc.ctNoContactsYet
+                : _loc.ctNoResults,
             textAlign: TextAlign.center,
             style: TextStyle(color: _textSecondary, fontSize: 15),
           ),
@@ -540,7 +541,7 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
             FilledButton.icon(
               onPressed: () => _openEditor(),
               icon: const Icon(Icons.add),
-              label: Text(AppLocalizations.of(context)!.addFirstCustomer),
+              label: Text(_loc.addFirstCustomer),
             ),
           ],
         ],
@@ -557,7 +558,7 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
               children: [
                 const SizedBox(width: 44),
         Text(
-                  'الرصيد',
+                  _loc.ctColBalance,
           style: TextStyle(
             fontWeight: FontWeight.w600,
                     fontSize: 12,
@@ -566,7 +567,7 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
                 ),
                 Expanded(
                   child: Text(
-                    'العميل',
+                    _loc.ctColCustomer,
                     textAlign: TextAlign.right,
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
@@ -577,47 +578,47 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
                 ),
               ],
             )
-          : const Row(
+          : Row(
               children: [
-                SizedBox(width: 44),
+                const SizedBox(width: 44),
                 SizedBox(
                   width: 88,
                   child: Text(
-                    'الحالة',
+                    _loc.ctColStatus,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
+                    style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
                   ),
                 ),
                 Expanded(
                   flex: 2,
                   child: Text(
-                    'الرصيد',
+                    _loc.ctColBalance,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
+                    style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
                   ),
                 ),
                 Expanded(
                   flex: 2,
                   child: Text(
-                    'البريد',
+                    _loc.ctColEmail,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
+                    style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
                   ),
                 ),
                 Expanded(
                   flex: 2,
                   child: Text(
-                    'الهاتف',
+                    _loc.ctColPhone,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
+                    style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
                   ),
                 ),
                 Expanded(
                   flex: 4,
                   child: Text(
-                    'العميل',
+                    _loc.ctColCustomer,
                     textAlign: TextAlign.right,
-                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+                    style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
           ),
         ),
       ],
@@ -902,7 +903,7 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
     return SizedBox(
       width: 44,
       child: PopupMenuButton<String>(
-        tooltip: AppLocalizations.of(context)!.actions,
+        tooltip: _loc.actions,
         shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
         onSelected: (v) {
           if (v == 'edit') _openEditor(customer: c);
@@ -910,12 +911,12 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
           if (v == 'delete') _confirmDelete(c);
         },
         itemBuilder: (ctx) => [
-          PopupMenuItem(value: 'detail', child: Text(AppLocalizations.of(context)!.financialDetails)),
-          const PopupMenuItem(value: 'edit', child: Text('تعديل البيانات')),
+          PopupMenuItem(value: 'detail', child: Text(_loc.financialDetails)),
+          PopupMenuItem(value: 'edit', child: Text(_loc.ctEditData)),
           const PopupMenuDivider(),
           PopupMenuItem(
             value: 'delete',
-            child: Text(AppLocalizations.of(context)!.delete, style: const TextStyle(color: Colors.red)),
+            child: Text(_loc.delete, style: const TextStyle(color: Colors.red)),
           ),
         ],
         child: Padding(

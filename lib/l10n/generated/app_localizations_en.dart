@@ -8719,4 +8719,481 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get csSortTooltip => 'Search';
+
+  @override
+  String get cfLoadFailedAfterAdd =>
+      'Failed to load customer data after adding';
+
+  @override
+  String get cfLoadFailed => 'Failed to load customer data';
+
+  @override
+  String get cfTitleEdit => 'Edit customer data';
+
+  @override
+  String get cfFillBasic =>
+      'Fill in the basic data. Optional fields can be left empty.';
+
+  @override
+  String get cfNameHint => 'Full name as shown on invoices';
+
+  @override
+  String get cfPhoneHint => 'Phone number (optional)';
+
+  @override
+  String get cfPhone2Hint => 'Additional phone number';
+
+  @override
+  String get cfPhonePrimaryExample =>
+      'Example: 07701234567 — must not duplicate another customer (distinguishes similar names)';
+
+  @override
+  String get cfPhone2Example => 'Example: 07801234567';
+
+  @override
+  String get cfDeleteNumber => 'Delete number';
+
+  @override
+  String get cfAddAnotherNumber => 'Add another number';
+
+  @override
+  String get cfAddressHint => 'Address (optional)';
+
+  @override
+  String get cfAddressExample => 'City, district';
+
+  @override
+  String get cfEmailHint => 'Email (optional)';
+
+  @override
+  String get cfNotesHint => 'Notes (optional)';
+
+  @override
+  String get cfNotesDescription => 'Customer preferences, internal notes…';
+
+  @override
+  String cfSaveFailed(Object error) {
+    return 'Save failed: $error';
+  }
+
+  @override
+  String cfRegisteredSince(Object date) {
+    return 'Registered since $date';
+  }
+
+  @override
+  String get ctDeleteContact => 'Delete contact';
+
+  @override
+  String get ctIndebted => 'Indebted';
+
+  @override
+  String get ctCreditor => 'Creditor';
+
+  @override
+  String get ctTitle => 'Customer contacts';
+
+  @override
+  String get ctRefresh => 'Refresh';
+
+  @override
+  String get ctNewCustomer => 'New customer';
+
+  @override
+  String get ctSort => 'Sort';
+
+  @override
+  String get ctSortNameAZ => 'Name (A–Z)';
+
+  @override
+  String get ctSortBalanceSize => 'Balance size';
+
+  @override
+  String get ctSearchHint => 'Search by name, phone or email';
+
+  @override
+  String get ctSearchExample => 'Example: Mohammed, 077…, name@…';
+
+  @override
+  String get ctIdSearchLabel => 'ID / Code number';
+
+  @override
+  String get ctIdSearchExample => 'Example: 12 or 000012';
+
+  @override
+  String get ctApplySearch => 'Apply search';
+
+  @override
+  String get ctClearFilter => 'Clear filter';
+
+  @override
+  String get ctDebtOverdueLabel => 'Overdue or credit';
+
+  @override
+  String get ctDebtOverdueDescription =>
+      'Unreturned credit sales invoices, or debit balance on account — to contact regarding debt.';
+
+  @override
+  String get ctInstallmentsLabel => 'Installments';
+
+  @override
+  String get ctInstallmentsDescription =>
+      'Has a registered installment plan — to contact regarding installments.';
+
+  @override
+  String get ctNoContactsYet => 'No contacts yet';
+
+  @override
+  String get ctNoResults =>
+      'No matching results. Change the search or add a customer.';
+
+  @override
+  String get ctColBalance => 'Balance';
+
+  @override
+  String get ctColCustomer => 'Customer';
+
+  @override
+  String get ctColStatus => 'Status';
+
+  @override
+  String get ctColBalanceHeader => 'Balance';
+
+  @override
+  String get ctColEmail => 'Email';
+
+  @override
+  String get ctColPhone => 'Phone';
+
+  @override
+  String get ctColCustomerHeader => 'Customer';
+
+  @override
+  String get ctEditData => 'Edit data';
+
+  @override
+  String ctDeleteConfirm(Object name) {
+    return 'Delete \"$name\" from the system?';
+  }
+
+  @override
+  String ctDeleteFailed(Object error) {
+    return 'Delete failed: $error';
+  }
+
+  @override
+  String ctShowing(Object count) {
+    return 'Showing: $count';
+  }
+
+  @override
+  String ctCreditSaleLabel(Object count) {
+    return 'Credit sales ×$count';
+  }
+
+  @override
+  String ctInstallmentLabel(Object count) {
+    return 'Installments ×$count';
+  }
+
+  @override
+  String get lsSaveSuccess => 'Loyalty settings saved';
+
+  @override
+  String lsSaveFailed(Object error) {
+    return 'Failed to save: $error';
+  }
+
+  @override
+  String get lsTitle => 'Customer loyalty settings';
+
+  @override
+  String get lsSave => 'Save';
+
+  @override
+  String get lsWhyNotSpoilTitle => 'Why doesn\'t it \"spoil\" profits?';
+
+  @override
+  String get lsWhyNotSpoilBody =>
+      'Points are a marketing grant: recorded as a loyalty discount separate from the goods margin. Granting points doesn\'t change the purchase cost; redemption reduces what the customer pays in cash according to your rules.';
+
+  @override
+  String get lsEnablePoints => 'Enable points program';
+
+  @override
+  String get lsEnablePointsSubtitle =>
+      'When disabled, invoices are saved without collecting or redeeming';
+
+  @override
+  String get lsPointsPerThousand =>
+      'Points per 1,000 IQD of qualifying invoice net';
+
+  @override
+  String get lsRedemptionValue =>
+      'Discount value in dinars per point on redemption';
+
+  @override
+  String get lsMinRedemption =>
+      'Minimum points for a single redemption (0 = no limit)';
+
+  @override
+  String get lsMaxRedemptionPercent => 'Max % of invoice net covered by points';
+
+  @override
+  String get lsAwardWhenTitle => 'When are points awarded?';
+
+  @override
+  String get lsAwardCashSale => 'Cash sale';
+
+  @override
+  String get lsAwardDelivery => 'Delivery';
+
+  @override
+  String get lsAwardInstallment => 'Installment';
+
+  @override
+  String get lsAwardCreditWithAdvance => 'Credit sale with advance payment';
+
+  @override
+  String llLoadFailed(Object error) {
+    return 'Failed to load: $error';
+  }
+
+  @override
+  String get llGranted => 'Granted';
+
+  @override
+  String get llRedeemed => 'Redeemed';
+
+  @override
+  String get llTitle => 'Loyalty points ledger';
+
+  @override
+  String get llRefresh => 'Refresh';
+
+  @override
+  String get llNoData =>
+      'No transactions yet — enable loyalty in settings and record sales linked to customers.';
+
+  @override
+  String llCustomerId(Object id) {
+    return 'Customer #$id';
+  }
+
+  @override
+  String llBalance(Object balance) {
+    return 'Balance $balance';
+  }
+
+  @override
+  String get svAddReceipt => 'Warehouse receipt';
+
+  @override
+  String get svDispenseReceipt => 'Warehouse dispensing';
+
+  @override
+  String get svTransferBetween => 'Transfer between warehouses';
+
+  @override
+  String get svStocktaking => 'Warehouse stocktaking';
+
+  @override
+  String get svSource => 'Supplier';
+
+  @override
+  String get svBranchShop => 'Branch / other shop';
+
+  @override
+  String get svMobileSupplier => 'Mobile supplier';
+
+  @override
+  String get svManual => 'Manual';
+
+  @override
+  String get svMainSupplier => 'Main supplier';
+
+  @override
+  String get svSupplier1 => 'Supplier 1';
+
+  @override
+  String get svSupplier2 => 'Supplier 2';
+
+  @override
+  String get svNoActiveWarehouse => 'No active warehouse — add one first';
+
+  @override
+  String get svStocktakingDisabled =>
+      'Saving \"stocktaking\" is not yet enabled';
+
+  @override
+  String get svUnnamedItem => 'Unnamed item';
+
+  @override
+  String get svEnterMatchingItems =>
+      'Enter items with quantities and names matching registered products';
+
+  @override
+  String get svWarning => 'Warning';
+
+  @override
+  String get svCancel => 'Cancel';
+
+  @override
+  String get svContinue => 'Continue';
+
+  @override
+  String get svPleaseFillSourceName =>
+      'Please fill in the incoming voucher source name';
+
+  @override
+  String get svVoucherDocument => 'Stock voucher';
+
+  @override
+  String get svSaving => 'Saving…';
+
+  @override
+  String get svConfirm => 'Confirm';
+
+  @override
+  String get svWarehouse => 'Warehouse';
+
+  @override
+  String get svNoActiveWarehouseAdd =>
+      'No active warehouse. Add one from \"Warehouses\".';
+
+  @override
+  String get svReceivingWarehouse => 'Receiving warehouse';
+
+  @override
+  String get svFromWarehouse => 'From warehouse';
+
+  @override
+  String get svWarehouses => 'Warehouses';
+
+  @override
+  String get svToWarehouse => 'To warehouse';
+
+  @override
+  String get svChoose => 'Choose';
+
+  @override
+  String get svVoucherData => 'Voucher data';
+
+  @override
+  String get svVoucherType => 'Voucher type';
+
+  @override
+  String get svDate => 'Date';
+
+  @override
+  String get svSourceData => 'Source data';
+
+  @override
+  String get svSourceType => 'Source type';
+
+  @override
+  String get svSourceRefOptional => 'Source reference (ID optional)';
+
+  @override
+  String get svSourceRefExample => 'Example: 15';
+
+  @override
+  String get svSourceName => 'Source name';
+
+  @override
+  String get svSupplierName => 'Supplier name';
+
+  @override
+  String get svSourceEntityName => 'Source entity name';
+
+  @override
+  String get svReferenceSettings => 'Reference settings';
+
+  @override
+  String get svReference => 'Reference';
+
+  @override
+  String get svReferenceHint => 'Reference number...';
+
+  @override
+  String get svOtherInfo => 'Other information';
+
+  @override
+  String get svSupplier => 'Supplier';
+
+  @override
+  String get svNotes => 'Notes';
+
+  @override
+  String get svAutoSupplierReceipt =>
+      'Auto-create supplier receipt and link to voucher';
+
+  @override
+  String get svAutoSupplierReceiptDesc =>
+      'Records a payable entry for the voucher amount then links it.';
+
+  @override
+  String get svAutoReturnRecord => 'Auto-record supplier return in payables';
+
+  @override
+  String get svAutoReturnRecordDesc =>
+      'Records a supplier payment without cash box to reduce the balance when dispensing goods as returned.';
+
+  @override
+  String get svTotal => 'Total';
+
+  @override
+  String get svQuantity => 'Quantity';
+
+  @override
+  String get svUnitPrice => 'Unit price';
+
+  @override
+  String get svItems => 'Items';
+
+  @override
+  String get svAddItem => 'Add item';
+
+  @override
+  String get svDeleteItem => 'Delete item';
+
+  @override
+  String get svItemQuantity => 'Quantity';
+
+  @override
+  String get svItemUnitPrice => 'Unit price';
+
+  @override
+  String get svChooseProduct => 'Choose a product';
+
+  @override
+  String get svManualSelection => 'Manual selection';
+
+  @override
+  String get svManualItemName => 'Manual item name';
+
+  @override
+  String svFromReceipt(Object number) {
+    return 'From incoming receipt #$number';
+  }
+
+  @override
+  String svSupplierReturnNote(Object number) {
+    return 'Supplier return via dispensing voucher #$number';
+  }
+
+  @override
+  String svProductsNotFound(Object names) {
+    return 'Products not found by name: $names';
+  }
+
+  @override
+  String svItemsSkipped(Object count, Object names) {
+    return 'Items skipped due to name mismatch: $names\nContinuing will save only $count item(s).';
+  }
+
+  @override
+  String svVoucherSaved(Object id, Object number) {
+    return 'Voucher #$id ($number) saved';
+  }
 }

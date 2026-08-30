@@ -15703,6 +15703,858 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'البحث'**
   String get csSortTooltip;
+
+  /// No description provided for @cfLoadFailedAfterAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر تحميل بيانات العميل بعد الإضافة'**
+  String get cfLoadFailedAfterAdd;
+
+  /// No description provided for @cfLoadFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر تحميل بيانات العميل'**
+  String get cfLoadFailed;
+
+  /// No description provided for @cfTitleEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل بيانات العميل'**
+  String get cfTitleEdit;
+
+  /// No description provided for @cfFillBasic.
+  ///
+  /// In ar, this message translates to:
+  /// **'املأ البيانات الأساسية. يمكن ترك الحقول الاختيارية فارغة.'**
+  String get cfFillBasic;
+
+  /// No description provided for @cfNameHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم الكامل كما يظهر في الفواتير'**
+  String get cfNameHint;
+
+  /// No description provided for @cfPhoneHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الهاتف (اختياري)'**
+  String get cfPhoneHint;
+
+  /// No description provided for @cfPhone2Hint.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم هاتف إضافي'**
+  String get cfPhone2Hint;
+
+  /// No description provided for @cfPhonePrimaryExample.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: 07701234567 — لا يُكرَّر لعميل آخر (يُميّز الأسماء المتشابهة)'**
+  String get cfPhonePrimaryExample;
+
+  /// No description provided for @cfPhone2Example.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: 07801234567'**
+  String get cfPhone2Example;
+
+  /// No description provided for @cfDeleteNumber.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف الرقم'**
+  String get cfDeleteNumber;
+
+  /// No description provided for @cfAddAnotherNumber.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة رقم آخر'**
+  String get cfAddAnotherNumber;
+
+  /// No description provided for @cfAddressHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'العنوان (اختياري)'**
+  String get cfAddressHint;
+
+  /// No description provided for @cfAddressExample.
+  ///
+  /// In ar, this message translates to:
+  /// **'المدينة، المنطقة'**
+  String get cfAddressExample;
+
+  /// No description provided for @cfEmailHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'البريد الإلكتروني (اختياري)'**
+  String get cfEmailHint;
+
+  /// No description provided for @cfNotesHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظات (اختياري)'**
+  String get cfNotesHint;
+
+  /// No description provided for @cfNotesDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفضيلات العميل، ملاحظات داخلية…'**
+  String get cfNotesDescription;
+
+  /// No description provided for @cfSaveFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر الحفظ: {error}'**
+  String cfSaveFailed(Object error);
+
+  /// No description provided for @cfRegisteredSince.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسجّل منذ {date}'**
+  String cfRegisteredSince(Object date);
+
+  /// No description provided for @ctDeleteContact.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف جهة الاتصال'**
+  String get ctDeleteContact;
+
+  /// No description provided for @ctIndebted.
+  ///
+  /// In ar, this message translates to:
+  /// **'مديون'**
+  String get ctIndebted;
+
+  /// No description provided for @ctCreditor.
+  ///
+  /// In ar, this message translates to:
+  /// **'دائن'**
+  String get ctCreditor;
+
+  /// No description provided for @ctTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'جهات اتصال العملاء'**
+  String get ctTitle;
+
+  /// No description provided for @ctRefresh.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديث'**
+  String get ctRefresh;
+
+  /// No description provided for @ctNewCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'عميل جديد'**
+  String get ctNewCustomer;
+
+  /// No description provided for @ctSort.
+  ///
+  /// In ar, this message translates to:
+  /// **'ترتيب'**
+  String get ctSort;
+
+  /// No description provided for @ctSortNameAZ.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم (أ-ي)'**
+  String get ctSortNameAZ;
+
+  /// No description provided for @ctSortBalanceSize.
+  ///
+  /// In ar, this message translates to:
+  /// **'حجم الرصيد'**
+  String get ctSortBalanceSize;
+
+  /// No description provided for @ctSearchHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث بالاسم أو الهاتف أو البريد'**
+  String get ctSearchHint;
+
+  /// No description provided for @ctSearchExample.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: محمد، 077…، name@…'**
+  String get ctSearchExample;
+
+  /// No description provided for @ctIdSearchLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم المعرف / الكود'**
+  String get ctIdSearchLabel;
+
+  /// No description provided for @ctIdSearchExample.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: 12 أو 000012'**
+  String get ctIdSearchExample;
+
+  /// No description provided for @ctApplySearch.
+  ///
+  /// In ar, this message translates to:
+  /// **'تطبيق البحث'**
+  String get ctApplySearch;
+
+  /// No description provided for @ctClearFilter.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح التصفية'**
+  String get ctClearFilter;
+
+  /// No description provided for @ctDebtOverdueLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'عليهم دين أو آجل'**
+  String get ctDebtOverdueLabel;
+
+  /// No description provided for @ctDebtOverdueDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'فواتير بيع آجل غير مرتجعة، أو رصيد مدين على الحساب — للاتصال بخصوص الدين.'**
+  String get ctDebtOverdueDescription;
+
+  /// No description provided for @ctInstallmentsLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'عليهم أقساط'**
+  String get ctInstallmentsLabel;
+
+  /// No description provided for @ctInstallmentsDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'لديهم خطة تقسيط مسجّلة — للاتصال بخصوص الأقساط.'**
+  String get ctInstallmentsDescription;
+
+  /// No description provided for @ctNoContactsYet.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد جهات اتصال بعد'**
+  String get ctNoContactsYet;
+
+  /// No description provided for @ctNoResults.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد نتائج مطابقة. غيّر البحث أو أضف عميلاً.'**
+  String get ctNoResults;
+
+  /// No description provided for @ctColBalance.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرصيد'**
+  String get ctColBalance;
+
+  /// No description provided for @ctColCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'العميل'**
+  String get ctColCustomer;
+
+  /// No description provided for @ctColStatus.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحالة'**
+  String get ctColStatus;
+
+  /// No description provided for @ctColBalanceHeader.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرصيد'**
+  String get ctColBalanceHeader;
+
+  /// No description provided for @ctColEmail.
+  ///
+  /// In ar, this message translates to:
+  /// **'البريد'**
+  String get ctColEmail;
+
+  /// No description provided for @ctColPhone.
+  ///
+  /// In ar, this message translates to:
+  /// **'الهاتف'**
+  String get ctColPhone;
+
+  /// No description provided for @ctColCustomerHeader.
+  ///
+  /// In ar, this message translates to:
+  /// **'العميل'**
+  String get ctColCustomerHeader;
+
+  /// No description provided for @ctEditData.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل البيانات'**
+  String get ctEditData;
+
+  /// No description provided for @ctDeleteConfirm.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف «{name}» من النظام؟'**
+  String ctDeleteConfirm(Object name);
+
+  /// No description provided for @ctDeleteFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر الحذف: {error}'**
+  String ctDeleteFailed(Object error);
+
+  /// No description provided for @ctShowing.
+  ///
+  /// In ar, this message translates to:
+  /// **'المعروض: {count}'**
+  String ctShowing(Object count);
+
+  /// No description provided for @ctCreditSaleLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع آجل ×{count}'**
+  String ctCreditSaleLabel(Object count);
+
+  /// No description provided for @ctInstallmentLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تقسيط ×{count}'**
+  String ctInstallmentLabel(Object count);
+
+  /// No description provided for @lsSaveSuccess.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم حفظ إعدادات الولاء'**
+  String get lsSaveSuccess;
+
+  /// No description provided for @lsSaveFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر الحفظ: {error}'**
+  String lsSaveFailed(Object error);
+
+  /// No description provided for @lsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات ولاء العملاء'**
+  String get lsTitle;
+
+  /// No description provided for @lsSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get lsSave;
+
+  /// No description provided for @lsWhyNotSpoilTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لماذا لا «يُفسد» الأرباح؟'**
+  String get lsWhyNotSpoilTitle;
+
+  /// No description provided for @lsWhyNotSpoilBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'النقاط منحة تسويقية: تُسجَّل كخصم ولاء منفصل عن هامش البضاعة. منح النقاط لا يغيّر تكلفة الشراء؛ الاستبدال يقلّل ما يدفعه العميل نقداً وفق قواعدك.'**
+  String get lsWhyNotSpoilBody;
+
+  /// No description provided for @lsEnablePoints.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفعيل برنامج النقاط'**
+  String get lsEnablePoints;
+
+  /// No description provided for @lsEnablePointsSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'عند الإيقاف تُحفظ الفواتير دون جمع أو استبدال'**
+  String get lsEnablePointsSubtitle;
+
+  /// No description provided for @lsPointsPerThousand.
+  ///
+  /// In ar, this message translates to:
+  /// **'نقاط لكل 1000 د.ع من صافي الفاتورة المؤهّل'**
+  String get lsPointsPerThousand;
+
+  /// No description provided for @lsRedemptionValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيمة الخصم بالدينار لكل نقطة عند الاستبدال'**
+  String get lsRedemptionValue;
+
+  /// No description provided for @lsMinRedemption.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقل عدد نقاط لعملية استبدال واحدة (0 = بدون حد)'**
+  String get lsMinRedemption;
+
+  /// No description provided for @lsMaxRedemptionPercent.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقصى % من صافي الفاتورة يُغطّى بالنقاط'**
+  String get lsMaxRedemptionPercent;
+
+  /// No description provided for @lsAwardWhenTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'متى تُمنح النقاط؟'**
+  String get lsAwardWhenTitle;
+
+  /// No description provided for @lsAwardCashSale.
+  ///
+  /// In ar, this message translates to:
+  /// **'البيع النقدي'**
+  String get lsAwardCashSale;
+
+  /// No description provided for @lsAwardDelivery.
+  ///
+  /// In ar, this message translates to:
+  /// **'التوصيل'**
+  String get lsAwardDelivery;
+
+  /// No description provided for @lsAwardInstallment.
+  ///
+  /// In ar, this message translates to:
+  /// **'التقسيط'**
+  String get lsAwardInstallment;
+
+  /// No description provided for @lsAwardCreditWithAdvance.
+  ///
+  /// In ar, this message translates to:
+  /// **'البيع الآجل عند وجود مقدّم دفع'**
+  String get lsAwardCreditWithAdvance;
+
+  /// No description provided for @llLoadFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر التحميل: {error}'**
+  String llLoadFailed(Object error);
+
+  /// No description provided for @llGranted.
+  ///
+  /// In ar, this message translates to:
+  /// **'منح'**
+  String get llGranted;
+
+  /// No description provided for @llRedeemed.
+  ///
+  /// In ar, this message translates to:
+  /// **'استبدال'**
+  String get llRedeemed;
+
+  /// No description provided for @llTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل نقاط الولاء'**
+  String get llTitle;
+
+  /// No description provided for @llRefresh.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديث'**
+  String get llRefresh;
+
+  /// No description provided for @llNoData.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد حركات بعد — فعّل الولاء من الإعدادات وسجّل مبيعات مرتبطة بعملاء.'**
+  String get llNoData;
+
+  /// No description provided for @llCustomerId.
+  ///
+  /// In ar, this message translates to:
+  /// **'عميل #{id}'**
+  String llCustomerId(Object id);
+
+  /// No description provided for @llBalance.
+  ///
+  /// In ar, this message translates to:
+  /// **'رصيد {balance}'**
+  String llBalance(Object balance);
+
+  /// No description provided for @svAddReceipt.
+  ///
+  /// In ar, this message translates to:
+  /// **'إذن إضافة مخزن'**
+  String get svAddReceipt;
+
+  /// No description provided for @svDispenseReceipt.
+  ///
+  /// In ar, this message translates to:
+  /// **'إذن صرف مخزن'**
+  String get svDispenseReceipt;
+
+  /// No description provided for @svTransferBetween.
+  ///
+  /// In ar, this message translates to:
+  /// **'نقل بين مخازن'**
+  String get svTransferBetween;
+
+  /// No description provided for @svStocktaking.
+  ///
+  /// In ar, this message translates to:
+  /// **'جرد مخزن'**
+  String get svStocktaking;
+
+  /// No description provided for @svSource.
+  ///
+  /// In ar, this message translates to:
+  /// **'مورد'**
+  String get svSource;
+
+  /// No description provided for @svBranchShop.
+  ///
+  /// In ar, this message translates to:
+  /// **'فرع/محل آخر'**
+  String get svBranchShop;
+
+  /// No description provided for @svMobileSupplier.
+  ///
+  /// In ar, this message translates to:
+  /// **'مورد متنقل'**
+  String get svMobileSupplier;
+
+  /// No description provided for @svManual.
+  ///
+  /// In ar, this message translates to:
+  /// **'يدوي'**
+  String get svManual;
+
+  /// No description provided for @svMainSupplier.
+  ///
+  /// In ar, this message translates to:
+  /// **'مورد رئيسي'**
+  String get svMainSupplier;
+
+  /// No description provided for @svSupplier1.
+  ///
+  /// In ar, this message translates to:
+  /// **'مورد 1'**
+  String get svSupplier1;
+
+  /// No description provided for @svSupplier2.
+  ///
+  /// In ar, this message translates to:
+  /// **'مورد 2'**
+  String get svSupplier2;
+
+  /// No description provided for @svNoActiveWarehouse.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد مخزن نشط — أضف مخزناً أولاً'**
+  String get svNoActiveWarehouse;
+
+  /// No description provided for @svStocktakingDisabled.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ «جرد مخزن» غير مفعّل بعد'**
+  String get svStocktakingDisabled;
+
+  /// No description provided for @svUnnamedItem.
+  ///
+  /// In ar, this message translates to:
+  /// **'بند بلا اسم'**
+  String get svUnnamedItem;
+
+  /// No description provided for @svEnterMatchingItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل بنوداً بكميات وأسماء مطابقة لمنتجات مسجّلة'**
+  String get svEnterMatchingItems;
+
+  /// No description provided for @svWarning.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه'**
+  String get svWarning;
+
+  /// No description provided for @svCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get svCancel;
+
+  /// No description provided for @svContinue.
+  ///
+  /// In ar, this message translates to:
+  /// **'متابعة'**
+  String get svContinue;
+
+  /// No description provided for @svPleaseFillSourceName.
+  ///
+  /// In ar, this message translates to:
+  /// **'يرجى تعبئة اسم مصدر الإذن الوارد'**
+  String get svPleaseFillSourceName;
+
+  /// No description provided for @svVoucherDocument.
+  ///
+  /// In ar, this message translates to:
+  /// **'سند مخزوني'**
+  String get svVoucherDocument;
+
+  /// No description provided for @svSaving.
+  ///
+  /// In ar, this message translates to:
+  /// **'جاري الحفظ…'**
+  String get svSaving;
+
+  /// No description provided for @svConfirm.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكيد'**
+  String get svConfirm;
+
+  /// No description provided for @svWarehouse.
+  ///
+  /// In ar, this message translates to:
+  /// **'المخزن'**
+  String get svWarehouse;
+
+  /// No description provided for @svNoActiveWarehouseAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد مخزن نشط. أضف مخزناً من «المخازن».'**
+  String get svNoActiveWarehouseAdd;
+
+  /// No description provided for @svReceivingWarehouse.
+  ///
+  /// In ar, this message translates to:
+  /// **'المخزن المستقبل'**
+  String get svReceivingWarehouse;
+
+  /// No description provided for @svFromWarehouse.
+  ///
+  /// In ar, this message translates to:
+  /// **'من مخزن'**
+  String get svFromWarehouse;
+
+  /// No description provided for @svWarehouses.
+  ///
+  /// In ar, this message translates to:
+  /// **'المخازن'**
+  String get svWarehouses;
+
+  /// No description provided for @svToWarehouse.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلى مخزن'**
+  String get svToWarehouse;
+
+  /// No description provided for @svChoose.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر'**
+  String get svChoose;
+
+  /// No description provided for @svVoucherData.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيانات الإذن المخزني'**
+  String get svVoucherData;
+
+  /// No description provided for @svVoucherType.
+  ///
+  /// In ar, this message translates to:
+  /// **'نوع الأذن'**
+  String get svVoucherType;
+
+  /// No description provided for @svDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ'**
+  String get svDate;
+
+  /// No description provided for @svSourceData.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيانات المصدر'**
+  String get svSourceData;
+
+  /// No description provided for @svSourceType.
+  ///
+  /// In ar, this message translates to:
+  /// **'نوع المصدر'**
+  String get svSourceType;
+
+  /// No description provided for @svSourceRefOptional.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرجع المصدر (ID اختياري)'**
+  String get svSourceRefOptional;
+
+  /// No description provided for @svSourceRefExample.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: 15'**
+  String get svSourceRefExample;
+
+  /// No description provided for @svSourceName.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم المصدر'**
+  String get svSourceName;
+
+  /// No description provided for @svSupplierName.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم المورد'**
+  String get svSupplierName;
+
+  /// No description provided for @svSourceEntityName.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الجهة المصدر'**
+  String get svSourceEntityName;
+
+  /// No description provided for @svReferenceSettings.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات المرجع'**
+  String get svReferenceSettings;
+
+  /// No description provided for @svReference.
+  ///
+  /// In ar, this message translates to:
+  /// **'المرجع'**
+  String get svReference;
+
+  /// No description provided for @svReferenceHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم المرجع...'**
+  String get svReferenceHint;
+
+  /// No description provided for @svOtherInfo.
+  ///
+  /// In ar, this message translates to:
+  /// **'معلومات أخرى'**
+  String get svOtherInfo;
+
+  /// No description provided for @svSupplier.
+  ///
+  /// In ar, this message translates to:
+  /// **'المورد'**
+  String get svSupplier;
+
+  /// No description provided for @svNotes.
+  ///
+  /// In ar, this message translates to:
+  /// **'الملاحظات'**
+  String get svNotes;
+
+  /// No description provided for @svAutoSupplierReceipt.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنشاء وصل مورد تلقائي وربطه بالسند'**
+  String get svAutoSupplierReceipt;
+
+  /// No description provided for @svAutoSupplierReceiptDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'يسجّل وصلاً في الذمم بنفس مبلغ السند ثم يربطه به.'**
+  String get svAutoSupplierReceiptDesc;
+
+  /// No description provided for @svAutoReturnRecord.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل مرتجع المورد تلقائيًا في الذمم'**
+  String get svAutoReturnRecord;
+
+  /// No description provided for @svAutoReturnRecordDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'يسجّل دفعة مورد بدون صندوق لتخفيض الذمة عند صرف بضاعة كمردود.'**
+  String get svAutoReturnRecordDesc;
+
+  /// No description provided for @svTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإجمالي'**
+  String get svTotal;
+
+  /// No description provided for @svQuantity.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكمية'**
+  String get svQuantity;
+
+  /// No description provided for @svUnitPrice.
+  ///
+  /// In ar, this message translates to:
+  /// **'سعر الوحدة'**
+  String get svUnitPrice;
+
+  /// No description provided for @svItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'البنود'**
+  String get svItems;
+
+  /// No description provided for @svAddItem.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة بند'**
+  String get svAddItem;
+
+  /// No description provided for @svDeleteItem.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف البند'**
+  String get svDeleteItem;
+
+  /// No description provided for @svItemQuantity.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكمية'**
+  String get svItemQuantity;
+
+  /// No description provided for @svItemUnitPrice.
+  ///
+  /// In ar, this message translates to:
+  /// **'سعر الوحدة'**
+  String get svItemUnitPrice;
+
+  /// No description provided for @svChooseProduct.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر منتجاً'**
+  String get svChooseProduct;
+
+  /// No description provided for @svManualSelection.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيار يدوي'**
+  String get svManualSelection;
+
+  /// No description provided for @svManualItemName.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم البند اليدوي'**
+  String get svManualItemName;
+
+  /// No description provided for @svFromReceipt.
+  ///
+  /// In ar, this message translates to:
+  /// **'من إذن وارد #{number}'**
+  String svFromReceipt(Object number);
+
+  /// No description provided for @svSupplierReturnNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتجع مورد عبر سند صرف #{number}'**
+  String svSupplierReturnNote(Object number);
+
+  /// No description provided for @svProductsNotFound.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تُعثر على منتجات بالأسماء: {names}'**
+  String svProductsNotFound(Object names);
+
+  /// No description provided for @svItemsSkipped.
+  ///
+  /// In ar, this message translates to:
+  /// **'بنود تُجاهل لعدم مطابقة الاسم: {names}\nالمتابعة تحفظ {count} بنداً فقط.'**
+  String svItemsSkipped(Object count, Object names);
+
+  /// No description provided for @svVoucherSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم حفظ السند #{id} ({number})'**
+  String svVoucherSaved(Object id, Object number);
 }
 
 class _AppLocalizationsDelegate

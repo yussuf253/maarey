@@ -8829,4 +8829,485 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get csSortTooltip => 'Recherche';
+
+  @override
+  String get cfLoadFailedAfterAdd =>
+      'Échec du chargement des données client après ajout';
+
+  @override
+  String get cfLoadFailed => 'Échec du chargement des données client';
+
+  @override
+  String get cfTitleEdit => 'Modifier les données du client';
+
+  @override
+  String get cfFillBasic =>
+      'Remplissez les données de base. Les champs optionnels peuvent rester vides.';
+
+  @override
+  String get cfNameHint => 'Nom complet tel qu\'affiché sur les factures';
+
+  @override
+  String get cfPhoneHint => 'Numéro de téléphone (optionnel)';
+
+  @override
+  String get cfPhone2Hint => 'Numéro de téléphone supplémentaire';
+
+  @override
+  String get cfPhonePrimaryExample =>
+      'Exemple : 07701234567 — ne doit pas dupliquer un autre client (distingue les noms similaires)';
+
+  @override
+  String get cfPhone2Example => 'Exemple : 07801234567';
+
+  @override
+  String get cfDeleteNumber => 'Supprimer le numéro';
+
+  @override
+  String get cfAddAnotherNumber => 'Ajouter un autre numéro';
+
+  @override
+  String get cfAddressHint => 'Adresse (optionnel)';
+
+  @override
+  String get cfAddressExample => 'Ville, quartier';
+
+  @override
+  String get cfEmailHint => 'E-mail (optionnel)';
+
+  @override
+  String get cfNotesHint => 'Notes (optionnel)';
+
+  @override
+  String get cfNotesDescription => 'Préférences du client, notes internes…';
+
+  @override
+  String cfSaveFailed(Object error) {
+    return 'Échec de la sauvegarde : $error';
+  }
+
+  @override
+  String cfRegisteredSince(Object date) {
+    return 'Inscrit depuis le $date';
+  }
+
+  @override
+  String get ctDeleteContact => 'Supprimer le contact';
+
+  @override
+  String get ctIndebted => 'Débiteur';
+
+  @override
+  String get ctCreditor => 'Créancier';
+
+  @override
+  String get ctTitle => 'Contacts clients';
+
+  @override
+  String get ctRefresh => 'Actualiser';
+
+  @override
+  String get ctNewCustomer => 'Nouveau client';
+
+  @override
+  String get ctSort => 'Trier';
+
+  @override
+  String get ctSortNameAZ => 'Nom (A–Z)';
+
+  @override
+  String get ctSortBalanceSize => 'Taille du solde';
+
+  @override
+  String get ctSearchHint => 'Recherche par nom, téléphone ou e-mail';
+
+  @override
+  String get ctSearchExample => 'Exemple : Mohammed, 077…, name@…';
+
+  @override
+  String get ctIdSearchLabel => 'Numéro ID / Code';
+
+  @override
+  String get ctIdSearchExample => 'Exemple : 12 ou 000012';
+
+  @override
+  String get ctApplySearch => 'Appliquer la recherche';
+
+  @override
+  String get ctClearFilter => 'Effacer le filtre';
+
+  @override
+  String get ctDebtOverdueLabel => 'En retard ou crédit';
+
+  @override
+  String get ctDebtOverdueDescription =>
+      'Factures de vente à crédit non retournées, ou solde débit sur le compte — à contacter concernant la dette.';
+
+  @override
+  String get ctInstallmentsLabel => 'Échéanciers';
+
+  @override
+  String get ctInstallmentsDescription =>
+      'A un plan d\'échéance enregistré — à contacter concernant les échéances.';
+
+  @override
+  String get ctNoContactsYet => 'Aucun contact pour le moment';
+
+  @override
+  String get ctNoResults =>
+      'Aucun résultat correspondant. Modifiez la recherche ou ajoutez un client.';
+
+  @override
+  String get ctColBalance => 'Solde';
+
+  @override
+  String get ctColCustomer => 'Client';
+
+  @override
+  String get ctColStatus => 'Statut';
+
+  @override
+  String get ctColBalanceHeader => 'Solde';
+
+  @override
+  String get ctColEmail => 'E-mail';
+
+  @override
+  String get ctColPhone => 'Téléphone';
+
+  @override
+  String get ctColCustomerHeader => 'Client';
+
+  @override
+  String get ctEditData => 'Modifier les données';
+
+  @override
+  String ctDeleteConfirm(Object name) {
+    return 'Supprimer « $name » du système ?';
+  }
+
+  @override
+  String ctDeleteFailed(Object error) {
+    return 'Échec de la suppression : $error';
+  }
+
+  @override
+  String ctShowing(Object count) {
+    return 'Affichés : $count';
+  }
+
+  @override
+  String ctCreditSaleLabel(Object count) {
+    return 'Ventes crédit ×$count';
+  }
+
+  @override
+  String ctInstallmentLabel(Object count) {
+    return 'Échéanciers ×$count';
+  }
+
+  @override
+  String get lsSaveSuccess => 'Paramètres de fidélité enregistrés';
+
+  @override
+  String lsSaveFailed(Object error) {
+    return 'Échec de l\'enregistrement : $error';
+  }
+
+  @override
+  String get lsTitle => 'Paramètres de fidélité client';
+
+  @override
+  String get lsSave => 'Enregistrer';
+
+  @override
+  String get lsWhyNotSpoilTitle =>
+      'Pourquoi « n\'abîme »-t-il pas les profits ?';
+
+  @override
+  String get lsWhyNotSpoilBody =>
+      'Les points sont une subvention marketing : enregistrés comme remise de fidélité séparée de la marge. L\'attribution des points ne modifie pas le coût d\'achat ; la réduction diminue ce que le client paie en espèces selon vos règles.';
+
+  @override
+  String get lsEnablePoints => 'Activer le programme de points';
+
+  @override
+  String get lsEnablePointsSubtitle =>
+      'Lorsque désactivé, les factures sont enregistrées sans collecte ni rédemption';
+
+  @override
+  String get lsPointsPerThousand =>
+      'Points pour 1 000 IQD de net de facture éligible';
+
+  @override
+  String get lsRedemptionValue =>
+      'Valeur de réduction en dinars par point lors de la rédemption';
+
+  @override
+  String get lsMinRedemption =>
+      'Points minimum pour une rédemption unique (0 = pas de limite)';
+
+  @override
+  String get lsMaxRedemptionPercent =>
+      'Max % du net de facture couvert par les points';
+
+  @override
+  String get lsAwardWhenTitle => 'Quand les points sont-ils attribués ?';
+
+  @override
+  String get lsAwardCashSale => 'Vente au comptant';
+
+  @override
+  String get lsAwardDelivery => 'Livraison';
+
+  @override
+  String get lsAwardInstallment => 'Échéance';
+
+  @override
+  String get lsAwardCreditWithAdvance => 'Vente à crédit avec acompte';
+
+  @override
+  String llLoadFailed(Object error) {
+    return 'Échec du chargement : $error';
+  }
+
+  @override
+  String get llGranted => 'Accordés';
+
+  @override
+  String get llRedeemed => 'Échangés';
+
+  @override
+  String get llTitle => 'Registre des points de fidélité';
+
+  @override
+  String get llRefresh => 'Actualiser';
+
+  @override
+  String get llNoData =>
+      'Aucune transaction — activez la fidélité dans les paramètres et enregistrez des ventes liées à des clients.';
+
+  @override
+  String llCustomerId(Object id) {
+    return 'Client #$id';
+  }
+
+  @override
+  String llBalance(Object balance) {
+    return 'Solde $balance';
+  }
+
+  @override
+  String get svAddReceipt => 'Bon de réception';
+
+  @override
+  String get svDispenseReceipt => 'Bon de sortie';
+
+  @override
+  String get svTransferBetween => 'Transfert entre entrepôts';
+
+  @override
+  String get svStocktaking => 'Inventaire entrepôt';
+
+  @override
+  String get svSource => 'Fournisseur';
+
+  @override
+  String get svBranchShop => 'Succursale / autre magasin';
+
+  @override
+  String get svMobileSupplier => 'Fournisseur mobile';
+
+  @override
+  String get svManual => 'Manuel';
+
+  @override
+  String get svMainSupplier => 'Fournisseur principal';
+
+  @override
+  String get svSupplier1 => 'Fournisseur 1';
+
+  @override
+  String get svSupplier2 => 'Fournisseur 2';
+
+  @override
+  String get svNoActiveWarehouse =>
+      'Aucun entrepôt actif — ajoutez-en un d\'abord';
+
+  @override
+  String get svStocktakingDisabled =>
+      'Sauvegarde de l\'inventaire pas encore activée';
+
+  @override
+  String get svUnnamedItem => 'Article sans nom';
+
+  @override
+  String get svEnterMatchingItems =>
+      'Saisissez des articles avec quantités et noms correspondant aux produits enregistrés';
+
+  @override
+  String get svWarning => 'Avertissement';
+
+  @override
+  String get svCancel => 'Annuler';
+
+  @override
+  String get svContinue => 'Continuer';
+
+  @override
+  String get svPleaseFillSourceName =>
+      'Veuillez remplir le nom de la source du bon';
+
+  @override
+  String get svVoucherDocument => 'Bon de stock';
+
+  @override
+  String get svSaving => 'Enregistrement…';
+
+  @override
+  String get svConfirm => 'Confirmer';
+
+  @override
+  String get svWarehouse => 'Entrepôt';
+
+  @override
+  String get svNoActiveWarehouseAdd =>
+      'Aucun entrepôt actif. Ajoutez-en depuis « Entrepôts ».';
+
+  @override
+  String get svReceivingWarehouse => 'Entrepôt de réception';
+
+  @override
+  String get svFromWarehouse => 'Depuis l\'entrepôt';
+
+  @override
+  String get svWarehouses => 'Entrepôts';
+
+  @override
+  String get svToWarehouse => 'Vers l\'entrepôt';
+
+  @override
+  String get svChoose => 'Choisir';
+
+  @override
+  String get svVoucherData => 'Données du bon';
+
+  @override
+  String get svVoucherType => 'Type de bon';
+
+  @override
+  String get svDate => 'Date';
+
+  @override
+  String get svSourceData => 'Données source';
+
+  @override
+  String get svSourceType => 'Type de source';
+
+  @override
+  String get svSourceRefOptional => 'Référence source (ID optionnel)';
+
+  @override
+  String get svSourceRefExample => 'Exemple : 15';
+
+  @override
+  String get svSourceName => 'Nom de la source';
+
+  @override
+  String get svSupplierName => 'Nom du fournisseur';
+
+  @override
+  String get svSourceEntityName => 'Nom de l\'entité source';
+
+  @override
+  String get svReferenceSettings => 'Paramètres de référence';
+
+  @override
+  String get svReference => 'Référence';
+
+  @override
+  String get svReferenceHint => 'Numéro de référence...';
+
+  @override
+  String get svOtherInfo => 'Autres informations';
+
+  @override
+  String get svSupplier => 'Fournisseur';
+
+  @override
+  String get svNotes => 'Notes';
+
+  @override
+  String get svAutoSupplierReceipt =>
+      'Créer automatiquement un reçu fournisseur et lier au bon';
+
+  @override
+  String get svAutoSupplierReceiptDesc =>
+      'Enregistre une entrée à payer pour le montant du bon puis la lie.';
+
+  @override
+  String get svAutoReturnRecord =>
+      'Enregistrer automatiquement le retour fournisseur';
+
+  @override
+  String get svAutoReturnRecordDesc =>
+      'Enregistre un paiement fournisseur sans caisse pour réduire le solde lors de la sortie de marchandises retournées.';
+
+  @override
+  String get svTotal => 'Total';
+
+  @override
+  String get svQuantity => 'Quantité';
+
+  @override
+  String get svUnitPrice => 'Prix unitaire';
+
+  @override
+  String get svItems => 'Articles';
+
+  @override
+  String get svAddItem => 'Ajouter un article';
+
+  @override
+  String get svDeleteItem => 'Supprimer l\'article';
+
+  @override
+  String get svItemQuantity => 'Quantité';
+
+  @override
+  String get svItemUnitPrice => 'Prix unitaire';
+
+  @override
+  String get svChooseProduct => 'Choisir un produit';
+
+  @override
+  String get svManualSelection => 'Sélection manuelle';
+
+  @override
+  String get svManualItemName => 'Nom de l\'article manuel';
+
+  @override
+  String svFromReceipt(Object number) {
+    return 'Depuis le bon de réception #$number';
+  }
+
+  @override
+  String svSupplierReturnNote(Object number) {
+    return 'Retour fournisseur via bon de sortie #$number';
+  }
+
+  @override
+  String svProductsNotFound(Object names) {
+    return 'Produits introuvables par nom : $names';
+  }
+
+  @override
+  String svItemsSkipped(Object count, Object names) {
+    return 'Articles ignorés en raison d\'une non-concordance de nom : $names\nLa continuation enregistrera uniquement $count article(s).';
+  }
+
+  @override
+  String svVoucherSaved(Object id, Object number) {
+    return 'Bon #$id ($number) enregistré';
+  }
 }
