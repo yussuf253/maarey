@@ -10333,4 +10333,213 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get npHide => 'Hide';
+
+  @override
+  String get spTitle => 'Subscription Plans';
+
+  @override
+  String get spSubtitle => 'Choose the right plan for your business';
+
+  @override
+  String get spJwtDescription =>
+      'The cards below are for comparison and pricing only. After payment you\'ll receive a signed token (JWT) — paste it in the activation field below the cards.';
+
+  @override
+  String get spLegacyDescription =>
+      'First card: automatic 15-day trial (2 devices). The following cards are paid plans — after payment enter the key in the unified field below the page.';
+
+  @override
+  String get spHowToSubscribe => 'How to Subscribe';
+
+  @override
+  String get spHowJwtStep1 => '1. Contact the NaBoo team via the methods below';
+
+  @override
+  String get spHowJwtStep2 => '2. Complete payment for the plan you want';
+
+  @override
+  String get spHowJwtStep3 =>
+      '3. Receive the full activation token (JWT) from administration';
+
+  @override
+  String get spHowJwtStep4 =>
+      '4. Paste the token in the unified field below the plan cards — plan and device count are extracted from the token';
+
+  @override
+  String get spHowLegacyStep1 =>
+      '1. Contact the NaBoo team via the methods below';
+
+  @override
+  String get spHowLegacyStep2 =>
+      '2. Tell us which plan you want and complete payment';
+
+  @override
+  String get spHowLegacyStep3 =>
+      '3. Receive the license key from administration';
+
+  @override
+  String get spHowLegacyStep4 =>
+      '4. Paste the key in the unified field below the plan cards then press \"Activate Key\"';
+
+  @override
+  String get spContactWhatsApp => 'WhatsApp / Phone';
+
+  @override
+  String get spContactEmail => 'Email';
+
+  @override
+  String get spContinue => 'Continue';
+
+  @override
+  String get spErrorPasteTokenFirst => 'Paste the license token first';
+
+  @override
+  String get spActivateTokenTitle => 'Activate License Token';
+
+  @override
+  String get spActivateTokenDesc =>
+      'Paste the full token sent by administration. Plan and device count are extracted from inside the token, not from the card layout.';
+
+  @override
+  String get spTokenHint => 'Paste activation token here';
+
+  @override
+  String get spActivateTokenButton => 'Activate Token';
+
+  @override
+  String get spErrorPasteKeyFirst =>
+      'Paste the license key or activation token first';
+
+  @override
+  String get spActivateKeyTitle => 'Activate Key';
+
+  @override
+  String get spActivateKeyDesc =>
+      'Paste the license key you received after payment, or JWT token if available. The plans above are for display and comparison only.';
+
+  @override
+  String get spKeyHint => 'Paste license key or activation token';
+
+  @override
+  String get spActivateKeyButton => 'Activate Key';
+
+  @override
+  String get spFree => 'Free';
+
+  @override
+  String get sp15Days => '15 days';
+
+  @override
+  String get spMonthly => 'Monthly';
+
+  @override
+  String get spCurrentTrial => 'Your current trial';
+
+  @override
+  String get spCurrentPlan => 'Your current plan';
+
+  @override
+  String get spTrialAutoDescription =>
+      'The trial starts automatically — no key needed. When upgrading, receive the token from administration and paste it in the unified field below the cards.';
+
+  @override
+  String get spJwtCardDescription =>
+      'This card is for display and comparison only. After payment, paste the activation token (JWT) in the unified field below the cards.';
+
+  @override
+  String get spLegacyCardDescription =>
+      'This card is for display and comparison only. After payment, paste the license key in the unified field below the cards.';
+
+  @override
+  String get spMostPopular => 'Most Popular';
+
+  @override
+  String get spCopiedPhone => 'Phone number copied';
+
+  @override
+  String get spCopiedEmail => 'Email copied';
+
+  @override
+  String get spCopy => 'Copy';
+
+  @override
+  String get spTrialName => 'Free Trial';
+
+  @override
+  String get spBasicName => 'Basic';
+
+  @override
+  String get spProName => 'Professional';
+
+  @override
+  String get spUnlimitedName => 'Unlimited';
+
+  @override
+  String get spDevicesUnlimited => 'Unlimited devices';
+
+  @override
+  String spDevicesCount(Object count) {
+    return '$count devices';
+  }
+
+  @override
+  String get spPlanPriceFree => 'Free — 15 days';
+
+  @override
+  String spPlanPriceMonthly(Object price) {
+    return '$price Fdj / month';
+  }
+
+  @override
+  String get spTrialFeature1 =>
+      '15 days from first use (or from first cloud account registration)';
+
+  @override
+  String get spTrialFeature2 => '2 devices on the same account';
+
+  @override
+  String get spTrialFeature3 =>
+      'Then choose a paid plan and activate the key sent by administration';
+
+  @override
+  String get spBasicFeature1 => '2 devices on the same account';
+
+  @override
+  String get spBasicFeature2 => 'All inventory and invoicing features';
+
+  @override
+  String get spBasicFeature3 => 'Reports and analytics';
+
+  @override
+  String get spBasicFeature4 => 'Technical support';
+
+  @override
+  String get spProFeature1 => '3 devices on the same account';
+
+  @override
+  String get spProFeature2 => 'All features of the Basic plan';
+
+  @override
+  String get spProFeature3 => 'Purchase orders and supplier management';
+
+  @override
+  String get spProFeature4 => 'Advanced reports';
+
+  @override
+  String get spProFeature5 => 'Priority technical support';
+
+  @override
+  String get spUnlimitedFeature1 => 'Unlimited devices on one account';
+
+  @override
+  String get spUnlimitedFeature2 => 'All features of the Professional plan';
+
+  @override
+  String get spUnlimitedFeature3 => 'Multi-branch support';
+
+  @override
+  String get spUnlimitedFeature4 => 'Top priority support';
+
+  @override
+  String get devToolsOpen => 'Opening dev tools…';
 }

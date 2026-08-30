@@ -393,21 +393,48 @@ class SettingsScreen extends StatelessWidget {
 }
 
 // ── بطاقة الشركة ──────────────────────────────────────────────────────────────
-class _CompanyCard extends StatelessWidget {
+class _CompanyCard extends StatefulWidget {
   const _CompanyCard();
 
   @override
+  State<_CompanyCard> createState() => _CompanyCardState();
+}
+
+class _CompanyCardState extends State<_CompanyCard> {
+  @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     final ac = context.appCorners;
     final gap = ScreenLayout.of(context).pageHorizontalGap;
+    return FutureBuilder(
+      future: _loadStoreInfo(),
+      builder: (context, snap) {
+        final data = snap.data;
+        final storeName = data?['name'] ?? '';
+        final storeAddress = data?['address'] ?? '';
+        final displayName = storeName.isNotEmpty ? storeName : loc.storeInfo;
+        return _buildInner(context, loc, cs, ac, gap, displayName, storeAddress);
+      },
+    );
+  }
+
+  Future<Map<String, String>> _loadStoreInfo() async {
+    final p = await SharedPreferences.getInstance();
+    return {
+      'name': p.getString('store_info_name') ?? '',
+      'address': p.getString('store_info_address') ?? '',
+    };
+  }
+
+  Widget _buildInner(BuildContext context, AppLocalizations loc, ColorScheme cs, dynamic ac, double gap, String displayName, String displayAddress) {
     return GestureDetector(
       onLongPress: () {
         // مدخل مخفي لأدوات الاختبار (Dev only screen will block in release anyway).
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('فتح أدوات الاختبار…'),
-            duration: Duration(milliseconds: 900),
+          SnackBar(
+            content: Text(loc.devToolsOpen),
+            duration: const Duration(milliseconds: 900),
           ),
         );
         Navigator.of(context, rootNavigator: true).pushNamed('/dev/stress');
@@ -451,21 +478,23 @@ class _CompanyCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'متجر البصرة',
+                    displayName,
                     style: TextStyle(
                       color: cs.onPrimary,
                       fontWeight: FontWeight.bold,
                       fontSize: 17,
                     ),
                   ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'البصرة، العراق',
-                    style: TextStyle(
-                      color: cs.onPrimary.withValues(alpha: 0.82),
-                      fontSize: 13,
+                  if (displayAddress.isNotEmpty) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      displayAddress,
+                      style: TextStyle(
+                        color: cs.onPrimary.withValues(alpha: 0.82),
+                        fontSize: 13,
+                      ),
                     ),
-                  ),
+                  ],
                   const SizedBox(height: 8),
                   Container(
                     padding: const EdgeInsets.symmetric(
@@ -477,7 +506,7 @@ class _CompanyCard extends StatelessWidget {
                       borderRadius: ac.sm,
                     ),
                     child: Text(
-                      'نسخة تجريبية',
+                      loc.trialVersion,
                       style: TextStyle(
                         color: cs.onPrimary,
                         fontSize: 11,
@@ -1464,10 +1493,46 @@ class _StoreInfoScreen extends StatefulWidget {
 }
 
 class _StoreInfoScreenState extends State<_StoreInfoScreen> {
-  final _name = TextEditingController(text: 'متجر البصرة');
-  final _address = TextEditingController(text: 'البصرة، العراق');
-  final _phone = TextEditingController(text: '07xxxxxxxxx');
+  final _name = TextEditingController();
+  final _address = TextEditingController();
+  final _phone = TextEditingController();
   final _taxNo = TextEditingController();
+  bool _loaded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _load();
+  }
+
+  Future<void> _load() async {
+    final p = await SharedPreferences.getInstance();
+    setState(() {
+      _name.text = p.getString('store_info_name') ?? '';
+      _address.text = p.getString('store_info_address') ?? '';
+      _phone.text = p.getString('store_info_phone') ?? '';
+      _taxNo.text = p.getString('store_info_taxNo') ?? '';
+      _loaded = true;
+    });
+  }
+
+  Future<void> _save() async {
+    final p = await SharedPreferences.getInstance();
+    await p.setString('store_info_name', _name.text);
+    await p.setString('store_info_address', _address.text);
+    await p.setString('store_info_phone', _phone.text);
+    await p.setString('store_info_taxNo', _taxNo.text);
+    if (mounted) Navigator.pop(context);
+  }
+
+  @override
+  void dispose() {
+    _name.dispose();
+    _address.dispose();
+    _phone.dispose();
+    _taxNo.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1481,9 +1546,7 @@ class _StoreInfoScreenState extends State<_StoreInfoScreen> {
           title: AppLocalizations.of(context)!.storeInfo,
           actions: [
             TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
+              onPressed: _save,
               style: TextButton.styleFrom(foregroundColor: cs.onPrimary),
               child: Text(
                 AppLocalizations.of(context)!.save,

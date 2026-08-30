@@ -8,6 +8,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'license/license_engine_v2.dart';
 import 'license/license_token.dart';
 import 'license/trusted_time_service.dart';
+import '../l10n/generated/app_localizations.dart';
 import '../providers/open_ops_registry.dart';
 import 'security_audit_log_service.dart';
 
@@ -111,6 +112,17 @@ class SubscriptionPlan {
     'unlimited' => unlimited,
     _ => basic,
   };
+}
+
+/// Locale-aware plan name lookup by key.
+String planNameForKey(String? key, AppLocalizations loc) {
+  switch (key) {
+    case 'trial': return loc.spTrialName;
+    case 'basic': return loc.spBasicName;
+    case 'pro': return loc.spProName;
+    case 'unlimited': return loc.spUnlimitedName;
+    default: return '—';
+  }
 }
 
 // ── مفاتيح الكاش ─────────────────────────────────────────────────────────────

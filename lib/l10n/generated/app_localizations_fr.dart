@@ -10451,4 +10451,216 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get npHide => 'Masquer';
+
+  @override
+  String get spTitle => 'Plans d\'Abonnement';
+
+  @override
+  String get spSubtitle => 'Choisissez le plan adapté à votre activité';
+
+  @override
+  String get spJwtDescription =>
+      'Les cartes ci-dessous servent uniquement à la comparaison et aux prix. Après le paiement, vous recevrez un jeton signé (JWT) — collez-le dans le champ d\'activation sous les cartes.';
+
+  @override
+  String get spLegacyDescription =>
+      'Première carte : essai automatique de 15 jours (2 appareils). Les cartes suivantes sont des plans payants — après le paiement, entrez la clé dans le champ unifié ci-dessous.';
+
+  @override
+  String get spHowToSubscribe => 'Comment S\'abonner';
+
+  @override
+  String get spHowJwtStep1 =>
+      '1. Contactez l\'équipe NaBoo via les méthodes ci-dessous';
+
+  @override
+  String get spHowJwtStep2 => '2. Effectuez le paiement pour le plan souhaité';
+
+  @override
+  String get spHowJwtStep3 =>
+      '3. Recevez le jeton d\'activation complet (JWT) de l\'administration';
+
+  @override
+  String get spHowJwtStep4 =>
+      '4. Collez le jeton dans le champ unifié sous les cartes — le plan et le nombre d\'appareils sont extraits du jeton';
+
+  @override
+  String get spHowLegacyStep1 =>
+      '1. Contactez l\'équipe NaBoo via les méthodes ci-dessous';
+
+  @override
+  String get spHowLegacyStep2 =>
+      '2. Dites-nous le plan souhaité et effectuez le paiement';
+
+  @override
+  String get spHowLegacyStep3 =>
+      '3. Recevez la clé de licence de l\'administration';
+
+  @override
+  String get spHowLegacyStep4 =>
+      '4. Collez la clé dans le champ unifié sous les cartes puis appuyez « Activer la Clé »';
+
+  @override
+  String get spContactWhatsApp => 'WhatsApp / Téléphone';
+
+  @override
+  String get spContactEmail => 'E-mail';
+
+  @override
+  String get spContinue => 'Continuer';
+
+  @override
+  String get spErrorPasteTokenFirst => 'Collez d\'abord le jeton de licence';
+
+  @override
+  String get spActivateTokenTitle => 'Activer le Jeton de Licence';
+
+  @override
+  String get spActivateTokenDesc =>
+      'Collez le jeton complet envoyé par l\'administration. Le plan et le nombre d\'appareils sont extraits du jeton, pas de la mise en page de la carte.';
+
+  @override
+  String get spTokenHint => 'Collez le jeton d\'activation ici';
+
+  @override
+  String get spActivateTokenButton => 'Activer le Jeton';
+
+  @override
+  String get spErrorPasteKeyFirst =>
+      'Collez d\'abord la clé de licence ou le jeton d\'activation';
+
+  @override
+  String get spActivateKeyTitle => 'Activer la Clé';
+
+  @override
+  String get spActivateKeyDesc =>
+      'Collez la clé de licence reçue après le paiement, ou le jeton JWT si disponible. Les cartes ci-dessus servent uniquement à l\'affichage et à la comparaison.';
+
+  @override
+  String get spKeyHint => 'Collez la clé de licence ou le jeton d\'activation';
+
+  @override
+  String get spActivateKeyButton => 'Activer la Clé';
+
+  @override
+  String get spFree => 'Gratuit';
+
+  @override
+  String get sp15Days => '15 jours';
+
+  @override
+  String get spMonthly => 'Mensuel';
+
+  @override
+  String get spCurrentTrial => 'Votre essai actuel';
+
+  @override
+  String get spCurrentPlan => 'Votre plan actuel';
+
+  @override
+  String get spTrialAutoDescription =>
+      'L\'essai démarre automatiquement — aucune clé nécessaire. Lors de la mise à niveau, recevez le jeton de l\'administration et collez-le dans le champ unifié sous les cartes.';
+
+  @override
+  String get spJwtCardDescription =>
+      'Cette carte est uniquement pour l\'affichage et la comparaison. Après le paiement, collez le jeton d\'activation (JWT) dans le champ unifié sous les cartes.';
+
+  @override
+  String get spLegacyCardDescription =>
+      'Cette carte est uniquement pour l\'affichage et la comparaison. Après le paiement, collez la clé de licence dans le champ unifié sous les cartes.';
+
+  @override
+  String get spMostPopular => 'Le Plus Populaire';
+
+  @override
+  String get spCopiedPhone => 'Numéro copié';
+
+  @override
+  String get spCopiedEmail => 'E-mail copié';
+
+  @override
+  String get spCopy => 'Copier';
+
+  @override
+  String get spTrialName => 'Essai Gratuit';
+
+  @override
+  String get spBasicName => 'Basique';
+
+  @override
+  String get spProName => 'Professionnel';
+
+  @override
+  String get spUnlimitedName => 'Illimité';
+
+  @override
+  String get spDevicesUnlimited => 'Appareils illimités';
+
+  @override
+  String spDevicesCount(Object count) {
+    return '$count appareils';
+  }
+
+  @override
+  String get spPlanPriceFree => 'Gratuit — 15 jours';
+
+  @override
+  String spPlanPriceMonthly(Object price) {
+    return '$price Fdj / mois';
+  }
+
+  @override
+  String get spTrialFeature1 =>
+      '15 jours à partir de la première utilisation (ou de la première inscription au compte cloud)';
+
+  @override
+  String get spTrialFeature2 => '2 appareils sur le même compte';
+
+  @override
+  String get spTrialFeature3 =>
+      'Ensuite choisissez un plan payant et activez la clé envoyée par l\'administration';
+
+  @override
+  String get spBasicFeature1 => '2 appareils sur le même compte';
+
+  @override
+  String get spBasicFeature2 =>
+      'Toutes les fonctionnalités d\'inventaire et de facturation';
+
+  @override
+  String get spBasicFeature3 => 'Rapports et analyses';
+
+  @override
+  String get spBasicFeature4 => 'Support technique';
+
+  @override
+  String get spProFeature1 => '3 appareils sur le même compte';
+
+  @override
+  String get spProFeature2 => 'Toutes les fonctionnalités du plan Basique';
+
+  @override
+  String get spProFeature3 => 'Commandes d\'achat et gestion des fournisseurs';
+
+  @override
+  String get spProFeature4 => 'Rapports avancés';
+
+  @override
+  String get spProFeature5 => 'Support technique prioritaire';
+
+  @override
+  String get spUnlimitedFeature1 => 'Appareils illimités sur un seul compte';
+
+  @override
+  String get spUnlimitedFeature2 =>
+      'Toutes les fonctionnalités du plan Professionnel';
+
+  @override
+  String get spUnlimitedFeature3 => 'Support multi-agences';
+
+  @override
+  String get spUnlimitedFeature4 => 'Support prioritaire absolu';
+
+  @override
+  String get devToolsOpen => 'Ouverture des outils de dev…';
 }

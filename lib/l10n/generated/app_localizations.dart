@@ -18390,6 +18390,384 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'إخفاء'**
   String get npHide;
+
+  /// No description provided for @spTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطط الاشتراك'**
+  String get spTitle;
+
+  /// No description provided for @spSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر الخطة المناسبة لنشاطك'**
+  String get spSubtitle;
+
+  /// No description provided for @spJwtDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'البطاقات أدناه للمقارنة والأسعار فقط. بعد الدفع تستلم رمزاً موقّعاً (JWT) — الصقه في حقل التفعيل أسفل البطاقات مباشرة.'**
+  String get spJwtDescription;
+
+  /// No description provided for @spLegacyDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'البطاقة الأولى: تجربة تلقائية 15 يوماً (جهازان). البطاقات التالية خطط مدفوعة — بعد الدفع تُدخل المفتاح في الحقل الموحّد أسفل الصفحة.'**
+  String get spLegacyDescription;
+
+  /// No description provided for @spHowToSubscribe.
+  ///
+  /// In ar, this message translates to:
+  /// **'كيفية الاشتراك'**
+  String get spHowToSubscribe;
+
+  /// No description provided for @spHowJwtStep1.
+  ///
+  /// In ar, this message translates to:
+  /// **'١. تواصل مع فريق NaBoo عبر الطرق أدناه'**
+  String get spHowJwtStep1;
+
+  /// No description provided for @spHowJwtStep2.
+  ///
+  /// In ar, this message translates to:
+  /// **'٢. أكمل الدفع للخطة التي تريدها'**
+  String get spHowJwtStep2;
+
+  /// No description provided for @spHowJwtStep3.
+  ///
+  /// In ar, this message translates to:
+  /// **'٣. استلم رمز التفعيل الكامل (JWT) من الإدارة'**
+  String get spHowJwtStep3;
+
+  /// No description provided for @spHowJwtStep4.
+  ///
+  /// In ar, this message translates to:
+  /// **'٤. الصق الرمز في الحقل الموحّد أسفل بطاقات الخطط — الخطة وحد الأجهزة يُستنتجان من الرمز'**
+  String get spHowJwtStep4;
+
+  /// No description provided for @spHowLegacyStep1.
+  ///
+  /// In ar, this message translates to:
+  /// **'١. تواصل مع فريق NaBoo عبر الطرق أدناه'**
+  String get spHowLegacyStep1;
+
+  /// No description provided for @spHowLegacyStep2.
+  ///
+  /// In ar, this message translates to:
+  /// **'٢. أخبرنا بالخطة التي تريدها وأكمل الدفع'**
+  String get spHowLegacyStep2;
+
+  /// No description provided for @spHowLegacyStep3.
+  ///
+  /// In ar, this message translates to:
+  /// **'٣. استلم مفتاح الترخيص من الإدارة'**
+  String get spHowLegacyStep3;
+
+  /// No description provided for @spHowLegacyStep4.
+  ///
+  /// In ar, this message translates to:
+  /// **'٤. الصق المفتاح في الحقل الموحّد أسفل بطاقات الخطط ثم اضغط «تفعيل المفتاح»'**
+  String get spHowLegacyStep4;
+
+  /// No description provided for @spContactWhatsApp.
+  ///
+  /// In ar, this message translates to:
+  /// **'واتساب / هاتف'**
+  String get spContactWhatsApp;
+
+  /// No description provided for @spContactEmail.
+  ///
+  /// In ar, this message translates to:
+  /// **'البريد الإلكتروني'**
+  String get spContactEmail;
+
+  /// No description provided for @spContinue.
+  ///
+  /// In ar, this message translates to:
+  /// **'متابعة'**
+  String get spContinue;
+
+  /// No description provided for @spErrorPasteTokenFirst.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصق رمز الترخيص أولاً'**
+  String get spErrorPasteTokenFirst;
+
+  /// No description provided for @spActivateTokenTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفعيل رمز الترخيص'**
+  String get spActivateTokenTitle;
+
+  /// No description provided for @spActivateTokenDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصق الرمز الكامل الذي أرسلته الإدارة. الخطة وحد الأجهزة يُستنتجان من داخل الرمز وليس من شكل البطاقة.'**
+  String get spActivateTokenDesc;
+
+  /// No description provided for @spTokenHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصق رمز التفعيل هنا'**
+  String get spTokenHint;
+
+  /// No description provided for @spActivateTokenButton.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفعيل الرمز'**
+  String get spActivateTokenButton;
+
+  /// No description provided for @spErrorPasteKeyFirst.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصق مفتاح الترخيص أو رمز التفعيل أولاً'**
+  String get spErrorPasteKeyFirst;
+
+  /// No description provided for @spActivateKeyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفعيل المفتاح'**
+  String get spActivateKeyTitle;
+
+  /// No description provided for @spActivateKeyDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصق مفتاح الترخيص الذي استلمته بعد الدفع، أو رمز JWT إن وُجد. الخطط أعلاه للعرض والمقارنة فقط.'**
+  String get spActivateKeyDesc;
+
+  /// No description provided for @spKeyHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصق مفتاح الترخيص أو رمز التفعيل'**
+  String get spKeyHint;
+
+  /// No description provided for @spActivateKeyButton.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفعيل المفتاح'**
+  String get spActivateKeyButton;
+
+  /// No description provided for @spFree.
+  ///
+  /// In ar, this message translates to:
+  /// **'مجاناً'**
+  String get spFree;
+
+  /// No description provided for @sp15Days.
+  ///
+  /// In ar, this message translates to:
+  /// **'15 يوماً'**
+  String get sp15Days;
+
+  /// No description provided for @spMonthly.
+  ///
+  /// In ar, this message translates to:
+  /// **'شهرياً'**
+  String get spMonthly;
+
+  /// No description provided for @spCurrentTrial.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجربتك الحالية'**
+  String get spCurrentTrial;
+
+  /// No description provided for @spCurrentPlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطتك الحالية'**
+  String get spCurrentPlan;
+
+  /// No description provided for @spTrialAutoDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'التجربة تبدأ تلقائياً — لا مفتاح. عند الترقية استلم الرمز من الإدارة والصقه في الحقل الموحّد أسفل البطاقات.'**
+  String get spTrialAutoDescription;
+
+  /// No description provided for @spJwtCardDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذه البطاقة للعرض والمقارنة فقط. بعد الدفع الصق رمز التفعيل (JWT) في الحقل الموحّد أسفل البطاقات مباشرة.'**
+  String get spJwtCardDescription;
+
+  /// No description provided for @spLegacyCardDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذه البطاقة للعرض والمقارنة فقط. بعد الدفع الصق مفتاح الترخيص في الحقل الموحّد أسفل البطاقات.'**
+  String get spLegacyCardDescription;
+
+  /// No description provided for @spMostPopular.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأكثر طلباً'**
+  String get spMostPopular;
+
+  /// No description provided for @spCopiedPhone.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم نسخ الرقم'**
+  String get spCopiedPhone;
+
+  /// No description provided for @spCopiedEmail.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم نسخ البريد'**
+  String get spCopiedEmail;
+
+  /// No description provided for @spCopy.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخ'**
+  String get spCopy;
+
+  /// No description provided for @spTrialName.
+  ///
+  /// In ar, this message translates to:
+  /// **'التجربة المجانية'**
+  String get spTrialName;
+
+  /// No description provided for @spBasicName.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأساسية'**
+  String get spBasicName;
+
+  /// No description provided for @spProName.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاحترافية'**
+  String get spProName;
+
+  /// No description provided for @spUnlimitedName.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير المحدودة'**
+  String get spUnlimitedName;
+
+  /// No description provided for @spDevicesUnlimited.
+  ///
+  /// In ar, this message translates to:
+  /// **'أجهزة غير محدودة'**
+  String get spDevicesUnlimited;
+
+  /// No description provided for @spDevicesCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} أجهزة'**
+  String spDevicesCount(Object count);
+
+  /// No description provided for @spPlanPriceFree.
+  ///
+  /// In ar, this message translates to:
+  /// **'مجاناً — 15 يوماً'**
+  String get spPlanPriceFree;
+
+  /// No description provided for @spPlanPriceMonthly.
+  ///
+  /// In ar, this message translates to:
+  /// **'{price} Fdj / شهر'**
+  String spPlanPriceMonthly(Object price);
+
+  /// No description provided for @spTrialFeature1.
+  ///
+  /// In ar, this message translates to:
+  /// **'15 يوماً من أول استخدام (أو من أول تسجيل للحساب السحابي)'**
+  String get spTrialFeature1;
+
+  /// No description provided for @spTrialFeature2.
+  ///
+  /// In ar, this message translates to:
+  /// **'جهازان على نفس الحساب'**
+  String get spTrialFeature2;
+
+  /// No description provided for @spTrialFeature3.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعدها اختر خطة مدفوعة وفعّل المفتاح الذي ترسله الإدارة'**
+  String get spTrialFeature3;
+
+  /// No description provided for @spBasicFeature1.
+  ///
+  /// In ar, this message translates to:
+  /// **'جهازان على نفس الحساب'**
+  String get spBasicFeature1;
+
+  /// No description provided for @spBasicFeature2.
+  ///
+  /// In ar, this message translates to:
+  /// **'جميع ميزات المخزون والفواتير'**
+  String get spBasicFeature2;
+
+  /// No description provided for @spBasicFeature3.
+  ///
+  /// In ar, this message translates to:
+  /// **'التقارير والتحليلات'**
+  String get spBasicFeature3;
+
+  /// No description provided for @spBasicFeature4.
+  ///
+  /// In ar, this message translates to:
+  /// **'دعم فني'**
+  String get spBasicFeature4;
+
+  /// No description provided for @spProFeature1.
+  ///
+  /// In ar, this message translates to:
+  /// **'3 أجهزة على نفس الحساب'**
+  String get spProFeature1;
+
+  /// No description provided for @spProFeature2.
+  ///
+  /// In ar, this message translates to:
+  /// **'جميع ميزات الخطة الأساسية'**
+  String get spProFeature2;
+
+  /// No description provided for @spProFeature3.
+  ///
+  /// In ar, this message translates to:
+  /// **'أوامر الشراء وإدارة الموردين'**
+  String get spProFeature3;
+
+  /// No description provided for @spProFeature4.
+  ///
+  /// In ar, this message translates to:
+  /// **'تقارير متقدمة'**
+  String get spProFeature4;
+
+  /// No description provided for @spProFeature5.
+  ///
+  /// In ar, this message translates to:
+  /// **'أولوية في الدعم الفني'**
+  String get spProFeature5;
+
+  /// No description provided for @spUnlimitedFeature1.
+  ///
+  /// In ar, this message translates to:
+  /// **'أجهزة غير محدودة على حساب واحد'**
+  String get spUnlimitedFeature1;
+
+  /// No description provided for @spUnlimitedFeature2.
+  ///
+  /// In ar, this message translates to:
+  /// **'جميع ميزات الخطة الاحترافية'**
+  String get spUnlimitedFeature2;
+
+  /// No description provided for @spUnlimitedFeature3.
+  ///
+  /// In ar, this message translates to:
+  /// **'متعدد الفروع'**
+  String get spUnlimitedFeature3;
+
+  /// No description provided for @spUnlimitedFeature4.
+  ///
+  /// In ar, this message translates to:
+  /// **'أولوية قصوى في الدعم'**
+  String get spUnlimitedFeature4;
+
+  /// No description provided for @devToolsOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح أدوات الاختبار…'**
+  String get devToolsOpen;
 }
 
 class _AppLocalizationsDelegate

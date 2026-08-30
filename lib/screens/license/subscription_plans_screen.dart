@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../services/license/license_token.dart';
 import '../../services/license_service.dart';
 import '../../theme/design_tokens.dart';
@@ -30,9 +31,9 @@ Color _priceHighlightOnDark(Color accent) {
 }
 
 /// عرض للواجهة — نسخ الرقم للواتساب/الاتصال.
-const String _kSupportPhoneDisplay = '0780 428 9711';
-const String _kSupportPhoneCopy = '07884289711';
-const String _kSupportEmail = 'mbrmjbaqer@gmail.com';
+const String _kSupportPhoneDisplay = '253 77 571464';
+const String _kSupportPhoneCopy = '25377571464';
+const String _kSupportEmail = 'yussufh253@gmail.com';
 
 String _formatPriceIQD(int price) {
   final s = price.toString();
@@ -42,6 +43,34 @@ String _formatPriceIQD(int price) {
     buf.write(s[i]);
   }
   return buf.toString();
+}
+
+/// Locale-aware plan name.
+String _planName(SubscriptionPlan plan, AppLocalizations loc) {
+  switch (plan.key) {
+    case 'trial': return loc.spTrialName;
+    case 'basic': return loc.spBasicName;
+    case 'pro': return loc.spProName;
+    case 'unlimited': return loc.spUnlimitedName;
+    default: return plan.nameAr;
+  }
+}
+
+/// Locale-aware devices label.
+String _devicesLabel(SubscriptionPlan plan, AppLocalizations loc) {
+  if (plan.isUnlimited) return loc.spDevicesUnlimited;
+  return loc.spDevicesCount(plan.maxDevices);
+}
+
+/// Locale-aware features list.
+List<String> _planFeatures(SubscriptionPlan plan, AppLocalizations loc) {
+  switch (plan.key) {
+    case 'trial': return [loc.spTrialFeature1, loc.spTrialFeature2, loc.spTrialFeature3];
+    case 'basic': return [loc.spBasicFeature1, loc.spBasicFeature2, loc.spBasicFeature3, loc.spBasicFeature4];
+    case 'pro': return [loc.spProFeature1, loc.spProFeature2, loc.spProFeature3, loc.spProFeature4, loc.spProFeature5];
+    case 'unlimited': return [loc.spUnlimitedFeature1, loc.spUnlimitedFeature2, loc.spUnlimitedFeature3, loc.spUnlimitedFeature4];
+    default: return plan.features;
+  }
 }
 
 class SubscriptionPlansScreen extends StatelessWidget {
@@ -58,6 +87,7 @@ class SubscriptionPlansScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final shouldForceContinue = nextRouteName != null;
     return SecureScreen(
       child: PopScope(
@@ -77,9 +107,9 @@ class SubscriptionPlansScreen extends StatelessWidget {
                   ),
                   onPressed: () => Navigator.pop(context),
                 ),
-          title: const Text(
-            'خطط الاشتراك',
-            style: TextStyle(
+          title: Text(
+            loc.spTitle,
+            style: const TextStyle(
               color: _SubPlanText.primary,
               fontWeight: FontWeight.bold,
             ),
@@ -104,9 +134,9 @@ class SubscriptionPlansScreen extends StatelessWidget {
                       constraints: const BoxConstraints(maxWidth: 560),
                       child: Column(
                         children: [
-                          const Text(
-                            'اختر الخطة المناسبة لنشاطك',
-                            style: TextStyle(
+                          Text(
+                            loc.spSubtitle,
+                            style: const TextStyle(
                               color: _SubPlanText.primary,
                               fontSize: 22,
                               fontWeight: FontWeight.bold,
@@ -115,9 +145,7 @@ class SubscriptionPlansScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 6),
                           Text(
-                            jwtMode
-                                ? 'البطاقات أدناه للمقارنة والأسعار فقط. بعد الدفع تستلم رمزاً موقّعاً (JWT) — الصقه في حقل التفعيل أسفل البطاقات مباشرة.'
-                                : 'البطاقة الأولى: تجربة تلقائية 15 يوماً (جهازان). البطاقات التالية خطط مدفوعة — بعد الدفع تُدخل المفتاح في الحقل الموحّد أسفل الصفحة.',
+                            jwtMode ? loc.spJwtDescription : loc.spLegacyDescription,
                             style: const TextStyle(
                               color: _SubPlanText.secondary,
                               fontSize: 13,
@@ -177,17 +205,17 @@ class SubscriptionPlansScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Row(
+                                Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.info_outline,
                                       color: AppColors.accentGold,
                                       size: 20,
                                     ),
-                                    SizedBox(width: 8),
+                                    const SizedBox(width: 8),
                                     Text(
-                                      'كيفية الاشتراك',
-                                      style: TextStyle(
+                                      loc.spHowToSubscribe,
+                                      style: const TextStyle(
                                         color: _SubPlanText.primary,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 15,
@@ -198,14 +226,8 @@ class SubscriptionPlansScreen extends StatelessWidget {
                                 const SizedBox(height: 12),
                                 Text(
                                   jwtMode
-                                      ? '١. تواصل مع فريق NaBoo عبر الطرق أدناه\n'
-                                            '٢. أكمل الدفع للخطة التي تريدها\n'
-                                            '٣. استلم رمز التفعيل الكامل (JWT) من الإدارة\n'
-                                            '٤. الصق الرمز في الحقل الموحّد أسفل بطاقات الخطط — الخطة وحد الأجهزة يُستنتجان من الرمز'
-                                      : '١. تواصل مع فريق NaBoo عبر الطرق أدناه\n'
-                                            '٢. أخبرنا بالخطة التي تريدها وأكمل الدفع\n'
-                                            '٣. استلم مفتاح الترخيص من الإدارة\n'
-                                            '٤. الصق المفتاح في الحقل الموحّد أسفل بطاقات الخطط ثم اضغط «تفعيل المفتاح»',
+                                      ? '${loc.spHowJwtStep1}\n${loc.spHowJwtStep2}\n${loc.spHowJwtStep3}\n${loc.spHowJwtStep4}'
+                                      : '${loc.spHowLegacyStep1}\n${loc.spHowLegacyStep2}\n${loc.spHowLegacyStep3}\n${loc.spHowLegacyStep4}',
                                   style: const TextStyle(
                                     color: _SubPlanText.body,
                                     fontSize: 13,
@@ -216,16 +238,16 @@ class SubscriptionPlansScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 16),
-                          const _ContactRow(
+                          _ContactRow(
                             icon: Icons.phone_outlined,
-                            label: 'واتساب / هاتف',
+                            label: loc.spContactWhatsApp,
                             value: _kSupportPhoneDisplay,
                             copyValue: _kSupportPhoneCopy,
                           ),
                           const SizedBox(height: 10),
-                          const _ContactRow(
+                          _ContactRow(
                             icon: Icons.email_outlined,
-                            label: 'البريد الإلكتروني',
+                            label: loc.spContactEmail,
                             value: _kSupportEmail,
                             copyValue: _kSupportEmail,
                           ),
@@ -240,7 +262,7 @@ class SubscriptionPlansScreen extends StatelessWidget {
                                   );
                                 },
                                 icon: const Icon(Icons.arrow_back_rounded),
-                                label: const Text('متابعة'),
+                                label: Text(loc.spContinue),
                               ),
                             ),
                           ],
@@ -278,9 +300,10 @@ class _JwtActivatePanelState extends State<_JwtActivatePanel> {
   }
 
   Future<void> _activate() async {
+    final loc = AppLocalizations.of(context)!;
     final key = normalizeJwtCompactInput(_ctrl.text);
     if (key.isEmpty) {
-      setState(() => _error = 'الصق رمز الترخيص أولاً');
+      setState(() => _error = loc.spErrorPasteTokenFirst);
       return;
     }
     setState(() {
@@ -307,6 +330,7 @@ class _JwtActivatePanelState extends State<_JwtActivatePanel> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return GlassSurface(
       borderRadius: const BorderRadius.all(Radius.circular(16)),
       tintColor: AppGlass.surfaceTint,
@@ -316,14 +340,14 @@ class _JwtActivatePanelState extends State<_JwtActivatePanel> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Row(
+          Row(
             children: [
-              Icon(Icons.vpn_key_rounded, color: AppColors.accentGold, size: 22),
-              SizedBox(width: 10),
+              const Icon(Icons.vpn_key_rounded, color: AppColors.accentGold, size: 22),
+              const SizedBox(width: 10),
               Expanded(
                 child: Text(
-                  'تفعيل رمز الترخيص',
-                  style: TextStyle(
+                  loc.spActivateTokenTitle,
+                  style: const TextStyle(
                     color: _SubPlanText.primary,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -333,9 +357,9 @@ class _JwtActivatePanelState extends State<_JwtActivatePanel> {
             ],
           ),
           const SizedBox(height: 8),
-          const Text(
-            'الصق الرمز الكامل الذي أرسلته الإدارة. الخطة وحد الأجهزة يُستنتجان من داخل الرمز وليس من شكل البطاقة.',
-            style: TextStyle(
+          Text(
+            loc.spActivateTokenDesc,
+            style: const TextStyle(
               color: _SubPlanText.secondary,
               fontSize: 12.5,
               height: 1.45,
@@ -355,7 +379,7 @@ class _JwtActivatePanelState extends State<_JwtActivatePanel> {
               decoration: InputDecoration(
                 filled: true,
                 fillColor: AppColors.surfaceDark.withOpacity(0.65),
-                hintText: 'الصق رمز التفعيل هنا',
+                hintText: loc.spTokenHint,
                 hintStyle: TextStyle(
                   color: _SubPlanText.tertiary.withOpacity(0.85),
                 ),
@@ -405,7 +429,7 @@ class _JwtActivatePanelState extends State<_JwtActivatePanel> {
                       color: Colors.white,
                     ),
                   )
-                : const Text('تفعيل الرمز'),
+                : Text(loc.spActivateTokenButton),
           ),
         ],
       ),
@@ -432,9 +456,10 @@ class _LegacyLicenseKeyPanelState extends State<_LegacyLicenseKeyPanel> {
   }
 
   Future<void> _activate() async {
+    final loc = AppLocalizations.of(context)!;
     final key = normalizeJwtCompactInput(_ctrl.text);
     if (key.isEmpty) {
-      setState(() => _error = 'الصق مفتاح الترخيص أو رمز التفعيل أولاً');
+      setState(() => _error = loc.spErrorPasteKeyFirst);
       return;
     }
     setState(() {
@@ -464,6 +489,7 @@ class _LegacyLicenseKeyPanelState extends State<_LegacyLicenseKeyPanel> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return GlassSurface(
       borderRadius: const BorderRadius.all(Radius.circular(16)),
       tintColor: AppGlass.surfaceTint,
@@ -473,14 +499,14 @@ class _LegacyLicenseKeyPanelState extends State<_LegacyLicenseKeyPanel> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Row(
+          Row(
             children: [
-              Icon(Icons.key_rounded, color: AppColors.accentGold, size: 22),
-              SizedBox(width: 10),
+              const Icon(Icons.key_rounded, color: AppColors.accentGold, size: 22),
+              const SizedBox(width: 10),
               Expanded(
                 child: Text(
-                  'تفعيل المفتاح',
-                  style: TextStyle(
+                  loc.spActivateKeyTitle,
+                  style: const TextStyle(
                     color: _SubPlanText.primary,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -490,9 +516,9 @@ class _LegacyLicenseKeyPanelState extends State<_LegacyLicenseKeyPanel> {
             ],
           ),
           const SizedBox(height: 8),
-          const Text(
-            'الصق مفتاح الترخيص الذي استلمته بعد الدفع، أو رمز JWT إن وُجد. الخطط أعلاه للعرض والمقارنة فقط.',
-            style: TextStyle(
+          Text(
+            loc.spActivateKeyDesc,
+            style: const TextStyle(
               color: _SubPlanText.secondary,
               fontSize: 12.5,
               height: 1.45,
@@ -512,7 +538,7 @@ class _LegacyLicenseKeyPanelState extends State<_LegacyLicenseKeyPanel> {
               decoration: InputDecoration(
                 filled: true,
                 fillColor: AppColors.surfaceDark.withOpacity(0.65),
-                hintText: 'الصق مفتاح الترخيص أو رمز التفعيل',
+                hintText: loc.spKeyHint,
                 hintStyle: TextStyle(
                   color: _SubPlanText.tertiary.withOpacity(0.85),
                 ),
@@ -562,7 +588,7 @@ class _LegacyLicenseKeyPanelState extends State<_LegacyLicenseKeyPanel> {
                       color: Colors.white,
                     ),
                   )
-                : const Text('تفعيل المفتاح'),
+                : Text(loc.spActivateKeyButton),
           ),
         ],
       ),
@@ -590,12 +616,14 @@ class _PlanCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final priceColor = _priceHighlightOnDark(accentColor);
     final strokeColor = isCurrent
         ? accentColor.withOpacity(0.85)
         : isPopular
             ? accentColor.withOpacity(0.55)
             : AppGlass.stroke;
+    final features = _planFeatures(plan, loc);
 
     final inner = GlassSurface(
       borderRadius: const BorderRadius.all(Radius.circular(20)),
@@ -628,7 +656,7 @@ class _PlanCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      plan.nameAr,
+                      _planName(plan, loc),
                       style: const TextStyle(
                         color: _SubPlanText.primary,
                         fontSize: 16,
@@ -636,7 +664,7 @@ class _PlanCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      plan.devicesLabel,
+                      _devicesLabel(plan, loc),
                       style: const TextStyle(
                         color: _SubPlanText.secondary,
                         fontSize: 12,
@@ -650,16 +678,16 @@ class _PlanCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      'مجاناً',
+                      loc.spFree,
                       style: TextStyle(
                         color: priceColor,
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const Text(
-                      '15 يوماً',
-                      style: TextStyle(
+                    Text(
+                      loc.sp15Days,
+                      style: const TextStyle(
                         color: _SubPlanText.tertiary,
                         fontSize: 11,
                       ),
@@ -692,9 +720,9 @@ class _PlanCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Text(
-                      'شهرياً',
-                      style: TextStyle(
+                    Text(
+                      loc.spMonthly,
+                      style: const TextStyle(
                         color: _SubPlanText.tertiary,
                         fontSize: 10,
                       ),
@@ -706,7 +734,7 @@ class _PlanCard extends StatelessWidget {
           const SizedBox(height: 16),
           Divider(color: AppColors.borderDark.withOpacity(0.65)),
           const SizedBox(height: 12),
-          ...plan.features.map(
+          ...features.map(
             (f) => Padding(
               padding: const EdgeInsetsDirectional.only(bottom: 8),
               child: Row(
@@ -758,7 +786,7 @@ class _PlanCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 6),
                   Text(
-                    plan.isIntroTrialTier ? 'تجربتك الحالية' : 'خطتك الحالية',
+                    plan.isIntroTrialTier ? loc.spCurrentTrial : loc.spCurrentPlan,
                     style: const TextStyle(
                       color: _SubPlanText.primary,
                       fontWeight: FontWeight.bold,
@@ -771,10 +799,10 @@ class _PlanCard extends StatelessWidget {
           else
             Text(
               plan.isIntroTrialTier
-                  ? 'التجربة تبدأ تلقائياً — لا مفتاح. عند الترقية استلم الرمز من الإدارة والصقه في الحقل الموحّد أسفل البطاقات.'
+                  ? loc.spTrialAutoDescription
                   : jwtMode
-                      ? 'هذه البطاقة للعرض والمقارنة فقط. بعد الدفع الصق رمز التفعيل (JWT) في الحقل الموحّد أسفل البطاقات مباشرة.'
-                      : 'هذه البطاقة للعرض والمقارنة فقط. بعد الدفع الصق مفتاح الترخيص في الحقل الموحّد أسفل البطاقات.',
+                      ? loc.spJwtCardDescription
+                      : loc.spLegacyCardDescription,
               style: const TextStyle(
                 color: _SubPlanText.secondary,
                 fontSize: 12,
@@ -812,9 +840,9 @@ class _PlanCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: const Text(
-                  'الأكثر طلباً',
-                  style: TextStyle(
+                child: Text(
+                  loc.spMostPopular,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 11,
                     fontWeight: FontWeight.bold,
@@ -842,6 +870,7 @@ class _ContactRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return GlassSurface(
       borderRadius: const BorderRadius.all(Radius.circular(12)),
       tintColor: AppGlass.surfaceTint,
@@ -891,15 +920,15 @@ class _ContactRow extends StatelessWidget {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(
-                    label.contains('هاتف') || label.contains('واتساب')
-                        ? 'تم نسخ الرقم'
-                        : 'تم نسخ البريد',
+                    label.contains(loc.spContactWhatsApp.split('/').first.trim())
+                        ? loc.spCopiedPhone
+                        : loc.spCopiedEmail,
                   ),
                   behavior: SnackBarBehavior.floating,
                 ),
               );
             },
-            tooltip: 'نسخ',
+            tooltip: loc.spCopy,
           ),
         ],
       ),

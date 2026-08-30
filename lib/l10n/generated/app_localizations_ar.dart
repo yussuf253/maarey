@@ -10238,4 +10238,208 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get npHide => 'إخفاء';
+
+  @override
+  String get spTitle => 'خطط الاشتراك';
+
+  @override
+  String get spSubtitle => 'اختر الخطة المناسبة لنشاطك';
+
+  @override
+  String get spJwtDescription =>
+      'البطاقات أدناه للمقارنة والأسعار فقط. بعد الدفع تستلم رمزاً موقّعاً (JWT) — الصقه في حقل التفعيل أسفل البطاقات مباشرة.';
+
+  @override
+  String get spLegacyDescription =>
+      'البطاقة الأولى: تجربة تلقائية 15 يوماً (جهازان). البطاقات التالية خطط مدفوعة — بعد الدفع تُدخل المفتاح في الحقل الموحّد أسفل الصفحة.';
+
+  @override
+  String get spHowToSubscribe => 'كيفية الاشتراك';
+
+  @override
+  String get spHowJwtStep1 => '١. تواصل مع فريق NaBoo عبر الطرق أدناه';
+
+  @override
+  String get spHowJwtStep2 => '٢. أكمل الدفع للخطة التي تريدها';
+
+  @override
+  String get spHowJwtStep3 => '٣. استلم رمز التفعيل الكامل (JWT) من الإدارة';
+
+  @override
+  String get spHowJwtStep4 =>
+      '٤. الصق الرمز في الحقل الموحّد أسفل بطاقات الخطط — الخطة وحد الأجهزة يُستنتجان من الرمز';
+
+  @override
+  String get spHowLegacyStep1 => '١. تواصل مع فريق NaBoo عبر الطرق أدناه';
+
+  @override
+  String get spHowLegacyStep2 => '٢. أخبرنا بالخطة التي تريدها وأكمل الدفع';
+
+  @override
+  String get spHowLegacyStep3 => '٣. استلم مفتاح الترخيص من الإدارة';
+
+  @override
+  String get spHowLegacyStep4 =>
+      '٤. الصق المفتاح في الحقل الموحّد أسفل بطاقات الخطط ثم اضغط «تفعيل المفتاح»';
+
+  @override
+  String get spContactWhatsApp => 'واتساب / هاتف';
+
+  @override
+  String get spContactEmail => 'البريد الإلكتروني';
+
+  @override
+  String get spContinue => 'متابعة';
+
+  @override
+  String get spErrorPasteTokenFirst => 'الصق رمز الترخيص أولاً';
+
+  @override
+  String get spActivateTokenTitle => 'تفعيل رمز الترخيص';
+
+  @override
+  String get spActivateTokenDesc =>
+      'الصق الرمز الكامل الذي أرسلته الإدارة. الخطة وحد الأجهزة يُستنتجان من داخل الرمز وليس من شكل البطاقة.';
+
+  @override
+  String get spTokenHint => 'الصق رمز التفعيل هنا';
+
+  @override
+  String get spActivateTokenButton => 'تفعيل الرمز';
+
+  @override
+  String get spErrorPasteKeyFirst => 'الصق مفتاح الترخيص أو رمز التفعيل أولاً';
+
+  @override
+  String get spActivateKeyTitle => 'تفعيل المفتاح';
+
+  @override
+  String get spActivateKeyDesc =>
+      'الصق مفتاح الترخيص الذي استلمته بعد الدفع، أو رمز JWT إن وُجد. الخطط أعلاه للعرض والمقارنة فقط.';
+
+  @override
+  String get spKeyHint => 'الصق مفتاح الترخيص أو رمز التفعيل';
+
+  @override
+  String get spActivateKeyButton => 'تفعيل المفتاح';
+
+  @override
+  String get spFree => 'مجاناً';
+
+  @override
+  String get sp15Days => '15 يوماً';
+
+  @override
+  String get spMonthly => 'شهرياً';
+
+  @override
+  String get spCurrentTrial => 'تجربتك الحالية';
+
+  @override
+  String get spCurrentPlan => 'خطتك الحالية';
+
+  @override
+  String get spTrialAutoDescription =>
+      'التجربة تبدأ تلقائياً — لا مفتاح. عند الترقية استلم الرمز من الإدارة والصقه في الحقل الموحّد أسفل البطاقات.';
+
+  @override
+  String get spJwtCardDescription =>
+      'هذه البطاقة للعرض والمقارنة فقط. بعد الدفع الصق رمز التفعيل (JWT) في الحقل الموحّد أسفل البطاقات مباشرة.';
+
+  @override
+  String get spLegacyCardDescription =>
+      'هذه البطاقة للعرض والمقارنة فقط. بعد الدفع الصق مفتاح الترخيص في الحقل الموحّد أسفل البطاقات.';
+
+  @override
+  String get spMostPopular => 'الأكثر طلباً';
+
+  @override
+  String get spCopiedPhone => 'تم نسخ الرقم';
+
+  @override
+  String get spCopiedEmail => 'تم نسخ البريد';
+
+  @override
+  String get spCopy => 'نسخ';
+
+  @override
+  String get spTrialName => 'التجربة المجانية';
+
+  @override
+  String get spBasicName => 'الأساسية';
+
+  @override
+  String get spProName => 'الاحترافية';
+
+  @override
+  String get spUnlimitedName => 'غير المحدودة';
+
+  @override
+  String get spDevicesUnlimited => 'أجهزة غير محدودة';
+
+  @override
+  String spDevicesCount(Object count) {
+    return '$count أجهزة';
+  }
+
+  @override
+  String get spPlanPriceFree => 'مجاناً — 15 يوماً';
+
+  @override
+  String spPlanPriceMonthly(Object price) {
+    return '$price Fdj / شهر';
+  }
+
+  @override
+  String get spTrialFeature1 =>
+      '15 يوماً من أول استخدام (أو من أول تسجيل للحساب السحابي)';
+
+  @override
+  String get spTrialFeature2 => 'جهازان على نفس الحساب';
+
+  @override
+  String get spTrialFeature3 =>
+      'بعدها اختر خطة مدفوعة وفعّل المفتاح الذي ترسله الإدارة';
+
+  @override
+  String get spBasicFeature1 => 'جهازان على نفس الحساب';
+
+  @override
+  String get spBasicFeature2 => 'جميع ميزات المخزون والفواتير';
+
+  @override
+  String get spBasicFeature3 => 'التقارير والتحليلات';
+
+  @override
+  String get spBasicFeature4 => 'دعم فني';
+
+  @override
+  String get spProFeature1 => '3 أجهزة على نفس الحساب';
+
+  @override
+  String get spProFeature2 => 'جميع ميزات الخطة الأساسية';
+
+  @override
+  String get spProFeature3 => 'أوامر الشراء وإدارة الموردين';
+
+  @override
+  String get spProFeature4 => 'تقارير متقدمة';
+
+  @override
+  String get spProFeature5 => 'أولوية في الدعم الفني';
+
+  @override
+  String get spUnlimitedFeature1 => 'أجهزة غير محدودة على حساب واحد';
+
+  @override
+  String get spUnlimitedFeature2 => 'جميع ميزات الخطة الاحترافية';
+
+  @override
+  String get spUnlimitedFeature3 => 'متعدد الفروع';
+
+  @override
+  String get spUnlimitedFeature4 => 'أولوية قصوى في الدعم';
+
+  @override
+  String get devToolsOpen => 'فتح أدوات الاختبار…';
 }
