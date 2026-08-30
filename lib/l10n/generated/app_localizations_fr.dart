@@ -9369,4 +9369,193 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get usDisableButton => 'Désactiver';
+
+  @override
+  String get ufPhoneFormatHint =>
+      'Utilisez le format téléphonique irakien (ex. : 07XXXXXXXXX)';
+
+  @override
+  String get ufEmailRequired =>
+      'L\'e-mail est requis (utilisé comme nom de connexion)';
+
+  @override
+  String get ufEmailAlreadyRegistered => 'Cet e-mail est déjà enregistré';
+
+  @override
+  String get ufPasswordMinLength =>
+      'Le mot de passe doit contenir au moins 6 caractères';
+
+  @override
+  String get ufPasswordMismatch =>
+      'La confirmation du mot de passe ne correspond pas';
+
+  @override
+  String get ufEmailTaken =>
+      'Cet e-mail est enregistré pour un autre utilisateur';
+
+  @override
+  String get ufInvalidPasswordOrMismatch =>
+      'Mot de passe invalide ou confirmation incorrecte';
+
+  @override
+  String get ufTitleEdit => 'Modifier l\'utilisateur';
+
+  @override
+  String get ufTitleNew => 'Nouvel utilisateur';
+
+  @override
+  String get ufAccountData => 'Données du compte';
+
+  @override
+  String get ufAccountDataDesc =>
+      'L\'e-mail est utilisé comme nom de connexion. Téléphone au format irakien courant (07…).';
+
+  @override
+  String get ufFullName => 'Nom complet';
+
+  @override
+  String get ufRequired => 'Obligatoire';
+
+  @override
+  String get ufRole => 'Rôle professionnel';
+
+  @override
+  String get ufRoleHint => 'Caissier, magasinier, …';
+
+  @override
+  String get ufEmailLogin => 'E-mail (nom de connexion)';
+
+  @override
+  String get ufPhoneIraq => 'Numéro de téléphone (Irak)';
+
+  @override
+  String get ufPhoneIraqHint => 'Numéros irakiens courants commençant par 07';
+
+  @override
+  String get ufPhone2Optional => 'Deuxième téléphone (optionnel)';
+
+  @override
+  String get ufPhone2Hint => 'Si disponible';
+
+  @override
+  String get ufPermissionPassword => 'Permission et mot de passe';
+
+  @override
+  String get ufAccountType => 'Type de compte';
+
+  @override
+  String get ufAccountEmployee => 'Employé (permissions détaillées)';
+
+  @override
+  String get ufAccountAdmin => 'Admin (toutes les permissions)';
+
+  @override
+  String get ufAdminNote =>
+      'Le compte admin contourne les restrictions détaillées et reçoit un accès complet au système.';
+
+  @override
+  String get ufNewPasswordOptional => 'Nouveau mot de passe (optionnel)';
+
+  @override
+  String get ufPassword => 'Mot de passe';
+
+  @override
+  String get ufConfirmNewPassword => 'Confirmer le nouveau mot de passe';
+
+  @override
+  String get ufConfirmPassword => 'Confirmer le mot de passe';
+
+  @override
+  String get ufDetailedPermissions => 'Permissions détaillées';
+
+  @override
+  String get ufDetailedPermissionsDesc =>
+      'Activez ce que cet employé peut accéder. Enregistré en base de données par utilisateur.';
+
+  @override
+  String get ufSaving => 'Enregistrement…';
+
+  @override
+  String get ufSave => 'Enregistrer';
+
+  @override
+  String get ufCancel => 'Annuler';
+
+  @override
+  String ufSaveFailed(Object error) {
+    return 'Échec de la sauvegarde : $error';
+  }
+
+  @override
+  String get eiRegenerateShiftCode => 'Régénérer le code de quart';
+
+  @override
+  String get eiRegenerateShiftCodeDesc =>
+      'Un nouveau code sera généré. La carte d\'identité doit être imprimée/mise à jour et redistribuée.';
+
+  @override
+  String get eiCancel => 'Annuler';
+
+  @override
+  String get eiConfirm => 'Confirmer';
+
+  @override
+  String get eiShiftCodeRenewed => 'Code de quart régénéré.';
+
+  @override
+  String get eiTitle => 'Identités des employés';
+
+  @override
+  String get eiNoActiveUsers =>
+      'Aucun utilisateur actif dans la base de données.';
+
+  @override
+  String get swTimeZero => '0 min';
+
+  @override
+  String swTimeHoursMinutes(Object hours, Object minutes) {
+    return '${hours}h ${minutes}min';
+  }
+
+  @override
+  String swTimeHoursOnly(Object hours) {
+    return '${hours}h';
+  }
+
+  @override
+  String swTimeMinutesOnly(Object minutes) {
+    return '${minutes}min';
+  }
+
+  @override
+  String get swHintCompact =>
+      'Aperçu journalier ; touchez le jour pour voir les détails des quarts.';
+
+  @override
+  String get swHintFull =>
+      'Sept colonnes (sam → ven) : axe 00:00–24:00 en chiffres latins ; chaque barre est un quart (nom et heure dans la barre).';
+
+  @override
+  String get swNoShifts => 'Aucun quart';
+
+  @override
+  String get swShiftSingular => 'quart';
+
+  @override
+  String get swShiftPlural => 'quarts';
+
+  @override
+  String get swTitle => 'Quarts des employés — hebdomadaire';
+
+  @override
+  String get swWeekTotalTime => 'Temps total de la semaine';
+
+  @override
+  String get swNextWeek => 'Semaine prochaine';
+
+  @override
+  String get swThisWeek => 'Cette semaine';
+
+  @override
+  String get swPrevWeek => 'Semaine précédente';
 }

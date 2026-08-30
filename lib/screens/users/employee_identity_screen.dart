@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../providers/auth_provider.dart';
 import '../../services/database_helper.dart';
 import '../../widgets/employee_id_card.dart';
@@ -17,6 +18,7 @@ class EmployeeIdentityScreen extends StatefulWidget {
 }
 
 class _EmployeeIdentityScreenState extends State<EmployeeIdentityScreen> {
+  AppLocalizations get loc => AppLocalizations.of(context)!;
   final _db = DatabaseHelper();
   List<Map<String, dynamic>> _rows = [];
   bool _loading = true;
@@ -45,18 +47,18 @@ class _EmployeeIdentityScreenState extends State<EmployeeIdentityScreen> {
       builder: (ctx) => Directionality(
         textDirection: TextDirection.rtl,
         child: AlertDialog(
-          title: const Text('تجديد رمز الوردية'),
-          content: const Text(
-            'سيتم إنشاء رمز جديد. يجب طباعة/تحديث بطاقة الهوية وإعادة توزيعها.',
+          title: Text(loc.eiRegenerateShiftCode),
+          content: Text(
+            loc.eiRegenerateShiftCodeDesc,
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: const Text('إلغاء'),
+              child: Text(loc.eiCancel),
             ),
             FilledButton(
               onPressed: () => Navigator.pop(ctx, true),
-              child: const Text('تأكيد'),
+              child: Text(loc.eiConfirm),
             ),
           ],
         ),
@@ -67,7 +69,7 @@ class _EmployeeIdentityScreenState extends State<EmployeeIdentityScreen> {
     if (!mounted) return;
     ScaffoldMessenger.of(
       context,
-    ).showSnackBar(const SnackBar(content: Text('تم تجديد رمز الوردية.')));
+    ).showSnackBar(SnackBar(content: Text(loc.eiShiftCodeRenewed)));
     await _load();
     setState(() => _expandedId = userId);
   }
@@ -83,9 +85,9 @@ class _EmployeeIdentityScreenState extends State<EmployeeIdentityScreen> {
       child: Scaffold(
         backgroundColor: bg,
         appBar: AppBar(
-          title: const Text(
-            'هويات الموظفين',
-            style: TextStyle(fontWeight: FontWeight.bold),
+          title: Text(
+            loc.eiTitle,
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
         body: _loading
@@ -93,7 +95,7 @@ class _EmployeeIdentityScreenState extends State<EmployeeIdentityScreen> {
             : _rows.isEmpty
             ? Center(
                 child: Text(
-                  'لا يوجد مستخدمون نشطون في قاعدة البيانات.',
+                  loc.eiNoActiveUsers,
                   style: TextStyle(color: Colors.grey.shade600),
                 ),
               )
@@ -147,7 +149,7 @@ class _EmployeeIdentityScreenState extends State<EmployeeIdentityScreen> {
                               child: TextButton.icon(
                                 onPressed: () => _regeneratePin(id),
                                 icon: const Icon(Icons.refresh),
-                                label: const Text('تجديد رمز الوردية'),
+                                label: Text(loc.eiRegenerateShiftCode),
                               ),
                             ),
                         ],

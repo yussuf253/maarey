@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../models/user_permission_catalog.dart';
 import '../../services/cloud_sync_service.dart';
 import '../../services/database_helper.dart';
@@ -10,12 +11,12 @@ import '../../utils/screen_layout.dart';
 import '../../utils/customer_validation.dart';
 
 /// التحقق من هاتف عراقي شائع (اختياري): أرقام فقط، طول معقول.
-String? _iraqPhoneOptional(String? v) {
+String? _iraqPhoneOptional(String? v, String hint) {
   final t = v?.trim() ?? '';
   if (t.isEmpty) return null;
   final digits = t.replaceAll(RegExp(r'\D'), '');
   if (digits.length < 10 || digits.length > 11) {
-    return 'استخدم صيغة هاتف عراقي (مثال: 07XXXXXXXXX)';
+    return hint;
   }
   return null;
 }
@@ -31,6 +32,7 @@ class UserFormScreen extends StatefulWidget {
 }
 
 class _UserFormScreenState extends State<UserFormScreen> {
+  AppLocalizations get loc => AppLocalizations.of(context)!;
   final _db = DatabaseHelper();
   final _perm = PermissionService.instance;
   final _formKey = GlobalKey<FormState>();
@@ -156,12 +158,12 @@ class _UserFormScreenState extends State<UserFormScreen> {
     final email = _emailCtrl.text.trim();
     if (email.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('البريد مطلوب (يُستخدم كاسم دخول)')),
+        SnackBar(content: Text(loc.ufEmailRequired)),
       );
       return;
     }
-    final p1 = _iraqPhoneOptional(_phoneCtrl.text);
-    final p2 = _iraqPhoneOptional(_phone2Ctrl.text);
+    final p1 = _iraqPhoneOptional(_phoneCtrl.text, loc.ufPhoneFormatHint);
+    final p2 = _iraqPhoneOptional(_phone2Ctrl.text, loc.ufPhoneFormatHint);
     if (p1 != null) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(p1)));
       return;
@@ -175,7 +177,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
       if (await _db.signupEmailTaken(email)) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('هذا البريد مسجّل مسبقاً')),
+            SnackBar(content: Text(loc.ufEmailAlreadyRegistered)),
           );
         }
         return;
@@ -183,13 +185,13 @@ class _UserFormScreenState extends State<UserFormScreen> {
       if (!mounted) return;
       if (_passCtrl.text.length < 6) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('كلمة المرور 6 أحرف على الأقل')),
+          SnackBar(content: Text(loc.ufPasswordMinLength)),
         );
         return;
       }
       if (_passCtrl.text != _pass2Ctrl.text) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('تأكيد كلمة المرور غير مطابق')),
+          SnackBar(content: Text(loc.ufPasswordMismatch)),
         );
         return;
       }
@@ -199,7 +201,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
       if (email.toLowerCase() != oldMail && await _db.signupEmailTaken(email)) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('هذا البريد مسجّل لمستخدم آخر')),
+            SnackBar(content: Text(loc.ufEmailTaken)),
           );
         }
         return;
@@ -208,8 +210,8 @@ class _UserFormScreenState extends State<UserFormScreen> {
       if (_passCtrl.text.isNotEmpty) {
         if (_passCtrl.text.length < 6 || _passCtrl.text != _pass2Ctrl.text) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('كلمة المرور غير صالحة أو التأكيد غير مطابق'),
+            SnackBar(
+              content: Text(loc.ufInvalidPasswordOrMismatch),
             ),
           );
           return;
@@ -265,7 +267,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('تعذر الحفظ: $e')));
+        ).showSnackBar(SnackBar(content: Text(loc.ufSaveFailed(e.toString()))));
       }
     } finally {
       if (mounted) setState(() => _saving = false);
@@ -287,7 +289,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
       elevation: 0,
       centerTitle: false,
       title: Text(
-        _isEdit ? 'تعديل مستخدم' : 'مستخدم جديد',
+        _isEdit ? loc.ufTitleEdit : loc.ufTitleNew,
         style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
       ),
     );
@@ -332,14 +334,14 @@ class _UserFormScreenState extends State<UserFormScreen> {
                         children: [
                           _sectionCard(
                             icon: Icons.person_outline,
-                            title: 'بيانات الحساب',
+                            title: loc.ufAccountData,
                             subtitle:
-                                'البريد يُستخدم كاسم دخول. الهاتف بصيغة عراقية شائعة (07…).',
+                                loc.ufAccountDataDesc,
                             children: [
                               TextFormField(
                                 controller: _nameCtrl,
                                 decoration: _decoration(
-                                  label: 'الاسم الكامل',
+                                  label: loc.ufFullName,
                                   prefixIcon: Icon(
                                     Icons.badge_outlined,
                                     color: _textSecondary,
@@ -348,15 +350,15 @@ class _UserFormScreenState extends State<UserFormScreen> {
                                 ),
                                 validator: (v) =>
                                     (v == null || v.trim().isEmpty)
-                                    ? 'مطلوب'
+                                    ? loc.ufRequired
                                     : null,
                               ),
                               const SizedBox(height: 14),
                               TextFormField(
                                 controller: _jobCtrl,
                                 decoration: _decoration(
-                                  label: 'الدور الوظيفي',
-                                  hint: 'كاشير، مخزن، …',
+                                  label: loc.ufRole,
+                                  hint: loc.ufRoleHint,
                                   prefixIcon: Icon(
                                     Icons.work_outline,
                                     color: _textSecondary,
@@ -370,7 +372,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
                                 enabled: !_isEdit,
                                 keyboardType: TextInputType.emailAddress,
                                 decoration: _decoration(
-                                  label: 'البريد الإلكتروني (اسم الدخول)',
+                                  label: loc.ufEmailLogin,
                                   prefixIcon: Icon(
                                     Icons.email_outlined,
                                     color: _textSecondary,
@@ -379,7 +381,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
                                 ),
                                 validator: (v) {
                                   final t = v?.trim() ?? '';
-                                  if (t.isEmpty) return 'مطلوب';
+                                  if (t.isEmpty) return loc.ufRequired;
                                   return CustomerValidation.optionalEmail(v);
                                 },
                               ),
@@ -388,9 +390,9 @@ class _UserFormScreenState extends State<UserFormScreen> {
                                 controller: _phoneCtrl,
                                 keyboardType: TextInputType.phone,
                                 decoration: _decoration(
-                                  label: 'رقم الهاتف (العراق)',
+                                  label: loc.ufPhoneIraq,
                                   hint: '07XXXXXXXXX',
-                                  helper: 'أرقام عراقية شائعة تبدأ بـ 07',
+                                  helper: loc.ufPhoneIraqHint,
                                   prefixIcon: Icon(
                                     Icons.phone_android_outlined,
                                     color: _textSecondary,
@@ -403,8 +405,8 @@ class _UserFormScreenState extends State<UserFormScreen> {
                                 controller: _phone2Ctrl,
                                 keyboardType: TextInputType.phone,
                                 decoration: _decoration(
-                                  label: 'هاتف ثانٍ (اختياري)',
-                                  hint: 'إن وُجد',
+                                  label: loc.ufPhone2Optional,
+                                  hint: loc.ufPhone2Hint,
                                   prefixIcon: Icon(
                                     Icons.phone_in_talk_outlined,
                                     color: _textSecondary,
@@ -417,27 +419,27 @@ class _UserFormScreenState extends State<UserFormScreen> {
                           const SizedBox(height: 16),
                           _sectionCard(
                             icon: Icons.lock_outline,
-                            title: 'الصلاحية وكلمة المرور',
+                            title: loc.ufPermissionPassword,
                             children: [
                               DropdownButtonFormField<String>(
                                 key: ValueKey<String>(_role),
                                 initialValue: _role,
                                 decoration: _decoration(
-                                  label: 'نوع الحساب',
+                                  label: loc.ufAccountType,
                                   prefixIcon: Icon(
                                     Icons.admin_panel_settings_outlined,
                                     color: _textSecondary,
                                     size: 22,
                                   ),
                                 ),
-                                items: const [
+                                items: [
                                   DropdownMenuItem(
                                     value: 'staff',
-                                    child: Text('موظف (صلاحيات مفصّلة)'),
+                                    child: Text(loc.ufAccountEmployee),
                                   ),
                                   DropdownMenuItem(
                                     value: 'admin',
-                                    child: Text('مدير (كل الصلاحيات)'),
+                                    child: Text(loc.ufAccountAdmin),
                                   ),
                                 ],
                                 onChanged: _saving ? null : _onRoleChanged,
@@ -458,7 +460,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
                                       const SizedBox(width: 10),
                                       Expanded(
                                         child: Text(
-                                          'حساب المدير يتجاوز القيود التفصيلية ويُطبَّق عليه السماح الكامل في النظام.',
+                                          loc.ufAdminNote,
                                           style: TextStyle(
                                             fontSize: 12.5,
                                             color: _textSecondary,
@@ -476,8 +478,8 @@ class _UserFormScreenState extends State<UserFormScreen> {
                                 obscureText: true,
                                 decoration: _decoration(
                                   label: _isEdit
-                                      ? 'كلمة مرور جديدة (اختياري)'
-                                      : 'كلمة المرور',
+                                      ? loc.ufNewPasswordOptional
+                                      : loc.ufPassword,
                                   prefixIcon: Icon(
                                     Icons.password_outlined,
                                     color: _textSecondary,
@@ -491,8 +493,8 @@ class _UserFormScreenState extends State<UserFormScreen> {
                                 obscureText: true,
                                 decoration: _decoration(
                                   label: _isEdit
-                                      ? 'تأكيد كلمة المرور الجديدة'
-                                      : 'تأكيد كلمة المرور',
+                                      ? loc.ufConfirmNewPassword
+                                      : loc.ufConfirmPassword,
                                   prefixIcon: Icon(
                                     Icons.verified_user_outlined,
                                     color: _textSecondary,
@@ -506,9 +508,9 @@ class _UserFormScreenState extends State<UserFormScreen> {
                             const SizedBox(height: 16),
                             _sectionCard(
                               icon: Icons.rule_folder_outlined,
-                              title: 'الصلاحيات التفصيلية',
+                              title: loc.ufDetailedPermissions,
                               subtitle:
-                                  'فعّل ما يحق لهذا الموظف الوصول إليه. يُحفظ في قاعدة البيانات لكل مستخدم.',
+                                  loc.ufDetailedPermissionsDesc,
                               children: [
                                 for (final g in _groups) ...[
                                   _permExpansion(g),
@@ -531,7 +533,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
                                   )
                                 : const Icon(Icons.save_outlined),
                             label: Text(
-                              _saving ? 'جاري الحفظ…' : 'حفظ',
+                              _saving ? loc.ufSaving : loc.ufSave,
                               style: const TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16,
@@ -553,7 +555,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
                             onPressed: _saving
                                 ? null
                                 : () => Navigator.pop(context),
-                            child: const Text('إلغاء'),
+                            child: Text(loc.ufCancel),
                           ),
                         ],
                       ),

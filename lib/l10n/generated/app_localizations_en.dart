@@ -9254,4 +9254,187 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get usDisableButton => 'Disable';
+
+  @override
+  String get ufPhoneFormatHint => 'Use Iraqi phone format (e.g. 07XXXXXXXXX)';
+
+  @override
+  String get ufEmailRequired => 'Email is required (used as login name)';
+
+  @override
+  String get ufEmailAlreadyRegistered => 'This email is already registered';
+
+  @override
+  String get ufPasswordMinLength => 'Password must be at least 6 characters';
+
+  @override
+  String get ufPasswordMismatch => 'Password confirmation does not match';
+
+  @override
+  String get ufEmailTaken => 'This email is registered to another user';
+
+  @override
+  String get ufInvalidPasswordOrMismatch =>
+      'Invalid password or confirmation mismatch';
+
+  @override
+  String get ufTitleEdit => 'Edit user';
+
+  @override
+  String get ufTitleNew => 'New user';
+
+  @override
+  String get ufAccountData => 'Account data';
+
+  @override
+  String get ufAccountDataDesc =>
+      'Email is used as login name. Phone in common Iraqi format (07…).';
+
+  @override
+  String get ufFullName => 'Full name';
+
+  @override
+  String get ufRequired => 'Required';
+
+  @override
+  String get ufRole => 'Job role';
+
+  @override
+  String get ufRoleHint => 'Cashier, warehouse, …';
+
+  @override
+  String get ufEmailLogin => 'Email (login name)';
+
+  @override
+  String get ufPhoneIraq => 'Phone number (Iraq)';
+
+  @override
+  String get ufPhoneIraqHint => 'Common Iraqi numbers starting with 07';
+
+  @override
+  String get ufPhone2Optional => 'Second phone (optional)';
+
+  @override
+  String get ufPhone2Hint => 'If available';
+
+  @override
+  String get ufPermissionPassword => 'Permission & password';
+
+  @override
+  String get ufAccountType => 'Account type';
+
+  @override
+  String get ufAccountEmployee => 'Employee (detailed permissions)';
+
+  @override
+  String get ufAccountAdmin => 'Admin (full permissions)';
+
+  @override
+  String get ufAdminNote =>
+      'Admin account bypasses detailed restrictions and is granted full system access.';
+
+  @override
+  String get ufNewPasswordOptional => 'New password (optional)';
+
+  @override
+  String get ufPassword => 'Password';
+
+  @override
+  String get ufConfirmNewPassword => 'Confirm new password';
+
+  @override
+  String get ufConfirmPassword => 'Confirm password';
+
+  @override
+  String get ufDetailedPermissions => 'Detailed permissions';
+
+  @override
+  String get ufDetailedPermissionsDesc =>
+      'Enable what this employee can access. Saved in the database per user.';
+
+  @override
+  String get ufSaving => 'Saving…';
+
+  @override
+  String get ufSave => 'Save';
+
+  @override
+  String get ufCancel => 'Cancel';
+
+  @override
+  String ufSaveFailed(Object error) {
+    return 'Save failed: $error';
+  }
+
+  @override
+  String get eiRegenerateShiftCode => 'Regenerate shift code';
+
+  @override
+  String get eiRegenerateShiftCodeDesc =>
+      'A new code will be generated. The ID card must be printed/updated and redistributed.';
+
+  @override
+  String get eiCancel => 'Cancel';
+
+  @override
+  String get eiConfirm => 'Confirm';
+
+  @override
+  String get eiShiftCodeRenewed => 'Shift code renewed.';
+
+  @override
+  String get eiTitle => 'Employee identities';
+
+  @override
+  String get eiNoActiveUsers => 'No active users in the database.';
+
+  @override
+  String get swTimeZero => '0 min';
+
+  @override
+  String swTimeHoursMinutes(Object hours, Object minutes) {
+    return '${hours}h ${minutes}m';
+  }
+
+  @override
+  String swTimeHoursOnly(Object hours) {
+    return '${hours}h';
+  }
+
+  @override
+  String swTimeMinutesOnly(Object minutes) {
+    return '${minutes}m';
+  }
+
+  @override
+  String get swHintCompact =>
+      'Daily overview; tap the day to see shift details.';
+
+  @override
+  String get swHintFull =>
+      'Seven columns (Sat → Fri): axis 00:00–24:00 in Latin digits; each bar is a shift (name and time inside the bar).';
+
+  @override
+  String get swNoShifts => 'No shifts';
+
+  @override
+  String get swShiftSingular => 'shift';
+
+  @override
+  String get swShiftPlural => 'shifts';
+
+  @override
+  String get swTitle => 'Employee shifts — weekly';
+
+  @override
+  String get swWeekTotalTime => 'Total time this week';
+
+  @override
+  String get swNextWeek => 'Next week';
+
+  @override
+  String get swThisWeek => 'This week';
+
+  @override
+  String get swPrevWeek => 'Previous week';
 }

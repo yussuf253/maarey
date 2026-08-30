@@ -16663,6 +16663,342 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'تعطيل'**
   String get usDisableButton;
+
+  /// No description provided for @ufPhoneFormatHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدم صيغة هاتف عراقي (مثال: 07XXXXXXXXX)'**
+  String get ufPhoneFormatHint;
+
+  /// No description provided for @ufEmailRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'البريد مطلوب (يُستخدم كاسم دخول)'**
+  String get ufEmailRequired;
+
+  /// No description provided for @ufEmailAlreadyRegistered.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا البريد مسجّل مسبقاً'**
+  String get ufEmailAlreadyRegistered;
+
+  /// No description provided for @ufPasswordMinLength.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمة المرور 6 أحرف على الأقل'**
+  String get ufPasswordMinLength;
+
+  /// No description provided for @ufPasswordMismatch.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكيد كلمة المرور غير مطابق'**
+  String get ufPasswordMismatch;
+
+  /// No description provided for @ufEmailTaken.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا البريد مسجّل لمستخدم آخر'**
+  String get ufEmailTaken;
+
+  /// No description provided for @ufInvalidPasswordOrMismatch.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمة المرور غير صالحة أو التأكيد غير مطابق'**
+  String get ufInvalidPasswordOrMismatch;
+
+  /// No description provided for @ufTitleEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل مستخدم'**
+  String get ufTitleEdit;
+
+  /// No description provided for @ufTitleNew.
+  ///
+  /// In ar, this message translates to:
+  /// **'مستخدم جديد'**
+  String get ufTitleNew;
+
+  /// No description provided for @ufAccountData.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيانات الحساب'**
+  String get ufAccountData;
+
+  /// No description provided for @ufAccountDataDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'البريد يُستخدم كاسم دخول. الهاتف بصيغة عراقية شائعة (07…).'**
+  String get ufAccountDataDesc;
+
+  /// No description provided for @ufFullName.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم الكامل'**
+  String get ufFullName;
+
+  /// No description provided for @ufRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'مطلوب'**
+  String get ufRequired;
+
+  /// No description provided for @ufRole.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدور الوظيفي'**
+  String get ufRole;
+
+  /// No description provided for @ufRoleHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'كاشير، مخزن، …'**
+  String get ufRoleHint;
+
+  /// No description provided for @ufEmailLogin.
+  ///
+  /// In ar, this message translates to:
+  /// **'البريد الإلكتروني (اسم الدخول)'**
+  String get ufEmailLogin;
+
+  /// No description provided for @ufPhoneIraq.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الهاتف (العراق)'**
+  String get ufPhoneIraq;
+
+  /// No description provided for @ufPhoneIraqHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أرقام عراقية شائعة تبدأ بـ 07'**
+  String get ufPhoneIraqHint;
+
+  /// No description provided for @ufPhone2Optional.
+  ///
+  /// In ar, this message translates to:
+  /// **'هاتف ثانٍ (اختياري)'**
+  String get ufPhone2Optional;
+
+  /// No description provided for @ufPhone2Hint.
+  ///
+  /// In ar, this message translates to:
+  /// **'إن وُجد'**
+  String get ufPhone2Hint;
+
+  /// No description provided for @ufPermissionPassword.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصلاحية وكلمة المرور'**
+  String get ufPermissionPassword;
+
+  /// No description provided for @ufAccountType.
+  ///
+  /// In ar, this message translates to:
+  /// **'نوع الحساب'**
+  String get ufAccountType;
+
+  /// No description provided for @ufAccountEmployee.
+  ///
+  /// In ar, this message translates to:
+  /// **'موظف (صلاحيات مفصّلة)'**
+  String get ufAccountEmployee;
+
+  /// No description provided for @ufAccountAdmin.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدير (كل الصلاحيات)'**
+  String get ufAccountAdmin;
+
+  /// No description provided for @ufAdminNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'حساب المدير يتجاوز القيود التفصيلية ويُطبَّق عليه السماح الكامل في النظام.'**
+  String get ufAdminNote;
+
+  /// No description provided for @ufNewPasswordOptional.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمة مرور جديدة (اختياري)'**
+  String get ufNewPasswordOptional;
+
+  /// No description provided for @ufPassword.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمة المرور'**
+  String get ufPassword;
+
+  /// No description provided for @ufConfirmNewPassword.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكيد كلمة المرور الجديدة'**
+  String get ufConfirmNewPassword;
+
+  /// No description provided for @ufConfirmPassword.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكيد كلمة المرور'**
+  String get ufConfirmPassword;
+
+  /// No description provided for @ufDetailedPermissions.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصلاحيات التفصيلية'**
+  String get ufDetailedPermissions;
+
+  /// No description provided for @ufDetailedPermissionsDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'فعّل ما يحق لهذا الموظف الوصول إليه. يُحفظ في قاعدة البيانات لكل مستخدم.'**
+  String get ufDetailedPermissionsDesc;
+
+  /// No description provided for @ufSaving.
+  ///
+  /// In ar, this message translates to:
+  /// **'جاري الحفظ…'**
+  String get ufSaving;
+
+  /// No description provided for @ufSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get ufSave;
+
+  /// No description provided for @ufCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get ufCancel;
+
+  /// No description provided for @ufSaveFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر الحفظ: {error}'**
+  String ufSaveFailed(Object error);
+
+  /// No description provided for @eiRegenerateShiftCode.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجديد رمز الوردية'**
+  String get eiRegenerateShiftCode;
+
+  /// No description provided for @eiRegenerateShiftCodeDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيتم إنشاء رمز جديد. يجب طباعة/تحديث بطاقة الهوية وإعادة توزيعها.'**
+  String get eiRegenerateShiftCodeDesc;
+
+  /// No description provided for @eiCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get eiCancel;
+
+  /// No description provided for @eiConfirm.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكيد'**
+  String get eiConfirm;
+
+  /// No description provided for @eiShiftCodeRenewed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم تجديد رمز الوردية.'**
+  String get eiShiftCodeRenewed;
+
+  /// No description provided for @eiTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'هويات الموظفين'**
+  String get eiTitle;
+
+  /// No description provided for @eiNoActiveUsers.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد مستخدمون نشطون في قاعدة البيانات.'**
+  String get eiNoActiveUsers;
+
+  /// No description provided for @swTimeZero.
+  ///
+  /// In ar, this message translates to:
+  /// **'0 د'**
+  String get swTimeZero;
+
+  /// No description provided for @swTimeHoursMinutes.
+  ///
+  /// In ar, this message translates to:
+  /// **'{hours} س {minutes} د'**
+  String swTimeHoursMinutes(Object hours, Object minutes);
+
+  /// No description provided for @swTimeHoursOnly.
+  ///
+  /// In ar, this message translates to:
+  /// **'{hours} س'**
+  String swTimeHoursOnly(Object hours);
+
+  /// No description provided for @swTimeMinutesOnly.
+  ///
+  /// In ar, this message translates to:
+  /// **'{minutes} د'**
+  String swTimeMinutesOnly(Object minutes);
+
+  /// No description provided for @swHintCompact.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض يومي مرتب؛ افتح اليوم لرؤية تفاصيل الورديات.'**
+  String get swHintCompact;
+
+  /// No description provided for @swHintFull.
+  ///
+  /// In ar, this message translates to:
+  /// **'سبع خانات (السبت → الجمعة): المحور 00:00–24:00 بأرقام لاتينية؛ كل شريط فترة وردية (الاسم والوقت داخل الشريط).'**
+  String get swHintFull;
+
+  /// No description provided for @swNoShifts.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد ورديات'**
+  String get swNoShifts;
+
+  /// No description provided for @swShiftSingular.
+  ///
+  /// In ar, this message translates to:
+  /// **'وردية'**
+  String get swShiftSingular;
+
+  /// No description provided for @swShiftPlural.
+  ///
+  /// In ar, this message translates to:
+  /// **'ورديات'**
+  String get swShiftPlural;
+
+  /// No description provided for @swTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ورديات الموظفين — أسبوع'**
+  String get swTitle;
+
+  /// No description provided for @swWeekTotalTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي الوقت خلال الأسبوع'**
+  String get swWeekTotalTime;
+
+  /// No description provided for @swNextWeek.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأسبوع التالي'**
+  String get swNextWeek;
+
+  /// No description provided for @swThisWeek.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الأسبوع'**
+  String get swThisWeek;
+
+  /// No description provided for @swPrevWeek.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأسبوع السابق'**
+  String get swPrevWeek;
 }
 
 class _AppLocalizationsDelegate

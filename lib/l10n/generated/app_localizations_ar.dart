@@ -9162,4 +9162,187 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get usDisableButton => 'تعطيل';
+
+  @override
+  String get ufPhoneFormatHint => 'استخدم صيغة هاتف عراقي (مثال: 07XXXXXXXXX)';
+
+  @override
+  String get ufEmailRequired => 'البريد مطلوب (يُستخدم كاسم دخول)';
+
+  @override
+  String get ufEmailAlreadyRegistered => 'هذا البريد مسجّل مسبقاً';
+
+  @override
+  String get ufPasswordMinLength => 'كلمة المرور 6 أحرف على الأقل';
+
+  @override
+  String get ufPasswordMismatch => 'تأكيد كلمة المرور غير مطابق';
+
+  @override
+  String get ufEmailTaken => 'هذا البريد مسجّل لمستخدم آخر';
+
+  @override
+  String get ufInvalidPasswordOrMismatch =>
+      'كلمة المرور غير صالحة أو التأكيد غير مطابق';
+
+  @override
+  String get ufTitleEdit => 'تعديل مستخدم';
+
+  @override
+  String get ufTitleNew => 'مستخدم جديد';
+
+  @override
+  String get ufAccountData => 'بيانات الحساب';
+
+  @override
+  String get ufAccountDataDesc =>
+      'البريد يُستخدم كاسم دخول. الهاتف بصيغة عراقية شائعة (07…).';
+
+  @override
+  String get ufFullName => 'الاسم الكامل';
+
+  @override
+  String get ufRequired => 'مطلوب';
+
+  @override
+  String get ufRole => 'الدور الوظيفي';
+
+  @override
+  String get ufRoleHint => 'كاشير، مخزن، …';
+
+  @override
+  String get ufEmailLogin => 'البريد الإلكتروني (اسم الدخول)';
+
+  @override
+  String get ufPhoneIraq => 'رقم الهاتف (العراق)';
+
+  @override
+  String get ufPhoneIraqHint => 'أرقام عراقية شائعة تبدأ بـ 07';
+
+  @override
+  String get ufPhone2Optional => 'هاتف ثانٍ (اختياري)';
+
+  @override
+  String get ufPhone2Hint => 'إن وُجد';
+
+  @override
+  String get ufPermissionPassword => 'الصلاحية وكلمة المرور';
+
+  @override
+  String get ufAccountType => 'نوع الحساب';
+
+  @override
+  String get ufAccountEmployee => 'موظف (صلاحيات مفصّلة)';
+
+  @override
+  String get ufAccountAdmin => 'مدير (كل الصلاحيات)';
+
+  @override
+  String get ufAdminNote =>
+      'حساب المدير يتجاوز القيود التفصيلية ويُطبَّق عليه السماح الكامل في النظام.';
+
+  @override
+  String get ufNewPasswordOptional => 'كلمة مرور جديدة (اختياري)';
+
+  @override
+  String get ufPassword => 'كلمة المرور';
+
+  @override
+  String get ufConfirmNewPassword => 'تأكيد كلمة المرور الجديدة';
+
+  @override
+  String get ufConfirmPassword => 'تأكيد كلمة المرور';
+
+  @override
+  String get ufDetailedPermissions => 'الصلاحيات التفصيلية';
+
+  @override
+  String get ufDetailedPermissionsDesc =>
+      'فعّل ما يحق لهذا الموظف الوصول إليه. يُحفظ في قاعدة البيانات لكل مستخدم.';
+
+  @override
+  String get ufSaving => 'جاري الحفظ…';
+
+  @override
+  String get ufSave => 'حفظ';
+
+  @override
+  String get ufCancel => 'إلغاء';
+
+  @override
+  String ufSaveFailed(Object error) {
+    return 'تعذر الحفظ: $error';
+  }
+
+  @override
+  String get eiRegenerateShiftCode => 'تجديد رمز الوردية';
+
+  @override
+  String get eiRegenerateShiftCodeDesc =>
+      'سيتم إنشاء رمز جديد. يجب طباعة/تحديث بطاقة الهوية وإعادة توزيعها.';
+
+  @override
+  String get eiCancel => 'إلغاء';
+
+  @override
+  String get eiConfirm => 'تأكيد';
+
+  @override
+  String get eiShiftCodeRenewed => 'تم تجديد رمز الوردية.';
+
+  @override
+  String get eiTitle => 'هويات الموظفين';
+
+  @override
+  String get eiNoActiveUsers => 'لا يوجد مستخدمون نشطون في قاعدة البيانات.';
+
+  @override
+  String get swTimeZero => '0 د';
+
+  @override
+  String swTimeHoursMinutes(Object hours, Object minutes) {
+    return '$hours س $minutes د';
+  }
+
+  @override
+  String swTimeHoursOnly(Object hours) {
+    return '$hours س';
+  }
+
+  @override
+  String swTimeMinutesOnly(Object minutes) {
+    return '$minutes د';
+  }
+
+  @override
+  String get swHintCompact =>
+      'عرض يومي مرتب؛ افتح اليوم لرؤية تفاصيل الورديات.';
+
+  @override
+  String get swHintFull =>
+      'سبع خانات (السبت → الجمعة): المحور 00:00–24:00 بأرقام لاتينية؛ كل شريط فترة وردية (الاسم والوقت داخل الشريط).';
+
+  @override
+  String get swNoShifts => 'لا توجد ورديات';
+
+  @override
+  String get swShiftSingular => 'وردية';
+
+  @override
+  String get swShiftPlural => 'ورديات';
+
+  @override
+  String get swTitle => 'ورديات الموظفين — أسبوع';
+
+  @override
+  String get swWeekTotalTime => 'إجمالي الوقت خلال الأسبوع';
+
+  @override
+  String get swNextWeek => 'الأسبوع التالي';
+
+  @override
+  String get swThisWeek => 'هذا الأسبوع';
+
+  @override
+  String get swPrevWeek => 'الأسبوع السابق';
 }

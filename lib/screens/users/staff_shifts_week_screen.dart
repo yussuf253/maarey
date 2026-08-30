@@ -3,6 +3,8 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
+import '../../l10n/generated/app_localizations.dart';
+
 import '../../services/database_helper.dart';
 import '../../utils/screen_layout.dart';
 import '../../theme/design_tokens.dart';
@@ -81,6 +83,7 @@ class StaffShiftsWeekScreen extends StatefulWidget {
 }
 
 class _StaffShiftsWeekScreenState extends State<StaffShiftsWeekScreen> {
+  AppLocalizations get loc => AppLocalizations.of(context)!;
   final DatabaseHelper _db = DatabaseHelper();
 
   /// أول يوم في الأسبوع: **السبت** 00:00 (شائع في العرض العربي).
@@ -241,11 +244,11 @@ class _StaffShiftsWeekScreenState extends State<StaffShiftsWeekScreen> {
   String _fmtDur(Duration d) {
     final h = d.inHours;
     final min = d.inMinutes.remainder(60);
-    if (h <= 0 && min <= 0) return '0 د';
+    if (h <= 0 && min <= 0) return loc.swTimeZero;
     if (h > 0) {
-      return min > 0 ? '$h س $min د' : '$h س';
+      return min > 0 ? loc.swTimeHoursMinutes(h.toString(), min.toString()) : loc.swTimeHoursOnly(h.toString());
     }
-    return '$min د';
+    return loc.swTimeMinutesOnly(min.toString());
   }
 
   static String _hm24(DateTime d) {
@@ -281,7 +284,7 @@ class _StaffShiftsWeekScreenState extends State<StaffShiftsWeekScreen> {
             IconButton(
               onPressed: _nextWeek,
               icon: Icon(Icons.chevron_right_rounded, color: iconColor),
-              tooltip: 'الأسبوع التالي',
+              tooltip: loc.swNextWeek,
               style: IconButton.styleFrom(
                 visualDensity: VisualDensity.compact,
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -303,7 +306,7 @@ class _StaffShiftsWeekScreenState extends State<StaffShiftsWeekScreen> {
                   TextButton.icon(
                     onPressed: _thisWeek,
                     icon: const Icon(Icons.today_outlined, size: 17),
-                    label: const Text('هذا الأسبوع'),
+                    label: Text(loc.swThisWeek),
                     style: TextButton.styleFrom(
                       visualDensity: VisualDensity.compact,
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -316,7 +319,7 @@ class _StaffShiftsWeekScreenState extends State<StaffShiftsWeekScreen> {
             IconButton(
               onPressed: _prevWeek,
               icon: Icon(Icons.chevron_left_rounded, color: iconColor),
-              tooltip: 'الأسبوع السابق',
+              tooltip: loc.swPrevWeek,
               style: IconButton.styleFrom(
                 visualDensity: VisualDensity.compact,
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -330,8 +333,8 @@ class _StaffShiftsWeekScreenState extends State<StaffShiftsWeekScreen> {
 
   Widget _buildHintRow(BuildContext context, {required bool compact}) {
     final text = compact
-        ? 'عرض يومي مرتب؛ افتح اليوم لرؤية تفاصيل الورديات.'
-        : 'سبع خانات (السبت → الجمعة): المحور 00:00–24:00 بأرقام لاتينية؛ كل شريط فترة وردية (الاسم والوقت داخل الشريط).';
+        ? loc.swHintCompact
+        : loc.swHintFull;
 
     return Padding(
       padding: EdgeInsets.fromLTRB(compact ? 12 : 16, 8, compact ? 12 : 16, 4),
@@ -434,7 +437,7 @@ class _StaffShiftsWeekScreenState extends State<StaffShiftsWeekScreen> {
                     bottom: 12,
                   ),
                   child: Text(
-                    'لا توجد ورديات',
+                    loc.swNoShifts,
                     style: Theme.of(
                       context,
                     ).textTheme.bodySmall?.copyWith(color: cs.onSurfaceVariant),
@@ -471,7 +474,7 @@ class _StaffShiftsWeekScreenState extends State<StaffShiftsWeekScreen> {
                 child: Align(
                   alignment: AlignmentDirectional.centerEnd,
                   child: Text(
-                    '${segs.length} ${segs.length == 1 ? 'وردية' : 'ورديات'}',
+                    '${segs.length} ${segs.length == 1 ? loc.swShiftSingular : loc.swShiftPlural}',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: cs.primary,
                       fontWeight: FontWeight.w600,
@@ -643,9 +646,9 @@ class _StaffShiftsWeekScreenState extends State<StaffShiftsWeekScreen> {
           foregroundColor: Colors.white,
           surfaceTintColor: Colors.transparent,
           elevation: 0,
-          title: const Text(
-            'ورديات الموظفين — أسبوع',
-            style: TextStyle(fontWeight: FontWeight.bold),
+          title: Text(
+            loc.swTitle,
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
         body: _loading
@@ -1012,6 +1015,7 @@ class _TotalsBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final entries = totals.entries.toList()
       ..sort((a, b) => b.value.compareTo(a.value));
     final border = isDark ? AppColors.borderDark : AppColors.borderLight;
@@ -1040,7 +1044,7 @@ class _TotalsBar extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      'إجمالي الوقت خلال الأسبوع',
+                      loc.swWeekTotalTime,
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.w800,
                       ),
