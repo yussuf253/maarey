@@ -164,7 +164,7 @@ class _DebtsScreenState extends State<DebtsScreen>
     final gap = sl.pageHorizontalGap;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Shortcuts(
         shortcuts: <ShortcutActivator, Intent>{
           const SingleActivator(LogicalKeyboardKey.keyF, control: true):

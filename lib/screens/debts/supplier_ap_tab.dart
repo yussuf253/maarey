@@ -47,7 +47,7 @@ class _SupplierApTabState extends State<SupplierApTab> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: AlertDialog(
           shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
           title: const Text('مورد جديد'),

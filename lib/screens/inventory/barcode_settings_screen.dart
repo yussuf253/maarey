@@ -140,7 +140,7 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: theme.scaffoldBackgroundColor,
         appBar: AppBar(

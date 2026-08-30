@@ -85,7 +85,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     final loc = AppLocalizations.of(context)!;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: const Color(0xFFF7F8FA),
         appBar: AppBar(

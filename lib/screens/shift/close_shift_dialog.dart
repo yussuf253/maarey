@@ -282,14 +282,14 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
         },
       },
       child: Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: AlertDialog(
           backgroundColor: cs.surface,
           surfaceTintColor: Colors.transparent,
           shape: RoundedRectangleBorder(borderRadius: ac.lg),
           titlePadding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
           title: Row(
-            textDirection: TextDirection.rtl,
+            textDirection: Directionality.of(context),
             children: [
               Icon(Icons.lock_rounded, color: cs.primary, size: 26),
               Expanded(
@@ -641,7 +641,7 @@ class _BalanceHero extends StatelessWidget {
                 child: Text(
                   label,
                   textAlign: TextAlign.right,
-                  textDirection: TextDirection.rtl,
+                  textDirection: Directionality.of(context),
                   style: TextStyle(
                     color: Colors.white.withValues(alpha: 0.94),
                     fontSize: labelSize,

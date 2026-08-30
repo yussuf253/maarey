@@ -288,7 +288,7 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
     final border = _isDark ? Colors.white12 : _kBorder;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: bg,
         appBar: AppBar(
@@ -1033,7 +1033,7 @@ class _SearchCard extends StatelessWidget {
                 focusNode: keywordFn,
                 keyboardType: TextInputType.text,
                 textAlign: TextAlign.right,
-                textDirection: TextDirection.rtl,
+                textDirection: Directionality.of(context),
                 textInputAction: TextInputAction.search,
                 style: TextStyle(fontSize: 13, color: text1),
                 onChanged: (_) => onKeywordChanged(),
@@ -1396,7 +1396,7 @@ class _SearchFieldCore extends StatelessWidget {
             controller: controller,
             keyboardType: keyboard,
             textAlign: TextAlign.right,
-            textDirection: TextDirection.rtl,
+            textDirection: Directionality.of(context),
             style: TextStyle(fontSize: 13, color: text1),
             decoration: InputDecoration(
               hintText: hint.isEmpty ? null : hint,

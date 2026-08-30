@@ -45,7 +45,7 @@ class _EmployeeIdentityScreenState extends State<EmployeeIdentityScreen> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: AlertDialog(
           title: Text(loc.eiRegenerateShiftCode),
           content: Text(
@@ -81,7 +81,7 @@ class _EmployeeIdentityScreenState extends State<EmployeeIdentityScreen> {
     final auth = context.watch<AuthProvider>();
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: bg,
         appBar: AppBar(

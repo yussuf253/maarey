@@ -46,7 +46,7 @@ class InventoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: _bg,
         appBar: AppBar(

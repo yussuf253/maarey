@@ -994,7 +994,7 @@ class _HomeScreenState extends State<HomeScreen>
       barrierDismissible: true,
       builder: (ctx) {
         return Directionality(
-          textDirection: TextDirection.rtl,
+          textDirection: Directionality.of(context),
           child: AlertDialog(
             title: Text(loc.logoutLabel),
             content: Column(
@@ -2025,12 +2025,12 @@ class _HomeScreenState extends State<HomeScreen>
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              textDirection: TextDirection.rtl,
+              textDirection: Directionality.of(context),
               children: [
                 Expanded(
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    textDirection: TextDirection.rtl,
+                    textDirection: Directionality.of(context),
                     children: [
                       Expanded(flex: 3, child: valueWidget()),
                       const SizedBox(width: 10),
@@ -2085,7 +2085,7 @@ class _HomeScreenState extends State<HomeScreen>
               shape: RoundedRectangleBorder(borderRadius: ctx.appCorners.lg),
               titlePadding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               title: Row(
-                textDirection: TextDirection.rtl,
+                textDirection: Directionality.of(context),
                 children: [
                   const CircleAvatar(
                     radius: 28,
@@ -2283,7 +2283,7 @@ class _HomeScreenState extends State<HomeScreen>
     final shortHint = sl.isHandsetForLayout && w < 400;
     final loc = AppLocalizations.of(context)!;
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: TextField(
         controller: _searchController,
         focusNode: _searchFocusNode,
@@ -3049,7 +3049,7 @@ class _HomeScreenState extends State<HomeScreen>
           child: ConstrainedBox(
             constraints: BoxConstraints(maxHeight: maxH),
             child: Directionality(
-              textDirection: TextDirection.rtl,
+              textDirection: Directionality.of(context),
               child: _globalSearchLoading
                   ? const Padding(
                       padding: EdgeInsets.all(28),

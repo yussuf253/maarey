@@ -345,7 +345,7 @@ class _LoginScreenState extends State<LoginScreen>
           child: SafeArea(
             child: isWide
                 ? Row(
-                    textDirection: TextDirection.rtl,
+                    textDirection: Directionality.of(context),
                     children: [
                       Expanded(
                         flex: 5,

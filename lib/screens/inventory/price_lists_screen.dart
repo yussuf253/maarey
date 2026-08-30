@@ -155,7 +155,7 @@ class _PriceListsScreenState extends State<PriceListsScreen>
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: _bg,
         appBar: AppBar(
@@ -562,7 +562,7 @@ class _PriceItemsSheet extends StatelessWidget {
     final color = list['color'] as Color;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Container(
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -767,7 +767,7 @@ class _PriceListFormState extends State<_PriceListForm> {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Container(
         decoration: const BoxDecoration(
           color: Colors.white,

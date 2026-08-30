@@ -101,7 +101,7 @@ class _ProductSkuNumberingDialogState extends State<_ProductSkuNumberingDialog> 
     final maxH = MediaQuery.sizeOf(context).height * 0.92;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Dialog(
         insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
         shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),

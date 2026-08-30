@@ -299,7 +299,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
   Widget build(BuildContext context) {
     if (_booting) {
       return Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: Scaffold(
           backgroundColor: _pageBg,
           body: Column(
@@ -314,7 +314,7 @@ class _UserFormScreenState extends State<UserFormScreen> {
     }
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: _pageBg,
         body: Column(

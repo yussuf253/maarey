@@ -89,7 +89,7 @@ class _UnitTemplatesSettingsScreenState
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: AlertDialog(
           title: Text(loc.deleteTemplate),
           content: Text(loc.deleteTemplateConfirm(row['name'] as String)),
@@ -147,7 +147,7 @@ class _UnitTemplatesSettingsScreenState
     ];
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: bg,
         appBar: AppBar(

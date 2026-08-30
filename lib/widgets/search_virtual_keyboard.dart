@@ -412,7 +412,7 @@ class _SearchVirtualKeyboardState extends State<SearchVirtualKeyboard> {
         child: SafeArea(
           top: false,
           child: Directionality(
-            textDirection: TextDirection.rtl,
+            textDirection: Directionality.of(context),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(6, 2, 6, 6),
               child: body,

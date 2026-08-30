@@ -129,7 +129,7 @@ class _CustomerDebtDetailScreenState extends State<CustomerDebtDetailScreen> {
     final submitted = await showDialog<String>(
       context: context,
       builder: (ctx) => Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: AlertDialog(
           shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
           title: const Text('تسديد دين'),
@@ -237,7 +237,7 @@ class _CustomerDebtDetailScreenState extends State<CustomerDebtDetailScreen> {
 
     if (_resolveError != null && _party == null) {
       return Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: Scaffold(
           appBar: AppBar(title: const Text('ديون عميل')),
           body: Center(child: Text(_resolveError!)),
@@ -248,7 +248,7 @@ class _CustomerDebtDetailScreenState extends State<CustomerDebtDetailScreen> {
     final title = _party?.displayName ?? '…';
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: bg,
         appBar: AppBar(

@@ -152,7 +152,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
       context: context,
       builder: (ctx) => StatefulBuilder(
         builder: (ctx, setLocal) => Directionality(
-          textDirection: TextDirection.rtl,
+          textDirection: Directionality.of(context),
           child: AlertDialog(
             shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
             title: const Text('وصل المورد'),
@@ -322,7 +322,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
       context: context,
       builder: (ctx) => StatefulBuilder(
         builder: (ctx, setLocal) => Directionality(
-          textDirection: TextDirection.rtl,
+          textDirection: Directionality.of(context),
           child: AlertDialog(
             shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
             title: const Text('دفعة للمورد'),
@@ -438,7 +438,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
       context: context,
       builder: (ctx) => StatefulBuilder(
         builder: (ctx, setLocal) => Directionality(
-          textDirection: TextDirection.rtl,
+          textDirection: Directionality.of(context),
           child: AlertDialog(
             shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
             title: const Text('مرتجع مورد'),
@@ -540,7 +540,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: AlertDialog(
           shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
           title: const Text('عكس الدفعة؟'),
@@ -600,7 +600,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
       final chosen = await showDialog<int>(
         context: context,
         builder: (ctx) => Directionality(
-          textDirection: TextDirection.rtl,
+          textDirection: Directionality.of(context),
           child: StatefulBuilder(
             builder: (ctx, setS) => AlertDialog(
               shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
@@ -674,7 +674,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: AlertDialog(
           shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
           title: const Text('إلغاء ربط الإذن؟'),
@@ -715,7 +715,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
       await showDialog<void>(
         context: context,
         builder: (ctx) => Directionality(
-          textDirection: TextDirection.rtl,
+          textDirection: Directionality.of(context),
           child: AlertDialog(
             shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
             title: const Text('ربط بوصل المورد — إذن وارد'),
@@ -861,7 +861,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: AlertDialog(
           shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
           title: const Text('تعديل المورد'),
@@ -920,7 +920,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
     final card = isDark ? AppColors.cardDark : cs.surface;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         appBar: AppBar(
           title: Text(_supplier?.name ?? 'مورد'),

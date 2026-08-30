@@ -148,7 +148,7 @@ class _AppColorPickerSheetState extends State<_AppColorPickerSheet> {
     final svH = svW * 0.62;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: LayoutBuilder(
         builder: (ctx, constraints) {
           final screenH = MediaQuery.sizeOf(context).height;

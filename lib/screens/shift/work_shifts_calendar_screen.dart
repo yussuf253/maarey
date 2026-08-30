@@ -71,7 +71,7 @@ class _WorkShiftsCalendarScreenState extends State<WorkShiftsCalendarScreen> {
     const navy = Color(0xFF1E3A5F);
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: bg,
         appBar: AppBar(

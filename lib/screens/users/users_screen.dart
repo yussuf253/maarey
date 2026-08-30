@@ -118,7 +118,7 @@ class _UsersScreenState extends State<UsersScreen> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: AlertDialog(
           title: Text(loc.usDisableUserTitle),
           content: Text(loc.usDisableUserDesc),
@@ -153,7 +153,7 @@ class _UsersScreenState extends State<UsersScreen> {
     final gap = ScreenLayout.of(context).pageHorizontalGap;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(

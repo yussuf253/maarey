@@ -565,7 +565,7 @@ loc.svItemsSkipped(missing.join(', '), lines.length.toString()),
     return PermissionGuard(
       permissionKey: PermissionKeys.inventoryVoucherIn,
       child: Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: Scaffold(
           backgroundColor: _kBg,
           appBar: AppBar(

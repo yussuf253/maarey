@@ -10,7 +10,7 @@ class DeviceRevokedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: const Color(0xFF1E3A5F),
         body: SafeArea(

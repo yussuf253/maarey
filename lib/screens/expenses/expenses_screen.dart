@@ -175,7 +175,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       lastDate: DateTime(today.year, today.month, today.day),
       initialDateRange: DateTimeRange(start: _from, end: _to),
       builder: (ctx, child) =>
-          Directionality(textDirection: TextDirection.rtl, child: child!),
+          Directionality(textDirection: Directionality.of(context), child: child!),
     );
     if (range == null) return;
     setState(() {
@@ -310,7 +310,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       context: context,
       builder: (ctx) {
         return Directionality(
-          textDirection: TextDirection.rtl,
+          textDirection: Directionality.of(context),
           child: AlertDialog(
             title: Text(AppLocalizations.of(context)!.deleteExpenseLabel),
             content: Text(AppLocalizations.of(context)!.deleteExpenseConfirm),
@@ -393,7 +393,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
         child: Focus(
           autofocus: true,
           child: Directionality(
-            textDirection: TextDirection.rtl,
+            textDirection: Directionality.of(context),
             child: DefaultTabController(
               length: 2,
               child: Scaffold(
@@ -2300,7 +2300,7 @@ class _PiePainter extends CustomPainter {
             fontWeight: activeIndex == i ? FontWeight.w800 : FontWeight.w600,
           ),
         ),
-        textDirection: TextDirection.rtl,
+        textDirection: TextDirection.ltr,
         textAlign: isRight ? TextAlign.right : TextAlign.left,
       )..layout(maxWidth: size.width * 0.30);
 
@@ -2525,7 +2525,7 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
       lastDate: DateTime(today.year, today.month, today.day),
       initialDate: _date,
       builder: (ctx, child) =>
-          Directionality(textDirection: TextDirection.rtl, child: child!),
+          Directionality(textDirection: Directionality.of(context), child: child!),
     );
     if (picked == null) return;
     setState(() => _date = picked);
@@ -2541,7 +2541,7 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
     final leave = await showDialog<bool>(
       context: context,
       builder: (ctx) => Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: AlertDialog(
           title: Text(AppLocalizations.of(context)!.closeForm),
           content: Text(AppLocalizations.of(context)!.closeFormConfirm),
@@ -3005,7 +3005,7 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
         },
       },
       child: Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: Material(
           color: cs.surface,
           borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
@@ -3311,7 +3311,7 @@ class _EmployeePickerDialogState extends State<_EmployeePickerDialog> {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: AlertDialog(
         title: Text(AppLocalizations.of(context)!.selectEmployeeTitle),
         content: SizedBox(

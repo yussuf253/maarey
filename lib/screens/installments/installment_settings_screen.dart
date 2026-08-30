@@ -302,7 +302,7 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
   Widget build(BuildContext context) {
     if (_loading) {
       return Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: Scaffold(
           backgroundColor: _pageBg,
           body: Column(
@@ -317,7 +317,7 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
     }
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: _pageBg,
         body: Column(

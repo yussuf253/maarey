@@ -1686,7 +1686,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         : null;
     final sl = ScreenLayout.of(context);
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: saleLightBg,
         appBar: AppBar(
@@ -2151,7 +2151,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       children: [
         Expanded(child: main),
         MouseRegion(
@@ -2200,7 +2200,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                     focusNode: _saleQuickRailSearchFocus,
                     onChanged: (_) => setState(() {}),
                     textInputAction: TextInputAction.search,
-                    textDirection: TextDirection.rtl,
+                    textDirection: Directionality.of(context),
                     style: TextStyle(fontSize: 13, color: text1),
                     decoration: InputDecoration(
                       isDense: true,
@@ -3937,7 +3937,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       barrierDismissible: true,
       barrierColor: palette.navy.withValues(alpha: 0.52),
       builder: (ctx) => Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: _SaleParkInvoiceDialog(
           palette: palette,
           isDark: isDark,
@@ -5787,7 +5787,7 @@ class _SaleParkInvoiceDialogState extends State<_SaleParkInvoiceDialog> {
                               ),
                             ),
                           ),
-                          textDirection: TextDirection.rtl,
+                          textDirection: Directionality.of(context),
                         ),
                       ),
                     ],

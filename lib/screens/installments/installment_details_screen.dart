@@ -113,7 +113,7 @@ class _InstallmentDetailsScreenState extends State<InstallmentDetailsScreen> {
     final payOutcome = await showDialog<RecordInstallmentPaymentResult?>(
       context: context,
       builder: (ctx) => Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: AlertDialog(
           shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
           title: Text(AppLocalizations.of(context)!.installmentPaymentLabel),
@@ -201,7 +201,7 @@ class _InstallmentDetailsScreenState extends State<InstallmentDetailsScreen> {
     final card = isDark ? AppColors.cardDark : AppColors.cardLight;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: bg,
         appBar: AppBar(

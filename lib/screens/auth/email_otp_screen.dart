@@ -216,7 +216,7 @@ class _EmailOtpScreenState extends State<EmailOtpScreen> {
               children: [
                 isWide
                     ? Row(
-                        textDirection: TextDirection.rtl,
+                        textDirection: Directionality.of(context),
                         children: [
                           Expanded(
                             flex: 5,

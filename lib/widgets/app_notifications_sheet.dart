@@ -96,7 +96,7 @@ class _NotificationsSheetState extends State<_NotificationsSheet> {
   Widget build(BuildContext context) {
     final nav = widget.contentNavigator;
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: DraggableScrollableSheet(
         expand: false,
         initialChildSize: 0.65,

@@ -300,7 +300,7 @@ class _MenuRow extends StatelessWidget {
     final cs = Theme.of(context).colorScheme;
     final effectiveColor = color ?? cs.onSurface;
     return Row(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       children: [
         Icon(icon, size: 18, color: effectiveColor),
         const SizedBox(width: AppSpacing.md),

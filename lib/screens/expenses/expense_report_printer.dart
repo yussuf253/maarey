@@ -77,7 +77,7 @@ class _ReportRangePickerDialogState extends State<_ReportRangePickerDialog> {
       lastDate: _today,
       initialDateRange: _range,
       builder: (ctx, child) => Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: child!,
       ),
     );
@@ -91,7 +91,7 @@ class _ReportRangePickerDialogState extends State<_ReportRangePickerDialog> {
     final label = '${dateFmt.format(_range.start)}  ->  ${dateFmt.format(_range.end)}';
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: AlertDialog(
         title: Text('طباعة تقرير مصروفات'),
         content: SizedBox(

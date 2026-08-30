@@ -325,7 +325,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
         final gap = ScreenLayout.of(context).pageHorizontalGap;
 
         return Directionality(
-          textDirection: TextDirection.rtl,
+          textDirection: Directionality.of(context),
           child: Shortcuts(
             shortcuts: <ShortcutActivator, Intent>{
               const SingleActivator(LogicalKeyboardKey.keyN, control: true):

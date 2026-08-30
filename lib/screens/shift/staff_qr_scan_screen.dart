@@ -38,7 +38,7 @@ class _StaffQrScanScreenState extends State<StaffQrScanScreen> {
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('مسح بطاقة الموظف'),

@@ -72,7 +72,7 @@
 //       ),
 //       child: Text(
 //         _displayText,
-//         textDirection: TextDirection.rtl,
+//         textDirection: Directionality.of(context),
 //       ),
 //     );
 //   }

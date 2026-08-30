@@ -149,7 +149,7 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
     final loc = AppLocalizations.of(context)!;
     return SecureScreen(
       child: Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: const Color(0xFFF7F8FA),
         appBar: AppBar(

@@ -303,7 +303,7 @@ class _WarehousesScreenState extends State<WarehousesScreen> {
     return PermissionGuard(
       permissionKey: PermissionKeys.inventoryView,
       child: Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: Scaffold(
           backgroundColor: _bg,
           appBar: AppBar(
@@ -1446,7 +1446,7 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
             ),
           const SizedBox(height: 14),
           Row(
-            textDirection: TextDirection.rtl,
+            textDirection: Directionality.of(context),
             children: [
               Switch(
                 value: _active,
@@ -1479,7 +1479,7 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
           ],
           const SizedBox(height: 8),
           Row(
-            textDirection: TextDirection.rtl,
+            textDirection: Directionality.of(context),
             children: [
               Switch(
                 value: _isDefault && _active,
@@ -1550,7 +1550,7 @@ class _WarehouseSheetState extends State<_WarehouseSheet> {
         }
       },
       child: Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: CallbackShortcuts(
           bindings: {
             const SingleActivator(LogicalKeyboardKey.escape): () =>
@@ -1645,7 +1645,7 @@ class _BranchSearchSheetState extends State<_BranchSearchSheet> {
               .toList();
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Container(
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -1705,7 +1705,7 @@ class _StockDetailSheet extends StatelessWidget {
     final repo = InventoryRepository();
     final warehouseId = (warehouse['id'] as num?)?.toInt() ?? -1;
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Container(
         decoration: const BoxDecoration(
           color: Colors.white,

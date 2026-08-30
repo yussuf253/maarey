@@ -36,7 +36,7 @@ class _InventorySettingsScreenState extends State<InventorySettingsScreen> {
         final divColor = isDark ? Colors.grey.shade800 : Colors.grey.shade200;
 
         return Directionality(
-          textDirection: TextDirection.rtl,
+          textDirection: Directionality.of(context),
           child: Scaffold(
             backgroundColor: bg,
             appBar: AppBar(

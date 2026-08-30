@@ -290,7 +290,7 @@ class _DebtSettingsScreenState extends State<DebtSettingsScreen> {
   Widget build(BuildContext context) {
     if (_loading) {
       return Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: Scaffold(
           backgroundColor: _pageBg,
           body: Column(
@@ -305,7 +305,7 @@ class _DebtSettingsScreenState extends State<DebtSettingsScreen> {
     }
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: _pageBg,
         body: Column(

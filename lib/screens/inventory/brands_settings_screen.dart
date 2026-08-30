@@ -68,7 +68,7 @@ class _BrandsSettingsScreenState extends State<BrandsSettingsScreen> {
       context: context,
       builder: (ctx) {
         return Directionality(
-          textDirection: TextDirection.rtl,
+          textDirection: Directionality.of(context),
           child: AlertDialog(
             title: Text(loc.newBrand),
             content: TextField(
@@ -124,7 +124,7 @@ class _BrandsSettingsScreenState extends State<BrandsSettingsScreen> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: AlertDialog(
           title: Text(loc.deleteBrand),
           content: Text(loc.deleteBrandConfirm(row['name'] as String)),
@@ -160,7 +160,7 @@ class _BrandsSettingsScreenState extends State<BrandsSettingsScreen> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: theme.scaffoldBackgroundColor,
         appBar: AppBar(

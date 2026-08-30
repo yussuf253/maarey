@@ -238,7 +238,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
     final pageBg = cs.surfaceContainerLowest;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: pageBg,
         body: SafeArea(
@@ -812,7 +812,7 @@ class _DateStrip extends StatelessWidget {
       transitionDuration: const Duration(milliseconds: 220),
       pageBuilder: (ctx, _, _) {
         return Directionality(
-          textDirection: TextDirection.rtl,
+          textDirection: Directionality.of(context),
           child: Center(
             child: Material(
               color: Colors.transparent,
@@ -2123,7 +2123,7 @@ class _PiePainter extends CustomPainter {
             fontWeight: activeIndex == i ? FontWeight.w800 : FontWeight.w600,
           ),
         ),
-        textDirection: TextDirection.rtl,
+        textDirection: TextDirection.ltr,
         textAlign: isRight ? TextAlign.right : TextAlign.left,
       )..layout(maxWidth: size.width * 0.30);
 
@@ -3586,7 +3586,7 @@ class _ReportsGaugesPainter extends CustomPainter {
             fontSize: 12,
           ),
         ),
-        textDirection: TextDirection.rtl,
+        textDirection: TextDirection.ltr,
       )..layout();
       tp.paint(canvas, Offset((size.width - tp.width) / 2, size.height / 2));
       return;
@@ -3762,7 +3762,7 @@ class _ReportsStackedAreaPainter extends CustomPainter {
           text: 'لا توجد بيانات',
           style: TextStyle(color: labelColor, fontSize: 12),
         ),
-        textDirection: TextDirection.rtl,
+        textDirection: TextDirection.ltr,
       )..layout();
       tp.paint(canvas, Offset((size.width - tp.width) / 2, size.height / 2));
       return;

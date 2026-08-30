@@ -73,7 +73,7 @@ class _CategoriesSettingsScreenState extends State<CategoriesSettingsScreen> {
       barrierDismissible: false,
       builder: (ctx) {
         return Directionality(
-          textDirection: TextDirection.rtl,
+          textDirection: Directionality.of(context),
           child: StatefulBuilder(
             builder: (context, setModal) {
               final parents =
@@ -188,7 +188,7 @@ class _CategoriesSettingsScreenState extends State<CategoriesSettingsScreen> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: AlertDialog(
           title: Text(loc.deleteCategory),
           content: Text(loc.deleteCategoryConfirm(row['name'] as String)),
@@ -236,7 +236,7 @@ class _CategoriesSettingsScreenState extends State<CategoriesSettingsScreen> {
     final border = cs.outlineVariant;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: bg,
         appBar: AppBar(

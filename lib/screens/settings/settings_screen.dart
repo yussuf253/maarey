@@ -70,7 +70,7 @@ class SettingsScreen extends StatelessWidget {
 
     return SecureScreen(
       child: Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: Scaffold(
           backgroundColor: cs.surface,
           appBar: showAppBar
@@ -339,7 +339,7 @@ class SettingsScreen extends StatelessWidget {
     showDialog<void>(
       context: context,
       builder: (ctx) => Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: AlertDialog(
           title: Text(loc.language),
           content: Column(
@@ -989,7 +989,7 @@ class _AccountSubscriptionScreenState
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: AlertDialog(
           title: Text(loc.allowDeviceReturnTitle),
           content: Text(loc.allowDeviceReturnContent(d.deviceName)),
@@ -1025,7 +1025,7 @@ class _AccountSubscriptionScreenState
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: AlertDialog(
           title: Text(loc.disconnectDeviceTitle),
           content: SingleChildScrollView(
@@ -1091,7 +1091,7 @@ class _AccountSubscriptionScreenState
   Widget build(BuildContext context) {
     final auth = context.watch<AuthProvider>();
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: _settingsAppBar(
@@ -1473,7 +1473,7 @@ class _StoreInfoScreenState extends State<_StoreInfoScreen> {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: cs.surface,
         appBar: _settingsAppBar(
@@ -1590,7 +1590,7 @@ class _InvoiceSettingsScreenState extends State<_InvoiceSettingsScreen> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final cs = Theme.of(context).colorScheme;
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: cs.surface,
         appBar: _settingsAppBar(
@@ -1772,7 +1772,7 @@ class _NotificationsScreenState extends State<_NotificationsScreen> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final cs = Theme.of(context).colorScheme;
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: cs.surface,
         appBar: _settingsAppBar(
@@ -1867,7 +1867,7 @@ class _NotificationsScreenState extends State<_NotificationsScreen> {
                         controller: _expiryDefaultDaysCtrl,
                         keyboardType: TextInputType.number,
                         textAlign: TextAlign.right,
-                        textDirection: TextDirection.rtl,
+                        textDirection: Directionality.of(context),
                         decoration: InputDecoration(
                           labelText: AppLocalizations.of(
                             context,
@@ -1978,7 +1978,7 @@ class _Field extends StatelessWidget {
     return TextField(
       controller: controller,
       keyboardType: keyboard,
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       decoration: InputDecoration(
         labelText: label,
         prefixIcon: Icon(icon, size: 20),

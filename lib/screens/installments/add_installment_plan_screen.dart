@@ -247,7 +247,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
 
     if (_loading) {
       return Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: Scaffold(
           backgroundColor: bg,
           appBar: AppBar(
@@ -262,7 +262,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
 
     if (_loadError != null) {
       return Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: Scaffold(
           backgroundColor: bg,
           appBar: AppBar(
@@ -295,7 +295,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
     final step = _settings.paymentIntervalMonths;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: bg,
         appBar: AppBar(
@@ -614,7 +614,7 @@ class _InstallmentCustomerPickerSheetState
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Padding(
         padding: EdgeInsets.only(bottom: mq.viewInsets.bottom),
         child: SizedBox(

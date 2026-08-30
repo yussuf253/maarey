@@ -217,7 +217,7 @@ Future<void> _showCashShiftDetailDialog(
 
       final titleHGap = ScreenLayout.of(ctx).pageHorizontalGap;
       return Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: AlertDialog(
           backgroundColor: isDark ? AppColors.cardDark : AppColors.cardLight,
           titlePadding: EdgeInsets.zero,
@@ -711,7 +711,7 @@ class _CashScreenState extends State<CashScreen>
 
     if (_loading) {
       return Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: Scaffold(
           backgroundColor: bg,
           appBar: appBar,
@@ -721,7 +721,7 @@ class _CashScreenState extends State<CashScreen>
     }
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: bg,
         appBar: appBar,
@@ -1693,7 +1693,7 @@ class _AddTransactionSheetState extends State<_AddTransactionSheet> {
         ),
       ),
       child: Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: gap, vertical: 20),
           child: Column(
@@ -1749,7 +1749,7 @@ class _AddTransactionSheetState extends State<_AddTransactionSheet> {
               const SizedBox(height: 14),
               TextField(
                 controller: _desc,
-                textDirection: TextDirection.rtl,
+                textDirection: Directionality.of(context),
                 decoration: InputDecoration(
                   labelText: AppLocalizations.of(context)!.expenseDescription,
                   prefixIcon: Icon(Icons.notes_rounded),

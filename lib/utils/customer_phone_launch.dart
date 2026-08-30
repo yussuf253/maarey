@@ -107,7 +107,7 @@ Future<String?> _resolvePhoneChoice(
     showDragHandle: true,
     builder: (ctx) {
       return Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),

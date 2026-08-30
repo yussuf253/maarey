@@ -21,7 +21,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     final panel = isDark ? const Color(0xFF1E293B) : const Color(0xFFF8FAFC);
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: panel,
         appBar: AppBar(

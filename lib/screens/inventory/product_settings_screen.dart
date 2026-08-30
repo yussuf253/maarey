@@ -278,7 +278,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
     await showDialog<void>(
       context: context,
       builder: (ctx) => Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: AlertDialog(
           title: const Text('إعدادات ترقيم أذون التحويل'),
           content: TextField(
@@ -324,7 +324,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
         : const Color(0xFFF0F4F8);
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: bg,
         appBar: AppBar(

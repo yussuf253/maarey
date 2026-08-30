@@ -247,7 +247,7 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
       }
 
       return Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: Scaffold(
               backgroundColor: bg,
               appBar: AppBar(

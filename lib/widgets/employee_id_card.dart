@@ -52,7 +52,7 @@ class EmployeeIdCard extends StatelessWidget {
     final border = Theme.of(context).colorScheme.outline.withValues(alpha: 0.5);
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Container(
         width: width,
         constraints: BoxConstraints(minHeight: h),

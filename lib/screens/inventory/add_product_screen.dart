@@ -441,7 +441,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
       builder: (ctx) {
         final cs = Theme.of(ctx).colorScheme;
         return Directionality(
-          textDirection: TextDirection.rtl,
+          textDirection: Directionality.of(context),
           child: LayoutBuilder(
             builder: (context, constraints) {
               final screenH = MediaQuery.sizeOf(ctx).height;
@@ -1922,7 +1922,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
         }
       },
       child: Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: Scaffold(
           backgroundColor: theme.scaffoldBackgroundColor,
           appBar: AppBar(

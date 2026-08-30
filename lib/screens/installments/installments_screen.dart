@@ -192,7 +192,7 @@ class _InstallmentsScreenState extends State<InstallmentsScreen>
 
     if (_loading) {
       return Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: Scaffold(
           backgroundColor: theme.scaffoldBackgroundColor,
           appBar: AppBar(
@@ -228,7 +228,7 @@ class _InstallmentsScreenState extends State<InstallmentsScreen>
     final activeCount = _plans.where((p) => !_isSettled(p)).length;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: theme.scaffoldBackgroundColor,
         appBar: AppBar(
@@ -594,7 +594,7 @@ class _InstallmentSearchBar extends StatelessWidget {
         builder: (context, value, _) {
           return TextField(
             controller: controller,
-            textDirection: TextDirection.rtl,
+            textDirection: Directionality.of(context),
             style: TextStyle(color: cs.onSurface),
             cursorColor: cs.primary,
             decoration: InputDecoration(

@@ -81,7 +81,7 @@ class _ParkedSalesScreenState extends State<ParkedSalesScreen> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: AlertDialog(
           shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
           title: Text(loc.deleteParkedSaleTitle),
@@ -127,7 +127,7 @@ class _ParkedSalesScreenState extends State<ParkedSalesScreen> {
     final loc = AppLocalizations.of(context)!;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: bg,
         appBar: AppBar(

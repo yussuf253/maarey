@@ -173,7 +173,7 @@ class _CustomerFormScreenState extends State<CustomerFormScreen> {
     final created = widget.existing?.createdAt;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(

@@ -638,7 +638,7 @@ class _StaffShiftsWeekScreenState extends State<StaffShiftsWeekScreen> {
 
     return SecureScreen(
       child: Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: bg,
         appBar: AppBar(

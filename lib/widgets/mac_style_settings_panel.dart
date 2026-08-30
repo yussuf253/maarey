@@ -286,7 +286,7 @@ class _MacFloatingHostState extends State<_MacFloatingHost> {
               right: 0,
               bottom: bottomDock,
               child: Directionality(
-                textDirection: TextDirection.rtl,
+                textDirection: Directionality.of(context),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -746,7 +746,7 @@ class _MacSinglePanelState extends State<_MacSinglePanel>
             width: innerW,
             height: _kTitleBar,
             child: Directionality(
-              textDirection: TextDirection.rtl,
+              textDirection: Directionality.of(context),
               child: Row(
                 children: [
                   Expanded(

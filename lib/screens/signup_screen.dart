@@ -156,7 +156,7 @@ class _SignUpScreenState extends State<SignUpScreen>
     final variant = context.screenLayout.layoutVariant;
     final isWide = variant.index >= DeviceVariant.tabletLG.index;
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: _navy1,
         body: isWide ? _wideLayout() : _narrowLayout(),

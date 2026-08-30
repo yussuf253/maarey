@@ -13,7 +13,7 @@ class DashboardLayoutSettingsScreen extends StatelessWidget {
     final layout = context.watch<DashboardLayoutProvider>();
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: cs.primary,

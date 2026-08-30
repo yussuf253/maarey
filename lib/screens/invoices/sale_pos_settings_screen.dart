@@ -121,7 +121,7 @@ class SalePosSettingsScreen extends StatelessWidget {
         variant != DeviceVariant.phoneSM;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         appBar: AppBar(
           title: Text(
@@ -896,7 +896,7 @@ class _WideSaleLayoutPreviewMini extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Container(
         height: 54,
         decoration: BoxDecoration(

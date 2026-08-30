@@ -594,7 +594,7 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
 
     if (_loading) {
       return Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: Scaffold(
           backgroundColor: scheme.surface,
           appBar: _returnAppBar(context, AppLocalizations.of(context)!.returnScreenTitle),
@@ -609,7 +609,7 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
 
     if (_loadError != null) {
       return Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: Scaffold(
           backgroundColor: scheme.surface,
           appBar: _returnAppBar(context, AppLocalizations.of(context)!.returnScreenTitle),
@@ -669,7 +669,7 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
     );
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: scheme.surface,
         appBar: _returnAppBar(

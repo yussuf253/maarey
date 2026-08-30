@@ -60,7 +60,7 @@ class AppBreadcrumbStrip extends StatelessWidget {
           ),
         ),
         child: Directionality(
-          textDirection: TextDirection.rtl,
+          textDirection: Directionality.of(context),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

@@ -300,7 +300,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
         final cs = Theme.of(ctx).colorScheme;
 
         return Directionality(
-          textDirection: TextDirection.rtl,
+          textDirection: Directionality.of(context),
           child: LayoutBuilder(
             builder: (context, constraints) {
               final screenH = MediaQuery.sizeOf(ctx).height;
@@ -1300,7 +1300,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
     final ac = context.appCorners;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: theme.scaffoldBackgroundColor,
         appBar: AppBar(
@@ -1917,7 +1917,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
           controller: controller,
           validator: validator,
           keyboardType: keyboard,
-          textDirection: TextDirection.rtl,
+          textDirection: Directionality.of(context),
           decoration: InputDecoration(
             hintText: hint,
             filled: true,

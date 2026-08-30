@@ -659,7 +659,7 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
         color: cs.surfaceContainerHighest.withValues(alpha: 0.35),
       ),
       child: Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: Text.rich(
           TextSpan(
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -922,7 +922,7 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     );
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: PopScope<bool>(
         canPop: !_anyDirty,
         onPopInvokedWithResult: (didPop, result) async {

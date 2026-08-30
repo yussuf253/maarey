@@ -68,7 +68,7 @@ Future<void> showInvoiceDetailSheet(
     backgroundColor: Colors.transparent,
     builder: (ctx) {
       return Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: DraggableScrollableSheet(
           initialChildSize: sl.sheetInitialFraction,
           minChildSize: sl.sheetMinFraction,
@@ -193,7 +193,7 @@ class _InvoiceDetailPanelState extends State<InvoiceDetailPanel> {
     }
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: _InvoiceDetailContent(
         invoice: _invoice!,
         isDark: isDark,

@@ -331,7 +331,7 @@ class _InventoryHubScreenState extends State<InventoryHubScreen> {
     }).toList();
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('مركز المخزون'),

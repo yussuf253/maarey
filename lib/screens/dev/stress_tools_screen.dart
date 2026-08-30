@@ -361,7 +361,7 @@ class _StressToolsScreenState extends State<StressToolsScreen> {
     }
     final cs = Theme.of(context).colorScheme;
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Stress Tools (Dev)'),

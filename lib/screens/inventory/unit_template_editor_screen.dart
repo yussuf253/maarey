@@ -182,7 +182,7 @@ class _UnitTemplateEditorScreenState extends State<UnitTemplateEditorScreen> {
 
     if (_missingTemplate) {
       return Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: Scaffold(
           backgroundColor: bg,
           appBar: AppBar(
@@ -200,7 +200,7 @@ class _UnitTemplateEditorScreenState extends State<UnitTemplateEditorScreen> {
     }
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: bg,
         appBar: AppBar(

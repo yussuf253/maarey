@@ -342,7 +342,7 @@ class _InvoicesScreenState extends State<InvoicesScreen>
         : listBody;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Shortcuts(
         shortcuts: <ShortcutActivator, Intent>{
           const SingleActivator(LogicalKeyboardKey.keyN, control: true):
@@ -828,7 +828,7 @@ class _SearchSortBar extends StatelessWidget {
           final searchField = TextField(
             controller: controller,
             focusNode: focusNode,
-            textDirection: TextDirection.rtl,
+            textDirection: Directionality.of(context),
             decoration: InputDecoration(
               hintText: loc.searchInvoicesHint,
               hintStyle: TextStyle(fontSize: 13, color: cs.onSurfaceVariant),
@@ -1565,7 +1565,7 @@ class _FilterSheetState extends State<_FilterSheet> {
         borderRadius: AppShape.none,
       ),
       child: Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(

@@ -327,9 +327,9 @@ class _OpenShiftScreenState extends State<OpenShiftScreen> {
   @override
   Widget build(BuildContext context) {
     if (_checking) {
-      return const Directionality(
-        textDirection: TextDirection.rtl,
-        child: GlassBackground(
+      return Directionality(
+        textDirection: Directionality.of(context),
+        child: const GlassBackground(
           backgroundImage: AssetImage('assets/images/splash_bg.png'),
           child: Scaffold(
             backgroundColor: Colors.transparent,
@@ -344,7 +344,7 @@ class _OpenShiftScreenState extends State<OpenShiftScreen> {
     return PopScope(
       canPop: false,
       child: Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: AnnotatedRegion<SystemUiOverlayStyle>(
           value: const SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
@@ -910,7 +910,7 @@ class _ShiftStaffIdentityDialogState extends State<_ShiftStaffIdentityDialog> {
     );
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Dialog(
         backgroundColor: Colors.transparent,
         elevation: 0,

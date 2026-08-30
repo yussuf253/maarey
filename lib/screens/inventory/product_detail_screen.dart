@@ -52,7 +52,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     final loc = AppLocalizations.of(context)!;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: theme.scaffoldBackgroundColor,
         appBar: AppBar(

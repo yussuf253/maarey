@@ -357,7 +357,7 @@ class CalculatorPanelState extends State<CalculatorPanel> {
       autofocus: true,
       onKeyEvent: _handleKey,
       child: Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: Directionality.of(context),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
