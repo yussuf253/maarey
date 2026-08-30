@@ -7,6 +7,7 @@ import 'package:intl/intl.dart' hide TextDirection;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../l10n/generated/app_localizations.dart';
+import '../l10n/generated/app_localizations.dart';
 import '../services/database_helper.dart';
 import '../services/system_notification_service.dart';
 import '../services/tenant_context_service.dart';
@@ -197,7 +198,7 @@ class AppNotification {
       final m = diff.inMinutes;
       if (m <= 1) return AppNotification.loc!.npMinuteAgo;
       if (m == 2) return AppNotification.loc!.npTwoMinutesAgo;
-      return 'منذ $m دقيقة';
+      return loc!.npMinutesAgo(m.toString());
     }
 
     final startToday = DateTime(now.year, now.month, now.day);
@@ -208,13 +209,13 @@ class AppNotification {
       final h = diff.inHours;
       if (h <= 1) return AppNotification.loc!.npHourAgo;
       if (h == 2) return AppNotification.loc!.npTwoHoursAgo;
-      return 'منذ $h ساعة';
+      return loc!.npHoursAgo(h.toString());
     }
     if (calendarDays == 1) {
       return AppNotification.loc!.npYesterday(DateFormat('HH:mm').format(time));
     }
     if (calendarDays == 2) return AppNotification.loc!.npTwoDaysAgo;
-    if (calendarDays < 7) return 'منذ $calendarDays أيام';
+    if (calendarDays < 7) return loc!.npDaysAgo(calendarDays.toString());
     if (time.year == now.year) {
       return DateFormat('d MMM', 'ar').format(time);
     }
@@ -431,22 +432,22 @@ class NotificationProvider extends ChangeNotifier {
       final at = DateTime.tryParse(tRaw ?? '') ?? DateTime.now();
       final lines = m['lines'];
       final buf = StringBuffer()
-        ..writeln('فاتورة بيع #${invoiceId ?? '-'} — ${dateTimeFmt.format(at)}')
-        ..writeln('البائع: ${staff.isEmpty ? '—' : staff}')
-        ..writeln('العميل: ${customer.isEmpty ? 'بدون اسم' : customer}')
+        ..writeln(_loc!.npSaleInvoiceLine((invoiceId ?? '-').toString(), dateTimeFmt.format(at)))
+        ..writeln(_loc!.npSeller(staff.isEmpty ? '-' : staff))
+        ..writeln(_loc!.npCustomer(customer.isEmpty ? _loc!.npWithoutName : customer))
         ..writeln('────────');
       if (lines is List) {
         for (final L in lines) {
           if (L is! Map) continue;
           final lm = Map<String, dynamic>.from(L);
-          final name = (lm['name'] as String?)?.trim() ?? 'صنف';
+          final name = (lm['name'] as String?)?.trim() ?? _loc!.npItem;
           final pid = (lm['productId'] as num?)?.toInt();
           final qty = (lm['qtySold'] as num?)?.round() ?? 0;
           final before = (lm['before'] as num?)?.toDouble() ?? 0;
           final after = (lm['after'] as num?)?.toDouble() ?? 0;
-          buf.writeln('• $name${pid != null ? ' — مُعرّف #$pid' : ''}');
+          buf.writeln('\$name\${pid != null ? _loc!.npItemId(pid.toString()) : ''}');
           buf.writeln(
-            '  مُباع في الفاتورة: ${numFmt.format(qty)} — الرصيد قبل: ${numFmt.format(before)} → بعد: ${numFmt.format(after)}',
+            _loc!.npSoldInInvoice(numFmt.format(qty), numFmt.format(before), numFmt.format(after)),
           );
         }
       }
@@ -525,7 +526,7 @@ class NotificationProvider extends ChangeNotifier {
       final m = Map<String, dynamic>.from(e);
       final id = m['id']?.toString();
       if (id == null || id.isEmpty) continue;
-      final title = m['title']?.toString() ?? 'وردية';
+      final title = m['title']?.toString() ?? _loc!.npShift;
       final body = m['body']?.toString() ?? '';
       final tRaw = m['t']?.toString();
       final at = DateTime.tryParse(tRaw ?? '') ?? now;
@@ -689,43 +690,43 @@ class NotificationProvider extends ChangeNotifier {
 
       final title = isInst
           ? (planFail
-              ? 'بيع بالتقسيط — فاتورة محفوظة'
-              : 'بيع بالتقسيط — تم التسجيل')
-          : 'بيع بالدين (آجل) — تم التسجيل';
+              ? _loc!.npCreditSaleSaved
+              : _loc!.npCreditSaleRegistered)
+          : _loc!.npCreditSaleTitle;
 
       final buf = StringBuffer()
-        ..writeln('مكان التسجيل: شاشة «بيع جديد» (نقطة البيع)')
+        ..writeln(_loc!.npRegisteredAt)
         ..writeln(
-          'فاتورة #${invoiceId ?? '-'} — ${dateTimeFmt.format(at)}',
+          _loc!.npInvoiceLine((invoiceId ?? '-').toString(), dateTimeFmt.format(at)),
         )
-        ..writeln('البائع: ${staff.isEmpty ? '—' : staff}')
-        ..writeln('العميل: ${customer.isEmpty ? 'بدون اسم' : customer}')
+        ..writeln(_loc!.npSeller(staff.isEmpty ? '-' : staff))
+        ..writeln(_loc!.npCustomer(customer.isEmpty ? _loc!.npWithoutName : customer))
         ..writeln(
-          'الإجمالي: ${numFmt.format(total)} د.ع — الواصل: ${numFmt.format(advance)} د.ع — المتبقي: ${numFmt.format(rem)} د.ع',
+          _loc!.npTotalLine(numFmt.format(total), numFmt.format(advance), numFmt.format(rem)),
         );
       if (isInst) {
         if (planFail) {
           buf.writeln(
-            'تنبيه: تعذّر إنشاء خطة التقسيط تلقائياً — راجع «الأقساط» واربط الفاتورة بخطة.',
+            _loc!.npInstallmentPlanError,
           );
         } else {
           if (planId != null) {
-            buf.writeln('خطة التقسيط: #$planId');
+            buf.writeln(_loc!.npInstallmentPlanRef(planId.toString()));
           }
           if (months != null && months > 0) {
-            buf.writeln('عدد الأشهر المخطط: $months');
+            buf.writeln(_loc!.npPlannedMonths(months.toString()));
           }
           if (monthly != null && monthly > 1e-6) {
             buf.writeln(
-              'قسط شهري تقريبي: ${numFmt.format(monthly)} د.ع',
+              _loc!.npMonthlyEstimate(numFmt.format(monthly)),
             );
           }
           if (financed != null && financed > 1e-6) {
-            buf.writeln('الممول من البيع: ${numFmt.format(financed)} د.ع');
+            buf.writeln(_loc!.npFinancedFromSale(numFmt.format(financed)));
           }
           if (twi != null && twi > 1e-6 && (twi - total).abs() > 1e-6) {
             buf.writeln(
-              'الإجمالي مع الفائدة (إن وُجدت): ${numFmt.format(twi)} د.ع',
+              _loc!.npTotalWithInterest(numFmt.format(twi)),
             );
           }
         }
@@ -737,16 +738,16 @@ class NotificationProvider extends ChangeNotifier {
           if (L is! Map) continue;
           if (n++ >= 22) break;
           final lm = Map<String, dynamic>.from(L);
-          final name = (lm['name'] as String?)?.trim() ?? 'صنف';
+          final name = (lm['name'] as String?)?.trim() ?? _loc!.npItem;
           final pid = (lm['productId'] as num?)?.toInt();
           final qty = (lm['qty'] as num?)?.toDouble() ?? 0;
           final lt = (lm['lineTotal'] as num?)?.toDouble() ?? 0;
           buf.writeln(
-            '• $name${pid != null ? ' — #$pid' : ''} — ${numFmt.format(qty)} — ${numFmt.format(lt)} د.ع',
+            _loc!.npItemLine(name, pid != null ? pid.toString() : '', numFmt.format(qty), numFmt.format(lt)),
           );
         }
         if (lines.length > 22) {
-          buf.writeln('… وباقي الأسطر في الفاتورة.');
+          buf.writeln(_loc!.npMoreItemsInInvoice);
         }
       }
       built.add(
@@ -841,7 +842,7 @@ class NotificationProvider extends ChangeNotifier {
               id: nid,
               title: _loc!.npLateInstallmentTitle,
               body:
-                  '${name == null || name.isEmpty ? 'عميل' : name}${pid != null && pid > 0 ? ' — خطة #$pid' : ''} — مستحق ${dateFmt.format(dueDt)} — ${numFmt.format(amt)} د.ع',
+                  _loc!.npLateInstallmentBody(dateFmt.format(dueDt), (name == null || name.isEmpty ? _loc!.npCustomerLabel : name), pid != null && pid > 0 ? _loc!.npPlanRef(pid.toString()) : ''),
               type: NotificationType.installmentLate,
               time: dueDt,
               isRead: _readIds.contains(nid),
@@ -871,7 +872,7 @@ class NotificationProvider extends ChangeNotifier {
               id: nid,
               title: _loc!.npUpcomingTitle,
               body:
-                  '${name == null || name.isEmpty ? 'عميل' : name}${pid != null && pid > 0 ? ' — خطة #$pid' : ''} — ${dateFmt.format(dueDt)} — ${numFmt.format(amt)} د.ع',
+                  _loc!.npUpcomingBody(dateFmt.format(dueDt), (name == null || name.isEmpty ? _loc!.npCustomerLabel : name), pid != null && pid > 0 ? _loc!.npPlanRef(pid.toString()) : ''),
               type: NotificationType.installmentDue,
               time: dueDt,
               isRead: _readIds.contains(nid),
@@ -896,7 +897,7 @@ class NotificationProvider extends ChangeNotifier {
               id: 'debt_cust_$cid',
               title: _loc!.npCustomerDebtTitle,
               body:
-                  '$name$extra — المتبقي ${numFmt.format(bal)} د.ع (آجل غير المقسّط).',
+                  _loc!.npCustomerDebtBody(name, extra, numFmt.format(bal)),
               type: NotificationType.customerDebt,
               time: now,
               isRead: _readIds.contains('debt_cust_$cid'),
@@ -921,9 +922,9 @@ class NotificationProvider extends ChangeNotifier {
                 id: 'debt_set_age_$invId',
                 title: _loc!.npDebtAgeTitle,
                 body:
-                    'حسب إعدادات الدين ($warnDays يوماً): فاتورة #$invId — '
-                    '${cust.isEmpty ? 'بدون اسم' : cust} — منذ ${dateFmt.format(invDate)} '
-                    '($age ${age == 1 ? 'يوماً' : 'أياماً'}).',
+                    _loc!.npDebtAgeBody(warnDays.toString(), invId.toString(), (cust.isEmpty ? _loc!.npWithoutName : cust), dateFmt.format(invDate), age.toString(), age == 1 ? _loc!.npDay : _loc!.npDays),
+
+
                 type: NotificationType.debtInvoiceAged,
                 time: invDate,
                 isRead: _readIds.contains('debt_set_age_$invId'),
@@ -945,10 +946,10 @@ class NotificationProvider extends ChangeNotifier {
             built.add(
               AppNotification(
                 id: 'debt_set_cap_c_$cid',
-                title: 'تجاوز سقف الدين للعميل',
+                title: _loc!.npCustomerCapTitle,
                 body:
-                    'حسب إعدادات الدين: مجموع الآجل المفتوح لـ «$name» '
-                    '${numFmt.format(open)} د.ع (السقف ${numFmt.format(capC)} د.ع).',
+                    _loc!.npCustomerCapBody(name, numFmt.format(open), numFmt.format(capC)),
+
                 type: NotificationType.debtCustomerCeiling,
                 time: now,
                 isRead: _readIds.contains('debt_set_cap_c_$cid'),
@@ -968,10 +969,10 @@ class NotificationProvider extends ChangeNotifier {
             built.add(
               AppNotification(
                 id: nid,
-                title: 'تجاوز سقف الدين للعميل',
+                title: _loc!.npCustomerCapTitle,
                 body:
-                    'حسب إعدادات الدين (بدون بطاقة عميل): «$name» — '
-                    '${numFmt.format(open)} د.ع (السقف ${numFmt.format(capC)} د.ع).',
+                    _loc!.npCustomerCapBodyNoCard(name, numFmt.format(open), numFmt.format(capC)),
+
                 type: NotificationType.debtCustomerCeiling,
                 time: now,
                 isRead: _readIds.contains(nid),
@@ -997,10 +998,10 @@ class NotificationProvider extends ChangeNotifier {
                 id: 'debt_set_cap_i_$invId',
                 title: _loc!.npInvoiceCapTitle,
                 body:
-                    'حسب إعدادات الدين: فاتورة #$invId — '
-                    '${cust.isEmpty ? 'بدون اسم' : cust} — المتبقي '
-                    '${numFmt.format(rem)} د.ع (السقف ${numFmt.format(capI)} د.ع) — '
-                    'تاريخ ${dateFmt.format(invDate)}.',
+                    _loc!.npInvoiceCapBody(invId.toString(), (cust.isEmpty ? _loc!.npWithoutName : cust), numFmt.format(rem), numFmt.format(capI), dateFmt.format(invDate)),
+
+
+
                 type: NotificationType.debtInvoiceCeiling,
                 time: invDate,
                 isRead: _readIds.contains('debt_set_cap_i_$invId'),
@@ -1025,14 +1026,14 @@ class NotificationProvider extends ChangeNotifier {
             title = _loc!.npNegativeStockTitle;
             final over = qty.abs();
             body =
-                '"$name" — الكمية الحالية ${numFmt.format(qty)} (أي بيع زائد نحو ${numFmt.format(over)} ${over == 1 ? 'وحدة' : 'وحدات'} عن الرصيد عند آخر تحديث).';
+            _loc!.npNegativeStockBody(name, numFmt.format(qty), numFmt.format(over), over == 1 ? _loc!.npUnit : _loc!.npUnits);
           } else if (qty <= 1e-9) {
             title = _loc!.npOutOfStockTitle;
-            body = '"$name" — المخزون صفر.';
+            body = _loc!.npOutOfStockBody(name);
           } else {
             title = _loc!.npLowStockTitle;
             body =
-                '"$name" — الكمية ${numFmt.format(qty)} (الحد ${numFmt.format(th)}).';
+                _loc!.npLowStockBody(name, numFmt.format(qty), numFmt.format(th));
           }
           built.add(
             AppNotification(
@@ -1081,7 +1082,7 @@ class NotificationProvider extends ChangeNotifier {
                 id: 'exp_past_$pid',
                 title: _loc!.npExpiredTitle,
                 body:
-                    '«$name» — تجاوز التاريخ المدوَّن ($expLabel). راجع العرض أو الإتلاف حسب سياسة المتجر.',
+                    _loc!.npExpiredBody(name, expLabel),
                 type: NotificationType.expiredProduct,
                 time: exp ?? now,
                 isRead: _readIds.contains('exp_past_$pid'),
@@ -1089,14 +1090,14 @@ class NotificationProvider extends ChangeNotifier {
             );
           } else {
             final daysPhrase = days == 0
-                ? 'اليوم آخرُ الأيام المسماة للحفظ'
-                : 'بقي $days ${days == 1 ? 'يوماً' : 'أياماً'} على أجل الانتهاء';
+                ? _loc!.npLastDay
+                : _loc!.npDaysRemaining(days.toString());
             built.add(
               AppNotification(
                 id: 'exp_soon_$pid',
                 title: _loc!.npNearExpiryTitle,
                 body:
-                    '«$name» — ينتهي أجل الحفظ عند $expLabel ($daysPhrase).',
+                    _loc!.npNearExpiryBody(name, expLabel, daysPhrase),
                 type: NotificationType.expirySoon,
                 time: now,
                 isRead: _readIds.contains('exp_soon_$pid'),
@@ -1124,7 +1125,7 @@ class NotificationProvider extends ChangeNotifier {
               id: 'ret_$invId',
               title: _loc!.npReturnTitle,
               body:
-                  'فاتورة مرتجعة #$invId${orig != null ? ' ← أصل #$orig' : ''} — ${cust == null || cust.isEmpty ? 'بدون اسم' : cust} — ${numFmt.format(total)} د.ع',
+                  _loc!.npReturnBody(invId.toString(), orig != null ? _loc!.npOrigRef(orig.toString()) : '', (cust == null || cust.isEmpty ? _loc!.npWithoutName : cust), numFmt.format(total), numFmt.format(total)),
               type: NotificationType.saleReturn,
               time: d,
               isRead: _readIds.contains('ret_$invId'),
@@ -1144,7 +1145,7 @@ class NotificationProvider extends ChangeNotifier {
             id: 'daily_$dayKey',
             title: _loc!.npDailySummaryTitle,
             body:
-                'إجمالي فواتير البيع (بدون مرتجعات) لهذا اليوم: ${numFmt.format(total)} د.ع',
+                _loc!.npDailySummaryBody(numFmt.format(total)),
             type: NotificationType.newReport,
             time: DateTime(now.year, now.month, now.day, 12),
             isRead: _readIds.contains('daily_$dayKey'),
