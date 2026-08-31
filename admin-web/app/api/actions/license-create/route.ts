@@ -2,6 +2,8 @@ import { randomInt } from "crypto";
 import { NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 import { maxDevicesForPlan, PLAN_KEYS, type PlanKey } from "@/lib/plan-presets";
+import { importRsaPrivateKeyFromPem, signLicenseJwt } from "@/lib/license-jwt-sign";
+import { resolveLicenseJwtPrivateKeyPem } from "@/lib/resolve-license-private-pem";
 
 function generateLicenseKey(): string {
   const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
@@ -95,10 +97,48 @@ export async function POST(req: Request) {
         .single();
 
       if (!error && data) {
+        const licenseId = data.id as number;
+        const licKey = data.license_key as string;
+
+        // Sign a JWT so the app can activate it.
+        let license_jwt: string | null = null;
+        try {
+          const pem = resolveLicenseJwtPrivateKeyPem();
+          const kid = process.env.LICENSE_JWT_KID ?? "naboo";
+          if (pem) {
+            const privateKey = await importRsaPrivateKeyFromPem(pem);
+            const now = new Date();
+            const endsAt = expires_at ? new Date(expires_at) : new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000);
+            license_jwt = await signLicenseJwt({
+              privateKey,
+              kid,
+              claims: {
+                tenantId: String(licenseId),
+                plan,
+                maxDevices: maxDevicesForPlan(plan),
+                startsAt: now,
+                endsAt,
+                licenseId: String(licenseId),
+                isTrial: status === "trial",
+                issuedAt: now,
+              },
+            });
+            // Persist the JWT so reveal-key can return it later.
+            await supabase
+              .from("licenses")
+              .update({ license_jwt })
+              .eq("id", licenseId);
+          }
+        } catch (signErr) {
+          // Non-fatal: the license_key is still usable for legacy flow.
+          console.error("JWT signing failed:", signErr);
+        }
+
         return NextResponse.json({
           ok: true,
-          id: data.id as number,
-          license_key: data.license_key as string,
+          id: licenseId,
+          license_key: licKey,
+          license_jwt,
         });
       }
       const msg = error?.message ?? "";

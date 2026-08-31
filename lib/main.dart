@@ -166,7 +166,10 @@ void main() async {
     // Token persisted in OS-level secure storage (Keychain / EncryptedSharedPreferences / DPAPI)
     // instead of plain SharedPreferences. Also auto-migrates any legacy token on first run.
     authOptions: FlutterAuthClientOptions(
-      autoRefreshToken: false,
+      // Enable auto-refresh so the session survives app restarts.
+      // The SDK handles network errors gracefully — it silently fails
+      // to refresh when offline and retries when connectivity returns.
+      autoRefreshToken: true,
       localStorage: SecureLocalStorage(
         persistSessionKey: supabasePersistSessionKeyFromUrl(SupabaseConfig.url),
       ),

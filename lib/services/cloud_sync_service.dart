@@ -258,7 +258,12 @@ class CloudSyncService {
   Future<bool> bootstrapForSignedInUser() async {
     final client = Supabase.instance.client;
     final user = client.auth.currentUser;
-    if (user == null) return true;
+    if (user == null) {
+      AppLogger.warn('CloudSync',
+          'bootstrapForSignedInUser: currentUser is null — session may have expired. '
+          'The user needs to sign in again or autoRefreshToken must be enabled.');
+      return true;
+    }
 
     try {
       // لا upsert جزئي على profiles — قد يصفّر trial_started_at ويعيد العدّ 15 يوماً كل مرة.

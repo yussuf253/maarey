@@ -156,14 +156,20 @@ class AuthProvider extends ChangeNotifier {
       _clear();
       notifyListeners();
       return;
-    }
-    _setFromRow(row);
+    }    _setFromRow(row);
     if (prefs.getString(_prefActiveDataOwner) == null) {
       await prefs.setString(_prefActiveDataOwner, _dataOwnerKeyForRow(row));
     }
     await _refreshTenantContextSilently();
     notifyListeners();
+
+    // Re-establish Supabase session & sync on app restart.
+    final localId = row['id'] as int?;
+    if (localId != null && localId > 0) {
+      unawaited(_completeCloudBootstrapAfterRestore(localId));
+    }
   }
+
 
   Future<void> _completeCloudBootstrapAfterRestore(int localUserId) async {
     try {
