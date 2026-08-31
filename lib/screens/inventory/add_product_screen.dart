@@ -175,6 +175,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
 
   bool _saving = false;
   bool _loadingRefs = true;
+  bool _skipDirtyCheck = false; // Temporarily skip pop-scope dialog for sub-screen navigation
   String _productCodeHint = 'N1-…';
   List<String> _categoryOptions = [];
   List<String> _brandOptions = [];
@@ -246,6 +247,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
   Future<void> _handleLeaveAttemptFromRouteChange() async {
     if (!mounted) return;
     if (_saving) return;
+    if (_skipDirtyCheck) return;
     if (!_hasUnsavedChanges()) return;
 
     // ظهر مسار آخر فوق هذه الشاشة (مثلاً من القائمة الجانبية).
@@ -889,6 +891,9 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
   /// Opens the online product lookup screen.
   /// If a product is found, auto-fills the form fields.
   Future<void> _openLookup() async {
+    // Temporarily allow pop-scope so the lookup sub-screen can open freely.
+    _skipDirtyCheck = true;
+    try {
     final result = await Navigator.push<ProductLookupResult>(
       context,
       MaterialPageRoute(
@@ -926,6 +931,9 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
           behavior: SnackBarBehavior.floating,
         ),
       );
+    }
+    } finally {
+      _skipDirtyCheck = false;
     }
   }
 
@@ -1948,7 +1956,7 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
 
-    final canPopNow = !_saving && !_hasUnsavedChanges();
+    final canPopNow = _skipDirtyCheck || (!_saving && !_hasUnsavedChanges());
     return PopScope(
       canPop: canPopNow,
       onPopInvoked: (didPop) async {
