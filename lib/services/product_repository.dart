@@ -214,79 +214,8 @@ class ProductRepository {
   static final ValueNotifier<int> pinnedVersion = ValueNotifier<int>(0);
 
   Future<void> seedIfEmpty() async {
-    final db = await _db;
-    final result = await db.rawQuery('SELECT COUNT(*) AS c FROM products');
-    final count = (result.first['c'] as int?) ?? 0;
-    if (count > 0) return;
-
-    final now = DateTime.now().toIso8601String();
-
-    /// لا نُدخل تصنيفات ولا ماركات تجريبية — تُضاف من إعدادات التصنيفات/العلامات.
-
-    Future<void> addProduct({
-      required String name,
-      required String barcode,
-      required String productCode,
-      int? categoryId,
-      int? brandId,
-      required double buyPrice,
-      required double sellPrice,
-      required double qty,
-      required double lowStockThreshold,
-    }) async {
-      final status = qty <= lowStockThreshold ? 'low' : 'instock';
-      await db.insert('products', {
-        'name': name,
-        'barcode': barcode,
-        'productCode': productCode,
-        'categoryId': categoryId,
-        'brandId': brandId,
-        'buyPrice': buyPrice,
-        'sellPrice': sellPrice,
-        'minSellPrice': buyPrice,
-        'qty': qty,
-        'lowStockThreshold': lowStockThreshold,
-        'status': status,
-        'createdAt': now,
-      });
-    }
-
-    await addProduct(
-      name: 'Pringles-1250',
-      barcode: '3666000000036',
-      productCode: 'PR-1250',
-      buyPrice: 1000,
-      sellPrice: 1250,
-      qty: 13,
-      lowStockThreshold: 10,
-    );
-    await addProduct(
-      name: 'Coca-Cola',
-      barcode: '3666000000029',
-      productCode: 'CC-1500',
-      buyPrice: 1000,
-      sellPrice: 1500,
-      qty: 30,
-      lowStockThreshold: 50,
-    );
-    await addProduct(
-      name: 'Pepsi',
-      barcode: '3666000000012',
-      productCode: 'PP-1500',
-      buyPrice: 1000,
-      sellPrice: 1500,
-      qty: 13,
-      lowStockThreshold: 10,
-    );
-    await addProduct(
-      name: 'رز الحياني (Al-Hayani Rice)',
-      barcode: '3666000000043',
-      productCode: 'RC-3500',
-      buyPrice: 3000,
-      sellPrice: 3500,
-      qty: 100,
-      lowStockThreshold: 20,
-    );
+    // No seed products — app starts with an empty product catalog.
+    // Products are added via the add-product screen or bulk CSV import.
   }
 
   /// تصنيفات لإدارة الإعدادات (مع اسم الأب إن وُجد).

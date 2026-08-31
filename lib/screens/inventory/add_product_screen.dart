@@ -27,6 +27,7 @@ import '../../services/business_setup_settings.dart';
 import '../../theme/app_corner_style.dart';
 import '../../widgets/app_color_picker_dialog.dart';
 import '../../widgets/barcode_input_launcher.dart';
+import 'product_lookup_screen.dart';
 import '../../utils/app_logger.dart';
 import '../../utils/debug_ndjson_logger.dart';
 import '../../utils/barcode_prefill.dart';
@@ -883,6 +884,49 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
       buf.write(rnd.nextInt(10));
     }
     setState(() => _barcodeCtrl.text = buf.toString());
+  }
+
+  /// Opens the online product lookup screen.
+  /// If a product is found, auto-fills the form fields.
+  Future<void> _openLookup() async {
+    final result = await Navigator.push<ProductLookupResult>(
+      context,
+      MaterialPageRoute(
+        builder: (_) => ProductLookupScreen(
+          initialBarcode: _barcodeCtrl.text.trim(),
+          initialQuery: _nameCtrl.text.trim(),
+        ),
+      ),
+    );
+    if (!mounted || result == null) return;
+
+    setState(() {
+      if (result.barcode != null && result.barcode!.isNotEmpty) {
+        _barcodeCtrl.text = result.barcode!;
+      }
+      if (result.name != null && result.name!.isNotEmpty) {
+        _nameCtrl.text = result.name!;
+      }
+      if (result.brand != null && result.brand!.isNotEmpty) {
+        _brandCtrl.text = result.brand!;
+      }
+      if (result.category != null && result.category!.isNotEmpty) {
+        _categoryCtrl.text = result.category!;
+      }
+      if (result.description != null && result.description!.isNotEmpty) {
+        _descCtrl.text = result.description!;
+      }
+    });
+
+    if (result.foundOnline) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(loc.olAutoFilled),
+          backgroundColor: Colors.green.shade700,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
   }
 
   Future<void> _pickImage() async {
@@ -2724,6 +2768,28 @@ class _AddProductScreenState extends State<AddProductScreen> with RouteAware {
                           ? Icons.camera_alt_rounded
                           : Icons.keyboard_alt_rounded,
                       color: cs.primary,
+                      size: 24,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 8),
+            // ── Online lookup button ──────────────────────────────
+            Tooltip(
+              message: loc.olTitle,
+              child: Material(
+                color: Colors.blue.withValues(alpha: 0.15),
+                shape: const CircleBorder(),
+                clipBehavior: Clip.antiAlias,
+                child: InkWell(
+                  onTap: _openLookup,
+                  child: const SizedBox(
+                    width: 48,
+                    height: 48,
+                    child: Icon(
+                      Icons.language,
+                      color: Colors.blue,
                       size: 24,
                     ),
                   ),

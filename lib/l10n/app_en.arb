@@ -3256,5 +3256,21 @@
   "syncNothingToSync": "No changes to sync",
   "syncCompletedPush": "Data uploaded to cloud",
   "syncCompletedPull": "Data downloaded from cloud",
-  "syncNotLoggedIn": "Please sign in to sync"
+  "syncNotLoggedIn": "Please sign in to sync",
+  "olTitle": "Product Lookup",
+  "olScanHint": "Scan barcode or type product name",
+  "olSearching": "Searching…",
+  "olFoundInLocal": "Found in local database",
+  "olNotFound": "Product not found locally",
+  "olSearchingOnline": "Searching online…",
+  "olOnlineFound": "Found in international directory",
+  "olOnlineNotFound": "Product not found in international directory",
+  "olUseThisProduct": "Use this product",
+  "olNoResults": "No results",
+  "olProductImage": "Product image",
+  "olBrand": "Brand",
+  "olCategory": "Category",
+  "olQuantity": "Quantity",
+  "olAddToProducts": "Add to products",
+  "olAutoFilled": "Fields auto-filled from international directory"
 }

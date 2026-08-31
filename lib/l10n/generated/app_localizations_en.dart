@@ -10717,4 +10717,52 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get syncNotLoggedIn => 'Please sign in to sync';
+
+  @override
+  String get olTitle => 'Product Lookup';
+
+  @override
+  String get olScanHint => 'Scan barcode or type product name';
+
+  @override
+  String get olSearching => 'Searching…';
+
+  @override
+  String get olFoundInLocal => 'Found in local database';
+
+  @override
+  String get olNotFound => 'Product not found locally';
+
+  @override
+  String get olSearchingOnline => 'Searching online…';
+
+  @override
+  String get olOnlineFound => 'Found in international directory';
+
+  @override
+  String get olOnlineNotFound => 'Product not found in international directory';
+
+  @override
+  String get olUseThisProduct => 'Use this product';
+
+  @override
+  String get olNoResults => 'No results';
+
+  @override
+  String get olProductImage => 'Product image';
+
+  @override
+  String get olBrand => 'Brand';
+
+  @override
+  String get olCategory => 'Category';
+
+  @override
+  String get olQuantity => 'Quantity';
+
+  @override
+  String get olAddToProducts => 'Add to products';
+
+  @override
+  String get olAutoFilled => 'Fields auto-filled from international directory';
 }

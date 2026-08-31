@@ -2933,5 +2933,21 @@
   "syncNothingToSync": "Aucune modification à synchroniser",
   "syncCompletedPush": "Données envoyées au cloud",
   "syncCompletedPull": "Données téléchargées du cloud",
-  "syncNotLoggedIn": "Connectez-vous pour synchroniser"
+  "syncNotLoggedIn": "Connectez-vous pour synchroniser",
+  "olTitle": "Recherche de produit",
+  "olScanHint": "Scannez le code-barres ou tapez le nom du produit",
+  "olSearching": "Recherche…",
+  "olFoundInLocal": "Trouvé dans la base de données locale",
+  "olNotFound": "Produit non trouvé localement",
+  "olSearchingOnline": "Recherche en ligne…",
+  "olOnlineFound": "Trouvé dans l'annuaire international",
+  "olOnlineNotFound": "Produit non trouvé dans l'annuaire international",
+  "olUseThisProduct": "Utiliser ce produit",
+  "olNoResults": "Aucun résultat",
+  "olProductImage": "Image du produit",
+  "olBrand": "Marque",
+  "olCategory": "Catégorie",
+  "olQuantity": "Quantité",
+  "olAddToProducts": "Ajouter aux produits",
+  "olAutoFilled": "Champs remplis automatiquement depuis l'annuaire international"
 }

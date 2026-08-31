@@ -3160,5 +3160,21 @@
   "syncNothingToSync": "لا توجد تغييرات للمزامنة",
   "syncCompletedPush": "تم رفع البيانات إلى السحابة",
   "syncCompletedPull": "تم سحب البيانات من السحابة",
-  "syncNotLoggedIn": "يجب تسجيل الدخول أولاً للمزامنة"
+  "syncNotLoggedIn": "يجب تسجيل الدخول أولاً للمزامنة",
+  "olTitle": "بحث عن منتج",
+  "olScanHint": "امسح الباركود أو اكتب اسم المنتج",
+  "olSearching": "جارٍ البحث…",
+  "olFoundInLocal": "وجد في قاعدة البيانات المحلية",
+  "olNotFound": "لم يُعثر على المنتج محلياً",
+  "olSearchingOnline": "جارٍ البحث عبر الإنترنت…",
+  "olOnlineFound": "وجد في الدليل الدولي",
+  "olOnlineNotFound": "المنتج غير موجود في الدليل الدولي",
+  "olUseThisProduct": "استخدم هذا المنتج",
+  "olNoResults": "لا توجد نتائج",
+  "olProductImage": "صورة المنتج",
+  "olBrand": "العلامة التجارية",
+  "olCategory": "الفئة",
+  "olQuantity": "الكمية",
+  "olAddToProducts": "إضافة إلى المنتجات",
+  "olAutoFilled": "تم ملء الحقول تلقائياً من الدليل الدولي"
 }

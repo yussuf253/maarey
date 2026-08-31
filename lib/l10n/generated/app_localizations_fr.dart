@@ -10839,4 +10839,54 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get syncNotLoggedIn => 'Connectez-vous pour synchroniser';
+
+  @override
+  String get olTitle => 'Recherche de produit';
+
+  @override
+  String get olScanHint => 'Scannez le code-barres ou tapez le nom du produit';
+
+  @override
+  String get olSearching => 'Recherche…';
+
+  @override
+  String get olFoundInLocal => 'Trouvé dans la base de données locale';
+
+  @override
+  String get olNotFound => 'Produit non trouvé localement';
+
+  @override
+  String get olSearchingOnline => 'Recherche en ligne…';
+
+  @override
+  String get olOnlineFound => 'Trouvé dans l\'annuaire international';
+
+  @override
+  String get olOnlineNotFound =>
+      'Produit non trouvé dans l\'annuaire international';
+
+  @override
+  String get olUseThisProduct => 'Utiliser ce produit';
+
+  @override
+  String get olNoResults => 'Aucun résultat';
+
+  @override
+  String get olProductImage => 'Image du produit';
+
+  @override
+  String get olBrand => 'Marque';
+
+  @override
+  String get olCategory => 'Catégorie';
+
+  @override
+  String get olQuantity => 'Quantité';
+
+  @override
+  String get olAddToProducts => 'Ajouter aux produits';
+
+  @override
+  String get olAutoFilled =>
+      'Champs remplis automatiquement depuis l\'annuaire international';
 }

@@ -10616,4 +10616,52 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get syncNotLoggedIn => 'يجب تسجيل الدخول أولاً للمزامنة';
+
+  @override
+  String get olTitle => 'بحث عن منتج';
+
+  @override
+  String get olScanHint => 'امسح الباركود أو اكتب اسم المنتج';
+
+  @override
+  String get olSearching => 'جارٍ البحث…';
+
+  @override
+  String get olFoundInLocal => 'وجد في قاعدة البيانات المحلية';
+
+  @override
+  String get olNotFound => 'لم يُعثر على المنتج محلياً';
+
+  @override
+  String get olSearchingOnline => 'جارٍ البحث عبر الإنترنت…';
+
+  @override
+  String get olOnlineFound => 'وجد في الدليل الدولي';
+
+  @override
+  String get olOnlineNotFound => 'المنتج غير موجود في الدليل الدولي';
+
+  @override
+  String get olUseThisProduct => 'استخدم هذا المنتج';
+
+  @override
+  String get olNoResults => 'لا توجد نتائج';
+
+  @override
+  String get olProductImage => 'صورة المنتج';
+
+  @override
+  String get olBrand => 'العلامة التجارية';
+
+  @override
+  String get olCategory => 'الفئة';
+
+  @override
+  String get olQuantity => 'الكمية';
+
+  @override
+  String get olAddToProducts => 'إضافة إلى المنتجات';
+
+  @override
+  String get olAutoFilled => 'تم ملء الحقول تلقائياً من الدليل الدولي';
 }

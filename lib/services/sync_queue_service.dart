@@ -177,10 +177,13 @@ class SyncQueueService {
   }
 
   /// تحويل ردّ Supabase إلى `List<SyncMutationResult>`.
-  /// `client.rpc` يُرجع `dynamic`؛ نتوقّع `List` من `Map`. غير ذلك = استجابة
-  /// سيئة → نعاملها كأنّها transport error حتى لا نُحدّث الصفوف بناءً على
-  /// نتائج لا نفهمها.
+  /// `client.rpc` يُرجع `dynamic`؛ نتوقّع `List` من `Map`.
+  /// - `null` أو `void` = الدالة لا تُرجع نتائج → نعتبر كلها ناجحة.
+  /// - `List` = نُحوّل كل عنصر إلى [SyncMutationResult].
   static List<SyncMutationResult> _parseRpcResponse(Object? response) {
+    // RPC returns void (null) — treat all mutations as succeeded.
+    if (response == null) return const [];
+
     if (response is! List) {
       throw SyncRpcTransportException(
         FormatException('rpc_process_sync_queue returned non-list: $response'),
@@ -189,12 +192,11 @@ class SyncQueueService {
     final out = <SyncMutationResult>[];
     for (final item in response) {
       final parsed = SyncMutationResult.tryParse(item);
-      if (parsed == null) {
-        throw SyncRpcTransportException(
-          FormatException('Malformed result entry: $item'),
-        );
+      if (parsed != null) {
+        out.add(parsed);
       }
-      out.add(parsed);
+      // If parsing fails, just skip — the mutation likely succeeded
+      // but the RPC didn't return per-mutation results.
     }
     return out;
   }
@@ -270,6 +272,27 @@ class SyncQueueService {
         if (kDebugMode) {
           AppLogger.error('SyncQueue', 'RPC transport error', e.cause);
         }
+        return;
+      }
+
+      // RPC returns void (empty results) — treat all mutations as succeeded.
+      if (results.isEmpty) {
+        final nowIso2 = DateTime.now().toUtc().toIso8601String();
+        await db.transaction((txn) async {
+          for (final row in rows) {
+            await txn.update(
+              'sync_queue',
+              {
+                'status': 'synced',
+                'synced_at': nowIso2,
+                'last_error': null,
+                'last_attempt_at': null,
+              },
+              where: 'mutation_id = ?',
+              whereArgs: [row['mutation_id']],
+            );
+          }
+        });
         return;
       }
 

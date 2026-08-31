@@ -19098,6 +19098,102 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'يجب تسجيل الدخول أولاً للمزامنة'**
   String get syncNotLoggedIn;
+
+  /// No description provided for @olTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث عن منتج'**
+  String get olTitle;
+
+  /// No description provided for @olScanHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'امسح الباركود أو اكتب اسم المنتج'**
+  String get olScanHint;
+
+  /// No description provided for @olSearching.
+  ///
+  /// In ar, this message translates to:
+  /// **'جارٍ البحث…'**
+  String get olSearching;
+
+  /// No description provided for @olFoundInLocal.
+  ///
+  /// In ar, this message translates to:
+  /// **'وجد في قاعدة البيانات المحلية'**
+  String get olFoundInLocal;
+
+  /// No description provided for @olNotFound.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يُعثر على المنتج محلياً'**
+  String get olNotFound;
+
+  /// No description provided for @olSearchingOnline.
+  ///
+  /// In ar, this message translates to:
+  /// **'جارٍ البحث عبر الإنترنت…'**
+  String get olSearchingOnline;
+
+  /// No description provided for @olOnlineFound.
+  ///
+  /// In ar, this message translates to:
+  /// **'وجد في الدليل الدولي'**
+  String get olOnlineFound;
+
+  /// No description provided for @olOnlineNotFound.
+  ///
+  /// In ar, this message translates to:
+  /// **'المنتج غير موجود في الدليل الدولي'**
+  String get olOnlineNotFound;
+
+  /// No description provided for @olUseThisProduct.
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدم هذا المنتج'**
+  String get olUseThisProduct;
+
+  /// No description provided for @olNoResults.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد نتائج'**
+  String get olNoResults;
+
+  /// No description provided for @olProductImage.
+  ///
+  /// In ar, this message translates to:
+  /// **'صورة المنتج'**
+  String get olProductImage;
+
+  /// No description provided for @olBrand.
+  ///
+  /// In ar, this message translates to:
+  /// **'العلامة التجارية'**
+  String get olBrand;
+
+  /// No description provided for @olCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفئة'**
+  String get olCategory;
+
+  /// No description provided for @olQuantity.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكمية'**
+  String get olQuantity;
+
+  /// No description provided for @olAddToProducts.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة إلى المنتجات'**
+  String get olAddToProducts;
+
+  /// No description provided for @olAutoFilled.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم ملء الحقول تلقائياً من الدليل الدولي'**
+  String get olAutoFilled;
 }
 
 class _AppLocalizationsDelegate
