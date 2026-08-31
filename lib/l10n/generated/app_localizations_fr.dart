@@ -7711,7 +7711,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Produit enregistré et liste mise à jour';
 
   @override
-  String get ipNewProductBtn => '+ Nouveau produit';
+  String get ipNewProductBtn => 'Nouveau produit';
 
   @override
   String get ipStatusActive => 'Actif';
@@ -10827,4 +10827,16 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ipBulkImport => 'Import en masse de produits';
+
+  @override
+  String get syncNothingToSync => 'Aucune modification à synchroniser';
+
+  @override
+  String get syncCompletedPush => 'Données envoyées au cloud';
+
+  @override
+  String get syncCompletedPull => 'Données téléchargées du cloud';
+
+  @override
+  String get syncNotLoggedIn => 'Connectez-vous pour synchroniser';
 }

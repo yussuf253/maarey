@@ -2055,7 +2055,7 @@
   "ipMoreTooltip": "Plus",
   "ipPrintBarcodes": "Imprimer les étiquettes de codes-barres",
   "ipProductSavedSnackbar": "Produit enregistré et liste mise à jour",
-  "ipNewProductBtn": "+ Nouveau produit",
+  "ipNewProductBtn": "Nouveau produit",
   "ipStatusActive": "Actif",
   "ipStatusLowStock": "Stock bas",
   "ipStatusOutOfStock": "Rupture de stock",
@@ -2929,5 +2929,9 @@
   "bulkImportSampleSupplier": "Société Al-Amal",
   "bulkImportSampleTax": "0",
   "bulkImportSampleUnit": "Pièce",
-  "ipBulkImport": "Import en masse de produits"
+  "ipBulkImport": "Import en masse de produits",
+  "syncNothingToSync": "Aucune modification à synchroniser",
+  "syncCompletedPush": "Données envoyées au cloud",
+  "syncCompletedPull": "Données téléchargées du cloud",
+  "syncNotLoggedIn": "Connectez-vous pour synchroniser"
 }

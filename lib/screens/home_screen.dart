@@ -1665,7 +1665,54 @@ class _HomeScreenState extends State<HomeScreen>
                     behavior: SnackBarBehavior.floating,
                   ),
                 );
-                await CloudSyncService.instance.syncNow();
+                await CloudSyncService.instance.syncNow(
+                  forcePull: true,
+                  forcePush: true,
+                );
+                // Show completion feedback based on result
+                final result = CloudSyncService.instance.syncResult.value;
+                if (!mounted) return;
+                String msg;
+                switch (result) {
+                  case SyncResult.notLoggedIn:
+                    msg = loc.syncNotLoggedIn;
+                    break;
+                  case SyncResult.licenseFailed:
+                  case SyncResult.syncPaused:
+                  case SyncResult.deviceBlocked:
+                  case SyncResult.pullBlocked:
+                  case SyncResult.error:
+                    msg = CloudSyncService.instance.lastError.value ??
+                        loc.syncFailedTooltip;
+                    break;
+                  case SyncResult.pullAndPush:
+                    msg = '${loc.syncCompletedPull} ✓ ${loc.syncCompletedPush} ✓';
+                    break;
+                  case SyncResult.pushed:
+                    msg = loc.syncCompletedPush;
+                    break;
+                  case SyncResult.pulledOnly:
+                    msg = loc.syncNothingToSync;
+                    break;
+                  case null:
+                    msg = loc.syncNothingToSync;
+                    break;
+                }
+                messenger.showSnackBar(
+                  SnackBar(
+                    content: Text(msg),
+                    duration: const Duration(seconds: 3),
+                    behavior: SnackBarBehavior.floating,
+                    backgroundColor: result == SyncResult.error ||
+                            result == SyncResult.licenseFailed ||
+                            result == SyncResult.syncPaused ||
+                            result == SyncResult.deviceBlocked ||
+                            result == SyncResult.pullBlocked ||
+                            result == SyncResult.notLoggedIn
+                        ? Colors.red.shade700
+                        : Colors.green.shade700,
+                  ),
+                );
               },
             ),
             if (hasError)

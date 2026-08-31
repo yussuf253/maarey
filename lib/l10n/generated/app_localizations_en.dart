@@ -10705,4 +10705,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ipBulkImport => 'Bulk import products';
+
+  @override
+  String get syncNothingToSync => 'No changes to sync';
+
+  @override
+  String get syncCompletedPush => 'Data uploaded to cloud';
+
+  @override
+  String get syncCompletedPull => 'Data downloaded from cloud';
+
+  @override
+  String get syncNotLoggedIn => 'Please sign in to sync';
 }

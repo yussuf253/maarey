@@ -19074,6 +19074,30 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'استيراد منتجات بالجملة'**
   String get ipBulkImport;
+
+  /// No description provided for @syncNothingToSync.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد تغييرات للمزامنة'**
+  String get syncNothingToSync;
+
+  /// No description provided for @syncCompletedPush.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم رفع البيانات إلى السحابة'**
+  String get syncCompletedPush;
+
+  /// No description provided for @syncCompletedPull.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم سحب البيانات من السحابة'**
+  String get syncCompletedPull;
+
+  /// No description provided for @syncNotLoggedIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'يجب تسجيل الدخول أولاً للمزامنة'**
+  String get syncNotLoggedIn;
 }
 
 class _AppLocalizationsDelegate

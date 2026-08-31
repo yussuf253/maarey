@@ -10604,4 +10604,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get ipBulkImport => 'استيراد منتجات بالجملة';
+
+  @override
+  String get syncNothingToSync => 'لا توجد تغييرات للمزامنة';
+
+  @override
+  String get syncCompletedPush => 'تم رفع البيانات إلى السحابة';
+
+  @override
+  String get syncCompletedPull => 'تم سحب البيانات من السحابة';
+
+  @override
+  String get syncNotLoggedIn => 'يجب تسجيل الدخول أولاً للمزامنة';
 }

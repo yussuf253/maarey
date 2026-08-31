@@ -81,6 +81,36 @@ class _SnapshotBuildResult {
 /// بيانات السحابة بلقطة محلية فارغة أو ناقصة (سبب شائع لاختفاء البيانات على جهاز آخر).
 enum _PullOutcome { allowPush, blockPush }
 
+/// Result of a manual [CloudSyncService.syncNow] call.
+enum SyncResult {
+  /// No user was logged in — sync skipped silently.
+  notLoggedIn,
+
+  /// License/preflight failed — [lastError] is set.
+  licenseFailed,
+
+  /// Remote config paused sync globally.
+  syncPaused,
+
+  /// Device limit reached or device revoked.
+  deviceBlocked,
+
+  /// Pull was blocked (e.g. schema version mismatch).
+  pullBlocked,
+
+  /// Snapshot was pushed successfully.
+  pushed,
+
+  /// Pull succeeded; no push was needed (signatures unchanged).
+  pulledOnly,
+
+  /// Both pull and push succeeded.
+  pullAndPush,
+
+  /// An error occurred — [lastError] is set.
+  error,
+}
+
 /// مزامنة سحابية بنمط snapshot:
 /// - تثبيت profile للمستخدم.
 /// - سحب آخر snapshot من السحابة (إن وجد).
@@ -768,6 +798,10 @@ class CloudSyncService {
     return missingTable && tableNotReady;
   }
 
+  /// [_syncResult] is the result of the most recent manual [syncNow] call.
+  final ValueNotifier<SyncResult?> _syncResultNotifier = ValueNotifier(null);
+  ValueNotifier<SyncResult?> get syncResult => _syncResultNotifier;
+
   Future<void> syncNow({
     bool forcePull = true,
     bool forcePush = false,
@@ -775,18 +809,23 @@ class CloudSyncService {
   }) async {
     if (_syncRunning) {
       _syncQueued = true;
+      AppLogger.info('CloudSync', 'syncNow: already running, queued');
       return;
     }
     await _runSyncExclusive(() async {
       final client = Supabase.instance.client;
       final user = client.auth.currentUser;
-      if (user == null) return;
+      if (user == null) {
+        AppLogger.warn('CloudSync', 'syncNow: user is null, aborting');
+        _syncResultNotifier.value = SyncResult.notLoggedIn;
+        return;
+      }
 
       _syncRunning = true;
       try {
+        AppLogger.info('CloudSync',
+            'syncNow started: forcePull=$forcePull, forcePush=$forcePush');
         // Preflight إلزامي قبل أي Pull/Push.
-        // (1) الترخيص/الوقت/حد الأجهزة تُدار في LicenseService.checkLicense.
-        // (2) عند فشل preflight: لا مزامنة.
         final lastOk = _lastSuccessfulPreflightAt;
         final okFresh =
             lastOk != null &&
@@ -803,7 +842,10 @@ class CloudSyncService {
         final lic = LicenseService.instance.state;
         if (!(lic.status == LicenseStatus.active ||
             lic.status == LicenseStatus.trial)) {
+          AppLogger.warn('CloudSync',
+              'syncNow: license check failed — status=${lic.status}');
           lastError.value = lic.message ?? 'لا يمكن المزامنة بدون ترخيص صالح.';
+          _syncResultNotifier.value = SyncResult.licenseFailed;
           return;
         }
 
@@ -811,18 +853,23 @@ class CloudSyncService {
           force: true,
         );
         if (remoteCfg.syncPausedGlobally) {
+          AppLogger.warn('CloudSync', 'syncNow: sync paused globally');
           lastError.value = remoteCfg.syncPausedMessageAr;
+          _syncResultNotifier.value = SyncResult.syncPaused;
           return;
         }
         DeviceAccessResult access;
         try {
           access = await registerCurrentDevice();
         } on DeviceLimitReachedException {
+          AppLogger.warn('CloudSync', 'syncNow: device limit reached');
           lastError.value =
               'تم الوصول إلى الحد الأقصى للأجهزة في الحساب. افصل جهازاً أو قم بترقية الخطة.';
+          _syncResultNotifier.value = SyncResult.deviceBlocked;
           return;
         }
         if (access == DeviceAccessResult.revoked) {
+          AppLogger.warn('CloudSync', 'syncNow: device revoked');
           final kick = onRemoteDeviceRevoked;
           if (kick != null) {
             unawaited(kick());
@@ -830,36 +877,53 @@ class CloudSyncService {
             lastError.value =
                 'تم إزالة هذا الجهاز من الحساب. سجّل الخروج ثم اطلب السماح بالعودة من جهاز نشط.';
           }
+          _syncResultNotifier.value = SyncResult.deviceBlocked;
           return;
         }
+
+        bool pulled = false;
         if (forcePull) {
+          AppLogger.info('CloudSync', 'syncNow: pulling snapshot…');
           final pull = await _pullLatestSnapshot(
             userId: user.id,
             forceImport: forceImportOnPull,
           );
           if (pull == _PullOutcome.blockPush) {
+            _syncResultNotifier.value = SyncResult.pullBlocked;
             return;
           }
+          pulled = true;
         }
+
+        AppLogger.info('CloudSync', 'syncNow: pushing snapshot…');
         final pushOk = await _pushSnapshot(
           userId: user.id,
           forcePush: forcePush,
         );
         await refreshDevices();
         if (!pushOk) {
+          AppLogger.warn('CloudSync', 'syncNow: push returned false');
+          _syncResultNotifier.value = SyncResult.error;
           return;
         }
         lastError.value = null;
         lastSyncAt.value = DateTime.now();
+        _syncResultNotifier.value =
+            pulled ? SyncResult.pullAndPush : SyncResult.pushed;
+        AppLogger.info('CloudSync', 'syncNow: completed successfully');
       } on PostgrestException catch (e) {
+        AppLogger.error('CloudSync', 'syncNow: PostgrestException', e);
         if (_isMissingSyncTables(e)) {
           lastError.value =
               'جداول المزامنة غير موجودة في Supabase. نفّذ ملف supabase_sync_setup.sql مرة واحدة من SQL Editor.';
         } else {
           lastError.value = e.toString();
         }
-      } catch (e) {
+        _syncResultNotifier.value = SyncResult.error;
+      } catch (e, st) {
+        AppLogger.error('CloudSync', 'syncNow: unexpected error', e, st);
         lastError.value = e.toString();
+        _syncResultNotifier.value = SyncResult.error;
       } finally {
         _syncRunning = false;
         if (_syncQueued) {
@@ -996,15 +1060,42 @@ class CloudSyncService {
     'work_shift': 'work_shifts',
     'cash_ledger': 'cash_ledger',
     'product': 'products',
+    'product_variant': 'product_variants',
+    'product_color': 'product_colors',
+    'product_batch': 'product_batches',
     'category': 'categories',
     'brand': 'brands',
+    'warehouse': 'warehouses',
     'customer': 'customers',
+    'customer_extra_phone': 'customer_extra_phones',
     'supplier': 'suppliers',
     'supplier_bill': 'supplier_bills',
     'supplier_payout': 'supplier_payouts',
     'customer_debt_payment': 'customer_debt_payments',
     'installment_plan': 'installment_plans',
     'installment': 'installments',
+    'loyalty_setting': 'loyalty_settings',
+    'loyalty_ledger': 'loyalty_ledger',
+    'debt_setting': 'debt_settings',
+    'installment_setting': 'installment_settings',
+    'purchase_order': 'purchase_orders',
+    'purchase_order_item': 'purchase_order_items',
+    'po_receipt': 'po_receipts',
+    'stock_voucher': 'stock_vouchers',
+    'stock_voucher_item': 'stock_voucher_items',
+    'stocktaking_session': 'stocktaking_sessions',
+    'stocktaking_item': 'stocktaking_items',
+    'price_list': 'price_lists',
+    'price_list_item': 'price_list_items',
+    'branch': 'branches',
+    'parked_sale': 'parked_sales',
+    'activity_log': 'activity_logs',
+    'unit_template': 'unit_templates',
+    'unit_template_conversion': 'unit_template_conversions',
+    'print_setting': 'print_settings',
+    'app_setting': 'app_settings',
+    'service_order': 'service_orders',
+    'service_order_item': 'service_order_items',
   };
 
   Future<void> _attachSyncNotificationsRealtime() async {
@@ -1502,6 +1593,8 @@ class CloudSyncService {
     if (!forcePush &&
         _tableSignaturesUnchanged(currentSigMap, previousSigMap)) {
       // لا تغيّر في أي جدول -> لا رفع.
+      AppLogger.info('CloudSync',
+          '_pushSnapshot: signatures unchanged, skipping push (use forcePush=true to override)');
       return true;
     }
     // رفع **كل** جداول المزامنة في كل لقطة. الرفع «بالجداول المتغيرة فقط» كان
@@ -2201,6 +2294,32 @@ class CloudSyncService {
         if (handled) continue;
       }
 
+      // ── products: global_id merge with FK resolution ─────────────────
+      if (table == 'products' && localCols.contains('global_id')) {
+        final handled = await _mergeProductsByGlobalId(
+          txn: txn,
+          incomingRaw: incomingRaw,
+          incoming: incoming,
+          localCols: localCols,
+          deletedAt: deletedAt,
+        );
+        if (handled) continue;
+      }
+
+      // ── All remaining tables with global_id: simple merge ────────────
+      if (localCols.contains('global_id')) {
+        final handled = await _mergeSimpleTableByGlobalId(
+          txn: txn,
+          table: table,
+          incomingRaw: incomingRaw,
+          incoming: incoming,
+          localCols: localCols,
+          deletedAt: deletedAt,
+          pkCols: pkCols,
+        );
+        if (handled) continue;
+      }
+
       // إذا لا يوجد مفتاح أساسي عملي، fallback على replace.
 
       if (pkCols.isEmpty || pkCols.any((c) => !incoming.containsKey(c))) {
@@ -2364,6 +2483,63 @@ class CloudSyncService {
     }
 
     await _doMergeWithGlobalId(txn: txn, table: table, gid: gid, incomingRaw: incomingRaw, incoming: incoming, deletedAt: deletedAt);
+    return true;
+  }
+
+  /// ── Products: global_id merge with FK resolution ──────────────────────
+  /// Products reference `categoryId` and `brandId` which are local auto-increment
+  /// PKs that differ across devices.  When an incoming product arrives we resolve
+  /// those FKs by looking up the local id whose `global_id` matches the remote
+  /// `category_global_id` / `brand_global_id` columns (or the value stored inside
+  /// the product row when the remote side exported the resolved id).
+  Future<bool> _mergeProductsByGlobalId({
+    required Transaction txn,
+    required Map<String, dynamic> incomingRaw,
+    required Map<String, dynamic> incoming,
+    required Set<String> localCols,
+    required DateTime? deletedAt,
+  }) async {
+    final gid = (incomingRaw['global_id'] ?? incoming['global_id'] ?? '').toString().trim();
+    if (gid.isEmpty) return false;
+
+    // Resolve categoryId via global_id lookup ──────────────────────────────
+    if (localCols.contains('categoryId')) {
+      // The incoming row may carry a category_global_id (from remote export)
+      // or the categoryId itself may be a global_id in some migration paths.
+      final catGid = (incomingRaw['category_global_id'] ?? '').toString().trim();
+      if (catGid.isNotEmpty) {
+        final c = await txn.query('categories',
+            columns: ['id'], where: 'global_id = ?', whereArgs: [catGid], limit: 1);
+        if (c.isNotEmpty) {
+          incoming['categoryId'] = c.first['id'];
+        } else {
+          incoming['categoryId'] = null; // category doesn't exist locally yet
+        }
+      }
+    }
+
+    // Resolve brandId via global_id lookup ─────────────────────────────────
+    if (localCols.contains('brandId')) {
+      final brandGid = (incomingRaw['brand_global_id'] ?? '').toString().trim();
+      if (brandGid.isNotEmpty) {
+        final b = await txn.query('brands',
+            columns: ['id'], where: 'global_id = ?', whereArgs: [brandGid], limit: 1);
+        if (b.isNotEmpty) {
+          incoming['brandId'] = b.first['id'];
+        } else {
+          incoming['brandId'] = null;
+        }
+      }
+    }
+
+    await _doMergeWithGlobalId(
+      txn: txn,
+      table: 'products',
+      gid: gid,
+      incomingRaw: incomingRaw,
+      incoming: incoming,
+      deletedAt: deletedAt,
+    );
     return true;
   }
 

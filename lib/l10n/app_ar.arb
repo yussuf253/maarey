@@ -3156,5 +3156,9 @@
   "bulkImportSampleSupplier": "شركة الأمل",
   "bulkImportSampleTax": "0",
   "bulkImportSampleUnit": "قطعة",
-  "ipBulkImport": "استيراد منتجات بالجملة"
+  "ipBulkImport": "استيراد منتجات بالجملة",
+  "syncNothingToSync": "لا توجد تغييرات للمزامنة",
+  "syncCompletedPush": "تم رفع البيانات إلى السحابة",
+  "syncCompletedPull": "تم سحب البيانات من السحابة",
+  "syncNotLoggedIn": "يجب تسجيل الدخول أولاً للمزامنة"
 }

@@ -3252,5 +3252,9 @@
   "bulkImportSampleSupplier": "Al-Amal Company",
   "bulkImportSampleTax": "0",
   "bulkImportSampleUnit": "Piece",
-  "ipBulkImport": "Bulk import products"
+  "ipBulkImport": "Bulk import products",
+  "syncNothingToSync": "No changes to sync",
+  "syncCompletedPush": "Data uploaded to cloud",
+  "syncCompletedPull": "Data downloaded from cloud",
+  "syncNotLoggedIn": "Please sign in to sync"
 }
