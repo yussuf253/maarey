@@ -52,12 +52,6 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
     _ => value,
   };
 
-  String _typeLabel(String type) => switch (type) {
-    'in' => loc.filterDeposit,
-    'out' => loc.filterWithdraw,
-    'transfer' => loc.filterTransfer,
-    _ => '',
-  };
 
   @override
   void initState() {

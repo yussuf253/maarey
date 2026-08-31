@@ -17,6 +17,7 @@ import '../../utils/screen_layout.dart';
 import 'add_product_screen.dart';
 import 'barcode_labels_screen.dart';
 import 'inventory_settings_screen.dart';
+import 'bulk_import_screen.dart';
 import 'product_edit_screen.dart';
 
 final class _AddProductShortcut extends Intent {
@@ -320,6 +321,13 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
                       builder: (_) => const BarcodeLabelsScreen(),
                     ),
                   );
+                } else if (v == 'bulk_import') {
+                  await Navigator.push<bool>(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const BulkImportScreen(),
+                    ),
+                  );
                 }
               },
               itemBuilder: (_) => [
@@ -330,6 +338,16 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
                       const Icon(Icons.qr_code_rounded, size: 18),
                       const SizedBox(width: 10),
                       Text(loc.ipPrintBarcodes),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: 'bulk_import',
+                  child: Row(
+                    children: [
+                      const Icon(Icons.upload_file_rounded, size: 18),
+                      const SizedBox(width: 10),
+                      Text(loc.ipBulkImport),
                     ],
                   ),
                 ),

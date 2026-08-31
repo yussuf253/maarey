@@ -18768,6 +18768,312 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'فتح أدوات الاختبار…'**
   String get devToolsOpen;
+
+  /// No description provided for @bulkImportTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'استيراد المنتجات من CSV'**
+  String get bulkImportTitle;
+
+  /// No description provided for @bulkImportSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'قم باستيراد منتجاتك من ملف CSV بسرعة'**
+  String get bulkImportSubtitle;
+
+  /// No description provided for @bulkImportTemplate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحميل نموذج CSV'**
+  String get bulkImportTemplate;
+
+  /// No description provided for @bulkImportTemplateDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'حمّل النموذج المملوء مسبقاً ثم أعد ملؤه ببيانات منتجاتك'**
+  String get bulkImportTemplateDesc;
+
+  /// No description provided for @bulkImportPickFile.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيار ملف CSV'**
+  String get bulkImportPickFile;
+
+  /// No description provided for @bulkImportPickFileDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر ملف CSV من جهازك'**
+  String get bulkImportPickFileDesc;
+
+  /// No description provided for @bulkImportPreview.
+  ///
+  /// In ar, this message translates to:
+  /// **'معاينة البيانات'**
+  String get bulkImportPreview;
+
+  /// No description provided for @bulkImportStartImport.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدء الاستيراد'**
+  String get bulkImportStartImport;
+
+  /// No description provided for @bulkImportImporting.
+  ///
+  /// In ar, this message translates to:
+  /// **'جاري الاستيراد...'**
+  String get bulkImportImporting;
+
+  /// No description provided for @bulkImportSuccess.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم استيراد المنتجات بنجاح'**
+  String get bulkImportSuccess;
+
+  /// No description provided for @bulkImportPartial.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم استيراد {success} من {total} — فشل {failed}'**
+  String bulkImportPartial(Object failed, Object success, Object total);
+
+  /// No description provided for @bulkImportFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'فشل الاستيراد'**
+  String get bulkImportFailed;
+
+  /// No description provided for @bulkImportNoFile.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يتم اختيار ملف'**
+  String get bulkImportNoFile;
+
+  /// No description provided for @bulkImportInvalidFormat.
+  ///
+  /// In ar, this message translates to:
+  /// **'صيغة الملف غير صحيحة'**
+  String get bulkImportInvalidFormat;
+
+  /// No description provided for @bulkImportColName.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم المنتج'**
+  String get bulkImportColName;
+
+  /// No description provided for @bulkImportColBarcode.
+  ///
+  /// In ar, this message translates to:
+  /// **'الباركود'**
+  String get bulkImportColBarcode;
+
+  /// No description provided for @bulkImportColBuyPrice.
+  ///
+  /// In ar, this message translates to:
+  /// **'سعر الشراء'**
+  String get bulkImportColBuyPrice;
+
+  /// No description provided for @bulkImportColSellPrice.
+  ///
+  /// In ar, this message translates to:
+  /// **'سعر البيع'**
+  String get bulkImportColSellPrice;
+
+  /// No description provided for @bulkImportColQty.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكمية'**
+  String get bulkImportColQty;
+
+  /// No description provided for @bulkImportColCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفئة'**
+  String get bulkImportColCategory;
+
+  /// No description provided for @bulkImportColLowStock.
+  ///
+  /// In ar, this message translates to:
+  /// **'حد التنبيه'**
+  String get bulkImportColLowStock;
+
+  /// No description provided for @bulkImportColDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوصف'**
+  String get bulkImportColDescription;
+
+  /// No description provided for @bulkImportColSupplier.
+  ///
+  /// In ar, this message translates to:
+  /// **'المورد'**
+  String get bulkImportColSupplier;
+
+  /// No description provided for @bulkImportColTaxPercent.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة الضريبة'**
+  String get bulkImportColTaxPercent;
+
+  /// No description provided for @bulkImportColSaleUnit.
+  ///
+  /// In ar, this message translates to:
+  /// **'وحدة البيع'**
+  String get bulkImportColSaleUnit;
+
+  /// No description provided for @bulkImportRowsFound.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم العثور على {count} صفوف'**
+  String bulkImportRowsFound(Object count);
+
+  /// No description provided for @bulkImportErrorsFound.
+  ///
+  /// In ar, this message translates to:
+  /// **'يوجد {count} أخطاء — صححها قبل الاستيراد'**
+  String bulkImportErrorsFound(Object count);
+
+  /// No description provided for @bulkImportRowError.
+  ///
+  /// In ar, this message translates to:
+  /// **'صف {row}: {error}'**
+  String bulkImportRowError(Object error, Object row);
+
+  /// No description provided for @bulkImportRequiredField.
+  ///
+  /// In ar, this message translates to:
+  /// **'حقل مطلوب'**
+  String get bulkImportRequiredField;
+
+  /// No description provided for @bulkImportInvalidNumber.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم غير صحيح'**
+  String get bulkImportInvalidNumber;
+
+  /// No description provided for @bulkImportImportAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'استيراد الكل'**
+  String get bulkImportImportAll;
+
+  /// No description provided for @bulkImportCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get bulkImportCancel;
+
+  /// No description provided for @bulkImportColumnName.
+  ///
+  /// In ar, this message translates to:
+  /// **'العمود'**
+  String get bulkImportColumnName;
+
+  /// No description provided for @bulkImportColumnSample.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال'**
+  String get bulkImportColumnSample;
+
+  /// No description provided for @bulkImportColumnStatus.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحالة'**
+  String get bulkImportColumnStatus;
+
+  /// No description provided for @bulkImportRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'مطلوب'**
+  String get bulkImportRequired;
+
+  /// No description provided for @bulkImportOptional.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختياري'**
+  String get bulkImportOptional;
+
+  /// No description provided for @bulkImportBackToImport.
+  ///
+  /// In ar, this message translates to:
+  /// **'العودة للاستيراد'**
+  String get bulkImportBackToImport;
+
+  /// No description provided for @bulkImportAddMore.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة المزيد'**
+  String get bulkImportAddMore;
+
+  /// No description provided for @bulkImportSampleName.
+  ///
+  /// In ar, this message translates to:
+  /// **'شيبس ليز'**
+  String get bulkImportSampleName;
+
+  /// No description provided for @bulkImportSampleBarcode.
+  ///
+  /// In ar, this message translates to:
+  /// **'6281100123456'**
+  String get bulkImportSampleBarcode;
+
+  /// No description provided for @bulkImportSampleBuy.
+  ///
+  /// In ar, this message translates to:
+  /// **'800'**
+  String get bulkImportSampleBuy;
+
+  /// No description provided for @bulkImportSampleSell.
+  ///
+  /// In ar, this message translates to:
+  /// **'1000'**
+  String get bulkImportSampleSell;
+
+  /// No description provided for @bulkImportSampleQty.
+  ///
+  /// In ar, this message translates to:
+  /// **'50'**
+  String get bulkImportSampleQty;
+
+  /// No description provided for @bulkImportSampleCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'وجبات خفيفة'**
+  String get bulkImportSampleCategory;
+
+  /// No description provided for @bulkImportSampleLowStock.
+  ///
+  /// In ar, this message translates to:
+  /// **'10'**
+  String get bulkImportSampleLowStock;
+
+  /// No description provided for @bulkImportSampleDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'شيبس بطاطس بالملح'**
+  String get bulkImportSampleDesc;
+
+  /// No description provided for @bulkImportSampleSupplier.
+  ///
+  /// In ar, this message translates to:
+  /// **'شركة الأمل'**
+  String get bulkImportSampleSupplier;
+
+  /// No description provided for @bulkImportSampleTax.
+  ///
+  /// In ar, this message translates to:
+  /// **'0'**
+  String get bulkImportSampleTax;
+
+  /// No description provided for @bulkImportSampleUnit.
+  ///
+  /// In ar, this message translates to:
+  /// **'قطعة'**
+  String get bulkImportSampleUnit;
+
+  /// No description provided for @ipBulkImport.
+  ///
+  /// In ar, this message translates to:
+  /// **'استيراد منتجات بالجملة'**
+  String get ipBulkImport;
 }
 
 class _AppLocalizationsDelegate

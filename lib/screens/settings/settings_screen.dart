@@ -1497,7 +1497,6 @@ class _StoreInfoScreenState extends State<_StoreInfoScreen> {
   final _address = TextEditingController();
   final _phone = TextEditingController();
   final _taxNo = TextEditingController();
-  bool _loaded = false;
 
   @override
   void initState() {
@@ -1512,7 +1511,6 @@ class _StoreInfoScreenState extends State<_StoreInfoScreen> {
       _address.text = p.getString('store_info_address') ?? '';
       _phone.text = p.getString('store_info_phone') ?? '';
       _taxNo.text = p.getString('store_info_taxNo') ?? '';
-      _loaded = true;
     });
   }
 

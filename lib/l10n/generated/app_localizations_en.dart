@@ -10542,4 +10542,167 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get devToolsOpen => 'Opening dev tools…';
+
+  @override
+  String get bulkImportTitle => 'Import Products from CSV';
+
+  @override
+  String get bulkImportSubtitle =>
+      'Import your products from a CSV file quickly';
+
+  @override
+  String get bulkImportTemplate => 'Download CSV Template';
+
+  @override
+  String get bulkImportTemplateDesc =>
+      'Download a pre-filled template, then fill it with your product data';
+
+  @override
+  String get bulkImportPickFile => 'Pick CSV File';
+
+  @override
+  String get bulkImportPickFileDesc => 'Choose a CSV file from your device';
+
+  @override
+  String get bulkImportPreview => 'Data Preview';
+
+  @override
+  String get bulkImportStartImport => 'Start Import';
+
+  @override
+  String get bulkImportImporting => 'Importing...';
+
+  @override
+  String get bulkImportSuccess => 'Products imported successfully';
+
+  @override
+  String bulkImportPartial(Object failed, Object success, Object total) {
+    return 'Imported $success of $total — $failed failed';
+  }
+
+  @override
+  String get bulkImportFailed => 'Import failed';
+
+  @override
+  String get bulkImportNoFile => 'No file selected';
+
+  @override
+  String get bulkImportInvalidFormat => 'Invalid file format';
+
+  @override
+  String get bulkImportColName => 'Product Name';
+
+  @override
+  String get bulkImportColBarcode => 'Barcode';
+
+  @override
+  String get bulkImportColBuyPrice => 'Buy Price';
+
+  @override
+  String get bulkImportColSellPrice => 'Sell Price';
+
+  @override
+  String get bulkImportColQty => 'Quantity';
+
+  @override
+  String get bulkImportColCategory => 'Category';
+
+  @override
+  String get bulkImportColLowStock => 'Low Stock Threshold';
+
+  @override
+  String get bulkImportColDescription => 'Description';
+
+  @override
+  String get bulkImportColSupplier => 'Supplier';
+
+  @override
+  String get bulkImportColTaxPercent => 'Tax %';
+
+  @override
+  String get bulkImportColSaleUnit => 'Sale Unit';
+
+  @override
+  String bulkImportRowsFound(Object count) {
+    return '$count rows found';
+  }
+
+  @override
+  String bulkImportErrorsFound(Object count) {
+    return '$count errors — fix them before importing';
+  }
+
+  @override
+  String bulkImportRowError(Object error, Object row) {
+    return 'Row $row: $error';
+  }
+
+  @override
+  String get bulkImportRequiredField => 'Required field';
+
+  @override
+  String get bulkImportInvalidNumber => 'Invalid number';
+
+  @override
+  String get bulkImportImportAll => 'Import All';
+
+  @override
+  String get bulkImportCancel => 'Cancel';
+
+  @override
+  String get bulkImportColumnName => 'Column';
+
+  @override
+  String get bulkImportColumnSample => 'Example';
+
+  @override
+  String get bulkImportColumnStatus => 'Status';
+
+  @override
+  String get bulkImportRequired => 'Required';
+
+  @override
+  String get bulkImportOptional => 'Optional';
+
+  @override
+  String get bulkImportBackToImport => 'Back to Import';
+
+  @override
+  String get bulkImportAddMore => 'Add More';
+
+  @override
+  String get bulkImportSampleName => 'Lays Chips';
+
+  @override
+  String get bulkImportSampleBarcode => '6281100123456';
+
+  @override
+  String get bulkImportSampleBuy => '800';
+
+  @override
+  String get bulkImportSampleSell => '1000';
+
+  @override
+  String get bulkImportSampleQty => '50';
+
+  @override
+  String get bulkImportSampleCategory => 'Snacks';
+
+  @override
+  String get bulkImportSampleLowStock => '10';
+
+  @override
+  String get bulkImportSampleDesc => 'Salted potato chips';
+
+  @override
+  String get bulkImportSampleSupplier => 'Al-Amal Company';
+
+  @override
+  String get bulkImportSampleTax => '0';
+
+  @override
+  String get bulkImportSampleUnit => 'Piece';
+
+  @override
+  String get ipBulkImport => 'Bulk import products';
 }

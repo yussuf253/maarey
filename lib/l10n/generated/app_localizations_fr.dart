@@ -10663,4 +10663,168 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get devToolsOpen => 'Ouverture des outils de dev…';
+
+  @override
+  String get bulkImportTitle => 'Importer des Produits depuis CSV';
+
+  @override
+  String get bulkImportSubtitle =>
+      'Importez rapidement vos produits depuis un fichier CSV';
+
+  @override
+  String get bulkImportTemplate => 'Télécharger le Modèle CSV';
+
+  @override
+  String get bulkImportTemplateDesc =>
+      'Téléchargez un modèle pré-rempli, puis complétez-le avec vos données produit';
+
+  @override
+  String get bulkImportPickFile => 'Choisir un Fichier CSV';
+
+  @override
+  String get bulkImportPickFileDesc =>
+      'Sélectionnez un fichier CSV depuis votre appareil';
+
+  @override
+  String get bulkImportPreview => 'Aperçu des Données';
+
+  @override
+  String get bulkImportStartImport => 'Lancer l\'Import';
+
+  @override
+  String get bulkImportImporting => 'Import en cours...';
+
+  @override
+  String get bulkImportSuccess => 'Produits importés avec succès';
+
+  @override
+  String bulkImportPartial(Object failed, Object success, Object total) {
+    return 'Importé $success sur $total — $failed échoué(s)';
+  }
+
+  @override
+  String get bulkImportFailed => 'Échec de l\'import';
+
+  @override
+  String get bulkImportNoFile => 'Aucun fichier sélectionné';
+
+  @override
+  String get bulkImportInvalidFormat => 'Format de fichier invalide';
+
+  @override
+  String get bulkImportColName => 'Nom du Produit';
+
+  @override
+  String get bulkImportColBarcode => 'Code-barres';
+
+  @override
+  String get bulkImportColBuyPrice => 'Prix d\'Achat';
+
+  @override
+  String get bulkImportColSellPrice => 'Prix de Vente';
+
+  @override
+  String get bulkImportColQty => 'Quantité';
+
+  @override
+  String get bulkImportColCategory => 'Catégorie';
+
+  @override
+  String get bulkImportColLowStock => 'Seuil Stock Bas';
+
+  @override
+  String get bulkImportColDescription => 'Description';
+
+  @override
+  String get bulkImportColSupplier => 'Fournisseur';
+
+  @override
+  String get bulkImportColTaxPercent => '% Taxe';
+
+  @override
+  String get bulkImportColSaleUnit => 'Unité de Vente';
+
+  @override
+  String bulkImportRowsFound(Object count) {
+    return '$count lignes trouvées';
+  }
+
+  @override
+  String bulkImportErrorsFound(Object count) {
+    return '$count erreurs — corrigez-les avant l\'import';
+  }
+
+  @override
+  String bulkImportRowError(Object error, Object row) {
+    return 'Ligne $row : $error';
+  }
+
+  @override
+  String get bulkImportRequiredField => 'Champ obligatoire';
+
+  @override
+  String get bulkImportInvalidNumber => 'Nombre invalide';
+
+  @override
+  String get bulkImportImportAll => 'Tout Importer';
+
+  @override
+  String get bulkImportCancel => 'Annuler';
+
+  @override
+  String get bulkImportColumnName => 'Colonne';
+
+  @override
+  String get bulkImportColumnSample => 'Exemple';
+
+  @override
+  String get bulkImportColumnStatus => 'Statut';
+
+  @override
+  String get bulkImportRequired => 'Obligatoire';
+
+  @override
+  String get bulkImportOptional => 'Optionnel';
+
+  @override
+  String get bulkImportBackToImport => 'Retour à l\'Import';
+
+  @override
+  String get bulkImportAddMore => 'Ajouter Plus';
+
+  @override
+  String get bulkImportSampleName => 'Chips Lays';
+
+  @override
+  String get bulkImportSampleBarcode => '6281100123456';
+
+  @override
+  String get bulkImportSampleBuy => '800';
+
+  @override
+  String get bulkImportSampleSell => '1000';
+
+  @override
+  String get bulkImportSampleQty => '50';
+
+  @override
+  String get bulkImportSampleCategory => 'Snacks';
+
+  @override
+  String get bulkImportSampleLowStock => '10';
+
+  @override
+  String get bulkImportSampleDesc => 'Chips de pommes de terre salées';
+
+  @override
+  String get bulkImportSampleSupplier => 'Société Al-Amal';
+
+  @override
+  String get bulkImportSampleTax => '0';
+
+  @override
+  String get bulkImportSampleUnit => 'Pièce';
+
+  @override
+  String get ipBulkImport => 'Import en masse de produits';
 }

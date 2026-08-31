@@ -10442,4 +10442,166 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get devToolsOpen => 'فتح أدوات الاختبار…';
+
+  @override
+  String get bulkImportTitle => 'استيراد المنتجات من CSV';
+
+  @override
+  String get bulkImportSubtitle => 'قم باستيراد منتجاتك من ملف CSV بسرعة';
+
+  @override
+  String get bulkImportTemplate => 'تحميل نموذج CSV';
+
+  @override
+  String get bulkImportTemplateDesc =>
+      'حمّل النموذج المملوء مسبقاً ثم أعد ملؤه ببيانات منتجاتك';
+
+  @override
+  String get bulkImportPickFile => 'اختيار ملف CSV';
+
+  @override
+  String get bulkImportPickFileDesc => 'اختر ملف CSV من جهازك';
+
+  @override
+  String get bulkImportPreview => 'معاينة البيانات';
+
+  @override
+  String get bulkImportStartImport => 'بدء الاستيراد';
+
+  @override
+  String get bulkImportImporting => 'جاري الاستيراد...';
+
+  @override
+  String get bulkImportSuccess => 'تم استيراد المنتجات بنجاح';
+
+  @override
+  String bulkImportPartial(Object failed, Object success, Object total) {
+    return 'تم استيراد $success من $total — فشل $failed';
+  }
+
+  @override
+  String get bulkImportFailed => 'فشل الاستيراد';
+
+  @override
+  String get bulkImportNoFile => 'لم يتم اختيار ملف';
+
+  @override
+  String get bulkImportInvalidFormat => 'صيغة الملف غير صحيحة';
+
+  @override
+  String get bulkImportColName => 'اسم المنتج';
+
+  @override
+  String get bulkImportColBarcode => 'الباركود';
+
+  @override
+  String get bulkImportColBuyPrice => 'سعر الشراء';
+
+  @override
+  String get bulkImportColSellPrice => 'سعر البيع';
+
+  @override
+  String get bulkImportColQty => 'الكمية';
+
+  @override
+  String get bulkImportColCategory => 'الفئة';
+
+  @override
+  String get bulkImportColLowStock => 'حد التنبيه';
+
+  @override
+  String get bulkImportColDescription => 'الوصف';
+
+  @override
+  String get bulkImportColSupplier => 'المورد';
+
+  @override
+  String get bulkImportColTaxPercent => 'نسبة الضريبة';
+
+  @override
+  String get bulkImportColSaleUnit => 'وحدة البيع';
+
+  @override
+  String bulkImportRowsFound(Object count) {
+    return 'تم العثور على $count صفوف';
+  }
+
+  @override
+  String bulkImportErrorsFound(Object count) {
+    return 'يوجد $count أخطاء — صححها قبل الاستيراد';
+  }
+
+  @override
+  String bulkImportRowError(Object error, Object row) {
+    return 'صف $row: $error';
+  }
+
+  @override
+  String get bulkImportRequiredField => 'حقل مطلوب';
+
+  @override
+  String get bulkImportInvalidNumber => 'رقم غير صحيح';
+
+  @override
+  String get bulkImportImportAll => 'استيراد الكل';
+
+  @override
+  String get bulkImportCancel => 'إلغاء';
+
+  @override
+  String get bulkImportColumnName => 'العمود';
+
+  @override
+  String get bulkImportColumnSample => 'مثال';
+
+  @override
+  String get bulkImportColumnStatus => 'الحالة';
+
+  @override
+  String get bulkImportRequired => 'مطلوب';
+
+  @override
+  String get bulkImportOptional => 'اختياري';
+
+  @override
+  String get bulkImportBackToImport => 'العودة للاستيراد';
+
+  @override
+  String get bulkImportAddMore => 'إضافة المزيد';
+
+  @override
+  String get bulkImportSampleName => 'شيبس ليز';
+
+  @override
+  String get bulkImportSampleBarcode => '6281100123456';
+
+  @override
+  String get bulkImportSampleBuy => '800';
+
+  @override
+  String get bulkImportSampleSell => '1000';
+
+  @override
+  String get bulkImportSampleQty => '50';
+
+  @override
+  String get bulkImportSampleCategory => 'وجبات خفيفة';
+
+  @override
+  String get bulkImportSampleLowStock => '10';
+
+  @override
+  String get bulkImportSampleDesc => 'شيبس بطاطس بالملح';
+
+  @override
+  String get bulkImportSampleSupplier => 'شركة الأمل';
+
+  @override
+  String get bulkImportSampleTax => '0';
+
+  @override
+  String get bulkImportSampleUnit => 'قطعة';
+
+  @override
+  String get ipBulkImport => 'استيراد منتجات بالجملة';
 }
