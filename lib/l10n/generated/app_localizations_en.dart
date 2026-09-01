@@ -10765,4 +10765,135 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get olAutoFilled => 'Fields auto-filled from international directory';
+
+  @override
+  String get signupAcceptTermsFirst =>
+      'You must accept the terms and conditions first';
+
+  @override
+  String get signupAccountCreated =>
+      'Account created successfully! Please log in.';
+
+  @override
+  String get signupGoogleSoon => 'Google Sign-In will be available soon';
+
+  @override
+  String get signupBrandSubtitle => 'Business Management System';
+
+  @override
+  String get signupGetStarted => 'GET STARTED';
+
+  @override
+  String get signupCreateAccount => 'Create New Account';
+
+  @override
+  String get signupFullNameLabel => 'Business Name / Full Name';
+
+  @override
+  String get signupFullNameHint => 'e.g. Basra Trading Company';
+
+  @override
+  String get signupNameRequired => 'Name is required';
+
+  @override
+  String get signupNameMinLength => 'Must be at least 3 characters';
+
+  @override
+  String get signupEmailLabel => 'Email';
+
+  @override
+  String get signupEmailRequired => 'Email is required';
+
+  @override
+  String get signupEmailInvalid => 'Invalid email format';
+
+  @override
+  String get signupPhoneLabel => 'Phone Number';
+
+  @override
+  String get signupPhoneHintIraq => '07701234567';
+
+  @override
+  String get signupPhoneHintOther => 'Enter number';
+
+  @override
+  String get signupPhoneRequired => 'Phone number is required';
+
+  @override
+  String get signupPhoneIraqInvalid =>
+      'Iraqi number: 11 digits starting with 07';
+
+  @override
+  String get signupPhoneInvalid => 'Invalid number';
+
+  @override
+  String get signupPasswordLabel => 'Password';
+
+  @override
+  String get signupPasswordHint => '8 characters minimum';
+
+  @override
+  String get signupPasswordRequired => 'Password is required';
+
+  @override
+  String get signupPasswordMinLength => 'At least 8 characters';
+
+  @override
+  String get signupConfirmPasswordLabel => 'Confirm Password';
+
+  @override
+  String get signupConfirmPasswordHint => 'Re-enter password';
+
+  @override
+  String get signupConfirmPasswordRequired =>
+      'Password confirmation is required';
+
+  @override
+  String get signupPasswordsMismatch => 'Passwords do not match';
+
+  @override
+  String get signupCaptchaTitle =>
+      'Identity Verification — Answer the simple question';
+
+  @override
+  String get signupCaptchaChange => 'Change';
+
+  @override
+  String get signupCaptchaHint => 'Answer';
+
+  @override
+  String get signupCaptchaAnswerRequired => 'Enter the answer';
+
+  @override
+  String get signupCaptchaWrong => 'Incorrect answer';
+
+  @override
+  String get signupCreateButton => 'CREATE ACCOUNT';
+
+  @override
+  String get signupHasAccount => 'Already have an account?';
+
+  @override
+  String get signupLoginLink => 'Log In';
+
+  @override
+  String get signupGoogleButton => 'Sign up with Google';
+
+  @override
+  String get signupOrDivider => 'Or sign up with details';
+
+  @override
+  String get signupTermsPrefix => 'I agree to ';
+
+  @override
+  String get signupTermsOfUse => 'Terms of Use';
+
+  @override
+  String get signupAnd => ' and ';
+
+  @override
+  String get signupPrivacyPolicy => 'Privacy Policy';
+
+  @override
+  String get signupTermsSuffix => ' of Naboo.';
 }

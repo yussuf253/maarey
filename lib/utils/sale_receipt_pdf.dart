@@ -2097,39 +2097,18 @@ class SaleReceiptPdf {
   ) async {
     final scaffoldMsg = ScaffoldMessenger.of(context);
     try {
-      final printers = await printing.Printing.listPrinters();
-      if (printers.isEmpty) {
-        scaffoldMsg.showSnackBar(
-          SnackBar(
-            content: Text(
-              _l.rpNoPrinterFound,
-              style: const TextStyle(fontFamily: 'NotoNaskhArabic'),
-            ),
-            backgroundColor: Colors.redAccent,
-            behavior: SnackBarBehavior.floating,
-          ),
-        );
-        return;
-      }
-      
-      final printer = printers.firstWhere(
-        (p) => p.isDefault,
-        orElse: () => printers.first,
-      );
-      
       final bytes = await buildPdf(pageFormat);
-      
-      await printing.Printing.directPrintPdf(
-        printer: printer,
-        onLayout: (_) => bytes,
+      await printing.Printing.layoutPdf(
+        onLayout: (_) async => bytes,
         format: pageFormat,
+        name: 'receipt',
       );
     } catch (e) {
       scaffoldMsg.showSnackBar(
         SnackBar(
           content: Text(
             _l.rpPrintError,
-            style: TextStyle(fontFamily: 'NotoNaskhArabic'),
+            style: const TextStyle(fontFamily: 'NotoNaskhArabic'),
           ),
           backgroundColor: Colors.redAccent,
           behavior: SnackBarBehavior.floating,

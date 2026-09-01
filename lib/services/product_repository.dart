@@ -218,6 +218,225 @@ class ProductRepository {
     // Products are added via the add-product screen or bulk CSV import.
   }
 
+  /// Import predefined medicines from the pharmacy inventory spreadsheet.
+  /// Returns the number of products inserted.
+  Future<int> importMedicines() async {
+    final db = await _db;
+    final now = DateTime.now().toIso8601String();
+    final tid = _tenant.activeTenantId.clamp(1, 999999999);
+
+    // Ensure "Médicaments" category exists.
+    final catRow = await db.query(
+      'categories', columns: ['id'],
+      where: 'name = ? AND isActive = 1',
+      whereArgs: ['Médicaments'], limit: 1,
+    );
+    int catId;
+    if (catRow.isEmpty) {
+      catId = await db.insert('categories', {
+        'name': 'Médicaments',
+        'isActive': 1,
+        'tenantId': tid,
+        'createdAt': now,
+      });
+    } else {
+      catId = catRow.first['id'] as int;
+    }
+
+    // Check which products already exist (by name) to avoid duplicates.
+    final existing = await db.rawQuery(
+      'SELECT name FROM products WHERE isActive = 1',
+    );
+    final existingNames = <String>{
+      for (final r in existing) (r['name'] as String).toLowerCase(),
+    };
+
+    final medicines = <Map<String, dynamic>>[
+      {'name': 'Broncathiol 2% oral', 'qty': 11, 'price': 1250, 'exp': '2027-01-01'},
+      {'name': 'Hydravit 10mg', 'qty': 32, 'price': 200, 'exp': '2028-01-01'},
+      {'name': 'Hélicidine sans sucre oral', 'qty': 4, 'price': 1450, 'exp': '2028-09-01'},
+      {'name': 'Trimetabol oral 150ml', 'qty': 5, 'price': 1100, 'exp': '2027-08-01'},
+      {'name': 'Oroken oral 40mg/5ml', 'qty': 23, 'price': 2000, 'exp': '2027-05-01'},
+      {'name': 'Efferalgan sirop 3%', 'qty': 5, 'price': 750, 'exp': '2028-09-01'},
+      {'name': 'Augmentin enfant sirop 100mg', 'qty': 11, 'price': 1650, 'exp': '2027-06-01'},
+      {'name': 'Dynamogen sirop 3mg', 'qty': 2, 'price': 1600, 'exp': '2029-10-01'},
+      {'name': 'Maalox sachet', 'qty': 3, 'price': 1200, 'exp': '2027-12-01'},
+      {'name': 'Astaph sirop 125mg', 'qty': 6, 'price': 700, 'exp': '2028-06-01'},
+      {'name': 'Cooper sérum physiologique nasal', 'qty': 8, 'price': 1000, 'exp': '2027-07-01'},
+      {'name': 'Ferbasi 200ml', 'qty': 7, 'price': 700, 'exp': '2027-04-01'},
+      {'name': 'Vogalène sirop 0,1%', 'qty': 15, 'price': 1200, 'exp': '2027-04-01'},
+      {'name': 'Vogalènd sirop 0,4%', 'qty': 11, 'price': 900, 'exp': '2027-02-01'},
+      {'name': 'Flagyl sirop 125mg', 'qty': 8, 'price': 1100, 'exp': '2027-05-01'},
+      {'name': 'Décontractyl méphésine comprimés', 'qty': 5, 'price': 1500, 'exp': '2026-09-01'},
+      {'name': 'Zentel comprimés 400mg', 'qty': 5, 'price': 0, 'exp': null},
+      {'name': 'Zentel sirop 0,4g', 'qty': 8, 'price': 900, 'exp': '2027-09-01'},
+      {'name': 'Difal 50mg comprimé', 'qty': 3, 'price': 700, 'exp': null},
+      {'name': 'Atarax 25mg', 'qty': 3, 'price': 1000, 'exp': '2027-08-01'},
+      {'name': 'Cotareg 80mg comprimés', 'qty': 1, 'price': 1500, 'exp': '2027-06-01'},
+      {'name': 'Humex 0,30g oral', 'qty': 2, 'price': 1100, 'exp': '2026-12-01'},
+      {'name': 'Finastéride Viatris comprimés', 'qty': 4, 'price': 1500, 'exp': '2028-02-01'},
+      {'name': 'Albencare comprimés 400mg', 'qty': 6, 'price': 2350, 'exp': '2027-07-01'},
+      {'name': 'Pediakid sirop 22 vitamines', 'qty': 3, 'price': 0, 'exp': '2026-09-01'},
+      {'name': 'Janumet 50/850mg comprimés', 'qty': 4, 'price': 0, 'exp': null},
+      {'name': 'Insumed seringue 0,3ml', 'qty': 2, 'price': 0, 'exp': '2029-09-01'},
+      {'name': 'Trialgic comprimés', 'qty': 34, 'price': 0, 'exp': '2027-04-01'},
+      {'name': 'Healax cream 100g', 'qty': 3, 'price': 0, 'exp': '2026-08-01'},
+      {'name': 'Facidine 2% pommade', 'qty': 3, 'price': 0, 'exp': '2027-11-01'},
+      {'name': 'Mag 2 comprimés', 'qty': 3, 'price': 0, 'exp': '2028-02-01'},
+      {'name': 'Tardyferon 80mg comprimés', 'qty': 7, 'price': 0, 'exp': '2028-04-01'},
+      {'name': 'Efferalgan 500mg comprimés', 'qty': 4, 'price': 0, 'exp': '2027-11-01'},
+      {'name': 'Ery 500mg comprimés 20', 'qty': 20, 'price': 0, 'exp': '2027-06-01'},
+      {'name': 'Coveram 10mg 30', 'qty': 1, 'price': 0, 'exp': '2028-11-01'},
+      {'name': 'Pervital 20 comprimés', 'qty': 4, 'price': 0, 'exp': '2028-02-01'},
+      {'name': 'Feroglobin B12 sirop', 'qty': 2, 'price': 0, 'exp': '2027-04-01'},
+      {'name': 'Feroglobin capsules', 'qty': 4, 'price': 0, 'exp': '2028-09-01'},
+      {'name': 'Alvityl 12 vitamines 40 comprimés', 'qty': 9, 'price': 0, 'exp': '2028-05-01'},
+      {'name': 'Alvityl sirop 11 vitamines', 'qty': 3, 'price': 0, 'exp': '2027-08-01'},
+      {'name': 'Gaviscon buvable 24 sachets', 'qty': 1, 'price': 0, 'exp': '2027-09-01'},
+      {'name': 'Nuravit sirop 125ml', 'qty': 6, 'price': 0, 'exp': '2027-06-01'},
+      {'name': 'Nurabol sirop 2mg/5ml 125ml', 'qty': 4, 'price': 0, 'exp': '2027-09-01'},
+      {'name': 'Disten 300/380mg 50 comprimés', 'qty': 5, 'price': 0, 'exp': '2029-12-01'},
+      {'name': 'Nexium 20mg 28 comprimés', 'qty': 6, 'price': 0, 'exp': '2026-10-01'},
+      {'name': 'Oméprazole Cristers 20mg', 'qty': 7, 'price': 0, 'exp': '2028-01-01'},
+      {'name': 'Oméprazole Viatris 20mg', 'qty': 5, 'price': 0, 'exp': '2027-10-01'},
+      {'name': 'Acide folique 5mg', 'qty': 1, 'price': 0, 'exp': '2027-11-01'},
+      {'name': 'Neopred 20mg', 'qty': 2, 'price': 0, 'exp': '2028-02-01'},
+      {'name': 'UPSA-C 1000mg', 'qty': 18, 'price': 0, 'exp': '2027-09-01'},
+      {'name': 'Deltacortril 5mg', 'qty': 3, 'price': 0, 'exp': '2026-07-01'},
+      {'name': 'Ketum 100mg', 'qty': 2, 'price': 0, 'exp': '2027-04-01'},
+      {'name': 'Navidoxine 25mg', 'qty': 4, 'price': 0, 'exp': '2028-04-01'},
+      {'name': 'Neurobion comprimés', 'qty': 3, 'price': 0, 'exp': '2027-01-01'},
+      {'name': 'Crosscal 50mg', 'qty': 1, 'price': 0, 'exp': '2027-07-01'},
+      {'name': 'Bactrim 400/80mg', 'qty': 1, 'price': 0, 'exp': '2028-11-01'},
+      {'name': 'Flagyl 500mg comprimés', 'qty': 7, 'price': 0, 'exp': '2027-01-01'},
+      {'name': 'Clamoxyl 500mg 42 gélules', 'qty': 16, 'price': 0, 'exp': '2026-10-01'},
+      {'name': 'Augmentin adultes 500mg', 'qty': 10, 'price': 0, 'exp': '2027-05-01'},
+      {'name': 'Oflocet auriculaire 1,5mg', 'qty': 2, 'price': 0, 'exp': '2027-08-01'},
+      {'name': 'Otofa rifamycine auriculaire', 'qty': 2, 'price': 0, 'exp': '2027-09-01'},
+      {'name': 'Otipax phénazone auriculaire', 'qty': 4, 'price': 0, 'exp': '2028-12-01'},
+      {'name': 'Cérulyse 5g auriculaire', 'qty': 2, 'price': 0, 'exp': '2028-05-01'},
+      {'name': 'Indocollyre 0,1%', 'qty': 8, 'price': 0, 'exp': '2027-04-01'},
+      {'name': 'Janumet 50/1000mg', 'qty': 5, 'price': 0, 'exp': null},
+      {'name': 'Duphalac sirop 200ml', 'qty': 2, 'price': 0, 'exp': '2028-04-01'},
+      {'name': 'Tributine 250ml suspension buvable', 'qty': 1, 'price': 0, 'exp': '2027-04-01'},
+      {'name': 'Duphalac 10g/15ml 20 sachets', 'qty': 3, 'price': 0, 'exp': '2028-06-01'},
+      {'name': 'Fervex adultes 8 sachets', 'qty': 1, 'price': 0, 'exp': '2028-09-01'},
+      {'name': 'Brufen 400mg', 'qty': 3, 'price': 0, 'exp': '2028-02-01'},
+      {'name': 'Ibuprofène 400mg', 'qty': 41, 'price': 0, 'exp': '2027-09-01'},
+      {'name': 'Doliprane 500mg comprimés', 'qty': 17, 'price': 0, 'exp': '2028-03-01'},
+      {'name': 'Paracétamol 500mg gélules', 'qty': 4, 'price': 0, 'exp': '2027-03-01'},
+      {'name': 'Gelphore sirop 125ml', 'qty': 1, 'price': 0, 'exp': '2027-05-01'},
+      {'name': 'Glucophage 850mg', 'qty': 3, 'price': 0, 'exp': '2029-04-01'},
+      {'name': 'Aspirin 100mg', 'qty': 2, 'price': 0, 'exp': '2027-09-01'},
+      {'name': 'Doliprane 1000mg', 'qty': 4, 'price': 0, 'exp': '2027-05-01'},
+      {'name': 'Glucophage 500mg', 'qty': 3, 'price': 0, 'exp': '2029-05-01'},
+      {'name': 'Clotri-denk 1% cream 20g', 'qty': 5, 'price': 0, 'exp': '2027-10-01'},
+      {'name': 'Tramagen 50 comprimés', 'qty': 5, 'price': 0, 'exp': null},
+      {'name': 'Amaryl 3mg', 'qty': 1, 'price': 0, 'exp': '2027-03-01'},
+      {'name': 'Diamicron MR 60mg', 'qty': 14, 'price': 0, 'exp': '2028-05-01'},
+      {'name': 'Toco 500mg', 'qty': 3, 'price': 0, 'exp': '2029-08-01'},
+      {'name': 'Claril 500mg', 'qty': 9, 'price': 0, 'exp': null},
+      {'name': 'Polygynax capsule vaginal', 'qty': 8, 'price': 0, 'exp': '2027-01-01'},
+      {'name': 'Tamsulosine Viatris 0,4mg', 'qty': 4, 'price': 0, 'exp': '2026-10-01'},
+      {'name': 'Tributine 150mg 20 sachets', 'qty': 4, 'price': 0, 'exp': '2029-10-01'},
+      {'name': 'Maxidex 0,1% collyre', 'qty': 4, 'price': 0, 'exp': '2027-10-01'},
+      {'name': 'Ofrivid 10ml collyre', 'qty': 10, 'price': 0, 'exp': '2026-12-01'},
+      {'name': 'Flucon collyre', 'qty': 4, 'price': 0, 'exp': '2027-03-01'},
+      {'name': 'Maxidrol collyre', 'qty': 13, 'price': 0, 'exp': '2027-12-01'},
+      {'name': 'Chibroxine collyre 0,3%', 'qty': 9, 'price': 0, 'exp': '2028-04-01'},
+      {'name': 'Cutacnyl gel 10%', 'qty': 2, 'price': 0, 'exp': '2026-09-01'},
+      {'name': 'Cutacnyl gel 5%', 'qty': 1, 'price': 0, 'exp': '2026-08-01'},
+      {'name': 'Nozinan 25mg comprimés', 'qty': 9, 'price': 0, 'exp': '2027-09-01'},
+      {'name': 'Nozinan 100mg comprimés', 'qty': 5, 'price': 0, 'exp': '2027-02-01'},
+      {'name': 'Norodol 5mg', 'qty': 1, 'price': 0, 'exp': '2028-03-01'},
+      {'name': 'Gynanfort vaginal 10 ovules', 'qty': 2, 'price': 0, 'exp': null},
+      {'name': 'Flexdol comprimés', 'qty': 3, 'price': 0, 'exp': '2027-09-01'},
+      {'name': 'Advilmed sirop enfants/nourrissons 20mg', 'qty': 15, 'price': 0, 'exp': '2028-03-01'},
+      {'name': 'Glucose 5%', 'qty': 19, 'price': 0, 'exp': '2027-01-01'},
+      {'name': 'Sodium chloride 0,9% 500ml', 'qty': 8, 'price': 0, 'exp': '2029-02-01'},
+      {'name': 'Ringer L injection 500ml', 'qty': 21, 'price': 0, 'exp': '2029-03-01'},
+      {'name': 'RL sodium 500ml', 'qty': 3, 'price': 0, 'exp': '2028-05-01'},
+      {'name': 'NS sodium 500ml', 'qty': 1, 'price': 0, 'exp': '2028-05-01'},
+      {'name': 'Dakin 250ml', 'qty': 3, 'price': 0, 'exp': '2026-11-01'},
+      {'name': 'Eau oxygénée 250ml', 'qty': 6, 'price': 0, 'exp': '2028-03-01'},
+      {'name': 'Paracétamol infusion 100ml', 'qty': 15, 'price': 0, 'exp': '2027-07-01'},
+      {'name': 'Betadine 125ml', 'qty': 9, 'price': 0, 'exp': '2027-09-01'},
+      {'name': 'Süsinna sweetener 1200 tablets', 'qty': 2, 'price': 0, 'exp': '2028-08-01'},
+      {'name': 'KOP', 'qty': 7, 'price': 0, 'exp': '2030-12-01'},
+      {'name': 'ECIB', 'qty': 13, 'price': 0, 'exp': '2030-12-01'},
+      {'name': 'NRC cannula', 'qty': 79, 'price': 0, 'exp': '2028-02-01'},
+      {'name': 'Helpha 12ml', 'qty': 95, 'price': 0, 'exp': '2026-12-01'},
+      {'name': 'Doliprane 150mg 8-12kg', 'qty': 10, 'price': 0, 'exp': '2027-08-01'},
+      {'name': 'Doliprane 300mg', 'qty': 5, 'price': 0, 'exp': '2026-12-01'},
+      {'name': 'Mixtard 30 100ml', 'qty': 59, 'price': 0, 'exp': '2027-10-01'},
+      {'name': 'Novomix FlexPen', 'qty': 25, 'price': 0, 'exp': '2027-01-01'},
+      {'name': 'Insulin glargine 3ml', 'qty': 0, 'price': 0, 'exp': '2028-02-01'},
+      {'name': 'Efferalgan 80mg', 'qty': 8, 'price': 0, 'exp': '2028-07-01'},
+      {'name': 'Hemax 4000 UI', 'qty': 7, 'price': 0, 'exp': '2027-09-01'},
+      {'name': 'Parogencyl menthe 75ml', 'qty': 3, 'price': 0, 'exp': null},
+      {'name': 'Parogencyl nouvelle formule 75ml', 'qty': 1, 'price': 0, 'exp': null},
+      {'name': 'Sensodyne 75ml', 'qty': 1, 'price': 0, 'exp': null},
+      {'name': 'Fluocaril 145mg 6-13 ans', 'qty': 3, 'price': 0, 'exp': null},
+      {'name': 'Dorco toothbrush 12 pièces', 'qty': 1, 'price': 0, 'exp': null},
+      {'name': 'Rabirchamber Small', 'qty': 4, 'price': 0, 'exp': null},
+      {'name': 'Oxalair 125 microgrammes 120 doses', 'qty': 1, 'price': 0, 'exp': '2027-06-01'},
+      {'name': 'Acyclovir 200mg comprimés', 'qty': 4, 'price': 0, 'exp': '2026-07-01'},
+      {'name': 'GPRact 20mg comprimés', 'qty': 14, 'price': 0, 'exp': '2027-07-01'},
+      {'name': 'Duphalast CP 10mg', 'qty': 8, 'price': 0, 'exp': '2029-08-01'},
+      {'name': 'Biafine', 'qty': 3, 'price': 0, 'exp': '2027-09-01'},
+      {'name': 'Rovamycine sachets', 'qty': 8, 'price': 0, 'exp': '2027-11-01'},
+      {'name': 'Nozinan 25mg comprimés 2', 'qty': 10, 'price': 0, 'exp': '2028-07-01'},
+      {'name': 'Fortal', 'qty': 8, 'price': 0, 'exp': '2027-01-01'},
+      {'name': 'Magnésie poudre', 'qty': 6, 'price': 0, 'exp': '2028-12-01'},
+      {'name': 'Becosterene 0,05% gouttes', 'qty': 5, 'price': 0, 'exp': '2027-11-01'},
+      {'name': 'Smecta sachets', 'qty': 3, 'price': 0, 'exp': '2028-01-01'},
+      {'name': 'On Call Plus appareil', 'qty': 3, 'price': 0, 'exp': '2026-11-01'},
+      {'name': 'On Call Plus bandelettes', 'qty': 12, 'price': 0, 'exp': '2027-06-01'},
+      {'name': 'Pédiasure sachets 80mg', 'qty': 10, 'price': 0, 'exp': '2026-08-01'},
+      {'name': 'Ascobut solution', 'qty': 5, 'price': 0, 'exp': '2027-03-01'},
+      {'name': 'Fungazone sirop', 'qty': 3, 'price': 0, 'exp': '2027-09-01'},
+      {'name': 'Azithro sirop 200mg/5ml', 'qty': 3, 'price': 0, 'exp': '2028-11-01'},
+      {'name': 'Apo-zopiclone CP 500mg', 'qty': 1, 'price': 0, 'exp': '2027-08-01'},
+      {'name': 'Oroken sirop 100mg/5ml', 'qty': 5, 'price': 0, 'exp': '2027-03-01'},
+      {'name': 'Tegretol CP 200mg', 'qty': 14, 'price': 0, 'exp': '2028-05-01'},
+      {'name': 'Seretide', 'qty': 1, 'price': 0, 'exp': '2026-10-01'},
+      {'name': 'Pevaryl crème 1%', 'qty': 4, 'price': 0, 'exp': '2026-10-01'},
+      {'name': 'Flomozine crème', 'qty': 4, 'price': 0, 'exp': '2027-02-01'},
+      {'name': 'Sedorrhoïde crème', 'qty': 3, 'price': 0, 'exp': '2027-01-01'},
+      {'name': 'Maxilase sirop', 'qty': 3, 'price': 0, 'exp': '2027-05-01'},
+      {'name': 'Phenergan sirop adultes', 'qty': 8, 'price': 0, 'exp': '2027-01-01'},
+      {'name': 'Voltaren Emulgel 1%', 'qty': 1, 'price': 0, 'exp': '2028-10-01'},
+      {'name': 'Affinité adulte', 'qty': 2, 'price': 0, 'exp': '2026-12-01'},
+      {'name': 'Polygynax ovules', 'qty': 7, 'price': 0, 'exp': '2028-11-01'},
+      {'name': 'Nevixal 0,1%', 'qty': 7, 'price': 0, 'exp': '2027-09-01'},
+    ];
+
+    int inserted = 0;
+    for (final m in medicines) {
+      final name = m['name'] as String;
+      if (existingNames.contains(name.toLowerCase())) continue;
+      final code = await _allocateTenantScopedProductCode(tid, db);
+      await db.insert('products', {
+        'name': name,
+        'qty': m['qty'],
+        'sellPrice': m['price'],
+        'buyPrice': 0,
+        'lowStockThreshold': 5,
+        'categoryId': catId,
+        'tenantId': tid,
+        'trackInventory': 1,
+        'isActive': 1,
+        'createdAt': now,
+        'updatedAt': now,
+        'productCode': code,
+        'expiryDate': m['exp'],
+        'status': (m['qty'] as int) <= 5 ? 'low' : 'instock',
+      });
+      inserted++;
+    }
+    return inserted;
+  }
+
   /// تصنيفات لإدارة الإعدادات (مع اسم الأب إن وُجد).
   Future<List<Map<String, dynamic>>> listCategoriesForSettings() async {
     final db = await _db;

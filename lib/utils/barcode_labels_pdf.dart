@@ -241,39 +241,18 @@ class BarcodeLabelsPdf {
   ) async {
     final scaffoldMsg = ScaffoldMessenger.of(context);
     try {
-      final printers = await printing.Printing.listPrinters();
-      if (printers.isEmpty) {
-        scaffoldMsg.showSnackBar(
-          const SnackBar(
-            content: Text(
-              'لم يتم العثور على أي طابعة متصلة بالجهاز. يرجى توصيل طابعة للمتابعة.',
-              style: TextStyle(fontFamily: 'NotoNaskhArabic'),
-            ),
-            backgroundColor: Colors.redAccent,
-            behavior: SnackBarBehavior.floating,
-          ),
-        );
-        return;
-      }
-      
-      final printer = printers.firstWhere(
-        (p) => p.isDefault,
-        orElse: () => printers.first,
-      );
-      
       final bytes = await buildPdf(pageFormat);
-      
-      await printing.Printing.directPrintPdf(
-        printer: printer,
-        onLayout: (_) => bytes,
+      await printing.Printing.layoutPdf(
+        onLayout: (_) async => bytes,
         format: pageFormat,
+        name: 'barcode-labels',
       );
     } catch (e) {
       scaffoldMsg.showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text(
-            'تعذر تشغيل الطباعة المباشرة. يرجى مراجعة إعدادات جهاز الطباعة لديك.',
-            style: TextStyle(fontFamily: 'NotoNaskhArabic'),
+            'Printing failed. Please check printer settings.',
+            style: const TextStyle(fontFamily: 'NotoNaskhArabic'),
           ),
           backgroundColor: Colors.redAccent,
           behavior: SnackBarBehavior.floating,

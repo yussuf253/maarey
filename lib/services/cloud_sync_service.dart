@@ -324,6 +324,67 @@ class CloudSyncService {
     }
   }
 
+  /// Delete the cloud snapshot so all devices start fresh on next sync.
+  Future<bool> clearCloudSnapshot() async {
+    try {
+      final client = Supabase.instance.client;
+      final user = client.auth.currentUser;
+      if (user == null) return false;
+      await client.from(_snapshotsTable).delete().eq('user_id', user.id);
+      await client.from(_snapshotChunksTable).delete().eq('user_id', user.id);
+      await clearSyncPreferences();
+      lastError.value = null;
+      lastSyncAt.value = null;
+      return true;
+    } catch (e) {
+      lastError.value = 'Failed to clear cloud snapshot: $e';
+      return false;
+    }
+  }
+
+  /// Remove products & product_unit_variants from the cloud snapshot
+  /// without deleting everything else (tenants, settings, invoices, etc.).
+  Future<bool> clearProductsFromCloud() async {
+    try {
+      final client = Supabase.instance.client;
+      final user = client.auth.currentUser;
+      if (user == null) return false;
+
+      // Fetch current snapshot
+      final row = await client
+          .from(_snapshotsTable)
+          .select('id, payload')
+          .eq('user_id', user.id)
+          .maybeSingle();
+      if (row == null) return false;
+
+      final payload = row['payload'];
+      if (payload == null) return false;
+
+      final Map<String, dynamic> data =
+          payload is String ? Map<String, dynamic>.from(jsonDecode(payload)) : Map<String, dynamic>.from(payload as Map);
+      final tables = data['tables'];
+      if (tables is Map) {
+        tables.remove('products');
+        tables.remove('product_unit_variants');
+      }
+
+      // Update snapshot without products
+      await client.from(_snapshotsTable).update({
+        'payload': data,
+        'updated_at': DateTime.now().toUtc().toIso8601String(),
+      }).eq('id', row['id']);
+
+      // Clear local sync prefs so next sync pulls fresh
+      await clearSyncPreferences();
+      lastError.value = null;
+      return true;
+    } catch (e) {
+      lastError.value = 'Failed to clear products from cloud: $e';
+      return false;
+    }
+  }
+
   Future<void> stopForSignOut() async {
     _syncTimer?.cancel();
     _syncTimer = null;

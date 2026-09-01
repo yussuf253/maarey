@@ -19194,6 +19194,258 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'تم ملء الحقول تلقائياً من الدليل الدولي'**
   String get olAutoFilled;
+
+  /// No description provided for @signupAcceptTermsFirst.
+  ///
+  /// In ar, this message translates to:
+  /// **'يجب الموافقة على الشروط والأحكام أولاً'**
+  String get signupAcceptTermsFirst;
+
+  /// No description provided for @signupAccountCreated.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم إنشاء الحساب بنجاح! يرجى تسجيل الدخول.'**
+  String get signupAccountCreated;
+
+  /// No description provided for @signupGoogleSoon.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيتم تفعيل ميزة Google Sign-In قريباً'**
+  String get signupGoogleSoon;
+
+  /// No description provided for @signupBrandSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'نظام إدارة الأعمال'**
+  String get signupBrandSubtitle;
+
+  /// No description provided for @signupGetStarted.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ الآن'**
+  String get signupGetStarted;
+
+  /// No description provided for @signupCreateAccount.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنشاء حساب جديد'**
+  String get signupCreateAccount;
+
+  /// No description provided for @signupFullNameLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم التجاري / الاسم الكامل'**
+  String get signupFullNameLabel;
+
+  /// No description provided for @signupFullNameHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: مؤسسة البصرة للتجارة'**
+  String get signupFullNameHint;
+
+  /// No description provided for @signupNameRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم مطلوب'**
+  String get signupNameRequired;
+
+  /// No description provided for @signupNameMinLength.
+  ///
+  /// In ar, this message translates to:
+  /// **'يجب أن يكون 3 أحرف على الأقل'**
+  String get signupNameMinLength;
+
+  /// No description provided for @signupEmailLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'البريد الإلكتروني'**
+  String get signupEmailLabel;
+
+  /// No description provided for @signupEmailRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'البريد مطلوب'**
+  String get signupEmailRequired;
+
+  /// No description provided for @signupEmailInvalid.
+  ///
+  /// In ar, this message translates to:
+  /// **'صيغة البريد غير صحيحة'**
+  String get signupEmailInvalid;
+
+  /// No description provided for @signupPhoneLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الجوال'**
+  String get signupPhoneLabel;
+
+  /// No description provided for @signupPhoneHintIraq.
+  ///
+  /// In ar, this message translates to:
+  /// **'07701234567'**
+  String get signupPhoneHintIraq;
+
+  /// No description provided for @signupPhoneHintOther.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل الرقم'**
+  String get signupPhoneHintOther;
+
+  /// No description provided for @signupPhoneRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الجوال مطلوب'**
+  String get signupPhoneRequired;
+
+  /// No description provided for @signupPhoneIraqInvalid.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم عراقي: 11 رقماً يبدأ بـ 07'**
+  String get signupPhoneIraqInvalid;
+
+  /// No description provided for @signupPhoneInvalid.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم غير صحيح'**
+  String get signupPhoneInvalid;
+
+  /// No description provided for @signupPasswordLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمة المرور'**
+  String get signupPasswordLabel;
+
+  /// No description provided for @signupPasswordHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'8 أحرف على الأقل'**
+  String get signupPasswordHint;
+
+  /// No description provided for @signupPasswordRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمة المرور مطلوبة'**
+  String get signupPasswordRequired;
+
+  /// No description provided for @signupPasswordMinLength.
+  ///
+  /// In ar, this message translates to:
+  /// **'8 أحرف على الأقل'**
+  String get signupPasswordMinLength;
+
+  /// No description provided for @signupConfirmPasswordLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكيد كلمة المرور'**
+  String get signupConfirmPasswordLabel;
+
+  /// No description provided for @signupConfirmPasswordHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعد إدخال كلمة المرور'**
+  String get signupConfirmPasswordHint;
+
+  /// No description provided for @signupConfirmPasswordRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكيد كلمة المرور مطلوب'**
+  String get signupConfirmPasswordRequired;
+
+  /// No description provided for @signupPasswordsMismatch.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمتا المرور غير متطابقتين'**
+  String get signupPasswordsMismatch;
+
+  /// No description provided for @signupCaptchaTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'التحقق من الهوية — أجب على السؤال البسيط'**
+  String get signupCaptchaTitle;
+
+  /// No description provided for @signupCaptchaChange.
+  ///
+  /// In ar, this message translates to:
+  /// **'تغيير'**
+  String get signupCaptchaChange;
+
+  /// No description provided for @signupCaptchaHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجواب'**
+  String get signupCaptchaHint;
+
+  /// No description provided for @signupCaptchaAnswerRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل الجواب'**
+  String get signupCaptchaAnswerRequired;
+
+  /// No description provided for @signupCaptchaWrong.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجابة غير صحيحة'**
+  String get signupCaptchaWrong;
+
+  /// No description provided for @signupCreateButton.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنشاء الحساب'**
+  String get signupCreateButton;
+
+  /// No description provided for @signupHasAccount.
+  ///
+  /// In ar, this message translates to:
+  /// **'لديك حساب بالفعل؟'**
+  String get signupHasAccount;
+
+  /// No description provided for @signupLoginLink.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل الدخول'**
+  String get signupLoginLink;
+
+  /// No description provided for @signupGoogleButton.
+  ///
+  /// In ar, this message translates to:
+  /// **'التسجيل عبر Google'**
+  String get signupGoogleButton;
+
+  /// No description provided for @signupOrDivider.
+  ///
+  /// In ar, this message translates to:
+  /// **'أو التسجيل بالبيانات'**
+  String get signupOrDivider;
+
+  /// No description provided for @signupTermsPrefix.
+  ///
+  /// In ar, this message translates to:
+  /// **'أوافق على '**
+  String get signupTermsPrefix;
+
+  /// No description provided for @signupTermsOfUse.
+  ///
+  /// In ar, this message translates to:
+  /// **'شروط الاستخدام'**
+  String get signupTermsOfUse;
+
+  /// No description provided for @signupAnd.
+  ///
+  /// In ar, this message translates to:
+  /// **'  و  '**
+  String get signupAnd;
+
+  /// No description provided for @signupPrivacyPolicy.
+  ///
+  /// In ar, this message translates to:
+  /// **'سياسة الخصوصية'**
+  String get signupPrivacyPolicy;
+
+  /// No description provided for @signupTermsSuffix.
+  ///
+  /// In ar, this message translates to:
+  /// **' الخاصة بـ Naboo.'**
+  String get signupTermsSuffix;
 }
 
 class _AppLocalizationsDelegate

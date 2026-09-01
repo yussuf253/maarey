@@ -13,6 +13,7 @@ import '../../screens/license/subscription_plans_screen.dart';
 import '../../services/cloud_sync_service.dart';
 import '../../services/license_service.dart';
 import '../../services/mac_style_settings_prefs.dart';
+import '../../services/product_repository.dart';
 import '../../widgets/mac_style_settings_panel.dart';
 import '../../navigation/content_navigation.dart';
 import '../../theme/app_corner_style.dart';
@@ -243,6 +244,56 @@ class SettingsScreen extends StatelessWidget {
                                     routeId: AppContentRoutes.settingsRestore,
                                     breadcrumbTitle: loc.restoreData,
                                   ),
+                                ),
+                                _SettingItem(
+                                  icon: Icons.medical_services_outlined,
+                                  iconColor: _kTeal,
+                                  title: 'استيراد الأدوية',
+                                  subtitle: 'إضافة 157 دواء من ملف الجرد',
+                                  onTap: () async {
+                                    final confirmed = await showDialog<bool>(
+                                      context: context,
+                                      builder: (ctx) => AlertDialog(
+                                        title: const Text('استيراد الأدوية'),
+                                        content: const Text(
+                                          'سيتم إضافة 157 دواء إلى كتالوج المنتجات. هل تريد المتابعة؟',
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(ctx, false),
+                                            child: const Text('إلغاء'),
+                                          ),
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(ctx, true),
+                                            child: const Text('استيراد'),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                    if (confirmed == true) {
+                                      try {
+                                        final repo = ProductRepository();
+                                        final count = await repo.importMedicines();
+                                        if (!context.mounted) return;
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'تم استيراد $count دواء بنجاح',
+                                            ),
+                                            backgroundColor: Colors.green,
+                                          ),
+                                        );
+                                      } catch (e) {
+                                        if (!context.mounted) return;
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                            content: Text('خطأ: $e'),
+                                            backgroundColor: Colors.red,
+                                          ),
+                                        );
+                                      }
+                                    }
+                                  },
                                 ),
                               ],
                             ),
@@ -1449,6 +1500,57 @@ class _AccountSubscriptionScreenState
                         ),
                       ],
                     ],
+                  ),
+                ),
+                const SizedBox(height: 12),
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton.icon(
+                    onPressed: _busy
+                        ? null
+                        : () async {
+                            final confirmed = await showDialog<bool>(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                title: const Text('مسح المنتجات من السحابة'),
+                                content: const Text(
+                                  'سيتم حذف جميع المنتجات من السحابة فقط. الإعدادات والفواتير والعملاء لن تتأثر. تريد المتابعة؟',
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(ctx, false),
+                                    child: const Text('إلغاء'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(ctx, true),
+                                    child: const Text('مسح',
+                                        style: TextStyle(color: Colors.red)),
+                                  ),
+                                ],
+                              ),
+                            );
+                            if (confirmed == true) {
+                              setState(() => _busy = true);
+                              final ok = await CloudSyncService
+                                  .instance
+                                  .clearProductsFromCloud();
+                              setState(() => _busy = false);
+                              if (!mounted) return;
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    ok
+                                        ? 'تم مسح المنتجات من السحابة. اضغط مزامنة الآن'
+                                        : 'فشل المسح: ${CloudSyncService.instance.lastError.value ?? "خطأ"}',
+                                  ),
+                                  backgroundColor: ok ? Colors.green : Colors.red,
+                                ),
+                              );
+                            }
+                          },
+                    icon: const Icon(Icons.delete_outline, color: Colors.red),
+                    label: const Text('مسح المنتجات من السحابة',
+                        style: TextStyle(color: Colors.red)),
                   ),
                 ),
                 const SizedBox(height: 12),

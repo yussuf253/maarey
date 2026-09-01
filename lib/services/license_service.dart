@@ -5,6 +5,8 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../utils/app_logger.dart';
+
 import 'license/license_engine_v2.dart';
 import 'license/license_token.dart';
 import 'license/trusted_time_service.dart';
@@ -833,6 +835,39 @@ class LicenseService extends ChangeNotifier {
       await checkLicense(forceRemote: true);
       return;
     }
+
+    // ── Step 1: Check if a license is assigned to this user in Supabase ──
+    try {
+      final client = Supabase.instance.client;
+      final licRow = await client
+          .from('licenses')
+          .select('id, license_jwt, status, plan, assigned_user_id')
+          .eq('assigned_user_id', user.id)
+          .inFilter('status', ['active', 'trial'])
+          .order('id', ascending: false)
+          .limit(1)
+          .maybeSingle();
+
+      if (licRow != null) {
+        final jwt = (licRow['license_jwt'] as String?)?.trim() ?? '';
+        if (jwt.isNotEmpty && jwt.split('.').length == 3) {
+          // Auto-activate the assigned license JWT.
+          final licId = licRow['id'];
+          final plan = licRow['plan'];
+          AppLogger.info('LicenseService',
+              'Auto-activating assigned license #$licId (plan=$plan) for user ${user.email}');
+          final result = await activateSignedToken(jwt);
+          if (result.ok) return;
+          AppLogger.warn('LicenseService',
+              'Auto-activate failed: ${result.message}');
+        }
+      }
+    } catch (e) {
+      AppLogger.warn('LicenseService',
+          'Failed to query assigned license: $e');
+    }
+
+    // ── Step 2: No assigned license → fall back to trial ──
     final accountCreatedAtIso = _supabaseUserCreatedAtIsoUtc(user);
     try {
       final client = Supabase.instance.client;

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 
 import '../widgets/app_brand_mark.dart';
 import '../utils/screen_layout.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 /// نفس [login_screen] — نصوص الحقول الفاتحة لا ترث لون الثيم الداكن للتطبيق.
 ThemeData _authPanelLightThemeSignup(BuildContext context) {
@@ -57,6 +58,8 @@ class _SignUpScreenState extends State<SignUpScreen>
   bool   _obscureConfirm = true;
   bool   _isLoading      = false;
   bool   _acceptTerms    = false;
+
+  AppLocalizations get _loc => AppLocalizations.of(context)!;
   String _dialCode       = '+964'; // العراق افتراضيًا
 
   // ── Captcha ─────────────────────────────────────────────────────────────
@@ -122,19 +125,19 @@ class _SignUpScreenState extends State<SignUpScreen>
   Future<void> _register() async {
     if (!(_formKey.currentState?.validate() ?? false)) return;
     if (!_acceptTerms) {
-      _showSnack('يجب الموافقة على الشروط والأحكام أولاً', Colors.orange.shade700);
+      _showSnack(_loc.signupAcceptTermsFirst, Colors.orange.shade700);
       return;
     }
     setState(() => _isLoading = true);
     await Future.delayed(const Duration(milliseconds: 1200));
     if (!mounted) return;
     setState(() => _isLoading = false);
-    _showSnack('تم إنشاء الحساب بنجاح! يرجى تسجيل الدخول.', Colors.green.shade700);
+    _showSnack(_loc.signupAccountCreated, Colors.green.shade700);
     Navigator.of(context).pop();
   }
 
   void _googleSignIn() =>
-      _showSnack('سيتم تفعيل ميزة Google Sign-In قريباً', _navy3);
+      _showSnack(_loc.signupGoogleSoon, _navy3);
 
   void _showSnack(String msg, Color bg) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -209,7 +212,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                     borderWidth: 2.0,
                   ),
                   SizedBox(height: isNarrow ? 10 : 16),
-                  Text('نظام إدارة الأعمال', style: TextStyle(
+                  Text(_loc.signupBrandSubtitle, style: TextStyle(
                     fontSize: isNarrow ? 11 : 13,
                     color: Colors.white.withValues(alpha: 0.6),
                     letterSpacing: 2.5,
@@ -269,16 +272,16 @@ class _SignUpScreenState extends State<SignUpScreen>
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     // ── Header ─────────────────────────────────────────
-                    const Text('ابدأ الآن', style: TextStyle(
+                    Text(_loc.signupGetStarted, style: TextStyle(
                       fontSize: 13, color: _gold,
                       letterSpacing: 3, fontWeight: FontWeight.w500,
                     ), textAlign: TextAlign.center),
                     const SizedBox(height: 6),
-                    const Text('إنشاء حساب جديد', style: TextStyle(
+                    Text(_loc.signupCreateAccount, style: TextStyle(
                       fontSize: 26, fontWeight: FontWeight.bold, color: _navy2,
                     ), textAlign: TextAlign.center),
                     const SizedBox(height: 6),
-                    Text('أنشئ حسابك للوصول الكامل إلى جميع الميزات',
+                    Text(_loc.signupSubtitle,
                         style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
                         textAlign: TextAlign.center),
                     const SizedBox(height: 24),
@@ -290,25 +293,25 @@ class _SignUpScreenState extends State<SignUpScreen>
                     const SizedBox(height: 20),
 
                     // ── Name ──────────────────────────────────────────
-                    _label('الاسم التجاري / الاسم الكامل'),
+                    _label(_loc.signupFullNameLabel),
                     const SizedBox(height: 8),
                     TextFormField(
                       controller: _nameCtrl,
                       style: const TextStyle(color: _navy2),
                       decoration: _dec(
-                        hint: 'مثال: مؤسسة البصرة للتجارة',
+                        hint: _loc.signupFullNameHint,
                         icon: Icons.storefront_outlined,
                       ),
                       validator: (v) {
-                        if (v == null || v.trim().isEmpty) return 'الاسم مطلوب';
-                        if (v.trim().length < 3) return 'يجب أن يكون 3 أحرف على الأقل';
+                        if (v == null || v.trim().isEmpty) return _loc.signupNameRequired;
+                        if (v.trim().length < 3) return _loc.signupNameMinLength;
                         return null;
                       },
                     ),
                     const SizedBox(height: 16),
 
                     // ── Email ─────────────────────────────────────────
-                    _label('البريد الإلكتروني'),
+                    _label(_loc.signupEmailLabel),
                     const SizedBox(height: 8),
                     TextFormField(
                       controller: _emailCtrl,
@@ -320,32 +323,32 @@ class _SignUpScreenState extends State<SignUpScreen>
                         icon: Icons.email_outlined,
                       ),
                       validator: (v) {
-                        if (v == null || v.trim().isEmpty) return 'البريد مطلوب';
+                        if (v == null || v.trim().isEmpty) return _loc.signupEmailRequired;
                         final re = RegExp(
                           r'^[\w\.\-]+@[\w\-]+\.[a-z]{2,}$',
                           caseSensitive: false,
                         );
-                        if (!re.hasMatch(v.trim())) return 'صيغة البريد غير صحيحة';
+                        if (!re.hasMatch(v.trim())) return _loc.signupEmailInvalid;
                         return null;
                       },
                     ),
                     const SizedBox(height: 16),
 
                     // ── Phone ─────────────────────────────────────────
-                    _label('رقم الجوال'),
+                    _label(_loc.signupPhoneLabel),
                     const SizedBox(height: 8),
                     _phoneField(),
                     const SizedBox(height: 16),
 
                     // ── Password ──────────────────────────────────────
-                    _label('كلمة المرور'),
+                    _label(_loc.signupPasswordLabel),
                     const SizedBox(height: 8),
                     TextFormField(
                       controller: _passCtrl,
                       obscureText: _obscurePass,
                       style: const TextStyle(color: _navy2),
                       decoration: _dec(
-                        hint: '8 أحرف على الأقل',
+                        hint: _loc.signupPasswordHint,
                         icon: Icons.lock_outline_rounded,
                         suffix: _eyeToggle(
                           visible: !_obscurePass,
@@ -353,22 +356,22 @@ class _SignUpScreenState extends State<SignUpScreen>
                         ),
                       ),
                       validator: (v) {
-                        if (v == null || v.isEmpty) return 'كلمة المرور مطلوبة';
-                        if (v.length < 8) return '8 أحرف على الأقل';
+                        if (v == null || v.isEmpty) return _loc.signupPasswordRequired;
+                        if (v.length < 8) return _loc.signupPasswordMinLength;
                         return null;
                       },
                     ),
                     const SizedBox(height: 16),
 
                     // ── Confirm password ──────────────────────────────
-                    _label('تأكيد كلمة المرور'),
+                    _label(_loc.signupConfirmPasswordLabel),
                     const SizedBox(height: 8),
                     TextFormField(
                       controller: _confirmCtrl,
                       obscureText: _obscureConfirm,
                       style: const TextStyle(color: _navy2),
                       decoration: _dec(
-                        hint: 'أعد إدخال كلمة المرور',
+                        hint: _loc.signupConfirmPasswordHint,
                         icon: Icons.lock_outline_rounded,
                         suffix: _eyeToggle(
                           visible: !_obscureConfirm,
@@ -377,8 +380,8 @@ class _SignUpScreenState extends State<SignUpScreen>
                         ),
                       ),
                       validator: (v) {
-                        if (v == null || v.isEmpty) return 'تأكيد كلمة المرور مطلوب';
-                        if (v != _passCtrl.text) return 'كلمتا المرور غير متطابقتين';
+                        if (v == null || v.isEmpty) return _loc.signupConfirmPasswordRequired;
+                        if (v != _passCtrl.text) return _loc.signupPasswordsMismatch;
                         return null;
                       },
                     ),
@@ -409,7 +412,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                                 height: 22, width: 22,
                                 child: CircularProgressIndicator(
                                     strokeWidth: 2, color: Colors.white))
-                            : const Text('إنشاء الحساب', style: TextStyle(
+                            : Text(_loc.signupCreateButton, style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 1.5)),
@@ -421,13 +424,13 @@ class _SignUpScreenState extends State<SignUpScreen>
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('لديك حساب بالفعل؟',
+                        Text(_loc.signupHasAccount,
                             style: TextStyle(
                                 fontSize: 13, color: Colors.grey.shade600)),
                         const SizedBox(width: 4),
                         GestureDetector(
                           onTap: () => Navigator.of(context).pop(),
-                          child: const Text('تسجيل الدخول', style: TextStyle(
+                          child: Text(_loc.signupLoginLink, style: TextStyle(
                               fontSize: 13,
                               color: _gold,
                               fontWeight: FontWeight.bold)),
@@ -465,7 +468,7 @@ class _SignUpScreenState extends State<SignUpScreen>
             child: CustomPaint(painter: _GoogleLogoPainter()),
           ),
           const SizedBox(width: 10),
-          const Text('التسجيل عبر Google', style: TextStyle(
+          Text(_loc.signupGoogleButton, style: TextStyle(
               fontSize: 14, fontWeight: FontWeight.w600)),
         ],
       ),
@@ -477,7 +480,7 @@ class _SignUpScreenState extends State<SignUpScreen>
     Expanded(child: Divider(color: Colors.grey.shade300)),
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: Text('أو التسجيل بالبيانات',
+      child: Text(_loc.signupOrDivider,
           style: TextStyle(fontSize: 12, color: Colors.grey.shade500)),
     ),
     Expanded(child: Divider(color: Colors.grey.shade300)),
@@ -528,18 +531,18 @@ class _SignUpScreenState extends State<SignUpScreen>
             ],
             style: const TextStyle(color: _navy2),
             decoration: _dec(
-              hint: _dialCode == '+964' ? '07701234567' : 'أدخل الرقم',
+              hint: _dialCode == '+964' ? _loc.signupPhoneHintIraq : _loc.signupPhoneHintOther,
               icon: Icons.phone_outlined,
             ),
             validator: (v) {
               final t = v?.trim() ?? '';
-              if (t.isEmpty) return 'رقم الجوال مطلوب';
+              if (t.isEmpty) return _loc.signupPhoneRequired;
               if (_dialCode == '+964') {
                 if (!RegExp(r'^07\d{9}$').hasMatch(t)) {
-                  return 'رقم عراقي: 11 رقماً يبدأ بـ 07';
+                  return _loc.signupPhoneIraqInvalid;
                 }
               } else if (t.length < 7) {
-                return 'رقم غير صحيح';
+                return _loc.signupPhoneInvalid;
               }
               return null;
             },
@@ -566,19 +569,19 @@ class _SignUpScreenState extends State<SignUpScreen>
             const Icon(Icons.verified_user_rounded,
                 color: Color(0xFF856404), size: 16),
             const SizedBox(width: 6),
-            const Expanded(
-              child: Text('التحقق من الهوية — أجب على السؤال البسيط',
-                  style: TextStyle(
+            Expanded(
+              child: Text(_loc.signupCaptchaTitle,
+                  style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF856404))),
             ),
             GestureDetector(
               onTap: _refreshCaptcha,
-              child: const Row(children: [
-                Icon(Icons.refresh_rounded, color: Color(0xFF856404), size: 16),
-                SizedBox(width: 4),
-                Text('تغيير', style: TextStyle(
+              child: Row(children: [
+                const Icon(Icons.refresh_rounded, color: Color(0xFF856404), size: 16),
+                const SizedBox(width: 4),
+                Text(_loc.signupCaptchaChange, style: const TextStyle(
                     fontSize: 11, color: Color(0xFF856404))),
               ]),
             ),
@@ -620,11 +623,11 @@ class _SignUpScreenState extends State<SignUpScreen>
                     fontWeight: FontWeight.bold,
                     fontSize: 18),
                 textAlign: TextAlign.center,
-                decoration: _dec(hint: 'الجواب', icon: Icons.calculate_outlined),
+                decoration: _dec(hint: _loc.signupCaptchaHint, icon: Icons.calculate_outlined),
                 validator: (v) {
-                  if (v == null || v.trim().isEmpty) return 'أدخل الجواب';
+                  if (v == null || v.trim().isEmpty) return _loc.signupCaptchaAnswerRequired;
                   final n = int.tryParse(v.trim());
-                  if (n == null || n != _captchaAnswer) return 'إجابة غير صحيحة';
+                  if (n == null || n != _captchaAnswer) return _loc.signupCaptchaWrong;
                   return null;
                 },
               ),
@@ -655,25 +658,25 @@ class _SignUpScreenState extends State<SignUpScreen>
             text: TextSpan(
               style: TextStyle(fontSize: 12, color: Colors.grey.shade600, height: 1.6),
               children: [
-                const TextSpan(text: 'أوافق على '),
+                TextSpan(text: _loc.signupTermsPrefix),
                 WidgetSpan(child: GestureDetector(
                   onTap: () {},
-                  child: const Text('شروط الاستخدام', style: TextStyle(
+                  child: Text(_loc.signupTermsOfUse, style: TextStyle(
                       color: _gold,
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
                       decoration: TextDecoration.underline)),
                 )),
-                const TextSpan(text: '  و  '),
+                TextSpan(text: _loc.signupAnd),
                 WidgetSpan(child: GestureDetector(
                   onTap: () {},
-                  child: const Text('سياسة الخصوصية', style: TextStyle(
+                  child: Text(_loc.signupPrivacyPolicy, style: TextStyle(
                       color: _gold,
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
                       decoration: TextDecoration.underline)),
                 )),
-                const TextSpan(text: ' الخاصة بـ Naboo.'),
+                TextSpan(text: _loc.signupTermsSuffix),
               ],
             ),
           ),

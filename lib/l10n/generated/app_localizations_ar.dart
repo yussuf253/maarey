@@ -10664,4 +10664,131 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get olAutoFilled => 'تم ملء الحقول تلقائياً من الدليل الدولي';
+
+  @override
+  String get signupAcceptTermsFirst => 'يجب الموافقة على الشروط والأحكام أولاً';
+
+  @override
+  String get signupAccountCreated =>
+      'تم إنشاء الحساب بنجاح! يرجى تسجيل الدخول.';
+
+  @override
+  String get signupGoogleSoon => 'سيتم تفعيل ميزة Google Sign-In قريباً';
+
+  @override
+  String get signupBrandSubtitle => 'نظام إدارة الأعمال';
+
+  @override
+  String get signupGetStarted => 'ابدأ الآن';
+
+  @override
+  String get signupCreateAccount => 'إنشاء حساب جديد';
+
+  @override
+  String get signupFullNameLabel => 'الاسم التجاري / الاسم الكامل';
+
+  @override
+  String get signupFullNameHint => 'مثال: مؤسسة البصرة للتجارة';
+
+  @override
+  String get signupNameRequired => 'الاسم مطلوب';
+
+  @override
+  String get signupNameMinLength => 'يجب أن يكون 3 أحرف على الأقل';
+
+  @override
+  String get signupEmailLabel => 'البريد الإلكتروني';
+
+  @override
+  String get signupEmailRequired => 'البريد مطلوب';
+
+  @override
+  String get signupEmailInvalid => 'صيغة البريد غير صحيحة';
+
+  @override
+  String get signupPhoneLabel => 'رقم الجوال';
+
+  @override
+  String get signupPhoneHintIraq => '07701234567';
+
+  @override
+  String get signupPhoneHintOther => 'أدخل الرقم';
+
+  @override
+  String get signupPhoneRequired => 'رقم الجوال مطلوب';
+
+  @override
+  String get signupPhoneIraqInvalid => 'رقم عراقي: 11 رقماً يبدأ بـ 07';
+
+  @override
+  String get signupPhoneInvalid => 'رقم غير صحيح';
+
+  @override
+  String get signupPasswordLabel => 'كلمة المرور';
+
+  @override
+  String get signupPasswordHint => '8 أحرف على الأقل';
+
+  @override
+  String get signupPasswordRequired => 'كلمة المرور مطلوبة';
+
+  @override
+  String get signupPasswordMinLength => '8 أحرف على الأقل';
+
+  @override
+  String get signupConfirmPasswordLabel => 'تأكيد كلمة المرور';
+
+  @override
+  String get signupConfirmPasswordHint => 'أعد إدخال كلمة المرور';
+
+  @override
+  String get signupConfirmPasswordRequired => 'تأكيد كلمة المرور مطلوب';
+
+  @override
+  String get signupPasswordsMismatch => 'كلمتا المرور غير متطابقتين';
+
+  @override
+  String get signupCaptchaTitle => 'التحقق من الهوية — أجب على السؤال البسيط';
+
+  @override
+  String get signupCaptchaChange => 'تغيير';
+
+  @override
+  String get signupCaptchaHint => 'الجواب';
+
+  @override
+  String get signupCaptchaAnswerRequired => 'أدخل الجواب';
+
+  @override
+  String get signupCaptchaWrong => 'إجابة غير صحيحة';
+
+  @override
+  String get signupCreateButton => 'إنشاء الحساب';
+
+  @override
+  String get signupHasAccount => 'لديك حساب بالفعل؟';
+
+  @override
+  String get signupLoginLink => 'تسجيل الدخول';
+
+  @override
+  String get signupGoogleButton => 'التسجيل عبر Google';
+
+  @override
+  String get signupOrDivider => 'أو التسجيل بالبيانات';
+
+  @override
+  String get signupTermsPrefix => 'أوافق على ';
+
+  @override
+  String get signupTermsOfUse => 'شروط الاستخدام';
+
+  @override
+  String get signupAnd => '  و  ';
+
+  @override
+  String get signupPrivacyPolicy => 'سياسة الخصوصية';
+
+  @override
+  String get signupTermsSuffix => ' الخاصة بـ Naboo.';
 }

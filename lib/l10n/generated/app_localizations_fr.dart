@@ -10889,4 +10889,136 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get olAutoFilled =>
       'Champs remplis automatiquement depuis l\'annuaire international';
+
+  @override
+  String get signupAcceptTermsFirst =>
+      'Vous devez accepter les conditions générales d\'abord';
+
+  @override
+  String get signupAccountCreated =>
+      'Compte créé avec succès ! Veuillez vous connecter.';
+
+  @override
+  String get signupGoogleSoon => 'Google Sign-In sera bientôt disponible';
+
+  @override
+  String get signupBrandSubtitle => 'Système de gestion d\'entreprise';
+
+  @override
+  String get signupGetStarted => 'COMMENCER';
+
+  @override
+  String get signupCreateAccount => 'Créer un nouveau compte';
+
+  @override
+  String get signupFullNameLabel => 'Nom commercial / Nom complet';
+
+  @override
+  String get signupFullNameHint => 'ex: Société de commerce de Bassora';
+
+  @override
+  String get signupNameRequired => 'Le nom est requis';
+
+  @override
+  String get signupNameMinLength => 'Doit comporter au moins 3 caractères';
+
+  @override
+  String get signupEmailLabel => 'E-mail';
+
+  @override
+  String get signupEmailRequired => 'L\'e-mail est requis';
+
+  @override
+  String get signupEmailInvalid => 'Format d\'e-mail invalide';
+
+  @override
+  String get signupPhoneLabel => 'Numéro de téléphone';
+
+  @override
+  String get signupPhoneHintIraq => '07701234567';
+
+  @override
+  String get signupPhoneHintOther => 'Entrez le numéro';
+
+  @override
+  String get signupPhoneRequired => 'Le numéro de téléphone est requis';
+
+  @override
+  String get signupPhoneIraqInvalid =>
+      'Numéro irakien : 11 chiffres commençant par 07';
+
+  @override
+  String get signupPhoneInvalid => 'Numéro invalide';
+
+  @override
+  String get signupPasswordLabel => 'Mot de passe';
+
+  @override
+  String get signupPasswordHint => '8 caractères minimum';
+
+  @override
+  String get signupPasswordRequired => 'Le mot de passe est requis';
+
+  @override
+  String get signupPasswordMinLength => 'Au moins 8 caractères';
+
+  @override
+  String get signupConfirmPasswordLabel => 'Confirmer le mot de passe';
+
+  @override
+  String get signupConfirmPasswordHint => 'Ressaisissez le mot de passe';
+
+  @override
+  String get signupConfirmPasswordRequired =>
+      'La confirmation du mot de passe est requise';
+
+  @override
+  String get signupPasswordsMismatch =>
+      'Les mots de passe ne correspondent pas';
+
+  @override
+  String get signupCaptchaTitle =>
+      'Vérification d\'identité — Répondez à la question simple';
+
+  @override
+  String get signupCaptchaChange => 'Changer';
+
+  @override
+  String get signupCaptchaHint => 'Réponse';
+
+  @override
+  String get signupCaptchaAnswerRequired => 'Entrez la réponse';
+
+  @override
+  String get signupCaptchaWrong => 'Réponse incorrecte';
+
+  @override
+  String get signupCreateButton => 'CRÉER LE COMPTE';
+
+  @override
+  String get signupHasAccount => 'Vous avez déjà un compte ?';
+
+  @override
+  String get signupLoginLink => 'Se connecter';
+
+  @override
+  String get signupGoogleButton => 'S\'inscrire avec Google';
+
+  @override
+  String get signupOrDivider => 'Ou inscrivez-vous avec vos informations';
+
+  @override
+  String get signupTermsPrefix => 'J\'accepte ';
+
+  @override
+  String get signupTermsOfUse => 'Conditions d\'utilisation';
+
+  @override
+  String get signupAnd => ' et ';
+
+  @override
+  String get signupPrivacyPolicy => 'Politique de confidentialité';
+
+  @override
+  String get signupTermsSuffix => ' de Naboo.';
 }
