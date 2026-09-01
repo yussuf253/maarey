@@ -11448,4 +11448,824 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get dsOverdueHint => 'Jours après échéance pour marquer en retard';
+
+  @override
+  String get cashInvoiceNumShort => 'Facture #';
+
+  @override
+  String get cashShiftLoadError =>
+      'Échec du chargement de l\'historique du quart ; ci-dessous uniquement la vue de la caisse.';
+
+  @override
+  String get cashTotalMovements =>
+      'Total des mouvements affichés en caisse pour ce groupe';
+
+  @override
+  String get cashMovementsCount => 'mouvements.';
+
+  @override
+  String get cashMovementStats => 'Nombre de mouvements';
+
+  @override
+  String get cashMovementsDeposit => 'Dépôt';
+
+  @override
+  String get cashMovementsWithdrawal => 'Retrait';
+
+  @override
+  String get cashMovementsManual => 'Manuel';
+
+  @override
+  String get cashMovementsLinked => 'Liées à une facture';
+
+  @override
+  String get cashMovementsTimes => 'fois';
+
+  @override
+  String get cashSalesCash => 'Vente au comptant';
+
+  @override
+  String get cashFirstPayment => 'Acompte / Premier versement';
+
+  @override
+  String get cashInstallmentPayment => 'Paiement de tranche';
+
+  @override
+  String get cashSupplierPayment => 'Paiement fournisseur';
+
+  @override
+  String get cashSupplierPaymentReversal => 'Annulation paiement fournisseur';
+
+  @override
+  String get cashReturn => 'Retour';
+
+  @override
+  String get cashMovement => 'Mouvement';
+
+  @override
+  String get cashSummaryInflow => 'Entrée';
+
+  @override
+  String get cashSummaryOutflow => 'Sortie';
+
+  @override
+  String get cashNoShift => 'Sans quart';
+
+  @override
+  String get cashTapDetails => 'Appuyez pour les détails';
+
+  @override
+  String get cashShiftLabel => 'Quart ';
+
+  @override
+  String get cashMovementsShort => ' mouvements';
+
+  @override
+  String get cashEmployeeLabel => 'Employé : ';
+
+  @override
+  String get cashTapInvoice => 'Appuyez pour la facture #';
+
+  @override
+  String get cashCashboxInfo =>
+      'Enregistré séparément des factures de vente et tranches. Utilisé pour les dépenses du magasin ou dépôt/retrait bancaire.';
+
+  @override
+  String get cashCashboxBalanceInfo =>
+      'Total des entrées en caisse des ventes au comptant, acomptes, paiements de tranches et dépôts manuels — hors factures à crédit sans acompte.';
+
+  @override
+  String get calculatorTitle => 'Calculatrice';
+
+  @override
+  String get calculatorCopyResult => 'Copier le résultat';
+
+  @override
+  String get calculatorClearAll => 'Tout effacer';
+
+  @override
+  String get debtsGroupByCustomer =>
+      'Regroupement par client : produits, vendeurs et paiement partiel depuis l\'écran détails. QR sur reçu pour les clients enregistrés uniquement.';
+
+  @override
+  String get debtsSearchHintCustomer => 'Recherche par nom ou ID client…';
+
+  @override
+  String get debtsXofYCustomers => 'sur';
+
+  @override
+  String get debtsNoCreditRemaining =>
+      'Aucun crédit restant regroupé par clients';
+
+  @override
+  String get debtsNoResults => 'Aucun résultat';
+
+  @override
+  String get debtsCustomerLabel => 'Client';
+
+  @override
+  String get debtsRegisteredCustomer => 'Client enregistré';
+
+  @override
+  String get debtsNotLinked => 'Non lié au tableau des clients (par nom)';
+
+  @override
+  String get debtsCreditInvoices => 'factures à crédit';
+
+  @override
+  String get debtsRemainingLabel => 'Restant';
+
+  @override
+  String get debtsCustomerStatement => 'Relevé client';
+
+  @override
+  String get debtsAgingWarningInfo =>
+      'L\'avertissement commence après X jours.';
+
+  @override
+  String get debtsAgingDisabled =>
+      'Activez les jours d\'avertissement pour marquer les factures anciennes.';
+
+  @override
+  String get debtsInfoBanner =>
+      'Les créances sont calculées depuis les factures à crédit.';
+
+  @override
+  String get debtsTotalRemaining => 'Total restant';
+
+  @override
+  String get debtsShowAll => 'Afficher toutes les factures';
+
+  @override
+  String get debtsOpenInvoices => 'Factures ouvertes';
+
+  @override
+  String get debtsFilterOpen => 'Filtrer : ouvertes seulement';
+
+  @override
+  String get debtsAgingWarning => 'Alerte d\'ancienneté';
+
+  @override
+  String get debtsFilterAging => 'Filtrer : alerte';
+
+  @override
+  String get debtsStatusClosed => 'Fermé';
+
+  @override
+  String get debtsStatusAging => 'Alerte';
+
+  @override
+  String get debtsStatusOpen => 'Ouvert';
+
+  @override
+  String get debtsReceiptLabel => 'Reçu';
+
+  @override
+  String get debtsViewDetails => 'Détails';
+
+  @override
+  String get debtsDaysSinceInvoice => 'jours';
+
+  @override
+  String get debtsAdvanceOf => 'Acompte';
+
+  @override
+  String get debtsTapForDetails => 'Appuyez pour voir les détails';
+
+  @override
+  String get debtsNoInvoicesInFilter =>
+      'Aucune facture dans la recherche actuelle';
+
+  @override
+  String get debtsNoDebtInvoices => 'Aucune facture de dette enregistrée';
+
+  @override
+  String get debtsClearSearchHint =>
+      'Effacez la recherche ou sélectionnez « Tout ».';
+
+  @override
+  String get debtsNewSaleHint =>
+      'Depuis « Nouvelle vente », choisissez « Crédit » pour afficher le montant ici.';
+
+  @override
+  String get hubInventoryTitle => 'Centre de stock';
+
+  @override
+  String get hubProductsList => 'Liste des produits';
+
+  @override
+  String get hubProductsListDesc =>
+      'Rechercher, filtrer et gérer tous les articles';
+
+  @override
+  String get hubAddProduct => 'Ajouter un produit';
+
+  @override
+  String get hubAddProductDesc => 'Créer un nouvel article en stock';
+
+  @override
+  String get hubQuickUpdate => 'Mettre à jour un produit';
+
+  @override
+  String get hubQuickUpdateDesc =>
+      'Rechercher, code-barres, modifier prix et quantités sans créer de nouvel article';
+
+  @override
+  String get hubVouchers => 'Mouvements de stock';
+
+  @override
+  String get hubVouchersDesc => 'Entrées, sorties, transferts entre entrepôts';
+
+  @override
+  String get hubWarehouses => 'Gestion des entrepôts';
+
+  @override
+  String get hubWarehousesDesc =>
+      'Ajouter et modifier les entrepôts et emplacements';
+
+  @override
+  String get hubPriceLists => 'Listes de prix';
+
+  @override
+  String get hubPriceListsDesc => 'Prix personnalisés pour clients et groupes';
+
+  @override
+  String get hubStocktaking => 'Inventaire périodique';
+
+  @override
+  String get hubStocktakingDesc =>
+      'Concilier le stock physique avec le système';
+
+  @override
+  String get hubPurchaseOrders => 'Bons de commande';
+
+  @override
+  String get hubPurchaseOrdersDesc =>
+      'Créer et suivre les commandes fournisseurs';
+
+  @override
+  String get hubAnalytics => 'Analyses de stock';
+
+  @override
+  String get hubAnalyticsDesc => 'Valeur du stock, alertes, plus populaires';
+
+  @override
+  String get hubSettings => 'Paramètres de stock';
+
+  @override
+  String get hubSettingsDesc =>
+      'Type d\'activité, caractéristiques produit, activer les fonctionnalités';
+
+  @override
+  String get hubTenantSelect => 'Sélectionner le compte/locataire';
+
+  @override
+  String get hubTenantClose => 'Fermer';
+
+  @override
+  String get hubCustomizeUnits => 'Personnaliser les unités de stock';
+
+  @override
+  String get hubCustomizeUnitsDesc =>
+      'Masquer toute unité dont vous n\'avez pas besoin. Vous pourrez la restaurer plus tard au même endroit';
+
+  @override
+  String get hubCancel => 'Annuler';
+
+  @override
+  String get hubSave => 'Enregistrer';
+
+  @override
+  String get hubRefresh => 'Actualiser';
+
+  @override
+  String get hubCustomize => 'Personnaliser les unités';
+
+  @override
+  String get hubSwitchTenant => 'Changer de locataire';
+
+  @override
+  String get hubAllHidden =>
+      'Toutes les unités sont masquées ou désactivées depuis les paramètres';
+
+  @override
+  String get hubManageUnits => 'Gérer les unités';
+
+  @override
+  String get hubReloadOnReturn =>
+      'Recharger au retour (les paramètres peuvent avoir changé)';
+
+  @override
+  String get bsTitle => 'Paramètres du code-barres';
+
+  @override
+  String get bsSubtitle =>
+      'Configurer les formats de code-barres, les codes-barres avec poids intégré et les paramètres de tarification';
+
+  @override
+  String get bsTypeTitle => 'Type de code-barres';
+
+  @override
+  String get bsTypeCode128Desc =>
+      'Code-barres flexible supportant les lettres, chiffres et symboles. Utilisé largement dans la logistique et l\'entreposage';
+
+  @override
+  String get bsTypeEan13Desc =>
+      'Standard composé de 13 chiffres couramment utilisé dans la grande distribution. Inclut le code pays, le code fabricant et le code produit';
+
+  @override
+  String get bsTypeLabel =>
+      'Choisir le standard de code-barres que le système utilisera pour créer et lire les codes-barres produits';
+
+  @override
+  String get bsWeightEmbedded => 'Code-barres avec poids intégré';
+
+  @override
+  String get bsWeightEnabled => 'Activé';
+
+  @override
+  String get bsWeightDisabled => 'Désactivé';
+
+  @override
+  String get bsWeightDesc =>
+      'Utiliser le code-barres avec poids intégré pour que le système puisse lire le poids et le prix directement du code-barres';
+
+  @override
+  String get bsWeightFormat => 'Format du code-barres avec poids intégré';
+
+  @override
+  String get bsWeightFormatDesc =>
+      'Saisir le format du code-barres selon le modèle, où les chiffres représentent le produit, les chiffres de poids et les chiffres de prix';
+
+  @override
+  String get bsWeightExample =>
+      'Par exemple, si le poids est affiché en 4 chiffres il apparaîtra en grammes, et en 5 chiffres en dizaines de grammes';
+
+  @override
+  String get bsWeightUnit => 'Division de l\'unité de poids';
+
+  @override
+  String get bsWeightUnitExample => 'Exemple';
+
+  @override
+  String get bsWeightUnitDesc =>
+      'Saisir la valeur utilisée par le système pour convertir l\'unité de poids dans le code-barres en votre unité de vente';
+
+  @override
+  String get bsCurrencyDivision => 'Division de la devise';
+
+  @override
+  String get bsCurrencyExample => 'Exemple';
+
+  @override
+  String get bsCurrencyDesc =>
+      'Saisir la valeur utilisée par le système pour convertir le prix de l\'unité intégrée dans le code-barres vers votre devise de base';
+
+  @override
+  String get bsFormatLabel => 'Format du code-barres intégré';
+
+  @override
+  String get bsFormatError =>
+      'Le format du code-barres intégré ne doit contenir que les lettres W, P et D';
+
+  @override
+  String get bsWeightUnitError =>
+      'Saisir une valeur positive valide pour diviser l\'unité de poids';
+
+  @override
+  String get bsCurrencyDivError =>
+      'Saisir une valeur positive valide pour diviser la devise';
+
+  @override
+  String get bsSaveSuccess => 'Paramètres du code-barres enregistrés';
+
+  @override
+  String get bsSaveError => 'Échec de l\'enregistrement';
+
+  @override
+  String get imTabAll => 'Tout';
+
+  @override
+  String get imTabDeposit => 'Dépôt';
+
+  @override
+  String get imTabWithdrawal => 'Retrait';
+
+  @override
+  String get imTabTransfer => 'Transfert';
+
+  @override
+  String get imSortNewest => 'Plus récent';
+
+  @override
+  String get imSortOldest => 'Plus ancien';
+
+  @override
+  String get imLoadError => 'Échec du chargement des mouvements';
+
+  @override
+  String get stOpenSessions => 'Sessions ouvertes';
+
+  @override
+  String get stCompleted => 'Terminé';
+
+  @override
+  String get stCloseSessionConfirm => 'Voulez-vous fermer cette session ?';
+
+  @override
+  String get stCategory => 'Catégorie';
+
+  @override
+  String get stStarted => 'Commencé';
+
+  @override
+  String get stClosed => 'Fermé';
+
+  @override
+  String get stSystemQty => 'Système';
+
+  @override
+  String get stDifference => 'Écart';
+
+  @override
+  String get stReport => 'Rapport';
+
+  @override
+  String get stActualQty => 'Réel';
+
+  @override
+  String get plRetail => 'Liste de détail';
+
+  @override
+  String get plRetailDesc => 'Prix de détail pour les clients ordinaires';
+
+  @override
+  String get plWholesale => 'Liste de gros';
+
+  @override
+  String get plWholesaleDesc =>
+      'Prix de gros pour les distributeurs et commerçants';
+
+  @override
+  String get plVIP => 'Liste clients VIP';
+
+  @override
+  String get plVIPDesc => 'Prix spéciaux pour les clients fidèles';
+
+  @override
+  String get plDeleteConfirm => 'Voulez-vous supprimer';
+
+  @override
+  String get plCategory => 'Catégorie';
+
+  @override
+  String get plPrices => 'Prix';
+
+  @override
+  String get plSellPrice => 'Prix de vente';
+
+  @override
+  String get rptDashboard => 'Tableau de bord';
+
+  @override
+  String get rptDashboardSub => 'KPIs et période';
+
+  @override
+  String get rptSalesInvoices => 'Ventes et factures';
+
+  @override
+  String get rptSalesInvoicesSub => 'Modes de paiement et retours';
+
+  @override
+  String get rptCustomers => 'Clients';
+
+  @override
+  String get rptCustomersSub => 'Meilleurs acheteurs';
+
+  @override
+  String get rptDebts => 'Dettes';
+
+  @override
+  String get rptDebtsSub => 'Soldes clients';
+
+  @override
+  String get rptInstallments => 'Acomptes';
+
+  @override
+  String get rptInstallmentsSub => 'Plans de la période';
+
+  @override
+  String get rptStaff => 'Personnel';
+
+  @override
+  String get rptStaffSub => 'Performance d\'enregistrement';
+
+  @override
+  String get rptAnalyticsMargin => 'Analyse et marge';
+
+  @override
+  String get rptAnalyticsMarginSub => 'Produits et marge estimée';
+
+  @override
+  String get rptReportSettings => 'Paramètres des rapports';
+
+  @override
+  String get rptReportSettingsSub => 'Période par défaut et préférences';
+
+  @override
+  String get rptNoData => 'Aucune donnée';
+
+  @override
+  String get rptDateFilter => 'Filtre de date';
+
+  @override
+  String get rptToday => 'Aujourd\'hui';
+
+  @override
+  String get rptYesterday => 'Hier';
+
+  @override
+  String get rptLastWeek => 'Semaine dernière';
+
+  @override
+  String get rptLastMonth => 'Mois dernier';
+
+  @override
+  String get rptLastQuarter => 'Dernier trimestre';
+
+  @override
+  String get rptReset => 'Réinitialiser';
+
+  @override
+  String get rptApply => 'Appliquer';
+
+  @override
+  String get rptClose => 'Fermer';
+
+  @override
+  String get rptCopiedSectionName => 'Nom de la section copié';
+
+  @override
+  String get rptSales => 'Ventes';
+
+  @override
+  String get rptTotal => 'Total';
+
+  @override
+  String get rptReturns => 'Retours';
+
+  @override
+  String get rptCustomer => 'Client';
+
+  @override
+  String get rptStaffLabel => 'Personnel';
+
+  @override
+  String get rptOthers => 'Autres';
+
+  @override
+  String get rptNoCustomerData => 'Aucune donnée client pour cette période';
+
+  @override
+  String get rptNoStaffSales =>
+      'Aucune vente enregistrée par le personnel pour cette période';
+
+  @override
+  String get rptTopBuyers => 'Meilleurs acheteurs par nom de facture';
+
+  @override
+  String get rptSalesByCustomer => 'Répartition des ventes par clients';
+
+  @override
+  String get rptSalesByStaff => 'Répartition des ventes par personnel';
+
+  @override
+  String get rptDebtsBalances =>
+      'Soldes enregistrés dans le grand livre clients';
+
+  @override
+  String get rptInstallmentPlans =>
+      'Plans d\'acomptes liés aux factures de la période';
+
+  @override
+  String get rptDetails => 'Détails des plans';
+
+  @override
+  String get rptStaffPercentage =>
+      'Pourcentage de chaque membre du personnel du total des ventes';
+
+  @override
+  String get rptConsistentWithPie =>
+      'Cohérent avec les pourcentages du graphique circulaire et du tableau';
+
+  @override
+  String get rptUnknown => 'Inconnu';
+
+  @override
+  String get rptNoName => 'Sans nom';
+
+  @override
+  String get rptSelectedPeriod => 'Période sélectionnée';
+
+  @override
+  String get rptApproxNet => 'Net approximatif';
+
+  @override
+  String get rptTotalExpenses => 'Total des dépenses';
+
+  @override
+  String get rptNetAfterExpenses => 'Net après dépenses';
+
+  @override
+  String get rptInvoicesReturns => 'Factures et retours';
+
+  @override
+  String get rptDailySalesInRange =>
+      'Tendance des ventes quotidiennes dans la période';
+
+  @override
+  String get rptPiePayments => 'Répartition des modes de paiement';
+
+  @override
+  String get osDescription =>
+      'Après connexion, afficher le solde de la caisse, l\'inventaire, ajouter de l\'argent, puis identifier l\'employé du quart';
+
+  @override
+  String get osSessionExpired =>
+      'Session terminée en arrière-plan pendant le chargement de l\'écran';
+
+  @override
+  String get osUnexpectedError => 'Erreur inattendue lors de l\'initialisation';
+
+  @override
+  String get osPasswordRequired =>
+      'En revenant à l\'application avec un quart ouvert, nous demandons le mot de passe de l\'employé';
+
+  @override
+  String get osShiftEmployee => 'Employé du quart';
+
+  @override
+  String get osOpeningBalance => 'Solde d\'ouverture (Système)';
+
+  @override
+  String get osManualCount => 'Comptage manuel de la caisse';
+
+  @override
+  String get osAddedMoney => 'Argent ajouté à l\'ouverture';
+
+  @override
+  String get osOpeningShift => 'Ouvrir le quart';
+
+  @override
+  String get osErrorOpening => 'Échec de l\'ouverture du quart';
+
+  @override
+  String get osNoShiftId =>
+      'Opération terminée sans ID de quart valide, réessayez';
+
+  @override
+  String get osShiftOpened => 'Quart ouvert avec succès';
+
+  @override
+  String get osAmountHint => 'Montant affiché lors de l\'inventaire';
+
+  @override
+  String get osAmountLabel =>
+      'Saisissez le montant réel dans la caisse maintenant';
+
+  @override
+  String get osExample => 'Exemple';
+
+  @override
+  String get osAddMoney => 'Ajouter de l\'argent à la caisse';
+
+  @override
+  String get osAddMoneyDesc =>
+      'Optionnel - utilisez si vous ajoutez du cash avant de commencer les ventes';
+
+  @override
+  String get osLogout => 'Quitter le compte';
+
+  @override
+  String get osReviewBalance =>
+      'Vérifiez le solde de la caisse système, puis enregistrez le comptage réel avant de commencer';
+
+  @override
+  String get osOpeningSystemBalance => 'Solde de la caisse selon le système';
+
+  @override
+  String get osOpeningLoading => 'Ouverture du quart en cours...';
+
+  @override
+  String get osStaffDialogTitle => 'Dialogue employé du quart';
+
+  @override
+  String get osStaffDialogDesc =>
+      'Sélectionner un utilisateur enregistré par code carte ou scanner';
+
+  @override
+  String get osAllActiveUsers => 'Tous les utilisateurs actifs';
+
+  @override
+  String get osErrorLoadingUsers =>
+      'Échec du chargement des utilisateurs du quart';
+
+  @override
+  String get osInvalidCard =>
+      'Le texte lu n\'est pas un code d\'identité valide';
+
+  @override
+  String get osSelectUser =>
+      'Sélectionnez l\'utilisateur du quart dans la liste ou scannez la carte';
+
+  @override
+  String get osUserNotFound =>
+      'Utilisateur non trouvé, sélectionnez un autre utilisateur';
+
+  @override
+  String get osNoLocalPassword =>
+      'Aucun mot de passe local pour ce compte, définissez un mot de passe depuis la gestion des utilisateurs';
+
+  @override
+  String get osWrongPassword => 'Mot de passe de connexion incorrect';
+
+  @override
+  String get osSelectEmployee =>
+      'Sélectionnez l\'employé responsable de la caisse pour ce quart';
+
+  @override
+  String get osNoActiveUsers =>
+      'Aucun utilisateur actif dans le système, ajoutez un utilisateur depuis la gestion';
+
+  @override
+  String get osUserLabel => 'Utilisateur du quart';
+
+  @override
+  String get osSelectUserHint => 'Sélectionner un utilisateur';
+
+  @override
+  String get osDisplayName => 'Nom affiché';
+
+  @override
+  String get osAutoDetermined => 'Déterminé automatiquement';
+
+  @override
+  String get osScanDesc =>
+      'Sélectionner l\'utilisateur par caméra ou lecteur externe, puis saisir le mot de passe pour confirmer';
+
+  @override
+  String get osScanCamera => 'Scanner avec la caméra';
+
+  @override
+  String get osExternalReader => 'Lecteur externe';
+
+  @override
+  String get osPressToScan => 'Appuyez ici puis scannez la carte';
+
+  @override
+  String get osInvalidIdCode =>
+      'Le texte lu n\'est pas un code d\'identité valide';
+
+  @override
+  String get osLoginPassword => 'Mot de passe de connexion';
+
+  @override
+  String get osSessionEnded => 'Session utilisateur terminée, reconnectez-vous';
+
+  @override
+  String get osCannotBeNegative => 'Le montant ajouté ne peut pas être négatif';
+
+  @override
+  String get osErrorStaffDialog =>
+      'Échec de l\'ouverture de la boîte de sélection du personnel';
+
+  @override
+  String get osNoStaffSelected => 'Aucun employé du quart sélectionné';
+
+  @override
+  String get osIncompleteData =>
+      'Données incomplètes, sélectionnez l\'employé à nouveau';
+
+  @override
+  String get osPasswordNotStored =>
+      'Nous ne stockons pas les mots de passe, la vérification était dans le dialogue uniquement';
+
+  @override
+  String get osAutoFixed =>
+      'Données de l\'employé corrigées automatiquement sur cet appareil, vous pouvez continuer';
+
+  @override
+  String get osStaffMissing =>
+      'L\'employé enregistré n\'existe plus, fermez le quart depuis un autre appareil ou contactez l\'admin';
+
+  @override
+  String get osAuthRejected =>
+      'Authentification rejetée, l\'application ne doit pas s\'ouvrir sur un quart sans preuve';
+
+  @override
+  String get osReturningToLogin =>
+      'Déconnexion de cette session et retour à l\'écran de connexion';
+
+  @override
+  String get osUseExistingShift => 'Revenir au quart existant au lieu de cela';
 }

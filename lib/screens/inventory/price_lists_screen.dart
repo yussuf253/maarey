@@ -40,42 +40,17 @@ class _PriceListsScreenState extends State<PriceListsScreen>
 
   late final TabController _tab;
 
-  final List<Map<String, dynamic>> _lists = [
-    {
-      'id': 1,
-      'name': 'قائمة التجزئة',
-      'description': 'أسعار بيع التجزئة للعملاء العاديين',
-      'color': _blue,
-      'isDefault': true,
-      'isActive': true,
-      'itemsCount': 248,
-      'createdAt': '01/01/2025',
-    },
-    {
-      'id': 2,
-      'name': 'قائمة الجملة',
-      'description': 'أسعار الجملة للموزعين والتجار',
-      'color': _green,
-      'isDefault': false,
-      'isActive': true,
-      'itemsCount': 200,
-      'createdAt': '15/02/2025',
-    },
-    {
-      'id': 3,
-      'name': 'قائمة العملاء المميزين',
-      'description': 'أسعار خاصة للعملاء الدائمين (VIP)',
-      'color': _purple,
-      'isDefault': false,
-      'isActive': true,
-      'itemsCount': 150,
-      'createdAt': '01/03/2025',
-    },
-  ];
+  late final List<Map<String, dynamic>> _lists;
 
   @override
   void initState() {
     super.initState();
+
+    _lists = [
+      {'id': 1, 'name': loc.plRetail, 'description': loc.plRetailDesc, 'color': _blue, 'isDefault': true, 'isActive': true, 'itemsCount': 248, 'createdAt': '01/01/2025'},
+      {'id': 2, 'name': loc.plWholesale, 'description': loc.plWholesaleDesc, 'color': _green, 'isDefault': false, 'isActive': true, 'itemsCount': 200, 'createdAt': '15/02/2025'},
+      {'id': 3, 'name': loc.plVIP, 'description': loc.plVIPDesc + ' (VIP)', 'color': _purple, 'isDefault': false, 'isActive': true, 'itemsCount': 150, 'createdAt': '01/03/2025'},
+    ];
 
     _tab = TabController(length: 2, vsync: this);
   }
@@ -131,7 +106,7 @@ class _PriceListsScreenState extends State<PriceListsScreen>
       context: context,
       builder: (_) => AlertDialog(
         title: Text(loc.deletePriceList),
-        content: Text('هل تريد حذف «${l['name']}»؟'),
+        content: Text('${loc.plDeleteConfirm} «${l['name']}»?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -400,7 +375,7 @@ class _PriceListCard extends StatelessWidget {
                 Icon(Icons.inventory_2_outlined, size: 15, color: color),
                 const SizedBox(width: 6),
                 Text(
-                  '${data['itemsCount']} صنف',
+                  '${data['itemsCount']} ${loc.plCategory}',
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.bold,
@@ -590,7 +565,7 @@ class _PriceItemsSheet extends StatelessWidget {
                   const SizedBox(width: 10),
                   Expanded(
                     child: Text(
-                      'أسعار ${list['name']}',
+                      '${loc.plPrices} ${list['name']}',
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -620,7 +595,7 @@ class _PriceItemsSheet extends StatelessWidget {
                   Expanded(
                     flex: 3,
                     child: Text(
-                      'سعر البيع',
+                      loc.plSellPrice,
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,

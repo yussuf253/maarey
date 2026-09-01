@@ -11213,4 +11213,798 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get dsOverdueHint => 'أيام بعد الاستحقاق لتصنيف كمتأخر';
+
+  @override
+  String get cashInvoiceNumShort => 'فاتورة #';
+
+  @override
+  String get cashShiftLoadError =>
+      'تعذّر تحميل سجل الوردية من قاعدة البيانات؛ يُعرض أدناه ما يظهر في قائمة الصندوق فقط.';
+
+  @override
+  String get cashTotalMovements =>
+      'إجمالي ما يظهر من حركات في الصندوق لهذه المجموعة';
+
+  @override
+  String get cashMovementsCount => 'حركة.';
+
+  @override
+  String get cashMovementStats => 'أعداد الحركات';
+
+  @override
+  String get cashMovementsDeposit => 'إدخال';
+
+  @override
+  String get cashMovementsWithdrawal => 'إخراج';
+
+  @override
+  String get cashMovementsManual => 'يدوية';
+
+  @override
+  String get cashMovementsLinked => 'مرتبطة بفاتورة';
+
+  @override
+  String get cashMovementsTimes => 'حركة';
+
+  @override
+  String get cashSalesCash => 'بيع نقدي';
+
+  @override
+  String get cashFirstPayment => 'مقدم / دفعة أولى';
+
+  @override
+  String get cashInstallmentPayment => 'تسديد قسط';
+
+  @override
+  String get cashSupplierPayment => 'دفع مورد';
+
+  @override
+  String get cashSupplierPaymentReversal => 'عكس دفع مورد';
+
+  @override
+  String get cashReturn => 'مرتجع';
+
+  @override
+  String get cashMovement => 'حركة';
+
+  @override
+  String get cashSummaryInflow => 'وارد';
+
+  @override
+  String get cashSummaryOutflow => 'صادر';
+
+  @override
+  String get cashNoShift => 'بدون وردية';
+
+  @override
+  String get cashTapDetails => 'اضغط لعرض التفاصيل';
+
+  @override
+  String get cashShiftLabel => 'وردية ';
+
+  @override
+  String get cashMovementsShort => ' حركة';
+
+  @override
+  String get cashEmployeeLabel => 'الموظف: ';
+
+  @override
+  String get cashTapInvoice => 'اضغط للفاتورة #';
+
+  @override
+  String get cashCashboxInfo =>
+      'يُسجَّل منفصلاً عن فواتير البيع والأقساط. استخدمه لمصروفات المتجر أو إيداع/سحب بنكي.';
+
+  @override
+  String get cashCashboxBalanceInfo =>
+      'مجموع وارد الصندوق من المبيعات النقدية والمقدمات وتسديد الأقساط والإيداع اليدوي — دون إجمالي الفواتير الآجلة بدون مقدم';
+
+  @override
+  String get calculatorTitle => 'الحاسبة';
+
+  @override
+  String get calculatorCopyResult => 'نسخ الناتج';
+
+  @override
+  String get calculatorClearAll => 'مسح الكل';
+
+  @override
+  String get debtsGroupByCustomer =>
+      'تجميع حسب العميل: المنتجات والبائعون وتسديد جزئي من شاشة التفاصيل. QR على الإيصال للعملاء المسجّلين فقط.';
+
+  @override
+  String get debtsSearchHintCustomer => 'بحث باسم العميل أو المعرف…';
+
+  @override
+  String get debtsXofYCustomers => 'من';
+
+  @override
+  String get debtsNoCreditRemaining => 'لا يوجد متبقٍ آجل مجمّع بالعملاء';
+
+  @override
+  String get debtsNoResults => 'لا نتائج للبحث';
+
+  @override
+  String get debtsCustomerLabel => 'عميل';
+
+  @override
+  String get debtsRegisteredCustomer => 'عميل مسجّل';
+
+  @override
+  String get debtsNotLinked => 'غير مربوط بجدول العملاء (بالاسم)';
+
+  @override
+  String get debtsCreditInvoices => 'فاتورة آجل';
+
+  @override
+  String get debtsRemainingLabel => 'المتبقي';
+
+  @override
+  String get debtsCustomerStatement => 'كشف العميل';
+
+  @override
+  String get debtsAgingWarningInfo =>
+      'التحذير بالعمر يبدأ بعد يوماً من تاريخ الفاتورة.';
+
+  @override
+  String get debtsAgingDisabled =>
+      'فعّل «أيام تحذير العمر» من إعدادات الدين لتمييز الفواتير القديمة.';
+
+  @override
+  String get debtsInfoBanner =>
+      'تُحسب الديون من فواتير النوع «دين / آجل». المتبقي = إجمالي الفاتورة − المقدّم. حدود البيع تُضبط من إعدادات الدين.';
+
+  @override
+  String get debtsTotalRemaining => 'إجمالي المتبقي';
+
+  @override
+  String get debtsShowAll => 'عرض كل الفواتير';
+
+  @override
+  String get debtsOpenInvoices => 'فواتير مفتوحة';
+
+  @override
+  String get debtsFilterOpen => 'تصفية: مفتوحة فقط';
+
+  @override
+  String get debtsAgingWarning => 'تحذير عمر';
+
+  @override
+  String get debtsFilterAging => 'تصفية: تحذير عمر';
+
+  @override
+  String get debtsStatusClosed => 'مغلقة';
+
+  @override
+  String get debtsStatusAging => 'تنبيه عمر';
+
+  @override
+  String get debtsStatusOpen => 'مفتوحة';
+
+  @override
+  String get debtsReceiptLabel => 'الإيصال';
+
+  @override
+  String get debtsViewDetails => 'تفاصيل';
+
+  @override
+  String get debtsDaysSinceInvoice => 'يوماً';
+
+  @override
+  String get debtsAdvanceOf => 'المقدّم';
+
+  @override
+  String get debtsTapForDetails => 'اضغط لعرض تفاصيل الفاتورة';
+
+  @override
+  String get debtsNoInvoicesInFilter =>
+      'لا توجد فواتير ضمن البحث أو التصفية الحالية';
+
+  @override
+  String get debtsNoDebtInvoices => 'لا توجد فواتير دين مسجّلة';
+
+  @override
+  String get debtsClearSearchHint =>
+      'امسح البحث أو اختر «الكل» في شريط التصفية.';
+
+  @override
+  String get debtsNewSaleHint =>
+      'من «بيع جديد» اختر نوع «دين» ليظهر المبلغ المؤجل هنا.';
+
+  @override
+  String get hubInventoryTitle => 'مركز المخزون';
+
+  @override
+  String get hubProductsList => 'قائمة المنتجات';
+
+  @override
+  String get hubProductsListDesc => 'بحث، تصفية، وإدارة جميع الأصناف';
+
+  @override
+  String get hubAddProduct => 'إضافة منتج جديد';
+
+  @override
+  String get hubAddProductDesc => 'إنشاء صنف جديد في المخزون';
+
+  @override
+  String get hubQuickUpdate => 'تحديث منتج موجود';
+
+  @override
+  String get hubQuickUpdateDesc =>
+      'بحث، باركود، وتعديل أسعار وكميات دون إنشاء صنف جديد';
+
+  @override
+  String get hubVouchers => 'حركات المخزون';
+
+  @override
+  String get hubVouchersDesc => 'وارد، صادر، تحويل بين المستودعات';
+
+  @override
+  String get hubWarehouses => 'إدارة المستودعات';
+
+  @override
+  String get hubWarehousesDesc => 'إضافة وتعديل المستودعات والمواقع';
+
+  @override
+  String get hubPriceLists => 'قوائم الأسعار';
+
+  @override
+  String get hubPriceListsDesc => 'أسعار مخصصة للعملاء والمجموعات';
+
+  @override
+  String get hubStocktaking => 'الجرد الدوري';
+
+  @override
+  String get hubStocktakingDesc => 'مطابقة المخزون الفعلي بالنظام';
+
+  @override
+  String get hubPurchaseOrders => 'أوامر الشراء';
+
+  @override
+  String get hubPurchaseOrdersDesc => 'إنشاء وتتبع طلبات الشراء من الموردين';
+
+  @override
+  String get hubAnalytics => 'تحليلات المخزون';
+
+  @override
+  String get hubAnalyticsDesc => 'قيمة المخزون، تنبيهات، الأكثر حركة';
+
+  @override
+  String get hubSettings => 'إعدادات المخزون';
+
+  @override
+  String get hubSettingsDesc => 'نوع النشاط، خصائص المنتج، تفعيل الميزات';
+
+  @override
+  String get hubTenantSelect => 'اختيار الحساب/المستأجر';
+
+  @override
+  String get hubTenantClose => 'إغلاق';
+
+  @override
+  String get hubCustomizeUnits => 'تخصيص وحدات المخزون';
+
+  @override
+  String get hubCustomizeUnitsDesc =>
+      'أخفِ أي وحدة لا تحتاجها الآن. يمكنك إرجاعها لاحقاً من نفس المكان';
+
+  @override
+  String get hubCancel => 'إلغاء';
+
+  @override
+  String get hubSave => 'حفظ';
+
+  @override
+  String get hubRefresh => 'تحديث';
+
+  @override
+  String get hubCustomize => 'تخصيص الوحدات';
+
+  @override
+  String get hubSwitchTenant => 'تبديل المستأجر';
+
+  @override
+  String get hubAllHidden => 'تم إخفاء كل الوحدات أو تعطيلها من الإعدادات';
+
+  @override
+  String get hubManageUnits => 'إدارة الوحدات';
+
+  @override
+  String get hubReloadOnReturn => 'أعد التحميل عند العودة قد تغيرت الإعدادات';
+
+  @override
+  String get bsTitle => 'إعدادات الباركود';
+
+  @override
+  String get bsSubtitle => 'تهيئة الباركود إعدادات حقيقية في النظام';
+
+  @override
+  String get bsTypeTitle => 'نوع الباركود';
+
+  @override
+  String get bsTypeCode128Desc =>
+      'باركود مرن يدعم ترميز الأرقام والحروف والرموز، ويُستخدم على نطاق واسع في التوصيل والمستودعات';
+
+  @override
+  String get bsTypeEan13Desc =>
+      'معيار مكوّن من 13 رقمًا يُستخدم بشكل شائع في قطاع التجزئة، ويشمل رمز الدولة ورمز المصنّع ورمز المنتج';
+
+  @override
+  String get bsTypeLabel =>
+      'اختر معيار الباركود الذي سيعتمد عليه النظام في إنشاء وقراءة باركود المنتجات';
+
+  @override
+  String get bsWeightEmbedded => 'باركود متضمن الوزن';
+
+  @override
+  String get bsWeightEnabled => 'مفعّل';
+
+  @override
+  String get bsWeightDisabled => 'معطّل';
+
+  @override
+  String get bsWeightDesc =>
+      'استخدم الباركود متضمن الوزن ليتمكّن النظام من قراءة وزن المنتج والسعر إذا وُجد مباشرة من الباركود';
+
+  @override
+  String get bsWeightFormat => 'صيغة الباركود المتضمن';
+
+  @override
+  String get bsWeightFormatDesc =>
+      'أدخل صيغة الباركود المدمج وفق النموذج، حيث تُمثل أرقام المنتج، وخانات الوزن، وخانات السعر';
+
+  @override
+  String get bsWeightExample =>
+      'على سبيل المثال، إذا كان الوزن يُعرض بأربع خانات فسيظهر جرامًا، وإذا كان بخمس خانات سيظهر كعشرات الجرامات';
+
+  @override
+  String get bsWeightUnit => 'تقسيم وحدة الوزن';
+
+  @override
+  String get bsWeightUnitExample => 'مثال';
+
+  @override
+  String get bsWeightUnitDesc =>
+      'أدخل القيمة التي يستخدمها النظام لتحويل وحدة الوزن في الباركود إلى وحدة البيع لديك';
+
+  @override
+  String get bsCurrencyDivision => 'قسمة العملة';
+
+  @override
+  String get bsCurrencyExample => 'مثال';
+
+  @override
+  String get bsCurrencyDesc =>
+      'أدخل القيمة التي يستخدمها النظام لتحويل السعر من الوحدة المضمنة في الباركود إلى وحدتك الأساسية';
+
+  @override
+  String get bsFormatLabel => 'صيغة الباركود المتضمن';
+
+  @override
+  String get bsFormatError =>
+      'صيغة الباركود المتضمن يجب أن تحتوي فقط على الحروف W و P و D';
+
+  @override
+  String get bsWeightUnitError =>
+      'أدخل قيمة صحيحة أكبر من صفر لتقسيم وحدة الوزن';
+
+  @override
+  String get bsCurrencyDivError => 'أدخل قيمة صحيحة أكبر من صفر لقسمة العملة';
+
+  @override
+  String get bsSaveSuccess => 'تم حفظ إعدادات الباركود';
+
+  @override
+  String get bsSaveError => 'تعذر الحفظ';
+
+  @override
+  String get imTabAll => 'الكل';
+
+  @override
+  String get imTabDeposit => 'إيداع';
+
+  @override
+  String get imTabWithdrawal => 'صرف';
+
+  @override
+  String get imTabTransfer => 'تحويل';
+
+  @override
+  String get imSortNewest => 'الأحدث';
+
+  @override
+  String get imSortOldest => 'الأقدم';
+
+  @override
+  String get imLoadError => 'تعذر تحميل الحركات';
+
+  @override
+  String get stOpenSessions => 'جلسات مفتوحة';
+
+  @override
+  String get stCompleted => 'مكتملة';
+
+  @override
+  String get stCloseSessionConfirm => 'هل تريد إقفال جلسة؟';
+
+  @override
+  String get stCategory => 'صنف';
+
+  @override
+  String get stStarted => 'بدأ';
+
+  @override
+  String get stClosed => 'أُقفل';
+
+  @override
+  String get stSystemQty => 'النظام';
+
+  @override
+  String get stDifference => 'فرق';
+
+  @override
+  String get stReport => 'تقرير';
+
+  @override
+  String get stActualQty => 'الفعلي';
+
+  @override
+  String get plRetail => 'قائمة التجزئة';
+
+  @override
+  String get plRetailDesc => 'أسعار بيع التجزئة للعملاء العاديين';
+
+  @override
+  String get plWholesale => 'قائمة الجملة';
+
+  @override
+  String get plWholesaleDesc => 'أسعار الجملة للموزعين والتجار';
+
+  @override
+  String get plVIP => 'قائمة العملاء المميزين';
+
+  @override
+  String get plVIPDesc => 'أسعار خاصة للعملاء الدائمين';
+
+  @override
+  String get plDeleteConfirm => 'هل تريد حذف';
+
+  @override
+  String get plCategory => 'صنف';
+
+  @override
+  String get plPrices => 'أسعار';
+
+  @override
+  String get plSellPrice => 'سعر البيع';
+
+  @override
+  String get rptDashboard => 'لوحة تنفيذية';
+
+  @override
+  String get rptDashboardSub => 'مؤشرات وفترة';
+
+  @override
+  String get rptSalesInvoices => 'المبيعات والفواتير';
+
+  @override
+  String get rptSalesInvoicesSub => 'أنواع الدفع والمرتجعات';
+
+  @override
+  String get rptCustomers => 'العملاء';
+
+  @override
+  String get rptCustomersSub => 'أكثر المشترين';
+
+  @override
+  String get rptDebts => 'الديون';
+
+  @override
+  String get rptDebtsSub => 'أرصدة العملاء';
+
+  @override
+  String get rptInstallments => 'الأقساط';
+
+  @override
+  String get rptInstallmentsSub => 'خطط الفترة';
+
+  @override
+  String get rptStaff => 'الموظفون';
+
+  @override
+  String get rptStaffSub => 'أداء التسجيل';
+
+  @override
+  String get rptAnalyticsMargin => 'تحليل وهامش';
+
+  @override
+  String get rptAnalyticsMarginSub => 'منتجات وهامش تقديري';
+
+  @override
+  String get rptReportSettings => 'إعدادات التقارير';
+
+  @override
+  String get rptReportSettingsSub => 'فترة افتراضية وتفضيلات';
+
+  @override
+  String get rptNoData => 'لا توجد بيانات';
+
+  @override
+  String get rptDateFilter => 'فلتر التاريخ';
+
+  @override
+  String get rptToday => 'اليوم';
+
+  @override
+  String get rptYesterday => 'أمس';
+
+  @override
+  String get rptLastWeek => 'آخر أسبوع';
+
+  @override
+  String get rptLastMonth => 'آخر شهر';
+
+  @override
+  String get rptLastQuarter => 'آخر ربع سنة';
+
+  @override
+  String get rptReset => 'إعادة ضبط';
+
+  @override
+  String get rptApply => 'تطبيق';
+
+  @override
+  String get rptClose => 'إغلاق';
+
+  @override
+  String get rptCopiedSectionName => 'تم نسخ اسم القسم';
+
+  @override
+  String get rptSales => 'مبيعات';
+
+  @override
+  String get rptTotal => 'إجمالي';
+
+  @override
+  String get rptReturns => 'مرتجعات';
+
+  @override
+  String get rptCustomer => 'العميل';
+
+  @override
+  String get rptStaffLabel => 'الموظفون';
+
+  @override
+  String get rptOthers => 'آخرون';
+
+  @override
+  String get rptNoCustomerData => 'لا توجد بيانات عملاء في هذه الفترة';
+
+  @override
+  String get rptNoStaffSales => 'لا توجد مبيعات مسجّلة باسم موظف في هذه الفترة';
+
+  @override
+  String get rptTopBuyers => 'أكثر العملاء شراءً حسب اسم الفاتورة';
+
+  @override
+  String get rptSalesByCustomer => 'توزيع المبيعات على العملاء';
+
+  @override
+  String get rptSalesByStaff => 'توزيع المبيعات على الموظفين';
+
+  @override
+  String get rptDebtsBalances => 'جدول أرصدة مسجّلة في سجل العملاء';
+
+  @override
+  String get rptInstallmentPlans => 'خطط الأقساط المرتبطة بفواتير الفترة';
+
+  @override
+  String get rptDetails => 'تفاصيل الخطط';
+
+  @override
+  String get rptStaffPercentage => 'نسبة كل موظف من إجمالي المبيعات';
+
+  @override
+  String get rptConsistentWithPie => 'متسقة مع نسب المخطط الدائري والجدول';
+
+  @override
+  String get rptUnknown => 'غير معروف';
+
+  @override
+  String get rptNoName => 'بدون اسم';
+
+  @override
+  String get rptSelectedPeriod => 'الفترة المحددة';
+
+  @override
+  String get rptApproxNet => 'تقريبي صافي';
+
+  @override
+  String get rptTotalExpenses => 'إجمالي المصروفات';
+
+  @override
+  String get rptNetAfterExpenses => 'صافي بعد المصروفات';
+
+  @override
+  String get rptInvoicesReturns => 'فواتير ومرتجعات';
+
+  @override
+  String get rptDailySalesInRange => 'اتجاه المبيعات اليومي في الفترة';
+
+  @override
+  String get rptPiePayments => 'توزيع أنواع الدفع';
+
+  @override
+  String get osDescription =>
+      'بعد تسجيل الدخول عرض رصيد الصندوق، الجرد، إضافة مال، ثم تمييز موظف الوردية';
+
+  @override
+  String get osSessionExpired => 'الجلسة انتهت في الخلفية أثناء تحميل الشاشة';
+
+  @override
+  String get osUnexpectedError => 'حدث خطأ غير متوقع أثناء التهيئة';
+
+  @override
+  String get osPasswordRequired =>
+      'عند العودة إلى التطبيق بوردية مفتوحة أصلاً نطلب كلمة مرور موظف الوردية';
+
+  @override
+  String get osShiftEmployee => 'موظف الوردية';
+
+  @override
+  String get osOpeningBalance => 'رصيد النظام عند الفتح';
+
+  @override
+  String get osManualCount => 'الجرد اليدوي الصندوق';
+
+  @override
+  String get osAddedMoney => 'المبلغ المضاف عند الفتح';
+
+  @override
+  String get osOpeningShift => 'فتح وردية';
+
+  @override
+  String get osErrorOpening => 'تعذر فتح الوردية';
+
+  @override
+  String get osNoShiftId => 'تمت العملية بدون رقم وردية صالح حاول مرة أخرى';
+
+  @override
+  String get osShiftOpened => 'تم فتح الوردية';
+
+  @override
+  String get osAmountHint => 'المبلغ الظاهر عند الجرد';
+
+  @override
+  String get osAmountLabel => 'اكتب الموجود فعلياً داخل الصندوق الآن';
+
+  @override
+  String get osExample => 'مثال';
+
+  @override
+  String get osAddMoney => 'إضافة مال للصندوق';
+
+  @override
+  String get osAddMoneyDesc => 'اختياري استخدمه إذا أضفت نقداً قبل بداية البيع';
+
+  @override
+  String get osLogout => 'الخروج من الحساب';
+
+  @override
+  String get osReviewBalance =>
+      'راجع رصيد الصندوق حسب النظام، ثم سجّل الجرد الفعلي قبل بدء العمل';
+
+  @override
+  String get osOpeningSystemBalance => 'رصيد الصندوق حسب النظام';
+
+  @override
+  String get osOpeningLoading => 'جاري فتح الوردية';
+
+  @override
+  String get osStaffDialogTitle => 'حوار موظف الوردية';
+
+  @override
+  String get osStaffDialogDesc =>
+      'اختيار مستخدم مسجّل في النظام رمز البطاقة، أو مسح';
+
+  @override
+  String get osAllActiveUsers => 'كل المستخدمين النشطين';
+
+  @override
+  String get osErrorLoadingUsers => 'تعذر تحميل مستخدمي الوردية';
+
+  @override
+  String get osInvalidCard => 'النص المقروء ليس رمز هوية صالحاً';
+
+  @override
+  String get osSelectUser => 'اختر مستخدم الوردية من القائمة أو امسح البطاقة';
+
+  @override
+  String get osUserNotFound =>
+      'تعذر العثور على المستخدم المختار اختر مستخدماً آخر';
+
+  @override
+  String get osNoLocalPassword =>
+      'لا توجد كلمة مرور محلية لهذا الحساب عيّن كلمة مرور من إدارة المستخدمين';
+
+  @override
+  String get osWrongPassword => 'كلمة مرور الدخول غير صحيحة';
+
+  @override
+  String get osSelectEmployee =>
+      'اختر الموظف المسؤول عن الصندوق في هذه الوردية';
+
+  @override
+  String get osNoActiveUsers =>
+      'لا يوجد مستخدمون نشطون في النظام أضف مستخدماً من إدارة المستخدمين';
+
+  @override
+  String get osUserLabel => 'مستخدم الوردية';
+
+  @override
+  String get osSelectUserHint => 'اختر مستخدماً';
+
+  @override
+  String get osDisplayName => 'الاسم الظاهر';
+
+  @override
+  String get osAutoDetermined => 'يُحدَّد تلقائياً';
+
+  @override
+  String get osScanDesc =>
+      'يمكن اختيار المستخدم عبر الكاميرا أو قارئ خارجي، ثم إدخال كلمة المرور للتأكيد';
+
+  @override
+  String get osScanCamera => 'مسح بالكاميرا';
+
+  @override
+  String get osExternalReader => 'قارئ خارجي';
+
+  @override
+  String get osPressToScan => 'اضغط هنا ثم امسح البطاقة';
+
+  @override
+  String get osInvalidIdCode => 'النص المقروء ليس رمز هوية صالحاً';
+
+  @override
+  String get osLoginPassword => 'كلمة مرور الدخول';
+
+  @override
+  String get osSessionEnded => 'انتهت جلسة المستخدم سجّل الدخول مرة أخرى';
+
+  @override
+  String get osCannotBeNegative => 'لا يمكن أن يكون المبلغ المضاف سالباً';
+
+  @override
+  String get osErrorStaffDialog => 'تعذر فتح نافذة اختيار موظف الوردية';
+
+  @override
+  String get osNoStaffSelected => 'لم يتم اختيار موظف الوردية';
+
+  @override
+  String get osIncompleteData =>
+      'بيانات موظف الوردية غير مكتملة اختر الموظف مرة أخرى';
+
+  @override
+  String get osPasswordNotStored =>
+      'لا نخزّن كلمة مرور الدخول التحقق كان في الحوار فقط';
+
+  @override
+  String get osAutoFixed =>
+      'تم إصلاح بيانات موظف الوردية تلقائياً على هذا الجهاز يمكنك المتابعة';
+
+  @override
+  String get osStaffMissing =>
+      'موظف الوردية المسجَّل لم يعد موجوداً أغلق الوردية من جهاز آخر أو اتصل بالمدير';
+
+  @override
+  String get osAuthRejected =>
+      'رفض التحقق من موظف الوردية يجب عدم فتح التطبيق على وردية مفتوحة دون إثبات';
+
+  @override
+  String get osReturningToLogin =>
+      'نسجّل خروج الجلسة على هذا الجهاز ونعود لشاشة تسجيل الدخول';
+
+  @override
+  String get osUseExistingShift => 'العودة للوردية المفتوحة بدلاً من ذلك';
 }

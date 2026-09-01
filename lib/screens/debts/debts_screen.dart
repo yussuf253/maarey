@@ -1,6 +1,8 @@
 import 'dart:async' show unawaited;
 
 import 'package:flutter/material.dart';
+
+import '../../l10n/generated/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
@@ -44,6 +46,7 @@ class DebtsScreen extends StatefulWidget {
 
 class _DebtsScreenState extends State<DebtsScreen>
     with SingleTickerProviderStateMixin {
+  AppLocalizations get _loc => AppLocalizations.of(context)!;
   final DatabaseHelper _db = DatabaseHelper();
   final TextEditingController _search = TextEditingController();
   final FocusNode _searchFocus = FocusNode();
@@ -209,7 +212,7 @@ class _DebtsScreenState extends State<DebtsScreen>
             child: Scaffold(
               backgroundColor: bg,
               appBar: AppBar(
-                title: const Text('الديون — آجل'),
+                title: Text(_loc.debtsTitle),
                 bottom: TabBar(
                   controller: _tabs,
                   isScrollable: sl.isNarrowWidth,
@@ -220,15 +223,15 @@ class _DebtsScreenState extends State<DebtsScreen>
                   unselectedLabelStyle: TextStyle(
                     fontSize: sl.isNarrowWidth ? 12 : 14,
                   ),
-                  tabs: const [
-                    Tab(text: 'فواتير'),
-                    Tab(text: 'عملاء'),
-                    Tab(text: 'موردون'),
+                  tabs: [
+                    Tab(text: _loc.debtsTabInvoices),
+                    Tab(text: _loc.debtsTabCustomers),
+                    Tab(text: _loc.debtsTabSuppliers),
                   ],
                 ),
                 actions: [
                   IconButton(
-                    tooltip: 'إعدادات الدين',
+                    tooltip: _loc.debtsSettingsTooltip,
                     onPressed: () async {
                       await Navigator.push<void>(
                         context,
@@ -241,7 +244,7 @@ class _DebtsScreenState extends State<DebtsScreen>
                     icon: const Icon(Icons.tune_rounded),
                   ),
                   IconButton(
-                    tooltip: 'تحديث (F5)',
+                    tooltip: _loc.debtsRefreshTooltip,
                     onPressed: _loading ? null : _refreshFromServer,
                     icon: const Icon(Icons.refresh_rounded),
                   ),
@@ -311,7 +314,7 @@ class _DebtsScreenState extends State<DebtsScreen>
                               style: TextStyle(color: cs.onSurface),
                               cursorColor: cs.primary,
                               decoration: InputDecoration(
-                                hintText: 'بحث: عميل، رقم فاتورة، معرّف عميل… (Ctrl+F)',
+                                hintText: _loc.debtsSearchHint,
                                 hintStyle: TextStyle(
                                   color: cs.onSurfaceVariant,
                                 ),
@@ -321,7 +324,7 @@ class _DebtsScreenState extends State<DebtsScreen>
                                 ),
                                 suffixIcon: _search.text.isNotEmpty
                                     ? IconButton(
-                                        tooltip: 'مسح البحث',
+                                        tooltip: _loc.debtsClearSearch,
                                         onPressed: () {
                                           _search.clear();
                                           setState(() {});
@@ -363,22 +366,22 @@ class _DebtsScreenState extends State<DebtsScreen>
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: SegmentedButton<_DebtFilter>(
-                                segments: const [
+                                segments: [
                                   ButtonSegment(
                                     value: _DebtFilter.all,
-                                    label: Text('الكل'),
+                                    label: Text(_loc.debtsAll),
                                   ),
                                   ButtonSegment(
                                     value: _DebtFilter.open,
-                                    label: Text('مفتوحة'),
+                                    label: Text(_loc.debtsStatusOpen),
                                   ),
                                   ButtonSegment(
                                     value: _DebtFilter.aged,
-                                    label: Text('تحذير عمر'),
+                                    label: Text(_loc.debtsAgingWarning),
                                   ),
                                   ButtonSegment(
                                     value: _DebtFilter.settled,
-                                    label: Text('مغلقة'),
+                                    label: Text(_loc.debtsStatusClosed),
                                   ),
                                 ],
                                 selected: {_filter},
@@ -482,7 +485,7 @@ class _DebtsScreenState extends State<DebtsScreen>
                               style: TextStyle(color: cs.onSurface),
                               cursorColor: cs.primary,
                               decoration: InputDecoration(
-                                hintText: 'بحث باسم العميل أو المعرف…',
+                                hintText: _loc.debtsSearchHintCustomer,
                                 hintStyle: TextStyle(
                                   color: cs.onSurfaceVariant,
                                 ),
@@ -492,7 +495,7 @@ class _DebtsScreenState extends State<DebtsScreen>
                                 ),
                                 suffixIcon: _search.text.isNotEmpty
                                     ? IconButton(
-                                        tooltip: 'مسح البحث',
+                                        tooltip: _loc.debtsClearSearch,
                                         onPressed: () {
                                           _search.clear();
                                           setState(() {});

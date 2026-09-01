@@ -80,61 +80,23 @@ class _ReportsScreenState extends State<ReportsScreen> {
   int _reloadGeneration = 0;
   Timer? _reloadDebounce;
 
-  static const List<_ReportsSection> _sections = [
-    _ReportsSection(
-      id: 0,
-      label: 'لوحة تنفيذية',
-      icon: Icons.space_dashboard_rounded,
-      subtitle: 'مؤشرات وفترة',
-    ),
-    _ReportsSection(
-      id: 1,
-      label: 'المبيعات والفواتير',
-      icon: Icons.point_of_sale_rounded,
-      subtitle: 'أنواع الدفع والمرتجعات',
-    ),
-    _ReportsSection(
-      id: 2,
-      label: 'العملاء',
-      icon: Icons.groups_rounded,
-      subtitle: 'أكثر المشترين',
-    ),
-    _ReportsSection(
-      id: 3,
-      label: 'الديون',
-      icon: Icons.account_balance_wallet_rounded,
-      subtitle: 'أرصدة العملاء',
-    ),
-    _ReportsSection(
-      id: 4,
-      label: 'الأقساط',
-      icon: Icons.calendar_month_rounded,
-      subtitle: 'خطط الفترة',
-    ),
-    _ReportsSection(
-      id: 5,
-      label: 'الموظفون',
-      icon: Icons.badge_rounded,
-      subtitle: 'أداء التسجيل',
-    ),
-    _ReportsSection(
-      id: 6,
-      label: 'تحليل وهامش',
-      icon: Icons.analytics_rounded,
-      subtitle: 'منتجات وهامش تقديري',
-    ),
-    _ReportsSection(
-      id: 7,
-      label: 'إعدادات التقارير',
-      icon: Icons.tune_rounded,
-      subtitle: 'فترة افتراضية وتفضيلات',
-    ),
-  ];
+  AppLocalizations get _loc => AppLocalizations.of(context)!;
+
+  List<_ReportsSection> _buildSections(AppLocalizations loc) => [
+      _ReportsSection(id: 0, label: loc.rptDashboard, icon: Icons.space_dashboard_rounded, subtitle: loc.rptDashboardSub),
+      _ReportsSection(id: 1, label: loc.rptSalesInvoices, icon: Icons.point_of_sale_rounded, subtitle: loc.rptSalesInvoicesSub),
+      _ReportsSection(id: 2, label: loc.rptCustomers, icon: Icons.groups_rounded, subtitle: loc.rptCustomersSub),
+      _ReportsSection(id: 3, label: loc.rptDebts, icon: Icons.account_balance_wallet_rounded, subtitle: loc.rptDebtsSub),
+      _ReportsSection(id: 4, label: loc.rptInstallments, icon: Icons.calendar_month_rounded, subtitle: loc.rptInstallmentsSub),
+      _ReportsSection(id: 5, label: loc.rptStaff, icon: Icons.badge_rounded, subtitle: loc.rptStaffSub),
+      _ReportsSection(id: 6, label: loc.rptAnalyticsMargin, icon: Icons.analytics_rounded, subtitle: loc.rptAnalyticsMarginSub),
+      _ReportsSection(id: 7, label: loc.rptReportSettings, icon: Icons.tune_rounded, subtitle: loc.rptReportSettingsSub),
+    ];
 
   @override
   void initState() {
     super.initState();
-    _section = widget.initialSection.clamp(0, _sections.length - 1);
+    _section = widget.initialSection.clamp(0, 8 - 1);
     _bootstrap();
   }
 
@@ -143,7 +105,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.initialSection != widget.initialSection) {
       setState(() {
-        _section = widget.initialSection.clamp(0, _sections.length - 1);
+        _section = widget.initialSection.clamp(0, 8 - 1);
       });
     }
   }
@@ -249,7 +211,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
               _DateStrip(
                 from: _from,
                 to: _to,
-                sections: _sections,
+                sections: _buildSections(_loc),
                 selectedSection: _section,
                 onSectionChanged: (idx) => setState(() => _section = idx),
                 onRefresh: _loading ? null : _refreshFromServer,
@@ -272,7 +234,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
   Widget _buildSectionContent() {
     final d = _data;
     if (d == null) {
-      return Center(child: Text('لا توجد بيانات'));
+      return Center(child: Text(_loc.rptNoData));
     }
     switch (_section) {
       case 0:
@@ -931,6 +893,7 @@ enum _RangeQuickPreset {
 }
 
 class _FigmaLikeRangeDialogState extends State<_FigmaLikeRangeDialog> {
+  AppLocalizations get loc => AppLocalizations.of(context)!;
   late DateTime _start;
   late DateTime _end;
   late DateTime _displayMonth;
@@ -1016,7 +979,7 @@ class _FigmaLikeRangeDialogState extends State<_FigmaLikeRangeDialog> {
                 ),
                 const Spacer(),
                 IconButton(
-                  tooltip: 'إغلاق',
+                  tooltip: loc.rptClose,
                   visualDensity: VisualDensity.compact,
                   onPressed: () => Navigator.of(context).pop(),
                   icon: const Icon(Icons.close_rounded),
@@ -1041,26 +1004,26 @@ class _FigmaLikeRangeDialogState extends State<_FigmaLikeRangeDialog> {
                   child: Column(
                     children: [
                       _QuickPresetTile(
-                        label: 'اليوم',
+                        label: loc.rptToday,
                         onTap: () => _applyQuickPreset(_RangeQuickPreset.today),
                       ),
                       _QuickPresetTile(
-                        label: 'أمس',
+                        label: loc.rptYesterday,
                         onTap: () =>
                             _applyQuickPreset(_RangeQuickPreset.yesterday),
                       ),
                       _QuickPresetTile(
-                        label: 'آخر أسبوع',
+                        label: loc.rptLastWeek,
                         onTap: () =>
                             _applyQuickPreset(_RangeQuickPreset.lastWeek),
                       ),
                       _QuickPresetTile(
-                        label: 'آخر شهر',
+                        label: loc.rptLastMonth,
                         onTap: () =>
                             _applyQuickPreset(_RangeQuickPreset.lastMonth),
                       ),
                       _QuickPresetTile(
-                        label: 'آخر ربع سنة',
+                        label: loc.rptLastQuarter,
                         onTap: () =>
                             _applyQuickPreset(_RangeQuickPreset.lastQuarter),
                       ),
@@ -1070,7 +1033,7 @@ class _FigmaLikeRangeDialogState extends State<_FigmaLikeRangeDialog> {
                         child: TextButton(
                           onPressed: () =>
                               _applyQuickPreset(_RangeQuickPreset.reset),
-                          child: const Text('إعادة ضبط'),
+                          child: Text(loc.rptReset),
                         ),
                       ),
                     ],
@@ -1224,7 +1187,7 @@ class _FigmaLikeRangeDialogState extends State<_FigmaLikeRangeDialog> {
                       context,
                     ).pop(DateTimeRange(start: start, end: end));
                   },
-                  child: Text('تطبيق'),
+                  child: Text(loc.rptApply),
                 ),
               ],
             ),
@@ -1497,7 +1460,7 @@ class _PanelDashboard extends StatelessWidget {
             title: AppLocalizations.of(context)!.topCustomersBySpending,
             subtitle: AppLocalizations.of(context)!.topEmployeesBySales,
             child: _SimpleTable(
-              headers: [AppLocalizations.of(context)!.customerLabel2, 'إجمالي', AppLocalizations.of(context)!.invoiceCount],
+              headers: [AppLocalizations.of(context)!.customerLabel2, AppLocalizations.of(context)!.rptTotal, AppLocalizations.of(context)!.invoiceCount],
               rows: data.topCustomers.take(8).map((e) {
                 return [
                   e.name,
@@ -1516,11 +1479,13 @@ class _PanelDashboard extends StatelessWidget {
 // ─── مبيعات ─────────────────────────────────────────────────────────────────
 
 class _PanelSales extends StatelessWidget {
+  // loc is defined in build()
   const _PanelSales({required this.data});
   final ReportsSnapshot data;
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
 
     // AppLocalizations.of(context)!.sales فقط (نقدي/دين/تقسيط/توصيل) — باقي الأنواع سندات ولا تُعرض هنا.
@@ -1556,7 +1521,7 @@ class _PanelSales extends StatelessWidget {
         color: const Color(0xFF2563EB),
       ),
       _PieSlice(
-        label: 'مرتجعات',
+        label: loc.rptReturns,
         value: math.max(0, data.returnsTotal),
         color: const Color(0xFFDC2626),
       ),
@@ -2169,6 +2134,7 @@ class _PiePainter extends CustomPainter {
 // ─── عملاء ───────────────────────────────────────────────────────────────────
 
 class _PanelCustomers extends StatelessWidget {
+  // loc is defined in build()
   const _PanelCustomers({required this.data});
   final ReportsSnapshot data;
 
@@ -2183,6 +2149,7 @@ class _PanelCustomers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
 
     // ترتيب تنازلي حسب الإجمالي (topCustomers أصلاً مرتبة، نتأكد فقط).
@@ -2199,7 +2166,7 @@ class _PanelCustomers extends StatelessWidget {
         if (v > 0) {
           slices.add(
             _PieSlice(
-              label: c.name.trim().isEmpty ? 'بدون اسم' : c.name.trim(),
+              label: c.name.trim().isEmpty ? loc.rptNoName : c.name.trim(),
               value: v,
               color: _palette[i % _palette.length],
             ),
@@ -2212,7 +2179,7 @@ class _PanelCustomers extends StatelessWidget {
             .fold<double>(0, (s, e) => s + math.max(0.0, e.amount));
         if (rest > 0) {
           slices.add(
-            _PieSlice(label: 'آخرون', value: rest, color: cs.outlineVariant),
+            _PieSlice(label: loc.rptOthers, value: rest, color: cs.outlineVariant),
           );
         }
       }
@@ -2251,7 +2218,7 @@ class _PanelCustomers extends StatelessWidget {
             title: 'أكثر العملاء شراءً (حسب اسم الفاتورة)',
             subtitle: 'ترتيب حسب الإجمالي — من بيانات الفواتير في الفترة',
             child: _SimpleTable(
-              headers: ['العميل', AppLocalizations.of(context)!.totalAmountLabel, AppLocalizations.of(context)!.salesInvoices],
+              headers: [loc.rptCustomer, AppLocalizations.of(context)!.totalAmountLabel, AppLocalizations.of(context)!.salesInvoices],
               rows: sorted
                   .map(
                     (e) => [
@@ -2330,11 +2297,13 @@ class _PanelDebts extends StatelessWidget {
 // ─── أقساط ───────────────────────────────────────────────────────────────────
 
 class _PanelInstallments extends StatelessWidget {
+  // loc is defined in build()
   const _PanelInstallments({required this.data});
   final ReportsSnapshot data;
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     final t = data.installmentTotals;
     return SingleChildScrollView(
@@ -2367,7 +2336,7 @@ class _PanelInstallments extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           _AnalyticsCard(
-            title: 'تفاصيل الخطط',
+            title: loc.rptDetails,
             subtitle: 'جدول — خطط الأقساط المرتبطة بفواتير الفترة',
             child: _SimpleTable(
               headers: [
@@ -2399,6 +2368,7 @@ class _PanelInstallments extends StatelessWidget {
 // ─── موظفون ──────────────────────────────────────────────────────────────────
 
 class _PanelStaff extends StatelessWidget {
+  // loc is defined in build()
   const _PanelStaff({required this.data});
   final ReportsSnapshot data;
 
@@ -2413,6 +2383,7 @@ class _PanelStaff extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
 
     final sorted = [...data.staffSales]
@@ -2441,7 +2412,7 @@ class _PanelStaff extends StatelessWidget {
             .fold<double>(0, (sum, e) => sum + math.max(0.0, e.salesTotal));
         if (rest > 0) {
           slices.add(
-            _PieSlice(label: 'آخرون', value: rest, color: cs.outlineVariant),
+            _PieSlice(label: loc.rptOthers, value: rest, color: cs.outlineVariant),
           );
         }
       }
@@ -2503,10 +2474,10 @@ class _PanelStaff extends StatelessWidget {
                 )[d.dayLabel] = d.amount;
               }
 
-              // نستخدم نفس أعلى الموظفين الظاهرين في البيتزا (بدون 'آخرون') كبناء للسلاسل.
+              // نستخدم نفس أعلى الموظفين الظاهرين في البيتزا (بدون loc.rptOthers) كبناء للسلاسل.
               final topLabels = <String>[];
               for (final sl in slices) {
-                if (sl.label == 'آخرون') continue;
+                if (sl.label == loc.rptOthers) continue;
                 topLabels.add(sl.label);
               }
               final series = <_AreaSeries>[
@@ -2533,7 +2504,7 @@ class _PanelStaff extends StatelessWidget {
             title: 'فواتير مسجّلة باسم الموظف (حقل الفاتورة)',
             subtitle: 'جدول — أداء التسجيل حسب اسم الموظف على الفاتورة',
             child: _SimpleTable(
-              headers: ['الموظف / المسجّل', AppLocalizations.of(context)!.invoiceCount, 'إجمالي'],
+              headers: ['الموظف / المسجّل', AppLocalizations.of(context)!.invoiceCount, loc.rptTotal],
               rows: data.staffSales
                   .map(
                     (s) => [
@@ -3580,7 +3551,7 @@ class _ReportsGaugesPainter extends CustomPainter {
     if (items.isEmpty || total <= 0) {
       final tp = TextPainter(
         text: TextSpan(
-          text: 'لا توجد بيانات',
+          text: 'No data',
           style: TextStyle(
             color: labelColor.withValues(alpha: 0.8),
             fontSize: 12,
@@ -3759,7 +3730,7 @@ class _ReportsStackedAreaPainter extends CustomPainter {
     if (series.isEmpty || dates.isEmpty) {
       final tp = TextPainter(
         text: TextSpan(
-          text: 'لا توجد بيانات',
+          text: 'No data',
           style: TextStyle(color: labelColor, fontSize: 12),
         ),
         textDirection: TextDirection.ltr,

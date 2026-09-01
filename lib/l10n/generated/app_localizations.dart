@@ -20280,6 +20280,1518 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'أيام بعد الاستحقاق لتصنيف كمتأخر'**
   String get dsOverdueHint;
+
+  /// No description provided for @cashInvoiceNumShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة #'**
+  String get cashInvoiceNumShort;
+
+  /// No description provided for @cashShiftLoadError.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر تحميل سجل الوردية من قاعدة البيانات؛ يُعرض أدناه ما يظهر في قائمة الصندوق فقط.'**
+  String get cashShiftLoadError;
+
+  /// No description provided for @cashTotalMovements.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي ما يظهر من حركات في الصندوق لهذه المجموعة'**
+  String get cashTotalMovements;
+
+  /// No description provided for @cashMovementsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'حركة.'**
+  String get cashMovementsCount;
+
+  /// No description provided for @cashMovementStats.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعداد الحركات'**
+  String get cashMovementStats;
+
+  /// No description provided for @cashMovementsDeposit.
+  ///
+  /// In ar, this message translates to:
+  /// **'إدخال'**
+  String get cashMovementsDeposit;
+
+  /// No description provided for @cashMovementsWithdrawal.
+  ///
+  /// In ar, this message translates to:
+  /// **'إخراج'**
+  String get cashMovementsWithdrawal;
+
+  /// No description provided for @cashMovementsManual.
+  ///
+  /// In ar, this message translates to:
+  /// **'يدوية'**
+  String get cashMovementsManual;
+
+  /// No description provided for @cashMovementsLinked.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتبطة بفاتورة'**
+  String get cashMovementsLinked;
+
+  /// No description provided for @cashMovementsTimes.
+  ///
+  /// In ar, this message translates to:
+  /// **'حركة'**
+  String get cashMovementsTimes;
+
+  /// No description provided for @cashSalesCash.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع نقدي'**
+  String get cashSalesCash;
+
+  /// No description provided for @cashFirstPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'مقدم / دفعة أولى'**
+  String get cashFirstPayment;
+
+  /// No description provided for @cashInstallmentPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسديد قسط'**
+  String get cashInstallmentPayment;
+
+  /// No description provided for @cashSupplierPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'دفع مورد'**
+  String get cashSupplierPayment;
+
+  /// No description provided for @cashSupplierPaymentReversal.
+  ///
+  /// In ar, this message translates to:
+  /// **'عكس دفع مورد'**
+  String get cashSupplierPaymentReversal;
+
+  /// No description provided for @cashReturn.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتجع'**
+  String get cashReturn;
+
+  /// No description provided for @cashMovement.
+  ///
+  /// In ar, this message translates to:
+  /// **'حركة'**
+  String get cashMovement;
+
+  /// No description provided for @cashSummaryInflow.
+  ///
+  /// In ar, this message translates to:
+  /// **'وارد'**
+  String get cashSummaryInflow;
+
+  /// No description provided for @cashSummaryOutflow.
+  ///
+  /// In ar, this message translates to:
+  /// **'صادر'**
+  String get cashSummaryOutflow;
+
+  /// No description provided for @cashNoShift.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدون وردية'**
+  String get cashNoShift;
+
+  /// No description provided for @cashTapDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط لعرض التفاصيل'**
+  String get cashTapDetails;
+
+  /// No description provided for @cashShiftLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'وردية '**
+  String get cashShiftLabel;
+
+  /// No description provided for @cashMovementsShort.
+  ///
+  /// In ar, this message translates to:
+  /// **' حركة'**
+  String get cashMovementsShort;
+
+  /// No description provided for @cashEmployeeLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموظف: '**
+  String get cashEmployeeLabel;
+
+  /// No description provided for @cashTapInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط للفاتورة #'**
+  String get cashTapInvoice;
+
+  /// No description provided for @cashCashboxInfo.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُسجَّل منفصلاً عن فواتير البيع والأقساط. استخدمه لمصروفات المتجر أو إيداع/سحب بنكي.'**
+  String get cashCashboxInfo;
+
+  /// No description provided for @cashCashboxBalanceInfo.
+  ///
+  /// In ar, this message translates to:
+  /// **'مجموع وارد الصندوق من المبيعات النقدية والمقدمات وتسديد الأقساط والإيداع اليدوي — دون إجمالي الفواتير الآجلة بدون مقدم'**
+  String get cashCashboxBalanceInfo;
+
+  /// No description provided for @calculatorTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحاسبة'**
+  String get calculatorTitle;
+
+  /// No description provided for @calculatorCopyResult.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخ الناتج'**
+  String get calculatorCopyResult;
+
+  /// No description provided for @calculatorClearAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح الكل'**
+  String get calculatorClearAll;
+
+  /// No description provided for @debtsGroupByCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجميع حسب العميل: المنتجات والبائعون وتسديد جزئي من شاشة التفاصيل. QR على الإيصال للعملاء المسجّلين فقط.'**
+  String get debtsGroupByCustomer;
+
+  /// No description provided for @debtsSearchHintCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث باسم العميل أو المعرف…'**
+  String get debtsSearchHintCustomer;
+
+  /// No description provided for @debtsXofYCustomers.
+  ///
+  /// In ar, this message translates to:
+  /// **'من'**
+  String get debtsXofYCustomers;
+
+  /// No description provided for @debtsNoCreditRemaining.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد متبقٍ آجل مجمّع بالعملاء'**
+  String get debtsNoCreditRemaining;
+
+  /// No description provided for @debtsNoResults.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا نتائج للبحث'**
+  String get debtsNoResults;
+
+  /// No description provided for @debtsCustomerLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'عميل'**
+  String get debtsCustomerLabel;
+
+  /// No description provided for @debtsRegisteredCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'عميل مسجّل'**
+  String get debtsRegisteredCustomer;
+
+  /// No description provided for @debtsNotLinked.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير مربوط بجدول العملاء (بالاسم)'**
+  String get debtsNotLinked;
+
+  /// No description provided for @debtsCreditInvoices.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة آجل'**
+  String get debtsCreditInvoices;
+
+  /// No description provided for @debtsRemainingLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتبقي'**
+  String get debtsRemainingLabel;
+
+  /// No description provided for @debtsCustomerStatement.
+  ///
+  /// In ar, this message translates to:
+  /// **'كشف العميل'**
+  String get debtsCustomerStatement;
+
+  /// No description provided for @debtsAgingWarningInfo.
+  ///
+  /// In ar, this message translates to:
+  /// **'التحذير بالعمر يبدأ بعد يوماً من تاريخ الفاتورة.'**
+  String get debtsAgingWarningInfo;
+
+  /// No description provided for @debtsAgingDisabled.
+  ///
+  /// In ar, this message translates to:
+  /// **'فعّل «أيام تحذير العمر» من إعدادات الدين لتمييز الفواتير القديمة.'**
+  String get debtsAgingDisabled;
+
+  /// No description provided for @debtsInfoBanner.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُحسب الديون من فواتير النوع «دين / آجل». المتبقي = إجمالي الفاتورة − المقدّم. حدود البيع تُضبط من إعدادات الدين.'**
+  String get debtsInfoBanner;
+
+  /// No description provided for @debtsTotalRemaining.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي المتبقي'**
+  String get debtsTotalRemaining;
+
+  /// No description provided for @debtsShowAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض كل الفواتير'**
+  String get debtsShowAll;
+
+  /// No description provided for @debtsOpenInvoices.
+  ///
+  /// In ar, this message translates to:
+  /// **'فواتير مفتوحة'**
+  String get debtsOpenInvoices;
+
+  /// No description provided for @debtsFilterOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'تصفية: مفتوحة فقط'**
+  String get debtsFilterOpen;
+
+  /// No description provided for @debtsAgingWarning.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحذير عمر'**
+  String get debtsAgingWarning;
+
+  /// No description provided for @debtsFilterAging.
+  ///
+  /// In ar, this message translates to:
+  /// **'تصفية: تحذير عمر'**
+  String get debtsFilterAging;
+
+  /// No description provided for @debtsStatusClosed.
+  ///
+  /// In ar, this message translates to:
+  /// **'مغلقة'**
+  String get debtsStatusClosed;
+
+  /// No description provided for @debtsStatusAging.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه عمر'**
+  String get debtsStatusAging;
+
+  /// No description provided for @debtsStatusOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفتوحة'**
+  String get debtsStatusOpen;
+
+  /// No description provided for @debtsReceiptLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإيصال'**
+  String get debtsReceiptLabel;
+
+  /// No description provided for @debtsViewDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل'**
+  String get debtsViewDetails;
+
+  /// No description provided for @debtsDaysSinceInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'يوماً'**
+  String get debtsDaysSinceInvoice;
+
+  /// No description provided for @debtsAdvanceOf.
+  ///
+  /// In ar, this message translates to:
+  /// **'المقدّم'**
+  String get debtsAdvanceOf;
+
+  /// No description provided for @debtsTapForDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط لعرض تفاصيل الفاتورة'**
+  String get debtsTapForDetails;
+
+  /// No description provided for @debtsNoInvoicesInFilter.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد فواتير ضمن البحث أو التصفية الحالية'**
+  String get debtsNoInvoicesInFilter;
+
+  /// No description provided for @debtsNoDebtInvoices.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد فواتير دين مسجّلة'**
+  String get debtsNoDebtInvoices;
+
+  /// No description provided for @debtsClearSearchHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'امسح البحث أو اختر «الكل» في شريط التصفية.'**
+  String get debtsClearSearchHint;
+
+  /// No description provided for @debtsNewSaleHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'من «بيع جديد» اختر نوع «دين» ليظهر المبلغ المؤجل هنا.'**
+  String get debtsNewSaleHint;
+
+  /// No description provided for @hubInventoryTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مركز المخزون'**
+  String get hubInventoryTitle;
+
+  /// No description provided for @hubProductsList.
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة المنتجات'**
+  String get hubProductsList;
+
+  /// No description provided for @hubProductsListDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث، تصفية، وإدارة جميع الأصناف'**
+  String get hubProductsListDesc;
+
+  /// No description provided for @hubAddProduct.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة منتج جديد'**
+  String get hubAddProduct;
+
+  /// No description provided for @hubAddProductDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنشاء صنف جديد في المخزون'**
+  String get hubAddProductDesc;
+
+  /// No description provided for @hubQuickUpdate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديث منتج موجود'**
+  String get hubQuickUpdate;
+
+  /// No description provided for @hubQuickUpdateDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث، باركود، وتعديل أسعار وكميات دون إنشاء صنف جديد'**
+  String get hubQuickUpdateDesc;
+
+  /// No description provided for @hubVouchers.
+  ///
+  /// In ar, this message translates to:
+  /// **'حركات المخزون'**
+  String get hubVouchers;
+
+  /// No description provided for @hubVouchersDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'وارد، صادر، تحويل بين المستودعات'**
+  String get hubVouchersDesc;
+
+  /// No description provided for @hubWarehouses.
+  ///
+  /// In ar, this message translates to:
+  /// **'إدارة المستودعات'**
+  String get hubWarehouses;
+
+  /// No description provided for @hubWarehousesDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة وتعديل المستودعات والمواقع'**
+  String get hubWarehousesDesc;
+
+  /// No description provided for @hubPriceLists.
+  ///
+  /// In ar, this message translates to:
+  /// **'قوائم الأسعار'**
+  String get hubPriceLists;
+
+  /// No description provided for @hubPriceListsDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسعار مخصصة للعملاء والمجموعات'**
+  String get hubPriceListsDesc;
+
+  /// No description provided for @hubStocktaking.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجرد الدوري'**
+  String get hubStocktaking;
+
+  /// No description provided for @hubStocktakingDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'مطابقة المخزون الفعلي بالنظام'**
+  String get hubStocktakingDesc;
+
+  /// No description provided for @hubPurchaseOrders.
+  ///
+  /// In ar, this message translates to:
+  /// **'أوامر الشراء'**
+  String get hubPurchaseOrders;
+
+  /// No description provided for @hubPurchaseOrdersDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنشاء وتتبع طلبات الشراء من الموردين'**
+  String get hubPurchaseOrdersDesc;
+
+  /// No description provided for @hubAnalytics.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحليلات المخزون'**
+  String get hubAnalytics;
+
+  /// No description provided for @hubAnalyticsDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيمة المخزون، تنبيهات، الأكثر حركة'**
+  String get hubAnalyticsDesc;
+
+  /// No description provided for @hubSettings.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات المخزون'**
+  String get hubSettings;
+
+  /// No description provided for @hubSettingsDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'نوع النشاط، خصائص المنتج، تفعيل الميزات'**
+  String get hubSettingsDesc;
+
+  /// No description provided for @hubTenantSelect.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيار الحساب/المستأجر'**
+  String get hubTenantSelect;
+
+  /// No description provided for @hubTenantClose.
+  ///
+  /// In ar, this message translates to:
+  /// **'إغلاق'**
+  String get hubTenantClose;
+
+  /// No description provided for @hubCustomizeUnits.
+  ///
+  /// In ar, this message translates to:
+  /// **'تخصيص وحدات المخزون'**
+  String get hubCustomizeUnits;
+
+  /// No description provided for @hubCustomizeUnitsDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'أخفِ أي وحدة لا تحتاجها الآن. يمكنك إرجاعها لاحقاً من نفس المكان'**
+  String get hubCustomizeUnitsDesc;
+
+  /// No description provided for @hubCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get hubCancel;
+
+  /// No description provided for @hubSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get hubSave;
+
+  /// No description provided for @hubRefresh.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديث'**
+  String get hubRefresh;
+
+  /// No description provided for @hubCustomize.
+  ///
+  /// In ar, this message translates to:
+  /// **'تخصيص الوحدات'**
+  String get hubCustomize;
+
+  /// No description provided for @hubSwitchTenant.
+  ///
+  /// In ar, this message translates to:
+  /// **'تبديل المستأجر'**
+  String get hubSwitchTenant;
+
+  /// No description provided for @hubAllHidden.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم إخفاء كل الوحدات أو تعطيلها من الإعدادات'**
+  String get hubAllHidden;
+
+  /// No description provided for @hubManageUnits.
+  ///
+  /// In ar, this message translates to:
+  /// **'إدارة الوحدات'**
+  String get hubManageUnits;
+
+  /// No description provided for @hubReloadOnReturn.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعد التحميل عند العودة قد تغيرت الإعدادات'**
+  String get hubReloadOnReturn;
+
+  /// No description provided for @bsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات الباركود'**
+  String get bsTitle;
+
+  /// No description provided for @bsSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تهيئة الباركود إعدادات حقيقية في النظام'**
+  String get bsSubtitle;
+
+  /// No description provided for @bsTypeTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'نوع الباركود'**
+  String get bsTypeTitle;
+
+  /// No description provided for @bsTypeCode128Desc.
+  ///
+  /// In ar, this message translates to:
+  /// **'باركود مرن يدعم ترميز الأرقام والحروف والرموز، ويُستخدم على نطاق واسع في التوصيل والمستودعات'**
+  String get bsTypeCode128Desc;
+
+  /// No description provided for @bsTypeEan13Desc.
+  ///
+  /// In ar, this message translates to:
+  /// **'معيار مكوّن من 13 رقمًا يُستخدم بشكل شائع في قطاع التجزئة، ويشمل رمز الدولة ورمز المصنّع ورمز المنتج'**
+  String get bsTypeEan13Desc;
+
+  /// No description provided for @bsTypeLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر معيار الباركود الذي سيعتمد عليه النظام في إنشاء وقراءة باركود المنتجات'**
+  String get bsTypeLabel;
+
+  /// No description provided for @bsWeightEmbedded.
+  ///
+  /// In ar, this message translates to:
+  /// **'باركود متضمن الوزن'**
+  String get bsWeightEmbedded;
+
+  /// No description provided for @bsWeightEnabled.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفعّل'**
+  String get bsWeightEnabled;
+
+  /// No description provided for @bsWeightDisabled.
+  ///
+  /// In ar, this message translates to:
+  /// **'معطّل'**
+  String get bsWeightDisabled;
+
+  /// No description provided for @bsWeightDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدم الباركود متضمن الوزن ليتمكّن النظام من قراءة وزن المنتج والسعر إذا وُجد مباشرة من الباركود'**
+  String get bsWeightDesc;
+
+  /// No description provided for @bsWeightFormat.
+  ///
+  /// In ar, this message translates to:
+  /// **'صيغة الباركود المتضمن'**
+  String get bsWeightFormat;
+
+  /// No description provided for @bsWeightFormatDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل صيغة الباركود المدمج وفق النموذج، حيث تُمثل أرقام المنتج، وخانات الوزن، وخانات السعر'**
+  String get bsWeightFormatDesc;
+
+  /// No description provided for @bsWeightExample.
+  ///
+  /// In ar, this message translates to:
+  /// **'على سبيل المثال، إذا كان الوزن يُعرض بأربع خانات فسيظهر جرامًا، وإذا كان بخمس خانات سيظهر كعشرات الجرامات'**
+  String get bsWeightExample;
+
+  /// No description provided for @bsWeightUnit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تقسيم وحدة الوزن'**
+  String get bsWeightUnit;
+
+  /// No description provided for @bsWeightUnitExample.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال'**
+  String get bsWeightUnitExample;
+
+  /// No description provided for @bsWeightUnitDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل القيمة التي يستخدمها النظام لتحويل وحدة الوزن في الباركود إلى وحدة البيع لديك'**
+  String get bsWeightUnitDesc;
+
+  /// No description provided for @bsCurrencyDivision.
+  ///
+  /// In ar, this message translates to:
+  /// **'قسمة العملة'**
+  String get bsCurrencyDivision;
+
+  /// No description provided for @bsCurrencyExample.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال'**
+  String get bsCurrencyExample;
+
+  /// No description provided for @bsCurrencyDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل القيمة التي يستخدمها النظام لتحويل السعر من الوحدة المضمنة في الباركود إلى وحدتك الأساسية'**
+  String get bsCurrencyDesc;
+
+  /// No description provided for @bsFormatLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'صيغة الباركود المتضمن'**
+  String get bsFormatLabel;
+
+  /// No description provided for @bsFormatError.
+  ///
+  /// In ar, this message translates to:
+  /// **'صيغة الباركود المتضمن يجب أن تحتوي فقط على الحروف W و P و D'**
+  String get bsFormatError;
+
+  /// No description provided for @bsWeightUnitError.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل قيمة صحيحة أكبر من صفر لتقسيم وحدة الوزن'**
+  String get bsWeightUnitError;
+
+  /// No description provided for @bsCurrencyDivError.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل قيمة صحيحة أكبر من صفر لقسمة العملة'**
+  String get bsCurrencyDivError;
+
+  /// No description provided for @bsSaveSuccess.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم حفظ إعدادات الباركود'**
+  String get bsSaveSuccess;
+
+  /// No description provided for @bsSaveError.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر الحفظ'**
+  String get bsSaveError;
+
+  /// No description provided for @imTabAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكل'**
+  String get imTabAll;
+
+  /// No description provided for @imTabDeposit.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيداع'**
+  String get imTabDeposit;
+
+  /// No description provided for @imTabWithdrawal.
+  ///
+  /// In ar, this message translates to:
+  /// **'صرف'**
+  String get imTabWithdrawal;
+
+  /// No description provided for @imTabTransfer.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحويل'**
+  String get imTabTransfer;
+
+  /// No description provided for @imSortNewest.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأحدث'**
+  String get imSortNewest;
+
+  /// No description provided for @imSortOldest.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأقدم'**
+  String get imSortOldest;
+
+  /// No description provided for @imLoadError.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر تحميل الحركات'**
+  String get imLoadError;
+
+  /// No description provided for @stOpenSessions.
+  ///
+  /// In ar, this message translates to:
+  /// **'جلسات مفتوحة'**
+  String get stOpenSessions;
+
+  /// No description provided for @stCompleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكتملة'**
+  String get stCompleted;
+
+  /// No description provided for @stCloseSessionConfirm.
+  ///
+  /// In ar, this message translates to:
+  /// **'هل تريد إقفال جلسة؟'**
+  String get stCloseSessionConfirm;
+
+  /// No description provided for @stCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'صنف'**
+  String get stCategory;
+
+  /// No description provided for @stStarted.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدأ'**
+  String get stStarted;
+
+  /// No description provided for @stClosed.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُقفل'**
+  String get stClosed;
+
+  /// No description provided for @stSystemQty.
+  ///
+  /// In ar, this message translates to:
+  /// **'النظام'**
+  String get stSystemQty;
+
+  /// No description provided for @stDifference.
+  ///
+  /// In ar, this message translates to:
+  /// **'فرق'**
+  String get stDifference;
+
+  /// No description provided for @stReport.
+  ///
+  /// In ar, this message translates to:
+  /// **'تقرير'**
+  String get stReport;
+
+  /// No description provided for @stActualQty.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفعلي'**
+  String get stActualQty;
+
+  /// No description provided for @plRetail.
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة التجزئة'**
+  String get plRetail;
+
+  /// No description provided for @plRetailDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسعار بيع التجزئة للعملاء العاديين'**
+  String get plRetailDesc;
+
+  /// No description provided for @plWholesale.
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة الجملة'**
+  String get plWholesale;
+
+  /// No description provided for @plWholesaleDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسعار الجملة للموزعين والتجار'**
+  String get plWholesaleDesc;
+
+  /// No description provided for @plVIP.
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة العملاء المميزين'**
+  String get plVIP;
+
+  /// No description provided for @plVIPDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسعار خاصة للعملاء الدائمين'**
+  String get plVIPDesc;
+
+  /// No description provided for @plDeleteConfirm.
+  ///
+  /// In ar, this message translates to:
+  /// **'هل تريد حذف'**
+  String get plDeleteConfirm;
+
+  /// No description provided for @plCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'صنف'**
+  String get plCategory;
+
+  /// No description provided for @plPrices.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسعار'**
+  String get plPrices;
+
+  /// No description provided for @plSellPrice.
+  ///
+  /// In ar, this message translates to:
+  /// **'سعر البيع'**
+  String get plSellPrice;
+
+  /// No description provided for @rptDashboard.
+  ///
+  /// In ar, this message translates to:
+  /// **'لوحة تنفيذية'**
+  String get rptDashboard;
+
+  /// No description provided for @rptDashboardSub.
+  ///
+  /// In ar, this message translates to:
+  /// **'مؤشرات وفترة'**
+  String get rptDashboardSub;
+
+  /// No description provided for @rptSalesInvoices.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبيعات والفواتير'**
+  String get rptSalesInvoices;
+
+  /// No description provided for @rptSalesInvoicesSub.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنواع الدفع والمرتجعات'**
+  String get rptSalesInvoicesSub;
+
+  /// No description provided for @rptCustomers.
+  ///
+  /// In ar, this message translates to:
+  /// **'العملاء'**
+  String get rptCustomers;
+
+  /// No description provided for @rptCustomersSub.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكثر المشترين'**
+  String get rptCustomersSub;
+
+  /// No description provided for @rptDebts.
+  ///
+  /// In ar, this message translates to:
+  /// **'الديون'**
+  String get rptDebts;
+
+  /// No description provided for @rptDebtsSub.
+  ///
+  /// In ar, this message translates to:
+  /// **'أرصدة العملاء'**
+  String get rptDebtsSub;
+
+  /// No description provided for @rptInstallments.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأقساط'**
+  String get rptInstallments;
+
+  /// No description provided for @rptInstallmentsSub.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطط الفترة'**
+  String get rptInstallmentsSub;
+
+  /// No description provided for @rptStaff.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموظفون'**
+  String get rptStaff;
+
+  /// No description provided for @rptStaffSub.
+  ///
+  /// In ar, this message translates to:
+  /// **'أداء التسجيل'**
+  String get rptStaffSub;
+
+  /// No description provided for @rptAnalyticsMargin.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحليل وهامش'**
+  String get rptAnalyticsMargin;
+
+  /// No description provided for @rptAnalyticsMarginSub.
+  ///
+  /// In ar, this message translates to:
+  /// **'منتجات وهامش تقديري'**
+  String get rptAnalyticsMarginSub;
+
+  /// No description provided for @rptReportSettings.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات التقارير'**
+  String get rptReportSettings;
+
+  /// No description provided for @rptReportSettingsSub.
+  ///
+  /// In ar, this message translates to:
+  /// **'فترة افتراضية وتفضيلات'**
+  String get rptReportSettingsSub;
+
+  /// No description provided for @rptNoData.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد بيانات'**
+  String get rptNoData;
+
+  /// No description provided for @rptDateFilter.
+  ///
+  /// In ar, this message translates to:
+  /// **'فلتر التاريخ'**
+  String get rptDateFilter;
+
+  /// No description provided for @rptToday.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم'**
+  String get rptToday;
+
+  /// No description provided for @rptYesterday.
+  ///
+  /// In ar, this message translates to:
+  /// **'أمس'**
+  String get rptYesterday;
+
+  /// No description provided for @rptLastWeek.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر أسبوع'**
+  String get rptLastWeek;
+
+  /// No description provided for @rptLastMonth.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر شهر'**
+  String get rptLastMonth;
+
+  /// No description provided for @rptLastQuarter.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر ربع سنة'**
+  String get rptLastQuarter;
+
+  /// No description provided for @rptReset.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة ضبط'**
+  String get rptReset;
+
+  /// No description provided for @rptApply.
+  ///
+  /// In ar, this message translates to:
+  /// **'تطبيق'**
+  String get rptApply;
+
+  /// No description provided for @rptClose.
+  ///
+  /// In ar, this message translates to:
+  /// **'إغلاق'**
+  String get rptClose;
+
+  /// No description provided for @rptCopiedSectionName.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم نسخ اسم القسم'**
+  String get rptCopiedSectionName;
+
+  /// No description provided for @rptSales.
+  ///
+  /// In ar, this message translates to:
+  /// **'مبيعات'**
+  String get rptSales;
+
+  /// No description provided for @rptTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي'**
+  String get rptTotal;
+
+  /// No description provided for @rptReturns.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتجعات'**
+  String get rptReturns;
+
+  /// No description provided for @rptCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'العميل'**
+  String get rptCustomer;
+
+  /// No description provided for @rptStaffLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموظفون'**
+  String get rptStaffLabel;
+
+  /// No description provided for @rptOthers.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخرون'**
+  String get rptOthers;
+
+  /// No description provided for @rptNoCustomerData.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد بيانات عملاء في هذه الفترة'**
+  String get rptNoCustomerData;
+
+  /// No description provided for @rptNoStaffSales.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد مبيعات مسجّلة باسم موظف في هذه الفترة'**
+  String get rptNoStaffSales;
+
+  /// No description provided for @rptTopBuyers.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكثر العملاء شراءً حسب اسم الفاتورة'**
+  String get rptTopBuyers;
+
+  /// No description provided for @rptSalesByCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'توزيع المبيعات على العملاء'**
+  String get rptSalesByCustomer;
+
+  /// No description provided for @rptSalesByStaff.
+  ///
+  /// In ar, this message translates to:
+  /// **'توزيع المبيعات على الموظفين'**
+  String get rptSalesByStaff;
+
+  /// No description provided for @rptDebtsBalances.
+  ///
+  /// In ar, this message translates to:
+  /// **'جدول أرصدة مسجّلة في سجل العملاء'**
+  String get rptDebtsBalances;
+
+  /// No description provided for @rptInstallmentPlans.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطط الأقساط المرتبطة بفواتير الفترة'**
+  String get rptInstallmentPlans;
+
+  /// No description provided for @rptDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل الخطط'**
+  String get rptDetails;
+
+  /// No description provided for @rptStaffPercentage.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة كل موظف من إجمالي المبيعات'**
+  String get rptStaffPercentage;
+
+  /// No description provided for @rptConsistentWithPie.
+  ///
+  /// In ar, this message translates to:
+  /// **'متسقة مع نسب المخطط الدائري والجدول'**
+  String get rptConsistentWithPie;
+
+  /// No description provided for @rptUnknown.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير معروف'**
+  String get rptUnknown;
+
+  /// No description provided for @rptNoName.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدون اسم'**
+  String get rptNoName;
+
+  /// No description provided for @rptSelectedPeriod.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفترة المحددة'**
+  String get rptSelectedPeriod;
+
+  /// No description provided for @rptApproxNet.
+  ///
+  /// In ar, this message translates to:
+  /// **'تقريبي صافي'**
+  String get rptApproxNet;
+
+  /// No description provided for @rptTotalExpenses.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي المصروفات'**
+  String get rptTotalExpenses;
+
+  /// No description provided for @rptNetAfterExpenses.
+  ///
+  /// In ar, this message translates to:
+  /// **'صافي بعد المصروفات'**
+  String get rptNetAfterExpenses;
+
+  /// No description provided for @rptInvoicesReturns.
+  ///
+  /// In ar, this message translates to:
+  /// **'فواتير ومرتجعات'**
+  String get rptInvoicesReturns;
+
+  /// No description provided for @rptDailySalesInRange.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتجاه المبيعات اليومي في الفترة'**
+  String get rptDailySalesInRange;
+
+  /// No description provided for @rptPiePayments.
+  ///
+  /// In ar, this message translates to:
+  /// **'توزيع أنواع الدفع'**
+  String get rptPiePayments;
+
+  /// No description provided for @osDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد تسجيل الدخول عرض رصيد الصندوق، الجرد، إضافة مال، ثم تمييز موظف الوردية'**
+  String get osDescription;
+
+  /// No description provided for @osSessionExpired.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجلسة انتهت في الخلفية أثناء تحميل الشاشة'**
+  String get osSessionExpired;
+
+  /// No description provided for @osUnexpectedError.
+  ///
+  /// In ar, this message translates to:
+  /// **'حدث خطأ غير متوقع أثناء التهيئة'**
+  String get osUnexpectedError;
+
+  /// No description provided for @osPasswordRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'عند العودة إلى التطبيق بوردية مفتوحة أصلاً نطلب كلمة مرور موظف الوردية'**
+  String get osPasswordRequired;
+
+  /// No description provided for @osShiftEmployee.
+  ///
+  /// In ar, this message translates to:
+  /// **'موظف الوردية'**
+  String get osShiftEmployee;
+
+  /// No description provided for @osOpeningBalance.
+  ///
+  /// In ar, this message translates to:
+  /// **'رصيد النظام عند الفتح'**
+  String get osOpeningBalance;
+
+  /// No description provided for @osManualCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجرد اليدوي الصندوق'**
+  String get osManualCount;
+
+  /// No description provided for @osAddedMoney.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ المضاف عند الفتح'**
+  String get osAddedMoney;
+
+  /// No description provided for @osOpeningShift.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح وردية'**
+  String get osOpeningShift;
+
+  /// No description provided for @osErrorOpening.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر فتح الوردية'**
+  String get osErrorOpening;
+
+  /// No description provided for @osNoShiftId.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمت العملية بدون رقم وردية صالح حاول مرة أخرى'**
+  String get osNoShiftId;
+
+  /// No description provided for @osShiftOpened.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم فتح الوردية'**
+  String get osShiftOpened;
+
+  /// No description provided for @osAmountHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ الظاهر عند الجرد'**
+  String get osAmountHint;
+
+  /// No description provided for @osAmountLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب الموجود فعلياً داخل الصندوق الآن'**
+  String get osAmountLabel;
+
+  /// No description provided for @osExample.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال'**
+  String get osExample;
+
+  /// No description provided for @osAddMoney.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة مال للصندوق'**
+  String get osAddMoney;
+
+  /// No description provided for @osAddMoneyDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختياري استخدمه إذا أضفت نقداً قبل بداية البيع'**
+  String get osAddMoneyDesc;
+
+  /// No description provided for @osLogout.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخروج من الحساب'**
+  String get osLogout;
+
+  /// No description provided for @osReviewBalance.
+  ///
+  /// In ar, this message translates to:
+  /// **'راجع رصيد الصندوق حسب النظام، ثم سجّل الجرد الفعلي قبل بدء العمل'**
+  String get osReviewBalance;
+
+  /// No description provided for @osOpeningSystemBalance.
+  ///
+  /// In ar, this message translates to:
+  /// **'رصيد الصندوق حسب النظام'**
+  String get osOpeningSystemBalance;
+
+  /// No description provided for @osOpeningLoading.
+  ///
+  /// In ar, this message translates to:
+  /// **'جاري فتح الوردية'**
+  String get osOpeningLoading;
+
+  /// No description provided for @osStaffDialogTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'حوار موظف الوردية'**
+  String get osStaffDialogTitle;
+
+  /// No description provided for @osStaffDialogDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيار مستخدم مسجّل في النظام رمز البطاقة، أو مسح'**
+  String get osStaffDialogDesc;
+
+  /// No description provided for @osAllActiveUsers.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل المستخدمين النشطين'**
+  String get osAllActiveUsers;
+
+  /// No description provided for @osErrorLoadingUsers.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر تحميل مستخدمي الوردية'**
+  String get osErrorLoadingUsers;
+
+  /// No description provided for @osInvalidCard.
+  ///
+  /// In ar, this message translates to:
+  /// **'النص المقروء ليس رمز هوية صالحاً'**
+  String get osInvalidCard;
+
+  /// No description provided for @osSelectUser.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر مستخدم الوردية من القائمة أو امسح البطاقة'**
+  String get osSelectUser;
+
+  /// No description provided for @osUserNotFound.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر العثور على المستخدم المختار اختر مستخدماً آخر'**
+  String get osUserNotFound;
+
+  /// No description provided for @osNoLocalPassword.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد كلمة مرور محلية لهذا الحساب عيّن كلمة مرور من إدارة المستخدمين'**
+  String get osNoLocalPassword;
+
+  /// No description provided for @osWrongPassword.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمة مرور الدخول غير صحيحة'**
+  String get osWrongPassword;
+
+  /// No description provided for @osSelectEmployee.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر الموظف المسؤول عن الصندوق في هذه الوردية'**
+  String get osSelectEmployee;
+
+  /// No description provided for @osNoActiveUsers.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد مستخدمون نشطون في النظام أضف مستخدماً من إدارة المستخدمين'**
+  String get osNoActiveUsers;
+
+  /// No description provided for @osUserLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مستخدم الوردية'**
+  String get osUserLabel;
+
+  /// No description provided for @osSelectUserHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر مستخدماً'**
+  String get osSelectUserHint;
+
+  /// No description provided for @osDisplayName.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم الظاهر'**
+  String get osDisplayName;
+
+  /// No description provided for @osAutoDetermined.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُحدَّد تلقائياً'**
+  String get osAutoDetermined;
+
+  /// No description provided for @osScanDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'يمكن اختيار المستخدم عبر الكاميرا أو قارئ خارجي، ثم إدخال كلمة المرور للتأكيد'**
+  String get osScanDesc;
+
+  /// No description provided for @osScanCamera.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح بالكاميرا'**
+  String get osScanCamera;
+
+  /// No description provided for @osExternalReader.
+  ///
+  /// In ar, this message translates to:
+  /// **'قارئ خارجي'**
+  String get osExternalReader;
+
+  /// No description provided for @osPressToScan.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط هنا ثم امسح البطاقة'**
+  String get osPressToScan;
+
+  /// No description provided for @osInvalidIdCode.
+  ///
+  /// In ar, this message translates to:
+  /// **'النص المقروء ليس رمز هوية صالحاً'**
+  String get osInvalidIdCode;
+
+  /// No description provided for @osLoginPassword.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمة مرور الدخول'**
+  String get osLoginPassword;
+
+  /// No description provided for @osSessionEnded.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهت جلسة المستخدم سجّل الدخول مرة أخرى'**
+  String get osSessionEnded;
+
+  /// No description provided for @osCannotBeNegative.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يمكن أن يكون المبلغ المضاف سالباً'**
+  String get osCannotBeNegative;
+
+  /// No description provided for @osErrorStaffDialog.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر فتح نافذة اختيار موظف الوردية'**
+  String get osErrorStaffDialog;
+
+  /// No description provided for @osNoStaffSelected.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يتم اختيار موظف الوردية'**
+  String get osNoStaffSelected;
+
+  /// No description provided for @osIncompleteData.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيانات موظف الوردية غير مكتملة اختر الموظف مرة أخرى'**
+  String get osIncompleteData;
+
+  /// No description provided for @osPasswordNotStored.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا نخزّن كلمة مرور الدخول التحقق كان في الحوار فقط'**
+  String get osPasswordNotStored;
+
+  /// No description provided for @osAutoFixed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم إصلاح بيانات موظف الوردية تلقائياً على هذا الجهاز يمكنك المتابعة'**
+  String get osAutoFixed;
+
+  /// No description provided for @osStaffMissing.
+  ///
+  /// In ar, this message translates to:
+  /// **'موظف الوردية المسجَّل لم يعد موجوداً أغلق الوردية من جهاز آخر أو اتصل بالمدير'**
+  String get osStaffMissing;
+
+  /// No description provided for @osAuthRejected.
+  ///
+  /// In ar, this message translates to:
+  /// **'رفض التحقق من موظف الوردية يجب عدم فتح التطبيق على وردية مفتوحة دون إثبات'**
+  String get osAuthRejected;
+
+  /// No description provided for @osReturningToLogin.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسجّل خروج الجلسة على هذا الجهاز ونعود لشاشة تسجيل الدخول'**
+  String get osReturningToLogin;
+
+  /// No description provided for @osUseExistingShift.
+  ///
+  /// In ar, this message translates to:
+  /// **'العودة للوردية المفتوحة بدلاً من ذلك'**
+  String get osUseExistingShift;
 }
 
 class _AppLocalizationsDelegate

@@ -23,6 +23,7 @@ class DebtSettingsScreen extends StatefulWidget {
 }
 
 class _DebtSettingsScreenState extends State<DebtSettingsScreen> {
+  AppLocalizations get _loc => AppLocalizations.of(context)!;
   final _db = DatabaseHelper();
   bool _loading = true;
   DebtSettingsData _data = DebtSettingsData.defaults();
@@ -112,7 +113,7 @@ class _DebtSettingsScreenState extends State<DebtSettingsScreen> {
     final days = int.tryParse(_warnDays.text.trim()) ?? 0;
     if (days < 0 || days > 36500) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('أيام التحذير: بين 0 و 36500')),
+        SnackBar(content: Text(_loc.dsInvalidDays)),
       );
       return;
     }
@@ -130,7 +131,7 @@ class _DebtSettingsScreenState extends State<DebtSettingsScreen> {
     setState(() => _data = next);
     ScaffoldMessenger.of(
       context,
-    ).showSnackBar(const SnackBar(content: Text('تم حفظ إعدادات الدين')));
+    ).showSnackBar(SnackBar(content: Text(_loc.dsSaved)));
   }
 
   PreferredSizeWidget _buildAppBar() {
@@ -139,14 +140,14 @@ class _DebtSettingsScreenState extends State<DebtSettingsScreen> {
       foregroundColor: _onPrimary,
       elevation: 0,
       centerTitle: false,
-      title: const Text(
-        'إعدادات الدين',
+      title: Text(
+        _loc.dsTitle,
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
       ),
       actions: [
         IconButton(
           icon: const Icon(Icons.refresh_rounded),
-          tooltip: 'إعادة التحميل من القاعدة',
+          tooltip: _loc.dsReloadTooltip,
           onPressed: _loading ? null : _load,
         ),
         const SizedBox(width: 4),
@@ -327,15 +328,15 @@ class _DebtSettingsScreenState extends State<DebtSettingsScreen> {
                           icon: Icons.account_balance_outlined,
                           title: 'سقوف المبالغ',
                           subtitle:
-                              'حدود المبالغ بالدينار العراقي. الفارغ أو 0 يعني عدم تفعيل السقف.',
+                              ' thresholds. Empty or 0 means no limit.',
                           children: [
                             TextField(
                               controller: _maxPerCustomer,
                               keyboardType: TextInputType.number,
                               decoration: _fieldDecoration(
-                                label: 'أقصى مجموع متبقٍ لكل عميل (Fdj)',
+                                label: _loc.dsMaxPerCustomer,
                                 helper:
-                                    'مجموع المتبقي عبر كل فواتير الدين المفتوحة لنفس العميل. يمنع للعميل تجاوز السقف عند التفعيل أدناه.',
+                                    'Sum of remaining across all open debt invoices for the same customer.',
                                 helperMaxLines: 3,
                                 prefixIcon: Icon(
                                   Icons.groups_outlined,
@@ -349,8 +350,8 @@ class _DebtSettingsScreenState extends State<DebtSettingsScreen> {
                               controller: _maxPerInvoice,
                               keyboardType: TextInputType.number,
                               decoration: _fieldDecoration(
-                                label: 'أقصى متبقٍ لفاتورة دين واحدة (Fdj)',
-                                helper: 'إجمالي الفاتورة − المقدّم (النقدي).',
+                                label: _loc.dsMaxPerInvoice,
+                                helper: 'Invoice total minus down payment.',
                                 prefixIcon: Icon(
                                   Icons.receipt_long_outlined,
                                   size: 20,
@@ -363,9 +364,9 @@ class _DebtSettingsScreenState extends State<DebtSettingsScreen> {
                               controller: _warnDays,
                               keyboardType: TextInputType.number,
                               decoration: _fieldDecoration(
-                                label: 'أيام «تحذير العمر» في لوحة الديون',
+                                label: 'Aging warning days in debts screen',
                                 helper:
-                                    '0 = لا تنبيه بالعمر. بعد هذا العدد من أيام تاريخ الفاتورة تُعرَّف الفاتورة كقديمة.',
+                                    '0 = no aging alert. After this many days from invoice date, the invoice is flagged as old.',
                                 helperMaxLines: 3,
                                 prefixIcon: Icon(
                                   Icons.schedule_outlined,
@@ -379,14 +380,14 @@ class _DebtSettingsScreenState extends State<DebtSettingsScreen> {
                         const SizedBox(height: 16),
                         _section(
                           icon: Icons.gavel_outlined,
-                          title: 'الفرض عند البيع',
+                          title: 'Enforce at sale',
                           subtitle:
-                              'عند التعطيل، يُسمح بالتجاوز لكن تبقى الأرقام مرجعاً لك يدوياً.',
+                              'When disabled, exceeding is allowed but figures remain as manual reference.',
                           children: [
                             _switchTile(
-                              title: 'منع تجاوز سقف العميل',
+                              title: 'Prevent customer ceiling breach',
                               subtitle:
-                                  'يمنع حفظ فاتورة دين جديدة إذا تجاوز العميل الحد المحدد في «أقصى مجموع لكل عميل».',
+                                  'Prevents saving a new credit invoice if the customer exceeds the max remaining per customer.',
                               value: _data.enforceCustomerCapAtSale,
                               onChanged: (v) => setState(
                                 () => _data = _data.copyWith(
@@ -396,9 +397,9 @@ class _DebtSettingsScreenState extends State<DebtSettingsScreen> {
                             ),
                             const SizedBox(height: 8),
                             _switchTile(
-                              title: 'منع تجاوز سقف الفاتورة الواحدة',
+                              title: 'Prevent single invoice ceiling breach',
                               subtitle:
-                                  'يمنع الحفظ إذا تجاوز المتبقي في هذه الفاتورة الحد المحدد لكل فاتورة.',
+                                  'Prevents saving if remaining on this invoice exceeds the max per invoice.',
                               value: _data.enforceSingleInvoiceCapAtSale,
                               onChanged: (v) => setState(
                                 () => _data = _data.copyWith(
@@ -415,7 +416,7 @@ class _DebtSettingsScreenState extends State<DebtSettingsScreen> {
                           label: const Padding(
                             padding: EdgeInsets.symmetric(vertical: 4),
                             child: Text(
-                              'حفظ الإعدادات',
+                              'Save Settings',
                               style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16,

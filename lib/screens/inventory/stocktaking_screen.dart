@@ -135,8 +135,8 @@ class _StocktakingScreenState extends State<StocktakingScreen>
             unselectedLabelColor: Colors.white60,
             tabs: [
 
-              Tab(text: 'جلسات مفتوحة (${_openSessions.length})'),
-              Tab(text: 'مكتملة (${_closedSessions.length})'),
+              Tab(text: '${loc.stOpenSessions} (${_openSessions.length})'),
+              Tab(text: '${loc.stCompleted} (${_closedSessions.length})'),
             ],
           ),
         ),
@@ -184,7 +184,7 @@ class _StocktakingScreenState extends State<StocktakingScreen>
             mainAxisSize: MainAxisSize.min,
             children: [
 
-              Text('هل تريد إقفال جلسة «${s['title']}»؟'),
+              Text('${loc.stCloseSessionConfirm} «${s['title']}»?'),
               SizedBox(height: 8),
               CheckboxListTile(
                 contentPadding: EdgeInsets.zero,
@@ -422,7 +422,7 @@ class _SessionCard extends StatelessWidget {
               children: [
 
                 Text(
-                  '$counted / $total صنف',
+                  '$counted / $total ${loc.stCategory}',
                   style: const TextStyle(fontSize: 12, color: _t2),
                 ),
                 const Spacer(),
@@ -455,9 +455,9 @@ class _SessionCard extends StatelessWidget {
                 Text(
                   isOpen
 
-                      ? 'بدأ: ${_fmtDate(data['startedAt']?.toString())}'
+                      ? '${loc.stStarted}: ${_fmtDate(data['startedAt']?.toString())}'
 
-                      : 'أُقفل: ${_fmtDate(data['closedAt']?.toString())}',
+                      : '${loc.stClosed}: ${_fmtDate(data['closedAt']?.toString())}',
                   style: const TextStyle(fontSize: 12, color: _t2),
                 ),
                 const Spacer(),
@@ -1029,14 +1029,14 @@ class _CountItemState extends State<_CountItem> {
                   children: [
 
                     Text(
-                      'النظام: ${((widget.item['systemQty'] as num?)?.toDouble() ?? 0).toStringAsFixed(0)}',
+                      '${loc.stSystemQty}: ${((widget.item['systemQty'] as num?)?.toDouble() ?? 0).toStringAsFixed(0)}',
                       style: const TextStyle(fontSize: 11, color: _t2),
                     ),
                     if (diff != null && diff != 0) ...[
 
                       const SizedBox(width: 10),
                       Text(
-                        'فرق: ${diff > 0 ? '+' : ''}${diff.toStringAsFixed(0)}',
+                        '${loc.stDifference}: ${diff > 0 ? '+' : ''}${diff.toStringAsFixed(0)}',
                         style: TextStyle(
                           fontSize: 11,
                           color: diff > 0 ? _green : _red,
@@ -1152,7 +1152,7 @@ class _SessionReportSheet extends StatelessWidget {
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(
-                    'تقرير: ${session['title']}',
+                    '${loc.stReport}: ${session['title']}',
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
@@ -1206,7 +1206,7 @@ class _SessionReportSheet extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 10),
-                  _diffRow(loc.statusRow, total, counted, counted - total),
+                  _diffRow(loc.statusRow, total, counted, counted - total, loc),
                 ],
               ),
             ),
@@ -1216,7 +1216,7 @@ class _SessionReportSheet extends StatelessWidget {
     );
   }
 
-  Widget _diffRow(String name, int sys, int cnt, int diff) {
+  Widget _diffRow(String name, int sys, int cnt, int diff, AppLocalizations loc) {
     final color = diff > 0 ? _green : _red;
 
     return Container(
@@ -1241,12 +1241,12 @@ class _SessionReportSheet extends StatelessWidget {
             ),
           ),
           Text(
-            'النظام: $sys',
+            '${loc.stSystemQty}: $sys',
             style: const TextStyle(fontSize: 12, color: _t2),
           ),
           const SizedBox(width: 12),
           Text(
-            'الفعلي: $cnt',
+            '${loc.stActualQty}: $cnt',
             style: const TextStyle(fontSize: 12, color: _t2),
           ),
           const SizedBox(width: 12),

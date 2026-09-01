@@ -11321,4 +11321,810 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dsOverdueHint => 'Days past due to mark as overdue';
+
+  @override
+  String get cashInvoiceNumShort => 'Invoice #';
+
+  @override
+  String get cashShiftLoadError =>
+      'Failed to load shift history from database; below is only the cash list view.';
+
+  @override
+  String get cashTotalMovements =>
+      'Total movements shown in cash for this group';
+
+  @override
+  String get cashMovementsCount => 'movements.';
+
+  @override
+  String get cashMovementStats => 'Movement counts';
+
+  @override
+  String get cashMovementsDeposit => 'Deposit';
+
+  @override
+  String get cashMovementsWithdrawal => 'Withdrawal';
+
+  @override
+  String get cashMovementsManual => 'Manual';
+
+  @override
+  String get cashMovementsLinked => 'Linked to invoice';
+
+  @override
+  String get cashMovementsTimes => 'times';
+
+  @override
+  String get cashSalesCash => 'Cash Sale';
+
+  @override
+  String get cashFirstPayment => 'Down payment / First payment';
+
+  @override
+  String get cashInstallmentPayment => 'Installment payment';
+
+  @override
+  String get cashSupplierPayment => 'Supplier payment';
+
+  @override
+  String get cashSupplierPaymentReversal => 'Supplier payment reversal';
+
+  @override
+  String get cashReturn => 'Return';
+
+  @override
+  String get cashMovement => 'Movement';
+
+  @override
+  String get cashSummaryInflow => 'Inflow';
+
+  @override
+  String get cashSummaryOutflow => 'Outflow';
+
+  @override
+  String get cashNoShift => 'No shift';
+
+  @override
+  String get cashTapDetails => 'Tap for details';
+
+  @override
+  String get cashShiftLabel => 'Shift ';
+
+  @override
+  String get cashMovementsShort => ' movements';
+
+  @override
+  String get cashEmployeeLabel => 'Employee: ';
+
+  @override
+  String get cashTapInvoice => 'Tap for invoice #';
+
+  @override
+  String get cashCashboxInfo =>
+      'Recorded separately from sales invoices and installments. Use for store expenses or bank deposit/withdrawal.';
+
+  @override
+  String get cashCashboxBalanceInfo =>
+      'Total cash inflow from cash sales, down payments, installment payments and manual deposits — excluding credit invoices without down payment.';
+
+  @override
+  String get calculatorTitle => 'Calculator';
+
+  @override
+  String get calculatorCopyResult => 'Copy result';
+
+  @override
+  String get calculatorClearAll => 'Clear all';
+
+  @override
+  String get debtsGroupByCustomer =>
+      'Group by customer: products, sellers and partial payment from details screen. QR on receipt for registered customers only.';
+
+  @override
+  String get debtsSearchHintCustomer => 'Search by customer name or ID...';
+
+  @override
+  String get debtsXofYCustomers => 'of';
+
+  @override
+  String get debtsNoCreditRemaining =>
+      'No remaining credit grouped by customers';
+
+  @override
+  String get debtsNoResults => 'No results';
+
+  @override
+  String get debtsCustomerLabel => 'Customer';
+
+  @override
+  String get debtsRegisteredCustomer => 'Registered customer';
+
+  @override
+  String get debtsNotLinked => 'Not linked to customers table (by name)';
+
+  @override
+  String get debtsCreditInvoices => 'credit invoices';
+
+  @override
+  String get debtsRemainingLabel => 'Remaining';
+
+  @override
+  String get debtsCustomerStatement => 'Customer Statement';
+
+  @override
+  String get debtsAgingWarningInfo =>
+      'Aging warning starts after X days from invoice date.';
+
+  @override
+  String get debtsAgingDisabled =>
+      'Enable aging warning days in debt settings to flag old invoices.';
+
+  @override
+  String get debtsInfoBanner =>
+      'Debts are calculated from credit invoices. Remaining = total - down payment. Sale limits set in debt settings.';
+
+  @override
+  String get debtsTotalRemaining => 'Total Remaining';
+
+  @override
+  String get debtsShowAll => 'Show all invoices';
+
+  @override
+  String get debtsOpenInvoices => 'Open Invoices';
+
+  @override
+  String get debtsFilterOpen => 'Filter: open only';
+
+  @override
+  String get debtsAgingWarning => 'Aging Warning';
+
+  @override
+  String get debtsFilterAging => 'Filter: aging warning';
+
+  @override
+  String get debtsStatusClosed => 'Closed';
+
+  @override
+  String get debtsStatusAging => 'Aging Alert';
+
+  @override
+  String get debtsStatusOpen => 'Open';
+
+  @override
+  String get debtsReceiptLabel => 'Receipt';
+
+  @override
+  String get debtsViewDetails => 'Details';
+
+  @override
+  String get debtsDaysSinceInvoice => 'days';
+
+  @override
+  String get debtsAdvanceOf => 'Down payment';
+
+  @override
+  String get debtsTapForDetails => 'Tap to view invoice details';
+
+  @override
+  String get debtsNoInvoicesInFilter =>
+      'No invoices in current search or filter';
+
+  @override
+  String get debtsNoDebtInvoices => 'No debt invoices registered';
+
+  @override
+  String get debtsClearSearchHint =>
+      'Clear search or select \"All\" in filter bar.';
+
+  @override
+  String get debtsNewSaleHint =>
+      'From \"New Sale\" choose type \"Credit\" to show the deferred amount here.';
+
+  @override
+  String get hubInventoryTitle => 'Inventory Center';
+
+  @override
+  String get hubProductsList => 'Products List';
+
+  @override
+  String get hubProductsListDesc => 'Search, filter, and manage all items';
+
+  @override
+  String get hubAddProduct => 'Add New Product';
+
+  @override
+  String get hubAddProductDesc => 'Create a new item in inventory';
+
+  @override
+  String get hubQuickUpdate => 'Update Existing Product';
+
+  @override
+  String get hubQuickUpdateDesc =>
+      'Search, barcode, and adjust prices & quantities without creating new item';
+
+  @override
+  String get hubVouchers => 'Stock Movements';
+
+  @override
+  String get hubVouchersDesc => 'Incoming, outgoing, warehouse transfers';
+
+  @override
+  String get hubWarehouses => 'Warehouse Management';
+
+  @override
+  String get hubWarehousesDesc => 'Add and edit warehouses and locations';
+
+  @override
+  String get hubPriceLists => 'Price Lists';
+
+  @override
+  String get hubPriceListsDesc => 'Custom prices for customers and groups';
+
+  @override
+  String get hubStocktaking => 'Periodic Stocktaking';
+
+  @override
+  String get hubStocktakingDesc => 'Match physical stock with system';
+
+  @override
+  String get hubPurchaseOrders => 'Purchase Orders';
+
+  @override
+  String get hubPurchaseOrdersDesc =>
+      'Create and track purchase orders from suppliers';
+
+  @override
+  String get hubAnalytics => 'Stock Analytics';
+
+  @override
+  String get hubAnalyticsDesc => 'Stock value, alerts, most popular';
+
+  @override
+  String get hubSettings => 'Inventory Settings';
+
+  @override
+  String get hubSettingsDesc =>
+      'Activity type, product features, enable features';
+
+  @override
+  String get hubTenantSelect => 'Select Account/Tenant';
+
+  @override
+  String get hubTenantClose => 'Close';
+
+  @override
+  String get hubCustomizeUnits => 'Customize Inventory Units';
+
+  @override
+  String get hubCustomizeUnitsDesc =>
+      'Hide any unit you don\'t need now. You can restore them later from the same place';
+
+  @override
+  String get hubCancel => 'Cancel';
+
+  @override
+  String get hubSave => 'Save';
+
+  @override
+  String get hubRefresh => 'Refresh';
+
+  @override
+  String get hubCustomize => 'Customize Units';
+
+  @override
+  String get hubSwitchTenant => 'Switch Tenant';
+
+  @override
+  String get hubAllHidden => 'All units are hidden or disabled from settings';
+
+  @override
+  String get hubManageUnits => 'Manage Units';
+
+  @override
+  String get hubReloadOnReturn =>
+      'Reload when returning (settings may have changed)';
+
+  @override
+  String get bsTitle => 'Barcode Settings';
+
+  @override
+  String get bsSubtitle =>
+      'Configure barcode formats, weight-embedded barcodes, and pricing settings';
+
+  @override
+  String get bsTypeTitle => 'Barcode Type';
+
+  @override
+  String get bsTypeCode128Desc =>
+      'Flexible barcode supporting letters, numbers and symbols. Widely used in logistics and warehousing';
+
+  @override
+  String get bsTypeEan13Desc =>
+      'Standard composed of 13 digits commonly used in retail. Includes country code, manufacturer code, and product code';
+
+  @override
+  String get bsTypeLabel =>
+      'Choose the barcode standard the system will use for creating and reading product barcodes';
+
+  @override
+  String get bsWeightEmbedded => 'Weight-Embedded Barcode';
+
+  @override
+  String get bsWeightEnabled => 'Enabled';
+
+  @override
+  String get bsWeightDisabled => 'Disabled';
+
+  @override
+  String get bsWeightDesc =>
+      'Use weight-embedded barcode so the system can read product weight and price directly from the barcode';
+
+  @override
+  String get bsWeightFormat => 'Weight-Embedded Barcode Format';
+
+  @override
+  String get bsWeightFormatDesc =>
+      'Enter the weight-embedded barcode format according to the template, where digits represent product, weight digits, and price digits';
+
+  @override
+  String get bsWeightExample =>
+      'For example, if weight is displayed in 4 digits it will appear as grams, and if in 5 digits it will appear as tens of grams';
+
+  @override
+  String get bsWeightUnit => 'Weight Unit Division';
+
+  @override
+  String get bsWeightUnitExample => 'Example';
+
+  @override
+  String get bsWeightUnitDesc =>
+      'Enter the value used by the system to convert the weight unit in the barcode to your selling unit. Example: 1000 means the barcode weight is in grams and your selling unit is kilograms';
+
+  @override
+  String get bsCurrencyDivision => 'Currency Division';
+
+  @override
+  String get bsCurrencyExample => 'Example';
+
+  @override
+  String get bsCurrencyDesc =>
+      'Enter the value used by the system to convert the price from the embedded unit to your base currency unit';
+
+  @override
+  String get bsFormatLabel => 'Embedded Barcode Format';
+
+  @override
+  String get bsFormatError =>
+      'The embedded barcode format should only contain letters W, P, and D';
+
+  @override
+  String get bsWeightUnitError =>
+      'Enter a valid positive value to divide the weight unit';
+
+  @override
+  String get bsCurrencyDivError =>
+      'Enter a valid positive value to divide the currency';
+
+  @override
+  String get bsSaveSuccess => 'Barcode settings saved';
+
+  @override
+  String get bsSaveError => 'Failed to save';
+
+  @override
+  String get imTabAll => 'All';
+
+  @override
+  String get imTabDeposit => 'Deposit';
+
+  @override
+  String get imTabWithdrawal => 'Withdrawal';
+
+  @override
+  String get imTabTransfer => 'Transfer';
+
+  @override
+  String get imSortNewest => 'Newest';
+
+  @override
+  String get imSortOldest => 'Oldest';
+
+  @override
+  String get imLoadError => 'Failed to load movements';
+
+  @override
+  String get stOpenSessions => 'Open Sessions';
+
+  @override
+  String get stCompleted => 'Completed';
+
+  @override
+  String get stCloseSessionConfirm => 'Do you want to close this session?';
+
+  @override
+  String get stCategory => 'Category';
+
+  @override
+  String get stStarted => 'Started';
+
+  @override
+  String get stClosed => 'Closed';
+
+  @override
+  String get stSystemQty => 'System';
+
+  @override
+  String get stDifference => 'Difference';
+
+  @override
+  String get stReport => 'Report';
+
+  @override
+  String get stActualQty => 'Actual';
+
+  @override
+  String get plRetail => 'Retail List';
+
+  @override
+  String get plRetailDesc => 'Retail prices for regular customers';
+
+  @override
+  String get plWholesale => 'Wholesale List';
+
+  @override
+  String get plWholesaleDesc => 'Wholesale prices for distributors and traders';
+
+  @override
+  String get plVIP => 'VIP Customer List';
+
+  @override
+  String get plVIPDesc => 'Special prices for loyal customers';
+
+  @override
+  String get plDeleteConfirm => 'Do you want to delete?';
+
+  @override
+  String get plCategory => 'Category';
+
+  @override
+  String get plPrices => 'Prices';
+
+  @override
+  String get plSellPrice => 'Sell Price';
+
+  @override
+  String get rptDashboard => 'Dashboard';
+
+  @override
+  String get rptDashboardSub => 'KPIs & period';
+
+  @override
+  String get rptSalesInvoices => 'Sales & Invoices';
+
+  @override
+  String get rptSalesInvoicesSub => 'Payment types & returns';
+
+  @override
+  String get rptCustomers => 'Customers';
+
+  @override
+  String get rptCustomersSub => 'Top buyers';
+
+  @override
+  String get rptDebts => 'Debts';
+
+  @override
+  String get rptDebtsSub => 'Customer balances';
+
+  @override
+  String get rptInstallments => 'Installments';
+
+  @override
+  String get rptInstallmentsSub => 'Period plans';
+
+  @override
+  String get rptStaff => 'Staff';
+
+  @override
+  String get rptStaffSub => 'Recording performance';
+
+  @override
+  String get rptAnalyticsMargin => 'Analytics & Margin';
+
+  @override
+  String get rptAnalyticsMarginSub => 'Products & estimated margin';
+
+  @override
+  String get rptReportSettings => 'Report Settings';
+
+  @override
+  String get rptReportSettingsSub => 'Default period & preferences';
+
+  @override
+  String get rptNoData => 'No data';
+
+  @override
+  String get rptDateFilter => 'Date filter';
+
+  @override
+  String get rptToday => 'Today';
+
+  @override
+  String get rptYesterday => 'Yesterday';
+
+  @override
+  String get rptLastWeek => 'Last week';
+
+  @override
+  String get rptLastMonth => 'Last month';
+
+  @override
+  String get rptLastQuarter => 'Last quarter';
+
+  @override
+  String get rptReset => 'Reset';
+
+  @override
+  String get rptApply => 'Apply';
+
+  @override
+  String get rptClose => 'Close';
+
+  @override
+  String get rptCopiedSectionName => 'Section name copied';
+
+  @override
+  String get rptSales => 'Sales';
+
+  @override
+  String get rptTotal => 'Total';
+
+  @override
+  String get rptReturns => 'Returns';
+
+  @override
+  String get rptCustomer => 'Customer';
+
+  @override
+  String get rptStaffLabel => 'Staff';
+
+  @override
+  String get rptOthers => 'Others';
+
+  @override
+  String get rptNoCustomerData => 'No customer data for this period';
+
+  @override
+  String get rptNoStaffSales => 'No sales recorded by staff for this period';
+
+  @override
+  String get rptTopBuyers => 'Top buyers by invoice name';
+
+  @override
+  String get rptSalesByCustomer => 'Sales distribution by customers';
+
+  @override
+  String get rptSalesByStaff => 'Sales distribution by staff';
+
+  @override
+  String get rptDebtsBalances => 'Recorded balances in customer ledger';
+
+  @override
+  String get rptInstallmentPlans =>
+      'Installment plans linked to period invoices';
+
+  @override
+  String get rptDetails => 'Details';
+
+  @override
+  String get rptStaffPercentage =>
+      'Each staff member\'s percentage of total sales';
+
+  @override
+  String get rptConsistentWithPie =>
+      'Consistent with pie chart and table percentages';
+
+  @override
+  String get rptUnknown => 'Unknown';
+
+  @override
+  String get rptNoName => 'No name';
+
+  @override
+  String get rptSelectedPeriod => 'Selected period';
+
+  @override
+  String get rptApproxNet => 'Approx. net';
+
+  @override
+  String get rptTotalExpenses => 'Total expenses';
+
+  @override
+  String get rptNetAfterExpenses => 'Net after expenses';
+
+  @override
+  String get rptInvoicesReturns => 'Invoices & returns';
+
+  @override
+  String get rptDailySalesInRange => 'Daily sales trend in period';
+
+  @override
+  String get rptPiePayments => 'Payment type distribution';
+
+  @override
+  String get osDescription =>
+      'After logging in, view cash register balance, inventory, add money, then identify the shift employee';
+
+  @override
+  String get osSessionExpired =>
+      'Session ended in background while loading screen';
+
+  @override
+  String get osUnexpectedError => 'Unexpected error during initialization';
+
+  @override
+  String get osPasswordRequired =>
+      'When returning to the app with an open shift, we ask for the shift employee\'s password';
+
+  @override
+  String get osShiftEmployee => 'Shift Employee';
+
+  @override
+  String get osOpeningBalance => 'Opening Balance (System)';
+
+  @override
+  String get osManualCount => 'Manual Cash Count';
+
+  @override
+  String get osAddedMoney => 'Added Money at Opening';
+
+  @override
+  String get osOpeningShift => 'Open Shift';
+
+  @override
+  String get osErrorOpening => 'Failed to open shift';
+
+  @override
+  String get osNoShiftId =>
+      'Operation completed without valid shift ID, try again';
+
+  @override
+  String get osShiftOpened => 'Shift opened successfully';
+
+  @override
+  String get osAmountHint => 'Amount shown at inventory count';
+
+  @override
+  String get osAmountLabel =>
+      'Enter the actual amount in the cash register now';
+
+  @override
+  String get osExample => 'Example';
+
+  @override
+  String get osAddMoney => 'Add money to register';
+
+  @override
+  String get osAddMoneyDesc =>
+      'Optional - use if you add cash before starting sales';
+
+  @override
+  String get osLogout => 'Exit Account';
+
+  @override
+  String get osReviewBalance =>
+      'Review the system cash register balance, then record the actual count before starting work';
+
+  @override
+  String get osOpeningSystemBalance => 'Opening Cash Register Balance';
+
+  @override
+  String get osOpeningLoading => 'Opening shift...';
+
+  @override
+  String get osStaffDialogTitle => 'Shift Employee Dialog';
+
+  @override
+  String get osStaffDialogDesc =>
+      'Select a registered user by card code or scan';
+
+  @override
+  String get osAllActiveUsers => 'All active users';
+
+  @override
+  String get osErrorLoadingUsers => 'Failed to load shift users';
+
+  @override
+  String get osInvalidCard => 'Scanned text is not a valid identity code';
+
+  @override
+  String get osSelectUser => 'Select the shift user from the list or scan card';
+
+  @override
+  String get osUserNotFound => 'User not found, select another user';
+
+  @override
+  String get osNoLocalPassword =>
+      'No local password for this account, set a password from user management';
+
+  @override
+  String get osWrongPassword => 'Wrong login password';
+
+  @override
+  String get osSelectEmployee =>
+      'Select the employee responsible for the register in this shift';
+
+  @override
+  String get osNoActiveUsers =>
+      'No active users in the system, add a user from user management';
+
+  @override
+  String get osUserLabel => 'Shift User';
+
+  @override
+  String get osSelectUserHint => 'Select a user';
+
+  @override
+  String get osDisplayName => 'Display Name';
+
+  @override
+  String get osAutoDetermined => 'Auto-determined';
+
+  @override
+  String get osScanDesc =>
+      'Select user by camera or external reader, then enter password to confirm';
+
+  @override
+  String get osScanCamera => 'Scan with camera';
+
+  @override
+  String get osExternalReader => 'External Reader';
+
+  @override
+  String get osPressToScan => 'Press here then scan card';
+
+  @override
+  String get osInvalidIdCode => 'Scanned text is not a valid identity code';
+
+  @override
+  String get osLoginPassword => 'Login Password';
+
+  @override
+  String get osSessionEnded => 'User session ended, log in again';
+
+  @override
+  String get osCannotBeNegative => 'Added amount cannot be negative';
+
+  @override
+  String get osErrorStaffDialog => 'Failed to open staff selection dialog';
+
+  @override
+  String get osNoStaffSelected => 'No shift employee selected';
+
+  @override
+  String get osIncompleteData =>
+      'Incomplete shift employee data, select employee again';
+
+  @override
+  String get osPasswordNotStored =>
+      'We don\'t store login passwords, verification was in the dialog only';
+
+  @override
+  String get osAutoFixed =>
+      'Shift employee data auto-fixed on this device, you can continue';
+
+  @override
+  String get osStaffMissing =>
+      'Registered shift employee no longer exists, close shift from another device or contact admin';
+
+  @override
+  String get osAuthRejected =>
+      'Shift employee authentication rejected, app should not open on open shift without proof';
+
+  @override
+  String get osReturningToLogin =>
+      'Logging out this device session and returning to login screen';
+
+  @override
+  String get osUseExistingShift => 'Return to existing shift instead';
 }

@@ -72,9 +72,9 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
     final pattern = _patternCtrl.text.trim().toUpperCase();
     if (!_validatePattern(pattern)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text(
-            'صيغة الباركود المتضمن يجب أن تحتوي فقط على الحروف X و W و P و N.',
+            loc.bsFormatError,
           ),
           behavior: SnackBarBehavior.floating,
         ),
@@ -86,8 +86,8 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
     final cd = double.tryParse(_currencyDivCtrl.text.replaceAll(',', '.'));
     if (wd == null || wd <= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('أدخل قيمة صحيحة أكبر من صفر لتقسيم وحدة الوزن.'),
+        SnackBar(
+          content: Text(loc.bsWeightUnitError),
           behavior: SnackBarBehavior.floating,
         ),
       );
@@ -95,8 +95,8 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
     }
     if (cd == null || cd <= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('أدخل قيمة صحيحة أكبر من صفر لقسمة العملة.'),
+        SnackBar(
+          content: Text(loc.bsCurrencyDivError),
           behavior: SnackBarBehavior.floating,
         ),
       );
@@ -116,7 +116,7 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('تم حفظ إعدادات الباركود.'),
+          content: Text(loc.bsSaveSuccess),
           behavior: SnackBarBehavior.floating,
           backgroundColor: Theme.of(context).colorScheme.primary,
         ),
@@ -125,7 +125,7 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('تعذر الحفظ: $e'),
+          content: Text('\${loc.bsSaveError}: \$e'),
           behavior: SnackBarBehavior.floating,
         ),
       );
@@ -148,7 +148,7 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
           foregroundColor: cs.onPrimary,
           elevation: 0,
           title: Text(
-            'تهيئة الباركود',
+            loc.bsTitle,
             style: theme.textTheme.titleMedium?.copyWith(
               color: cs.onPrimary,
               fontWeight: FontWeight.w700,
@@ -166,7 +166,7 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 children: [
                   Text(
-                    'حدد تفضيلات وصيغ الباركود لمسح دقيق وضبط التسعير حسب الوزن.',
+                    loc.bsSubtitle,
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: cs.onSurfaceVariant,
                       height: 1.55,
@@ -177,7 +177,7 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: Text(
-                      'نوع الباركود',
+                      loc.bsTypeTitle,
                       style: theme.textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
@@ -191,14 +191,14 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
                         selected: _standard == 'code128',
                         title: 'Code 128',
                         description:
-                            'باركود مرن يدعم ترميز الأرقام والحروف والرموز، ويُستخدم على نطاق واسع في التوصيل والمستودعات وتتبع المنتجات لقدرته على استيعاب الأكواد الطويلة.',
+                            loc.bsTypeCode128Desc,
                         onTap: () => setState(() => _standard = 'code128'),
                       );
                       final ean = _FormatCard(
                         selected: _standard == 'ean13',
                         title: 'EAN 13',
                         description:
-                            'معيار مكوّن من 13 رقمًا يُستخدم بشكل شائع في قطاع التجزئة، ويشمل رمز الدولة ورمز المصنّع ورمز المنتج بالإضافة إلى رقم تحقق.',
+                            loc.bsTypeEan13Desc,
                         onTap: () => setState(() => _standard = 'ean13'),
                       );
                       if (row) {
@@ -223,7 +223,7 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    'اختر معيار الباركود الذي سيعتمد عليه النظام في إنشاء وقراءة باركود المنتجات.',
+                    loc.bsTypeLabel,
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: cs.onSurfaceVariant,
                       height: 1.45,
@@ -239,7 +239,7 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
                           children: [
                             Expanded(
                               child: Text(
-                                'باركود متضمن الوزن',
+                                loc.bsWeightEmbedded,
                                 style: theme.textTheme.titleSmall?.copyWith(
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -255,7 +255,7 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
                             ),
                             const SizedBox(width: 8),
                             Text(
-                              _weightEmbed ? 'مفعّل' : 'معطّل',
+                              _weightEmbed ? loc.bsWeightEnabled : loc.bsWeightDisabled,
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 color: _weightEmbed
@@ -267,7 +267,7 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
                         ),
                         const SizedBox(height: 10),
                         Text(
-                          'استخدم الباركود متضمن الوزن ليتمكّن النظام من قراءة وزن المنتج (والسعر إذا وُجد) مباشرة من الباركود دون الحاجة إلى إدخاله يدويًا.',
+                          loc.bsWeightDesc,
                           style: theme.textTheme.bodySmall?.copyWith(
                             color: cs.onSurfaceVariant,
                             height: 1.5,
@@ -281,7 +281,7 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: Text(
-                      'صيغة الباركود المتضمن',
+                      loc.bsWeightFormat,
                       style: theme.textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
@@ -306,7 +306,7 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'أدخل صيغة الباركود المدمج وفق النموذج، حيث تُمثل X أرقام المنتج، وW خانات الوزن، وP خانات السعر (إذا لزم الأمر)، وN أي خانات إضافية.',
+                     loc.bsWeightFormatDesc,
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: cs.onSurfaceVariant,
                       height: 1.5,
@@ -315,7 +315,7 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'على سبيل المثال، إذا كان الوزن يُعرض بأربع خانات فسيظهر 250 جرامًا كـ 0250، وإذا كان بخمس خانات فسيظهر كـ 00250. يعتمد اختيار عدد الخانات على طبيعة الأوزان أو الأسعار التي تتعامل بها.',
+                     loc.bsWeightExample,
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: cs.onSurfaceVariant,
                       height: 1.5,
@@ -326,7 +326,7 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: Text(
-                      'تقسيم وحدة الوزن',
+                      loc.bsWeightUnit,
                       style: theme.textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
@@ -338,8 +338,8 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
                     textAlign: TextAlign.right,
                     keyboardType: const TextInputType.numberWithOptions(
                         decimal: true),
-                    decoration: const InputDecoration(
-                      hintText: 'مثال: 1000',
+                    decoration: InputDecoration(
+                      hintText: loc.bsWeightUnitExample + ': 1000',
                       filled: true,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.zero,
@@ -348,7 +348,7 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'أدخل القيمة التي يستخدمها النظام لتحويل وحدة الوزن في الباركود إلى وحدة البيع لديك. مثال: إذا بعت بالكيلوغرام والميزان يسجّل بالغرام أدخل 1000.',
+                     loc.bsWeightUnitDesc,
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: cs.onSurfaceVariant,
                       height: 1.5,
@@ -359,7 +359,7 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: Text(
-                      'قسمة العملة',
+                      loc.bsCurrencyDivision,
                       style: theme.textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
@@ -371,8 +371,8 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
                     textAlign: TextAlign.right,
                     keyboardType: const TextInputType.numberWithOptions(
                         decimal: true),
-                    decoration: const InputDecoration(
-                      hintText: 'مثال: 100',
+                    decoration: InputDecoration(
+                      hintText: loc.bsCurrencyExample + ': 100',
                       filled: true,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.zero,
@@ -381,7 +381,7 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'أدخل القيمة التي يستخدمها النظام لتحويل السعر من الوحدة المضمنة في الباركود إلى وحدتك الأساسية للبيع. مثال: إذا بعت بالدينار والباركود بالفلس أدخل 1000، أو إذا كان السعر بالسنت والبيع بالدولار أدخل 100.',
+                     loc.bsCurrencyDesc,
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: cs.onSurfaceVariant,
                       height: 1.5,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../theme/design_tokens.dart';
 import '../../widgets/calculator_panel.dart';
 
@@ -25,19 +26,19 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       child: Scaffold(
         backgroundColor: panel,
         appBar: AppBar(
-          title: const Text('الحاسبة', style: TextStyle(fontWeight: FontWeight.w700)),
+          title: Text(AppLocalizations.of(context)!.calculatorTitle, style: const TextStyle(fontWeight: FontWeight.w700)),
           backgroundColor: AppColors.primary,
           foregroundColor: Colors.white,
           elevation: 0,
           actions: [
             IconButton(
-              tooltip: 'نسخ الناتج',
+              tooltip: AppLocalizations.of(context)!.calculatorCopyResult,
               icon: const Icon(Icons.copy_rounded, size: 22),
               onPressed: () =>
                   _panelKey.currentState?.copyToClipboard(context),
             ),
             IconButton(
-              tooltip: 'مسح الكل',
+              tooltip: AppLocalizations.of(context)!.calculatorClearAll,
               icon: const Icon(Icons.delete_outline_rounded, size: 22),
               onPressed: () => _panelKey.currentState?.clearAll(),
             ),

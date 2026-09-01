@@ -22,6 +22,7 @@ import 'stocktaking_screen.dart';
 import 'purchase_orders_screen.dart';
 import 'stock_analytics_screen.dart';
 import 'inventory_settings_screen.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 class InventoryHubScreen extends StatefulWidget {
   const InventoryHubScreen({super.key});
@@ -41,89 +42,93 @@ class _InventoryHubScreenState extends State<InventoryHubScreen> {
   Set<String> _hiddenIds = <String>{};
   bool        _loading   = true;
 
-  // ── تعريف جميع وحدات المخزون ────────────────────────────────────────────
-  late final List<_InvModule> _modules = [
+  AppLocalizations get _loc => AppLocalizations.of(context)!;
+
+  List<_InvModule> _modules() {
+    final loc = _loc;
+    return [
     _InvModule(
       id:       'products',
-      title:    'قائمة المنتجات',
-      subtitle: 'بحث، تصفية، وإدارة جميع الأصناف',
+      title:    loc.hubProductsList,
+      subtitle: loc.hubProductsListDesc,
       icon:     Icons.inventory_2_outlined,
       color:    Colors.teal,
       builder:  (_) => const InventoryProductsScreen(),
     ),
     _InvModule(
       id:       'add_product',
-      title:    'إضافة منتج جديد',
-      subtitle: 'إنشاء صنف جديد في المخزون',
+      title:    loc.hubAddProduct,
+      subtitle: loc.hubAddProductDesc,
       icon:     Icons.add_box_outlined,
       color:    const Color(0xFF1E3A5F),
       builder:  (_) => const AddProductScreen(),
     ),
     _InvModule(
       id:       'quick_update',
-      title:    'تحديث منتج موجود',
-      subtitle: 'بحث، باركود، وتعديل أسعار وكميات دون إنشاء صنف جديد',
+      title:    loc.hubQuickUpdate,
+      subtitle: loc.hubQuickUpdateDesc,
       icon:     Icons.edit_note_rounded,
       color:    const Color(0xFF0D9488),
       builder:  (_) => const QuickProductUpdateScreen(),
     ),
     _InvModule(
       id:       'vouchers',
-      title:    'حركات المخزون',
-      subtitle: 'وارد، صادر، تحويل بين المستودعات',
+      title:    loc.hubVouchers,
+      subtitle: loc.hubVouchersDesc,
       icon:     Icons.swap_horiz_outlined,
       color:    Colors.indigo,
       builder:  (_) => const InventoryManagementScreen(),
     ),
     _InvModule(
       id:       'warehouses',
-      title:    'إدارة المستودعات',
-      subtitle: 'إضافة وتعديل المستودعات والمواقع',
+      title:    loc.hubWarehouses,
+      subtitle: loc.hubWarehousesDesc,
       icon:     Icons.warehouse_outlined,
       color:    Colors.brown,
       builder:  (_) => const WarehousesScreen(),
     ),
     _InvModule(
       id:       'price_lists',
-      title:    'قوائم الأسعار',
-      subtitle: 'أسعار مخصصة للعملاء والمجموعات',
+      title:    loc.hubPriceLists,
+      subtitle: loc.hubPriceListsDesc,
       icon:     Icons.price_change_outlined,
       color:    Colors.green,
       builder:  (_) => PriceListsScreen(),
     ),
     _InvModule(
       id:       'stocktaking',
-      title:    'الجرد الدوري',
-      subtitle: 'مطابقة المخزون الفعلي بالنظام',
+      title:    loc.hubStocktaking,
+      subtitle: loc.hubStocktakingDesc,
       icon:     Icons.fact_check_outlined,
       color:    Colors.deepOrange,
       builder:  (_) => const StocktakingScreen(),
     ),
     _InvModule(
       id:       'purchase_orders',
-      title:    'أوامر الشراء',
-      subtitle: 'إنشاء وتتبع طلبات الشراء من الموردين',
+      title:    loc.hubPurchaseOrders,
+      subtitle: loc.hubPurchaseOrdersDesc,
       icon:     Icons.receipt_long_outlined,
       color:    Colors.purple,
       builder:  (_) => const PurchaseOrdersScreen(),
     ),
     _InvModule(
       id:       'analytics',
-      title:    'تحليلات المخزون',
-      subtitle: 'قيمة المخزون، تنبيهات، الأكثر حركة',
+      title:    loc.hubAnalytics,
+      subtitle: loc.hubAnalyticsDesc,
       icon:     Icons.bar_chart_outlined,
       color:    Colors.blue,
       builder:  (_) => const StockAnalyticsScreen(),
     ),
     _InvModule(
       id:       'settings',
-      title:    'إعدادات المخزون',
-      subtitle: 'نوع النشاط، خصائص المنتج، تفعيل الميزات',
+      title:    loc.hubSettings,
+      subtitle: loc.hubSettingsDesc,
       icon:     Icons.tune_outlined,
       color:    Colors.grey.shade700,
       builder:  (_) => const InventorySettingsScreen(),
     ),
   ];
+  }
 
   @override
   void initState() {
@@ -201,7 +206,7 @@ class _InventoryHubScreenState extends State<InventoryHubScreen> {
     final selected = await showDialog<int>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('اختيار الحساب/المستأجر'),
+        title: Text(_loc.hubTenantSelect),
         content: SizedBox(
           width: MediaQuery.sizeOf(ctx).width < 560
               ? MediaQuery.sizeOf(ctx).width - 56
@@ -226,7 +231,7 @@ class _InventoryHubScreenState extends State<InventoryHubScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('إغلاق'),
+            child: Text(_loc.hubTenantClose),
           ),
         ],
       ),
@@ -252,7 +257,7 @@ class _InventoryHubScreenState extends State<InventoryHubScreen> {
       builder: (ctx) {
         return StatefulBuilder(
           builder: (_, setLocal) => AlertDialog(
-            title: const Text('تخصيص وحدات المخزون'),
+            title: Text(_loc.hubCustomizeUnits),
             content: SizedBox(
               width: MediaQuery.sizeOf(ctx).width < 560
                   ? MediaQuery.sizeOf(ctx).width - 56
@@ -260,11 +265,11 @@ class _InventoryHubScreenState extends State<InventoryHubScreen> {
               child: ListView(
                 shrinkWrap: true,
                 children: [
-                  const Text(
-                    'أخفِ أي وحدة لا تحتاجها الآن. يمكنك إرجاعها لاحقاً من نفس المكان.',
+                  Text(
+                    _loc.hubCustomizeUnitsDesc,
                   ),
                   const SizedBox(height: 12),
-                  for (final m in _modules)
+                  for (final m in _modules())
                     CheckboxListTile(
                       value:    !next.contains(m.id),
                       title:    Text(m.title),
@@ -290,11 +295,11 @@ class _InventoryHubScreenState extends State<InventoryHubScreen> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(ctx, false),
-                child: const Text('إلغاء'),
+                child: Text(_loc.hubCancel),
               ),
               FilledButton(
                 onPressed: () => Navigator.pop(ctx, true),
-                child: const Text('حفظ'),
+                child: Text(_loc.hubSave),
               ),
             ],
           ),
@@ -324,7 +329,7 @@ class _InventoryHubScreenState extends State<InventoryHubScreen> {
   @override
   Widget build(BuildContext context) {
     final layout = context.screenLayout;
-    final visible = _modules.where((m) {
+    final visible = _modules().where((m) {
       if (_hiddenIds.contains(m.id)) return false;
       if (_deniedIds.contains(m.id)) return false;
       return _isEnabledByPolicy(m.id);
@@ -334,21 +339,21 @@ class _InventoryHubScreenState extends State<InventoryHubScreen> {
       textDirection: Directionality.of(context),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('مركز المخزون'),
+          title: Text(_loc.hubInventoryTitle),
           actions: [
             IconButton(
               onPressed: _refreshFromServer,
-              tooltip: 'تحديث',
+              tooltip: _loc.hubRefresh,
               icon: const Icon(Icons.refresh_outlined),
             ),
             IconButton(
               onPressed: _openModuleManager,
-              tooltip: 'تخصيص الوحدات',
+              tooltip: _loc.hubCustomize,
               icon: const Icon(Icons.view_quilt_outlined),
             ),
             IconButton(
               onPressed: _openTenantSwitcher,
-              tooltip: 'تبديل المستأجر',
+              tooltip: _loc.hubSwitchTenant,
               icon: const Icon(Icons.apartment_outlined),
             ),
           ],
@@ -363,8 +368,8 @@ class _InventoryHubScreenState extends State<InventoryHubScreen> {
                         Icon(Icons.inventory_2_outlined,
                             size: 64, color: Colors.grey.shade300),
                         const SizedBox(height: 12),
-                        const Text(
-                          'تم إخفاء كل الوحدات أو تعطيلها من الإعدادات',
+                        Text(
+                          _loc.hubAllHidden,
                           style: TextStyle(color: Colors.grey),
                           textAlign: TextAlign.center,
                         ),
@@ -372,7 +377,7 @@ class _InventoryHubScreenState extends State<InventoryHubScreen> {
                         FilledButton.icon(
                           onPressed: _openModuleManager,
                           icon: const Icon(Icons.view_quilt_outlined),
-                          label: const Text('إدارة الوحدات'),
+                          label: Text(_loc.hubManageUnits),
                         ),
                       ],
                     ),

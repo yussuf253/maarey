@@ -28,29 +28,33 @@ class InventoryManagementScreen extends StatefulWidget {
 
 class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
   AppLocalizations get loc => AppLocalizations.of(context)!;
-  String _filter = 'الكل';
-  String _sortBy = 'الأحدث';
+  String _filter = 'all';
+  String _sortBy = 'newest';
   final _searchCtrl = TextEditingController();
   final _repo = InventoryRepository();
   List<Map<String, dynamic>> _rows = const [];
   bool _loading = true;
 
-  static const _filterOptions = ['الكل', 'إيداع', 'صرف', 'تحويل'];
-  static const _sortOptions = ['الأحدث', 'الأقدم'];
+  static const _filterOptions = ['all', 'deposit', 'withdrawal', 'transfer'];
+  static const _sortOptions = ['newest', 'oldest'];
 
-  String _filterLabel(String value) => switch (value) {
-    'الكل' => loc.filterAll,
-    'إيداع' => loc.filterDeposit,
-    'صرف' => loc.filterWithdraw,
-    'تحويل' => loc.filterTransfer,
-    _ => value,
-  };
+  String _filterLabel(String value) {
+    switch (value) {
+      case 'all': return loc.imTabAll;
+      case 'deposit': return loc.imTabDeposit;
+      case 'withdrawal': return loc.imTabWithdrawal;
+      case 'transfer': return loc.imTabTransfer;
+      default: return value;
+    }
+  }
 
-  String _sortLabel(String value) => switch (value) {
-    'الأحدث' => loc.sortNewest,
-    'الأقدم' => loc.sortOldest,
-    _ => value,
-  };
+  String _sortLabel(String value) {
+    switch (value) {
+      case 'newest': return loc.imSortNewest;
+      case 'oldest': return loc.imSortOldest;
+      default: return value;
+    }
+  }
 
 
   @override
@@ -62,16 +66,14 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
   Future<void> _load() async {
     setState(() => _loading = true);
     try {
-      final mappedType = switch (_filter) {
-        'إيداع' => 'in',
-        'صرف' => 'out',
-        'تحويل' => 'transfer',
-        _ => null,
-      };
+      String? mappedType;
+      if (_filter == 'deposit') mappedType = 'in';
+      else if (_filter == 'withdrawal') mappedType = 'out';
+      else if (_filter == 'transfer') mappedType = 'transfer';
       final rows = await _repo.listStockMovements(
         type: mappedType,
         search: _searchCtrl.text,
-        oldestFirst: _sortBy == 'الأقدم',
+        oldestFirst: _sortBy == loc.imSortOldest,
       );
       if (!mounted) return;
       setState(() => _rows = rows);
@@ -79,7 +81,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
       if (!mounted) return;
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('تعذر تحميل الحركات: $e')));
+      ).showSnackBar(SnackBar(content: Text('${loc.imLoadError}: $e')));
     } finally {
       if (mounted) setState(() => _loading = false);
     }
@@ -233,12 +235,11 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
               child: Row(
                 children: _filterOptions.map((f) {
                   final selected = _filter == f;
-                  final color = switch (f) {
-                    'إيداع' => _green,
-                    'صرف' => _red,
-                    'تحويل' => _blue,
-                    _ => _teal,
-                  };
+                  Color color;
+                  if (f == 'deposit') color = _green;
+                  else if (f == 'withdrawal') color = _red;
+                  else if (f == 'transfer') color = _blue;
+                  else color = _teal;
                   return Padding(
                     padding: const EdgeInsetsDirectional.only(start: 8),
                     child: FilterChip(
