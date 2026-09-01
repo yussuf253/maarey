@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../services/license_service.dart';
+import '../../l10n/generated/app_localizations.dart';
 import '../../widgets/secure_screen.dart';
 
 class ActivateLicenseScreen extends StatefulWidget {
@@ -16,6 +17,8 @@ class _ActivateLicenseScreenState extends State<ActivateLicenseScreen> {
   final _keyCtrl = TextEditingController();
   final _focusNode = FocusNode();
   bool _loading = false;
+
+  AppLocalizations get _loc => AppLocalizations.of(context)!;
   String? _error;
 
   @override
@@ -29,7 +32,7 @@ class _ActivateLicenseScreenState extends State<ActivateLicenseScreen> {
     if (_loading) return;
     final key = _keyCtrl.text.trim();
     if (key.isEmpty) {
-      setState(() => _error = 'أدخل مفتاح الترخيص');
+      setState(() => _error = _loc.licEnterKey);
       return;
     }
     setState(() {
@@ -70,7 +73,7 @@ class _ActivateLicenseScreenState extends State<ActivateLicenseScreen> {
                 ),
               ),
               Text(
-                'نظام إدارة المتاجر',
+                _loc.licStoreSystem,
                 style: TextStyle(
                   color: cs.onPrimary.withOpacity(0.75),
                   fontSize: 14,
@@ -94,7 +97,7 @@ class _ActivateLicenseScreenState extends State<ActivateLicenseScreen> {
                         ),
                         const SizedBox(height: 12),
                         Text(
-                          'تفعيل الترخيص',
+                          _loc.licActivation,
                           style: TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
@@ -104,7 +107,7 @@ class _ActivateLicenseScreenState extends State<ActivateLicenseScreen> {
                         ),
                         const SizedBox(height: 6),
                         Text(
-                          'أدخل مفتاح الترخيص للمتابعة',
+                          _loc.licEnterKeyToContinue,
                           style: TextStyle(
                             color: cs.onSurfaceVariant,
                             fontSize: 13,
@@ -121,7 +124,7 @@ class _ActivateLicenseScreenState extends State<ActivateLicenseScreen> {
                           maxLines: 3,
                           minLines: 1,
                           decoration: InputDecoration(
-                            hintText: 'NABOO-XXXX-XXXX-XXXX أو JWT',
+                            hintText: _loc.licKeyHint,
                             errorText: _error,
                             suffixIcon: _keyCtrl.text.isNotEmpty
                                 ? IconButton(
@@ -156,8 +159,8 @@ class _ActivateLicenseScreenState extends State<ActivateLicenseScreen> {
                                       strokeWidth: 2,
                                     ),
                                   )
-                                : const Text(
-                                    'تفعيل',
+                                : Text(
+                                    _loc.licActivate,
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -180,7 +183,7 @@ class _ActivateLicenseScreenState extends State<ActivateLicenseScreen> {
                             const SizedBox(width: 8),
                             Expanded(
                               child: Text(
-                                'للحصول على مفتاح ترخيص، تواصل مع فريق NaBoo.',
+                                _loc.licContactSupport,
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: cs.onSurfaceVariant,
@@ -197,7 +200,7 @@ class _ActivateLicenseScreenState extends State<ActivateLicenseScreen> {
 
               const SizedBox(height: 24),
               Text(
-                'NaBoo v2.0 — جميع الحقوق محفوظة',
+                _loc.licAllRightsReserved,
                 style: TextStyle(
                   color: cs.onPrimary.withOpacity(0.45),
                   fontSize: 11,

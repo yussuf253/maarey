@@ -10896,4 +10896,429 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get signupTermsSuffix => ' of Naboo.';
+
+  @override
+  String get licEnterKey => 'Enter license key';
+
+  @override
+  String get licStoreSystem => 'Store Management System';
+
+  @override
+  String get licActivation => 'License Activation';
+
+  @override
+  String get licEnterKeyToContinue => 'Enter your license key to continue';
+
+  @override
+  String get licKeyHint => 'NABOO-XXXX-XXXX-XXXX or JWT';
+
+  @override
+  String get licActivate => 'Activate';
+
+  @override
+  String get licContactSupport =>
+      'To get a license key, contact the NaBoo team.';
+
+  @override
+  String get licAllRightsReserved => 'NaBoo v2.0 — All rights reserved';
+
+  @override
+  String get licTimeConflict => 'Time settings conflict';
+
+  @override
+  String get licSuspended => 'License suspended';
+
+  @override
+  String get licDeviceLimitExceeded => 'Device limit exceeded';
+
+  @override
+  String get licExpired => 'Subscription expired';
+
+  @override
+  String get licTimeConflictMsg =>
+      'Time settings conflict detected. Contact support for help re-verifying.';
+
+  @override
+  String get licAccountSuspended =>
+      'Your account has been suspended. Contact technical support.';
+
+  @override
+  String get licSubscriptionEnded =>
+      'Your subscription has ended. Renew to continue.';
+
+  @override
+  String get licCurrentPlan => 'Current Plan';
+
+  @override
+  String get licRegisteredDevices => 'Registered Devices';
+
+  @override
+  String get licSubscriptionExpiry => 'Subscription Expiry';
+
+  @override
+  String get licTrialExpiry => 'Trial Expiry';
+
+  @override
+  String get licUpgradePlan => 'Upgrade Plan to Add Devices';
+
+  @override
+  String get licRenewSubscription => 'Renew Subscription';
+
+  @override
+  String get licComparePlans => 'Compare Subscription Plans';
+
+  @override
+  String get licEnterNewKey => 'Enter New Key';
+
+  @override
+  String get licVerifyAgain => 'Verify Again';
+
+  @override
+  String get licUseAnotherKey => 'Use Another Key';
+
+  @override
+  String get cashInvoicesSales =>
+      'Invoices and sales (entries linked to invoice)';
+
+  @override
+  String get cashManualDeposit => 'Manual deposit';
+
+  @override
+  String get cashManualWithdrawal => 'Manual withdrawal';
+
+  @override
+  String get cashOtherMovements => 'Other movements';
+
+  @override
+  String get cashLinkedInvoice => 'Invoice #';
+
+  @override
+  String get cashInflow => 'Inflow';
+
+  @override
+  String get cashOutflow => 'Outflow';
+
+  @override
+  String get cashNoLinkedEntries =>
+      'No entries linked to an invoice in this group.';
+
+  @override
+  String get cashInvoiceIdsShown => 'Invoice numbers shown:';
+
+  @override
+  String get cashShiftDetails => 'Shift #';
+
+  @override
+  String get cashShiftEmployee => 'Shift employee (card)';
+
+  @override
+  String get cashSummaryTitle => 'Cash Summary';
+
+  @override
+  String get cashTotalIn => 'Total Inflow';
+
+  @override
+  String get cashTotalOut => 'Total Outflow';
+
+  @override
+  String get cashNetFlow => 'Net Flow';
+
+  @override
+  String get cashBalanceLabel => 'Balance';
+
+  @override
+  String get cashDetailsTitle => 'Cash Details';
+
+  @override
+  String get cashFilterAll => 'All';
+
+  @override
+  String get cashDateRange => 'Date Range';
+
+  @override
+  String get cashFrom => 'From';
+
+  @override
+  String get cashTo => 'To';
+
+  @override
+  String get cashAmount => 'Amount';
+
+  @override
+  String get cashDescription => 'Description';
+
+  @override
+  String get cashType => 'Type';
+
+  @override
+  String get cashDate => 'Date';
+
+  @override
+  String get cashReceipt => 'Receipt';
+
+  @override
+  String get cashPayment => 'Payment';
+
+  @override
+  String get cashDeposit => 'Deposit';
+
+  @override
+  String get cashWithdrawal => 'Withdrawal';
+
+  @override
+  String get cashTransfer => 'Transfer';
+
+  @override
+  String get cashRefund => 'Refund';
+
+  @override
+  String get cashOpenShift => 'Open Shift';
+
+  @override
+  String get cashCloseShift => 'Close Shift';
+
+  @override
+  String get cashShiftHistory => 'Shift History';
+
+  @override
+  String get cashTransactions => 'Transactions';
+
+  @override
+  String get cashNoTransactions => 'No transactions found';
+
+  @override
+  String get cashPeriod => 'Period';
+
+  @override
+  String get cashInvoiceNum => 'Invoice #';
+
+  @override
+  String get cashEmployee => 'Employee';
+
+  @override
+  String get cashNote => 'Note';
+
+  @override
+  String get cashReceiptNum => 'Receipt #';
+
+  @override
+  String get cashCustomer => 'Customer';
+
+  @override
+  String get debtsTitle => 'Debts — Credit';
+
+  @override
+  String get debtsTabInvoices => 'Invoices';
+
+  @override
+  String get debtsTabCustomers => 'Customers';
+
+  @override
+  String get debtsTabSuppliers => 'Suppliers';
+
+  @override
+  String get debtsSettingsTooltip => 'Debt settings';
+
+  @override
+  String get debtsRefreshTooltip => 'Refresh (F5)';
+
+  @override
+  String get debtsShowingOf => 'Showing';
+
+  @override
+  String get debtsSearchHint => 'Search: customer, invoice number...';
+
+  @override
+  String get debtsClearSearch => 'Clear search';
+
+  @override
+  String get debtsAll => 'All';
+
+  @override
+  String get debtsPending => 'Pending';
+
+  @override
+  String get debtsOverdue => 'Overdue';
+
+  @override
+  String get debtsPaid => 'Paid';
+
+  @override
+  String get debtsPartial => 'Partial';
+
+  @override
+  String get debtsAmount => 'Amount';
+
+  @override
+  String get debtsPaidAmount => 'Paid';
+
+  @override
+  String get debtsRemaining => 'Remaining';
+
+  @override
+  String get debtsCustomer => 'Customer';
+
+  @override
+  String get debtsInvoiceNum => 'Invoice #';
+
+  @override
+  String get debtsDate => 'Date';
+
+  @override
+  String get debtsDueDate => 'Due Date';
+
+  @override
+  String get debtsActions => 'Actions';
+
+  @override
+  String get debtsPay => 'Pay';
+
+  @override
+  String get debtsDetails => 'Details';
+
+  @override
+  String get debtsRecordPayment => 'Record Payment';
+
+  @override
+  String get debtsNoInvoices => 'No invoices found';
+
+  @override
+  String get debtsTotalDebt => 'Total Debt';
+
+  @override
+  String get debtsPaidTotal => 'Paid Total';
+
+  @override
+  String get debtsOutstanding => 'Outstanding';
+
+  @override
+  String get cdInvalidData => 'Invalid data';
+
+  @override
+  String get cdRecordPayment => 'Record Payment';
+
+  @override
+  String get cdRemainingCurrent => 'Current remaining';
+
+  @override
+  String get cdAmountLabel => 'Amount (FDJ)';
+
+  @override
+  String get cdAutoDistribute =>
+      'Automatically distributed from oldest to newest invoices.';
+
+  @override
+  String get cdCancel => 'Cancel';
+
+  @override
+  String get cdConfirm => 'Confirm';
+
+  @override
+  String get cdEnterValidAmount => 'Enter a valid amount';
+
+  @override
+  String get cdNoRemaining => 'No remaining to pay or invalid amount';
+
+  @override
+  String get cdPaymentSuccess => 'Payment recorded successfully';
+
+  @override
+  String get cdPaymentFailed => 'Payment failed';
+
+  @override
+  String get cdInvoiceHistory => 'Invoice History';
+
+  @override
+  String get cdPaymentHistory => 'Payment History';
+
+  @override
+  String get cdNoPayments => 'No payments recorded';
+
+  @override
+  String get cdFullPayment => 'Full Payment';
+
+  @override
+  String get cdPartialPayment => 'Partial Payment';
+
+  @override
+  String get cdRemainingBalance => 'Remaining Balance';
+
+  @override
+  String get cdDebtBefore => 'Debt before';
+
+  @override
+  String get cdDebtAfter => 'Debt after';
+
+  @override
+  String get cdNoInvoiceLinked => 'No invoice linked';
+
+  @override
+  String get cdCustomerLabel => 'Customer';
+
+  @override
+  String get cdInvoiceLabel => 'Invoice';
+
+  @override
+  String get cdClose => 'Close';
+
+  @override
+  String get cdViewInvoice => 'View Invoice';
+
+  @override
+  String get cdAmountPaid => 'Amount paid';
+
+  @override
+  String get dsTitle => 'Debt Settings';
+
+  @override
+  String get dsReloadTooltip => 'Reload from database';
+
+  @override
+  String get dsApplyInfo =>
+      'These limits apply when saving a credit invoice. Leave empty or 0 to disable.';
+
+  @override
+  String get dsAmountCeilings => 'Amount Ceilings';
+
+  @override
+  String get dsMaxPerCustomer => 'Max remaining per customer (FDJ)';
+
+  @override
+  String get dsMaxPerInvoice => 'Max remaining per credit invoice (FDJ)';
+
+  @override
+  String get dsWarningDays => 'Warning days';
+
+  @override
+  String get dsSaved => 'Debt settings saved';
+
+  @override
+  String get dsInvalidDays => 'Warning days: between 0 and 36500';
+
+  @override
+  String get dsEnableLimits => 'Enable debt limits';
+
+  @override
+  String get dsMaxDebtPerCustomer => 'Max remaining per customer (FDJ)';
+
+  @override
+  String get dsMaxDebtPerInvoice => 'Max remaining per credit invoice (FDJ)';
+
+  @override
+  String get dsAutoEnforce => 'Auto-enforce limits';
+
+  @override
+  String get dsAutoEnforceHint => 'Prevent saving if limits exceeded';
+
+  @override
+  String get dsReminderDays => 'Reminder days';
+
+  @override
+  String get dsReminderHint => 'Days before due date to show reminder';
+
+  @override
+  String get dsOverdueThreshold => 'Overdue threshold (days)';
+
+  @override
+  String get dsOverdueHint => 'Days past due to mark as overdue';
 }

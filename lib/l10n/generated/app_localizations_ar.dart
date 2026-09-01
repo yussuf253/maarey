@@ -10791,4 +10791,426 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get signupTermsSuffix => ' الخاصة بـ Naboo.';
+
+  @override
+  String get licEnterKey => 'أدخل مفتاح الترخيص';
+
+  @override
+  String get licStoreSystem => 'نظام إدارة المتاجر';
+
+  @override
+  String get licActivation => 'تفعيل الترخيص';
+
+  @override
+  String get licEnterKeyToContinue => 'أدخل مفتاح الترخيص للمتابعة';
+
+  @override
+  String get licKeyHint => 'NABOO-XXXX-XXXX-XXXX أو JWT';
+
+  @override
+  String get licActivate => 'تفعيل';
+
+  @override
+  String get licContactSupport =>
+      'للحصول على مفتاح ترخيص، تواصل مع فريق NaBoo.';
+
+  @override
+  String get licAllRightsReserved => 'NaBoo v2.0 — جميع الحقوق محفوظة';
+
+  @override
+  String get licTimeConflict => 'تعارض في إعدادات الوقت';
+
+  @override
+  String get licSuspended => 'الترخيص موقوف';
+
+  @override
+  String get licDeviceLimitExceeded => 'تجاوز حد الأجهزة';
+
+  @override
+  String get licExpired => 'انتهى الاشتراك';
+
+  @override
+  String get licTimeConflictMsg =>
+      'تم اكتشاف تعارض في إعدادات الوقت. تواصل مع الدعم للمساعدة في إعادة التحقق.';
+
+  @override
+  String get licAccountSuspended => 'تم إيقاف حسابك. تواصل مع الدعم الفني.';
+
+  @override
+  String get licSubscriptionEnded => 'انتهى اشتراكك. جدّد للمتابعة.';
+
+  @override
+  String get licCurrentPlan => 'خطتك الحالية';
+
+  @override
+  String get licRegisteredDevices => 'الأجهزة المسجّلة';
+
+  @override
+  String get licSubscriptionExpiry => 'انتهاء الاشتراك';
+
+  @override
+  String get licTrialExpiry => 'انتهاء التجربة';
+
+  @override
+  String get licUpgradePlan => 'ترقية الخطة لإضافة أجهزة';
+
+  @override
+  String get licRenewSubscription => 'تجديد الاشتراك';
+
+  @override
+  String get licComparePlans => 'مقارنة خطط الاشتراك';
+
+  @override
+  String get licEnterNewKey => 'إدخال مفتاح جديد';
+
+  @override
+  String get licVerifyAgain => 'إعادة التحقق';
+
+  @override
+  String get licUseAnotherKey => 'استخدام مفتاح آخر';
+
+  @override
+  String get cashInvoicesSales => 'فواتير ومبيعات (قيود مرتبطة بفاتورة)';
+
+  @override
+  String get cashManualDeposit => 'إيداع يدوي';
+
+  @override
+  String get cashManualWithdrawal => 'سحب يدوي';
+
+  @override
+  String get cashOtherMovements => 'حركات أخرى';
+
+  @override
+  String get cashLinkedInvoice => 'فاتورة #';
+
+  @override
+  String get cashInflow => 'وارد';
+
+  @override
+  String get cashOutflow => 'صادر';
+
+  @override
+  String get cashNoLinkedEntries =>
+      'لا توجد في هذه المجموعة حركات مرتبطة برقم فاتورة.';
+
+  @override
+  String get cashInvoiceIdsShown => 'أرقام الفواتير الظاهرة في القيود:';
+
+  @override
+  String get cashShiftDetails => 'تفاصيل الوردية #';
+
+  @override
+  String get cashShiftEmployee => 'موظف الوردية (البطاقة)';
+
+  @override
+  String get cashSummaryTitle => 'ملخص الصندوق';
+
+  @override
+  String get cashTotalIn => 'الوارد الكلي';
+
+  @override
+  String get cashTotalOut => 'الصادر الكلي';
+
+  @override
+  String get cashNetFlow => 'صافي التدفق';
+
+  @override
+  String get cashBalanceLabel => 'الرصيد';
+
+  @override
+  String get cashDetailsTitle => 'تفاصيل الصندوق';
+
+  @override
+  String get cashFilterAll => 'الكل';
+
+  @override
+  String get cashDateRange => 'نطاق التاريخ';
+
+  @override
+  String get cashFrom => 'من';
+
+  @override
+  String get cashTo => 'إلى';
+
+  @override
+  String get cashAmount => 'المبلغ';
+
+  @override
+  String get cashDescription => 'الوصف';
+
+  @override
+  String get cashType => 'النوع';
+
+  @override
+  String get cashDate => 'التاريخ';
+
+  @override
+  String get cashReceipt => 'إيصال';
+
+  @override
+  String get cashPayment => 'دفعة';
+
+  @override
+  String get cashDeposit => 'إيداع';
+
+  @override
+  String get cashWithdrawal => 'سحب';
+
+  @override
+  String get cashTransfer => 'تحويل';
+
+  @override
+  String get cashRefund => 'مرتجع';
+
+  @override
+  String get cashOpenShift => 'فتح وردية';
+
+  @override
+  String get cashCloseShift => 'إغلاق وردية';
+
+  @override
+  String get cashShiftHistory => 'سجل الورديات';
+
+  @override
+  String get cashTransactions => 'المعاملات';
+
+  @override
+  String get cashNoTransactions => 'لا توجد معاملات';
+
+  @override
+  String get cashPeriod => 'الفترة';
+
+  @override
+  String get cashInvoiceNum => 'رقم الفاتورة';
+
+  @override
+  String get cashEmployee => 'الموظف';
+
+  @override
+  String get cashNote => 'ملاحظة';
+
+  @override
+  String get cashReceiptNum => 'رقم الإيصال';
+
+  @override
+  String get cashCustomer => 'العميل';
+
+  @override
+  String get debtsTitle => 'الديون — آجل';
+
+  @override
+  String get debtsTabInvoices => 'فواتير';
+
+  @override
+  String get debtsTabCustomers => 'عملاء';
+
+  @override
+  String get debtsTabSuppliers => 'موردون';
+
+  @override
+  String get debtsSettingsTooltip => 'إعدادات الدين';
+
+  @override
+  String get debtsRefreshTooltip => 'تحديث (F5)';
+
+  @override
+  String get debtsShowingOf => 'القائمة:';
+
+  @override
+  String get debtsSearchHint => 'بحث: عميل، رقم فاتورة، معرّف عميل…';
+
+  @override
+  String get debtsClearSearch => 'مسح البحث';
+
+  @override
+  String get debtsAll => 'الكل';
+
+  @override
+  String get debtsPending => 'معلّق';
+
+  @override
+  String get debtsOverdue => 'متأخر';
+
+  @override
+  String get debtsPaid => 'مدفوع';
+
+  @override
+  String get debtsPartial => 'جزئي';
+
+  @override
+  String get debtsAmount => 'المبلغ';
+
+  @override
+  String get debtsPaidAmount => 'المدفوع';
+
+  @override
+  String get debtsRemaining => 'المتبقي';
+
+  @override
+  String get debtsCustomer => 'العميل';
+
+  @override
+  String get debtsInvoiceNum => 'فاتورة #';
+
+  @override
+  String get debtsDate => 'التاريخ';
+
+  @override
+  String get debtsDueDate => 'تاريخ الاستحقاق';
+
+  @override
+  String get debtsActions => 'إجراءات';
+
+  @override
+  String get debtsPay => 'تسديد';
+
+  @override
+  String get debtsDetails => 'تفاصيل';
+
+  @override
+  String get debtsRecordPayment => 'تسجيل دفعة';
+
+  @override
+  String get debtsNoInvoices => 'لا توجد فواتير';
+
+  @override
+  String get debtsTotalDebt => 'إجمالي الدين';
+
+  @override
+  String get debtsPaidTotal => 'إجمالي المدفوع';
+
+  @override
+  String get debtsOutstanding => 'المستحق';
+
+  @override
+  String get cdInvalidData => 'بيانات غير صالحة';
+
+  @override
+  String get cdRecordPayment => 'تسديد دين';
+
+  @override
+  String get cdRemainingCurrent => 'المتبقي الحالي';
+
+  @override
+  String get cdAmountLabel => 'المبلغ (Fdj)';
+
+  @override
+  String get cdAutoDistribute =>
+      'يُوزَّع تلقائياً على الفواتير من الأقدم إلى الأحدث.';
+
+  @override
+  String get cdCancel => 'إلغاء';
+
+  @override
+  String get cdConfirm => 'تأكيد';
+
+  @override
+  String get cdEnterValidAmount => 'أدخل مبلغاً صالحاً';
+
+  @override
+  String get cdNoRemaining => 'لا يوجد متبقٍ للتسديد أو المبلغ غير صالح';
+
+  @override
+  String get cdPaymentSuccess => 'تم تسجيل الدفعة بنجاح';
+
+  @override
+  String get cdPaymentFailed => 'فشل تسجيل الدفعة';
+
+  @override
+  String get cdInvoiceHistory => 'سجل الفواتير';
+
+  @override
+  String get cdPaymentHistory => 'سجل الدفعات';
+
+  @override
+  String get cdNoPayments => 'لا توجد دفعات مسجلة';
+
+  @override
+  String get cdFullPayment => 'تسديد كامل';
+
+  @override
+  String get cdPartialPayment => 'تسديد جزئي';
+
+  @override
+  String get cdRemainingBalance => 'الرصيد المتبقي';
+
+  @override
+  String get cdDebtBefore => 'الدين قبل';
+
+  @override
+  String get cdDebtAfter => 'الدين بعد';
+
+  @override
+  String get cdNoInvoiceLinked => 'لا توجد فاتورة مرتبطة';
+
+  @override
+  String get cdCustomerLabel => 'العميل';
+
+  @override
+  String get cdInvoiceLabel => 'فاتورة';
+
+  @override
+  String get cdClose => 'إغلاق';
+
+  @override
+  String get cdViewInvoice => 'عرض الفاتورة';
+
+  @override
+  String get cdAmountPaid => 'المبلغ المدفوع';
+
+  @override
+  String get dsTitle => 'إعدادات الدين';
+
+  @override
+  String get dsReloadTooltip => 'إعادة التحميل من القاعدة';
+
+  @override
+  String get dsApplyInfo =>
+      'تُطبَّق هذه الحدود عند حفظ فاتورة نوعها «دين / آجل». اترك الحقل فارغاً أو 0 لتعطيل السقف.';
+
+  @override
+  String get dsAmountCeilings => 'سؤف المبالغ';
+
+  @override
+  String get dsMaxPerCustomer => 'أقصى مجموع متبقٍ لكل عميل (Fdj)';
+
+  @override
+  String get dsMaxPerInvoice => 'أقصى متبقٍ لفاتورة دين واحدة (Fdj)';
+
+  @override
+  String get dsWarningDays => 'أيام التحذير';
+
+  @override
+  String get dsSaved => 'تم حفظ إعدادات الدين';
+
+  @override
+  String get dsInvalidDays => 'أيام التحذير: بين 0 و 36500';
+
+  @override
+  String get dsEnableLimits => 'تفعيل سقوف الدين';
+
+  @override
+  String get dsMaxDebtPerCustomer => 'أقصى مجموع متبقٍ لكل عميل (Fdj)';
+
+  @override
+  String get dsMaxDebtPerInvoice => 'أقصى متبقٍ لفاتورة دين واحدة (Fdj)';
+
+  @override
+  String get dsAutoEnforce => 'فرض تلقائي للحدود';
+
+  @override
+  String get dsAutoEnforceHint => 'منع الحفظ عند تجاوز الحدود';
+
+  @override
+  String get dsReminderDays => 'أيام التذكير';
+
+  @override
+  String get dsReminderHint => 'أيام قبل تاريخ الاستحقاق لإظهار التذكير';
+
+  @override
+  String get dsOverdueThreshold => 'عتبة التأخر (أيام)';
+
+  @override
+  String get dsOverdueHint => 'أيام بعد الاستحقاق لتصنيف كمتأخر';
 }

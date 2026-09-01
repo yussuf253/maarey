@@ -19446,6 +19446,840 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **' الخاصة بـ Naboo.'**
   String get signupTermsSuffix;
+
+  /// No description provided for @licEnterKey.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل مفتاح الترخيص'**
+  String get licEnterKey;
+
+  /// No description provided for @licStoreSystem.
+  ///
+  /// In ar, this message translates to:
+  /// **'نظام إدارة المتاجر'**
+  String get licStoreSystem;
+
+  /// No description provided for @licActivation.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفعيل الترخيص'**
+  String get licActivation;
+
+  /// No description provided for @licEnterKeyToContinue.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل مفتاح الترخيص للمتابعة'**
+  String get licEnterKeyToContinue;
+
+  /// No description provided for @licKeyHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'NABOO-XXXX-XXXX-XXXX أو JWT'**
+  String get licKeyHint;
+
+  /// No description provided for @licActivate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفعيل'**
+  String get licActivate;
+
+  /// No description provided for @licContactSupport.
+  ///
+  /// In ar, this message translates to:
+  /// **'للحصول على مفتاح ترخيص، تواصل مع فريق NaBoo.'**
+  String get licContactSupport;
+
+  /// No description provided for @licAllRightsReserved.
+  ///
+  /// In ar, this message translates to:
+  /// **'NaBoo v2.0 — جميع الحقوق محفوظة'**
+  String get licAllRightsReserved;
+
+  /// No description provided for @licTimeConflict.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعارض في إعدادات الوقت'**
+  String get licTimeConflict;
+
+  /// No description provided for @licSuspended.
+  ///
+  /// In ar, this message translates to:
+  /// **'الترخيص موقوف'**
+  String get licSuspended;
+
+  /// No description provided for @licDeviceLimitExceeded.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجاوز حد الأجهزة'**
+  String get licDeviceLimitExceeded;
+
+  /// No description provided for @licExpired.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهى الاشتراك'**
+  String get licExpired;
+
+  /// No description provided for @licTimeConflictMsg.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم اكتشاف تعارض في إعدادات الوقت. تواصل مع الدعم للمساعدة في إعادة التحقق.'**
+  String get licTimeConflictMsg;
+
+  /// No description provided for @licAccountSuspended.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم إيقاف حسابك. تواصل مع الدعم الفني.'**
+  String get licAccountSuspended;
+
+  /// No description provided for @licSubscriptionEnded.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهى اشتراكك. جدّد للمتابعة.'**
+  String get licSubscriptionEnded;
+
+  /// No description provided for @licCurrentPlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطتك الحالية'**
+  String get licCurrentPlan;
+
+  /// No description provided for @licRegisteredDevices.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأجهزة المسجّلة'**
+  String get licRegisteredDevices;
+
+  /// No description provided for @licSubscriptionExpiry.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهاء الاشتراك'**
+  String get licSubscriptionExpiry;
+
+  /// No description provided for @licTrialExpiry.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهاء التجربة'**
+  String get licTrialExpiry;
+
+  /// No description provided for @licUpgradePlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'ترقية الخطة لإضافة أجهزة'**
+  String get licUpgradePlan;
+
+  /// No description provided for @licRenewSubscription.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجديد الاشتراك'**
+  String get licRenewSubscription;
+
+  /// No description provided for @licComparePlans.
+  ///
+  /// In ar, this message translates to:
+  /// **'مقارنة خطط الاشتراك'**
+  String get licComparePlans;
+
+  /// No description provided for @licEnterNewKey.
+  ///
+  /// In ar, this message translates to:
+  /// **'إدخال مفتاح جديد'**
+  String get licEnterNewKey;
+
+  /// No description provided for @licVerifyAgain.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة التحقق'**
+  String get licVerifyAgain;
+
+  /// No description provided for @licUseAnotherKey.
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدام مفتاح آخر'**
+  String get licUseAnotherKey;
+
+  /// No description provided for @cashInvoicesSales.
+  ///
+  /// In ar, this message translates to:
+  /// **'فواتير ومبيعات (قيود مرتبطة بفاتورة)'**
+  String get cashInvoicesSales;
+
+  /// No description provided for @cashManualDeposit.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيداع يدوي'**
+  String get cashManualDeposit;
+
+  /// No description provided for @cashManualWithdrawal.
+  ///
+  /// In ar, this message translates to:
+  /// **'سحب يدوي'**
+  String get cashManualWithdrawal;
+
+  /// No description provided for @cashOtherMovements.
+  ///
+  /// In ar, this message translates to:
+  /// **'حركات أخرى'**
+  String get cashOtherMovements;
+
+  /// No description provided for @cashLinkedInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة #'**
+  String get cashLinkedInvoice;
+
+  /// No description provided for @cashInflow.
+  ///
+  /// In ar, this message translates to:
+  /// **'وارد'**
+  String get cashInflow;
+
+  /// No description provided for @cashOutflow.
+  ///
+  /// In ar, this message translates to:
+  /// **'صادر'**
+  String get cashOutflow;
+
+  /// No description provided for @cashNoLinkedEntries.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد في هذه المجموعة حركات مرتبطة برقم فاتورة.'**
+  String get cashNoLinkedEntries;
+
+  /// No description provided for @cashInvoiceIdsShown.
+  ///
+  /// In ar, this message translates to:
+  /// **'أرقام الفواتير الظاهرة في القيود:'**
+  String get cashInvoiceIdsShown;
+
+  /// No description provided for @cashShiftDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل الوردية #'**
+  String get cashShiftDetails;
+
+  /// No description provided for @cashShiftEmployee.
+  ///
+  /// In ar, this message translates to:
+  /// **'موظف الوردية (البطاقة)'**
+  String get cashShiftEmployee;
+
+  /// No description provided for @cashSummaryTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخص الصندوق'**
+  String get cashSummaryTitle;
+
+  /// No description provided for @cashTotalIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوارد الكلي'**
+  String get cashTotalIn;
+
+  /// No description provided for @cashTotalOut.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصادر الكلي'**
+  String get cashTotalOut;
+
+  /// No description provided for @cashNetFlow.
+  ///
+  /// In ar, this message translates to:
+  /// **'صافي التدفق'**
+  String get cashNetFlow;
+
+  /// No description provided for @cashBalanceLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرصيد'**
+  String get cashBalanceLabel;
+
+  /// No description provided for @cashDetailsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل الصندوق'**
+  String get cashDetailsTitle;
+
+  /// No description provided for @cashFilterAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكل'**
+  String get cashFilterAll;
+
+  /// No description provided for @cashDateRange.
+  ///
+  /// In ar, this message translates to:
+  /// **'نطاق التاريخ'**
+  String get cashDateRange;
+
+  /// No description provided for @cashFrom.
+  ///
+  /// In ar, this message translates to:
+  /// **'من'**
+  String get cashFrom;
+
+  /// No description provided for @cashTo.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلى'**
+  String get cashTo;
+
+  /// No description provided for @cashAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ'**
+  String get cashAmount;
+
+  /// No description provided for @cashDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوصف'**
+  String get cashDescription;
+
+  /// No description provided for @cashType.
+  ///
+  /// In ar, this message translates to:
+  /// **'النوع'**
+  String get cashType;
+
+  /// No description provided for @cashDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ'**
+  String get cashDate;
+
+  /// No description provided for @cashReceipt.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيصال'**
+  String get cashReceipt;
+
+  /// No description provided for @cashPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'دفعة'**
+  String get cashPayment;
+
+  /// No description provided for @cashDeposit.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيداع'**
+  String get cashDeposit;
+
+  /// No description provided for @cashWithdrawal.
+  ///
+  /// In ar, this message translates to:
+  /// **'سحب'**
+  String get cashWithdrawal;
+
+  /// No description provided for @cashTransfer.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحويل'**
+  String get cashTransfer;
+
+  /// No description provided for @cashRefund.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتجع'**
+  String get cashRefund;
+
+  /// No description provided for @cashOpenShift.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح وردية'**
+  String get cashOpenShift;
+
+  /// No description provided for @cashCloseShift.
+  ///
+  /// In ar, this message translates to:
+  /// **'إغلاق وردية'**
+  String get cashCloseShift;
+
+  /// No description provided for @cashShiftHistory.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل الورديات'**
+  String get cashShiftHistory;
+
+  /// No description provided for @cashTransactions.
+  ///
+  /// In ar, this message translates to:
+  /// **'المعاملات'**
+  String get cashTransactions;
+
+  /// No description provided for @cashNoTransactions.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد معاملات'**
+  String get cashNoTransactions;
+
+  /// No description provided for @cashPeriod.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفترة'**
+  String get cashPeriod;
+
+  /// No description provided for @cashInvoiceNum.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الفاتورة'**
+  String get cashInvoiceNum;
+
+  /// No description provided for @cashEmployee.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموظف'**
+  String get cashEmployee;
+
+  /// No description provided for @cashNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة'**
+  String get cashNote;
+
+  /// No description provided for @cashReceiptNum.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الإيصال'**
+  String get cashReceiptNum;
+
+  /// No description provided for @cashCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'العميل'**
+  String get cashCustomer;
+
+  /// No description provided for @debtsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الديون — آجل'**
+  String get debtsTitle;
+
+  /// No description provided for @debtsTabInvoices.
+  ///
+  /// In ar, this message translates to:
+  /// **'فواتير'**
+  String get debtsTabInvoices;
+
+  /// No description provided for @debtsTabCustomers.
+  ///
+  /// In ar, this message translates to:
+  /// **'عملاء'**
+  String get debtsTabCustomers;
+
+  /// No description provided for @debtsTabSuppliers.
+  ///
+  /// In ar, this message translates to:
+  /// **'موردون'**
+  String get debtsTabSuppliers;
+
+  /// No description provided for @debtsSettingsTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات الدين'**
+  String get debtsSettingsTooltip;
+
+  /// No description provided for @debtsRefreshTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديث (F5)'**
+  String get debtsRefreshTooltip;
+
+  /// No description provided for @debtsShowingOf.
+  ///
+  /// In ar, this message translates to:
+  /// **'القائمة:'**
+  String get debtsShowingOf;
+
+  /// No description provided for @debtsSearchHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث: عميل، رقم فاتورة، معرّف عميل…'**
+  String get debtsSearchHint;
+
+  /// No description provided for @debtsClearSearch.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح البحث'**
+  String get debtsClearSearch;
+
+  /// No description provided for @debtsAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكل'**
+  String get debtsAll;
+
+  /// No description provided for @debtsPending.
+  ///
+  /// In ar, this message translates to:
+  /// **'معلّق'**
+  String get debtsPending;
+
+  /// No description provided for @debtsOverdue.
+  ///
+  /// In ar, this message translates to:
+  /// **'متأخر'**
+  String get debtsOverdue;
+
+  /// No description provided for @debtsPaid.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدفوع'**
+  String get debtsPaid;
+
+  /// No description provided for @debtsPartial.
+  ///
+  /// In ar, this message translates to:
+  /// **'جزئي'**
+  String get debtsPartial;
+
+  /// No description provided for @debtsAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ'**
+  String get debtsAmount;
+
+  /// No description provided for @debtsPaidAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'المدفوع'**
+  String get debtsPaidAmount;
+
+  /// No description provided for @debtsRemaining.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتبقي'**
+  String get debtsRemaining;
+
+  /// No description provided for @debtsCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'العميل'**
+  String get debtsCustomer;
+
+  /// No description provided for @debtsInvoiceNum.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة #'**
+  String get debtsInvoiceNum;
+
+  /// No description provided for @debtsDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ'**
+  String get debtsDate;
+
+  /// No description provided for @debtsDueDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ الاستحقاق'**
+  String get debtsDueDate;
+
+  /// No description provided for @debtsActions.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجراءات'**
+  String get debtsActions;
+
+  /// No description provided for @debtsPay.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسديد'**
+  String get debtsPay;
+
+  /// No description provided for @debtsDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل'**
+  String get debtsDetails;
+
+  /// No description provided for @debtsRecordPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل دفعة'**
+  String get debtsRecordPayment;
+
+  /// No description provided for @debtsNoInvoices.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد فواتير'**
+  String get debtsNoInvoices;
+
+  /// No description provided for @debtsTotalDebt.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي الدين'**
+  String get debtsTotalDebt;
+
+  /// No description provided for @debtsPaidTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي المدفوع'**
+  String get debtsPaidTotal;
+
+  /// No description provided for @debtsOutstanding.
+  ///
+  /// In ar, this message translates to:
+  /// **'المستحق'**
+  String get debtsOutstanding;
+
+  /// No description provided for @cdInvalidData.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيانات غير صالحة'**
+  String get cdInvalidData;
+
+  /// No description provided for @cdRecordPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسديد دين'**
+  String get cdRecordPayment;
+
+  /// No description provided for @cdRemainingCurrent.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتبقي الحالي'**
+  String get cdRemainingCurrent;
+
+  /// No description provided for @cdAmountLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ (Fdj)'**
+  String get cdAmountLabel;
+
+  /// No description provided for @cdAutoDistribute.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُوزَّع تلقائياً على الفواتير من الأقدم إلى الأحدث.'**
+  String get cdAutoDistribute;
+
+  /// No description provided for @cdCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get cdCancel;
+
+  /// No description provided for @cdConfirm.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكيد'**
+  String get cdConfirm;
+
+  /// No description provided for @cdEnterValidAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل مبلغاً صالحاً'**
+  String get cdEnterValidAmount;
+
+  /// No description provided for @cdNoRemaining.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد متبقٍ للتسديد أو المبلغ غير صالح'**
+  String get cdNoRemaining;
+
+  /// No description provided for @cdPaymentSuccess.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم تسجيل الدفعة بنجاح'**
+  String get cdPaymentSuccess;
+
+  /// No description provided for @cdPaymentFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'فشل تسجيل الدفعة'**
+  String get cdPaymentFailed;
+
+  /// No description provided for @cdInvoiceHistory.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل الفواتير'**
+  String get cdInvoiceHistory;
+
+  /// No description provided for @cdPaymentHistory.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل الدفعات'**
+  String get cdPaymentHistory;
+
+  /// No description provided for @cdNoPayments.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد دفعات مسجلة'**
+  String get cdNoPayments;
+
+  /// No description provided for @cdFullPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسديد كامل'**
+  String get cdFullPayment;
+
+  /// No description provided for @cdPartialPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسديد جزئي'**
+  String get cdPartialPayment;
+
+  /// No description provided for @cdRemainingBalance.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرصيد المتبقي'**
+  String get cdRemainingBalance;
+
+  /// No description provided for @cdDebtBefore.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدين قبل'**
+  String get cdDebtBefore;
+
+  /// No description provided for @cdDebtAfter.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدين بعد'**
+  String get cdDebtAfter;
+
+  /// No description provided for @cdNoInvoiceLinked.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد فاتورة مرتبطة'**
+  String get cdNoInvoiceLinked;
+
+  /// No description provided for @cdCustomerLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'العميل'**
+  String get cdCustomerLabel;
+
+  /// No description provided for @cdInvoiceLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة'**
+  String get cdInvoiceLabel;
+
+  /// No description provided for @cdClose.
+  ///
+  /// In ar, this message translates to:
+  /// **'إغلاق'**
+  String get cdClose;
+
+  /// No description provided for @cdViewInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض الفاتورة'**
+  String get cdViewInvoice;
+
+  /// No description provided for @cdAmountPaid.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ المدفوع'**
+  String get cdAmountPaid;
+
+  /// No description provided for @dsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات الدين'**
+  String get dsTitle;
+
+  /// No description provided for @dsReloadTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة التحميل من القاعدة'**
+  String get dsReloadTooltip;
+
+  /// No description provided for @dsApplyInfo.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُطبَّق هذه الحدود عند حفظ فاتورة نوعها «دين / آجل». اترك الحقل فارغاً أو 0 لتعطيل السقف.'**
+  String get dsApplyInfo;
+
+  /// No description provided for @dsAmountCeilings.
+  ///
+  /// In ar, this message translates to:
+  /// **'سؤف المبالغ'**
+  String get dsAmountCeilings;
+
+  /// No description provided for @dsMaxPerCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقصى مجموع متبقٍ لكل عميل (Fdj)'**
+  String get dsMaxPerCustomer;
+
+  /// No description provided for @dsMaxPerInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقصى متبقٍ لفاتورة دين واحدة (Fdj)'**
+  String get dsMaxPerInvoice;
+
+  /// No description provided for @dsWarningDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام التحذير'**
+  String get dsWarningDays;
+
+  /// No description provided for @dsSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم حفظ إعدادات الدين'**
+  String get dsSaved;
+
+  /// No description provided for @dsInvalidDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام التحذير: بين 0 و 36500'**
+  String get dsInvalidDays;
+
+  /// No description provided for @dsEnableLimits.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفعيل سقوف الدين'**
+  String get dsEnableLimits;
+
+  /// No description provided for @dsMaxDebtPerCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقصى مجموع متبقٍ لكل عميل (Fdj)'**
+  String get dsMaxDebtPerCustomer;
+
+  /// No description provided for @dsMaxDebtPerInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقصى متبقٍ لفاتورة دين واحدة (Fdj)'**
+  String get dsMaxDebtPerInvoice;
+
+  /// No description provided for @dsAutoEnforce.
+  ///
+  /// In ar, this message translates to:
+  /// **'فرض تلقائي للحدود'**
+  String get dsAutoEnforce;
+
+  /// No description provided for @dsAutoEnforceHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'منع الحفظ عند تجاوز الحدود'**
+  String get dsAutoEnforceHint;
+
+  /// No description provided for @dsReminderDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام التذكير'**
+  String get dsReminderDays;
+
+  /// No description provided for @dsReminderHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام قبل تاريخ الاستحقاق لإظهار التذكير'**
+  String get dsReminderHint;
+
+  /// No description provided for @dsOverdueThreshold.
+  ///
+  /// In ar, this message translates to:
+  /// **'عتبة التأخر (أيام)'**
+  String get dsOverdueThreshold;
+
+  /// No description provided for @dsOverdueHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أيام بعد الاستحقاق لتصنيف كمتأخر'**
+  String get dsOverdueHint;
 }
 
 class _AppLocalizationsDelegate

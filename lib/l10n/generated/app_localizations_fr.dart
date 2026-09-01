@@ -11021,4 +11021,431 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get signupTermsSuffix => ' de Naboo.';
+
+  @override
+  String get licEnterKey => 'Entrez la clé de licence';
+
+  @override
+  String get licStoreSystem => 'Système de gestion de magasin';
+
+  @override
+  String get licActivation => 'Activation de la licence';
+
+  @override
+  String get licEnterKeyToContinue =>
+      'Entrez votre clé de licence pour continuer';
+
+  @override
+  String get licKeyHint => 'NABOO-XXXX-XXXX-XXXX ou JWT';
+
+  @override
+  String get licActivate => 'Activer';
+
+  @override
+  String get licContactSupport =>
+      'Pour obtenir une clé de licence, contactez l\'équipe NaBoo.';
+
+  @override
+  String get licAllRightsReserved => 'NaBoo v2.0 — Tous droits réservés';
+
+  @override
+  String get licTimeConflict => 'Conflit de paramètres horaires';
+
+  @override
+  String get licSuspended => 'Licence suspendue';
+
+  @override
+  String get licDeviceLimitExceeded => 'Limite d\'appareils dépassée';
+
+  @override
+  String get licExpired => 'Abonnement expiré';
+
+  @override
+  String get licTimeConflictMsg =>
+      'Conflit de paramètres horaires détecté. Contactez le support pour une re-vérification.';
+
+  @override
+  String get licAccountSuspended =>
+      'Votre compte a été suspendu. Contactez le support technique.';
+
+  @override
+  String get licSubscriptionEnded =>
+      'Votre abonnement a expiré. Renouvelez pour continuer.';
+
+  @override
+  String get licCurrentPlan => 'Forfait actuel';
+
+  @override
+  String get licRegisteredDevices => 'Appareils enregistrés';
+
+  @override
+  String get licSubscriptionExpiry => 'Expiration de l\'abonnement';
+
+  @override
+  String get licTrialExpiry => 'Expiration de l\'essai';
+
+  @override
+  String get licUpgradePlan => 'Upgrade du forfait pour ajouter des appareils';
+
+  @override
+  String get licRenewSubscription => 'Renouveler l\'abonnement';
+
+  @override
+  String get licComparePlans => 'Comparer les forfaits d\'abonnement';
+
+  @override
+  String get licEnterNewKey => 'Entrer une nouvelle clé';
+
+  @override
+  String get licVerifyAgain => 'Vérifier à nouveau';
+
+  @override
+  String get licUseAnotherKey => 'Utiliser une autre clé';
+
+  @override
+  String get cashInvoicesSales => 'Factures et ventes (écritures liées)';
+
+  @override
+  String get cashManualDeposit => 'Dépôt manuel';
+
+  @override
+  String get cashManualWithdrawal => 'Retrait manuel';
+
+  @override
+  String get cashOtherMovements => 'Autres mouvements';
+
+  @override
+  String get cashLinkedInvoice => 'Facture #';
+
+  @override
+  String get cashInflow => 'Entrée';
+
+  @override
+  String get cashOutflow => 'Sortie';
+
+  @override
+  String get cashNoLinkedEntries =>
+      'Aucune écriture liée à une facture dans ce groupe.';
+
+  @override
+  String get cashInvoiceIdsShown => 'Numéros de factures affichés :';
+
+  @override
+  String get cashShiftDetails => 'Détails du quart #';
+
+  @override
+  String get cashShiftEmployee => 'Employé du quart (carte)';
+
+  @override
+  String get cashSummaryTitle => 'Résumé de la caisse';
+
+  @override
+  String get cashTotalIn => 'Total entrées';
+
+  @override
+  String get cashTotalOut => 'Total sorties';
+
+  @override
+  String get cashNetFlow => 'Flux net';
+
+  @override
+  String get cashBalanceLabel => 'Solde';
+
+  @override
+  String get cashDetailsTitle => 'Détails de la caisse';
+
+  @override
+  String get cashFilterAll => 'Tout';
+
+  @override
+  String get cashDateRange => 'Période';
+
+  @override
+  String get cashFrom => 'Du';
+
+  @override
+  String get cashTo => 'Au';
+
+  @override
+  String get cashAmount => 'Montant';
+
+  @override
+  String get cashDescription => 'Description';
+
+  @override
+  String get cashType => 'Type';
+
+  @override
+  String get cashDate => 'Date';
+
+  @override
+  String get cashReceipt => 'Reçu';
+
+  @override
+  String get cashPayment => 'Paiement';
+
+  @override
+  String get cashDeposit => 'Dépôt';
+
+  @override
+  String get cashWithdrawal => 'Retrait';
+
+  @override
+  String get cashTransfer => 'Transfert';
+
+  @override
+  String get cashRefund => 'Remboursement';
+
+  @override
+  String get cashOpenShift => 'Ouvrir un quart';
+
+  @override
+  String get cashCloseShift => 'Fermer un quart';
+
+  @override
+  String get cashShiftHistory => 'Historique des quarts';
+
+  @override
+  String get cashTransactions => 'Transactions';
+
+  @override
+  String get cashNoTransactions => 'Aucune transaction trouvée';
+
+  @override
+  String get cashPeriod => 'Période';
+
+  @override
+  String get cashInvoiceNum => 'Facture #';
+
+  @override
+  String get cashEmployee => 'Employé';
+
+  @override
+  String get cashNote => 'Note';
+
+  @override
+  String get cashReceiptNum => 'Reçu #';
+
+  @override
+  String get cashCustomer => 'Client';
+
+  @override
+  String get debtsTitle => 'Créances — À crédit';
+
+  @override
+  String get debtsTabInvoices => 'Factures';
+
+  @override
+  String get debtsTabCustomers => 'Clients';
+
+  @override
+  String get debtsTabSuppliers => 'Fournisseurs';
+
+  @override
+  String get debtsSettingsTooltip => 'Paramètres de dette';
+
+  @override
+  String get debtsRefreshTooltip => 'Actualiser (F5)';
+
+  @override
+  String get debtsShowingOf => 'Affichage :';
+
+  @override
+  String get debtsSearchHint => 'Recherche : client, numéro de facture…';
+
+  @override
+  String get debtsClearSearch => 'Effacer la recherche';
+
+  @override
+  String get debtsAll => 'Tout';
+
+  @override
+  String get debtsPending => 'En attente';
+
+  @override
+  String get debtsOverdue => 'En retard';
+
+  @override
+  String get debtsPaid => 'Payé';
+
+  @override
+  String get debtsPartial => 'Partiel';
+
+  @override
+  String get debtsAmount => 'Montant';
+
+  @override
+  String get debtsPaidAmount => 'Payé';
+
+  @override
+  String get debtsRemaining => 'Restant';
+
+  @override
+  String get debtsCustomer => 'Client';
+
+  @override
+  String get debtsInvoiceNum => 'Facture #';
+
+  @override
+  String get debtsDate => 'Date';
+
+  @override
+  String get debtsDueDate => 'Date d\'échéance';
+
+  @override
+  String get debtsActions => 'Actions';
+
+  @override
+  String get debtsPay => 'Payer';
+
+  @override
+  String get debtsDetails => 'Détails';
+
+  @override
+  String get debtsRecordPayment => 'Enregistrer le paiement';
+
+  @override
+  String get debtsNoInvoices => 'Aucune facture trouvée';
+
+  @override
+  String get debtsTotalDebt => 'Total dette';
+
+  @override
+  String get debtsPaidTotal => 'Total payé';
+
+  @override
+  String get debtsOutstanding => 'Montant dû';
+
+  @override
+  String get cdInvalidData => 'Données invalides';
+
+  @override
+  String get cdRecordPayment => 'Enregistrer le paiement';
+
+  @override
+  String get cdRemainingCurrent => 'Restant actuel';
+
+  @override
+  String get cdAmountLabel => 'Montant (FDJ)';
+
+  @override
+  String get cdAutoDistribute =>
+      'Réparti automatiquement des factures les plus anciennes aux plus récentes.';
+
+  @override
+  String get cdCancel => 'Annuler';
+
+  @override
+  String get cdConfirm => 'Confirmer';
+
+  @override
+  String get cdEnterValidAmount => 'Entrez un montant valide';
+
+  @override
+  String get cdNoRemaining => 'Rien à payer ou montant invalide';
+
+  @override
+  String get cdPaymentSuccess => 'Paiement enregistré avec succès';
+
+  @override
+  String get cdPaymentFailed => 'Échec du paiement';
+
+  @override
+  String get cdInvoiceHistory => 'Historique des factures';
+
+  @override
+  String get cdPaymentHistory => 'Historique des paiements';
+
+  @override
+  String get cdNoPayments => 'Aucun paiement enregistré';
+
+  @override
+  String get cdFullPayment => 'Paiement complet';
+
+  @override
+  String get cdPartialPayment => 'Paiement partiel';
+
+  @override
+  String get cdRemainingBalance => 'Solde restant';
+
+  @override
+  String get cdDebtBefore => 'Dette avant';
+
+  @override
+  String get cdDebtAfter => 'Dette après';
+
+  @override
+  String get cdNoInvoiceLinked => 'Aucune facture liée';
+
+  @override
+  String get cdCustomerLabel => 'Client';
+
+  @override
+  String get cdInvoiceLabel => 'Facture';
+
+  @override
+  String get cdClose => 'Fermer';
+
+  @override
+  String get cdViewInvoice => 'Voir la facture';
+
+  @override
+  String get cdAmountPaid => 'Montant payé';
+
+  @override
+  String get dsTitle => 'Paramètres de dette';
+
+  @override
+  String get dsReloadTooltip => 'Recharger depuis la base';
+
+  @override
+  String get dsApplyInfo =>
+      'Ces limites s\'appliquent lors de la sauvegarde d\'une facture à crédit. Laissez vide ou 0 pour désactiver.';
+
+  @override
+  String get dsAmountCeilings => 'Plafonds de montants';
+
+  @override
+  String get dsMaxPerCustomer => 'Max restant par client (FDJ)';
+
+  @override
+  String get dsMaxPerInvoice => 'Max restant par facture à crédit (FDJ)';
+
+  @override
+  String get dsWarningDays => 'Jours d\'avertissement';
+
+  @override
+  String get dsSaved => 'Paramètres de dette sauvegardés';
+
+  @override
+  String get dsInvalidDays => 'Jours d\'avertissement : entre 0 et 36500';
+
+  @override
+  String get dsEnableLimits => 'Activer les limites de dette';
+
+  @override
+  String get dsMaxDebtPerCustomer => 'Max restant par client (FDJ)';
+
+  @override
+  String get dsMaxDebtPerInvoice => 'Max restant par facture à crédit (FDJ)';
+
+  @override
+  String get dsAutoEnforce => 'Application automatique des limites';
+
+  @override
+  String get dsAutoEnforceHint =>
+      'Empêcher la sauvegarde si les limites sont dépassées';
+
+  @override
+  String get dsReminderDays => 'Jours de rappel';
+
+  @override
+  String get dsReminderHint =>
+      'Jours avant l\'échéance pour afficher le rappel';
+
+  @override
+  String get dsOverdueThreshold => 'Seuil de retard (jours)';
+
+  @override
+  String get dsOverdueHint => 'Jours après échéance pour marquer en retard';
 }

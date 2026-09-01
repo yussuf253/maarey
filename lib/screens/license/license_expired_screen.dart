@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../services/license_service.dart';
+import '../../l10n/generated/app_localizations.dart';
 import 'subscription_plans_screen.dart';
 
 class LicenseExpiredScreen extends StatefulWidget {
@@ -14,6 +15,8 @@ class LicenseExpiredScreen extends StatefulWidget {
 
 class _LicenseExpiredScreenState extends State<LicenseExpiredScreen> {
   bool _checking = false;
+
+  AppLocalizations get _loc => AppLocalizations.of(context)!;
   final _keyCtrl = TextEditingController();
   bool _activating = false;
   String? _activateError;
@@ -32,16 +35,16 @@ class _LicenseExpiredScreenState extends State<LicenseExpiredScreen> {
 
   String get _title {
     if (widget.state.lockReason == LockReason.timeTamper) {
-      return 'تعارض في إعدادات الوقت';
+      return _loc.licTimeConflict;
     }
-    if (_isSuspended) return 'الترخيص موقوف';
-    if (_isDeviceLimitExceeded) return 'تجاوز حد الأجهزة';
-    return 'انتهى الاشتراك';
+    if (_isSuspended) return _loc.licSuspended;
+    if (_isDeviceLimitExceeded) return _loc.licDeviceLimitExceeded;
+    return _loc.licExpired;
   }
 
   String get _bodyMessage {
     if (widget.state.lockReason == LockReason.timeTamper) {
-      return 'تم اكتشاف تعارض في إعدادات الوقت. تواصل مع الدعم للمساعدة في إعادة التحقق.';
+      return _loc.licTimeConflictMsg;
     }
     return widget.state.message ??
         (_isSuspended
@@ -59,7 +62,7 @@ class _LicenseExpiredScreenState extends State<LicenseExpiredScreen> {
     if (_activating) return;
     final key = _keyCtrl.text.trim();
     if (key.isEmpty) {
-      setState(() => _activateError = 'أدخل مفتاح الترخيص');
+      setState(() => _activateError = _loc.licEnterKey);
       return;
     }
     setState(() {
@@ -145,14 +148,14 @@ class _LicenseExpiredScreenState extends State<LicenseExpiredScreen> {
                       if (widget.state.plan != null) ...[
                         _InfoRow(
                           icon:  Icons.inventory_2_outlined,
-                          label: 'خطتك الحالية',
+                          label: _loc.licCurrentPlan,
                           value: widget.state.plan!.nameAr,
                           valueColor: cs.onSurface,
                         ),
                         if (!widget.state.isUnlimited)
                           _InfoRow(
                             icon:  Icons.devices_outlined,
-                            label: 'الأجهزة المسجّلة',
+                            label: _loc.licRegisteredDevices,
                             value: widget.state.devicesInfo,
                             valueColor: _isDeviceLimitExceeded
                                 ? cs.tertiary
@@ -211,7 +214,7 @@ class _LicenseExpiredScreenState extends State<LicenseExpiredScreen> {
                           width: double.infinity,
                           child: OutlinedButton.icon(
                             icon: const Icon(Icons.compare_arrows_outlined, size: 18),
-                            label: const Text('مقارنة خطط الاشتراك'),
+                            label: Text(_loc.licComparePlans),
                             onPressed: () => Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -229,7 +232,7 @@ class _LicenseExpiredScreenState extends State<LicenseExpiredScreen> {
                       Align(
                         alignment: AlignmentDirectional.centerStart,
                         child: Text(
-                          'إدخال مفتاح جديد',
+                          _loc.licEnterNewKey,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: cs.onSurface,
@@ -243,7 +246,7 @@ class _LicenseExpiredScreenState extends State<LicenseExpiredScreen> {
                         maxLines: 3,
                         minLines: 1,
                         decoration: InputDecoration(
-                          hintText: 'NABOO-XXXX-XXXX-XXXX أو JWT',
+                          hintText: _loc.licKeyHint,
                           errorText: _activateError,
                         ),
                         onChanged: (_) => setState(() => _activateError = null),
@@ -264,7 +267,7 @@ class _LicenseExpiredScreenState extends State<LicenseExpiredScreen> {
                                   height: 16,
                                   child: CircularProgressIndicator(strokeWidth: 2),
                                 )
-                              : const Text('تفعيل'),
+                              : Text(_loc.licActivate),
                         ),
                       ),
                       const SizedBox(height: 12),
@@ -281,7 +284,7 @@ class _LicenseExpiredScreenState extends State<LicenseExpiredScreen> {
                                   ),
                                 )
                               : const Icon(Icons.refresh_outlined, size: 18),
-                          label: const Text('إعادة التحقق'),
+                          label: Text(_loc.licVerifyAgain),
                           onPressed: _checking
                               ? null
                               : () async {
@@ -299,8 +302,8 @@ class _LicenseExpiredScreenState extends State<LicenseExpiredScreen> {
                       TextButton.icon(
                         icon: const Icon(Icons.vpn_key_outlined,
                             size: 16),
-                        label: const Text(
-                          'استخدام مفتاح آخر',
+                        label: Text(
+                          _loc.licUseAnotherKey,
                           style: TextStyle(fontSize: 12),
                         ),
                         onPressed: () async =>
@@ -314,7 +317,7 @@ class _LicenseExpiredScreenState extends State<LicenseExpiredScreen> {
 
                 const SizedBox(height: 24),
                 Text(
-                  'NaBoo v2.0 — جميع الحقوق محفوظة',
+                  _loc.licAllRightsReserved,
                   style: TextStyle(
                     color: cs.onSurfaceVariant,
                     fontSize: 11,
