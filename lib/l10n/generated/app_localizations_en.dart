@@ -12127,4 +12127,492 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get osUseExistingShift => 'Return to existing shift instead';
+
+  @override
+  String get sdRecordSupplierReceipt => 'Record Supplier Receipt';
+
+  @override
+  String get sdRecordSupplierReceiptSubtitle =>
+      'Their receipt number & date + amount + optional photo';
+
+  @override
+  String get sdSupplierPayment => 'Supplier Payment';
+
+  @override
+  String get sdSupplierPaymentSubtitle => 'Optional: deduct from cash drawer';
+
+  @override
+  String get sdSupplierReturn => 'Supplier Return (reduces payable)';
+
+  @override
+  String get sdSupplierReturnSubtitle => 'Records movement without cash drawer';
+
+  @override
+  String get sdSupplierReceiptTitle => 'Supplier Receipt';
+
+  @override
+  String get sdTheirReceiptNo => 'Their receipt/invoice number';
+
+  @override
+  String get sdTheirReceiptDate => 'Their receipt date';
+
+  @override
+  String sdTheirReceiptDateWith(Object date) {
+    return 'Their receipt date: $date';
+  }
+
+  @override
+  String get sdAmountFdj => 'Amount (Fdj)';
+
+  @override
+  String get sdInternalNote => 'Internal note';
+
+  @override
+  String get sdPhoto => 'Photo';
+
+  @override
+  String get sdGallery => 'Gallery';
+
+  @override
+  String sdPhotoSelected(Object name) {
+    return 'Photo: $name';
+  }
+
+  @override
+  String get sdCancel => 'Cancel';
+
+  @override
+  String get sdSave => 'Save';
+
+  @override
+  String get sdEnterValidAmount => 'Enter a valid amount';
+
+  @override
+  String sdSaveFailed(Object error) {
+    return 'Save failed: $error';
+  }
+
+  @override
+  String get sdReceiptRecorded => 'Supplier receipt recorded';
+
+  @override
+  String get sdRecordDiscountFromCash => 'Record cash drawer discount';
+
+  @override
+  String get sdDisableCashHint =>
+      'Disable if paid from bank account or outside the system';
+
+  @override
+  String get sdConfirm => 'Confirm';
+
+  @override
+  String get sdPaymentRecordedCash => 'Payment recorded & cash drawer updated';
+
+  @override
+  String get sdPaymentRecordedNoCash =>
+      'Payment recorded (without cash drawer)';
+
+  @override
+  String get sdRecordFailed => 'Recording failed';
+
+  @override
+  String get sdReturnTitle => 'Supplier Return';
+
+  @override
+  String get sdNote => 'Note';
+
+  @override
+  String get sdReturnCashHint =>
+      'This return will be recorded in supplier payable only, without cash drawer movement.';
+
+  @override
+  String get sdRegister => 'Register';
+
+  @override
+  String get sdReturnDefaultNote => 'Supplier return (without cash drawer)';
+
+  @override
+  String get sdReturnFailed => 'Failed to record return';
+
+  @override
+  String get sdReturnRecorded => 'Supplier return recorded';
+
+  @override
+  String get sdReversePayment => 'Reverse Payment?';
+
+  @override
+  String sdReverseCashDesc(Object amount) {
+    return 'Payment record will be deleted and a cash deposit of $amount Fdj will be recorded';
+  }
+
+  @override
+  String get sdReverseNoCashDesc =>
+      'Only the payment record will be deleted (was not linked to cash drawer).';
+
+  @override
+  String get sdConfirmReverse => 'Confirm Reversal';
+
+  @override
+  String get sdReverseFailed => 'Reversal failed';
+
+  @override
+  String get sdReversed => 'Payment reversed';
+
+  @override
+  String get sdNoActiveWarehouse =>
+      'No active warehouse — add one from warehouse settings';
+
+  @override
+  String get sdTargetWarehouse => 'Target Warehouse';
+
+  @override
+  String get sdContinue => 'Continue';
+
+  @override
+  String get sdLinkedVoucherCreated => 'Voucher created & linked';
+
+  @override
+  String get sdVoucherCreatedLinkFailed => 'Voucher created but linking failed';
+
+  @override
+  String sdCreationFailed(Object error) {
+    return 'Creation failed: $error';
+  }
+
+  @override
+  String get sdUnlinkVoucher => 'Unlink Voucher?';
+
+  @override
+  String get sdUnlinkVoucherDesc =>
+      'Will remove the link between supplier receipt and stock voucher only, without deleting the voucher.';
+
+  @override
+  String get sdUnlinked => 'Link removed';
+
+  @override
+  String get sdLinkToSupplierReceipt =>
+      'Link to Supplier Receipt — Incoming Voucher';
+
+  @override
+  String get sdEmptyVoucherAutoLink => 'Empty incoming voucher + auto-link';
+
+  @override
+  String get sdLinkInstruction =>
+      'Or select a registered incoming voucher, or enter voucher number / ID then \"Search & Link\".';
+
+  @override
+  String get sdNoVouchersYet =>
+      'No incoming vouchers in the database yet — use the field below when available.';
+
+  @override
+  String get sdLatestVouchers => 'Latest Vouchers';
+
+  @override
+  String get sdLinked => 'Linked';
+
+  @override
+  String get sdLinkFailed => 'Linking failed';
+
+  @override
+  String get sdVoucherNoOrId => 'Voucher number or ID';
+
+  @override
+  String get sdClose => 'Close';
+
+  @override
+  String get sdVoucherNotFound => 'No incoming voucher found with this number';
+
+  @override
+  String get sdSearchAndLink => 'Search & Link';
+
+  @override
+  String get sdEditSupplier => 'Edit Supplier';
+
+  @override
+  String get sdName => 'Name';
+
+  @override
+  String get sdPhone => 'Phone';
+
+  @override
+  String get sdSupplierDefault => 'Supplier';
+
+  @override
+  String get sdEditTooltip => 'Edit';
+
+  @override
+  String get sdSupplierNotFound => 'Supplier not found';
+
+  @override
+  String get sdBalanceOwedToYou => 'Nothing owed to this supplier';
+
+  @override
+  String get sdOverpayment => 'Balance in your favor (overpayment / error)';
+
+  @override
+  String get sdBalanceWithSupplier => 'Balance with supplier';
+
+  @override
+  String get sdNoBillForPayout =>
+      'No supplier receipt covers this payment — use \"Reverse Payment\" next to the payment';
+
+  @override
+  String sdPhoneLabel(Object phone) {
+    return 'Phone: $phone';
+  }
+
+  @override
+  String get sdPaymentWithoutReceipt =>
+      'Warning: paid to supplier without recording a receipt for the same amount. If the payment was made by mistake,';
+
+  @override
+  String get sdSupplierReturnLabel => 'Supplier Return';
+
+  @override
+  String get sdSupplierPaymentLabel => 'Supplier Payment';
+
+  @override
+  String get sdSupplierReceiptLabel => 'Supplier Receipt';
+
+  @override
+  String get sdSupplierReceipts => 'Supplier Receipts';
+
+  @override
+  String get sdLinkReceiptInstruction =>
+      'You can link each receipt to an incoming stock voucher (voucher number) when recording vouchers in the database.';
+
+  @override
+  String get sdNoReceiptsYet => 'No receipts yet.';
+
+  @override
+  String get sdOurPayments => 'Our Payments';
+
+  @override
+  String get sdNoPaymentsYet => 'No payments yet.';
+
+  @override
+  String get sdRecordLabel => 'Record';
+
+  @override
+  String sdBillRef(Object ref) {
+    return 'Receipt #$ref';
+  }
+
+  @override
+  String get sdBillNoRef => 'Receipt (no number)';
+
+  @override
+  String get sdUnlinkVoucherTooltip => 'Unlink Voucher';
+
+  @override
+  String get sdLinkVoucherTooltip => 'Link Incoming Voucher';
+
+  @override
+  String sdLinkedVoucher(Object ref) {
+    return 'Incoming Voucher: $ref';
+  }
+
+  @override
+  String sdTheirDate(Object date) {
+    return 'Their date: $date';
+  }
+
+  @override
+  String sdRecordedDate(Object date) {
+    return 'Recorded: $date';
+  }
+
+  @override
+  String sdPaymentRef(Object ref) {
+    return 'Payment #$ref';
+  }
+
+  @override
+  String get sdReverseTooltip => 'Reverse Payment (error / overpayment)';
+
+  @override
+  String get sdRecordedInCash => 'Recorded in cash drawer';
+
+  @override
+  String get sdNotInCash => 'Without cash drawer';
+
+  @override
+  String sdInvoiceVoucherRef(Object ref) {
+    return 'Invoice Voucher #$ref';
+  }
+
+  @override
+  String sdLinkedVoucherShort(Object ref) {
+    return 'Linked to voucher #$ref';
+  }
+
+  @override
+  String get sohPending => 'Pending';
+
+  @override
+  String get sohInProgress => 'In Progress';
+
+  @override
+  String get sohReadyForDelivery => 'Ready for Delivery';
+
+  @override
+  String get sohDelivered => 'Delivered';
+
+  @override
+  String get sohSinceStart => 'Since start';
+
+  @override
+  String get sohOverdue => 'Overdue';
+
+  @override
+  String get sohTimeRemaining => 'Time remaining';
+
+  @override
+  String get sohTryReLogin =>
+      'Try logging out and back in, or restart the app.';
+
+  @override
+  String get sohRestartToCompleteInit =>
+      'Restart the app to complete database initialization.';
+
+  @override
+  String get sohUnexpectedLocalData =>
+      'Unexpected local data; restart the app. If it persists, report to support.';
+
+  @override
+  String get sohDatabaseBusy =>
+      'Database is busy; wait a few seconds and try again.';
+
+  @override
+  String get sohPersistentError => 'If the problem persists, restart the app.';
+
+  @override
+  String get sohNewTicketBreadcrumb => 'New Maintenance Ticket';
+
+  @override
+  String get sohFailedToLoadTickets => 'Failed to load tickets.';
+
+  @override
+  String sohDebugDetails(Object error) {
+    return 'Debug details: $error';
+  }
+
+  @override
+  String get sohRetry => 'Retry';
+
+  @override
+  String get sohNoTicketsInTab => 'No tickets in this tab.';
+
+  @override
+  String get sohNoMatchingResults => 'No matching results.';
+
+  @override
+  String get sohReturnBadge => 'Return';
+
+  @override
+  String get sohCreditSaleBadge => 'Credit Sale';
+
+  @override
+  String get sohInstallmentBadge => 'Installment';
+
+  @override
+  String get sohDeliveryBadge => 'Delivery';
+
+  @override
+  String get sohDeadlineOverdue =>
+      'Deadline exceeded — complete the work or update the status.';
+
+  @override
+  String get sohTicketDetailsBreadcrumb => 'Ticket Details';
+
+  @override
+  String get sohCustomerDefault => 'Customer';
+
+  @override
+  String sohSerialPlate(Object value) {
+    return 'Serial/Plate: $value';
+  }
+
+  @override
+  String sohValueLabel(Object value) {
+    return 'Value: $value';
+  }
+
+  @override
+  String sohPaidLabel(Object value) {
+    return 'Paid: $value';
+  }
+
+  @override
+  String sohDepositLabel(Object value) {
+    return 'Deposit: $value';
+  }
+
+  @override
+  String sohRemainingLabel(Object value) {
+    return 'Remaining: $value';
+  }
+
+  @override
+  String get sohConvertToInvoiceTooltip => 'Convert to Invoice';
+
+  @override
+  String get sohItemsSentToSale => 'Items sent to sale screen.';
+
+  @override
+  String get sohFailedToOpenSale =>
+      'Failed to open sale — check the ticket or retry.';
+
+  @override
+  String get sohWorkStarted => 'Work started and deadline tracking begun';
+
+  @override
+  String get sohStartWorkLabel => 'Start Work';
+
+  @override
+  String get sohTicketMovedToReady => 'Ticket moved to Ready for Delivery';
+
+  @override
+  String get sohMoveToReady => 'Move to Ready';
+
+  @override
+  String get sohReadyForDeliveryLabel => 'Ready for Delivery';
+
+  @override
+  String get sohGoToPaymentLabel => 'Go to Payment';
+
+  @override
+  String get sohDeliveryRecorded => 'Delivery recorded';
+
+  @override
+  String get sohDeliveryFailed => 'Delivery failed — check amounts in details.';
+
+  @override
+  String get sohConfirmDelivery => 'Confirm Delivery';
+
+  @override
+  String get sohMaintenanceOrdersTitle => 'Maintenance Orders';
+
+  @override
+  String get sohRefreshTooltip => 'Refresh';
+
+  @override
+  String get sohNewTicketLabel => 'New Ticket';
+
+  @override
+  String get sohSearchHint => 'Search by customer, device, or serial…';
+
+  @override
+  String get sohDefaultServiceName => 'Technical Service';
+
+  @override
+  String sohSerialPrefix(Object value) {
+    return 'S/N: $value';
+  }
+
+  @override
+  String get sohSparePartDefault => 'Spare Part';
+
+  @override
+  String get sohNewSaleBreadcrumb => 'New Sale';
 }

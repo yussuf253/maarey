@@ -21792,6 +21792,864 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'العودة للوردية المفتوحة بدلاً من ذلك'**
   String get osUseExistingShift;
+
+  /// No description provided for @sdRecordSupplierReceipt.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل وصل المورد'**
+  String get sdRecordSupplierReceipt;
+
+  /// No description provided for @sdRecordSupplierReceiptSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم وتاريخ وصلهم + المبلغ + صورة اختيارية'**
+  String get sdRecordSupplierReceiptSubtitle;
+
+  /// No description provided for @sdSupplierPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'دفعة للمورد'**
+  String get sdSupplierPayment;
+
+  /// No description provided for @sdSupplierPaymentSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختياري: خصم من الصندوق'**
+  String get sdSupplierPaymentSubtitle;
+
+  /// No description provided for @sdSupplierReturn.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتجع مورد (تخفيض الذمة)'**
+  String get sdSupplierReturn;
+
+  /// No description provided for @sdSupplierReturnSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'يسجّل حركة دون الصندوق'**
+  String get sdSupplierReturnSubtitle;
+
+  /// No description provided for @sdSupplierReceiptTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'وصل المورد'**
+  String get sdSupplierReceiptTitle;
+
+  /// No description provided for @sdTheirReceiptNo.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم وصلهم / فاتورتهم'**
+  String get sdTheirReceiptNo;
+
+  /// No description provided for @sdTheirReceiptDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ وصلهم'**
+  String get sdTheirReceiptDate;
+
+  /// No description provided for @sdTheirReceiptDateWith.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ وصلهم: {date}'**
+  String sdTheirReceiptDateWith(Object date);
+
+  /// No description provided for @sdAmountFdj.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ (Fdj)'**
+  String get sdAmountFdj;
+
+  /// No description provided for @sdInternalNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة داخلية'**
+  String get sdInternalNote;
+
+  /// No description provided for @sdPhoto.
+  ///
+  /// In ar, this message translates to:
+  /// **'صورة'**
+  String get sdPhoto;
+
+  /// No description provided for @sdGallery.
+  ///
+  /// In ar, this message translates to:
+  /// **'معرض'**
+  String get sdGallery;
+
+  /// No description provided for @sdPhotoSelected.
+  ///
+  /// In ar, this message translates to:
+  /// **'صورة: {name}'**
+  String sdPhotoSelected(Object name);
+
+  /// No description provided for @sdCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get sdCancel;
+
+  /// No description provided for @sdSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get sdSave;
+
+  /// No description provided for @sdEnterValidAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل مبلغاً صالحاً'**
+  String get sdEnterValidAmount;
+
+  /// No description provided for @sdSaveFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر الحفظ: {error}'**
+  String sdSaveFailed(Object error);
+
+  /// No description provided for @sdReceiptRecorded.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم تسجيل وصل المورد'**
+  String get sdReceiptRecorded;
+
+  /// No description provided for @sdRecordDiscountFromCash.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل خصم من الصندوق'**
+  String get sdRecordDiscountFromCash;
+
+  /// No description provided for @sdDisableCashHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يعطّله إن دفعت من حساب بنكي أو خارج النظام'**
+  String get sdDisableCashHint;
+
+  /// No description provided for @sdConfirm.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكيد'**
+  String get sdConfirm;
+
+  /// No description provided for @sdPaymentRecordedCash.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم تسجيل الدفعة وقيد الصندوق'**
+  String get sdPaymentRecordedCash;
+
+  /// No description provided for @sdPaymentRecordedNoCash.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم تسجيل الدفعة (دون صندوق)'**
+  String get sdPaymentRecordedNoCash;
+
+  /// No description provided for @sdRecordFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر التسجيل'**
+  String get sdRecordFailed;
+
+  /// No description provided for @sdReturnTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتجع مورد'**
+  String get sdReturnTitle;
+
+  /// No description provided for @sdNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة'**
+  String get sdNote;
+
+  /// No description provided for @sdReturnCashHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيُسجّل هذا المرتجع ضمن ذمم الموردين فقط دون حركة صندوق.'**
+  String get sdReturnCashHint;
+
+  /// No description provided for @sdRegister.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل'**
+  String get sdRegister;
+
+  /// No description provided for @sdReturnDefaultNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتجع مورد (بدون صندوق)'**
+  String get sdReturnDefaultNote;
+
+  /// No description provided for @sdReturnFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر تسجيل المرتجع'**
+  String get sdReturnFailed;
+
+  /// No description provided for @sdReturnRecorded.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم تسجيل مرتجع المورد'**
+  String get sdReturnRecorded;
+
+  /// No description provided for @sdReversePayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'عكس الدفعة؟'**
+  String get sdReversePayment;
+
+  /// No description provided for @sdReverseCashDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيُحذف سجل الدفعة ويُسجَّل في الصندوق إيداع قدره {amount} Fdj'**
+  String sdReverseCashDesc(Object amount);
+
+  /// No description provided for @sdReverseNoCashDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيُحذف سجل الدفعة فقط (لم تكن مرتبطة بالصندوق).'**
+  String get sdReverseNoCashDesc;
+
+  /// No description provided for @sdConfirmReverse.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكيد العكس'**
+  String get sdConfirmReverse;
+
+  /// No description provided for @sdReverseFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر العكس'**
+  String get sdReverseFailed;
+
+  /// No description provided for @sdReversed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم عكس الدفعة'**
+  String get sdReversed;
+
+  /// No description provided for @sdNoActiveWarehouse.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد مخزن نشط — أضف مخزناً من إعدادات المخازن'**
+  String get sdNoActiveWarehouse;
+
+  /// No description provided for @sdTargetWarehouse.
+  ///
+  /// In ar, this message translates to:
+  /// **'المخزن المستهدف'**
+  String get sdTargetWarehouse;
+
+  /// No description provided for @sdContinue.
+  ///
+  /// In ar, this message translates to:
+  /// **'متابعة'**
+  String get sdContinue;
+
+  /// No description provided for @sdLinkedVoucherCreated.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُنشئ السند وتم الربط'**
+  String get sdLinkedVoucherCreated;
+
+  /// No description provided for @sdVoucherCreatedLinkFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُنشئ السند وتعذّر الربط'**
+  String get sdVoucherCreatedLinkFailed;
+
+  /// No description provided for @sdCreationFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر الإنشاء: {error}'**
+  String sdCreationFailed(Object error);
+
+  /// No description provided for @sdUnlinkVoucher.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء ربط الإذن؟'**
+  String get sdUnlinkVoucher;
+
+  /// No description provided for @sdUnlinkVoucherDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيُزال الربط بين وصل المورد وسند المخزون فقط دون حذف السند.'**
+  String get sdUnlinkVoucherDesc;
+
+  /// No description provided for @sdUnlinked.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم إلغاء الربط'**
+  String get sdUnlinked;
+
+  /// No description provided for @sdLinkToSupplierReceipt.
+  ///
+  /// In ar, this message translates to:
+  /// **'ربط بوصل المورد — إذن وارد'**
+  String get sdLinkToSupplierReceipt;
+
+  /// No description provided for @sdEmptyVoucherAutoLink.
+  ///
+  /// In ar, this message translates to:
+  /// **'سند وارد فارغ + ربط تلقائي'**
+  String get sdEmptyVoucherAutoLink;
+
+  /// No description provided for @sdLinkInstruction.
+  ///
+  /// In ar, this message translates to:
+  /// **'أو اختر سنداً واردًا مسجّلاً، أو أدخل رقم السند / المعرّف ثم «بحث وربط».'**
+  String get sdLinkInstruction;
+
+  /// No description provided for @sdNoVouchersYet.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد أذون وارد في القاعدة بعد — استخدم الحقل أدناه عند توفر السند.'**
+  String get sdNoVouchersYet;
+
+  /// No description provided for @sdLatestVouchers.
+  ///
+  /// In ar, this message translates to:
+  /// **'أحدث الأذون'**
+  String get sdLatestVouchers;
+
+  /// No description provided for @sdLinked.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم الربط'**
+  String get sdLinked;
+
+  /// No description provided for @sdLinkFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر الربط'**
+  String get sdLinkFailed;
+
+  /// No description provided for @sdVoucherNoOrId.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم السند أو معرّفه'**
+  String get sdVoucherNoOrId;
+
+  /// No description provided for @sdClose.
+  ///
+  /// In ar, this message translates to:
+  /// **'إغلاق'**
+  String get sdClose;
+
+  /// No description provided for @sdVoucherNotFound.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يُعثر على سند وارد بهذا الرقم'**
+  String get sdVoucherNotFound;
+
+  /// No description provided for @sdSearchAndLink.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث وربط'**
+  String get sdSearchAndLink;
+
+  /// No description provided for @sdEditSupplier.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل المورد'**
+  String get sdEditSupplier;
+
+  /// No description provided for @sdName.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم'**
+  String get sdName;
+
+  /// No description provided for @sdPhone.
+  ///
+  /// In ar, this message translates to:
+  /// **'الهاتف'**
+  String get sdPhone;
+
+  /// No description provided for @sdSupplierDefault.
+  ///
+  /// In ar, this message translates to:
+  /// **'مورد'**
+  String get sdSupplierDefault;
+
+  /// No description provided for @sdEditTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل'**
+  String get sdEditTooltip;
+
+  /// No description provided for @sdSupplierNotFound.
+  ///
+  /// In ar, this message translates to:
+  /// **'المورد غير موجود'**
+  String get sdSupplierNotFound;
+
+  /// No description provided for @sdBalanceOwedToYou.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما علينا لهذا المورد'**
+  String get sdBalanceOwedToYou;
+
+  /// No description provided for @sdOverpayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'رصيد لصالحكم (دفعة زائدة / خطأ)'**
+  String get sdOverpayment;
+
+  /// No description provided for @sdBalanceWithSupplier.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرصيد مع المورد'**
+  String get sdBalanceWithSupplier;
+
+  /// No description provided for @sdNoBillForPayout.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد وصل مورد يغطّي هذه الدفعة — استخدم «عكس الدفعة» بجانب الدفعة لا'**
+  String get sdNoBillForPayout;
+
+  /// No description provided for @sdPhoneLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'هاتف: {phone}'**
+  String sdPhoneLabel(Object phone);
+
+  /// No description provided for @sdPaymentWithoutReceipt.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه: دُفع للمورد دون تسجيل وصل بمبلغ مساوٍ. إن كان الدفع بالخطأ،'**
+  String get sdPaymentWithoutReceipt;
+
+  /// No description provided for @sdSupplierReturnLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتجع مورد'**
+  String get sdSupplierReturnLabel;
+
+  /// No description provided for @sdSupplierPaymentLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'دفعة مورد'**
+  String get sdSupplierPaymentLabel;
+
+  /// No description provided for @sdSupplierReceiptLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'وصل مورد'**
+  String get sdSupplierReceiptLabel;
+
+  /// No description provided for @sdSupplierReceipts.
+  ///
+  /// In ar, this message translates to:
+  /// **'وصولات المورد'**
+  String get sdSupplierReceipts;
+
+  /// No description provided for @sdLinkReceiptInstruction.
+  ///
+  /// In ar, this message translates to:
+  /// **'يمكن ربط كل وصل بإذن مخزني وارد (رقم السند) عند تسجيل الأذون في قاعدة البيانات.'**
+  String get sdLinkReceiptInstruction;
+
+  /// No description provided for @sdNoReceiptsYet.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا وصولات بعد.'**
+  String get sdNoReceiptsYet;
+
+  /// No description provided for @sdOurPayments.
+  ///
+  /// In ar, this message translates to:
+  /// **'دفعاتنا'**
+  String get sdOurPayments;
+
+  /// No description provided for @sdNoPaymentsYet.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا دفعات بعد.'**
+  String get sdNoPaymentsYet;
+
+  /// No description provided for @sdRecordLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل'**
+  String get sdRecordLabel;
+
+  /// No description provided for @sdBillRef.
+  ///
+  /// In ar, this message translates to:
+  /// **'وصل #{ref}'**
+  String sdBillRef(Object ref);
+
+  /// No description provided for @sdBillNoRef.
+  ///
+  /// In ar, this message translates to:
+  /// **'وصل (بدون رقم)'**
+  String get sdBillNoRef;
+
+  /// No description provided for @sdUnlinkVoucherTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء ربط الإذن'**
+  String get sdUnlinkVoucherTooltip;
+
+  /// No description provided for @sdLinkVoucherTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'ربط بإذن وارد'**
+  String get sdLinkVoucherTooltip;
+
+  /// No description provided for @sdLinkedVoucher.
+  ///
+  /// In ar, this message translates to:
+  /// **'إذن وارد: {ref}'**
+  String sdLinkedVoucher(Object ref);
+
+  /// No description provided for @sdTheirDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخهم: {date}'**
+  String sdTheirDate(Object date);
+
+  /// No description provided for @sdRecordedDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّلنا: {date}'**
+  String sdRecordedDate(Object date);
+
+  /// No description provided for @sdPaymentRef.
+  ///
+  /// In ar, this message translates to:
+  /// **'دفعة #{ref}'**
+  String sdPaymentRef(Object ref);
+
+  /// No description provided for @sdReverseTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'عكس الدفعة (خطأ / دفعة زائدة)'**
+  String get sdReverseTooltip;
+
+  /// No description provided for @sdRecordedInCash.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسجّل في الصندوق'**
+  String get sdRecordedInCash;
+
+  /// No description provided for @sdNotInCash.
+  ///
+  /// In ar, this message translates to:
+  /// **'دون صندوق'**
+  String get sdNotInCash;
+
+  /// No description provided for @sdInvoiceVoucherRef.
+  ///
+  /// In ar, this message translates to:
+  /// **'سند فواتير #{ref}'**
+  String sdInvoiceVoucherRef(Object ref);
+
+  /// No description provided for @sdLinkedVoucherShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتبط بإذن #{ref}'**
+  String sdLinkedVoucherShort(Object ref);
+
+  /// No description provided for @sohPending.
+  ///
+  /// In ar, this message translates to:
+  /// **'معلقة'**
+  String get sohPending;
+
+  /// No description provided for @sohInProgress.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيد العمل'**
+  String get sohInProgress;
+
+  /// No description provided for @sohReadyForDelivery.
+  ///
+  /// In ar, this message translates to:
+  /// **'جاهزة للتسليم'**
+  String get sohReadyForDelivery;
+
+  /// No description provided for @sohDelivered.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسلّمة'**
+  String get sohDelivered;
+
+  /// No description provided for @sohSinceStart.
+  ///
+  /// In ar, this message translates to:
+  /// **'منذ البدء'**
+  String get sohSinceStart;
+
+  /// No description provided for @sohOverdue.
+  ///
+  /// In ar, this message translates to:
+  /// **'متأخر'**
+  String get sohOverdue;
+
+  /// No description provided for @sohTimeRemaining.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوقت المتبقي'**
+  String get sohTimeRemaining;
+
+  /// No description provided for @sohTryReLogin.
+  ///
+  /// In ar, this message translates to:
+  /// **'جرّب تسجيل الخروج ثم الدخول، أو أعد تشغيل التطبيق.'**
+  String get sohTryReLogin;
+
+  /// No description provided for @sohRestartToCompleteInit.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعد تشغيل التطبيق لإكمال تهيئة قاعدة البيانات.'**
+  String get sohRestartToCompleteInit;
+
+  /// No description provided for @sohUnexpectedLocalData.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيانات محلية غير متوقعة؛ أعد تشغيل التطبيق. إن تكرّر ذلك، أبلغ الدعم.'**
+  String get sohUnexpectedLocalData;
+
+  /// No description provided for @sohDatabaseBusy.
+  ///
+  /// In ar, this message translates to:
+  /// **'قاعدة البيانات مشغولة؛ انتظر ثوانٍ ثم أعد المحاولة.'**
+  String get sohDatabaseBusy;
+
+  /// No description provided for @sohPersistentError.
+  ///
+  /// In ar, this message translates to:
+  /// **'إن استمرّت المشكلة، أعد تشغيل التطبيق.'**
+  String get sohPersistentError;
+
+  /// No description provided for @sohNewTicketBreadcrumb.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكرة صيانة جديدة'**
+  String get sohNewTicketBreadcrumb;
+
+  /// No description provided for @sohFailedToLoadTickets.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر تحميل التذاكر.'**
+  String get sohFailedToLoadTickets;
+
+  /// No description provided for @sohDebugDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل تقنية (Debug): {error}'**
+  String sohDebugDetails(Object error);
+
+  /// No description provided for @sohRetry.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة المحاولة'**
+  String get sohRetry;
+
+  /// No description provided for @sohNoTicketsInTab.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد تذاكر في هذا التبويب.'**
+  String get sohNoTicketsInTab;
+
+  /// No description provided for @sohNoMatchingResults.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا نتائج مطابقة.'**
+  String get sohNoMatchingResults;
+
+  /// No description provided for @sohReturnBadge.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتجع'**
+  String get sohReturnBadge;
+
+  /// No description provided for @sohCreditSaleBadge.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع آجل'**
+  String get sohCreditSaleBadge;
+
+  /// No description provided for @sohInstallmentBadge.
+  ///
+  /// In ar, this message translates to:
+  /// **'تقسيط'**
+  String get sohInstallmentBadge;
+
+  /// No description provided for @sohDeliveryBadge.
+  ///
+  /// In ar, this message translates to:
+  /// **'توصيل'**
+  String get sohDeliveryBadge;
+
+  /// No description provided for @sohDeadlineOverdue.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجاوز موعد التسليم المتوقع — أكمل العمل أو حدّث الحالة.'**
+  String get sohDeadlineOverdue;
+
+  /// No description provided for @sohTicketDetailsBreadcrumb.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل التذكرة'**
+  String get sohTicketDetailsBreadcrumb;
+
+  /// No description provided for @sohCustomerDefault.
+  ///
+  /// In ar, this message translates to:
+  /// **'عميل'**
+  String get sohCustomerDefault;
+
+  /// No description provided for @sohSerialPlate.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيريال/لوحة: {value}'**
+  String sohSerialPlate(Object value);
+
+  /// No description provided for @sohValueLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'القيمة: {value}'**
+  String sohValueLabel(Object value);
+
+  /// No description provided for @sohPaidLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدفوع: {value}'**
+  String sohPaidLabel(Object value);
+
+  /// No description provided for @sohDepositLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'العربون: {value}'**
+  String sohDepositLabel(Object value);
+
+  /// No description provided for @sohRemainingLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'متبقّي: {value}'**
+  String sohRemainingLabel(Object value);
+
+  /// No description provided for @sohConvertToInvoiceTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحويل لفاتورة'**
+  String get sohConvertToInvoiceTooltip;
+
+  /// No description provided for @sohItemsSentToSale.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم إرسال البنود إلى شاشة البيع.'**
+  String get sohItemsSentToSale;
+
+  /// No description provided for @sohFailedToOpenSale.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر فتح البيع — راجع التذكرة أو أعد المحاولة.'**
+  String get sohFailedToOpenSale;
+
+  /// No description provided for @sohWorkStarted.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم بدء العمل وبدء احتساب الموعد'**
+  String get sohWorkStarted;
+
+  /// No description provided for @sohStartWorkLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدء العمل'**
+  String get sohStartWorkLabel;
+
+  /// No description provided for @sohTicketMovedToReady.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم نقل التذكرة إلى جاهزة للتسليم'**
+  String get sohTicketMovedToReady;
+
+  /// No description provided for @sohMoveToReady.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتقال إلى جاهز للتسليم'**
+  String get sohMoveToReady;
+
+  /// No description provided for @sohReadyForDeliveryLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'جاهز للتسليم'**
+  String get sohReadyForDeliveryLabel;
+
+  /// No description provided for @sohGoToPaymentLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الانتقال للدفع'**
+  String get sohGoToPaymentLabel;
+
+  /// No description provided for @sohDeliveryRecorded.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم تسجيل التسليم'**
+  String get sohDeliveryRecorded;
+
+  /// No description provided for @sohDeliveryFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر التسليم — راجع المبالغ من التفاصيل.'**
+  String get sohDeliveryFailed;
+
+  /// No description provided for @sohConfirmDelivery.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكيد التسليم'**
+  String get sohConfirmDelivery;
+
+  /// No description provided for @sohMaintenanceOrdersTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'طلبات الصيانة'**
+  String get sohMaintenanceOrdersTitle;
+
+  /// No description provided for @sohRefreshTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديث'**
+  String get sohRefreshTooltip;
+
+  /// No description provided for @sohNewTicketLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكرة جديدة'**
+  String get sohNewTicketLabel;
+
+  /// No description provided for @sohSearchHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث بالعميل أو الجهاز أو السيريال…'**
+  String get sohSearchHint;
+
+  /// No description provided for @sohDefaultServiceName.
+  ///
+  /// In ar, this message translates to:
+  /// **'خدمة فنية'**
+  String get sohDefaultServiceName;
+
+  /// No description provided for @sohSerialPrefix.
+  ///
+  /// In ar, this message translates to:
+  /// **'س: {value}'**
+  String sohSerialPrefix(Object value);
+
+  /// No description provided for @sohSparePartDefault.
+  ///
+  /// In ar, this message translates to:
+  /// **'قطعة غيار'**
+  String get sohSparePartDefault;
+
+  /// No description provided for @sohNewSaleBreadcrumb.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع جديد'**
+  String get sohNewSaleBreadcrumb;
 }
 
 class _AppLocalizationsDelegate

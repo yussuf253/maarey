@@ -12007,4 +12007,489 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get osUseExistingShift => 'العودة للوردية المفتوحة بدلاً من ذلك';
+
+  @override
+  String get sdRecordSupplierReceipt => 'تسجيل وصل المورد';
+
+  @override
+  String get sdRecordSupplierReceiptSubtitle =>
+      'رقم وتاريخ وصلهم + المبلغ + صورة اختيارية';
+
+  @override
+  String get sdSupplierPayment => 'دفعة للمورد';
+
+  @override
+  String get sdSupplierPaymentSubtitle => 'اختياري: خصم من الصندوق';
+
+  @override
+  String get sdSupplierReturn => 'مرتجع مورد (تخفيض الذمة)';
+
+  @override
+  String get sdSupplierReturnSubtitle => 'يسجّل حركة دون الصندوق';
+
+  @override
+  String get sdSupplierReceiptTitle => 'وصل المورد';
+
+  @override
+  String get sdTheirReceiptNo => 'رقم وصلهم / فاتورتهم';
+
+  @override
+  String get sdTheirReceiptDate => 'تاريخ وصلهم';
+
+  @override
+  String sdTheirReceiptDateWith(Object date) {
+    return 'تاريخ وصلهم: $date';
+  }
+
+  @override
+  String get sdAmountFdj => 'المبلغ (Fdj)';
+
+  @override
+  String get sdInternalNote => 'ملاحظة داخلية';
+
+  @override
+  String get sdPhoto => 'صورة';
+
+  @override
+  String get sdGallery => 'معرض';
+
+  @override
+  String sdPhotoSelected(Object name) {
+    return 'صورة: $name';
+  }
+
+  @override
+  String get sdCancel => 'إلغاء';
+
+  @override
+  String get sdSave => 'حفظ';
+
+  @override
+  String get sdEnterValidAmount => 'أدخل مبلغاً صالحاً';
+
+  @override
+  String sdSaveFailed(Object error) {
+    return 'تعذّر الحفظ: $error';
+  }
+
+  @override
+  String get sdReceiptRecorded => 'تم تسجيل وصل المورد';
+
+  @override
+  String get sdRecordDiscountFromCash => 'تسجيل خصم من الصندوق';
+
+  @override
+  String get sdDisableCashHint => 'يعطّله إن دفعت من حساب بنكي أو خارج النظام';
+
+  @override
+  String get sdConfirm => 'تأكيد';
+
+  @override
+  String get sdPaymentRecordedCash => 'تم تسجيل الدفعة وقيد الصندوق';
+
+  @override
+  String get sdPaymentRecordedNoCash => 'تم تسجيل الدفعة (دون صندوق)';
+
+  @override
+  String get sdRecordFailed => 'تعذّر التسجيل';
+
+  @override
+  String get sdReturnTitle => 'مرتجع مورد';
+
+  @override
+  String get sdNote => 'ملاحظة';
+
+  @override
+  String get sdReturnCashHint =>
+      'سيُسجّل هذا المرتجع ضمن ذمم الموردين فقط دون حركة صندوق.';
+
+  @override
+  String get sdRegister => 'تسجيل';
+
+  @override
+  String get sdReturnDefaultNote => 'مرتجع مورد (بدون صندوق)';
+
+  @override
+  String get sdReturnFailed => 'تعذّر تسجيل المرتجع';
+
+  @override
+  String get sdReturnRecorded => 'تم تسجيل مرتجع المورد';
+
+  @override
+  String get sdReversePayment => 'عكس الدفعة؟';
+
+  @override
+  String sdReverseCashDesc(Object amount) {
+    return 'سيُحذف سجل الدفعة ويُسجَّل في الصندوق إيداع قدره $amount Fdj';
+  }
+
+  @override
+  String get sdReverseNoCashDesc =>
+      'سيُحذف سجل الدفعة فقط (لم تكن مرتبطة بالصندوق).';
+
+  @override
+  String get sdConfirmReverse => 'تأكيد العكس';
+
+  @override
+  String get sdReverseFailed => 'تعذّر العكس';
+
+  @override
+  String get sdReversed => 'تم عكس الدفعة';
+
+  @override
+  String get sdNoActiveWarehouse =>
+      'لا يوجد مخزن نشط — أضف مخزناً من إعدادات المخازن';
+
+  @override
+  String get sdTargetWarehouse => 'المخزن المستهدف';
+
+  @override
+  String get sdContinue => 'متابعة';
+
+  @override
+  String get sdLinkedVoucherCreated => 'أُنشئ السند وتم الربط';
+
+  @override
+  String get sdVoucherCreatedLinkFailed => 'أُنشئ السند وتعذّر الربط';
+
+  @override
+  String sdCreationFailed(Object error) {
+    return 'تعذّر الإنشاء: $error';
+  }
+
+  @override
+  String get sdUnlinkVoucher => 'إلغاء ربط الإذن؟';
+
+  @override
+  String get sdUnlinkVoucherDesc =>
+      'سيُزال الربط بين وصل المورد وسند المخزون فقط دون حذف السند.';
+
+  @override
+  String get sdUnlinked => 'تم إلغاء الربط';
+
+  @override
+  String get sdLinkToSupplierReceipt => 'ربط بوصل المورد — إذن وارد';
+
+  @override
+  String get sdEmptyVoucherAutoLink => 'سند وارد فارغ + ربط تلقائي';
+
+  @override
+  String get sdLinkInstruction =>
+      'أو اختر سنداً واردًا مسجّلاً، أو أدخل رقم السند / المعرّف ثم «بحث وربط».';
+
+  @override
+  String get sdNoVouchersYet =>
+      'لا توجد أذون وارد في القاعدة بعد — استخدم الحقل أدناه عند توفر السند.';
+
+  @override
+  String get sdLatestVouchers => 'أحدث الأذون';
+
+  @override
+  String get sdLinked => 'تم الربط';
+
+  @override
+  String get sdLinkFailed => 'تعذّر الربط';
+
+  @override
+  String get sdVoucherNoOrId => 'رقم السند أو معرّفه';
+
+  @override
+  String get sdClose => 'إغلاق';
+
+  @override
+  String get sdVoucherNotFound => 'لم يُعثر على سند وارد بهذا الرقم';
+
+  @override
+  String get sdSearchAndLink => 'بحث وربط';
+
+  @override
+  String get sdEditSupplier => 'تعديل المورد';
+
+  @override
+  String get sdName => 'الاسم';
+
+  @override
+  String get sdPhone => 'الهاتف';
+
+  @override
+  String get sdSupplierDefault => 'مورد';
+
+  @override
+  String get sdEditTooltip => 'تعديل';
+
+  @override
+  String get sdSupplierNotFound => 'المورد غير موجود';
+
+  @override
+  String get sdBalanceOwedToYou => 'ما علينا لهذا المورد';
+
+  @override
+  String get sdOverpayment => 'رصيد لصالحكم (دفعة زائدة / خطأ)';
+
+  @override
+  String get sdBalanceWithSupplier => 'الرصيد مع المورد';
+
+  @override
+  String get sdNoBillForPayout =>
+      'لا يوجد وصل مورد يغطّي هذه الدفعة — استخدم «عكس الدفعة» بجانب الدفعة لا';
+
+  @override
+  String sdPhoneLabel(Object phone) {
+    return 'هاتف: $phone';
+  }
+
+  @override
+  String get sdPaymentWithoutReceipt =>
+      'تنبيه: دُفع للمورد دون تسجيل وصل بمبلغ مساوٍ. إن كان الدفع بالخطأ،';
+
+  @override
+  String get sdSupplierReturnLabel => 'مرتجع مورد';
+
+  @override
+  String get sdSupplierPaymentLabel => 'دفعة مورد';
+
+  @override
+  String get sdSupplierReceiptLabel => 'وصل مورد';
+
+  @override
+  String get sdSupplierReceipts => 'وصولات المورد';
+
+  @override
+  String get sdLinkReceiptInstruction =>
+      'يمكن ربط كل وصل بإذن مخزني وارد (رقم السند) عند تسجيل الأذون في قاعدة البيانات.';
+
+  @override
+  String get sdNoReceiptsYet => 'لا وصولات بعد.';
+
+  @override
+  String get sdOurPayments => 'دفعاتنا';
+
+  @override
+  String get sdNoPaymentsYet => 'لا دفعات بعد.';
+
+  @override
+  String get sdRecordLabel => 'تسجيل';
+
+  @override
+  String sdBillRef(Object ref) {
+    return 'وصل #$ref';
+  }
+
+  @override
+  String get sdBillNoRef => 'وصل (بدون رقم)';
+
+  @override
+  String get sdUnlinkVoucherTooltip => 'إلغاء ربط الإذن';
+
+  @override
+  String get sdLinkVoucherTooltip => 'ربط بإذن وارد';
+
+  @override
+  String sdLinkedVoucher(Object ref) {
+    return 'إذن وارد: $ref';
+  }
+
+  @override
+  String sdTheirDate(Object date) {
+    return 'تاريخهم: $date';
+  }
+
+  @override
+  String sdRecordedDate(Object date) {
+    return 'سجّلنا: $date';
+  }
+
+  @override
+  String sdPaymentRef(Object ref) {
+    return 'دفعة #$ref';
+  }
+
+  @override
+  String get sdReverseTooltip => 'عكس الدفعة (خطأ / دفعة زائدة)';
+
+  @override
+  String get sdRecordedInCash => 'مسجّل في الصندوق';
+
+  @override
+  String get sdNotInCash => 'دون صندوق';
+
+  @override
+  String sdInvoiceVoucherRef(Object ref) {
+    return 'سند فواتير #$ref';
+  }
+
+  @override
+  String sdLinkedVoucherShort(Object ref) {
+    return 'مرتبط بإذن #$ref';
+  }
+
+  @override
+  String get sohPending => 'معلقة';
+
+  @override
+  String get sohInProgress => 'قيد العمل';
+
+  @override
+  String get sohReadyForDelivery => 'جاهزة للتسليم';
+
+  @override
+  String get sohDelivered => 'مسلّمة';
+
+  @override
+  String get sohSinceStart => 'منذ البدء';
+
+  @override
+  String get sohOverdue => 'متأخر';
+
+  @override
+  String get sohTimeRemaining => 'الوقت المتبقي';
+
+  @override
+  String get sohTryReLogin =>
+      'جرّب تسجيل الخروج ثم الدخول، أو أعد تشغيل التطبيق.';
+
+  @override
+  String get sohRestartToCompleteInit =>
+      'أعد تشغيل التطبيق لإكمال تهيئة قاعدة البيانات.';
+
+  @override
+  String get sohUnexpectedLocalData =>
+      'بيانات محلية غير متوقعة؛ أعد تشغيل التطبيق. إن تكرّر ذلك، أبلغ الدعم.';
+
+  @override
+  String get sohDatabaseBusy =>
+      'قاعدة البيانات مشغولة؛ انتظر ثوانٍ ثم أعد المحاولة.';
+
+  @override
+  String get sohPersistentError => 'إن استمرّت المشكلة، أعد تشغيل التطبيق.';
+
+  @override
+  String get sohNewTicketBreadcrumb => 'تذكرة صيانة جديدة';
+
+  @override
+  String get sohFailedToLoadTickets => 'تعذر تحميل التذاكر.';
+
+  @override
+  String sohDebugDetails(Object error) {
+    return 'تفاصيل تقنية (Debug): $error';
+  }
+
+  @override
+  String get sohRetry => 'إعادة المحاولة';
+
+  @override
+  String get sohNoTicketsInTab => 'لا توجد تذاكر في هذا التبويب.';
+
+  @override
+  String get sohNoMatchingResults => 'لا نتائج مطابقة.';
+
+  @override
+  String get sohReturnBadge => 'مرتجع';
+
+  @override
+  String get sohCreditSaleBadge => 'بيع آجل';
+
+  @override
+  String get sohInstallmentBadge => 'تقسيط';
+
+  @override
+  String get sohDeliveryBadge => 'توصيل';
+
+  @override
+  String get sohDeadlineOverdue =>
+      'تجاوز موعد التسليم المتوقع — أكمل العمل أو حدّث الحالة.';
+
+  @override
+  String get sohTicketDetailsBreadcrumb => 'تفاصيل التذكرة';
+
+  @override
+  String get sohCustomerDefault => 'عميل';
+
+  @override
+  String sohSerialPlate(Object value) {
+    return 'سيريال/لوحة: $value';
+  }
+
+  @override
+  String sohValueLabel(Object value) {
+    return 'القيمة: $value';
+  }
+
+  @override
+  String sohPaidLabel(Object value) {
+    return 'مدفوع: $value';
+  }
+
+  @override
+  String sohDepositLabel(Object value) {
+    return 'العربون: $value';
+  }
+
+  @override
+  String sohRemainingLabel(Object value) {
+    return 'متبقّي: $value';
+  }
+
+  @override
+  String get sohConvertToInvoiceTooltip => 'تحويل لفاتورة';
+
+  @override
+  String get sohItemsSentToSale => 'تم إرسال البنود إلى شاشة البيع.';
+
+  @override
+  String get sohFailedToOpenSale =>
+      'تعذر فتح البيع — راجع التذكرة أو أعد المحاولة.';
+
+  @override
+  String get sohWorkStarted => 'تم بدء العمل وبدء احتساب الموعد';
+
+  @override
+  String get sohStartWorkLabel => 'بدء العمل';
+
+  @override
+  String get sohTicketMovedToReady => 'تم نقل التذكرة إلى جاهزة للتسليم';
+
+  @override
+  String get sohMoveToReady => 'انتقال إلى جاهز للتسليم';
+
+  @override
+  String get sohReadyForDeliveryLabel => 'جاهز للتسليم';
+
+  @override
+  String get sohGoToPaymentLabel => 'الانتقال للدفع';
+
+  @override
+  String get sohDeliveryRecorded => 'تم تسجيل التسليم';
+
+  @override
+  String get sohDeliveryFailed => 'تعذر التسليم — راجع المبالغ من التفاصيل.';
+
+  @override
+  String get sohConfirmDelivery => 'تأكيد التسليم';
+
+  @override
+  String get sohMaintenanceOrdersTitle => 'طلبات الصيانة';
+
+  @override
+  String get sohRefreshTooltip => 'تحديث';
+
+  @override
+  String get sohNewTicketLabel => 'تذكرة جديدة';
+
+  @override
+  String get sohSearchHint => 'بحث بالعميل أو الجهاز أو السيريال…';
+
+  @override
+  String get sohDefaultServiceName => 'خدمة فنية';
+
+  @override
+  String sohSerialPrefix(Object value) {
+    return 'س: $value';
+  }
+
+  @override
+  String get sohSparePartDefault => 'قطعة غيار';
+
+  @override
+  String get sohNewSaleBreadcrumb => 'بيع جديد';
 }

@@ -39,6 +39,7 @@ class SupplierDetailScreen extends StatefulWidget {
 }
 
 class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
+  AppLocalizations get _loc => AppLocalizations.of(context)!;
   final DatabaseHelper _db = DatabaseHelper();
   final ImagePicker _picker = ImagePicker();
 
@@ -110,8 +111,8 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
           children: [
             ListTile(
               leading: const Icon(Icons.receipt_long_rounded),
-              title: const Text('تسجيل وصل المورد'),
-              subtitle: const Text('رقم وتاريخ وصلهم + المبلغ + صورة اختيارية'),
+              title: Text(_loc.sdRecordSupplierReceipt),
+              subtitle: Text(_loc.sdRecordSupplierReceiptSubtitle),
               onTap: () {
                 Navigator.pop(ctx);
                 _showAddBillDialog();
@@ -119,8 +120,8 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.payments_rounded),
-              title: const Text('دفعة للمورد'),
-              subtitle: const Text('اختياري: خصم من الصندوق'),
+              title: Text(_loc.sdSupplierPayment),
+              subtitle: Text(_loc.sdSupplierPaymentSubtitle),
               onTap: () {
                 Navigator.pop(ctx);
                 _showPayoutDialog();
@@ -128,8 +129,8 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.assignment_return_outlined),
-              title: const Text('مرتجع مورد (تخفيض الذمة)'),
-              subtitle: const Text('يسجّل حركة دون الصندوق'),
+              title: Text(_loc.sdSupplierReturn),
+              subtitle: Text(_loc.sdSupplierReturnSubtitle),
               onTap: () {
                 Navigator.pop(ctx);
                 _showSupplierReturnDialog();
@@ -155,7 +156,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
           textDirection: Directionality.of(context),
           child: AlertDialog(
             shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
-            title: const Text('وصل المورد'),
+            title: Text(_loc.sdSupplierReceiptTitle),
             content: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -163,9 +164,9 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                 children: [
                   TextField(
                     controller: refCtrl,
-                    decoration: const InputDecoration(
-                      labelText: 'رقم وصلهم / فاتورتهم',
-                      border: OutlineInputBorder(borderRadius: AppShape.none),
+                    decoration: InputDecoration(
+                      labelText: _loc.sdTheirReceiptNo,
+                      border: const OutlineInputBorder(borderRadius: AppShape.none),
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -173,8 +174,8 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                     contentPadding: EdgeInsets.zero,
                     title: Text(
                       theirDate != null
-                          ? 'تاريخ وصلهم: ${_dateFmt.format(theirDate!)}'
-                          : 'تاريخ وصلهم',
+                          ? _loc.sdTheirReceiptDateWith(_dateFmt.format(theirDate!))
+                          : _loc.sdTheirReceiptDate,
                     ),
                     trailing: IconButton(
                       icon: const Icon(Icons.calendar_today_rounded),
@@ -192,18 +193,18 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                   TextField(
                     controller: amountCtrl,
                     keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: 'المبلغ (Fdj) *',
-                      border: OutlineInputBorder(borderRadius: AppShape.none),
+                    decoration: InputDecoration(
+                      labelText: '${_loc.sdAmountFdj} *',
+                      border: const OutlineInputBorder(borderRadius: AppShape.none),
                     ),
                   ),
                   const SizedBox(height: 8),
                   TextField(
                     controller: noteCtrl,
                     maxLines: 2,
-                    decoration: const InputDecoration(
-                      labelText: 'ملاحظة داخلية',
-                      border: OutlineInputBorder(borderRadius: AppShape.none),
+                    decoration: InputDecoration(
+                      labelText: _loc.sdInternalNote,
+                      border: const OutlineInputBorder(borderRadius: AppShape.none),
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -218,7 +219,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                           if (x != null) setLocal(() => pickedFile = x);
                         },
                         icon: const Icon(Icons.photo_camera_rounded),
-                        label: const Text('صورة'),
+                        label: Text(_loc.sdPhoto),
                       ),
                       const SizedBox(width: 8),
                       OutlinedButton.icon(
@@ -230,13 +231,13 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                           if (x != null) setLocal(() => pickedFile = x);
                         },
                         icon: const Icon(Icons.photo_library_outlined),
-                        label: const Text('معرض'),
+                        label: Text(_loc.sdGallery),
                       ),
                     ],
                   ),
                   if (pickedFile != null)
                     Text(
-                      'صورة: ${pickedFile!.name}',
+                      _loc.sdPhotoSelected(pickedFile!.name),
                       style: TextStyle(
                         fontSize: 12,
                         color: Theme.of(ctx).hintColor,
@@ -248,11 +249,11 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(ctx, false),
-                child: const Text('إلغاء'),
+                child: Text(_loc.sdCancel),
               ),
               FilledButton(
                 onPressed: () => Navigator.pop(ctx, true),
-                child: const Text('حفظ'),
+                child: Text(_loc.sdSave),
               ),
             ],
           ),
@@ -271,7 +272,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
     if (amt <= 0) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('أدخل مبلغاً صالحاً')));
+      ).showSnackBar(SnackBar(content: Text(_loc.sdEnterValidAmount)));
       return;
     }
 
@@ -301,14 +302,14 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('تعذّر الحفظ: $e')));
+        ).showSnackBar(SnackBar(content: Text(_loc.sdSaveFailed(e.toString()))));
       }
       return;
     }
     if (mounted) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('تم تسجيل وصل المورد')));
+      ).showSnackBar(SnackBar(content: Text(_loc.sdReceiptRecorded)));
       await _load();
     }
   }
@@ -325,7 +326,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
           textDirection: Directionality.of(context),
           child: AlertDialog(
             shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
-            title: const Text('دفعة للمورد'),
+            title: Text(_loc.sdSupplierPayment),
             content: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -334,24 +335,24 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                   TextField(
                     controller: amountCtrl,
                     keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: 'المبلغ (Fdj)',
-                      border: OutlineInputBorder(borderRadius: AppShape.none),
+                    decoration: InputDecoration(
+                      labelText: _loc.sdAmountFdj,
+                      border: const OutlineInputBorder(borderRadius: AppShape.none),
                     ),
                   ),
                   const SizedBox(height: 8),
                   TextField(
                     controller: noteCtrl,
                     maxLines: 2,
-                    decoration: const InputDecoration(
-                      labelText: 'ملاحظة',
-                      border: OutlineInputBorder(borderRadius: AppShape.none),
+                    decoration: InputDecoration(
+                      labelText: _loc.sdNote,
+                      border: const OutlineInputBorder(borderRadius: AppShape.none),
                     ),
                   ),
                   SwitchListTile(
-                    title: const Text('تسجيل خصم من الصندوق'),
-                    subtitle: const Text(
-                      'يعطّله إن دفعت من حساب بنكي أو خارج النظام',
+                    title: Text(_loc.sdRecordDiscountFromCash),
+                    subtitle: Text(
+                      _loc.sdDisableCashHint,
                     ),
                     value: affectsCash,
                     onChanged: (v) => setLocal(() => affectsCash = v),
@@ -362,11 +363,11 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(ctx, false),
-                child: const Text('إلغاء'),
+                child: Text(_loc.sdCancel),
               ),
               FilledButton(
                 onPressed: () => Navigator.pop(ctx, true),
-                child: const Text('تأكيد'),
+                child: Text(_loc.sdConfirm),
               ),
             ],
           ),
@@ -383,7 +384,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
     if (amt <= 0) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('أدخل مبلغاً صالحاً')));
+      ).showSnackBar(SnackBar(content: Text(_loc.sdEnterValidAmount)));
       return;
     }
 
@@ -399,15 +400,15 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
     if (res == null) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('تعذّر التسجيل')));
+      ).showSnackBar(SnackBar(content: Text(_loc.sdRecordFailed)));
       return;
     }
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
           affectsCash
-              ? 'تم تسجيل الدفعة وقيد الصندوق'
-              : 'تم تسجيل الدفعة (دون صندوق)',
+              ? _loc.sdPaymentRecordedCash
+              : _loc.sdPaymentRecordedNoCash,
         ),
       ),
     );
@@ -441,7 +442,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
           textDirection: Directionality.of(context),
           child: AlertDialog(
             shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
-            title: const Text('مرتجع مورد'),
+            title: Text(_loc.sdReturnTitle),
             content: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -450,23 +451,23 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                   TextField(
                     controller: amountCtrl,
                     keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: 'المبلغ (Fdj)',
-                      border: OutlineInputBorder(borderRadius: AppShape.none),
+                    decoration: InputDecoration(
+                      labelText: _loc.sdAmountFdj,
+                      border: const OutlineInputBorder(borderRadius: AppShape.none),
                     ),
                   ),
                   const SizedBox(height: 8),
                   TextField(
                     controller: noteCtrl,
                     maxLines: 2,
-                    decoration: const InputDecoration(
-                      labelText: 'ملاحظة',
-                      border: OutlineInputBorder(borderRadius: AppShape.none),
+                    decoration: InputDecoration(
+                      labelText: _loc.sdNote,
+                      border: const OutlineInputBorder(borderRadius: AppShape.none),
                     ),
                   ),
                   const SizedBox(height: 10),
-                  const Text(
-                    'سيُسجّل هذا المرتجع ضمن ذمم الموردين فقط دون حركة صندوق.',
+                  Text(
+                    _loc.sdReturnCashHint,
                     style: TextStyle(fontSize: 12),
                   ),
                 ],
@@ -475,11 +476,11 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(ctx, false),
-                child: const Text('إلغاء'),
+                child: Text(_loc.sdCancel),
               ),
               FilledButton(
                 onPressed: () => Navigator.pop(ctx, true),
-                child: const Text('تسجيل'),
+                child: Text(_loc.sdRegister),
               ),
             ],
           ),
@@ -496,7 +497,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
     if (amt <= 0) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('أدخل مبلغاً صالحاً')));
+      ).showSnackBar(SnackBar(content: Text(_loc.sdEnterValidAmount)));
       return;
     }
 
@@ -504,7 +505,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
     final res = await _db.recordSupplierPayout(
       supplierId: widget.supplierId,
       amount: amt,
-      note: note.isEmpty ? 'مرتجع مورد (بدون صندوق)' : note,
+      note: note.isEmpty ? _loc.sdReturnDefaultNote : note,
       affectsCash: false,
       recordedByUserName: _userName(context),
     );
@@ -512,12 +513,12 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
     if (res == null) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('تعذّر تسجيل المرتجع')));
+      ).showSnackBar(SnackBar(content: Text(_loc.sdReturnFailed)));
       return;
     }
     ScaffoldMessenger.of(
       context,
-    ).showSnackBar(const SnackBar(content: Text('تم تسجيل مرتجع المورد')));
+    ).showSnackBar(SnackBar(content: Text(_loc.sdReturnRecorded)));
     await _load();
     if (!mounted) return;
     await SaleReceiptPdf.presentSupplierPaymentReceipt(
@@ -531,7 +532,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
       payoutRowId: res.payoutId,
       receiptInvoiceId: res.receiptInvoiceId,
       affectsCash: false,
-      note: note.isEmpty ? 'مرتجع مورد (بدون صندوق)' : note,
+      note: note.isEmpty ? _loc.sdReturnDefaultNote : note,
       recordedByUserName: _userName(context),
     );
   }
@@ -543,20 +544,20 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
         textDirection: Directionality.of(context),
         child: AlertDialog(
           shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
-          title: const Text('عكس الدفعة؟'),
+          title: Text(_loc.sdReversePayment),
           content: Text(
             p.affectsCash
-                ? 'سيُحذف سجل الدفعة ويُسجَّل في الصندوق إيداع قدره ${_numFmt.format(p.amount)} Fdj (عكس الخصم السابق).'
-                : 'سيُحذف سجل الدفعة فقط (لم تكن مرتبطة بالصندوق).',
+                ? _loc.sdReverseCashDesc(_numFmt.format(p.amount))
+                : _loc.sdReverseNoCashDesc,
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: const Text('إلغاء'),
+              child: Text(_loc.sdCancel),
             ),
             FilledButton(
               onPressed: () => Navigator.pop(ctx, true),
-              child: const Text('تأكيد العكس'),
+              child: Text(_loc.sdConfirmReverse),
             ),
           ],
         ),
@@ -571,12 +572,12 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
     if (!done) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('تعذّر العكس')));
+      ).showSnackBar(SnackBar(content: Text(_loc.sdReverseFailed)));
       return;
     }
     ScaffoldMessenger.of(
       context,
-    ).showSnackBar(const SnackBar(content: Text('تم عكس الدفعة')));
+    ).showSnackBar(SnackBar(content: Text(_loc.sdReversed)));
     unawaited(context.read<InvoiceProvider>().refresh());
     await _load();
   }
@@ -588,8 +589,8 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
     if (!mounted) return;
     if (whs.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('لا يوجد مخزن نشط — أضف مخزناً من إعدادات المخازن'),
+        SnackBar(
+          content: Text(_loc.sdNoActiveWarehouse),
         ),
       );
       return;
@@ -604,7 +605,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
           child: StatefulBuilder(
             builder: (ctx, setS) => AlertDialog(
               shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
-              title: const Text('المخزن المستهدف'),
+              title: Text(_loc.sdTargetWarehouse),
               content: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -621,11 +622,11 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(ctx),
-                  child: const Text('إلغاء'),
+                  child: Text(_loc.sdCancel),
                 ),
                 FilledButton(
                   onPressed: () => Navigator.pop(ctx, sel),
-                  child: const Text('متابعة'),
+                  child: Text(_loc.sdContinue),
                 ),
               ],
             ),
@@ -641,7 +642,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
         tenantId: TenantContextService.instance.activeTenantId,
         warehouseToId: wid,
         supplierName: sup?.name,
-        referenceNo: 'وصل مورد #${bill.id}',
+        referenceNo: _loc.sdLinkedVoucherShort(bill.id.toString()),
         sourceType: 'supplier',
         sourceName: sup?.name,
         sourceRefId: bill.id,
@@ -655,7 +656,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            ok ? 'أُنشئ السند وتم الربط' : 'أُنشئ السند وتعذّر الربط',
+            ok ? _loc.sdLinkedVoucherCreated : _loc.sdVoucherCreatedLinkFailed,
           ),
         ),
       );
@@ -664,7 +665,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('تعذّر الإنشاء: $e')));
+        ).showSnackBar(SnackBar(content: Text(_loc.sdCreationFailed(e.toString()))));
       }
     }
   }
@@ -677,18 +678,18 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
         textDirection: Directionality.of(context),
         child: AlertDialog(
           shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
-          title: const Text('إلغاء ربط الإذن؟'),
-          content: const Text(
-            'سيُزال الربط بين وصل المورد وسند المخزون فقط دون حذف السند.',
+          title: Text(_loc.sdUnlinkVoucher),
+          content: Text(
+            _loc.sdUnlinkVoucherDesc,
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: const Text('إلغاء'),
+              child: Text(_loc.sdCancel),
             ),
             FilledButton(
               onPressed: () => Navigator.pop(ctx, true),
-              child: const Text('تأكيد'),
+              child: Text(_loc.sdConfirm),
             ),
           ],
         ),
@@ -702,7 +703,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
     if (mounted) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('تم إلغاء الربط')));
+      ).showSnackBar(SnackBar(content: Text(_loc.sdUnlinked)));
       await _load();
     }
   }
@@ -718,7 +719,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
           textDirection: Directionality.of(context),
           child: AlertDialog(
             shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
-            title: const Text('ربط بوصل المورد — إذن وارد'),
+            title: Text(_loc.sdLinkToSupplierReceipt),
             content: SizedBox(
               width: double.maxFinite,
               child: SingleChildScrollView(
@@ -728,7 +729,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                   children: [
                     OutlinedButton.icon(
                       icon: const Icon(Icons.add_circle_outline_rounded),
-                      label: const Text('سند وارد فارغ + ربط تلقائي'),
+                      label: Text(_loc.sdEmptyVoucherAutoLink),
                       onPressed: () {
                         Navigator.pop(ctx);
                         _createStubVoucherAndLink(bill);
@@ -736,7 +737,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      'أو اختر سنداً واردًا مسجّلاً، أو أدخل رقم السند / المعرّف ثم «بحث وربط».',
+                      _loc.sdLinkInstruction,
                       style: TextStyle(
                         fontSize: 12,
                         color: Theme.of(ctx).hintColor,
@@ -748,7 +749,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 8),
                         child: Text(
-                          'لا توجد أذون وارد في القاعدة بعد — استخدم الحقل أدناه عند توفر السند.',
+                          _loc.sdNoVouchersYet,
                           style: TextStyle(
                             fontSize: 12,
                             color: Theme.of(ctx).colorScheme.outline,
@@ -757,7 +758,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                       )
                     else ...[
                       Text(
-                        'أحدث الأذون',
+                        _loc.sdLatestVouchers,
                         style: Theme.of(ctx).textTheme.labelLarge,
                       ),
                       const SizedBox(height: 4),
@@ -789,7 +790,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                             if (!mounted) return;
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text(ok ? 'تم الربط' : 'تعذّر الربط'),
+                                content: Text(ok ? _loc.sdLinked : _loc.sdLinkFailed),
                               ),
                             );
                             await _load();
@@ -800,9 +801,9 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                     ],
                     TextField(
                       controller: refCtrl,
-                      decoration: const InputDecoration(
-                        labelText: 'رقم السند أو معرّفه',
-                        border: OutlineInputBorder(borderRadius: AppShape.none),
+                      decoration: InputDecoration(
+                        labelText: _loc.sdVoucherNoOrId,
+                        border: const OutlineInputBorder(borderRadius: AppShape.none),
                       ),
                     ),
                   ],
@@ -812,7 +813,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(ctx),
-                child: const Text('إغلاق'),
+                child: Text(_loc.sdClose),
               ),
               FilledButton(
                 onPressed: () async {
@@ -822,8 +823,8 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                   if (!ctx.mounted) return;
                   if (row == null) {
                     ScaffoldMessenger.of(ctx).showSnackBar(
-                      const SnackBar(
-                        content: Text('لم يُعثر على سند وارد بهذا الرقم'),
+                      SnackBar(
+                        content: Text(_loc.sdVoucherNotFound),
                       ),
                     );
                     return;
@@ -838,11 +839,11 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                   Navigator.pop(ctx);
                   if (!mounted) return;
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(ok ? 'تم الربط' : 'تعذّر الربط')),
+                    SnackBar(content: Text(ok ? _loc.sdLinked : _loc.sdLinkFailed)),
                   );
                   await _load();
                 },
-                child: const Text('بحث وربط'),
+                child: Text(_loc.sdSearchAndLink),
               ),
             ],
           ),
@@ -864,23 +865,23 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
         textDirection: Directionality.of(context),
         child: AlertDialog(
           shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
-          title: const Text('تعديل المورد'),
+          title: Text(_loc.sdEditSupplier),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: nameCtrl,
-                decoration: const InputDecoration(
-                  labelText: 'الاسم',
-                  border: OutlineInputBorder(borderRadius: AppShape.none),
+                decoration: InputDecoration(
+                  labelText: _loc.sdName,
+                  border: const OutlineInputBorder(borderRadius: AppShape.none),
                 ),
               ),
               const SizedBox(height: 8),
               TextField(
                 controller: phoneCtrl,
-                decoration: const InputDecoration(
-                  labelText: 'الهاتف',
-                  border: OutlineInputBorder(borderRadius: AppShape.none),
+                decoration: InputDecoration(
+                  labelText: _loc.sdPhone,
+                  border: const OutlineInputBorder(borderRadius: AppShape.none),
                 ),
               ),
             ],
@@ -888,11 +889,11 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: const Text('إلغاء'),
+              child: Text(_loc.sdCancel),
             ),
             FilledButton(
               onPressed: () => Navigator.pop(ctx, true),
-              child: const Text('حفظ'),
+              child: Text(_loc.sdSave),
             ),
           ],
         ),
@@ -923,11 +924,11 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
       textDirection: Directionality.of(context),
       child: Scaffold(
         appBar: AppBar(
-          title: Text(_supplier?.name ?? 'مورد'),
+          title: Text(_supplier?.name ?? _loc.sdSupplierDefault),
           actions: [
             if (_supplier != null)
               IconButton(
-                tooltip: 'تعديل',
+                tooltip: _loc.sdEditTooltip,
                 onPressed: _editSupplierName,
                 icon: const Icon(Icons.edit_outlined),
               ),
@@ -940,7 +941,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
         body: _loading
             ? const Center(child: CircularProgressIndicator())
             : _supplier == null
-            ? const Center(child: Text('المورد غير موجود'))
+            ? Center(child: Text(_loc.sdSupplierNotFound))
             : ListView(
                 padding: EdgeInsetsDirectional.only(
                   start: ScreenLayout.of(context).pageHorizontalGap,
@@ -962,10 +963,10 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                       children: [
                         Text(
                           _openPayable > 1e-6
-                              ? 'ما علينا لهذا المورد'
+                              ? _loc.sdBalanceOwedToYou
                               : _openPayable < -1e-6
-                              ? 'رصيد لصالحكم (دفعة زائدة / خطأ)'
-                              : 'الرصيد مع المورد',
+                              ? _loc.sdOverpayment
+                              : _loc.sdBalanceWithSupplier,
                           style: TextStyle(
                             color: cs.onSurfaceVariant,
                             fontSize: 13,
@@ -987,7 +988,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                         if (_openPayable < -1e-6) ...[
                           const SizedBox(height: 8),
                           Text(
-                            'لا يوجد وصل مورد يغطّي هذه الدفعة — استخدم «عكس الدفعة» بجانب الدفعة لاسترجاع الصندوق، أو سجّل وصل المورد إن كان صحيحاً.',
+                            _loc.sdNoBillForPayout,
                             style: TextStyle(
                               fontSize: 12,
                               height: 1.4,
@@ -997,7 +998,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                         ],
                         if ((_supplier!.phone ?? '').isNotEmpty) ...[
                           const SizedBox(height: 8),
-                          Text('هاتف: ${_supplier!.phone}'),
+                          Text(_loc.sdPhoneLabel(_supplier!.phone ?? '')),
                         ],
                       ],
                     ),
@@ -1022,7 +1023,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                             const SizedBox(width: 10),
                             Expanded(
                               child: Text(
-                                'تنبيه: دُفع للمورد دون تسجيل وصل بمبلغ مساوٍ. إن كان الدفع بالخطأ، اضغط أيقونة التراجع بجانب الدفعة.',
+                                _loc.sdPaymentWithoutReceipt,
                                 style: TextStyle(
                                   fontSize: 13,
                                   height: 1.4,
@@ -1043,30 +1044,30 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                       OutlinedButton.icon(
                         onPressed: _showSupplierReturnDialog,
                         icon: const Icon(Icons.assignment_return_outlined),
-                        label: const Text('مرتجع مورد'),
+                        label: Text(_loc.sdSupplierReturnLabel),
                       ),
                       OutlinedButton.icon(
                         onPressed: _showPayoutDialog,
                         icon: const Icon(Icons.payments_rounded),
-                        label: const Text('دفعة مورد'),
+                        label: Text(_loc.sdSupplierPaymentLabel),
                       ),
                       OutlinedButton.icon(
                         onPressed: _showAddBillDialog,
                         icon: const Icon(Icons.receipt_long_rounded),
-                        label: const Text('وصل مورد'),
+                        label: Text(_loc.sdSupplierReceiptLabel),
                       ),
                     ],
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'وصولات المورد',
+                    _loc.sdSupplierReceipts,
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'يمكن ربط كل وصل بإذن مخزني وارد (رقم السند) عند تسجيل الأذون في قاعدة البيانات.',
+                    _loc.sdLinkReceiptInstruction,
                     style: TextStyle(
                       fontSize: 11,
                       color: cs.onSurfaceVariant,
@@ -1076,7 +1077,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                   const SizedBox(height: 8),
                   if (_bills.isEmpty)
                     Text(
-                      'لا وصولات بعد.',
+                      _loc.sdNoReceiptsYet,
                       style: TextStyle(color: cs.onSurfaceVariant),
                     )
                   else
@@ -1090,7 +1091,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                       ),
                   const SizedBox(height: 20),
                   Text(
-                    'دفعاتنا',
+                    _loc.sdOurPayments,
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -1098,7 +1099,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
                   const SizedBox(height: 8),
                   if (_payouts.isEmpty)
                     Text(
-                      'لا دفعات بعد.',
+                      _loc.sdNoPaymentsYet,
                       style: TextStyle(color: cs.onSurfaceVariant),
                     )
                   else
@@ -1116,7 +1117,7 @@ class _SupplierDetailScreenState extends State<SupplierDetailScreen> {
             : FloatingActionButton.extended(
                 onPressed: _openActionsSheet,
                 icon: const Icon(Icons.add_rounded),
-                label: const Text('تسجيل'),
+                label: Text(_loc.sdRecordLabel),
               ),
       ),
     );
@@ -1164,8 +1165,8 @@ class _BillTile extends StatelessWidget {
               Expanded(
                 child: Text(
                   bill.theirReference?.isNotEmpty == true
-                      ? 'وصل #${bill.theirReference}'
-                      : 'وصل (بدون رقم)',
+                      ? AppLocalizations.of(context)!.sdBillRef(bill.theirReference ?? '')
+                      : AppLocalizations.of(context)!.sdBillNoRef,
                   style: const TextStyle(fontWeight: FontWeight.w800),
                 ),
               ),
@@ -1175,13 +1176,13 @@ class _BillTile extends StatelessWidget {
               ),
               if (linked)
                 IconButton(
-                  tooltip: 'إلغاء ربط الإذن',
+                  tooltip: AppLocalizations.of(context)!.sdUnlinkVoucherTooltip,
                   icon: const Icon(Icons.link_off_rounded),
                   onPressed: onUnlinkStock,
                 )
               else
                 IconButton(
-                  tooltip: 'ربط بإذن وارد',
+                  tooltip: AppLocalizations.of(context)!.sdLinkVoucherTooltip,
                   icon: const Icon(Icons.inventory_2_outlined),
                   onPressed: onLinkStock,
                 ),
@@ -1195,7 +1196,7 @@ class _BillTile extends StatelessWidget {
                 const SizedBox(width: 6),
                 Expanded(
                   child: Text(
-                    'إذن وارد: ${bill.linkedVoucherNo ?? '#${bill.linkedStockVoucherId}'}',
+                    AppLocalizations.of(context)!.sdLinkedVoucher(bill.linkedVoucherNo ?? '#${bill.linkedStockVoucherId}'),
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
@@ -1208,11 +1209,11 @@ class _BillTile extends StatelessWidget {
           ],
           if (bill.theirBillDate != null)
             Text(
-              'تاريخهم: ${_dateFmt.format(bill.theirBillDate!)}',
+              AppLocalizations.of(context)!.sdTheirDate(_dateFmt.format(bill.theirBillDate!)),
               style: TextStyle(fontSize: 12, color: cs.onSurfaceVariant),
             ),
           Text(
-            'سجّلنا: ${_dateFmt.format(bill.createdAt)}',
+            AppLocalizations.of(context)!.sdRecordedDate(_dateFmt.format(bill.createdAt)),
             style: TextStyle(fontSize: 11, color: cs.onSurfaceVariant),
           ),
           if ((bill.note ?? '').isNotEmpty)
@@ -1271,7 +1272,7 @@ class _PayoutTile extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  'دفعة #${payout.id}',
+                  AppLocalizations.of(context)!.sdPaymentRef(payout.id.toString()),
                   style: const TextStyle(fontWeight: FontWeight.w800),
                 ),
               ),
@@ -1280,7 +1281,7 @@ class _PayoutTile extends StatelessWidget {
                 style: const TextStyle(fontWeight: FontWeight.w700),
               ),
               IconButton(
-                tooltip: 'عكس الدفعة (خطأ / دفعة زائدة)',
+                tooltip: AppLocalizations.of(context)!.sdReverseTooltip,
                 icon: const Icon(Icons.undo_rounded),
                 onPressed: onReverse,
               ),
@@ -1291,7 +1292,7 @@ class _PayoutTile extends StatelessWidget {
             style: TextStyle(fontSize: 12, color: cs.onSurfaceVariant),
           ),
           Text(
-            payout.affectsCash ? 'مسجّل في الصندوق' : 'دون صندوق',
+            payout.affectsCash ? AppLocalizations.of(context)!.sdRecordedInCash : AppLocalizations.of(context)!.sdNotInCash,
             style: TextStyle(
               fontSize: 11,
               color: payout.affectsCash ? cs.primary : cs.outline,
@@ -1301,7 +1302,7 @@ class _PayoutTile extends StatelessWidget {
             Text(payout.note!, style: const TextStyle(fontSize: 12)),
           if (payout.receiptInvoiceId != null && payout.receiptInvoiceId! > 0)
             Text(
-              'سند فواتير #${payout.receiptInvoiceId}',
+              AppLocalizations.of(context)!.sdInvoiceVoucherRef(payout.receiptInvoiceId.toString()),
               style: TextStyle(fontSize: 11, color: cs.primary),
             ),
         ],

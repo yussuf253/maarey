@@ -242,6 +242,25 @@ class BarcodeLabelsPdf {
     final scaffoldMsg = ScaffoldMessenger.of(context);
     try {
       final bytes = await buildPdf(pageFormat);
+
+      // Try direct printing: enumerate system printers, pick the default
+      // (or first available), then send the PDF straight to it.
+      final printers = await printing.Printing.listPrinters();
+      if (printers.isNotEmpty) {
+        final printer = printers.firstWhere(
+          (p) => p.isDefault,
+          orElse: () => printers.first,
+        );
+        await printing.Printing.directPrintPdf(
+          printer: printer,
+          onLayout: (_) async => bytes,
+          format: pageFormat,
+          name: 'barcode-labels',
+        );
+        return;
+      }
+
+      // No printers found — fall back to the platform print dialog.
       await printing.Printing.layoutPdf(
         onLayout: (_) async => bytes,
         format: pageFormat,

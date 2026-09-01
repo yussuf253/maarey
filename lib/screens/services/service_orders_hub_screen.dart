@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../../models/invoice.dart';
 import '../../navigation/content_navigation.dart';
 import '../../providers/sale_draft_provider.dart';
+import '../../l10n/generated/app_localizations.dart';
 import '../../services/service_orders_repository.dart';
 import '../../utils/app_logger.dart';
 import '../../utils/iqd_money.dart';
@@ -24,11 +25,12 @@ class ServiceOrdersHubScreen extends StatefulWidget {
 
 class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
     with TickerProviderStateMixin {
-  static const _tabs = <_ServiceStatusTab>[
-    _ServiceStatusTab('pending', 'معلقة', Color(0xFFEF4444)),
-    _ServiceStatusTab('in_progress', 'قيد العمل', Color(0xFFF59E0B)),
-    _ServiceStatusTab('completed', 'جاهزة للتسليم', Color(0xFF22C55E)),
-    _ServiceStatusTab('delivered', 'مسلّمة', Color(0xFF64748B)),
+  AppLocalizations get _loc => AppLocalizations.of(context)!;
+  late final List<_ServiceStatusTab> _tabs = [
+    _ServiceStatusTab('pending', _loc.sohPending, Color(0xFFEF4444)),
+    _ServiceStatusTab('in_progress', _loc.sohInProgress, Color(0xFFF59E0B)),
+    _ServiceStatusTab('completed', _loc.sohReadyForDelivery, Color(0xFF22C55E)),
+    _ServiceStatusTab('delivered', _loc.sohDelivered, Color(0xFF64748B)),
   ];
 
   late final TabController _tab;
@@ -138,11 +140,11 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
     return '${_twoDigits(h)}:${_twoDigits(m)}:${_twoDigits(s)}';
   }
 
-  static String _timerPrefix(Map<String, dynamic> r) {
+  String _timerPrefix(Map<String, dynamic> r) {
     final deadline = _deadlineUtc(r);
-    if (deadline == null) return 'منذ البدء';
-    if (_isOverdue(r)) return 'متأخر';
-    return 'الوقت المتبقي';
+    if (deadline == null) return _loc.sohSinceStart;
+    if (_isOverdue(r)) return _loc.sohOverdue;
+    return _loc.sohTimeRemaining;
   }
 
   /// تلميح عربي قصير يُعرض للمستخدم عند فشل التحميل (بدون تسريب تفاصيل تقنية).
@@ -152,22 +154,22 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
     if (s.contains('tenantcontextservice') ||
         s.contains('مستأجر') ||
         s.contains('tenant')) {
-      return 'جرّب تسجيل الخروج ثم الدخول، أو أعد تشغيل التطبيق.';
+      return _loc.sohTryReLogin;
     }
     if (s.contains('no such column') ||
         s.contains('no such table') ||
         s.contains('sqlite')) {
-      return 'أعد تشغيل التطبيق لإكمال تهيئة قاعدة البيانات.';
+      return _loc.sohRestartToCompleteInit;
     }
     if (s.contains('subtype') ||
         s.contains('type \'') ||
         s.contains('is not a subtype')) {
-      return 'بيانات محلية غير متوقعة؛ أعد تشغيل التطبيق. إن تكرّر ذلك، أبلغ الدعم.';
+      return _loc.sohUnexpectedLocalData;
     }
     if (s.contains('database is locked') || s.contains('locked')) {
-      return 'قاعدة البيانات مشغولة؛ انتظر ثوانٍ ثم أعد المحاولة.';
+      return _loc.sohDatabaseBusy;
     }
-    return 'إن استمرّت المشكلة، أعد تشغيل التطبيق.';
+    return _loc.sohPersistentError;
   }
 
   Future<void> _load() async {
@@ -200,7 +202,7 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
     final created = await Navigator.of(context).push<bool>(
       contentMaterialRoute(
         routeId: AppContentRoutes.serviceOrdersCreate,
-        breadcrumbTitle: 'تذكرة صيانة جديدة',
+        breadcrumbTitle: _loc.sohNewTicketBreadcrumb,
         builder: (_) => const ServiceOrderFormScreen(),
       ),
     );
@@ -254,7 +256,7 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
               const Icon(Icons.error_outline, size: 40),
               const SizedBox(height: 10),
               Text(
-                'تعذر تحميل التذاكر.',
+                _loc.sohFailedToLoadTickets,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w800,
                     ),
@@ -280,7 +282,7 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
                     color: Theme.of(context).colorScheme.surfaceContainerHighest,
                   ),
                   child: Text(
-                    'تفاصيل تقنية (Debug): ${_error.toString()}',
+                    _loc.sohDebugDetails(_error.toString()),
                     style: Theme.of(context).textTheme.bodySmall,
                     textAlign: TextAlign.start,
                   ),
@@ -289,7 +291,7 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
               const SizedBox(height: 10),
               FilledButton(
                 onPressed: _load,
-                child: const Text('إعادة المحاولة'),
+                child: Text(_loc.sohRetry),
               ),
             ],
           ),
@@ -300,7 +302,7 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
         child: Padding(
           padding: const EdgeInsets.all(18),
           child: Text(
-            q.trim().isEmpty ? 'لا توجد تذاكر في هذا التبويب.' : 'لا نتائج مطابقة.',
+            q.trim().isEmpty ? _loc.sohNoTicketsInTab : _loc.sohNoMatchingResults,
             style: TextStyle(color: cs.onSurfaceVariant, fontSize: 13),
             textAlign: TextAlign.center,
           ),
@@ -369,16 +371,16 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
             Color? invoiceBadgeColor;
             if (hasInvoice) {
               if (invIsReturned == 1) {
-                invoiceBadgeLabel = 'مرتجع';
+                invoiceBadgeLabel = _loc.sohReturnBadge;
                 invoiceBadgeColor = const Color(0xFFEF4444);
               } else if (invType == InvoiceType.credit) {
-                invoiceBadgeLabel = 'بيع آجل';
+                invoiceBadgeLabel = _loc.sohCreditSaleBadge;
                 invoiceBadgeColor = const Color(0xFFF59E0B);
               } else if (invType == InvoiceType.installment) {
-                invoiceBadgeLabel = 'تقسيط';
+                invoiceBadgeLabel = _loc.sohInstallmentBadge;
                 invoiceBadgeColor = const Color(0xFF8B5CF6);
               } else if (invType == InvoiceType.delivery) {
-                invoiceBadgeLabel = 'توصيل';
+                invoiceBadgeLabel = _loc.sohDeliveryBadge;
                 invoiceBadgeColor = const Color(0xFF3B82F6);
               }
               // نقدي أو سندات: لا شارة — التسليم كافٍ
@@ -421,7 +423,7 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
                             const SizedBox(width: 8),
                             Expanded(
                               child: Text(
-                                'تجاوز موعد التسليم المتوقع — أكمل العمل أو حدّث الحالة.',
+                                _loc.sohDeadlineOverdue,
                                 style: TextStyle(
                                   color: cs.error,
                                   fontWeight: FontWeight.w800,
@@ -440,7 +442,7 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
                               await Navigator.of(context).push<void>(
                                 contentMaterialRoute(
                                   routeId: AppContentRoutes.serviceOrdersHub,
-                                  breadcrumbTitle: 'تفاصيل التذكرة',
+                                  breadcrumbTitle: _loc.sohTicketDetailsBreadcrumb,
                                   builder: (_) => ServiceOrderDetailScreen(
                                     orderId: id,
                                     orderGlobalId: gid,
@@ -477,7 +479,7 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          customer.isEmpty ? 'عميل' : customer,
+                                          customer.isEmpty ? _loc.sohCustomerDefault : customer,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           style: const TextStyle(
@@ -519,7 +521,7 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
                                   if (serial.isNotEmpty) ...[
                                     const SizedBox(height: 2),
                                     Text(
-                                      'سيريال/لوحة: $serial',
+                                      _loc.sohSerialPlate(serial),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
@@ -535,7 +537,7 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          'القيمة: ${IraqiCurrencyFormat.formatIqd(IqdMoney.fromFils(effectiveTotalF))}',
+                                          _loc.sohValueLabel(IraqiCurrencyFormat.formatIqd(IqdMoney.fromFils(effectiveTotalF))),
                                           style: const TextStyle(
                                             fontWeight: FontWeight.w800,
                                             fontSize: 12.5,
@@ -567,8 +569,8 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
                                         ),
                                       Text(
                                         hasInvoice
-                                            ? 'مدفوع: ${IraqiCurrencyFormat.formatIqd(IqdMoney.fromFils(effectivePaidF))}'
-                                            : 'العربون: ${IraqiCurrencyFormat.formatIqd(IqdMoney.fromFils(effectivePaidF))}',
+                                            ? _loc.sohPaidLabel(IraqiCurrencyFormat.formatIqd(IqdMoney.fromFils(effectivePaidF)))
+                                            : _loc.sohDepositLabel(IraqiCurrencyFormat.formatIqd(IqdMoney.fromFils(effectivePaidF))),
                                         style: TextStyle(
                                           fontWeight: FontWeight.w700,
                                           color: cs.onSurfaceVariant,
@@ -580,7 +582,7 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
                                   if (status == 'completed' && remainingF > 0) ...[
                                     const SizedBox(height: 6),
                                     Text(
-                                      'متبقّي: ${IraqiCurrencyFormat.formatIqd(IqdMoney.fromFils(remainingF))}',
+                                      _loc.sohRemainingLabel(IraqiCurrencyFormat.formatIqd(IqdMoney.fromFils(remainingF))),
                                       style: TextStyle(
                                         fontWeight: FontWeight.w800,
                                         fontSize: 12.5,
@@ -594,7 +596,7 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
                             ),
                             const SizedBox(width: 6),
                             IconButton(
-                              tooltip: 'تحويل لفاتورة',
+                              tooltip: _loc.sohConvertToInvoiceTooltip,
                               onPressed: (!canOpenSaleFromTicket ||
                                       _convertingOrderId != null)
                                   ? null
@@ -610,18 +612,18 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
                                         if (ok) {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
-                                            const SnackBar(
+                                            SnackBar(
                                               content: Text(
-                                                'تم إرسال البنود إلى شاشة البيع.',
+                                                _loc.sohItemsSentToSale,
                                               ),
                                             ),
                                           );
                                         } else {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
-                                            const SnackBar(
+                                            SnackBar(
                                               content: Text(
-                                                'تعذر فتح البيع — راجع التذكرة أو أعد المحاولة.',
+                                                _loc.sohFailedToOpenSale,
                                               ),
                                             ),
                                           );
@@ -660,13 +662,13 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
                                 .startServiceOrderWork(id);
                             if (!mounted) return;
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('تم بدء العمل وبدء احتساب الموعد')),
+                              SnackBar(content: Text(_loc.sohWorkStarted)),
                             );
                             _tab.animateTo(1);
                             unawaited(_load());
                           },
                           icon: const Icon(Icons.play_arrow_rounded),
-                          label: const Text('بدء العمل'),
+                          label: Text(_loc.sohStartWorkLabel),
                         ),
                       ),
                     if (status == 'in_progress' && id != null && id > 0) ...[
@@ -735,8 +737,8 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
                                 .markServiceOrderReadyForPickup(id);
                             if (!mounted) return;
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('تم نقل التذكرة إلى جاهزة للتسليم'),
+                              SnackBar(
+                                content: Text(_loc.sohTicketMovedToReady),
                               ),
                             );
                             _tab.animateTo(2);
@@ -744,8 +746,8 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
                           },
                           child: Text(
                             overdue
-                                ? 'انتقال إلى جاهز للتسليم'
-                                : 'جاهز للتسليم',
+                                ? _loc.sohMoveToReady
+                                : _loc.sohReadyForDeliveryLabel,
                           ),
                         ),
                       ),
@@ -775,18 +777,18 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
                                           if (ok) {
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(
-                                              const SnackBar(
+                                              SnackBar(
                                                 content: Text(
-                                                  'تم إرسال البنود إلى شاشة البيع.',
+                                                  _loc.sohItemsSentToSale,
                                                 ),
                                               ),
                                             );
                                           } else {
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(
-                                              const SnackBar(
+                                              SnackBar(
                                                 content: Text(
-                                                  'تعذر فتح البيع — راجع التذكرة أو أعد المحاولة.',
+                                                  _loc.sohFailedToOpenSale,
                                                 ),
                                               ),
                                             );
@@ -812,7 +814,7 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          const Text('الانتقال للدفع'),
+                                          Text(_loc.sohGoToPaymentLabel),
                                           const SizedBox(width: 6),
                                           Icon(
                                             Icons.arrow_forward_rounded,
@@ -832,23 +834,23 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
                                   if (!mounted) return;
                                   if (ok) {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text('تم تسجيل التسليم'),
+                                      SnackBar(
+                                        content: Text(_loc.sohDeliveryRecorded),
                                       ),
                                     );
                                     _tab.animateTo(3);
                                     unawaited(_load());
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
+                                      SnackBar(
                                         content: Text(
-                                          'تعذر التسليم — راجع المبالغ من التفاصيل.',
+                                          _loc.sohDeliveryFailed,
                                         ),
                                       ),
                                     );
                                   }
                                 },
-                                child: const Text('تأكيد التسليم'),
+                                child: Text(_loc.sohConfirmDelivery),
                               ),
                       ),
                   ],
@@ -862,7 +864,7 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('طلبات الصيانة'),
+        title: Text(_loc.sohMaintenanceOrdersTitle),
         bottom: TabBar(
           controller: _tab,
           isScrollable: true,
@@ -889,7 +891,7 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
         ),
         actions: [
           IconButton(
-            tooltip: 'تحديث',
+            tooltip: _loc.sohRefreshTooltip,
             onPressed: _load,
             icon: const Icon(Icons.refresh_rounded),
           ),
@@ -898,7 +900,7 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _openCreate,
         icon: const Icon(Icons.add_rounded),
-        label: const Text('تذكرة جديدة'),
+        label: Text(_loc.sohNewTicketLabel),
       ),
       body: Column(
         children: [
@@ -909,7 +911,7 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
               textInputAction: TextInputAction.search,
               decoration: InputDecoration(
                 isDense: true,
-                hintText: 'بحث بالعميل أو الجهاز أو السيريال…',
+                hintText: _loc.sohSearchHint,
                 prefixIcon: const Icon(Icons.search_rounded),
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
               ),
@@ -948,11 +950,11 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
 
     final device = (order['deviceName'] ?? '').toString().trim();
     final serial = (order['deviceSerial'] ?? '').toString().trim();
-    final baseName = serviceName.isEmpty ? 'خدمة فنية' : serviceName;
+    final baseName = serviceName.isEmpty ? _loc.sohDefaultServiceName : serviceName;
     var finalName = baseName;
     final devDetails = [
       if (device.isNotEmpty) device,
-      if (serial.isNotEmpty) 'س: $serial',
+      if (serial.isNotEmpty) _loc.sohSerialPrefix(serial),
     ].join(' - ');
     if (devDetails.isNotEmpty) {
       finalName = '$baseName ($devDetails)';
@@ -1006,7 +1008,7 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
       final q = (it['quantity'] as num?)?.toInt() ?? 1;
       final pF = (it['priceFils'] as num?)?.toInt() ?? 0;
       draft.enqueueProductLine({
-        'name': name.isEmpty ? 'قطعة غيار' : name,
+        'name': name.isEmpty ? _loc.sohSparePartDefault : name,
         'sell': IqdMoney.fromFils(pF),
         'minSell': IqdMoney.fromFils(pF),
         'productId': pid,
@@ -1024,7 +1026,7 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
       await Navigator.of(context).push(
         contentMaterialRoute(
           routeId: AppContentRoutes.addInvoice,
-          breadcrumbTitle: 'بيع جديد',
+          breadcrumbTitle: _loc.sohNewSaleBreadcrumb,
           builder: (_) => const AddInvoiceScreen(),
         ),
       );
