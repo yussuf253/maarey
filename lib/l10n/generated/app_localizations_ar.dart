@@ -3255,6 +3255,9 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String get now => 'الآن';
+
+  @override
   String get dayOrMoreAgo => 'منذ يوم أو أكثر';
 
   @override
@@ -7301,6 +7304,12 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noLabel => 'لا';
+
+  @override
+  String get priceLabel => 'السعر';
+
+  @override
+  String get noPriceLabel => 'بدون سعر';
 
   @override
   String get okLabel => 'حسنًا';
@@ -13549,4 +13558,174 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cashDeclaredClosingCash => 'المُعلَن متبقيًّا في الصندوق';
+
+  @override
+  String get expCsvHeader => 'الفئة,الوصف,المبلغ,التاريخ,الحالة,متكرر,الموظف';
+
+  @override
+  String expDateFromTo(Object from, Object to) {
+    return 'من: $from   إلى: $to';
+  }
+
+  @override
+  String get expOtherPrefix => 'أخرى: ';
+
+  @override
+  String get expBeneficiarySuffix => ' — المستفيد';
+
+  @override
+  String get expBreakdownByCategory => 'توزيع حسب الفئة';
+
+  @override
+  String get expCategoryShareGauge => 'نسب إنفاق الفئات';
+
+  @override
+  String get expCategoryShareDescription =>
+      'كل قوس يمثل نسبة فئة من إجمالي المصروفات في الفترة.';
+
+  @override
+  String get expDailyTrendDescription =>
+      'يعرض مجموع كل فئة يوميًا بشكل تراكمي، مع محور قيم واضح ومسافات مريحة.';
+
+  @override
+  String get expAnalyticsDisclaimer =>
+      'ملاحظة: التحليلات تعتمد على تجميع SQL مباشر من جدول المصروفات ضمن الفترة المختارة.';
+
+  @override
+  String get expNoMetricsData => 'لا توجد بيانات لعرض المقاييس.';
+
+  @override
+  String get expNoTrendData => 'لا توجد بيانات اتجاه عبر الزمن لعرضها.';
+
+  @override
+  String get expAmountColon => 'المبلغ:';
+
+  @override
+  String expEmployeeFallback(Object id) {
+    return 'موظف #$id';
+  }
+
+  @override
+  String get expReceiptNumber => 'رقم الفاتورة';
+
+  @override
+  String expSaveError(Object error) {
+    return 'تعذر الحفظ: $error';
+  }
+
+  @override
+  String expTopCategoryLabel(Object name) {
+    return 'أعلى فئة: $name';
+  }
+
+  @override
+  String get blTitle => 'طباعة ملصقات باركود';
+
+  @override
+  String blPrintCount(Object count) {
+    return 'طباعة $count ملصق';
+  }
+
+  @override
+  String blTotalLabels(Object count) {
+    return 'إجمالي الملصقات: $count';
+  }
+
+  @override
+  String blProducts(Object count) {
+    return 'المنتجات: $count';
+  }
+
+  @override
+  String get blPrintHint =>
+      'الطباعة عبر الطابعة الافتراضية للنظام أو من شاشة المعاينة.';
+
+  @override
+  String get blDocTitle => 'ملصقات باركود المنتجات';
+
+  @override
+  String blSkippedZeroQty(Object count) {
+    return 'تم تخطي المنتجات ذات الكمية صفر ($count)';
+  }
+
+  @override
+  String blLoadError(Object error) {
+    return 'تعذّر التحميل: $error';
+  }
+
+  @override
+  String get blWeightProductsHint =>
+      'منتجات الوزن: يُطبع المعرف على الملصق؛ الوزن يُوزَّن عند البيع.';
+
+  @override
+  String blBarcode(Object code) {
+    return 'باركود: $code';
+  }
+
+  @override
+  String get blNoBarcode => 'بدون باركود';
+
+  @override
+  String blStock(Object qty) {
+    return 'مخزون: $qty';
+  }
+
+  @override
+  String blProductCode(Object code) {
+    return 'رمز صنف: $code';
+  }
+
+  @override
+  String get blSettingsHint =>
+      'اختَر المقاس ومظهر المعاينة (تطبَّق على البطاقات والطباعة).';
+
+  @override
+  String get blLabelSize => 'مقاس الملصق';
+
+  @override
+  String get blSetAllOne => 'اجعل الكل (1)';
+
+  @override
+  String blSetAllOneCount(Object count) {
+    return 'اجعل الكل (1) ($count)';
+  }
+
+  @override
+  String get blSearchProductHint => 'بحث عن منتج';
+
+  @override
+  String get blSearchProductSub => 'الاسم، الباركود، أو رمز الصنف';
+
+  @override
+  String blLastUpdated(Object time) {
+    return 'آخر تحديث: $time — إعادة جلب الأسعار والمخزون';
+  }
+
+  @override
+  String get blEmptyHint => 'ابحث عن منتج لإضافته للطباعة';
+
+  @override
+  String get blEmptySubHint => 'يمكنك إضافة منتجات متعددة وطباعتها دفعة واحدة';
+
+  @override
+  String blStockPrint(Object print, Object stock) {
+    return 'مخزون: $stock | طباعة: $print';
+  }
+
+  @override
+  String blPreviewLabel(Object name, Object price, Object size) {
+    return 'معاينة: $name — $price — $size';
+  }
+
+  @override
+  String get blAutoBarcodeNote => 'سيتم توليد باركود تلقائياً';
+
+  @override
+  String get blKg => 'كغم';
+
+  @override
+  String get blPerKg => '/كغم';
+
+  @override
+  String get blWeighted => 'وزن';
 }

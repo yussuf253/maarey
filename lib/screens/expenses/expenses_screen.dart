@@ -214,6 +214,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
   }
 
   String _breakdownLine() {
+    final loc = AppLocalizations.of(context)!;
     if (_total <= 1e-9 || _byCategory.isEmpty) return '';
     final nonzero =
         _byCategory
@@ -237,13 +238,14 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
     for (final r in nonzero.skip(2)) {
       rest += (r['total'] as num?)?.toDouble() ?? 0;
     }
-    return '$top2 | أخرى: ${IraqiCurrencyFormat.formatIqd(rest)}';
+    return '$top2 | ${loc.expOtherPrefix}${IraqiCurrencyFormat.formatIqd(rest)}';
   }
 
   Future<void> _exportExpensesToClipboard() async {
+    final loc = AppLocalizations.of(context)!;
     final bom = '\uFEFF';
     final sb = StringBuffer(bom);
-    sb.writeln('الفئة,الوصف,المبلغ,التاريخ,الحالة,متكرر,الموظف');
+    sb.writeln(loc.expCsvHeader);
     for (final e in _items) {
       final status = e.status == ExpenseStatus.paid ? AppLocalizations.of(context)!.paidLabel2 : AppLocalizations.of(context)!.unpaidLabel;
       final rec = e.isRecurring ? AppLocalizations.of(context)!.yesLabel : AppLocalizations.of(context)!.noLabel;
@@ -337,8 +339,9 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    final loc = AppLocalizations.of(context)!;
     final rangeLabel =
-        'من: ${_dateDispFmt.format(_from)}   إلى: ${_dateDispFmt.format(_to)}';
+        loc.expDateFromTo(_dateDispFmt.format(_from), _dateDispFmt.format(_to));
     final breakdown = _breakdownLine();
 
     final layout = ScreenLayout.of(context);
@@ -586,6 +589,7 @@ class _ExpensesLedgerTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    final loc = AppLocalizations.of(context)!;
     final ac = context.appCorners;
 
     final contentCount = loading ? 1 : (items.isEmpty ? 1 : items.length);
@@ -1073,7 +1077,7 @@ class _ExpensesLedgerTab extends StatelessWidget {
                                 const SizedBox(width: 4),
                                 Expanded(
                                   child: Text(
-                                    '${e.employeeName} — المستفيد',
+                                    '${e.employeeName}${loc.expBeneficiarySuffix}',
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
@@ -1217,6 +1221,7 @@ class _ExpensesAnalyticsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    final loc = AppLocalizations.of(context)!;
     final ac = context.appCorners;
     if (loading) return const Center(child: CircularProgressIndicator());
 
@@ -1283,7 +1288,7 @@ class _ExpensesAnalyticsTab extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    'توزيع حسب الفئة',
+                    loc.expBreakdownByCategory,
                     style: TextStyle(
                       fontWeight: FontWeight.w800,
                       color: cs.onSurface,
@@ -1361,7 +1366,7 @@ class _ExpensesAnalyticsTab extends StatelessWidget {
                       Icon(Icons.speed_outlined, color: cs.primary),
                       const SizedBox(width: 8),
                       Text(
-                        'نسب إنفاق الفئات (Gauges)',
+                        loc.expCategoryShareGauge,
                         style: TextStyle(
                           fontWeight: FontWeight.w800,
                           color: cs.onSurface,
@@ -1371,7 +1376,7 @@ class _ExpensesAnalyticsTab extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'كل قوس يمثل نسبة فئة من إجمالي المصروفات في الفترة.',
+                    loc.expCategoryShareDescription,
                     style: TextStyle(
                       fontSize: 11.5,
                       color: cs.onSurfaceVariant,
@@ -1413,7 +1418,7 @@ class _ExpensesAnalyticsTab extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'يعرض مجموع كل فئة يوميًا بشكل تراكمي، مع محور قيم واضح ومسافات مريحة.',
+                    loc.expDailyTrendDescription,
                     style: TextStyle(
                       fontSize: 11.5,
                       color: cs.onSurfaceVariant,
@@ -1433,7 +1438,7 @@ class _ExpensesAnalyticsTab extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'ملاحظة: التحليلات تعتمد على تجميع SQL مباشر من جدول المصروفات ضمن الفترة المختارة.',
+            loc.expAnalyticsDisclaimer,
             style: TextStyle(fontSize: 11, color: cs.onSurfaceVariant),
           ),
         ],
@@ -1574,10 +1579,11 @@ class _CategoryGauges extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    final loc = AppLocalizations.of(context)!;
     if (byCategory.isEmpty || total <= 0) {
       return Center(
         child: Text(
-          'لا توجد بيانات لعرض المقاييس.',
+          loc.expNoMetricsData,
           style: TextStyle(color: cs.onSurfaceVariant),
         ),
       );
@@ -1751,10 +1757,11 @@ class _StackedAreaChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    final loc = AppLocalizations.of(context)!;
     if (dailyByCategory.isEmpty || byCategory.isEmpty) {
       return Center(
         child: Text(
-          'لا توجد بيانات اتجاه عبر الزمن لعرضها.',
+          loc.expNoTrendData,
           style: TextStyle(color: cs.onSurfaceVariant),
         ),
       );
@@ -2119,6 +2126,7 @@ class _PieTooltip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    final loc = AppLocalizations.of(context)!;
     final pct = total <= 0 ? 0.0 : (amount / total) * 100;
     const w = 215.0;
     const h = 74.0;
@@ -2193,7 +2201,7 @@ class _PieTooltip extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        'المبلغ:',
+                        loc.expAmountColon,
                         style: TextStyle(
                           fontSize: 11.5,
                           fontWeight: FontWeight.w700,
@@ -2468,6 +2476,7 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
   }
 
   Future<void> _pickEmployee() async {
+    final loc = AppLocalizations.of(context)!;
     final picked = await showDialog<ExpenseEmployeeOption>(
       context: context,
       builder: (ctx) => const _EmployeePickerDialog(),
@@ -2477,7 +2486,7 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
         _employeeId = picked.id;
         _employeeLabel = picked.name.isNotEmpty
             ? picked.name
-            : 'موظف #${picked.id}';
+            : loc.expEmployeeFallback(picked.id);
       });
     }
   }
@@ -2575,6 +2584,7 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
   }
 
   Future<void> _save() async {
+    final loc = AppLocalizations.of(context)!;
     final amount = _parseAmountDoubleOrNull();
     if (_wizardStep != 2 || _categoryId <= 0 || amount == null) {
       if (!mounted) return;
@@ -2638,7 +2648,7 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
       }
     } catch (e) {
       if (!mounted) return;
-      messenger.showSnackBar(SnackBar(content: Text('تعذر الحفظ: $e')));
+      messenger.showSnackBar(SnackBar(content: Text(loc.expSaveError(e.toString()))));
     } finally {
       if (mounted) setState(() => _saving = false);
     }
@@ -2647,6 +2657,7 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    final loc = AppLocalizations.of(context)!;
     final ac = context.appCorners;
     final title = widget.existing == null ? AppLocalizations.of(context)!.addExpense : AppLocalizations.of(context)!.editExpense;
     final catName = _currentCategoryName();
@@ -2821,7 +2832,7 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
             if (catName == 'ماء' || catName == 'كهرباء') ...[
               const SizedBox(height: 12),
               AppInput(
-                label: 'رقم الفاتورة',
+                label: loc.expReceiptNumber,
                 isOptional: true,
                 hint: AppLocalizations.of(context)!.serviceInvoiceNumber,
                 controller: _invoiceRefCtrl,
@@ -2900,7 +2911,7 @@ class _ExpenseEditorSheetState extends State<_ExpenseEditorSheet> {
                               const SizedBox(width: 8),
                               Expanded(
                                 child: Text(
-                                  '${_status == ExpenseStatus.paid ? 'مدفوع ' : 'غير مدفوع — '}'
+                                  '${_status == ExpenseStatus.paid ? loc.paidLabel2 + ' ' : loc.unpaidLabel + ' — '}'
                                   '${_dateDispFmt.format(_date)}',
                                   textDirection: TextDirection.ltr,
                                   style: TextStyle(
@@ -3401,6 +3412,7 @@ class _ExpensesStatsBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final layout = ScreenLayout.of(context);
     final cs = Theme.of(context).colorScheme;
+    final loc = AppLocalizations.of(context)!;
     final now = DateTime.now();
     final todayKey = DateTime(now.year, now.month, now.day);
 
@@ -3448,7 +3460,7 @@ class _ExpensesStatsBar extends StatelessWidget {
       ),
       _ExpenseStatChip(
         icon: Icons.category_rounded,
-        label: 'أعلى فئة: $topCatName',
+        label: loc.expTopCategoryLabel(topCatName),
         value: IraqiCurrencyFormat.formatIqd(topCatTotal),
         color: AppSemanticColors.warning,
       ),

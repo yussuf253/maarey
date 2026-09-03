@@ -3282,6 +3282,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get now => 'Now';
+
+  @override
   String get dayOrMoreAgo => 'A day or more ago';
 
   @override
@@ -7370,6 +7373,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noLabel => 'No';
+
+  @override
+  String get priceLabel => 'Price';
+
+  @override
+  String get noPriceLabel => 'No price';
 
   @override
   String get okLabel => 'OK';
@@ -13682,4 +13691,176 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cashDeclaredClosingCash => 'Declared Remaining in Cashbox';
+
+  @override
+  String get expCsvHeader =>
+      'Category,Description,Amount,Date,Status,Recurring,Employee';
+
+  @override
+  String expDateFromTo(Object from, Object to) {
+    return 'From: $from   To: $to';
+  }
+
+  @override
+  String get expOtherPrefix => 'Other: ';
+
+  @override
+  String get expBeneficiarySuffix => ' — Beneficiary';
+
+  @override
+  String get expBreakdownByCategory => 'Breakdown by Category';
+
+  @override
+  String get expCategoryShareGauge => 'Category Spending Share';
+
+  @override
+  String get expCategoryShareDescription =>
+      'Each arc represents the proportion of a category against total expenses in the period.';
+
+  @override
+  String get expDailyTrendDescription =>
+      'Shows the cumulative daily total for each category with clear axis and spacing.';
+
+  @override
+  String get expAnalyticsDisclaimer =>
+      'Note: Analytics are based on direct SQL aggregation from the expenses table within the selected period.';
+
+  @override
+  String get expNoMetricsData => 'No data to display metrics.';
+
+  @override
+  String get expNoTrendData => 'No trend data to display.';
+
+  @override
+  String get expAmountColon => 'Amount:';
+
+  @override
+  String expEmployeeFallback(Object id) {
+    return 'Employee #$id';
+  }
+
+  @override
+  String get expReceiptNumber => 'Receipt Number';
+
+  @override
+  String expSaveError(Object error) {
+    return 'Save failed: $error';
+  }
+
+  @override
+  String expTopCategoryLabel(Object name) {
+    return 'Top category: $name';
+  }
+
+  @override
+  String get blTitle => 'Print Barcode Labels';
+
+  @override
+  String blPrintCount(Object count) {
+    return 'Print $count label';
+  }
+
+  @override
+  String blTotalLabels(Object count) {
+    return 'Total labels: $count';
+  }
+
+  @override
+  String blProducts(Object count) {
+    return 'Products: $count';
+  }
+
+  @override
+  String get blPrintHint =>
+      'Print via system default printer or preview screen.';
+
+  @override
+  String get blDocTitle => 'Product Barcode Labels';
+
+  @override
+  String blSkippedZeroQty(Object count) {
+    return 'Skipped $count product(s) with zero quantity';
+  }
+
+  @override
+  String blLoadError(Object error) {
+    return 'Failed to load: $error';
+  }
+
+  @override
+  String get blWeightProductsHint =>
+      'Weight products: ID is printed on label; weight is weighed at sale.';
+
+  @override
+  String blBarcode(Object code) {
+    return 'Barcode: $code';
+  }
+
+  @override
+  String get blNoBarcode => 'No barcode';
+
+  @override
+  String blStock(Object qty) {
+    return 'Stock: $qty';
+  }
+
+  @override
+  String blProductCode(Object code) {
+    return 'Product code: $code';
+  }
+
+  @override
+  String get blSettingsHint =>
+      'Choose size and preview appearance (applies to cards and print).';
+
+  @override
+  String get blLabelSize => 'Label Size';
+
+  @override
+  String get blSetAllOne => 'Set all to (1)';
+
+  @override
+  String blSetAllOneCount(Object count) {
+    return 'Set all to (1) ($count)';
+  }
+
+  @override
+  String get blSearchProductHint => 'Search product';
+
+  @override
+  String get blSearchProductSub => 'Name, barcode, or product code';
+
+  @override
+  String blLastUpdated(Object time) {
+    return 'Last updated: $time — Refresh prices and stock';
+  }
+
+  @override
+  String get blEmptyHint => 'Search for a product to add for printing';
+
+  @override
+  String get blEmptySubHint =>
+      'You can add multiple products and print them in one batch';
+
+  @override
+  String blStockPrint(Object print, Object stock) {
+    return 'Stock: $stock | Print: $print';
+  }
+
+  @override
+  String blPreviewLabel(Object name, Object price, Object size) {
+    return 'Preview: $name — $price — $size';
+  }
+
+  @override
+  String get blAutoBarcodeNote => 'A barcode will be generated automatically';
+
+  @override
+  String get blKg => 'kg';
+
+  @override
+  String get blPerKg => '/kg';
+
+  @override
+  String get blWeighted => 'weighted';
 }

@@ -425,8 +425,8 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
     );
     if (skipped > 0) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('تم تخطي المنتجات ذات الكمية صفر ($skipped)')),
-      );
+        SnackBar(content: Text(loc.blSkippedZeroQty(skipped.toString()))));
+
     }
   }
 
@@ -491,13 +491,13 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      'إجمالي الملصقات: $_totalLabels',
+                      loc.blTotalLabels(_totalLabels.toString()),
                       style: Theme.of(context).textTheme.titleSmall,
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 6),
-                    const Text(
-                      'الطباعة عبر الطابعة الافتراضية للنظام أو من شاشة المعاينة.',
+                    Text(
+                      loc.blPrintHint,
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 12),
                     ),
@@ -563,7 +563,7 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
       if (products.isEmpty) return;
       await BarcodeLabelsPdf.present(
         context,
-        title: 'ملصقات باركود المنتجات',
+        title: loc.blDocTitle,
         products: products,
         copiesByProductId: _copies,
         size: _size,
@@ -666,11 +666,12 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
   }
 
   String _agoAr(DateTime t) {
+    final loc = AppLocalizations.of(context)!;
     final d = DateTime.now().difference(t);
-    if (d.inSeconds < 55) return 'الآن';
-    if (d.inMinutes < 60) return 'منذ ${d.inMinutes} دقيقة';
-    if (d.inHours < 24) return 'منذ ${d.inHours} ساعة';
-    return 'منذ يوم أو أكثر';
+    if (d.inSeconds < 55) return loc.now;
+    if (d.inMinutes < 60) return loc.minutesAgo(d.inMinutes.toString());
+    return loc.hoursAgo(d.inHours.toString());
+    return loc.dayOrMoreAgo;
   }
 
   @override
@@ -715,13 +716,13 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
           textDirection: TextDirection.rtl,
           child: Scaffold(
             appBar: AppBar(
-              title: const Text('طباعة ملصقات باركود'),
+              title: Text(loc.blTitle),
               backgroundColor: cs.primary,
               foregroundColor: cs.onPrimary,
               actions: [
                 IconButton(
                       tooltip:
-                          'آخر تحديث: ${_agoAr(_lastSynced)} — إعادة جلب الأسعار والمخزون',
+                          loc.blLastUpdated(_agoAr(_lastSynced)),
                       onPressed:
                           _loading ? null : () => unawaited(_reloadQueueFresh()),
                       icon: _refreshing
@@ -748,7 +749,7 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
                       : const Icon(Icons.print_rounded),
-                  label: Text('طباعة $_totalLabels ملصق'),
+                  label: Text(loc.blPrintCount(_totalLabels.toString())),
                   style: TextButton.styleFrom(foregroundColor: cs.onPrimary),
                 ),
               ],
@@ -756,7 +757,7 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
             body: _loading
                 ? const Center(child: CircularProgressIndicator())
                 : _err != null
-                    ? Center(child: Text('تعذّر التحميل: $_err'))
+                    ? Center(child: Text(loc.blLoadError(_err.toString())))
                     : ListView(
                         padding: const EdgeInsets.all(16),
                         children: [
@@ -836,7 +837,7 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
             ),
             const SizedBox(height: 6),
             Text(
-              'منتجات الوزن: يُطبع المعرف على الملصق؛ الوزن يُوزَّن عند البيع.',
+              loc.blWeightProductsHint,
               style: TextStyle(
                 fontSize: 11,
                 height: 1.35,
@@ -877,9 +878,9 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
                                 ),
                                 title: Text(nm, overflow: TextOverflow.ellipsis),
                                 subtitle: Text(
-                                  '${bc.isNotEmpty ? 'باركود: $bc' : 'بدون باركود'}'
-                                  ' — مخزون: $qStock'
-                                  '${sk.isNotEmpty ? '\nرمز صنف: $sk' : ''}',
+                                  '${bc.isNotEmpty ? loc.blBarcode(bc) : loc.blNoBarcode}'
+                                  ' — ${loc.blStock(qStock)}'
+                                  '${sk.isNotEmpty ? '\n${loc.blProductCode(sk)}' : ''}',
                                   style: TextStyle(fontSize: 11, color: cs.onSurfaceVariant),
                                 ),
                                 onTap: () {
@@ -913,7 +914,7 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    'اختَر المقاس ومظهر المعاينة (تطبَّق على البطاقات والطباعة).',
+                    loc.blSettingsHint,
                     style: TextStyle(fontSize: 12, color: cs.onSurfaceVariant),
                   ),
                 ),
@@ -922,8 +923,8 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
             const SizedBox(height: 12),
             DropdownButtonFormField<BarcodeLabelSize>(
               value: _size,
-              decoration: const InputDecoration(
-                labelText: 'مقاس الملصق',
+              decoration: InputDecoration(
+                labelText: loc.blLabelSize,
                 border: OutlineInputBorder(borderRadius: AppShape.none),
                 isDense: true,
               ),
@@ -1004,7 +1005,7 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
                         : () => unawaited(_makeAllCopiesOne()),
                     child: Text(_totalProducts <= 1
                         ? loc.setAllOne
-                        : 'اجعل الكل (1) ($_totalProducts)'),
+                        : loc.blSetAllOneCount(_totalProducts.toString())),
                   ),
                 ),
               ],
@@ -1044,7 +1045,7 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
           children: [
             Expanded(
               child: Text(
-                'المنتجات: $_totalProducts',
+                loc.blProducts(_totalProducts.toString()),
                 style: const TextStyle(fontWeight: FontWeight.w700),
                 textAlign: TextAlign.center,
               ),
@@ -1052,7 +1053,7 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
             Text('|', style: TextStyle(color: cs.outline)),
             Expanded(
               child: Text(
-                'إجمالي الملصقات: $_totalLabels',
+                loc.blTotalLabels(_totalLabels.toString()),
                 style: const TextStyle(fontWeight: FontWeight.w700),
                 textAlign: TextAlign.center,
               ),
@@ -1070,14 +1071,14 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
         children: [
           Icon(Icons.qr_code_2_rounded, size: 72, color: cs.outlineVariant),
           const SizedBox(height: 12),
-          const Text(
-            'ابحث عن منتج لإضافته للطباعة',
+          Text(
+            loc.blEmptyHint,
             textAlign: TextAlign.center,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
           ),
           const SizedBox(height: 6),
           Text(
-            'يمكنك إضافة منتجات متعددة وطباعتها دفعة واحدة',
+            loc.blEmptySubHint,
             textAlign: TextAlign.center,
             style: TextStyle(color: cs.onSurfaceVariant, fontSize: 13),
           ),
@@ -1136,7 +1137,7 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
                 ],
               ),
               Text(
-                'مخزون: ${_qtyLine(r)} | طباعة: $printQ',
+                loc.blStockPrint(_qtyLine(r), printQ.toString()),
                 style: TextStyle(fontSize: 12, color: cs.onSurfaceVariant),
               ),
               if (overStock)
@@ -1259,8 +1260,9 @@ class _TogglePreviewRibbon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return Text(
-      'معاينة: ${showName ? 'اسم' : 'بدون اسم'} — ${showPrice ? 'سعر' : 'بدون سعر'} — ${size.labelAr}',
+      loc.blPreviewLabel(showName ? loc.yesLabel : loc.noLabel, showPrice ? loc.priceLabel : loc.noPriceLabel, size.labelAr),
       textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: 11,
@@ -1288,6 +1290,7 @@ class _BarcodeStripe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  final loc = AppLocalizations.of(context)!;
     final bc = '${row['barcode'] ?? ''}'.trim();
     final id = ((row['id'] as num?)?.toInt() ?? 0);
     final data = bc.isNotEmpty ? bc : 'P${id.abs()}';
@@ -1297,7 +1300,7 @@ class _BarcodeStripe extends StatelessWidget {
       children: [
         if (bc.isEmpty)
           Text(
-            'سيتم توليد باركود تلقائياً',
+            loc.blAutoBarcodeNote,
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: compact ? 8 : 10, color: Colors.orange.shade900),
           ),
@@ -1339,6 +1342,7 @@ class _CardLabelPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  final loc = AppLocalizations.of(context)!;
     final isWeight = ((row['stockBaseKind'] as num?)?.toInt() ?? 0) == 1;
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -1365,7 +1369,7 @@ class _CardLabelPreview extends StatelessWidget {
             if (showPrice)
               Text(
                 isWeight
-                    ? '${NumberFormatHelper.line(row)} /كغم'
+                    ? '${NumberFormatHelper.line(row)} ${loc.blPerKg}'
                     : NumberFormatHelper.line(row),
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: Colors.grey.shade900),

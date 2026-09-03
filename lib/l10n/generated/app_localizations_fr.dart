@@ -3310,6 +3310,9 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String get now => 'Maintenant';
+
+  @override
   String get dayOrMoreAgo => 'Il y a un jour ou plus';
 
   @override
@@ -7459,6 +7462,12 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get noLabel => 'Non';
+
+  @override
+  String get priceLabel => 'Prix';
+
+  @override
+  String get noPriceLabel => 'Sans prix';
 
   @override
   String get okLabel => 'OK';
@@ -13849,4 +13858,177 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get cashDeclaredClosingCash => 'Montant déclaré restant en caisse';
+
+  @override
+  String get expCsvHeader =>
+      'Catégorie,Description,Montant,Date,Statut,Récurrent,Employé';
+
+  @override
+  String expDateFromTo(Object from, Object to) {
+    return 'Du: $from   Au: $to';
+  }
+
+  @override
+  String get expOtherPrefix => 'Autres: ';
+
+  @override
+  String get expBeneficiarySuffix => ' — Bénéficiaire';
+
+  @override
+  String get expBreakdownByCategory => 'Répartition par catégorie';
+
+  @override
+  String get expCategoryShareGauge => 'Parts de dépenses par catégorie';
+
+  @override
+  String get expCategoryShareDescription =>
+      'Chaque arc représente la proportion d\'une catégorie par rapport aux dépenses totales de la période.';
+
+  @override
+  String get expDailyTrendDescription =>
+      'Affiche le total journalier cumulé pour chaque catégorie avec des axes et espaces clairs.';
+
+  @override
+  String get expAnalyticsDisclaimer =>
+      'Remarque : Les analyses sont basées sur l\'agrégation SQL directe de la table des dépenses dans la période sélectionnée.';
+
+  @override
+  String get expNoMetricsData => 'Aucune donnée pour afficher les métriques.';
+
+  @override
+  String get expNoTrendData => 'Aucune donnée de tendance à afficher.';
+
+  @override
+  String get expAmountColon => 'Montant :';
+
+  @override
+  String expEmployeeFallback(Object id) {
+    return 'Employé #$id';
+  }
+
+  @override
+  String get expReceiptNumber => 'Numéro de reçu';
+
+  @override
+  String expSaveError(Object error) {
+    return 'Échec de la sauvegarde : $error';
+  }
+
+  @override
+  String expTopCategoryLabel(Object name) {
+    return 'Catégorie principale : $name';
+  }
+
+  @override
+  String get blTitle => 'Imprimer les étiquettes de codes-barres';
+
+  @override
+  String blPrintCount(Object count) {
+    return 'Imprimer $count étiquette';
+  }
+
+  @override
+  String blTotalLabels(Object count) {
+    return 'Total des étiquettes : $count';
+  }
+
+  @override
+  String blProducts(Object count) {
+    return 'Produits : $count';
+  }
+
+  @override
+  String get blPrintHint =>
+      'Imprimer via l\'imprimante par défaut ou l\'écran d\'aperçu.';
+
+  @override
+  String get blDocTitle => 'Étiquettes de codes-barres produits';
+
+  @override
+  String blSkippedZeroQty(Object count) {
+    return '$count produit(s) à quantité zéro ignoré(s)';
+  }
+
+  @override
+  String blLoadError(Object error) {
+    return 'Échec du chargement : $error';
+  }
+
+  @override
+  String get blWeightProductsHint =>
+      'Produits au poids : l\'ID est imprimé sur l\'étiquette ; le poids est pesé à la vente.';
+
+  @override
+  String blBarcode(Object code) {
+    return 'Code-barres : $code';
+  }
+
+  @override
+  String get blNoBarcode => 'Sans code-barres';
+
+  @override
+  String blStock(Object qty) {
+    return 'Stock : $qty';
+  }
+
+  @override
+  String blProductCode(Object code) {
+    return 'Code produit : $code';
+  }
+
+  @override
+  String get blSettingsHint =>
+      'Choisir la taille et l\'apparence de l\'aperçu (s\'applique aux cartes et à l\'impression).';
+
+  @override
+  String get blLabelSize => 'Taille de l\'étiquette';
+
+  @override
+  String get blSetAllOne => 'Tout mettre à (1)';
+
+  @override
+  String blSetAllOneCount(Object count) {
+    return 'Tout mettre à (1) ($count)';
+  }
+
+  @override
+  String get blSearchProductHint => 'Rechercher un produit';
+
+  @override
+  String get blSearchProductSub => 'Nom, code-barres ou code produit';
+
+  @override
+  String blLastUpdated(Object time) {
+    return 'Dernière mise à jour : $time — Rafraîchir les prix et le stock';
+  }
+
+  @override
+  String get blEmptyHint =>
+      'Rechercher un produit à ajouter pour l\'impression';
+
+  @override
+  String get blEmptySubHint =>
+      'Vous pouvez ajouter plusieurs produits et les imprimer en un seul lot';
+
+  @override
+  String blStockPrint(Object print, Object stock) {
+    return 'Stock : $stock | Impression : $print';
+  }
+
+  @override
+  String blPreviewLabel(Object name, Object price, Object size) {
+    return 'Aperçu : $name — $price — $size';
+  }
+
+  @override
+  String get blAutoBarcodeNote => 'Un code-barres sera généré automatiquement';
+
+  @override
+  String get blKg => 'kg';
+
+  @override
+  String get blPerKg => '/kg';
+
+  @override
+  String get blWeighted => 'pesé';
 }

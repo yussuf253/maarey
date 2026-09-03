@@ -5984,6 +5984,12 @@ abstract class AppLocalizations {
   /// **'منذ {hours} ساعة'**
   String hoursAgo(Object hours);
 
+  /// No description provided for @now.
+  ///
+  /// In ar, this message translates to:
+  /// **'الآن'**
+  String get now;
+
   /// No description provided for @dayOrMoreAgo.
   ///
   /// In ar, this message translates to:
@@ -13333,6 +13339,18 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'لا'**
   String get noLabel;
+
+  /// No description provided for @priceLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'السعر'**
+  String get priceLabel;
+
+  /// No description provided for @noPriceLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدون سعر'**
+  String get noPriceLabel;
 
   /// No description provided for @okLabel.
   ///
@@ -24516,6 +24534,270 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'المُعلَن متبقيًّا في الصندوق'**
   String get cashDeclaredClosingCash;
+
+  /// No description provided for @expCsvHeader.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفئة,الوصف,المبلغ,التاريخ,الحالة,متكرر,الموظف'**
+  String get expCsvHeader;
+
+  /// No description provided for @expDateFromTo.
+  ///
+  /// In ar, this message translates to:
+  /// **'من: {from}   إلى: {to}'**
+  String expDateFromTo(Object from, Object to);
+
+  /// No description provided for @expOtherPrefix.
+  ///
+  /// In ar, this message translates to:
+  /// **'أخرى: '**
+  String get expOtherPrefix;
+
+  /// No description provided for @expBeneficiarySuffix.
+  ///
+  /// In ar, this message translates to:
+  /// **' — المستفيد'**
+  String get expBeneficiarySuffix;
+
+  /// No description provided for @expBreakdownByCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'توزيع حسب الفئة'**
+  String get expBreakdownByCategory;
+
+  /// No description provided for @expCategoryShareGauge.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسب إنفاق الفئات'**
+  String get expCategoryShareGauge;
+
+  /// No description provided for @expCategoryShareDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل قوس يمثل نسبة فئة من إجمالي المصروفات في الفترة.'**
+  String get expCategoryShareDescription;
+
+  /// No description provided for @expDailyTrendDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'يعرض مجموع كل فئة يوميًا بشكل تراكمي، مع محور قيم واضح ومسافات مريحة.'**
+  String get expDailyTrendDescription;
+
+  /// No description provided for @expAnalyticsDisclaimer.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة: التحليلات تعتمد على تجميع SQL مباشر من جدول المصروفات ضمن الفترة المختارة.'**
+  String get expAnalyticsDisclaimer;
+
+  /// No description provided for @expNoMetricsData.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد بيانات لعرض المقاييس.'**
+  String get expNoMetricsData;
+
+  /// No description provided for @expNoTrendData.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد بيانات اتجاه عبر الزمن لعرضها.'**
+  String get expNoTrendData;
+
+  /// No description provided for @expAmountColon.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ:'**
+  String get expAmountColon;
+
+  /// No description provided for @expEmployeeFallback.
+  ///
+  /// In ar, this message translates to:
+  /// **'موظف #{id}'**
+  String expEmployeeFallback(Object id);
+
+  /// No description provided for @expReceiptNumber.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الفاتورة'**
+  String get expReceiptNumber;
+
+  /// No description provided for @expSaveError.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر الحفظ: {error}'**
+  String expSaveError(Object error);
+
+  /// No description provided for @expTopCategoryLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعلى فئة: {name}'**
+  String expTopCategoryLabel(Object name);
+
+  /// No description provided for @blTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'طباعة ملصقات باركود'**
+  String get blTitle;
+
+  /// No description provided for @blPrintCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'طباعة {count} ملصق'**
+  String blPrintCount(Object count);
+
+  /// No description provided for @blTotalLabels.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي الملصقات: {count}'**
+  String blTotalLabels(Object count);
+
+  /// No description provided for @blProducts.
+  ///
+  /// In ar, this message translates to:
+  /// **'المنتجات: {count}'**
+  String blProducts(Object count);
+
+  /// No description provided for @blPrintHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الطباعة عبر الطابعة الافتراضية للنظام أو من شاشة المعاينة.'**
+  String get blPrintHint;
+
+  /// No description provided for @blDocTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملصقات باركود المنتجات'**
+  String get blDocTitle;
+
+  /// No description provided for @blSkippedZeroQty.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم تخطي المنتجات ذات الكمية صفر ({count})'**
+  String blSkippedZeroQty(Object count);
+
+  /// No description provided for @blLoadError.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر التحميل: {error}'**
+  String blLoadError(Object error);
+
+  /// No description provided for @blWeightProductsHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'منتجات الوزن: يُطبع المعرف على الملصق؛ الوزن يُوزَّن عند البيع.'**
+  String get blWeightProductsHint;
+
+  /// No description provided for @blBarcode.
+  ///
+  /// In ar, this message translates to:
+  /// **'باركود: {code}'**
+  String blBarcode(Object code);
+
+  /// No description provided for @blNoBarcode.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدون باركود'**
+  String get blNoBarcode;
+
+  /// No description provided for @blStock.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخزون: {qty}'**
+  String blStock(Object qty);
+
+  /// No description provided for @blProductCode.
+  ///
+  /// In ar, this message translates to:
+  /// **'رمز صنف: {code}'**
+  String blProductCode(Object code);
+
+  /// No description provided for @blSettingsHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختَر المقاس ومظهر المعاينة (تطبَّق على البطاقات والطباعة).'**
+  String get blSettingsHint;
+
+  /// No description provided for @blLabelSize.
+  ///
+  /// In ar, this message translates to:
+  /// **'مقاس الملصق'**
+  String get blLabelSize;
+
+  /// No description provided for @blSetAllOne.
+  ///
+  /// In ar, this message translates to:
+  /// **'اجعل الكل (1)'**
+  String get blSetAllOne;
+
+  /// No description provided for @blSetAllOneCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'اجعل الكل (1) ({count})'**
+  String blSetAllOneCount(Object count);
+
+  /// No description provided for @blSearchProductHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث عن منتج'**
+  String get blSearchProductHint;
+
+  /// No description provided for @blSearchProductSub.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم، الباركود، أو رمز الصنف'**
+  String get blSearchProductSub;
+
+  /// No description provided for @blLastUpdated.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر تحديث: {time} — إعادة جلب الأسعار والمخزون'**
+  String blLastUpdated(Object time);
+
+  /// No description provided for @blEmptyHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابحث عن منتج لإضافته للطباعة'**
+  String get blEmptyHint;
+
+  /// No description provided for @blEmptySubHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يمكنك إضافة منتجات متعددة وطباعتها دفعة واحدة'**
+  String get blEmptySubHint;
+
+  /// No description provided for @blStockPrint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخزون: {stock} | طباعة: {print}'**
+  String blStockPrint(Object print, Object stock);
+
+  /// No description provided for @blPreviewLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'معاينة: {name} — {price} — {size}'**
+  String blPreviewLabel(Object name, Object price, Object size);
+
+  /// No description provided for @blAutoBarcodeNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيتم توليد باركود تلقائياً'**
+  String get blAutoBarcodeNote;
+
+  /// No description provided for @blKg.
+  ///
+  /// In ar, this message translates to:
+  /// **'كغم'**
+  String get blKg;
+
+  /// No description provided for @blPerKg.
+  ///
+  /// In ar, this message translates to:
+  /// **'/كغم'**
+  String get blPerKg;
+
+  /// No description provided for @blWeighted.
+  ///
+  /// In ar, this message translates to:
+  /// **'وزن'**
+  String get blWeighted;
 }
 
 class _AppLocalizationsDelegate
