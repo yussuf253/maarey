@@ -32,16 +32,16 @@ class _ReportRangePickerDialogState extends State<_ReportRangePickerDialog> {
 
   DateTime get _today => DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
 
-  List<_ReportRangeQuickOption> _options() => [
+  List<_ReportRangeQuickOption> _options(BuildContext context) { final loc = AppLocalizations.of(context)!; return [
         _ReportRangeQuickOption(
-          label: 'يومي',
+          label: loc.expDaily,
           compute: () {
             final d = _today;
             return DateTimeRange(start: d, end: d);
           },
         ),
         _ReportRangeQuickOption(
-          label: 'أسبوعي',
+          label: loc.expWeekly,
           compute: () {
             final end = _today;
             final start = end.subtract(const Duration(days: 6));
@@ -49,7 +49,7 @@ class _ReportRangePickerDialogState extends State<_ReportRangePickerDialog> {
           },
         ),
         _ReportRangeQuickOption(
-          label: 'شهري',
+          label: loc.expMonthly,
           compute: () {
             final now = DateTime.now();
             return DateTimeRange(
@@ -59,7 +59,7 @@ class _ReportRangePickerDialogState extends State<_ReportRangePickerDialog> {
           },
         ),
         _ReportRangeQuickOption(
-          label: 'سنوي',
+          label: loc.expYearly,
           compute: () {
             final now = DateTime.now();
             return DateTimeRange(
@@ -69,6 +69,7 @@ class _ReportRangePickerDialogState extends State<_ReportRangePickerDialog> {
           },
         ),
       ];
+  }
 
   Future<void> _pickCustom() async {
     final picked = await showDateRangePicker(
@@ -86,6 +87,7 @@ class _ReportRangePickerDialogState extends State<_ReportRangePickerDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     final dateFmt = DateFormat('yyyy/MM/dd', 'en');
     final label = '${dateFmt.format(_range.start)}  ->  ${dateFmt.format(_range.end)}';
@@ -93,7 +95,7 @@ class _ReportRangePickerDialogState extends State<_ReportRangePickerDialog> {
     return Directionality(
       textDirection: Directionality.of(context),
       child: AlertDialog(
-        title: Text('طباعة تقرير مصروفات'),
+        title: Text(loc.expPrintReport),
         content: SizedBox(
           width: 460,
           child: Column(
@@ -101,7 +103,7 @@ class _ReportRangePickerDialogState extends State<_ReportRangePickerDialog> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                'اختر الفترة الزمنية للفاتورة:',
+                loc.expChoosePeriod,
                 style: TextStyle(color: cs.onSurfaceVariant),
               ),
               const SizedBox(height: 10),
@@ -109,7 +111,7 @@ class _ReportRangePickerDialogState extends State<_ReportRangePickerDialog> {
                 spacing: 8,
                 runSpacing: 8,
                 children: [
-                  for (final opt in _options())
+                  for (final opt in _options(context))
                     OutlinedButton.icon(
                       onPressed: () => setState(() => _range = opt.compute()),
                       icon: const Icon(Icons.event_rounded, size: 16),
@@ -118,7 +120,7 @@ class _ReportRangePickerDialogState extends State<_ReportRangePickerDialog> {
                   OutlinedButton.icon(
                     onPressed: _pickCustom,
                     icon: const Icon(Icons.edit_calendar_rounded, size: 16),
-                    label: Text('مخصص'),
+                    label: Text(loc.expCustom),
                   ),
                 ],
               ),
@@ -137,7 +139,7 @@ class _ReportRangePickerDialogState extends State<_ReportRangePickerDialog> {
                     Icon(Icons.date_range_rounded, color: cs.primary),
                     const SizedBox(width: 8),
                     Text(
-                      'الفترة المختارة:',
+                      loc.expSelectedPeriod,
                       style: const TextStyle(fontWeight: FontWeight.w700),
                     ),
                     const Spacer(),
@@ -155,12 +157,12 @@ class _ReportRangePickerDialogState extends State<_ReportRangePickerDialog> {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text('إلغاء'),
+            child: Text(loc.expCancel),
           ),
           FilledButton.icon(
             onPressed: () => Navigator.of(context).pop(_range),
             icon: const Icon(Icons.print_rounded, size: 16),
-            label: Text('طباعة'),
+            label: Text(loc.expPrint),
           ),
         ],
       ),
@@ -178,7 +180,13 @@ Future<DateTimeRange?> showExpenseReportRangePicker(
   );
 }
 
-/// مُولّد فاتورة تقرير المصروفات (PDF) مع دعم RTL العربية.
+/// Localized strings record for PDF generation.
+class _PdfLabels {
+  final String reportTitle, periodLabel, createdLabel, pageLabel, categoryLabel, totalLabel, percentageLabel, operationsLabel, paidLabel, pendingLabel, dateLabel, amountLabel, descriptionLabel, staffLabel, expenseReasonLabel, noNoteHint;
+  const _PdfLabels({required this.reportTitle, required this.periodLabel, required this.createdLabel, required this.pageLabel, required this.categoryLabel, required this.totalLabel, required this.percentageLabel, required this.operationsLabel, required this.paidLabel, required this.pendingLabel, required this.dateLabel, required this.amountLabel, required this.descriptionLabel, required this.staffLabel, required this.expenseReasonLabel, required this.noNoteHint});
+}
+
+/// Expense report PDF generator with RTL Arabic support.
 class ExpenseReportPrinter {
   ExpenseReportPrinter._();
 
@@ -195,6 +203,7 @@ class ExpenseReportPrinter {
     required DateTime from,
     required DateTime to,
   }) async {
+    final loc = AppLocalizations.of(context)!;
     final db = DatabaseHelper();
 
     // نعيد استخدام نفس استعلامات قاعدة البيانات الحالية للمصروفات.
@@ -227,6 +236,24 @@ class ExpenseReportPrinter {
     final latinFont = await _loadAsset('assets/fonts/Tajawal-Regular.ttf');
     final latinBold = await _loadAsset('assets/fonts/Tajawal-Bold.ttf');
 
+    final labels = _PdfLabels(
+      reportTitle: loc.expReportTitle,
+      periodLabel: loc.expPeriodLabel,
+      createdLabel: loc.expCreatedLabel,
+      pageLabel: loc.expPageLabel('{current}', '{total}'),
+      categoryLabel: loc.expCategory,
+      totalLabel: loc.expTotal,
+      percentageLabel: loc.expPercentage,
+      operationsLabel: loc.expOperationsCount,
+      paidLabel: loc.expPaid,
+      pendingLabel: loc.expPending,
+      dateLabel: loc.expDate,
+      amountLabel: loc.expAmount,
+      descriptionLabel: loc.expDescription,
+      staffLabel: loc.expStaff,
+      expenseReasonLabel: loc.expExpenseReason,
+      noNoteHint: loc.expNoNoteHint,
+    );
     final doc = pw.Document();
     doc.addPage(
       pw.MultiPage(
@@ -238,20 +265,22 @@ class ExpenseReportPrinter {
           bold: arBold,
           fontFallback: [latinFont, latinBold],
         ),
-        header: (ctx) => _pdfHeader(from, to),
-        footer: (ctx) => _pdfFooter(ctx),
+        header: (ctx) => _pdfHeader(from, to, labels),
+        footer: (ctx) => _pdfFooter(ctx, labels),
         build: (ctx) => [
-          _pdfSummary(total: total, paid: paid, pending: pending, count: items.length),
+          _pdfSummary(total: total, paid: paid, pending: pending, count: items.length, labels: labels),
           pw.SizedBox(height: 10),
           _pdfCategoryBreakdownTable(
             categoriesOrder: sortedCategoryKeys,
             byCategory: byCategory,
             total: total,
+            labels: labels,
           ),
           pw.SizedBox(height: 14),
           ..._pdfCategoriesDetails(
             categoriesOrder: sortedCategoryKeys,
             byCategory: byCategory,
+            labels: labels,
           ),
         ],
       ),
@@ -260,20 +289,20 @@ class ExpenseReportPrinter {
     await Printing.layoutPdf(onLayout: (_) async => doc.save());
   }
 
-  static pw.Widget _pdfHeader(DateTime from, DateTime to) {
+  static pw.Widget _pdfHeader(DateTime from, DateTime to, _PdfLabels labels) {
     return pw.Column(
       crossAxisAlignment: pw.CrossAxisAlignment.stretch,
       children: [
         pw.Center(
           child: pw.Text(
-            'فاتورة تقرير المصروفات',
+            labels.reportTitle,
             style: pw.TextStyle(fontSize: 16, fontWeight: pw.FontWeight.bold),
           ),
         ),
         pw.SizedBox(height: 2),
         pw.Center(
           child: pw.Text(
-            'الفترة: ${_dateFmt.format(from)}  ->  ${_dateFmt.format(to)}',
+            '${labels.periodLabel}: ${_dateFmt.format(from)}  ->  ${_dateFmt.format(to)}',
             style: const pw.TextStyle(fontSize: 10, color: PdfColors.grey700),
           ),
         ),
@@ -283,18 +312,18 @@ class ExpenseReportPrinter {
     );
   }
 
-  static pw.Widget _pdfFooter(pw.Context ctx) {
+  static pw.Widget _pdfFooter(pw.Context ctx, _PdfLabels labels) {
     return pw.Padding(
       padding: const pw.EdgeInsets.only(top: 6),
       child: pw.Row(
         children: [
           pw.Text(
-            'تم الإنشاء: ${_dateFmt.format(DateTime.now())}',
+            '${labels.createdLabel}: ${_dateFmt.format(DateTime.now())}',
             style: const pw.TextStyle(fontSize: 9, color: PdfColors.grey600),
           ),
           pw.Spacer(),
           pw.Text(
-            'صفحة ${ctx.pageNumber}/${ctx.pagesCount}',
+            '${labels.pageLabel.replaceAll('{current}', '${ctx.pageNumber}').replaceAll('{total}', '${ctx.pagesCount}')}',
             style: const pw.TextStyle(fontSize: 9, color: PdfColors.grey600),
           ),
         ],
@@ -307,6 +336,7 @@ class ExpenseReportPrinter {
     required double paid,
     required double pending,
     required int count,
+    required _PdfLabels labels,
   }) {
     pw.Widget box(String label, String value, {PdfColor? color}) {
       return pw.Expanded(
@@ -340,10 +370,10 @@ class ExpenseReportPrinter {
 
     return pw.Row(
       children: [
-        box('الإجمالي', '${_moneyFmt.format(total)} Fdj', color: PdfColors.indigo900),
-        box('المدفوع', '${_moneyFmt.format(paid)} Fdj', color: PdfColors.green800),
-        box('المعلق', '${_moneyFmt.format(pending)} Fdj', color: PdfColors.amber900),
-        box('عدد العمليات', '$count'),
+        box(labels.totalLabel, '${_moneyFmt.format(total)} Fdj', color: PdfColors.indigo900),
+        box(labels.paidLabel, '${_moneyFmt.format(paid)} Fdj', color: PdfColors.green800),
+        box(labels.pendingLabel, '${_moneyFmt.format(pending)} Fdj', color: PdfColors.amber900),
+        box(labels.operationsLabel, '$count'),
       ],
     );
   }
@@ -352,6 +382,7 @@ class ExpenseReportPrinter {
     required List<String> categoriesOrder,
     required Map<String, List<ExpenseEntry>> byCategory,
     required double total,
+    required _PdfLabels labels,
   }) {
     return pw.Table(
       border: pw.TableBorder.all(color: PdfColors.grey300, width: 0.4),
@@ -365,10 +396,10 @@ class ExpenseReportPrinter {
         pw.TableRow(
           decoration: const pw.BoxDecoration(color: PdfColors.grey200),
           children: [
-            _pdfCell('الفئة', isHeader: true),
-            _pdfCell('الإجمالي', isHeader: true, ltr: true),
-            _pdfCell('النسبة', isHeader: true, ltr: true),
-            _pdfCell('عدد العمليات', isHeader: true, ltr: true),
+            _pdfCell(labels.categoryLabel, isHeader: true),
+            _pdfCell(labels.totalLabel, isHeader: true, ltr: true),
+            _pdfCell(labels.percentageLabel, isHeader: true, ltr: true),
+            _pdfCell(labels.operationsLabel, isHeader: true, ltr: true),
           ],
         ),
         for (final key in categoriesOrder)
@@ -393,6 +424,7 @@ class ExpenseReportPrinter {
   static List<pw.Widget> _pdfCategoriesDetails({
     required List<String> categoriesOrder,
     required Map<String, List<ExpenseEntry>> byCategory,
+    required _PdfLabels labels,
   }) {
     final widgets = <pw.Widget>[];
     for (final key in categoriesOrder) {
@@ -408,17 +440,17 @@ class ExpenseReportPrinter {
       );
 
       if (key == 'رواتب') {
-        widgets.add(_pdfSalariesTable(list));
+        widgets.add(_pdfSalariesTable(list, labels));
       } else if (key == 'مصاريف متنوعة') {
-        widgets.add(_pdfMiscTableWithNotes(list));
+        widgets.add(_pdfMiscTableWithNotes(list, labels));
       } else {
-        widgets.add(_pdfStandardCategoryTable(list));
+        widgets.add(_pdfStandardCategoryTable(list, labels));
       }
     }
     return widgets;
   }
 
-  static pw.Widget _pdfStandardCategoryTable(List<ExpenseEntry> list) {
+  static pw.Widget _pdfStandardCategoryTable(List<ExpenseEntry> list, _PdfLabels labels) {
     return pw.Table(
       border: pw.TableBorder.all(color: PdfColors.grey300, width: 0.4),
       columnWidths: {
@@ -430,9 +462,9 @@ class ExpenseReportPrinter {
         pw.TableRow(
           decoration: const pw.BoxDecoration(color: PdfColors.grey100),
           children: [
-            _pdfCell('التاريخ', isHeader: true, ltr: true),
-            _pdfCell('المبلغ', isHeader: true, ltr: true),
-            _pdfCell('الوصف', isHeader: true),
+            _pdfCell(labels.dateLabel, isHeader: true, ltr: true),
+            _pdfCell(labels.amountLabel, isHeader: true, ltr: true),
+            _pdfCell(labels.descriptionLabel, isHeader: true),
           ],
         ),
         for (final e in list)
@@ -445,7 +477,7 @@ class ExpenseReportPrinter {
     );
   }
 
-  static pw.Widget _pdfSalariesTable(List<ExpenseEntry> list) {
+  static pw.Widget _pdfSalariesTable(List<ExpenseEntry> list, _PdfLabels labels) {
     return pw.Table(
       border: pw.TableBorder.all(color: PdfColors.grey300, width: 0.4),
       columnWidths: {
@@ -458,10 +490,10 @@ class ExpenseReportPrinter {
         pw.TableRow(
           decoration: const pw.BoxDecoration(color: PdfColors.grey100),
           children: [
-            _pdfCell('الموظف', isHeader: true),
-            _pdfCell('التاريخ', isHeader: true, ltr: true),
-            _pdfCell('المبلغ', isHeader: true, ltr: true),
-            _pdfCell('الوصف', isHeader: true),
+            _pdfCell(labels.staffLabel, isHeader: true),
+            _pdfCell(labels.dateLabel, isHeader: true, ltr: true),
+            _pdfCell(labels.amountLabel, isHeader: true, ltr: true),
+            _pdfCell(labels.descriptionLabel, isHeader: true),
           ],
         ),
         for (final e in list)
@@ -475,7 +507,7 @@ class ExpenseReportPrinter {
     );
   }
 
-  static pw.Widget _pdfMiscTableWithNotes(List<ExpenseEntry> list) {
+  static pw.Widget _pdfMiscTableWithNotes(List<ExpenseEntry> list, _PdfLabels labels) {
     return pw.Table(
       border: pw.TableBorder.all(color: PdfColors.grey300, width: 0.4),
       columnWidths: {
@@ -487,9 +519,9 @@ class ExpenseReportPrinter {
         pw.TableRow(
           decoration: const pw.BoxDecoration(color: PdfColors.grey100),
           children: [
-            _pdfCell('التاريخ', isHeader: true, ltr: true),
-            _pdfCell('المبلغ', isHeader: true, ltr: true),
-            _pdfCell('سبب الصرف (تعليق)', isHeader: true),
+            _pdfCell(labels.dateLabel, isHeader: true, ltr: true),
+            _pdfCell(labels.amountLabel, isHeader: true, ltr: true),
+            _pdfCell(labels.expenseReasonLabel, isHeader: true),
           ],
         ),
         for (final e in list)
@@ -498,7 +530,7 @@ class ExpenseReportPrinter {
             _pdfCell('${_moneyFmt.format(e.amount)} Fdj', ltr: true),
             _pdfCell(
               e.description.isEmpty
-                  ? 'بدون تعليق - يُنصح بإضافة سبب الصرف.'
+                  ? labels.noNoteHint
                   : e.description,
             ),
           ]),

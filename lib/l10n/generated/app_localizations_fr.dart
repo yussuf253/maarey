@@ -11585,13 +11585,17 @@ class AppLocalizationsFr extends AppLocalizations {
   String get debtsCustomerLabel => 'Client';
 
   @override
-  String get debtsRegisteredCustomer => 'Client enregistré';
+  String debtsRegisteredCustomer(Object id) {
+    return 'Client enregistré #$id';
+  }
 
   @override
   String get debtsNotLinked => 'Non lié au tableau des clients (par nom)';
 
   @override
-  String get debtsCreditInvoices => 'factures à crédit';
+  String debtsCreditInvoices(Object count) {
+    return '$count facture(s) à crédit';
+  }
 
   @override
   String get debtsRemainingLabel => 'Restant';
@@ -11621,7 +11625,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get debtsOpenInvoices => 'Factures ouvertes';
 
   @override
-  String get debtsFilterOpen => 'Filtrer : ouvertes seulement';
+  String get debtsFilterOpen => 'Filtre : ouvertes uniquement';
 
   @override
   String get debtsAgingWarning => 'Alerte d\'ancienneté';
@@ -11662,11 +11666,11 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get debtsClearSearchHint =>
-      'Effacez la recherche ou sélectionnez « Tout ».';
+      'Effacez la recherche ou sélectionnez «Tout» dans la barre de filtres.';
 
   @override
   String get debtsNewSaleHint =>
-      'Depuis « Nouvelle vente », choisissez « Crédit » pour afficher le montant ici.';
+      'Depuis «Nouvelle vente» choisissez le type «crédit» pour afficher le montant ici.';
 
   @override
   String get hubInventoryTitle => 'Centre de stock';
@@ -14031,4 +14035,373 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get blWeighted => 'pesé';
+
+  @override
+  String rptSectionCopied(Object name) {
+    return 'Nom de la section copié : $name';
+  }
+
+  @override
+  String get rptSalesTrendSubtitle =>
+      'Graphique à colonnes — montre la tendance des ventes entre les dates de la période';
+
+  @override
+  String get rptKPIShare =>
+      'Part de chaque KPI dans le net des ventes — synchronisé avec les cartes KPI ci-dessus';
+
+  @override
+  String get rptDailyBreakdownSubtitle =>
+      'Barres empilées — données quotidiennes des factures et dépenses (SQL GROUP BY jour)';
+
+  @override
+  String get rptCustomerPieSubtitle =>
+      'Graphique circulaire interactif — uniquement les factures de vente (sans les bons)';
+
+  @override
+  String get rptPaymentGaugeSubtitle =>
+      'Jauges — cohérentes avec les pourcentages du graphique circulaire et du tableau';
+
+  @override
+  String get rptPaymentTrendSubtitle =>
+      'Empilé — construit les totaux quotidiens par type de paiement directement depuis SQL';
+
+  @override
+  String get rptSalesOnlyNote =>
+      'Cette section affiche uniquement les ventes : comptant/credit/échéance/livraison.';
+
+  @override
+  String get rptVouchersExcluded =>
+      'Les bons de perception/paiement d\'échéance/paiement fournisseur sont exclus des \"ventes\" (car ce ne sont pas des revenus de vente).';
+
+  @override
+  String get rptCustomerDistributionTitle =>
+      'Distribution des ventes par client';
+
+  @override
+  String get rptCustomerDistributionDesc =>
+      'Graphique circulaire interactif — affiche les 6 meilleurs clients et le reste comme \"Autres\"';
+
+  @override
+  String get rptTopCustomersTitle =>
+      'Meilleurs clients par achat (nom de la facture)';
+
+  @override
+  String get rptTopCustomersSubtitle =>
+      'Triés par total — données des factures de la période';
+
+  @override
+  String get rptCustomerNameNote =>
+      'Remarque : Le nom est pris du champ \"nom du client\" de la facture ; pour un lien plus précis, utilisez la sélection client depuis le registre.';
+
+  @override
+  String get rptCustomerBalancesSubtitle =>
+      'Tableau — soldes enregistrés dans le registre des clients';
+
+  @override
+  String get rptInstallmentPlansSubtitle =>
+      'Tableau — plans de versement liés aux factures de la période';
+
+  @override
+  String get rptUnknownStaff => '(Inconnu)';
+
+  @override
+  String get rptStaffDistributionTitle => 'Distribution des ventes par employé';
+
+  @override
+  String get rptStaffDistributionDesc =>
+      'Graphique circulaire interactif — par nom d\'employé sur la facture (factures de vente uniquement)';
+
+  @override
+  String get rptNoStaffData =>
+      'Aucune vente enregistrée sous un nom d\'employé pour cette période';
+
+  @override
+  String get rptStaffShareTitle =>
+      'Part de chaque employé dans le total des ventes';
+
+  @override
+  String get rptStaffShareSubtitle =>
+      'Jauges — cohérentes avec les pourcentages du graphique circulaire et du tableau';
+
+  @override
+  String get rptStaffTrendTitle =>
+      'Tendance des ventes par employé au fil du temps';
+
+  @override
+  String get rptStaffTrendSubtitle =>
+      'Empilé — top 5 employés uniquement pour éviter l\'encombrement';
+
+  @override
+  String get rptStaffInvoicesTitle =>
+      'Factures enregistrées par employé (champ facture)';
+
+  @override
+  String get rptStaffInvoicesSubtitle =>
+      'Tableau — performance d\'enregistrement par nom d\'employé sur la facture';
+
+  @override
+  String get rptMarginGaugeSubtitle =>
+      'Jauges — distribution relative montrant où va chaque unité de revenu';
+
+  @override
+  String get rptMarginTrendStacked =>
+      'Empilé — chaque jour montre la composition des revenus face aux dépenses';
+
+  @override
+  String get rptMarginTrendStackedExpense =>
+      'Empilé — chaque jour montre la composition des revenus face aux dépenses';
+
+  @override
+  String get rptMarginSortNote =>
+      'Triés par marge nette (revenu − coût) après allocation des remises et déduction des retours';
+
+  @override
+  String get rptMarginPercent => 'Marge %';
+
+  @override
+  String rptLoyaltyDiscounts(Object amount) {
+    return 'Remises fidélité sur les factures : $amount FDJ';
+  }
+
+  @override
+  String rptLoyaltyPointsEarned(Object count) {
+    return 'Points accordés (total sur les factures) : $count';
+  }
+
+  @override
+  String get rptCostBasisNote =>
+      'Le coût de l\'article est déterminé par : (1) fixé à la vente, (2) prix moyen pondéré des achats (WAC), (3) dernier prix d\'achat dans la fiche produit';
+
+  @override
+  String get rptCostBasisNote2 =>
+      'Les nouvelles factures fixent automatiquement le coût lors de la création, le passé n\'est pas affecté par les changements de prix d\'achat.';
+
+  @override
+  String get rptInvoiceDiscountNote =>
+      'La remise au niveau de la facture (remise facture + remise fidélité) est distribuée proportionnellement à chaque ligne.';
+
+  @override
+  String get rptReturnsNote =>
+      'Les retours (isReturned = 1) sont déduits à la fois du revenu et du coût pour obtenir le vrai net.';
+
+  @override
+  String get rptVouchersExcludedNote =>
+      'Les bons (perception/paiement fournisseur) sont exclus car ce ne sont pas des ventes.';
+
+  @override
+  String get rptNetTotalNote =>
+      'Net = Marge totale − Dépenses totales de la période.';
+
+  @override
+  String get rptItemRevenueSubtitle =>
+      'Tableau — triés par revenu des articles dans la période';
+
+  @override
+  String get rptCostConfidenceSubtitle =>
+      'Plus la part des lignes à coût fixe est élevée, plus le chiffre est précis';
+
+  @override
+  String rptCostAccuracyLine1(Object known, Object total) {
+    return 'Sur $total lignes de vente dans la période, $known ont un coût connu.';
+  }
+
+  @override
+  String rptCostAccuracyLine2(Object count) {
+    return '$count lignes sans coût connu — complétez les prix d\'achat dans les fiches produits ou liez les lignes à des produits pour améliorer la précision de la marge.';
+  }
+
+  @override
+  String rptFixedCostLabel(Object count) {
+    return 'Fixé à la vente : $count';
+  }
+
+  @override
+  String rptCurrentPriceCostLabel(Object count) {
+    return 'Basé sur le prix d\'achat actuel : $count';
+  }
+
+  @override
+  String rptNoCostLabel(Object count) {
+    return 'Sans coût (traité comme 0) : $count';
+  }
+
+  @override
+  String rptCostAccuracyNote(Object count) {
+    return 'Il y a $count lignes sans coût connu — complétez les prix d\'achat dans les fiches produits ou liez les lignes à des produits pour améliorer la précision de la marge.';
+  }
+
+  @override
+  String get rptSavePeriodNote =>
+      'Lors de la sauvegarde, la période courante est mise à jour et stockée pour la prochaine fois.';
+
+  @override
+  String get rptStaffRecorder => 'Employé / Enregistreur';
+
+  @override
+  String rptHaveKnownCost(Object count) {
+    return '$count ont un coût connu.';
+  }
+
+  @override
+  String get rptDefaultPeriodSubtitle =>
+      'Lors de la sauvegarde, la période actuelle est mise à jour et enregistrée pour la prochaine fois.';
+
+  @override
+  String get expReportTitle => 'Rapport de dépenses';
+
+  @override
+  String get expPeriodLabel => 'Période';
+
+  @override
+  String get expCreatedLabel => 'Créé le';
+
+  @override
+  String expPageLabel(Object current, Object total) {
+    return 'Page $current/$total';
+  }
+
+  @override
+  String get expCategory => 'Catégorie';
+
+  @override
+  String get expTotal => 'Total';
+
+  @override
+  String get expPercentage => 'Pourcentage';
+
+  @override
+  String get expOperationsCount => 'Nombre d\'opérations';
+
+  @override
+  String get expPaid => 'Payé';
+
+  @override
+  String get expPending => 'En attente';
+
+  @override
+  String get expDate => 'Date';
+
+  @override
+  String get expAmount => 'Montant';
+
+  @override
+  String get expDescription => 'Description';
+
+  @override
+  String get expStaff => 'Employé';
+
+  @override
+  String get expExpenseReason => 'Motif de la dépense (note)';
+
+  @override
+  String get expNoNoteHint =>
+      'Pas de note - veuillez ajouter un motif de dépense.';
+
+  @override
+  String get expDaily => 'Journalier';
+
+  @override
+  String get expWeekly => 'Hebdomadaire';
+
+  @override
+  String get expMonthly => 'Mensuel';
+
+  @override
+  String get expYearly => 'Annuel';
+
+  @override
+  String get expPrintReport => 'Imprimer le rapport de dépenses';
+
+  @override
+  String get expChoosePeriod => 'Choisissez la période pour la facture :';
+
+  @override
+  String get expCustom => 'Personnalisé';
+
+  @override
+  String get expSelectedPeriod => 'Période sélectionnée :';
+
+  @override
+  String get expCancel => 'Annuler';
+
+  @override
+  String get expPrint => 'Imprimer';
+
+  @override
+  String debtsListFiltered(Object filtered, Object total) {
+    return '$filtered sur $total factures (recherche ou filtre)';
+  }
+
+  @override
+  String get debtsAggregateHint =>
+      'Agrégation par client : produits, vendeurs, paiement partiel depuis l\'écran détails. QR sur le reçu pour les clients enregistrés uniquement.';
+
+  @override
+  String debtsCustomersFiltered(Object filtered, Object total) {
+    return '$filtered sur $total clients';
+  }
+
+  @override
+  String get debtsNoRemainingAged =>
+      'Aucun solde aging restant agrégé avec les clients';
+
+  @override
+  String get debtsUnlinkedToCustomerTable =>
+      'Non lié à la table des clients (par nom)';
+
+  @override
+  String debtsAgeWarningActive(Object days) {
+    return ' L\'avertissement commence après $days jours à partir de la date de la facture.';
+  }
+
+  @override
+  String get debtsAgeWarningDisabled =>
+      ' Activez «Jours d\'avertissement» dans les paramètres de dette pour marquer les vieilles factures.';
+
+  @override
+  String debtsHowCalculated(Object ageHint) {
+    return 'Les dettes sont calculées à partir des factures de type «crédit». Restant = total − avance. Les limites de vente sont définies dans les paramètres.$ageHint';
+  }
+
+  @override
+  String get debtsShowAllInvoices => 'Afficher toutes les factures';
+
+  @override
+  String get debtsAgeWarning => 'Avertissement';
+
+  @override
+  String get debtsFilterAge => 'Filtre : avertissement';
+
+  @override
+  String get debtsClosed => 'Fermée';
+
+  @override
+  String get debtsAgeAlert => 'Alerte aging';
+
+  @override
+  String get debtsOpen => 'Ouverte';
+
+  @override
+  String get debtsReceipt => 'Reçu';
+
+  @override
+  String debtsInvoiceDays(Object date, Object days, Object id) {
+    return 'Facture #$id · $date · $days jours';
+  }
+
+  @override
+  String debtsAdvanceOverTotal(Object advance, Object total) {
+    return 'Avance $advance / $total Fdj';
+  }
+
+  @override
+  String get debtsTapForInvoiceDetails =>
+      'Appuyez pour voir les détails de la facture';
+
+  @override
+  String get debtsNoMatchingInvoices =>
+      'Aucune facture ne correspond à la recherche ou au filtre actuel';
+
+  @override
+  String get debtsNoCreditInvoices => 'Aucune facture à crédit enregistrée';
 }

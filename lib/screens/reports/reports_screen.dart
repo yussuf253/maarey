@@ -489,7 +489,7 @@ class _ReportsSideRailState extends State<_ReportsSideRail> {
                                         ).showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              'تم نسخ اسم القسم: ${s.label}',
+                                              AppLocalizations.of(context)!.rptSectionCopied(s.label),
                                             ),
                                             duration: const Duration(
                                               seconds: 2,
@@ -1176,7 +1176,7 @@ class _FigmaLikeRangeDialogState extends State<_FigmaLikeRangeDialog> {
               children: [
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  child: Text('إلغاء'),
+                  child: Text(AppLocalizations.of(context)!.cancelLabel2),
                 ),
                 const Spacer(),
                 FilledButton(
@@ -1384,14 +1384,14 @@ class _PanelDashboard extends StatelessWidget {
           const SizedBox(height: 18),
           _AnalyticsCard(
             title: AppLocalizations.of(context)!.dailySalesInRange,
-            subtitle: 'مخطط أعمدة — يوضح اتجاه المبيعات بين تاريخي الفترة',
+            subtitle: AppLocalizations.of(context)!.rptSalesTrendSubtitle,
             child: _DailyBars(points: data.dailySales, maxY: maxDay),
           ),
           const SizedBox(height: 18),
           _CategoryGaugesCard(
             title: AppLocalizations.of(context)!.mainPerformanceIndicators,
             subtitle:
-                'نسبة كل مؤشر من صافي المبيعات — متزامنة مع بطاقات KPI أعلاه',
+                AppLocalizations.of(context)!.rptKPIShare,
             total: data.salesNet <= 0 ? 1 : data.salesNet,
             items: [
               _GaugeItem(
@@ -1449,7 +1449,7 @@ class _PanelDashboard extends StatelessWidget {
               return _StackedAreaCard(
                 title: AppLocalizations.of(context)!.salesVsExpensesDailyTrend,
                 subtitle:
-                    'مكدّس من بيانات الفواتير والمصروفات (SQL GROUP BY يومي)',
+                    AppLocalizations.of(context)!.rptDailyBreakdownSubtitle,
                 series: series,
                 dates: dates,
               );
@@ -1575,7 +1575,7 @@ class _PanelSales extends StatelessWidget {
           const SizedBox(height: 18),
           _AnalyticsCard(
             title: AppLocalizations.of(context)!.salesByPaymentType,
-            subtitle: 'مخطط بيتزا تفاعلي — من فواتير البيع فقط (بدون السندات)',
+            subtitle: AppLocalizations.of(context)!.rptCustomerPieSubtitle,
             child: list.isEmpty || salesTotal <= 0
                 ? Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
@@ -1592,7 +1592,7 @@ class _PanelSales extends StatelessWidget {
                       slices: [
                         for (final r in list)
                           _PieSlice(
-                            label: _invoiceTypeLabel(r.type),
+                            label: _invoiceTypeLabel(r.type, context),
                             value: r.total,
                             color: _invoiceTypeAccentColor(r.type, cs),
                           ),
@@ -1604,12 +1604,12 @@ class _PanelSales extends StatelessWidget {
           const SizedBox(height: 18),
           _CategoryGaugesCard(
             title: AppLocalizations.of(context)!.paymentTypeRatio,
-            subtitle: 'Gauges — متسقة مع نسب المخطط الدائري والجدول',
+            subtitle: AppLocalizations.of(context)!.rptPaymentGaugeSubtitle,
             total: salesTotal <= 0 ? 1 : salesTotal,
             items: [
               for (final r in list)
                 _GaugeItem(
-                  label: _invoiceTypeLabel(r.type),
+                  label: _invoiceTypeLabel(r.type, context),
                   value: r.total,
                   color: _invoiceTypeAccentColor(r.type, cs),
                 ),
@@ -1635,7 +1635,7 @@ class _PanelSales extends StatelessWidget {
               final series = <_AreaSeries>[
                 for (final r in list)
                   _AreaSeries(
-                    name: _invoiceTypeLabel(r.type),
+                    name: _invoiceTypeLabel(r.type, context),
                     color: _invoiceTypeAccentColor(r.type, cs),
                     values: [
                       for (final d in dates) (byKey[r.type.index]?[d] ?? 0.0),
@@ -1644,7 +1644,7 @@ class _PanelSales extends StatelessWidget {
               ];
               return _StackedAreaCard(
                 title: AppLocalizations.of(context)!.paymentTypesTrendOverTime,
-                subtitle: 'مكدّس — يبني كل يوم مجموع كل نوع دفع مباشرة من SQL',
+                subtitle: AppLocalizations.of(context)!.rptPaymentTrendSubtitle,
                 series: series,
                 dates: dates,
               );
@@ -1654,14 +1654,14 @@ class _PanelSales extends StatelessWidget {
           _AnalyticsCard(
             title: AppLocalizations.of(context)!.accuracyNotes,
             subtitle: AppLocalizations.of(context)!.salesNotMixedWithReceipts,
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 _BulletLine(
-                  'هذا القسم يعرض المبيعات فقط: نقدي/دين/تقسيط/توصيل.',
+                  AppLocalizations.of(context)!.rptSalesOnlyNote,
                 ),
                 _BulletLine(
-                  'سندات التحصيل/تسديد الأقساط/دفع المورد تُستبعد من “المبيعات” (لأنها ليست إيراد بيع).',
+                  AppLocalizations.of(context)!.rptVouchersExcluded,
                 ),
               ],
             ),
@@ -1723,7 +1723,7 @@ class _SalesByTypeTableState extends State<_SalesByTypeTable> {
     super.initState();
     _rows = List<_SalesTypeRow>.from(widget.rows);
     _sortByTotal(ascending: false, notify: false);
-    _ds = _SalesByTypeDataSource(_rows);
+    _ds = _SalesByTypeDataSource(_rows, context: context);
   }
 
   @override
@@ -1745,8 +1745,8 @@ class _SalesByTypeTableState extends State<_SalesByTypeTable> {
     _sortColumnIndex = 0;
     _sortAscending = ascending;
     _rows.sort((a, b) {
-      final la = _invoiceTypeLabel(a.type);
-      final lb = _invoiceTypeLabel(b.type);
+      final la = _invoiceTypeLabel(a.type, context);
+      final lb = _invoiceTypeLabel(b.type, context);
       return ascending ? la.compareTo(lb) : lb.compareTo(la);
     });
     if (notify) setState(() {});
@@ -1823,7 +1823,8 @@ class _SalesByTypeTableState extends State<_SalesByTypeTable> {
 }
 
 class _SalesByTypeDataSource extends DataTableSource {
-  _SalesByTypeDataSource(List<_SalesTypeRow> rows) {
+  final BuildContext context;
+  _SalesByTypeDataSource(List<_SalesTypeRow> rows, {required this.context}) {
     updateRows(rows, notify: false);
   }
 
@@ -1844,7 +1845,7 @@ class _SalesByTypeDataSource extends DataTableSource {
     return DataRow.byIndex(
       index: index,
       cells: [
-        DataCell(Text(_invoiceTypeLabel(r.type))),
+        DataCell(Text(_invoiceTypeLabel(r.type, context))),
         DataCell(Text('${_numFmt.format(r.total)} Fdj')),
         DataCell(Text(_formatSharePercent(pct))),
       ],
@@ -2192,15 +2193,15 @@ class _PanelCustomers extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _AnalyticsCard(
-            title: 'توزيع المبيعات على العملاء',
+            title: AppLocalizations.of(context)!.rptCustomerDistributionTitle,
             subtitle:
-                'بيتزا تفاعلي — يعرض أعلى 6 عملاء وباقي العملاء كـ «آخرون»',
+                AppLocalizations.of(context)!.rptCustomerDistributionDesc,
             child: (slices.isEmpty || pieTotal <= 0)
                 ? Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     child: Center(
                       child: Text(
-                        'لا توجد بيانات عملاء في هذه الفترة',
+                        AppLocalizations.of(context)!.rptNoCustomerData,
                         style: TextStyle(color: cs.onSurfaceVariant),
                       ),
                     ),
@@ -2215,8 +2216,8 @@ class _PanelCustomers extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           _AnalyticsCard(
-            title: 'أكثر العملاء شراءً (حسب اسم الفاتورة)',
-            subtitle: 'ترتيب حسب الإجمالي — من بيانات الفواتير في الفترة',
+            title: AppLocalizations.of(context)!.rptTopCustomersTitle,
+            subtitle: AppLocalizations.of(context)!.rptTopCustomersSubtitle,
             child: _SimpleTable(
               headers: [loc.rptCustomer, AppLocalizations.of(context)!.totalAmountLabel, AppLocalizations.of(context)!.salesInvoices],
               rows: sorted
@@ -2232,7 +2233,7 @@ class _PanelCustomers extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            'تنبيه: الاسم مأخوذ من حقل «اسم العميل» في الفاتورة؛ لربط أدق استخدم اختيار العميل من السجل.',
+            AppLocalizations.of(context)!.rptCustomerNameNote,
             style: TextStyle(fontSize: 11, color: cs.onSurfaceVariant),
           ),
         ],
@@ -2274,7 +2275,7 @@ class _PanelDebts extends StatelessWidget {
           const SizedBox(height: 18),
           _AnalyticsCard(
             title: AppLocalizations.of(context)!.customerBalanceList,
-            subtitle: 'جدول — أرصدة مسجّلة في سجل العملاء',
+            subtitle: AppLocalizations.of(context)!.rptCustomerBalancesSubtitle,
             child: _SimpleTable(
               headers: ['#', AppLocalizations.of(context)!.customerLabel2, AppLocalizations.of(context)!.balance],
               rows: data.debtors
@@ -2337,7 +2338,7 @@ class _PanelInstallments extends StatelessWidget {
           const SizedBox(height: 18),
           _AnalyticsCard(
             title: loc.rptDetails,
-            subtitle: 'جدول — خطط الأقساط المرتبطة بفواتير الفترة',
+            subtitle: AppLocalizations.of(context)!.rptInstallmentPlansSubtitle,
             child: _SimpleTable(
               headers: [
                 AppLocalizations.of(context)!.planLabel,
@@ -2399,7 +2400,7 @@ class _PanelStaff extends StatelessWidget {
         if (v > 0) {
           slices.add(
             _PieSlice(
-              label: s.staffLabel.trim().isEmpty ? '(غير معروف)' : s.staffLabel,
+              label: s.staffLabel.trim().isEmpty ? AppLocalizations.of(context)!.rptUnknownStaff : s.staffLabel,
               value: v,
               color: _palette[i % _palette.length],
             ),
@@ -2425,15 +2426,15 @@ class _PanelStaff extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _AnalyticsCard(
-            title: 'توزيع المبيعات على الموظفين',
+            title: AppLocalizations.of(context)!.rptStaffDistributionTitle,
             subtitle:
-                'مخطط بيتزا تفاعلي — حسب اسم الموظف المسجّل في الفاتورة (فواتير بيع فقط)',
+                AppLocalizations.of(context)!.rptStaffDistributionDesc,
             child: slices.isEmpty || pieTotal <= 0
                 ? Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     child: Center(
                       child: Text(
-                        'لا توجد مبيعات مسجّلة باسم موظف في هذه الفترة',
+                        AppLocalizations.of(context)!.rptNoStaffData,
                         style: TextStyle(color: cs.onSurfaceVariant),
                       ),
                     ),
@@ -2448,8 +2449,8 @@ class _PanelStaff extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           _CategoryGaugesCard(
-            title: 'نسبة كل موظف من إجمالي المبيعات',
-            subtitle: 'Gauges — متسقة مع نسب المخطط الدائري والجدول',
+            title: AppLocalizations.of(context)!.rptStaffShareTitle,
+            subtitle: AppLocalizations.of(context)!.rptPaymentGaugeSubtitle,
             total: pieTotal <= 0 ? 1 : pieTotal,
             items: [
               for (final s in slices)
@@ -2492,8 +2493,8 @@ class _PanelStaff extends StatelessWidget {
               ];
 
               return _StackedAreaCard(
-                title: 'اتجاه مبيعات الموظفين عبر الزمن',
-                subtitle: 'مكدّس — أعلى 5 موظفين فقط لتفادي ازدحام الرسم',
+                title: AppLocalizations.of(context)!.rptStaffTrendTitle,
+                subtitle: AppLocalizations.of(context)!.rptStaffTrendSubtitle,
                 series: series,
                 dates: dates,
               );
@@ -2501,10 +2502,10 @@ class _PanelStaff extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           _AnalyticsCard(
-            title: 'فواتير مسجّلة باسم الموظف (حقل الفاتورة)',
-            subtitle: 'جدول — أداء التسجيل حسب اسم الموظف على الفاتورة',
+            title: AppLocalizations.of(context)!.rptStaffInvoicesTitle,
+            subtitle: AppLocalizations.of(context)!.rptStaffInvoicesSubtitle,
             child: _SimpleTable(
-              headers: ['الموظف / المسجّل', AppLocalizations.of(context)!.invoiceCount, loc.rptTotal],
+              headers: [loc.rptStaffRecorder, AppLocalizations.of(context)!.invoiceCount, loc.rptTotal],
               rows: data.staffSales
                   .map(
                     (s) => [
@@ -2593,7 +2594,7 @@ class _PanelAnalytics extends StatelessWidget {
           // ─── تركيب الإيراد (تكلفة + هامش) — Gauges متسقة مع KPI
           _CategoryGaugesCard(
             title: AppLocalizations.of(context)!.revenueComposition,
-            subtitle: 'Gauges — توزيع نسبي يوضح أين تذهب كل وحدة إيراد',
+            subtitle: AppLocalizations.of(context)!.rptMarginGaugeSubtitle,
             total: ms.revenueNet <= 0 ? 1 : ms.revenueNet,
             items: [
               _GaugeItem(
@@ -2648,8 +2649,8 @@ class _PanelAnalytics extends StatelessWidget {
               return _StackedAreaCard(
                 title: AppLocalizations.of(context)!.revenueTrend,
                 subtitle: cs2.brightness == Brightness.dark
-                    ? 'مكدّس — كل يوم يوضح تركيب الإيراد ومقابله المصروفات'
-                    : 'مكدّس — كل يوم يوضح تركيب الإيراد ومقابله المصروفات',
+                    ? AppLocalizations.of(context)!.rptMarginTrendStacked
+                    : AppLocalizations.of(context)!.rptMarginTrendStacked,
                 series: series,
                 dates: dates,
               );
@@ -2669,7 +2670,7 @@ class _PanelAnalytics extends StatelessWidget {
                   _AnalyticsCard(
                     title: AppLocalizations.of(context)!.top10ProfitProducts,
                     subtitle:
-                        'ترتيب حسب الهامش الصافي (إيراد − تكلفة) بعد توزيع الخصومات وطرح المرتجعات',
+                        AppLocalizations.of(context)!.rptMarginSortNote,
                     child: top.isEmpty
                         ? Padding(
                             padding: const EdgeInsets.symmetric(vertical: 16),
@@ -2682,7 +2683,7 @@ class _PanelAnalytics extends StatelessWidget {
                               AppLocalizations.of(context)!.revenueLabel,
                               AppLocalizations.of(context)!.costLabel,
                               AppLocalizations.of(context)!.marginLabel,
-                              'الهامش %',
+                              AppLocalizations.of(context)!.rptMarginPercent,
                             ],
                             rows: top
                                 .map(
@@ -2717,7 +2718,7 @@ class _PanelAnalytics extends StatelessWidget {
                               AppLocalizations.of(context)!.revenueLabel,
                               AppLocalizations.of(context)!.costLabel,
                               AppLocalizations.of(context)!.marginLabel,
-                              'الهامش %',
+                              AppLocalizations.of(context)!.rptMarginPercent,
                             ],
                             rows: bottom
                                 .map(
@@ -2750,10 +2751,10 @@ class _PanelAnalytics extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 _BulletLine(
-                  'خصومات ولاء على الفواتير: ${_numFmt.format(data.loyaltyRedeemedInRange)} Fdj',
+                  AppLocalizations.of(context)!.rptLoyaltyDiscounts(_numFmt.format(data.loyaltyRedeemedInRange)),
                 ),
                 _BulletLine(
-                  'نقاط ممنوحة (مجموع النقاط المسجّلة على الفواتير): ${_numFmt.format(data.loyaltyEarnedInRange)}',
+                  AppLocalizations.of(context)!.rptLoyaltyPointsEarned(_numFmt.format(data.loyaltyEarnedInRange)),
                 ),
               ],
             ),
@@ -2762,26 +2763,26 @@ class _PanelAnalytics extends StatelessWidget {
           _AnalyticsCard(
             title: AppLocalizations.of(context)!.howMarginCalculated,
             subtitle: AppLocalizations.of(context)!.fullTransparency,
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 _BulletLine(
-                  'تكلفة البند تُؤخذ بالترتيب: (١) مثبّتة وقت البيع، (٢) المتوسط المرجّح من دفعات المنتج (WAC)، (٣) آخر سعر شراء في بطاقة المنتج.',
+                  AppLocalizations.of(context)!.rptCostBasisNote,
                 ),
                 _BulletLine(
-                  'الفواتير الجديدة تُثبّت التكلفة تلقائياً لحظة إنشائها، فلا يتأثر الماضي بتغيّر أسعار الشراء.',
+                  AppLocalizations.of(context)!.rptCostBasisNote2,
                 ),
                 _BulletLine(
-                  'الخصم على مستوى الفاتورة (خصم الفاتورة + خصم الولاء) يُوزَّع نسبياً على كل سطر بند.',
+                  AppLocalizations.of(context)!.rptInvoiceDiscountNote,
                 ),
                 _BulletLine(
-                  'المرتجعات (isReturned = 1) تُطرح من الإيراد ومن التكلفة معاً للحصول على الصافي الحقيقي.',
+                  AppLocalizations.of(context)!.rptReturnsNote,
                 ),
                 _BulletLine(
-                  'تُستبعد السندات (تحصيل/تسديد/دفع مورد) لأنها ليست بيع.',
+                  AppLocalizations.of(context)!.rptVouchersExcludedNote,
                 ),
                 _BulletLine(
-                  'الصافي = الهامش الإجمالي − إجمالي المصروفات في الفترة.',
+                  AppLocalizations.of(context)!.rptNetTotalNote,
                 ),
               ],
             ),
@@ -2789,7 +2790,7 @@ class _PanelAnalytics extends StatelessWidget {
           const SizedBox(height: 18),
           _AnalyticsCard(
             title: AppLocalizations.of(context)!.topItemsByRevenue,
-            subtitle: 'جدول — ترتيب حسب إيراد البنود في الفترة',
+            subtitle: AppLocalizations.of(context)!.rptItemRevenueSubtitle,
             child: _SimpleTable(
               headers: [AppLocalizations.of(context)!.itemLabel2, AppLocalizations.of(context)!.quantityDialogTitle, AppLocalizations.of(context)!.revenueLabel],
               rows: data.topProducts
@@ -2831,7 +2832,7 @@ class _DataQualityCard extends StatelessWidget {
 
     return _AnalyticsCard(
       title: AppLocalizations.of(context)!.marginDataQuality,
-      subtitle: 'كلما ارتفعت نسبة السطور ذات التكلفة المثبّتة، زادت دقة الرقم',
+      subtitle: AppLocalizations.of(context)!.rptCostConfidenceSubtitle,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -2850,8 +2851,7 @@ class _DataQualityCard extends StatelessWidget {
                 child: Text(
                   total == 0
                       ? AppLocalizations.of(context)!.noItemsInPeriod
-                      : 'من أصل ${_numFmt.format(total)} سطر بيع في الفترة، '
-                            '${_numFmt.format(stamped + fb)} تملك تكلفة معروفة.',
+                      : AppLocalizations.of(context)!.rptCostAccuracyLine1(_numFmt.format(total), _numFmt.format(stamped + fb)),
                   style: TextStyle(fontSize: 12.5, color: cs.onSurfaceVariant),
                 ),
               ),
@@ -2896,15 +2896,15 @@ class _DataQualityCard extends StatelessWidget {
             children: [
               _ReportsLegendDot(
                 color: const Color(0xFF059669),
-                label: 'مثبّتة وقت البيع: ${_numFmt.format(stamped)}',
+                label: AppLocalizations.of(context)!.rptFixedCostLabel(_numFmt.format(stamped)),
               ),
               _ReportsLegendDot(
                 color: const Color(0xFFF4BC00),
-                label: 'تعتمد على سعر شراء حالي: ${_numFmt.format(fb)}',
+                label: AppLocalizations.of(context)!.rptCurrentPriceCostLabel(_numFmt.format(fb)),
               ),
               _ReportsLegendDot(
                 color: const Color(0xFFDC2626),
-                label: 'بدون تكلفة (تُعامَل 0): ${_numFmt.format(zc)}',
+                label: AppLocalizations.of(context)!.rptNoCostLabel(_numFmt.format(zc)),
               ),
             ],
           ),
@@ -2929,9 +2929,7 @@ class _DataQualityCard extends StatelessWidget {
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      'يوجد ${_numFmt.format(zc)} سطر بدون تكلفة معروفة — '
-                      'أكمِل سعر الشراء في بطاقات المنتجات أو اربط السطر بمنتج '
-                      'لرفع دقة الهامش.',
+                      AppLocalizations.of(context)!.rptCostAccuracyNote(_numFmt.format(zc)),
                       style: const TextStyle(
                         fontSize: 12,
                         color: Color(0xFF7F1D1D),
@@ -2987,7 +2985,7 @@ class _PanelSettingsState extends State<_PanelSettings> {
         constraints: const BoxConstraints(maxWidth: 520),
         child: _AnalyticsCard(
           title: AppLocalizations.of(context)!.defaultReportPeriod,
-          subtitle: 'عند الحفظ تُحدَّث الفترة الحالية وتُخزَّن للمرّة القادمة.',
+          subtitle: AppLocalizations.of(context)!.rptDefaultPeriodSubtitle,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -3860,21 +3858,21 @@ class _ReportsStackedAreaPainter extends CustomPainter {
   }
 }
 
-String _invoiceTypeLabel(InvoiceType t) {
+String _invoiceTypeLabel(InvoiceType t, BuildContext context) {
   switch (t) {
     case InvoiceType.cash:
-      return 'نقدي';
+      return AppLocalizations.of(context)!.paymentTypeCash;
     case InvoiceType.credit:
-      return 'دين';
+      return AppLocalizations.of(context)!.paymentTypeCredit;
     case InvoiceType.installment:
-      return 'تقسيط';
+      return AppLocalizations.of(context)!.paymentTypeInstallment;
     case InvoiceType.delivery:
-      return 'توصيل';
+      return AppLocalizations.of(context)!.paymentTypeDelivery;
     case InvoiceType.debtCollection:
-      return 'تحصيل دين';
+      return AppLocalizations.of(context)!.paymentTypeDebtCollection;
     case InvoiceType.installmentCollection:
-      return 'تسديد قسط';
+      return AppLocalizations.of(context)!.paymentTypeInstallmentCollection;
     case InvoiceType.supplierPayment:
-      return 'دفع مورد';
+      return AppLocalizations.of(context)!.paymentTypeSupplierPayment;
   }
 }

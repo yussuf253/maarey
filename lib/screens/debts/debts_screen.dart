@@ -295,7 +295,7 @@ class _DebtsScreenState extends State<DebtsScreen>
                                 bottom: 0,
                               ),
                               child: Text(
-                                'القائمة: ${filtered.length} من ${_rows.length} فاتورة (بحث أو تصفية)',
+                                loc.debtsListFiltered(filtered.length.toString(), _rows.length.toString()),
                                 style: theme.textTheme.labelMedium?.copyWith(
                                   color: cs.onSurfaceVariant,
                                 ),
@@ -466,7 +466,7 @@ class _DebtsScreenState extends State<DebtsScreen>
                               bottom: 8,
                             ),
                             child: Text(
-                              'تجميع حسب العميل: المنتجات والبائعون وتسديد جزئي من شاشة التفاصيل. QR على الإيصال للعملاء المسجّلين فقط.',
+                              loc.debtsAggregateHint,
                               style: theme.textTheme.bodySmall?.copyWith(
                                 color: cs.onSurfaceVariant,
                                 height: 1.45,
@@ -541,7 +541,7 @@ class _DebtsScreenState extends State<DebtsScreen>
                                 bottom: 8,
                               ),
                               child: Text(
-                                '${sumFiltered.length} من ${_summaries.length} عميل',
+                                loc.debtsCustomersFiltered(sumFiltered.length.toString(), _summaries.length.toString()),
                                 style: theme.textTheme.labelMedium?.copyWith(
                                   color: cs.onSurfaceVariant,
                                 ),
@@ -553,8 +553,8 @@ class _DebtsScreenState extends State<DebtsScreen>
                               child: Center(
                                 child: Text(
                                   _summaries.isEmpty
-                                      ? 'لا يوجد متبقٍ آجل مجمّع بالعملاء'
-                                      : 'لا نتائج للبحث',
+                                      ? loc.debtsNoRemainingAged
+                                      : loc.debtsNoResults,
                                   style: TextStyle(color: cs.onSurfaceVariant),
                                 ),
                               ),
@@ -639,7 +639,7 @@ class _CustomerDebtSummaryCard extends StatelessWidget {
                   children: [
                     Text(
                       summary.displayName.isEmpty
-                          ? 'عميل'
+                          ? loc.debtsCustomer
                           : summary.displayName,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -653,8 +653,8 @@ class _CustomerDebtSummaryCard extends StatelessWidget {
                     const SizedBox(height: 6),
                     Text(
                       summary.customerId != null
-                          ? 'عميل مسجّل #${summary.customerId}'
-                          : 'غير مربوط بجدول العملاء (بالاسم)',
+                          ? loc.debtsRegisteredCustomer(summary.customerId.toString())
+                          : loc.debtsUnlinkedToCustomerTable,
                       style: TextStyle(
                         fontFamily: 'Tajawal',
                         fontSize: 12,
@@ -662,7 +662,7 @@ class _CustomerDebtSummaryCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${summary.invoiceCount} فاتورة آجل',
+                      loc.debtsCreditInvoices(summary.invoiceCount.toString()),
                       style: TextStyle(
                         fontFamily: 'Tajawal',
                         fontSize: 12,
@@ -685,7 +685,7 @@ class _CustomerDebtSummaryCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'المتبقي',
+                    loc.debtsRemaining,
                     style: TextStyle(
                       fontFamily: 'Tajawal',
                       fontSize: 11,
@@ -696,7 +696,7 @@ class _CustomerDebtSummaryCard extends StatelessWidget {
                   // Card Action Pill (Golden §9.2.1) — اختصار لفتح كشف العميل.
                   _DebtActionPill(
                     icon: Icons.account_balance_wallet_rounded,
-                    label: 'كشف العميل',
+                    label: loc.debtsCustomerStatement,
                     color: colorScheme.primary,
                     onPressed: () {
                       Navigator.of(context).push<void>(
@@ -773,8 +773,8 @@ class _InfoBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ageHint = warnDays > 0
-        ? ' التحذير بالعمر يبدأ بعد $warnDays يوماً من تاريخ الفاتورة.'
-        : ' فعّل «أيام تحذير العمر» من إعدادات الدين لتمييز الفواتير القديمة.';
+        ? loc.debtsAgeWarningActive(warnDays.toString())
+        : loc.debtsAgeWarningDisabled;
     return DecoratedBox(
       decoration: BoxDecoration(
         color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.4),
@@ -827,37 +827,37 @@ class _SummaryStrip extends StatelessWidget {
       children: [
         Expanded(
           child: _MetricBox(
-            title: 'إجمالي المتبقي',
+            title: loc.debtsTotalRemaining,
             value: '${_numFmt.format(totalOpen)} Fdj',
             icon: Icons.account_balance_wallet_outlined,
             colorScheme: colorScheme,
             isDark: isDark,
-            tooltip: 'عرض كل الفواتير',
+            tooltip: loc.debtsShowAllInvoices,
             onTap: () => onSelectFilter(_DebtFilter.all),
           ),
         ),
         const SizedBox(width: 8),
         Expanded(
           child: _MetricBox(
-            title: 'فواتير مفتوحة',
+            title: loc.debtsOpenInvoices,
             value: '$openInvoices',
             icon: Icons.description_outlined,
             colorScheme: colorScheme,
             isDark: isDark,
-            tooltip: 'تصفية: مفتوحة فقط',
+            tooltip: loc.debtsFilterOpen,
             onTap: () => onSelectFilter(_DebtFilter.open),
           ),
         ),
         const SizedBox(width: 8),
         Expanded(
           child: _MetricBox(
-            title: 'تحذير عمر',
+            title: loc.debtsAgeWarning,
             value: '$agedInvoices',
             icon: Icons.schedule_rounded,
             colorScheme: colorScheme,
             isDark: isDark,
             accent: agedInvoices > 0 ? AppSemanticColors.warning : null,
-            tooltip: 'تصفية: تحذير عمر',
+            tooltip: loc.debtsFilterAge,
             onTap: () => onSelectFilter(_DebtFilter.aged),
           ),
         ),
@@ -964,7 +964,7 @@ class _DebtCard extends StatelessWidget {
     final statusColor = settled
         ? AppSemanticColors.success
         : (aged ? AppSemanticColors.warning : AppSemanticColors.info);
-    final statusLabel = settled ? 'مغلقة' : (aged ? 'تنبيه عمر' : 'مفتوحة');
+    final statusLabel = settled ? loc.debtsClosed : (aged ? loc.debtsAgeAlert : loc.debtsOpen);
     final titleC = colorScheme.onSurface;
     final mutedC = colorScheme.onSurfaceVariant;
     final fill = isDark ? AppColors.cardDark : colorScheme.surface;
@@ -1042,7 +1042,7 @@ class _DebtCard extends StatelessWidget {
                         icon: settled
                             ? Icons.check_circle_outline_rounded
                             : Icons.receipt_long_outlined,
-                        label: settled ? 'الإيصال' : 'تفاصيل',
+                        label: settled ? loc.debtsReceipt : loc.debtsDetails,
                         color: settled ? statusColor : colorScheme.primary,
                         onPressed: onTap,
                       ),
@@ -1050,7 +1050,7 @@ class _DebtCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    row.customerName.isEmpty ? 'عميل' : row.customerName,
+                    row.customerName.isEmpty ? loc.debtsCustomer : row.customerName,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -1063,7 +1063,7 @@ class _DebtCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    'فاتورة #${row.invoiceId} · ${_dateFmt.format(row.date)} · ${row.daysSinceInvoice(now)} يوماً',
+                    loc.debtsInvoiceDays(row.invoiceId.toString(), _dateFmt.format(row.date), row.daysSinceInvoice(now).toString()),
                     style: TextStyle(
                       fontFamily: 'Tajawal',
                       fontSize: 12,
@@ -1074,7 +1074,7 @@ class _DebtCard extends StatelessWidget {
                   if (row.customerId != null) ...[
                     const SizedBox(height: 4),
                     Text(
-                      'عميل مسجّل #${row.customerId}',
+                      loc.debtsRegisteredCustomer(row.customerId.toString()),
                       style: TextStyle(
                         fontFamily: 'Tajawal',
                         fontSize: 11,
@@ -1096,7 +1096,7 @@ class _DebtCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'المقدّم ${_numFmt.format(row.advancePayment)} / ${_numFmt.format(row.total)} Fdj',
+                    loc.debtsAdvanceOverTotal(_numFmt.format(row.advancePayment), _numFmt.format(row.total)),
                     style: TextStyle(
                       fontFamily: 'Tajawal',
                       fontSize: 11,
@@ -1106,7 +1106,7 @@ class _DebtCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'المتبقي',
+                    loc.debtsRemaining,
                     style: TextStyle(
                       fontFamily: 'Tajawal',
                       fontSize: 11,
@@ -1130,7 +1130,7 @@ class _DebtCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'اضغط لعرض تفاصيل الفاتورة',
+                    loc.debtsTapForInvoiceDetails,
                     style: TextStyle(
                       fontFamily: 'Tajawal',
                       fontSize: 11,
@@ -1187,17 +1187,17 @@ class _EmptyState extends StatelessWidget {
             Text(
               hasRows
                   ? (filterActive
-                        ? 'لا توجد فواتير ضمن البحث أو التصفية الحالية'
-                        : 'لا نتائج')
-                  : 'لا توجد فواتير دين مسجّلة',
+                        ? loc.debtsNoMatchingInvoices
+                        : loc.debtsNoResults)
+                  : loc.debtsNoCreditInvoices,
               textAlign: TextAlign.center,
               style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
             ),
             const SizedBox(height: 8),
             Text(
               hasRows
-                  ? 'امسح البحث أو اختر «الكل» في شريط التصفية.'
-                  : 'من «بيع جديد» اختر نوع «دين» ليظهر المبلغ المؤجل هنا.',
+                  ? loc.debtsClearSearchHint
+                  : loc.debtsNewSaleHint,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: colorScheme.onSurfaceVariant,

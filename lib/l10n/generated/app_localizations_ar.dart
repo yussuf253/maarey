@@ -11069,7 +11069,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get debtsRemaining => 'المتبقي';
 
   @override
-  String get debtsCustomer => 'العميل';
+  String get debtsCustomer => 'عميل';
 
   @override
   String get debtsInvoiceNum => 'فاتورة #';
@@ -11343,19 +11343,23 @@ class AppLocalizationsAr extends AppLocalizations {
   String get debtsNoCreditRemaining => 'لا يوجد متبقٍ آجل مجمّع بالعملاء';
 
   @override
-  String get debtsNoResults => 'لا نتائج للبحث';
+  String get debtsNoResults => 'لا نتائج';
 
   @override
   String get debtsCustomerLabel => 'عميل';
 
   @override
-  String get debtsRegisteredCustomer => 'عميل مسجّل';
+  String debtsRegisteredCustomer(Object id) {
+    return 'عميل مسجّل #$id';
+  }
 
   @override
   String get debtsNotLinked => 'غير مربوط بجدول العملاء (بالاسم)';
 
   @override
-  String get debtsCreditInvoices => 'فاتورة آجل';
+  String debtsCreditInvoices(Object count) {
+    return '$count فاتورة آجل';
+  }
 
   @override
   String get debtsRemainingLabel => 'المتبقي';
@@ -13728,4 +13732,364 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get blWeighted => 'وزن';
+
+  @override
+  String rptSectionCopied(Object name) {
+    return 'تم نسخ اسم القسم: $name';
+  }
+
+  @override
+  String get rptSalesTrendSubtitle =>
+      'مخطط أعمدة — يوضح اتجاه المبيعات بين تاريخي الفترة';
+
+  @override
+  String get rptKPIShare =>
+      'نسبة كل مؤشر من صافي المبيعات — متزامنة مع بطاقات KPI أعلاه';
+
+  @override
+  String get rptDailyBreakdownSubtitle =>
+      'مكدّس من بيانات الفواتير والمصروفات (SQL GROUP BY يومي)';
+
+  @override
+  String get rptCustomerPieSubtitle =>
+      'مخطط بيتزا تفاعلي — من فواتير البيع فقط (بدون السندات)';
+
+  @override
+  String get rptPaymentGaugeSubtitle =>
+      'Gauges — متسقة مع نسب المخطط الدائري والجدول';
+
+  @override
+  String get rptPaymentTrendSubtitle =>
+      'مكدّس — يبني كل يوم مجموع كل نوع دفع مباشرة من SQL';
+
+  @override
+  String get rptSalesOnlyNote =>
+      'هذا القسم يعرض المبيعات فقط: نقدي/دين/تقسيط/توصيل.';
+
+  @override
+  String get rptVouchersExcluded =>
+      'سندات التحصيل/تسديد الأقساط/دفع المورد تُستبعد من “المبيعات” (لأنها ليست إيراد بيع).';
+
+  @override
+  String get rptCustomerDistributionTitle => 'توزيع المبيعات على العملاء';
+
+  @override
+  String get rptCustomerDistributionDesc =>
+      'بيتزا تفاعلي — يعرض أعلى 6 عملاء وباقي العملاء كـ “آخرون”';
+
+  @override
+  String get rptTopCustomersTitle => 'أكثر العملاء شراءً (حسب اسم الفاتورة)';
+
+  @override
+  String get rptTopCustomersSubtitle =>
+      'ترتيب حسب الإجمالي — من بيانات الفواتير في الفترة';
+
+  @override
+  String get rptCustomerNameNote =>
+      'تنبيه: الاسم مأخوذ من حقل “اسم العميل” في الفاتورة؛ لربط أدق استخدم اختيار العميل من السجل.';
+
+  @override
+  String get rptCustomerBalancesSubtitle =>
+      'جدول — أرصدة مسجّلة في سجل العملاء';
+
+  @override
+  String get rptInstallmentPlansSubtitle =>
+      'جدول — خطط الأقساط المرتبطة بفواتير الفترة';
+
+  @override
+  String get rptUnknownStaff => '(غير معروف)';
+
+  @override
+  String get rptStaffDistributionTitle => 'توزيع المبيعات على الموظفين';
+
+  @override
+  String get rptStaffDistributionDesc =>
+      'مخطط بيتزا تفاعلي — حسب اسم الموظف المسجّل في الفاتورة (فواتير بيع فقط)';
+
+  @override
+  String get rptNoStaffData => 'لا توجد مبيعات مسجّلة باسم موظف في هذه الفترة';
+
+  @override
+  String get rptStaffShareTitle => 'نسبة كل موظف من إجمالي المبيعات';
+
+  @override
+  String get rptStaffShareSubtitle =>
+      'Gauges — متسقة مع نسب المخطط الدائري والجدول';
+
+  @override
+  String get rptStaffTrendTitle => 'اتجاه مبيعات الموظفين عبر الزمن';
+
+  @override
+  String get rptStaffTrendSubtitle =>
+      'مكدّس — أعلى 5 موظفين فقط لتفادي ازدحام الرسم';
+
+  @override
+  String get rptStaffInvoicesTitle =>
+      'فواتير مسجّلة باسم الموظف (حقل الفاتورة)';
+
+  @override
+  String get rptStaffInvoicesSubtitle =>
+      'جدول — أداء التسجيل حسب اسم الموظف على الفاتورة';
+
+  @override
+  String get rptMarginGaugeSubtitle =>
+      'Gauges — توزيع نسبي يوضح أين تذهب كل وحدة إيراد';
+
+  @override
+  String get rptMarginTrendStacked =>
+      'مكدّس — كل يوم يوضح تركيب الإيراد ومقابله المصروفات';
+
+  @override
+  String get rptMarginTrendStackedExpense =>
+      'مكدّس — كل يوم يوضح تركيب الإيراد ومقابله المصروفات';
+
+  @override
+  String get rptMarginSortNote =>
+      'ترتيب حسب الهامش الصافي (إيراد − تكلفة) بعد توزيع الخصومات وطرح المرتجعات';
+
+  @override
+  String get rptMarginPercent => 'الهامش %';
+
+  @override
+  String rptLoyaltyDiscounts(Object amount) {
+    return 'خصومات ولاء على الفواتير: $amount Fdj';
+  }
+
+  @override
+  String rptLoyaltyPointsEarned(Object count) {
+    return 'نقاط ممنوحة (مجموع النقاط المسجّلة على الفواتير): $count';
+  }
+
+  @override
+  String get rptCostBasisNote =>
+      'تكلفة البند تُؤخذ بالترتيب: (١) مثبّتة وقت البيع، (٢) المتوسط المرجّح من دفعات المنتج (WAC)، (٣) آخر سعر شراء في بطاقة المنتج';
+
+  @override
+  String get rptCostBasisNote2 =>
+      'الفواتير الجديدة تُثبّت التكلفة تلقائياً لحظة إنشائها، فلا يتأثر الماضي بتغيّر أسعار الشراء.';
+
+  @override
+  String get rptInvoiceDiscountNote =>
+      'الخصم على مستوى الفاتورة (خصم الفاتورة + خصم الولاء) يُوزَّع نسبياً على كل سطر بند.';
+
+  @override
+  String get rptReturnsNote =>
+      'المرتجعات (isReturned = 1) تُطرح من الإيراد ومن التكلفة معاً للحصول على الصافي الحقيقي.';
+
+  @override
+  String get rptVouchersExcludedNote =>
+      'تُستبعد السندات (تحصيل/تسديد/دفع مورد) لأنها ليست بيع.';
+
+  @override
+  String get rptNetTotalNote =>
+      'الصافي = الهامش الإجمالي − إجمالي المصروفات في الفترة.';
+
+  @override
+  String get rptItemRevenueSubtitle =>
+      'جدول — ترتيب حسب إيراد البنود في الفترة';
+
+  @override
+  String get rptCostConfidenceSubtitle =>
+      'كلما ارتفعت نسبة السطور ذات التكلفة المثبّتة، زادت دقة الرقم';
+
+  @override
+  String rptCostAccuracyLine1(Object known, Object total) {
+    return 'من أصل $total سطر بيع في الفترة، $known تملك تكلفة معروفة.';
+  }
+
+  @override
+  String rptCostAccuracyLine2(Object count) {
+    return '$count سطر بدون تكلفة معروفة — أكمِل سعر الشراء في بطاقات المنتجات أو اربط السطر بمنتج لرفع دقة الهامش.';
+  }
+
+  @override
+  String rptFixedCostLabel(Object count) {
+    return 'مثبّتة وقت البيع: $count';
+  }
+
+  @override
+  String rptCurrentPriceCostLabel(Object count) {
+    return 'تعتمد على سعر شراء حالي: $count';
+  }
+
+  @override
+  String rptNoCostLabel(Object count) {
+    return 'بدون تكلفة (تُعامَل 0): $count';
+  }
+
+  @override
+  String rptCostAccuracyNote(Object count) {
+    return 'يوجد $count سطر بدون تكلفة معروفة — أكمِل سعر الشراء في بطاقات المنتجات أو اربط السطر بمنتج لرفع دقة الهامش.';
+  }
+
+  @override
+  String get rptSavePeriodNote =>
+      'عند الحفظ تُحدَّث الفترة الحالية وتُخزَّن للمرّة القادمة.';
+
+  @override
+  String get rptStaffRecorder => 'الموظف / المسجّل';
+
+  @override
+  String rptHaveKnownCost(Object count) {
+    return '$count تملك تكلفة معروفة.';
+  }
+
+  @override
+  String get rptDefaultPeriodSubtitle =>
+      'عند الحفظ تُحدَّث الفترة الحالية وتُخزَّن للمرّة القادمة.';
+
+  @override
+  String get expReportTitle => 'فاتورة تقرير المصروفات';
+
+  @override
+  String get expPeriodLabel => 'الفترة';
+
+  @override
+  String get expCreatedLabel => 'تم الإنشاء';
+
+  @override
+  String expPageLabel(Object current, Object total) {
+    return 'صفحة $current/$total';
+  }
+
+  @override
+  String get expCategory => 'الفئة';
+
+  @override
+  String get expTotal => 'الإجمالي';
+
+  @override
+  String get expPercentage => 'النسبة';
+
+  @override
+  String get expOperationsCount => 'عدد العمليات';
+
+  @override
+  String get expPaid => 'المدفوع';
+
+  @override
+  String get expPending => 'المعلق';
+
+  @override
+  String get expDate => 'التاريخ';
+
+  @override
+  String get expAmount => 'المبلغ';
+
+  @override
+  String get expDescription => 'الوصف';
+
+  @override
+  String get expStaff => 'الموظف';
+
+  @override
+  String get expExpenseReason => 'سبب الصرف (تعليق)';
+
+  @override
+  String get expNoNoteHint => 'بدون تعليق - يُنصح بإضافة سبب الصرف.';
+
+  @override
+  String get expDaily => 'يومي';
+
+  @override
+  String get expWeekly => 'أسبوعي';
+
+  @override
+  String get expMonthly => 'شهري';
+
+  @override
+  String get expYearly => 'سنوي';
+
+  @override
+  String get expPrintReport => 'طباعة تقرير مصروفات';
+
+  @override
+  String get expChoosePeriod => 'اختر الفترة الزمنية للفاتورة:';
+
+  @override
+  String get expCustom => 'مخصص';
+
+  @override
+  String get expSelectedPeriod => 'الفترة المختارة:';
+
+  @override
+  String get expCancel => 'إلغاء';
+
+  @override
+  String get expPrint => 'طباعة';
+
+  @override
+  String debtsListFiltered(Object filtered, Object total) {
+    return 'القائمة: $filtered من $total فاتورة (بحث أو تصفية)';
+  }
+
+  @override
+  String get debtsAggregateHint =>
+      'تجميع حسب العميل: المنتجات والبائعون وتسديد جزئي من شاشة التفاصيل. QR على الإيصال للعملاء المسجّلين فقط.';
+
+  @override
+  String debtsCustomersFiltered(Object filtered, Object total) {
+    return '$filtered من $total عميل';
+  }
+
+  @override
+  String get debtsNoRemainingAged => 'لا يوجد متبقٍ آجل مجمّع بالعملاء';
+
+  @override
+  String get debtsUnlinkedToCustomerTable => 'غير مربوط بجدول العملاء (بالاسم)';
+
+  @override
+  String debtsAgeWarningActive(Object days) {
+    return ' التحذير بالعمر يبدأ بعد \$warnDays يوماً من تاريخ الفاتورة.';
+  }
+
+  @override
+  String get debtsAgeWarningDisabled =>
+      ' فعّل «أيام تحذير العمر» من إعدادات الدين لتمييز الفواتير القديمة.';
+
+  @override
+  String debtsHowCalculated(Object ageHint) {
+    return 'تُحسب الديون من فواتير النوع «دين / آجل». المتبقي = إجمالي الفاتورة − المقدّم. حدود البيع تُضبط من إعدادات الديون.\$ageHint';
+  }
+
+  @override
+  String get debtsShowAllInvoices => 'عرض كل الفواتير';
+
+  @override
+  String get debtsAgeWarning => 'تحذير عمر';
+
+  @override
+  String get debtsFilterAge => 'تصفية: تحذير عمر';
+
+  @override
+  String get debtsClosed => 'مغلقة';
+
+  @override
+  String get debtsAgeAlert => 'تنبيه عمر';
+
+  @override
+  String get debtsOpen => 'مفتوحة';
+
+  @override
+  String get debtsReceipt => 'الإيصال';
+
+  @override
+  String debtsInvoiceDays(Object date, Object days, Object id) {
+    return 'فاتورة #$id · $date · $days يوماً';
+  }
+
+  @override
+  String debtsAdvanceOverTotal(Object advance, Object total) {
+    return 'المقدّم $advance / $total Fdj';
+  }
+
+  @override
+  String get debtsTapForInvoiceDetails => 'اضغط لعرض تفاصيل الفاتورة';
+
+  @override
+  String get debtsNoMatchingInvoices =>
+      'لا توجد فواتير ضمن البحث أو التصفية الحالية';
+
+  @override
+  String get debtsNoCreditInvoices => 'لا توجد فواتير دين مسجّلة';
 }

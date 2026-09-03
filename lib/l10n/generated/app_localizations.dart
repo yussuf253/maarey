@@ -19990,7 +19990,7 @@ abstract class AppLocalizations {
   /// No description provided for @debtsCustomer.
   ///
   /// In ar, this message translates to:
-  /// **'العميل'**
+  /// **'عميل'**
   String get debtsCustomer;
 
   /// No description provided for @debtsInvoiceNum.
@@ -20524,7 +20524,7 @@ abstract class AppLocalizations {
   /// No description provided for @debtsNoResults.
   ///
   /// In ar, this message translates to:
-  /// **'لا نتائج للبحث'**
+  /// **'لا نتائج'**
   String get debtsNoResults;
 
   /// No description provided for @debtsCustomerLabel.
@@ -20536,8 +20536,8 @@ abstract class AppLocalizations {
   /// No description provided for @debtsRegisteredCustomer.
   ///
   /// In ar, this message translates to:
-  /// **'عميل مسجّل'**
-  String get debtsRegisteredCustomer;
+  /// **'عميل مسجّل #{id}'**
+  String debtsRegisteredCustomer(Object id);
 
   /// No description provided for @debtsNotLinked.
   ///
@@ -20548,8 +20548,8 @@ abstract class AppLocalizations {
   /// No description provided for @debtsCreditInvoices.
   ///
   /// In ar, this message translates to:
-  /// **'فاتورة آجل'**
-  String get debtsCreditInvoices;
+  /// **'{count} فاتورة آجل'**
+  String debtsCreditInvoices(Object count);
 
   /// No description provided for @debtsRemainingLabel.
   ///
@@ -24798,6 +24798,588 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'وزن'**
   String get blWeighted;
+
+  /// No description provided for @rptSectionCopied.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم نسخ اسم القسم: {name}'**
+  String rptSectionCopied(Object name);
+
+  /// No description provided for @rptSalesTrendSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخطط أعمدة — يوضح اتجاه المبيعات بين تاريخي الفترة'**
+  String get rptSalesTrendSubtitle;
+
+  /// No description provided for @rptKPIShare.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة كل مؤشر من صافي المبيعات — متزامنة مع بطاقات KPI أعلاه'**
+  String get rptKPIShare;
+
+  /// No description provided for @rptDailyBreakdownSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكدّس من بيانات الفواتير والمصروفات (SQL GROUP BY يومي)'**
+  String get rptDailyBreakdownSubtitle;
+
+  /// No description provided for @rptCustomerPieSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخطط بيتزا تفاعلي — من فواتير البيع فقط (بدون السندات)'**
+  String get rptCustomerPieSubtitle;
+
+  /// No description provided for @rptPaymentGaugeSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'Gauges — متسقة مع نسب المخطط الدائري والجدول'**
+  String get rptPaymentGaugeSubtitle;
+
+  /// No description provided for @rptPaymentTrendSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكدّس — يبني كل يوم مجموع كل نوع دفع مباشرة من SQL'**
+  String get rptPaymentTrendSubtitle;
+
+  /// No description provided for @rptSalesOnlyNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا القسم يعرض المبيعات فقط: نقدي/دين/تقسيط/توصيل.'**
+  String get rptSalesOnlyNote;
+
+  /// No description provided for @rptVouchersExcluded.
+  ///
+  /// In ar, this message translates to:
+  /// **'سندات التحصيل/تسديد الأقساط/دفع المورد تُستبعد من “المبيعات” (لأنها ليست إيراد بيع).'**
+  String get rptVouchersExcluded;
+
+  /// No description provided for @rptCustomerDistributionTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'توزيع المبيعات على العملاء'**
+  String get rptCustomerDistributionTitle;
+
+  /// No description provided for @rptCustomerDistributionDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيتزا تفاعلي — يعرض أعلى 6 عملاء وباقي العملاء كـ “آخرون”'**
+  String get rptCustomerDistributionDesc;
+
+  /// No description provided for @rptTopCustomersTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكثر العملاء شراءً (حسب اسم الفاتورة)'**
+  String get rptTopCustomersTitle;
+
+  /// No description provided for @rptTopCustomersSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ترتيب حسب الإجمالي — من بيانات الفواتير في الفترة'**
+  String get rptTopCustomersSubtitle;
+
+  /// No description provided for @rptCustomerNameNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه: الاسم مأخوذ من حقل “اسم العميل” في الفاتورة؛ لربط أدق استخدم اختيار العميل من السجل.'**
+  String get rptCustomerNameNote;
+
+  /// No description provided for @rptCustomerBalancesSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'جدول — أرصدة مسجّلة في سجل العملاء'**
+  String get rptCustomerBalancesSubtitle;
+
+  /// No description provided for @rptInstallmentPlansSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'جدول — خطط الأقساط المرتبطة بفواتير الفترة'**
+  String get rptInstallmentPlansSubtitle;
+
+  /// No description provided for @rptUnknownStaff.
+  ///
+  /// In ar, this message translates to:
+  /// **'(غير معروف)'**
+  String get rptUnknownStaff;
+
+  /// No description provided for @rptStaffDistributionTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'توزيع المبيعات على الموظفين'**
+  String get rptStaffDistributionTitle;
+
+  /// No description provided for @rptStaffDistributionDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخطط بيتزا تفاعلي — حسب اسم الموظف المسجّل في الفاتورة (فواتير بيع فقط)'**
+  String get rptStaffDistributionDesc;
+
+  /// No description provided for @rptNoStaffData.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد مبيعات مسجّلة باسم موظف في هذه الفترة'**
+  String get rptNoStaffData;
+
+  /// No description provided for @rptStaffShareTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة كل موظف من إجمالي المبيعات'**
+  String get rptStaffShareTitle;
+
+  /// No description provided for @rptStaffShareSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'Gauges — متسقة مع نسب المخطط الدائري والجدول'**
+  String get rptStaffShareSubtitle;
+
+  /// No description provided for @rptStaffTrendTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اتجاه مبيعات الموظفين عبر الزمن'**
+  String get rptStaffTrendTitle;
+
+  /// No description provided for @rptStaffTrendSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكدّس — أعلى 5 موظفين فقط لتفادي ازدحام الرسم'**
+  String get rptStaffTrendSubtitle;
+
+  /// No description provided for @rptStaffInvoicesTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'فواتير مسجّلة باسم الموظف (حقل الفاتورة)'**
+  String get rptStaffInvoicesTitle;
+
+  /// No description provided for @rptStaffInvoicesSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'جدول — أداء التسجيل حسب اسم الموظف على الفاتورة'**
+  String get rptStaffInvoicesSubtitle;
+
+  /// No description provided for @rptMarginGaugeSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'Gauges — توزيع نسبي يوضح أين تذهب كل وحدة إيراد'**
+  String get rptMarginGaugeSubtitle;
+
+  /// No description provided for @rptMarginTrendStacked.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكدّس — كل يوم يوضح تركيب الإيراد ومقابله المصروفات'**
+  String get rptMarginTrendStacked;
+
+  /// No description provided for @rptMarginTrendStackedExpense.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكدّس — كل يوم يوضح تركيب الإيراد ومقابله المصروفات'**
+  String get rptMarginTrendStackedExpense;
+
+  /// No description provided for @rptMarginSortNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'ترتيب حسب الهامش الصافي (إيراد − تكلفة) بعد توزيع الخصومات وطرح المرتجعات'**
+  String get rptMarginSortNote;
+
+  /// No description provided for @rptMarginPercent.
+  ///
+  /// In ar, this message translates to:
+  /// **'الهامش %'**
+  String get rptMarginPercent;
+
+  /// No description provided for @rptLoyaltyDiscounts.
+  ///
+  /// In ar, this message translates to:
+  /// **'خصومات ولاء على الفواتير: {amount} Fdj'**
+  String rptLoyaltyDiscounts(Object amount);
+
+  /// No description provided for @rptLoyaltyPointsEarned.
+  ///
+  /// In ar, this message translates to:
+  /// **'نقاط ممنوحة (مجموع النقاط المسجّلة على الفواتير): {count}'**
+  String rptLoyaltyPointsEarned(Object count);
+
+  /// No description provided for @rptCostBasisNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'تكلفة البند تُؤخذ بالترتيب: (١) مثبّتة وقت البيع، (٢) المتوسط المرجّح من دفعات المنتج (WAC)، (٣) آخر سعر شراء في بطاقة المنتج'**
+  String get rptCostBasisNote;
+
+  /// No description provided for @rptCostBasisNote2.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفواتير الجديدة تُثبّت التكلفة تلقائياً لحظة إنشائها، فلا يتأثر الماضي بتغيّر أسعار الشراء.'**
+  String get rptCostBasisNote2;
+
+  /// No description provided for @rptInvoiceDiscountNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخصم على مستوى الفاتورة (خصم الفاتورة + خصم الولاء) يُوزَّع نسبياً على كل سطر بند.'**
+  String get rptInvoiceDiscountNote;
+
+  /// No description provided for @rptReturnsNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'المرتجعات (isReturned = 1) تُطرح من الإيراد ومن التكلفة معاً للحصول على الصافي الحقيقي.'**
+  String get rptReturnsNote;
+
+  /// No description provided for @rptVouchersExcludedNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُستبعد السندات (تحصيل/تسديد/دفع مورد) لأنها ليست بيع.'**
+  String get rptVouchersExcludedNote;
+
+  /// No description provided for @rptNetTotalNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصافي = الهامش الإجمالي − إجمالي المصروفات في الفترة.'**
+  String get rptNetTotalNote;
+
+  /// No description provided for @rptItemRevenueSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'جدول — ترتيب حسب إيراد البنود في الفترة'**
+  String get rptItemRevenueSubtitle;
+
+  /// No description provided for @rptCostConfidenceSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلما ارتفعت نسبة السطور ذات التكلفة المثبّتة، زادت دقة الرقم'**
+  String get rptCostConfidenceSubtitle;
+
+  /// No description provided for @rptCostAccuracyLine1.
+  ///
+  /// In ar, this message translates to:
+  /// **'من أصل {total} سطر بيع في الفترة، {known} تملك تكلفة معروفة.'**
+  String rptCostAccuracyLine1(Object known, Object total);
+
+  /// No description provided for @rptCostAccuracyLine2.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} سطر بدون تكلفة معروفة — أكمِل سعر الشراء في بطاقات المنتجات أو اربط السطر بمنتج لرفع دقة الهامش.'**
+  String rptCostAccuracyLine2(Object count);
+
+  /// No description provided for @rptFixedCostLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثبّتة وقت البيع: {count}'**
+  String rptFixedCostLabel(Object count);
+
+  /// No description provided for @rptCurrentPriceCostLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعتمد على سعر شراء حالي: {count}'**
+  String rptCurrentPriceCostLabel(Object count);
+
+  /// No description provided for @rptNoCostLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدون تكلفة (تُعامَل 0): {count}'**
+  String rptNoCostLabel(Object count);
+
+  /// No description provided for @rptCostAccuracyNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'يوجد {count} سطر بدون تكلفة معروفة — أكمِل سعر الشراء في بطاقات المنتجات أو اربط السطر بمنتج لرفع دقة الهامش.'**
+  String rptCostAccuracyNote(Object count);
+
+  /// No description provided for @rptSavePeriodNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'عند الحفظ تُحدَّث الفترة الحالية وتُخزَّن للمرّة القادمة.'**
+  String get rptSavePeriodNote;
+
+  /// No description provided for @rptStaffRecorder.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموظف / المسجّل'**
+  String get rptStaffRecorder;
+
+  /// No description provided for @rptHaveKnownCost.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} تملك تكلفة معروفة.'**
+  String rptHaveKnownCost(Object count);
+
+  /// No description provided for @rptDefaultPeriodSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'عند الحفظ تُحدَّث الفترة الحالية وتُخزَّن للمرّة القادمة.'**
+  String get rptDefaultPeriodSubtitle;
+
+  /// No description provided for @expReportTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة تقرير المصروفات'**
+  String get expReportTitle;
+
+  /// No description provided for @expPeriodLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفترة'**
+  String get expPeriodLabel;
+
+  /// No description provided for @expCreatedLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم الإنشاء'**
+  String get expCreatedLabel;
+
+  /// No description provided for @expPageLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'صفحة {current}/{total}'**
+  String expPageLabel(Object current, Object total);
+
+  /// No description provided for @expCategory.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفئة'**
+  String get expCategory;
+
+  /// No description provided for @expTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإجمالي'**
+  String get expTotal;
+
+  /// No description provided for @expPercentage.
+  ///
+  /// In ar, this message translates to:
+  /// **'النسبة'**
+  String get expPercentage;
+
+  /// No description provided for @expOperationsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد العمليات'**
+  String get expOperationsCount;
+
+  /// No description provided for @expPaid.
+  ///
+  /// In ar, this message translates to:
+  /// **'المدفوع'**
+  String get expPaid;
+
+  /// No description provided for @expPending.
+  ///
+  /// In ar, this message translates to:
+  /// **'المعلق'**
+  String get expPending;
+
+  /// No description provided for @expDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ'**
+  String get expDate;
+
+  /// No description provided for @expAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ'**
+  String get expAmount;
+
+  /// No description provided for @expDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوصف'**
+  String get expDescription;
+
+  /// No description provided for @expStaff.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموظف'**
+  String get expStaff;
+
+  /// No description provided for @expExpenseReason.
+  ///
+  /// In ar, this message translates to:
+  /// **'سبب الصرف (تعليق)'**
+  String get expExpenseReason;
+
+  /// No description provided for @expNoNoteHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدون تعليق - يُنصح بإضافة سبب الصرف.'**
+  String get expNoNoteHint;
+
+  /// No description provided for @expDaily.
+  ///
+  /// In ar, this message translates to:
+  /// **'يومي'**
+  String get expDaily;
+
+  /// No description provided for @expWeekly.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسبوعي'**
+  String get expWeekly;
+
+  /// No description provided for @expMonthly.
+  ///
+  /// In ar, this message translates to:
+  /// **'شهري'**
+  String get expMonthly;
+
+  /// No description provided for @expYearly.
+  ///
+  /// In ar, this message translates to:
+  /// **'سنوي'**
+  String get expYearly;
+
+  /// No description provided for @expPrintReport.
+  ///
+  /// In ar, this message translates to:
+  /// **'طباعة تقرير مصروفات'**
+  String get expPrintReport;
+
+  /// No description provided for @expChoosePeriod.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر الفترة الزمنية للفاتورة:'**
+  String get expChoosePeriod;
+
+  /// No description provided for @expCustom.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخصص'**
+  String get expCustom;
+
+  /// No description provided for @expSelectedPeriod.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفترة المختارة:'**
+  String get expSelectedPeriod;
+
+  /// No description provided for @expCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get expCancel;
+
+  /// No description provided for @expPrint.
+  ///
+  /// In ar, this message translates to:
+  /// **'طباعة'**
+  String get expPrint;
+
+  /// No description provided for @debtsListFiltered.
+  ///
+  /// In ar, this message translates to:
+  /// **'القائمة: {filtered} من {total} فاتورة (بحث أو تصفية)'**
+  String debtsListFiltered(Object filtered, Object total);
+
+  /// No description provided for @debtsAggregateHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجميع حسب العميل: المنتجات والبائعون وتسديد جزئي من شاشة التفاصيل. QR على الإيصال للعملاء المسجّلين فقط.'**
+  String get debtsAggregateHint;
+
+  /// No description provided for @debtsCustomersFiltered.
+  ///
+  /// In ar, this message translates to:
+  /// **'{filtered} من {total} عميل'**
+  String debtsCustomersFiltered(Object filtered, Object total);
+
+  /// No description provided for @debtsNoRemainingAged.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد متبقٍ آجل مجمّع بالعملاء'**
+  String get debtsNoRemainingAged;
+
+  /// No description provided for @debtsUnlinkedToCustomerTable.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير مربوط بجدول العملاء (بالاسم)'**
+  String get debtsUnlinkedToCustomerTable;
+
+  /// No description provided for @debtsAgeWarningActive.
+  ///
+  /// In ar, this message translates to:
+  /// **' التحذير بالعمر يبدأ بعد \$warnDays يوماً من تاريخ الفاتورة.'**
+  String debtsAgeWarningActive(Object days);
+
+  /// No description provided for @debtsAgeWarningDisabled.
+  ///
+  /// In ar, this message translates to:
+  /// **' فعّل «أيام تحذير العمر» من إعدادات الدين لتمييز الفواتير القديمة.'**
+  String get debtsAgeWarningDisabled;
+
+  /// No description provided for @debtsHowCalculated.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُحسب الديون من فواتير النوع «دين / آجل». المتبقي = إجمالي الفاتورة − المقدّم. حدود البيع تُضبط من إعدادات الديون.\$ageHint'**
+  String debtsHowCalculated(Object ageHint);
+
+  /// No description provided for @debtsShowAllInvoices.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض كل الفواتير'**
+  String get debtsShowAllInvoices;
+
+  /// No description provided for @debtsAgeWarning.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحذير عمر'**
+  String get debtsAgeWarning;
+
+  /// No description provided for @debtsFilterAge.
+  ///
+  /// In ar, this message translates to:
+  /// **'تصفية: تحذير عمر'**
+  String get debtsFilterAge;
+
+  /// No description provided for @debtsClosed.
+  ///
+  /// In ar, this message translates to:
+  /// **'مغلقة'**
+  String get debtsClosed;
+
+  /// No description provided for @debtsAgeAlert.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه عمر'**
+  String get debtsAgeAlert;
+
+  /// No description provided for @debtsOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفتوحة'**
+  String get debtsOpen;
+
+  /// No description provided for @debtsReceipt.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإيصال'**
+  String get debtsReceipt;
+
+  /// No description provided for @debtsInvoiceDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة #{id} · {date} · {days} يوماً'**
+  String debtsInvoiceDays(Object date, Object days, Object id);
+
+  /// No description provided for @debtsAdvanceOverTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'المقدّم {advance} / {total} Fdj'**
+  String debtsAdvanceOverTotal(Object advance, Object total);
+
+  /// No description provided for @debtsTapForInvoiceDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط لعرض تفاصيل الفاتورة'**
+  String get debtsTapForInvoiceDetails;
+
+  /// No description provided for @debtsNoMatchingInvoices.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد فواتير ضمن البحث أو التصفية الحالية'**
+  String get debtsNoMatchingInvoices;
+
+  /// No description provided for @debtsNoCreditInvoices.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد فواتير دين مسجّلة'**
+  String get debtsNoCreditInvoices;
 }
 
 class _AppLocalizationsDelegate

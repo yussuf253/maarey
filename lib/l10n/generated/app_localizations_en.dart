@@ -11459,13 +11459,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get debtsCustomerLabel => 'Customer';
 
   @override
-  String get debtsRegisteredCustomer => 'Registered customer';
+  String debtsRegisteredCustomer(Object id) {
+    return 'Registered customer #$id';
+  }
 
   @override
   String get debtsNotLinked => 'Not linked to customers table (by name)';
 
   @override
-  String get debtsCreditInvoices => 'credit invoices';
+  String debtsCreditInvoices(Object count) {
+    return '$count credit invoice(s)';
+  }
 
   @override
   String get debtsRemainingLabel => 'Remaining';
@@ -11492,7 +11496,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get debtsShowAll => 'Show all invoices';
 
   @override
-  String get debtsOpenInvoices => 'Open Invoices';
+  String get debtsOpenInvoices => 'Open invoices';
 
   @override
   String get debtsFilterOpen => 'Filter: open only';
@@ -11536,11 +11540,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get debtsClearSearchHint =>
-      'Clear search or select \"All\" in filter bar.';
+      'Clear the search or select \"All\" in the filter bar.';
 
   @override
   String get debtsNewSaleHint =>
-      'From \"New Sale\" choose type \"Credit\" to show the deferred amount here.';
+      'From \"New Sale\" choose \"credit\" type to show the deferred amount here.';
 
   @override
   String get hubInventoryTitle => 'Inventory Center';
@@ -11914,7 +11918,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get rptOthers => 'Others';
 
   @override
-  String get rptNoCustomerData => 'No customer data for this period';
+  String get rptNoCustomerData => 'No customer data in this period';
 
   @override
   String get rptNoStaffSales => 'No sales recorded by staff for this period';
@@ -13863,4 +13867,367 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get blWeighted => 'weighted';
+
+  @override
+  String rptSectionCopied(Object name) {
+    return 'Section name copied: $name';
+  }
+
+  @override
+  String get rptSalesTrendSubtitle =>
+      'Column chart — shows sales trend between period dates';
+
+  @override
+  String get rptKPIShare =>
+      'Share of each KPI from net sales — synced with KPI cards above';
+
+  @override
+  String get rptDailyBreakdownSubtitle =>
+      'Stacked bar — daily invoice and expense data (SQL GROUP BY day)';
+
+  @override
+  String get rptCustomerPieSubtitle =>
+      'Interactive pie chart — from sales invoices only (excluding vouchers)';
+
+  @override
+  String get rptPaymentGaugeSubtitle =>
+      'Gauges — consistent with pie chart percentages and table';
+
+  @override
+  String get rptPaymentTrendSubtitle =>
+      'Stacked — builds daily payment type totals directly from SQL';
+
+  @override
+  String get rptSalesOnlyNote =>
+      'This section shows sales only: cash/credit/installment/delivery.';
+
+  @override
+  String get rptVouchersExcluded =>
+      'Collection/installment payment/supplier payment vouchers are excluded from \"sales\" (they are not sales revenue).';
+
+  @override
+  String get rptCustomerDistributionTitle => 'Customer Sales Distribution';
+
+  @override
+  String get rptCustomerDistributionDesc =>
+      'Interactive pie — shows top 6 customers and remaining as \"Others\"';
+
+  @override
+  String get rptTopCustomersTitle => 'Top Customers by Purchase (invoice name)';
+
+  @override
+  String get rptTopCustomersSubtitle =>
+      'Sorted by total — from invoice data in the period';
+
+  @override
+  String get rptCustomerNameNote =>
+      'Note: Name is taken from the invoice \"customer name\" field; for more precise linking use customer selection from the register.';
+
+  @override
+  String get rptCustomerBalancesSubtitle =>
+      'Table — balances recorded in the customer register';
+
+  @override
+  String get rptInstallmentPlansSubtitle =>
+      'Table — installment plans linked to period invoices';
+
+  @override
+  String get rptUnknownStaff => '(Unknown)';
+
+  @override
+  String get rptStaffDistributionTitle => 'Staff Sales Distribution';
+
+  @override
+  String get rptStaffDistributionDesc =>
+      'Interactive pie — by staff name on invoice (sales invoices only)';
+
+  @override
+  String get rptNoStaffData =>
+      'No sales recorded under a staff name in this period';
+
+  @override
+  String get rptStaffShareTitle => 'Staff Share of Total Sales';
+
+  @override
+  String get rptStaffShareSubtitle =>
+      'Gauges — consistent with pie chart percentages and table';
+
+  @override
+  String get rptStaffTrendTitle => 'Staff Sales Trend Over Time';
+
+  @override
+  String get rptStaffTrendSubtitle =>
+      'Stacked — top 5 staff only to avoid chart clutter';
+
+  @override
+  String get rptStaffInvoicesTitle =>
+      'Invoices Registered by Staff (invoice field)';
+
+  @override
+  String get rptStaffInvoicesSubtitle =>
+      'Table — registration performance by staff name on invoice';
+
+  @override
+  String get rptMarginGaugeSubtitle =>
+      'Gauges — relative distribution showing where each revenue unit goes';
+
+  @override
+  String get rptMarginTrendStacked =>
+      'Stacked — each day shows revenue composition vs expenses';
+
+  @override
+  String get rptMarginTrendStackedExpense =>
+      'Stacked — each day shows revenue composition vs expenses';
+
+  @override
+  String get rptMarginSortNote =>
+      'Sorted by net margin (revenue − cost) after discount allocation and returns deduction';
+
+  @override
+  String get rptMarginPercent => 'Margin %';
+
+  @override
+  String rptLoyaltyDiscounts(Object amount) {
+    return 'Loyalty discounts on invoices: $amount FDJ';
+  }
+
+  @override
+  String rptLoyaltyPointsEarned(Object count) {
+    return 'Points granted (total on invoices): $count';
+  }
+
+  @override
+  String get rptCostBasisNote =>
+      'Item cost is determined by: (1) fixed at sale, (2) weighted average purchase price (WAC), (3) last purchase price in product card';
+
+  @override
+  String get rptCostBasisNote2 =>
+      'New invoices automatically fix cost at creation time, so the past is not affected by purchase price changes.';
+
+  @override
+  String get rptInvoiceDiscountNote =>
+      'Invoice-level discount (invoice discount + loyalty discount) is distributed proportionally across each line item.';
+
+  @override
+  String get rptReturnsNote =>
+      'Returns (isReturned = 1) are deducted from both revenue and cost to get the true net.';
+
+  @override
+  String get rptVouchersExcludedNote =>
+      'Vouchers (collection/installment/supplier payment) are excluded because they are not sales.';
+
+  @override
+  String get rptNetTotalNote =>
+      'Net = Total Margin − Total Expenses in the period.';
+
+  @override
+  String get rptItemRevenueSubtitle =>
+      'Table — sorted by item revenue in the period';
+
+  @override
+  String get rptCostConfidenceSubtitle =>
+      'The higher the share of fixed-cost lines, the more accurate the number';
+
+  @override
+  String rptCostAccuracyLine1(Object known, Object total) {
+    return 'Out of $total sales lines in the period, $known have a known cost.';
+  }
+
+  @override
+  String rptCostAccuracyLine2(Object count) {
+    return '$count lines with no known cost — complete purchase prices in product cards or link lines to products to improve margin accuracy.';
+  }
+
+  @override
+  String rptFixedCostLabel(Object count) {
+    return 'Fixed at sale: $count';
+  }
+
+  @override
+  String rptCurrentPriceCostLabel(Object count) {
+    return 'Based on current purchase price: $count';
+  }
+
+  @override
+  String rptNoCostLabel(Object count) {
+    return 'No cost (treated as 0): $count';
+  }
+
+  @override
+  String rptCostAccuracyNote(Object count) {
+    return 'There are $count lines without a known cost — complete purchase prices in product cards or link lines to products to improve margin accuracy.';
+  }
+
+  @override
+  String get rptSavePeriodNote =>
+      'On save, the current period is updated and stored for next time.';
+
+  @override
+  String get rptStaffRecorder => 'Staff / Recorder';
+
+  @override
+  String rptHaveKnownCost(Object count) {
+    return '$count have a known cost.';
+  }
+
+  @override
+  String get rptDefaultPeriodSubtitle =>
+      'When saved, the current period is updated and stored for the next time.';
+
+  @override
+  String get expReportTitle => 'Expense Report';
+
+  @override
+  String get expPeriodLabel => 'Period';
+
+  @override
+  String get expCreatedLabel => 'Created';
+
+  @override
+  String expPageLabel(Object current, Object total) {
+    return 'Page $current/$total';
+  }
+
+  @override
+  String get expCategory => 'Category';
+
+  @override
+  String get expTotal => 'Total';
+
+  @override
+  String get expPercentage => 'Percentage';
+
+  @override
+  String get expOperationsCount => 'Operations';
+
+  @override
+  String get expPaid => 'Paid';
+
+  @override
+  String get expPending => 'Pending';
+
+  @override
+  String get expDate => 'Date';
+
+  @override
+  String get expAmount => 'Amount';
+
+  @override
+  String get expDescription => 'Description';
+
+  @override
+  String get expStaff => 'Staff';
+
+  @override
+  String get expExpenseReason => 'Expense Reason (Note)';
+
+  @override
+  String get expNoNoteHint => 'No note - consider adding an expense reason.';
+
+  @override
+  String get expDaily => 'Daily';
+
+  @override
+  String get expWeekly => 'Weekly';
+
+  @override
+  String get expMonthly => 'Monthly';
+
+  @override
+  String get expYearly => 'Yearly';
+
+  @override
+  String get expPrintReport => 'Print Expense Report';
+
+  @override
+  String get expChoosePeriod => 'Choose the time period for the invoice:';
+
+  @override
+  String get expCustom => 'Custom';
+
+  @override
+  String get expSelectedPeriod => 'Selected period:';
+
+  @override
+  String get expCancel => 'Cancel';
+
+  @override
+  String get expPrint => 'Print';
+
+  @override
+  String debtsListFiltered(Object filtered, Object total) {
+    return '$filtered of $total invoices (search or filter)';
+  }
+
+  @override
+  String get debtsAggregateHint =>
+      'Aggregate by customer: products, sellers, partial payment from details screen. QR on receipt for registered customers only.';
+
+  @override
+  String debtsCustomersFiltered(Object filtered, Object total) {
+    return '$filtered of $total customers';
+  }
+
+  @override
+  String get debtsNoRemainingAged =>
+      'No remaining aged balance aggregated with customers';
+
+  @override
+  String get debtsUnlinkedToCustomerTable =>
+      'Not linked to customer table (by name)';
+
+  @override
+  String debtsAgeWarningActive(Object days) {
+    return ' The age warning starts after $days days from the invoice date.';
+  }
+
+  @override
+  String get debtsAgeWarningDisabled =>
+      ' Enable \"Invoice Age Warning Days\" in debt settings to flag old invoices.';
+
+  @override
+  String debtsHowCalculated(Object ageHint) {
+    return 'Debts are calculated from \"credit / deferred\" type invoices. Remaining = total − advance. Sale limits are set in debt settings.$ageHint';
+  }
+
+  @override
+  String get debtsShowAllInvoices => 'Show all invoices';
+
+  @override
+  String get debtsAgeWarning => 'Age Warning';
+
+  @override
+  String get debtsFilterAge => 'Filter: age warning';
+
+  @override
+  String get debtsClosed => 'Closed';
+
+  @override
+  String get debtsAgeAlert => 'Age Alert';
+
+  @override
+  String get debtsOpen => 'Open';
+
+  @override
+  String get debtsReceipt => 'Receipt';
+
+  @override
+  String debtsInvoiceDays(Object date, Object days, Object id) {
+    return 'Invoice #$id · $date · $days days';
+  }
+
+  @override
+  String debtsAdvanceOverTotal(Object advance, Object total) {
+    return 'Advance $advance / $total Fdj';
+  }
+
+  @override
+  String get debtsTapForInvoiceDetails => 'Tap to view invoice details';
+
+  @override
+  String get debtsNoMatchingInvoices =>
+      'No invoices match the current search or filter';
+
+  @override
+  String get debtsNoCreditInvoices => 'No credit invoices recorded';
 }
