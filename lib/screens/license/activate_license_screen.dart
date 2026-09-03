@@ -64,7 +64,7 @@ class _ActivateLicenseScreenState extends State<ActivateLicenseScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'NaBoo',
+                'Maarey',
                 style: TextStyle(
                   color: cs.onPrimary,
                   fontSize: 48,

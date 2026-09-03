@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// شعار التطبيق: صورة بحواف دائرية + كلمة naboo (ذهبي تراثي) بجانبها.
+/// شعار التطبيق: صورة بحواف دائرية + كلمة maarey (ذهبي تراثي) بجانبها.
 class AppBrandMark extends StatelessWidget {
   const AppBrandMark({
     super.key,
     this.logoAssetPath = 'assets/images/logo.png',
-    this.title = 'naboo',
+    this.title = 'maarey',
     this.logoSize = 44,
     this.gap = 10,
     this.titleFontSize = 28,
@@ -34,7 +34,7 @@ class AppBrandMark extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final word = title.trim().isEmpty ? 'NABOO' : title.trim();
+    final word = title.trim().isEmpty ? 'MAAREY' : title.trim();
     final baseTextStyle = GoogleFonts.playfairDisplay(
       fontWeight: FontWeight.w800,
       fontStyle: FontStyle.italic,

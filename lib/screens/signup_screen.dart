@@ -203,7 +203,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   AppBrandMark(
-                    title: 'naboo',
+                    title: 'maarey',
                     logoSize: isNarrow ? 56 : 72,
                     titleFontSize: isNarrow ? 40 : 52,
                     titleColor: const Color(0xFFF2D36B),

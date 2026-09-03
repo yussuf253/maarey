@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:provider/provider.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../navigation/content_navigation.dart';
 import '../../providers/sale_draft_provider.dart';
 import '../../services/database_helper.dart';
@@ -29,6 +30,8 @@ class ServiceOrderDetailScreen extends StatefulWidget {
 }
 
 class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
+  AppLocalizations get _loc => AppLocalizations.of(context)!;
+
   bool _loading = true;
   Object? _error;
   Map<String, dynamic>? _order;
@@ -113,7 +116,7 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
     final saved = await Navigator.of(context).push<bool>(
       contentMaterialRoute(
         routeId: AppContentRoutes.serviceOrdersHub,
-        breadcrumbTitle: 'تعديل تذكرة',
+        breadcrumbTitle: _loc.sodEditTicket,
         builder: (_) => ServiceOrderFormScreen(
           editOrderId: oid,
           editOrderGlobalId: gid,
@@ -159,9 +162,9 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
                   child: TextField(
                     controller: search,
                     onChanged: (_) => setModal(() {}),
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       prefixIcon: Icon(Icons.search_rounded),
-                      hintText: 'بحث في قطع الغيار…',
+                      hintText: _loc.sodSearchParts,
                       isDense: true,
                     ),
                   ),
@@ -176,7 +179,7 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
                       final name = (p['name'] ?? '').toString().trim();
                       final sell = (p['sell'] as num?)?.toDouble() ?? 0;
                       return ListTile(
-                        title: Text(name.isEmpty ? 'منتج' : name),
+                        title: Text(name.isEmpty ? _loc.sodProduct : name),
                         subtitle: Text(
                           IraqiCurrencyFormat.formatIqd(sell),
                           textDirection: TextDirection.ltr,
@@ -210,11 +213,11 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
     final ok = await showDialog<bool>(
           context: context,
           builder: (ctx) => AlertDialog(
-            title: const Text('إضافة قطعة غيار'),
+            title: Text(_loc.sodAddPart),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(name.isEmpty ? 'قطعة غيار' : name, textAlign: TextAlign.start),
+                Text(name.isEmpty ? _loc.sodPart : name, textAlign: TextAlign.start),
                 const SizedBox(height: 10),
                 Row(
                   children: [
@@ -222,7 +225,7 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
                       child: TextField(
                         controller: qtyCtrl,
                         keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(labelText: 'الكمية'),
+                        decoration: InputDecoration(labelText: _loc.sodQuantity),
                         textDirection: TextDirection.ltr,
                         textAlign: TextAlign.start,
                       ),
@@ -232,7 +235,7 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
                       child: TextField(
                         controller: priceCtrl,
                         keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                        decoration: const InputDecoration(labelText: 'سعر البيع (Fdj)'),
+                        decoration: InputDecoration(labelText: _loc.sodSalePrice),
                         textDirection: TextDirection.ltr,
                         textAlign: TextAlign.start,
                       ),
@@ -244,11 +247,11 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(ctx, false),
-                child: const Text('إلغاء'),
+                child: Text(_loc.sodCancel),
               ),
               FilledButton(
                 onPressed: () => Navigator.pop(ctx, true),
-                child: const Text('إضافة'),
+                child: Text(_loc.sodAdd),
               ),
             ],
           ),
@@ -262,7 +265,7 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
     await ServiceOrdersRepository.instance.addItem(
       orderGlobalId: widget.orderGlobalId,
       productId: pid,
-      productName: name.isEmpty ? 'قطعة غيار' : name,
+      productName: name.isEmpty ? _loc.sodPart : name,
       quantity: q <= 0 ? 1 : q,
       priceFils: priceF,
     );
@@ -300,11 +303,11 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
 
     final device = (o['deviceName'] ?? '').toString().trim();
     final serial = (o['deviceSerial'] ?? '').toString().trim();
-    final baseName = serviceName.isEmpty ? 'خدمة فنية' : serviceName;
+    final baseName = serviceName.isEmpty ? _loc.sodTechnicalService : serviceName;
     String finalName = baseName;
     final devDetails = [
       if (device.isNotEmpty) device,
-      if (serial.isNotEmpty) 'س: $serial',
+      if (serial.isNotEmpty) '${_loc.sodSerialInfo}: $serial',
     ].join(' - ');
     if (devDetails.isNotEmpty) {
       finalName = '$baseName ($devDetails)';
@@ -345,7 +348,7 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
       final q = (it['quantity'] as num?)?.toInt() ?? 1;
       final pF = (it['priceFils'] as num?)?.toInt() ?? 0;
       draft.enqueueProductLine({
-        'name': name.isEmpty ? 'قطعة غيار' : name,
+        'name': name.isEmpty ? _loc.sodPart : name,
         'sell': IqdMoney.fromFils(pF),
         'minSell': IqdMoney.fromFils(pF),
         'productId': pid,
@@ -363,7 +366,7 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
       await Navigator.of(context).push(
         contentMaterialRoute(
           routeId: AppContentRoutes.addInvoice,
-          breadcrumbTitle: 'بيع جديد',
+          breadcrumbTitle: _loc.sodNewSale,
           builder: (_) => const AddInvoiceScreen(),
         ),
       );
@@ -381,7 +384,7 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
     }
     if (_error != null || o == null) {
       return Scaffold(
-        appBar: AppBar(title: const Text('تفاصيل التذكرة')),
+        appBar: AppBar(title: Text(_loc.sodTicketDetails)),
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -390,9 +393,9 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
               children: [
                 const Icon(Icons.error_outline, size: 42),
                 const SizedBox(height: 12),
-                const Text('تعذر تحميل بيانات التذكرة.'),
+                Text(_loc.sodLoadError),
                 const SizedBox(height: 12),
-                FilledButton(onPressed: _load, child: const Text('إعادة المحاولة')),
+                FilledButton(onPressed: _load, child: Text(_loc.sodRetry)),
               ],
             ),
           ),
@@ -412,15 +415,15 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('تفاصيل التذكرة'),
+        title: Text(_loc.sodTicketDetails),
         actions: [
           IconButton(
-            tooltip: 'تعديل',
+            tooltip: _loc.sodEdit,
             onPressed: _openEdit,
             icon: const Icon(Icons.edit_rounded),
           ),
           IconButton(
-            tooltip: 'تحديث',
+            tooltip: _loc.sodUpdate,
             onPressed: _load,
             icon: const Icon(Icons.refresh_rounded),
           ),
@@ -429,14 +432,14 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _addPart,
         icon: const Icon(Icons.add_rounded),
-        label: const Text('إضافة قطعة'),
+        label: Text(_loc.sodAddPartShort),
       ),
       body: ListView(
         padding: const EdgeInsetsDirectional.fromSTEB(14, 14, 14, 110),
         children: [
           _infoCard(
             context,
-            title: customer.isEmpty ? 'عميل' : customer,
+            title: customer.isEmpty ? _loc.sodCustomer : customer,
             subtitle: device.isEmpty ? '—' : device,
             trailing: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -450,7 +453,7 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
                 style: TextStyle(fontWeight: FontWeight.w900, color: cs.primary),
               ),
             ),
-            extra: serial.isEmpty ? null : 'سيريال/لوحة: $serial',
+            extra: serial.isEmpty ? null : '${_loc.sodSerialInfo}: $serial',
           ),
           const SizedBox(height: 10),
           ..._etaSummaryWidgets(context, o),
@@ -469,14 +472,14 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
                 child: FilledButton.icon(
                   onPressed: status == 'completed' ? _convertToInvoice : null,
                   icon: const Icon(Icons.open_in_new_rounded),
-                  label: const Text('تحويل لفاتورة بيع'),
+                  label: Text(_loc.sodConvertToInvoice),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 14),
           Text(
-            'قطع الغيار',
+            _loc.sodParts,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.w900,
                 ),
@@ -485,7 +488,7 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
           const SizedBox(height: 8),
           if (_items.isEmpty)
             Text(
-              'لا توجد قطع غيار بعد.',
+              _loc.sodNoPartsYet,
               style: TextStyle(color: cs.onSurfaceVariant),
               textAlign: TextAlign.start,
             )
@@ -509,7 +512,7 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
               children: [
                 Expanded(
                   child: Text(
-                    'بنود الفاتورة',
+                    _loc.sodInvoiceItems,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w900,
                         ),
@@ -523,7 +526,7 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
                     borderRadius: BorderRadius.circular(99),
                   ),
                   child: Text(
-                    'للعرض فقط',
+                    _loc.sodViewOnly,
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w700,
@@ -535,7 +538,7 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
             ),
             const SizedBox(height: 4),
             Text(
-              'المنتجات والخدمات المسجّلة في فاتورة البيع المرتبطة.',
+              _loc.sodInvoiceProductsDesc,
               style: TextStyle(fontSize: 12, color: cs.onSurfaceVariant),
               textAlign: TextAlign.start,
             ),
@@ -585,7 +588,7 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
         DateTime.now().isAfter(target) &&
         status != 'delivered' &&
         status != 'cancelled';
-    final df = DateFormat('EEEE، d MMMM yyyy • HH:mm', 'ar');
+    final df = DateFormat('EEEE, d MMMM yyyy • HH:mm', Localizations.localeOf(context).languageCode);
 
     return [
       Container(
@@ -611,8 +614,8 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
                 Expanded(
                   child: Text(
                     overdue
-                        ? 'تجاوز موعد التسليم المتوقع'
-                        : 'موعد التسليم المتوقع للزبون',
+                        ? _loc.sodPastDue
+                        : _loc.sodExpectedDelivery,
                     style: TextStyle(
                       fontWeight: FontWeight.w900,
                       color: overdue ? cs.error : cs.onSurface,
@@ -637,7 +640,7 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
               Padding(
                 padding: const EdgeInsetsDirectional.only(top: 6),
                 child: Text(
-                  'مدة العمل المتوقعة: $dm دقيقة',
+                  '${_loc.sodWorkDurationMin(dm)}',
                   style: TextStyle(fontSize: 12.5, color: cs.onSurfaceVariant),
                   textAlign: TextAlign.start,
                 ),
@@ -649,18 +652,18 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
     ];
   }
 
-  static String _statusLabel(String s) {
+  String _statusLabel(String s) {
     switch (s) {
       case 'pending':
-        return 'معلقة';
+        return _loc.sodPending;
       case 'in_progress':
-        return 'قيد العمل';
+        return _loc.sodInProgress;
       case 'completed':
-        return 'جاهزة للتسليم';
+        return _loc.sodReadyForDelivery;
       case 'delivered':
-        return 'مسلّمة';
+        return _loc.sodDelivered;
       case 'cancelled':
-        return 'ملغاة';
+        return _loc.sodCancelled;
       default:
         return s;
     }
@@ -769,16 +772,16 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text(
-              'ملخص مالي (بالفلس)',
+            Text(
+              _loc.sodFinancialSummary,
               style: TextStyle(fontWeight: FontWeight.w900),
             ),
-            row('الخدمة الفنية', f(serviceFils)),
-            row('قطع الغيار', f(partsFils)),
-            row('الإجمالي', f(totalFils), strong: true),
-            row('مدفوع مسبقاً', f(advanceFils)),
+            row(_loc.sodService, f(serviceFils)),
+            row(_loc.sodParts, f(partsFils)),
+            row(_loc.sodTotal, f(totalFils), strong: true),
+            row(_loc.sodPaidAdvance, f(advanceFils)),
             const Divider(height: 18),
-            row('المتبقي عند التسليم', f(remainingFils), strong: true),
+            row(_loc.sodRemainingOnDelivery, f(remainingFils), strong: true),
           ],
         ),
       ),
@@ -805,13 +808,13 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
           side: BorderSide(color: cs.outlineVariant.withValues(alpha: 0.55)),
         ),
         child: ListTile(
-          title: Text(name.isEmpty ? 'قطعة غيار' : name),
+          title: Text(name.isEmpty ? _loc.sodPart : name),
           subtitle: Text(
-            'الكمية: $q · سعر: ${IraqiCurrencyFormat.formatIqd(IqdMoney.fromFils(pF))} · إجمالي: ${IraqiCurrencyFormat.formatIqd(IqdMoney.fromFils(tF))}',
+            _loc.sodQtyPriceTotal(IraqiCurrencyFormat.formatIqd(IqdMoney.fromFils(pF)), q, IraqiCurrencyFormat.formatIqd(IqdMoney.fromFils(tF))),
             textDirection: TextDirection.ltr,
           ),
           trailing: IconButton(
-            tooltip: 'حذف',
+            tooltip: _loc.sodDelete,
             onPressed: onDelete,
             icon: const Icon(Icons.delete_outline_rounded, color: Color(0xFFEF4444)),
           ),
@@ -845,9 +848,9 @@ class _ServiceOrderDetailScreenState extends State<ServiceOrderDetailScreen> {
         child: ListTile(
           dense: true,
           leading: Icon(Icons.receipt_long_rounded, color: cs.secondary, size: 20),
-          title: Text(name.isEmpty ? 'منتج' : name, textAlign: TextAlign.start),
+          title: Text(name.isEmpty ? _loc.sodProduct : name, textAlign: TextAlign.start),
           subtitle: Text(
-            'الكمية: $qtyText',
+            _loc.sodQtyOnly(qtyText),
             textDirection: TextDirection.ltr,
             textAlign: TextAlign.start,
           ),

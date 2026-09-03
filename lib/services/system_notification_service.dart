@@ -9,8 +9,8 @@ class SystemNotificationService {
   SystemNotificationService._();
   static final SystemNotificationService instance = SystemNotificationService._();
 
-  static const _channelId = 'naboo_alerts';
-  static const _channelName = 'تنبيهات نابو';
+  static const _channelId = 'maarey_alerts';
+  static const _channelName = 'تنبيهات ماري';
   static const _channelDesc =
       'مخزون، أقساط، مرتجعات، صندوق، وغيرها — تظهر في شريط الإشعارات.';
 
@@ -81,7 +81,7 @@ class SystemNotificationService {
     required String id,
     required String title,
     required String body,
-    String summaryText = 'نابو',
+    String summaryText = 'ماري',
   }) async {
     if (!_initialized || kIsWeb) return;
     try {

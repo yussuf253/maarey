@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../models/customer_record.dart';
 import '../../screens/customers/customer_form_screen.dart';
 import '../../services/database_helper.dart';
@@ -30,6 +31,8 @@ class ServiceOrderFormScreen extends StatefulWidget {
 }
 
 class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
+  AppLocalizations get _loc => AppLocalizations.of(context)!;
+
   final _formKey = GlobalKey<FormState>();
   final _customerName = TextEditingController();
   final _customerFocus = FocusNode();
@@ -156,12 +159,12 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
   String _friendlyError(Object e) {
     final raw = e.toString();
     if (raw.contains('TenantContextService') || raw.contains('tenant')) {
-      return 'تعذر تحديد بيانات المستأجر. أعد فتح التطبيق ثم حاول مرة أخرى.';
+      return _loc.sofTenantError;
     }
     if (raw.contains('no such table') || raw.contains('no such column')) {
-      return 'قاعدة البيانات تحتاج تهيئة/تحديث. أعد فتح التطبيق ثم حاول مرة أخرى.';
+      return _loc.sofDbInitError;
     }
-    return 'حدث خطأ غير متوقع أثناء الحفظ.';
+    return _loc.sofUnexpectedError;
   }
 
   int _parseFils(TextEditingController c) {
@@ -210,7 +213,7 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 4),
                     child: Text(
-                      'المدة المتوقعة لإنجاز العمل',
+                      _loc.sofExpectedWorkDuration,
                       style: Theme.of(ctx).textTheme.titleSmall?.copyWith(
                             fontWeight: FontWeight.w800,
                           ),
@@ -223,7 +226,7 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
                       children: [
                         Expanded(
                           child: Text(
-                            'ساعات',
+                            _loc.sofHours,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 12,
@@ -233,7 +236,7 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
                         ),
                         Expanded(
                           child: Text(
-                            'دقائق',
+                            _loc.sofMinutes,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 12,
@@ -292,7 +295,7 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
                       children: [
                         TextButton(
                           onPressed: () => Navigator.pop(ctx),
-                          child: const Text('إلغاء'),
+                          child: Text(_loc.sofCancel),
                         ),
                         const Spacer(),
                         FilledButton(
@@ -303,7 +306,7 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
                             });
                             Navigator.pop(ctx);
                           },
-                          child: const Text('تم'),
+                          child: Text(_loc.sofDone),
                         ),
                       ],
                     ),
@@ -320,12 +323,12 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
 
   String _durationSummaryLabel() {
     final t = _etaHours * 60 + _etaMinutes;
-    if (t <= 0) return 'لم تُحدَّد — اضغط لاختيار الساعات والدقائق';
+    if (t <= 0) return _loc.sofNotSet;
     if (_etaHours > 0 && _etaMinutes > 0) {
-      return '$_etaHours س $_etaMinutes د — اضغط للتعديل';
+      return _loc.sofHoursMinutes(_etaHours, _etaMinutes);
     }
-    if (_etaHours > 0) return '$_etaHours ساعة — اضغط للتعديل';
-    return '$_etaMinutes دقيقة — اضغط للتعديل';
+    if (_etaHours > 0) return _loc.sofHoursOnly(_etaHours);
+    return _loc.sofMinutesOnly(_etaMinutes);
   }
 
   Widget _buildScheduleBanner(ColorScheme cs) {
@@ -342,16 +345,16 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
 
     if (targetLocal == null && mins == null) return const SizedBox.shrink();
 
-    final formatter = DateFormat('EEEE، d MMMM yyyy • HH:mm', 'ar');
+    final formatter = DateFormat('EEEE, d MMMM yyyy • HH:mm', Localizations.localeOf(context).languageCode);
     final overdue = targetLocal != null &&
         DateTime.now().isAfter(targetLocal) &&
         _status != 'delivered' &&
         _status != 'cancelled';
 
     final subtitle = _workStartedAtUtc == null && mins != null
-        ? 'بعد «بدء العمل» من قائمة التذاكر يُثبَّت الموعد بدقة من وقت البدء.'
+        ? _loc.sofTaskNotStarted
         : (mins != null
-            ? 'مدة العمل المتوقعة: $mins دقيقة'
+            ? _loc.sofWorkDurationMin(mins)
             : null);
 
     return Container(
@@ -381,8 +384,8 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
               Expanded(
                 child: Text(
                   overdue
-                      ? 'تجاوز موعد التسليم المتوقع'
-                      : 'موعد التسليم المتوقع (للزبون)',
+                      ? _loc.sofPastDue
+                      : _loc.sofExpectedDelivery,
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
                     color: overdue ? cs.error : cs.onPrimaryContainer,
@@ -469,9 +472,9 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
                   child: TextField(
                     controller: search,
                     onChanged: (_) => setModal(() {}),
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       prefixIcon: Icon(Icons.search_rounded),
-                      hintText: 'بحث في الخدمات…',
+                      hintText: _loc.sofSearchServices,
                       isDense: true,
                     ),
                   ),
@@ -486,7 +489,7 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
                       final id = (s['id'] as num?)?.toInt();
                       final sell = (s['sell'] as num?)?.toDouble() ?? 0;
                       return ListTile(
-                        title: Text(name.isEmpty ? 'خدمة' : name),
+                        title: Text(name.isEmpty ? _loc.sofService : name),
                         subtitle: Text(
                           IraqiCurrencyFormat.formatIqd(sell),
                           textDirection: TextDirection.ltr,
@@ -603,10 +606,10 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.isEdit ? 'تعديل تذكرة' : 'تذكرة جديدة'),
+        title: Text(widget.isEdit ? _loc.sofEditTicket : _loc.sofNewTicket),
         actions: [
           IconButton(
-            tooltip: 'حفظ',
+            tooltip: _loc.sofSave,
             onPressed: busy ? null : _submit,
             icon: const Icon(Icons.save_rounded),
           ),
@@ -627,7 +630,7 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
                   border: Border.all(color: cs.error.withValues(alpha: 0.25)),
                 ),
                 child: Text(
-                  (_errorText ?? 'حدث خطأ أثناء الحفظ. حاول مرة أخرى.'),
+                  (_errorText ?? _loc.sofSaveError),
                   style: TextStyle(color: cs.error),
                 ),
               ),
@@ -657,7 +660,7 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
                       }
                       final rows = await _customersDb.queryCustomersPage(
                         query: q,
-                        statusArabic: 'الكل',
+                        statusArabic: _loc.sofAll,
                         sortKey: 'name_asc',
                         limit: 20,
                         offset: 0,
@@ -682,16 +685,16 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
                         controller: controller,
                         focusNode: focusNode,
                         decoration: InputDecoration(
-                          labelText: 'اسم العميل',
+                          labelText: _loc.sofCustomerName,
                           border: const OutlineInputBorder(),
-                          hintText: 'ابدأ الكتابة للبحث في العملاء',
+                          hintText: _loc.sofCustomerSearchHint,
                           suffixIcon: _customerId != null
                               ? Icon(Icons.link_rounded, color: cs.primary)
                               : null,
                         ),
                         validator: (v) =>
                             (v == null || v.trim().isEmpty)
-                                ? 'اسم العميل مطلوب'
+                                ? _loc.sofCustomerRequired
                                 : null,
                         textAlign: TextAlign.start,
                         onFieldSubmitted: (_) => onSubmit(),
@@ -715,7 +718,7 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
                                 return ListTile(
                                   dense: true,
                                   title: Text(
-                                    c.name.trim().isEmpty ? 'عميل' : c.name,
+                                    c.name.trim().isEmpty ? _loc.sofCustomer : c.name,
                                     textAlign: TextAlign.start,
                                   ),
                                   subtitle: c.phone == null ||
@@ -738,7 +741,7 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
                 ),
                 const SizedBox(width: 4),
                 IconButton(
-                  tooltip: 'عميل جديد',
+                  tooltip: _loc.sofNewCustomer,
                   onPressed: busy ? null : _openNewCustomer,
                   icon: const Icon(Icons.person_add_alt_rounded),
                 ),
@@ -747,19 +750,19 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
             const SizedBox(height: 10),
             TextFormField(
               controller: _deviceName,
-              decoration: const InputDecoration(
-                labelText: 'اسم الجهاز / السيارة',
+              decoration: InputDecoration(
+                labelText: _loc.sofDeviceName,
                 border: OutlineInputBorder(),
               ),
               validator: (v) =>
-                  (v == null || v.trim().isEmpty) ? 'اسم الجهاز مطلوب' : null,
+                  (v == null || v.trim().isEmpty) ? _loc.sofDeviceNameRequired : null,
               textAlign: TextAlign.start,
             ),
             const SizedBox(height: 10),
             TextFormField(
               controller: _deviceSerial,
-              decoration: const InputDecoration(
-                labelText: 'رقم تسلسلي / لوحة (اختياري)',
+              decoration: InputDecoration(
+                labelText: _loc.sofSerialPlateOptional,
                 border: OutlineInputBorder(),
               ),
               textDirection: TextDirection.ltr,
@@ -768,7 +771,7 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
             Padding(
               padding: const EdgeInsetsDirectional.only(start: 4, top: 4),
               child: Text(
-                'إن تُرك فارغاً يُولَّد تلقائياً رقم مرجعي داخلي للتذكرة (وليس سيريال الجهاز).',
+                                _loc.sofSerialHint,
                 style: TextStyle(
                   fontSize: 12,
                   height: 1.3,
@@ -795,7 +798,7 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'المدة المتوقعة',
+                              _loc.sofExpectedDuration,
                               style: TextStyle(
                                 fontWeight: FontWeight.w800,
                                 color: cs.onSurface,
@@ -823,16 +826,16 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
             const SizedBox(height: 10),
             ListTile(
               contentPadding: EdgeInsets.zero,
-              title: const Text('الخدمة'),
+              title: Text(_loc.sofServiceTitle),
               subtitle: Text(
                 _serviceName?.trim().isNotEmpty == true
                     ? _serviceName!
-                    : (_serviceId == null ? 'غير محددة (اختياري)' : 'محددة'),
+                    : (_serviceId == null ? _loc.sofServiceNotSet : _loc.sofServiceSet),
               ),
               trailing: OutlinedButton.icon(
                 onPressed: busy ? null : _pickService,
                 icon: const Icon(Icons.search_rounded),
-                label: const Text('اختيار'),
+                label: Text(_loc.sofSelect),
               ),
             ),
             const SizedBox(height: 8),
@@ -844,10 +847,10 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
                     controller: _estimated,
                     readOnly: true,
                     enableInteractiveSelection: true,
-                    decoration: const InputDecoration(
-                      labelText: 'سعر تقديري (من الخدمة)',
+                    decoration: InputDecoration(
+                      labelText: _loc.sofEstimatedPrice,
                       border: OutlineInputBorder(),
-                      helperText: 'يُملأ تلقائياً من سعر الخدمة',
+                      helperText: _loc.sofEstimatedPriceHint,
                     ),
                     textDirection: TextDirection.ltr,
                     textAlign: TextAlign.start,
@@ -857,10 +860,10 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
                 Expanded(
                   child: TextFormField(
                     controller: _agreed,
-                    decoration: const InputDecoration(
-                      labelText: 'السعر المتفق عليه (Fdj)',
+                    decoration: InputDecoration(
+                      labelText: _loc.sofAgreedPrice,
                       border: OutlineInputBorder(),
-                      helperText: 'المكان الوحيد لتعديل السعر',
+                      helperText: _loc.sofAgreedPriceHint,
                     ),
                     keyboardType:
                         const TextInputType.numberWithOptions(decimal: true),
@@ -868,7 +871,7 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
                       final s = (v ?? '').trim().replaceAll(',', '');
                       if (s.isEmpty) return null;
                       final n = double.tryParse(s);
-                      if (n == null || n < 0) return 'أدخل مبلغاً صحيحاً';
+                      if (n == null || n < 0) return _loc.sofInvalidAmount;
                       return null;
                     },
                     textDirection: TextDirection.ltr,
@@ -883,8 +886,8 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
                 Expanded(
                   child: TextFormField(
                     controller: _advance,
-                    decoration: const InputDecoration(
-                      labelText: 'عربون/دفعة مقدمة (Fdj)',
+                    decoration: InputDecoration(
+                      labelText: _loc.sofAdvancePayment,
                       border: OutlineInputBorder(),
                     ),
                     keyboardType:
@@ -892,7 +895,7 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
                     validator: (v) {
                       final n =
                           double.tryParse((v ?? '').trim().replaceAll(',', ''));
-                      if (n == null || n < 0) return 'أدخل مبلغاً صحيحاً';
+                      if (n == null || n < 0) return _loc.sofInvalidAmount;
                       return null;
                     },
                     textDirection: TextDirection.ltr,
@@ -904,8 +907,8 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
             const SizedBox(height: 10),
             TextFormField(
               controller: _issue,
-              decoration: const InputDecoration(
-                labelText: 'وصف المشكلة (اختياري)',
+              decoration: InputDecoration(
+                labelText: _loc.sofProblemDesc,
                 border: OutlineInputBorder(),
               ),
               minLines: 2,
@@ -915,7 +918,7 @@ class _ServiceOrderFormScreenState extends State<ServiceOrderFormScreen> {
             const SizedBox(height: 14),
             FilledButton(
               onPressed: busy ? null : _submit,
-              child: Text(_saving ? 'جارٍ الحفظ…' : 'حفظ التذكرة'),
+              child: Text(_saving ? _loc.sofSaving : _loc.sofSaveTicket),
             ),
           ],
         ),

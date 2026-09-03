@@ -486,7 +486,7 @@ class _SplashScreenState extends State<SplashScreen>
                                     child: FittedBox(
                                       fit: BoxFit.scaleDown,
                                       child: Text(
-                                        'NABOO',
+                                        'MAAREY',
                                         textDirection: TextDirection.ltr,
                                         maxLines: 1,
                                         softWrap: false,

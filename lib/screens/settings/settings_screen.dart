@@ -248,24 +248,24 @@ class SettingsScreen extends StatelessWidget {
                                 _SettingItem(
                                   icon: Icons.medical_services_outlined,
                                   iconColor: _kTeal,
-                                  title: 'استيراد الأدوية',
-                                  subtitle: 'إضافة 157 دواء من ملف الجرد',
+                                  title: loc.settingsImportMeds,
+                                  subtitle: loc.settingsImportMedsDesc,
                                   onTap: () async {
                                     final confirmed = await showDialog<bool>(
                                       context: context,
                                       builder: (ctx) => AlertDialog(
-                                        title: const Text('استيراد الأدوية'),
-                                        content: const Text(
-                                          'سيتم إضافة 157 دواء إلى كتالوج المنتجات. هل تريد المتابعة؟',
+                                        title: Text(loc.settingsImportMeds),
+                                        content: Text(
+                                          loc.settingsImportMedsConfirm,
                                         ),
                                         actions: [
                                           TextButton(
                                             onPressed: () => Navigator.pop(ctx, false),
-                                            child: const Text('إلغاء'),
+                                            child: Text(loc.cancel),
                                           ),
                                           TextButton(
                                             onPressed: () => Navigator.pop(ctx, true),
-                                            child: const Text('استيراد'),
+                                            child: Text(loc.settingsImportMeds),
                                           ),
                                         ],
                                       ),
@@ -278,7 +278,7 @@ class SettingsScreen extends StatelessWidget {
                                         ScaffoldMessenger.of(context).showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              'تم استيراد $count دواء بنجاح',
+                                              loc.settingsImportedCount(count),
                                             ),
                                             backgroundColor: Colors.green,
                                           ),
@@ -287,7 +287,7 @@ class SettingsScreen extends StatelessWidget {
                                         if (!context.mounted) return;
                                         ScaffoldMessenger.of(context).showSnackBar(
                                           SnackBar(
-                                            content: Text('خطأ: $e'),
+                                            content: Text(loc.settingsImportError(e)),
                                             backgroundColor: Colors.red,
                                           ),
                                         );
@@ -374,8 +374,8 @@ class SettingsScreen extends StatelessWidget {
     showAboutDialog(
       context: context,
       applicationName: loc.appName,
-      applicationVersion: 'الإصدار 1.0.0',
-      applicationLegalese: '© 2026 نابو. جميع الحقوق محفوظة.',
+      applicationVersion: loc.settingsAppVersion,
+      applicationLegalese: loc.settingsCopyright,
       children: [
         Padding(
           padding: const EdgeInsetsDirectional.only(top: 8),
@@ -658,25 +658,26 @@ class _SubscriptionPlanTrailingBadge extends StatelessWidget {
     return ListenableBuilder(
       listenable: LicenseService.instance,
       builder: (context, _) {
+        final loc = AppLocalizations.of(context)!;
         final s = LicenseService.instance.state;
         late final String label;
         late final Color fg;
         late final Color bg;
         if (s.status == LicenseStatus.active) {
-          label = s.plan?.nameAr ?? 'مفعّل';
+          label = s.plan?.nameAr ?? loc.settingsLicenseActive;
           fg = cs.primary;
           bg = cs.primary.withValues(alpha: 0.12);
         } else if (s.status == LicenseStatus.trial) {
-          label = 'تجريبية';
+          label = loc.settingsLicenseTrial;
           fg = cs.tertiary;
           bg = cs.tertiary.withValues(alpha: 0.22);
         } else if (s.status == LicenseStatus.expired ||
             s.status == LicenseStatus.suspended) {
-          label = 'غير نشط';
+          label = loc.settingsLicenseInactive;
           fg = _kRed;
           bg = _kRed.withValues(alpha: 0.12);
         } else if (s.status == LicenseStatus.offline) {
-          label = 'غير متصّل';
+          label = loc.settingsLicenseDisconnected;
           fg = Colors.orange.shade800;
           bg = Colors.orange.withValues(alpha: 0.18);
         } else if (s.status == LicenseStatus.checking) {
@@ -684,7 +685,7 @@ class _SubscriptionPlanTrailingBadge extends StatelessWidget {
           fg = Colors.grey.shade700;
           bg = Colors.grey.withValues(alpha: 0.2);
         } else {
-          label = 'بدون ترخيص';
+          label = loc.settingsLicenseNone;
           fg = Colors.grey.shade700;
           bg = Colors.grey.withValues(alpha: 0.2);
         }
@@ -1096,7 +1097,7 @@ class _AccountSubscriptionScreenState
     if (!mounted) return;
     setState(() {
       _busy = false;
-      _message = err ?? 'تم السماح للجهاز بالعودة';
+      _message = err ?? loc.settingsDeviceAllowed;
     });
   }
 
@@ -1164,7 +1165,7 @@ class _AccountSubscriptionScreenState
         break;
     }
     if (lic.maxDevices == 0) return loc.unlimited;
-    return '${lic.maxDevices} أجهزة';
+    return loc.settingsDeviceCount(lic.maxDevices);
   }
 
   @override
@@ -1181,6 +1182,7 @@ class _AccountSubscriptionScreenState
         body: ListenableBuilder(
           listenable: LicenseService.instance,
           builder: (context, _) {
+            final loc = AppLocalizations.of(context)!;
             final lic = LicenseService.instance.state;
             final displayPlan = lic.plan;
             final gap = ScreenLayout.of(context).pageHorizontalGap;
@@ -1282,14 +1284,14 @@ class _AccountSubscriptionScreenState
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'الاشتراك',
+                        Text(
+                          loc.settingsSubscription,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 8),
                         if (lic.expiresAt != null) ...[
                           Text(
-                            'ينتهي الاشتراك في: ${_fmtDate(lic.expiresAt)}',
+                            loc.settingsSubscriptionExpires(_fmtDate(lic.expiresAt)),
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -1298,7 +1300,7 @@ class _AccountSubscriptionScreenState
                           if (lic.daysLeft != null) ...[
                             const SizedBox(height: 6),
                             Text(
-                              'متبقٍ تقريباً: ${lic.daysLeft} يوماً',
+                              loc.settingsDaysRemaining(lic.daysLeft ?? 0),
                               style: TextStyle(
                                 fontSize: 13,
                                 color: Colors.grey.shade700,
@@ -1306,8 +1308,8 @@ class _AccountSubscriptionScreenState
                             ),
                           ],
                         ] else
-                          const Text(
-                            'اشتراك مفعّل بلا تاريخ انتهاء محدد في السحابة.',
+                          Text(
+                            loc.settingsSubscriptionActiveNoExpiry,
                             style: TextStyle(fontSize: 14),
                           ),
                       ],
@@ -1322,15 +1324,15 @@ class _AccountSubscriptionScreenState
                     children: [
                       Row(
                         children: [
-                          const Text(
-                            'الأجهزة المرتبطة بالحساب',
+                          Text(
+                            loc.settingsLinkedDevices,
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           const Spacer(),
                           IconButton(
                             onPressed: _busy ? null : _refresh,
                             icon: const Icon(Icons.refresh),
-                            tooltip: 'تحديث',
+                            tooltip: loc.settingsUpdate,
                           ),
                         ],
                       ),
@@ -1345,7 +1347,7 @@ class _AccountSubscriptionScreenState
                             );
                           }
                           if (list.isEmpty) {
-                            return const Text('لا توجد أجهزة مسجّلة بعد.');
+                            return Text(loc.settingsNoDevicesRegistered);
                           }
                           return Column(
                             children: list.map((d) {
@@ -1360,13 +1362,13 @@ class _AccountSubscriptionScreenState
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '${d.platform} • آخر نشاط: ${_fmtDate(d.lastSeenAt)}',
+                                      '${d.platform} • ${loc.settingsLastActive(_fmtDate(d.lastSeenAt))}',
                                     ),
                                     if (d.isRevoked)
                                       Padding(
                                         padding: const EdgeInsets.only(top: 4),
                                         child: Text(
-                                          'مفصول — لا يمكنه الدخول حتى الموافقة',
+                                          loc.settingsDisconnectedCannotLogin,
                                           style: TextStyle(
                                             fontSize: 12,
                                             color: _kRed.withValues(alpha: 0.9),
@@ -1388,8 +1390,8 @@ class _AccountSubscriptionScreenState
                                             8,
                                           ),
                                         ),
-                                        child: const Text(
-                                          'هذا الجهاز',
+                                        child: Text(
+                                          loc.settingsThisDevice,
                                           style: TextStyle(
                                             color: _kTeal,
                                             fontSize: 11,
@@ -1402,10 +1404,10 @@ class _AccountSubscriptionScreenState
                                         onPressed: _busy
                                             ? null
                                             : () => _approveDevice(d),
-                                        child: const Text('سماح بالعودة'),
+                                        child: Text(loc.settingsAllowReturn),
                                       )
                                     : IconButton(
-                                        tooltip: 'فصل الجهاز',
+                                        tooltip: loc.settingsDisconnectDevice,
                                         onPressed: _busy
                                             ? null
                                             : () => _removeDevice(d),
@@ -1428,13 +1430,13 @@ class _AccountSubscriptionScreenState
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'المزامنة التلقائية',
+                      Text(
+                        loc.settingsAutoSync,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'تُرفع من كل جهاز نسخة كاملة من قاعدة البيانات؛ الأحدث في السحابة هي التي تُستورد على الجهاز الآخر بعد «مزامنة الآن» أو خلال نحو دقيقة. ليست لحظية لكل إدخال. يجب تنفيذ ملف SQL للمزامنة في Supabase، والإنترنت مفعّل.',
+                        loc.settingsAutoSyncDesc,
                         style: TextStyle(
                           fontSize: 12,
                           height: 1.35,
@@ -1467,7 +1469,7 @@ class _AccountSubscriptionScreenState
                         child: ElevatedButton.icon(
                           onPressed: _busy ? null : _syncNow,
                           icon: const Icon(Icons.sync),
-                          label: const Text('مزامنة الآن'),
+                          label: Text(loc.settingsSyncNow),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Theme.of(
                               context,
@@ -1481,7 +1483,7 @@ class _AccountSubscriptionScreenState
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'آخر مزامنة: ${_fmtDate(CloudSyncService.instance.lastSyncAt.value)}',
+                        loc.settingsLastSync(_fmtDate(CloudSyncService.instance.lastSyncAt.value)),
                         style: const TextStyle(
                           fontSize: 12,
                           color: Colors.grey,
@@ -1493,7 +1495,7 @@ class _AccountSubscriptionScreenState
                           _message!,
                           style: TextStyle(
                             fontSize: 12,
-                            color: _message == 'تمت المزامنة بنجاح'
+                            color: _message == loc.settingsSyncSuccess
                                 ? Colors.green
                                 : _kRed,
                           ),
@@ -1512,18 +1514,17 @@ class _AccountSubscriptionScreenState
                             final confirmed = await showDialog<bool>(
                               context: context,
                               builder: (ctx) => AlertDialog(
-                                title: const Text('مسح المنتجات من السحابة'),
-                                content: const Text(
-                                  'سيتم حذف جميع المنتجات من السحابة فقط. الإعدادات والفواتير والعملاء لن تتأثر. تريد المتابعة؟',
+                                title: Text(loc.settingsClearCloudProducts),
+                                content: Text(
+                                  loc.settingsClearCloudProductsDesc,
                                 ),
                                 actions: [
                                   TextButton(
-                                    onPressed: () => Navigator.pop(ctx, false),
-                                    child: const Text('إلغاء'),
+                                    onPressed: () => Navigator.pop(ctx, false),                                     child: Text(loc.cancel),
                                   ),
                                   TextButton(
                                     onPressed: () => Navigator.pop(ctx, true),
-                                    child: const Text('مسح',
+                                    child: Text(loc.settingsClearCloudProducts,
                                         style: TextStyle(color: Colors.red)),
                                   ),
                                 ],
@@ -1540,8 +1541,8 @@ class _AccountSubscriptionScreenState
                                 SnackBar(
                                   content: Text(
                                     ok
-                                        ? 'تم مسح المنتجات من السحابة. اضغط مزامنة الآن'
-                                        : 'فشل المسح: ${CloudSyncService.instance.lastError.value ?? "خطأ"}',
+                                        ? loc.settingsCleared
+                                        : loc.settingsClearFailed(CloudSyncService.instance.lastError.value ?? 'Error'),
                                   ),
                                   backgroundColor: ok ? Colors.green : Colors.red,
                                 ),
@@ -1549,7 +1550,7 @@ class _AccountSubscriptionScreenState
                             }
                           },
                     icon: const Icon(Icons.delete_outline, color: Colors.red),
-                    label: const Text('مسح المنتجات من السحابة',
+                    label: Text(loc.settingsClearCloudProducts,
                         style: TextStyle(color: Colors.red)),
                   ),
                 ),
@@ -1561,9 +1562,9 @@ class _AccountSubscriptionScreenState
                       Navigator.push<void>(
                         context,
                         FastContentPageRoute(
-                          settings: const RouteSettings(
+                          settings: RouteSettings(
                             name: AppContentRoutes.subscriptionPlans,
-                            arguments: BreadcrumbMeta('خطط الاشتراك'),
+                            arguments: BreadcrumbMeta(loc.settingsSubscriptionPlans),
                           ),
                           builder: (_) =>
                               SubscriptionPlansScreen(currentPlan: displayPlan),
@@ -1571,7 +1572,7 @@ class _AccountSubscriptionScreenState
                       );
                     },
                     icon: const Icon(Icons.upgrade_outlined),
-                    label: const Text('عرض خطط الاشتراك'),
+                    label: Text(loc.settingsViewSubscriptionPlans),
                   ),
                 ),
               ],
@@ -1746,7 +1747,7 @@ class _InvoiceSettingsScreenState extends State<_InvoiceSettingsScreen> {
   bool _showFooter = true;
   double _taxRate = 0.0;
   final _startNum = TextEditingController(text: '1');
-  final _footer = TextEditingController(text: 'شكراً لتعاملكم معنا');
+  final _footer = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

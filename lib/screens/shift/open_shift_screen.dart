@@ -14,7 +14,6 @@ import '../../l10n/generated/app_localizations.dart';
 import '../../services/database_helper.dart';
 import '../../theme/design_tokens.dart';
 import '../../navigation/app_root_navigator_key.dart';
-import '../../l10n/generated/app_localizations.dart';
 import '../../services/password_hashing.dart';
 import '../../utils/staff_identity_apply.dart';
 import '../../utils/staff_identity_qr.dart';
@@ -34,6 +33,7 @@ class OpenShiftScreen extends StatefulWidget {
 }
 
 class _OpenShiftScreenState extends State<OpenShiftScreen> {
+  AppLocalizations get _loc => AppLocalizations.of(context)!;
   final DatabaseHelper _db = DatabaseHelper();
   final _physical = TextEditingController();
   final _addCash = TextEditingController();
@@ -81,7 +81,7 @@ class _OpenShiftScreenState extends State<OpenShiftScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('حدث خطأ غير متوقع أثناء التهيئة: $e'),
+            content: Text(_loc.osUnexpectedInitError(e.toString())),
             duration: const Duration(seconds: 10),
           ),
         );
@@ -121,9 +121,9 @@ class _OpenShiftScreenState extends State<OpenShiftScreen> {
         );
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text(
-                '\${_loc.osAutoFixed}',
+                _loc.osAutoFixed,
               ),
             ),
           );
@@ -132,9 +132,9 @@ class _OpenShiftScreenState extends State<OpenShiftScreen> {
       }
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(
-              '\${_loc.osStaffMissing}',
+              _loc.osStaffMissing,
             ),
           ),
         );
@@ -182,14 +182,14 @@ class _OpenShiftScreenState extends State<OpenShiftScreen> {
     final auth = context.read<AuthProvider>();
     final uid = auth.userId;
     if (uid == null) {
-      _showOpenShiftMessage('\${_loc.osSessionEnded}');
+      _showOpenShiftMessage('${_loc.osSessionEnded}');
       return;
     }
 
     final physical = _parseMoney(_physical.text);
     final addPart = _parseMoney(_addCash.text);
     if (addPart < 0) {
-      _showOpenShiftMessage('\${_loc.osCannotBeNegative}');
+      _showOpenShiftMessage('${_loc.osCannotBeNegative}');
       return;
     }
 
@@ -204,7 +204,7 @@ class _OpenShiftScreenState extends State<OpenShiftScreen> {
         builder: (ctx) => _ShiftStaffIdentityDialog(db: _db),
       );
     } catch (e) {
-      _showOpenShiftMessage('تعذر فتح نافذة اختيار موظف الوردية: $e');
+      _showOpenShiftMessage(_loc.osErrorStaffDialog(e.toString()));
       if (mounted) setState(() => _openingShift = false);
       return;
     }
@@ -212,14 +212,14 @@ class _OpenShiftScreenState extends State<OpenShiftScreen> {
     if (!mounted) return;
     if (identity == null) {
       setState(() => _openingShift = false);
-      _showOpenShiftMessage('\${_loc.osNoStaffSelected}');
+      _showOpenShiftMessage('${_loc.osNoStaffSelected}');
       return;
     }
 
     final staffUserId = identity['shiftStaffUserId'];
     if (staffUserId is! int || staffUserId <= 0) {
       setState(() => _openingShift = false);
-      _showOpenShiftMessage('\${_loc.osIncompleteData}');
+      _showOpenShiftMessage('${_loc.osIncompleteData}');
       return;
     }
 
@@ -244,10 +244,10 @@ class _OpenShiftScreenState extends State<OpenShiftScreen> {
       String iq(double v) => IraqiCurrencyFormat.formatIqd(v);
 
       final detailBuf = StringBuffer()
-        ..writeln('موظف الوردية: $name')
-        ..writeln('رصيد النظام عند الفتح: ${iq(_systemBalance)}')
-        ..writeln('الجرد اليدوي (الصندوق): ${iq(physical)}')
-        ..writeln('المبلغ المضاف عند الفتح: ${iq(addPart)}');
+        ..writeln(_loc.osDetailStaff(name))
+        ..writeln(_loc.osDetailSystemBalance(iq(_systemBalance)))
+        ..writeln(_loc.osDetailPhysicalCount(iq(physical)))
+        ..writeln(_loc.osDetailAddedCash(iq(addPart)));
 
       final detail = detailBuf.toString().trim();
       openedShiftId = shiftId;
@@ -262,7 +262,7 @@ class _OpenShiftScreenState extends State<OpenShiftScreen> {
               .recordShiftLifecycleEvent(
                 isClose: false,
                 shiftId: shiftId,
-                title: 'فتح وردية #$shiftId',
+                title: _loc.osOpenShiftNotifTitle(shiftId.toString()),
                 body: detail,
               )
               .catchError((Object e, StackTrace st) {
@@ -276,7 +276,7 @@ class _OpenShiftScreenState extends State<OpenShiftScreen> {
       }
     } catch (e) {
       if (mounted) {
-        _showOpenShiftMessage('تعذر فتح الوردية: $e');
+        _showOpenShiftMessage(_loc.osErrorOpeningShift(e.toString()));
       }
       return;
     } finally {
@@ -285,7 +285,7 @@ class _OpenShiftScreenState extends State<OpenShiftScreen> {
 
     if (!mounted) return;
     if (openedShiftId == 0 || openedDetail.isEmpty) {
-      _showOpenShiftMessage('\${_loc.osNoShiftId}');
+      _showOpenShiftMessage('${_loc.osNoShiftId}');
       return;
     }
 
@@ -297,7 +297,7 @@ class _OpenShiftScreenState extends State<OpenShiftScreen> {
         SnackBar(
           behavior: SnackBarBehavior.floating,
           duration: const Duration(seconds: 6),
-          content: Text('تم فتح الوردية #$openedShiftId\n$openedDetail'),
+          content: Text(_loc.osShiftOpenedMsg(openedShiftId.toString())),
         ),
       );
     });
@@ -414,18 +414,18 @@ class _OpenShiftScreenState extends State<OpenShiftScreen> {
                                   ),
                                   SizedBox(height: compact ? 16 : 20),
                                   _MoneyGlassField(
-                                    label: '\${_loc.osAmountHint}',
+                                    label: '${_loc.osAmountHint}',
                                     subtitle:
-                                        '\${_loc.osAmountLabel}',
-                                    hint: '\${_loc.osExample}: 50,000',
+                                        '${_loc.osAmountLabel}',
+                                    hint: '${_loc.osExample}: 50,000',
                                     controller: _physical,
                                     keyboardType: TextInputType.number,
                                   ),
                                   SizedBox(height: compact ? 12 : 14),
                                   _MoneyGlassField(
-                                    label: '\${_loc.osAddMoney}',
+                                    label: '${_loc.osAddMoney}',
                                     subtitle:
-                                        '\${_loc.osAddMoneyDesc}',
+                                        '${_loc.osAddMoneyDesc}',
                                     hint: '0',
                                     controller: _addCash,
                                     keyboardType: TextInputType.number,
@@ -440,7 +440,7 @@ class _OpenShiftScreenState extends State<OpenShiftScreen> {
                                   TextButton(
                                     onPressed: _openingShift ? null : _logout,
                                     child: Text(
-                                      '\${_loc.osLogout}',
+                                      '${_loc.osLogout}',
                                       style: TextStyle(
                                         color: Colors.white.withValues(
                                           alpha: 0.70,
@@ -473,6 +473,7 @@ class _OpenShiftHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _loc = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -496,7 +497,7 @@ class _OpenShiftHeader extends StatelessWidget {
         ),
         SizedBox(height: compact ? 14 : 18),
         Text(
-          '\${_loc.osOpeningShift}',
+          '${_loc.osOpeningShift}',
           style: TextStyle(
             color: const Color(0xFFF8FAFC),
             fontSize: compact ? 22 : 24,
@@ -506,7 +507,7 @@ class _OpenShiftHeader extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          'راجع رصيد الصندوق حسب النظام، ثم سجّل الجرد الفعلي قبل بدء العمل. إذا أضفت نقداً جديداً للصندوق، اكتبه في الحقل الاختياري ليظهر في سجل الوردية.',
+          _loc.osReviewBalance,
           style: TextStyle(
             color: Colors.white.withValues(alpha: 0.78),
             fontSize: compact ? 12.8 : 14,
@@ -526,6 +527,7 @@ class _SystemCashCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _loc = AppLocalizations.of(context)!;
     return Container(
       padding: EdgeInsetsDirectional.all(compact ? 14 : 16),
       decoration: BoxDecoration(
@@ -548,7 +550,7 @@ class _SystemCashCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '\${_loc.osOpeningSystemBalance}',
+                  '${_loc.osOpeningSystemBalance}',
                   style: TextStyle(
                     fontSize: compact ? 11.5 : 12.5,
                     color: Colors.white.withValues(alpha: 0.75),
@@ -712,6 +714,7 @@ class _OpenShiftActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _loc = AppLocalizations.of(context)!;
     return FilledButton.icon(
       onPressed: onPressed,
       icon: opening
@@ -724,7 +727,7 @@ class _OpenShiftActionButton extends StatelessWidget {
               ),
             )
           : const Icon(Icons.lock_open_rounded),
-      label: Text(opening ? 'جاري فتح الوردية…' : '\${_loc.osOpeningShift}'),
+      label: Text(opening ? _loc.osOpeningShiftLoading : '${_loc.osOpeningShift}'),
       style: FilledButton.styleFrom(
         backgroundColor: AppColors.accentGold,
         foregroundColor: AppColors.primary,
@@ -747,7 +750,9 @@ class _ShiftStaffIdentityDialog extends StatefulWidget {
 }
 
 class _ShiftStaffIdentityDialogState extends State<_ShiftStaffIdentityDialog> {
-  AppLocalizations get loc => AppLocalizations.of(context)!;
+  AppLocalizations get _loc => AppLocalizations.of(context)!
+;
+  AppLocalizations get loc => _loc;
   final _displayNameCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
   final wedgeCtrl = TextEditingController();
@@ -776,7 +781,7 @@ class _ShiftStaffIdentityDialogState extends State<_ShiftStaffIdentityDialog> {
       setState(() => _loadingUsers = false);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('تعذر تحميل مستخدمي الوردية: $e'),
+          content: Text(_loc.osErrorLoadingUsersParam(e.toString())),
           behavior: SnackBarBehavior.floating,
         ),
       );
@@ -826,7 +831,7 @@ class _ShiftStaffIdentityDialogState extends State<_ShiftStaffIdentityDialog> {
           _applyParsed(parsed);
         } else if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('\${_loc.osInvalidIdCode}')),
+            SnackBar(content: Text('${_loc.osInvalidIdCode}')),
           );
         }
       }
@@ -851,8 +856,8 @@ class _ShiftStaffIdentityDialogState extends State<_ShiftStaffIdentityDialog> {
     final id = _selectedUserId;
     if (id == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('\${_loc.osSelectUser}'),
+        SnackBar(
+          content: Text('${_loc.osSelectUser}'),
         ),
       );
       return;
@@ -861,8 +866,8 @@ class _ShiftStaffIdentityDialogState extends State<_ShiftStaffIdentityDialog> {
     if (!mounted) return;
     if (row == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('\${_loc.osUserNotFound}'),
+        SnackBar(
+          content: Text('${_loc.osUserNotFound}'),
           behavior: SnackBarBehavior.floating,
         ),
       );
@@ -873,9 +878,9 @@ class _ShiftStaffIdentityDialogState extends State<_ShiftStaffIdentityDialog> {
     final hash = row['passwordHash'] as String?;
     if (salt == null || hash == null || salt.isEmpty || hash.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text(
-            'لا توجد كلمة مرور محلية لهذا الحساب. عيّن كلمة مرور من إدارة المستخدمين (أو استخدم حساباً ليس دخوله عبر Google فقط).',
+            _loc.osNoLocalPassword,
           ),
         ),
       );
@@ -883,7 +888,7 @@ class _ShiftStaffIdentityDialogState extends State<_ShiftStaffIdentityDialog> {
     }
     if (!PasswordHashing.verify(pwd, salt, hash)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('\${_loc.osWrongPassword}')),
+        SnackBar(content: Text('${_loc.osWrongPassword}')),
       );
       return;
     }
@@ -951,9 +956,9 @@ class _ShiftStaffIdentityDialogState extends State<_ShiftStaffIdentityDialog> {
                       ),
                     ),
                     const SizedBox(width: 12),
-                    const Expanded(
+                    Expanded(
                       child: Text(
-                        '\${_loc.osShiftEmployee}',
+                        _loc.osShiftEmployee,
                         style: TextStyle(
                           color: Color(0xFFF8FAFC),
                           fontSize: 20,
@@ -965,7 +970,7 @@ class _ShiftStaffIdentityDialogState extends State<_ShiftStaffIdentityDialog> {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  'اختر الموظف المسؤول عن الصندوق في هذه الوردية، ثم أدخل كلمة مرور دخوله. سجلات البيع والصلاحيات أثناء الوردية ستُحسب على هذا الموظف.',
+                  _loc.osSelectEmployee,
                   style: bodyStyle,
                 ),
                 const SizedBox(height: 16),
@@ -999,8 +1004,8 @@ class _ShiftStaffIdentityDialogState extends State<_ShiftStaffIdentityDialog> {
                                 ),
                               ),
                             ),
-                            child: const Text(
-                              '\${_loc.osNoActiveUsers}',
+                            child: Text(
+                              _loc.osNoActiveUsers,
                               style: TextStyle(
                                 color: Color(0xFFFFDAD6),
                                 fontSize: 12.5,
@@ -1011,7 +1016,7 @@ class _ShiftStaffIdentityDialogState extends State<_ShiftStaffIdentityDialog> {
                         else
                           InputDecorator(
                             decoration: inputDecoration(
-                              labelText: '\${_loc.osUserLabel}',
+                              labelText: '${_loc.osUserLabel}',
                               prefixIcon: Icons.person_outline,
                             ),
                             child: DropdownButtonHideUnderline(
@@ -1026,7 +1031,7 @@ class _ShiftStaffIdentityDialogState extends State<_ShiftStaffIdentityDialog> {
                                   fontWeight: FontWeight.w600,
                                 ),
                                 hint: Text(
-                                  '\${_loc.osSelectUserHint}',
+                                  '${_loc.osSelectUserHint}',
                                   style: TextStyle(
                                     color: Colors.white.withValues(alpha: 0.48),
                                   ),
@@ -1056,7 +1061,7 @@ class _ShiftStaffIdentityDialogState extends State<_ShiftStaffIdentityDialog> {
                           readOnly: true,
                           style: const TextStyle(color: Color(0xFFF8FAFC)),
                           decoration: inputDecoration(
-                            labelText: '\${_loc.osDisplayName}',
+                            labelText: '${_loc.osDisplayName}',
                             hintText: 'يُحدَّد تلقائياً',
                             prefixIcon: Icons.account_circle_outlined,
                           ),
@@ -1067,13 +1072,13 @@ class _ShiftStaffIdentityDialogState extends State<_ShiftStaffIdentityDialog> {
                           children: [
                             Expanded(
                               child: Text(
-                                '\${_loc.osScanDesc}',
+                                '${_loc.osScanDesc}',
                                 style: bodyStyle,
                               ),
                             ),
                             const SizedBox(width: 8),
                             IconButton.filledTonal(
-                              tooltip: '\${_loc.osScanCamera}',
+                              tooltip: '${_loc.osScanCamera}',
                               style: IconButton.styleFrom(
                                 backgroundColor: AppColors.accentGold
                                     .withValues(alpha: 0.16),
@@ -1101,8 +1106,8 @@ class _ShiftStaffIdentityDialogState extends State<_ShiftStaffIdentityDialog> {
                           focusNode: _wedgeFocus,
                           style: const TextStyle(color: Color(0xFFF8FAFC)),
                           decoration: inputDecoration(
-                            labelText: '\${_loc.osExternalReader}',
-                            hintText: '\${_loc.osPressToScan}',
+                            labelText: '${_loc.osExternalReader}',
+                            hintText: '${_loc.osPressToScan}',
                             prefixIcon: Icons.usb_rounded,
                           ),
                           textInputAction: TextInputAction.done,
@@ -1115,9 +1120,9 @@ class _ShiftStaffIdentityDialogState extends State<_ShiftStaffIdentityDialog> {
                               _applyParsed(parsed);
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
+                                SnackBar(
                                   content: Text(
-                                    '\${_loc.osInvalidIdCode}',
+                                    '${_loc.osInvalidIdCode}',
                                   ),
                                 ),
                               );
@@ -1131,8 +1136,8 @@ class _ShiftStaffIdentityDialogState extends State<_ShiftStaffIdentityDialog> {
                           style: const TextStyle(color: Color(0xFFF8FAFC)),
                           cursorColor: AppColors.accentGold,
                           decoration: inputDecoration(
-                            labelText: '\${_loc.osLoginPassword}',
-                            hintText: 'كلمة مرور المستخدم المختار',
+                            labelText: '${_loc.osLoginPassword}',
+                            hintText: _loc.osPasswordHint,
                             prefixIcon: Icons.lock_outline_rounded,
                           ),
                         ),
@@ -1156,7 +1161,7 @@ class _ShiftStaffIdentityDialogState extends State<_ShiftStaffIdentityDialog> {
                             borderRadius: BorderRadius.circular(14),
                           ),
                         ),
-                        child: const Text('إلغاء'),
+                        child: Text(_loc.cancel),
                       ),
                     ),
                     const SizedBox(width: 10),
@@ -1173,7 +1178,7 @@ class _ShiftStaffIdentityDialogState extends State<_ShiftStaffIdentityDialog> {
                             borderRadius: BorderRadius.circular(14),
                           ),
                         ),
-                        child: const Text('تأكيد'),
+                        child: Text(_loc.confirmAction),
                       ),
                     ),
                   ],
@@ -1232,7 +1237,7 @@ class _ShiftStaffIdentityDialogState extends State<_ShiftStaffIdentityDialog> {
     final email = (r['email'] as String?)?.trim() ?? '';
     final head = disp.isNotEmpty ? disp : u;
     if (email.isNotEmpty) return '$head · $email';
-    return head.isEmpty ? 'مستخدم #${r['id']}' : head;
+    return head.isEmpty ? _loc.osUserFallback(r['id'].toString()) : head;
   }
 }
 
@@ -1257,6 +1262,7 @@ class _ShiftStaffResumeLockDialog extends StatefulWidget {
 
 class _ShiftStaffResumeLockDialogState
     extends State<_ShiftStaffResumeLockDialog> {
+  AppLocalizations get _loc => AppLocalizations.of(context)!;
   final _ctrl = TextEditingController();
   final _focusPwd = FocusNode();
   bool _error = false;
@@ -1360,7 +1366,7 @@ class _ShiftStaffResumeLockDialogState
                             ),
                             const SizedBox(height: 12),
                             Text(
-                              'متابعة الوردية',
+                              _loc.osResumeShift,
                               textAlign: TextAlign.center,
                               style: GoogleFonts.tajawal(
                                 fontSize: 22,
@@ -1370,8 +1376,7 @@ class _ShiftStaffResumeLockDialogState
                             ),
                             const SizedBox(height: 10),
                             Text(
-                              'توجد وردية مفتوحة باسم "${widget.staffName}". '
-                              'أدخل كلمة مرور الموظف للمتابعة.',
+                              _loc.osResumeShiftDesc(widget.staffName),
                               textAlign: TextAlign.center,
                               style: GoogleFonts.tajawal(
                                 fontSize: 14,
@@ -1382,10 +1387,10 @@ class _ShiftStaffResumeLockDialogState
                             ),
                             const SizedBox(height: 20),
                             AppInput(
-                              label: 'كلمة مرور الموظف',
+                              label: _loc.osLoginPassword,
                               labelFontWeight: FontWeight.w700,
                               isRequired: true,
-                              hint: 'أدخل كلمة المرور',
+                              hint: _loc.osResumeShiftHint,
                               controller: _ctrl,
                               focusNode: _focusPwd,
                               useGlass: true,
@@ -1398,8 +1403,8 @@ class _ShiftStaffResumeLockDialogState
                               ),
                               prefixIcon: IconButton(
                                 tooltip: _obscurePassword
-                                    ? 'إظهار الرمز'
-                                    : 'إخفاء الرمز',
+                                    ? _loc.showPassword
+                                    : _loc.hidePassword,
                                 splashRadius: 22,
                                 icon: Icon(
                                   _obscurePassword
@@ -1417,7 +1422,7 @@ class _ShiftStaffResumeLockDialogState
                                 size: 20,
                               ),
                               warningText: _error
-                                  ? 'كلمة المرور غير صحيحة'
+                                  ? _loc.osWrongPassword
                                   : null,
                               onChanged: (_) => setState(() => _error = false),
                               textInputAction: TextInputAction.done,
@@ -1456,7 +1461,7 @@ class _ShiftStaffResumeLockDialogState
                                     ),
                                   ),
                                   child: Text(
-                                    'متابعة',
+                                    _loc.continueAction,
                                     style: GoogleFonts.tajawal(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w800,
@@ -1476,7 +1481,7 @@ class _ShiftStaffResumeLockDialogState
                                 padding: const EdgeInsets.symmetric(vertical: 12),
                               ),
                               child: Text(
-                                'تسجيل الخروج',
+                                _loc.logoutLabel,
                                 style: GoogleFonts.tajawal(
                                   fontWeight: FontWeight.w800,
                                   fontSize: 14,

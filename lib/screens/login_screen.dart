@@ -241,13 +241,13 @@ class _LoginScreenState extends State<LoginScreen>
     final auth = context.read<AuthProvider>();
     final nav = Navigator.of(context);
     final messenger = ScaffoldMessenger.of(context);
-    final success = await auth.login(
+    final result = await auth.login(
       _usernameController.text.trim(),
       _passwordController.text.trim(),
     );
     if (!mounted) return;
     setState(() => _isLoading = false);
-    if (success) {
+    if (result == null) {
       var target = '/open-shift';
       try {
         final completed = await BusinessSetupSettingsData.isCompleted(
@@ -258,9 +258,33 @@ class _LoginScreenState extends State<LoginScreen>
       unawaited(nav.pushReplacementNamed(target));
       return;
     }
+    // Map known error keys to localized strings; pass through any
+    // human-readable message returned by the provider (e.g. Supabase errors).
+    final loc = AppLocalizations.of(context)!;
+    String errorMessage;
+    switch (result) {
+      case 'invalidCredentials':
+        errorMessage = loc.invalidCredentials;
+        break;
+      case 'userNotFound':
+        errorMessage = loc.invalidCredentials;
+        break;
+      case 'emailNotConfirmed':
+        errorMessage = loc.emailNotConfirmed;
+        break;
+      case 'rateLimited':
+        errorMessage = loc.tooManyRequests;
+        break;
+      case 'networkError':
+        errorMessage = loc.networkError;
+        break;
+      default:
+        // Show the actual error message from Supabase or the provider.
+        errorMessage = result;
+    }
     messenger.showSnackBar(
       SnackBar(
-        content: Text(AppLocalizations.of(context)!.invalidCredentials),
+        content: Text(errorMessage),
         backgroundColor: Colors.red.shade700,
         behavior: SnackBarBehavior.floating,
       ),
@@ -390,7 +414,7 @@ class _LoginScreenState extends State<LoginScreen>
           mainAxisSize: MainAxisSize.min,
           children: [
             AppBrandMark(
-              title: 'naboo',
+              title: 'maarey',
               logoSize: logoSize,
               titleFontSize: titleSize,
               titleColor: const Color(0xFFF2D36B),

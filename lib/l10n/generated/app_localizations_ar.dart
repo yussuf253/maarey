@@ -9,7 +9,7 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
-  String get appTitle => 'Naboo';
+  String get appTitle => 'Maarey';
 
   @override
   String get settings => 'الإعدادات';
@@ -153,10 +153,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get aboutApp => 'عن التطبيق';
 
   @override
-  String get aboutAppSubtitle => 'الإصدار 1.0.0 · NaBoo Store Manager';
+  String get aboutAppSubtitle => 'الإصدار 1.0.0 · Maarey Store Manager';
 
   @override
-  String get appName => 'نابو لإدارة المتاجر';
+  String get appName => 'Mاري لإدارة المتاجر';
 
   @override
   String get appDescription =>
@@ -1466,6 +1466,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get invalidCredentials => 'اسم المستخدم أو كلمة السر غير صحيحة';
 
   @override
+  String get emailNotConfirmed =>
+      'البريد الإلكتروني غير مؤكد. يرجى التحقق من صندوق الوارد.';
+
+  @override
+  String get tooManyRequests =>
+      'محاولات كثيرة جداً. يرجى الانتظار بضع دقائق ثم المحاولة مجدداً.';
+
+  @override
+  String get networkError =>
+      'خطأ في الاتصال. يرجى التحقق من الاتصال بالإنترنت والمحاولة مجدداً.';
+
+  @override
   String get accountCreated => 'تم إنشاء الحساب بنجاح';
 
   @override
@@ -1626,7 +1638,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get iraqDialTooltip => '+964 العراق — سيتوفر اختيار دول أخرى لاحقاً';
 
   @override
-  String get welcomeToNaBoo => 'مرحباً بك في نابو';
+  String get welcomeToMaarey => 'مرحباً بك في Mاري';
 
   @override
   String welcomeBackGreeting(Object name) {
@@ -1956,7 +1968,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get useAnotherKey => 'استخدام مفتاح آخر';
 
   @override
-  String get allRightsReserved => 'NaBoo v2.0 — جميع الحقوق محفوظة';
+  String get allRightsReserved => 'Maarey v2.0 — جميع الحقوق محفوظة';
 
   @override
   String get noInternetConnection => 'لا يوجد اتصال بالإنترنت';
@@ -1976,7 +1988,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get contactTeamForLicense =>
-      'للحصول على مفتاح ترخيص، تواصل مع فريق NaBoo.';
+      'للحصول على مفتاح ترخيص، تواصل مع فريق Maarey.';
 
   @override
   String get subscriptionPlansTitle => 'خطط الاشتراك';
@@ -1997,11 +2009,11 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get subscribeStepsJwt =>
-      '١. تواصل مع فريق NaBoo عبر الطرق أدناه\n٢. أكمل الدفع للخطة التي تريدها\n٣. استلم رمز التفعيل الكامل (JWT) من الإدارة\n٤. الصق الرمز في الحقل الموحّد أسفل بطاقات الخطط — الخطة وحد الأجهزة يُستنتجان من الرمز';
+      '١. تواصل مع فريق Maarey عبر الطرق أدناه\n٢. أكمل الدفع للخطة التي تريدها\n٣. استلم رمز التفعيل الكامل (JWT) من الإدارة\n٤. الصق الرمز في الحقل الموحّد أسفل بطاقات الخطط — الخطة وحد الأجهزة يُستنتجان من الرمز';
 
   @override
   String get subscribeStepsLegacy =>
-      '١. تواصل مع فريق NaBoo عبر الطرق أدناه\n٢. أخبرنا بالخطة التي تريدها وأكمل الدفع\n٣. استلم مفتاح الترخيص من الإدارة\n٤. الصق المفتاح في الحقل الموحّد أسفل بطاقات الخطط ثم اضغط «تفعيل المفتاح»';
+      '١. تواصل مع فريق Maarey عبر الطرق أدناه\n٢. أخبرنا بالخطة التي تريدها وأكمل الدفع\n٣. استلم مفتاح الترخيص من الإدارة\n٤. الصق المفتاح في الحقل الموحّد أسفل بطاقات الخطط ثم اضغط «تفعيل المفتاح»';
 
   @override
   String get whatsappOrPhone => 'واتساب / هاتف';
@@ -5885,7 +5897,7 @@ class AppLocalizationsAr extends AppLocalizations {
       'هذا القسم يعرض المبيعات فقط: نقدي/دين/تقسيط/توصيل';
 
   @override
-  String get thankYou => 'شكرًا لاستخدام NaBoo';
+  String get thankYou => 'شكرًا لاستخدام Maarey';
 
   @override
   String get cashTitle => 'الصندوق';
@@ -7063,7 +7075,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get taxes => 'ضرائب';
 
   @override
-  String get thankYouForUsing => 'شكرًا لاستخدام NaBoo';
+  String get thankYouForUsing => 'شكرًا لاستخدام Maarey';
 
   @override
   String get today => 'اليوم';
@@ -10257,7 +10269,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get spHowToSubscribe => 'كيفية الاشتراك';
 
   @override
-  String get spHowJwtStep1 => '١. تواصل مع فريق NaBoo عبر الطرق أدناه';
+  String get spHowJwtStep1 => '١. تواصل مع فريق Maarey عبر الطرق أدناه';
 
   @override
   String get spHowJwtStep2 => '٢. أكمل الدفع للخطة التي تريدها';
@@ -10270,7 +10282,7 @@ class AppLocalizationsAr extends AppLocalizations {
       '٤. الصق الرمز في الحقل الموحّد أسفل بطاقات الخطط — الخطة وحد الأجهزة يُستنتجان من الرمز';
 
   @override
-  String get spHowLegacyStep1 => '١. تواصل مع فريق NaBoo عبر الطرق أدناه';
+  String get spHowLegacyStep1 => '١. تواصل مع فريق Maarey عبر الطرق أدناه';
 
   @override
   String get spHowLegacyStep2 => '٢. أخبرنا بالخطة التي تريدها وأكمل الدفع';
@@ -10790,7 +10802,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get signupPrivacyPolicy => 'سياسة الخصوصية';
 
   @override
-  String get signupTermsSuffix => ' الخاصة بـ Naboo.';
+  String get signupTermsSuffix => ' الخاصة بـ Maarey.';
 
   @override
   String get licEnterKey => 'أدخل مفتاح الترخيص';
@@ -10805,17 +10817,17 @@ class AppLocalizationsAr extends AppLocalizations {
   String get licEnterKeyToContinue => 'أدخل مفتاح الترخيص للمتابعة';
 
   @override
-  String get licKeyHint => 'NABOO-XXXX-XXXX-XXXX أو JWT';
+  String get licKeyHint => 'MAAREY-XXXX-XXXX-XXXX أو JWT';
 
   @override
   String get licActivate => 'تفعيل';
 
   @override
   String get licContactSupport =>
-      'للحصول على مفتاح ترخيص، تواصل مع فريق NaBoo.';
+      'للحصول على مفتاح ترخيص، تواصل مع فريق Maarey.';
 
   @override
-  String get licAllRightsReserved => 'NaBoo v2.0 — جميع الحقوق محفوظة';
+  String get licAllRightsReserved => 'Maarey v2.0 — جميع الحقوق محفوظة';
 
   @override
   String get licTimeConflict => 'تعارض في إعدادات الوقت';
@@ -11976,7 +11988,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get osCannotBeNegative => 'لا يمكن أن يكون المبلغ المضاف سالباً';
 
   @override
-  String get osErrorStaffDialog => 'تعذر فتح نافذة اختيار موظف الوردية';
+  String osErrorStaffDialog(Object error) {
+    return 'تعذر فتح نافذة اختيار موظف الوردية: $error';
+  }
 
   @override
   String get osNoStaffSelected => 'لم يتم اختيار موظف الوردية';
@@ -12492,4 +12506,1038 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get sohNewSaleBreadcrumb => 'بيع جديد';
+
+  @override
+  String get psTitle => 'إعدادات المنتجات';
+
+  @override
+  String get psTabSetup => 'تهيئة المنتجات';
+
+  @override
+  String get psTabTracking => 'تتبع المنتجات';
+
+  @override
+  String get psTabVouchers => 'الأذون المخزنية';
+
+  @override
+  String get psTabDefaults => 'القيم الافتراضية';
+
+  @override
+  String get psSetupTitle => 'تهيئة المنتجات';
+
+  @override
+  String get psSetupDesc =>
+      'إدارة الترقيم التلقائي، وخيارات التسعير المتقدمة، ونظام الوحدات، والأصناف المجمعة.';
+
+  @override
+  String get psNextSkuTitle => 'الرقم التسلسلي للمنتج التالي';
+
+  @override
+  String get psNextSkuDecoration => 'الرقم التالي';
+
+  @override
+  String get psNumberingSettings => 'إعدادات الترقيم';
+
+  @override
+  String get psNextSkuHint =>
+      'الرقم الذي سيُعرض كتلميح للمعرّف التالي. البادئة تُحفظ في إعدادات الترقيم.';
+
+  @override
+  String get psAdvancedPricingTitle => 'خيارات التسعير المتقدمة';
+
+  @override
+  String get psEnabled => 'مفعّل';
+
+  @override
+  String get psDisabled => 'معطّل';
+
+  @override
+  String get psAdvancedPricingDesc =>
+      'عند التفعيل: في «إضافة منتج جديد» يُقترح سعر البيع وأقل سعر من سعر الشراء حسب الهامش أدناه (قابل للتعديل يدوياً قبل الحفظ).';
+
+  @override
+  String get psCostMarginDecoration => 'هامش الربح على التكلفة (%)';
+
+  @override
+  String get psCostMarginHint => 'مثال: 25';
+
+  @override
+  String get psMinSellPriceDesc => 'أقل سعر بيع كنسبة من سعر البيع (%)';
+
+  @override
+  String get psMinSellPriceHint => '100 = مساوٍ لسعر البيع';
+
+  @override
+  String get psSaveSuggestedPrices => 'حفظ أرقام الاقتراح';
+
+  @override
+  String get psPricingExample =>
+      'مثال: تكلفة 10,000 وهامش 25% → سعر بيع مقترح 12,500. نسبة أقل سعر 100% تجعل أقل سعر = سعر البيع.';
+
+  @override
+  String get psMultiUnitTitle => 'استخدام وحدات متعددة لكل صنف';
+
+  @override
+  String get psManageUnits => 'إدارة الوحدات';
+
+  @override
+  String get psMultiUnitDesc =>
+      'السماح بشراء بوحدة وبيع بوحدة أخرى مع معاملات تحويل من قوالب الوحدات.';
+
+  @override
+  String get psDefaultStockDisplayTitle => 'الوحدة الافتراضية لعرض المخزون';
+
+  @override
+  String get psUnitBase => 'الوحدة الأساسية لقالب الوحدة';
+
+  @override
+  String get psUnitBaseDesc => 'عرض المخزون بوحدة القالب الأساسية.';
+
+  @override
+  String get psUnitSale => 'وحدة البيع';
+
+  @override
+  String get psUnitSaleDesc => 'عرض الرصيد بوحدة البيع الافتراضية.';
+
+  @override
+  String get psUnitPurchase => 'وحدة الشراء';
+
+  @override
+  String get psUnitPurchaseDesc => 'عرض الرصيد بوحدة الشراء الافتراضية.';
+
+  @override
+  String get psStockDisplayDesc =>
+      'تحدد كيف يُعرض المخزون في التقارير والجرد عند تفعيل تعدد الوحدات.';
+
+  @override
+  String get psBundlesTitle => 'التجميعات والوحدات المركبة';
+
+  @override
+  String get psBundlesAllowed => 'مسموح';
+
+  @override
+  String get psBundlesNotAllowed => 'غير مسموح';
+
+  @override
+  String get psBundlesDesc =>
+      'تعريف صنف مركّب من عدة أصناف وخصم المخزون عند التجميع أو البيع (يتطلب تطوير شاشات لاحقاً).';
+
+  @override
+  String get psAddProductPoliciesTitle => 'سياسات شاشة إضافة المنتج';
+
+  @override
+  String get psShowAdvancedPricing => 'إظهار قسم التسعير المتقدم';
+
+  @override
+  String get psShowAdvancedPricingDesc =>
+      'يتحكم بإظهار الضريبة والخصم وأقل سعر البيع وهامش الربح.';
+
+  @override
+  String get psShowBarcodeField => 'إظهار حقل الباركود';
+
+  @override
+  String get psBarcodeRequired => 'الباركود إلزامي عند الحفظ';
+
+  @override
+  String get psShowImageField => 'إظهار حقل صورة المنتج';
+
+  @override
+  String get psImageRequired => 'صورة المنتج إلزامية';
+
+  @override
+  String get psShowExtraFields => 'إظهار الحقول الإضافية';
+
+  @override
+  String get psShowExtraFieldsDesc =>
+      'مثل: ملاحظات داخلية، وسوم، الوزن، وتواريخ الإنتاج/الانتهاء.';
+
+  @override
+  String get psSupplierRequired => 'المورد إلزامي عند الحفظ';
+
+  @override
+  String get psWarehouseRequired => 'المخزن إلزامي عند الحفظ';
+
+  @override
+  String get psDefaultTrackingEnabled => 'تفعيل تتبع المخزون افتراضياً';
+
+  @override
+  String get psDefaultTrackingDesc =>
+      'ينعكس على حالة المفتاح عند فتح شاشة إضافة المنتج.';
+
+  @override
+  String get psAddProductPoliciesDesc =>
+      'هذه السياسات تُطبّق مباشرة على شاشة «إضافة منتج جديد» دون التأثير على شاشة البيع.';
+
+  @override
+  String get psTrackingTitle => 'تتبع المنتجات';
+
+  @override
+  String get psTrackingDesc => 'إعداد طرق التتبع وسلوك النظام عند نفاد الكمية.';
+
+  @override
+  String get psSerialBatchExpiryTitle =>
+      'تتبع بواسطة الرقم المسلسل، رقم التوصيلة، أو تاريخ الانتهاء';
+
+  @override
+  String get psSerialBatchExpiryDesc =>
+      'عند التفعيل يمكن تفعيل التتبع لكل منتج على حدة عند الإضافة.';
+
+  @override
+  String get psNegativeStockTitle => 'المخزون السالب';
+
+  @override
+  String get psNegativeStockStop =>
+      'إيقاف العمليات عند نفاد الكمية لجميع المنتجات';
+
+  @override
+  String get psNegativeStockStopDesc =>
+      'منع البيع أو الصرف عند وصول المخزون إلى الصفر.';
+
+  @override
+  String get psNegativeStockTrackableOnly =>
+      'السماح فقط للمنتجات القابلة للتتبع بالكميات';
+
+  @override
+  String get psNegativeStockTrackableDesc =>
+      'يُسمح بالبيع السالب أو الصرف حسب سياسة الصنف.';
+
+  @override
+  String get psNegativeStockDesc => 'يحدد سلوك النظام عند نفاد المخزون.';
+
+  @override
+  String get psShowTotalAvailableTitle => 'عرض الكمية الإجمالية والمتوفرة';
+
+  @override
+  String get psShowTotalAvailableDesc =>
+      'عرض إجمالي الكمية مقابل المتاح بعد الحجوزات (عند تفعيل الحجز لاحقاً).';
+
+  @override
+  String get psVouchersTitle => 'الأذون المخزنية';
+
+  @override
+  String get psVouchersDesc =>
+      'إنشاء طلبات مخزنية وترقيم أذون التحويل وربطها بالمبيعات والمشتريات.';
+
+  @override
+  String get psInventoryRequestsTitle => 'الطلبات المخزنية';
+
+  @override
+  String get psInventoryRequestsDesc =>
+      'تمكين الأقسام من رفع طلبات مخزنية لمراجعتها. الصلاحيات تُضبط من أدوار المستخدمين عند توفرها.';
+
+  @override
+  String get psTransferVoucherNextTitle =>
+      'الرقم التسلسلي لإذن التحويل المخزني التالي';
+
+  @override
+  String get psTransferVoucherNextDecoration => 'الرقم';
+
+  @override
+  String get psTransferVoucherNextDesc => 'الرقم التالي المقترح لأذون التحويل.';
+
+  @override
+  String get psSalesVoucherTitle => 'الأذون المخزنية لفواتير المبيعات';
+
+  @override
+  String get psSalesVoucherDesc =>
+      'عند التفعيل يُنشأ إذن صرف يحتاج اعتماداً قبل خصم المخزون.';
+
+  @override
+  String get psPurchaseVoucherTitle => 'الأذون المخزنية لفواتير الشراء';
+
+  @override
+  String get psPurchaseVoucherDesc =>
+      'عند التفعيل يُنشأ إذن إدخال يحتاج اعتماداً قبل إضافة المخزون.';
+
+  @override
+  String get psDefaultsTitle => 'القيم الافتراضية للنظام';
+
+  @override
+  String get psDefaultsDesc =>
+      'قيم تُقترح تلقائياً للمستودعات والمنتجات والضرائب.';
+
+  @override
+  String get psDefaultSubAccountTitle => 'الحساب الفرعي الافتراضي';
+
+  @override
+  String get psPleaseChoose => 'من فضلك اختر';
+
+  @override
+  String get psNone => '— بدون —';
+
+  @override
+  String get psGeneralInventory => 'مخزون عام';
+
+  @override
+  String get psRawMaterials => 'مواد خام';
+
+  @override
+  String get psCommercial => 'تجاري';
+
+  @override
+  String get psDefaultSubAccountDesc =>
+      'يُستخدم كمرجع محاسبي عند ربط المخزون بالحسابات.';
+
+  @override
+  String get psDefaultWarehouseTitle => 'المستودع الافتراضي';
+
+  @override
+  String get psManageWarehouses => 'إدارة المستودعات';
+
+  @override
+  String get psChooseWarehouse => 'اختر مستودعاً';
+
+  @override
+  String get psDefaultWarehouseDesc =>
+      'يُقترح عند إضافة منتجات وحركات مخزون جديدة.';
+
+  @override
+  String get psDefaultPriceListTitle => 'قائمة الأسعار الافتراضية';
+
+  @override
+  String get psManagePriceLists => 'إدارة القوائم';
+
+  @override
+  String get psDefaultPriceListDesc =>
+      'تُستخدم كقائمة أسعار افتراضية للفرع الحالي عند توفر الربط.';
+
+  @override
+  String get psDefaultTax1Title => 'الضريبة الافتراضية 1';
+
+  @override
+  String get psManageTaxes => 'إدارة الضرائب';
+
+  @override
+  String get psTaxRatesDesc =>
+      'نِسَب الضريبة تُضبط لكل منتج أو من إعدادات الفاتورة.';
+
+  @override
+  String get psDefaultTax1Desc =>
+      'تُقترح للمنتجات الجديدة ومتوافقة مع حقل الضريبة في المنتج.';
+
+  @override
+  String get psDefaultTax2Title => 'الضريبة الافتراضية 2';
+
+  @override
+  String get psDefaultTax2Desc => 'للاستخدام المزدوج عند دعم ضريبتين لاحقاً.';
+
+  @override
+  String get psReturnCostMethodTitle => 'طريقة احتساب تكلفة المرتجعات';
+
+  @override
+  String get psReturnBySalePrice => 'حسب سعر البيع';
+
+  @override
+  String get psReturnBySalePriceDesc => 'استخدام سعر البيع من فاتورة المبيعات.';
+
+  @override
+  String get psReturnByAvgCost => 'حسب آخر متوسط للتكلفة';
+
+  @override
+  String get psReturnByAvgCostDesc =>
+      'استخدام متوسط التكلفة عند إنشاء المرتجع.';
+
+  @override
+  String get psReturnCostDesc => 'يُطبَّق عند معالجة مرتجعات المبيعات.';
+
+  @override
+  String get psBusinessNatureTitle => 'طبيعة مبيعات النشاط';
+
+  @override
+  String get psNatureProducts => 'المنتجات فقط';
+
+  @override
+  String get psNatureProductsDesc => 'مناسب للمخزون الفعلي.';
+
+  @override
+  String get psNatureServices => 'الخدمات فقط';
+
+  @override
+  String get psNatureServicesDesc => 'أنشطة تعتمد على الوقت أو المشاريع.';
+
+  @override
+  String get psNatureBoth => 'منتجات وخدمات';
+
+  @override
+  String get psNatureBothDesc => 'دمج بين الصنفين في النظام.';
+
+  @override
+  String get psBusinessNatureDesc =>
+      'يحدد التركيز الافتراضي في شاشات المخزون والفوترة.';
+
+  @override
+  String get psVoucherPermEnabled => 'مفعّل';
+
+  @override
+  String get psVoucherPermDisabled => 'معطّل';
+
+  @override
+  String get psTaxExempt => 'معفى';
+
+  @override
+  String get psCustomTax => 'مخصص';
+
+  @override
+  String get psTransferSettingsTitle => 'إعدادات ترقيم أذون التحويل';
+
+  @override
+  String get psOptionalPrefix => 'بادئة اختيارية';
+
+  @override
+  String get psExamplePrefix => 'مثال: TR-';
+
+  @override
+  String get psCancel => 'إلغاء';
+
+  @override
+  String get psSave => 'حفظ';
+
+  @override
+  String get psSavePrefixHint => 'الرقم التالي المقترح لأذون التحويل.';
+
+  @override
+  String get psSerialHint =>
+      'الرقم الذي سيُعرض كتلميح للمعرّف التالي. البادئة تُحفظ في إعدادات الترقيم.';
+
+  @override
+  String get psTaxToggleTooltip =>
+      'عدم التعامل بالضريبة — إيقاف إظهار حقل الضريبة';
+
+  @override
+  String get psShowTaxField => 'إظهار حقل الضريبة';
+
+  @override
+  String get psTaxToggleDesc =>
+      'في «إضافة منتج جديد». أيقونة المنع تعطّل الضريبة دفعة واحدة.';
+
+  @override
+  String get psDiscountToggleTooltip =>
+      'عدم التعامل بالخصم — إيقاف إظهار حقول الخصم';
+
+  @override
+  String get psShowDiscountFields => 'إظهار حقول الخصم';
+
+  @override
+  String get psDiscountToggleDesc =>
+      'في «إضافة منتج جديد». أيقونة المنع تعطّل الخصم دفعة واحدة.';
+
+  @override
+  String get sodEditTicket => 'تعديل تذكرة';
+
+  @override
+  String get sodSearchParts => 'بحث في قطع الغيار…';
+
+  @override
+  String get sodProduct => 'منتج';
+
+  @override
+  String get sodAddPart => 'إضافة قطعة غيار';
+
+  @override
+  String get sodPart => 'قطعة غيار';
+
+  @override
+  String get sodQuantity => 'الكمية';
+
+  @override
+  String get sodSalePrice => 'سعر البيع (Fdj)';
+
+  @override
+  String get sodCancel => 'إلغاء';
+
+  @override
+  String get sodAdd => 'إضافة';
+
+  @override
+  String get sodTechnicalService => 'خدمة فنية';
+
+  @override
+  String get sodSerialPlate => 'سيريال/لوحة';
+
+  @override
+  String get sodNewSale => 'بيع جديد';
+
+  @override
+  String get sodTicketDetails => 'تفاصيل التذكرة';
+
+  @override
+  String get sodEdit => 'تعديل';
+
+  @override
+  String get sodUpdate => 'تحديث';
+
+  @override
+  String get sodAddPartShort => 'إضافة قطعة';
+
+  @override
+  String get sodCustomer => 'عميل';
+
+  @override
+  String get sodSerialInfo => 'سيريال/لوحة';
+
+  @override
+  String get sodConvertToInvoice => 'تحويل لفاتورة بيع';
+
+  @override
+  String get sodParts => 'قطع الغيار';
+
+  @override
+  String get sodNoPartsYet => 'لا توجد قطع غيار بعد.';
+
+  @override
+  String get sodInvoiceItems => 'بنود الفاتورة';
+
+  @override
+  String get sodViewOnly => 'للعرض فقط';
+
+  @override
+  String get sodInvoiceProductsDesc =>
+      'المنتجات والخدمات المسجّلة في فاتورة البيع المرتبطة.';
+
+  @override
+  String get sodPastDue => 'تجاوز موعد التسليم المتوقع';
+
+  @override
+  String get sodExpectedDelivery => 'موعد التسليم المتوقع للزبون';
+
+  @override
+  String sodWorkDurationMin(Object minutes) {
+    return 'مدة العمل المتوقعة: \$dm دقيقة';
+  }
+
+  @override
+  String get sodPending => 'معلقة';
+
+  @override
+  String get sodInProgress => 'قيد العمل';
+
+  @override
+  String get sodReadyForDelivery => 'جاهزة للتسليم';
+
+  @override
+  String get sodDelivered => 'مسلّمة';
+
+  @override
+  String get sodCancelled => 'ملغاة';
+
+  @override
+  String get sodFinancialSummary => 'ملخص مالي (بالفلس)';
+
+  @override
+  String get sodService => 'الخدمة الفنية';
+
+  @override
+  String get sodPartsLabel => 'قطع الغيار';
+
+  @override
+  String get sodTotal => 'الإجمالي';
+
+  @override
+  String get sodPaidAdvance => 'مدفوع مسبقاً';
+
+  @override
+  String get sodRemainingOnDelivery => 'المتبقي عند التسليم';
+
+  @override
+  String sodQtyPriceTotal(Object price, Object qty, Object total) {
+    return 'الكمية: $qty · سعر: $price · إجمالي: $total';
+  }
+
+  @override
+  String sodQtyOnly(Object qty) {
+    return 'الكمية: $qty';
+  }
+
+  @override
+  String get sodDelete => 'حذف';
+
+  @override
+  String get sodLoadError => 'تعذر تحميل بيانات التذكرة.';
+
+  @override
+  String get sodRetry => 'إعادة المحاولة';
+
+  @override
+  String get settingsImportMeds => 'استيراد الأدوية';
+
+  @override
+  String get settingsImportMedsDesc => 'إضافة 157 دواء من ملف الجرد';
+
+  @override
+  String get settingsImportMedsConfirm =>
+      'سيتم إضافة 157 دواء إلى كتالوج المنتجات. هل تريد المتابعة؟';
+
+  @override
+  String settingsImportedCount(Object count) {
+    return 'تم استيراد $count دواء بنجاح';
+  }
+
+  @override
+  String settingsImportError(Object error) {
+    return 'خطأ: $error';
+  }
+
+  @override
+  String get settingsAppVersion => 'الإصدار 1.0.0';
+
+  @override
+  String get settingsCopyright => '© 2026 Mاري. جميع الحقوق محفوظة.';
+
+  @override
+  String get settingsLicenseActive => 'مفعّل';
+
+  @override
+  String get settingsLicenseTrial => 'تجريبية';
+
+  @override
+  String get settingsLicenseInactive => 'غير نشط';
+
+  @override
+  String get settingsLicenseDisconnected => 'غير متصّل';
+
+  @override
+  String get settingsLicenseNone => 'بدون ترخيص';
+
+  @override
+  String get settingsDeviceAllowed => 'تم السماح للجهاز بالعودة';
+
+  @override
+  String settingsDeviceCount(Object count) {
+    return '$count أجهزة';
+  }
+
+  @override
+  String get settingsSubscription => 'الاشتراك';
+
+  @override
+  String settingsSubscriptionExpires(Object date) {
+    return 'ينتهي الاشتراك في: $date';
+  }
+
+  @override
+  String settingsDaysRemaining(Object days) {
+    return 'متبقٍ تقريباً: $days يوماً';
+  }
+
+  @override
+  String get settingsSubscriptionActiveNoExpiry =>
+      'اشتراك مفعّل بلا تاريخ انتهاء محدد في السحابة.';
+
+  @override
+  String get settingsLinkedDevices => 'الأجهزة المرتبطة بالحساب';
+
+  @override
+  String get settingsUpdate => 'تحديث';
+
+  @override
+  String get settingsNoDevicesRegistered => 'لا توجد أجهزة مسجّلة بعد.';
+
+  @override
+  String settingsLastActive(Object date) {
+    return 'آخر نشاط: $date';
+  }
+
+  @override
+  String get settingsDisconnectedCannotLogin =>
+      'مفصول — لا يمكنه الدخول حتى الموافقة';
+
+  @override
+  String get settingsThisDevice => 'هذا الجهاز';
+
+  @override
+  String get settingsAllowReturn => 'سماح بالعودة';
+
+  @override
+  String get settingsDisconnectDevice => 'فصل الجهاز';
+
+  @override
+  String get settingsAutoSync => 'المزامنة التلقائية';
+
+  @override
+  String get settingsAutoSyncDesc =>
+      'تُرفع من كل جهاز نسخة كاملة من قاعدة البيانات؛ الأحدث في السحابة هي التي تُستورد على الجهاز.';
+
+  @override
+  String get settingsSyncNow => 'مزامنة الآن';
+
+  @override
+  String settingsLastSync(Object date) {
+    return 'آخر مزامنة: $date';
+  }
+
+  @override
+  String get settingsSyncSuccess => 'تمت المزامنة بنجاح';
+
+  @override
+  String get settingsClearCloudProducts => 'مسح المنتجات من السحابة';
+
+  @override
+  String get settingsClearCloudProductsDesc =>
+      'سيتم حذف جميع المنتجات من السحابة فقط. الإعدادات والفواتير والعملاء لن تتأثر. تريد المتابعة؟';
+
+  @override
+  String get settingsCleared => 'تم مسح المنتجات من السحابة. اضغط مزامنة الآن';
+
+  @override
+  String settingsClearFailed(Object error) {
+    return 'فشل المسح: $error';
+  }
+
+  @override
+  String get settingsViewSubscriptionPlans => 'عرض خطط الاشتراك';
+
+  @override
+  String get settingsSubscriptionPlans => 'خطط الاشتراك';
+
+  @override
+  String get settingsThankYou => 'شكراً لتعاملكم معنا';
+
+  @override
+  String get sofTenantError =>
+      'تعذر تحديد بيانات المستأجر. أعد فتح التطبيق ثم حاول مرة أخرى.';
+
+  @override
+  String get sofDbInitError =>
+      'قاعدة البيانات تحتاج تهيئة/تحديث. أعد فتح التطبيق ثم حاول مرة أخرى.';
+
+  @override
+  String get sofUnexpectedError => 'حدث خطأ غير متوقع أثناء الحفظ.';
+
+  @override
+  String get sofExpectedWorkDuration => 'المدة المتوقعة لإنجاز العمل';
+
+  @override
+  String get sofHours => 'ساعات';
+
+  @override
+  String get sofMinutes => 'دقائق';
+
+  @override
+  String get sofCancel => 'إلغاء';
+
+  @override
+  String get sofDone => 'تم';
+
+  @override
+  String get sofNotSet => 'لم تُحدَّد — اضغط لاختيار الساعات والدقائق';
+
+  @override
+  String sofHoursMinutes(Object hours, Object minutes) {
+    return '$hours س $minutes د — اضغط للتعديل';
+  }
+
+  @override
+  String sofHoursOnly(Object hours) {
+    return '$hours ساعة — اضغط للتعديل';
+  }
+
+  @override
+  String sofMinutesOnly(Object minutes) {
+    return '$minutes دقيقة — اضغط للتعديل';
+  }
+
+  @override
+  String get sofTaskNotStarted =>
+      'بعد «بدء العمل» من قائمة التذاكر يُثبَّت الموعد بدقة من وقت البدء.';
+
+  @override
+  String sofWorkDurationMin(Object minutes) {
+    return 'مدة العمل المتوقعة: $minutes دقيقة';
+  }
+
+  @override
+  String get sofPastDue => 'تجاوز موعد التسليم المتوقع';
+
+  @override
+  String get sofExpectedDelivery => 'موعد التسليم المتوقع (للزبون)';
+
+  @override
+  String get sofSearchServices => 'بحث في الخدمات…';
+
+  @override
+  String get sofService => 'خدمة';
+
+  @override
+  String get sofEditTicket => 'تعديل تذكرة';
+
+  @override
+  String get sofNewTicket => 'تذكرة جديدة';
+
+  @override
+  String get sofSave => 'حفظ';
+
+  @override
+  String get sofSaveError => 'حدث خطأ أثناء الحفظ. حاول مرة أخرى.';
+
+  @override
+  String get sofAll => 'الكل';
+
+  @override
+  String get sofCustomerName => 'اسم العميل';
+
+  @override
+  String get sofCustomerSearchHint => 'ابدأ الكتابة للبحث في العملاء';
+
+  @override
+  String get sofCustomerRequired => 'اسم العميل مطلوب';
+
+  @override
+  String get sofCustomer => 'عميل';
+
+  @override
+  String get sofNewCustomer => 'عميل جديد';
+
+  @override
+  String get sofDeviceName => 'اسم الجهاز / السيارة';
+
+  @override
+  String get sofDeviceNameRequired => 'اسم الجهاز مطلوب';
+
+  @override
+  String get sofSerialPlateOptional => 'رقم تسلسلي / لوحة (اختياري)';
+
+  @override
+  String get sofSerialHint =>
+      'إن تُرك فارغاً يُولَّد تلقائياً رقم مرجعي داخلي للتذكرة (وليس سيريال الجهاز).';
+
+  @override
+  String get sofExpectedDuration => 'المدة المتوقعة';
+
+  @override
+  String get sofServiceTitle => 'الخدمة';
+
+  @override
+  String get sofServiceNotSet => 'غير محددة (اختياري)';
+
+  @override
+  String get sofServiceSet => 'محددة';
+
+  @override
+  String get sofSelect => 'اختيار';
+
+  @override
+  String get sofEstimatedPrice => 'سعر تقديري (من الخدمة)';
+
+  @override
+  String get sofEstimatedPriceHint => 'يُملأ تلقائياً من سعر الخدمة';
+
+  @override
+  String get sofAgreedPrice => 'السعر المتفق عليه (Fdj)';
+
+  @override
+  String get sofAgreedPriceHint => 'المكان الوحيد لتعديل السعر';
+
+  @override
+  String get sofInvalidAmount => 'أدخل مبلغاً صحيحاً';
+
+  @override
+  String get sofAdvancePayment => 'عربون/دفعة مقدمة (Fdj)';
+
+  @override
+  String get sofProblemDesc => 'وصف المشكلة (اختياري)';
+
+  @override
+  String get sofSaving => 'جارٍ الحفظ…';
+
+  @override
+  String get sofSaveTicket => 'حفظ التذكرة';
+
+  @override
+  String get licCheckingLicense => 'جارٍ التحقق من الترخيص…';
+
+  @override
+  String get licNoInternet => 'لا يوجد اتصال بالإنترنت';
+
+  @override
+  String get licOfflineWarning =>
+      'يعمل التطبيق بآخر بيانات ترخيص محفوظة.\nتأكد من الاتصال في أقرب فرصة.';
+
+  @override
+  String get licRetry => 'إعادة المحاولة';
+
+  @override
+  String get licEnterWithoutConnection => 'الدخول بدون اتصال';
+
+  @override
+  String get licUpgradeForDevices => 'ترقية الخطة لإضافة أجهزة';
+
+  @override
+  String osUnexpectedInitError(Object error) {
+    return 'حدث خطأ غير متوقع أثناء التهيئة: $error';
+  }
+
+  @override
+  String osErrorOpeningShift(Object error) {
+    return 'تعذر فتح الوردية: $error';
+  }
+
+  @override
+  String osShiftOpenedMsg(Object id) {
+    return 'تم فتح الوردية رقم #$id';
+  }
+
+  @override
+  String osOpenShiftNotifTitle(Object id) {
+    return 'فتح وردية #$id';
+  }
+
+  @override
+  String osDetailStaff(Object name) {
+    return 'موظف الوردية: $name';
+  }
+
+  @override
+  String osDetailSystemBalance(Object amount) {
+    return 'رصيد النظام عند الفتح: $amount';
+  }
+
+  @override
+  String osDetailPhysicalCount(Object amount) {
+    return 'الجرد اليدوي (الصندوق): $amount';
+  }
+
+  @override
+  String osDetailAddedCash(Object amount) {
+    return 'المبلغ المضاف عند الفتح: $amount';
+  }
+
+  @override
+  String get osResumeShift => 'متابعة الوردية';
+
+  @override
+  String osResumeShiftDesc(Object name) {
+    return 'توجد وردية مفتوحة باسم \"$name\". أدخل كلمة مرور الموظف للمتابعة.';
+  }
+
+  @override
+  String get osResumeShiftHint => 'أدخل كلمة مرور الموظف للمتابعة';
+
+  @override
+  String osUserFallback(Object id) {
+    return 'مستخدم #$id';
+  }
+
+  @override
+  String osErrorLoadingUsersParam(Object error) {
+    return 'تعذر تحميل مستخدمي الوردية: $error';
+  }
+
+  @override
+  String get osPasswordHint => 'كلمة مرور المستخدم المختار';
+
+  @override
+  String get osOpeningShiftLoading => 'جاري فتح الوردية…';
+
+  @override
+  String get csNoOpenShift => 'لا توجد وردية مفتوحة';
+
+  @override
+  String get csCloseShiftTitle => 'إغلاق الوردية';
+
+  @override
+  String get csShiftSummary => 'ملخص هذه الوردية';
+
+  @override
+  String get csSalesInvoices => 'فواتير البيع';
+
+  @override
+  String get csReturnInvoices => 'فواتير المرتجع';
+
+  @override
+  String get csPasswordVerifyTitle => 'تأكيد بكلمة مرور موظف الوردية (اختياري)';
+
+  @override
+  String get csPasswordHintNoUser =>
+      'أدخل كلمة مرور حساب الدخول إن أردت التحقق. اترك الحقل فارغاً لتخطي التحقق';
+
+  @override
+  String csPasswordHintWithName(Object name) {
+    return 'أدخل كلمة مرور الحساب \"$name\" إن أردت التحقق. اترك الحقل فارغاً لتخطي التحقق';
+  }
+
+  @override
+  String get csPasswordPlaceholder => 'كلمة مرور الدخول (اختياري)';
+
+  @override
+  String get csSystemBalance => 'رصيد الصندوق (حسب النظام)';
+
+  @override
+  String get csBalanceDesc =>
+      'يُحدَّد الرصيد تلقائياً من حركات الصندوق. راجع القيم ثم أكّد السحب.';
+
+  @override
+  String get csCashInBox => 'المبلغ في الصندوق';
+
+  @override
+  String get csWithdrawAmount => 'المبلغ الذي تريد أخذه';
+
+  @override
+  String get csRemainingAfterWithdraw => 'المتبقي في الصندوق بعد السحب';
+
+  @override
+  String get csConfirmClose => 'تأكيد وإغلاق الوردية';
+
+  @override
+  String get csPasswordVerifyError => 'تعذر التحقق من كلمة المرور لهذا الحساب';
+
+  @override
+  String get csUserVerifyError => 'تعذر التحقق من المستخدم الحالي';
+
+  @override
+  String get csNoSavedPassword =>
+      'لا توجد كلمة مرور محفوظة لهذا الحساب. اترك الحقل فارغاً.';
+
+  @override
+  String get csWrongPassword => 'كلمة المرور غير صحيحة';
+
+  @override
+  String get csWithdrawNegative => 'المبلغ المسحوب لا يمكن أن يكون سالباً';
+
+  @override
+  String get csWithdrawExceeds =>
+      'المبلغ المسحوب أكبر من المبلغ الموجود في الصندوق';
+
+  @override
+  String csCloseError(Object error) {
+    return 'تعذر الإغلاق: $error';
+  }
+
+  @override
+  String get csRefreshBalance => 'تحديث الرصيد';
+
+  @override
+  String get csInvalidValue => 'قيمة غير صالحة';
+
+  @override
+  String csCloseNotifTitle(Object id) {
+    return 'إغلاق وردية #$id';
+  }
+
+  @override
+  String get csShiftClosedMsg => 'تم إغلاق الوردية. افتح وردية جديدة للمتابعة.';
+
+  @override
+  String csDetailStaff(Object name) {
+    return 'موظف الوردية: $name';
+  }
+
+  @override
+  String csDetailSystemBalanceClose(Object amount) {
+    return 'رصيد النظام لحظة الإغلاق: $amount Fdj';
+  }
+
+  @override
+  String csDetailDeclaredCash(Object amount) {
+    return 'المبلغ المُعلَن في الصندوق: $amount Fdj';
+  }
+
+  @override
+  String csDetailWithdrawn(Object amount) {
+    return 'المبلغ المسحوب: $amount Fdj';
+  }
+
+  @override
+  String csDetailRemaining(Object amount) {
+    return 'المتبقّي في الصندوق بعد السحب: $amount Fdj';
+  }
 }

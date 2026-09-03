@@ -948,7 +948,7 @@ class _HomeScreenState extends State<HomeScreen>
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          'Welcome to NaBoo',
+          'Welcome to Maarey',
           style: TextStyle(
             color: _textPrimary,
             fontSize: 18,
@@ -2003,7 +2003,7 @@ class _HomeScreenState extends State<HomeScreen>
                     maxWidth: maxW.clamp(48.0, 400.0),
                   ),
                   child: AppBrandMark(
-                    title: 'naboo',
+                    title: 'maarey',
                     logoSize: sl.isNarrowWidth ? 34 : 38,
                     gap: sl.isNarrowWidth ? 8 : 10,
                     borderColor: const Color(0xFFB8960C),
@@ -2593,7 +2593,7 @@ class _HomeScreenState extends State<HomeScreen>
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      auth.role.isNotEmpty ? auth.role : 'NaBoo',
+                      auth.role.isNotEmpty ? auth.role : 'Maarey',
                       style: TextStyle(
                         color: cs.onPrimary.withValues(alpha: 0.72),
                         fontSize: 11,

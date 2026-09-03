@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // للتمييز حسب نظام التشغيل (كاميرا باركود، اهتزاز) انظر target_platform_helpers.dart (isMobileOsBuild).
 
-/// فئات الأجهزة المعتمدة في واجهة Naboo (متنافية بالضرورة - Mutually Exclusive)
+/// فئات الأجهزة المعتمدة في واجهة Maarey (متنافية بالضرورة - Mutually Exclusive)
 enum DeviceVariant {
   phoneXS,
   phoneSM,

@@ -20,7 +20,7 @@ class DeviceRevokedScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'NaBoo',
+                  'Maarey',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 40,

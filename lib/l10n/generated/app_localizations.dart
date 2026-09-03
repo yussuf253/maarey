@@ -103,7 +103,7 @@ abstract class AppLocalizations {
   /// No description provided for @appTitle.
   ///
   /// In ar, this message translates to:
-  /// **'Naboo'**
+  /// **'Maarey'**
   String get appTitle;
 
   /// No description provided for @settings.
@@ -373,13 +373,13 @@ abstract class AppLocalizations {
   /// No description provided for @aboutAppSubtitle.
   ///
   /// In ar, this message translates to:
-  /// **'الإصدار 1.0.0 · NaBoo Store Manager'**
+  /// **'الإصدار 1.0.0 · Maarey Store Manager'**
   String get aboutAppSubtitle;
 
   /// No description provided for @appName.
   ///
   /// In ar, this message translates to:
-  /// **'نابو لإدارة المتاجر'**
+  /// **'Mاري لإدارة المتاجر'**
   String get appName;
 
   /// No description provided for @appDescription.
@@ -2690,6 +2690,24 @@ abstract class AppLocalizations {
   /// **'اسم المستخدم أو كلمة السر غير صحيحة'**
   String get invalidCredentials;
 
+  /// No description provided for @emailNotConfirmed.
+  ///
+  /// In ar, this message translates to:
+  /// **'البريد الإلكتروني غير مؤكد. يرجى التحقق من صندوق الوارد.'**
+  String get emailNotConfirmed;
+
+  /// No description provided for @tooManyRequests.
+  ///
+  /// In ar, this message translates to:
+  /// **'محاولات كثيرة جداً. يرجى الانتظار بضع دقائق ثم المحاولة مجدداً.'**
+  String get tooManyRequests;
+
+  /// No description provided for @networkError.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطأ في الاتصال. يرجى التحقق من الاتصال بالإنترنت والمحاولة مجدداً.'**
+  String get networkError;
+
   /// No description provided for @accountCreated.
   ///
   /// In ar, this message translates to:
@@ -3002,11 +3020,11 @@ abstract class AppLocalizations {
   /// **'+964 العراق — سيتوفر اختيار دول أخرى لاحقاً'**
   String get iraqDialTooltip;
 
-  /// No description provided for @welcomeToNaBoo.
+  /// No description provided for @welcomeToMaarey.
   ///
   /// In ar, this message translates to:
-  /// **'مرحباً بك في نابو'**
-  String get welcomeToNaBoo;
+  /// **'مرحباً بك في Mاري'**
+  String get welcomeToMaarey;
 
   /// No description provided for @welcomeBackGreeting.
   ///
@@ -3617,7 +3635,7 @@ abstract class AppLocalizations {
   /// No description provided for @allRightsReserved.
   ///
   /// In ar, this message translates to:
-  /// **'NaBoo v2.0 — جميع الحقوق محفوظة'**
+  /// **'Maarey v2.0 — جميع الحقوق محفوظة'**
   String get allRightsReserved;
 
   /// No description provided for @noInternetConnection.
@@ -3653,7 +3671,7 @@ abstract class AppLocalizations {
   /// No description provided for @contactTeamForLicense.
   ///
   /// In ar, this message translates to:
-  /// **'للحصول على مفتاح ترخيص، تواصل مع فريق NaBoo.'**
+  /// **'للحصول على مفتاح ترخيص، تواصل مع فريق Maarey.'**
   String get contactTeamForLicense;
 
   /// No description provided for @subscriptionPlansTitle.
@@ -3689,13 +3707,13 @@ abstract class AppLocalizations {
   /// No description provided for @subscribeStepsJwt.
   ///
   /// In ar, this message translates to:
-  /// **'١. تواصل مع فريق NaBoo عبر الطرق أدناه\n٢. أكمل الدفع للخطة التي تريدها\n٣. استلم رمز التفعيل الكامل (JWT) من الإدارة\n٤. الصق الرمز في الحقل الموحّد أسفل بطاقات الخطط — الخطة وحد الأجهزة يُستنتجان من الرمز'**
+  /// **'١. تواصل مع فريق Maarey عبر الطرق أدناه\n٢. أكمل الدفع للخطة التي تريدها\n٣. استلم رمز التفعيل الكامل (JWT) من الإدارة\n٤. الصق الرمز في الحقل الموحّد أسفل بطاقات الخطط — الخطة وحد الأجهزة يُستنتجان من الرمز'**
   String get subscribeStepsJwt;
 
   /// No description provided for @subscribeStepsLegacy.
   ///
   /// In ar, this message translates to:
-  /// **'١. تواصل مع فريق NaBoo عبر الطرق أدناه\n٢. أخبرنا بالخطة التي تريدها وأكمل الدفع\n٣. استلم مفتاح الترخيص من الإدارة\n٤. الصق المفتاح في الحقل الموحّد أسفل بطاقات الخطط ثم اضغط «تفعيل المفتاح»'**
+  /// **'١. تواصل مع فريق Maarey عبر الطرق أدناه\n٢. أخبرنا بالخطة التي تريدها وأكمل الدفع\n٣. استلم مفتاح الترخيص من الإدارة\n٤. الصق المفتاح في الحقل الموحّد أسفل بطاقات الخطط ثم اضغط «تفعيل المفتاح»'**
   String get subscribeStepsLegacy;
 
   /// No description provided for @whatsappOrPhone.
@@ -10649,7 +10667,7 @@ abstract class AppLocalizations {
   /// No description provided for @thankYou.
   ///
   /// In ar, this message translates to:
-  /// **'شكرًا لاستخدام NaBoo'**
+  /// **'شكرًا لاستخدام Maarey'**
   String get thankYou;
 
   /// No description provided for @cashTitle.
@@ -12863,7 +12881,7 @@ abstract class AppLocalizations {
   /// No description provided for @thankYouForUsing.
   ///
   /// In ar, this message translates to:
-  /// **'شكرًا لاستخدام NaBoo'**
+  /// **'شكرًا لاستخدام Maarey'**
   String get thankYouForUsing;
 
   /// No description provided for @today.
@@ -18424,7 +18442,7 @@ abstract class AppLocalizations {
   /// No description provided for @spHowJwtStep1.
   ///
   /// In ar, this message translates to:
-  /// **'١. تواصل مع فريق NaBoo عبر الطرق أدناه'**
+  /// **'١. تواصل مع فريق Maarey عبر الطرق أدناه'**
   String get spHowJwtStep1;
 
   /// No description provided for @spHowJwtStep2.
@@ -18448,7 +18466,7 @@ abstract class AppLocalizations {
   /// No description provided for @spHowLegacyStep1.
   ///
   /// In ar, this message translates to:
-  /// **'١. تواصل مع فريق NaBoo عبر الطرق أدناه'**
+  /// **'١. تواصل مع فريق Maarey عبر الطرق أدناه'**
   String get spHowLegacyStep1;
 
   /// No description provided for @spHowLegacyStep2.
@@ -19444,7 +19462,7 @@ abstract class AppLocalizations {
   /// No description provided for @signupTermsSuffix.
   ///
   /// In ar, this message translates to:
-  /// **' الخاصة بـ Naboo.'**
+  /// **' الخاصة بـ Maarey.'**
   String get signupTermsSuffix;
 
   /// No description provided for @licEnterKey.
@@ -19474,7 +19492,7 @@ abstract class AppLocalizations {
   /// No description provided for @licKeyHint.
   ///
   /// In ar, this message translates to:
-  /// **'NABOO-XXXX-XXXX-XXXX أو JWT'**
+  /// **'MAAREY-XXXX-XXXX-XXXX أو JWT'**
   String get licKeyHint;
 
   /// No description provided for @licActivate.
@@ -19486,13 +19504,13 @@ abstract class AppLocalizations {
   /// No description provided for @licContactSupport.
   ///
   /// In ar, this message translates to:
-  /// **'للحصول على مفتاح ترخيص، تواصل مع فريق NaBoo.'**
+  /// **'للحصول على مفتاح ترخيص، تواصل مع فريق Maarey.'**
   String get licContactSupport;
 
   /// No description provided for @licAllRightsReserved.
   ///
   /// In ar, this message translates to:
-  /// **'NaBoo v2.0 — جميع الحقوق محفوظة'**
+  /// **'Maarey v2.0 — جميع الحقوق محفوظة'**
   String get licAllRightsReserved;
 
   /// No description provided for @licTimeConflict.
@@ -21742,8 +21760,8 @@ abstract class AppLocalizations {
   /// No description provided for @osErrorStaffDialog.
   ///
   /// In ar, this message translates to:
-  /// **'تعذر فتح نافذة اختيار موظف الوردية'**
-  String get osErrorStaffDialog;
+  /// **'تعذر فتح نافذة اختيار موظف الوردية: {error}'**
+  String osErrorStaffDialog(Object error);
 
   /// No description provided for @osNoStaffSelected.
   ///
@@ -22650,6 +22668,1836 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'بيع جديد'**
   String get sohNewSaleBreadcrumb;
+
+  /// No description provided for @psTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات المنتجات'**
+  String get psTitle;
+
+  /// No description provided for @psTabSetup.
+  ///
+  /// In ar, this message translates to:
+  /// **'تهيئة المنتجات'**
+  String get psTabSetup;
+
+  /// No description provided for @psTabTracking.
+  ///
+  /// In ar, this message translates to:
+  /// **'تتبع المنتجات'**
+  String get psTabTracking;
+
+  /// No description provided for @psTabVouchers.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأذون المخزنية'**
+  String get psTabVouchers;
+
+  /// No description provided for @psTabDefaults.
+  ///
+  /// In ar, this message translates to:
+  /// **'القيم الافتراضية'**
+  String get psTabDefaults;
+
+  /// No description provided for @psSetupTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تهيئة المنتجات'**
+  String get psSetupTitle;
+
+  /// No description provided for @psSetupDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'إدارة الترقيم التلقائي، وخيارات التسعير المتقدمة، ونظام الوحدات، والأصناف المجمعة.'**
+  String get psSetupDesc;
+
+  /// No description provided for @psNextSkuTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرقم التسلسلي للمنتج التالي'**
+  String get psNextSkuTitle;
+
+  /// No description provided for @psNextSkuDecoration.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرقم التالي'**
+  String get psNextSkuDecoration;
+
+  /// No description provided for @psNumberingSettings.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات الترقيم'**
+  String get psNumberingSettings;
+
+  /// No description provided for @psNextSkuHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرقم الذي سيُعرض كتلميح للمعرّف التالي. البادئة تُحفظ في إعدادات الترقيم.'**
+  String get psNextSkuHint;
+
+  /// No description provided for @psAdvancedPricingTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'خيارات التسعير المتقدمة'**
+  String get psAdvancedPricingTitle;
+
+  /// No description provided for @psEnabled.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفعّل'**
+  String get psEnabled;
+
+  /// No description provided for @psDisabled.
+  ///
+  /// In ar, this message translates to:
+  /// **'معطّل'**
+  String get psDisabled;
+
+  /// No description provided for @psAdvancedPricingDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'عند التفعيل: في «إضافة منتج جديد» يُقترح سعر البيع وأقل سعر من سعر الشراء حسب الهامش أدناه (قابل للتعديل يدوياً قبل الحفظ).'**
+  String get psAdvancedPricingDesc;
+
+  /// No description provided for @psCostMarginDecoration.
+  ///
+  /// In ar, this message translates to:
+  /// **'هامش الربح على التكلفة (%)'**
+  String get psCostMarginDecoration;
+
+  /// No description provided for @psCostMarginHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: 25'**
+  String get psCostMarginHint;
+
+  /// No description provided for @psMinSellPriceDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقل سعر بيع كنسبة من سعر البيع (%)'**
+  String get psMinSellPriceDesc;
+
+  /// No description provided for @psMinSellPriceHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'100 = مساوٍ لسعر البيع'**
+  String get psMinSellPriceHint;
+
+  /// No description provided for @psSaveSuggestedPrices.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ أرقام الاقتراح'**
+  String get psSaveSuggestedPrices;
+
+  /// No description provided for @psPricingExample.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: تكلفة 10,000 وهامش 25% → سعر بيع مقترح 12,500. نسبة أقل سعر 100% تجعل أقل سعر = سعر البيع.'**
+  String get psPricingExample;
+
+  /// No description provided for @psMultiUnitTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدام وحدات متعددة لكل صنف'**
+  String get psMultiUnitTitle;
+
+  /// No description provided for @psManageUnits.
+  ///
+  /// In ar, this message translates to:
+  /// **'إدارة الوحدات'**
+  String get psManageUnits;
+
+  /// No description provided for @psMultiUnitDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'السماح بشراء بوحدة وبيع بوحدة أخرى مع معاملات تحويل من قوالب الوحدات.'**
+  String get psMultiUnitDesc;
+
+  /// No description provided for @psDefaultStockDisplayTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوحدة الافتراضية لعرض المخزون'**
+  String get psDefaultStockDisplayTitle;
+
+  /// No description provided for @psUnitBase.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوحدة الأساسية لقالب الوحدة'**
+  String get psUnitBase;
+
+  /// No description provided for @psUnitBaseDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض المخزون بوحدة القالب الأساسية.'**
+  String get psUnitBaseDesc;
+
+  /// No description provided for @psUnitSale.
+  ///
+  /// In ar, this message translates to:
+  /// **'وحدة البيع'**
+  String get psUnitSale;
+
+  /// No description provided for @psUnitSaleDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض الرصيد بوحدة البيع الافتراضية.'**
+  String get psUnitSaleDesc;
+
+  /// No description provided for @psUnitPurchase.
+  ///
+  /// In ar, this message translates to:
+  /// **'وحدة الشراء'**
+  String get psUnitPurchase;
+
+  /// No description provided for @psUnitPurchaseDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض الرصيد بوحدة الشراء الافتراضية.'**
+  String get psUnitPurchaseDesc;
+
+  /// No description provided for @psStockDisplayDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحدد كيف يُعرض المخزون في التقارير والجرد عند تفعيل تعدد الوحدات.'**
+  String get psStockDisplayDesc;
+
+  /// No description provided for @psBundlesTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'التجميعات والوحدات المركبة'**
+  String get psBundlesTitle;
+
+  /// No description provided for @psBundlesAllowed.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسموح'**
+  String get psBundlesAllowed;
+
+  /// No description provided for @psBundlesNotAllowed.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير مسموح'**
+  String get psBundlesNotAllowed;
+
+  /// No description provided for @psBundlesDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعريف صنف مركّب من عدة أصناف وخصم المخزون عند التجميع أو البيع (يتطلب تطوير شاشات لاحقاً).'**
+  String get psBundlesDesc;
+
+  /// No description provided for @psAddProductPoliciesTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'سياسات شاشة إضافة المنتج'**
+  String get psAddProductPoliciesTitle;
+
+  /// No description provided for @psShowAdvancedPricing.
+  ///
+  /// In ar, this message translates to:
+  /// **'إظهار قسم التسعير المتقدم'**
+  String get psShowAdvancedPricing;
+
+  /// No description provided for @psShowAdvancedPricingDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'يتحكم بإظهار الضريبة والخصم وأقل سعر البيع وهامش الربح.'**
+  String get psShowAdvancedPricingDesc;
+
+  /// No description provided for @psShowBarcodeField.
+  ///
+  /// In ar, this message translates to:
+  /// **'إظهار حقل الباركود'**
+  String get psShowBarcodeField;
+
+  /// No description provided for @psBarcodeRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'الباركود إلزامي عند الحفظ'**
+  String get psBarcodeRequired;
+
+  /// No description provided for @psShowImageField.
+  ///
+  /// In ar, this message translates to:
+  /// **'إظهار حقل صورة المنتج'**
+  String get psShowImageField;
+
+  /// No description provided for @psImageRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'صورة المنتج إلزامية'**
+  String get psImageRequired;
+
+  /// No description provided for @psShowExtraFields.
+  ///
+  /// In ar, this message translates to:
+  /// **'إظهار الحقول الإضافية'**
+  String get psShowExtraFields;
+
+  /// No description provided for @psShowExtraFieldsDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثل: ملاحظات داخلية، وسوم، الوزن، وتواريخ الإنتاج/الانتهاء.'**
+  String get psShowExtraFieldsDesc;
+
+  /// No description provided for @psSupplierRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'المورد إلزامي عند الحفظ'**
+  String get psSupplierRequired;
+
+  /// No description provided for @psWarehouseRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'المخزن إلزامي عند الحفظ'**
+  String get psWarehouseRequired;
+
+  /// No description provided for @psDefaultTrackingEnabled.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفعيل تتبع المخزون افتراضياً'**
+  String get psDefaultTrackingEnabled;
+
+  /// No description provided for @psDefaultTrackingDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'ينعكس على حالة المفتاح عند فتح شاشة إضافة المنتج.'**
+  String get psDefaultTrackingDesc;
+
+  /// No description provided for @psAddProductPoliciesDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذه السياسات تُطبّق مباشرة على شاشة «إضافة منتج جديد» دون التأثير على شاشة البيع.'**
+  String get psAddProductPoliciesDesc;
+
+  /// No description provided for @psTrackingTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تتبع المنتجات'**
+  String get psTrackingTitle;
+
+  /// No description provided for @psTrackingDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعداد طرق التتبع وسلوك النظام عند نفاد الكمية.'**
+  String get psTrackingDesc;
+
+  /// No description provided for @psSerialBatchExpiryTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تتبع بواسطة الرقم المسلسل، رقم التوصيلة، أو تاريخ الانتهاء'**
+  String get psSerialBatchExpiryTitle;
+
+  /// No description provided for @psSerialBatchExpiryDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'عند التفعيل يمكن تفعيل التتبع لكل منتج على حدة عند الإضافة.'**
+  String get psSerialBatchExpiryDesc;
+
+  /// No description provided for @psNegativeStockTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'المخزون السالب'**
+  String get psNegativeStockTitle;
+
+  /// No description provided for @psNegativeStockStop.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف العمليات عند نفاد الكمية لجميع المنتجات'**
+  String get psNegativeStockStop;
+
+  /// No description provided for @psNegativeStockStopDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'منع البيع أو الصرف عند وصول المخزون إلى الصفر.'**
+  String get psNegativeStockStopDesc;
+
+  /// No description provided for @psNegativeStockTrackableOnly.
+  ///
+  /// In ar, this message translates to:
+  /// **'السماح فقط للمنتجات القابلة للتتبع بالكميات'**
+  String get psNegativeStockTrackableOnly;
+
+  /// No description provided for @psNegativeStockTrackableDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُسمح بالبيع السالب أو الصرف حسب سياسة الصنف.'**
+  String get psNegativeStockTrackableDesc;
+
+  /// No description provided for @psNegativeStockDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'يحدد سلوك النظام عند نفاد المخزون.'**
+  String get psNegativeStockDesc;
+
+  /// No description provided for @psShowTotalAvailableTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض الكمية الإجمالية والمتوفرة'**
+  String get psShowTotalAvailableTitle;
+
+  /// No description provided for @psShowTotalAvailableDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض إجمالي الكمية مقابل المتاح بعد الحجوزات (عند تفعيل الحجز لاحقاً).'**
+  String get psShowTotalAvailableDesc;
+
+  /// No description provided for @psVouchersTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأذون المخزنية'**
+  String get psVouchersTitle;
+
+  /// No description provided for @psVouchersDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنشاء طلبات مخزنية وترقيم أذون التحويل وربطها بالمبيعات والمشتريات.'**
+  String get psVouchersDesc;
+
+  /// No description provided for @psInventoryRequestsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الطلبات المخزنية'**
+  String get psInventoryRequestsTitle;
+
+  /// No description provided for @psInventoryRequestsDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمكين الأقسام من رفع طلبات مخزنية لمراجعتها. الصلاحيات تُضبط من أدوار المستخدمين عند توفرها.'**
+  String get psInventoryRequestsDesc;
+
+  /// No description provided for @psTransferVoucherNextTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرقم التسلسلي لإذن التحويل المخزني التالي'**
+  String get psTransferVoucherNextTitle;
+
+  /// No description provided for @psTransferVoucherNextDecoration.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرقم'**
+  String get psTransferVoucherNextDecoration;
+
+  /// No description provided for @psTransferVoucherNextDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرقم التالي المقترح لأذون التحويل.'**
+  String get psTransferVoucherNextDesc;
+
+  /// No description provided for @psSalesVoucherTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأذون المخزنية لفواتير المبيعات'**
+  String get psSalesVoucherTitle;
+
+  /// No description provided for @psSalesVoucherDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'عند التفعيل يُنشأ إذن صرف يحتاج اعتماداً قبل خصم المخزون.'**
+  String get psSalesVoucherDesc;
+
+  /// No description provided for @psPurchaseVoucherTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأذون المخزنية لفواتير الشراء'**
+  String get psPurchaseVoucherTitle;
+
+  /// No description provided for @psPurchaseVoucherDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'عند التفعيل يُنشأ إذن إدخال يحتاج اعتماداً قبل إضافة المخزون.'**
+  String get psPurchaseVoucherDesc;
+
+  /// No description provided for @psDefaultsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'القيم الافتراضية للنظام'**
+  String get psDefaultsTitle;
+
+  /// No description provided for @psDefaultsDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيم تُقترح تلقائياً للمستودعات والمنتجات والضرائب.'**
+  String get psDefaultsDesc;
+
+  /// No description provided for @psDefaultSubAccountTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحساب الفرعي الافتراضي'**
+  String get psDefaultSubAccountTitle;
+
+  /// No description provided for @psPleaseChoose.
+  ///
+  /// In ar, this message translates to:
+  /// **'من فضلك اختر'**
+  String get psPleaseChoose;
+
+  /// No description provided for @psNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'— بدون —'**
+  String get psNone;
+
+  /// No description provided for @psGeneralInventory.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخزون عام'**
+  String get psGeneralInventory;
+
+  /// No description provided for @psRawMaterials.
+  ///
+  /// In ar, this message translates to:
+  /// **'مواد خام'**
+  String get psRawMaterials;
+
+  /// No description provided for @psCommercial.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجاري'**
+  String get psCommercial;
+
+  /// No description provided for @psDefaultSubAccountDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُستخدم كمرجع محاسبي عند ربط المخزون بالحسابات.'**
+  String get psDefaultSubAccountDesc;
+
+  /// No description provided for @psDefaultWarehouseTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'المستودع الافتراضي'**
+  String get psDefaultWarehouseTitle;
+
+  /// No description provided for @psManageWarehouses.
+  ///
+  /// In ar, this message translates to:
+  /// **'إدارة المستودعات'**
+  String get psManageWarehouses;
+
+  /// No description provided for @psChooseWarehouse.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر مستودعاً'**
+  String get psChooseWarehouse;
+
+  /// No description provided for @psDefaultWarehouseDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُقترح عند إضافة منتجات وحركات مخزون جديدة.'**
+  String get psDefaultWarehouseDesc;
+
+  /// No description provided for @psDefaultPriceListTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة الأسعار الافتراضية'**
+  String get psDefaultPriceListTitle;
+
+  /// No description provided for @psManagePriceLists.
+  ///
+  /// In ar, this message translates to:
+  /// **'إدارة القوائم'**
+  String get psManagePriceLists;
+
+  /// No description provided for @psDefaultPriceListDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُستخدم كقائمة أسعار افتراضية للفرع الحالي عند توفر الربط.'**
+  String get psDefaultPriceListDesc;
+
+  /// No description provided for @psDefaultTax1Title.
+  ///
+  /// In ar, this message translates to:
+  /// **'الضريبة الافتراضية 1'**
+  String get psDefaultTax1Title;
+
+  /// No description provided for @psManageTaxes.
+  ///
+  /// In ar, this message translates to:
+  /// **'إدارة الضرائب'**
+  String get psManageTaxes;
+
+  /// No description provided for @psTaxRatesDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'نِسَب الضريبة تُضبط لكل منتج أو من إعدادات الفاتورة.'**
+  String get psTaxRatesDesc;
+
+  /// No description provided for @psDefaultTax1Desc.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُقترح للمنتجات الجديدة ومتوافقة مع حقل الضريبة في المنتج.'**
+  String get psDefaultTax1Desc;
+
+  /// No description provided for @psDefaultTax2Title.
+  ///
+  /// In ar, this message translates to:
+  /// **'الضريبة الافتراضية 2'**
+  String get psDefaultTax2Title;
+
+  /// No description provided for @psDefaultTax2Desc.
+  ///
+  /// In ar, this message translates to:
+  /// **'للاستخدام المزدوج عند دعم ضريبتين لاحقاً.'**
+  String get psDefaultTax2Desc;
+
+  /// No description provided for @psReturnCostMethodTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'طريقة احتساب تكلفة المرتجعات'**
+  String get psReturnCostMethodTitle;
+
+  /// No description provided for @psReturnBySalePrice.
+  ///
+  /// In ar, this message translates to:
+  /// **'حسب سعر البيع'**
+  String get psReturnBySalePrice;
+
+  /// No description provided for @psReturnBySalePriceDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدام سعر البيع من فاتورة المبيعات.'**
+  String get psReturnBySalePriceDesc;
+
+  /// No description provided for @psReturnByAvgCost.
+  ///
+  /// In ar, this message translates to:
+  /// **'حسب آخر متوسط للتكلفة'**
+  String get psReturnByAvgCost;
+
+  /// No description provided for @psReturnByAvgCostDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدام متوسط التكلفة عند إنشاء المرتجع.'**
+  String get psReturnByAvgCostDesc;
+
+  /// No description provided for @psReturnCostDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُطبَّق عند معالجة مرتجعات المبيعات.'**
+  String get psReturnCostDesc;
+
+  /// No description provided for @psBusinessNatureTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'طبيعة مبيعات النشاط'**
+  String get psBusinessNatureTitle;
+
+  /// No description provided for @psNatureProducts.
+  ///
+  /// In ar, this message translates to:
+  /// **'المنتجات فقط'**
+  String get psNatureProducts;
+
+  /// No description provided for @psNatureProductsDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'مناسب للمخزون الفعلي.'**
+  String get psNatureProductsDesc;
+
+  /// No description provided for @psNatureServices.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخدمات فقط'**
+  String get psNatureServices;
+
+  /// No description provided for @psNatureServicesDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنشطة تعتمد على الوقت أو المشاريع.'**
+  String get psNatureServicesDesc;
+
+  /// No description provided for @psNatureBoth.
+  ///
+  /// In ar, this message translates to:
+  /// **'منتجات وخدمات'**
+  String get psNatureBoth;
+
+  /// No description provided for @psNatureBothDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'دمج بين الصنفين في النظام.'**
+  String get psNatureBothDesc;
+
+  /// No description provided for @psBusinessNatureDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'يحدد التركيز الافتراضي في شاشات المخزون والفوترة.'**
+  String get psBusinessNatureDesc;
+
+  /// No description provided for @psVoucherPermEnabled.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفعّل'**
+  String get psVoucherPermEnabled;
+
+  /// No description provided for @psVoucherPermDisabled.
+  ///
+  /// In ar, this message translates to:
+  /// **'معطّل'**
+  String get psVoucherPermDisabled;
+
+  /// No description provided for @psTaxExempt.
+  ///
+  /// In ar, this message translates to:
+  /// **'معفى'**
+  String get psTaxExempt;
+
+  /// No description provided for @psCustomTax.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخصص'**
+  String get psCustomTax;
+
+  /// No description provided for @psTransferSettingsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات ترقيم أذون التحويل'**
+  String get psTransferSettingsTitle;
+
+  /// No description provided for @psOptionalPrefix.
+  ///
+  /// In ar, this message translates to:
+  /// **'بادئة اختيارية'**
+  String get psOptionalPrefix;
+
+  /// No description provided for @psExamplePrefix.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: TR-'**
+  String get psExamplePrefix;
+
+  /// No description provided for @psCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get psCancel;
+
+  /// No description provided for @psSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get psSave;
+
+  /// No description provided for @psSavePrefixHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرقم التالي المقترح لأذون التحويل.'**
+  String get psSavePrefixHint;
+
+  /// No description provided for @psSerialHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرقم الذي سيُعرض كتلميح للمعرّف التالي. البادئة تُحفظ في إعدادات الترقيم.'**
+  String get psSerialHint;
+
+  /// No description provided for @psTaxToggleTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدم التعامل بالضريبة — إيقاف إظهار حقل الضريبة'**
+  String get psTaxToggleTooltip;
+
+  /// No description provided for @psShowTaxField.
+  ///
+  /// In ar, this message translates to:
+  /// **'إظهار حقل الضريبة'**
+  String get psShowTaxField;
+
+  /// No description provided for @psTaxToggleDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'في «إضافة منتج جديد». أيقونة المنع تعطّل الضريبة دفعة واحدة.'**
+  String get psTaxToggleDesc;
+
+  /// No description provided for @psDiscountToggleTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدم التعامل بالخصم — إيقاف إظهار حقول الخصم'**
+  String get psDiscountToggleTooltip;
+
+  /// No description provided for @psShowDiscountFields.
+  ///
+  /// In ar, this message translates to:
+  /// **'إظهار حقول الخصم'**
+  String get psShowDiscountFields;
+
+  /// No description provided for @psDiscountToggleDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'في «إضافة منتج جديد». أيقونة المنع تعطّل الخصم دفعة واحدة.'**
+  String get psDiscountToggleDesc;
+
+  /// No description provided for @sodEditTicket.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل تذكرة'**
+  String get sodEditTicket;
+
+  /// No description provided for @sodSearchParts.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث في قطع الغيار…'**
+  String get sodSearchParts;
+
+  /// No description provided for @sodProduct.
+  ///
+  /// In ar, this message translates to:
+  /// **'منتج'**
+  String get sodProduct;
+
+  /// No description provided for @sodAddPart.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة قطعة غيار'**
+  String get sodAddPart;
+
+  /// No description provided for @sodPart.
+  ///
+  /// In ar, this message translates to:
+  /// **'قطعة غيار'**
+  String get sodPart;
+
+  /// No description provided for @sodQuantity.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكمية'**
+  String get sodQuantity;
+
+  /// No description provided for @sodSalePrice.
+  ///
+  /// In ar, this message translates to:
+  /// **'سعر البيع (Fdj)'**
+  String get sodSalePrice;
+
+  /// No description provided for @sodCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get sodCancel;
+
+  /// No description provided for @sodAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة'**
+  String get sodAdd;
+
+  /// No description provided for @sodTechnicalService.
+  ///
+  /// In ar, this message translates to:
+  /// **'خدمة فنية'**
+  String get sodTechnicalService;
+
+  /// No description provided for @sodSerialPlate.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيريال/لوحة'**
+  String get sodSerialPlate;
+
+  /// No description provided for @sodNewSale.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع جديد'**
+  String get sodNewSale;
+
+  /// No description provided for @sodTicketDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل التذكرة'**
+  String get sodTicketDetails;
+
+  /// No description provided for @sodEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل'**
+  String get sodEdit;
+
+  /// No description provided for @sodUpdate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديث'**
+  String get sodUpdate;
+
+  /// No description provided for @sodAddPartShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة قطعة'**
+  String get sodAddPartShort;
+
+  /// No description provided for @sodCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'عميل'**
+  String get sodCustomer;
+
+  /// No description provided for @sodSerialInfo.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيريال/لوحة'**
+  String get sodSerialInfo;
+
+  /// No description provided for @sodConvertToInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحويل لفاتورة بيع'**
+  String get sodConvertToInvoice;
+
+  /// No description provided for @sodParts.
+  ///
+  /// In ar, this message translates to:
+  /// **'قطع الغيار'**
+  String get sodParts;
+
+  /// No description provided for @sodNoPartsYet.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد قطع غيار بعد.'**
+  String get sodNoPartsYet;
+
+  /// No description provided for @sodInvoiceItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'بنود الفاتورة'**
+  String get sodInvoiceItems;
+
+  /// No description provided for @sodViewOnly.
+  ///
+  /// In ar, this message translates to:
+  /// **'للعرض فقط'**
+  String get sodViewOnly;
+
+  /// No description provided for @sodInvoiceProductsDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'المنتجات والخدمات المسجّلة في فاتورة البيع المرتبطة.'**
+  String get sodInvoiceProductsDesc;
+
+  /// No description provided for @sodPastDue.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجاوز موعد التسليم المتوقع'**
+  String get sodPastDue;
+
+  /// No description provided for @sodExpectedDelivery.
+  ///
+  /// In ar, this message translates to:
+  /// **'موعد التسليم المتوقع للزبون'**
+  String get sodExpectedDelivery;
+
+  /// No description provided for @sodWorkDurationMin.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدة العمل المتوقعة: \$dm دقيقة'**
+  String sodWorkDurationMin(Object minutes);
+
+  /// No description provided for @sodPending.
+  ///
+  /// In ar, this message translates to:
+  /// **'معلقة'**
+  String get sodPending;
+
+  /// No description provided for @sodInProgress.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيد العمل'**
+  String get sodInProgress;
+
+  /// No description provided for @sodReadyForDelivery.
+  ///
+  /// In ar, this message translates to:
+  /// **'جاهزة للتسليم'**
+  String get sodReadyForDelivery;
+
+  /// No description provided for @sodDelivered.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسلّمة'**
+  String get sodDelivered;
+
+  /// No description provided for @sodCancelled.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملغاة'**
+  String get sodCancelled;
+
+  /// No description provided for @sodFinancialSummary.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخص مالي (بالفلس)'**
+  String get sodFinancialSummary;
+
+  /// No description provided for @sodService.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخدمة الفنية'**
+  String get sodService;
+
+  /// No description provided for @sodPartsLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'قطع الغيار'**
+  String get sodPartsLabel;
+
+  /// No description provided for @sodTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإجمالي'**
+  String get sodTotal;
+
+  /// No description provided for @sodPaidAdvance.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدفوع مسبقاً'**
+  String get sodPaidAdvance;
+
+  /// No description provided for @sodRemainingOnDelivery.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتبقي عند التسليم'**
+  String get sodRemainingOnDelivery;
+
+  /// No description provided for @sodQtyPriceTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكمية: {qty} · سعر: {price} · إجمالي: {total}'**
+  String sodQtyPriceTotal(Object price, Object qty, Object total);
+
+  /// No description provided for @sodQtyOnly.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكمية: {qty}'**
+  String sodQtyOnly(Object qty);
+
+  /// No description provided for @sodDelete.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف'**
+  String get sodDelete;
+
+  /// No description provided for @sodLoadError.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر تحميل بيانات التذكرة.'**
+  String get sodLoadError;
+
+  /// No description provided for @sodRetry.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة المحاولة'**
+  String get sodRetry;
+
+  /// No description provided for @settingsImportMeds.
+  ///
+  /// In ar, this message translates to:
+  /// **'استيراد الأدوية'**
+  String get settingsImportMeds;
+
+  /// No description provided for @settingsImportMedsDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة 157 دواء من ملف الجرد'**
+  String get settingsImportMedsDesc;
+
+  /// No description provided for @settingsImportMedsConfirm.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيتم إضافة 157 دواء إلى كتالوج المنتجات. هل تريد المتابعة؟'**
+  String get settingsImportMedsConfirm;
+
+  /// No description provided for @settingsImportedCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم استيراد {count} دواء بنجاح'**
+  String settingsImportedCount(Object count);
+
+  /// No description provided for @settingsImportError.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطأ: {error}'**
+  String settingsImportError(Object error);
+
+  /// No description provided for @settingsAppVersion.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإصدار 1.0.0'**
+  String get settingsAppVersion;
+
+  /// No description provided for @settingsCopyright.
+  ///
+  /// In ar, this message translates to:
+  /// **'© 2026 Mاري. جميع الحقوق محفوظة.'**
+  String get settingsCopyright;
+
+  /// No description provided for @settingsLicenseActive.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفعّل'**
+  String get settingsLicenseActive;
+
+  /// No description provided for @settingsLicenseTrial.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجريبية'**
+  String get settingsLicenseTrial;
+
+  /// No description provided for @settingsLicenseInactive.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير نشط'**
+  String get settingsLicenseInactive;
+
+  /// No description provided for @settingsLicenseDisconnected.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير متصّل'**
+  String get settingsLicenseDisconnected;
+
+  /// No description provided for @settingsLicenseNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدون ترخيص'**
+  String get settingsLicenseNone;
+
+  /// No description provided for @settingsDeviceAllowed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم السماح للجهاز بالعودة'**
+  String get settingsDeviceAllowed;
+
+  /// No description provided for @settingsDeviceCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} أجهزة'**
+  String settingsDeviceCount(Object count);
+
+  /// No description provided for @settingsSubscription.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاشتراك'**
+  String get settingsSubscription;
+
+  /// No description provided for @settingsSubscriptionExpires.
+  ///
+  /// In ar, this message translates to:
+  /// **'ينتهي الاشتراك في: {date}'**
+  String settingsSubscriptionExpires(Object date);
+
+  /// No description provided for @settingsDaysRemaining.
+  ///
+  /// In ar, this message translates to:
+  /// **'متبقٍ تقريباً: {days} يوماً'**
+  String settingsDaysRemaining(Object days);
+
+  /// No description provided for @settingsSubscriptionActiveNoExpiry.
+  ///
+  /// In ar, this message translates to:
+  /// **'اشتراك مفعّل بلا تاريخ انتهاء محدد في السحابة.'**
+  String get settingsSubscriptionActiveNoExpiry;
+
+  /// No description provided for @settingsLinkedDevices.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأجهزة المرتبطة بالحساب'**
+  String get settingsLinkedDevices;
+
+  /// No description provided for @settingsUpdate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديث'**
+  String get settingsUpdate;
+
+  /// No description provided for @settingsNoDevicesRegistered.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد أجهزة مسجّلة بعد.'**
+  String get settingsNoDevicesRegistered;
+
+  /// No description provided for @settingsLastActive.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر نشاط: {date}'**
+  String settingsLastActive(Object date);
+
+  /// No description provided for @settingsDisconnectedCannotLogin.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفصول — لا يمكنه الدخول حتى الموافقة'**
+  String get settingsDisconnectedCannotLogin;
+
+  /// No description provided for @settingsThisDevice.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الجهاز'**
+  String get settingsThisDevice;
+
+  /// No description provided for @settingsAllowReturn.
+  ///
+  /// In ar, this message translates to:
+  /// **'سماح بالعودة'**
+  String get settingsAllowReturn;
+
+  /// No description provided for @settingsDisconnectDevice.
+  ///
+  /// In ar, this message translates to:
+  /// **'فصل الجهاز'**
+  String get settingsDisconnectDevice;
+
+  /// No description provided for @settingsAutoSync.
+  ///
+  /// In ar, this message translates to:
+  /// **'المزامنة التلقائية'**
+  String get settingsAutoSync;
+
+  /// No description provided for @settingsAutoSyncDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُرفع من كل جهاز نسخة كاملة من قاعدة البيانات؛ الأحدث في السحابة هي التي تُستورد على الجهاز.'**
+  String get settingsAutoSyncDesc;
+
+  /// No description provided for @settingsSyncNow.
+  ///
+  /// In ar, this message translates to:
+  /// **'مزامنة الآن'**
+  String get settingsSyncNow;
+
+  /// No description provided for @settingsLastSync.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر مزامنة: {date}'**
+  String settingsLastSync(Object date);
+
+  /// No description provided for @settingsSyncSuccess.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمت المزامنة بنجاح'**
+  String get settingsSyncSuccess;
+
+  /// No description provided for @settingsClearCloudProducts.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح المنتجات من السحابة'**
+  String get settingsClearCloudProducts;
+
+  /// No description provided for @settingsClearCloudProductsDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيتم حذف جميع المنتجات من السحابة فقط. الإعدادات والفواتير والعملاء لن تتأثر. تريد المتابعة؟'**
+  String get settingsClearCloudProductsDesc;
+
+  /// No description provided for @settingsCleared.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم مسح المنتجات من السحابة. اضغط مزامنة الآن'**
+  String get settingsCleared;
+
+  /// No description provided for @settingsClearFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'فشل المسح: {error}'**
+  String settingsClearFailed(Object error);
+
+  /// No description provided for @settingsViewSubscriptionPlans.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض خطط الاشتراك'**
+  String get settingsViewSubscriptionPlans;
+
+  /// No description provided for @settingsSubscriptionPlans.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطط الاشتراك'**
+  String get settingsSubscriptionPlans;
+
+  /// No description provided for @settingsThankYou.
+  ///
+  /// In ar, this message translates to:
+  /// **'شكراً لتعاملكم معنا'**
+  String get settingsThankYou;
+
+  /// No description provided for @sofTenantError.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر تحديد بيانات المستأجر. أعد فتح التطبيق ثم حاول مرة أخرى.'**
+  String get sofTenantError;
+
+  /// No description provided for @sofDbInitError.
+  ///
+  /// In ar, this message translates to:
+  /// **'قاعدة البيانات تحتاج تهيئة/تحديث. أعد فتح التطبيق ثم حاول مرة أخرى.'**
+  String get sofDbInitError;
+
+  /// No description provided for @sofUnexpectedError.
+  ///
+  /// In ar, this message translates to:
+  /// **'حدث خطأ غير متوقع أثناء الحفظ.'**
+  String get sofUnexpectedError;
+
+  /// No description provided for @sofExpectedWorkDuration.
+  ///
+  /// In ar, this message translates to:
+  /// **'المدة المتوقعة لإنجاز العمل'**
+  String get sofExpectedWorkDuration;
+
+  /// No description provided for @sofHours.
+  ///
+  /// In ar, this message translates to:
+  /// **'ساعات'**
+  String get sofHours;
+
+  /// No description provided for @sofMinutes.
+  ///
+  /// In ar, this message translates to:
+  /// **'دقائق'**
+  String get sofMinutes;
+
+  /// No description provided for @sofCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get sofCancel;
+
+  /// No description provided for @sofDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم'**
+  String get sofDone;
+
+  /// No description provided for @sofNotSet.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تُحدَّد — اضغط لاختيار الساعات والدقائق'**
+  String get sofNotSet;
+
+  /// No description provided for @sofHoursMinutes.
+  ///
+  /// In ar, this message translates to:
+  /// **'{hours} س {minutes} د — اضغط للتعديل'**
+  String sofHoursMinutes(Object hours, Object minutes);
+
+  /// No description provided for @sofHoursOnly.
+  ///
+  /// In ar, this message translates to:
+  /// **'{hours} ساعة — اضغط للتعديل'**
+  String sofHoursOnly(Object hours);
+
+  /// No description provided for @sofMinutesOnly.
+  ///
+  /// In ar, this message translates to:
+  /// **'{minutes} دقيقة — اضغط للتعديل'**
+  String sofMinutesOnly(Object minutes);
+
+  /// No description provided for @sofTaskNotStarted.
+  ///
+  /// In ar, this message translates to:
+  /// **'بعد «بدء العمل» من قائمة التذاكر يُثبَّت الموعد بدقة من وقت البدء.'**
+  String get sofTaskNotStarted;
+
+  /// No description provided for @sofWorkDurationMin.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدة العمل المتوقعة: {minutes} دقيقة'**
+  String sofWorkDurationMin(Object minutes);
+
+  /// No description provided for @sofPastDue.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجاوز موعد التسليم المتوقع'**
+  String get sofPastDue;
+
+  /// No description provided for @sofExpectedDelivery.
+  ///
+  /// In ar, this message translates to:
+  /// **'موعد التسليم المتوقع (للزبون)'**
+  String get sofExpectedDelivery;
+
+  /// No description provided for @sofSearchServices.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث في الخدمات…'**
+  String get sofSearchServices;
+
+  /// No description provided for @sofService.
+  ///
+  /// In ar, this message translates to:
+  /// **'خدمة'**
+  String get sofService;
+
+  /// No description provided for @sofEditTicket.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل تذكرة'**
+  String get sofEditTicket;
+
+  /// No description provided for @sofNewTicket.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكرة جديدة'**
+  String get sofNewTicket;
+
+  /// No description provided for @sofSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get sofSave;
+
+  /// No description provided for @sofSaveError.
+  ///
+  /// In ar, this message translates to:
+  /// **'حدث خطأ أثناء الحفظ. حاول مرة أخرى.'**
+  String get sofSaveError;
+
+  /// No description provided for @sofAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكل'**
+  String get sofAll;
+
+  /// No description provided for @sofCustomerName.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم العميل'**
+  String get sofCustomerName;
+
+  /// No description provided for @sofCustomerSearchHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ الكتابة للبحث في العملاء'**
+  String get sofCustomerSearchHint;
+
+  /// No description provided for @sofCustomerRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم العميل مطلوب'**
+  String get sofCustomerRequired;
+
+  /// No description provided for @sofCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'عميل'**
+  String get sofCustomer;
+
+  /// No description provided for @sofNewCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'عميل جديد'**
+  String get sofNewCustomer;
+
+  /// No description provided for @sofDeviceName.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الجهاز / السيارة'**
+  String get sofDeviceName;
+
+  /// No description provided for @sofDeviceNameRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الجهاز مطلوب'**
+  String get sofDeviceNameRequired;
+
+  /// No description provided for @sofSerialPlateOptional.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم تسلسلي / لوحة (اختياري)'**
+  String get sofSerialPlateOptional;
+
+  /// No description provided for @sofSerialHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'إن تُرك فارغاً يُولَّد تلقائياً رقم مرجعي داخلي للتذكرة (وليس سيريال الجهاز).'**
+  String get sofSerialHint;
+
+  /// No description provided for @sofExpectedDuration.
+  ///
+  /// In ar, this message translates to:
+  /// **'المدة المتوقعة'**
+  String get sofExpectedDuration;
+
+  /// No description provided for @sofServiceTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخدمة'**
+  String get sofServiceTitle;
+
+  /// No description provided for @sofServiceNotSet.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير محددة (اختياري)'**
+  String get sofServiceNotSet;
+
+  /// No description provided for @sofServiceSet.
+  ///
+  /// In ar, this message translates to:
+  /// **'محددة'**
+  String get sofServiceSet;
+
+  /// No description provided for @sofSelect.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيار'**
+  String get sofSelect;
+
+  /// No description provided for @sofEstimatedPrice.
+  ///
+  /// In ar, this message translates to:
+  /// **'سعر تقديري (من الخدمة)'**
+  String get sofEstimatedPrice;
+
+  /// No description provided for @sofEstimatedPriceHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُملأ تلقائياً من سعر الخدمة'**
+  String get sofEstimatedPriceHint;
+
+  /// No description provided for @sofAgreedPrice.
+  ///
+  /// In ar, this message translates to:
+  /// **'السعر المتفق عليه (Fdj)'**
+  String get sofAgreedPrice;
+
+  /// No description provided for @sofAgreedPriceHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'المكان الوحيد لتعديل السعر'**
+  String get sofAgreedPriceHint;
+
+  /// No description provided for @sofInvalidAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل مبلغاً صحيحاً'**
+  String get sofInvalidAmount;
+
+  /// No description provided for @sofAdvancePayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'عربون/دفعة مقدمة (Fdj)'**
+  String get sofAdvancePayment;
+
+  /// No description provided for @sofProblemDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'وصف المشكلة (اختياري)'**
+  String get sofProblemDesc;
+
+  /// No description provided for @sofSaving.
+  ///
+  /// In ar, this message translates to:
+  /// **'جارٍ الحفظ…'**
+  String get sofSaving;
+
+  /// No description provided for @sofSaveTicket.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ التذكرة'**
+  String get sofSaveTicket;
+
+  /// No description provided for @licCheckingLicense.
+  ///
+  /// In ar, this message translates to:
+  /// **'جارٍ التحقق من الترخيص…'**
+  String get licCheckingLicense;
+
+  /// No description provided for @licNoInternet.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد اتصال بالإنترنت'**
+  String get licNoInternet;
+
+  /// No description provided for @licOfflineWarning.
+  ///
+  /// In ar, this message translates to:
+  /// **'يعمل التطبيق بآخر بيانات ترخيص محفوظة.\nتأكد من الاتصال في أقرب فرصة.'**
+  String get licOfflineWarning;
+
+  /// No description provided for @licRetry.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة المحاولة'**
+  String get licRetry;
+
+  /// No description provided for @licEnterWithoutConnection.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدخول بدون اتصال'**
+  String get licEnterWithoutConnection;
+
+  /// No description provided for @licUpgradeForDevices.
+  ///
+  /// In ar, this message translates to:
+  /// **'ترقية الخطة لإضافة أجهزة'**
+  String get licUpgradeForDevices;
+
+  /// No description provided for @osUnexpectedInitError.
+  ///
+  /// In ar, this message translates to:
+  /// **'حدث خطأ غير متوقع أثناء التهيئة: {error}'**
+  String osUnexpectedInitError(Object error);
+
+  /// No description provided for @osErrorOpeningShift.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر فتح الوردية: {error}'**
+  String osErrorOpeningShift(Object error);
+
+  /// No description provided for @osShiftOpenedMsg.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم فتح الوردية رقم #{id}'**
+  String osShiftOpenedMsg(Object id);
+
+  /// No description provided for @osOpenShiftNotifTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح وردية #{id}'**
+  String osOpenShiftNotifTitle(Object id);
+
+  /// No description provided for @osDetailStaff.
+  ///
+  /// In ar, this message translates to:
+  /// **'موظف الوردية: {name}'**
+  String osDetailStaff(Object name);
+
+  /// No description provided for @osDetailSystemBalance.
+  ///
+  /// In ar, this message translates to:
+  /// **'رصيد النظام عند الفتح: {amount}'**
+  String osDetailSystemBalance(Object amount);
+
+  /// No description provided for @osDetailPhysicalCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجرد اليدوي (الصندوق): {amount}'**
+  String osDetailPhysicalCount(Object amount);
+
+  /// No description provided for @osDetailAddedCash.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ المضاف عند الفتح: {amount}'**
+  String osDetailAddedCash(Object amount);
+
+  /// No description provided for @osResumeShift.
+  ///
+  /// In ar, this message translates to:
+  /// **'متابعة الوردية'**
+  String get osResumeShift;
+
+  /// No description provided for @osResumeShiftDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'توجد وردية مفتوحة باسم \"{name}\". أدخل كلمة مرور الموظف للمتابعة.'**
+  String osResumeShiftDesc(Object name);
+
+  /// No description provided for @osResumeShiftHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل كلمة مرور الموظف للمتابعة'**
+  String get osResumeShiftHint;
+
+  /// No description provided for @osUserFallback.
+  ///
+  /// In ar, this message translates to:
+  /// **'مستخدم #{id}'**
+  String osUserFallback(Object id);
+
+  /// No description provided for @osErrorLoadingUsersParam.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر تحميل مستخدمي الوردية: {error}'**
+  String osErrorLoadingUsersParam(Object error);
+
+  /// No description provided for @osPasswordHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمة مرور المستخدم المختار'**
+  String get osPasswordHint;
+
+  /// No description provided for @osOpeningShiftLoading.
+  ///
+  /// In ar, this message translates to:
+  /// **'جاري فتح الوردية…'**
+  String get osOpeningShiftLoading;
+
+  /// No description provided for @csNoOpenShift.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد وردية مفتوحة'**
+  String get csNoOpenShift;
+
+  /// No description provided for @csCloseShiftTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إغلاق الوردية'**
+  String get csCloseShiftTitle;
+
+  /// No description provided for @csShiftSummary.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخص هذه الوردية'**
+  String get csShiftSummary;
+
+  /// No description provided for @csSalesInvoices.
+  ///
+  /// In ar, this message translates to:
+  /// **'فواتير البيع'**
+  String get csSalesInvoices;
+
+  /// No description provided for @csReturnInvoices.
+  ///
+  /// In ar, this message translates to:
+  /// **'فواتير المرتجع'**
+  String get csReturnInvoices;
+
+  /// No description provided for @csPasswordVerifyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكيد بكلمة مرور موظف الوردية (اختياري)'**
+  String get csPasswordVerifyTitle;
+
+  /// No description provided for @csPasswordHintNoUser.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل كلمة مرور حساب الدخول إن أردت التحقق. اترك الحقل فارغاً لتخطي التحقق'**
+  String get csPasswordHintNoUser;
+
+  /// No description provided for @csPasswordHintWithName.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل كلمة مرور الحساب \"{name}\" إن أردت التحقق. اترك الحقل فارغاً لتخطي التحقق'**
+  String csPasswordHintWithName(Object name);
+
+  /// No description provided for @csPasswordPlaceholder.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمة مرور الدخول (اختياري)'**
+  String get csPasswordPlaceholder;
+
+  /// No description provided for @csSystemBalance.
+  ///
+  /// In ar, this message translates to:
+  /// **'رصيد الصندوق (حسب النظام)'**
+  String get csSystemBalance;
+
+  /// No description provided for @csBalanceDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُحدَّد الرصيد تلقائياً من حركات الصندوق. راجع القيم ثم أكّد السحب.'**
+  String get csBalanceDesc;
+
+  /// No description provided for @csCashInBox.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ في الصندوق'**
+  String get csCashInBox;
+
+  /// No description provided for @csWithdrawAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ الذي تريد أخذه'**
+  String get csWithdrawAmount;
+
+  /// No description provided for @csRemainingAfterWithdraw.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتبقي في الصندوق بعد السحب'**
+  String get csRemainingAfterWithdraw;
+
+  /// No description provided for @csConfirmClose.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكيد وإغلاق الوردية'**
+  String get csConfirmClose;
+
+  /// No description provided for @csPasswordVerifyError.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر التحقق من كلمة المرور لهذا الحساب'**
+  String get csPasswordVerifyError;
+
+  /// No description provided for @csUserVerifyError.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر التحقق من المستخدم الحالي'**
+  String get csUserVerifyError;
+
+  /// No description provided for @csNoSavedPassword.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد كلمة مرور محفوظة لهذا الحساب. اترك الحقل فارغاً.'**
+  String get csNoSavedPassword;
+
+  /// No description provided for @csWrongPassword.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمة المرور غير صحيحة'**
+  String get csWrongPassword;
+
+  /// No description provided for @csWithdrawNegative.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ المسحوب لا يمكن أن يكون سالباً'**
+  String get csWithdrawNegative;
+
+  /// No description provided for @csWithdrawExceeds.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ المسحوب أكبر من المبلغ الموجود في الصندوق'**
+  String get csWithdrawExceeds;
+
+  /// No description provided for @csCloseError.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر الإغلاق: {error}'**
+  String csCloseError(Object error);
+
+  /// No description provided for @csRefreshBalance.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديث الرصيد'**
+  String get csRefreshBalance;
+
+  /// No description provided for @csInvalidValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيمة غير صالحة'**
+  String get csInvalidValue;
+
+  /// No description provided for @csCloseNotifTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إغلاق وردية #{id}'**
+  String csCloseNotifTitle(Object id);
+
+  /// No description provided for @csShiftClosedMsg.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم إغلاق الوردية. افتح وردية جديدة للمتابعة.'**
+  String get csShiftClosedMsg;
+
+  /// No description provided for @csDetailStaff.
+  ///
+  /// In ar, this message translates to:
+  /// **'موظف الوردية: {name}'**
+  String csDetailStaff(Object name);
+
+  /// No description provided for @csDetailSystemBalanceClose.
+  ///
+  /// In ar, this message translates to:
+  /// **'رصيد النظام لحظة الإغلاق: {amount} Fdj'**
+  String csDetailSystemBalanceClose(Object amount);
+
+  /// No description provided for @csDetailDeclaredCash.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ المُعلَن في الصندوق: {amount} Fdj'**
+  String csDetailDeclaredCash(Object amount);
+
+  /// No description provided for @csDetailWithdrawn.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ المسحوب: {amount} Fdj'**
+  String csDetailWithdrawn(Object amount);
+
+  /// No description provided for @csDetailRemaining.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتبقّي في الصندوق بعد السحب: {amount} Fdj'**
+  String csDetailRemaining(Object amount);
 }
 
 class _AppLocalizationsDelegate

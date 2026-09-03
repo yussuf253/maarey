@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../services/license_service.dart';
 import 'license_expired_screen.dart';
 
@@ -60,14 +61,15 @@ class _CheckingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color(0xFF1E3A5F),
+    final loc = AppLocalizations.of(context)!;
+    return Scaffold(
+      backgroundColor: const Color(0xFF1E3A5F),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              'NaBoo',
+            const Text(
+              'Maarey',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 42,
@@ -75,13 +77,13 @@ class _CheckingScreen extends StatelessWidget {
                 letterSpacing: 2,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
-              'نظام إدارة المتاجر',
-              style: TextStyle(color: Colors.white70, fontSize: 14),
+              loc.licStoreSystem,
+              style: const TextStyle(color: Colors.white70, fontSize: 14),
             ),
-            SizedBox(height: 32),
-            SizedBox(
+            const SizedBox(height: 32),
+            const SizedBox(
               width: 28,
               height: 28,
               child: CircularProgressIndicator(
@@ -89,10 +91,10 @@ class _CheckingScreen extends StatelessWidget {
                 strokeWidth: 2,
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Text(
-              'جارٍ التحقق من الترخيص…',
-              style: TextStyle(color: Colors.white54, fontSize: 12),
+              loc.licCheckingLicense,
+              style: const TextStyle(color: Colors.white54, fontSize: 12),
             ),
           ],
         ),
@@ -137,15 +139,15 @@ class _OfflineWarningWrapperState extends State<_OfflineWarningWrapper> {
                 color: Colors.orange,
               ),
               const SizedBox(height: 16),
-              const Text(
-                'لا يوجد اتصال بالإنترنت',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              Text(
+                AppLocalizations.of(context)!.licNoInternet,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              const Text(
-                'يعمل التطبيق بآخر بيانات ترخيص محفوظة.\nتأكد من الاتصال في أقرب فرصة.',
+              Text(
+                AppLocalizations.of(context)!.licOfflineWarning,
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.grey, fontSize: 13),
+                style: const TextStyle(color: Colors.grey, fontSize: 13),
               ),
               const SizedBox(height: 24),
               SizedBox(
@@ -161,13 +163,13 @@ class _OfflineWarningWrapperState extends State<_OfflineWarningWrapper> {
                     );
                     if (mounted) setState(() => _dismissed = true);
                   },
-                  child: const Text('إعادة المحاولة'),
+                  child: Text(AppLocalizations.of(context)!.licRetry),
                 ),
               ),
               const SizedBox(height: 8),
               TextButton(
                 onPressed: () => setState(() => _dismissed = true),
-                child: const Text('الدخول بدون اتصال'),
+                child: Text(AppLocalizations.of(context)!.licEnterWithoutConnection),
               ),
             ],
           ),

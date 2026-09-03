@@ -235,7 +235,7 @@ class MyApp extends StatelessWidget {
             builder: (context, salePosProv, _) {
               return MaterialApp(
                 navigatorKey: appRootNavigatorKey,
-                title: 'naboo',
+                title: 'maarey',
                 debugShowCheckedModeBanner: false,
                 theme: AppThemeResolver.light(salePosProv.data),
                 darkTheme: AppThemeResolver.dark(salePosProv.data),
@@ -497,7 +497,7 @@ class _LicenseCheckingScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'NaBoo',
+                  'Maarey',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 42,

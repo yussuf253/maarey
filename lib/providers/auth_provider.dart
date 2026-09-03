@@ -13,6 +13,7 @@ import '../services/tenant_context.dart';
 import '../services/tenant_context_service.dart';
 import '../services/supabase_config.dart';
 import '../services/auth/secure_session_storage.dart';
+import '../utils/app_logger.dart';
 
 /// جلسة محلية فقط (SharedPreferences + SQLite). بدون سحابة أو اشتراك.
 class AuthProvider extends ChangeNotifier {
@@ -208,23 +209,27 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future<bool> login(String login, String password) async {
+  /// Logs in the user. Returns null on success, or a localized error message on failure.
+  Future<String?> login(String login, String password) async {
     final row = await _db.getUserByLogin(login);
+    AppLogger.info('Auth', 'login: local lookup ${row != null ? 'found user #${row['id']}' : 'null (no local user)'}');
     if (row == null) {
       return _loginViaSupabaseFallback(login, password);
     }
     final salt = row['passwordSalt'] as String?;
     final hash = row['passwordHash'] as String?;
     if (salt == null || hash == null || salt.isEmpty || hash.isEmpty) {
-      // الحساب موجود محلياً لكن بدون كلمة مرور (أُنشئ عبر Google أو fallback سابق)
-      // نحاول Supabase وإذا نجح نحفظ الـ hash محلياً
+      AppLogger.info('Auth', 'login: user exists locally but has no password hash — trying Supabase');
       return _loginViaSupabaseFallback(login, password);
     }
-    if (!PasswordHashing.verify(password, salt, hash)) return false;
+    if (!PasswordHashing.verify(password, salt, hash)) {
+      AppLogger.info('Auth', 'login: local password hash mismatch');
+      return 'invalidCredentials';
+    }
 
     await _bindAccountDataScope(_dataOwnerKeyForRow(row));
     final rowAfter = await _db.getUserByLogin(login);
-    if (rowAfter == null) return false;
+    if (rowAfter == null) return 'invalidCredentials';
 
     _setFromRow(rowAfter);
     final prefs = await SharedPreferences.getInstance();
@@ -238,21 +243,31 @@ class AuthProvider extends ChangeNotifier {
     );
     await _refreshTenantContextSilently();
     notifyListeners();
-    return true;
+    return null; // success
   }
 
-  Future<bool> _loginViaSupabaseFallback(String login, String password) async {
+  Future<String?> _loginViaSupabaseFallback(String login, String password) async {
     final mail = login.trim().toLowerCase();
-    if (mail.isEmpty || !mail.contains('@')) return false;
+    if (mail.isEmpty || !mail.contains('@')) {
+      AppLogger.info('Auth', 'login: Supabase fallback skipped — login is not an email');
+      return 'userNotFound';
+    }
     try {
+      AppLogger.info('Auth', 'login: trying Supabase signInWithPassword for $mail');
       final res = await Supabase.instance.client.auth.signInWithPassword(
         email: mail,
         password: password,
       );
       final user = res.user ?? Supabase.instance.client.auth.currentUser;
-      if (user == null) return false;
+      if (user == null) {
+        AppLogger.warn('Auth', 'login: Supabase returned null user');
+        return 'invalidCredentials';
+      }
       final email = (user.email ?? '').trim();
-      if (email.isEmpty) return false;
+      if (email.isEmpty) {
+        AppLogger.warn('Auth', 'login: Supabase user has no email');
+        return 'invalidCredentials';
+      }
       final displayName =
           (user.userMetadata?['full_name'] as String?) ??
           (user.userMetadata?['name'] as String?) ??
@@ -275,7 +290,7 @@ class AuthProvider extends ChangeNotifier {
       );
 
       final localRow = await _db.getUserById(localId);
-      if (localRow == null) return false;
+      if (localRow == null) return 'invalidCredentials';
 
       _setFromRow(localRow);
       final prefs = await SharedPreferences.getInstance();
@@ -284,11 +299,28 @@ class AuthProvider extends ChangeNotifier {
       await _completeCloudBootstrapAfterRestore(localId);
       await _refreshTenantContextSilently();
       notifyListeners();
-      return true;
-    } on AuthException {
-      return false;
-    } catch (_) {
-      return false;
+      AppLogger.info('Auth', 'login: Supabase fallback succeeded for $email');
+      return null; // success
+    } on AuthException catch (e) {
+      AppLogger.error('Auth', 'login: Supabase signIn failed', e);
+      final msg = e.message.toLowerCase();
+      if (msg.contains('invalid login') || msg.contains('invalid') && msg.contains('credential')) {
+        return 'invalidCredentials';
+      }
+      if (msg.contains('email not confirmed') || msg.contains('not confirmed')) {
+        return 'emailNotConfirmed';
+      }
+      if (msg.contains('rate limit') || msg.contains('too many')) {
+        return 'rateLimited';
+      }
+      if (msg.contains('network') || msg.contains('connection') || msg.contains('timeout')) {
+        return 'networkError';
+      }
+      // Return the actual Supabase error message so the user sees what went wrong.
+      return e.message;
+    } catch (e) {
+      AppLogger.error('Auth', 'login: Supabase fallback unexpected error', e);
+      return 'networkError';
     }
   }
 

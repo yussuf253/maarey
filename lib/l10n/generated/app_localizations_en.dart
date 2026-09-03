@@ -9,7 +9,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'Naboo';
+  String get appTitle => 'Maarey';
 
   @override
   String get settings => 'Settings';
@@ -154,10 +154,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aboutApp => 'About App';
 
   @override
-  String get aboutAppSubtitle => 'Version 1.0.0 · NaBoo Store Manager';
+  String get aboutAppSubtitle => 'Version 1.0.0 · Maarey Store Manager';
 
   @override
-  String get appName => 'NaBoo Store Manager';
+  String get appName => 'Maarey Store Manager';
 
   @override
   String get appDescription =>
@@ -1480,6 +1480,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get invalidCredentials => 'Invalid username or password';
 
   @override
+  String get emailNotConfirmed =>
+      'Email not confirmed. Please check your inbox.';
+
+  @override
+  String get tooManyRequests =>
+      'Too many attempts. Please wait a few minutes and try again.';
+
+  @override
+  String get networkError =>
+      'Network error. Please check your connection and try again.';
+
+  @override
   String get accountCreated => 'Account created successfully';
 
   @override
@@ -1642,7 +1654,7 @@ class AppLocalizationsEn extends AppLocalizations {
       '+964 Iraq — other country codes will be available later';
 
   @override
-  String get welcomeToNaBoo => 'Welcome to NaBoo';
+  String get welcomeToMaarey => 'Welcome to Maarey';
 
   @override
   String welcomeBackGreeting(Object name) {
@@ -1976,7 +1988,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get useAnotherKey => 'Use another key';
 
   @override
-  String get allRightsReserved => 'NaBoo v2.0 — All rights reserved';
+  String get allRightsReserved => 'Maarey v2.0 — All rights reserved';
 
   @override
   String get noInternetConnection => 'No internet connection';
@@ -1996,7 +2008,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get contactTeamForLicense =>
-      'To get a license key, contact the NaBoo team.';
+      'To get a license key, contact the Maarey team.';
 
   @override
   String get subscriptionPlansTitle => 'Subscription plans';
@@ -2017,11 +2029,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get subscribeStepsJwt =>
-      '1. Contact the NaBoo team via the methods below\n2. Complete payment for the plan you want\n3. Receive the full activation token (JWT) from management\n4. Paste the token in the unified field below the plan cards — plan and device limit are inferred from the token';
+      '1. Contact the Maarey team via the methods below\n2. Complete payment for the plan you want\n3. Receive the full activation token (JWT) from management\n4. Paste the token in the unified field below the plan cards — plan and device limit are inferred from the token';
 
   @override
   String get subscribeStepsLegacy =>
-      '1. Contact the NaBoo team via the methods below\n2. Tell us the plan you want and complete payment\n3. Receive the license key from management\n4. Paste the key in the unified field below the plan cards then press \"Activate key\"';
+      '1. Contact the Maarey team via the methods below\n2. Tell us the plan you want and complete payment\n3. Receive the license key from management\n4. Paste the key in the unified field below the plan cards then press \"Activate key\"';
 
   @override
   String get whatsappOrPhone => 'WhatsApp / Phone';
@@ -5939,7 +5951,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'This section shows sales only: cash/credit/installment/delivery';
 
   @override
-  String get thankYou => 'Thank you for using NaBoo';
+  String get thankYou => 'Thank you for using Maarey';
 
   @override
   String get cashTitle => 'Cash Drawer';
@@ -7132,7 +7144,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get taxes => 'Taxes';
 
   @override
-  String get thankYouForUsing => 'Thank you for using NaBoo';
+  String get thankYouForUsing => 'Thank you for using Maarey';
 
   @override
   String get today => 'Today';
@@ -10352,7 +10364,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get spHowToSubscribe => 'How to Subscribe';
 
   @override
-  String get spHowJwtStep1 => '1. Contact the NaBoo team via the methods below';
+  String get spHowJwtStep1 =>
+      '1. Contact the Maarey team via the methods below';
 
   @override
   String get spHowJwtStep2 => '2. Complete payment for the plan you want';
@@ -10367,7 +10380,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get spHowLegacyStep1 =>
-      '1. Contact the NaBoo team via the methods below';
+      '1. Contact the Maarey team via the methods below';
 
   @override
   String get spHowLegacyStep2 =>
@@ -10895,7 +10908,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get signupPrivacyPolicy => 'Privacy Policy';
 
   @override
-  String get signupTermsSuffix => ' of Naboo.';
+  String get signupTermsSuffix => ' of Maarey.';
 
   @override
   String get licEnterKey => 'Enter license key';
@@ -10910,17 +10923,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get licEnterKeyToContinue => 'Enter your license key to continue';
 
   @override
-  String get licKeyHint => 'NABOO-XXXX-XXXX-XXXX or JWT';
+  String get licKeyHint => 'MAAREY-XXXX-XXXX-XXXX or JWT';
 
   @override
   String get licActivate => 'Activate';
 
   @override
   String get licContactSupport =>
-      'To get a license key, contact the NaBoo team.';
+      'To get a license key, contact the Maarey team.';
 
   @override
-  String get licAllRightsReserved => 'NaBoo v2.0 — All rights reserved';
+  String get licAllRightsReserved => 'Maarey v2.0 — All rights reserved';
 
   @override
   String get licTimeConflict => 'Time settings conflict';
@@ -12096,7 +12109,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get osCannotBeNegative => 'Added amount cannot be negative';
 
   @override
-  String get osErrorStaffDialog => 'Failed to open staff selection dialog';
+  String osErrorStaffDialog(Object error) {
+    return 'Failed to open staff selection dialog: $error';
+  }
 
   @override
   String get osNoStaffSelected => 'No shift employee selected';
@@ -12615,4 +12630,1046 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sohNewSaleBreadcrumb => 'New Sale';
+
+  @override
+  String get psTitle => 'Product Settings';
+
+  @override
+  String get psTabSetup => 'Product Setup';
+
+  @override
+  String get psTabTracking => 'Product Tracking';
+
+  @override
+  String get psTabVouchers => 'Inventory Vouchers';
+
+  @override
+  String get psTabDefaults => 'Default Values';
+
+  @override
+  String get psSetupTitle => 'Product Setup';
+
+  @override
+  String get psSetupDesc =>
+      'Auto-numbering, advanced pricing, unit system, and bundle management.';
+
+  @override
+  String get psNextSkuTitle => 'Next Product Serial Number';
+
+  @override
+  String get psNextSkuDecoration => 'Next Number';
+
+  @override
+  String get psNumberingSettings => 'Numbering Settings';
+
+  @override
+  String get psNextSkuHint =>
+      'The number displayed as the next identifier hint. The prefix is saved in numbering settings.';
+
+  @override
+  String get psAdvancedPricingTitle => 'Advanced Pricing Options';
+
+  @override
+  String get psEnabled => 'Enabled';
+
+  @override
+  String get psDisabled => 'Disabled';
+
+  @override
+  String get psAdvancedPricingDesc =>
+      'When enabled: in \"Add New Product\", the selling price and minimum price are suggested from the purchase price based on the margin below (editable manually before saving).';
+
+  @override
+  String get psCostMarginDecoration => 'Cost Margin (%)';
+
+  @override
+  String get psCostMarginHint => 'Example: 25';
+
+  @override
+  String get psMinSellPriceDesc =>
+      'Minimum selling price as percentage of selling price (%)';
+
+  @override
+  String get psMinSellPriceHint => '100 = Equal to selling price';
+
+  @override
+  String get psSaveSuggestedPrices => 'Save Suggested Prices';
+
+  @override
+  String get psPricingExample =>
+      'Example: cost 10,000 and margin 25% → suggested selling price 12,500. Minimum price ratio 100% makes minimum price = selling price.';
+
+  @override
+  String get psMultiUnitTitle => 'Use Multiple Units per Item';
+
+  @override
+  String get psManageUnits => 'Manage Units';
+
+  @override
+  String get psMultiUnitDesc =>
+      'Allow purchasing in one unit and selling in another with conversion factors from unit templates.';
+
+  @override
+  String get psDefaultStockDisplayTitle => 'Default Unit for Stock Display';
+
+  @override
+  String get psUnitBase => 'Template Base Unit';
+
+  @override
+  String get psUnitBaseDesc => 'Display stock in the template\'s base unit.';
+
+  @override
+  String get psUnitSale => 'Sale Unit';
+
+  @override
+  String get psUnitSaleDesc => 'Display balance in the default sale unit.';
+
+  @override
+  String get psUnitPurchase => 'Purchase Unit';
+
+  @override
+  String get psUnitPurchaseDesc =>
+      'Display balance in the default purchase unit.';
+
+  @override
+  String get psStockDisplayDesc =>
+      'Determines how stock is displayed in reports and stocktaking when multi-unit is enabled.';
+
+  @override
+  String get psBundlesTitle => 'Bundles and Composite Units';
+
+  @override
+  String get psBundlesAllowed => 'Allowed';
+
+  @override
+  String get psBundlesNotAllowed => 'Not Allowed';
+
+  @override
+  String get psBundlesDesc =>
+      'Define a composite item from several items and deduct stock on assembly or sale (requires future screen development).';
+
+  @override
+  String get psAddProductPoliciesTitle => 'Add Product Screen Policies';
+
+  @override
+  String get psShowAdvancedPricing => 'Show Advanced Pricing Section';
+
+  @override
+  String get psShowAdvancedPricingDesc =>
+      'Controls visibility of tax, discount, minimum selling price, and profit margin.';
+
+  @override
+  String get psShowBarcodeField => 'Show Barcode Field';
+
+  @override
+  String get psBarcodeRequired => 'Barcode Required on Save';
+
+  @override
+  String get psShowImageField => 'Show Product Image Field';
+
+  @override
+  String get psImageRequired => 'Product Image Required';
+
+  @override
+  String get psShowExtraFields => 'Show Extra Fields';
+
+  @override
+  String get psShowExtraFieldsDesc =>
+      'Such as: internal notes, tags, weight, and production/expiry dates.';
+
+  @override
+  String get psSupplierRequired => 'Supplier Required on Save';
+
+  @override
+  String get psWarehouseRequired => 'Warehouse Required on Save';
+
+  @override
+  String get psDefaultTrackingEnabled => 'Enable Stock Tracking by Default';
+
+  @override
+  String get psDefaultTrackingDesc =>
+      'Affects the toggle state when opening the Add Product screen.';
+
+  @override
+  String get psAddProductPoliciesDesc =>
+      'These policies apply directly to the \"Add New Product\" screen without affecting the sales screen.';
+
+  @override
+  String get psTrackingTitle => 'Product Tracking';
+
+  @override
+  String get psTrackingDesc =>
+      'Configure tracking methods and system behavior when stock runs out.';
+
+  @override
+  String get psSerialBatchExpiryTitle => 'Serial / Batch / Expiry Tracking';
+
+  @override
+  String get psSerialBatchExpiryDesc =>
+      'When enabled, tracking can be activated for each product individually during addition.';
+
+  @override
+  String get psNegativeStockTitle => 'Negative Stock';
+
+  @override
+  String get psNegativeStockStop =>
+      'Stop operations when stock runs out for all products';
+
+  @override
+  String get psNegativeStockStopDesc =>
+      'Prevent sales or disbursements when stock reaches zero.';
+
+  @override
+  String get psNegativeStockTrackableOnly =>
+      'Allow only trackable products to have negative quantities';
+
+  @override
+  String get psNegativeStockTrackableDesc =>
+      'Negative sales or disbursements are allowed per item policy.';
+
+  @override
+  String get psNegativeStockDesc =>
+      'Determines system behavior when stock runs out.';
+
+  @override
+  String get psShowTotalAvailableTitle => 'Show Total and Available Quantity';
+
+  @override
+  String get psShowTotalAvailableDesc =>
+      'Display total quantity vs available after reservations (when reservation is enabled later).';
+
+  @override
+  String get psVouchersTitle => 'Inventory Vouchers';
+
+  @override
+  String get psVouchersDesc =>
+      'Create inventory requests, number transfer vouchers, and link them to sales and purchases.';
+
+  @override
+  String get psInventoryRequestsTitle => 'Inventory Requests';
+
+  @override
+  String get psInventoryRequestsDesc =>
+      'Enable departments to submit inventory requests for review. Permissions are set from user roles when available.';
+
+  @override
+  String get psTransferVoucherNextTitle =>
+      'Next Inventory Transfer Voucher Serial Number';
+
+  @override
+  String get psTransferVoucherNextDecoration => 'Number';
+
+  @override
+  String get psTransferVoucherNextDesc =>
+      'The next suggested number for transfer vouchers.';
+
+  @override
+  String get psSalesVoucherTitle => 'Sales Invoice Inventory Vouchers';
+
+  @override
+  String get psSalesVoucherDesc =>
+      'When enabled, creates a disbursement voucher requiring approval before stock deduction.';
+
+  @override
+  String get psPurchaseVoucherTitle => 'Purchase Invoice Inventory Vouchers';
+
+  @override
+  String get psPurchaseVoucherDesc =>
+      'When enabled, creates an entry voucher requiring approval before stock addition.';
+
+  @override
+  String get psDefaultsTitle => 'System Default Values';
+
+  @override
+  String get psDefaultsDesc =>
+      'Values suggested automatically for warehouses, products, and taxes.';
+
+  @override
+  String get psDefaultSubAccountTitle => 'Default Sub-Account';
+
+  @override
+  String get psPleaseChoose => 'Please choose';
+
+  @override
+  String get psNone => '— None —';
+
+  @override
+  String get psGeneralInventory => 'General Inventory';
+
+  @override
+  String get psRawMaterials => 'Raw Materials';
+
+  @override
+  String get psCommercial => 'Commercial';
+
+  @override
+  String get psDefaultSubAccountDesc =>
+      'Used as an accounting reference when linking inventory to accounts.';
+
+  @override
+  String get psDefaultWarehouseTitle => 'Default Warehouse';
+
+  @override
+  String get psManageWarehouses => 'Manage Warehouses';
+
+  @override
+  String get psChooseWarehouse => 'Choose a warehouse';
+
+  @override
+  String get psDefaultWarehouseDesc =>
+      'Suggested when adding new products and inventory movements.';
+
+  @override
+  String get psDefaultPriceListTitle => 'Default Price List';
+
+  @override
+  String get psManagePriceLists => 'Manage Lists';
+
+  @override
+  String get psDefaultPriceListDesc =>
+      'Used as the default price list for the current branch when the link is available.';
+
+  @override
+  String get psDefaultTax1Title => 'Default Tax 1';
+
+  @override
+  String get psManageTaxes => 'Manage Taxes';
+
+  @override
+  String get psTaxRatesDesc =>
+      'Tax rates are set per product or from invoice settings.';
+
+  @override
+  String get psDefaultTax1Desc =>
+      'Suggested for new products and compatible with the tax field in the product.';
+
+  @override
+  String get psDefaultTax2Title => 'Default Tax 2';
+
+  @override
+  String get psDefaultTax2Desc =>
+      'For dual use when supporting two taxes later.';
+
+  @override
+  String get psReturnCostMethodTitle => 'Return Cost Calculation Method';
+
+  @override
+  String get psReturnBySalePrice => 'By Sale Price';
+
+  @override
+  String get psReturnBySalePriceDesc =>
+      'Use the selling price from the sales invoice.';
+
+  @override
+  String get psReturnByAvgCost => 'By Last Average Cost';
+
+  @override
+  String get psReturnByAvgCostDesc =>
+      'Use the average cost when creating the return.';
+
+  @override
+  String get psReturnCostDesc => 'Applied when processing sales returns.';
+
+  @override
+  String get psBusinessNatureTitle => 'Business Activity Nature';
+
+  @override
+  String get psNatureProducts => 'Products Only';
+
+  @override
+  String get psNatureProductsDesc => 'Suitable for physical inventory.';
+
+  @override
+  String get psNatureServices => 'Services Only';
+
+  @override
+  String get psNatureServicesDesc => 'Time-based or project-based activities.';
+
+  @override
+  String get psNatureBoth => 'Products and Services';
+
+  @override
+  String get psNatureBothDesc => 'Combines both types in the system.';
+
+  @override
+  String get psBusinessNatureDesc =>
+      'Determines the default focus in inventory and invoicing screens.';
+
+  @override
+  String get psVoucherPermEnabled => 'Enabled';
+
+  @override
+  String get psVoucherPermDisabled => 'Disabled';
+
+  @override
+  String get psTaxExempt => 'Exempt';
+
+  @override
+  String get psCustomTax => 'Custom';
+
+  @override
+  String get psTransferSettingsTitle => 'Transfer Numbering Settings';
+
+  @override
+  String get psOptionalPrefix => 'Optional Prefix';
+
+  @override
+  String get psExamplePrefix => 'Example: TR-';
+
+  @override
+  String get psCancel => 'Cancel';
+
+  @override
+  String get psSave => 'Save';
+
+  @override
+  String get psSavePrefixHint => 'The prefix is saved in numbering settings.';
+
+  @override
+  String get psSerialHint =>
+      'The number displayed as next identifier hint. The prefix is saved in numbering settings.';
+
+  @override
+  String get psTaxToggleTooltip => 'Disable tax handling — hide the tax field';
+
+  @override
+  String get psShowTaxField => 'Show Tax Field';
+
+  @override
+  String get psTaxToggleDesc =>
+      'In \'Add New Product\'. The block icon disables tax entirely.';
+
+  @override
+  String get psDiscountToggleTooltip =>
+      'Disable discount handling — hide the discount fields';
+
+  @override
+  String get psShowDiscountFields => 'Show Discount Fields';
+
+  @override
+  String get psDiscountToggleDesc =>
+      'In \'Add New Product\'. The block icon disables discounts entirely.';
+
+  @override
+  String get sodEditTicket => 'Edit Ticket';
+
+  @override
+  String get sodSearchParts => 'Search parts…';
+
+  @override
+  String get sodProduct => 'Product';
+
+  @override
+  String get sodAddPart => 'Add Part';
+
+  @override
+  String get sodPart => 'Part';
+
+  @override
+  String get sodQuantity => 'Quantity';
+
+  @override
+  String get sodSalePrice => 'Sale Price (Fdj)';
+
+  @override
+  String get sodCancel => 'Cancel';
+
+  @override
+  String get sodAdd => 'Add';
+
+  @override
+  String get sodTechnicalService => 'Technical Service';
+
+  @override
+  String get sodSerialPlate => 'Serial/Plate';
+
+  @override
+  String get sodNewSale => 'New Sale';
+
+  @override
+  String get sodTicketDetails => 'Ticket Details';
+
+  @override
+  String get sodEdit => 'Edit';
+
+  @override
+  String get sodUpdate => 'Update';
+
+  @override
+  String get sodAddPartShort => 'Add Part';
+
+  @override
+  String get sodCustomer => 'Customer';
+
+  @override
+  String get sodSerialInfo => 'Serial/Plate';
+
+  @override
+  String get sodConvertToInvoice => 'Convert to Sales Invoice';
+
+  @override
+  String get sodParts => 'Parts';
+
+  @override
+  String get sodNoPartsYet => 'No parts added yet.';
+
+  @override
+  String get sodInvoiceItems => 'Invoice Items';
+
+  @override
+  String get sodViewOnly => 'View Only';
+
+  @override
+  String get sodInvoiceProductsDesc =>
+      'Products and services registered in the linked sales invoice.';
+
+  @override
+  String get sodPastDue => 'Past due delivery';
+
+  @override
+  String get sodExpectedDelivery => 'Expected delivery date';
+
+  @override
+  String sodWorkDurationMin(Object minutes) {
+    return 'Expected work duration: $minutes min';
+  }
+
+  @override
+  String get sodPending => 'Pending';
+
+  @override
+  String get sodInProgress => 'In Progress';
+
+  @override
+  String get sodReadyForDelivery => 'Ready for Delivery';
+
+  @override
+  String get sodDelivered => 'Delivered';
+
+  @override
+  String get sodCancelled => 'Cancelled';
+
+  @override
+  String get sodFinancialSummary => 'Financial Summary (Fils)';
+
+  @override
+  String get sodService => 'Technical Service';
+
+  @override
+  String get sodPartsLabel => 'Parts';
+
+  @override
+  String get sodTotal => 'Total';
+
+  @override
+  String get sodPaidAdvance => 'Paid Advance';
+
+  @override
+  String get sodRemainingOnDelivery => 'Remaining on Delivery';
+
+  @override
+  String sodQtyPriceTotal(Object price, Object qty, Object total) {
+    return 'Qty: $qty · Price: $price · Total: $total';
+  }
+
+  @override
+  String sodQtyOnly(Object qty) {
+    return 'Qty: $qty';
+  }
+
+  @override
+  String get sodDelete => 'Delete';
+
+  @override
+  String get sodLoadError => 'Failed to load ticket data.';
+
+  @override
+  String get sodRetry => 'Retry';
+
+  @override
+  String get settingsImportMeds => 'Import Medicines';
+
+  @override
+  String get settingsImportMedsDesc => 'Add 157 medicines from inventory file';
+
+  @override
+  String get settingsImportMedsConfirm =>
+      'Add 157 medicines to the product catalog. Do you want to continue?';
+
+  @override
+  String settingsImportedCount(Object count) {
+    return '$count medicines imported successfully';
+  }
+
+  @override
+  String settingsImportError(Object error) {
+    return 'Error: $error';
+  }
+
+  @override
+  String get settingsAppVersion => 'Version 1.0.0';
+
+  @override
+  String get settingsCopyright => '© 2026 Maarey. All rights reserved.';
+
+  @override
+  String get settingsLicenseActive => 'Active';
+
+  @override
+  String get settingsLicenseTrial => 'Trial';
+
+  @override
+  String get settingsLicenseInactive => 'Inactive';
+
+  @override
+  String get settingsLicenseDisconnected => 'Disconnected';
+
+  @override
+  String get settingsLicenseNone => 'No License';
+
+  @override
+  String get settingsDeviceAllowed => 'Device has been allowed to return';
+
+  @override
+  String settingsDeviceCount(Object count) {
+    return '$count devices';
+  }
+
+  @override
+  String get settingsSubscription => 'Subscription';
+
+  @override
+  String settingsSubscriptionExpires(Object date) {
+    return 'Subscription expires: $date';
+  }
+
+  @override
+  String settingsDaysRemaining(Object days) {
+    return 'Approximately $days days remaining';
+  }
+
+  @override
+  String get settingsSubscriptionActiveNoExpiry =>
+      'Active subscription with no expiry date in the cloud.';
+
+  @override
+  String get settingsLinkedDevices => 'Devices linked to account';
+
+  @override
+  String get settingsUpdate => 'Update';
+
+  @override
+  String get settingsNoDevicesRegistered => 'No devices registered yet.';
+
+  @override
+  String settingsLastActive(Object date) {
+    return 'Last active: $date';
+  }
+
+  @override
+  String get settingsDisconnectedCannotLogin =>
+      'Disconnected — cannot login until approved';
+
+  @override
+  String get settingsThisDevice => 'This device';
+
+  @override
+  String get settingsAllowReturn => 'Allow Return';
+
+  @override
+  String get settingsDisconnectDevice => 'Disconnect device';
+
+  @override
+  String get settingsAutoSync => 'Auto Sync';
+
+  @override
+  String get settingsAutoSyncDesc =>
+      'A full database backup is uploaded from each device; the latest in the cloud is imported on the device.';
+
+  @override
+  String get settingsSyncNow => 'Sync Now';
+
+  @override
+  String settingsLastSync(Object date) {
+    return 'Last sync: $date';
+  }
+
+  @override
+  String get settingsSyncSuccess => 'Sync completed successfully';
+
+  @override
+  String get settingsClearCloudProducts => 'Clear Cloud Products';
+
+  @override
+  String get settingsClearCloudProductsDesc =>
+      'All products will be deleted from the cloud only. Settings, invoices, and customers will not be affected. Do you want to continue?';
+
+  @override
+  String get settingsCleared => 'Cloud products cleared. Tap Sync Now';
+
+  @override
+  String settingsClearFailed(Object error) {
+    return 'Clear failed: $error';
+  }
+
+  @override
+  String get settingsViewSubscriptionPlans => 'View Subscription Plans';
+
+  @override
+  String get settingsSubscriptionPlans => 'Subscription Plans';
+
+  @override
+  String get settingsThankYou => 'Thank you for dealing with us';
+
+  @override
+  String get sofTenantError =>
+      'Failed to determine tenant data. Reopen the app and try again.';
+
+  @override
+  String get sofDbInitError =>
+      'Database needs initialization/update. Reopen the app and try again.';
+
+  @override
+  String get sofUnexpectedError => 'An unexpected error occurred while saving.';
+
+  @override
+  String get sofExpectedWorkDuration => 'Expected work duration';
+
+  @override
+  String get sofHours => 'hours';
+
+  @override
+  String get sofMinutes => 'minutes';
+
+  @override
+  String get sofCancel => 'Cancel';
+
+  @override
+  String get sofDone => 'Done';
+
+  @override
+  String get sofNotSet => 'Not set — tap to choose hours and minutes';
+
+  @override
+  String sofHoursMinutes(Object hours, Object minutes) {
+    return '${hours}h ${minutes}m — tap to edit';
+  }
+
+  @override
+  String sofHoursOnly(Object hours) {
+    return '$hours hours — tap to edit';
+  }
+
+  @override
+  String sofMinutesOnly(Object minutes) {
+    return '$minutes minutes — tap to edit';
+  }
+
+  @override
+  String get sofTaskNotStarted =>
+      'After \'Start Work\' from the ticket list, the deadline is fixed from the start time.';
+
+  @override
+  String sofWorkDurationMin(Object minutes) {
+    return 'Expected work duration: $minutes min';
+  }
+
+  @override
+  String get sofPastDue => 'Past due delivery';
+
+  @override
+  String get sofExpectedDelivery => 'Expected delivery date (for customer)';
+
+  @override
+  String get sofSearchServices => 'Search services…';
+
+  @override
+  String get sofService => 'Service';
+
+  @override
+  String get sofEditTicket => 'Edit Ticket';
+
+  @override
+  String get sofNewTicket => 'New Ticket';
+
+  @override
+  String get sofSave => 'Save';
+
+  @override
+  String get sofSaveError => 'An error occurred while saving. Try again.';
+
+  @override
+  String get sofAll => 'All';
+
+  @override
+  String get sofCustomerName => 'Customer Name';
+
+  @override
+  String get sofCustomerSearchHint => 'Start typing to search customers';
+
+  @override
+  String get sofCustomerRequired => 'Customer name is required';
+
+  @override
+  String get sofCustomer => 'Customer';
+
+  @override
+  String get sofNewCustomer => 'New customer';
+
+  @override
+  String get sofDeviceName => 'Device / Vehicle Name';
+
+  @override
+  String get sofDeviceNameRequired => 'Device name is required';
+
+  @override
+  String get sofSerialPlateOptional => 'Serial / Plate (optional)';
+
+  @override
+  String get sofSerialHint =>
+      'If left empty, an internal reference number is auto-generated for the ticket (not the device serial).';
+
+  @override
+  String get sofExpectedDuration => 'Expected Duration';
+
+  @override
+  String get sofServiceTitle => 'Service';
+
+  @override
+  String get sofServiceNotSet => 'Not set (optional)';
+
+  @override
+  String get sofServiceSet => 'Set';
+
+  @override
+  String get sofSelect => 'Select';
+
+  @override
+  String get sofEstimatedPrice => 'Estimated Price (from service)';
+
+  @override
+  String get sofEstimatedPriceHint => 'Auto-filled from service price';
+
+  @override
+  String get sofAgreedPrice => 'Agreed Price (Fdj)';
+
+  @override
+  String get sofAgreedPriceHint => 'The only place to edit the price';
+
+  @override
+  String get sofInvalidAmount => 'Enter a valid amount';
+
+  @override
+  String get sofAdvancePayment => 'Advance Payment (Fdj)';
+
+  @override
+  String get sofProblemDesc => 'Problem Description (optional)';
+
+  @override
+  String get sofSaving => 'Saving…';
+
+  @override
+  String get sofSaveTicket => 'Save Ticket';
+
+  @override
+  String get licCheckingLicense => 'Checking license…';
+
+  @override
+  String get licNoInternet => 'No internet connection';
+
+  @override
+  String get licOfflineWarning =>
+      'The app is working with last saved license data.\nMake sure to connect at the earliest opportunity.';
+
+  @override
+  String get licRetry => 'Retry';
+
+  @override
+  String get licEnterWithoutConnection => 'Enter without connection';
+
+  @override
+  String get licUpgradeForDevices => 'Upgrade plan to add devices';
+
+  @override
+  String osUnexpectedInitError(Object error) {
+    return 'Unexpected error during initialization: $error';
+  }
+
+  @override
+  String osErrorOpeningShift(Object error) {
+    return 'Failed to open shift: $error';
+  }
+
+  @override
+  String osShiftOpenedMsg(Object id) {
+    return 'Shift #$id opened successfully';
+  }
+
+  @override
+  String osOpenShiftNotifTitle(Object id) {
+    return 'Open shift #$id';
+  }
+
+  @override
+  String osDetailStaff(Object name) {
+    return 'Shift staff: $name';
+  }
+
+  @override
+  String osDetailSystemBalance(Object amount) {
+    return 'System balance at open: $amount';
+  }
+
+  @override
+  String osDetailPhysicalCount(Object amount) {
+    return 'Manual cash count: $amount';
+  }
+
+  @override
+  String osDetailAddedCash(Object amount) {
+    return 'Added cash at open: $amount';
+  }
+
+  @override
+  String get osResumeShift => 'Resume Shift';
+
+  @override
+  String osResumeShiftDesc(Object name) {
+    return 'An open shift exists under \"$name\". Enter the employee password to continue.';
+  }
+
+  @override
+  String get osResumeShiftHint => 'Enter the employee password to continue';
+
+  @override
+  String osUserFallback(Object id) {
+    return 'User #$id';
+  }
+
+  @override
+  String osErrorLoadingUsersParam(Object error) {
+    return 'Failed to load shift users: $error';
+  }
+
+  @override
+  String get osPasswordHint => 'Selected user password';
+
+  @override
+  String get osOpeningShiftLoading => 'Opening shift…';
+
+  @override
+  String get csNoOpenShift => 'No open shift';
+
+  @override
+  String get csCloseShiftTitle => 'Close Shift';
+
+  @override
+  String get csShiftSummary => 'Shift Summary';
+
+  @override
+  String get csSalesInvoices => 'Sales Invoices';
+
+  @override
+  String get csReturnInvoices => 'Return Invoices';
+
+  @override
+  String get csPasswordVerifyTitle =>
+      'Confirm with shift employee password (optional)';
+
+  @override
+  String get csPasswordHintNoUser =>
+      'Enter login password to verify. Leave empty to skip verification';
+
+  @override
+  String csPasswordHintWithName(Object name) {
+    return 'Enter password for \"$name\" to verify. Leave empty to skip verification';
+  }
+
+  @override
+  String get csPasswordPlaceholder => 'Login password (optional)';
+
+  @override
+  String get csSystemBalance => 'Cash Register Balance (System)';
+
+  @override
+  String get csBalanceDesc =>
+      'Balance is auto-determined from register movements. Review the values then confirm withdrawal.';
+
+  @override
+  String get csCashInBox => 'Cash in Register';
+
+  @override
+  String get csWithdrawAmount => 'Amount to Withdraw';
+
+  @override
+  String get csRemainingAfterWithdraw =>
+      'Remaining in Register After Withdrawal';
+
+  @override
+  String get csConfirmClose => 'Confirm & Close Shift';
+
+  @override
+  String get csPasswordVerifyError =>
+      'Failed to verify password for this account';
+
+  @override
+  String get csUserVerifyError => 'Failed to verify current user';
+
+  @override
+  String get csNoSavedPassword =>
+      'No saved password for this account. Leave the field empty.';
+
+  @override
+  String get csWrongPassword => 'Incorrect password';
+
+  @override
+  String get csWithdrawNegative => 'Withdrawal amount cannot be negative';
+
+  @override
+  String get csWithdrawExceeds =>
+      'Withdrawal amount exceeds the cash in register';
+
+  @override
+  String csCloseError(Object error) {
+    return 'Failed to close shift: $error';
+  }
+
+  @override
+  String get csRefreshBalance => 'Refresh balance';
+
+  @override
+  String get csInvalidValue => 'Invalid value';
+
+  @override
+  String csCloseNotifTitle(Object id) {
+    return 'Close shift #$id';
+  }
+
+  @override
+  String get csShiftClosedMsg => 'Shift closed. Open a new shift to continue.';
+
+  @override
+  String csDetailStaff(Object name) {
+    return 'Shift staff: $name';
+  }
+
+  @override
+  String csDetailSystemBalanceClose(Object amount) {
+    return 'System balance at close: $amount Fdj';
+  }
+
+  @override
+  String csDetailDeclaredCash(Object amount) {
+    return 'Declared cash in register: $amount Fdj';
+  }
+
+  @override
+  String csDetailWithdrawn(Object amount) {
+    return 'Withdrawn: $amount Fdj';
+  }
+
+  @override
+  String csDetailRemaining(Object amount) {
+    return 'Remaining in register after withdrawal: $amount Fdj';
+  }
 }

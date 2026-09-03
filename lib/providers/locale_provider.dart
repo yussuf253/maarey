@@ -9,7 +9,7 @@ const List<Locale> kSupportedLocales = [
 
 class LocaleProvider extends ChangeNotifier {
   static const _prefsKey = 'app_locale';
-  Locale _locale = const Locale('ar');
+  Locale _locale = const Locale('fr');
   Locale get locale => _locale;
 
   LocaleProvider() {

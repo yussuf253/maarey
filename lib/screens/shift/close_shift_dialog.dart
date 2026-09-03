@@ -13,6 +13,7 @@ import '../../services/database_helper.dart';
 import '../../services/password_hashing.dart';
 import '../../theme/app_corner_style.dart';
 import '../../utils/iraqi_currency_format.dart';
+import '../../l10n/generated/app_localizations.dart';
 import '../../utils/numeric_format.dart';
 import '../../widgets/inputs/app_input.dart';
 import '../../widgets/inputs/app_price_input.dart';
@@ -20,10 +21,11 @@ import '../../widgets/inputs/app_price_input.dart';
 /// إغلاق الوردية: عرض الرصيد تلقائياً، جرد الصندوق، المبلغ المسحوب، وملخص الفواتير.
 Future<void> showCloseShiftDialog(BuildContext context) async {
   final shift = context.read<ShiftProvider>().activeShift;
+  final loc = AppLocalizations.of(context)!;
   if (shift == null) {
     ScaffoldMessenger.of(
       context,
-    ).showSnackBar(const SnackBar(content: Text('لا توجد وردية مفتوحة')));
+    ).showSnackBar(SnackBar(content: Text(loc.csNoOpenShift)));
     return;
   }
 
@@ -45,7 +47,7 @@ Future<void> showCloseShiftDialog(BuildContext context) async {
               behavior: SnackBarBehavior.floating,
               duration: const Duration(seconds: 7),
               content: Text(
-                'تم إغلاق الوردية. افتح وردية جديدة للمتابعة.\n\n$detail',
+                loc.csShiftClosedMsg,
               ),
             ),
           );
@@ -69,6 +71,7 @@ class _CloseShiftDialog extends StatefulWidget {
 }
 
 class _CloseShiftDialogState extends State<_CloseShiftDialog> {
+  AppLocalizations get _loc => AppLocalizations.of(context)!;
   final DatabaseHelper _db = DatabaseHelper();
   final _inBoxCtrl = TextEditingController();
   final _withdrawCtrl = TextEditingController();
@@ -128,7 +131,7 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
   int _wdParsed() => NumericFormat.parseNumber(_withdrawCtrl.text);
 
   String? _withdrawWarn() {
-    if (_wdParsed() > _inParsed()) return 'المبلغ أكبر من رصيد الصندوق';
+    if (_wdParsed() > _inParsed()) return _loc.csWithdrawExceeds;
     return null;
   }
 
@@ -153,8 +156,8 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
       final uid = auth.userId;
       if (uid == null || uid <= 0) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('تعذر التحقق من كلمة المرور لهذا الحساب'),
+          SnackBar(
+            content: Text(_loc.csPasswordVerifyError),
           ),
         );
         return;
@@ -163,7 +166,7 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
       if (!mounted) return;
       if (row == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('تعذر التحقق من المستخدم الحالي')),
+          SnackBar(content: Text(_loc.csUserVerifyError)),
         );
         return;
       }
@@ -172,12 +175,12 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
       if (salt == null || hash == null || salt.isEmpty || hash.isEmpty) {
         setState(
           () => _passwordInlineError =
-              'لا توجد كلمة مرور محفوظة لهذا الحساب. اترك الحقل فارغاً.',
+              _loc.csNoSavedPassword,
         );
         return;
       }
       if (!PasswordHashing.verify(pwdIn, salt, hash)) {
-        setState(() => _passwordInlineError = 'كلمة المرور غير صحيحة');
+        setState(() => _passwordInlineError = _loc.csWrongPassword);
         return;
       }
     }
@@ -187,14 +190,14 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
 
     if (withdraw < 0) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('المبلغ المسحوب لا يمكن أن يكون سالباً')),
+        SnackBar(content: Text(_loc.csWithdrawNegative)),
       );
       return;
     }
     if (withdraw > inBox + 0.0001) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('المبلغ المسحوب أكبر من المبلغ الموجود في الصندوق'),
+        SnackBar(
+          content: Text(_loc.csWithdrawExceeds),
         ),
       );
       return;
@@ -219,25 +222,25 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
         setState(() => _submitting = false);
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('تعذر الإغلاق: $e')));
+        ).showSnackBar(SnackBar(content: Text(_loc.csCloseError(e.toString()))));
       }
       return;
     }
 
     final staffLabel = _shiftStaffName.isEmpty ? '—' : _shiftStaffName;
     final detailBuf = StringBuffer()
-      ..writeln('موظف الوردية: $staffLabel')
+      ..writeln(_loc.csDetailStaff(staffLabel))
       ..writeln(
-        'رصيد النظام لحظة الإغلاق: ${IraqiCurrencyFormat.formatInt(systemNow.round())} Fdj',
+        _loc.csDetailSystemBalanceClose(IraqiCurrencyFormat.formatInt(systemNow.round())),
       )
       ..writeln(
-        'المبلغ المُعلَن في الصندوق: ${IraqiCurrencyFormat.formatInt(inBox.round())} Fdj',
+        _loc.csDetailDeclaredCash(IraqiCurrencyFormat.formatInt(inBox.round())),
       )
       ..writeln(
-        'المبلغ المسحوب: ${IraqiCurrencyFormat.formatInt(withdraw.round())} Fdj',
+        _loc.csDetailWithdrawn(IraqiCurrencyFormat.formatInt(withdraw.round())),
       )
       ..writeln(
-        'المتبقّي في الصندوق بعد السحب: ${IraqiCurrencyFormat.formatInt(remaining.round())} Fdj',
+        _loc.csDetailRemaining(IraqiCurrencyFormat.formatInt(remaining.round())),
       );
     final detail = detailBuf.toString().trim();
 
@@ -248,7 +251,7 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
             .recordShiftLifecycleEvent(
               isClose: true,
               shiftId: widget.shiftId,
-              title: 'إغلاق وردية #${widget.shiftId}',
+              title: _loc.csCloseNotifTitle(widget.shiftId.toString()),
               body: detail,
             )
             .catchError((Object e, StackTrace st) {
@@ -294,7 +297,7 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
               Icon(Icons.lock_rounded, color: cs.primary, size: 26),
               Expanded(
                 child: Text(
-                  'إغلاق الوردية',
+                  _loc.csCloseShiftTitle,
                   textAlign: TextAlign.center,
                   style: theme.textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.w800,
@@ -327,7 +330,7 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              'ملخص هذه الوردية',
+                              _loc.csShiftSummary,
                               style: theme.textTheme.titleSmall?.copyWith(
                                 color: cs.onSurfaceVariant,
                                 fontWeight: FontWeight.w600,
@@ -339,7 +342,7 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
                                 Expanded(
                                   child: _StatChip(
                                     icon: Icons.receipt_long_rounded,
-                                    label: 'فواتير البيع',
+                                    label: _loc.csSalesInvoices,
                                     value: '${_counts['sales'] ?? 0}',
                                     color: const Color(0xFF059669),
                                   ),
@@ -348,7 +351,7 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
                                 Expanded(
                                   child: _StatChip(
                                     icon: Icons.undo_rounded,
-                                    label: 'فواتير المرتجع',
+                                    label: _loc.csReturnInvoices,
                                     value: '${_counts['returns'] ?? 0}',
                                     color: const Color(0xFFDC2626),
                                   ),
@@ -357,7 +360,7 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              'تأكيد بكلمة مرور موظف الوردية (اختياري)',
+                              _loc.csPasswordVerifyTitle,
                               style: theme.textTheme.labelLarge?.copyWith(
                                 color: cs.onSurfaceVariant,
                                 fontWeight: FontWeight.w600,
@@ -366,8 +369,8 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
                             const SizedBox(height: 6),
                             Text(
                               uLabel.isEmpty
-                                  ? 'أدخل كلمة مرور حساب الدخول إن أردت التحقق. اترك الحقل فارغاً لتخطّي التحقق'
-                                  : 'أدخل كلمة مرور الحساب «$uLabel» إن أردت التحقق. اترك الحقل فارغاً لتخطي التحقق',
+                                  ? _loc.csPasswordHintNoUser
+                                  : _loc.csPasswordHintWithName(uLabel),
                               style: theme.textTheme.bodySmall?.copyWith(
                                 height: 1.35,
                                 color: cs.onSurfaceVariant,
@@ -377,7 +380,7 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
                             AppInput(
                               label: ' ',
                               showLabel: false,
-                              hint: 'كلمة مرور الدخول (اختياري)',
+                              hint: _loc.csPasswordPlaceholder,
                               controller: _passwordVerifyCtrl,
                               focusNode: _focusPwd,
                               obscureText: true,
@@ -393,7 +396,7 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
                             ),
                             const SizedBox(height: 16),
                             _BalanceHero(
-                              label: 'رصيد الصندوق (حسب النظام)',
+                              label: _loc.csSystemBalance,
                               amountIQD:
                                   '${IraqiCurrencyFormat.formatInt(_systemBalance.round())} Fdj',
                               onRefresh: _reload,
@@ -408,7 +411,7 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
                             ),
                             const SizedBox(height: 16),
                             AppPriceInput(
-                              label: 'المبلغ في الصندوق',
+                              label: _loc.csCashInBox,
                               hint: '0 Fdj',
                               controller: _inBoxCtrl,
                               focusNode: _focusInBox,
@@ -417,14 +420,14 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
                                   _focusWithdraw.requestFocus(),
                               validator: (_) {
                                 if (_inParsed() < 0) {
-                                  return 'قيمة غير صالحة';
+                                  return _loc.csInvalidValue;
                                 }
                                 return null;
                               },
                               onParsedChanged: (_) => setState(() {}),
                             ),
                             AppPriceInput(
-                              label: 'المبلغ الذي تريد أخذه',
+                              label: _loc.csWithdrawAmount,
                               hint: '0 Fdj',
                               controller: _withdrawCtrl,
                               focusNode: _focusWithdraw,
@@ -435,7 +438,7 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
                               },
                               validator: (_) {
                                 if (_wdParsed() < 0) {
-                                  return 'قيمة غير صالحة';
+                                  return _loc.csInvalidValue;
                                 }
                                 return null;
                               },
@@ -461,7 +464,7 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        'المتبقي في الصندوق بعد السحب',
+                                        _loc.csRemainingAfterWithdraw,
                                         style: theme.textTheme.bodyMedium
                                             ?.copyWith(fontSize: 13),
                                       ),
@@ -495,7 +498,7 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
                       Navigator.of(context).pop<void>();
                     },
               style: TextButton.styleFrom(foregroundColor: cs.error),
-              child: const Text('إلغاء'),
+              child: Text(_loc.cancel),
             ),
             FilledButton(
               onPressed: (_loading || _submitting) ? null : _confirm,
@@ -513,12 +516,12 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
                         color: Colors.white,
                       ),
                     )
-                  : const Row(
+                  : Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.check_rounded, size: 22),
-                        SizedBox(width: 8),
-                        Text('تأكيد وإغلاق الوردية'),
+                        const Icon(Icons.check_rounded, size: 22),
+                        const SizedBox(width: 8),
+                        Text(_loc.csConfirmClose),
                       ],
                     ),
             ),
@@ -633,7 +636,7 @@ class _BalanceHero extends StatelessWidget {
                   color: Colors.white.withValues(alpha: 0.94),
                   size: 22,
                 ),
-                tooltip: 'تحديث الرصيد',
+                tooltip: AppLocalizations.of(context)!.csRefreshBalance,
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
               ),

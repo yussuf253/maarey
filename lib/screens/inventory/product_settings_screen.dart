@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/generated/app_localizations.dart';
 import '../../services/app_settings_repository.dart';
 import '../../services/inventory_product_settings.dart';
 import '../../services/product_repository.dart';
@@ -18,6 +19,8 @@ class ProductSettingsScreen extends StatefulWidget {
 }
 
 class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
+  AppLocalizations get _loc => AppLocalizations.of(context)!;
+
   final _repo = ProductRepository();
 
   final _settings = AppSettingsRepository.instance;
@@ -129,7 +132,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
       contentPadding: EdgeInsets.zero,
       dense: true,
       leading: IconButton(
-        tooltip: 'عدم التعامل بالضريبة — إيقاف إظهار حقل الضريبة',
+        tooltip: _loc.psTaxToggleTooltip,
         icon: Icon(
           Icons.block_rounded,
           color: canUse && on
@@ -144,9 +147,9 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
 
             : null,
       ),
-      title: const Text('إظهار حقل الضريبة'),
-      subtitle: const Text(
-        'في «إضافة منتج جديد». أيقونة المنع تعطّل الضريبة دفعة واحدة.',
+      title: Text(_loc.psShowTaxField),
+      subtitle: Text(
+        _loc.psTaxToggleDesc,
         style: TextStyle(fontSize: 12, height: 1.25),
       ),
       trailing: Switch(
@@ -171,7 +174,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
       contentPadding: EdgeInsets.zero,
       dense: true,
       leading: IconButton(
-        tooltip: 'عدم التعامل بالخصم — إيقاف إظهار حقول الخصم',
+        tooltip: _loc.psDiscountToggleTooltip,
         icon: Icon(
           Icons.money_off_rounded,
           color: canUse && on
@@ -186,9 +189,9 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
 
             : null,
       ),
-      title: const Text('إظهار حقول الخصم'),
-      subtitle: const Text(
-        'في «إضافة منتج جديد». أيقونة المنع تعطّل الخصم دفعة واحدة.',
+      title: Text(_loc.psShowDiscountFields),
+      subtitle: Text(
+        _loc.psDiscountToggleDesc,
         style: TextStyle(fontSize: 12, height: 1.25),
       ),
       trailing: Switch(
@@ -280,21 +283,21 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
       builder: (ctx) => Directionality(
         textDirection: Directionality.of(context),
         child: AlertDialog(
-          title: const Text('إعدادات ترقيم أذون التحويل'),
+          title: Text(_loc.psTransferSettingsTitle),
           content: TextField(
             controller: prefixCtrl,
             textAlign: TextAlign.right,
-            decoration: const InputDecoration(
-              labelText: 'بادئة اختيارية',
+            decoration: InputDecoration(
+              labelText: _loc.psOptionalPrefix,
               border: OutlineInputBorder(),
-              hintText: 'مثال: TR-',
+              hintText: _loc.psExamplePrefix,
             ),
           ),
           actions: [
 
             TextButton(
               onPressed: () => Navigator.pop(ctx),
-              child: const Text('إلغاء'),
+              child: Text(_loc.psCancel),
             ),
             FilledButton(
               onPressed: () async {
@@ -304,7 +307,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
 
                 if (ctx.mounted) Navigator.pop(ctx);
               },
-              child: const Text('حفظ'),
+              child: Text(_loc.psSave),
             ),
           ],
         ),
@@ -330,8 +333,8 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
         appBar: AppBar(
           backgroundColor: const Color(0xFF1E3A5F),
           foregroundColor: Colors.white,
-          title: const Text(
-            'إعدادات المنتجات',
+          title: Text(
+            _loc.psTitle,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
           ),
           leading: IconButton(
@@ -355,12 +358,11 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                         labelColor: cs.primary,
                         unselectedLabelColor: cs.onSurfaceVariant,
                         indicatorColor: cs.primary,
-                        tabs: const [
-
-                          Tab(text: 'تهيئة المنتجات'),
-                          Tab(text: 'تتبع المنتجات'),
-                          Tab(text: 'الأذون المخزنية'),
-                          Tab(text: 'القيم الافتراضية'),
+                        tabs: [
+                          Tab(text: _loc.psTabSetup),
+                          Tab(text: _loc.psTabTracking),
+                          Tab(text: _loc.psTabVouchers),
+                          Tab(text: _loc.psTabDefaults),
                         ],
                       ),
                     ),
@@ -390,14 +392,14 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
         children: [
 
           _header(
-            'تهيئة المنتجات',
-            'إدارة الترقيم التلقائي، وخيارات التسعير المتقدمة، ونظام الوحدات، والأصناف المجمعة.',
+            _loc.psSetupTitle,
+            _loc.psSetupDesc,
             cs,
           ),
           const SizedBox(height: 16),
           _sectionCard(
             cs,
-            title: 'الرقم التسلسلي للمنتج التالي',
+            title: _loc.psNextSkuTitle,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -407,7 +409,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                     controller: _nextSkuCtrl,
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.right,
-                    decoration: _outlineDec('الرقم التالي'),
+                    decoration: _outlineDec(_loc.psNextSkuDecoration),
                     onEditingComplete: _persist,
                   ),
                 ),
@@ -415,27 +417,27 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                 OutlinedButton.icon(
                   onPressed: () => _openNumberingDialog(forTransfer: false),
                   icon: const Icon(Icons.settings_outlined, size: 18),
-                  label: const Text('إعدادات الترقيم'),
+                  label: Text(_loc.psNumberingSettings),
                 ),
               ],
             ),
             footer:
 
-                'الرقم الذي سيُعرض كتلميح للمعرّف التالي. البادئة تُحفظ في إعدادات الترقيم.',
+                _loc.psNextSkuHint,
           ),
           const SizedBox(height: 12),
           _sectionCard(
             cs,
-            title: 'خيارات التسعير المتقدمة',
+            title: _loc.psAdvancedPricingTitle,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
 
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: Text(_d.advancedPricing ? 'مفعّل' : 'معطّل'),
-                  subtitle: const Text(
-                    'عند التفعيل: في «إضافة منتج جديد» يُقترح سعر البيع وأقل سعر من سعر الشراء حسب الهامش أدناه (قابل للتعديل يدوياً قبل الحفظ).',
+                  title: Text(_d.advancedPricing ? _loc.psEnabled : _loc.psDisabled),
+                  subtitle: Text(
+                    _loc.psAdvancedPricingDesc,
                     style: TextStyle(fontSize: 12, height: 1.35),
                   ),
                   value: _d.advancedPricing,
@@ -456,9 +458,9 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                           keyboardType: const TextInputType.numberWithOptions(
                             decimal: true,
                           ),
-                          decoration: _outlineDec('هامش الربح على التكلفة (%)')
+                          decoration: _outlineDec(_loc.psCostMarginDecoration)
 
-                              .copyWith(hintText: 'مثال: 25'),
+                              .copyWith(hintText: _loc.psCostMarginHint),
                           onSubmitted: (_) => _persistMarginSuggestFields(),
                         ),
                         const SizedBox(height: 12),
@@ -469,8 +471,8 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                             decimal: true,
                           ),
                           decoration: _outlineDec(
-                            'أقل سعر بيع كنسبة من سعر البيع (%)',
-                          ).copyWith(hintText: '100 = مساوٍ لسعر البيع'),
+                            _loc.psMinSellPriceDesc,
+                          ).copyWith(hintText: _loc.psMinSellPriceHint),
                           onSubmitted: (_) => _persistMarginSuggestFields(),
                         ),
                         const SizedBox(height: 8),
@@ -478,7 +480,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                           alignment: Alignment.centerLeft,
                           child: FilledButton.tonal(
                             onPressed: _persistMarginSuggestFields,
-                            child: const Text('حفظ أرقام الاقتراح'),
+                            child: Text(_loc.psSaveSuggestedPrices),
                           ),
                         ),
                       ],
@@ -487,14 +489,12 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                 ],
               ],
             ),
-            footer:
-
-                'مثال: تكلفة 10,000 وهامش 25٪ → سعر بيع مقترح 12,500. نسبة أقل سعر 100٪ تجعل أقل سعر = سعر البيع.',
+            footer: _loc.psPricingExample,
           ),
           const SizedBox(height: 12),
           _sectionCard(
             cs,
-            title: 'استخدام وحدات متعددة لكل صنف',
+            title: _loc.psMultiUnitTitle,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -511,7 +511,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                         );
                       },
                       icon: const Icon(Icons.open_in_new_rounded, size: 18),
-                      label: const Text('إدارة الوحدات'),
+                      label: Text(_loc.psManageUnits),
                     ),
                     const Spacer(),
                     Switch(
@@ -520,61 +520,61 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
 
                           _patch(_d.copyWith(multiUnitPerItem: v)),
                     ),
-                    Text(_d.multiUnitPerItem ? 'مفعّل' : 'معطّل'),
+                    Text(_d.multiUnitPerItem ? _loc.psEnabled : _loc.psDisabled),
                   ],
                 ),
               ],
             ),
             footer:
 
-                'السماح بشراء بوحدة وبيع بوحدة أخرى مع معاملات تحويل من قوالب الوحدات.',
+                _loc.psMultiUnitDesc,
           ),
           const SizedBox(height: 12),
           _sectionCard(
             cs,
-            title: 'الوحدة الافتراضية لعرض المخزون',
+            title: _loc.psDefaultStockDisplayTitle,
             child: Column(
               children: [
 
-                _unitRadio('base', 'الوحدة الأساسية لقالب الوحدة',
-                    'عرض المخزون بوحدة القالب الأساسية.'),
-                _unitRadio('sale', 'وحدة البيع',
-                    'عرض الرصيد بوحدة البيع الافتراضية.'),
-                _unitRadio('purchase', 'وحدة الشراء',
-                    'عرض الرصيد بوحدة الشراء الافتراضية.'),
+                _unitRadio('base', _loc.psUnitBase,
+                    _loc.psUnitBaseDesc),
+                _unitRadio('sale', _loc.psUnitSale,
+                    _loc.psUnitSaleDesc),
+                _unitRadio('purchase', _loc.psUnitPurchase,
+                    _loc.psUnitPurchaseDesc),
               ],
             ),
             footer:
 
-                'تحدد كيف يُعرض المخزون في التقارير والجرد عند تفعيل تعدد الوحدات.',
+                _loc.psStockDisplayDesc,
           ),
           const SizedBox(height: 12),
           _sectionCard(
             cs,
-            title: 'التجميعات والوحدات المركبة',
+            title: _loc.psBundlesTitle,
             child: SwitchListTile(
               contentPadding: EdgeInsets.zero,
-              title: Text(_d.bundlesEnabled ? 'مسموح' : 'غير مسموح'),
+              title: Text(_d.bundlesEnabled ? _loc.psBundlesAllowed : _loc.psBundlesNotAllowed),
               value: _d.bundlesEnabled,
               onChanged: (v) => _patch(_d.copyWith(bundlesEnabled: v)),
             ),
             footer:
 
-                'تعريف صنف مركّب من عدة أصناف وخصم المخزون عند التجميع أو البيع (يتطلب تطوير شاشات لاحقاً).',
+                _loc.psBundlesDesc,
           ),
           const SizedBox(height: 12),
           _sectionCard(
             cs,
-            title: 'سياسات شاشة إضافة المنتج',
+            title: _loc.psAddProductPoliciesTitle,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
 
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text('إظهار قسم التسعير المتقدم'),
-                  subtitle: const Text(
-                    'يتحكم بإظهار الضريبة والخصم وأقل سعر البيع وهامش الربح.',
+                  title: Text(_loc.psShowAdvancedPricing),
+                  subtitle: Text(
+                    _loc.psShowAdvancedPricingDesc,
                   ),
                   value: _d.addShowAdvancedPricing,
                   onChanged: (v) =>
@@ -583,7 +583,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                 ),
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text('إظهار حقل الباركود'),
+                  title: Text(_loc.psShowBarcodeField),
                   value: _d.addShowBarcodeField,
                   onChanged: (v) {
                     if (!v && _d.addRequireBarcode) {
@@ -602,7 +602,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                 ),
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text('الباركود إلزامي عند الحفظ'),
+                  title: Text(_loc.psBarcodeRequired),
                   value: _d.addRequireBarcode,
                   onChanged: _d.addShowBarcodeField
 
@@ -612,7 +612,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                 ),
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text('إظهار حقل صورة المنتج'),
+                  title: Text(_loc.psShowImageField),
                   value: _d.addShowImageField,
                   onChanged: (v) {
                     if (!v && _d.addRequireImage) {
@@ -631,7 +631,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                 ),
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text('صورة المنتج إلزامية'),
+                  title: Text(_loc.psImageRequired),
                   value: _d.addRequireImage,
                   onChanged: _d.addShowImageField
 
@@ -641,30 +641,30 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                 ),
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text('إظهار الحقول الإضافية'),
-                  subtitle: const Text(
-                    'مثل: ملاحظات داخلية، وسوم، الوزن، وتواريخ الإنتاج/الانتهاء.',
+                  title: Text(_loc.psShowExtraFields),
+                  subtitle: Text(
+                    _loc.psShowExtraFieldsDesc,
                   ),
                   value: _d.addShowExtraFields,
                   onChanged: (v) => _patch(_d.copyWith(addShowExtraFields: v)),
                 ),
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text('المورد إلزامي عند الحفظ'),
+                  title: Text(_loc.psSupplierRequired),
                   value: _d.addRequireSupplier,
                   onChanged: (v) => _patch(_d.copyWith(addRequireSupplier: v)),
                 ),
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text('المخزن إلزامي عند الحفظ'),
+                  title: Text(_loc.psWarehouseRequired),
                   value: _d.addRequireWarehouse,
                   onChanged: (v) => _patch(_d.copyWith(addRequireWarehouse: v)),
                 ),
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text('تفعيل تتبع المخزون افتراضياً'),
-                  subtitle: const Text(
-                    'ينعكس على حالة المفتاح عند فتح شاشة إضافة المنتج.',
+                  title: Text(_loc.psDefaultTrackingEnabled),
+                  subtitle: Text(
+                    _loc.psDefaultTrackingDesc,
                   ),
                   value: _d.addDefaultTrackInventory,
                   onChanged: (v) =>
@@ -677,7 +677,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
             ),
             footer:
 
-                'هذه السياسات تُطبّق مباشرة على شاشة «إضافة منتج جديد» دون التأثير على شاشة البيع.',
+                _loc.psAddProductPoliciesDesc,
           ),
         ],
       ),
@@ -727,8 +727,8 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
         children: [
 
           _header(
-            'تتبع المنتجات',
-            'إعداد طرق التتبع وسلوك النظام عند نفاد الكمية.',
+            _loc.psTrackingTitle,
+            _loc.psTrackingDesc,
             cs,
           ),
           const SizedBox(height: 16),
@@ -736,10 +736,10 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
             cs,
             title:
 
-                'تتبع بواسطة الرقم المسلسل، رقم التوصيلة، أو تاريخ الانتهاء',
+                _loc.psSerialBatchExpiryTitle,
             child: SwitchListTile(
               contentPadding: EdgeInsets.zero,
-              title: Text(_d.trackSerialBatchExpiry ? 'مفعّل' : 'معطّل'),
+              title: Text(_d.trackSerialBatchExpiry ? _loc.psEnabled : _loc.psDisabled),
               value: _d.trackSerialBatchExpiry,
               onChanged: (v) =>
 
@@ -747,36 +747,36 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
             ),
             footer:
 
-                'عند التفعيل يمكن تفعيل التتبع لكل منتج على حدة عند الإضافة.',
+                _loc.psSerialBatchExpiryDesc,
           ),
           const SizedBox(height: 12),
           _sectionCard(
             cs,
-            title: 'المخزون السالب',
+            title: _loc.psNegativeStockTitle,
             child: Column(
               children: [
 
                 _negRadio(
                   'stop_all',
-                  'إيقاف العمليات عند نفاد الكمية لجميع المنتجات',
-                  'منع البيع أو الصرف عند وصول المخزون إلى الصفر.',
+                  _loc.psNegativeStockStop,
+                  _loc.psNegativeStockStopDesc,
                 ),
                 _negRadio(
                   'tracked_only',
-                  'السماح فقط للمنتجات القابلة للتتبع بالكميات',
-                  'يُسمح بالبيع السالب أو الصرف حسب سياسة الصنف.',
+                  _loc.psNegativeStockTrackableOnly,
+                  _loc.psNegativeStockTrackableDesc,
                 ),
               ],
             ),
-            footer: 'يحدد سلوك النظام عند نفاد المخزون.',
+            footer: _loc.psNegativeStockDesc,
           ),
           const SizedBox(height: 12),
           _sectionCard(
             cs,
-            title: 'عرض الكمية الإجمالية والمتوفرة',
+            title: _loc.psShowTotalAvailableTitle,
             child: SwitchListTile(
               contentPadding: EdgeInsets.zero,
-              title: Text(_d.showTotalAndAvailable ? 'مفعّل' : 'معطّل'),
+              title: Text(_d.showTotalAndAvailable ? _loc.psEnabled : _loc.psDisabled),
               value: _d.showTotalAndAvailable,
               onChanged: (v) =>
 
@@ -784,7 +784,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
             ),
             footer:
 
-                'عرض إجمالي الكمية مقابل المتاح بعد الحجوزات (عند تفعيل الحجز لاحقاً).',
+                _loc.psShowTotalAvailableDesc,
           ),
         ],
       ),
@@ -834,17 +834,17 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
         children: [
 
           _header(
-            'الأذون المخزنية',
-            'إنشاء طلبات مخزنية وترقيم أذون التحويل وربطها بالمبيعات والمشتريات.',
+            _loc.psVouchersTitle,
+            _loc.psVouchersDesc,
             cs,
           ),
           const SizedBox(height: 16),
           _sectionCard(
             cs,
-            title: 'الطلبات المخزنية',
+            title: _loc.psInventoryRequestsTitle,
             child: SwitchListTile(
               contentPadding: EdgeInsets.zero,
-              title: Text(_d.inventoryRequestsEnabled ? 'مفعّل' : 'معطّل'),
+              title: Text(_d.inventoryRequestsEnabled ? _loc.psEnabled : _loc.psDisabled),
               value: _d.inventoryRequestsEnabled,
               onChanged: (v) =>
 
@@ -852,12 +852,12 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
             ),
             footer:
 
-                'تمكين الأقسام من رفع طلبات مخزنية لمراجعتها. الصلاحيات تُضبط من أدوار المستخدمين عند توفرها.',
+                _loc.psInventoryRequestsDesc,
           ),
           const SizedBox(height: 12),
           _sectionCard(
             cs,
-            title: 'الرقم التسلسلي لإذن التحويل المخزني التالي',
+            title: _loc.psTransferVoucherNextTitle,
             child: Row(
               children: [
 
@@ -865,7 +865,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                   child: TextField(
                     controller: _nextTransferCtrl,
                     textAlign: TextAlign.right,
-                    decoration: _outlineDec('الرقم'),
+                    decoration: _outlineDec(_loc.psTransferVoucherNextDecoration),
                     onEditingComplete: _persist,
                   ),
                 ),
@@ -873,33 +873,33 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                 OutlinedButton.icon(
                   onPressed: () => _openNumberingDialog(forTransfer: true),
                   icon: const Icon(Icons.settings_outlined, size: 18),
-                  label: const Text('إعدادات الترقيم'),
+                  label: Text(_loc.psNumberingSettings),
                 ),
               ],
             ),
-            footer: 'الرقم التالي المقترح لأذون التحويل.',
+            footer: _loc.psTransferVoucherNextDesc,
           ),
           const SizedBox(height: 12),
           _sectionCard(
             cs,
-            title: 'الأذون المخزنية لفواتير المبيعات',
+            title: _loc.psSalesVoucherTitle,
             child: SwitchListTile(
               contentPadding: EdgeInsets.zero,
-              title: Text(_d.salesVoucherPerm ? 'مفعّل' : 'معطّل'),
+              title: Text(_d.salesVoucherPerm ? _loc.psEnabled : _loc.psDisabled),
               value: _d.salesVoucherPerm,
               onChanged: (v) => _patch(_d.copyWith(salesVoucherPerm: v)),
             ),
             footer:
 
-                'عند التفعيل يُنشأ إذن صرف يحتاج اعتماداً قبل خصم المخزون.',
+                _loc.psSalesVoucherDesc,
           ),
           const SizedBox(height: 12),
           _sectionCard(
             cs,
-            title: 'الأذون المخزنية لفواتير الشراء',
+            title: _loc.psPurchaseVoucherTitle,
             child: SwitchListTile(
               contentPadding: EdgeInsets.zero,
-              title: Text(_d.purchaseVoucherPerm ? 'مفعّل' : 'معطّل'),
+              title: Text(_d.purchaseVoucherPerm ? _loc.psEnabled : _loc.psDisabled),
               value: _d.purchaseVoucherPerm,
               onChanged: (v) =>
 
@@ -907,7 +907,7 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
             ),
             footer:
 
-                'عند التفعيل يُنشأ إذن إدخال يحتاج اعتماداً قبل إضافة المخزون.',
+                _loc.psPurchaseVoucherDesc,
           ),
         ],
       ),
@@ -922,38 +922,38 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
         children: [
 
           _header(
-            'القيم الافتراضية للنظام',
-            'قيم تُقترح تلقائياً للمستودعات والمنتجات والضرائب.',
+            _loc.psDefaultsTitle,
+            _loc.psDefaultsDesc,
             cs,
           ),
           const SizedBox(height: 16),
           _sectionCard(
             cs,
-            title: 'الحساب الفرعي الافتراضي',
+            title: _loc.psDefaultSubAccountTitle,
             child: DropdownButtonFormField<String>(
               value: _d.subAccountLabel.isEmpty ? null : _d.subAccountLabel,
               decoration: const InputDecoration(border: OutlineInputBorder()),
-              hint: const Text('من فضلك اختر'),
-              items: const [
+              hint: Text(_loc.psPleaseChoose),
+              items: [
 
-                DropdownMenuItem(value: '', child: Text('— بدون —')),
+                DropdownMenuItem(value: '', child: Text(_loc.psNone)),
                 DropdownMenuItem(
-                    value: 'مخزون_عام', child: Text('مخزون عام')),
+                    value: 'مخزون_عام', child: Text(_loc.psGeneralInventory)),
                 DropdownMenuItem(
-                    value: 'مواد_خام', child: Text('مواد خام')),
+                    value: 'مواد_خام', child: Text(_loc.psRawMaterials)),
                 DropdownMenuItem(
-                    value: 'تجاري', child: Text('تجاري')),
+                    value: 'تجاري', child: Text(_loc.psCommercial)),
               ],
               onChanged: (v) =>
 
                   _patch(_d.copyWith(subAccountLabel: v ?? '')),
             ),
-            footer: 'يُستخدم كمرجع محاسبي عند ربط المخزون بالحسابات.',
+            footer: _loc.psDefaultSubAccountDesc,
           ),
           const SizedBox(height: 12),
           _sectionCard(
             cs,
-            title: 'المستودع الافتراضي',
+            title: _loc.psDefaultWarehouseTitle,
             child: Row(
               children: [
 
@@ -966,19 +966,19 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                     );
                   },
                   icon: const Icon(Icons.open_in_new_rounded, size: 18),
-                  label: const Text('إدارة المستودعات'),
+                  label: Text(_loc.psManageWarehouses),
                 ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: DropdownButtonFormField<int?>(
                     value: _d.defaultWarehouseId,
                     decoration: const InputDecoration(border: OutlineInputBorder()),
-                    hint: const Text('اختر مستودعاً'),
+                    hint: Text(_loc.psChooseWarehouse),
                     items: [
 
-                      const DropdownMenuItem<int?>(
+                      DropdownMenuItem<int?>(
                         value: null,
-                        child: Text('— بدون —'),
+                        child: Text(_loc.psNone),
                       ),
                       ..._warehouses.map(
                         (w) => DropdownMenuItem<int?>(
@@ -998,12 +998,12 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                 ),
               ],
             ),
-            footer: 'يُقترح عند إضافة منتجات وحركات مخزون جديدة.',
+            footer: _loc.psDefaultWarehouseDesc,
           ),
           const SizedBox(height: 12),
           _sectionCard(
             cs,
-            title: 'قائمة الأسعار الافتراضية',
+            title: _loc.psDefaultPriceListTitle,
             child: Row(
               children: [
 
@@ -1016,19 +1016,19 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                     );
                   },
                   icon: const Icon(Icons.open_in_new_rounded, size: 18),
-                  label: const Text('إدارة القوائم'),
+                  label: Text(_loc.psManagePriceLists),
                 ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: DropdownButtonFormField<int?>(
                     value: _d.defaultPriceListId,
                     decoration: const InputDecoration(border: OutlineInputBorder()),
-                    hint: const Text('من فضلك اختر'),
+                    hint: Text(_loc.psPleaseChoose),
                     items: [
 
-                      const DropdownMenuItem<int?>(
+                      DropdownMenuItem<int?>(
                         value: null,
-                        child: Text('— بدون —'),
+                        child: Text(_loc.psNone),
                       ),
                       ..._priceLists.map(
                         (w) => DropdownMenuItem<int?>(
@@ -1048,26 +1048,26 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                 ),
               ],
             ),
-            footer: 'تُستخدم كقائمة أسعار افتراضية للفرع الحالي عند توفر الربط.',
+            footer: _loc.psDefaultPriceListDesc,
           ),
           const SizedBox(height: 12),
           _sectionCard(
             cs,
-            title: 'الضريبة الافتراضية 1',
+            title: _loc.psDefaultTax1Title,
             child: Row(
               children: [
 
                 OutlinedButton(
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
+                      SnackBar(
                         content: Text(
-                          'نِسَب الضريبة تُضبط لكل منتج أو من إعدادات الفاتورة.',
+                          _loc.psTaxRatesDesc,
                         ),
                       ),
                     );
                   },
-                  child: const Text('إدارة الضرائب'),
+                  child: Text(_loc.psManageTaxes),
                 ),
                 const SizedBox(width: 8),
                 Expanded(
@@ -1086,26 +1086,26 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                 ),
               ],
             ),
-            footer: 'تُقترح للمنتجات الجديدة ومتوافقة مع حقل الضريبة في المنتج.',
+            footer: _loc.psDefaultTax1Desc,
           ),
           const SizedBox(height: 12),
           _sectionCard(
             cs,
-            title: 'الضريبة الافتراضية 2',
+            title: _loc.psDefaultTax2Title,
             child: Row(
               children: [
 
                 OutlinedButton(
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
+                      SnackBar(
                         content: Text(
-                          'للاستخدام المزدوج عند دعم ضريبتين لاحقاً.',
+                          _loc.psDefaultTax2Desc,
                         ),
                       ),
                     );
                   },
-                  child: const Text('إدارة الضرائب'),
+                  child: Text(_loc.psManageTaxes),
                 ),
                 const SizedBox(width: 8),
                 Expanded(
@@ -1129,40 +1129,40 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
           const SizedBox(height: 12),
           _sectionCard(
             cs,
-            title: 'طريقة احتساب تكلفة المرتجعات',
+            title: _loc.psReturnCostMethodTitle,
             child: Column(
               children: [
 
                 _simpleRadio(
                   'sell_price',
-                  'حسب سعر البيع',
-                  'استخدام سعر البيع من فاتورة المبيعات.',
+                  _loc.psReturnBySalePrice,
+                  _loc.psReturnBySalePriceDesc,
                 ),
                 _simpleRadio(
                   'last_avg',
-                  'حسب آخر متوسط للتكلفة',
-                  'استخدام متوسط التكلفة عند إنشاء المرتجع.',
+                  _loc.psReturnByAvgCost,
+                  _loc.psReturnByAvgCostDesc,
                 ),
               ],
             ),
-            footer: 'يُطبَّق عند معالجة مرتجعات المبيعات.',
+            footer: _loc.psReturnCostDesc,
           ),
           const SizedBox(height: 12),
           _sectionCard(
             cs,
-            title: 'طبيعة مبيعات النشاط',
+            title: _loc.psBusinessNatureTitle,
             child: Column(
               children: [
 
                 _natureRadio(
-                    'products', 'المنتجات فقط', 'مناسب للمخزون الفعلي.'),
+                    'products', _loc.psNatureProducts, _loc.psNatureProductsDesc),
                 _natureRadio(
-                    'services', 'الخدمات فقط', 'أنشطة تعتمد على الوقت أو المشاريع.'),
-                _natureRadio('both', 'منتجات وخدمات',
-                    'دمج بين الصنفين في النظام.'),
+                    'services', _loc.psNatureServices, _loc.psNatureServicesDesc),
+                _natureRadio('both', _loc.psNatureBoth,
+                    _loc.psNatureBothDesc),
               ],
             ),
-            footer: 'يحدد التركيز الافتراضي في شاشات المخزون والفوترة.',
+            footer: _loc.psBusinessNatureDesc,
           ),
         ],
       ),

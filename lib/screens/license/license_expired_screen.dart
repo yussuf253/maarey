@@ -48,8 +48,8 @@ class _LicenseExpiredScreenState extends State<LicenseExpiredScreen> {
     }
     return widget.state.message ??
         (_isSuspended
-            ? 'تم إيقاف حسابك. تواصل مع الدعم الفني.'
-            : 'انتهى اشتراكك. جدّد للمتابعة.');
+            ? _loc.licAccountSuspended
+            : _loc.licSubscriptionEnded);
   }
 
   @override
@@ -168,8 +168,8 @@ class _LicenseExpiredScreenState extends State<LicenseExpiredScreen> {
                         _InfoRow(
                           icon:  Icons.calendar_today_outlined,
                           label: widget.state.expiresAt != null
-                              ? 'انتهاء الاشتراك'
-                              : 'انتهاء التجربة',
+                              ? _loc.licSubscriptionExpiry
+                              : _loc.licTrialExpiry,
                           value: _fmtDate(
                             widget.state.expiresAt ?? widget.state.trialEndsAt,
                           ),
@@ -190,8 +190,8 @@ class _LicenseExpiredScreenState extends State<LicenseExpiredScreen> {
                             icon: const Icon(Icons.upgrade_outlined),
                             label: Text(
                               _isDeviceLimitExceeded
-                                  ? 'ترقية الخطة لإضافة أجهزة'
-                                  : 'تجديد الاشتراك',
+                                  ? _loc.licUpgradeForDevices
+                                  : _loc.licRenewSubscription,
                               style: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,

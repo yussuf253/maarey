@@ -7,7 +7,7 @@ import '../utils/target_platform_helpers.dart';
 
 /// لوحة الحاسبة — لوحة أزرار + عرض بتنسيق الآلاف، ناتج صحيح للدينار (تُقطع الكسور عند =).
 ///
-/// لا يستخدم [÷] في الشبكة وفق تصميم واجهة naboo.
+/// لا يستخدم [÷] في الشبكة وفق تصميم واجهة maarey.
 class CalculatorPanel extends StatefulWidget {
   const CalculatorPanel({super.key, this.onCopySnack});
 
