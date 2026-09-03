@@ -20068,7 +20068,7 @@ abstract class AppLocalizations {
   /// No description provided for @cdRecordPayment.
   ///
   /// In ar, this message translates to:
-  /// **'تسديد دين'**
+  /// **'تسجيل دفعة'**
   String get cdRecordPayment;
 
   /// No description provided for @cdRemainingCurrent.
@@ -20122,8 +20122,8 @@ abstract class AppLocalizations {
   /// No description provided for @cdPaymentFailed.
   ///
   /// In ar, this message translates to:
-  /// **'فشل تسجيل الدفعة'**
-  String get cdPaymentFailed;
+  /// **'تعذّر إكمال التسديد: {error}'**
+  String cdPaymentFailed(Object error);
 
   /// No description provided for @cdInvoiceHistory.
   ///
@@ -25380,6 +25380,1488 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'لا توجد فواتير دين مسجّلة'**
   String get debtsNoCreditInvoices;
+
+  /// No description provided for @instDueAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'المستحق: {amount} Fdj'**
+  String instDueAmount(Object amount);
+
+  /// No description provided for @instFullBoxOnly.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُسجَّل كاملاً في الصندوق (لا دفع جزئي حالياً).'**
+  String get instFullBoxOnly;
+
+  /// No description provided for @instMustPayFull.
+  ///
+  /// In ar, this message translates to:
+  /// **'يجب تسديد قيمة القسط كاملة ({amount} Fdj)'**
+  String instMustPayFull(Object amount);
+
+  /// No description provided for @instPayFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر التسجيل (قد يكون القسط مدفوعاً)'**
+  String get instPayFailed;
+
+  /// No description provided for @instCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'عميل'**
+  String get instCustomer;
+
+  /// No description provided for @instLinkedToCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتبط بسجل العملاء #{id}'**
+  String instLinkedToCustomer(Object id);
+
+  /// No description provided for @instRegisteredBalance.
+  ///
+  /// In ar, this message translates to:
+  /// **'رصيد العميل المسجّل: {amount} Fdj'**
+  String instRegisteredBalance(Object amount);
+
+  /// No description provided for @instNoCustomerMatch.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد تطابق في جدول العملاء — الاسم مأخوذ من الفاتورة فقط. يمكنك ربط عميل عند إنشاء خطة جديدة من شاشة «إضافة خطة».'**
+  String get instNoCustomerMatch;
+
+  /// No description provided for @instInvoiceNumber.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الفاتورة: #{id}'**
+  String instInvoiceNumber(Object id);
+
+  /// No description provided for @instDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ'**
+  String get instDate;
+
+  /// No description provided for @instTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإجمالي'**
+  String get instTotal;
+
+  /// No description provided for @instAdvanceCollected.
+  ///
+  /// In ar, this message translates to:
+  /// **'المقدم المحصّل: {amount} Fdj'**
+  String instAdvanceCollected(Object amount);
+
+  /// No description provided for @instSaleQty.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع: {qty}'**
+  String instSaleQty(Object qty);
+
+  /// No description provided for @instStock.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخزون: {qty}'**
+  String instStock(Object qty);
+
+  /// No description provided for @instInterestRate.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة الفائدة'**
+  String get instInterestRate;
+
+  /// No description provided for @instPlannedMonths.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الأشهر'**
+  String get instPlannedMonths;
+
+  /// No description provided for @instFinancedAtSale.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ المموّل'**
+  String get instFinancedAtSale;
+
+  /// No description provided for @instInterestAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيمة الفائدة'**
+  String get instInterestAmount;
+
+  /// No description provided for @instTotalWithInterest.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإجمالي مع الفائدة'**
+  String get instTotalWithInterest;
+
+  /// No description provided for @instSuggestedMonthly.
+  ///
+  /// In ar, this message translates to:
+  /// **'القسط الشهري المقترح'**
+  String get instSuggestedMonthly;
+
+  /// No description provided for @instEstimateNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه: الأرقام أعلاه تقدير عند البيع. جدول الأقساط الفعلي يُوزَّع على «إجمالي الفاتورة − المقدّم» وقد يختلف عن القسط المقترح بالفلس.'**
+  String get instEstimateNote;
+
+  /// No description provided for @instAdvance.
+  ///
+  /// In ar, this message translates to:
+  /// **'مقدّم'**
+  String get instAdvance;
+
+  /// No description provided for @instFromSchedule.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقساط من الجدول'**
+  String get instFromSchedule;
+
+  /// No description provided for @instPaid.
+  ///
+  /// In ar, this message translates to:
+  /// **'المدفوع'**
+  String get instPaid;
+
+  /// No description provided for @instRemaining.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتبقي'**
+  String get instRemaining;
+
+  /// No description provided for @instInstallment.
+  ///
+  /// In ar, this message translates to:
+  /// **'القسط {index}'**
+  String instInstallment(Object index);
+
+  /// No description provided for @instDueDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاستحقاق'**
+  String get instDueDate;
+
+  /// No description provided for @instPaidOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'سُدد'**
+  String get instPaidOn;
+
+  /// No description provided for @instPayButton.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسديد'**
+  String get instPayButton;
+
+  /// No description provided for @mpImportSuccess.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم الاستيراد بنجاح'**
+  String get mpImportSuccess;
+
+  /// No description provided for @mpBundledSuccess.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم استيراد المواد المضمّنة بنجاح'**
+  String get mpBundledSuccess;
+
+  /// No description provided for @mpErrorEmptyPath.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب مسار ملف قاعدة البيانات أولاً'**
+  String get mpErrorEmptyPath;
+
+  /// No description provided for @mpErrorMissingFile.
+  ///
+  /// In ar, this message translates to:
+  /// **'الملف غير موجود. إذا كان الملف داخل RAR/ZIP لازم تفك الضغط وتستخرج ملف .db أولاً، ثم اكتب مساره أو اسمه.'**
+  String get mpErrorMissingFile;
+
+  /// No description provided for @mpErrorNoProducts.
+  ///
+  /// In ar, this message translates to:
+  /// **'الملف لا يحتوي جدول المنتجات (products). اختر ملف قاعدة صحيح'**
+  String get mpErrorNoProducts;
+
+  /// No description provided for @mpErrorReadFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر قراءة الملف. تأكد أنه قاعدة SQLite صالحة وغير محمية'**
+  String get mpErrorReadFailed;
+
+  /// No description provided for @mpErrorGeneric.
+  ///
+  /// In ar, this message translates to:
+  /// **'حدث خطأ أثناء الاستيراد: {s}'**
+  String mpErrorGeneric(Object s);
+
+  /// No description provided for @mpTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'استيراد مواد وأسعار'**
+  String get mpTitle;
+
+  /// No description provided for @mpBundledDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'يستورد هذا الخيار قاعدة مواد جاهزة مضمّنة داخل التطبيق (≈ 3500 صنف من أشهر منتجات السوق مع أسعارها). يفضل مراجعة الأسعار بعد الاستيراد لأن أسعار السوق تتغير.'**
+  String get mpBundledDesc;
+
+  /// No description provided for @mpBundledRestoreTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'استعادة قاعدة المواد المضمّنة'**
+  String get mpBundledRestoreTitle;
+
+  /// No description provided for @mpBundledRestoreDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'بضغطة واحدة: يقوم التطبيق بفك ضغط الملف المضمّن وإضافة المواد إلى مخزنك. إذا كان أحد الأصناف موجوداً مسبقاً بنفس الباركود، سيتم تحديث اسمه/سعره/تصنيفه فقط (بدون تكرار).'**
+  String get mpBundledRestoreDesc;
+
+  /// No description provided for @mpBundledButtonBusy.
+  ///
+  /// In ar, this message translates to:
+  /// **'جاري الاستيراد…'**
+  String get mpBundledButtonBusy;
+
+  /// No description provided for @mpBundledButtonIdle.
+  ///
+  /// In ar, this message translates to:
+  /// **'استيراد المواد المضمّنة'**
+  String get mpBundledButtonIdle;
+
+  /// No description provided for @mpAdvancedTileTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'استيراد متقدّم: من ملف خارجي'**
+  String get mpAdvancedTileTitle;
+
+  /// No description provided for @mpAdvancedTileSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إذا عندك ملف Market POS بصيغة .db خارج التطبيق'**
+  String get mpAdvancedTileSubtitle;
+
+  /// No description provided for @mpDbPathLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسار ملف قاعدة البيانات'**
+  String get mpDbPathLabel;
+
+  /// No description provided for @mpDbPathHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال: /Users/you/Documents/supermarket_backup_2026-04-15_20-05-15.db'**
+  String get mpDbPathHint;
+
+  /// No description provided for @mpImportExternal.
+  ///
+  /// In ar, this message translates to:
+  /// **'استيراد من ملف خارجي'**
+  String get mpImportExternal;
+
+  /// No description provided for @mpTipHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تلميح: يمكنك كتابة اسم الملف فقط وسيتم البحث عنه داخل Documents/Downloads/Desktop.'**
+  String get mpTipHint;
+
+  /// No description provided for @mpResultTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'نتيجة الاستيراد'**
+  String get mpResultTitle;
+
+  /// No description provided for @mpResultTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي السجلات المقروءة: {total}'**
+  String mpResultTotal(Object total);
+
+  /// No description provided for @mpResultNew.
+  ///
+  /// In ar, this message translates to:
+  /// **'مواد جديدة: {inserted}'**
+  String mpResultNew(Object inserted);
+
+  /// No description provided for @mpResultUpdated.
+  ///
+  /// In ar, this message translates to:
+  /// **'مواد تم تحديثها: {updated}'**
+  String mpResultUpdated(Object updated);
+
+  /// No description provided for @mpResultSkipped.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم تجاوزها: {skipped}'**
+  String mpResultSkipped(Object skipped);
+
+  /// No description provided for @mpResultCategories.
+  ///
+  /// In ar, this message translates to:
+  /// **'تصنيفات تمت إضافتها: {createdCategories}'**
+  String mpResultCategories(Object createdCategories);
+
+  /// No description provided for @cdTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل دين العميل'**
+  String get cdTitle;
+
+  /// No description provided for @cdOriginalAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ الأصلي'**
+  String get cdOriginalAmount;
+
+  /// No description provided for @cdCurrentBalance.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرصيد الحالي'**
+  String get cdCurrentBalance;
+
+  /// No description provided for @cdInstallments.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأقساط'**
+  String get cdInstallments;
+
+  /// No description provided for @cdPaid.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدفوع'**
+  String get cdPaid;
+
+  /// No description provided for @cdRemaining.
+  ///
+  /// In ar, this message translates to:
+  /// **'متبقي'**
+  String get cdRemaining;
+
+  /// No description provided for @cdDueDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ الاستحقاق'**
+  String get cdDueDate;
+
+  /// No description provided for @cdOverdue.
+  ///
+  /// In ar, this message translates to:
+  /// **'متأخر'**
+  String get cdOverdue;
+
+  /// No description provided for @cdPaidOn.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم الدفع يوم'**
+  String get cdPaidOn;
+
+  /// No description provided for @cdStatus.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحالة'**
+  String get cdStatus;
+
+  /// No description provided for @cdPaidStatus.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدفوع'**
+  String get cdPaidStatus;
+
+  /// No description provided for @cdPendingStatus.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيد الانتظار'**
+  String get cdPendingStatus;
+
+  /// No description provided for @cdOverdueStatus.
+  ///
+  /// In ar, this message translates to:
+  /// **'متأخر'**
+  String get cdOverdueStatus;
+
+  /// No description provided for @cdPaidInstallments.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقساط مدفوعة'**
+  String get cdPaidInstallments;
+
+  /// No description provided for @cdPendingInstallments.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقساط قيد الانتظار'**
+  String get cdPendingInstallments;
+
+  /// No description provided for @cdOverdueInstallments.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقساط متأخرة'**
+  String get cdOverdueInstallments;
+
+  /// No description provided for @cdNoInstallments.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد أقساط'**
+  String get cdNoInstallments;
+
+  /// No description provided for @cdTotalPaid.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي المدفوع'**
+  String get cdTotalPaid;
+
+  /// No description provided for @cdTotalRemaining.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي المتبقي'**
+  String get cdTotalRemaining;
+
+  /// No description provided for @cdConfirmPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكيد الدفعة'**
+  String get cdConfirmPayment;
+
+  /// No description provided for @cdPaymentAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'مبلغ الدفعة'**
+  String get cdPaymentAmount;
+
+  /// No description provided for @cfTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'التفاصيل المالية'**
+  String get cfTitle;
+
+  /// No description provided for @cfTotalPurchases.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي المشتريات'**
+  String get cfTotalPurchases;
+
+  /// No description provided for @cfTotalPaid.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي المدفوع'**
+  String get cfTotalPaid;
+
+  /// No description provided for @cfTotalDebt.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي الدين'**
+  String get cfTotalDebt;
+
+  /// No description provided for @cfLastPurchase.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر مشتريات'**
+  String get cfLastPurchase;
+
+  /// No description provided for @cfAverageOrder.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوسط قيمة الطلب'**
+  String get cfAverageOrder;
+
+  /// No description provided for @cfPurchaseCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد المشتريات'**
+  String get cfPurchaseCount;
+
+  /// No description provided for @cfInvoiceHistory.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل الفواتير'**
+  String get cfInvoiceHistory;
+
+  /// No description provided for @cfPaymentHistory.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل الدفعات'**
+  String get cfPaymentHistory;
+
+  /// No description provided for @cfNoInvoices.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد فواتير'**
+  String get cfNoInvoices;
+
+  /// No description provided for @cfNoPayments.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد دفعات'**
+  String get cfNoPayments;
+
+  /// No description provided for @cfDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ'**
+  String get cfDate;
+
+  /// No description provided for @cfAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ'**
+  String get cfAmount;
+
+  /// No description provided for @cfBalance.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرصيد'**
+  String get cfBalance;
+
+  /// No description provided for @cfInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة'**
+  String get cfInvoice;
+
+  /// No description provided for @cfPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'دفعة'**
+  String get cfPayment;
+
+  /// No description provided for @cfViewDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض التفاصيل'**
+  String get cfViewDetails;
+
+  /// No description provided for @cfNoData.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد بيانات مالية متاحة'**
+  String get cfNoData;
+
+  /// No description provided for @cfDebtWarning.
+  ///
+  /// In ar, this message translates to:
+  /// **'دين مستحق'**
+  String get cfDebtWarning;
+
+  /// No description provided for @cfCreditAvailable.
+  ///
+  /// In ar, this message translates to:
+  /// **'رصيد متاح'**
+  String get cfCreditAvailable;
+
+  /// No description provided for @cfContactInfo.
+  ///
+  /// In ar, this message translates to:
+  /// **'معلومات الاتصال'**
+  String get cfContactInfo;
+
+  /// No description provided for @saTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'حسابات الموردين'**
+  String get saTitle;
+
+  /// No description provided for @saTotalDebt.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي الديون'**
+  String get saTotalDebt;
+
+  /// No description provided for @saTotalPaid.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي المدفوع'**
+  String get saTotalPaid;
+
+  /// No description provided for @saOutstanding.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرصيد المستحق'**
+  String get saOutstanding;
+
+  /// No description provided for @saPaymentHistory.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل الدفعات'**
+  String get saPaymentHistory;
+
+  /// No description provided for @saRecordPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل دفعة'**
+  String get saRecordPayment;
+
+  /// No description provided for @saInvoiceHistory.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل المشتريات'**
+  String get saInvoiceHistory;
+
+  /// No description provided for @saNoSuppliers.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد موردون'**
+  String get saNoSuppliers;
+
+  /// No description provided for @saNoPayments.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد دفعات مسجلة'**
+  String get saNoPayments;
+
+  /// No description provided for @saNoInvoices.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد فواتير شراء'**
+  String get saNoInvoices;
+
+  /// No description provided for @saSupplierName.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم المورد'**
+  String get saSupplierName;
+
+  /// No description provided for @saDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'التاريخ'**
+  String get saDate;
+
+  /// No description provided for @saAmount.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ'**
+  String get saAmount;
+
+  /// No description provided for @saRemaining.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتبقي'**
+  String get saRemaining;
+
+  /// No description provided for @saPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'دفعة'**
+  String get saPayment;
+
+  /// No description provided for @saPurchase.
+  ///
+  /// In ar, this message translates to:
+  /// **'شراء'**
+  String get saPurchase;
+
+  /// No description provided for @saViewDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض التفاصيل'**
+  String get saViewDetails;
+
+  /// No description provided for @saPayDebt.
+  ///
+  /// In ar, this message translates to:
+  /// **'سداد الدين'**
+  String get saPayDebt;
+
+  /// No description provided for @saDebtLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'دين'**
+  String get saDebtLabel;
+
+  /// No description provided for @saPaidLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدفوع'**
+  String get saPaidLabel;
+
+  /// No description provided for @isTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات المخزون'**
+  String get isTitle;
+
+  /// No description provided for @isStockTracking.
+  ///
+  /// In ar, this message translates to:
+  /// **'تتبع المخزون'**
+  String get isStockTracking;
+
+  /// No description provided for @isStockTrackingDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفعيل تتبع كميات المنتجات'**
+  String get isStockTrackingDesc;
+
+  /// No description provided for @isBarcodeRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'الباركود مطلوب'**
+  String get isBarcodeRequired;
+
+  /// No description provided for @isBarcodeRequiredDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'طلب الباركود عند إضافة المنتجات'**
+  String get isBarcodeRequiredDesc;
+
+  /// No description provided for @isAutoDeduct.
+  ///
+  /// In ar, this message translates to:
+  /// **'خصم تلقائي للمخزون'**
+  String get isAutoDeduct;
+
+  /// No description provided for @isAutoDeductDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'خصم المخزون تلقائياً عند تأكيد الفاتورة'**
+  String get isAutoDeductDesc;
+
+  /// No description provided for @isLowStockAlert.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيه المخزون المنخفض'**
+  String get isLowStockAlert;
+
+  /// No description provided for @isLowStockAlertDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض تحذير عند انخفاض المخزون عن الحد'**
+  String get isLowStockAlertDesc;
+
+  /// No description provided for @isThreshold.
+  ///
+  /// In ar, this message translates to:
+  /// **'حد التنبيه'**
+  String get isThreshold;
+
+  /// No description provided for @isDefaultWarehouse.
+  ///
+  /// In ar, this message translates to:
+  /// **'المخزن الافتراضي'**
+  String get isDefaultWarehouse;
+
+  /// No description provided for @isUnits.
+  ///
+  /// In ar, this message translates to:
+  /// **'وحدات القياس'**
+  String get isUnits;
+
+  /// No description provided for @isSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ الإعدادات'**
+  String get isSave;
+
+  /// No description provided for @isSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم حفظ الإعدادات'**
+  String get isSaved;
+
+  /// No description provided for @isWeightUnit.
+  ///
+  /// In ar, this message translates to:
+  /// **'وحدة الوزن'**
+  String get isWeightUnit;
+
+  /// No description provided for @isLengthUnit.
+  ///
+  /// In ar, this message translates to:
+  /// **'وحدة الطول'**
+  String get isLengthUnit;
+
+  /// No description provided for @isVolumeUnit.
+  ///
+  /// In ar, this message translates to:
+  /// **'وحدة الحجم'**
+  String get isVolumeUnit;
+
+  /// No description provided for @asTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة خدمة'**
+  String get asTitle;
+
+  /// No description provided for @asEditTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل الخدمة'**
+  String get asEditTitle;
+
+  /// No description provided for @asNameLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الخدمة'**
+  String get asNameLabel;
+
+  /// No description provided for @asNameHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل اسم الخدمة'**
+  String get asNameHint;
+
+  /// No description provided for @asPriceLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'السعر'**
+  String get asPriceLabel;
+
+  /// No description provided for @asPriceHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل السعر'**
+  String get asPriceHint;
+
+  /// No description provided for @asDescLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوصف'**
+  String get asDescLabel;
+
+  /// No description provided for @asDescHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل الوصف (اختياري)'**
+  String get asDescHint;
+
+  /// No description provided for @asCategoryLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'التصنيف'**
+  String get asCategoryLabel;
+
+  /// No description provided for @asCategoryHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر التصنيف'**
+  String get asCategoryHint;
+
+  /// No description provided for @asDurationLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'المدة (بالدقائق)'**
+  String get asDurationLabel;
+
+  /// No description provided for @asDurationHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل المدة'**
+  String get asDurationHint;
+
+  /// No description provided for @asSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get asSave;
+
+  /// No description provided for @asSaving.
+  ///
+  /// In ar, this message translates to:
+  /// **'جارٍ الحفظ...'**
+  String get asSaving;
+
+  /// No description provided for @asSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم حفظ الخدمة بنجاح'**
+  String get asSaved;
+
+  /// No description provided for @asError.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطأ في حفظ الخدمة'**
+  String get asError;
+
+  /// No description provided for @asDelete.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف الخدمة'**
+  String get asDelete;
+
+  /// No description provided for @asConfirmDelete.
+  ///
+  /// In ar, this message translates to:
+  /// **'هل أنت متأكد من حذف هذه الخدمة؟'**
+  String get asConfirmDelete;
+
+  /// No description provided for @cdCustomerFallback.
+  ///
+  /// In ar, this message translates to:
+  /// **'عميل #{id}'**
+  String cdCustomerFallback(Object id);
+
+  /// No description provided for @cdPayDebt.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسديد دين'**
+  String get cdPayDebt;
+
+  /// No description provided for @cdCurrentRemaining.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتبقي الحالي: {amount} Fdj'**
+  String cdCurrentRemaining(Object amount);
+
+  /// No description provided for @cdAutoDistributeHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُوزَّع تلقائياً على الفواتير من الأقدم إلى الأحدث.'**
+  String get cdAutoDistributeHint;
+
+  /// No description provided for @cdNothingToPay.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد متبقٍ للتسديد أو المبلغ غير صالح'**
+  String get cdNothingToPay;
+
+  /// No description provided for @cdCustomerDebts.
+  ///
+  /// In ar, this message translates to:
+  /// **'ديون عميل'**
+  String get cdCustomerDebts;
+
+  /// No description provided for @cdOpenInvoices.
+  ///
+  /// In ar, this message translates to:
+  /// **'فواتير آجل'**
+  String get cdOpenInvoices;
+
+  /// No description provided for @cdTakenOnCredit.
+  ///
+  /// In ar, this message translates to:
+  /// **'المنتجات المأخوذة بالدين'**
+  String get cdTakenOnCredit;
+
+  /// No description provided for @cdNoItemsRecorded.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد بنود مسجّلة.'**
+  String get cdNoItemsRecorded;
+
+  /// No description provided for @cdInvoicesChip.
+  ///
+  /// In ar, this message translates to:
+  /// **'فواتير'**
+  String get cdInvoicesChip;
+
+  /// No description provided for @cdOpenChip.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفتوحة'**
+  String get cdOpenChip;
+
+  /// No description provided for @cdInvoiceNumber.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة #{id}'**
+  String cdInvoiceNumber(Object id);
+
+  /// No description provided for @cdSettled.
+  ///
+  /// In ar, this message translates to:
+  /// **'مغلقة'**
+  String get cdSettled;
+
+  /// No description provided for @cdRemainingShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'متبقٍّ'**
+  String get cdRemainingShort;
+
+  /// No description provided for @cdInvoiceLineSummary.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة #{id} · {date}'**
+  String cdInvoiceLineSummary(Object date, Object id);
+
+  /// No description provided for @cdSellerLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'البائع: {name}'**
+  String cdSellerLabel(Object name);
+
+  /// No description provided for @cdQuantityLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكمية: {qty}'**
+  String cdQuantityLabel(Object qty);
+
+  /// No description provided for @cdPriceLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'السعر: {price}'**
+  String cdPriceLabel(Object price);
+
+  /// No description provided for @cdPayDebtButton.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسديد دين (متبقٍّ {amount} Fdj)'**
+  String cdPayDebtButton(Object amount);
+
+  /// No description provided for @cfOutstandingDebt.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدين المستحق'**
+  String get cfOutstandingDebt;
+
+  /// No description provided for @cfPurchaseHistory.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجل المشتريات'**
+  String get cfPurchaseHistory;
+
+  /// No description provided for @cfFdj.
+  ///
+  /// In ar, this message translates to:
+  /// **'Fdj'**
+  String get cfFdj;
+
+  /// No description provided for @saInvoiceId.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة #{id}'**
+  String saInvoiceId(Object id);
+
+  /// No description provided for @cfFullDebtScreen.
+  ///
+  /// In ar, this message translates to:
+  /// **'شاشة الديون الكاملة (تسديد وتفاصيل)'**
+  String get cfFullDebtScreen;
+
+  /// No description provided for @cfCreditSales.
+  ///
+  /// In ar, this message translates to:
+  /// **'مبيعات بالأجل (دين)'**
+  String get cfCreditSales;
+
+  /// No description provided for @cfCreditSalesDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل فاتورة مرتبطة بإيصال البيع — اضغط لعرض التفاصيل'**
+  String get cfCreditSalesDesc;
+
+  /// No description provided for @cfNoCreditInvoices.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد فواتير «آجل» مربوطة بهذا العميل. استخدم البيع بالدين مع اختيار العميل من القائمة.'**
+  String get cfNoCreditInvoices;
+
+  /// No description provided for @cfInstallments.
+  ///
+  /// In ar, this message translates to:
+  /// **'التقسيط'**
+  String get cfInstallments;
+
+  /// No description provided for @cfInstallmentsDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطط الأقساط المرتبطة بفواتير البيع'**
+  String get cfInstallmentsDesc;
+
+  /// No description provided for @cfNoInstallmentPlans.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد خطط تقسيط مربوطة بهذا العميل. استخدم نوع البيع «تقسيط» مع اختيار العميل.'**
+  String get cfNoInstallmentPlans;
+
+  /// No description provided for @cfEditCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعديل بيانات العميل'**
+  String get cfEditCustomer;
+
+  /// No description provided for @cfClosePanel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إغلاق اللوحة (Esc)'**
+  String get cfClosePanel;
+
+  /// No description provided for @cfSelectCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر عميلاً من القائمة'**
+  String get cfSelectCustomer;
+
+  /// No description provided for @cfDebtDetailsWillAppear.
+  ///
+  /// In ar, this message translates to:
+  /// **'ستظهر تفاصيل ديون العميل وأقساطه هنا.'**
+  String get cfDebtDetailsWillAppear;
+
+  /// No description provided for @cfPhone.
+  ///
+  /// In ar, this message translates to:
+  /// **'الهاتف'**
+  String get cfPhone;
+
+  /// No description provided for @cfEmail.
+  ///
+  /// In ar, this message translates to:
+  /// **'البريد'**
+  String get cfEmail;
+
+  /// No description provided for @cfWalletBalance.
+  ///
+  /// In ar, this message translates to:
+  /// **'رصيد المحفظة'**
+  String get cfWalletBalance;
+
+  /// No description provided for @cfSaleInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة بيع #{id}'**
+  String cfSaleInvoice(Object id);
+
+  /// No description provided for @cfSettledShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'مغلقة'**
+  String get cfSettledShort;
+
+  /// No description provided for @cfRemainingBalance.
+  ///
+  /// In ar, this message translates to:
+  /// **'متبقٍّ: {balance}'**
+  String cfRemainingBalance(Object balance);
+
+  /// No description provided for @cfViewReceipt.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض إيصال / تفاصيل الفاتورة'**
+  String get cfViewReceipt;
+
+  /// No description provided for @cfInstallmentInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة تقسيط #{id}'**
+  String cfInstallmentInvoice(Object id);
+
+  /// No description provided for @cfInstallmentSummary.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ الكلي: {total} · المدفوع: {paid}'**
+  String cfInstallmentSummary(Object paid, Object total);
+
+  /// No description provided for @cfInstallmentDetail.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأقساط: {paidCount} / {n} مدفوعة · متبقٍّ تقريباً: {remaining}'**
+  String cfInstallmentDetail(Object n, Object paidCount, Object remaining);
+
+  /// No description provided for @cfInstallmentSchedule.
+  ///
+  /// In ar, this message translates to:
+  /// **'جدول الأقساط'**
+  String get cfInstallmentSchedule;
+
+  /// No description provided for @saNewSupplier.
+  ///
+  /// In ar, this message translates to:
+  /// **'مورد جديد'**
+  String get saNewSupplier;
+
+  /// No description provided for @saNameRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم المورد *'**
+  String get saNameRequired;
+
+  /// No description provided for @saPhoneOptional.
+  ///
+  /// In ar, this message translates to:
+  /// **'هاتف (اختياري)'**
+  String get saPhoneOptional;
+
+  /// No description provided for @saNotes.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظات'**
+  String get saNotes;
+
+  /// No description provided for @saCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get saCancel;
+
+  /// No description provided for @saSave.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get saSave;
+
+  /// No description provided for @saEnterName.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل اسم المورد'**
+  String get saEnterName;
+
+  /// No description provided for @saSaveError.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر الحفظ'**
+  String get saSaveError;
+
+  /// No description provided for @saCreditAccounts.
+  ///
+  /// In ar, this message translates to:
+  /// **'ذمم دائنة (موردون)'**
+  String get saCreditAccounts;
+
+  /// No description provided for @saCreditAccountsDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل وصل المورد (رقمهم وتاريخهم) ثم سجّل الدفعات عند السداد. يمكن ربط الصندوق تلقائياً عند الدفع.'**
+  String get saCreditAccountsDesc;
+
+  /// No description provided for @saTotalOwed.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي ما علينا للموردين: {amount} Fdj'**
+  String saTotalOwed(Object amount);
+
+  /// No description provided for @saSearchHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث باسم المورد…'**
+  String get saSearchHint;
+
+  /// No description provided for @saNoSuppliersYet.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا موردين بعد — اضغط + لإضافة مورد'**
+  String get saNoSuppliersYet;
+
+  /// No description provided for @saSupplierSummary.
+  ///
+  /// In ar, this message translates to:
+  /// **'وارد: {billed} · مدفوع: {paid}'**
+  String saSupplierSummary(Object billed, Object paid);
+
+  /// No description provided for @saReceiptLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'وصل'**
+  String get saReceiptLabel;
+
+  /// No description provided for @saPaymentLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'دفعة'**
+  String get saPaymentLabel;
+
+  /// No description provided for @saReturnLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتجع'**
+  String get saReturnLabel;
+
+  /// No description provided for @saDueToSupplier.
+  ///
+  /// In ar, this message translates to:
+  /// **'مستحق للمورد'**
+  String get saDueToSupplier;
+
+  /// No description provided for @saBalanced.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوازن'**
+  String get saBalanced;
+
+  /// No description provided for @saSupplierChip.
+  ///
+  /// In ar, this message translates to:
+  /// **'مورد'**
+  String get saSupplierChip;
+
+  /// No description provided for @isFullSettingsHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات المنتجات الكاملة (تهيئة، تتبع، أذون، قيم افتراضية) متوفرة من البطاقة الرئيسية «إعدادات المنتجات» في شبكة إعدادات المخزون.'**
+  String get isFullSettingsHint;
+
+  /// No description provided for @isCategoriesMoved.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم نقل إدارة التصنيفات إلى شاشة مخصّصة. افتح «التصنيفات» من القائمة الرئيسية لإعدادات المخزون.'**
+  String get isCategoriesMoved;
+
+  /// No description provided for @isBrandsMoved.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم نقل إدارة العلامات التجارية إلى شاشة مخصّصة. افتح «العلامات التجارية» من القائمة الرئيسية.'**
+  String get isBrandsMoved;
+
+  /// No description provided for @isBarcodeConfigMoved.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم نقل تهيئة الباركود إلى شاشة مخصّصة. افتح «إعدادات الباركود» من القائمة الرئيسية لهذه الإعدادات.'**
+  String get isBarcodeConfigMoved;
+
+  /// No description provided for @isDefaultWarehouses.
+  ///
+  /// In ar, this message translates to:
+  /// **'المستودعات الافتراضية للموظفين'**
+  String get isDefaultWarehouses;
+
+  /// No description provided for @isForceDefaultWarehouse.
+  ///
+  /// In ar, this message translates to:
+  /// **'فرض مستودع افتراضي عند تسجيل الحركات'**
+  String get isForceDefaultWarehouse;
+
+  /// No description provided for @isWarehouseRecommendation.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُنصح بربط كل موظف بمستودع افتراضي لتتبع الصلاحيات والحركات.'**
+  String get isWarehouseRecommendation;
+
+  /// No description provided for @isUnitsTemplatesMoved.
+  ///
+  /// In ar, this message translates to:
+  /// **'إدارة قوالب الوحدات (الأساسية والتحويل) من الشاشة المخصّصة. افتح «قوالب الوحدات» من القائمة الرئيسية لإعدادات المخزون.'**
+  String get isUnitsTemplatesMoved;
+
+  /// No description provided for @isAllowDifferentPurchaseUnits.
+  ///
+  /// In ar, this message translates to:
+  /// **'السماح بوحدات شراء مختلفة عن البيع'**
+  String get isAllowDifferentPurchaseUnits;
+
+  /// No description provided for @isShowConversionsOnPurchase.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض التحويلات في فاتورة الشراء'**
+  String get isShowConversionsOnPurchase;
+
+  /// No description provided for @isPrinting.
+  ///
+  /// In ar, this message translates to:
+  /// **'الطباعة'**
+  String get isPrinting;
+
+  /// No description provided for @isIncludeStoreLogo.
+  ///
+  /// In ar, this message translates to:
+  /// **'تضمين شعار المتجر في المستندات'**
+  String get isIncludeStoreLogo;
+
+  /// No description provided for @isPrintBarcodeOnReceipts.
+  ///
+  /// In ar, this message translates to:
+  /// **'طباعة باركود على أذون الصرف'**
+  String get isPrintBarcodeOnReceipts;
+
+  /// No description provided for @isExtraFields.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحقول الإضافية'**
+  String get isExtraFields;
+
+  /// No description provided for @isShowExtraFieldsInLists.
+  ///
+  /// In ar, this message translates to:
+  /// **'إظهار الحقول الإضافية في قوائم المنتجات'**
+  String get isShowExtraFieldsInLists;
+
+  /// No description provided for @isIncludeInExportReports.
+  ///
+  /// In ar, this message translates to:
+  /// **'تضمينها في التقارير القابلة للتصدير'**
+  String get isIncludeInExportReports;
+
+  /// No description provided for @isNoExtraSettings.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد إعدادات إضافية لهذه الفئة بعد.'**
+  String get isNoExtraSettings;
+
+  /// No description provided for @asMinPriceError.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحد الأدنى للبيع لا يجوز أن يتجاوز سعر البيع'**
+  String get asMinPriceError;
+
+  /// No description provided for @asSavedSuccess.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم حفظ الخدمة'**
+  String get asSavedSuccess;
+
+  /// No description provided for @asAddTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة خدمة فنية'**
+  String get asAddTitle;
+
+  /// No description provided for @asAddDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف خدمة للبيع المباشر من شاشة البيع (كمية ثابتة 1، بدون مخزون).'**
+  String get asAddDescription;
+
+  /// No description provided for @asNameRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل اسم الخدمة'**
+  String get asNameRequired;
+
+  /// No description provided for @asSalePriceLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'سعر البيع'**
+  String get asSalePriceLabel;
+
+  /// No description provided for @asInvalidPrice.
+  ///
+  /// In ar, this message translates to:
+  /// **'السعر غير صالح'**
+  String get asInvalidPrice;
+
+  /// No description provided for @asRefCostLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'التكلفة المرجعية للخدمة'**
+  String get asRefCostLabel;
+
+  /// No description provided for @asRefCostDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'أجر الفني أو مواد مستهلكة افتراضية — لحساب الهامش في التقارير (مثل سعر الشراء للمنتج).'**
+  String get asRefCostDesc;
+
+  /// No description provided for @asMinSalePriceLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحد الأدنى للبيع'**
+  String get asMinSalePriceLabel;
+
+  /// No description provided for @asMinSalePriceDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'إن تُرك فارغاً يُستخدم سعر البيع.'**
+  String get asMinSalePriceDesc;
+
+  /// No description provided for @asDescriptionLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوصف أو التفاصيل'**
+  String get asDescriptionLabel;
+
+  /// No description provided for @asDescriptionHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدة العمل، الشروط، الملاحظات…'**
+  String get asDescriptionHint;
+
+  /// No description provided for @asSaveButton.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ الخدمة'**
+  String get asSaveButton;
 }
 
 class _AppLocalizationsDelegate

@@ -295,7 +295,7 @@ class _DebtsScreenState extends State<DebtsScreen>
                                 bottom: 0,
                               ),
                               child: Text(
-                                loc.debtsListFiltered(filtered.length.toString(), _rows.length.toString()),
+                                _loc.debtsListFiltered(filtered.length.toString(), _rows.length.toString()),
                                 style: theme.textTheme.labelMedium?.copyWith(
                                   color: cs.onSurfaceVariant,
                                 ),
@@ -466,7 +466,7 @@ class _DebtsScreenState extends State<DebtsScreen>
                               bottom: 8,
                             ),
                             child: Text(
-                              loc.debtsAggregateHint,
+                              _loc.debtsAggregateHint,
                               style: theme.textTheme.bodySmall?.copyWith(
                                 color: cs.onSurfaceVariant,
                                 height: 1.45,
@@ -541,7 +541,7 @@ class _DebtsScreenState extends State<DebtsScreen>
                                 bottom: 8,
                               ),
                               child: Text(
-                                loc.debtsCustomersFiltered(sumFiltered.length.toString(), _summaries.length.toString()),
+                                _loc.debtsCustomersFiltered(sumFiltered.length.toString(), _summaries.length.toString()),
                                 style: theme.textTheme.labelMedium?.copyWith(
                                   color: cs.onSurfaceVariant,
                                 ),
@@ -553,8 +553,8 @@ class _DebtsScreenState extends State<DebtsScreen>
                               child: Center(
                                 child: Text(
                                   _summaries.isEmpty
-                                      ? loc.debtsNoRemainingAged
-                                      : loc.debtsNoResults,
+                                      ? _loc.debtsNoRemainingAged
+                                      : _loc.debtsNoResults,
                                   style: TextStyle(color: cs.onSurfaceVariant),
                                 ),
                               ),
@@ -589,6 +589,7 @@ class _DebtsScreenState extends State<DebtsScreen>
 }
 
 class _CustomerDebtSummaryCard extends StatelessWidget {
+
   const _CustomerDebtSummaryCard({
     required this.summary,
     required this.colorScheme,
@@ -601,6 +602,7 @@ class _CustomerDebtSummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _loc = AppLocalizations.of(context)!;
     final gap = ScreenLayout.of(context).pageHorizontalGap;
     final fill = isDark ? AppColors.cardDark : colorScheme.surface;
     final titleC = colorScheme.onSurface;
@@ -639,7 +641,7 @@ class _CustomerDebtSummaryCard extends StatelessWidget {
                   children: [
                     Text(
                       summary.displayName.isEmpty
-                          ? loc.debtsCustomer
+                          ? _loc.debtsCustomer
                           : summary.displayName,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -653,8 +655,8 @@ class _CustomerDebtSummaryCard extends StatelessWidget {
                     const SizedBox(height: 6),
                     Text(
                       summary.customerId != null
-                          ? loc.debtsRegisteredCustomer(summary.customerId.toString())
-                          : loc.debtsUnlinkedToCustomerTable,
+                          ? _loc.debtsRegisteredCustomer(summary.customerId.toString())
+                          : _loc.debtsUnlinkedToCustomerTable,
                       style: TextStyle(
                         fontFamily: 'Tajawal',
                         fontSize: 12,
@@ -662,7 +664,7 @@ class _CustomerDebtSummaryCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      loc.debtsCreditInvoices(summary.invoiceCount.toString()),
+                      _loc.debtsCreditInvoices(summary.invoiceCount.toString()),
                       style: TextStyle(
                         fontFamily: 'Tajawal',
                         fontSize: 12,
@@ -685,7 +687,7 @@ class _CustomerDebtSummaryCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    loc.debtsRemaining,
+                    _loc.debtsRemaining,
                     style: TextStyle(
                       fontFamily: 'Tajawal',
                       fontSize: 11,
@@ -696,7 +698,7 @@ class _CustomerDebtSummaryCard extends StatelessWidget {
                   // Card Action Pill (Golden §9.2.1) — اختصار لفتح كشف العميل.
                   _DebtActionPill(
                     icon: Icons.account_balance_wallet_rounded,
-                    label: loc.debtsCustomerStatement,
+                    label: _loc.debtsCustomerStatement,
                     color: colorScheme.primary,
                     onPressed: () {
                       Navigator.of(context).push<void>(
@@ -765,6 +767,7 @@ class _DebtActionPill extends StatelessWidget {
 }
 
 class _InfoBanner extends StatelessWidget {
+
   final ColorScheme colorScheme;
   final int warnDays;
 
@@ -772,9 +775,10 @@ class _InfoBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _loc = AppLocalizations.of(context)!;
     final ageHint = warnDays > 0
-        ? loc.debtsAgeWarningActive(warnDays.toString())
-        : loc.debtsAgeWarningDisabled;
+        ? _loc.debtsAgeWarningActive(warnDays.toString())
+        : _loc.debtsAgeWarningDisabled;
     return DecoratedBox(
       decoration: BoxDecoration(
         color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.4),
@@ -790,7 +794,7 @@ class _InfoBanner extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(
               child: Text(
-                'تُحسب الديون من فواتير النوع «دين / آجل». المتبقي = إجمالي الفاتورة − المقدّم. حدود البيع تُضبط من إعدادات الديون.$ageHint',
+                '${_loc.debtsHowCalculated(ageHint)}',
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   color: colorScheme.onSurfaceVariant,
                   height: 1.45,
@@ -805,6 +809,7 @@ class _InfoBanner extends StatelessWidget {
 }
 
 class _SummaryStrip extends StatelessWidget {
+
   final double totalOpen;
   final int openInvoices;
   final int agedInvoices;
@@ -823,41 +828,42 @@ class _SummaryStrip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _loc = AppLocalizations.of(context)!;
     return Row(
       children: [
         Expanded(
           child: _MetricBox(
-            title: loc.debtsTotalRemaining,
+            title: _loc.debtsTotalRemaining,
             value: '${_numFmt.format(totalOpen)} Fdj',
             icon: Icons.account_balance_wallet_outlined,
             colorScheme: colorScheme,
             isDark: isDark,
-            tooltip: loc.debtsShowAllInvoices,
+            tooltip: _loc.debtsShowAllInvoices,
             onTap: () => onSelectFilter(_DebtFilter.all),
           ),
         ),
         const SizedBox(width: 8),
         Expanded(
           child: _MetricBox(
-            title: loc.debtsOpenInvoices,
+            title: _loc.debtsOpenInvoices,
             value: '$openInvoices',
             icon: Icons.description_outlined,
             colorScheme: colorScheme,
             isDark: isDark,
-            tooltip: loc.debtsFilterOpen,
+            tooltip: _loc.debtsFilterOpen,
             onTap: () => onSelectFilter(_DebtFilter.open),
           ),
         ),
         const SizedBox(width: 8),
         Expanded(
           child: _MetricBox(
-            title: loc.debtsAgeWarning,
+            title: _loc.debtsAgeWarning,
             value: '$agedInvoices',
             icon: Icons.schedule_rounded,
             colorScheme: colorScheme,
             isDark: isDark,
             accent: agedInvoices > 0 ? AppSemanticColors.warning : null,
-            tooltip: loc.debtsFilterAge,
+            tooltip: _loc.debtsFilterAge,
             onTap: () => onSelectFilter(_DebtFilter.aged),
           ),
         ),
@@ -938,6 +944,7 @@ class _MetricBox extends StatelessWidget {
 }
 
 class _DebtCard extends StatelessWidget {
+
   final CreditDebtInvoice row;
   final int warnDays;
   final ColorScheme colorScheme;
@@ -956,6 +963,7 @@ class _DebtCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _loc = AppLocalizations.of(context)!;
     final gap = ScreenLayout.of(context).pageHorizontalGap;
     final now = DateTime.now();
     final settled = row.isSettled;
@@ -964,7 +972,7 @@ class _DebtCard extends StatelessWidget {
     final statusColor = settled
         ? AppSemanticColors.success
         : (aged ? AppSemanticColors.warning : AppSemanticColors.info);
-    final statusLabel = settled ? loc.debtsClosed : (aged ? loc.debtsAgeAlert : loc.debtsOpen);
+    final statusLabel = settled ? _loc.debtsClosed : (aged ? _loc.debtsAgeAlert : _loc.debtsOpen);
     final titleC = colorScheme.onSurface;
     final mutedC = colorScheme.onSurfaceVariant;
     final fill = isDark ? AppColors.cardDark : colorScheme.surface;
@@ -1042,7 +1050,7 @@ class _DebtCard extends StatelessWidget {
                         icon: settled
                             ? Icons.check_circle_outline_rounded
                             : Icons.receipt_long_outlined,
-                        label: settled ? loc.debtsReceipt : loc.debtsDetails,
+                        label: settled ? _loc.debtsReceipt : _loc.debtsDetails,
                         color: settled ? statusColor : colorScheme.primary,
                         onPressed: onTap,
                       ),
@@ -1050,7 +1058,7 @@ class _DebtCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    row.customerName.isEmpty ? loc.debtsCustomer : row.customerName,
+                    row.customerName.isEmpty ? _loc.debtsCustomer : row.customerName,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -1063,7 +1071,7 @@ class _DebtCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    loc.debtsInvoiceDays(row.invoiceId.toString(), _dateFmt.format(row.date), row.daysSinceInvoice(now).toString()),
+                    _loc.debtsInvoiceDays(row.invoiceId.toString(), _dateFmt.format(row.date), row.daysSinceInvoice(now).toString()),
                     style: TextStyle(
                       fontFamily: 'Tajawal',
                       fontSize: 12,
@@ -1074,7 +1082,7 @@ class _DebtCard extends StatelessWidget {
                   if (row.customerId != null) ...[
                     const SizedBox(height: 4),
                     Text(
-                      loc.debtsRegisteredCustomer(row.customerId.toString()),
+                      _loc.debtsRegisteredCustomer(row.customerId.toString()),
                       style: TextStyle(
                         fontFamily: 'Tajawal',
                         fontSize: 11,
@@ -1096,7 +1104,7 @@ class _DebtCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    loc.debtsAdvanceOverTotal(_numFmt.format(row.advancePayment), _numFmt.format(row.total)),
+                    _loc.debtsAdvanceOverTotal(_numFmt.format(row.advancePayment), _numFmt.format(row.total)),
                     style: TextStyle(
                       fontFamily: 'Tajawal',
                       fontSize: 11,
@@ -1106,7 +1114,7 @@ class _DebtCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    loc.debtsRemaining,
+                    _loc.debtsRemaining,
                     style: TextStyle(
                       fontFamily: 'Tajawal',
                       fontSize: 11,
@@ -1130,7 +1138,7 @@ class _DebtCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    loc.debtsTapForInvoiceDetails,
+                    _loc.debtsTapForInvoiceDetails,
                     style: TextStyle(
                       fontFamily: 'Tajawal',
                       fontSize: 11,
@@ -1159,6 +1167,7 @@ class _DebtCard extends StatelessWidget {
 }
 
 class _EmptyState extends StatelessWidget {
+
   final bool hasRows;
   final ColorScheme colorScheme;
   final bool filterActive;
@@ -1171,6 +1180,7 @@ class _EmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _loc = AppLocalizations.of(context)!;
     final gap = ScreenLayout.of(context).pageHorizontalGap;
     return Center(
       child: Padding(
@@ -1187,17 +1197,17 @@ class _EmptyState extends StatelessWidget {
             Text(
               hasRows
                   ? (filterActive
-                        ? loc.debtsNoMatchingInvoices
-                        : loc.debtsNoResults)
-                  : loc.debtsNoCreditInvoices,
+                        ? _loc.debtsNoMatchingInvoices
+                        : _loc.debtsNoResults)
+                  : _loc.debtsNoCreditInvoices,
               textAlign: TextAlign.center,
               style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
             ),
             const SizedBox(height: 8),
             Text(
               hasRows
-                  ? loc.debtsClearSearchHint
-                  : loc.debtsNewSaleHint,
+                  ? _loc.debtsClearSearchHint
+                  : _loc.debtsNewSaleHint,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: colorScheme.onSurfaceVariant,

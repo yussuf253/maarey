@@ -1,3 +1,4 @@
+import '../../l10n/generated/app_localizations.dart';
 import 'dart:async' show unawaited;
 
 import 'package:flutter/material.dart';
@@ -41,6 +42,7 @@ class _SupplierApTabState extends State<SupplierApTab> {
   }
 
   Future<void> _addSupplierDialog() async {
+    final loc = AppLocalizations.of(context)!;
     final nameCtrl = TextEditingController();
     final phoneCtrl = TextEditingController();
     final noteCtrl = TextEditingController();
@@ -50,34 +52,34 @@ class _SupplierApTabState extends State<SupplierApTab> {
         textDirection: Directionality.of(context),
         child: AlertDialog(
           shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
-          title: const Text('مورد جديد'),
+          title: Text(loc.saNewSupplier),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
                   controller: nameCtrl,
-                  decoration: const InputDecoration(
-                    labelText: 'اسم المورد *',
-                    border: OutlineInputBorder(borderRadius: AppShape.none),
+                  decoration: InputDecoration(
+                    labelText: loc.saNameRequired,
+                    border: const OutlineInputBorder(borderRadius: AppShape.none),
                   ),
                 ),
                 const SizedBox(height: 10),
                 TextField(
                   controller: phoneCtrl,
                   keyboardType: TextInputType.phone,
-                  decoration: const InputDecoration(
-                    labelText: 'هاتف (اختياري)',
-                    border: OutlineInputBorder(borderRadius: AppShape.none),
+                  decoration: InputDecoration(
+                    labelText: loc.saPhoneOptional,
+                    border: const OutlineInputBorder(borderRadius: AppShape.none),
                   ),
                 ),
                 const SizedBox(height: 10),
                 TextField(
                   controller: noteCtrl,
                   maxLines: 2,
-                  decoration: const InputDecoration(
-                    labelText: 'ملاحظات',
-                    border: OutlineInputBorder(borderRadius: AppShape.none),
+                  decoration: InputDecoration(
+                    labelText: loc.saNotes,
+                    border: const OutlineInputBorder(borderRadius: AppShape.none),
                   ),
                 ),
               ],
@@ -86,11 +88,11 @@ class _SupplierApTabState extends State<SupplierApTab> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: const Text('إلغاء'),
+              child: Text(loc.saCancel),
             ),
             FilledButton(
               onPressed: () => Navigator.pop(ctx, true),
-              child: const Text('حفظ'),
+              child: Text(loc.saSave),
             ),
           ],
         ),
@@ -106,7 +108,7 @@ class _SupplierApTabState extends State<SupplierApTab> {
     if (name.isEmpty) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('أدخل اسم المورد')));
+      ).showSnackBar(SnackBar(content: Text(loc.saEnterName)));
       return;
     }
     try {
@@ -119,7 +121,7 @@ class _SupplierApTabState extends State<SupplierApTab> {
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(const SnackBar(content: Text('تعذّر الحفظ')));
+        ).showSnackBar(SnackBar(content: Text(loc.saSaveError)));
       }
       return;
     }
@@ -129,6 +131,7 @@ class _SupplierApTabState extends State<SupplierApTab> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
     final isDark = theme.brightness == Brightness.dark;
@@ -176,14 +179,14 @@ class _SupplierApTabState extends State<SupplierApTab> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'ذمم دائنة (موردون)',
+                          loc.saCreditAccounts,
                           style: theme.textTheme.titleSmall?.copyWith(
                             fontWeight: FontWeight.w800,
                           ),
                         ),
                         const SizedBox(height: 6),
                         Text(
-                          'سجّل وصل المورد (رقمهم وتاريخهم) ثم سجّل الدفعات عند السداد. يمكن ربط الصندوق تلقائياً عند الدفع.',
+                          loc.saCreditAccountsDesc,
                           style: theme.textTheme.bodySmall?.copyWith(
                             color: cs.onSurfaceVariant,
                             height: 1.45,
@@ -191,7 +194,7 @@ class _SupplierApTabState extends State<SupplierApTab> {
                         ),
                         const SizedBox(height: 10),
                         Text(
-                          'إجمالي ما علينا للموردين: ${_numFmt.format(totalOpen)} Fdj',
+              'loc.saTotalOwed(\${_numFmt.format(totalOpen)})',
                           style: TextStyle(
                             fontWeight: FontWeight.w800,
                             fontSize: 16,
@@ -207,7 +210,7 @@ class _SupplierApTabState extends State<SupplierApTab> {
                   TextField(
                     controller: _search,
                     decoration: InputDecoration(
-                      hintText: 'بحث باسم المورد…',
+                      hintText: loc.saSearchHint,
                       prefixIcon: const Icon(Icons.search_rounded),
                       suffixIcon: _search.text.isNotEmpty
                           ? IconButton(
@@ -226,7 +229,7 @@ class _SupplierApTabState extends State<SupplierApTab> {
                       height: 220,
                       child: Center(
                         child: Text(
-                          'لا موردين بعد — اضغط + لإضافة مورد',
+                          loc.saNoSuppliersYet,
                           style: TextStyle(color: cs.onSurfaceVariant),
                         ),
                       ),
@@ -277,7 +280,7 @@ class _SupplierApTabState extends State<SupplierApTab> {
                                           ),
                                         ),
                                         Text(
-                                          'وارد: ${_numFmt.format(s.totalBilled)} · مدفوع: ${_numFmt.format(s.totalPaid)}',
+              loc.saSupplierSummary(_numFmt.format(s.totalBilled), _numFmt.format(s.totalPaid)),
                                           style: TextStyle(
                                             fontSize: 12,
                                             color: cs.onSurfaceVariant,
@@ -290,7 +293,7 @@ class _SupplierApTabState extends State<SupplierApTab> {
                                           children: [
                                             _quickActionChip(
                                               context,
-                                              label: 'وصل',
+                                              label: loc.saReceiptLabel,
                                               icon: Icons.receipt_long_rounded,
                                               onTap: () async {
                                                 await Navigator.push<void>(
@@ -313,7 +316,7 @@ class _SupplierApTabState extends State<SupplierApTab> {
                                             ),
                                             _quickActionChip(
                                               context,
-                                              label: 'دفعة',
+                                              label: loc.saPaymentLabel,
                                               icon: Icons.payments_rounded,
                                               onTap: () async {
                                                 await Navigator.push<void>(
@@ -336,7 +339,7 @@ class _SupplierApTabState extends State<SupplierApTab> {
                                             ),
                                             _quickActionChip(
                                               context,
-                                              label: 'مرتجع',
+                                              label: loc.saReturnLabel,
                                               icon: Icons
                                                   .assignment_return_outlined,
                                               onTap: () async {
@@ -378,8 +381,8 @@ class _SupplierApTabState extends State<SupplierApTab> {
                                       ),
                                       Text(
                                         s.openPayable > 1e-6
-                                            ? 'مستحق للمورد'
-                                            : 'متوازن',
+              ? loc.saDueToSupplier
+              : loc.saBalanced,
                                         style: TextStyle(
                                           fontSize: 11,
                                           color: cs.onSurfaceVariant,
@@ -409,7 +412,7 @@ class _SupplierApTabState extends State<SupplierApTab> {
           floatingActionButton: FloatingActionButton.extended(
             onPressed: _addSupplierDialog,
             icon: const Icon(Icons.add_rounded),
-            label: const Text('مورد'),
+            label: Text(loc.saSupplierChip),
           ),
         );
       },

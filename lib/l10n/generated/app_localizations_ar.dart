@@ -11108,7 +11108,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cdInvalidData => 'بيانات غير صالحة';
 
   @override
-  String get cdRecordPayment => 'تسديد دين';
+  String get cdRecordPayment => 'تسجيل دفعة';
 
   @override
   String get cdRemainingCurrent => 'المتبقي الحالي';
@@ -11136,7 +11136,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cdPaymentSuccess => 'تم تسجيل الدفعة بنجاح';
 
   @override
-  String get cdPaymentFailed => 'فشل تسجيل الدفعة';
+  String cdPaymentFailed(Object error) {
+    return 'تعذّر إكمال التسديد: $error';
+  }
 
   @override
   String get cdInvoiceHistory => 'سجل الفواتير';
@@ -14092,4 +14094,833 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get debtsNoCreditInvoices => 'لا توجد فواتير دين مسجّلة';
+
+  @override
+  String instDueAmount(Object amount) {
+    return 'المستحق: $amount Fdj';
+  }
+
+  @override
+  String get instFullBoxOnly =>
+      'يُسجَّل كاملاً في الصندوق (لا دفع جزئي حالياً).';
+
+  @override
+  String instMustPayFull(Object amount) {
+    return 'يجب تسديد قيمة القسط كاملة ($amount Fdj)';
+  }
+
+  @override
+  String get instPayFailed => 'تعذر التسجيل (قد يكون القسط مدفوعاً)';
+
+  @override
+  String get instCustomer => 'عميل';
+
+  @override
+  String instLinkedToCustomer(Object id) {
+    return 'مرتبط بسجل العملاء #$id';
+  }
+
+  @override
+  String instRegisteredBalance(Object amount) {
+    return 'رصيد العميل المسجّل: $amount Fdj';
+  }
+
+  @override
+  String get instNoCustomerMatch =>
+      'لا يوجد تطابق في جدول العملاء — الاسم مأخوذ من الفاتورة فقط. يمكنك ربط عميل عند إنشاء خطة جديدة من شاشة «إضافة خطة».';
+
+  @override
+  String instInvoiceNumber(Object id) {
+    return 'رقم الفاتورة: #$id';
+  }
+
+  @override
+  String get instDate => 'التاريخ';
+
+  @override
+  String get instTotal => 'الإجمالي';
+
+  @override
+  String instAdvanceCollected(Object amount) {
+    return 'المقدم المحصّل: $amount Fdj';
+  }
+
+  @override
+  String instSaleQty(Object qty) {
+    return 'بيع: $qty';
+  }
+
+  @override
+  String instStock(Object qty) {
+    return 'مخزون: $qty';
+  }
+
+  @override
+  String get instInterestRate => 'نسبة الفائدة';
+
+  @override
+  String get instPlannedMonths => 'عدد الأشهر';
+
+  @override
+  String get instFinancedAtSale => 'المبلغ المموّل';
+
+  @override
+  String get instInterestAmount => 'قيمة الفائدة';
+
+  @override
+  String get instTotalWithInterest => 'الإجمالي مع الفائدة';
+
+  @override
+  String get instSuggestedMonthly => 'القسط الشهري المقترح';
+
+  @override
+  String get instEstimateNote =>
+      'تنبيه: الأرقام أعلاه تقدير عند البيع. جدول الأقساط الفعلي يُوزَّع على «إجمالي الفاتورة − المقدّم» وقد يختلف عن القسط المقترح بالفلس.';
+
+  @override
+  String get instAdvance => 'مقدّم';
+
+  @override
+  String get instFromSchedule => 'أقساط من الجدول';
+
+  @override
+  String get instPaid => 'المدفوع';
+
+  @override
+  String get instRemaining => 'المتبقي';
+
+  @override
+  String instInstallment(Object index) {
+    return 'القسط $index';
+  }
+
+  @override
+  String get instDueDate => 'الاستحقاق';
+
+  @override
+  String get instPaidOn => 'سُدد';
+
+  @override
+  String get instPayButton => 'تسديد';
+
+  @override
+  String get mpImportSuccess => 'تم الاستيراد بنجاح';
+
+  @override
+  String get mpBundledSuccess => 'تم استيراد المواد المضمّنة بنجاح';
+
+  @override
+  String get mpErrorEmptyPath => 'اكتب مسار ملف قاعدة البيانات أولاً';
+
+  @override
+  String get mpErrorMissingFile =>
+      'الملف غير موجود. إذا كان الملف داخل RAR/ZIP لازم تفك الضغط وتستخرج ملف .db أولاً، ثم اكتب مساره أو اسمه.';
+
+  @override
+  String get mpErrorNoProducts =>
+      'الملف لا يحتوي جدول المنتجات (products). اختر ملف قاعدة صحيح';
+
+  @override
+  String get mpErrorReadFailed =>
+      'تعذر قراءة الملف. تأكد أنه قاعدة SQLite صالحة وغير محمية';
+
+  @override
+  String mpErrorGeneric(Object s) {
+    return 'حدث خطأ أثناء الاستيراد: $s';
+  }
+
+  @override
+  String get mpTitle => 'استيراد مواد وأسعار';
+
+  @override
+  String get mpBundledDesc =>
+      'يستورد هذا الخيار قاعدة مواد جاهزة مضمّنة داخل التطبيق (≈ 3500 صنف من أشهر منتجات السوق مع أسعارها). يفضل مراجعة الأسعار بعد الاستيراد لأن أسعار السوق تتغير.';
+
+  @override
+  String get mpBundledRestoreTitle => 'استعادة قاعدة المواد المضمّنة';
+
+  @override
+  String get mpBundledRestoreDesc =>
+      'بضغطة واحدة: يقوم التطبيق بفك ضغط الملف المضمّن وإضافة المواد إلى مخزنك. إذا كان أحد الأصناف موجوداً مسبقاً بنفس الباركود، سيتم تحديث اسمه/سعره/تصنيفه فقط (بدون تكرار).';
+
+  @override
+  String get mpBundledButtonBusy => 'جاري الاستيراد…';
+
+  @override
+  String get mpBundledButtonIdle => 'استيراد المواد المضمّنة';
+
+  @override
+  String get mpAdvancedTileTitle => 'استيراد متقدّم: من ملف خارجي';
+
+  @override
+  String get mpAdvancedTileSubtitle =>
+      'إذا عندك ملف Market POS بصيغة .db خارج التطبيق';
+
+  @override
+  String get mpDbPathLabel => 'مسار ملف قاعدة البيانات';
+
+  @override
+  String get mpDbPathHint =>
+      'مثال: /Users/you/Documents/supermarket_backup_2026-04-15_20-05-15.db';
+
+  @override
+  String get mpImportExternal => 'استيراد من ملف خارجي';
+
+  @override
+  String get mpTipHint =>
+      'تلميح: يمكنك كتابة اسم الملف فقط وسيتم البحث عنه داخل Documents/Downloads/Desktop.';
+
+  @override
+  String get mpResultTitle => 'نتيجة الاستيراد';
+
+  @override
+  String mpResultTotal(Object total) {
+    return 'إجمالي السجلات المقروءة: $total';
+  }
+
+  @override
+  String mpResultNew(Object inserted) {
+    return 'مواد جديدة: $inserted';
+  }
+
+  @override
+  String mpResultUpdated(Object updated) {
+    return 'مواد تم تحديثها: $updated';
+  }
+
+  @override
+  String mpResultSkipped(Object skipped) {
+    return 'تم تجاوزها: $skipped';
+  }
+
+  @override
+  String mpResultCategories(Object createdCategories) {
+    return 'تصنيفات تمت إضافتها: $createdCategories';
+  }
+
+  @override
+  String get cdTitle => 'تفاصيل دين العميل';
+
+  @override
+  String get cdOriginalAmount => 'المبلغ الأصلي';
+
+  @override
+  String get cdCurrentBalance => 'الرصيد الحالي';
+
+  @override
+  String get cdInstallments => 'الأقساط';
+
+  @override
+  String get cdPaid => 'مدفوع';
+
+  @override
+  String get cdRemaining => 'متبقي';
+
+  @override
+  String get cdDueDate => 'تاريخ الاستحقاق';
+
+  @override
+  String get cdOverdue => 'متأخر';
+
+  @override
+  String get cdPaidOn => 'تم الدفع يوم';
+
+  @override
+  String get cdStatus => 'الحالة';
+
+  @override
+  String get cdPaidStatus => 'مدفوع';
+
+  @override
+  String get cdPendingStatus => 'قيد الانتظار';
+
+  @override
+  String get cdOverdueStatus => 'متأخر';
+
+  @override
+  String get cdPaidInstallments => 'أقساط مدفوعة';
+
+  @override
+  String get cdPendingInstallments => 'أقساط قيد الانتظار';
+
+  @override
+  String get cdOverdueInstallments => 'أقساط متأخرة';
+
+  @override
+  String get cdNoInstallments => 'لا توجد أقساط';
+
+  @override
+  String get cdTotalPaid => 'إجمالي المدفوع';
+
+  @override
+  String get cdTotalRemaining => 'إجمالي المتبقي';
+
+  @override
+  String get cdConfirmPayment => 'تأكيد الدفعة';
+
+  @override
+  String get cdPaymentAmount => 'مبلغ الدفعة';
+
+  @override
+  String get cfTitle => 'التفاصيل المالية';
+
+  @override
+  String get cfTotalPurchases => 'إجمالي المشتريات';
+
+  @override
+  String get cfTotalPaid => 'إجمالي المدفوع';
+
+  @override
+  String get cfTotalDebt => 'إجمالي الدين';
+
+  @override
+  String get cfLastPurchase => 'آخر مشتريات';
+
+  @override
+  String get cfAverageOrder => 'متوسط قيمة الطلب';
+
+  @override
+  String get cfPurchaseCount => 'عدد المشتريات';
+
+  @override
+  String get cfInvoiceHistory => 'سجل الفواتير';
+
+  @override
+  String get cfPaymentHistory => 'سجل الدفعات';
+
+  @override
+  String get cfNoInvoices => 'لا توجد فواتير';
+
+  @override
+  String get cfNoPayments => 'لا توجد دفعات';
+
+  @override
+  String get cfDate => 'التاريخ';
+
+  @override
+  String get cfAmount => 'المبلغ';
+
+  @override
+  String get cfBalance => 'الرصيد';
+
+  @override
+  String get cfInvoice => 'فاتورة';
+
+  @override
+  String get cfPayment => 'دفعة';
+
+  @override
+  String get cfViewDetails => 'عرض التفاصيل';
+
+  @override
+  String get cfNoData => 'لا توجد بيانات مالية متاحة';
+
+  @override
+  String get cfDebtWarning => 'دين مستحق';
+
+  @override
+  String get cfCreditAvailable => 'رصيد متاح';
+
+  @override
+  String get cfContactInfo => 'معلومات الاتصال';
+
+  @override
+  String get saTitle => 'حسابات الموردين';
+
+  @override
+  String get saTotalDebt => 'إجمالي الديون';
+
+  @override
+  String get saTotalPaid => 'إجمالي المدفوع';
+
+  @override
+  String get saOutstanding => 'الرصيد المستحق';
+
+  @override
+  String get saPaymentHistory => 'سجل الدفعات';
+
+  @override
+  String get saRecordPayment => 'تسجيل دفعة';
+
+  @override
+  String get saInvoiceHistory => 'سجل المشتريات';
+
+  @override
+  String get saNoSuppliers => 'لا يوجد موردون';
+
+  @override
+  String get saNoPayments => 'لا توجد دفعات مسجلة';
+
+  @override
+  String get saNoInvoices => 'لا توجد فواتير شراء';
+
+  @override
+  String get saSupplierName => 'اسم المورد';
+
+  @override
+  String get saDate => 'التاريخ';
+
+  @override
+  String get saAmount => 'المبلغ';
+
+  @override
+  String get saRemaining => 'المتبقي';
+
+  @override
+  String get saPayment => 'دفعة';
+
+  @override
+  String get saPurchase => 'شراء';
+
+  @override
+  String get saViewDetails => 'عرض التفاصيل';
+
+  @override
+  String get saPayDebt => 'سداد الدين';
+
+  @override
+  String get saDebtLabel => 'دين';
+
+  @override
+  String get saPaidLabel => 'مدفوع';
+
+  @override
+  String get isTitle => 'إعدادات المخزون';
+
+  @override
+  String get isStockTracking => 'تتبع المخزون';
+
+  @override
+  String get isStockTrackingDesc => 'تفعيل تتبع كميات المنتجات';
+
+  @override
+  String get isBarcodeRequired => 'الباركود مطلوب';
+
+  @override
+  String get isBarcodeRequiredDesc => 'طلب الباركود عند إضافة المنتجات';
+
+  @override
+  String get isAutoDeduct => 'خصم تلقائي للمخزون';
+
+  @override
+  String get isAutoDeductDesc => 'خصم المخزون تلقائياً عند تأكيد الفاتورة';
+
+  @override
+  String get isLowStockAlert => 'تنبيه المخزون المنخفض';
+
+  @override
+  String get isLowStockAlertDesc => 'عرض تحذير عند انخفاض المخزون عن الحد';
+
+  @override
+  String get isThreshold => 'حد التنبيه';
+
+  @override
+  String get isDefaultWarehouse => 'المخزن الافتراضي';
+
+  @override
+  String get isUnits => 'وحدات القياس';
+
+  @override
+  String get isSave => 'حفظ الإعدادات';
+
+  @override
+  String get isSaved => 'تم حفظ الإعدادات';
+
+  @override
+  String get isWeightUnit => 'وحدة الوزن';
+
+  @override
+  String get isLengthUnit => 'وحدة الطول';
+
+  @override
+  String get isVolumeUnit => 'وحدة الحجم';
+
+  @override
+  String get asTitle => 'إضافة خدمة';
+
+  @override
+  String get asEditTitle => 'تعديل الخدمة';
+
+  @override
+  String get asNameLabel => 'اسم الخدمة';
+
+  @override
+  String get asNameHint => 'أدخل اسم الخدمة';
+
+  @override
+  String get asPriceLabel => 'السعر';
+
+  @override
+  String get asPriceHint => 'أدخل السعر';
+
+  @override
+  String get asDescLabel => 'الوصف';
+
+  @override
+  String get asDescHint => 'أدخل الوصف (اختياري)';
+
+  @override
+  String get asCategoryLabel => 'التصنيف';
+
+  @override
+  String get asCategoryHint => 'اختر التصنيف';
+
+  @override
+  String get asDurationLabel => 'المدة (بالدقائق)';
+
+  @override
+  String get asDurationHint => 'أدخل المدة';
+
+  @override
+  String get asSave => 'حفظ';
+
+  @override
+  String get asSaving => 'جارٍ الحفظ...';
+
+  @override
+  String get asSaved => 'تم حفظ الخدمة بنجاح';
+
+  @override
+  String get asError => 'خطأ في حفظ الخدمة';
+
+  @override
+  String get asDelete => 'حذف الخدمة';
+
+  @override
+  String get asConfirmDelete => 'هل أنت متأكد من حذف هذه الخدمة؟';
+
+  @override
+  String cdCustomerFallback(Object id) {
+    return 'عميل #$id';
+  }
+
+  @override
+  String get cdPayDebt => 'تسديد دين';
+
+  @override
+  String cdCurrentRemaining(Object amount) {
+    return 'المتبقي الحالي: $amount Fdj';
+  }
+
+  @override
+  String get cdAutoDistributeHint =>
+      'يُوزَّع تلقائياً على الفواتير من الأقدم إلى الأحدث.';
+
+  @override
+  String get cdNothingToPay => 'لا يوجد متبقٍ للتسديد أو المبلغ غير صالح';
+
+  @override
+  String get cdCustomerDebts => 'ديون عميل';
+
+  @override
+  String get cdOpenInvoices => 'فواتير آجل';
+
+  @override
+  String get cdTakenOnCredit => 'المنتجات المأخوذة بالدين';
+
+  @override
+  String get cdNoItemsRecorded => 'لا توجد بنود مسجّلة.';
+
+  @override
+  String get cdInvoicesChip => 'فواتير';
+
+  @override
+  String get cdOpenChip => 'مفتوحة';
+
+  @override
+  String cdInvoiceNumber(Object id) {
+    return 'فاتورة #$id';
+  }
+
+  @override
+  String get cdSettled => 'مغلقة';
+
+  @override
+  String get cdRemainingShort => 'متبقٍّ';
+
+  @override
+  String cdInvoiceLineSummary(Object date, Object id) {
+    return 'فاتورة #$id · $date';
+  }
+
+  @override
+  String cdSellerLabel(Object name) {
+    return 'البائع: $name';
+  }
+
+  @override
+  String cdQuantityLabel(Object qty) {
+    return 'الكمية: $qty';
+  }
+
+  @override
+  String cdPriceLabel(Object price) {
+    return 'السعر: $price';
+  }
+
+  @override
+  String cdPayDebtButton(Object amount) {
+    return 'تسديد دين (متبقٍّ $amount Fdj)';
+  }
+
+  @override
+  String get cfOutstandingDebt => 'الدين المستحق';
+
+  @override
+  String get cfPurchaseHistory => 'سجل المشتريات';
+
+  @override
+  String get cfFdj => 'Fdj';
+
+  @override
+  String saInvoiceId(Object id) {
+    return 'فاتورة #$id';
+  }
+
+  @override
+  String get cfFullDebtScreen => 'شاشة الديون الكاملة (تسديد وتفاصيل)';
+
+  @override
+  String get cfCreditSales => 'مبيعات بالأجل (دين)';
+
+  @override
+  String get cfCreditSalesDesc =>
+      'كل فاتورة مرتبطة بإيصال البيع — اضغط لعرض التفاصيل';
+
+  @override
+  String get cfNoCreditInvoices =>
+      'لا توجد فواتير «آجل» مربوطة بهذا العميل. استخدم البيع بالدين مع اختيار العميل من القائمة.';
+
+  @override
+  String get cfInstallments => 'التقسيط';
+
+  @override
+  String get cfInstallmentsDesc => 'خطط الأقساط المرتبطة بفواتير البيع';
+
+  @override
+  String get cfNoInstallmentPlans =>
+      'لا توجد خطط تقسيط مربوطة بهذا العميل. استخدم نوع البيع «تقسيط» مع اختيار العميل.';
+
+  @override
+  String get cfEditCustomer => 'تعديل بيانات العميل';
+
+  @override
+  String get cfClosePanel => 'إغلاق اللوحة (Esc)';
+
+  @override
+  String get cfSelectCustomer => 'اختر عميلاً من القائمة';
+
+  @override
+  String get cfDebtDetailsWillAppear => 'ستظهر تفاصيل ديون العميل وأقساطه هنا.';
+
+  @override
+  String get cfPhone => 'الهاتف';
+
+  @override
+  String get cfEmail => 'البريد';
+
+  @override
+  String get cfWalletBalance => 'رصيد المحفظة';
+
+  @override
+  String cfSaleInvoice(Object id) {
+    return 'فاتورة بيع #$id';
+  }
+
+  @override
+  String get cfSettledShort => 'مغلقة';
+
+  @override
+  String cfRemainingBalance(Object balance) {
+    return 'متبقٍّ: $balance';
+  }
+
+  @override
+  String get cfViewReceipt => 'عرض إيصال / تفاصيل الفاتورة';
+
+  @override
+  String cfInstallmentInvoice(Object id) {
+    return 'فاتورة تقسيط #$id';
+  }
+
+  @override
+  String cfInstallmentSummary(Object paid, Object total) {
+    return 'المبلغ الكلي: $total · المدفوع: $paid';
+  }
+
+  @override
+  String cfInstallmentDetail(Object n, Object paidCount, Object remaining) {
+    return 'الأقساط: $paidCount / $n مدفوعة · متبقٍّ تقريباً: $remaining';
+  }
+
+  @override
+  String get cfInstallmentSchedule => 'جدول الأقساط';
+
+  @override
+  String get saNewSupplier => 'مورد جديد';
+
+  @override
+  String get saNameRequired => 'اسم المورد *';
+
+  @override
+  String get saPhoneOptional => 'هاتف (اختياري)';
+
+  @override
+  String get saNotes => 'ملاحظات';
+
+  @override
+  String get saCancel => 'إلغاء';
+
+  @override
+  String get saSave => 'حفظ';
+
+  @override
+  String get saEnterName => 'أدخل اسم المورد';
+
+  @override
+  String get saSaveError => 'تعذّر الحفظ';
+
+  @override
+  String get saCreditAccounts => 'ذمم دائنة (موردون)';
+
+  @override
+  String get saCreditAccountsDesc =>
+      'سجّل وصل المورد (رقمهم وتاريخهم) ثم سجّل الدفعات عند السداد. يمكن ربط الصندوق تلقائياً عند الدفع.';
+
+  @override
+  String saTotalOwed(Object amount) {
+    return 'إجمالي ما علينا للموردين: $amount Fdj';
+  }
+
+  @override
+  String get saSearchHint => 'بحث باسم المورد…';
+
+  @override
+  String get saNoSuppliersYet => 'لا موردين بعد — اضغط + لإضافة مورد';
+
+  @override
+  String saSupplierSummary(Object billed, Object paid) {
+    return 'وارد: $billed · مدفوع: $paid';
+  }
+
+  @override
+  String get saReceiptLabel => 'وصل';
+
+  @override
+  String get saPaymentLabel => 'دفعة';
+
+  @override
+  String get saReturnLabel => 'مرتجع';
+
+  @override
+  String get saDueToSupplier => 'مستحق للمورد';
+
+  @override
+  String get saBalanced => 'متوازن';
+
+  @override
+  String get saSupplierChip => 'مورد';
+
+  @override
+  String get isFullSettingsHint =>
+      'إعدادات المنتجات الكاملة (تهيئة، تتبع، أذون، قيم افتراضية) متوفرة من البطاقة الرئيسية «إعدادات المنتجات» في شبكة إعدادات المخزون.';
+
+  @override
+  String get isCategoriesMoved =>
+      'تم نقل إدارة التصنيفات إلى شاشة مخصّصة. افتح «التصنيفات» من القائمة الرئيسية لإعدادات المخزون.';
+
+  @override
+  String get isBrandsMoved =>
+      'تم نقل إدارة العلامات التجارية إلى شاشة مخصّصة. افتح «العلامات التجارية» من القائمة الرئيسية.';
+
+  @override
+  String get isBarcodeConfigMoved =>
+      'تم نقل تهيئة الباركود إلى شاشة مخصّصة. افتح «إعدادات الباركود» من القائمة الرئيسية لهذه الإعدادات.';
+
+  @override
+  String get isDefaultWarehouses => 'المستودعات الافتراضية للموظفين';
+
+  @override
+  String get isForceDefaultWarehouse => 'فرض مستودع افتراضي عند تسجيل الحركات';
+
+  @override
+  String get isWarehouseRecommendation =>
+      'يُنصح بربط كل موظف بمستودع افتراضي لتتبع الصلاحيات والحركات.';
+
+  @override
+  String get isUnitsTemplatesMoved =>
+      'إدارة قوالب الوحدات (الأساسية والتحويل) من الشاشة المخصّصة. افتح «قوالب الوحدات» من القائمة الرئيسية لإعدادات المخزون.';
+
+  @override
+  String get isAllowDifferentPurchaseUnits =>
+      'السماح بوحدات شراء مختلفة عن البيع';
+
+  @override
+  String get isShowConversionsOnPurchase => 'عرض التحويلات في فاتورة الشراء';
+
+  @override
+  String get isPrinting => 'الطباعة';
+
+  @override
+  String get isIncludeStoreLogo => 'تضمين شعار المتجر في المستندات';
+
+  @override
+  String get isPrintBarcodeOnReceipts => 'طباعة باركود على أذون الصرف';
+
+  @override
+  String get isExtraFields => 'الحقول الإضافية';
+
+  @override
+  String get isShowExtraFieldsInLists =>
+      'إظهار الحقول الإضافية في قوائم المنتجات';
+
+  @override
+  String get isIncludeInExportReports => 'تضمينها في التقارير القابلة للتصدير';
+
+  @override
+  String get isNoExtraSettings => 'لا توجد إعدادات إضافية لهذه الفئة بعد.';
+
+  @override
+  String get asMinPriceError => 'الحد الأدنى للبيع لا يجوز أن يتجاوز سعر البيع';
+
+  @override
+  String get asSavedSuccess => 'تم حفظ الخدمة';
+
+  @override
+  String get asAddTitle => 'إضافة خدمة فنية';
+
+  @override
+  String get asAddDescription =>
+      'أضف خدمة للبيع المباشر من شاشة البيع (كمية ثابتة 1، بدون مخزون).';
+
+  @override
+  String get asNameRequired => 'أدخل اسم الخدمة';
+
+  @override
+  String get asSalePriceLabel => 'سعر البيع';
+
+  @override
+  String get asInvalidPrice => 'السعر غير صالح';
+
+  @override
+  String get asRefCostLabel => 'التكلفة المرجعية للخدمة';
+
+  @override
+  String get asRefCostDesc =>
+      'أجر الفني أو مواد مستهلكة افتراضية — لحساب الهامش في التقارير (مثل سعر الشراء للمنتج).';
+
+  @override
+  String get asMinSalePriceLabel => 'الحد الأدنى للبيع';
+
+  @override
+  String get asMinSalePriceDesc => 'إن تُرك فارغاً يُستخدم سعر البيع.';
+
+  @override
+  String get asDescriptionLabel => 'الوصف أو التفاصيل';
+
+  @override
+  String get asDescriptionHint => 'مدة العمل، الشروط، الملاحظات…';
+
+  @override
+  String get asSaveButton => 'حفظ الخدمة';
 }

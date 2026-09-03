@@ -108,6 +108,7 @@ class _InstallmentDetailsScreenState extends State<InstallmentDetailsScreen> {
   }
 
   Future<void> _recordPayment(Installment installment) async {
+    final loc = AppLocalizations.of(context)!;
     final amountController =
         TextEditingController(text: installment.amount.toStringAsFixed(0));
     final payOutcome = await showDialog<RecordInstallmentPaymentResult?>(
@@ -122,12 +123,12 @@ class _InstallmentDetailsScreenState extends State<InstallmentDetailsScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                'المستحق: ${_numFmt.format(installment.amount)} Fdj',
+                loc.instDueAmount(_numFmt.format(installment.amount)),
                 style: const TextStyle(fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 6),
               Text(
-                'يُسجَّل كاملاً في الصندوق (لا دفع جزئي حالياً).',
+                loc.instFullBoxOnly,
                 style: TextStyle(fontSize: 12, color: Theme.of(ctx).hintColor),
               ),
               const SizedBox(height: 12),
@@ -158,8 +159,8 @@ class _InstallmentDetailsScreenState extends State<InstallmentDetailsScreen> {
                     SnackBar(
                       content: Text(
                         paid + 1e-6 < installment.amount
-                            ? 'يجب تسديد قيمة القسط كاملة (${_numFmt.format(installment.amount)} Fdj)'
-                            : 'تعذر التسجيل (قد يكون القسط مدفوعاً)',
+                            ? loc.instMustPayFull(_numFmt.format(installment.amount))
+                            : loc.instPayFailed,
                       ),
                     ),
                   );
@@ -303,6 +304,7 @@ class _CustomerPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final phone = customer?['phone']?.toString();
     final email = customer?['email']?.toString();
     final address = customer?['address']?.toString();
@@ -329,7 +331,7 @@ class _CustomerPanel extends StatelessWidget {
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
-                  plan.customerName.isEmpty ? 'عميل' : plan.customerName,
+                  plan.customerName.isEmpty ? loc.instCustomer : plan.customerName,
                   style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -337,16 +339,16 @@ class _CustomerPanel extends StatelessWidget {
           ),
           if (customer != null) ...[
             const SizedBox(height: 10),
-            _InfoLine(Icons.link_rounded, 'مرتبط بسجل العملاء #${customer!['id']}'),
+            _InfoLine(Icons.link_rounded, loc.instLinkedToCustomer(customer!['id'].toString())),
             if (phone != null && phone.isNotEmpty) _InfoLine(Icons.phone_rounded, phone),
             if (email != null && email.isNotEmpty) _InfoLine(Icons.email_outlined, email),
             if (address != null && address.isNotEmpty) _InfoLine(Icons.location_on_outlined, address),
             if (balance != null)
-              _InfoLine(Icons.account_balance_wallet_outlined, 'رصيد العميل المسجّل: ${_numFmt.format(balance)} Fdj'),
+              _InfoLine(Icons.account_balance_wallet_outlined, loc.instRegisteredBalance(_numFmt.format(balance))),
           ] else ...[
             const SizedBox(height: 8),
             Text(
-              'لا يوجد تطابق في جدول العملاء — الاسم مأخوذ من الفاتورة فقط. يمكنك ربط عميل عند إنشاء خطة جديدة من شاشة «إضافة خطة».',
+              loc.instNoCustomerMatch,
               style: TextStyle(fontSize: 12, color: Theme.of(context).hintColor, height: 1.4),
             ),
           ],
@@ -384,6 +386,7 @@ class _InvoicePanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(14),
@@ -396,11 +399,11 @@ class _InvoicePanel extends StatelessWidget {
         children: [
           Text(AppLocalizations.of(context)!.linkedInvoice, style: TextStyle(fontWeight: FontWeight.bold)),
           const SizedBox(height: 8),
-          Text('رقم الفاتورة: #${invoice.id}'),
-          Text('التاريخ: ${_dateFmt.format(invoice.date)}'),
-          Text('الإجمالي: ${_numFmt.format(invoice.total)} Fdj'),
+          Text(loc.instInvoiceNumber(invoice.id.toString())),
+          Text('${loc.instDate}: ${_dateFmt.format(invoice.date)}'),
+          Text('${loc.instTotal}: ${_numFmt.format(invoice.total)} Fdj'),
           if (invoice.advancePayment > 0)
-            Text('المقدم المحصّل: ${_numFmt.format(invoice.advancePayment)} Fdj'),
+            Text(loc.instAdvanceCollected(_numFmt.format(invoice.advancePayment))),
         ],
       ),
     );
@@ -421,6 +424,7 @@ class _ItemsPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(14),
@@ -460,13 +464,13 @@ class _ItemsPanel extends StatelessWidget {
                     child: Text(it.productName, style: const TextStyle(fontWeight: FontWeight.w500)),
                   ),
                   Expanded(
-                    child: Text('بيع: ${it.quantity}', textAlign: TextAlign.center),
+                    child: Text(loc.instSaleQty(it.quantity.toString()), textAlign: TextAlign.center),
                   ),
                   Expanded(
                     child: Text(
                       pid == null
                           ? '—'
-                          : (q != null ? 'مخزون: ${_numFmt.format(q)}' : AppLocalizations.of(context)!.unlinked),
+                          : (q != null ? loc.instStock(_numFmt.format(q)) : AppLocalizations.of(context)!.unlinked),
                       textAlign: TextAlign.end,
                       style: TextStyle(
                         fontSize: 12,
@@ -497,6 +501,7 @@ class _SaleFinanceSnapshotPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final border = isDark ? AppColors.borderDark : AppColors.borderLight;
     final pct = plan.interestPct;
     final pctStr =
@@ -520,21 +525,21 @@ class _SaleFinanceSnapshotPanel extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          Text('نسبة الفائدة: $pctStr%'),
-          Text('عدد الأشهر: ${plan.plannedMonths}'),
-          Text('المبلغ المموّل: ${_numFmt.format(plan.financedAtSale)} Fdj'),
+          Text('${loc.instInterestRate}: \$pctStr%'),
+          Text('${loc.instPlannedMonths}: ${plan.plannedMonths}'),
+          Text('${loc.instFinancedAtSale}: ${_numFmt.format(plan.financedAtSale)} Fdj'),
           if (plan.interestAmount > 1e-9)
-            Text('قيمة الفائدة: ${_numFmt.format(plan.interestAmount)} Fdj'),
+            Text('${loc.instInterestAmount}: ${_numFmt.format(plan.interestAmount)} Fdj'),
           Text(
-            'الإجمالي مع الفائدة: ${_numFmt.format(plan.totalWithInterest)} Fdj',
+            '${loc.instTotalWithInterest}: ${_numFmt.format(plan.totalWithInterest)} Fdj',
           ),
           if (plan.suggestedMonthly > 1e-9)
             Text(
-              'القسط الشهري المقترح: ${_numFmt.format(plan.suggestedMonthly)} Fdj',
+              '${loc.instSuggestedMonthly}: ${_numFmt.format(plan.suggestedMonthly)} Fdj',
             ),
           const SizedBox(height: 8),
           Text(
-            'تنبيه: الأرقام أعلاه تقدير عند البيع. جدول الأقساط الفعلي يُوزَّع على «إجمالي الفاتورة − المقدّم» وقد يختلف عن القسط المقترح بالفلس.',
+            loc.instEstimateNote,
             style: TextStyle(
               fontSize: 10,
               height: 1.35,
@@ -561,6 +566,7 @@ class _ProgressPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final ratio = plan.totalAmount > 0 ? (plan.paidAmount / plan.totalAmount).clamp(0.0, 1.0) : 0.0;
     final rem = (plan.totalAmount - plan.paidAmount).clamp(0.0, double.infinity);
     final advance = invoice?.advancePayment ?? 0.0;
@@ -571,8 +577,8 @@ class _ProgressPanel extends StatelessWidget {
     final hasAdvance = advance > 1e-6;
     final hasSchedule = schedulePaid > 1e-6;
     final rawParts = <String>[
-      if (hasAdvance) 'مقدّم: ${_numFmt.format(advance)} Fdj',
-      if (hasSchedule) 'أقساط من الجدول: ${_numFmt.format(schedulePaid)} Fdj',
+      if (hasAdvance) '${loc.instAdvance}: ${_numFmt.format(advance)} Fdj',
+      if (hasSchedule) '${loc.instFromSchedule}: ${_numFmt.format(schedulePaid)} Fdj',
     ];
     final combinedRaw = advance + schedulePaid;
     final capped =
@@ -600,7 +606,7 @@ class _ProgressPanel extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'المدفوع: ${_numFmt.format(plan.paidAmount)} / ${_numFmt.format(plan.totalAmount)} Fdj',
+            '${loc.instPaid}: ${_numFmt.format(plan.paidAmount)} / ${_numFmt.format(plan.totalAmount)} Fdj',
             style: const TextStyle(fontWeight: FontWeight.w600),
           ),
           if (rawParts.isNotEmpty) ...[
@@ -627,7 +633,7 @@ class _ProgressPanel extends StatelessWidget {
               ),
             ),
           const SizedBox(height: 4),
-          Text('المتبقي: ${_numFmt.format(rem)} Fdj'),
+          Text('${loc.instRemaining}: ${_numFmt.format(rem)} Fdj'),
         ],
       ),
     );
@@ -650,6 +656,7 @@ class _InstallmentRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final paid = installment.paid;
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
@@ -672,14 +679,14 @@ class _InstallmentRow extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('القسط $index', style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text(loc.instInstallment(index.toString()), style: const TextStyle(fontWeight: FontWeight.bold)),
                 Text(
-                  'الاستحقاق: ${_dateFmt.format(installment.dueDate)}',
+                  '${loc.instDueDate}: ${_dateFmt.format(installment.dueDate)}',
                   style: TextStyle(fontSize: 12, color: Theme.of(context).hintColor),
                 ),
                 if (paid && installment.paidDate != null)
                   Text(
-                    'سُدد: ${_dateFmt.format(installment.paidDate!)}',
+                    '${loc.instPaidOn}: ${_dateFmt.format(installment.paidDate!)}',
                     style: const TextStyle(fontSize: 12, color: Color(0xFF16A34A)),
                   ),
               ],
@@ -703,7 +710,7 @@ class _InstallmentRow extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
                   ),
-                  child: const Text('تسديد'),
+                  child: Text(loc.instPayButton),
                 ),
             ],
           ),

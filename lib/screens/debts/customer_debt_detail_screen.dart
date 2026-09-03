@@ -61,7 +61,7 @@ class _CustomerDebtDetailScreenState extends State<CustomerDebtDetailScreen> {
     } else if (widget.registeredCustomerId != null) {
       _resolveParty(widget.registeredCustomerId!);
     } else {
-      _resolveError = 'بيانات غير صالحة';
+      _resolveError = AppLocalizations.of(context)!.cdInvalidData;
       _loading = false;
     }
   }
@@ -71,7 +71,7 @@ class _CustomerDebtDetailScreenState extends State<CustomerDebtDetailScreen> {
     final row = await _db.getCustomerById(customerId);
     final name = (row?['name'] as String?)?.trim();
     final display =
-        (name != null && name.isNotEmpty) ? name : 'عميل #$customerId';
+        (name != null && name.isNotEmpty) ? name : AppLocalizations.of(context)!.cdCustomerFallback(customerId.toString());
     if (!mounted) return;
     setState(() {
       _party = CustomerDebtParty(
@@ -121,6 +121,7 @@ class _CustomerDebtDetailScreenState extends State<CustomerDebtDetailScreen> {
   }
 
   Future<void> _openPayDialog() async {
+    final loc = AppLocalizations.of(context)!;
     final p = _party;
     if (p == null || _openTotal < 0.009) return;
     final ctrl = TextEditingController(
@@ -132,21 +133,21 @@ class _CustomerDebtDetailScreenState extends State<CustomerDebtDetailScreen> {
         textDirection: Directionality.of(context),
         child: AlertDialog(
           shape: const RoundedRectangleBorder(borderRadius: AppShape.none),
-          title: const Text('تسديد دين'),
+          title: Text(loc.cdPayDebt),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                'المتبقي الحالي: ${_numFmt.format(_openTotal)} Fdj',
+                loc.cdCurrentRemaining(_numFmt.format(_openTotal)),
                 style: const TextStyle(fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 12),
               TextField(
                 controller: ctrl,
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'المبلغ (Fdj)',
+                decoration: InputDecoration(
+                  labelText: loc.cdAmountLabel,
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -160,11 +161,11 @@ class _CustomerDebtDetailScreenState extends State<CustomerDebtDetailScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx),
-              child: const Text('إلغاء'),
+              child: Text(loc.cdCancel),
             ),
             FilledButton(
               onPressed: () => Navigator.pop(ctx, ctrl.text),
-              child: const Text('تأكيد'),
+              child: Text(loc.cdConfirm),
             ),
           ],
         ),
@@ -176,7 +177,7 @@ class _CustomerDebtDetailScreenState extends State<CustomerDebtDetailScreen> {
     final amt = double.tryParse(raw) ?? 0;
     if (amt <= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('أدخل مبلغاً صالحاً')),
+        SnackBar(content: Text(loc.cdEnterValidAmount)),
       );
       return;
     }
@@ -190,8 +191,8 @@ class _CustomerDebtDetailScreenState extends State<CustomerDebtDetailScreen> {
       if (!mounted) return;
       if (res == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('لا يوجد متبقٍ للتسديد أو المبلغ غير صالح'),
+          SnackBar(
+            content: Text(loc.cdNothingToPay),
           ),
         );
         return;
@@ -221,7 +222,7 @@ class _CustomerDebtDetailScreenState extends State<CustomerDebtDetailScreen> {
       }());
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('تعذّر إكمال التسديد: $e')),
+          SnackBar(content: Text(loc.cdPaymentFailed(e.toString()))),
         );
       }
     }
@@ -229,6 +230,7 @@ class _CustomerDebtDetailScreenState extends State<CustomerDebtDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
     final isDark = theme.brightness == Brightness.dark;
@@ -239,7 +241,7 @@ class _CustomerDebtDetailScreenState extends State<CustomerDebtDetailScreen> {
       return Directionality(
         textDirection: Directionality.of(context),
         child: Scaffold(
-          appBar: AppBar(title: const Text('ديون عميل')),
+          appBar: AppBar(title: Text(loc.cdCustomerDebts)),
           body: Center(child: Text(_resolveError!)),
         ),
       );
@@ -275,7 +277,7 @@ class _CustomerDebtDetailScreenState extends State<CustomerDebtDetailScreen> {
                           ),
                           const SizedBox(height: 14),
                           Text(
-                            'فواتير آجل',
+                            loc.cdOpenInvoices,
                             style: theme.textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.bold,
                             ),
@@ -295,7 +297,7 @@ class _CustomerDebtDetailScreenState extends State<CustomerDebtDetailScreen> {
                           ),
                           const SizedBox(height: 18),
                           Text(
-                            'المنتجات المأخوذة بالدين',
+                            loc.cdTakenOnCredit,
                             style: theme.textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.bold,
                             ),
@@ -303,7 +305,7 @@ class _CustomerDebtDetailScreenState extends State<CustomerDebtDetailScreen> {
                           const SizedBox(height: 8),
                           if (_lines.isEmpty)
                             Text(
-                              'لا توجد بنود مسجّلة.',
+                              loc.cdNoItemsRecorded,
                               style: TextStyle(color: cs.onSurfaceVariant),
                             )
                           else
@@ -348,6 +350,7 @@ class _SummaryHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     final border = isDark ? AppColors.borderDark : AppColors.borderLight;
     return Container(
@@ -362,7 +365,7 @@ class _SummaryHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'إجمالي المتبقي',
+            loc.cdTotalRemaining,
             style: TextStyle(
               fontSize: 13,
               color: cs.onSurfaceVariant,
@@ -383,9 +386,9 @@ class _SummaryHeader extends StatelessWidget {
           const SizedBox(height: 12),
           Row(
             children: [
-              _chip(context, cs, 'فواتير', '$invoiceCount'),
+              _chip(context, cs, loc.cdInvoicesChip, '$invoiceCount'),
               const SizedBox(width: 10),
-              _chip(context, cs, 'مفتوحة', '$openInvoiceCount'),
+              _chip(context, cs, loc.cdOpenChip, '$openInvoiceCount'),
             ],
           ),
         ],
@@ -428,6 +431,7 @@ class _InvoiceMiniTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     final border = isDark ? AppColors.borderDark : AppColors.borderLight;
     final settled = inv.isSettled;
@@ -451,7 +455,7 @@ class _InvoiceMiniTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'فاتورة #${inv.invoiceId}',
+                        loc.cdInvoiceNumber(inv.invoiceId.toString()),
                         style: const TextStyle(fontWeight: FontWeight.w800),
                       ),
                       Text(
@@ -474,7 +478,7 @@ class _InvoiceMiniTile extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      settled ? 'مغلقة' : 'متبقٍّ',
+                      settled ? loc.cdSettled : loc.cdRemainingShort,
                       style: TextStyle(fontSize: 11, color: cs.onSurfaceVariant),
                     ),
                   ],
@@ -502,6 +506,7 @@ class _ProductDebtTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     final border = isDark ? AppColors.borderDark : AppColors.borderLight;
     final seller = (line.sellerName ?? '').trim();
@@ -529,12 +534,12 @@ class _ProductDebtTile extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            'فاتورة #${line.invoiceId} · ${_dateFmt.format(line.invoiceDate)}',
+            loc.cdInvoiceLineSummary(line.invoiceId.toString(), _dateFmt.format(line.invoiceDate)),
             style: TextStyle(fontSize: 12, color: cs.onSurfaceVariant),
           ),
           if (seller.isNotEmpty)
             Text(
-              'البائع: $seller',
+              loc.cdSellerLabel(seller),
               style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
@@ -545,12 +550,12 @@ class _ProductDebtTile extends StatelessWidget {
           Row(
             children: [
               Text(
-                'الكمية: ${line.quantity}',
+                loc.cdQuantityLabel(line.quantity.toString()),
                 style: TextStyle(fontSize: 12, color: cs.onSurfaceVariant),
               ),
               const SizedBox(width: 12),
               Text(
-                'السعر: ${_numFmt.format(line.unitPrice)}',
+                loc.cdPriceLabel(_numFmt.format(line.unitPrice)),
                 style: TextStyle(fontSize: 12, color: cs.onSurfaceVariant),
               ),
               const Spacer(),
@@ -579,6 +584,7 @@ class _PayBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     return Material(
       elevation: 8,
@@ -597,8 +603,8 @@ class _PayBar extends StatelessWidget {
             icon: const Icon(Icons.payments_rounded),
             label: Text(
               enabled
-                  ? 'تسديد دين (متبقٍّ ${_numFmt.format(openTotal)} Fdj)'
-                  : 'لا يوجد متبقٍ',
+                  ? loc.cdPayDebtButton(_numFmt.format(openTotal))
+                  : loc.cdNoRemaining,
               style: const TextStyle(fontWeight: FontWeight.w700),
             ),
           ),

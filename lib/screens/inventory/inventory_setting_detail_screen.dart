@@ -117,7 +117,7 @@ class _InventorySettingDetailScreenState
       case 'products':
         return [
           _infoTile(
-            'إعدادات المنتجات الكاملة (تهيئة، تتبع، أذون، قيم افتراضية) متوفرة من البطاقة الرئيسية «إعدادات المنتجات» في شبكة إعدادات المخزون.',
+            'loc.isFullSettingsHint (تهيئة، تتبع، أذون، قيم افتراضية) متوفرة من البطاقة الرئيسية «إعدادات المنتجات» في شبكة إعدادات المخزون.',
             textSecondary,
             surface,
             divider,
@@ -126,7 +126,7 @@ class _InventorySettingDetailScreenState
       case 'categories':
         return [
           _infoTile(
-            'تم نقل إدارة التصنيفات إلى شاشة مخصّصة. افتح «التصنيفات» من القائمة الرئيسية لإعدادات المخزون.',
+            'loc.isCategoriesMoved إلى شاشة مخصّصة. افتح «التصنيفات» من القائمة الرئيسية لإعدادات المخزون.',
             textSecondary,
             surface,
             divider,
@@ -135,7 +135,7 @@ class _InventorySettingDetailScreenState
       case 'brands':
         return [
           _infoTile(
-            'تم نقل إدارة العلامات التجارية إلى شاشة مخصّصة. افتح «العلامات التجارية» من القائمة الرئيسية.',
+            'loc.isBrandsMoved إلى شاشة مخصّصة. افتح «العلامات التجارية» من القائمة الرئيسية.',
             textSecondary,
             surface,
             divider,
@@ -144,7 +144,7 @@ class _InventorySettingDetailScreenState
       case 'barcode':
         return [
           _infoTile(
-            'تم نقل تهيئة الباركود إلى شاشة مخصّصة. افتح «إعدادات الباركود» من القائمة الرئيسية لهذه الإعدادات.',
+            'loc.isBarcodeConfigMoved إلى شاشة مخصّصة. افتح «إعدادات الباركود» من القائمة الرئيسية لهذه الإعدادات.',
             textSecondary,
             surface,
             divider,
@@ -162,7 +162,7 @@ class _InventorySettingDetailScreenState
             surface,
           ),
           _infoTile(
-            'يُنصح بربط كل موظف بمستودع افتراضي لتتبع الصلاحيات والحركات.',
+            'loc.isWarehouseRecommendation بمستودع افتراضي لتتبع الصلاحيات والحركات.',
             textSecondary,
             surface,
             divider,
@@ -171,14 +171,14 @@ class _InventorySettingDetailScreenState
       case 'unit_templates':
         return [
           _infoTile(
-            'إدارة قوالب الوحدات (الأساسية والتحويل) من الشاشة المخصّصة. افتح «قوالب الوحدات» من القائمة الرئيسية لإعدادات المخزون — تُستعمل كمرجع عند تعريف وحدات إضافية للمنتج.',
+            'loc.isUnitsTemplatesMoved (الأساسية والتحويل) من الشاشة المخصّصة. افتح «قوالب الوحدات» من القائمة الرئيسية لإعدادات المخزون — تُستعمل كمرجع عند تعريف وحدات إضافية للمنتج.',
             textSecondary,
             surface,
             divider,
           ),
           _sectionTitle('الوحدات', textPrimary),
           _switchTile(
-            'السماح بوحدات شراء مختلفة عن البيع',
+            'loc.isAllowDifferentPurchaseUnits عن البيع',
             'unit_purchase_sell',
             textPrimary,
             textSecondary,
@@ -186,7 +186,7 @@ class _InventorySettingDetailScreenState
             surface,
           ),
           _switchTile(
-            'عرض التحويلات في فاتورة الشراء',
+            'loc.isShowConversionsOnPurchase',
             'unit_show_po',
             textPrimary,
             textSecondary,
@@ -198,7 +198,7 @@ class _InventorySettingDetailScreenState
         return [
           _sectionTitle('الطباعة', textPrimary),
           _switchTile(
-            'تضمين شعار المتجر في المستندات',
+            'loc.isIncludeStoreLogo في المستندات',
             'print_logo',
             textPrimary,
             textSecondary,
@@ -206,7 +206,7 @@ class _InventorySettingDetailScreenState
             surface,
           ),
           _switchTile(
-            'طباعة باركود على أذون الصرف',
+            'loc.isPrintBarcodeOnReceipts',
             'print_barcode_issue',
             textPrimary,
             textSecondary,
@@ -218,7 +218,7 @@ class _InventorySettingDetailScreenState
         return [
           _sectionTitle('الحقول الإضافية', textPrimary),
           _switchTile(
-            'إظهار الحقول الإضافية في قوائم المنتجات',
+            'loc.isShowExtraFieldsInLists في قوائم المنتجات',
             'cf_show_lists',
             textPrimary,
             textSecondary,
@@ -226,7 +226,7 @@ class _InventorySettingDetailScreenState
             surface,
           ),
           _switchTile(
-            'تضمينها في التقارير القابلة للتصدير',
+            'loc.isIncludeInExportReports',
             'cf_export',
             textPrimary,
             textSecondary,
@@ -239,7 +239,7 @@ class _InventorySettingDetailScreenState
           Padding(
             padding: const EdgeInsets.all(24),
             child: Text(
-              'لا توجد إعدادات إضافية لهذه الفئة بعد.',
+              'loc.isNoExtraSettings لهذه الفئة بعد.',
               style: TextStyle(color: textSecondary),
               textAlign: TextAlign.center,
             ),

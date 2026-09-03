@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import '../../l10n/generated/app_localizations.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../services/market_pos_import_service.dart';
@@ -101,6 +103,7 @@ class _MarketPosImportScreenState extends State<MarketPosImportScreen> {
   }
 
   Future<void> _runImport() async {
+    final loc = AppLocalizations.of(context)!;
     final input = _pathCtrl.text;
     setState(() {
       _busy = true;
@@ -121,8 +124,8 @@ class _MarketPosImportScreenState extends State<MarketPosImportScreen> {
       if (!mounted) return;
       setState(() => _last = r);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('تم الاستيراد بنجاح'),
+        SnackBar(
+          content: Text(loc.mpImportSuccess),
           duration: Duration(milliseconds: 1200),
         ),
       );
@@ -135,6 +138,7 @@ class _MarketPosImportScreenState extends State<MarketPosImportScreen> {
   }
 
   Future<void> _runBundledImport() async {
+    final loc = AppLocalizations.of(context)!;
     setState(() {
       _busy = true;
       _error = null;
@@ -145,8 +149,8 @@ class _MarketPosImportScreenState extends State<MarketPosImportScreen> {
       if (!mounted) return;
       setState(() => _last = r);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('تم استيراد المواد المضمّنة بنجاح'),
+        SnackBar(
+          content: Text(loc.mpBundledSuccess),
           duration: Duration(milliseconds: 1400),
         ),
       );
@@ -159,29 +163,31 @@ class _MarketPosImportScreenState extends State<MarketPosImportScreen> {
   }
 
   String _humanError(Object e) {
+    final loc = AppLocalizations.of(context)!;
     final s = e.toString();
-    if (s.contains('empty_path')) return 'اكتب مسار ملف قاعدة البيانات أولاً';
+    if (s.contains('empty_path')) return loc.mpErrorEmptyPath;
     if (s.contains('missing_file')) {
-      return 'الملف غير موجود. إذا كان الملف داخل RAR/ZIP لازم تفك الضغط وتستخرج ملف .db أولاً، ثم اكتب مساره أو اسمه.';
+      return loc.mpErrorMissingFile;
     }
     if (s.contains('no such table: products')) {
-      return 'الملف لا يحتوي جدول المنتجات (products). اختر ملف قاعدة صحيح';
+      return loc.mpErrorNoProducts;
     }
     if (s.contains('DatabaseException')) {
-      return 'تعذر قراءة الملف. تأكد أنه قاعدة SQLite صالحة وغير محمية';
+      return loc.mpErrorReadFailed;
     }
-    return 'حدث خطأ أثناء الاستيراد: $s';
+    return loc.mpErrorGeneric(s);
   }
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     return Directionality(
       textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: cs.surface,
         appBar: AppBar(
-          title: const Text('استيراد مواد وأسعار'),
+          title: Text(loc.mpTitle),
           backgroundColor: cs.primary,
           foregroundColor: cs.onPrimary,
         ),
@@ -189,8 +195,7 @@ class _MarketPosImportScreenState extends State<MarketPosImportScreen> {
           padding: const EdgeInsets.all(16),
           children: [
             Text(
-              'يستورد هذا الخيار قاعدة مواد جاهزة مضمّنة داخل التطبيق (≈ 3500 صنف من أشهر منتجات السوق مع أسعارها). '
-              'يفضل مراجعة الأسعار بعد الاستيراد لأن أسعار السوق تتغير.',
+              loc.mpBundledDesc,
               style: TextStyle(color: cs.onSurfaceVariant, height: 1.35),
             ),
             const SizedBox(height: 14),
@@ -207,9 +212,9 @@ class _MarketPosImportScreenState extends State<MarketPosImportScreen> {
                     children: [
                       Icon(Icons.inventory_2_rounded, color: cs.primary),
                       const SizedBox(width: 8),
-                      const Expanded(
+                      Expanded(
                         child: Text(
-                          'استعادة قاعدة المواد المضمّنة',
+                          loc.mpBundledRestoreTitle,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -217,8 +222,7 @@ class _MarketPosImportScreenState extends State<MarketPosImportScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'بضغطة واحدة: يقوم التطبيق بفك ضغط الملف المضمّن وإضافة المواد إلى مخزنك. '
-                    'إذا كان أحد الأصناف موجوداً مسبقاً بنفس الباركود، سيتم تحديث اسمه/سعره/تصنيفه فقط (بدون تكرار).',
+                    loc.mpBundledRestoreDesc,
                     style: TextStyle(
                       color: cs.onSurfaceVariant,
                       fontSize: 12,
@@ -236,7 +240,7 @@ class _MarketPosImportScreenState extends State<MarketPosImportScreen> {
                           )
                         : const Icon(Icons.cloud_download_rounded),
                     label: Text(
-                      _busy ? 'جاري الاستيراد…' : 'استيراد المواد المضمّنة',
+                      _busy ? loc.mpBundledButtonBusy : loc.mpBundledButtonIdle,
                     ),
                   ),
                 ],
@@ -247,14 +251,14 @@ class _MarketPosImportScreenState extends State<MarketPosImportScreen> {
               tilePadding: EdgeInsets.zero,
               childrenPadding: const EdgeInsets.symmetric(vertical: 6),
               title: Text(
-                'استيراد متقدّم: من ملف خارجي',
+                loc.mpAdvancedTileTitle,
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   color: cs.onSurface,
                 ),
               ),
               subtitle: Text(
-                'إذا عندك ملف Market POS بصيغة .db خارج التطبيق',
+                loc.mpAdvancedTileSubtitle,
                 style: TextStyle(
                   fontSize: 12,
                   color: cs.onSurfaceVariant,
@@ -272,8 +276,8 @@ class _MarketPosImportScreenState extends State<MarketPosImportScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const Text(
-                        'مسار ملف قاعدة البيانات',
+                      Text(
+                        loc.mpDbPathLabel,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 8),
@@ -281,9 +285,8 @@ class _MarketPosImportScreenState extends State<MarketPosImportScreen> {
                         textDirection: TextDirection.ltr,
                         child: TextField(
                           controller: _pathCtrl,
-                          decoration: const InputDecoration(
-                            hintText:
-                                'مثال: /Users/you/Documents/supermarket_backup_2026-04-15_20-05-15.db',
+                          decoration: InputDecoration(
+                            hintText: loc.mpDbPathHint,
                             border: OutlineInputBorder(),
                             isDense: true,
                           ),
@@ -293,11 +296,11 @@ class _MarketPosImportScreenState extends State<MarketPosImportScreen> {
                       OutlinedButton.icon(
                         onPressed: _busy ? null : _runImport,
                         icon: const Icon(Icons.download_rounded),
-                        label: const Text('استيراد من ملف خارجي'),
+                        label: Text(loc.mpImportExternal),
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'تلميح: يمكنك كتابة اسم الملف فقط وسيتم البحث عنه داخل Documents/Downloads/Desktop.',
+                        loc.mpTipHint,
                         style: TextStyle(
                           color: cs.onSurfaceVariant,
                           fontSize: 12,
@@ -333,6 +336,7 @@ class _ResultCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     return Container(
       padding: const EdgeInsets.all(14),
@@ -343,16 +347,16 @@ class _ResultCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
-            'نتيجة الاستيراد',
-            style: TextStyle(fontWeight: FontWeight.bold),
+          Text(
+            loc.mpResultTitle,
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
-          Text('إجمالي السجلات المقروءة: ${r.total}'),
-          Text('مواد جديدة: ${r.inserted}'),
-          Text('مواد تم تحديثها: ${r.updated}'),
-          Text('تم تجاوزها: ${r.skipped}'),
-          Text('تصنيفات تمت إضافتها: ${r.createdCategories}'),
+          Text(loc.mpResultTotal(r.total)),
+          Text(loc.mpResultNew(r.inserted)),
+          Text(loc.mpResultUpdated(r.updated)),
+          Text(loc.mpResultSkipped(r.skipped)),
+          Text(loc.mpResultCategories(r.createdCategories)),
         ],
       ),
     );

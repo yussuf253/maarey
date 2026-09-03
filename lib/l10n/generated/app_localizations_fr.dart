@@ -11341,7 +11341,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get cdInvalidData => 'Données invalides';
 
   @override
-  String get cdRecordPayment => 'Enregistrer le paiement';
+  String get cdRecordPayment => 'Enregistrer un paiement';
 
   @override
   String get cdRemainingCurrent => 'Restant actuel';
@@ -11369,7 +11369,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get cdPaymentSuccess => 'Paiement enregistré avec succès';
 
   @override
-  String get cdPaymentFailed => 'Échec du paiement';
+  String cdPaymentFailed(Object error) {
+    return 'Échec du paiement : $error';
+  }
 
   @override
   String get cdInvoiceHistory => 'Historique des factures';
@@ -14404,4 +14406,851 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get debtsNoCreditInvoices => 'Aucune facture à crédit enregistrée';
+
+  @override
+  String instDueAmount(Object amount) {
+    return 'Échéance : $amount Fdj';
+  }
+
+  @override
+  String get instFullBoxOnly =>
+      'Enregistré en totalité dans la caisse (pas de paiement partiel).';
+
+  @override
+  String instMustPayFull(Object amount) {
+    return 'Vous devez payer la totalité de la tranche ($amount Fdj)';
+  }
+
+  @override
+  String get instPayFailed =>
+      'Échec de l\'enregistrement (la tranche est peut-être déjà payée)';
+
+  @override
+  String get instCustomer => 'Client';
+
+  @override
+  String instLinkedToCustomer(Object id) {
+    return 'Lié au dossier client #$id';
+  }
+
+  @override
+  String instRegisteredBalance(Object amount) {
+    return 'Solde client enregistré : $amount Fdj';
+  }
+
+  @override
+  String get instNoCustomerMatch =>
+      'Aucune correspondance dans la table clients — le nom provient uniquement de la facture.';
+
+  @override
+  String instInvoiceNumber(Object id) {
+    return 'Facture #$id';
+  }
+
+  @override
+  String get instDate => 'Date';
+
+  @override
+  String get instTotal => 'Total';
+
+  @override
+  String instAdvanceCollected(Object amount) {
+    return 'Avance perçue : $amount Fdj';
+  }
+
+  @override
+  String instSaleQty(Object qty) {
+    return 'Vente : $qty';
+  }
+
+  @override
+  String instStock(Object qty) {
+    return 'Stock : $qty';
+  }
+
+  @override
+  String get instInterestRate => 'Taux d\'intérêt';
+
+  @override
+  String get instPlannedMonths => 'Mois prévus';
+
+  @override
+  String get instFinancedAtSale => 'Montant financé';
+
+  @override
+  String get instInterestAmount => 'Montant des intérêts';
+
+  @override
+  String get instTotalWithInterest => 'Total avec intérêts';
+
+  @override
+  String get instSuggestedMonthly => 'Tranche mensuelle suggérée';
+
+  @override
+  String get instEstimateNote =>
+      'Note : les chiffres ci-dessus sont des estimations à la vente.';
+
+  @override
+  String get instAdvance => 'Avance';
+
+  @override
+  String get instFromSchedule => 'Tranches du planning';
+
+  @override
+  String get instPaid => 'Payé';
+
+  @override
+  String get instRemaining => 'Restant';
+
+  @override
+  String instInstallment(Object index) {
+    return 'Tranche #$index';
+  }
+
+  @override
+  String get instDueDate => 'Échéance';
+
+  @override
+  String get instPaidOn => 'Payé le';
+
+  @override
+  String get instPayButton => 'Payer';
+
+  @override
+  String get mpImportSuccess => 'Importé avec succès';
+
+  @override
+  String get mpBundledSuccess => 'Matériaux intégrés importés avec succès';
+
+  @override
+  String get mpErrorEmptyPath =>
+      'Entrez d\'abord le chemin du fichier base de données';
+
+  @override
+  String get mpErrorMissingFile =>
+      'Fichier introuvable. Si le fichier est dans une archive RAR/ZIP, extrayez d\'abord le fichier .db, puis saisissez son chemin ou son nom.';
+
+  @override
+  String get mpErrorNoProducts =>
+      'Le fichier ne contient pas de table produits. Choisissez un fichier de base valide';
+
+  @override
+  String get mpErrorReadFailed =>
+      'Impossible de lire le fichier. Assurez-vous qu\'il s\'agit d\'une base SQLite valide et non protégée';
+
+  @override
+  String mpErrorGeneric(Object s) {
+    return 'Erreur lors de l\'import : $s';
+  }
+
+  @override
+  String get mpTitle => 'Importer matériaux & prix';
+
+  @override
+  String get mpBundledDesc =>
+      'Cette option importe une base de données de matériaux prête à l\'emploi (≈ 3 500 articles des produits les plus populaires du marché avec leurs prix). Il est recommandé de vérifier les prix après l\'import car les prix du marché changent.';
+
+  @override
+  String get mpBundledRestoreTitle => 'Restaurer la base de matériaux intégrée';
+
+  @override
+  String get mpBundledRestoreDesc =>
+      'En un clic : l\'application extraira le fichier intégré et ajoutera les matériaux à votre inventaire. Si un article existe déjà avec le même code-barres, seul son nom/prix/catégorie sera mis à jour (sans doublons).';
+
+  @override
+  String get mpBundledButtonBusy => 'Import en cours...';
+
+  @override
+  String get mpBundledButtonIdle => 'Importer les matériaux intégrés';
+
+  @override
+  String get mpAdvancedTileTitle => 'Import avancé : depuis un fichier externe';
+
+  @override
+  String get mpAdvancedTileSubtitle =>
+      'Si vous avez un fichier .db Market POS en dehors de l\'application';
+
+  @override
+  String get mpDbPathLabel => 'Chemin du fichier base de données';
+
+  @override
+  String get mpDbPathHint =>
+      'Exemple : /Users/you/Documents/supermarket_backup_2026-04-15_20-05-15.db';
+
+  @override
+  String get mpImportExternal => 'Importer depuis un fichier externe';
+
+  @override
+  String get mpTipHint =>
+      'Astuce : vous pouvez écrire juste le nom du fichier et il sera recherché dans Documents/Téléchargements/Bureau.';
+
+  @override
+  String get mpResultTitle => 'Résultat de l\'import';
+
+  @override
+  String mpResultTotal(Object total) {
+    return 'Total des enregistrements lus : $total';
+  }
+
+  @override
+  String mpResultNew(Object inserted) {
+    return 'Nouveaux matériaux : $inserted';
+  }
+
+  @override
+  String mpResultUpdated(Object updated) {
+    return 'Matériaux mis à jour : $updated';
+  }
+
+  @override
+  String mpResultSkipped(Object skipped) {
+    return 'Ignorés : $skipped';
+  }
+
+  @override
+  String mpResultCategories(Object createdCategories) {
+    return 'Catégories créées : $createdCategories';
+  }
+
+  @override
+  String get cdTitle => 'Détails de la dette client';
+
+  @override
+  String get cdOriginalAmount => 'Montant original';
+
+  @override
+  String get cdCurrentBalance => 'Solde actuel';
+
+  @override
+  String get cdInstallments => 'Échéances';
+
+  @override
+  String get cdPaid => 'Payé';
+
+  @override
+  String get cdRemaining => 'Restant';
+
+  @override
+  String get cdDueDate => 'Date d\'échéance';
+
+  @override
+  String get cdOverdue => 'En retard';
+
+  @override
+  String get cdPaidOn => 'Payé le';
+
+  @override
+  String get cdStatus => 'Statut';
+
+  @override
+  String get cdPaidStatus => 'Payé';
+
+  @override
+  String get cdPendingStatus => 'En attente';
+
+  @override
+  String get cdOverdueStatus => 'En retard';
+
+  @override
+  String get cdPaidInstallments => 'Échéances payées';
+
+  @override
+  String get cdPendingInstallments => 'Échéances en attente';
+
+  @override
+  String get cdOverdueInstallments => 'Échéances en retard';
+
+  @override
+  String get cdNoInstallments => 'Aucune échéance trouvée';
+
+  @override
+  String get cdTotalPaid => 'Total payé';
+
+  @override
+  String get cdTotalRemaining => 'Total restant';
+
+  @override
+  String get cdConfirmPayment => 'Confirmer le paiement';
+
+  @override
+  String get cdPaymentAmount => 'Montant du paiement';
+
+  @override
+  String get cfTitle => 'Détails financiers';
+
+  @override
+  String get cfTotalPurchases => 'Total des achats';
+
+  @override
+  String get cfTotalPaid => 'Total payé';
+
+  @override
+  String get cfTotalDebt => 'Total de la dette';
+
+  @override
+  String get cfLastPurchase => 'Dernier achat';
+
+  @override
+  String get cfAverageOrder => 'Valeur moyenne de commande';
+
+  @override
+  String get cfPurchaseCount => 'Nombre d\'achats';
+
+  @override
+  String get cfInvoiceHistory => 'Historique des factures';
+
+  @override
+  String get cfPaymentHistory => 'Historique des paiements';
+
+  @override
+  String get cfNoInvoices => 'Aucune facture trouvée';
+
+  @override
+  String get cfNoPayments => 'Aucun paiement trouvé';
+
+  @override
+  String get cfDate => 'Date';
+
+  @override
+  String get cfAmount => 'Montant';
+
+  @override
+  String get cfBalance => 'Solde';
+
+  @override
+  String get cfInvoice => 'Facture';
+
+  @override
+  String get cfPayment => 'Paiement';
+
+  @override
+  String get cfViewDetails => 'Voir les détails';
+
+  @override
+  String get cfNoData => 'Aucune donnée financière disponible';
+
+  @override
+  String get cfDebtWarning => 'Dette en cours';
+
+  @override
+  String get cfCreditAvailable => 'Crédit disponible';
+
+  @override
+  String get cfContactInfo => 'Informations de contact';
+
+  @override
+  String get saTitle => 'Comptes fournisseurs';
+
+  @override
+  String get saTotalDebt => 'Total des dettes';
+
+  @override
+  String get saTotalPaid => 'Total payé';
+
+  @override
+  String get saOutstanding => 'Solde dû';
+
+  @override
+  String get saPaymentHistory => 'Historique des paiements';
+
+  @override
+  String get saRecordPayment => 'Enregistrer un paiement';
+
+  @override
+  String get saInvoiceHistory => 'Historique des achats';
+
+  @override
+  String get saNoSuppliers => 'Aucun fournisseur trouvé';
+
+  @override
+  String get saNoPayments => 'Aucun paiement enregistré';
+
+  @override
+  String get saNoInvoices => 'Aucune facture d\'achat';
+
+  @override
+  String get saSupplierName => 'Nom du fournisseur';
+
+  @override
+  String get saDate => 'Date';
+
+  @override
+  String get saAmount => 'Montant';
+
+  @override
+  String get saRemaining => 'Restant';
+
+  @override
+  String get saPayment => 'Paiement';
+
+  @override
+  String get saPurchase => 'Achat';
+
+  @override
+  String get saViewDetails => 'Voir les détails';
+
+  @override
+  String get saPayDebt => 'Payer la dette';
+
+  @override
+  String get saDebtLabel => 'Dette';
+
+  @override
+  String get saPaidLabel => 'Payé';
+
+  @override
+  String get isTitle => 'Paramètres d\'inventaire';
+
+  @override
+  String get isStockTracking => 'Suivi des stocks';
+
+  @override
+  String get isStockTrackingDesc =>
+      'Activer le suivi des quantités de produits';
+
+  @override
+  String get isBarcodeRequired => 'Code-barres requis';
+
+  @override
+  String get isBarcodeRequiredDesc =>
+      'Exiger un code-barres lors de l\'ajout de produits';
+
+  @override
+  String get isAutoDeduct => 'Déduction automatique du stock';
+
+  @override
+  String get isAutoDeductDesc =>
+      'Réduire automatiquement le stock lorsque la facture est confirmée';
+
+  @override
+  String get isLowStockAlert => 'Alerte stock bas';
+
+  @override
+  String get isLowStockAlertDesc =>
+      'Afficher un avertissement lorsque le stock tombe en dessous du seuil';
+
+  @override
+  String get isThreshold => 'Seuil d\'alerte';
+
+  @override
+  String get isDefaultWarehouse => 'Entrepôt par défaut';
+
+  @override
+  String get isUnits => 'Unités de mesure';
+
+  @override
+  String get isSave => 'Enregistrer les paramètres';
+
+  @override
+  String get isSaved => 'Paramètres enregistrés';
+
+  @override
+  String get isWeightUnit => 'Unité de poids';
+
+  @override
+  String get isLengthUnit => 'Unité de longueur';
+
+  @override
+  String get isVolumeUnit => 'Unité de volume';
+
+  @override
+  String get asTitle => 'Ajouter un service';
+
+  @override
+  String get asEditTitle => 'Modifier le service';
+
+  @override
+  String get asNameLabel => 'Nom du service';
+
+  @override
+  String get asNameHint => 'Saisir le nom du service';
+
+  @override
+  String get asPriceLabel => 'Prix';
+
+  @override
+  String get asPriceHint => 'Saisir le prix';
+
+  @override
+  String get asDescLabel => 'Description';
+
+  @override
+  String get asDescHint => 'Saisir la description (optionnel)';
+
+  @override
+  String get asCategoryLabel => 'Catégorie';
+
+  @override
+  String get asCategoryHint => 'Sélectionner une catégorie';
+
+  @override
+  String get asDurationLabel => 'Durée (en minutes)';
+
+  @override
+  String get asDurationHint => 'Saisir la durée';
+
+  @override
+  String get asSave => 'Enregistrer';
+
+  @override
+  String get asSaving => 'Enregistrement...';
+
+  @override
+  String get asSaved => 'Service enregistré avec succès';
+
+  @override
+  String get asError => 'Erreur lors de l\'enregistrement du service';
+
+  @override
+  String get asDelete => 'Supprimer le service';
+
+  @override
+  String get asConfirmDelete =>
+      'Êtes-vous sûr de vouloir supprimer ce service ?';
+
+  @override
+  String cdCustomerFallback(Object id) {
+    return 'Client #$id';
+  }
+
+  @override
+  String get cdPayDebt => 'Payer la dette';
+
+  @override
+  String cdCurrentRemaining(Object amount) {
+    return 'Restant actuel : $amount Fdj';
+  }
+
+  @override
+  String get cdAutoDistributeHint =>
+      'Distribué automatiquement de la plus ancienne à la plus récente facture.';
+
+  @override
+  String get cdNothingToPay => 'Aucun restant à payer ou montant invalide';
+
+  @override
+  String get cdCustomerDebts => 'Dettes client';
+
+  @override
+  String get cdOpenInvoices => 'Factures ouvertes';
+
+  @override
+  String get cdTakenOnCredit => 'Produits pris à crédit';
+
+  @override
+  String get cdNoItemsRecorded => 'Aucun élément enregistré.';
+
+  @override
+  String get cdInvoicesChip => 'Factures';
+
+  @override
+  String get cdOpenChip => 'Ouvertes';
+
+  @override
+  String cdInvoiceNumber(Object id) {
+    return 'Facture #$id';
+  }
+
+  @override
+  String get cdSettled => 'Clôturée';
+
+  @override
+  String get cdRemainingShort => 'Restant';
+
+  @override
+  String cdInvoiceLineSummary(Object date, Object id) {
+    return 'Facture #$id · $date';
+  }
+
+  @override
+  String cdSellerLabel(Object name) {
+    return 'Vendeur : $name';
+  }
+
+  @override
+  String cdQuantityLabel(Object qty) {
+    return 'Qté : $qty';
+  }
+
+  @override
+  String cdPriceLabel(Object price) {
+    return 'Prix : $price';
+  }
+
+  @override
+  String cdPayDebtButton(Object amount) {
+    return 'Payer la dette (restant $amount Fdj)';
+  }
+
+  @override
+  String get cfOutstandingDebt => 'Dette en cours';
+
+  @override
+  String get cfPurchaseHistory => 'Historique des achats';
+
+  @override
+  String get cfFdj => 'Fdj';
+
+  @override
+  String saInvoiceId(Object id) {
+    return 'Facture #$id';
+  }
+
+  @override
+  String get cfFullDebtScreen =>
+      'Écran complet des dettes (paiement et détails)';
+
+  @override
+  String get cfCreditSales => 'Ventes à crédit (dette)';
+
+  @override
+  String get cfCreditSalesDesc =>
+      'Chaque facture est liée à un reçu de vente — appuyez pour voir les détails';
+
+  @override
+  String get cfNoCreditInvoices =>
+      'Aucune facture à crédit liée à ce client. Utilisez la vente à crédit et sélectionnez le client dans la liste.';
+
+  @override
+  String get cfInstallments => 'Échéancier';
+
+  @override
+  String get cfInstallmentsDesc =>
+      'Plans de versements liés aux factures de vente';
+
+  @override
+  String get cfNoInstallmentPlans =>
+      'Aucun plan de versement lié à ce client. Utilisez la vente par versements et sélectionnez le client.';
+
+  @override
+  String get cfEditCustomer => 'Modifier les informations client';
+
+  @override
+  String get cfClosePanel => 'Fermer le panneau (Esc)';
+
+  @override
+  String get cfSelectCustomer => 'Sélectionnez un client dans la liste';
+
+  @override
+  String get cfDebtDetailsWillAppear =>
+      'Les détails de la dette et des versements du client apparaîtront ici.';
+
+  @override
+  String get cfPhone => 'Téléphone';
+
+  @override
+  String get cfEmail => 'E-mail';
+
+  @override
+  String get cfWalletBalance => 'Solde du portefeuille';
+
+  @override
+  String cfSaleInvoice(Object id) {
+    return 'Facture de vente #$id';
+  }
+
+  @override
+  String get cfSettledShort => 'Clôturée';
+
+  @override
+  String cfRemainingBalance(Object balance) {
+    return 'Restant : $balance';
+  }
+
+  @override
+  String get cfViewReceipt => 'Voir le reçu / détails de la facture';
+
+  @override
+  String cfInstallmentInvoice(Object id) {
+    return 'Facture de versement #$id';
+  }
+
+  @override
+  String cfInstallmentSummary(Object paid, Object total) {
+    return 'Total : $total · Payé : $paid';
+  }
+
+  @override
+  String cfInstallmentDetail(Object n, Object paidCount, Object remaining) {
+    return 'Versements : $paidCount / $n payés · Restant approx : $remaining';
+  }
+
+  @override
+  String get cfInstallmentSchedule => 'Échéancier';
+
+  @override
+  String get saNewSupplier => 'Nouveau fournisseur';
+
+  @override
+  String get saNameRequired => 'Nom du fournisseur *';
+
+  @override
+  String get saPhoneOptional => 'Téléphone (optionnel)';
+
+  @override
+  String get saNotes => 'Notes';
+
+  @override
+  String get saCancel => 'Annuler';
+
+  @override
+  String get saSave => 'Enregistrer';
+
+  @override
+  String get saEnterName => 'Saisissez le nom du fournisseur';
+
+  @override
+  String get saSaveError => 'Échec de l\'enregistrement';
+
+  @override
+  String get saCreditAccounts => 'Comptes créditeurs (fournisseurs)';
+
+  @override
+  String get saCreditAccountsDesc =>
+      'Enregistrez les reçus fournisseur (numéro et date), puis enregistrez les paiements lors du règlement. La caisse peut être liée automatiquement.';
+
+  @override
+  String saTotalOwed(Object amount) {
+    return 'Total dû aux fournisseurs : $amount Fdj';
+  }
+
+  @override
+  String get saSearchHint => 'Rechercher par nom de fournisseur...';
+
+  @override
+  String get saNoSuppliersYet => 'Aucun fournisseur — appuyez + pour ajouter';
+
+  @override
+  String saSupplierSummary(Object billed, Object paid) {
+    return 'Facturé : $billed · Payé : $paid';
+  }
+
+  @override
+  String get saReceiptLabel => 'Reçu';
+
+  @override
+  String get saPaymentLabel => 'Paiement';
+
+  @override
+  String get saReturnLabel => 'Retour';
+
+  @override
+  String get saDueToSupplier => 'Dû au fournisseur';
+
+  @override
+  String get saBalanced => 'Équilibré';
+
+  @override
+  String get saSupplierChip => 'Fournisseur';
+
+  @override
+  String get isFullSettingsHint =>
+      'Paramètres complets des produits (configuration, suivi, autorisations, valeurs par défaut) disponibles depuis la carte principale «Paramètres produits».';
+
+  @override
+  String get isCategoriesMoved =>
+      'La gestion des catégories a été déplacée vers un écran dédié. Ouvrez «Catégories» depuis le menu principal.';
+
+  @override
+  String get isBrandsMoved =>
+      'La gestion des marques a été déplacée vers un écran dédié. Ouvrez «Marques» depuis le menu principal.';
+
+  @override
+  String get isBarcodeConfigMoved =>
+      'La configuration du code-barres a été déplacée vers un écran dédié. Ouvrez «Paramètres code-barres» depuis le menu principal.';
+
+  @override
+  String get isDefaultWarehouses => 'Entrepôts par défaut pour les employés';
+
+  @override
+  String get isForceDefaultWarehouse =>
+      'Forcer un entrepôt par défaut lors de l\'enregistrement des mouvements';
+
+  @override
+  String get isWarehouseRecommendation =>
+      'Il est recommandé de lier chaque employé à un entrepôt par défaut pour suivre les autorisations et les mouvements.';
+
+  @override
+  String get isUnitsTemplatesMoved =>
+      'Gestion des modèles d\'unités (de base et conversion) depuis l\'écran dédié. Ouvrez «Modèles d\'unités» depuis le menu principal.';
+
+  @override
+  String get isAllowDifferentPurchaseUnits =>
+      'Autoriser des unités d\'achat différentes des unités de vente';
+
+  @override
+  String get isShowConversionsOnPurchase =>
+      'Afficher les conversions sur la facture d\'achat';
+
+  @override
+  String get isPrinting => 'Impression';
+
+  @override
+  String get isIncludeStoreLogo =>
+      'Inclure le logo du magasin dans les documents';
+
+  @override
+  String get isPrintBarcodeOnReceipts =>
+      'Imprimer le code-barres sur les bons de sortie';
+
+  @override
+  String get isExtraFields => 'Champs supplémentaires';
+
+  @override
+  String get isShowExtraFieldsInLists =>
+      'Afficher les champs supplémentaires dans les listes de produits';
+
+  @override
+  String get isIncludeInExportReports =>
+      'Inclure dans les rapports exportables';
+
+  @override
+  String get isNoExtraSettings =>
+      'Aucun paramètre supplémentaire pour cette catégorie.';
+
+  @override
+  String get asMinPriceError =>
+      'Le prix de vente minimum ne peut pas dépasser le prix de vente';
+
+  @override
+  String get asSavedSuccess => 'Service enregistré';
+
+  @override
+  String get asAddTitle => 'Ajouter un service technique';
+
+  @override
+  String get asAddDescription =>
+      'Ajoutez un service pour la vente directe depuis l\'écran de vente (quantité fixe 1, pas de stock).';
+
+  @override
+  String get asNameRequired => 'Saisissez un nom de service';
+
+  @override
+  String get asSalePriceLabel => 'Prix de vente';
+
+  @override
+  String get asInvalidPrice => 'Prix invalide';
+
+  @override
+  String get asRefCostLabel => 'Coût de référence du service';
+
+  @override
+  String get asRefCostDesc =>
+      'Frais du technicien ou matériaux consommés par défaut — pour le calcul de la marge dans les rapports.';
+
+  @override
+  String get asMinSalePriceLabel => 'Prix de vente minimum';
+
+  @override
+  String get asMinSalePriceDesc =>
+      'Si laissé vide, le prix de vente est utilisé.';
+
+  @override
+  String get asDescriptionLabel => 'Description ou détails';
+
+  @override
+  String get asDescriptionHint => 'Durée de travail, conditions, notes...';
+
+  @override
+  String get asSaveButton => 'Enregistrer le service';
 }

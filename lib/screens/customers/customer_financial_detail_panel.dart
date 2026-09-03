@@ -1,4 +1,5 @@
 import '../../l10n/generated/app_localizations.dart';
+import '../../l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
@@ -102,6 +103,7 @@ class _CustomerFinancialDetailPanelState
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final c = widget.customer;
     if (c == null) return const _PanelEmpty();
     if (_loading) return const Center(child: CircularProgressIndicator());
@@ -151,21 +153,21 @@ class _CustomerFinancialDetailPanelState
               ),
             ),
             icon: const Icon(Icons.account_balance_wallet_outlined),
-            label: const Text('شاشة الديون الكاملة (تسديد وتفاصيل)'),
+            label: Text(loc.cfFullDebtScreen),
           ),
           const SizedBox(height: 20),
-          const _SectionTitle(
+          _SectionTitle(
             icon: Icons.receipt_long_outlined,
-            title: 'مبيعات بالأجل (دين)',
+            title: loc.cfCreditSales,
             subtitle:
-                'كل فاتورة مرتبطة بإيصال البيع — اضغط لعرض التفاصيل',
+                loc.cfCreditSalesDesc,
             color: AppSemanticColors.warning,
           ),
           const SizedBox(height: 8),
           if (_creditInvoices.isEmpty)
-            const _EmptyHint(
+            _EmptyHint(
               text:
-                  'لا توجد فواتير «آجل» مربوطة بهذا العميل. استخدم البيع بالدين مع اختيار العميل من القائمة.',
+                  loc.cfNoCreditInvoices,
             )
           else
             ..._creditInvoices.map(
@@ -181,15 +183,15 @@ class _CustomerFinancialDetailPanelState
           const SizedBox(height: 22),
           _SectionTitle(
             icon: Icons.calendar_month_rounded,
-            title: 'التقسيط',
-            subtitle: 'خطط الأقساط المرتبطة بفواتير البيع',
+            title: loc.cfInstallments,
+            subtitle: loc.cfInstallmentsDesc,
             color: cs.primary,
           ),
           const SizedBox(height: 8),
           if (_plans.isEmpty)
-            const _EmptyHint(
+            _EmptyHint(
               text:
-                  'لا توجد خطط تقسيط مربوطة بهذا العميل. استخدم نوع البيع «تقسيط» مع اختيار العميل.',
+                  loc.cfNoInstallmentPlans,
             )
           else
             ..._plans.map(
@@ -234,6 +236,7 @@ class _PanelHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     return Container(
       padding: const EdgeInsets.fromLTRB(12, 10, 6, 10),
@@ -259,13 +262,13 @@ class _PanelHeader extends StatelessWidget {
           ),
           if (onEdit != null)
             IconButton(
-              tooltip: 'تعديل بيانات العميل',
+              tooltip: loc.cfEditCustomer,
               onPressed: onEdit,
               icon: Icon(Icons.edit_outlined, color: cs.onPrimary),
             ),
           if (onClose != null)
             IconButton(
-              tooltip: 'إغلاق اللوحة (Esc)',
+              tooltip: loc.cfClosePanel,
               onPressed: onClose,
               icon: Icon(Icons.close_rounded, color: cs.onPrimary),
             ),
@@ -280,6 +283,7 @@ class _PanelEmpty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     return Center(
       child: Padding(
@@ -294,7 +298,7 @@ class _PanelEmpty extends StatelessWidget {
             ),
             const SizedBox(height: 14),
             Text(
-              'اختر عميلاً من القائمة',
+              loc.cfSelectCustomer,
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w700,
@@ -303,7 +307,7 @@ class _PanelEmpty extends StatelessWidget {
             ),
             const SizedBox(height: 6),
             Text(
-              'ستظهر تفاصيل ديون العميل وأقساطه هنا.',
+              loc.cfDebtDetailsWillAppear,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 12.5,
@@ -334,6 +338,7 @@ class _SectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -369,6 +374,7 @@ class _SummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     return Container(
       width: double.infinity,
@@ -382,15 +388,15 @@ class _SummaryCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _kv(
-            'الهاتف',
+            loc.cfPhone,
             customer.phone?.trim().isNotEmpty == true ? customer.phone! : '—',
           ),
           _kv(
-            'البريد',
+            loc.cfEmail,
             customer.email?.trim().isNotEmpty == true ? customer.email! : '—',
           ),
           _kv(
-            'رصيد المحفظة',
+            loc.cfWalletBalance,
             IraqiCurrencyFormat.formatIqd(customer.balance),
           ),
           _kv(AppLocalizations.of(context)!.loyaltyPoints, '${customer.loyaltyPoints}'),
@@ -431,6 +437,7 @@ class _EmptyHint extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(14),
@@ -465,6 +472,7 @@ class _CreditInvoiceTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     final settled = inv.isSettled;
     return Padding(
@@ -487,7 +495,7 @@ class _CreditInvoiceTile extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'فاتورة بيع #${inv.invoiceId}',
+            loc.cfSaleInvoice(inv.invoiceId.toString()),
                           style: const TextStyle(
                             fontWeight: FontWeight.w800,
                             fontSize: 14,
@@ -516,8 +524,8 @@ class _CreditInvoiceTile extends StatelessWidget {
                       ),
                       Text(
                         settled
-                            ? 'مغلقة'
-                            : 'متبقٍّ: ${IraqiCurrencyFormat.formatIqd(inv.remaining)}',
+                            ? loc.cfSettledShort
+            : loc.cfRemainingBalance(IraqiCurrencyFormat.formatIqd(inv.remaining)),
                         style: TextStyle(
                           fontSize: 11.5,
                           color: settled
@@ -537,7 +545,7 @@ class _CreditInvoiceTile extends StatelessWidget {
               child: TextButton.icon(
                 onPressed: onReceipt,
                 icon: const Icon(Icons.receipt_long_outlined, size: 20),
-                label: const Text('عرض إيصال / تفاصيل الفاتورة'),
+                label: Text(loc.cfViewReceipt),
               ),
             ),
           ],
@@ -560,6 +568,7 @@ class _InstallmentPlanTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     final paidCount = plan.installments.where((e) => e.paid).length;
     final n = plan.installments.length;
@@ -582,7 +591,7 @@ class _InstallmentPlanTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'فاتورة تقسيط #${plan.invoiceId}',
+            loc.cfInstallmentInvoice(plan.invoiceId.toString()),
                     style: const TextStyle(
                       fontWeight: FontWeight.w800,
                       fontSize: 14,
@@ -590,13 +599,13 @@ class _InstallmentPlanTile extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    'المبلغ الكلي: ${IraqiCurrencyFormat.formatIqd(plan.totalAmount)} · المدفوع: ${IraqiCurrencyFormat.formatIqd(plan.paidAmount)}',
+            '${loc.cfInstallmentSummary(IraqiCurrencyFormat.formatIqd(plan.totalAmount), IraqiCurrencyFormat.formatIqd(plan.paidAmount))}',
                     style:
                         TextStyle(fontSize: 12.5, color: cs.onSurfaceVariant),
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'الأقساط: $paidCount / $n مدفوعة · متبقٍّ تقريباً: ${IraqiCurrencyFormat.formatIqd(remaining)}',
+            '${loc.cfInstallmentDetail(paidCount.toString(), n.toString(), IraqiCurrencyFormat.formatIqd(remaining))}',
                     style:
                         TextStyle(fontSize: 12.5, color: cs.onSurfaceVariant),
                   ),
@@ -618,7 +627,7 @@ class _InstallmentPlanTile extends StatelessWidget {
                     child: TextButton.icon(
                       onPressed: onPlanDetails,
                       icon: const Icon(Icons.view_list_outlined, size: 20),
-                      label: const Text('جدول الأقساط'),
+                      label: Text(loc.cfInstallmentSchedule),
                     ),
                   ),
               ],
