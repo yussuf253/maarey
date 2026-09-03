@@ -4156,5 +4156,9 @@
   "csDetailSystemBalanceClose": "System balance at close: {amount} Fdj",
   "csDetailDeclaredCash": "Declared cash in register: {amount} Fdj",
   "csDetailWithdrawn": "Withdrawn: {amount} Fdj",
-  "csDetailRemaining": "Remaining in register after withdrawal: {amount} Fdj"
+  "csDetailRemaining": "Remaining in register after withdrawal: {amount} Fdj",
+  "cashBucketInvoices": "Invoices & Sales (entries linked to invoice)",
+  "cashBucketOther": "Other Movements",
+  "cashDeclaredClosingCash": "Declared Remaining in Cashbox",
+  "cashSale": "Sale"
 }

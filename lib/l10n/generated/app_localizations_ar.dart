@@ -6475,7 +6475,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cashBox => 'الصندوق';
 
   @override
-  String get cashSale => 'بيع نقدي';
+  String get cashSale => 'بيع';
 
   @override
   String get category => 'الفئة';
@@ -13540,4 +13540,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String csDetailRemaining(Object amount) {
     return 'المتبقّي في الصندوق بعد السحب: $amount Fdj';
   }
+
+  @override
+  String get cashBucketInvoices => 'فواتير ومبيعات (قيود مرتبطة بفاتورة)';
+
+  @override
+  String get cashBucketOther => 'حركات أخرى';
+
+  @override
+  String get cashDeclaredClosingCash => 'المُعلَن متبقيًّا في الصندوق';
 }

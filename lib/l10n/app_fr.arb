@@ -3833,5 +3833,9 @@
   "csDetailSystemBalanceClose": "Solde système à la fermeture : {amount} Fdj",
   "csDetailDeclaredCash": "Argent déclaré en caisse : {amount} Fdj",
   "csDetailWithdrawn": "Retiré : {amount} Fdj",
-  "csDetailRemaining": "Reste en caisse après retrait : {amount} Fdj"
+  "csDetailRemaining": "Reste en caisse après retrait : {amount} Fdj",
+  "cashBucketInvoices": "Factures et ventes (écritures liées à une facture)",
+  "cashBucketOther": "Autres mouvements",
+  "cashDeclaredClosingCash": "Montant déclaré restant en caisse",
+  "cashSale": "Vente"
 }

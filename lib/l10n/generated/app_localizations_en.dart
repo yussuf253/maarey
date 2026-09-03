@@ -6534,7 +6534,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cashBox => 'Cash Box';
 
   @override
-  String get cashSale => 'Cash Sale';
+  String get cashSale => 'Sale';
 
   @override
   String get category => 'Category';
@@ -13672,4 +13672,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String csDetailRemaining(Object amount) {
     return 'Remaining in register after withdrawal: $amount Fdj';
   }
+
+  @override
+  String get cashBucketInvoices =>
+      'Invoices & Sales (entries linked to invoice)';
+
+  @override
+  String get cashBucketOther => 'Other Movements';
+
+  @override
+  String get cashDeclaredClosingCash => 'Declared Remaining in Cashbox';
 }

@@ -364,8 +364,8 @@ class _MacSinglePanelState extends State<_MacSinglePanel>
     with TickerProviderStateMixin {
   static const double _kTitleBar = 40;
   static const double _kHandle = 8;
-  static const double _kMinW = 360;
-  static const double _kMinH = 420;
+  static const double _kMinW = 480;
+  static const double _kMinH = 520;
   static const double _kRadius = 12;
 
   static const _dotCloseColor = Color(0xFFFF5F57);
@@ -383,8 +383,8 @@ class _MacSinglePanelState extends State<_MacSinglePanel>
 
   double _left = 0;
   double _top = 0;
-  double _width = 520;
-  double _height = 480;
+  double _width = 860;
+  double _height = 680;
   bool _layoutReady = false;
   bool _maximized = false;
   bool _minimized = false;
@@ -521,8 +521,8 @@ class _MacSinglePanelState extends State<_MacSinglePanel>
   void _applyCompactLayout() {
     final sw = _sw;
     final sh = _sh;
-    var maxW = math.min(560.0, sw * 0.62);
-    var maxH = math.min(500.0, sh * 0.52);
+    var maxW = math.min(920.0, sw * 0.78);
+    var maxH = math.min(740.0, sh * 0.78);
     maxW = maxW.clamp(_kMinW, sw).toDouble();
     maxH = maxH.clamp(_kMinH, sh).toDouble();
     _width = maxW;
@@ -905,43 +905,23 @@ class _MacSinglePanelState extends State<_MacSinglePanel>
                                     children: [
                                       _titleBar(barBg, rw),
                                       Expanded(
-                                        // لا نستبدل [Navigator] بـ [ColoredBox] أثناء أنيميشن التصغير —
-                                        // ذلك كان يُزيل الشجرة ويُعيد إنشاء «بيع جديد» فارغاً عند العودة من البلاطة.
-                                        child: ClipRect(
-                                          child: FittedBox(
-                                            fit: BoxFit.contain,
-                                            alignment: Alignment.topCenter,
-                                            child: SizedBox(
-                                              width: math.max(
-                                                _kMinW,
-                                                _restoreWidth ?? _width,
+                                        child: Navigator(
+                                          key: s.navigatorKey,
+                                          onGenerateInitialRoutes:
+                                              (navigator, ir) {
+                                            return [
+                                              MaterialPageRoute<void>(
+                                                settings: RouteSettings(
+                                                  name: s.routeId,
+                                                  arguments: BreadcrumbMeta(
+                                                    s.windowTitle,
+                                                  ),
+                                                ),
+                                                builder: (ctx) =>
+                                                    s.pageBuilder(ctx),
                                               ),
-                                              height: math.max(
-                                                _kMinH - _kTitleBar,
-                                                (_restoreHeight ?? _height) -
-                                                    _kTitleBar,
-                                              ),
-                                              child: Navigator(
-                                                key: s.navigatorKey,
-                                                onGenerateInitialRoutes:
-                                                    (navigator, ir) {
-                                                  return [
-                                                    MaterialPageRoute<void>(
-                                                      settings: RouteSettings(
-                                                        name: s.routeId,
-                                                        arguments:
-                                                            BreadcrumbMeta(
-                                                          s.windowTitle,
-                                                        ),
-                                                      ),
-                                                      builder: (ctx) =>
-                                                          s.pageBuilder(ctx),
-                                                    ),
-                                                  ];
-                                                },
-                                              ),
-                                            ),
-                                          ),
+                                            ];
+                                          },
                                         ),
                                       ),
                                     ],

@@ -11729,7 +11729,7 @@ abstract class AppLocalizations {
   /// No description provided for @cashSale.
   ///
   /// In ar, this message translates to:
-  /// **'بيع نقدي'**
+  /// **'بيع'**
   String get cashSale;
 
   /// No description provided for @category.
@@ -24498,6 +24498,24 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'المتبقّي في الصندوق بعد السحب: {amount} Fdj'**
   String csDetailRemaining(Object amount);
+
+  /// No description provided for @cashBucketInvoices.
+  ///
+  /// In ar, this message translates to:
+  /// **'فواتير ومبيعات (قيود مرتبطة بفاتورة)'**
+  String get cashBucketInvoices;
+
+  /// No description provided for @cashBucketOther.
+  ///
+  /// In ar, this message translates to:
+  /// **'حركات أخرى'**
+  String get cashBucketOther;
+
+  /// No description provided for @cashDeclaredClosingCash.
+  ///
+  /// In ar, this message translates to:
+  /// **'المُعلَن متبقيًّا في الصندوق'**
+  String get cashDeclaredClosingCash;
 }
 
 class _AppLocalizationsDelegate

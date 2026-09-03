@@ -4060,5 +4060,9 @@
   "csDetailSystemBalanceClose": "رصيد النظام لحظة الإغلاق: {amount} Fdj",
   "csDetailDeclaredCash": "المبلغ المُعلَن في الصندوق: {amount} Fdj",
   "csDetailWithdrawn": "المبلغ المسحوب: {amount} Fdj",
-  "csDetailRemaining": "المتبقّي في الصندوق بعد السحب: {amount} Fdj"
+  "csDetailRemaining": "المتبقّي في الصندوق بعد السحب: {amount} Fdj",
+  "cashBucketInvoices": "فواتير ومبيعات (قيود مرتبطة بفاتورة)",
+  "cashBucketOther": "حركات أخرى",
+  "cashDeclaredClosingCash": "المُعلَن متبقيًّا في الصندوق",
+  "cashSale": "بيع"
 }

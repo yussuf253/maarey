@@ -24,16 +24,17 @@ const List<_ShiftLedgerBucket> _kShiftLedgerBucketOrder = [
   _ShiftLedgerBucket.other,
 ];
 
-String _shiftLedgerBucketTitle(_ShiftLedgerBucket b) {
+String _shiftLedgerBucketTitle(BuildContext context, _ShiftLedgerBucket b) {
+  final loc = AppLocalizations.of(context)!;
   switch (b) {
     case _ShiftLedgerBucket.invoices:
-      return 'فواتير ومبيعات (قيود مرتبطة بفاتورة)';
+      return loc.cashBucketInvoices;
     case _ShiftLedgerBucket.manualIn:
-      return 'إيداع يدوي';
+      return loc.manualDeposit;
     case _ShiftLedgerBucket.manualOut:
-      return 'سحب يدوي';
+      return loc.manualWithdrawal;
     case _ShiftLedgerBucket.other:
-      return 'حركات أخرى';
+      return loc.cashBucketOther;
   }
 }
 
@@ -148,11 +149,12 @@ Widget _dialogSummaryMoneyRow({
   );
 }
 
-Widget _dialogMovementBullet(_CashTx t) {
-  final inv = t.invoiceId != null ? ' · فاتورة #${t.invoiceId}' : '';
-  final type = _ledgerTypeLabelAr(t.transactionType);
+Widget _dialogMovementBullet(BuildContext context, _CashTx t) {
+  final loc = AppLocalizations.of(context)!;
+  final inv = t.invoiceId != null ? ' · ${loc.cashLinkedInvoice}${t.invoiceId}' : '';
+  final type = _ledgerTypeLabelAr(context, t.transactionType);
   final isIn = t.amount > 0;
-  final flow = isIn ? 'وارد' : 'صادر';
+  final flow = isIn ? loc.cashSummaryInflow : loc.cashSummaryOutflow;
   final amt = IraqiCurrencyFormat.formatInt(t.amount.abs());
   final sign = isIn ? '+' : '−';
   final color = isIn ? const Color(0xFF16A34A) : const Color(0xFFDC2626);
@@ -182,14 +184,15 @@ Widget _dialogMovementBullet(_CashTx t) {
   );
 }
 
-String _invoiceIdsSummaryLine(List<_CashTx> movements) {
+String _invoiceIdsSummaryLine(BuildContext context, List<_CashTx> movements) {
+  final loc = AppLocalizations.of(context)!;
   final ids =
       movements.map((t) => t.invoiceId).whereType<int>().toSet().toList()
         ..sort();
   if (ids.isEmpty) {
-    return 'لا توجد في هذه المجموعة حركات مرتبطة برقم فاتورة.';
+    return loc.cashNoLinkedEntries;
   }
-  return 'أرقام الفواتير الظاهرة في القيود: ${ids.map((id) => '#$id').join('، ')} — العدد ${ids.length}';
+  return '${loc.cashInvoiceIdsShown} ${ids.map((id) => '#$id').join(', ')} — ${loc.totalLabel}: ${ids.length}';
 }
 
 Future<void> _showCashShiftDetailDialog(
@@ -210,10 +213,11 @@ Future<void> _showCashShiftDetailDialog(
     context: context,
     builder: (ctx) {
       final isDark = Theme.of(ctx).brightness == Brightness.dark;
+      final loc = AppLocalizations.of(context)!;
       final manualTotals = _shiftManualDepositWithdrawTotals(movements);
       final titleText = shiftId == null
           ? AppLocalizations.of(context)!.movementsWithoutShift
-          : 'تفاصيل الوردية #$shiftId';
+          : '${loc.cashShiftDetails}$shiftId';
 
       final titleHGap = ScreenLayout.of(ctx).pageHorizontalGap;
       return Directionality(
@@ -259,13 +263,13 @@ Future<void> _showCashShiftDetailDialog(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (shiftId != null && shiftRow != null) ...[
-                    _dialogSectionTitle(AppLocalizations.of(context)!.shiftIdentity),
+                    _dialogSectionTitle(loc.shiftIdentity),
                     _dialogInsetBox(
                       isDark: isDark,
                       children: [
                         _detailLine(
-                          'موظف الوردية (البطاقة)',
-                          _shiftStaffNameFromRow(shiftRow),
+                          loc.cashShiftEmployee,
+                          _shiftStaffNameFromRow(context, shiftRow),
                         ),
                         _detailLine(
                           AppLocalizations.of(context)!.sessionOpenedBy,
@@ -277,26 +281,26 @@ Future<void> _showCashShiftDetailDialog(
                         ),
                         _detailLine(
                           AppLocalizations.of(context)!.closeTime,
-                          _fmtShiftClosedLabel(
+                          _fmtShiftClosedLabel(context, 
                             shiftRow['closedAt']?.toString(),
                           ),
                         ),
                       ],
                     ),
-                    _dialogSectionTitle(AppLocalizations.of(context)!.inventoryAndCashbox),
+                    _dialogSectionTitle(loc.inventoryAndCashbox),
                     _dialogInsetBox(
                       isDark: isDark,
                       children: [
                         _detailMoneyLine(
-                          AppLocalizations.of(context)!.systemBalanceAtOpen,
+                          loc.systemBalanceAtOpen,
                           _shiftRowDouble(shiftRow, 'systemBalanceAtOpen'),
                         ),
                         _detailMoneyLine(
-                          AppLocalizations.of(context)!.declaredCashAtOpen,
+                          loc.declaredCashAtOpen,
                           _shiftRowDouble(shiftRow, 'declaredPhysicalCash'),
                         ),
                         _detailMoneyLine(
-                          AppLocalizations.of(context)!.amountAddedAtOpen,
+                          loc.amountAddedAtOpen,
                           _shiftRowDouble(shiftRow, 'addedCashAtOpen'),
                         ),
                         if (shiftRow['closedAt'] != null &&
@@ -314,19 +318,19 @@ Future<void> _showCashShiftDetailDialog(
                             ),
                           ),
                           _detailMoneyLine(
-                            AppLocalizations.of(context)!.systemBalanceAtClose,
+                            loc.systemBalanceAtClose,
                             _shiftRowDouble(shiftRow, 'systemBalanceAtClose'),
                           ),
                           _detailMoneyLine(
-                            'المُعلَن متبقيًّا في الصندوق',
+                            loc.cashDeclaredClosingCash,
                             _shiftRowDouble(shiftRow, 'declaredClosingCash'),
                           ),
                           _detailMoneyLine(
-                            AppLocalizations.of(context)!.withdrawnAtClose,
+                            loc.withdrawnAtClose,
                             _shiftRowDouble(shiftRow, 'withdrawnAtClose'),
                           ),
                           _detailMoneyLine(
-                            AppLocalizations.of(context)!.declaredCashAfterWithdrawal,
+                            loc.declaredCashAfterWithdrawal,
                             _shiftRowDouble(
                               shiftRow,
                               'declaredCashInBoxAtClose',
@@ -336,12 +340,12 @@ Future<void> _showCashShiftDetailDialog(
                       ],
                     ),
                   ] else if (shiftId != null) ...[
-                    _dialogSectionTitle(AppLocalizations.of(context)!.warningLabel),
+                    _dialogSectionTitle(loc.warningLabel),
                     _dialogInsetBox(
                       isDark: isDark,
                       children: [
                         Text(
-                          'تعذّر تحميل سجل الوردية من قاعدة البيانات؛ يُعرض أدناه ما يظهر في قائمة الصندوق فقط.',
+                          loc.cashShiftLoadError,
                           style: TextStyle(
                             fontSize: 12.5,
                             height: 1.4,
@@ -351,12 +355,12 @@ Future<void> _showCashShiftDetailDialog(
                       ],
                     ),
                   ],
-                  _dialogSectionTitle(AppLocalizations.of(context)!.inboundOutboundSummary),
+                  _dialogSectionTitle(loc.inboundOutboundSummary),
                   _dialogInsetBox(
                     isDark: isDark,
                     children: [
                       Text(
-                        'إجمالي ما يظهر من حركات في الصندوق لهذه المجموعة: $n حركة.',
+                        '${loc.cashTotalMovements} $n ${loc.cashMovementsCount}',
                         style: TextStyle(
                           fontSize: 12,
                           height: 1.35,
@@ -365,18 +369,18 @@ Future<void> _showCashShiftDetailDialog(
                       ),
                       const SizedBox(height: 8),
                       _dialogSummaryMoneyRow(
-                        label: AppLocalizations.of(context)!.inboundEntry,
+                        label: loc.inboundEntry,
                         amount: bd.wared,
                         accent: const Color(0xFF16A34A),
                       ),
                       _dialogSummaryMoneyRow(
-                        label: AppLocalizations.of(context)!.outboundExit,
+                        label: loc.outboundExit,
                         amount: bd.sader,
                         accent: const Color(0xFFDC2626),
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        'أعداد الحركات: إدخال ${bd.edkhalCount} · إخراج ${bd.ikhrajCount} · قيود يدوية ${bd.manualCount} · قيود مرتبطة بفاتورة ${bd.invoiceLinkedCount}',
+                        loc.cashMovementStats,
                         style: TextStyle(
                           fontSize: 11.5,
                           height: 1.35,
@@ -387,29 +391,29 @@ Future<void> _showCashShiftDetailDialog(
                   ),
                   _dialogSectionTitle(
                     shiftId == null
-                        ? AppLocalizations.of(context)!.manualDepositWithdrawalGroup
-                        : AppLocalizations.of(context)!.manualDepositWithdrawalInShift,
+                        ? loc.manualDepositWithdrawalGroup
+                        : loc.manualDepositWithdrawalInShift,
                   ),
                   _dialogInsetBox(
                     isDark: isDark,
                     children: [
                       _detailLine(
-                        AppLocalizations.of(context)!.manualDepositReceipt,
-                        '${_numFmt.format(manualTotals.depositSum)} Fdj — ${manualTotals.depositCount} حركة',
+                        loc.manualDepositReceipt,
+                        '${_numFmt.format(manualTotals.depositSum)} Fdj — ${manualTotals.depositCount} ${loc.cashMovementsTimes}',
                       ),
                       _detailLine(
-                        AppLocalizations.of(context)!.manualWithdrawalReceipt,
-                        '${_numFmt.format(manualTotals.withdrawSum)} Fdj — ${manualTotals.withdrawCount} حركة',
+                        loc.manualWithdrawalReceipt,
+                        '${_numFmt.format(manualTotals.withdrawSum)} Fdj — ${manualTotals.withdrawCount} ${loc.cashMovementsTimes}',
                       ),
                     ],
                   ),
-                  _dialogSectionTitle(AppLocalizations.of(context)!.countByEntryType),
+                  _dialogSectionTitle(loc.countByEntryType),
                   _dialogInsetBox(
                     isDark: isDark,
                     children: [
                       if (!buckets.values.any((l) => l.isNotEmpty))
                         Text(
-                          AppLocalizations.of(context)!.noMovementsInGroup,
+                          loc.noMovementsInGroup,
                           style: TextStyle(
                             fontSize: 12.5,
                             color: Colors.grey.shade600,
@@ -425,7 +429,7 @@ Future<void> _showCashShiftDetailDialog(
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      _shiftLedgerBucketTitle(bucket),
+                                      _shiftLedgerBucketTitle(context, bucket),
                                       style: const TextStyle(
                                         fontSize: 12.5,
                                         fontWeight: FontWeight.w600,
@@ -444,12 +448,12 @@ Future<void> _showCashShiftDetailDialog(
                             ),
                     ],
                   ),
-                  _dialogSectionTitle(AppLocalizations.of(context)!.invoicesInMovements),
+                  _dialogSectionTitle(loc.invoicesInMovements),
                   _dialogInsetBox(
                     isDark: isDark,
                     children: [
                       Text(
-                        _invoiceIdsSummaryLine(movements),
+                        _invoiceIdsSummaryLine(context, movements),
                         style: const TextStyle(
                           fontSize: 12.5,
                           height: 1.45,
@@ -458,35 +462,35 @@ Future<void> _showCashShiftDetailDialog(
                       ),
                     ],
                   ),
-                  _dialogSectionTitle(AppLocalizations.of(context)!.inboundLineByLine),
+                  _dialogSectionTitle(loc.inboundLineByLine),
                   _dialogInsetBox(
                     isDark: isDark,
                     children: inward.isEmpty
                         ? [
                             Text(
-                              AppLocalizations.of(context)!.noInboundMovements,
+                              loc.noInboundMovements,
                               style: TextStyle(
                                 color: Colors.grey.shade600,
                                 fontSize: 12.5,
                               ),
                             ),
                           ]
-                        : inward.map(_dialogMovementBullet).toList(),
+                        : inward.map((t) => _dialogMovementBullet(context, t)).toList(),
                   ),
-                  _dialogSectionTitle(AppLocalizations.of(context)!.outboundLineByLine),
+                  _dialogSectionTitle(loc.outboundLineByLine),
                   _dialogInsetBox(
                     isDark: isDark,
                     children: outward.isEmpty
                         ? [
                             Text(
-                              AppLocalizations.of(context)!.noOutboundMovements,
+                              loc.noOutboundMovements,
                               style: TextStyle(
                                 color: Colors.grey.shade600,
                                 fontSize: 12.5,
                               ),
                             ),
                           ]
-                        : outward.map(_dialogMovementBullet).toList(),
+                        : outward.map((t) => _dialogMovementBullet(context, t)).toList(),
                   ),
                 ],
               ),
@@ -497,7 +501,7 @@ Future<void> _showCashShiftDetailDialog(
             TextButton(
               onPressed: () => Navigator.pop(ctx),
               child: Text(
-                AppLocalizations.of(context)!.closeLabel,
+                loc.closeLabel,
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   color: AppColors.primary,
@@ -511,10 +515,10 @@ Future<void> _showCashShiftDetailDialog(
   );
 }
 
-String _shiftStaffNameFromRow(Map<String, dynamic> row) {
+String _shiftStaffNameFromRow(BuildContext context, Map<String, dynamic> row) {
   final name = (row['shiftStaffName'] as String?)?.trim();
   if (name != null && name.isNotEmpty) return name;
-  return 'موظف الوردية';
+  return AppLocalizations.of(context)!.shiftStaffFallback;
 }
 
 String _fmtShiftDate(String? iso) {
@@ -523,8 +527,8 @@ String _fmtShiftDate(String? iso) {
   return _dateFmt.format(d);
 }
 
-String _fmtShiftClosedLabel(String? iso) {
-  if (iso == null || iso.isEmpty) return 'مفتوحة';
+String _fmtShiftClosedLabel(BuildContext context, String? iso) {
+  if (iso == null || iso.isEmpty) return AppLocalizations.of(context)!.openStatus;
   final d = DateTime.tryParse(iso);
   if (d == null) return '—';
   return _dateFmt.format(d);
@@ -554,28 +558,29 @@ Widget _detailMoneyLine(String label, double? value) {
   return _detailLine(label, '${_numFmt.format(value)} Fdj');
 }
 
-String _ledgerTypeLabelAr(String transactionType) {
+String _ledgerTypeLabelAr(BuildContext context, String transactionType) {
+  final loc = AppLocalizations.of(context)!;
   switch (transactionType) {
     case 'sale_cash':
-      return 'بيع نقدي';
+      return loc.cashSalesCash;
     case 'sale_advance':
-      return 'مقدم / دفعة أولى';
+      return loc.cashFirstPayment;
     case 'sale_other':
-      return 'بيع';
+      return loc.cashSale;
     case 'manual_in':
-      return 'إيداع يدوي';
+      return loc.manualDeposit;
     case 'manual_out':
-      return 'سحب يدوي';
+      return loc.manualWithdrawal;
     case 'installment_payment':
-      return 'تسديد قسط';
+      return loc.cashInstallmentPayment;
     case 'supplier_payment':
-      return 'دفع مورد';
+      return loc.cashSupplierPayment;
     case 'supplier_payment_reversal':
-      return 'عكس دفع مورد';
+      return loc.cashSupplierPaymentReversal;
     case 'sale_return':
-      return 'مرتجع';
+      return loc.cashReturn;
     default:
-      return transactionType.isEmpty ? 'حركة' : transactionType;
+      return transactionType.isEmpty ? loc.cashMovement : transactionType;
   }
 }
 
@@ -888,8 +893,8 @@ class _BalanceCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const Text(
-            'الرصيد الحالي',
+          Text(
+            AppLocalizations.of(context)!.currentBalance,
             style: TextStyle(color: Colors.white70, fontSize: 13),
           ),
           const SizedBox(height: 6),
@@ -903,7 +908,7 @@ class _BalanceCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'مجموع وارد الصندوق من المبيعات النقدية والمقدمات وتسديد الأقساط والإيداع اليدوي — دون إجمالي الفواتير الآجلة بدون مقدم',
+            AppLocalizations.of(context)!.cashCashboxBalanceInfo,
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white.withValues(alpha: 0.75),
@@ -1121,7 +1126,7 @@ class _CashTx {
   bool get _isManual =>
       transactionType == 'manual_in' || transactionType == 'manual_out';
 
-  String get flowLabel => amount >= 0 ? 'إدخال' : 'إخراج';
+  String flowLabel(BuildContext context) => amount >= 0 ? AppLocalizations.of(context)!.cashMovementsDeposit : AppLocalizations.of(context)!.cashMovementsWithdrawal;
 }
 
 /// مجموع قيود `manual_in` و`manual_out` ضمن الحركات المعروضة للمجموعة.
@@ -1240,7 +1245,7 @@ class _CashShiftSectionHeader extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'بدون وردية · $n حركة',
+                        '${AppLocalizations.of(context)!.cashNoShift} \xb7 $n ${AppLocalizations.of(context)!.cashMovementsShort}',
                         style: const TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 13,
@@ -1248,7 +1253,7 @@ class _CashShiftSectionHeader extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'اضغط لعرض التفاصيل',
+                        AppLocalizations.of(context)!.cashTapDetails,
                         style: TextStyle(fontSize: 11.5, color: onV),
                       ),
                     ],
@@ -1288,7 +1293,7 @@ class _CashShiftSectionHeader extends StatelessWidget {
                           style: DefaultTextStyle.of(context).style,
                           children: [
                             TextSpan(
-                              text: 'وردية ',
+                              text: AppLocalizations.of(context)!.cashShiftLabel,
                               style: TextStyle(
                                 fontWeight: FontWeight.w800,
                                 fontSize: 15,
@@ -1304,7 +1309,7 @@ class _CashShiftSectionHeader extends StatelessWidget {
                               ),
                             ),
                             TextSpan(
-                              text: '  ·  $n حركة',
+                              text: '  \xb7  $n ${AppLocalizations.of(context)!.cashMovementsShort}',
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 12,
@@ -1316,7 +1321,7 @@ class _CashShiftSectionHeader extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'اضغط لعرض التفاصيل',
+                        AppLocalizations.of(context)!.cashTapDetails,
                         style: TextStyle(fontSize: 11.5, color: onV),
                       ),
                     ],
@@ -1331,7 +1336,7 @@ class _CashShiftSectionHeader extends StatelessWidget {
     }
 
     final Map<String, dynamic> row = shiftRow!;
-    final name = _shiftStaffNameFromRow(row);
+    final name = _shiftStaffNameFromRow(context, row);
 
     return Material(
       color: Colors.transparent,
@@ -1359,7 +1364,7 @@ class _CashShiftSectionHeader extends StatelessWidget {
                         style: DefaultTextStyle.of(context).style,
                         children: [
                           TextSpan(
-                            text: 'وردية ',
+                            text: AppLocalizations.of(context)!.cashShiftLabel,
                             style: TextStyle(
                               fontWeight: FontWeight.w800,
                               fontSize: 15,
@@ -1375,7 +1380,7 @@ class _CashShiftSectionHeader extends StatelessWidget {
                             ),
                           ),
                           TextSpan(
-                            text: '  ·  $n حركة',
+                            text: '  \xb7  $n ${AppLocalizations.of(context)!.cashMovementsShort}',
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 12,
@@ -1387,7 +1392,7 @@ class _CashShiftSectionHeader extends StatelessWidget {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      'الموظف: $name',
+                      '${AppLocalizations.of(context)!.cashEmployeeLabel}$name',
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 13,
@@ -1396,7 +1401,7 @@ class _CashShiftSectionHeader extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'اضغط لعرض التفاصيل',
+                      AppLocalizations.of(context)!.cashTapDetails,
                       style: TextStyle(fontSize: 11.5, color: onV),
                     ),
                   ],
@@ -1523,7 +1528,7 @@ class _TxCard extends StatelessWidget {
     final isIn = tx.amount > 0;
     final color = isIn ? const Color(0xFF22C55E) : const Color(0xFFEF4444);
     final icon = isIn ? Icons.south_west_rounded : Icons.north_east_rounded;
-    final typeLabel = _ledgerTypeLabelAr(tx.transactionType);
+    final typeLabel = _ledgerTypeLabelAr(context, tx.transactionType);
 
     return Material(
       color: cardBg,
@@ -1585,7 +1590,7 @@ class _TxCard extends StatelessWidget {
                         ),
                         if (tx.invoiceId != null)
                           Text(
-                            'اضغط للفاتورة #${tx.invoiceId}',
+                            '${AppLocalizations.of(context)!.cashTapInvoice}${tx.invoiceId}',
                             style: TextStyle(
                               fontSize: 10,
                               color: Colors.blue.shade700,
@@ -1622,7 +1627,7 @@ class _TxCard extends StatelessWidget {
                       color: color.withValues(alpha: 0.12),
                     ),
                     child: Text(
-                      tx.flowLabel,
+                      tx.flowLabel(context),
                       style: TextStyle(
                         color: color,
                         fontSize: 10,
@@ -1663,10 +1668,20 @@ class _AddTransactionSheetState extends State<_AddTransactionSheet> {
   final _desc = TextEditingController();
   final _amount = TextEditingController();
 
+  bool _typeInitialized = false;
+
   @override
   void initState() {
     super.initState();
-    _type = widget.initialIncome ? AppLocalizations.of(context)!.entry : AppLocalizations.of(context)!.exit;
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_typeInitialized) {
+      _typeInitialized = true;
+      _type = widget.initialIncome ? AppLocalizations.of(context)!.entry : AppLocalizations.of(context)!.exit;
+    }
   }
 
   @override
@@ -1706,7 +1721,7 @@ class _AddTransactionSheetState extends State<_AddTransactionSheet> {
               ),
               const SizedBox(height: 6),
               Text(
-                'يُسجَّل منفصلاً عن فواتير البيع والأقساط. استخدمه لمصروفات المتجر أو إيداع/سحب بنكي.',
+                AppLocalizations.of(context)!.cashCashboxInfo,
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.grey.shade600,

@@ -6601,7 +6601,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get cashBox => 'Caisse';
 
   @override
-  String get cashSale => 'Vente au comptant';
+  String get cashSale => 'Vente';
 
   @override
   String get category => 'Catégorie';
@@ -13839,4 +13839,14 @@ class AppLocalizationsFr extends AppLocalizations {
   String csDetailRemaining(Object amount) {
     return 'Reste en caisse après retrait : $amount Fdj';
   }
+
+  @override
+  String get cashBucketInvoices =>
+      'Factures et ventes (écritures liées à une facture)';
+
+  @override
+  String get cashBucketOther => 'Autres mouvements';
+
+  @override
+  String get cashDeclaredClosingCash => 'Montant déclaré restant en caisse';
 }
