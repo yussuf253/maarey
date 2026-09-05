@@ -613,7 +613,10 @@ class _StatsBar extends StatelessWidget {
               !i.isReturned &&
               (i.type == InvoiceType.cash ||
                   i.type == InvoiceType.debtCollection ||
-                  i.type == InvoiceType.installmentCollection),
+                  i.type == InvoiceType.installmentCollection ||
+                  i.type == InvoiceType.waafi ||
+                  i.type == InvoiceType.dahabPlus ||
+                  i.type == InvoiceType.cacPay),
         )
         .fold(0.0, (s, i) => s + i.total);
     final unpaid = invoices

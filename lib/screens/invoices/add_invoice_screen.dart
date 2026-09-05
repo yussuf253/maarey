@@ -1785,7 +1785,10 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
     final prev = type;
     setState(() {
       type = t;
-      if (t == InvoiceType.delivery) {
+      if (t == InvoiceType.delivery ||
+          t == InvoiceType.waafi ||
+          t == InvoiceType.dahabPlus ||
+          t == InvoiceType.cacPay) {
         _advanceController.text = '0';
       } else if (t == InvoiceType.installment || t == InvoiceType.credit) {
         _advanceController.clear();
@@ -2918,6 +2921,9 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       if (salePos.allowCredit) AppLocalizations.of(context)!.creditLabel,
       if (salePos.allowInstallment) AppLocalizations.of(context)!.installmentLabel,
       if (salePos.allowDelivery) AppLocalizations.of(context)!.deliveryLabel,
+      if (salePos.allowWaafi) AppLocalizations.of(context)!.paymentTypeWaafi,
+      if (salePos.allowDahabPlus) AppLocalizations.of(context)!.paymentTypeDahabPlus,
+      if (salePos.allowCacPay) AppLocalizations.of(context)!.paymentTypeCacPay,
     ];
     final customerCaption =
         loc.aiSelectPaymentMethod(paymentOptions.join(' أو '));
@@ -2984,6 +2990,30 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                         salePos,
                         InvoiceType.delivery,
                         AppLocalizations.of(context)!.deliveryLabel,
+                      ),
+                    if (salePos.allowWaafi)
+                      _paymentTypeChip(
+                        context,
+                        palette,
+                        salePos,
+                        InvoiceType.waafi,
+                        AppLocalizations.of(context)!.paymentTypeWaafi,
+                      ),
+                    if (salePos.allowDahabPlus)
+                      _paymentTypeChip(
+                        context,
+                        palette,
+                        salePos,
+                        InvoiceType.dahabPlus,
+                        AppLocalizations.of(context)!.paymentTypeDahabPlus,
+                      ),
+                    if (salePos.allowCacPay)
+                      _paymentTypeChip(
+                        context,
+                        palette,
+                        salePos,
+                        InvoiceType.cacPay,
+                        AppLocalizations.of(context)!.paymentTypeCacPay,
                       ),
                   ],
                 ),

@@ -761,10 +761,13 @@ extension DbInvoices on DatabaseHelper {
       case InvoiceType.debtCollection:
       case InvoiceType.installmentCollection:
         return invoice.total;
-      case InvoiceType.supplierPayment:
+      // المحافظ الإلكترونية (وافي / دهاب بلس / CAC Pay): مبلغ مدفوع بالكامل
+      // عند البيع — يُسجّل في الصندوق مثل النقدي والتوصيل.
       case InvoiceType.waafi:
       case InvoiceType.dahabPlus:
       case InvoiceType.cacPay:
+        return invoice.total;
+      case InvoiceType.supplierPayment:
         return 0;
     }
   }

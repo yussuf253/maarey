@@ -2429,7 +2429,10 @@ class _HomeScreenState extends State<HomeScreen>
     }
     if (inv.type == InvoiceType.debtCollection ||
         inv.type == InvoiceType.installmentCollection ||
-        inv.type == InvoiceType.supplierPayment) {
+        inv.type == InvoiceType.supplierPayment ||
+        inv.type == InvoiceType.waafi ||
+        inv.type == InvoiceType.dahabPlus ||
+        inv.type == InvoiceType.cacPay) {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text(loc.invoiceNotOpenableAsReturn)));

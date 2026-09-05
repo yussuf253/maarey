@@ -4901,6 +4901,25 @@ class AppLocalizationsAr extends AppLocalizations {
   String get deliverySaleSubtitle => 'إيقافه يخفي خيار «توصيل».';
 
   @override
+  String get waafiSaleTitle => 'الدفع عبر وافي';
+
+  @override
+  String get waafiSaleSubtitle => 'إيقافه يخفي خيار «وافي» في شاشة البيع.';
+
+  @override
+  String get dahabPlusSaleTitle => 'الدفع عبر دهاب بلس';
+
+  @override
+  String get dahabPlusSaleSubtitle =>
+      'إيقافه يخفي خيار «دهاب بلس» في شاشة البيع.';
+
+  @override
+  String get cacPaySaleTitle => 'الدفع عبر CAC Pay';
+
+  @override
+  String get cacPaySaleSubtitle => 'إيقافه يخفي خيار «CAC Pay» في شاشة البيع.';
+
+  @override
   String get cashCustomerSection => 'العميل في البيع النقدي';
 
   @override

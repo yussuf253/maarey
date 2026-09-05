@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../models/invoice.dart' show InvoiceType;
 import 'database_helper.dart';
 import 'tenant_context_service.dart';
 
@@ -15,13 +16,15 @@ import 'tenant_context_service.dart';
 // tests can drive them directly against the in-memory FFI database in
 // `test/helpers/in_memory_db`, without instantiating [DatabaseHelper].
 
-/// SQL fragment for the sales-only filter (invoice `type` indices 0..3:
-/// cash / installment / credit / quotation, but NOT receipt-style entries such
-/// as debt collection or supplier payouts). Inlined as a literal because the
-/// type indices are compile-time constants — there is no SQL injection risk.
+/// SQL fragment for the sales-only filter: real sales types (cash=0,
+/// credit=1, installment=2, delivery=3, and the electronic wallets
+/// Waafi=7 / Dahab Plus=8 / CAC Pay=9) but NOT receipt-style entries such as
+/// debt collection or supplier payouts. Inlined as a literal because enum
+/// `.index` cannot be used in const expressions — keep in sync with the
+/// declaration order of [InvoiceType].
 /// Shared by [ReportsSqlOps] (static, testable) and [ReportsRepository] so
 /// both stay in sync.
-const String _kSalesTypeInSql = 'type IN (0,1,2,3)';
+const String _kSalesTypeInSql = 'type IN (0,1,2,3,7,8,9)';
 
 /// نطاق زمني للتقارير (مقارنة نصية ISO مع عمود `invoices.date`).
 class ReportDateRange {
