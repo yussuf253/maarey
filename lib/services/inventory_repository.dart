@@ -237,10 +237,23 @@ class InventoryRepository {
     }
     final q = search.trim();
     if (q.isNotEmpty) {
+      // يبحث في رقم السند والمرجع والملاحظات **وأسماء المنتجات** داخل بنود
+      // السند (الوعد في حقل البحث «بحث بالمنتج أو رقم السند»).
       where.add(
-        '(v.voucherNo LIKE ? OR IFNULL(v.referenceNo, \'\') LIKE ? OR IFNULL(v.notes, \'\') LIKE ?)',
+        '''
+(
+  v.voucherNo LIKE ?
+  OR IFNULL(v.referenceNo, '') LIKE ?
+  OR IFNULL(v.notes, '') LIKE ?
+  OR EXISTS (
+    SELECT 1
+    FROM stock_voucher_items si
+    INNER JOIN products p2 ON p2.id = si.productId
+    WHERE si.voucherId = v.id AND p2.name LIKE ?
+  )
+)''',
       );
-      args.addAll(['%$q%', '%$q%', '%$q%']);
+      args.addAll(['%$q%', '%$q%', '%$q%', '%$q%']);
     }
 
     final whereSql = where.isEmpty ? '' : 'WHERE ${where.join(' AND ')}';

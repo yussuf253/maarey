@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../providers/auth_provider.dart';
+import '../../models/print_settings_data.dart';
 import '../../providers/notification_provider.dart';
+import '../../providers/print_settings_provider.dart';
 import '../../providers/theme_provider.dart';
 import '../../providers/idle_timeout_provider.dart';
 import '../../providers/ui_feedback_settings_provider.dart';
@@ -13,6 +15,7 @@ import '../../screens/license/subscription_plans_screen.dart';
 import '../../services/cloud_sync_service.dart';
 import '../../services/license_service.dart';
 import '../../services/mac_style_settings_prefs.dart';
+import '../../services/print_settings_repository.dart';
 import '../../services/product_repository.dart';
 import '../../widgets/mac_style_settings_panel.dart';
 import '../../navigation/content_navigation.dart';
@@ -1741,10 +1744,6 @@ class _InvoiceSettingsScreen extends StatefulWidget {
 }
 
 class _InvoiceSettingsScreenState extends State<_InvoiceSettingsScreen> {
-  static const _kShowTax = 'invoice_settings_showTax';
-  static const _kShowDiscount = 'invoice_settings_showDiscount';
-  static const _kShowLogo = 'invoice_settings_showLogo';
-  static const _kShowFooter = 'invoice_settings_showFooter';
   static const _kTaxRate = 'invoice_settings_taxRate';
   static const _kStartNum = 'invoice_settings_startNum';
   static const _kFooter = 'invoice_settings_footer';
@@ -1772,12 +1771,17 @@ class _InvoiceSettingsScreenState extends State<_InvoiceSettingsScreen> {
 
   Future<void> _loadPrefs() async {
     final p = await SharedPreferences.getInstance();
+    // مفاتيح الإظهار/الإخفاء تُقرأ من إعدادات الطباعة لتنطبق فعلياً على الإيصال.
+    PrintSettingsData ps = PrintSettingsData.defaults();
+    try {
+      ps = await PrintSettingsRepository.instance.load();
+    } catch (_) {}
     if (!mounted) return;
     setState(() {
-      _showTax = p.getBool(_kShowTax) ?? true;
-      _showDiscount = p.getBool(_kShowDiscount) ?? true;
-      _showLogo = p.getBool(_kShowLogo) ?? true;
-      _showFooter = p.getBool(_kShowFooter) ?? true;
+      _showTax = ps.invoiceShowTax;
+      _showDiscount = ps.invoiceShowDiscount;
+      _showLogo = ps.invoiceShowStoreLogo;
+      _showFooter = ps.invoiceShowFooterExtra;
       _taxRate = p.getDouble(_kTaxRate) ?? 0.0;
       _startNum.text = (p.getInt(_kStartNum) ?? 1).toString();
       _footer.text = p.getString(_kFooter) ?? '';
@@ -1785,14 +1789,23 @@ class _InvoiceSettingsScreenState extends State<_InvoiceSettingsScreen> {
   }
 
   Future<void> _savePrefs() async {
+    final prov = context.read<PrintSettingsProvider>();
     final p = await SharedPreferences.getInstance();
-    await p.setBool(_kShowTax, _showTax);
-    await p.setBool(_kShowDiscount, _showDiscount);
-    await p.setBool(_kShowLogo, _showLogo);
-    await p.setBool(_kShowFooter, _showFooter);
     await p.setDouble(_kTaxRate, _taxRate);
     await p.setInt(_kStartNum, int.tryParse(_startNum.text) ?? 1);
     await p.setString(_kFooter, _footer.text.trim());
+    // تُحفظ مفاتيح الإظهار/الإخفاء ضمن إعدادات الطباعة (نفس مصدر الإيصال).
+    try {
+      final ps = await PrintSettingsRepository.instance.load();
+      await prov.save(
+        ps.copyWith(
+          invoiceShowTax: _showTax,
+          invoiceShowDiscount: _showDiscount,
+          invoiceShowStoreLogo: _showLogo,
+          invoiceShowFooterExtra: _showFooter,
+        ),
+      );
+    } catch (_) {}
   }
 
   @override

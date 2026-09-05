@@ -73,7 +73,7 @@ class _InventoryManagementScreenState extends State<InventoryManagementScreen> {
       final rows = await _repo.listStockMovements(
         type: mappedType,
         search: _searchCtrl.text,
-        oldestFirst: _sortBy == loc.imSortOldest,
+        oldestFirst: _sortBy == 'oldest',
       );
       if (!mounted) return;
       setState(() => _rows = rows);

@@ -4,8 +4,8 @@ import 'package:pdf/pdf.dart';
 
 /// أحجام ورق شائعة في أنظمة البيع بالتجزئة.
 enum PrintPaperFormat {
-
   thermal76x297,
+
   /// حراري ضيق (~58 مم)
   thermal58,
 
@@ -25,6 +25,10 @@ class PrintSettingsData {
     required this.receiptShowBuyerAddressQr,
     required this.storeTitleLine,
     required this.footerExtra,
+    this.invoiceShowTax = true,
+    this.invoiceShowDiscount = true,
+    this.invoiceShowStoreLogo = true,
+    this.invoiceShowFooterExtra = true,
   });
 
   factory PrintSettingsData.defaults() => const PrintSettingsData(
@@ -49,6 +53,18 @@ class PrintSettingsData {
   /// أسطر إضافية أسفل الإيصال (شروط، هاتف، شكر).
   final String footerExtra;
 
+  /// إظهار الضريبة أسفل جدول البنود (إعدادات الفواتير).
+  final bool invoiceShowTax;
+
+  /// إظهار الخصم أسفل جدول البنود (إعدادات الفواتير).
+  final bool invoiceShowDiscount;
+
+  /// إظهار سطر اسم/شعار المتجر أعلى الإيصال (إعدادات الفواتير).
+  final bool invoiceShowStoreLogo;
+
+  /// إظهار نص التذييل الإضافي أسفل الإيصال (إعدادات الفواتير).
+  final bool invoiceShowFooterExtra;
+
   /// تنسيق صفحة PDF للمعاينة والطباعة.
   PdfPageFormat get pdfPageFormat {
     const mm = 72.0 / 25.4;
@@ -71,6 +87,10 @@ class PrintSettingsData {
         'receiptShowBuyerAddressQr': receiptShowBuyerAddressQr,
         'storeTitleLine': storeTitleLine,
         'footerExtra': footerExtra,
+        'invoiceShowTax': invoiceShowTax,
+        'invoiceShowDiscount': invoiceShowDiscount,
+        'invoiceShowStoreLogo': invoiceShowStoreLogo,
+        'invoiceShowFooterExtra': invoiceShowFooterExtra,
       };
 
   factory PrintSettingsData.fromJson(Map<String, dynamic> m) {
@@ -92,6 +112,10 @@ class PrintSettingsData {
           m['receiptShowBuyerAddressQr'] as bool? ?? d.receiptShowBuyerAddressQr,
       storeTitleLine: m['storeTitleLine'] as String? ?? d.storeTitleLine,
       footerExtra: m['footerExtra'] as String? ?? d.footerExtra,
+      invoiceShowTax: m['invoiceShowTax'] as bool? ?? true,
+      invoiceShowDiscount: m['invoiceShowDiscount'] as bool? ?? true,
+      invoiceShowStoreLogo: m['invoiceShowStoreLogo'] as bool? ?? true,
+      invoiceShowFooterExtra: m['invoiceShowFooterExtra'] as bool? ?? true,
     );
   }
 
@@ -116,6 +140,10 @@ class PrintSettingsData {
     bool? receiptShowBuyerAddressQr,
     String? storeTitleLine,
     String? footerExtra,
+    bool? invoiceShowTax,
+    bool? invoiceShowDiscount,
+    bool? invoiceShowStoreLogo,
+    bool? invoiceShowFooterExtra,
   }) {
     return PrintSettingsData(
       paperFormat: paperFormat ?? this.paperFormat,
@@ -125,6 +153,11 @@ class PrintSettingsData {
           receiptShowBuyerAddressQr ?? this.receiptShowBuyerAddressQr,
       storeTitleLine: storeTitleLine ?? this.storeTitleLine,
       footerExtra: footerExtra ?? this.footerExtra,
+      invoiceShowTax: invoiceShowTax ?? this.invoiceShowTax,
+      invoiceShowDiscount: invoiceShowDiscount ?? this.invoiceShowDiscount,
+      invoiceShowStoreLogo: invoiceShowStoreLogo ?? this.invoiceShowStoreLogo,
+      invoiceShowFooterExtra:
+          invoiceShowFooterExtra ?? this.invoiceShowFooterExtra,
     );
   }
 }
