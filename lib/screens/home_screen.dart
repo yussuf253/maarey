@@ -19,6 +19,7 @@ import '../providers/product_provider.dart';
 import '../providers/theme_provider.dart';
 import '../providers/sale_draft_provider.dart';
 import '../providers/parked_sales_provider.dart';
+import '../providers/print_settings_provider.dart';
 import '../widgets/search_virtual_keyboard.dart';
 import '../widgets/virtual_keyboard_controller.dart';
 import '../widgets/dashboard_view.dart';
@@ -822,6 +823,9 @@ class _HomeScreenState extends State<HomeScreen>
       if (!mounted) return;
       try {
         await context.read<ProductProvider>().loadProducts(seedIfEmpty: false);
+      } catch (_) {}
+      try {
+        await context.read<PrintSettingsProvider>().load();
       } catch (_) {}
       if (mounted) setState(() {});
     });

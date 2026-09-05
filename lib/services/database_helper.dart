@@ -2173,10 +2173,21 @@ class DatabaseHelper {
     await db.execute('''
       CREATE TABLE IF NOT EXISTS print_settings (
         id INTEGER PRIMARY KEY CHECK (id = 1),
+        global_id TEXT,
         payload TEXT NOT NULL,
         updatedAt TEXT NOT NULL
       )
     ''');
+    // Migrate: add global_id column for cloud sync if missing.
+    try {
+      await db.execute("ALTER TABLE print_settings ADD COLUMN global_id TEXT");
+    } catch (_) {
+      // Column already exists.
+    }
+    // Ensure existing row has a global_id.
+    await db.rawUpdate(
+      "UPDATE print_settings SET global_id = 'print_setting_singleton' WHERE id = 1 AND (global_id IS NULL OR global_id = '')",
+    );
     final rows = await db.rawQuery(
       'SELECT COUNT(*) AS c FROM print_settings WHERE id = 1',
     );

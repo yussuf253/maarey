@@ -217,31 +217,31 @@ List<pw.Widget> _receiptCreditSummaryWidgets(
   final paid = inv.advancePayment;
   final rem = (inv.total - inv.advancePayment).clamp(0.0, 1e18);
   return [
+    pw.SizedBox(height: 10),
+    pw.Divider(thickness: 0.7, color: PdfColors.grey600),
     pw.SizedBox(height: 6),
-    pw.Divider(thickness: 0.5, color: PdfColors.grey600),
-    pw.SizedBox(height: 4),
     pw.Text(
       _l.rpCreditSummary,
-      style: pw.TextStyle(font: fontBold, fontSize: 10),
+      style: pw.TextStyle(font: fontBold, fontSize: 12),
       textAlign: pw.TextAlign.right,
       textDirection: pw.TextDirection.rtl,
     ),
-    pw.SizedBox(height: 3),
+    pw.SizedBox(height: 4),
     pw.Text(
       _l.rpInvoiceTotal(inv.total.toStringAsFixed(0)),
-      style: pw.TextStyle(font: font, fontSize: 9),
+      style: pw.TextStyle(font: font, fontSize: 11),
       textAlign: pw.TextAlign.right,
       textDirection: pw.TextDirection.rtl,
     ),
     pw.Text(
       _l.rpAmountPaid(paid.toStringAsFixed(0)),
-      style: pw.TextStyle(font: font, fontSize: 9),
+      style: pw.TextStyle(font: font, fontSize: 11),
       textAlign: pw.TextAlign.right,
       textDirection: pw.TextDirection.rtl,
     ),
     pw.Text(
       _l.rpRemaining(rem.toStringAsFixed(0)),
-      style: pw.TextStyle(font: fontBold, fontSize: 10),
+      style: pw.TextStyle(font: fontBold, fontSize: 12),
       textAlign: pw.TextAlign.right,
       textDirection: pw.TextDirection.rtl,
     ),
@@ -264,61 +264,61 @@ List<pw.Widget> _receiptInstallmentFinanceWidgets(
   final totalWith = inv.installmentTotalWithInterest;
   final monthly = inv.installmentSuggestedMonthly;
   return [
+    pw.SizedBox(height: 10),
+    pw.Divider(thickness: 0.7, color: PdfColors.grey600),
     pw.SizedBox(height: 6),
-    pw.Divider(thickness: 0.5, color: PdfColors.grey600),
-    pw.SizedBox(height: 4),
     pw.Text(
       _l.rpInstallmentSummary,
-      style: pw.TextStyle(font: fontBold, fontSize: 10),
+      style: pw.TextStyle(font: fontBold, fontSize: 12),
       textAlign: pw.TextAlign.right,
       textDirection: pw.TextDirection.rtl,
     ),
-    pw.SizedBox(height: 3),
+    pw.SizedBox(height: 4),
     pw.Text(
       _l.rpSalePriceTotal(inv.total.toStringAsFixed(0)),
-      style: pw.TextStyle(font: font, fontSize: 9),
+      style: pw.TextStyle(font: font, fontSize: 11),
       textAlign: pw.TextAlign.right,
       textDirection: pw.TextDirection.rtl,
     ),
     pw.Text(
       _l.rpAdvancePayment(inv.advancePayment.toStringAsFixed(0)),
-      style: pw.TextStyle(font: font, fontSize: 9),
+      style: pw.TextStyle(font: font, fontSize: 11),
       textAlign: pw.TextAlign.right,
       textDirection: pw.TextDirection.rtl,
     ),
     pw.Text(
       _l.rpFinancedAmount(financed.toStringAsFixed(0)),
-      style: pw.TextStyle(font: font, fontSize: 9),
+      style: pw.TextStyle(font: font, fontSize: 11),
       textAlign: pw.TextAlign.right,
       textDirection: pw.TextDirection.rtl,
     ),
     pw.Text(
       _l.rpInterestRate((pct % 1 == 0 ? pct.toInt().toString() : pct.toStringAsFixed(2))),
-      style: pw.TextStyle(font: font, fontSize: 9),
+      style: pw.TextStyle(font: font, fontSize: 11),
       textAlign: pw.TextAlign.right,
       textDirection: pw.TextDirection.rtl,
     ),
     pw.Text(
       _l.rpInterestValue(interestAmt.toStringAsFixed(0)),
-      style: pw.TextStyle(font: font, fontSize: 9),
+      style: pw.TextStyle(font: font, fontSize: 11),
       textAlign: pw.TextAlign.right,
       textDirection: pw.TextDirection.rtl,
     ),
     pw.Text(
       _l.rpTotalWithInterest(totalWith > 1e-6 ? totalWith.toStringAsFixed(0) : (financed + interestAmt).toStringAsFixed(0)),
-      style: pw.TextStyle(font: fontBold, fontSize: 9),
+      style: pw.TextStyle(font: fontBold, fontSize: 11),
       textAlign: pw.TextAlign.right,
       textDirection: pw.TextDirection.rtl,
     ),
     pw.Text(
       _l.rpPlannedMonths(months > 0 ? months.toString() : '—'),
-      style: pw.TextStyle(font: font, fontSize: 9),
+      style: pw.TextStyle(font: font, fontSize: 11),
       textAlign: pw.TextAlign.right,
       textDirection: pw.TextDirection.rtl,
     ),
     pw.Text(
       _l.rpSuggestedMonthly(monthly > 1e-6 ? monthly.toStringAsFixed(0) : '—'),
-      style: pw.TextStyle(font: fontBold, fontSize: 9),
+      style: pw.TextStyle(font: fontBold, fontSize: 12),
       textAlign: pw.TextAlign.right,
       textDirection: pw.TextDirection.rtl,
     ),
@@ -482,33 +482,38 @@ class SaleReceiptPdf {
     required bool showBarcode,
     required bool showSecondaryQr,
     required int barcodeInvoiceId,
+    double pageWidth = 595,
   }) {
     final barcodeOk = showBarcode && barcodeInvoiceId > 0;
     if (!barcodeOk && !showSecondaryQr) return [];
+
+    final barcodeW = math.min(168.0, pageWidth * 0.8);
+    final barcodeH = barcodeW * 42.0 / 168.0;
+    final qrSize = math.min(110.0, pageWidth * 0.6);
 
     pw.Widget barcodeColumn() => pw.Column(
           children: [
             pw.Text(
               _l.rpReturnItems,
-              style: pw.TextStyle(font: fontBold, fontSize: 8),
+              style: pw.TextStyle(font: fontBold, fontSize: 9),
               textAlign: pw.TextAlign.center,
               textDirection: _pwDirectionForLocale(_currentLocale),
             ),
-            pw.SizedBox(height: 2),
+            pw.SizedBox(height: 4),
             pw.Center(
               child: pw.BarcodeWidget(
                 barcode: bc.Barcode.code128(),
                 data: 'INV-$barcodeInvoiceId',
-                width: 160,
-                height: 32,
+                width: barcodeW,
+                height: barcodeH,
                 drawText: false,
               ),
             ),
-            pw.SizedBox(height: 2),
+            pw.SizedBox(height: 4),
             pw.Center(
               child: pw.Text(
                 'INV-$barcodeInvoiceId',
-                style: pw.TextStyle(font: font, fontSize: 8),
+                style: pw.TextStyle(font: font, fontSize: 10),
                 textDirection: _pwDirectionForLocale(_currentLocale),
               ),
             ),
@@ -519,24 +524,24 @@ class SaleReceiptPdf {
           children: [
             pw.Text(
               secondaryTitle,
-              style: pw.TextStyle(font: fontBold, fontSize: 8),
+              style: pw.TextStyle(font: fontBold, fontSize: 9),
               textAlign: pw.TextAlign.center,
               textDirection: _pwDirectionForLocale(_currentLocale),
             ),
-            pw.SizedBox(height: 2),
+            pw.SizedBox(height: 4),
             pw.Center(
               child: pw.BarcodeWidget(
                 barcode: bc.Barcode.qrCode(),
                 data: secondaryPayload,
-                width: 90,
-                height: 90,
+                width: qrSize,
+                height: qrSize,
                 drawText: false,
               ),
             ),
             pw.SizedBox(height: 2),
             pw.Text(
               secondarySubtitle,
-              style: pw.TextStyle(font: font, fontSize: 7),
+              style: pw.TextStyle(font: font, fontSize: 8),
               textAlign: pw.TextAlign.center,
               textDirection: _pwDirectionForLocale(_currentLocale),
             ),
@@ -545,12 +550,12 @@ class SaleReceiptPdf {
 
     if (barcodeOk && showSecondaryQr) {
       return [
-        pw.SizedBox(height: 8),
+        pw.SizedBox(height: 16),
         pw.Row(
           crossAxisAlignment: pw.CrossAxisAlignment.start,
           children: [
             pw.Expanded(child: qrColumn()),
-            pw.SizedBox(width: 8),
+            pw.SizedBox(width: 12),
             pw.Expanded(child: barcodeColumn()),
           ],
         ),
@@ -558,12 +563,12 @@ class SaleReceiptPdf {
     }
     if (barcodeOk) {
       return [
-        pw.SizedBox(height: 8),
+        pw.SizedBox(height: 16),
         pw.Center(child: barcodeColumn()),
       ];
     }
     return [
-      pw.SizedBox(height: 8),
+      pw.SizedBox(height: 16),
       pw.Center(child: qrColumn()),
     ];
   }
@@ -577,6 +582,7 @@ class SaleReceiptPdf {
     required String secondarySubtitle,
     required bool showBarcode,
     required bool showSecondaryQr,
+    double pageWidth = 595,
   }) {
     return _receiptCodesFooterRow(
       font: font,
@@ -587,6 +593,7 @@ class SaleReceiptPdf {
       showBarcode: showBarcode,
       showSecondaryQr: showSecondaryQr,
       barcodeInvoiceId: invoice.id ?? 0,
+      pageWidth: pageWidth,
     );
   }
 
@@ -645,31 +652,32 @@ class SaleReceiptPdf {
                 googleMapsSearchUrlFromAddress(invoice.deliveryAddress);
             if (locUrl.isNotEmpty) {
               final addrLine = _receiptSafe(invoice.deliveryAddress);
+              final addrQrSize = math.min(108.0, pageFormat.width * 0.6);
               buyerAddressQrWidgets.addAll([
-                pw.SizedBox(height: 8),
+                pw.SizedBox(height: 14),
                 pw.Center(
                   child: pw.Text(
                     _l.rpBuyerAddressQr,
-                    style: pw.TextStyle(font: fontBold, fontSize: 9),
+                    style: pw.TextStyle(font: fontBold, fontSize: 10),
                     textAlign: pw.TextAlign.center,
                     textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 ),
-                pw.SizedBox(height: 4),
+                pw.SizedBox(height: 6),
                 pw.Center(
                   child: pw.BarcodeWidget(
                     barcode: bc.Barcode.qrCode(),
                     data: locUrl,
-                    width: 90,
-                    height: 90,
+                    width: addrQrSize,
+                    height: addrQrSize,
                     drawText: false,
                   ),
                 ),
-                pw.SizedBox(height: 3),
+                pw.SizedBox(height: 4),
                 pw.Center(
                   child: pw.Text(
                     _l.rpScanToOpenMap,
-                    style: pw.TextStyle(font: font, fontSize: 8),
+                    style: pw.TextStyle(font: font, fontSize: 9),
                     textAlign: pw.TextAlign.center,
                     textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
@@ -692,7 +700,7 @@ class SaleReceiptPdf {
           }
 
           return pw.Padding(
-            padding: const pw.EdgeInsets.fromLTRB(14, 10, 14, 10),
+            padding: const pw.EdgeInsets.all(28),
             child: pw.Column(
               crossAxisAlignment: pw.CrossAxisAlignment.stretch,
               children: [
@@ -700,24 +708,24 @@ class SaleReceiptPdf {
                   pw.Center(
                     child: pw.Text(
                       _receiptSafe(s.storeTitleLine),
-                      style: pw.TextStyle(font: fontBold, fontSize: 12),
+                      style: pw.TextStyle(font: fontBold, fontSize: 14),
                       textDirection: _pwDirectionForLocale(_currentLocale),
                     ),
                   ),
-                  pw.SizedBox(height: 3),
+                  pw.SizedBox(height: 6),
                 ],
                 pw.Center(
                   child: pw.Text(
                     _l.rpSaleReceipt,
-                    style: pw.TextStyle(font: fontBold, fontSize: 15),
+                    style: pw.TextStyle(font: fontBold, fontSize: 18),
                     textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 ),
-                pw.SizedBox(height: 6),
+                pw.SizedBox(height: 10),
                 pw.Container(
                   padding: const pw.EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 6,
+                    horizontal: 12,
+                    vertical: 10,
                   ),
                   decoration: pw.BoxDecoration(
                     border: pw.Border.all(color: PdfColors.grey700, width: 1),
@@ -732,13 +740,13 @@ class SaleReceiptPdf {
                         textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
                         textDirection: _pwDirectionForLocale(_currentLocale),
                       ),
-                      pw.SizedBox(height: 2),
+                      pw.SizedBox(height: 4),
                       pw.Center(
                         child: pw.Text(
                           opId,
                           style: pw.TextStyle(
                             font: fontBold,
-                            fontSize: 18,
+                            fontSize: 22,
                           ),
                           textDirection: _pwDirectionForLocale(_currentLocale),
                         ),
@@ -746,10 +754,10 @@ class SaleReceiptPdf {
                     ],
                   ),
                 ),
-                pw.SizedBox(height: 6),
+                pw.SizedBox(height: 10),
                 pw.Text(
                   _l.rpDateTimeFull(df.format(invoice.date)),
-                  style: pw.TextStyle(font: font, fontSize: 10),
+                  style: pw.TextStyle(font: font, fontSize: 11),
                   textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
                   textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
@@ -778,13 +786,13 @@ class SaleReceiptPdf {
                     overflow: pw.TextOverflow.clip,
                   ),
                 ],
+                pw.SizedBox(height: 10),
+                pw.Divider(thickness: 0.7, color: PdfColors.grey600),
                 pw.SizedBox(height: 6),
-                pw.Divider(thickness: 0.5, color: PdfColors.grey600),
-                pw.SizedBox(height: 4),
                 pw.Table(
                   border: pw.TableBorder.all(
                     color: PdfColors.grey400,
-                    width: 0.5,
+                    width: 0.6,
                   ),
                   columnWidths: {
                     0: const pw.FlexColumnWidth(3.2),
@@ -797,10 +805,10 @@ class SaleReceiptPdf {
                       decoration:
                           const pw.BoxDecoration(color: PdfColors.grey300),
                       children: [
-                        _cell(_l.rpItem, fontBold, 9, true),
-                        _cell(_l.rpQuantity, fontBold, 9, true),
-                        _cell(_l.rpPrice, fontBold, 9, true),
-                        _cell(_l.rpSubtotal, fontBold, 9, true),
+                        _cell(_l.rpItem, fontBold, 10, true),
+                        _cell(_l.rpQuantity, fontBold, 10, true),
+                        _cell(_l.rpPrice, fontBold, 10, true),
+                        _cell(_l.rpSubtotal, fontBold, 10, true),
                       ],
                     ),
                     ...invoice.items.map(
@@ -811,15 +819,15 @@ class SaleReceiptPdf {
                                 ? '-'
                                 : _itemNameForReceipt(e),
                             font,
-                            8.5,
+                            9.5,
                             true,
                           ),
-                          _cell('${e.quantity}', font, 8.5, false),
-                          _cell(e.price.toStringAsFixed(0), font, 8.5, false),
+                          _cell('${e.quantity}', font, 9.5, false),
+                          _cell(e.price.toStringAsFixed(0), font, 9.5, false),
                           _cell(
                             _l.rpReceiptItemsAmount(e.total.toStringAsFixed(0)),
                             font,
-                            8.5,
+                            9.5,
                             false,
                           ),
                         ],
@@ -827,40 +835,40 @@ class SaleReceiptPdf {
                     ),
                   ],
                 ),
+                pw.SizedBox(height: 10),
+                pw.Divider(thickness: 0.7, color: PdfColors.grey600),
                 pw.SizedBox(height: 6),
-                pw.Divider(thickness: 0.5, color: PdfColors.grey600),
-                pw.SizedBox(height: 4),
                 pw.Text(
                   _l.rpSubtotalBeforeDiscount(subtotalBeforeDiscount.toStringAsFixed(0)),
-                  style: pw.TextStyle(font: font, fontSize: 9),
+                  style: pw.TextStyle(font: font, fontSize: 11),
                   textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
                   textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 pw.Text(
                   _l.rpPercentDiscount(invoice.discount.toStringAsFixed(0), invoice.discountPercent.toStringAsFixed(2)),
-                  style: pw.TextStyle(font: font, fontSize: 9),
+                  style: pw.TextStyle(font: font, fontSize: 11),
                   textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
                   textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 pw.Text(
                   _l.rpTax(invoice.tax.toStringAsFixed(0)),
-                  style: pw.TextStyle(font: font, fontSize: 9),
+                  style: pw.TextStyle(font: font, fontSize: 11),
                   textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
                   textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
                 if (invoice.loyaltyDiscount > 0) ...[
-                  pw.SizedBox(height: 1),
+                  pw.SizedBox(height: 2),
                   pw.Text(
                     _l.rpLoyaltyDiscount(invoice.loyaltyDiscount.toStringAsFixed(0)),
-                    style: pw.TextStyle(font: font, fontSize: 9),
+                    style: pw.TextStyle(font: font, fontSize: 11),
                     textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
                     textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 ],
-                pw.SizedBox(height: 3),
+                pw.SizedBox(height: 4),
                 pw.Text(
                   _l.rpFinalTotal(invoice.total.toStringAsFixed(0)),
-                  style: pw.TextStyle(font: fontBold, fontSize: 11),
+                  style: pw.TextStyle(font: fontBold, fontSize: 13),
                   textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
                   textDirection: _pwDirectionForLocale(_currentLocale),
                 ),
@@ -873,9 +881,9 @@ class SaleReceiptPdf {
                 ),
                 ..._receiptCreditSummaryWidgets(invoice, font, fontBold),
                 if (_receiptSafe(s.footerExtra).isNotEmpty) ...[
-                  pw.SizedBox(height: 6),
+                  pw.SizedBox(height: 10),
                   pw.Divider(thickness: 0.5, color: PdfColors.grey500),
-                  pw.SizedBox(height: 4),
+                  pw.SizedBox(height: 6),
                   pw.Text(
                     _receiptSafe(s.footerExtra),
                     style: pw.TextStyle(font: font, fontSize: 9),
@@ -892,6 +900,7 @@ class SaleReceiptPdf {
                   secondarySubtitle: secondaryQr.subtitle,
                   showBarcode: s.receiptShowBarcode,
                   showSecondaryQr: showSecondaryQr,
+                  pageWidth: pageFormat.width,
                 ),
                 ...buyerAddressQrWidgets,
               ],
@@ -945,16 +954,16 @@ class SaleReceiptPdf {
     }
     final ord = _orderedInstallmentsForPlan(plan);
     final rows = <pw.Widget>[
-      pw.SizedBox(height: 6),
+      pw.SizedBox(height: 10),
       pw.Divider(thickness: 0.5, color: PdfColors.grey500),
-      pw.SizedBox(height: 4),
+      pw.SizedBox(height: 6),
       pw.Text(
         _l.rpInstallmentTable,
-        style: pw.TextStyle(font: fontBold, fontSize: 10),
+        style: pw.TextStyle(font: fontBold, fontSize: 12),
         textAlign: _isArabicLocale(_currentLocale) ? pw.TextAlign.right : pw.TextAlign.left,
         textDirection: _pwDirectionForLocale(_currentLocale),
       ),
-      pw.SizedBox(height: 4),
+      pw.SizedBox(height: 6),
       pw.Table(
         border: pw.TableBorder.all(color: PdfColors.grey400, width: 0.5),
         columnWidths: {
@@ -1471,9 +1480,9 @@ class SaleReceiptPdf {
                   ),
                 ],
                 if (_receiptSafe(s.footerExtra).isNotEmpty) ...[
-                  pw.SizedBox(height: 6),
+                  pw.SizedBox(height: 10),
                   pw.Divider(thickness: 0.5, color: PdfColors.grey500),
-                  pw.SizedBox(height: 4),
+                  pw.SizedBox(height: 6),
                   pw.Text(
                     _receiptSafe(s.footerExtra),
                       style: pw.TextStyle(font: font, fontSize: 9),
@@ -1490,6 +1499,7 @@ class SaleReceiptPdf {
                   showBarcode: s.receiptShowBarcode,
                   showSecondaryQr: showDebtQr,
                   barcodeInvoiceId: invForBarcode,
+                  pageWidth: pageFormat.width,
                 ),
               ],
             ),
