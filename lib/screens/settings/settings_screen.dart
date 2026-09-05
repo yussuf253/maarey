@@ -1741,6 +1741,14 @@ class _InvoiceSettingsScreen extends StatefulWidget {
 }
 
 class _InvoiceSettingsScreenState extends State<_InvoiceSettingsScreen> {
+  static const _kShowTax = 'invoice_settings_showTax';
+  static const _kShowDiscount = 'invoice_settings_showDiscount';
+  static const _kShowLogo = 'invoice_settings_showLogo';
+  static const _kShowFooter = 'invoice_settings_showFooter';
+  static const _kTaxRate = 'invoice_settings_taxRate';
+  static const _kStartNum = 'invoice_settings_startNum';
+  static const _kFooter = 'invoice_settings_footer';
+
   bool _showTax = true;
   bool _showDiscount = true;
   bool _showLogo = true;
@@ -1748,6 +1756,44 @@ class _InvoiceSettingsScreenState extends State<_InvoiceSettingsScreen> {
   double _taxRate = 0.0;
   final _startNum = TextEditingController(text: '1');
   final _footer = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadPrefs();
+  }
+
+  @override
+  void dispose() {
+    _startNum.dispose();
+    _footer.dispose();
+    super.dispose();
+  }
+
+  Future<void> _loadPrefs() async {
+    final p = await SharedPreferences.getInstance();
+    if (!mounted) return;
+    setState(() {
+      _showTax = p.getBool(_kShowTax) ?? true;
+      _showDiscount = p.getBool(_kShowDiscount) ?? true;
+      _showLogo = p.getBool(_kShowLogo) ?? true;
+      _showFooter = p.getBool(_kShowFooter) ?? true;
+      _taxRate = p.getDouble(_kTaxRate) ?? 0.0;
+      _startNum.text = (p.getInt(_kStartNum) ?? 1).toString();
+      _footer.text = p.getString(_kFooter) ?? '';
+    });
+  }
+
+  Future<void> _savePrefs() async {
+    final p = await SharedPreferences.getInstance();
+    await p.setBool(_kShowTax, _showTax);
+    await p.setBool(_kShowDiscount, _showDiscount);
+    await p.setBool(_kShowLogo, _showLogo);
+    await p.setBool(_kShowFooter, _showFooter);
+    await p.setDouble(_kTaxRate, _taxRate);
+    await p.setInt(_kStartNum, int.tryParse(_startNum.text) ?? 1);
+    await p.setString(_kFooter, _footer.text.trim());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1762,7 +1808,18 @@ class _InvoiceSettingsScreenState extends State<_InvoiceSettingsScreen> {
           title: AppLocalizations.of(context)!.invoiceSettings,
           actions: [
             TextButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () async {
+                await _savePrefs();
+                if (mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('تم حفظ إعدادات الفواتير'),
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                  Navigator.pop(context);
+                }
+              },
               style: TextButton.styleFrom(foregroundColor: cs.onPrimary),
               child: Text(
                 AppLocalizations.of(context)!.save,

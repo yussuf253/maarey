@@ -54,11 +54,11 @@ class PrintSettingsData {
     const mm = 72.0 / 25.4;
     switch (paperFormat) {
       case PrintPaperFormat.thermal58:
-        return const PdfPageFormat(58 * mm, 320 * mm);
+        return const PdfPageFormat(58 * mm, 200 * mm);
       case PrintPaperFormat.thermal80:
-        return const PdfPageFormat(80 * mm, 320 * mm);
+        return const PdfPageFormat(80 * mm, 250 * mm);
       case PrintPaperFormat.thermal76x297:
-        return const PdfPageFormat(76 * mm, 297 * mm);
+        return const PdfPageFormat(76 * mm, 200 * mm);
       case PrintPaperFormat.a4:
         return PdfPageFormat.a4;
     }
