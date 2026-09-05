@@ -1488,12 +1488,15 @@ class _PanelSales extends StatelessWidget {
     final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
 
-    // AppLocalizations.of(context)!.sales فقط (نقدي/دين/تقسيط/توصيل) — باقي الأنواع سندات ولا تُعرض هنا.
+    // المبيعات فقط (نقدي/دين/تقسيط/توصيل + المحافظ الإلكترونية) — باقي الأنواع سندات ولا تُعرض هنا.
     final salesTypes = <InvoiceType>[
       InvoiceType.cash,
       InvoiceType.credit,
       InvoiceType.installment,
       InvoiceType.delivery,
+      InvoiceType.waafi,
+      InvoiceType.dahabPlus,
+      InvoiceType.cacPay,
     ];
 
     final typeTotals = <InvoiceType, double>{for (final t in salesTypes) t: 0};
