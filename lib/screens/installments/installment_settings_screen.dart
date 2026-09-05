@@ -1,3 +1,4 @@
+import '../../l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
@@ -99,6 +100,7 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
   }
 
   Future<void> _save() async {
+    final loc = AppLocalizations.of(context)!;
     final minP = double.tryParse(_minPct.text.replaceAll(',', '').trim()) ?? 0;
     final cnt = int.tryParse(_defCount.text.trim()) ?? 1;
     final iv = int.tryParse(_interval.text.trim()) ?? 1;
@@ -142,7 +144,7 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
     setState(() => _data = next);
     ScaffoldMessenger.of(
       context,
-    ).showSnackBar(const SnackBar(content: Text('تم حفظ إعدادات التقسيط')));
+).showSnackBar(SnackBar(content: Text(loc.isSavedInstallment)));
   }
 
   PreferredSizeWidget _buildAppBar() {
@@ -167,6 +169,7 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
   }
 
   Widget _introBanner() {
+    final loc = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -181,7 +184,7 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              'تُطبَّق على بيع «تقسيط»، وبطاقة «مخطط التقسيط» في شاشة البيع (عند التفعيل)، وعلى ضبط خطة الأقساط بعد الحفظ.',
+              loc.isAppliesToDesc,
               style: TextStyle(
                 fontSize: 13,
                 height: 1.45,
@@ -300,6 +303,7 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     if (_loading) {
       return Directionality(
         textDirection: Directionality.of(context),
@@ -344,7 +348,7 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
                             _switchTile(
                               title: AppLocalizations.of(context)!.requireAdvanceForInstallment,
                               subtitle:
-                                  'يمنع حفظ فاتورة تقسيط إذا كان المقدّم أقل من النسبة المحددة أدناه (من إجمالي الفاتورة بعد الخصم والضريبة).',
+              loc.isMinAdvanceHint,
                               value: _data.requireDownPaymentForInstallmentSale,
                               onChanged: (v) => setState(
                                 () => _data = _data.copyWith(
@@ -382,7 +386,7 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
                             _switchTile(
                               title: AppLocalizations.of(context)!.showInstallmentCardInSale,
                               subtitle:
-                                  'تُظهر المقدّم، نسبة الفائدة، عدد الأشهر، والقسط المقترح. عند الإيقاف يظهر المقدّم مع «تفصيل المبالغ» فقط، وتُحسب الفائدة من الإعدادات أدناه عند الحفظ.',
+              loc.isSummaryCardHint,
                               value: _data.showInstallmentCalculatorOnSale,
                               onChanged: (v) => setState(
                                 () => _data = _data.copyWith(
@@ -398,7 +402,7 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
                                 label:
                                     AppLocalizations.of(context)!.defaultRemainingInstallments,
                                 helper:
-                                    'يُستخدم كعدد أشهر افتراضي في بطاقة «مخطط التقسيط» عند البيع؛ وعند إخفاء البطاقة يُحسب ما يُحفظ مع الفاتورة.',
+              loc.isDefaultMonthsHint,
                                 helperMaxLines: 3,
                                 prefixIcon: Icon(
                                   Icons.calendar_view_month_outlined,
@@ -418,7 +422,7 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
                                 label:
                                     AppLocalizations.of(context)!.defaultInstallmentInterestRate,
                                 helper:
-                                    'تُملأ خانة الفائدة عند اختيار «تقسيط»؛ وعند إخفاء البطاقة تُستخدم عند حفظ الفاتورة.',
+              loc.isInterestHint,
                                 prefixIcon: Icon(
                                   Icons.trending_up,
                                   size: 20,
@@ -450,7 +454,7 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
                             ),
                             const SizedBox(height: 16),
                             _switchTile(
-                              title: 'استخدام أشهر تقويمية لتواريخ الاستحقاق',
+title: loc.isCalendarDatesTitle,
                               subtitle:
                                   AppLocalizations.of(context)!.calendarMonthsExplanation,
                               value: _data.useCalendarMonths,
@@ -480,10 +484,10 @@ class _InstallmentSettingsScreenState extends State<InstallmentSettingsScreen> {
                                 helper: null,
                               ),
                               items: [
-                                const DropdownMenuItem(
+                                DropdownMenuItem(
                                   value:
                                       InstallmentSettingsData.anchorInvoiceDate,
-                                  child: Text('من تاريخ الفاتورة'),
+                                      child: Text(loc.isFromInvoiceDate),
                                 ),
                                 DropdownMenuItem(
                                   value: InstallmentSettingsData.anchorCustom,

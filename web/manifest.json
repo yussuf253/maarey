@@ -1,6 +1,6 @@
 {
-    "name": "your_app_name",
-    "short_name": "your_app_name",
+    "name": "Maarey",
+    "short_name": "Maarey",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

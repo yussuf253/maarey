@@ -442,8 +442,10 @@ class AuthProvider extends ChangeNotifier {
       if (msg.contains('network') || msg.contains('connection') || msg.contains('timeout')) {
         return 'تعذر الاتصال بالخادم. تحقق من الإنترنت وحاول مجدداً.';
       }
-      return 'تعذر إرسال رمز التحقق. حاول مرة أخرى لاحقاً.';
+      AppLogger.error('Auth', 'sendEmailOtp: Supabase AuthException', e);
+      return 'تعذر إرسال رمز التحقق: ${e.message}';
     } catch (e) {
+      AppLogger.error('Auth', 'sendEmailOtp: unexpected error', e);
       return 'تعذر إرسال رمز التحقق. تحقق من الاتصال بالإنترنت.';
     }
   }
@@ -572,12 +574,15 @@ class AuthProvider extends ChangeNotifier {
       }
       if (msg.contains('not found') || msg.contains('no user') || msg.contains('otp_disabled')) {
         return 'لا يوجد حساب مرتبط بهذا البريد الإلكتروني.';
-      }
-      return 'تعذر إرسال رمز التحقق. حاول مرة أخرى لاحقاً.';
-    } catch (_) {
+      }      AppLogger.error('Auth', 'sendPasswordResetOtp: Supabase AuthException', e);
+      return 'تعذر إرسال رمز التحقق: ${e.message}';
+    } catch (e) {
+      AppLogger.error('Auth', 'sendPasswordResetOtp: unexpected error', e);
       return 'تعذر إرسال رمز التحقق. تحقق من الاتصال بالإنترنت.';
     }
   }
+
+
 
   /// يتحقق من رمز الاستعادة المُدخل. لا يُغير أي بيانات محلية.
   Future<String?> verifyPasswordResetOtp({

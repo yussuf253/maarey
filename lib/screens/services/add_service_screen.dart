@@ -1,3 +1,4 @@
+import '../../l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -38,6 +39,7 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
   }
 
   Future<void> _save() async {
+    final loc = AppLocalizations.of(context)!;
     if (_submitting) return;
     if (!_formKey.currentState!.validate()) return;
 
@@ -51,8 +53,8 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
 
     if (minIqd > sellIqd) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('الحد الأدنى للبيع لا يجوز أن يتجاوز سعر البيع'),
+        SnackBar(
+          content: Text(loc.asMinPriceError),
         ),
       );
       return;
@@ -82,20 +84,21 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
       return;
     }
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('تم حفظ الخدمة')),
+      SnackBar(content: Text(loc.asSavedSuccess)),
     );
     Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
 
     return PopScope(
       canPop: !_submitting,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('إضافة خدمة فنية'),
+          title: Text(loc.asAddTitle),
         ),
         body: AdaptiveFormContainer(
           child: Form(
@@ -104,65 +107,65 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
             padding: const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 24),
             children: [
               Text(
-                'أضف خدمة للبيع المباشر من شاشة البيع (كمية ثابتة 1، بدون مخزون).',
+                loc.asAddDescription,
                 style: TextStyle(color: cs.onSurfaceVariant, height: 1.35),
                 textAlign: TextAlign.start,
               ),
               const SizedBox(height: 16),
               AppInput(
-                label: 'اسم الخدمة',
-                hint: 'مثال: تركيب شاشة',
+                label: loc.asNameLabel,
+                hint: loc.asNameHint,
                 controller: _name,
                 isRequired: true,
                 textInputAction: TextInputAction.next,
                 validator: (v) {
                   if (v == null || v.trim().isEmpty) {
-                    return 'أدخل اسم الخدمة';
+                    return loc.asNameRequired;
                   }
                   return null;
                 },
               ),
               const SizedBox(height: 12),
               AppPriceInput(
-                label: 'سعر البيع',
+                label: loc.asSalePriceLabel,
                 controller: _sell,
                 isRequired: true,
                 textInputAction: TextInputAction.next,
                 validator: (s) {
                   final n = NumericFormat.parseNumber(s ?? '');
-                  if (n < 0) return 'السعر غير صالح';
+                  if (n < 0) return loc.asInvalidPrice;
                   return null;
                 },
               ),
               const SizedBox(height: 12),
               AppPriceInput(
-                label: 'التكلفة المرجعية للخدمة',
+                label: loc.asRefCostLabel,
                 controller: _costRef,
                 isOptional: true,
                 textInputAction: TextInputAction.next,
                 subtitle:
-                    'أجر الفني أو مواد مستهلكة افتراضية — لحساب الهامش في التقارير (مثل سعر الشراء للمنتج).',
+                    loc.asRefCostDesc,
               ),
               const SizedBox(height: 12),
               AppPriceInput(
-                label: 'الحد الأدنى للبيع',
+                label: loc.asMinSalePriceLabel,
                 controller: _minSell,
                 isOptional: true,
                 textInputAction: TextInputAction.next,
-                subtitle: 'إن تُرك فارغاً يُستخدم سعر البيع.',
+                subtitle: loc.asMinSalePriceDesc,
               ),
               const SizedBox(height: 12),
               AppInput(
-                label: 'قسم أو تصنيف الخدمة',
-                hint: 'مثال: صيانة عتاد، برمجيات، صيانة سريعة',
+                label: loc.asCategoryLabel,
+                hint: loc.asCategoryHint,
                 controller: _category,
                 isOptional: true,
                 textInputAction: TextInputAction.next,
               ),
               const SizedBox(height: 12),
               AppInput(
-                label: 'الوصف أو التفاصيل',
-                hint: 'مدة العمل، الشروط، الملاحظات…',
+                label: loc.asDescriptionLabel,
+                hint: loc.asDescriptionHint,
                 controller: _desc,
                 isOptional: true,
                 maxLines: 4,
@@ -177,7 +180,7 @@ class _AddServiceScreenState extends State<AddServiceScreen> {
                         width: 22,
                         child: CircularProgressIndicator(strokeWidth: 2),
                       )
-                    : const Text('حفظ الخدمة'),
+                    : Text(loc.asSaveButton),
               ),
             ],
           ),

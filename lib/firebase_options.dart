@@ -32,48 +32,49 @@ class DefaultFirebaseOptions {
   // ستجدها في: Project Settings → Your apps → Config
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey:            'YOUR-WEB-API-KEY',
-    appId:             'YOUR-WEB-APP-ID',
-    messagingSenderId: 'YOUR-SENDER-ID',
-    projectId:         'YOUR-PROJECT-ID',
-    authDomain:        'YOUR-PROJECT-ID.firebaseapp.com',
-    storageBucket:     'YOUR-PROJECT-ID.appspot.com',
+    apiKey: 'AIzaSyBvH_yxEAv1jq_h-EgbsJibId5TlniUVW8',
+    appId: '1:671139204618:web:09ba6ef7f297607e43d9f3',
+    messagingSenderId: '671139204618',
+    projectId: 'maarey-dj',
+    authDomain: 'maarey-dj.firebaseapp.com',
+    storageBucket: 'maarey-dj.firebasestorage.app',
+    measurementId: 'G-MWLPBGMYEQ',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBJb21mA_icY3P0ykAhajKcfiLBRapgpYE',
-    appId: '1:201331038467:android:d59414d912d42bb8703136',
-    messagingSenderId: '201331038467',
-    projectId: 'naboo-m',
-    storageBucket: 'naboo-m.firebasestorage.app',
+    apiKey: 'AIzaSyBhKdi6cT5bDjRWOLRuyI-6dou1rtys4Mo',
+    appId: '1:671139204618:android:3282200f4a5dcb1943d9f3',
+    messagingSenderId: '671139204618',
+    projectId: 'maarey-dj',
+    storageBucket: 'maarey-dj.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCtCKHs_MMz9Kw-aKQd68EFAIBKzv2DZO8',
-    appId: '1:201331038467:ios:0cb65ac76b68dcce703136',
-    messagingSenderId: '201331038467',
-    projectId: 'naboo-m',
-    storageBucket: 'naboo-m.firebasestorage.app',
-    iosBundleId: 'com.yourdomain.yourAppName',
+    apiKey: 'AIzaSyAaevH906C3zWvH47A2a-U56r1YGlI4Z1M',
+    appId: '1:671139204618:ios:862cb029cfe7bb6e43d9f3',
+    messagingSenderId: '671139204618',
+    projectId: 'maarey-dj',
+    storageBucket: 'maarey-dj.firebasestorage.app',
+    iosBundleId: 'com.mareey.ios',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCtCKHs_MMz9Kw-aKQd68EFAIBKzv2DZO8',
-    appId: '1:201331038467:ios:e3e419a05339268c703136',
-    messagingSenderId: '201331038467',
-    projectId: 'naboo-m',
-    storageBucket: 'naboo-m.firebasestorage.app',
-    iosBundleId: 'com.basra.storemanager',
+    apiKey: 'AIzaSyAaevH906C3zWvH47A2a-U56r1YGlI4Z1M',
+    appId: '1:671139204618:ios:1ee9ca3f161ef1c043d9f3',
+    messagingSenderId: '671139204618',
+    projectId: 'maarey-dj',
+    storageBucket: 'maarey-dj.firebasestorage.app',
+    iosBundleId: 'com.maarey.app',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyDFGkfcqxeWJEab63TyLxuyPtBs8sbVZa0',
-    appId: '1:201331038467:web:cbe2a07852068cc2703136',
-    messagingSenderId: '201331038467',
-    projectId: 'naboo-m',
-    authDomain: 'naboo-m.firebaseapp.com',
-    storageBucket: 'naboo-m.firebasestorage.app',
-    measurementId: 'G-BQN14KZLZQ',
+    apiKey: 'AIzaSyBvH_yxEAv1jq_h-EgbsJibId5TlniUVW8',
+    appId: '1:671139204618:web:09ba6ef7f297607e43d9f3',
+    messagingSenderId: '671139204618',
+    projectId: 'maarey-dj',
+    authDomain: 'maarey-dj.firebaseapp.com',
+    storageBucket: 'maarey-dj.firebasestorage.app',
+    measurementId: 'G-MWLPBGMYEQ',
   );
 
 }

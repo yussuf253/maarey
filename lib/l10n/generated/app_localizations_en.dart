@@ -15067,4 +15067,101 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get asSaveButton => 'Save service';
+
+  @override
+  String get dlCustomizeHome => 'Customize home screen';
+
+  @override
+  String get dlToggleHint =>
+      'Enable or disable each section, then drag the ⋮⋮ icon to reorder from top to bottom.';
+
+  @override
+  String get dlOrderOnHome => 'Order on home';
+
+  @override
+  String get dlFixedTop => 'Fixed at top — cannot be hidden';
+
+  @override
+  String get dlResetTitle => 'Reset to default?';
+
+  @override
+  String get dlResetDesc =>
+      'All sections will be shown and ordered as in the original app.';
+
+  @override
+  String get dlCancel => 'Cancel';
+
+  @override
+  String get dlReset => 'Reset';
+
+  @override
+  String get dlResetButton => 'Reset order and visibility to defaults';
+
+  @override
+  String get wsMonthShifts => 'Monthly shifts';
+
+  @override
+  String get wsNextMonth => 'Next month';
+
+  @override
+  String get wsPrevMonth => 'Previous month';
+
+  @override
+  String get wsMonthDesc =>
+      'Shifts that started or ended within this month (or are still open) are shown. \"Shift employee\" is what was entered when opening the shift.';
+
+  @override
+  String get wsNoShiftsThisMonth => 'No shifts this month';
+
+  @override
+  String get wsOpenLabel => 'Open (not closed)';
+
+  @override
+  String wsInvoiceCount(Object count) {
+    return '$count invoices';
+  }
+
+  @override
+  String get wsOpenAction => 'Open';
+
+  @override
+  String get wsCloseAction => 'Close';
+
+  @override
+  String get isSavedInstallment => 'Installment settings saved';
+
+  @override
+  String get isAppliesToDesc =>
+      'Applied to installment sales, installment plan card on the sales screen (when enabled), and installment plan setup after saving.';
+
+  @override
+  String get isMinAdvanceHint =>
+      'Prevents saving an installment invoice if the advance payment is less than the minimum percentage below (of the total after discount and tax).';
+
+  @override
+  String get isSummaryCardHint =>
+      'Shows the advance, interest rate, number of months, and suggested installment. When hidden, only the advance with \"amount details\" is shown, and interest is calculated automatically.';
+
+  @override
+  String get isDefaultMonthsHint =>
+      'Used as the default number of months in the installment plan card during sales; when hidden, it is used when saving the invoice.';
+
+  @override
+  String get isInterestHint =>
+      'The interest field is filled when selecting \"installment\"; when hidden, it is used when saving the invoice.';
+
+  @override
+  String get isCalendarDatesTitle => 'Use calendar months for due dates';
+
+  @override
+  String get isFromInvoiceDate => 'From invoice date';
+
+  @override
+  String get invDeposit => 'Deposit';
+
+  @override
+  String get invWithdrawal => 'Withdrawal';
+
+  @override
+  String get invInternalTransfer => 'Internal transfer';
 }

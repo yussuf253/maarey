@@ -26862,6 +26862,180 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'حفظ الخدمة'**
   String get asSaveButton;
+
+  /// No description provided for @dlCustomizeHome.
+  ///
+  /// In ar, this message translates to:
+  /// **'تخصيص الشاشة الرئيسية'**
+  String get dlCustomizeHome;
+
+  /// No description provided for @dlToggleHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'فعّل أو عطّل كل قسم، ثم اسحب من أيقونة ⋮⋮ لترتيب الظهور من الأعلى إلى الأسفل.'**
+  String get dlToggleHint;
+
+  /// No description provided for @dlOrderOnHome.
+  ///
+  /// In ar, this message translates to:
+  /// **'الترتيب على الرئيسية'**
+  String get dlOrderOnHome;
+
+  /// No description provided for @dlFixedTop.
+  ///
+  /// In ar, this message translates to:
+  /// **'ثابت في الأعلى — لا يُخفى'**
+  String get dlFixedTop;
+
+  /// No description provided for @dlResetTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'استعادة الافتراضي؟'**
+  String get dlResetTitle;
+
+  /// No description provided for @dlResetDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيتم إظهار كل الأقسام وترتيبها كما في التطبيق الأصلي.'**
+  String get dlResetDesc;
+
+  /// No description provided for @dlCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get dlCancel;
+
+  /// No description provided for @dlReset.
+  ///
+  /// In ar, this message translates to:
+  /// **'استعادة'**
+  String get dlReset;
+
+  /// No description provided for @dlResetButton.
+  ///
+  /// In ar, this message translates to:
+  /// **'استعادة الترتيب والظهور الافتراضيين'**
+  String get dlResetButton;
+
+  /// No description provided for @wsMonthShifts.
+  ///
+  /// In ar, this message translates to:
+  /// **'ورديات الشهر'**
+  String get wsMonthShifts;
+
+  /// No description provided for @wsNextMonth.
+  ///
+  /// In ar, this message translates to:
+  /// **'الشهر التالي'**
+  String get wsNextMonth;
+
+  /// No description provided for @wsPrevMonth.
+  ///
+  /// In ar, this message translates to:
+  /// **'الشهر السابق'**
+  String get wsPrevMonth;
+
+  /// No description provided for @wsMonthDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'تظهر الورديات التي بدأت أو انتهت ضمن هذا الشهر (أو ما زالت مفتوحة وتمرّ بها). اسم «موظف الوردية» هو ما أُدخل عند فتح الوردية.'**
+  String get wsMonthDesc;
+
+  /// No description provided for @wsNoShiftsThisMonth.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد ورديات في هذا الشهر'**
+  String get wsNoShiftsThisMonth;
+
+  /// No description provided for @wsOpenLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفتوحة (لم تُغلق)'**
+  String get wsOpenLabel;
+
+  /// No description provided for @wsInvoiceCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} فاتورة'**
+  String wsInvoiceCount(Object count);
+
+  /// No description provided for @wsOpenAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح'**
+  String get wsOpenAction;
+
+  /// No description provided for @wsCloseAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'إغلاق'**
+  String get wsCloseAction;
+
+  /// No description provided for @isSavedInstallment.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم حفظ إعدادات التقسيط'**
+  String get isSavedInstallment;
+
+  /// No description provided for @isAppliesToDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُطبَّق على بيع «تقسيط»، وبطاقة «مخطط التقسيط» في شاشة البيع (عند التفعيل)، وعلى ضبط خطة الأقساط بعد الحفظ.'**
+  String get isAppliesToDesc;
+
+  /// No description provided for @isMinAdvanceHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يمنع حفظ فاتورة تقسيط إذا كان المقدّم أقل من النسبة المحددة أدناه (من إجمالي الفاتورة بعد الخصم والضريبة).'**
+  String get isMinAdvanceHint;
+
+  /// No description provided for @isSummaryCardHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُظهر المقدّم، نسبة الفائدة، عدد الأشهر، والقسط المقترح. عند الإيقاف يظهر المقدّم مع «تفصيل المبالغ» فقط، وتُحسب الفائدة تلقائياً.'**
+  String get isSummaryCardHint;
+
+  /// No description provided for @isDefaultMonthsHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُستخدم كعدد أشهر افتراضي في بطاقة «مخطط التقسيط» عند البيع؛ وعند إخفاء البطاقة يُحسب ما يُحفظ مع الفاتورة.'**
+  String get isDefaultMonthsHint;
+
+  /// No description provided for @isInterestHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُملأ خانة الفائدة عند اختيار «تقسيط»؛ وعند إخفاء البطاقة تُستخدم عند حفظ الفاتورة.'**
+  String get isInterestHint;
+
+  /// No description provided for @isCalendarDatesTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'استخدام أشهر تقويمية لتواريخ الاستحقاق'**
+  String get isCalendarDatesTitle;
+
+  /// No description provided for @isFromInvoiceDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'من تاريخ الفاتورة'**
+  String get isFromInvoiceDate;
+
+  /// No description provided for @invDeposit.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيداع'**
+  String get invDeposit;
+
+  /// No description provided for @invWithdrawal.
+  ///
+  /// In ar, this message translates to:
+  /// **'صرف'**
+  String get invWithdrawal;
+
+  /// No description provided for @invInternalTransfer.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحويل داخلي'**
+  String get invInternalTransfer;
 }
 
 class _AppLocalizationsDelegate

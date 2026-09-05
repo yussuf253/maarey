@@ -14923,4 +14923,101 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get asSaveButton => 'حفظ الخدمة';
+
+  @override
+  String get dlCustomizeHome => 'تخصيص الشاشة الرئيسية';
+
+  @override
+  String get dlToggleHint =>
+      'فعّل أو عطّل كل قسم، ثم اسحب من أيقونة ⋮⋮ لترتيب الظهور من الأعلى إلى الأسفل.';
+
+  @override
+  String get dlOrderOnHome => 'الترتيب على الرئيسية';
+
+  @override
+  String get dlFixedTop => 'ثابت في الأعلى — لا يُخفى';
+
+  @override
+  String get dlResetTitle => 'استعادة الافتراضي؟';
+
+  @override
+  String get dlResetDesc =>
+      'سيتم إظهار كل الأقسام وترتيبها كما في التطبيق الأصلي.';
+
+  @override
+  String get dlCancel => 'إلغاء';
+
+  @override
+  String get dlReset => 'استعادة';
+
+  @override
+  String get dlResetButton => 'استعادة الترتيب والظهور الافتراضيين';
+
+  @override
+  String get wsMonthShifts => 'ورديات الشهر';
+
+  @override
+  String get wsNextMonth => 'الشهر التالي';
+
+  @override
+  String get wsPrevMonth => 'الشهر السابق';
+
+  @override
+  String get wsMonthDesc =>
+      'تظهر الورديات التي بدأت أو انتهت ضمن هذا الشهر (أو ما زالت مفتوحة وتمرّ بها). اسم «موظف الوردية» هو ما أُدخل عند فتح الوردية.';
+
+  @override
+  String get wsNoShiftsThisMonth => 'لا توجد ورديات في هذا الشهر';
+
+  @override
+  String get wsOpenLabel => 'مفتوحة (لم تُغلق)';
+
+  @override
+  String wsInvoiceCount(Object count) {
+    return '$count فاتورة';
+  }
+
+  @override
+  String get wsOpenAction => 'فتح';
+
+  @override
+  String get wsCloseAction => 'إغلاق';
+
+  @override
+  String get isSavedInstallment => 'تم حفظ إعدادات التقسيط';
+
+  @override
+  String get isAppliesToDesc =>
+      'تُطبَّق على بيع «تقسيط»، وبطاقة «مخطط التقسيط» في شاشة البيع (عند التفعيل)، وعلى ضبط خطة الأقساط بعد الحفظ.';
+
+  @override
+  String get isMinAdvanceHint =>
+      'يمنع حفظ فاتورة تقسيط إذا كان المقدّم أقل من النسبة المحددة أدناه (من إجمالي الفاتورة بعد الخصم والضريبة).';
+
+  @override
+  String get isSummaryCardHint =>
+      'تُظهر المقدّم، نسبة الفائدة، عدد الأشهر، والقسط المقترح. عند الإيقاف يظهر المقدّم مع «تفصيل المبالغ» فقط، وتُحسب الفائدة تلقائياً.';
+
+  @override
+  String get isDefaultMonthsHint =>
+      'يُستخدم كعدد أشهر افتراضي في بطاقة «مخطط التقسيط» عند البيع؛ وعند إخفاء البطاقة يُحسب ما يُحفظ مع الفاتورة.';
+
+  @override
+  String get isInterestHint =>
+      'تُملأ خانة الفائدة عند اختيار «تقسيط»؛ وعند إخفاء البطاقة تُستخدم عند حفظ الفاتورة.';
+
+  @override
+  String get isCalendarDatesTitle => 'استخدام أشهر تقويمية لتواريخ الاستحقاق';
+
+  @override
+  String get isFromInvoiceDate => 'من تاريخ الفاتورة';
+
+  @override
+  String get invDeposit => 'إيداع';
+
+  @override
+  String get invWithdrawal => 'صرف';
+
+  @override
+  String get invInternalTransfer => 'تحويل داخلي';
 }

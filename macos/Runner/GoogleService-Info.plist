@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyCtCKHs_MMz9Kw-aKQd68EFAIBKzv2DZO8</string>
+	<string>AIzaSyAaevH906C3zWvH47A2a-U56r1YGlI4Z1M</string>
 	<key>GCM_SENDER_ID</key>
-	<string>201331038467</string>
+	<string>671139204618</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.basra.storemanager</string>
+	<string>com.maarey.app</string>
 	<key>PROJECT_ID</key>
-	<string>naboo-m</string>
+	<string>maarey-dj</string>
 	<key>STORAGE_BUCKET</key>
-	<string>naboo-m.firebasestorage.app</string>
+	<string>maarey-dj.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:201331038467:ios:e3e419a05339268c703136</string>
+	<string>1:671139204618:ios:1ee9ca3f161ef1c043d9f3</string>
 </dict>
 </plist>

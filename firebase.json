@@ -1,1 +1,76 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"naboo-m","appId":"1:201331038467:android:d59414d912d42bb8703136","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"naboo-m","appId":"1:201331038467:ios:0cb65ac76b68dcce703136","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"macos":{"default":{"projectId":"naboo-m","appId":"1:201331038467:ios:e3e419a05339268c703136","uploadDebugSymbols":false,"fileOutput":"macos/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"naboo-m","configurations":{"android":"1:201331038467:android:d59414d912d42bb8703136","ios":"1:201331038467:ios:0cb65ac76b68dcce703136","macos":"1:201331038467:ios:e3e419a05339268c703136","windows":"1:201331038467:web:cbe2a07852068cc2703136"}}}}}}
+{
+  "hosting": {
+    "site": "maarey",
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(js|css|woff|woff2|ttf|eot)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=31536000"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png|svg|webp)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=31536000"
+          }
+        ]
+      }
+    ]
+  },
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "maarey-dj",
+          "appId": "1:671139204618:android:3282200f4a5dcb1943d9f3",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "maarey-dj",
+          "appId": "1:671139204618:ios:862cb029cfe7bb6e43d9f3",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "macos": {
+        "default": {
+          "projectId": "maarey-dj",
+          "appId": "1:671139204618:ios:1ee9ca3f161ef1c043d9f3",
+          "uploadDebugSymbols": false,
+          "fileOutput": "macos/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "maarey-dj",
+          "configurations": {
+            "android": "1:671139204618:android:3282200f4a5dcb1943d9f3",
+            "ios": "1:671139204618:ios:862cb029cfe7bb6e43d9f3",
+            "macos": "1:671139204618:ios:1ee9ca3f161ef1c043d9f3",
+            "web": "1:671139204618:web:09ba6ef7f297607e43d9f3",
+            "windows": "1:671139204618:web:09ba6ef7f297607e43d9f3"
+          }
+        }
+      }
+    }
+  }
+}

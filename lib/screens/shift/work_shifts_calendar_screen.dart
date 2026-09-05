@@ -1,3 +1,4 @@
+import '../../l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
@@ -66,6 +67,7 @@ class _WorkShiftsCalendarScreenState extends State<WorkShiftsCalendarScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final bg = isDark ? const Color(0xFF0F0F1A) : const Color(0xFFF1F5F9);
     const navy = Color(0xFF1E3A5F);
@@ -77,8 +79,8 @@ class _WorkShiftsCalendarScreenState extends State<WorkShiftsCalendarScreen> {
         appBar: AppBar(
           backgroundColor: navy,
           foregroundColor: Colors.white,
-          title: const Text(
-            'ورديات الشهر',
+          title: Text(
+            loc.wsMonthShifts,
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
@@ -97,7 +99,7 @@ class _WorkShiftsCalendarScreenState extends State<WorkShiftsCalendarScreen> {
                     IconButton(
                       onPressed: _loading ? null : _nextMonth,
                       icon: const Icon(Icons.chevron_right_rounded),
-                      tooltip: 'الشهر التالي',
+                      tooltip: loc.wsNextMonth,
                     ),
                     Expanded(
                       child: Text(
@@ -112,7 +114,7 @@ class _WorkShiftsCalendarScreenState extends State<WorkShiftsCalendarScreen> {
                     IconButton(
                       onPressed: _loading ? null : _prevMonth,
                       icon: const Icon(Icons.chevron_left_rounded),
-                      tooltip: 'الشهر السابق',
+                      tooltip: loc.wsPrevMonth,
                     ),
                   ],
                 ),
@@ -126,7 +128,7 @@ class _WorkShiftsCalendarScreenState extends State<WorkShiftsCalendarScreen> {
                 bottom: 8,
               ),
               child: Text(
-                'تظهر الورديات التي بدأت أو انتهت ضمن هذا الشهر (أو ما زالت مفتوحة وتمرّ بها). اسم «موظف الوردية» هو ما أُدخل عند فتح الوردية.',
+              loc.wsMonthDesc,
                 style: TextStyle(
                   fontSize: 12,
                   height: 1.35,
@@ -140,7 +142,7 @@ class _WorkShiftsCalendarScreenState extends State<WorkShiftsCalendarScreen> {
                   : _rows.isEmpty
                   ? Center(
                       child: Text(
-                        'لا توجد ورديات في هذا الشهر',
+                        loc.wsNoShiftsThisMonth,
                         style: TextStyle(
                           color: Theme.of(context).hintColor,
                           fontSize: 15,
@@ -175,7 +177,7 @@ class _WorkShiftsCalendarScreenState extends State<WorkShiftsCalendarScreen> {
                         final openStr = _dtFmt.format(opened);
                         final closeStr = closed != null
                             ? _dtFmt.format(closed)
-                            : 'مفتوحة (لم تُغلق)';
+                            : loc.wsOpenLabel;
 
                         return Container(
                           decoration: BoxDecoration(
@@ -220,7 +222,7 @@ class _WorkShiftsCalendarScreenState extends State<WorkShiftsCalendarScreen> {
                                       ),
                                     ),
                                     Text(
-                                      '$invN فاتورة',
+                loc.wsInvoiceCount(invN),
                                       style: TextStyle(
                                         fontSize: 13,
                                         color: Theme.of(
@@ -232,11 +234,11 @@ class _WorkShiftsCalendarScreenState extends State<WorkShiftsCalendarScreen> {
                                   ],
                                 ),
                                 const SizedBox(height: 10),
-                                _rowLine(Icons.login_rounded, 'فتح', openStr),
+                                _rowLine(Icons.login_rounded, loc.wsOpenAction, openStr),
                                 const SizedBox(height: 6),
                                 _rowLine(
                                   Icons.logout_rounded,
-                                  'إغلاق',
+                                  loc.wsCloseAction,
                                   closeStr,
                                 ),
                               ],

@@ -591,10 +591,11 @@ class _MoveTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final (ico, col, lbl) = switch (type) {
-      'in'       => (Icons.arrow_downward_rounded, _green, 'إيداع'),
-      'out'      => (Icons.arrow_upward_rounded, Colors.red.shade500, 'صرف'),
-      'transfer' => (Icons.swap_horiz_rounded, _blue, 'تحويل'),
+      'in'       => (Icons.arrow_downward_rounded, _green, loc.invDeposit),
+      'out'      => (Icons.arrow_upward_rounded, Colors.red.shade500, loc.invWithdrawal),
+      'transfer' => (Icons.swap_horiz_rounded, _blue, loc.invInternalTransfer),
       _          => (Icons.circle, _t2, ''),
     };
 

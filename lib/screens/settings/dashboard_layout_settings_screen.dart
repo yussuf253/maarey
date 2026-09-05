@@ -1,3 +1,4 @@
+import '../../l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,6 +10,7 @@ class DashboardLayoutSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     final layout = context.watch<DashboardLayoutProvider>();
 
@@ -18,8 +20,8 @@ class DashboardLayoutSettingsScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: cs.primary,
           foregroundColor: cs.onPrimary,
-          title: const Text(
-            'تخصيص الشاشة الرئيسية',
+          title: Text(
+            loc.dlCustomizeHome,
             style: TextStyle(fontWeight: FontWeight.w800),
           ),
         ),
@@ -27,7 +29,7 @@ class DashboardLayoutSettingsScreen extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           children: [
             Text(
-              'فعّل أو عطّل كل قسم، ثم اسحب من أيقونة ⋮⋮ لترتيب الظهور من الأعلى إلى الأسفل.',
+              loc.dlToggleHint,
               style: TextStyle(
                 fontSize: 13,
                 color: cs.onSurfaceVariant,
@@ -36,7 +38,7 @@ class DashboardLayoutSettingsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              'الترتيب على الرئيسية',
+              loc.dlOrderOnHome,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
@@ -79,7 +81,7 @@ class DashboardLayoutSettingsScreen extends StatelessWidget {
                       style: const TextStyle(fontWeight: FontWeight.w600),
                     ),
                     subtitle: id == 'header'
-                        ? const Text('ثابت في الأعلى — لا يُخفى')
+                        ? Text(loc.dlFixedTop)
                         : null,
                     trailing: Switch.adaptive(
                       value: visible,
@@ -97,18 +99,18 @@ class DashboardLayoutSettingsScreen extends StatelessWidget {
                 final ok = await showDialog<bool>(
                   context: context,
                   builder: (ctx) => AlertDialog(
-                    title: const Text('استعادة الافتراضي؟'),
-                    content: const Text(
-                      'سيتم إظهار كل الأقسام وترتيبها كما في التطبيق الأصلي.',
+                    title: Text(loc.dlResetTitle),
+                    content: Text(
+                      loc.dlResetDesc,
                     ),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(ctx, false),
-                        child: const Text('إلغاء'),
+                        child: Text(loc.dlCancel),
                       ),
                       FilledButton(
                         onPressed: () => Navigator.pop(ctx, true),
-                        child: const Text('استعادة'),
+                        child: Text(loc.dlReset),
                       ),
                     ],
                   ),
@@ -118,7 +120,7 @@ class DashboardLayoutSettingsScreen extends StatelessWidget {
                 }
               },
               icon: const Icon(Icons.restore_rounded),
-              label: const Text('استعادة الترتيب والظهور الافتراضيين'),
+              label: Text(loc.dlResetButton),
             ),
           ],
         ),

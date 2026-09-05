@@ -1,3 +1,4 @@
+import '../../l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -34,6 +35,7 @@ class _InventorySettingDetailScreenState
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return Consumer<ThemeProvider>(
       builder: (context, tp, _) {
         final isDark = tp.isDarkMode;
@@ -95,6 +97,7 @@ class _InventorySettingDetailScreenState
               ),
               const SizedBox(height: 20),
               ..._buildControls(
+                loc: loc,
                 textPrimary: textPrimary,
                 textSecondary: textSecondary,
                 divider: divider,
@@ -108,6 +111,7 @@ class _InventorySettingDetailScreenState
   }
 
   List<Widget> _buildControls({
+    required AppLocalizations loc,
     required Color textPrimary,
     required Color textSecondary,
     required Color divider,
@@ -117,7 +121,7 @@ class _InventorySettingDetailScreenState
       case 'products':
         return [
           _infoTile(
-            'loc.isFullSettingsHint (تهيئة، تتبع، أذون، قيم افتراضية) متوفرة من البطاقة الرئيسية «إعدادات المنتجات» في شبكة إعدادات المخزون.',
+            loc.isFullSettingsHint,
             textSecondary,
             surface,
             divider,
@@ -126,7 +130,7 @@ class _InventorySettingDetailScreenState
       case 'categories':
         return [
           _infoTile(
-            'loc.isCategoriesMoved إلى شاشة مخصّصة. افتح «التصنيفات» من القائمة الرئيسية لإعدادات المخزون.',
+            loc.isCategoriesMoved,
             textSecondary,
             surface,
             divider,
@@ -135,7 +139,7 @@ class _InventorySettingDetailScreenState
       case 'brands':
         return [
           _infoTile(
-            'loc.isBrandsMoved إلى شاشة مخصّصة. افتح «العلامات التجارية» من القائمة الرئيسية.',
+            loc.isBrandsMoved,
             textSecondary,
             surface,
             divider,
@@ -144,7 +148,7 @@ class _InventorySettingDetailScreenState
       case 'barcode':
         return [
           _infoTile(
-            'loc.isBarcodeConfigMoved إلى شاشة مخصّصة. افتح «إعدادات الباركود» من القائمة الرئيسية لهذه الإعدادات.',
+            loc.isBarcodeConfigMoved,
             textSecondary,
             surface,
             divider,
@@ -152,9 +156,9 @@ class _InventorySettingDetailScreenState
         ];
       case 'employee_default_warehouses':
         return [
-          _sectionTitle('المستودعات الافتراضية للموظفين', textPrimary),
+          _sectionTitle(loc.isDefaultWarehouses, textPrimary),
           _switchTile(
-            'فرض مستودع افتراضي عند تسجيل الحركات',
+            loc.isForceDefaultWarehouse,
             'emp_default_force',
             textPrimary,
             textSecondary,
@@ -162,7 +166,7 @@ class _InventorySettingDetailScreenState
             surface,
           ),
           _infoTile(
-            'loc.isWarehouseRecommendation بمستودع افتراضي لتتبع الصلاحيات والحركات.',
+            loc.isWarehouseRecommendation,
             textSecondary,
             surface,
             divider,
@@ -171,14 +175,14 @@ class _InventorySettingDetailScreenState
       case 'unit_templates':
         return [
           _infoTile(
-            'loc.isUnitsTemplatesMoved (الأساسية والتحويل) من الشاشة المخصّصة. افتح «قوالب الوحدات» من القائمة الرئيسية لإعدادات المخزون — تُستعمل كمرجع عند تعريف وحدات إضافية للمنتج.',
+            loc.isUnitsTemplatesMoved,
             textSecondary,
             surface,
             divider,
           ),
-          _sectionTitle('الوحدات', textPrimary),
+          _sectionTitle(loc.isUnits, textPrimary),
           _switchTile(
-            'loc.isAllowDifferentPurchaseUnits عن البيع',
+            loc.isAllowDifferentPurchaseUnits,
             'unit_purchase_sell',
             textPrimary,
             textSecondary,
@@ -186,7 +190,7 @@ class _InventorySettingDetailScreenState
             surface,
           ),
           _switchTile(
-            'loc.isShowConversionsOnPurchase',
+            loc.isShowConversionsOnPurchase,
             'unit_show_po',
             textPrimary,
             textSecondary,
@@ -196,9 +200,9 @@ class _InventorySettingDetailScreenState
         ];
       case 'print_templates':
         return [
-          _sectionTitle('الطباعة', textPrimary),
+          _sectionTitle(loc.isPrinting, textPrimary),
           _switchTile(
-            'loc.isIncludeStoreLogo في المستندات',
+            loc.isIncludeStoreLogo,
             'print_logo',
             textPrimary,
             textSecondary,
@@ -206,7 +210,7 @@ class _InventorySettingDetailScreenState
             surface,
           ),
           _switchTile(
-            'loc.isPrintBarcodeOnReceipts',
+            loc.isPrintBarcodeOnReceipts,
             'print_barcode_issue',
             textPrimary,
             textSecondary,
@@ -216,9 +220,9 @@ class _InventorySettingDetailScreenState
         ];
       case 'custom_fields':
         return [
-          _sectionTitle('الحقول الإضافية', textPrimary),
+          _sectionTitle(loc.isExtraFields, textPrimary),
           _switchTile(
-            'loc.isShowExtraFieldsInLists في قوائم المنتجات',
+            loc.isShowExtraFieldsInLists,
             'cf_show_lists',
             textPrimary,
             textSecondary,
@@ -226,7 +230,7 @@ class _InventorySettingDetailScreenState
             surface,
           ),
           _switchTile(
-            'loc.isIncludeInExportReports',
+            loc.isIncludeInExportReports,
             'cf_export',
             textPrimary,
             textSecondary,
@@ -239,7 +243,7 @@ class _InventorySettingDetailScreenState
           Padding(
             padding: const EdgeInsets.all(24),
             child: Text(
-              'loc.isNoExtraSettings لهذه الفئة بعد.',
+              loc.isNoExtraSettings,
               style: TextStyle(color: textSecondary),
               textAlign: TextAlign.center,
             ),

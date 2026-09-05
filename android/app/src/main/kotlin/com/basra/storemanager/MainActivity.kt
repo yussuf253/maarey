@@ -1,4 +1,4 @@
-package com.basra.storemanager
+package com.maarey.app
 
 import io.flutter.embedding.android.FlutterActivity
 

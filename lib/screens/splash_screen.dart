@@ -114,6 +114,20 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   Future<void> _goNext() async {
+    try {
+      await _goNextCore();
+    } catch (e, st) {
+      // On web or any platform, if the splash flow crashes, navigate to login
+      // so the user is not stuck on the splash screen forever.
+      debugPrint('[SplashScreen] _goNext crashed: $e\n$st');
+      if (!mounted) return;
+      try {
+        await Navigator.of(context).pushReplacementNamed('/login');
+      } catch (_) {}
+    }
+  }
+
+  Future<void> _goNextCore() async {
     final auth = context.read<AuthProvider>();
 
     // إعدادات سحابية: صيانة، تحديث، إلخ — تصل لكل من ثبّت التطبيق سابقاً عند فتحه مع إنترنت.

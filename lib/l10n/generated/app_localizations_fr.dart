@@ -15253,4 +15253,103 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get asSaveButton => 'Enregistrer le service';
+
+  @override
+  String get dlCustomizeHome => 'Personnaliser l\'écran d\'accueil';
+
+  @override
+  String get dlToggleHint =>
+      'Activez ou désactivez chaque section, puis faites glisser l\'icône ⋮⋮ pour réordonner de haut en bas.';
+
+  @override
+  String get dlOrderOnHome => 'Ordre sur l\'accueil';
+
+  @override
+  String get dlFixedTop => 'Fixé en haut — ne peut pas être masqué';
+
+  @override
+  String get dlResetTitle => 'Réinitialiser par défaut ?';
+
+  @override
+  String get dlResetDesc =>
+      'Toutes les sections seront affichées et ordonnées comme dans l\'application d\'origine.';
+
+  @override
+  String get dlCancel => 'Annuler';
+
+  @override
+  String get dlReset => 'Réinitialiser';
+
+  @override
+  String get dlResetButton =>
+      'Réinitialiser l\'ordre et la visibilité par défaut';
+
+  @override
+  String get wsMonthShifts => 'Garde mensuelles';
+
+  @override
+  String get wsNextMonth => 'Mois suivant';
+
+  @override
+  String get wsPrevMonth => 'Mois précédent';
+
+  @override
+  String get wsMonthDesc =>
+      'Les gardes qui ont commencé ou se sont terminées dans ce mois (ou sont encore ouvertes) sont affichées. \"Employé de garde\" est ce qui a été saisi lors de l\'ouverture.';
+
+  @override
+  String get wsNoShiftsThisMonth => 'Aucune garde ce mois-ci';
+
+  @override
+  String get wsOpenLabel => 'Ouverte (non fermée)';
+
+  @override
+  String wsInvoiceCount(Object count) {
+    return '$count factures';
+  }
+
+  @override
+  String get wsOpenAction => 'Ouvrir';
+
+  @override
+  String get wsCloseAction => 'Fermer';
+
+  @override
+  String get isSavedInstallment => 'Paramètres d\'échelonnement enregistrés';
+
+  @override
+  String get isAppliesToDesc =>
+      'Appliqué aux ventes par échelonnement, à la carte de plan d\'échelonnement sur l\'écran de vente (lorsqu\'activé), et à la configuration du plan après enregistrement.';
+
+  @override
+  String get isMinAdvanceHint =>
+      'Empêche l\'enregistrement d\'une facture d\'échelonnement si l\'avance est inférieure au pourcentage minimum ci-dessous (du total après remise et taxe).';
+
+  @override
+  String get isSummaryCardHint =>
+      'Affiche l\'avance, le taux d\'intérêt, le nombre de mois et la mensualité suggérée. Lorsqu\'il est masqué, seule l\'avance avec les « détails des montants » est affichée, et l\'intérêt est calculé automatiquement.';
+
+  @override
+  String get isDefaultMonthsHint =>
+      'Utilisé comme nombre de mois par défaut dans la carte de plan lors des ventes ; lorsqu\'il est masqué, il est utilisé lors de l\'enregistrement.';
+
+  @override
+  String get isInterestHint =>
+      'Le champ d\'intérêt est rempli lors de la sélection de « échelonnement » ; lorsqu\'il est masqué, il est utilisé lors de l\'enregistrement.';
+
+  @override
+  String get isCalendarDatesTitle =>
+      'Utiliser les mois calendaires pour les dates d\'échéance';
+
+  @override
+  String get isFromInvoiceDate => 'À partir de la date de facture';
+
+  @override
+  String get invDeposit => 'Dépôt';
+
+  @override
+  String get invWithdrawal => 'Retrait';
+
+  @override
+  String get invInternalTransfer => 'Transfert interne';
 }

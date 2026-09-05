@@ -158,39 +158,66 @@ void main() async {
   initSqliteForPlatform();
   // Fail fast if --dart-define values are missing (or assertions stripped in release).
   SupabaseConfig.assertConfigured();
-  await Supabase.initialize(
-    url: SupabaseConfig.url,
-    anonKey: SupabaseConfig.anonKey,
-    // Offline-friendly: prevent noisy infinite refresh retries when DNS/Internet is down.
-    // We explicitly trigger sync/bootstrap from our code paths when needed.
-    // Token persisted in OS-level secure storage (Keychain / EncryptedSharedPreferences / DPAPI)
-    // instead of plain SharedPreferences. Also auto-migrates any legacy token on first run.
-    authOptions: FlutterAuthClientOptions(
-      // Enable auto-refresh so the session survives app restarts.
-      // The SDK handles network errors gracefully — it silently fails
-      // to refresh when offline and retries when connectivity returns.
-      autoRefreshToken: true,
-      localStorage: SecureLocalStorage(
-        persistSessionKey: supabasePersistSessionKeyFromUrl(SupabaseConfig.url),
+
+  // On web, flutter_secure_storage and sqflite may throw during init.
+  // Wrap each critical step so the app can still launch even if a
+  // platform-specific subsystem fails.
+  try {
+    await Supabase.initialize(
+      url: SupabaseConfig.url,
+      anonKey: SupabaseConfig.anonKey,
+      authOptions: FlutterAuthClientOptions(
+        autoRefreshToken: true,
+        localStorage: SecureLocalStorage(
+          persistSessionKey: supabasePersistSessionKeyFromUrl(SupabaseConfig.url),
+        ),
       ),
-    ),
-  );
+    );
+  } catch (e) {
+    // If SecureLocalStorage fails (common on web), retry with default storage.
+    debugPrint('[main] Supabase.initialize failed with SecureLocalStorage: $e');
+    try {
+      await Supabase.initialize(
+        url: SupabaseConfig.url,
+        anonKey: SupabaseConfig.anonKey,
+      );
+    } catch (e2) {
+      debugPrint('[main] Supabase.initialize fallback also failed: $e2');
+    }
+  }
+
   if (kDebugMode) {
     debugPrint('Before runStartupCriticalMigrations');
   }
-  await DatabaseHelper().runStartupCriticalMigrations();
+  try {
+    await DatabaseHelper().runStartupCriticalMigrations();
+  } catch (e) {
+    debugPrint('[main] runStartupCriticalMigrations failed: $e');
+  }
   if (kDebugMode) {
     debugPrint('After runStartupCriticalMigrations / Before LicenseService');
   }
-  await LicenseService.instance.initialize();
+  try {
+    await LicenseService.instance.initialize();
+  } catch (e) {
+    debugPrint('[main] LicenseService.initialize failed: $e');
+  }
   if (kDebugMode) {
     debugPrint('After LicenseService / Before SyncQueueService');
   }
-  SyncQueueService.instance.initialize();
+  try {
+    SyncQueueService.instance.initialize();
+  } catch (e) {
+    debugPrint('[main] SyncQueueService.initialize failed: $e');
+  }
   if (kDebugMode) {
     debugPrint('After SyncQueueService / Before SystemNotificationService');
   }
-  await SystemNotificationService.instance.initialize();
+  try {
+    await SystemNotificationService.instance.initialize();
+  } catch (e) {
+    debugPrint('[main] SystemNotificationService.initialize failed: $e');
+  }
   if (kDebugMode) {
     debugPrint('After SystemNotificationService / Before runApp');
   }

@@ -495,7 +495,7 @@ class _ResultsCard extends StatelessWidget {
                 final row = rows[i];
                 final parentName = row['parentName'] as String?;
                 final subtitle = parentName != null && parentName.isNotEmpty
-                    ? loc.underParent(parentName ?? '')
+                    ? loc.underParent(parentName)
                     : null;
                 return Padding(
                   padding: const EdgeInsets.symmetric(

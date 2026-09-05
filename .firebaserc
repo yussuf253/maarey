@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "maarey-dj"
+  },
+  "targets": {
+    "maarey-dj": {
+      "hosting": {
+        "maarey": [
+          "maarey.web.app"
+        ]
+      }
+    }
+  }
+}
