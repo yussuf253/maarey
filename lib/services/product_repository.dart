@@ -2433,8 +2433,19 @@ class ProductRepository {
     
     if (rows.isEmpty) return;
     final payload = Map<String, dynamic>.from(rows.first);
-    final globalId = payload['global_id'] as String?;
-    if (globalId == null) return;
+    var globalId = payload['global_id'] as String?;
+    // Backfill global_id for legacy rows that lack one so the
+    // mutation can be enqueued for cloud sync.
+    if (globalId == null || globalId.trim().isEmpty) {
+      globalId = const Uuid().v4();
+      await txn.update(
+        'products',
+        {'global_id': globalId},
+        where: 'id = ?',
+        whereArgs: [productId],
+      );
+      payload['global_id'] = globalId;
+    }
     
     await SyncQueueService.instance.enqueueMutation(
       txn,

@@ -389,6 +389,9 @@ class SalePosSettingsData {
       case InvoiceType.debtCollection:
       case InvoiceType.installmentCollection:
       case InvoiceType.supplierPayment:
+      case InvoiceType.waafi:
+      case InvoiceType.dahabPlus:
+      case InvoiceType.cacPay:
         return false;
     }
   }

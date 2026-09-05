@@ -1113,6 +1113,15 @@ class AppLocalizationsFr extends AppLocalizations {
   String get paymentTypeSupplierPayment => 'Paiement fournisseur';
 
   @override
+  String get paymentTypeWaafi => 'Waafi';
+
+  @override
+  String get paymentTypeDahabPlus => 'Dahab Plus';
+
+  @override
+  String get paymentTypeCacPay => 'CAC Pay';
+
+  @override
   String noInvoiceWithNumber(Object id) {
     return 'Aucune facture avec le numéro $id';
   }
@@ -9687,6 +9696,15 @@ class AppLocalizationsFr extends AppLocalizations {
   String get rpSupplierPayment => 'Paiement fournisseur';
 
   @override
+  String get rpWaafi => 'Waafi';
+
+  @override
+  String get rpDahabPlus => 'Dahab Plus';
+
+  @override
+  String get rpCacPay => 'CAC Pay';
+
+  @override
   String get rpCreditSummary => 'Résumé vente à crédit';
 
   @override
@@ -9796,7 +9814,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get rpScanToOpenMap => 'Scannez pour ouvrir sur la carte';
 
   @override
-  String get rpOpNumber => 'Opération n°';
+  String get rpOpNumber => 'Facture n°';
 
   @override
   String rpDateTimeFull(Object date) {

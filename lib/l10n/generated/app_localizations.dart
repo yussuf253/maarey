@@ -2026,6 +2026,24 @@ abstract class AppLocalizations {
   /// **'دفع مورد'**
   String get paymentTypeSupplierPayment;
 
+  /// No description provided for @paymentTypeWaafi.
+  ///
+  /// In ar, this message translates to:
+  /// **'وافي'**
+  String get paymentTypeWaafi;
+
+  /// No description provided for @paymentTypeDahabPlus.
+  ///
+  /// In ar, this message translates to:
+  /// **'دهاب بلس'**
+  String get paymentTypeDahabPlus;
+
+  /// No description provided for @paymentTypeCacPay.
+  ///
+  /// In ar, this message translates to:
+  /// **'Cac Pay'**
+  String get paymentTypeCacPay;
+
   /// No description provided for @noInvoiceWithNumber.
   ///
   /// In ar, this message translates to:
@@ -17192,6 +17210,24 @@ abstract class AppLocalizations {
   /// **'دفع مورد'**
   String get rpSupplierPayment;
 
+  /// No description provided for @rpWaafi.
+  ///
+  /// In ar, this message translates to:
+  /// **'وافي'**
+  String get rpWaafi;
+
+  /// No description provided for @rpDahabPlus.
+  ///
+  /// In ar, this message translates to:
+  /// **'دهاب بلس'**
+  String get rpDahabPlus;
+
+  /// No description provided for @rpCacPay.
+  ///
+  /// In ar, this message translates to:
+  /// **'Cac Pay'**
+  String get rpCacPay;
+
   /// No description provided for @rpCreditSummary.
   ///
   /// In ar, this message translates to:
@@ -17369,7 +17405,7 @@ abstract class AppLocalizations {
   /// No description provided for @rpOpNumber.
   ///
   /// In ar, this message translates to:
-  /// **'رقم العملية'**
+  /// **'رقم الفاتورة'**
   String get rpOpNumber;
 
   /// No description provided for @rpDateTimeFull.

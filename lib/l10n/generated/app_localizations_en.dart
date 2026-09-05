@@ -1099,6 +1099,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get paymentTypeSupplierPayment => 'Supplier payment';
 
   @override
+  String get paymentTypeWaafi => 'Waafi';
+
+  @override
+  String get paymentTypeDahabPlus => 'Dahab Plus';
+
+  @override
+  String get paymentTypeCacPay => 'CAC Pay';
+
+  @override
   String noInvoiceWithNumber(Object id) {
     return 'No invoice with number $id';
   }
@@ -9567,6 +9576,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get rpSupplierPayment => 'Supplier payment';
 
   @override
+  String get rpWaafi => 'Waafi';
+
+  @override
+  String get rpDahabPlus => 'Dahab Plus';
+
+  @override
+  String get rpCacPay => 'CAC Pay';
+
+  @override
   String get rpCreditSummary => 'Credit sale summary';
 
   @override
@@ -9677,7 +9695,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get rpScanToOpenMap => 'Scan to open location on maps';
 
   @override
-  String get rpOpNumber => 'Operation #';
+  String get rpOpNumber => 'Invoice #';
 
   @override
   String rpDateTimeFull(Object date) {

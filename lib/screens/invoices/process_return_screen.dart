@@ -310,6 +310,12 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
         return loc.installmentCollectionType;
       case InvoiceType.supplierPayment:
         return loc.supplierPaymentTypeLabel;
+      case InvoiceType.waafi:
+        return loc.paymentTypeWaafi;
+      case InvoiceType.dahabPlus:
+        return loc.paymentTypeDahabPlus;
+      case InvoiceType.cacPay:
+        return loc.paymentTypeCacPay;
     }
   }
 
@@ -326,6 +332,9 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
       case InvoiceType.credit:
         return loc.creditReturnHintLabel;
       case InvoiceType.supplierPayment:
+      case InvoiceType.waafi:
+      case InvoiceType.dahabPlus:
+      case InvoiceType.cacPay:
         return loc.notApplicableForType;
     }
   }
@@ -493,6 +502,9 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
       case InvoiceType.credit:
         return '';
       case InvoiceType.supplierPayment:
+      case InvoiceType.waafi:
+      case InvoiceType.dahabPlus:
+      case InvoiceType.cacPay:
         return '';
     }
   }

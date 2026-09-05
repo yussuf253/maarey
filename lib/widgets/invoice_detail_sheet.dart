@@ -36,6 +36,12 @@ String _invoiceTypeTranslated(AppLocalizations loc, InvoiceType t) {
       return loc.paymentTypeInstallmentCollection;
     case InvoiceType.supplierPayment:
       return loc.paymentTypeSupplierPayment;
+    case InvoiceType.waafi:
+      return loc.paymentTypeWaafi;
+    case InvoiceType.dahabPlus:
+      return loc.paymentTypeDahabPlus;
+    case InvoiceType.cacPay:
+      return loc.paymentTypeCacPay;
   }
 }
 

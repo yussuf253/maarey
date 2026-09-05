@@ -1088,6 +1088,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get paymentTypeSupplierPayment => 'دفع مورد';
 
   @override
+  String get paymentTypeWaafi => 'وافي';
+
+  @override
+  String get paymentTypeDahabPlus => 'دهاب بلس';
+
+  @override
+  String get paymentTypeCacPay => 'Cac Pay';
+
+  @override
   String noInvoiceWithNumber(Object id) {
     return 'لا توجد فاتورة برقم $id';
   }
@@ -9475,6 +9484,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get rpSupplierPayment => 'دفع مورد';
 
   @override
+  String get rpWaafi => 'وافي';
+
+  @override
+  String get rpDahabPlus => 'دهاب بلس';
+
+  @override
+  String get rpCacPay => 'Cac Pay';
+
+  @override
   String get rpCreditSummary => 'ملخص البيع بالدين';
 
   @override
@@ -9584,7 +9602,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get rpScanToOpenMap => 'امسح لفتح الموقع على الخرائط';
 
   @override
-  String get rpOpNumber => 'رقم العملية';
+  String get rpOpNumber => 'رقم الفاتورة';
 
   @override
   String rpDateTimeFull(Object date) {

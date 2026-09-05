@@ -84,6 +84,9 @@ class LoyaltyMath {
       case InvoiceType.debtCollection:
       case InvoiceType.installmentCollection:
       case InvoiceType.supplierPayment:
+      case InvoiceType.waafi:
+      case InvoiceType.dahabPlus:
+      case InvoiceType.cacPay:
         return 0;
     }
     if (s.pointsPer1000Dinar <= 0) return 0;

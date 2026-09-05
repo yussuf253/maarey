@@ -54,6 +54,9 @@ bool _canReturnInvoice(Invoice inv, Set<int> serviceProductIds) {
     case InvoiceType.debtCollection:
     case InvoiceType.installmentCollection:
     case InvoiceType.supplierPayment:
+    case InvoiceType.waafi:
+    case InvoiceType.dahabPlus:
+    case InvoiceType.cacPay:
       return false;
   }
   if (inv.items.isNotEmpty &&
@@ -82,6 +85,10 @@ Color _invoiceStatusColor(Invoice invoice, ColorScheme cs) {
       return cs.secondary;
     case InvoiceType.supplierPayment:
       return AppSemanticColors.supplier;
+    case InvoiceType.waafi:
+    case InvoiceType.dahabPlus:
+    case InvoiceType.cacPay:
+      return cs.primary;
   }
 }
 
@@ -1201,6 +1208,12 @@ class _InvoiceCard extends StatelessWidget {
         return loc.paymentTypeInstallmentCollection;
       case InvoiceType.supplierPayment:
         return loc.paymentTypeSupplierPayment;
+      case InvoiceType.waafi:
+        return loc.paymentTypeWaafi;
+      case InvoiceType.dahabPlus:
+        return loc.paymentTypeDahabPlus;
+      case InvoiceType.cacPay:
+        return loc.paymentTypeCacPay;
     }
   }
 
@@ -1219,6 +1232,9 @@ class _InvoiceCard extends StatelessWidget {
       case InvoiceType.installmentCollection:
         return Icons.receipt_long_rounded;
       case InvoiceType.supplierPayment:
+      case InvoiceType.waafi:
+      case InvoiceType.dahabPlus:
+      case InvoiceType.cacPay:
         return Icons.storefront_outlined;
     }
   }

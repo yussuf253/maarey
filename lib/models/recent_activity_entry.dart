@@ -337,6 +337,12 @@ String _invoiceTypeLabelAr(InvoiceType t) {
       return 'تسديد قسط';
     case InvoiceType.supplierPayment:
       return 'دفع مورد';
+    case InvoiceType.waafi:
+      return 'وافي';
+    case InvoiceType.dahabPlus:
+      return 'دهاب بلس';
+    case InvoiceType.cacPay:
+      return 'Cac Pay';
   }
 }
 

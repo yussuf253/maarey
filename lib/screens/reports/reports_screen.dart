@@ -1685,6 +1685,9 @@ Color _invoiceTypeAccentColor(InvoiceType t, ColorScheme cs) {
     case InvoiceType.debtCollection:
     case InvoiceType.installmentCollection:
     case InvoiceType.supplierPayment:
+    case InvoiceType.waafi:
+    case InvoiceType.dahabPlus:
+    case InvoiceType.cacPay:
       return cs.secondary;
   }
 }
@@ -3874,5 +3877,11 @@ String _invoiceTypeLabel(InvoiceType t, BuildContext context) {
       return AppLocalizations.of(context)!.paymentTypeInstallmentCollection;
     case InvoiceType.supplierPayment:
       return AppLocalizations.of(context)!.paymentTypeSupplierPayment;
+    case InvoiceType.waafi:
+      return AppLocalizations.of(context)!.paymentTypeWaafi;
+    case InvoiceType.dahabPlus:
+      return AppLocalizations.of(context)!.paymentTypeDahabPlus;
+    case InvoiceType.cacPay:
+      return AppLocalizations.of(context)!.paymentTypeCacPay;
   }
 }

@@ -105,11 +105,27 @@ class InventoryProductsProvider extends ChangeNotifier {
       if (seedIfEmpty) {
         await _repo.seedIfEmpty();
       }
-      _items.clear();
-      _offset = 0;
-      _hasMore = true;
 
-      await _fetchTotals();
+      // Load into temporary variables first so a failure never
+      // leaves _items empty (which previously required an app
+      // restart to recover from).
+      int newOffset = 0;
+      bool newHasMore = true;
+      int newMatched = 0;
+      int newCatalog = 0;
+
+      final totals = await _repo.countInventoryProducts(
+        keyword: _keyword,
+        barcode: _barcode,
+        productCode: _productCode,
+        categoryName: _categoryName,
+        brandName: _brandName,
+        statusArabic: _status,
+        priceMinIqd: _priceMinIqd,
+        priceMaxIqd: _priceMaxIqd,
+      );
+      newMatched = totals;
+      newCatalog = await _repo.countActiveProductsForTenant();
 
       final page = await _repo.queryProductsPage(
         keyword: _keyword,
@@ -123,31 +139,23 @@ class InventoryProductsProvider extends ChangeNotifier {
         priceMinIqd: _priceMinIqd,
         priceMaxIqd: _priceMaxIqd,
         limit: _pageSize,
-        offset: _offset,
+        offset: 0,
       );
-      _items.addAll(page);
-      _offset += page.length;
-      _hasMore = page.length >= _pageSize;
+      newOffset = page.length;
+      newHasMore = page.length >= _pageSize;
+
+      // Only swap state after all queries succeeded.
+      _items
+        ..clear()
+        ..addAll(page);
+      _offset = newOffset;
+      _hasMore = newHasMore;
+      _matchedTotal = newMatched;
+      _catalogTotal = newCatalog;
     } finally {
       _isLoading = false;
       notifyListeners();
     }
-  }
-
-  Future<void> _fetchTotals() async {
-    final m = await _repo.countInventoryProducts(
-      keyword: _keyword,
-      barcode: _barcode,
-      productCode: _productCode,
-      categoryName: _categoryName,
-      brandName: _brandName,
-      statusArabic: _status,
-      priceMinIqd: _priceMinIqd,
-      priceMaxIqd: _priceMaxIqd,
-    );
-    final c = await _repo.countActiveProductsForTenant();
-    _matchedTotal = m;
-    _catalogTotal = c;
   }
 
   Future<void> loadMore() async {
