@@ -654,8 +654,7 @@ class ProductRepository {
 
   /// استعلام صفحات للمنتجات لإدارة المخزون (بدون تحميل كل الجدول).
   ///
-  /// - [statusArabic]: "الكل" | "نشط" | "مخزون منخفض" | "نفذ من المخزون" | "معطّل"
-  ///   (يتوافق مع القيم السابقة: "في المخزون" → نشط تقريباً، "منخفض" → مخزون منخفض)
+  /// - [statusKey]: 'all' | 'active' | 'low_stock' | 'out_of_stock' | 'disabled'
   /// - [sortByArabic]: "الاسم" | "السعر" | "الكمية" | "تاريخ الإضافة"
   Future<List<Map<String, dynamic>>> queryProductsPage({
     required String keyword,
@@ -663,7 +662,7 @@ class ProductRepository {
     required String productCode,
     required String categoryName,
     required String brandName,
-    required String statusArabic,
+    required String statusKey,
     required String sortByArabic,
     required bool sortAscending,
     int? priceMinIqd,
@@ -679,27 +678,22 @@ class ProductRepository {
     const effQtyExpr = 'COALESCE(v.sumQty, p.qty)';
 
     void addStatusAndActive() {
-      switch (statusArabic) {
-        case 'معطّل':
-          where.add('p.isActive = 0');
-          return;
-        default:
-          where.add('p.isActive = 1');
+      if (statusKey == 'disabled') {
+        where.add('p.isActive = 0');
+        return;
       }
-      switch (statusArabic) {
-        case 'نشط':
-        case 'في المخزون':
+      where.add('p.isActive = 1');
+      switch (statusKey) {
+        case 'active':
           where.add("($effQtyExpr > 0 AND p.status = 'instock')");
           break;
-        case 'مخزون منخفض':
-        case 'منخفض':
+        case 'low_stock':
           where.add("p.status = 'low'");
           break;
-        case 'نفذ من المخزون':
+        case 'out_of_stock':
           where.add('$effQtyExpr <= 0');
           break;
-        case 'الكل':
-        case 'معطّل':
+        case 'all':
           break;
       }
     }
@@ -807,7 +801,7 @@ class ProductRepository {
     required String productCode,
     required String categoryName,
     required String brandName,
-    required String statusArabic,
+    required String statusKey,
     int? priceMinIqd,
     int? priceMaxIqd,
   }) async {
@@ -819,27 +813,22 @@ class ProductRepository {
     const effQtyExpr = 'COALESCE(v.sumQty, p.qty)';
 
     void addStatusAndActive() {
-      switch (statusArabic) {
-        case 'معطّل':
-          where.add('p.isActive = 0');
-          return;
-        default:
-          where.add('p.isActive = 1');
+      if (statusKey == 'disabled') {
+        where.add('p.isActive = 0');
+        return;
       }
-      switch (statusArabic) {
-        case 'نشط':
-        case 'في المخزون':
+      where.add('p.isActive = 1');
+      switch (statusKey) {
+        case 'active':
           where.add("($effQtyExpr > 0 AND p.status = 'instock')");
           break;
-        case 'مخزون منخفض':
-        case 'منخفض':
+        case 'low_stock':
           where.add("p.status = 'low'");
           break;
-        case 'نفذ من المخزون':
+        case 'out_of_stock':
           where.add('$effQtyExpr <= 0');
           break;
-        case 'الكل':
-        case 'معطّل':
+        case 'all':
           break;
       }
     }

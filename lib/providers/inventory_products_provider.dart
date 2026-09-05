@@ -25,13 +25,17 @@ class InventoryProductsProvider extends ChangeNotifier {
 
   int _offset = 0;
 
+  /// Monotonic counter so that stale [refresh] results are discarded when
+  /// a newer refresh was started while the previous one was still in flight.
+  int _refreshVersion = 0;
+
   // Filters
   String _keyword = '';
   String _barcode = '';
   String _productCode = '';
   String _categoryName = 'جميع التصنيفات';
   String _brandName = 'جميع الماركات';
-  String _status = 'الكل';
+  String _status = 'all';
   String _sortBy = 'الاسم';
   bool _sortAscending = true;
   int? _priceMinIqd;
@@ -98,7 +102,7 @@ class InventoryProductsProvider extends ChangeNotifier {
   }
 
   Future<void> refresh({bool seedIfEmpty = false}) async {
-    if (_isLoading) return;
+    final version = ++_refreshVersion;
     _isLoading = true;
     notifyListeners();
     try {
@@ -120,7 +124,7 @@ class InventoryProductsProvider extends ChangeNotifier {
         productCode: _productCode,
         categoryName: _categoryName,
         brandName: _brandName,
-        statusArabic: _status,
+        statusKey: _status,
         priceMinIqd: _priceMinIqd,
         priceMaxIqd: _priceMaxIqd,
       );
@@ -133,7 +137,7 @@ class InventoryProductsProvider extends ChangeNotifier {
         productCode: _productCode,
         categoryName: _categoryName,
         brandName: _brandName,
-        statusArabic: _status,
+        statusKey: _status,
         sortByArabic: _sortBy,
         sortAscending: _sortAscending,
         priceMinIqd: _priceMinIqd,
@@ -144,7 +148,8 @@ class InventoryProductsProvider extends ChangeNotifier {
       newOffset = page.length;
       newHasMore = page.length >= _pageSize;
 
-      // Only swap state after all queries succeeded.
+      // Only apply results if this is still the latest refresh.
+      if (version != _refreshVersion) return;
       _items
         ..clear()
         ..addAll(page);
@@ -153,13 +158,15 @@ class InventoryProductsProvider extends ChangeNotifier {
       _matchedTotal = newMatched;
       _catalogTotal = newCatalog;
     } finally {
-      _isLoading = false;
-      notifyListeners();
+      if (version == _refreshVersion) {
+        _isLoading = false;
+        notifyListeners();
+      }
     }
   }
 
   Future<void> loadMore() async {
-    if (_isLoading || _isLoadingMore || !_hasMore) return;
+    if (_isLoadingMore || !_hasMore) return;
     _isLoadingMore = true;
     notifyListeners();
     try {
@@ -169,7 +176,7 @@ class InventoryProductsProvider extends ChangeNotifier {
         productCode: _productCode,
         categoryName: _categoryName,
         brandName: _brandName,
-        statusArabic: _status,
+        statusKey: _status,
         sortByArabic: _sortBy,
         sortAscending: _sortAscending,
         priceMinIqd: _priceMinIqd,

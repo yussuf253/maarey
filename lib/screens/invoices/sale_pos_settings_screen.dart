@@ -173,6 +173,36 @@ class SalePosSettingsScreen extends StatelessWidget {
                     prov.save(d.copyWith(allowDelivery: v));
                   },
                 ),
+                const Divider(height: 1),
+                _PolicySwitch(
+                  title: AppLocalizations.of(context)!.waafiSaleTitle,
+                  subtitle: AppLocalizations.of(context)!.waafiSaleSubtitle,
+                  value: d.allowWaafi,
+                  onChanged: (v) {
+                    if (v == null) return;
+                    prov.save(d.copyWith(allowWaafi: v));
+                  },
+                ),
+                const Divider(height: 1),
+                _PolicySwitch(
+                  title: AppLocalizations.of(context)!.dahabPlusSaleTitle,
+                  subtitle: AppLocalizations.of(context)!.dahabPlusSaleSubtitle,
+                  value: d.allowDahabPlus,
+                  onChanged: (v) {
+                    if (v == null) return;
+                    prov.save(d.copyWith(allowDahabPlus: v));
+                  },
+                ),
+                const Divider(height: 1),
+                _PolicySwitch(
+                  title: AppLocalizations.of(context)!.cacPaySaleTitle,
+                  subtitle: AppLocalizations.of(context)!.cacPaySaleSubtitle,
+                  value: d.allowCacPay,
+                  onChanged: (v) {
+                    if (v == null) return;
+                    prov.save(d.copyWith(allowCacPay: v));
+                  },
+                ),
               ],
             ),
             const SizedBox(height: 22),

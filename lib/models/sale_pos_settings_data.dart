@@ -193,6 +193,9 @@ class SalePosSettingsData {
     required this.allowCredit,
     required this.allowInstallment,
     required this.allowDelivery,
+    this.allowWaafi = true,
+    this.allowDahabPlus = true,
+    this.allowCacPay = true,
     required this.enforceAvailableQtyAtSale,
     required this.useSaleBrandSkin,
     required this.showBuyerAddressOnCash,
@@ -215,6 +218,15 @@ class SalePosSettingsData {
   final bool allowCredit;
   final bool allowInstallment;
   final bool allowDelivery;
+
+  /// السماح بالدفع عبر «وافي» في شاشة البيع.
+  final bool allowWaafi;
+
+  /// السماح بالدفع عبر «دهاب بلس» في شاشة البيع.
+  final bool allowDahabPlus;
+
+  /// السماح بالدفع عبر «CAC Pay» في شاشة البيع.
+  final bool allowCacPay;
 
   /// عند التفعيل: تمنع شاشة البيع زيادة الكمية فوق الرصيد المعروض للصنف.
   /// عند الإيقاف: يُسمح بالبيع حتى لو أصبح إجمالي الرصيد سالباً، فيُلغى السالب لاحقاً عند تسجيل وارد (نفس حقل [products.qty]).
@@ -263,6 +275,9 @@ class SalePosSettingsData {
     allowCredit: true,
     allowInstallment: true,
     allowDelivery: true,
+    allowWaafi: true,
+    allowDahabPlus: true,
+    allowCacPay: true,
     enforceAvailableQtyAtSale: false,
     useSaleBrandSkin: true,
     showBuyerAddressOnCash: true,
@@ -317,6 +332,9 @@ class SalePosSettingsData {
         allowCredit: m['credit'] != false,
         allowInstallment: m['installment'] != false,
         allowDelivery: m['delivery'] != false,
+        allowWaafi: m['waafi'] != false,
+        allowDahabPlus: m['dahabPlus'] != false,
+        allowCacPay: m['cacPay'] != false,
         enforceAvailableQtyAtSale: m.containsKey('enforceAvailQty')
             ? m['enforceAvailQty'] != false
             : false,
@@ -357,6 +375,9 @@ class SalePosSettingsData {
     'credit': allowCredit,
     'installment': allowInstallment,
     'delivery': allowDelivery,
+    'waafi': allowWaafi,
+    'dahabPlus': allowDahabPlus,
+    'cacPay': allowCacPay,
     'enforceAvailQty': enforceAvailableQtyAtSale,
     'brandUi': useSaleBrandSkin,
     'buyerAddrCash': showBuyerAddressOnCash,
@@ -386,12 +407,15 @@ class SalePosSettingsData {
         return allowInstallment;
       case InvoiceType.delivery:
         return allowDelivery;
+      case InvoiceType.waafi:
+        return allowWaafi;
+      case InvoiceType.dahabPlus:
+        return allowDahabPlus;
+      case InvoiceType.cacPay:
+        return allowCacPay;
       case InvoiceType.debtCollection:
       case InvoiceType.installmentCollection:
       case InvoiceType.supplierPayment:
-      case InvoiceType.waafi:
-      case InvoiceType.dahabPlus:
-      case InvoiceType.cacPay:
         return false;
     }
   }
@@ -402,6 +426,9 @@ class SalePosSettingsData {
     bool? allowCredit,
     bool? allowInstallment,
     bool? allowDelivery,
+    bool? allowWaafi,
+    bool? allowDahabPlus,
+    bool? allowCacPay,
     bool? enforceAvailableQtyAtSale,
     bool? useSaleBrandSkin,
     bool? showBuyerAddressOnCash,
@@ -425,6 +452,9 @@ class SalePosSettingsData {
       allowCredit: allowCredit ?? this.allowCredit,
       allowInstallment: allowInstallment ?? this.allowInstallment,
       allowDelivery: allowDelivery ?? this.allowDelivery,
+      allowWaafi: allowWaafi ?? this.allowWaafi,
+      allowDahabPlus: allowDahabPlus ?? this.allowDahabPlus,
+      allowCacPay: allowCacPay ?? this.allowCacPay,
       enforceAvailableQtyAtSale:
           enforceAvailableQtyAtSale ?? this.enforceAvailableQtyAtSale,
       useSaleBrandSkin: useSaleBrandSkin ?? this.useSaleBrandSkin,

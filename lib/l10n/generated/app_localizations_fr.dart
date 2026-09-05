@@ -5011,6 +5011,27 @@ class AppLocalizationsFr extends AppLocalizations {
   String get deliverySaleSubtitle => 'Désactiver masque l\'option «livraison».';
 
   @override
+  String get waafiSaleTitle => 'Paiement Waafi';
+
+  @override
+  String get waafiSaleSubtitle =>
+      'Désactiver masque l\'option «Waafi» sur l\'écran de vente.';
+
+  @override
+  String get dahabPlusSaleTitle => 'Paiement Dahab Plus';
+
+  @override
+  String get dahabPlusSaleSubtitle =>
+      'Désactiver masque l\'option «Dahab Plus» sur l\'écran de vente.';
+
+  @override
+  String get cacPaySaleTitle => 'Paiement CAC Pay';
+
+  @override
+  String get cacPaySaleSubtitle =>
+      'Désactiver masque l\'option «CAC Pay» sur l\'écran de vente.';
+
+  @override
   String get cashCustomerSection => 'Client en vente en espèces';
 
   @override

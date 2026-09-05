@@ -4951,6 +4951,27 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deliverySaleSubtitle => 'Disabling hides the \"delivery\" option.';
 
   @override
+  String get waafiSaleTitle => 'Waafi Payment';
+
+  @override
+  String get waafiSaleSubtitle =>
+      'Disabling hides the \"Waafi\" option on the sale screen.';
+
+  @override
+  String get dahabPlusSaleTitle => 'Dahab Plus Payment';
+
+  @override
+  String get dahabPlusSaleSubtitle =>
+      'Disabling hides the \"Dahab Plus\" option on the sale screen.';
+
+  @override
+  String get cacPaySaleTitle => 'CAC Pay Payment';
+
+  @override
+  String get cacPaySaleSubtitle =>
+      'Disabling hides the \"CAC Pay\" option on the sale screen.';
+
+  @override
   String get cashCustomerSection => 'Customer in Cash Sale';
 
   @override

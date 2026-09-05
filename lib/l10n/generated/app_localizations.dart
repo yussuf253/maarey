@@ -8828,6 +8828,42 @@ abstract class AppLocalizations {
   /// **'إيقافه يخفي خيار «توصيل».'**
   String get deliverySaleSubtitle;
 
+  /// No description provided for @waafiSaleTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدفع عبر وافي'**
+  String get waafiSaleTitle;
+
+  /// No description provided for @waafiSaleSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقافه يخفي خيار «وافي» في شاشة البيع.'**
+  String get waafiSaleSubtitle;
+
+  /// No description provided for @dahabPlusSaleTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدفع عبر دهاب بلس'**
+  String get dahabPlusSaleTitle;
+
+  /// No description provided for @dahabPlusSaleSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقافه يخفي خيار «دهاب بلس» في شاشة البيع.'**
+  String get dahabPlusSaleSubtitle;
+
+  /// No description provided for @cacPaySaleTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدفع عبر CAC Pay'**
+  String get cacPaySaleTitle;
+
+  /// No description provided for @cacPaySaleSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقافه يخفي خيار «CAC Pay» في شاشة البيع.'**
+  String get cacPaySaleSubtitle;
+
   /// No description provided for @cashCustomerSection.
   ///
   /// In ar, this message translates to:
