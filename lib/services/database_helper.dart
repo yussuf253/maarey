@@ -330,7 +330,11 @@ class DatabaseHelper {
   /// مدة الخدمة المتوقعة وموعد التسليم المقترح — لتذاكر الصيانة.
   Future<void> _ensureServiceOrdersEtaColumns(Database db) async {
     try {
-      if (!await _tableHasColumn(db, 'service_orders', 'expectedDurationMinutes')) {
+      if (!await _tableHasColumn(
+        db,
+        'service_orders',
+        'expectedDurationMinutes',
+      )) {
         await db.execute(
           'ALTER TABLE service_orders ADD COLUMN expectedDurationMinutes INTEGER',
         );
@@ -486,7 +490,9 @@ class DatabaseHelper {
   Future<void> _ensureProductVariantsGlobalIds(Database db) async {
     try {
       if (!await _tableHasColumn(db, 'product_colors', 'global_id')) {
-        await db.execute('ALTER TABLE product_colors ADD COLUMN global_id TEXT');
+        await db.execute(
+          'ALTER TABLE product_colors ADD COLUMN global_id TEXT',
+        );
       }
       if (!await _tableHasColumn(db, 'product_variants', 'global_id')) {
         await db.execute(
@@ -615,29 +621,25 @@ class DatabaseHelper {
     for (final u in users) {
       final idNum = u['id'] as num?;
       if (idNum == null) continue;
-      batch.insert(
-        'user_profiles',
-        {
-          'id': idNum.toInt(),
-          'username': (u['username'] ?? '').toString().trim().toLowerCase(),
-          'role': ((u['role'] ?? 'staff').toString().trim().isEmpty)
-              ? 'staff'
-              : (u['role'] ?? 'staff').toString().trim(),
-          'email': (u['email'] ?? '').toString().trim(),
-          'phone': (u['phone'] ?? '').toString().trim(),
-          'phone2': (u['phone2'] ?? '').toString().trim(),
-          'displayName': (u['displayName'] ?? '').toString().trim(),
-          'jobTitle': (u['jobTitle'] ?? '').toString().trim(),
-          'isActive': ((u['isActive'] as num?)?.toInt() ?? 1) == 1 ? 1 : 0,
-          'createdAt': ((u['createdAt'] ?? '').toString().trim().isEmpty)
-              ? now
-              : (u['createdAt'] ?? '').toString(),
-          'updatedAt': ((u['updatedAt'] ?? '').toString().trim().isEmpty)
-              ? now
-              : (u['updatedAt'] ?? '').toString(),
-        },
-        conflictAlgorithm: ConflictAlgorithm.replace,
-      );
+      batch.insert('user_profiles', {
+        'id': idNum.toInt(),
+        'username': (u['username'] ?? '').toString().trim().toLowerCase(),
+        'role': ((u['role'] ?? 'staff').toString().trim().isEmpty)
+            ? 'staff'
+            : (u['role'] ?? 'staff').toString().trim(),
+        'email': (u['email'] ?? '').toString().trim(),
+        'phone': (u['phone'] ?? '').toString().trim(),
+        'phone2': (u['phone2'] ?? '').toString().trim(),
+        'displayName': (u['displayName'] ?? '').toString().trim(),
+        'jobTitle': (u['jobTitle'] ?? '').toString().trim(),
+        'isActive': ((u['isActive'] as num?)?.toInt() ?? 1) == 1 ? 1 : 0,
+        'createdAt': ((u['createdAt'] ?? '').toString().trim().isEmpty)
+            ? now
+            : (u['createdAt'] ?? '').toString(),
+        'updatedAt': ((u['updatedAt'] ?? '').toString().trim().isEmpty)
+            ? now
+            : (u['updatedAt'] ?? '').toString(),
+      }, conflictAlgorithm: ConflictAlgorithm.replace);
     }
     await batch.commit(noResult: true);
   }
@@ -998,7 +1000,6 @@ class DatabaseHelper {
       where: 'id = ?',
       whereArgs: [planId],
     );
-
   }
 
   Future<void> _reconcileInstallmentPlanPaidAmounts(Database db) async {
@@ -1236,7 +1237,11 @@ class DatabaseHelper {
   /// ترحيل لمرة واحدة: منتجات [stockBaseKind]=1 كانت تُخزَّن بالـ **غرام** وتُسعَّر للغرام؛
   /// أصبحت بالـ **كيلوغرام** مع سعر للكيلو. تُحافظ على إجماليات الأسطر والتكاليف.
   Future<void> _migrateWeightStockBaseGramsToKilograms(Database db) async {
-    final hasPoItems = await _tableHasColumn(db, 'purchase_order_items', 'productId');
+    final hasPoItems = await _tableHasColumn(
+      db,
+      'purchase_order_items',
+      'productId',
+    );
     await db.transaction((txn) async {
       await txn.execute('''
         UPDATE product_unit_variants
@@ -1691,10 +1696,10 @@ class DatabaseHelper {
   /// حقول إضافية لبطاقة المنتج: الرتبة/الدرجة (grade)، رقم الدفعة (batchNumber).
   Future<void> _ensureInventoryProductExtendedCols(Database db) async {
     final cols = <String, String>{
-      'grade':           'TEXT',
-      'batchNumber':     'TEXT',
+      'grade': 'TEXT',
+      'batchNumber': 'TEXT',
       'expiryAlertDaysBefore': 'INTEGER',
-      'imageUrl':        'TEXT',
+      'imageUrl': 'TEXT',
     };
     for (final e in cols.entries) {
       if (!await _tableHasColumn(db, 'products', e.key)) {
@@ -1878,6 +1883,13 @@ class DatabaseHelper {
     // existing single-tenant installs (DEFAULT 1) safe.
     await ensureTenantColumn('customer_debt_payments');
 
+    // Step 24 (per-table invoice sync): invoices/invoice_items now sync via
+    // sync_queue mutations (like products/customers) instead of riding the
+    // whole-DB app_snapshots blob. Every row needs a stable global_id and
+    // updatedAt stamps for last-write-wins merges — added idempotently here
+    // and backfilled for rows created before this migration.
+    await _ensureInvoiceSyncColumns(db);
+
     // Step 10 (soft-delete foundation): every read across db_debts, db_cash,
     // db_shifts, db_suppliers, and reports_repository now filters by
     // `deleted_at IS NULL`, so the column must exist on the five core
@@ -1896,6 +1908,99 @@ class DatabaseHelper {
     }
   }
 
+  /// Idempotently adds the per-table sync columns (global_id + createdAt/
+  /// updatedAt) to invoices/invoice_items and backfills existing rows.
+  /// Backfill stamps are derived from each row's own business date, so two
+  /// devices backfilling the same legacy row produce identical stamps.
+  Future<void> _ensureInvoiceSyncColumns(Database db) async {
+    if (!await _tableHasColumn(db, 'invoices', 'global_id')) {
+      await db.execute('ALTER TABLE invoices ADD COLUMN global_id TEXT');
+    }
+    if (!await _tableHasColumn(db, 'invoice_items', 'global_id')) {
+      await db.execute('ALTER TABLE invoice_items ADD COLUMN global_id TEXT');
+    }
+    // يُخزَّن لتوطين البنود اليتيمة حين يصل البند قبل فاتورته (إصلاح ذاتي لاحقاً).
+    if (!await _tableHasColumn(db, 'invoice_items', 'invoiceGlobalId')) {
+      await db.execute(
+        'ALTER TABLE invoice_items ADD COLUMN invoiceGlobalId TEXT',
+      );
+    }
+    if (!await _tableHasColumn(db, 'invoices', 'createdAt')) {
+      await db.execute('ALTER TABLE invoices ADD COLUMN createdAt TEXT');
+    }
+    if (!await _tableHasColumn(db, 'invoices', 'updatedAt')) {
+      await db.execute('ALTER TABLE invoices ADD COLUMN updatedAt TEXT');
+    }
+    if (!await _tableHasColumn(db, 'invoice_items', 'createdAt')) {
+      await db.execute('ALTER TABLE invoice_items ADD COLUMN createdAt TEXT');
+    }
+    if (!await _tableHasColumn(db, 'invoice_items', 'updatedAt')) {
+      await db.execute('ALTER TABLE invoice_items ADD COLUMN updatedAt TEXT');
+    }
+    await db.execute(
+      'CREATE INDEX IF NOT EXISTS idx_invoices_global_id ON invoices(global_id)',
+    );
+    await db.execute(
+      'CREATE INDEX IF NOT EXISTS idx_invoice_items_global_id ON invoice_items(global_id)',
+    );
+
+    final uuid = const Uuid();
+    final nowIso = DateTime.now().toUtc().toIso8601String();
+
+    final missingInvoices = await db.query(
+      'invoices',
+      columns: ['id', 'date'],
+      where: "global_id IS NULL OR TRIM(global_id) = ''",
+    );
+    if (missingInvoices.isNotEmpty) {
+      final batch = db.batch();
+      for (final r in missingInvoices) {
+        final d = (r['date'] ?? '').toString();
+        batch.update(
+          'invoices',
+          {
+            'global_id': uuid.v4(),
+            if (d.isEmpty) 'createdAt': nowIso,
+            'updatedAt': d.isNotEmpty ? d : nowIso,
+          },
+          where: 'id = ?',
+          whereArgs: [r['id']],
+        );
+      }
+      await batch.commit(noResult: true);
+    }
+
+    final missingItems = await db.rawQuery('''
+      SELECT i.id AS id, v.date AS parentDate,
+             v.global_id AS parentGlobalId, i.createdAt AS itemCreatedAt
+      FROM invoice_items i
+      LEFT JOIN invoices v ON v.id = i.invoiceId
+      WHERE i.global_id IS NULL OR TRIM(i.global_id) = ''
+    ''');
+    if (missingItems.isNotEmpty) {
+      final batch = db.batch();
+      for (final r in missingItems) {
+        final parent = (r['parentDate'] ?? '').toString();
+        final own = (r['itemCreatedAt'] ?? '').toString();
+        final stamp = parent.isNotEmpty
+            ? parent
+            : (own.isNotEmpty ? own : nowIso);
+        final parentGid = (r['parentGlobalId'] ?? '').toString().trim();
+        batch.update(
+          'invoice_items',
+          {
+            'global_id': uuid.v4(),
+            'updatedAt': stamp,
+            if (parentGid.isNotEmpty) 'invoiceGlobalId': parentGid,
+          },
+          where: 'id = ?',
+          whereArgs: [r['id']],
+        );
+      }
+      await batch.commit(noResult: true);
+    }
+  }
+
   /// Idempotently adds a `deleted_at TEXT` column to [table] and a partial
   /// index so soft-delete reads (`WHERE deleted_at IS NULL`) stay cheap.
   /// Logs and swallows any ALTER error so a constrained schema (e.g. a
@@ -1903,9 +2008,7 @@ class DatabaseHelper {
   Future<void> _ensureSoftDeleteColumn(Database db, String table) async {
     if (!await _tableHasColumn(db, table, 'deleted_at')) {
       try {
-        await db.execute(
-          'ALTER TABLE $table ADD COLUMN deleted_at TEXT',
-        );
+        await db.execute('ALTER TABLE $table ADD COLUMN deleted_at TEXT');
       } catch (e, st) {
         if (kDebugMode) {
           AppLogger.error(

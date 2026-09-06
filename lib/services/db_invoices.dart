@@ -132,7 +132,8 @@ extension DbInvoices on DatabaseHelper {
     };
 
     final whereSql = where.isEmpty ? '' : 'WHERE ${where.join(' AND ')}';
-    final rows = await db.rawQuery('''
+    final rows = await db.rawQuery(
+      '''
       SELECT
         i.*,
         c.phone AS customerPhone
@@ -141,13 +142,16 @@ extension DbInvoices on DatabaseHelper {
       $whereSql
       ORDER BY $orderBy
       LIMIT ? OFFSET ?
-    ''', [...args, limit, offset]);
+    ''',
+      [...args, limit, offset],
+    );
 
     return rows.whereType<Map<String, dynamic>>().map((invoiceMap) {
       return Invoice(
         id: invoiceMap['id'] as int?,
         customerName: invoiceMap['customerName'] as String? ?? '',
-        date: DateTime.tryParse((invoiceMap['date'] ?? '').toString()) ??
+        date:
+            DateTime.tryParse((invoiceMap['date'] ?? '').toString()) ??
             DateTime.fromMillisecondsSinceEpoch(0),
         type: invoiceTypeFromDb(invoiceMap['type']),
         items: const <InvoiceItem>[],
@@ -195,10 +199,10 @@ extension DbInvoices on DatabaseHelper {
             (invoiceMap['installmentInterestAmount'] as num?)?.toDouble() ?? 0,
         installmentTotalWithInterest:
             (invoiceMap['installmentTotalWithInterest'] as num?)?.toDouble() ??
-                0,
+            0,
         installmentSuggestedMonthly:
             (invoiceMap['installmentSuggestedMonthly'] as num?)?.toDouble() ??
-                0,
+            0,
       );
     }).toList();
   }
@@ -271,9 +275,9 @@ extension DbInvoices on DatabaseHelper {
   Future<int> _insertInvoiceInTransaction(
     Transaction txn,
     Invoice invoice,
-    LoyaltySettingsData loyaltySettings,
-    {required bool enforceStockNonZero}
-  ) async {
+    LoyaltySettingsData loyaltySettings, {
+    required bool enforceStockNonZero,
+  }) async {
     _validateInvoiceForSave(invoice);
     final tenantId = await _resolveActiveTenantIdForLocalDb(txn);
     final actor = (invoice.createdByUserName ?? '').trim();
@@ -301,8 +305,16 @@ extension DbInvoices on DatabaseHelper {
         ? wsRows.first['id'] as int
         : invoice.workShiftId;
 
+    // Per-table sync identity: stable global_id + LWW stamps, assigned at
+    // creation so every invoice is immediately syncable.
+    final nowSyncIso = DateTime.now().toUtc().toIso8601String();
+    final invGlobalId = const Uuid().v4();
+
     final id = await txn.insert('invoices', {
       'tenantId': tenantId,
+      'global_id': invGlobalId,
+      'createdAt': nowSyncIso,
+      'updatedAt': nowSyncIso,
       'customerName': invoice.customerName,
       'date': invoice.date.toIso8601String(),
       'type': invoice.type.index,
@@ -384,6 +396,9 @@ extension DbInvoices on DatabaseHelper {
       final base = item.baseQtyResolved;
       await txn.insert('invoice_items', {
         'invoiceId': id,
+        'global_id': const Uuid().v4(),
+        'createdAt': nowSyncIso,
+        'updatedAt': nowSyncIso,
         'productName': item.productName,
         'quantity': base,
         'price': item.price,
@@ -435,7 +450,9 @@ extension DbInvoices on DatabaseHelper {
             final delta = item.baseQtyResolved;
             final q = delta.round();
             if ((delta - q).abs() > 1e-9) {
-              throw const FormatException('كمية الملابس يجب أن تكون رقماً صحيحاً.');
+              throw const FormatException(
+                'كمية الملابس يجب أن تكون رقماً صحيحاً.',
+              );
             }
             final affected = await txn.rawUpdate(
               'UPDATE product_variants SET quantity = quantity - ? '
@@ -443,7 +460,9 @@ extension DbInvoices on DatabaseHelper {
               [q, pvId, q],
             );
             if (affected < 1 && !allowNeg) {
-              throw const FormatException('لا توجد كمية متوفرة لهذا المقاس/اللون.');
+              throw const FormatException(
+                'لا توجد كمية متوفرة لهذا المقاس/اللون.',
+              );
             }
 
             // Sync mutation for this variant (best-effort).
@@ -640,7 +659,156 @@ extension DbInvoices on DatabaseHelper {
       );
     }
 
+    // Per-table invoice sync (replaces the whole-DB snapshot rides):
+    // enqueue invoice + items mutations in the SAME transaction as the
+    // local insert so a sale is either fully local or fully queued.
+    // Best-effort — a sync failure must never fail the sale itself.
+    try {
+      await _enqueueInvoiceSyncMutations(txn, invoiceId: id);
+    } catch (_) {
+      // Swallowed: sync_queue retries and the next snapshot push backstops.
+    }
+
     return id;
+  }
+
+  /// يجهّز طفرات مزامنة الفاتورة وبنودها في نفس معاملة الإدراج.
+  ///
+  /// تُستخدم أعمدة global_id المستقرة بدل المفاتيح المحلية التزايدية، وتُرسل
+  /// مراجع الأجانب (العميل/المنتج/المتغير/الورديّة) كـ global_ids ليُحلّها
+  /// الجهاز المستقبل محلياً. (يُشترط وجود أعمدة المزامنة — تُؤمَّن عبر
+  /// _ensureInvoiceSyncColumns عند فتح القاعدة.)
+  Future<void> _enqueueInvoiceSyncMutations(
+    Transaction txn, {
+    required int invoiceId,
+  }) async {
+    final nowIso = DateTime.now().toUtc().toIso8601String();
+
+    final invRows = await txn.query(
+      'invoices',
+      where: 'id = ?',
+      whereArgs: [invoiceId],
+      limit: 1,
+    );
+    if (invRows.isEmpty) return;
+    final inv = invRows.first;
+
+    final invGid = (inv['global_id'] ?? '').toString().trim();
+    if (invGid.isEmpty) return; // pre-migration row — snapshot still backstops
+
+    Future<String> gidOf(String table, Object? id) async {
+      final asInt = id is int ? id : int.tryParse('$id');
+      if (asInt == null) return '';
+      final r = await txn.query(
+        table,
+        columns: ['global_id'],
+        where: 'id = ?',
+        whereArgs: [asInt],
+        limit: 1,
+      );
+      if (r.isEmpty) return '';
+      return (r.first['global_id'] ?? '').toString().trim();
+    }
+
+    final customerGid = await gidOf('customers', inv['customerId']);
+    final originalGid = await gidOf('invoices', inv['originalInvoiceId']);
+    final shiftGid = await gidOf('work_shifts', inv['workShiftId']);
+
+    await SyncQueueService.instance.enqueueMutation(
+      txn,
+      entityType: 'invoice',
+      globalId: invGid,
+      operation: 'INSERT',
+      payload: {
+        'id': invGid,
+        'tenantId': (inv['tenantId'] as num?)?.toInt() ?? 1,
+        'customerName': (inv['customerName'] ?? '').toString(),
+        'date': (inv['date'] ?? '').toString(),
+        'type': (inv['type'] as num?)?.toInt() ?? 0,
+        'discount': (inv['discount'] as num?)?.toDouble() ?? 0.0,
+        'discountFils': (inv['discountFils'] as num?)?.toInt() ?? 0,
+        'tax': (inv['tax'] as num?)?.toDouble() ?? 0.0,
+        'taxFils': (inv['taxFils'] as num?)?.toInt() ?? 0,
+        'advancePayment': (inv['advancePayment'] as num?)?.toDouble() ?? 0.0,
+        'advancePaymentFils': (inv['advancePaymentFils'] as num?)?.toInt() ?? 0,
+        'total': (inv['total'] as num?)?.toDouble() ?? 0.0,
+        'totalFils': (inv['totalFils'] as num?)?.toInt() ?? 0,
+        'isReturned': (inv['isReturned'] as num?)?.toInt() ?? 0,
+        'originalInvoiceGlobalId': originalGid,
+        'deliveryAddress': (inv['deliveryAddress'] ?? '').toString(),
+        'createdByUserName': (inv['createdByUserName'] ?? '').toString(),
+        'discountPercent': (inv['discountPercent'] as num?)?.toDouble() ?? 0.0,
+        'workShiftGlobalId': shiftGid,
+        'customerGlobalId': customerGid,
+        'loyaltyDiscount': (inv['loyaltyDiscount'] as num?)?.toDouble() ?? 0.0,
+        'loyaltyDiscountFils':
+            (inv['loyaltyDiscountFils'] as num?)?.toInt() ?? 0,
+        'loyaltyPointsRedeemed':
+            (inv['loyaltyPointsRedeemed'] as num?)?.toInt() ?? 0,
+        'loyaltyPointsEarned':
+            (inv['loyaltyPointsEarned'] as num?)?.toInt() ?? 0,
+        'installmentInterestPct': inv['installmentInterestPct']?.toString(),
+        'installmentPlannedMonths': inv['installmentPlannedMonths']?.toString(),
+        'installmentFinancedAmount': inv['installmentFinancedAmount']
+            ?.toString(),
+        'installmentInterestAmount': inv['installmentInterestAmount']
+            ?.toString(),
+        'installmentTotalWithInterest': inv['installmentTotalWithInterest']
+            ?.toString(),
+        'installmentSuggestedMonthly': inv['installmentSuggestedMonthly']
+            ?.toString(),
+        'createdAt': (inv['createdAt'] ?? inv['date'] ?? nowIso).toString(),
+        'updatedAt': (inv['updatedAt'] ?? inv['date'] ?? nowIso).toString(),
+      },
+    );
+
+    final itemRows = await txn.query(
+      'invoice_items',
+      where: 'invoiceId = ?',
+      whereArgs: [invoiceId],
+    );
+    for (final it in itemRows) {
+      final itGid = (it['global_id'] ?? '').toString().trim();
+      if (itGid.isEmpty) continue;
+      final productGid = await gidOf('products', it['productId']);
+      final variantGid = await gidOf(
+        'product_variants',
+        it['productVariantId'],
+      );
+      await SyncQueueService.instance.enqueueMutation(
+        txn,
+        entityType: 'invoice_item',
+        globalId: itGid,
+        operation: 'INSERT',
+        payload: {
+          'id': itGid,
+          'tenantId':
+              (it['tenantId'] as num?)?.toInt() ??
+              ((inv['tenantId'] as num?)?.toInt() ?? 1),
+          'invoiceGlobalId': invGid,
+          'productName': (it['productName'] ?? '').toString(),
+          'quantity': (it['quantity'] as num?)?.toDouble() ?? 0.0,
+          'price': (it['price'] as num?)?.toDouble() ?? 0.0,
+          'priceFils': (it['priceFils'] as num?)?.toInt() ?? 0,
+          'total': (it['total'] as num?)?.toDouble() ?? 0.0,
+          'totalFils': (it['totalFils'] as num?)?.toInt() ?? 0,
+          'unitCost': (it['unitCost'] as num?)?.toDouble() ?? 0.0,
+          'unitCostFils': (it['unitCostFils'] as num?)?.toInt() ?? 0,
+          'productGlobalId': productGid,
+          'unitVariantId': it['unitVariantId']?.toString(),
+          'unitLabel': (it['unitLabel'] ?? '').toString(),
+          'unitFactor': (it['unitFactor'] as num?)?.toDouble() ?? 1.0,
+          'enteredQty': (it['enteredQty'] as num?)?.toDouble() ?? 0.0,
+          'baseQty': (it['baseQty'] as num?)?.toDouble() ?? 0.0,
+          'productVariantGlobalId': variantGid,
+          'variantColorNameSnapshot': (it['variantColorNameSnapshot'] ?? '')
+              .toString(),
+          'variantSizeSnapshot': (it['variantSizeSnapshot'] ?? '').toString(),
+          'createdAt': (it['createdAt'] ?? inv['date'] ?? nowIso).toString(),
+          'updatedAt': (it['updatedAt'] ?? inv['date'] ?? nowIso).toString(),
+        },
+      );
+    }
   }
 
   Future<int> insertInvoiceWithPolicy(
@@ -669,7 +837,9 @@ extension DbInvoices on DatabaseHelper {
 
     void ensureFinite(String label, double v) {
       if (!isFiniteNum(v)) {
-        throw const FormatException('بيانات الفاتورة غير صالحة (قيمة رقمية غير منتهية).');
+        throw const FormatException(
+          'بيانات الفاتورة غير صالحة (قيمة رقمية غير منتهية).',
+        );
       }
       if (v < -moneyTol) {
         throw FormatException('لا يمكن أن يكون $label أقل من الصفر.');
@@ -714,10 +884,14 @@ extension DbInvoices on DatabaseHelper {
       ensureFinite('سعر البند رقم $lineNo', item.price);
       ensureFinite('إجمالي البند رقم $lineNo', item.total);
       if (!isFiniteNum(enteredQty) || enteredQty <= 0) {
-        throw FormatException('كمية البيع في البند رقم $lineNo يجب أن تكون أكبر من صفر.');
+        throw FormatException(
+          'كمية البيع في البند رقم $lineNo يجب أن تكون أكبر من صفر.',
+        );
       }
       if (!isFiniteNum(baseQty) || baseQty <= 0) {
-        throw FormatException('كمية المخزون الأساسية في البند رقم $lineNo غير صالحة.');
+        throw FormatException(
+          'كمية المخزون الأساسية في البند رقم $lineNo غير صالحة.',
+        );
       }
       if (item.productId != null && item.productId! <= 0) {
         throw FormatException('معرّف المنتج في البند رقم $lineNo غير صالح.');
@@ -744,7 +918,9 @@ extension DbInvoices on DatabaseHelper {
       );
     }
     if (invoice.advancePayment - invoice.total > moneyTol) {
-      throw const FormatException('الدفعة المقدمة لا يمكن أن تتجاوز إجمالي الفاتورة.');
+      throw const FormatException(
+        'الدفعة المقدمة لا يمكن أن تتجاوز إجمالي الفاتورة.',
+      );
     }
   }
 
@@ -818,12 +994,10 @@ extension DbInvoices on DatabaseHelper {
       originalInvoiceId: invoiceMap['originalInvoiceId'] as int?,
       deliveryAddress: invoiceMap['deliveryAddress'] as String?,
       createdByUserName: invoiceMap['createdByUserName'] as String?,
-      discountPercent:
-          (invoiceMap['discountPercent'] as num?)?.toDouble() ?? 0,
+      discountPercent: (invoiceMap['discountPercent'] as num?)?.toDouble() ?? 0,
       workShiftId: invoiceMap['workShiftId'] as int?,
       customerId: invoiceMap['customerId'] as int?,
-      loyaltyDiscount:
-          (invoiceMap['loyaltyDiscount'] as num?)?.toDouble() ?? 0,
+      loyaltyDiscount: (invoiceMap['loyaltyDiscount'] as num?)?.toDouble() ?? 0,
       loyaltyPointsRedeemed:
           (invoiceMap['loyaltyPointsRedeemed'] as num?)?.toInt() ?? 0,
       loyaltyPointsEarned:
@@ -837,11 +1011,9 @@ extension DbInvoices on DatabaseHelper {
       installmentInterestAmount:
           (invoiceMap['installmentInterestAmount'] as num?)?.toDouble() ?? 0,
       installmentTotalWithInterest:
-          (invoiceMap['installmentTotalWithInterest'] as num?)?.toDouble() ??
-          0,
+          (invoiceMap['installmentTotalWithInterest'] as num?)?.toDouble() ?? 0,
       installmentSuggestedMonthly:
-          (invoiceMap['installmentSuggestedMonthly'] as num?)?.toDouble() ??
-          0,
+          (invoiceMap['installmentSuggestedMonthly'] as num?)?.toDouble() ?? 0,
     );
   }
 
