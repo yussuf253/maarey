@@ -27108,6 +27108,12 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'تحويل داخلي'**
   String get invInternalTransfer;
+
+  /// No description provided for @orSeparator.
+  ///
+  /// In ar, this message translates to:
+  /// **'أو'**
+  String get orSeparator;
 }
 
 class _AppLocalizationsDelegate

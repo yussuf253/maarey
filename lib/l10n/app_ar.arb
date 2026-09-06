@@ -4495,5 +4495,6 @@
   "isFromInvoiceDate": "من تاريخ الفاتورة",
   "invDeposit": "إيداع",
   "invWithdrawal": "صرف",
-  "invInternalTransfer": "تحويل داخلي"
+  "invInternalTransfer": "تحويل داخلي",
+  "orSeparator": "أو"
 }

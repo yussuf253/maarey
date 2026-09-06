@@ -4591,5 +4591,6 @@
   "isFromInvoiceDate": "From invoice date",
   "invDeposit": "Deposit",
   "invWithdrawal": "Withdrawal",
-  "invInternalTransfer": "Internal transfer"
+  "invInternalTransfer": "Internal transfer",
+  "orSeparator": "or"
 }

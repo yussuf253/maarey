@@ -4268,5 +4268,6 @@
   "isFromInvoiceDate": "À partir de la date de facture",
   "invDeposit": "Dépôt",
   "invWithdrawal": "Retrait",
-  "invInternalTransfer": "Transfert interne"
+  "invInternalTransfer": "Transfert interne",
+  "orSeparator": "ou"
 }

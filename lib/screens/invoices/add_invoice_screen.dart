@@ -2600,8 +2600,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
             caption: productsCaption,
             trailing: showScan
                 ? Tooltip(
-                    message:
-                  'AppLocalizations.of(context)!.barcodeFieldHint',
+                    message: AppLocalizations.of(context)!.barcodeFieldHint,
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 180),
                       curve: Curves.easeOut,
@@ -2732,8 +2731,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
             context,
             palette,
             title: AppLocalizations.of(context)!.saleSummaryTitle,
-            caption:
-              'AppLocalizations.of(context)!.discountTaxNote',
+            caption: AppLocalizations.of(context)!.discountTaxNote,
           ),
           const SizedBox(height: 6),
           _saleFlowPanel(
@@ -2779,7 +2777,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                  'AppLocalizations.of(context)!.taxHelperHint',
+                    AppLocalizations.of(context)!.taxHelperHint,
                     style: TextStyle(
                       fontSize: 11,
                       height: 1.35,
@@ -2844,18 +2842,18 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                 ),
                 const SizedBox(height: 8),
                 _sumRow(
-              'AppLocalizations.of(context)!.originalAmountLabel',
+                  AppLocalizations.of(context)!.originalAmountLabel,
                   IraqiCurrencyFormat.formatIqd(subtotal),
                 ),
                 if (pos.enableInvoiceDiscount) ...[
                   const SizedBox(height: 6),
                   _sumRow(
-              'AppLocalizations.of(context)!.invoiceDiscountAmountLabel',
+                    AppLocalizations.of(context)!.invoiceDiscountAmountLabel,
                     IraqiCurrencyFormat.formatIqd(discountValue),
                   ),
                   const SizedBox(height: 4),
                   _sumRow(
-              'AppLocalizations.of(context)!.subtotalAfterDiscountLabel',
+                    AppLocalizations.of(context)!.subtotalAfterDiscountLabel,
                     IraqiCurrencyFormat.formatIqd(_subtotalAfterDiscount),
                   ),
                 ],
@@ -2926,7 +2924,9 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       if (salePos.allowCacPay) AppLocalizations.of(context)!.paymentTypeCacPay,
     ];
     final customerCaption =
-        loc.aiSelectPaymentMethod(paymentOptions.join(' أو '));
+        loc.aiSelectPaymentMethod(
+          paymentOptions.join(AppLocalizations.of(context)!.orSeparator),
+        );
     return Padding(
       padding: const EdgeInsets.only(bottom: 4),
       child: Column(
@@ -4119,10 +4119,8 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
 
     if (!(_formKey.currentState?.validate() ?? false)) {
       _showSaleSnackBar(
-        const SnackBar(
-          content: Text(
-          'AppLocalizations.of(context)!.requiredFieldsMessage',
-          ),
+        SnackBar(
+          content: Text(AppLocalizations.of(context)!.requiredFieldsMessage),
           duration: Duration(seconds: 5),
         ),
       );
@@ -4132,10 +4130,8 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
     final posSave = context.read<SalePosSettingsProvider>().data;
     if (!posSave.allowsPayment(type)) {
       _showSaleSnackBar(
-        const SnackBar(
-          content: Text(
-          'AppLocalizations.of(context)!.paymentMethodNotAllowed',
-          ),
+        SnackBar(
+          content: Text(AppLocalizations.of(context)!.paymentMethodNotAllowed),
         ),
       );
       return;
@@ -4146,7 +4142,9 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       _showSaleSnackBar(
         SnackBar(
           content: Text(
-          'AppLocalizations.of(context)!.discountExceedsMaximum(_maxAllowedDiscountPercent.toStringAsFixed(2))',
+            AppLocalizations.of(context)!.discountExceedsMaximum(
+              _maxAllowedDiscountPercent.toStringAsFixed(2),
+            ),
           ),
         ),
       );
@@ -4192,10 +4190,9 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
     if (loyaltyCfg.enabled && rawRedeem > 0 && customerId == null) {
       if (mounted) {
         _showSaleSnackBar(
-          const SnackBar(
-            content: Text(
-          'AppLocalizations.of(context)!.loyaltyRedeemMustSelectCustomer',
-            ),
+          SnackBar(
+            content:
+                Text(AppLocalizations.of(context)!.loyaltyRedeemMustSelectCustomer),
           ),
         );
       }
@@ -4610,10 +4607,8 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       if (openPlanEditor) {
         _showSnackBarViaMessenger(
           messenger,
-          const SnackBar(
-            content: Text(
-          'AppLocalizations.of(context)!.installmentPlanCreated',
-            ),
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.installmentPlanCreated),
           ),
         );
         await _emitFinancedSaleNotif(
@@ -4648,10 +4643,9 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       _resetSaleForNextInvoice();
       _showSnackBarViaMessenger(
         messenger,
-        const SnackBar(
-          content: Text(
-        'AppLocalizations.of(context)!.installmentPlanSavedNoRemaining',
-          ),
+        SnackBar(
+          content:
+              Text(AppLocalizations.of(context)!.installmentPlanSavedNoRemaining),
         ),
       );
       await _emitFinancedSaleNotif(
@@ -4927,9 +4921,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
           context: context,
           builder: (_) => AlertDialog(
             title: Text(AppLocalizations.of(context)!.productNotFoundTitle),
-            content: const Text(
-          'AppLocalizations.of(context)!.barcodeNotFoundAddNew',
-            ),
+            content: Text(AppLocalizations.of(context)!.barcodeNotFoundAddNew),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context, false),
@@ -5497,7 +5489,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                   ],
                 ] else
                   Text(
-              'AppLocalizations.of(context)!.selectColorFirst',
+                    AppLocalizations.of(context)!.selectColorFirst,
                     style: TextStyle(
                       color: cs.onSurfaceVariant,
                       fontWeight: FontWeight.w600,

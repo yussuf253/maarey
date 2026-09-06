@@ -15203,4 +15203,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get invInternalTransfer => 'Internal transfer';
+
+  @override
+  String get orSeparator => 'or';
 }

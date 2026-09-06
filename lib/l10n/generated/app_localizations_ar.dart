@@ -15057,4 +15057,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get invInternalTransfer => 'تحويل داخلي';
+
+  @override
+  String get orSeparator => 'أو';
 }
