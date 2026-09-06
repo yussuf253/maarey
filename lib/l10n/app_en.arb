@@ -1542,6 +1542,8 @@
   "qrBuyerAddressDesc": "When enabled, shows buyer address field in sale and prints QR that opens location on Google Maps",
   "headerLineLabel": "Line above \"Sales Receipt\" title (store name)",
   "footerLineLabel": "Additional footer (phone, terms, thanks)",
+  "autoOpenReceiptTitle": "Auto-open receipt after each sale",
+  "autoOpenReceiptDesc": "Off by default: nothing opens or prints without your action. When on, the sale receipt opens right after payment is completed.",
   "barcodeLabelsSection": "Barcode & Labels Settings",
   "storeDataTitle": "Store Data",
   "storeDataDesc": "From Settings — can later auto-link store name to receipt",

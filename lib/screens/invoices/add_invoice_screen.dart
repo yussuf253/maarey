@@ -4527,8 +4527,14 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
     final productProvForBg = context.read<ProductProvider>();
     final notifProvForBg = context.read<NotificationProvider>();
 
+    /// يُقرأ الآن (قبل إعادة تهيئة السلة) — الإيصال التلقائي معطّل افتراضياً:
+    /// لا يُفتح/يُطبع أيّ إيصال بعد البيع إلا إذا فعّل المستخدم ذلك في إعدادات الطباعة.
+    final autoOpenReceipt =
+        context.read<PrintSettingsProvider>().data.autoOpenReceiptAfterSale;
+
     /// بعد الدفع: إيصال الطباعة فوق شاشة البيع. عند [pushReplacement] لخطة التقسيط يُستخدم جذر التطبيق لأن سياق البيع يُستبدل.
     void scheduleReceiptPrint({bool saleContextDisposedAfter = false}) {
+      if (!autoOpenReceipt) return;
       final inv = forPrint;
       final subtot = receiptSubtotalBefore;
       WidgetsBinding.instance.addPostFrameCallback((_) {

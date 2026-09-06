@@ -223,6 +223,9 @@ class DatabaseHelper {
     await ensureProductColorsAndVariantsSchema(db);
     await _ensureProductVariantsGlobalIds(db);
     await _ensureServicesAndJobTicketsSchema(db);
+    // إعدادات الطباعة — نفس جدول الصف الواحد (id=1)؛ يُصلح القواعد القديمة/المنسوخة
+    // التي أنشئت قبل إدخال الجدول (إصدار السكيما < 19) بدل الفشل بـ «no such table».
+    await _createPrintSettingsTable(db);
   }
 
   Future<void> _ensureServicesAndJobTicketsSchema(Database db) async {

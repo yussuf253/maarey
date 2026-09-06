@@ -17,6 +17,7 @@ import '../models/invoice.dart';
 import '../models/print_settings_data.dart';
 import '../services/database_helper.dart';
 import '../services/print_settings_repository.dart';
+import 'pdf_print_helper.dart';
 import 'theme.dart';
 import 'customer_debt_deep_link.dart';
 import 'invoice_deep_link.dart';
@@ -2184,47 +2185,13 @@ class SaleReceiptPdf {
     BuildContext context,
     FutureOr<Uint8List> Function(PdfPageFormat) buildPdf,
     PdfPageFormat pageFormat,
-  ) async {
-    final scaffoldMsg = ScaffoldMessenger.of(context);
-    try {
-      final bytes = await buildPdf(pageFormat);
-
-      // Try direct printing: enumerate system printers, pick the default
-      // (or first available), then send the PDF straight to it.
-      final printers = await printing.Printing.listPrinters();
-      if (printers.isNotEmpty) {
-        final printer = printers.firstWhere(
-          (p) => p.isDefault,
-          orElse: () => printers.first,
-        );
-        await printing.Printing.directPrintPdf(
-          printer: printer,
-          onLayout: (_) async => bytes,
-          format: pageFormat,
-          name: 'receipt',
-        );
-        return;
-      }
-
-      // No printers found — fall back to the platform print dialog
-      // (Android shows its native print sheet; desktop opens the PDF
-      // in a browser where the user can print from there).
-      await printing.Printing.layoutPdf(
-        onLayout: (_) async => bytes,
-        format: pageFormat,
-        name: 'receipt',
-      );
-    } catch (e) {
-      scaffoldMsg.showSnackBar(
-        SnackBar(
-          content: Text(
-            _l.rpPrintError,
-            style: const TextStyle(fontFamily: 'NotoNaskhArabic'),
-          ),
-          backgroundColor: Colors.redAccent,
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
-    }
+  ) {
+    // عبر المساعد الموحّد: منتقي طابعة قبل الإرسال المباشر + تسجيل الخطأ الحقيقي.
+    return PdfPrintHelper.printPdf(
+      context,
+      buildPdf: buildPdf,
+      pageFormat: pageFormat,
+      docName: 'receipt',
+    );
   }
 }

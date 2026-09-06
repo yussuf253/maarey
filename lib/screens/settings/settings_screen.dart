@@ -1788,14 +1788,16 @@ class _InvoiceSettingsScreenState extends State<_InvoiceSettingsScreen> {
     });
   }
 
-  Future<void> _savePrefs() async {
-    final prov = context.read<PrintSettingsProvider>();
+  /// يعيد true عند نجاح الحفظ — يُستخدم لعرض الخطأ بدل ابتلاعه صامتاً
+  /// (كان الفشل الصامت يجعل المستخدم يظن أن الإعدادات حُفظت وهي لا).
+  Future<bool> _savePrefs() async {
     final p = await SharedPreferences.getInstance();
     await p.setDouble(_kTaxRate, _taxRate);
     await p.setInt(_kStartNum, int.tryParse(_startNum.text) ?? 1);
     await p.setString(_kFooter, _footer.text.trim());
     // تُحفظ مفاتيح الإظهار/الإخفاء ضمن إعدادات الطباعة (نفس مصدر الإيصال).
     try {
+      final prov = context.read<PrintSettingsProvider>();
       final ps = await PrintSettingsRepository.instance.load();
       await prov.save(
         ps.copyWith(
@@ -1805,7 +1807,19 @@ class _InvoiceSettingsScreenState extends State<_InvoiceSettingsScreen> {
           invoiceShowFooterExtra: _showFooter,
         ),
       );
-    } catch (_) {}
+      return true;
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('تعذر حفظ إعدادات الفواتير: $e'),
+            backgroundColor: Colors.redAccent,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      }
+      return false;
+    }
   }
 
   @override
@@ -1822,8 +1836,9 @@ class _InvoiceSettingsScreenState extends State<_InvoiceSettingsScreen> {
           actions: [
             TextButton(
               onPressed: () async {
-                await _savePrefs();
-                if (mounted) {
+                final ok = await _savePrefs();
+                if (!mounted) return;
+                if (ok) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('تم حفظ إعدادات الفواتير'),

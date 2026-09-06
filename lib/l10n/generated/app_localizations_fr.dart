@@ -5324,6 +5324,14 @@ class AppLocalizationsFr extends AppLocalizations {
       'Pied de page supplémentaire (téléphone, conditions, remerciements)';
 
   @override
+  String get autoOpenReceiptTitle =>
+      'Ouvrir automatiquement le reçu après chaque vente';
+
+  @override
+  String get autoOpenReceiptDesc =>
+      'Désactivé par défaut : rien ne s\'ouvre ou ne s\'imprime sans votre action. Une fois activé, le reçu de vente s\'ouvre juste après le paiement.';
+
+  @override
   String get barcodeLabelsSection => 'Paramètres code-barres & étiquettes';
 
   @override

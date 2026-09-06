@@ -9356,6 +9356,18 @@ abstract class AppLocalizations {
   /// **'تذييل إضافي (هاتف، شروط، شكر)'**
   String get footerLineLabel;
 
+  /// No description provided for @autoOpenReceiptTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح الإيصال تلقائياً بعد كل عملية بيع'**
+  String get autoOpenReceiptTitle;
+
+  /// No description provided for @autoOpenReceiptDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'معطّل افتراضياً: لا يُفتح أو يُطبع أي إيصال دون تجاوزك. عند تفعيله يُفتح إيصال البيع مباشرة بعد إتمام الدفع.'**
+  String get autoOpenReceiptDesc;
+
   /// No description provided for @barcodeLabelsSection.
   ///
   /// In ar, this message translates to:

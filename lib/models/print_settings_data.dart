@@ -29,6 +29,7 @@ class PrintSettingsData {
     this.invoiceShowDiscount = true,
     this.invoiceShowStoreLogo = true,
     this.invoiceShowFooterExtra = true,
+    this.autoOpenReceiptAfterSale = false,
   });
 
   factory PrintSettingsData.defaults() => const PrintSettingsData(
@@ -65,6 +66,10 @@ class PrintSettingsData {
   /// إظهار نص التذييل الإضافي أسفل الإيصال (إعدادات الفواتير).
   final bool invoiceShowFooterExtra;
 
+  /// فتح إيصال البيع تلقائياً بعد إتمام كل عملية بيع.
+  /// معطّل افتراضياً — لا تُفتح/تُطبع أيّ ورقة دون علم المستخدم.
+  final bool autoOpenReceiptAfterSale;
+
   /// تنسيق صفحة PDF للمعاينة والطباعة.
   PdfPageFormat get pdfPageFormat {
     const mm = 72.0 / 25.4;
@@ -91,6 +96,7 @@ class PrintSettingsData {
         'invoiceShowDiscount': invoiceShowDiscount,
         'invoiceShowStoreLogo': invoiceShowStoreLogo,
         'invoiceShowFooterExtra': invoiceShowFooterExtra,
+        'autoOpenReceiptAfterSale': autoOpenReceiptAfterSale,
       };
 
   factory PrintSettingsData.fromJson(Map<String, dynamic> m) {
@@ -116,6 +122,8 @@ class PrintSettingsData {
       invoiceShowDiscount: m['invoiceShowDiscount'] as bool? ?? true,
       invoiceShowStoreLogo: m['invoiceShowStoreLogo'] as bool? ?? true,
       invoiceShowFooterExtra: m['invoiceShowFooterExtra'] as bool? ?? true,
+      autoOpenReceiptAfterSale:
+          m['autoOpenReceiptAfterSale'] as bool? ?? false,
     );
   }
 
@@ -144,6 +152,7 @@ class PrintSettingsData {
     bool? invoiceShowDiscount,
     bool? invoiceShowStoreLogo,
     bool? invoiceShowFooterExtra,
+    bool? autoOpenReceiptAfterSale,
   }) {
     return PrintSettingsData(
       paperFormat: paperFormat ?? this.paperFormat,
@@ -158,6 +167,8 @@ class PrintSettingsData {
       invoiceShowStoreLogo: invoiceShowStoreLogo ?? this.invoiceShowStoreLogo,
       invoiceShowFooterExtra:
           invoiceShowFooterExtra ?? this.invoiceShowFooterExtra,
+      autoOpenReceiptAfterSale:
+          autoOpenReceiptAfterSale ?? this.autoOpenReceiptAfterSale,
     );
   }
 }

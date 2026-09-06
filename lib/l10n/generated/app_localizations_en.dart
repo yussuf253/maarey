@@ -5258,6 +5258,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get footerLineLabel => 'Additional footer (phone, terms, thanks)';
 
   @override
+  String get autoOpenReceiptTitle => 'Auto-open receipt after each sale';
+
+  @override
+  String get autoOpenReceiptDesc =>
+      'Off by default: nothing opens or prints without your action. When on, the sale receipt opens right after payment is completed.';
+
+  @override
   String get barcodeLabelsSection => 'Barcode & Labels Settings';
 
   @override

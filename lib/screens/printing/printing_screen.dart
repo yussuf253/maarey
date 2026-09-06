@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../models/invoice.dart';
 import '../../models/print_settings_data.dart';
 import '../../providers/print_settings_provider.dart';
+import '../../services/print_settings_repository.dart';
 import '../../theme/design_tokens.dart';
 import '../../utils/sale_receipt_pdf.dart';
 import '../inventory/barcode_settings_screen.dart';
@@ -23,6 +24,7 @@ class _PrintingScreenState extends State<PrintingScreen> {
   late bool _showBarcode;
   late bool _showQr;
   late bool _showBuyerAddressQr;
+  late bool _autoOpenReceipt;
   late TextEditingController _storeTitleCtrl;
   late TextEditingController _footerCtrl;
   bool _dirty = false;
@@ -35,6 +37,7 @@ class _PrintingScreenState extends State<PrintingScreen> {
     _showBarcode = p.receiptShowBarcode;
     _showQr = p.receiptShowQr;
     _showBuyerAddressQr = p.receiptShowBuyerAddressQr;
+    _autoOpenReceipt = p.autoOpenReceiptAfterSale;
     _storeTitleCtrl = TextEditingController(text: p.storeTitleLine);
     _footerCtrl = TextEditingController(text: p.footerExtra);
   }
@@ -46,21 +49,31 @@ class _PrintingScreenState extends State<PrintingScreen> {
     super.dispose();
   }
 
-  PrintSettingsData _collect() {
-    return PrintSettingsData(
+  PrintSettingsData _collect(PrintSettingsData base) {
+    // دمج فوق الإعدادات المحفوظة الحالية — لا نُصفّر المفاتيح التي لا تديرها
+    // هذه الشاشة (مثل مفاتيح إعدادات الفواتير invoiceShow*).
+    return base.copyWith(
       paperFormat: _paper,
       receiptShowBarcode: _showBarcode,
       receiptShowQr: _showQr,
       receiptShowBuyerAddressQr: _showBuyerAddressQr,
       storeTitleLine: _storeTitleCtrl.text.trim(),
       footerExtra: _footerCtrl.text.trim(),
+      autoOpenReceiptAfterSale: _autoOpenReceipt,
     );
   }
 
   Future<void> _save() async {
     final nav = ScaffoldMessenger.of(context);
     try {
-      await context.read<PrintSettingsProvider>().save(_collect());
+      final prov = context.read<PrintSettingsProvider>();
+      // الأساس = آخر قيم محفوظة على القاعدة (وليس النموذج المحلي) حتى لا تُفقد
+      // المفاتيح التي تديرها شاشات أخرى (إعدادات الفواتير).
+      PrintSettingsData base = prov.data;
+      try {
+        base = await PrintSettingsRepository.instance.load();
+      } catch (_) {}
+      await prov.save(_collect(base));
       if (!mounted) return;
       setState(() => _dirty = false);
       nav.showSnackBar(
@@ -77,7 +90,7 @@ class _PrintingScreenState extends State<PrintingScreen> {
   }
 
   Future<void> _previewSample() async {
-    final settings = _collect();
+    final settings = _collect(context.read<PrintSettingsProvider>().data);
     final sample = Invoice(
       customerName: AppLocalizations.of(context)!.testCustomerName,
       date: DateTime.now(),
@@ -262,6 +275,22 @@ class _PrintingScreenState extends State<PrintingScreen> {
                             alignLabelWithHint: true,
                             border: const OutlineInputBorder(borderRadius: AppShape.none),
                           ),
+                        ),
+                        const Divider(height: 24),
+                        SwitchListTile(
+                          contentPadding: EdgeInsets.zero,
+                          title: Text(AppLocalizations.of(context)!.autoOpenReceiptTitle),
+                          subtitle: Text(
+                            AppLocalizations.of(context)!.autoOpenReceiptDesc,
+                            style: const TextStyle(fontSize: 12),
+                          ),
+                          value: _autoOpenReceipt,
+                          activeThumbColor: cs.primary,
+                          onChanged: (v) =>
+                              setState(() {
+                                _autoOpenReceipt = v;
+                                _dirty = true;
+                              }),
                         ),
                       ],
                     ),

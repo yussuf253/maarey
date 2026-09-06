@@ -5201,6 +5201,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get footerLineLabel => 'تذييل إضافي (هاتف، شروط، شكر)';
 
   @override
+  String get autoOpenReceiptTitle => 'فتح الإيصال تلقائياً بعد كل عملية بيع';
+
+  @override
+  String get autoOpenReceiptDesc =>
+      'معطّل افتراضياً: لا يُفتح أو يُطبع أي إيصال دون تجاوزك. عند تفعيله يُفتح إيصال البيع مباشرة بعد إتمام الدفع.';
+
+  @override
   String get barcodeLabelsSection => 'إعدادات الباركود والملصقات';
 
   @override

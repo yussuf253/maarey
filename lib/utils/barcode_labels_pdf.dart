@@ -8,6 +8,8 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart' as printing;
 
+import 'pdf_print_helper.dart';
+
 class BarcodeLabelProduct {
   const BarcodeLabelProduct({
     required this.id,
@@ -238,46 +240,14 @@ class BarcodeLabelsPdf {
     BuildContext context,
     FutureOr<Uint8List> Function(PdfPageFormat) buildPdf,
     PdfPageFormat pageFormat,
-  ) async {
-    final scaffoldMsg = ScaffoldMessenger.of(context);
-    try {
-      final bytes = await buildPdf(pageFormat);
-
-      // Try direct printing: enumerate system printers, pick the default
-      // (or first available), then send the PDF straight to it.
-      final printers = await printing.Printing.listPrinters();
-      if (printers.isNotEmpty) {
-        final printer = printers.firstWhere(
-          (p) => p.isDefault,
-          orElse: () => printers.first,
-        );
-        await printing.Printing.directPrintPdf(
-          printer: printer,
-          onLayout: (_) async => bytes,
-          format: pageFormat,
-          name: 'barcode-labels',
-        );
-        return;
-      }
-
-      // No printers found — fall back to the platform print dialog.
-      await printing.Printing.layoutPdf(
-        onLayout: (_) async => bytes,
-        format: pageFormat,
-        name: 'barcode-labels',
-      );
-    } catch (e) {
-      scaffoldMsg.showSnackBar(
-        SnackBar(
-          content: Text(
-            'Printing failed. Please check printer settings.',
-            style: const TextStyle(fontFamily: 'NotoNaskhArabic'),
-          ),
-          backgroundColor: Colors.redAccent,
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
-    }
+  ) {
+    // عبر المساعد الموحّد: منتقي طابعة قبل الإرسال المباشر + تسجيل الخطأ الحقيقي.
+    return PdfPrintHelper.printPdf(
+      context,
+      buildPdf: buildPdf,
+      pageFormat: pageFormat,
+      docName: 'barcode-labels',
+    );
   }
 }
 

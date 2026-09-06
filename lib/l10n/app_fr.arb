@@ -1483,6 +1483,8 @@
   "qrBuyerAddressDesc": "Quand activé, affiche le champ adresse acheteur et imprime un QR qui ouvre la position sur Google Maps",
   "headerLineLabel": "Ligne au-dessus du titre \"Reçu de vente\" (nom du magasin)",
   "footerLineLabel": "Pied de page supplémentaire (téléphone, conditions, remerciements)",
+  "autoOpenReceiptTitle": "Ouvrir automatiquement le reçu après chaque vente",
+  "autoOpenReceiptDesc": "Désactivé par défaut : rien ne s'ouvre ou ne s'imprime sans votre action. Une fois activé, le reçu de vente s'ouvre juste après le paiement.",
   "barcodeLabelsSection": "Paramètres code-barres & étiquettes",
   "storeDataTitle": "Données du magasin",
   "storeDataDesc": "Depuis les paramètres — peut être lié automatiquement au reçu",
