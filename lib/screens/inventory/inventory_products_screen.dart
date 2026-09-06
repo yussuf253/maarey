@@ -120,6 +120,16 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
     }
   }
 
+  /// مفاتيح فرز مستقرة عن اللغة — القوائم المنسدلة تستخدم النصوص المترجمة
+  /// كقيم، لذا نحوّلها هنا قبل إرسالها للمزوّد/المستودع.
+  String get _sortKey => switch (_sortBy) {
+    _ when _sortBy == loc.ipResultsName || _sortBy.isEmpty => 'name',
+    _ when _sortBy == loc.ipResultsPrice => 'price',
+    _ when _sortBy == loc.ipResultsQty => 'qty',
+    _ when _sortBy == loc.ipResultsAddedDate => 'added',
+    _ => _sortBy,
+  };
+
   void _pushFiltersToProvider() {
     if (!mounted) return;
     final prov = context.read<InventoryProductsProvider>();
@@ -130,10 +140,14 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
         keyword: _keyword.text,
         barcode: _barcode.text,
         productCode: _prodCode.text,
-        categoryName: _category,
-        brandName: _brand,
+        // القوائم تستخدم النص المترجم («كل التصنيفات»/"All categories") كقيمة،
+        // وكان يُرسل حرفياً إلى SQL فيصبح شرطاً اسمه «All categories» لا يطابق
+        // شيئاً ← القائمة تفرغ بعد أي بحث ولا تعود إلا بإعادة تشغيل التطبيق.
+        // نحوّل خيار «الكل» إلى نص فارغ = بلا تصفية.
+        categoryName: _category == loc.ipAllCategories ? '' : _category,
+        brandName: _brand == loc.ipAllBrands ? '' : _brand,
         status: _status,
-        sortBy: _sortBy,
+        sortBy: _sortKey,
         sortAscending: _sortAscending,
         priceMinIqd: _advanced ? pMin : null,
         priceMaxIqd: _advanced ? pMax : null,

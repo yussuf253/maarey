@@ -29,14 +29,14 @@ class InventoryProductsProvider extends ChangeNotifier {
   /// a newer refresh was started while the previous one was still in flight.
   int _refreshVersion = 0;
 
-  // Filters
+  // Filters — التصنيف/الماركة فارغ = بلا تصفية (قيمة «الكل» لا تُخزَّن أصلاً).
   String _keyword = '';
   String _barcode = '';
   String _productCode = '';
-  String _categoryName = 'جميع التصنيفات';
-  String _brandName = 'جميع الماركات';
+  String _categoryName = '';
+  String _brandName = '';
   String _status = 'all';
-  String _sortBy = 'الاسم';
+  String _sortBy = 'name';
   bool _sortAscending = true;
   int? _priceMinIqd;
   int? _priceMaxIqd;
@@ -59,6 +59,30 @@ class InventoryProductsProvider extends ChangeNotifier {
   /// إجمالي المنتجات النشطة للمؤسسة (لمقارنة «من أصل X»).
   int get catalogTotal => _catalogTotal;
 
+  /// تطبيع قيمة التصنيف/الماركة: فارغ أو خيار «الكل» (بأي لغة) = بلا تصفية.
+  static String _normalizeAll(String v) {
+    final s = v.trim();
+    if (s.isEmpty) return '';
+    const allSentinels = <String>{
+      'جميع التصنيفات',
+      'جميع الماركات',
+      'All categories',
+      'All brands',
+      'Toutes les catégories',
+      'Toutes les marques',
+    };
+    return allSentinels.contains(s) ? '' : s;
+  }
+
+  /// تطبيع مفتاح الفرز: يقبل المفاتيح المستقرة والنصوص العربية القديمة.
+  static String _normalizeSort(String v) => switch (v.trim()) {
+    '' || 'الاسم' || 'name' => 'name',
+    'السعر' || 'price' => 'price',
+    'الكمية' || 'qty' => 'qty',
+    'تاريخ الإضافة' || 'added' => 'added',
+    _ => 'name',
+  };
+
   Future<void> setFilters({
     required String keyword,
     required String barcode,
@@ -74,15 +98,17 @@ class InventoryProductsProvider extends ChangeNotifier {
     final kw = keyword.trim();
     final bc = barcode.trim();
     final pc = productCode.trim();
-    final cn = categoryName.trim();
-    final bn = brandName.trim();
+    final cn = _normalizeAll(categoryName);
+    final bn = _normalizeAll(brandName);
+    final st = status.trim().isEmpty ? 'all' : status.trim();
+    final sb = _normalizeSort(sortBy);
     final changed = kw != _keyword ||
         bc != _barcode ||
         pc != _productCode ||
         cn != _categoryName ||
         bn != _brandName ||
-        status != _status ||
-        sortBy != _sortBy ||
+        st != _status ||
+        sb != _sortBy ||
         sortAscending != _sortAscending ||
         priceMinIqd != _priceMinIqd ||
         priceMaxIqd != _priceMaxIqd;
@@ -91,10 +117,10 @@ class InventoryProductsProvider extends ChangeNotifier {
     _keyword = kw;
     _barcode = bc;
     _productCode = pc;
-    _categoryName = cn.isEmpty ? 'جميع التصنيفات' : cn;
-    _brandName = bn.isEmpty ? 'جميع الماركات' : bn;
-    _status = status;
-    _sortBy = sortBy;
+    _categoryName = cn;
+    _brandName = bn;
+    _status = st;
+    _sortBy = sb;
     _sortAscending = sortAscending;
     _priceMinIqd = priceMinIqd;
     _priceMaxIqd = priceMaxIqd;

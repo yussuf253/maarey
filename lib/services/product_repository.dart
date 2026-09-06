@@ -751,10 +751,12 @@ class ProductRepository {
     }
 
     final asc = sortAscending ? 'ASC' : 'DESC';
+    // مفاتيح فرز مستقرة عن اللغة (name/price/qty/added) مع قبول النصوص العربية
+    // القديمة خلفاً للتوافق.
     final orderBy = switch (sortByArabic) {
-      'السعر' => 'p.sellPrice $asc, p.id DESC',
-      'الكمية' => '$effQtyExpr $asc, p.id DESC',
-      'تاريخ الإضافة' => 'p.createdAt $asc, p.id DESC',
+      'السعر' || 'price' => 'p.sellPrice $asc, p.id DESC',
+      'الكمية' || 'qty' => '$effQtyExpr $asc, p.id DESC',
+      'تاريخ الإضافة' || 'added' => 'p.createdAt $asc, p.id DESC',
       _ => 'p.name COLLATE NOCASE $asc, p.id DESC',
     };
 
