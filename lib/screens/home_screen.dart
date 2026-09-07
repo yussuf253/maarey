@@ -16,6 +16,7 @@ import '../services/license/restricted_mode_policy.dart';
 import '../providers/notification_provider.dart';
 import '../providers/shift_provider.dart';
 import '../providers/product_provider.dart';
+import '../providers/inventory_products_provider.dart';
 import '../providers/theme_provider.dart';
 import '../providers/sale_draft_provider.dart';
 import '../providers/parked_sales_provider.dart';
@@ -823,6 +824,11 @@ class _HomeScreenState extends State<HomeScreen>
       if (!mounted) return;
       try {
         await context.read<ProductProvider>().loadProducts(seedIfEmpty: false);
+      } catch (_) {}
+      // شاشة المخزون تستعلم من قاعدة البيانات مباشرة — يجب تحديث مزودها بعد
+      // استيراد لقطة جديدة حتى تظهر المنتجات المستوردة دون إعادة تشغيل.
+      try {
+        await context.read<InventoryProductsProvider>().refresh();
       } catch (_) {}
       try {
         await context.read<PrintSettingsProvider>().load();

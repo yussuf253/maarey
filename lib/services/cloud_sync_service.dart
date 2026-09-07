@@ -1814,7 +1814,18 @@ class CloudSyncService {
       final prevImported = prefs.getString(importedKey) ?? '';
       // لا تعيد تنزيل/استيراد نفس النسخة مرة أخرى (إلا عند الطلب اليدوي).
       if (prevImported == remoteUpdatedAtMeta) {
-        return _PullOutcome.allowPush;
+        // استثناء: إذا كانت القاعدة المحلية بلا بيانات فعلية (جهاز جديد،
+        // انهيار، أو استبدال payload اللقطة يدوياً على السحابة دون تغيير
+        // updated_at) — يجب إعادة الاستيراد ولو كانت النسخة نفسها، وإلا
+        // يبقى الجهاز فارغاً مع بيانات سليمة على السحابة.
+        try {
+          final db = await _dbHelper.database;
+          if (!await _localDbHasNoSyncData(db)) {
+            return _PullOutcome.allowPush;
+          }
+        } catch (_) {
+          return _PullOutcome.allowPush;
+        }
       }
     }
 
