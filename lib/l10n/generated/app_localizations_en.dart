@@ -1234,6 +1234,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deletedSnackbar => 'Deleted';
 
   @override
+  String get deleteInvoiceTitle => 'Delete invoice?';
+
+  @override
+  String deleteInvoiceBody(Object invoiceNo) {
+    return 'Invoice #$invoiceNo will be hidden from the list and reports and its stock quantities restored. Its record stays kept for audit.';
+  }
+
+  @override
+  String get invoiceDeleteFailed =>
+      'Could not delete the invoice, please try again.';
+
+  @override
   String get parkedSalesScreenTitle => 'Parked sales';
 
   @override

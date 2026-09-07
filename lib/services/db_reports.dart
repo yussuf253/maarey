@@ -32,6 +32,7 @@ extension DbReports on DatabaseHelper {
         ) AS v
       FROM invoices
       WHERE IFNULL(isReturned, 0) = 0
+        AND deleted_at IS NULL
         AND datetime(date) >= datetime(?)
         AND datetime(date) <= datetime(?)
       GROUP BY substr(date, 1, 10)
@@ -126,6 +127,7 @@ extension DbReports on DatabaseHelper {
       SELECT COUNT(*) AS c
       FROM invoices
       WHERE IFNULL(isReturned, 0) = 0
+        AND deleted_at IS NULL
         AND type IN (0, 1, 2, 3)
         AND workShiftId = ?
       ''',
@@ -142,6 +144,7 @@ extension DbReports on DatabaseHelper {
         ) AS s
         FROM invoices
         WHERE IFNULL(isReturned, 0) = 0
+          AND deleted_at IS NULL
           AND type IN (0, 1, 2, 3)
           AND workShiftId = ?
         ''',
@@ -184,6 +187,7 @@ extension DbReports on DatabaseHelper {
         '''
       SELECT id, customerName, total, type, date, isReturned, createdByUserName
       FROM invoices
+      WHERE deleted_at IS NULL
       ORDER BY datetime(date) DESC
       LIMIT ?
       ''',

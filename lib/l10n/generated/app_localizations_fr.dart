@@ -1248,6 +1248,18 @@ class AppLocalizationsFr extends AppLocalizations {
   String get deletedSnackbar => 'Supprimé';
 
   @override
+  String get deleteInvoiceTitle => 'Supprimer la facture ?';
+
+  @override
+  String deleteInvoiceBody(Object invoiceNo) {
+    return 'La facture #$invoiceNo sera masquée de la liste et des rapports et ses quantités seront restaurées en stock. Son enregistrement reste conservé pour audit.';
+  }
+
+  @override
+  String get invoiceDeleteFailed =>
+      'Impossible de supprimer la facture, veuillez réessayer.';
+
+  @override
   String get parkedSalesScreenTitle => 'Ventes en attente';
 
   @override

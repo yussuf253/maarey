@@ -220,6 +220,7 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
         FROM invoice_items ii
         INNER JOIN invoices inv ON inv.id = ii.invoiceId
         WHERE inv.originalInvoiceId = ? AND inv.isReturned = 1
+          AND inv.deleted_at IS NULL
         ''',
         [inv.id],
       );
@@ -473,6 +474,7 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
       FROM invoice_items ii
       INNER JOIN invoices inv ON inv.id = ii.invoiceId
       WHERE inv.originalInvoiceId = ? AND inv.isReturned = 1
+        AND inv.deleted_at IS NULL
       ''',
       [originalId],
     );

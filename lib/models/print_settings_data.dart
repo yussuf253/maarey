@@ -29,7 +29,7 @@ class PrintSettingsData {
     this.invoiceShowDiscount = true,
     this.invoiceShowStoreLogo = true,
     this.invoiceShowFooterExtra = true,
-    this.autoOpenReceiptAfterSale = false,
+    this.autoOpenReceiptAfterSale = true,
   });
 
   factory PrintSettingsData.defaults() => const PrintSettingsData(
@@ -67,7 +67,7 @@ class PrintSettingsData {
   final bool invoiceShowFooterExtra;
 
   /// فتح إيصال البيع تلقائياً بعد إتمام كل عملية بيع.
-  /// معطّل افتراضياً — لا تُفتح/تُطبع أيّ ورقة دون علم المستخدم.
+  /// مُفعّل افتراضياً — يمكن للمستخدم تعطيله من إعدادات الطباعة.
   final bool autoOpenReceiptAfterSale;
 
   /// تنسيق صفحة PDF للمعاينة والطباعة.
@@ -123,7 +123,7 @@ class PrintSettingsData {
       invoiceShowStoreLogo: m['invoiceShowStoreLogo'] as bool? ?? true,
       invoiceShowFooterExtra: m['invoiceShowFooterExtra'] as bool? ?? true,
       autoOpenReceiptAfterSale:
-          m['autoOpenReceiptAfterSale'] as bool? ?? false,
+          m['autoOpenReceiptAfterSale'] as bool? ?? true,
     );
   }
 

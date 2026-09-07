@@ -217,6 +217,7 @@ extension DbCustomers on DatabaseHelper {
              ) AS tot
       FROM invoices inv
       WHERE IFNULL(inv.isReturned, 0) = 0
+        AND inv.deleted_at IS NULL
         AND inv.customerId IN ($placeholders)
         AND inv.type IN ($typeList)
       GROUP BY inv.customerId
@@ -320,6 +321,7 @@ LEFT JOIN (
          ) AS purchaseTotal
   FROM invoices inv
   WHERE IFNULL(inv.isReturned, 0) = 0
+    AND inv.deleted_at IS NULL
     AND inv.customerId IS NOT NULL
     AND inv.type IN ($typeList)
   GROUP BY inv.customerId

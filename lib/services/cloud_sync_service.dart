@@ -1458,6 +1458,74 @@ class CloudSyncService {
     }
   }
 
+  /// ختم حذف منطقي على فاتورة محلية داخل معاملة مزامنة — يُستخدم عندما يصل
+  /// tombstone من جهاز آخر (صف بعيد بـ deleted_at غير null).
+  ///
+  /// نفس منطق `deleteInvoice` في db_invoices: ختم الفاتورة وبنودها، إرجاع
+  /// المخزون (بيع فعلي غير مرتجع)، وحذف قيود الصندوق المرتبطة — دون حذف فعلي.
+  Future<void> _softDeleteInvoiceInTxn(
+    Transaction txn, {
+    required int invoiceId,
+  }) async {
+    try {
+      final nowIso = DateTime.now().toUtc().toIso8601String();
+      final rows = await txn.query(
+        'invoices',
+        where: 'id = ? AND deleted_at IS NULL',
+        whereArgs: [invoiceId],
+        limit: 1,
+      );
+      if (rows.isEmpty) return;
+      final inv = rows.first;
+      final isReturned = (inv['isReturned'] as num?)?.toInt() == 1;
+      final typeIdx = (inv['type'] as num?)?.toInt() ?? 0;
+      final serviceReceipt =
+          typeIdx == 4 || typeIdx == 5 || typeIdx == 6; // تحصيل دين/قسط/دفع مورد
+
+      await txn.update(
+        'invoices',
+        {'deleted_at': nowIso, 'updatedAt': nowIso},
+        where: 'id = ? AND deleted_at IS NULL',
+        whereArgs: [invoiceId],
+      );
+      await txn.update(
+        'invoice_items',
+        {'deleted_at': nowIso, 'updatedAt': nowIso},
+        where: 'invoiceId = ? AND deleted_at IS NULL',
+        whereArgs: [invoiceId],
+      );
+
+      if (!isReturned && !serviceReceipt) {
+        final items = await txn.query(
+          'invoice_items',
+          where: 'invoiceId = ? AND deleted_at IS NULL',
+          whereArgs: [invoiceId],
+        );
+        for (final it in items) {
+          final pid = (it['productId'] as num?)?.toInt();
+          if (pid == null) continue;
+          final baseQty = (it['baseQty'] as num?)?.toDouble() ??
+              (it['quantity'] as num?)?.toDouble() ??
+              0.0;
+          if (baseQty <= 0) continue;
+          await txn.rawUpdate(
+            'UPDATE products SET qty = qty + ? WHERE id = ?',
+            [baseQty, pid],
+          );
+        }
+      }
+
+      await txn.update(
+        'cash_ledger',
+        {'deleted_at': nowIso, 'updatedAt': nowIso},
+        where: 'invoiceId = ? AND deleted_at IS NULL',
+        whereArgs: [invoiceId],
+      );
+    } catch (e) {
+      AppLogger.warn('CloudSync', '_softDeleteInvoiceInTxn failed: $e');
+    }
+  }
+
   /// إعادة توطين بنود الفواتير اليتيمة: بند وصل قبل فاتورته يحمل
   /// invoiceGlobalId لكن invoiceId = NULL. عند وصول الفاتورة لاحقاً،
   /// يُربط البند تلقائياً بـ id المحلي.
@@ -2886,6 +2954,11 @@ class CloudSyncService {
 
   /// دمج صف فاتورة بعيد: توطين FKs عبر global_id (العميل، الأصل، الورديّة)
   /// ثم دمج LWW عبر [softDeleteInvoices] للمرتجعات الناعمة.
+  ///
+  /// الحذف المنطقي: صف بعيد يحمل `deleted_at` غير null يُدمج محلياً كـ
+  /// tombstone (ختم `deleted_at` المحلي + حذف بنود الفاتورة وإرجاع المخزون
+  /// وحذف قيود الصندوق المرتبطة) بدل حذف الصف فعلياً — حتى يبقى للتدقيق
+  /// ويتوقف ظهوره في القوائم والتقارير.
   Future<bool> _mergeInvoicesByGlobalId({
     required Transaction txn,
     required Map<String, dynamic> incomingRaw,
@@ -2900,6 +2973,26 @@ class CloudSyncService {
 
     // صفوف Supabase snake_case → أعمدة محلية camelCase.
     final row = _mapRemoteRowToLocal(incomingRaw, localCols);
+
+    // الحذف المنطقي عن بُعد: ختم المحلي بـ deleted_at + تنظيف آثار الفاتورة
+    // (بنود، مخزون، قيود صندوق) بدل الحذف الفعلي في _doMergeWithGlobalId.
+    if (deletedAt != null) {
+      final local = await txn.query(
+        'invoices',
+        columns: ['id', 'deleted_at'],
+        where: 'global_id = ?',
+        whereArgs: [gid],
+        limit: 1,
+      );
+      if (local.isNotEmpty &&
+          (local.first['deleted_at'] ?? '').toString().trim().isEmpty) {
+        final localId = (local.first['id'] as num?)?.toInt();
+        if (localId != null) {
+          await _softDeleteInvoiceInTxn(txn, invoiceId: localId);
+        }
+      }
+      return true;
+    }
 
     if (localCols.contains('customerId')) {
       final cg =

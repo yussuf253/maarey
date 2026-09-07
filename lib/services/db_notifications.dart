@@ -164,6 +164,7 @@ extension DbNotifications on DatabaseHelper {
       WHERE i.tenantId = ?
         AND i.type = ?
         AND IFNULL(i.isReturned, 0) = 0
+        AND i.deleted_at IS NULL
         AND (i.total - IFNULL(i.advancePayment, 0)) > 0.009
         AND CAST(
           (julianday(date('now', 'localtime')) - julianday(date(trim(i.date))))
@@ -194,6 +195,7 @@ extension DbNotifications on DatabaseHelper {
       WHERE i.tenantId = ?
         AND i.type = ?
         AND IFNULL(i.isReturned, 0) = 0
+        AND i.deleted_at IS NULL
         AND i.customerId IS NOT NULL
         AND (i.total - IFNULL(i.advancePayment, 0)) > 0.009
       GROUP BY i.customerId
@@ -223,6 +225,7 @@ extension DbNotifications on DatabaseHelper {
       WHERE i.tenantId = ?
         AND i.type = ?
         AND IFNULL(i.isReturned, 0) = 0
+        AND i.deleted_at IS NULL
         AND i.customerId IS NULL
         AND LENGTH(TRIM(IFNULL(i.customerName, ''))) > 0
         AND (i.total - IFNULL(i.advancePayment, 0)) > 0.009
@@ -254,6 +257,7 @@ extension DbNotifications on DatabaseHelper {
       WHERE i.tenantId = ?
         AND i.type = ?
         AND IFNULL(i.isReturned, 0) = 0
+        AND i.deleted_at IS NULL
         AND (i.total - IFNULL(i.advancePayment, 0)) > 0.009
         AND (i.total - IFNULL(i.advancePayment, 0)) >= ?
       ORDER BY remaining DESC, i.date ASC

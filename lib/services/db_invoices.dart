@@ -79,6 +79,9 @@ extension DbInvoices on DatabaseHelper {
     final where = <String>[];
     final args = <Object?>[];
 
+    // الحذف المنطقي — الفواتير المحذوفة لا تظهر في القائمة.
+    where.add('i.deleted_at IS NULL');
+
     // تبويب
     switch (tabIndex) {
       case 1:
@@ -218,6 +221,9 @@ extension DbInvoices on DatabaseHelper {
 
     final where = <String>[];
     final args = <Object?>[];
+
+    // الحذف المنطقي — الفواتير المحذوفة لا تُحتسب في الإجماليات.
+    where.add('i.deleted_at IS NULL');
 
     switch (tabIndex) {
       case 1:
@@ -681,6 +687,7 @@ extension DbInvoices on DatabaseHelper {
   Future<void> _enqueueInvoiceSyncMutations(
     Transaction txn, {
     required int invoiceId,
+    String? deletedAtIso,
   }) async {
     final nowIso = DateTime.now().toUtc().toIso8601String();
 
@@ -718,8 +725,11 @@ extension DbInvoices on DatabaseHelper {
       txn,
       entityType: 'invoice',
       globalId: invGid,
-      operation: 'INSERT',
+      // الحذف المنطقي يُرسل UPDATE تحمل deletedAt حتى يبقى الصف في السحابة
+      // للتدقيق ويُلتقط على بقية الأجهزة عبر السحب التزايدي (بدون realtime).
+      operation: deletedAtIso != null ? 'UPDATE' : 'INSERT',
       payload: {
+        if (deletedAtIso != null) 'deletedAt': deletedAtIso,
         'id': invGid,
         'tenantId': (inv['tenantId'] as num?)?.toInt() ?? 1,
         'customerName': (inv['customerName'] ?? '').toString(),
@@ -948,12 +958,12 @@ extension DbInvoices on DatabaseHelper {
     }
   }
 
-  /// فاتورة واحدة مع بنودها.
+  /// فاتورة واحدة مع بنودها (تتجاهل الفواتير المحذوفة منطقياً).
   Future<Invoice?> getInvoiceById(int id) async {
     final db = await database;
     final maps = await db.query(
       'invoices',
-      where: 'id = ?',
+      where: 'id = ? AND deleted_at IS NULL',
       whereArgs: [id],
       limit: 1,
     );
@@ -1017,10 +1027,13 @@ extension DbInvoices on DatabaseHelper {
     );
   }
 
-  /// كل الفواتير (استعلام مجمّع لتفادي N+1).
+  /// كل الفواتير (استعلام مجمّع لتفادي N+1) — تتجاهل الفواتير المحذوفة منطقياً.
   Future<List<Invoice>> getInvoices() async {
     final db = await database;
-    final invoiceMaps = await db.query('invoices');
+    final invoiceMaps = await db.query(
+      'invoices',
+      where: 'deleted_at IS NULL',
+    );
     if (invoiceMaps.isEmpty) return [];
 
     final ids = invoiceMaps.map((m) => m['id'] as int).toList();
@@ -1102,5 +1115,120 @@ extension DbInvoices on DatabaseHelper {
             0,
       );
     }).toList();
+  }
+
+  /// حذف فاتورة منطقياً (soft delete) — يُستخدم لتنظيف الفواتير القديمة
+  /// التي لا يمكن تعديلها عبر شاشة اللقطة.
+  ///
+  /// الخطوات داخل معاملة واحدة:
+  /// 1) ختم `deleted_at` على الفاتورة وبنودها (بدون حذف فعلي — audit يبقى).
+  /// 2) إرجاع كمية المخزون للبنود (فقط لفواتير بيع غير مرتجعة — المرتجعة رجّعت
+  ///    الكمية أصلاً عند إنشائها).
+  /// 3) حذف منطقي لقيود الصندوق المرتبطة (`cash_ledger.invoiceId = ?`) حتى
+  ///    لا يبقى أثر مالي لفاتورة حذفها المستخدم.
+  /// 4) طفرة مزامنة UPDATE تحمل `deletedAt` عبر global_id — تُختم الفاتورة
+  ///    عن بُعد بـ deleted_at (تبقى للتدقيق) وتُلتقط على بقية الأجهزة عبر
+  ///    السحب التزايدي حتى بدون realtime.
+  ///
+  /// يعيد عدد الصفوف المتأثرة (0 إذا الفاتورة غير موجودة/محذوفة سابقاً/لغير
+  /// المستأجر الحالي).
+  Future<int> deleteInvoice(int id) async {
+    final db = await database;
+    final tenantId = await _resolveActiveTenantIdForLocalDb(db);
+    final nowIso = DateTime.now().toUtc().toIso8601String();
+
+    final affected = await db.transaction<int>((txn) async {
+      final rows = await txn.query(
+        'invoices',
+        where: 'id = ? AND tenantId = ? AND deleted_at IS NULL',
+        whereArgs: [id, tenantId],
+        limit: 1,
+      );
+      if (rows.isEmpty) return 0;
+      final inv = rows.first;
+      final gid = (inv['global_id'] ?? '').toString().trim();
+      final isReturned = (inv['isReturned'] as num?)?.toInt() == 1;
+      final serviceReceipt =
+          inv['type'] == InvoiceType.debtCollection.index ||
+          inv['type'] == InvoiceType.installmentCollection.index ||
+          inv['type'] == InvoiceType.supplierPayment.index;
+
+      // 1) ختم الحذف على الفاتورة وبنودها.
+      await txn.update(
+        'invoices',
+        {'deleted_at': nowIso, 'updatedAt': nowIso},
+        where: 'id = ? AND tenantId = ? AND deleted_at IS NULL',
+        whereArgs: [id, tenantId],
+      );
+      await txn.update(
+        'invoice_items',
+        {'deleted_at': nowIso, 'updatedAt': nowIso},
+        where: 'invoiceId = ? AND deleted_at IS NULL',
+        whereArgs: [id],
+      );
+
+      // 2) إرجاع كمية المخزون (بيع فعلي غير مرتجع فقط).
+      if (!isReturned && !serviceReceipt) {
+        final items = await txn.query(
+          'invoice_items',
+          where: 'invoiceId = ? AND deleted_at IS NULL',
+          whereArgs: [id],
+        );
+        for (final it in items) {
+          final pid = (it['productId'] as num?)?.toInt();
+          if (pid == null) continue;
+          final baseQty = (it['baseQty'] as num?)?.toDouble() ??
+              (it['quantity'] as num?)?.toDouble() ??
+              0.0;
+          if (baseQty <= 0) continue;
+          await txn.rawUpdate(
+            'UPDATE products SET qty = qty + ? WHERE id = ?',
+            [baseQty, pid],
+          );
+        }
+      }
+
+      // 3) حذف منطقي لقيود الصندوق المرتبطة.
+      await txn.update(
+        'cash_ledger',
+        {'deleted_at': nowIso, 'updatedAt': nowIso},
+        where: 'invoiceId = ? AND tenantId = ? AND deleted_at IS NULL',
+        whereArgs: [id, tenantId],
+      );
+
+      await _insertActivityLogInTxn(
+        txn,
+        type: 'invoice_deleted',
+        refTable: 'invoices',
+        refId: id,
+        title: 'حذف فاتورة',
+        details:
+            'الفاتورة #${(inv['id'] ?? id).toString()} — الحذف المنطقي يحفظ سجل التدقيق',
+        amount: (inv['total'] as num?)?.toDouble(),
+      );
+
+      // 4) طفرة مزامنة UPDATE تحمل deletedAt — best-effort داخل نفس المعاملة.
+      //    نستخدم UPDATE بحمولة الصف الكاملة (بدل DELETE) حتى يبقى الصف في
+      //    السحابة للتدقيق ويُلتقط الحذف على بقية الأجهزة عبر
+      //    _pullInvoicesIncremental (updated_at > cursor) حتى لو فاتها
+      //    إشعار الـ realtime.
+      if (gid.isNotEmpty) {
+        try {
+          await _enqueueInvoiceSyncMutations(
+            txn,
+            invoiceId: id,
+            deletedAtIso: nowIso,
+          );
+        } catch (_) {
+          // طابور المزامنة يعيد المحاولة؛ اللقطة التالية تنشر الحذف أيضاً.
+        }
+      }
+      return 1;
+    });
+
+    if (affected > 0) {
+      CloudSyncService.instance.scheduleSyncSoon();
+    }
+    return affected;
   }
 }

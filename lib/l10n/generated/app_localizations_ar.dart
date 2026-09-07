@@ -1222,6 +1222,17 @@ class AppLocalizationsAr extends AppLocalizations {
   String get deletedSnackbar => 'تم الحذف';
 
   @override
+  String get deleteInvoiceTitle => 'حذف الفاتورة؟';
+
+  @override
+  String deleteInvoiceBody(Object invoiceNo) {
+    return 'سيتم إخفاء الفاتورة #$invoiceNo من القائمة والتقارير وإرجاع كمياتها للمخزون. يبقى سجلها محفوظاً للتدقيق.';
+  }
+
+  @override
+  String get invoiceDeleteFailed => 'تعذّر حذف الفاتورة، حاول مجدداً.';
+
+  @override
   String get parkedSalesScreenTitle => 'فواتير معلّقة مؤقتاً';
 
   @override

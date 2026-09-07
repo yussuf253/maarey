@@ -196,6 +196,7 @@ FROM invoices i
 LEFT JOIN installment_plans p ON p.invoiceId = i.id
 WHERE i.type IN ($placeholders)
   AND IFNULL(i.isReturned, 0) = 0
+  AND i.deleted_at IS NULL
   AND p.id IS NULL
   $extra
 ''', types);

@@ -2252,6 +2252,24 @@ abstract class AppLocalizations {
   /// **'تم الحذف'**
   String get deletedSnackbar;
 
+  /// No description provided for @deleteInvoiceTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف الفاتورة؟'**
+  String get deleteInvoiceTitle;
+
+  /// No description provided for @deleteInvoiceBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيتم إخفاء الفاتورة #{invoiceNo} من القائمة والتقارير وإرجاع كمياتها للمخزون. يبقى سجلها محفوظاً للتدقيق.'**
+  String deleteInvoiceBody(Object invoiceNo);
+
+  /// No description provided for @invoiceDeleteFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر حذف الفاتورة، حاول مجدداً.'**
+  String get invoiceDeleteFailed;
+
   /// No description provided for @parkedSalesScreenTitle.
   ///
   /// In ar, this message translates to:

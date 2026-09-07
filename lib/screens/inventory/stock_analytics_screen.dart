@@ -104,6 +104,8 @@ class _StockAnalyticsScreenState extends State<StockAnalyticsScreen> {
       WHERE inv.tenantId = ?
         AND inv.date >= ?
         AND inv.isReturned = 0
+        AND inv.deleted_at IS NULL
+        AND ii.deleted_at IS NULL
         AND ii.productId IS NOT NULL
       GROUP BY ii.productId
       ORDER BY totalSold DESC

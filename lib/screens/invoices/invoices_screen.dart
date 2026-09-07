@@ -220,6 +220,57 @@ class _InvoicesScreenState extends State<InvoicesScreen>
     } catch (_) {}
   }
 
+  /// حذف منطقي لفاتورة بعد تأكيد المستخدم — تنظيف الفواتير القديمة/الاختبارية.
+  /// لا يُحذف أي صف فعلياً: ختم `deleted_at` يخفيها من القائمة والتقارير ويبقيها للتدقيق.
+  Future<void> _deleteInvoice(Invoice inv) async {
+    final id = inv.id;
+    if (id == null || !mounted) return;
+    final loc = AppLocalizations.of(context)!;
+    final cs = Theme.of(context).colorScheme;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogCtx) => AlertDialog(
+        title: Text(loc.deleteInvoiceTitle),
+        content: Text(loc.deleteInvoiceBody(inv.id?.toString() ?? '')),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogCtx, false),
+            child: Text(loc.cancel),
+          ),
+          FilledButton(
+            style: FilledButton.styleFrom(backgroundColor: cs.error),
+            onPressed: () => Navigator.pop(dialogCtx, true),
+            child: Text(loc.deleteAction),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !mounted) return;
+    try {
+      final affected = await _db.deleteInvoice(id);
+      if (!mounted) return;
+      if (affected > 0) {
+        if (_selectedInvoiceId == id) {
+          setState(() => _selectedInvoiceId = null);
+        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(loc.deletedSnackbar)),
+        );
+      }
+    } catch (_) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(loc.invoiceDeleteFailed)),
+      );
+    }
+    // تحديث القائمة بعد الحذف حتى تختفي البطاقة فوراً.
+    if (mounted) {
+      unawaited(
+        Provider.of<InvoiceProvider>(context, listen: false).refresh(),
+      );
+    }
+  }
+
   Future<void> _tryOpenInvoiceAfterLoad() async {
     final targetId = widget.openInvoiceIdAfterLoad;
     if (targetId == null || !mounted) return;
@@ -320,6 +371,7 @@ class _InvoicesScreenState extends State<InvoicesScreen>
                 compareShiftKeys: _compareShiftKeys,
                 dateTimeFmt: _dateTimeFmt,
                 onInvoiceTap: _openInvoiceDetails,
+                onInvoiceDelete: _deleteInvoice,
                 selectedInvoiceId: _selectedInvoiceId,
                 serviceProductIds: serviceProductIds,
                 onLoadMore: provider.hasMore ? provider.loadMore : null,
@@ -902,6 +954,9 @@ class _InvoiceList extends StatelessWidget {
   final DateFormat dateTimeFmt;
   final Future<void> Function(Invoice) onInvoiceTap;
 
+  /// حذف منطقي لفاتورة — يُستدعى من الضغط المطوّل/قائمة السياق على البطاقة.
+  final Future<void> Function(Invoice)? onInvoiceDelete;
+
   /// معرّف الفاتورة المحدّدة حالياً (لتمييز البطاقة بصرياً في وضع Master-Detail).
   /// `null` ⇒ لا توجد فاتورة محدّدة.
   final int? selectedInvoiceId;
@@ -928,6 +983,7 @@ class _InvoiceList extends StatelessWidget {
     required this.onLoadMore,
     required this.isLoadingMore,
     required this.isLoading,
+    this.onInvoiceDelete,
   });
 
   @override
@@ -976,6 +1032,9 @@ class _InvoiceList extends StatelessWidget {
             isSelected: inv.id != null && inv.id == selectedInvoiceId,
             serviceProductIds: serviceProductIds,
             onTap: () => onInvoiceTap(inv),
+            onDelete: onInvoiceDelete == null
+                ? null
+                : () => onInvoiceDelete!(inv),
           );
         },
       );
@@ -1026,6 +1085,8 @@ class _InvoiceList extends StatelessWidget {
           isSelected: inv.id != null && inv.id == selectedInvoiceId,
           serviceProductIds: serviceProductIds,
           onTap: () => onInvoiceTap(inv),
+          onDelete:
+              onInvoiceDelete == null ? null : () => onInvoiceDelete!(inv),
         );
       },
     );
@@ -1179,6 +1240,10 @@ class _InvoiceCard extends StatelessWidget {
   final String? shiftStaffLabel;
   final VoidCallback onTap;
 
+  /// حذف منطقي — عند توفيره تُظهر البطاقة إجراء الحذف (ضغط مطوّل/زر). قد يكون
+  /// null (مثلاً فواتير بدون معرّف) فلا يظهر الإجراء.
+  final VoidCallback? onDelete;
+
   /// وضع التحديد (لـ Master-Detail على الديسكتوب) — يرسم خطاً جانبياً وتغطية ناعمة.
   final bool isSelected;
 
@@ -1192,6 +1257,7 @@ class _InvoiceCard extends StatelessWidget {
     required this.onTap,
     required this.serviceProductIds,
     this.isSelected = false,
+    this.onDelete,
   });
 
   String _statusLabel(AppLocalizations loc) {
@@ -1247,7 +1313,7 @@ class _InvoiceCard extends StatelessWidget {
     final cs = Theme.of(context).colorScheme;
     final loc = AppLocalizations.of(context)!;
     final statusColor = _invoiceStatusColor(invoice, cs);
-    return Container(
+    final card = Container(
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
         color: isSelected
@@ -1425,6 +1491,30 @@ class _InvoiceCard extends StatelessWidget {
               ],
             ),
           ),
+        ),
+      ),
+    );
+
+    if (onDelete == null) return card;
+
+    // الضغط المطوّل (لمس) + زر السلة (ديسكتوب/ماوس) — يفتحان تأكيد الحذف.
+    return GestureDetector(
+      onLongPress: onDelete,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: Row(
+          children: [
+            Expanded(child: card),
+            IconButton(
+              tooltip: loc.deleteAction,
+              icon: Icon(
+                Icons.delete_outline_rounded,
+                size: 20,
+                color: cs.error.withValues(alpha: 0.8),
+              ),
+              onPressed: onDelete,
+            ),
+          ],
         ),
       ),
     );
