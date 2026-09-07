@@ -1939,7 +1939,12 @@ class CloudSyncService {
     } else {
       final syncId = idemKey;
       final chunks = _splitText(encoded, _chunkSizeChars);
-      await client.from(_snapshotChunksTable).delete().eq('user_id', userId);
+      // ترتيب آمن ضد انهيار التطبيق منتصف الرفع:
+      // 1) ارفع الأجزاء الجديدة أولاً (sync_id فريد لا يمسّ مجموعة الأجزاء القديمة).
+      // 2) ثم وجّه صف اللقطة إلى sync_id الجديد.
+      // 3) أخيراً احذف الأجزاء القديمة فقط.
+      // أي انهيار في أي نقطة يترك اللقطة القديمة تشير إلى أجزائها السليمة،
+      // فلا تُفسد اللقطة على السحابة ولا تُستورد فارغة على الأجهزة الأخرى.
       for (var i = 0; i < chunks.length; i++) {
         await client.from(_snapshotChunksTable).upsert({
           'user_id': userId,
@@ -1962,6 +1967,17 @@ class CloudSyncService {
         'idempotency_key': idemKey,
         'updated_at': nowIso,
       }, onConflict: 'user_id');
+      // حذف أجزاء أي sync_id قديم بعد أن أصبحت اللقطة تشير إلى الجديد.
+      try {
+        await client
+            .from(_snapshotChunksTable)
+            .delete()
+            .eq('user_id', userId)
+            .neq('sync_id', syncId);
+      } catch (e) {
+        // الأجزاء القديمة المتبقية غير ضارة — يُعاد تنظيفها في الرفع التالي.
+        AppLogger.warn('CloudSync', 'stale chunk cleanup failed: $e');
+      }
     }
     await prefs.setString(sigMapKey, jsonEncode(currentSigMap));
     await _clearPendingIdempotencyKey(prefs: prefs, userId: userId);
@@ -3553,9 +3569,25 @@ class CloudSyncService {
     return true;
   }
 
+  /// جداول تُنشأ/تُملأ افتراضياً عند أول تشغيل التطبيق — وجودها لا يعني أن
+  /// الجهاز يحمل بيانات مستخدم حقيقية. تُستبعد من فحص "القاعدة فارغة" حتى لا
+  /// يتجاوز جهاز جديد حماية اللقطة الفارغة ويكتب فوق بيانات السحابة (وهو ما
+  /// سبّب فقدان اللقطة سابقاً).
+  static const _defaultSeedTables = {
+    'tenants',
+    'branches',
+    'app_settings',
+    'debt_settings',
+    'loyalty_settings',
+    'installment_settings',
+    'print_settings',
+  };
+
   Future<bool> _localDbHasNoSyncData(Database db) async {
     final names = await _listSyncTables(db);
     for (final t in names) {
+      // افتراضيات التمهيد ليست بيانات — جهاز جديد بها يبقى "فارغاً" للحماية.
+      if (_defaultSeedTables.contains(t)) continue;
       try {
         final r = await db.rawQuery('SELECT COUNT(*) AS c FROM $t');
         final c = (r.first['c'] as num?)?.toInt() ?? 0;
