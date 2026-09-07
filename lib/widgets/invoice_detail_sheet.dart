@@ -5,6 +5,7 @@ import '../models/invoice.dart';
 import '../services/database_helper.dart';
 import '../l10n/generated/app_localizations.dart';
 import '../theme/design_tokens.dart';
+import '../utils/sale_receipt_pdf.dart';
 import '../utils/screen_layout.dart';
 
 final _numFmt = NumberFormat('#,##0', 'ar');
@@ -226,6 +227,21 @@ class _InvoiceDetailContent extends StatelessWidget {
   final ScrollController? scrollController;
   final bool showDragHandle;
   final VoidCallback? onClose;
+
+  /// يفتح معاينة PDF للإيصال مع زر الطباعة — يعمل على الديسكتوب والموبايل.
+  Future<void> _printReceipt(BuildContext context) async {
+    final loc = AppLocalizations.of(context)!;
+    try {
+      await SaleReceiptPdf.presentReceipt(
+        context,
+        locale: Localizations.localeOf(context),
+        loc: loc,
+        invoice: invoice,
+        subtotalBeforeDiscount:
+            invoice.items.fold<double>(0, (s, e) => s + e.total),
+      );
+    } catch (_) {}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -458,6 +474,13 @@ class _InvoiceDetailContent extends StatelessWidget {
             ],
           ),
         ),
+                        const SizedBox(height: 16),
+                        FilledButton.icon(
+                          onPressed: () => _printReceipt(context),
+                          icon: const Icon(Icons.print_rounded),
+                          label: Text(loc.printReceipt),
+                        ),
+                        const SizedBox(height: 4),
       ],
     ),
   ),
