@@ -515,23 +515,7 @@ extension DbInvoices on DatabaseHelper {
                       ? ''
                       : (cRows.first['global_id'] ?? '').toString().trim();
                   if (pGlobal.isNotEmpty && cGlobal.isNotEmpty) {
-                    final nowIso = DateTime.now().toUtc().toIso8601String();
-                    await SyncQueueService.instance.enqueueMutation(
-                      txn,
-                      entityType: 'product_variant',
-                      globalId: vGlobal,
-                      operation: 'UPDATE',
-                      payload: {
-                        'id': vGlobal,
-                        'product_id': pGlobal,
-                        'color_id': cGlobal,
-                        'size': (v['size'] ?? '').toString(),
-                        'quantity': (v['quantity'] as num?)?.toInt() ?? 0,
-                        'barcode': (v['barcode'] ?? '').toString(),
-                        'sku': (v['sku'] ?? '').toString(),
-                        'updated_at': nowIso,
-                      },
-                    );
+                    // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
                   }
                 }
               }

@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:math';
 
+import 'package:crypto/crypto.dart';
 import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -1890,6 +1892,12 @@ class DatabaseHelper {
     // and backfilled for rows created before this migration.
     await _ensureInvoiceSyncColumns(db);
 
+    // المرحلة الأولى من المزامنة لكل جدول (نمط الفواتير): منتجات، وحدات
+    // المنتجات، عملاء، موردين — كل صف يحتاج global_id ثابتاً و updatedAt
+    // ليعمل السحب التزايدي والدمج LWW. المعرّفات مشتقة بشكل حتمي من المفاتيح
+    // الطبيعية حتى ينتج جهازان نفس المعرّف لنفس الصف القديم (لا تكرارات).
+    await _ensurePerTableSyncColumns(db);
+
     // Step 10 (soft-delete foundation): every read across db_debts, db_cash,
     // db_shifts, db_suppliers, and reports_repository now filters by
     // `deleted_at IS NULL`, so the column must exist on the five core
@@ -1999,6 +2007,503 @@ class DatabaseHelper {
       }
       await batch.commit(noResult: true);
     }
+  }
+
+  /// معرّف عالمي حتمي مشتق من مفتاح طبيعي — جهازان ينتجان نفس المعرّف لنفس
+  /// الصف القديم فيتطابقا على السحابة بدل التكرار.
+  static String _stableGlobalId(String prefix, String naturalKey) {
+    final digest = md5.convert(utf8.encode(naturalKey)).toString();
+    return '$prefix-${digest.substring(0, 24)}';
+  }
+
+  /// تهيئة أعمدة المزامنة لكل جدول (المرحلة الأولى): global_id + updatedAt
+  /// لجدولات [products, product_unit_variants, customers, suppliers] مع
+  /// تعبئة القيم الناقصة حتمياً. تُستدعى عند كل فتح للقاعدة (idempotent).
+  Future<void> _ensurePerTableSyncColumns(Database db) async {
+    // صندوق صادر الحذف الصلب: صفوف تنتظر رفعها إلى sync_hard_deletes على
+    // السحابة. بعد نجاح الرفع يُحذف الصف محلياً (انظر _pushSyncTombstones).
+    try {
+      await db.execute('''
+        CREATE TABLE IF NOT EXISTS sync_tombstones(
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          table_name TEXT NOT NULL,
+          global_id TEXT NOT NULL,
+          deleted_at TEXT NOT NULL,
+          createdAt TEXT NOT NULL,
+          UNIQUE(table_name, global_id)
+        )
+      ''');
+    } catch (_) {}
+
+    // أبناء تُخطى لأن أباهم المطلوب لم يصل بعد — يُعاد جلبهم بالـ global_id
+    // في دورات لاحقة حتى يصل الأب (انظر _processPendingChildren).
+    try {
+      await db.execute('''
+        CREATE TABLE IF NOT EXISTS sync_pending_children(
+          table_name TEXT NOT NULL,
+          global_id TEXT NOT NULL,
+          first_seen TEXT NOT NULL,
+          attempts INTEGER NOT NULL DEFAULT 0,
+          PRIMARY KEY(table_name, global_id)
+        )
+      ''');
+    } catch (_) {}
+
+    // 1) الأعمدة الناقصة.
+    Future<void> ensureCol(String table, String col, String type) async {
+      if (!await _tableHasColumn(db, table, col)) {
+        try {
+          await db.execute('ALTER TABLE $table ADD COLUMN $col $type');
+        } catch (e) {
+          AppLogger.warn('DatabaseHelper', 'ensure $table.$col failed: $e');
+        }
+      }
+    }
+
+    await ensureCol('products', 'global_id', 'TEXT');
+    await ensureCol('product_unit_variants', 'global_id', 'TEXT');
+    await ensureCol('product_unit_variants', 'updatedAt', 'TEXT');
+    await ensureCol('customers', 'global_id', 'TEXT');
+    await ensureCol('customers', 'updatedAt', 'TEXT');
+    await ensureCol('suppliers', 'global_id', 'TEXT');
+    await ensureCol('suppliers', 'updatedAt', 'TEXT');
+
+    // المرحلة 2: جداول المال.
+    await ensureCol('installment_plans', 'global_id', 'TEXT');
+    await ensureCol('installment_plans', 'updatedAt', 'TEXT');
+    await ensureCol('installment_plans', 'createdAt', 'TEXT');
+    // أعمدة *_global_id محلية يحتاجها دمج السحب لحل مفاتيح الأجانب.
+    await ensureCol('installment_plans', 'customer_global_id', 'TEXT');
+    await ensureCol('installment_plans', 'invoice_global_id', 'TEXT');
+    await ensureCol('installments', 'global_id', 'TEXT');
+    await ensureCol('installments', 'updatedAt', 'TEXT');
+    await ensureCol('installments', 'createdAt', 'TEXT');
+    await ensureCol('installments', 'plan_global_id', 'TEXT');
+    await ensureCol('customer_debt_payments', 'global_id', 'TEXT');
+    await ensureCol('customer_debt_payments', 'updatedAt', 'TEXT');
+    await ensureCol('customer_debt_payments', 'customer_global_id', 'TEXT');
+    await ensureCol('expense_categories', 'updatedAt', 'TEXT');
+
+    // المرحلة 3: فواتير/دفعات الموردين، أوامر الشراء، سندات المخزون.
+    await ensureCol('warehouses', 'global_id', 'TEXT');
+    await ensureCol('supplier_bills', 'global_id', 'TEXT');
+    await ensureCol('supplier_bills', 'updatedAt', 'TEXT');
+    await ensureCol('supplier_bills', 'supplier_global_id', 'TEXT');
+    await ensureCol('supplier_payouts', 'global_id', 'TEXT');
+    await ensureCol('supplier_payouts', 'updatedAt', 'TEXT');
+    await ensureCol('supplier_payouts', 'supplier_global_id', 'TEXT');
+    await ensureCol('purchase_orders', 'global_id', 'TEXT');
+    await ensureCol('purchase_orders', 'supplier_global_id', 'TEXT');
+    await ensureCol('purchase_order_items', 'global_id', 'TEXT');
+    await ensureCol('purchase_order_items', 'updatedAt', 'TEXT');
+    await ensureCol('purchase_order_items', 'createdAt', 'TEXT');
+    await ensureCol('purchase_order_items', 'po_global_id', 'TEXT');
+    await ensureCol('purchase_order_items', 'product_global_id', 'TEXT');
+    await ensureCol('po_receipts', 'global_id', 'TEXT');
+    await ensureCol('po_receipts', 'updatedAt', 'TEXT');
+    await ensureCol('po_receipts', 'createdAt', 'TEXT');
+    await ensureCol('po_receipts', 'po_global_id', 'TEXT');
+    await ensureCol('po_receipts', 'stock_voucher_global_id', 'TEXT');
+    await ensureCol('stock_vouchers', 'global_id', 'TEXT');
+    await ensureCol('stock_vouchers', 'updatedAt', 'TEXT');
+    await ensureCol('stock_voucher_items', 'global_id', 'TEXT');
+    await ensureCol('stock_voucher_items', 'updatedAt', 'TEXT');
+    await ensureCol('stock_voucher_items', 'createdAt', 'TEXT');
+    await ensureCol('stock_voucher_items', 'voucher_global_id', 'TEXT');
+    await ensureCol('stock_voucher_items', 'product_global_id', 'TEXT');
+
+    // المرحلة 4: الجرد، السلات الموقوفة، سجل النشاط.
+    // (work_shifts مضمونة عبر ensureWorkShiftsGlobalIdSchema.)
+    await ensureCol('activity_logs', 'global_id', 'TEXT');
+    await ensureCol('activity_logs', 'updatedAt', 'TEXT');
+    await ensureCol('parked_sales', 'global_id', 'TEXT');
+    await ensureCol('stocktaking_sessions', 'global_id', 'TEXT');
+    await ensureCol('stocktaking_sessions', 'updatedAt', 'TEXT');
+    await ensureCol('stocktaking_sessions', 'warehouse_global_id', 'TEXT');
+    await ensureCol('stocktaking_items', 'global_id', 'TEXT');
+    await ensureCol('stocktaking_items', 'updatedAt', 'TEXT');
+    await ensureCol('stocktaking_items', 'session_global_id', 'TEXT');
+    await ensureCol('stocktaking_items', 'product_global_id', 'TEXT');
+    await ensureCol('stocktaking_items', 'adjustment_voucher_global_id', 'TEXT');
+
+    // أعمدة gids على سندات المخزون — دفتر إعادة الربط للمخازن الاختيارية.
+    await ensureCol('stock_vouchers', 'warehouse_from_gid', 'TEXT');
+    await ensureCol('stock_vouchers', 'warehouse_to_gid', 'TEXT');
+
+    // فهارس على global_id لكل جدول.
+    for (final t in const [
+      'products',
+      'product_unit_variants',
+      'customers',
+      'suppliers',
+      'installment_plans',
+      'installments',
+      'customer_debt_payments',
+      'expenses',
+      'expense_categories',
+      'warehouses',
+      'supplier_bills',
+      'supplier_payouts',
+      'purchase_orders',
+      'purchase_order_items',
+      'po_receipts',
+      'stock_vouchers',
+      'stock_voucher_items',
+      'stocktaking_sessions',
+      'stocktaking_items',
+      'parked_sales',
+      'activity_logs',
+    ]) {
+      try {
+        await db.execute(
+          'CREATE INDEX IF NOT EXISTS idx_${t}_global_id ON $t(global_id)',
+        );
+      } catch (_) {}
+    }
+
+    // 2) تعبئة global_id الناقص حتمياً + ختم updatedAt.
+    final nowIso = DateTime.now().toUtc().toIso8601String();
+
+    Future<void> backfillRows(
+      String table,
+      List<Map<String, Object?>> rows,
+      String Function(Map<String, Object?> row) gidOf,
+    ) async {
+      if (rows.isEmpty) return;
+      final batch = db.batch();
+      for (final r in rows) {
+        batch.update(
+          table,
+          {
+            'global_id': gidOf(r),
+            'updatedAt': ((r['stamp'] ?? '') as String).isNotEmpty
+                ? r['stamp']
+                : nowIso,
+          },
+          where: 'id = ?',
+          whereArgs: [r['id']],
+        );
+      }
+      await batch.commit(noResult: true);
+    }
+
+    // منتجات: المفتاح الطبيعي = productCode|barcode|name.
+    await backfillRows(
+      'products',
+      await db.rawQuery(""
+          "SELECT id, productCode, barcode, name, updatedAt, createdAt AS stamp "
+          "FROM products WHERE global_id IS NULL OR TRIM(global_id) = ''"),
+      (r) => _stableGlobalId(
+        'p',
+        '${(r['productCode'] ?? '')}|${(r['barcode'] ?? '')}|${(r['name'] ?? '')}',
+      ),
+    );
+
+    // وحدات المنتجات: productGid|unitName|unitSymbol|barcode.
+    await backfillRows(
+      'product_unit_variants',
+      await db.rawQuery(""
+          "SELECT v.id AS id, IFNULL(p.global_id, '') AS pgid, "
+          "IFNULL(v.unitName, '') AS unitName, "
+          "IFNULL(v.unitSymbol, '') AS unitSymbol, "
+          "IFNULL(v.barcode, '') AS barcode, "
+          "'' AS stamp "
+          "FROM product_unit_variants v LEFT JOIN products p ON p.id = v.productId "
+          "WHERE v.global_id IS NULL OR TRIM(v.global_id) = ''"),
+      (r) => _stableGlobalId(
+        'v',
+        '${r['pgid']}|${r['unitName']}|${r['unitSymbol']}|${r['barcode']}',
+      ),
+    );
+
+    // عملاء: name|phone.
+    await backfillRows(
+      'customers',
+      await db.rawQuery(""
+          "SELECT id, IFNULL(name, '') AS nm, IFNULL(phone, '') AS ph, "
+          "updatedAt, createdAt AS stamp FROM customers "
+          "WHERE global_id IS NULL OR TRIM(global_id) = ''"),
+      (r) => _stableGlobalId('c', '${r['nm']}|${r['ph']}'),
+    );
+
+    // موردون: name|phone.
+    await backfillRows(
+      'suppliers',
+      await db.rawQuery(""
+          "SELECT id, IFNULL(name, '') AS nm, IFNULL(phone, '') AS ph, "
+          "updatedAt, createdAt AS stamp FROM suppliers "
+          "WHERE global_id IS NULL OR TRIM(global_id) = ''"),
+      (r) => _stableGlobalId('s', '${r['nm']}|${r['ph']}'),
+    );
+
+    // ── المرحلة 2: جداول المال ──
+
+    // خطط الأقساط: invoiceGid|customerName|total|paid|months.
+    await backfillRows(
+      'installment_plans',
+      await db.rawQuery(""
+          "SELECT p.id AS id, "
+          "IFNULL((SELECT global_id FROM invoices WHERE invoices.id = p.invoiceId), '') AS igid, "
+          "IFNULL(p.customerName, '') AS cn, p.totalAmount AS ta, p.paidAmount AS pa, "
+          "IFNULL(p.numberOfInstallments, 0) AS nm, updatedAt, createdAt AS stamp "
+          "FROM installment_plans p "
+          "WHERE p.global_id IS NULL OR TRIM(p.global_id) = ''"),
+      (r) => _stableGlobalId(
+        'ip',
+        '${r['igid']}|${r['cn']}|${r['ta']}|${r['pa']}|${r['nm']}',
+      ),
+    );
+
+    // أقساط: planGid|dueDate|amount|paid|paidDate.
+    await backfillRows(
+      'installments',
+      await db.rawQuery(""
+          "SELECT i.id AS id, IFNULL(p.global_id, '') AS pgid, "
+          "IFNULL(i.dueDate, '') AS dd, i.amount AS am, "
+          "IFNULL(i.paid, 0) AS pd, IFNULL(i.paidDate, '') AS pdd, "
+          "updatedAt, createdAt AS stamp "
+          "FROM installments i LEFT JOIN installment_plans p ON p.id = i.planId "
+          "WHERE i.global_id IS NULL OR TRIM(i.global_id) = ''"),
+      (r) => _stableGlobalId(
+        'in',
+        '${r['pgid']}|${r['dd']}|${r['am']}|${r['pd']}|${r['pdd']}',
+      ),
+    );
+
+    // دفعات ديون العملاء: customerGid|amount|createdAt|before|after.
+    await backfillRows(
+      'customer_debt_payments',
+      await db.rawQuery(""
+          "SELECT d.id AS id, "
+          "IFNULL((SELECT global_id FROM customers WHERE customers.id = d.customerId), '') AS cg, "
+          "d.amount AS am, d.createdAt AS ca, d.debtBefore AS db, d.debtAfter AS da, "
+          "updatedAt FROM customer_debt_payments d "
+          "WHERE d.global_id IS NULL OR TRIM(d.global_id) = ''"),
+      (r) => _stableGlobalId(
+        'cdp',
+        '${r['cg']}|${r['am']}|${r['ca']}|${r['db']}|${r['da']}',
+      ),
+    );
+
+    // المصروفات: description|amount|occurredAt|status.
+    await backfillRows(
+      'expenses',
+      await db.rawQuery(""
+          "SELECT id, IFNULL(description, '') AS ds, amount AS am, "
+          "IFNULL(occurredAt, '') AS oa, IFNULL(status, '') AS st, "
+          "updatedAt, createdAt AS stamp FROM expenses "
+          "WHERE global_id IS NULL OR TRIM(global_id) = ''"),
+      (r) => _stableGlobalId(
+        'e',
+        '${r['ds']}|${r['am']}|${r['oa']}|${r['st']}',
+      ),
+    );
+
+    // فئات المصروفات: name|tenantId.
+    await backfillRows(
+      'expense_categories',
+      await db.rawQuery(""
+          "SELECT id, IFNULL(name, '') AS nm, IFNULL(tenantId, 1) AS tid, "
+          "updatedAt, createdAt AS stamp FROM expense_categories "
+          "WHERE global_id IS NULL OR TRIM(global_id) = ''"),
+      (r) => _stableGlobalId('ec', '${r['nm']}|${r['tid']}'),
+    );
+
+    // ── المرحلة 3: مورّدون ماليون، أوامر شراء، سندات مخزون ──
+
+    // المخازن: name (UNIQUE محلياً).
+    await backfillRows(
+      'warehouses',
+      await db.rawQuery(""
+          "SELECT id, IFNULL(name, '') AS nm, createdAt AS stamp FROM warehouses "
+          "WHERE global_id IS NULL OR TRIM(global_id) = ''"),
+      (r) => _stableGlobalId('w', '${r['nm']}'),
+    );
+
+    // فواتير الموردين: supplierGid|amount|createdAt|theirReference.
+    await backfillRows(
+      'supplier_bills',
+      await db.rawQuery(""
+          "SELECT b.id AS id, IFNULL(s.global_id, '') AS sg, b.amount AS am, "
+          "b.createdAt AS ca, IFNULL(b.theirReference, '') AS tr, "
+          "updatedAt FROM supplier_bills b "
+          "LEFT JOIN suppliers s ON s.id = b.supplierId "
+          "WHERE b.global_id IS NULL OR TRIM(b.global_id) = ''"),
+      (r) => _stableGlobalId(
+        'sb',
+        '${r['sg']}|${r['am']}|${r['ca']}|${r['tr']}',
+      ),
+    );
+
+    // دفعات الموردين: supplierGid|amount|createdAt|affectsCash.
+    await backfillRows(
+      'supplier_payouts',
+      await db.rawQuery(""
+          "SELECT p.id AS id, IFNULL(s.global_id, '') AS sg, p.amount AS am, "
+          "p.createdAt AS ca, IFNULL(p.affectsCash, 1) AS ac, "
+          "updatedAt FROM supplier_payouts p "
+          "LEFT JOIN suppliers s ON s.id = p.supplierId "
+          "WHERE p.global_id IS NULL OR TRIM(p.global_id) = ''"),
+      (r) => _stableGlobalId(
+        'sp',
+        '${r['sg']}|${r['am']}|${r['ca']}|${r['ac']}',
+      ),
+    );
+
+    // أوامر الشراء: poNumber|supplierGid|orderDate.
+    await backfillRows(
+      'purchase_orders',
+      await db.rawQuery(""
+          "SELECT o.id AS id, o.poNumber AS pn, "
+          "IFNULL((SELECT global_id FROM suppliers WHERE suppliers.id = o.supplierId), '') AS sg, "
+          "IFNULL(o.orderDate, '') AS od, updatedAt, createdAt AS stamp "
+          "FROM purchase_orders o "
+          "WHERE o.global_id IS NULL OR TRIM(o.global_id) = ''"),
+      (r) => _stableGlobalId('po', '${r['pn']}|${r['sg']}|${r['od']}'),
+    );
+
+    // بنود أوامر الشراء: poGid|productName|orderedQty|unitPrice.
+    await backfillRows(
+      'purchase_order_items',
+      await db.rawQuery(""
+          "SELECT i.id AS id, IFNULL(o.global_id, '') AS og, "
+          "IFNULL(i.productName, '') AS pn, i.orderedQty AS oq, "
+          "i.unitPrice AS up, updatedAt, createdAt AS stamp "
+          "FROM purchase_order_items i "
+          "LEFT JOIN purchase_orders o ON o.id = i.poId "
+          "WHERE i.global_id IS NULL OR TRIM(i.global_id) = ''"),
+      (r) => _stableGlobalId(
+        'poi',
+        '${r['og']}|${r['pn']}|${r['oq']}|${r['up']}',
+      ),
+    );
+
+    // سندات الاستلام: poGid|receivedAt|note.
+    await backfillRows(
+      'po_receipts',
+      await db.rawQuery(""
+          "SELECT r.id AS id, IFNULL(o.global_id, '') AS og, "
+          "IFNULL(r.receivedAt, '') AS ra, IFNULL(r.note, '') AS nt, "
+          "updatedAt, createdAt AS stamp "
+          "FROM po_receipts r LEFT JOIN purchase_orders o ON o.id = r.poId "
+          "WHERE r.global_id IS NULL OR TRIM(r.global_id) = ''"),
+      (r) => _stableGlobalId('por', '${r['og']}|${r['ra']}|${r['nt']}'),
+    );
+
+    // سندات المخزون: voucherNo (UNIQUE — مفتاح طبيعي مثالي).
+    await backfillRows(
+      'stock_vouchers',
+      await db.rawQuery(""
+          "SELECT id, IFNULL(voucherNo, '') AS vn, updatedAt, createdAt AS stamp "
+          "FROM stock_vouchers "
+          "WHERE global_id IS NULL OR TRIM(global_id) = ''"),
+      (r) => _stableGlobalId('sv', '${r['vn']}'),
+    );
+
+    // بنود سندات المخزون: voucherGid|productGid|qty|unitPrice.
+    await backfillRows(
+      'stock_voucher_items',
+      await db.rawQuery(""
+          "SELECT i.id AS id, IFNULL(v.global_id, '') AS vg, "
+          "IFNULL(p.global_id, '') AS pg, i.qty AS q, i.unitPrice AS up, "
+          "updatedAt, createdAt AS stamp "
+          "FROM stock_voucher_items i "
+          "LEFT JOIN stock_vouchers v ON v.id = i.voucherId "
+          "LEFT JOIN products p ON p.id = i.productId "
+          "WHERE i.global_id IS NULL OR TRIM(i.global_id) = ''"),
+      (r) => _stableGlobalId(
+        'svi',
+        '${r['vg']}|${r['pg']}|${r['q']}|${r['up']}',
+      ),
+    );
+
+    // ── المرحلة 4: الجرد، السلات الموقوفة، سجل النشاط ──
+
+    // جلسات الجرد: title|startedAt|warehouseGid.
+    await backfillRows(
+      'stocktaking_sessions',
+      await db.rawQuery(""
+          "SELECT s.id AS id, IFNULL(s.title, '') AS ti, "
+          "IFNULL(s.startedAt, '') AS sa, "
+          "IFNULL((SELECT global_id FROM warehouses WHERE warehouses.id = s.warehouseId), '') AS wg, "
+          "updatedAt, startedAt AS stamp "
+          "FROM stocktaking_sessions s "
+          "WHERE s.global_id IS NULL OR TRIM(s.global_id) = ''"),
+      (r) => _stableGlobalId('ss', '${r['ti']}|${r['sa']}|${r['wg']}'),
+    );
+
+    // بنود الجرد: sessionGid|productGid (فريد لكل جلسة).
+    await backfillRows(
+      'stocktaking_items',
+      await db.rawQuery(""
+          "SELECT i.id AS id, IFNULL(s.global_id, '') AS sg, "
+          "IFNULL(p.global_id, '') AS pg, updatedAt, startedAt AS stamp "
+          "FROM stocktaking_items i "
+          "LEFT JOIN stocktaking_sessions s ON s.id = i.sessionId "
+          "LEFT JOIN products p ON p.id = i.productId "
+          "WHERE i.global_id IS NULL OR TRIM(i.global_id) = ''"),
+      (r) => _stableGlobalId('si', '${r['sg']}|${r['pg']}'),
+    );
+
+    // السلات الموقوفة: md5(payload) حتمي بالكامل.
+    await backfillRows(
+      'parked_sales',
+      await db.rawQuery(""
+          "SELECT id, IFNULL(title, '') AS ti, IFNULL(payload, '') AS pl, "
+          "updatedAt, createdAt AS stamp FROM parked_sales "
+          "WHERE global_id IS NULL OR TRIM(global_id) = ''"),
+      (r) => _stableGlobalId('ps', '${r['pl']}'),
+    );
+
+    // سجل النشاط: type|title|createdAt|amount.
+    await backfillRows(
+      'activity_logs',
+      await db.rawQuery(""
+          "SELECT id, IFNULL(type, '') AS ty, IFNULL(title, '') AS ti, "
+          "createdAt AS ca, IFNULL(amount, 0) AS am, updatedAt "
+          "FROM activity_logs "
+          "WHERE global_id IS NULL OR TRIM(global_id) = ''"),
+      (r) => _stableGlobalId('al', '${r['ty']}|${r['ti']}|${r['ca']}|${r['am']}'),
+    );
+
+    // 3) صفوف بلا updatedAt (تصلكم مزامنة تزايدية بالتاريخ) — ختمها مرة واحدة.
+    for (final t in const [
+      'products',
+      'customers',
+      'suppliers',
+      'installment_plans',
+      'installments',
+      'customer_debt_payments',
+      'expense_categories',
+      'stocktaking_sessions',
+      'stocktaking_items',
+      'parked_sales',
+      'activity_logs',
+    ]) {
+      try {
+        await db.execute(
+          "UPDATE $t SET updatedAt = IFNULL(NULLIF(createdAt, ''), ?) "
+          "WHERE updatedAt IS NULL OR TRIM(updatedAt) = ''",
+          [nowIso],
+        );
+      } catch (_) {}
+    }
+    try {
+      await db.execute(
+        "UPDATE product_unit_variants SET updatedAt = ? "
+        "WHERE updatedAt IS NULL OR TRIM(updatedAt) = ''",
+        [nowIso],
+      );
+    } catch (_) {}
+    try {
+      // المصروفات: ختم من occurredAt قبل القيمة الافتراضية.
+      await db.execute(
+        "UPDATE expenses SET updatedAt = "
+        "IFNULL(NULLIF(updatedAt, ''), IFNULL(NULLIF(occurredAt, ''), ?)) "
+        "WHERE updatedAt IS NULL OR TRIM(updatedAt) = ''",
+        [nowIso],
+      );
+    } catch (_) {}
   }
 
   /// Idempotently adds a `deleted_at TEXT` column to [table] and a partial

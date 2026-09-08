@@ -507,14 +507,7 @@ LEFT JOIN (
       };
       id = await txn.insert('customers', payload);
       await _replaceCustomerExtraPhones(txn, id, extras);
-
-      await SyncQueueService.instance.enqueueMutation(
-        txn,
-        entityType: 'customer',
-        globalId: globalId,
-        operation: 'INSERT',
-        payload: payload,
-      );
+      // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
     });
     CloudSyncService.instance.scheduleSyncSoon();
     return id;
@@ -567,15 +560,7 @@ LEFT JOIN (
         whereArgs: [id],
       );
       await _replaceCustomerExtraPhones(txn, id, extras);
-
-      final fullRow = Map<String, dynamic>.from(rows.first)..addAll(updatedPayload);
-      await SyncQueueService.instance.enqueueMutation(
-        txn,
-        entityType: 'customer',
-        globalId: gid,
-        operation: 'UPDATE',
-        payload: fullRow,
-      );
+      // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
     });
     CloudSyncService.instance.scheduleSyncSoon();
   }
@@ -611,16 +596,21 @@ LEFT JOIN (
         await txn.delete('customers', where: 'id = ?', whereArgs: [id]);
       }
 
-      for (final r in rows) {
-        final gid = r['global_id'] as String?;
-        if (gid != null && gid.isNotEmpty) {
-          await SyncQueueService.instance.enqueueMutation(
+      // Hard-delete tombstones: sync_hard_deletes on cloud tells other
+      // devices to remove matching local rows.
+      final deletedGids = rows
+          .map((r) => (r['global_id'] ?? '').toString().trim())
+          .where((g) => g.isNotEmpty)
+          .toList();
+      if (deletedGids.isNotEmpty) {
+        try {
+          await CloudSyncService.recordHardDeleteTombstones(
             txn,
-            entityType: 'customer',
-            globalId: gid,
-            operation: 'DELETE',
-            payload: {'updatedAt': DateTime.now().toIso8601String()},
+            'customers',
+            deletedGids,
           );
+        } catch (_) {
+          // Tombstone is best-effort — don't fail the customer delete.
         }
       }
     });

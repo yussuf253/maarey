@@ -451,13 +451,7 @@ extension DbSuppliers on DatabaseHelper {
         'updatedAt': nowIso,
       };
       id = await DbSuppliersSqlOps.insertSupplier(txn, tid, payload);
-      await SyncQueueService.instance.enqueueMutation(
-        txn,
-        entityType: 'supplier',
-        globalId: globalId,
-        operation: 'INSERT',
-        payload: Map<String, dynamic>.from(payload),
-      );
+      // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
     });
     CloudSyncService.instance.scheduleSyncSoon();
     return id;
@@ -488,17 +482,13 @@ extension DbSuppliers on DatabaseHelper {
     if (n.isEmpty) throw ArgumentError('name');
     final rows = await db.query(
       'suppliers',
-      columns: ['global_id', 'tenantId', 'createdAt', 'isActive'],
+      columns: ['global_id'],
       where: 'id = ? AND tenantId = ?',
       whereArgs: [id, tid],
       limit: 1,
     );
     if (rows.isEmpty) return;
     var gid = (rows.first['global_id'] as String?)?.trim() ?? '';
-    final tenantInt = (rows.first['tenantId'] as num?)?.toInt() ?? 1;
-    final createdAt = (rows.first['createdAt'] as String?) ??
-        DateTime.now().toUtc().toIso8601String();
-    final isActive = (rows.first['isActive'] as num?)?.toInt() ?? 1;
     final nowIso = DateTime.now().toUtc().toIso8601String();
 
     await db.transaction((txn) async {
@@ -516,23 +506,7 @@ extension DbSuppliers on DatabaseHelper {
         'updatedAt': nowIso,
       };
       await DbSuppliersSqlOps.updateSupplier(txn, tid, id, updatedPayload);
-      final queuePayload = <String, dynamic>{
-        'global_id': gid,
-        'tenantId': tenantInt,
-        'name': n,
-        'phone': updatedPayload['phone'],
-        'notes': updatedPayload['notes'],
-        'isActive': isActive,
-        'createdAt': createdAt,
-        'updatedAt': nowIso,
-      };
-      await SyncQueueService.instance.enqueueMutation(
-        txn,
-        entityType: 'supplier',
-        globalId: gid,
-        operation: 'UPDATE',
-        payload: queuePayload,
-      );
+      // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
     });
     CloudSyncService.instance.scheduleSyncSoon();
   }

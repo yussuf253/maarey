@@ -3,7 +3,6 @@ import 'package:sqflite/sqflite.dart';
 import 'cloud_sync_service.dart';
 import 'database_helper.dart';
 import 'product_variants_sql_ops.dart';
-import 'sync_queue_service.dart';
 import 'tenant_context_service.dart';
 
 class ProductVariantsRepository {
@@ -216,23 +215,7 @@ class ProductVariantsRepository {
         final cGlobal = cRows.isEmpty ? '' : (cRows.first['global_id'] ?? '').toString().trim();
         if (pGlobal.isEmpty || cGlobal.isEmpty) return a;
 
-        final nowIso = DateTime.now().toUtc().toIso8601String();
-        await SyncQueueService.instance.enqueueMutation(
-          txn,
-          entityType: 'product_variant',
-          globalId: vGlobal,
-          operation: 'UPDATE',
-          payload: {
-            'id': vGlobal,
-            'product_id': pGlobal,
-            'color_id': cGlobal,
-            'size': (v['size'] ?? '').toString(),
-            'quantity': (v['quantity'] as num?)?.toInt() ?? 0,
-            'barcode': (v['barcode'] ?? '').toString(),
-            'sku': (v['sku'] ?? '').toString(),
-            'updated_at': nowIso,
-          },
-        );
+        // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
       } catch (_) {}
 
       return a;

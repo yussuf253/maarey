@@ -287,13 +287,7 @@ extension DbCash on DatabaseHelper {
     final id = await db.transaction((txn) async {
       final insertId =
           await DbCashSqlOps.insertCashLedgerEntry(txn, tid, payload);
-      await SyncQueueService.instance.enqueueMutation(
-        txn,
-        entityType: 'cash_ledger',
-        globalId: globalId,
-        operation: 'INSERT',
-        payload: payload,
-      );
+      // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
       return insertId;
     });
 

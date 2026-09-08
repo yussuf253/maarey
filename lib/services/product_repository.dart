@@ -2425,8 +2425,7 @@ class ProductRepository {
     if (rows.isEmpty) return;
     final payload = Map<String, dynamic>.from(rows.first);
     var globalId = payload['global_id'] as String?;
-    // Backfill global_id for legacy rows that lack one so the
-    // mutation can be enqueued for cloud sync.
+    // Backfill global_id for legacy rows that lack one.
     if (globalId == null || globalId.trim().isEmpty) {
       globalId = const Uuid().v4();
       await txn.update(
@@ -2437,14 +2436,7 @@ class ProductRepository {
       );
       payload['global_id'] = globalId;
     }
-    
-    await SyncQueueService.instance.enqueueMutation(
-      txn,
-      entityType: 'product',
-      operation: operation,
-      globalId: globalId,
-      payload: payload,
-    );
+    // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
   }
 }
 

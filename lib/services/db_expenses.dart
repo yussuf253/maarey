@@ -6,33 +6,6 @@ part of 'database_helper.dart';
 String _expenseCashLedgerGlobalId(String expenseGlobalId) =>
     '${expenseGlobalId}_cash';
 
-Map<String, dynamic>? _cashLedgerEntryForExpenseRpc({
-  required String expenseGlobalId,
-  required int tenantId,
-  required double amount,
-  required String descriptionLine,
-  required DateTime occurredAt,
-  required int? workShiftId,
-  required String updatedAtIso,
-}) {
-  final ledgerGid = _expenseCashLedgerGlobalId(expenseGlobalId);
-  final fils = -(amount.abs() * 1000).round();
-  return {
-    'global_id': ledgerGid,
-    'expense_global_id': expenseGlobalId,
-    'tenantId': tenantId,
-    'transactionType': 'expense_out',
-    'amount': -amount.abs(),
-    'amountFils': fils,
-    'description': descriptionLine,
-    'invoiceId': null,
-    'workShiftId': workShiftId,
-    'work_shift_global_id': null,
-    'createdAt': occurredAt.toIso8601String(),
-    'updatedAt': updatedAtIso,
-  };
-}
-
 /// ترحيل أعمدة المصروفات/التصنيفات. تجنّب `UNIQUE` داخل `ADD COLUMN` لأن بعض
 /// محركات SQLite (مثل Darwin في macOS/iOS) ترفض الصيغة وتفشل بصمت إذا تُمسَك الأخطاء.
 Future<void> ensureExpensesSchema(Database db) async {
@@ -467,8 +440,6 @@ extension DbExpenses on DatabaseHelper {
         tenantId: tenantId,
       );
       int? ledgerId;
-      String? ledgerNote;
-      int? openShiftIdForRpc;
       if (affectsCash && status == 'paid') {
         final link = await _linkExpenseToCashLedger(
           txn,
@@ -482,8 +453,6 @@ extension DbExpenses on DatabaseHelper {
           actorName: actor,
         );
         ledgerId = link.ledgerId;
-        ledgerNote = link.note;
-        openShiftIdForRpc = link.workShiftId;
         await txn.update(
           'expenses',
           {'cashLedgerId': ledgerId},
@@ -492,29 +461,8 @@ extension DbExpenses on DatabaseHelper {
         );
       }
 
-      final queuePayload = Map<String, dynamic>.from(basePayload)
-        ..['cashLedgerId'] = ledgerId;
-      if (affectsCash && status == 'paid' && ledgerNote != null) {
-        queuePayload['cash_ledger_entry'] = _cashLedgerEntryForExpenseRpc(
-          expenseGlobalId: globalId,
-          tenantId: tenantId,
-          amount: amount,
-          descriptionLine: ledgerNote,
-          occurredAt: occurredAt,
-          workShiftId: openShiftIdForRpc,
-          updatedAtIso: nowIso,
-        );
-      } else {
-        queuePayload['cash_ledger_entry'] = null;
-      }
-
-      await SyncQueueService.instance.enqueueMutation(
-        txn,
-        entityType: 'expense',
-        globalId: globalId,
-        operation: 'INSERT',
-        payload: queuePayload,
-      );
+      // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
+      // Cash ledger entry is synced independently via the cash_ledger table.
     });
     CloudSyncService.instance.scheduleSyncSoon();
     return expenseId;
@@ -679,18 +627,6 @@ extension DbExpenses on DatabaseHelper {
       final nowIso = DateTime.now().toUtc().toIso8601String();
       final categoryGlobalId = await _ensureCategoryGlobalId(txn, categoryId);
 
-      final Map<String, dynamic>? cashLedgerRpc = paidLink != null
-          ? _cashLedgerEntryForExpenseRpc(
-              expenseGlobalId: globalId,
-              tenantId: tenantId,
-              amount: amount,
-              descriptionLine: paidLink.note,
-              occurredAt: occurredAt,
-              workShiftId: paidLink.workShiftId,
-              updatedAtIso: nowIso,
-            )
-          : null;
-
       final payload = {
         'global_id': globalId,
         'tenantId': tenantId,
@@ -720,15 +656,8 @@ extension DbExpenses on DatabaseHelper {
         whereArgs: [id, tenantId],
       );
 
-      final queuePayload = Map<String, dynamic>.from(payload)
-        ..['cash_ledger_entry'] = cashLedgerRpc;
-      await SyncQueueService.instance.enqueueMutation(
-        txn,
-        entityType: 'expense',
-        globalId: globalId,
-        operation: 'UPDATE',
-        payload: queuePayload,
-      );
+      // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
+      // Cash ledger entry is synced independently via the cash_ledger table.
       final statusLabel = status == 'paid' ? 'مدفوع' : 'معلق';
       await _insertActivityLogInTxn(
         txn,
@@ -762,6 +691,29 @@ extension DbExpenses on DatabaseHelper {
       final priorLedger = prior.isNotEmpty
           ? (prior.first['cashLedgerId'] as num?)?.toInt()
           : null;
+      final globalId = prior.isNotEmpty ? (prior.first['global_id'] as String? ?? '') : '';
+
+      // Record tombstones before local hard-delete so other devices can
+      // discover the deletion via sync_hard_deletes pull.
+      final deleteSyncIso = DateTime.now().toUtc().toIso8601String();
+      try {
+        if (priorLedger != null && globalId.isNotEmpty) {
+          final ledgerGid = _expenseCashLedgerGlobalId(globalId);
+          await CloudSyncService.recordHardDeleteTombstones(
+            txn, 'cash_ledger', [ledgerGid],
+            deletedAt: DateTime.parse(deleteSyncIso),
+          );
+        }
+        if (globalId.isNotEmpty) {
+          await CloudSyncService.recordHardDeleteTombstones(
+            txn, 'expenses', [globalId],
+            deletedAt: DateTime.parse(deleteSyncIso),
+          );
+        }
+      } catch (_) {
+        // Tombstones are best-effort — don't fail the expense delete.
+      }
+
       if (priorLedger != null) {
         await txn.delete('cash_ledger', where: 'id = ?', whereArgs: [priorLedger]);
         await _insertActivityLogInTxn(
@@ -775,27 +727,12 @@ extension DbExpenses on DatabaseHelper {
           tenantId: tenantId,
         );
       }
-      final globalId = prior.isNotEmpty ? (prior.first['global_id'] as String? ?? '') : '';
 
-      final deleteSyncIso = DateTime.now().toUtc().toIso8601String();
       await txn.delete(
         'expenses',
         where: 'id = ? AND tenantId = ?',
         whereArgs: [id, tenantId],
       );
-
-      if (globalId.isNotEmpty) {
-        await SyncQueueService.instance.enqueueMutation(
-          txn,
-          entityType: 'expense',
-          globalId: globalId,
-          operation: 'DELETE',
-          payload: {
-            'global_id': globalId,
-            'updatedAt': deleteSyncIso,
-          },
-        );
-      }
       final categoryId = prior.isNotEmpty
           ? (prior.first['categoryId'] as num?)?.toInt()
           : null;

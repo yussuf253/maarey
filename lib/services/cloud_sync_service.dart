@@ -979,6 +979,42 @@ class CloudSyncService {
           AppLogger.warn('CloudSync', 'invoice incremental pull failed: $e');
         }
 
+        // السحب التزايدي لجداول المرحلة الأولى (منتجات/وحدات/عملاء/موردين).
+        try {
+          await _pullPerTableIncremental(client);
+        } catch (e) {
+          AppLogger.warn('CloudSync', 'per-table incremental pull failed: $e');
+        }
+
+        // سحب سجلات الحذف الصلب من الأجهزة الأخرى.
+        try {
+          await _pullSyncTombstones(client);
+        } catch (e) {
+          AppLogger.warn('CloudSync', 'tombstone pull failed: $e');
+        }
+
+        // إعادة جلب الأبناء المعلّقين الذين وصلوا قبل آبائهم.
+        try {
+          await _processPendingChildren(client);
+        } catch (e) {
+          AppLogger.warn('CloudSync', 'pending children processing failed: $e');
+        }
+
+        // الرفع التزايدي لجداول المرحلة الأولى — قبل رفع اللقطة حتى تصل
+        // البيانات لجداولها حتى لو فشل رفع اللقطة.
+        try {
+          await _pushPerTableIncremental(client);
+        } catch (e) {
+          AppLogger.warn('CloudSync', 'per-table incremental push failed: $e');
+        }
+
+        // رفع سجلات الحذف الصلب المعلّقة.
+        try {
+          await _pushSyncTombstones(client);
+        } catch (e) {
+          AppLogger.warn('CloudSync', 'tombstone push failed: $e');
+        }
+
         AppLogger.info('CloudSync', 'syncNow: pushing snapshot…');
         final pushOk = await _pushSnapshot(
           userId: user.id,
@@ -1458,6 +1494,875 @@ class CloudSyncService {
     }
   }
 
+  /// ── المزامنة لكل جدول (نمط الفواتير) — المرحلة الأولى ────────────────────
+  /// منتجات + وحدات + عملاء + موردون: تنتقل كصفوف مستقلة في جداولها على
+  /// السحابة (سحب/رفع تزايدي بالـ updatedAt) بدل ركوبها في لقطة app_snapshots
+  /// الكاملة. أي خطأ في جدول لا يؤثر على بقية الجداول ولا على اللقطة.
+  static const Set<String> _perTableSyncTables = {
+    'products',
+    'product_unit_variants',
+    'customers',
+    'suppliers',
+    // المرحلة 4: الورديات — قبل cash_ledger لأنها تحل work_shift_global_id.
+    'work_shifts',
+    // المرحلة 2: جداول المال.
+    'cash_ledger',
+    'expenses',
+    'expense_categories',
+    'installment_plans',
+    'installments',
+    'customer_debt_payments',
+    // المرحلة 3: المورّدون الماليون، أوامر الشراء، سندات المخزون.
+    'supplier_bills',
+    'supplier_payouts',
+    'purchase_orders',
+    'purchase_order_items',
+    'stock_vouchers',
+    'stock_voucher_items',
+    'po_receipts',
+    // المرحلة 4: الجرد، السلات الموقوفة، سجل النشاط.
+    'stocktaking_sessions',
+    'stocktaking_items',
+    'parked_sales',
+    'activity_logs',
+  };
+
+  /// أعمدة كل جدول على السحابة (snake_case) — يُقاطع مع الأعمدة المحلية عند
+  /// الرفع حتى لا يكسر عمود محلي جديد جدولاً بعيداً لم يُحدّث بعد.
+  static const Map<String, Set<String>> _perTableRemoteColumns = {
+    'products': {
+      'global_id', 'tenant_id', 'name', 'barcode', 'product_code',
+      'category_global_id', 'brand_global_id', 'buy_price', 'sell_price',
+      'min_sell_price', 'qty', 'low_stock_threshold', 'status', 'is_active',
+      'created_at', 'updated_at', 'deleted_at', 'description', 'image_path',
+      'image_url', 'internal_notes', 'tags', 'sale_unit', 'supplier_name',
+      'tax_percent', 'discount_percent', 'discount_amount',
+      'buy_conversion_label', 'track_inventory', 'allow_negative_stock',
+      'supplier_item_code', 'net_weight_grams', 'manufacturing_date',
+      'expiry_date', 'grade', 'batch_number', 'expiry_alert_days_before',
+      'is_pinned', 'pinned_at', 'is_service', 'service_kind',
+      'stock_base_kind',
+    },
+    'product_unit_variants': {
+      'global_id', 'tenant_id', 'product_global_id', 'unit_name',
+      'unit_symbol', 'barcode', 'sell_price', 'min_sell_price',
+      'factor_to_base', 'is_default', 'is_active', 'created_at', 'updated_at',
+      'deleted_at',
+    },
+    'customers': {
+      'global_id', 'tenant_id', 'name', 'phone', 'email', 'address', 'notes',
+      'balance', 'loyalty_points', 'created_at', 'updated_at', 'deleted_at',
+    },
+    'suppliers': {
+      'global_id', 'tenant_id', 'name', 'phone', 'notes', 'is_active',
+      'created_at', 'updated_at', 'deleted_at',
+    },
+    // المرحلة 2: جداول المال. ملاحظة: remote expenses/expense_categories
+    // موروثة من طابور RPC بمفتاح global_id UNIQUE (وليس PK) — الرفع يمرّ
+    // onConflict: 'global_id' صراحة.
+    'cash_ledger': {
+      'global_id', 'tenant_id', 'transaction_type', 'amount', 'amount_fils',
+      'description', 'work_shift_global_id', 'invoice_global_id',
+      'created_at', 'updated_at', 'deleted_at',
+    },
+    'expenses': {
+      'global_id', 'tenant_id', 'category_global_id', 'amount', 'occurred_at',
+      'status', 'description', 'is_recurring', 'recurring_day',
+      'attachment_path', 'affects_cash', 'invoice_ref', 'landlord_or_property',
+      'tax_kind', 'created_at', 'updated_at', 'deleted_at',
+    },
+    'expense_categories': {
+      'global_id', 'tenant_id', 'name', 'sort_order', 'is_active',
+      'created_at', 'updated_at',
+    },
+    'installment_plans': {
+      'global_id', 'customer_name', 'total_amount', 'paid_amount',
+      'number_of_installments', 'customer_global_id', 'invoice_global_id',
+      'interest_pct', 'interest_amount', 'financed_at_sale',
+      'total_with_interest', 'planned_months', 'suggested_monthly',
+      'created_at', 'updated_at', 'deleted_at',
+    },
+    'installments': {
+      'global_id', 'plan_global_id', 'due_date', 'amount', 'paid', 'paid_date',
+      'created_at', 'updated_at', 'deleted_at',
+    },
+    'customer_debt_payments': {
+      'global_id', 'customer_global_id', 'customer_name_snapshot', 'amount',
+      'debt_before', 'debt_after', 'created_by_user_name', 'note',
+      'created_at', 'updated_at', 'deleted_at',
+    },
+    // المرحلة 3 — الجداول البعيدة موجودة من 20260531_full_sync_coverage.sql
+    // و supabase_sync_queue_rpc.sql بمفتاح global_id PK وأعمدة *_global_id
+    // لمفاتيح الأجانب. أعمدة ints المحلية (poId, voucherId, supplierId…)
+    // لا تُرفع — تُحل إلى global_ids.
+    'supplier_bills': {
+      'global_id', 'supplier_global_id', 'their_reference', 'their_bill_date',
+      'amount', 'note', 'image_path', 'created_by_user_name', 'created_at',
+      'updated_at',
+    },
+    'supplier_payouts': {
+      'global_id', 'supplier_global_id', 'amount', 'note',
+      'created_by_user_name', 'affects_cash', 'created_at', 'updated_at',
+    },
+    'purchase_orders': {
+      'global_id', 'tenant_id', 'po_number', 'supplier_global_id',
+      'supplier_name', 'status', 'order_date', 'expected_date', 'notes',
+      'total_amount', 'received_amount', 'created_by_user_name', 'created_at',
+      'updated_at',
+    },
+    'purchase_order_items': {
+      'global_id', 'tenant_id', 'po_global_id', 'product_global_id',
+      'product_name', 'ordered_qty', 'received_qty', 'unit_price', 'total',
+      'created_at', 'updated_at',
+    },
+    'po_receipts': {
+      'global_id', 'tenant_id', 'po_global_id', 'stock_voucher_global_id',
+      'received_at', 'note', 'created_by_user_name', 'created_at',
+      'updated_at',
+    },
+    'stock_vouchers': {
+      'global_id', 'tenant_id', 'voucher_no', 'voucher_type', 'voucher_date',
+      'warehouse_from_gid', 'warehouse_to_gid', 'reference_no', 'notes',
+      'supplier_name', 'source_type', 'source_name', 'created_at',
+      'updated_at',
+    },
+    'stock_voucher_items': {
+      'global_id', 'tenant_id', 'voucher_global_id', 'product_global_id',
+      'qty', 'unit_price', 'total', 'stock_before', 'stock_after',
+      'created_at', 'updated_at',
+    },
+    // المرحلة 4. work_shifts: جدول بعيد جديد (انظر migration) — أعمدة
+    // session_user_id/shift_staff_user_id/shift_staff_pin لا تُرفع
+    // (أجهزية/سرية). parked_sales و activity_logs كانا بلا updated_at
+    // على السحابة — يضاف عبر ALTER في migration.
+    'work_shifts': {
+      'global_id', 'tenant_id', 'opened_at', 'closed_at',
+      'system_balance_at_open', 'declared_physical_cash', 'added_cash_at_open',
+      'shift_staff_name', 'declared_closing_cash', 'system_balance_at_close',
+      'withdrawn_at_close', 'declared_cash_in_box_at_close', 'created_at',
+      'updated_at', 'deleted_at',
+    },
+    'parked_sales': {
+      'global_id', 'tenant_id', 'title', 'payload', 'created_at',
+      'updated_at',
+    },
+    'activity_logs': {
+      'global_id', 'tenant_id', 'type', 'ref_table', 'ref_id', 'title',
+      'details', 'amount', 'created_at', 'updated_at',
+    },
+    'stocktaking_sessions': {
+      'global_id', 'tenant_id', 'warehouse_global_id', 'title', 'status',
+      'notes', 'started_at', 'closed_at', 'created_at', 'updated_at',
+    },
+    'stocktaking_items': {
+      'global_id', 'tenant_id', 'session_global_id', 'product_global_id',
+      'system_qty', 'counted_qty', 'difference',
+      'adjustment_voucher_global_id', 'created_at', 'updated_at',
+    },
+  };
+
+  String _camelToSnakeKey(String k) => k.replaceAllMapped(
+        RegExp(r'([A-Z])'),
+        (m) => '_${m.group(1)!.toLowerCase()}',
+      );
+
+  /// ── الحذف الصلب: نشر tombstones عبر جدول sync_hard_deletes ──────────────
+  ///
+  /// صف محذوف فعلياً لا يمكن اكتشاف حذفه بالسحب التزايدي (السحب يقرأ صفوفاً
+  /// قائمة فقط). لذلك يُسجّل كل حذف صلب في صندوق `sync_tombstones` المحلي،
+  /// ويُرفع إلى `sync_hard_deletes` على السحابة، وكل جهاز يسحب هذه السجلات
+  /// ويحذف صفوفها المحلية (مع حماية LWW: صف أُعيد إنشاؤه بعد الحذف لا يُمس).
+
+  /// تسجيل حذف صلب — يُستدعى داخل نفس معاملة الحذف من مواقع الحذف.
+  static Future<void> recordHardDeleteTombstones(
+    DatabaseExecutor executor,
+    String table,
+    Iterable<String> globalIds, {
+    DateTime? deletedAt,
+  }) async {
+    final gids = globalIds
+        .map((g) => g.trim())
+        .where((g) => g.isNotEmpty)
+        .toSet();
+    if (gids.isEmpty) return;
+    final nowIso = (deletedAt ?? DateTime.now().toUtc()).toIso8601String();
+    for (final gid in gids) {
+      await executor.insert(
+        'sync_tombstones',
+        {
+          'table_name': table,
+          'global_id': gid,
+          'deleted_at': nowIso,
+          'createdAt': nowIso,
+        },
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    }
+  }
+
+  /// رفع سجلات الحذف الصلب المعلّقة إلى السحابة ثم تنظيف الصندوق المحلي.
+  Future<void> _pushSyncTombstones(SupabaseClient client) async {
+    final db = await _dbHelper.database;
+    final tombs = await db.query('sync_tombstones', orderBy: 'id', limit: 500);
+    if (tombs.isEmpty) return;
+    final payload = tombs
+        .map((t) => {
+              'table_name': t['table_name'],
+              'global_id': t['global_id'],
+              'deleted_at': t['deleted_at'],
+              'created_at': t['createdAt'],
+            })
+        .toList();
+    for (var i = 0; i < payload.length; i += 200) {
+      final chunk =
+          payload.sublist(i, i + 200 > payload.length ? payload.length : i + 200);
+      await client.from('sync_hard_deletes').upsert(chunk);
+    }
+    // نجح الرفع — نظّف المُرسل.
+    final ids = tombs.map((t) => t['id']).whereType<int>().toList();
+    if (ids.isNotEmpty) {
+      final ph = List.filled(ids.length, '?').join(',');
+      await db.delete('sync_tombstones', where: 'id IN ($ph)', whereArgs: ids);
+    }
+  }
+
+  /// سحب سجلات الحذف الصلب من السحابة وتطبيقها محلياً مع حماية LWW:
+  /// صف محلي أحدث من زمن الحذف (أُعيد إنشاؤه) لا يُحذف.
+  Future<void> _pullSyncTombstones(SupabaseClient client) async {
+    final user = client.auth.currentUser;
+    if (user == null) return;
+    final db = await _dbHelper.database;
+    final prefs = await SharedPreferences.getInstance();
+    final cursorKey = 'sync.tombstone_cursor.${user.id}';
+    var cursor = prefs.getString(cursorKey) ?? '1970-01-01T00:00:00Z';
+    if (DateTime.tryParse(cursor) == null) cursor = '1970-01-01T00:00:00Z';
+
+    var pages = 0;
+    const pageSize = 200;
+    while (pages < 20) {
+      final rows = (await client
+              .from('sync_hard_deletes')
+              .select()
+              .gt('created_at', cursor)
+              .order('created_at', ascending: true)
+              .limit(pageSize))
+          .cast<Map<String, dynamic>>();
+      if (rows.isEmpty) break;
+
+      await db.execute('PRAGMA foreign_keys = OFF');
+      try {
+        await db.transaction((txn) async {
+          for (final r in rows) {
+            final table = (r['table_name'] ?? '').toString().trim();
+            final gid = (r['global_id'] ?? '').toString().trim();
+            if (!_perTableSyncTables.contains(table) || gid.isEmpty) continue;
+            final deletedAt = _rowDate(r['deleted_at']);
+            final existing = await txn.query(
+              table,
+              where: 'global_id = ?',
+              whereArgs: [gid],
+              limit: 1,
+            );
+            if (existing.isEmpty) continue;
+            // LWW: صف محلي أحدث من الحذف (أُعيد إنشاؤه على هذا الجهاز) يبقى.
+            final localTs = _bestTimestamp(existing.first);
+            if (deletedAt != null && localTs != null && localTs.isAfter(deletedAt)) {
+              continue;
+            }
+            await txn.delete(table, where: 'global_id = ?', whereArgs: [gid]);
+          }
+        });
+      } finally {
+        await db.execute('PRAGMA foreign_keys = ON');
+      }
+      pages++;
+
+      var maxTs = cursor;
+      for (final r in rows) {
+        final ts = (r['created_at'] ?? '').toString();
+        if (ts.compareTo(maxTs) > 0) maxTs = ts;
+      }
+      await prefs.setString(cursorKey, maxTs);
+      cursor = maxTs;
+      if (rows.length < pageSize) break;
+    }
+  }
+
+  String _prefsKeyTableCursor(String table, String userId) =>
+      'sync.table_cursor.$table.$userId';
+
+  Future<String?> _globalIdOfLocalRow(
+    Database db,
+    String table,
+    Object? id,
+  ) async {
+    final asInt = id is int ? id : int.tryParse('$id');
+    if (asInt == null) return null;
+    try {
+      final r = await db.query(
+        table,
+        columns: ['global_id'],
+        where: 'id = ?',
+        whereArgs: [asInt],
+        limit: 1,
+      );
+      if (r.isEmpty) return null;
+      final g = (r.first['global_id'] ?? '').toString().trim();
+      return g.isEmpty ? null : g;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  /// تحويل صف محلي (camelCase) إلى صف سحابي (snake_case) مع توطين مفاتيح
+  /// الأجانب كـ global_ids. يعيد null إذا كان الصف بلا global_id.
+  Future<Map<String, dynamic>?> _localRowToRemoteRow(
+    Database db,
+    String table,
+    Map<String, dynamic> row,
+    Set<String> remoteCols, {
+    bool localColsHasWorkShiftGid = false,
+  }) async {
+    final gid = (row['global_id'] ?? '').toString().trim();
+    if (gid.isEmpty) return null;
+    final out = <String, dynamic>{};
+    row.forEach((k, v) {
+      if (k == 'id') return; // المفتاح المحلي التزايدي لا يُرفع
+      final snake = _camelToSnakeKey(k);
+      if (!remoteCols.contains(snake)) return;
+      // suppliers.is_active على السحابة boolean — التحويل من 0/1 المحلي.
+      if (table == 'suppliers' && snake == 'is_active') {
+        final asInt = v is num ? v.toInt() : int.tryParse('$v') ?? 1;
+        out[snake] = asInt != 0;
+        return;
+      }
+      out[snake] = _normalizeValue(v);
+    });
+    // توطين مفاتيح الأجانب.
+    if (table == 'products') {
+      out.remove('category_id');
+      out.remove('brand_id');
+      out['category_global_id'] =
+          await _globalIdOfLocalRow(db, 'categories', row['categoryId']);
+      out['brand_global_id'] =
+          await _globalIdOfLocalRow(db, 'brands', row['brandId']);
+    } else if (table == 'product_unit_variants') {
+      out.remove('product_id');
+      out['product_global_id'] =
+          await _globalIdOfLocalRow(db, 'products', row['productId']);
+    } else if (table == 'cash_ledger') {
+      // أعمدة ints المحلية بلا معنى عبر الأجهزة — تُستبدل بـ global_ids.
+      out.remove('invoice_id');
+      out.remove('work_shift_id');
+      out['invoice_global_id'] =
+          await _globalIdOfLocalRow(db, 'invoices', row['invoiceId']);
+      // work_shift_global_id عمود محلي يُرفع كما هو إن وُجد.
+      if (localColsHasWorkShiftGid) {
+        out['work_shift_global_id'] = _normalizeValue(row['work_shift_global_id']);
+      } else {
+        out['work_shift_global_id'] =
+            await _globalIdOfLocalRow(db, 'work_shifts', row['workShiftId']);
+      }
+    } else if (table == 'expenses') {
+      out.remove('category_id');
+      out.remove('cash_ledger_id');
+      // category_global_id عمود محلي — يُستخدم إن وُجد وإلا يُحل ديناميكياً.
+      final localCatGid = (row['category_global_id'] ?? '').toString().trim();
+      out['category_global_id'] = localCatGid.isNotEmpty
+          ? localCatGid
+          : await _globalIdOfLocalRow(
+              db,
+              'expense_categories',
+              row['categoryId'],
+            );
+    } else if (table == 'installment_plans') {
+      out.remove('customer_id');
+      out.remove('invoice_id');
+      out['customer_global_id'] =
+          await _globalIdOfLocalRow(db, 'customers', row['customerId']);
+      out['invoice_global_id'] =
+          await _globalIdOfLocalRow(db, 'invoices', row['invoiceId']);
+    } else if (table == 'installments') {
+      out.remove('plan_id');
+      out['plan_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'installment_plans',
+        row['planId'],
+      );
+    } else if (table == 'customer_debt_payments') {
+      out.remove('customer_id');
+      out['customer_global_id'] =
+          await _globalIdOfLocalRow(db, 'customers', row['customerId']);
+    } else if (table == 'supplier_bills' || table == 'supplier_payouts') {
+      out.remove('supplier_id');
+      out['supplier_global_id'] =
+          await _globalIdOfLocalRow(db, 'suppliers', row['supplierId']);
+    } else if (table == 'purchase_orders') {
+      out.remove('supplier_id');
+      out['supplier_global_id'] =
+          await _globalIdOfLocalRow(db, 'suppliers', row['supplierId']);
+    } else if (table == 'purchase_order_items') {
+      out.remove('po_id');
+      out.remove('product_id');
+      out['po_global_id'] =
+          await _globalIdOfLocalRow(db, 'purchase_orders', row['poId']);
+      out['product_global_id'] =
+          await _globalIdOfLocalRow(db, 'products', row['productId']);
+    } else if (table == 'po_receipts') {
+      out.remove('po_id');
+      out.remove('stock_voucher_id');
+      out['po_global_id'] =
+          await _globalIdOfLocalRow(db, 'purchase_orders', row['poId']);
+      out['stock_voucher_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'stock_vouchers',
+        row['stockVoucherId'],
+      );
+    } else if (table == 'stock_vouchers') {
+      // أعمدة ints المحلية بلا معنى عبر الأجهزة — المخازن تُحل عبر global_id.
+      out.remove('warehouse_from_id');
+      out.remove('warehouse_to_id');
+      out.remove('created_by_user_id');
+      out.remove('source_ref_id');
+      out['warehouse_from_gid'] =
+          await _globalIdOfLocalRow(db, 'warehouses', row['warehouseFromId']);
+      out['warehouse_to_gid'] =
+          await _globalIdOfLocalRow(db, 'warehouses', row['warehouseToId']);
+    } else if (table == 'stock_voucher_items') {
+      out.remove('voucher_id');
+      out.remove('product_id');
+      out['voucher_global_id'] =
+          await _globalIdOfLocalRow(db, 'stock_vouchers', row['voucherId']);
+      out['product_global_id'] =
+          await _globalIdOfLocalRow(db, 'products', row['productId']);
+    } else if (table == 'stocktaking_sessions') {
+      out.remove('warehouse_id');
+      out.remove('created_by_user_id');
+      out['warehouse_global_id'] =
+          await _globalIdOfLocalRow(db, 'warehouses', row['warehouseId']);
+    } else if (table == 'stocktaking_items') {
+      out.remove('session_id');
+      out.remove('product_id');
+      out.remove('adjustment_voucher_id');
+      out['session_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'stocktaking_sessions',
+        row['sessionId'],
+      );
+      out['product_global_id'] =
+          await _globalIdOfLocalRow(db, 'products', row['productId']);
+      out['adjustment_voucher_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'stock_vouchers',
+        row['adjustmentVoucherId'],
+      );
+    }
+    // أعمدة boolean على السحابة (محلياً 0/1).
+    for (final b in const ['affects_cash', 'is_recurring', 'is_active']) {
+      if (out.containsKey(b) && out[b] is num) {
+        out[b] = (out[b] as num).toInt() != 0;
+      }
+    }
+    out['global_id'] = gid;
+    return out;
+  }
+
+  /// رفع تزايدي لكل جدول من جداول المرحلة الأولى: الصفوف التي تغيّرت منذ آخر
+  /// رفع (updatedAt > cursor) تُرفع كـ upsert إلى جدولها على السحابة.
+  Future<void> _pushPerTableIncremental(SupabaseClient client) async {
+    final user = client.auth.currentUser;
+    if (user == null) return;
+    final db = await _dbHelper.database;
+    final prefs = await SharedPreferences.getInstance();
+    for (final table in _perTableSyncTables) {
+      try {
+        await _pushOnePerTable(client, db, prefs, user.id, table);
+      } catch (e) {
+        AppLogger.warn('CloudSync', 'per-table push failed ($table): $e');
+      }
+    }
+  }
+
+  Future<void> _pushOnePerTable(
+    SupabaseClient client,
+    Database db,
+    SharedPreferences prefs,
+    String userId,
+    String table,
+  ) async {
+    final remoteCols = _perTableRemoteColumns[table];
+    if (remoteCols == null) return;
+    final cursorKey = _prefsKeyTableCursor(table, userId);
+    var cursor = prefs.getString(cursorKey) ?? '1970-01-01T00:00:00Z';
+    if (DateTime.tryParse(cursor) == null) cursor = '1970-01-01T00:00:00Z';
+
+    final rows = await db.query(
+      table,
+      where: 'updatedAt IS NULL OR updatedAt > ?',
+      whereArgs: [cursor],
+      limit: 400,
+    );
+    if (rows.isEmpty) return;
+
+    final out = <Map<String, dynamic>>[];
+    final pushedGids = <String>[];
+    bool hasWorkShiftGid = false;
+    if (table == 'cash_ledger') {
+      try {
+        hasWorkShiftGid = await db
+            .rawQuery('PRAGMA table_info(cash_ledger)')
+            .then((cols) => cols.any((c) =>
+                (c['name'] ?? '').toString() == 'work_shift_global_id'));
+      } catch (_) {}
+    }
+    for (final r in rows) {
+      final remote = await _localRowToRemoteRow(
+        db,
+        table,
+        r,
+        remoteCols,
+        localColsHasWorkShiftGid: hasWorkShiftGid,
+      );
+      if (remote == null) continue; // بلا global_id — تُملأ عند الفتح القادم
+      out.add(remote);
+      pushedGids.add((remote['global_id'] as String));
+    }
+    for (var i = 0; i < out.length; i += 150) {
+      final chunk = out.sublist(i, i + 150 > out.length ? out.length : i + 150);
+      // expenses/expense_categories: global_id عمود UNIQUE وليس PK على السحابة.
+      if (table == 'expenses' || table == 'expense_categories') {
+        await client.from(table).upsert(chunk, onConflict: 'global_id');
+      } else {
+        await client.from(table).upsert(chunk);
+      }
+    }
+
+    // ختم صفوف بلا updatedAt حتى لا تُرفع في كل دورة.
+    if (rows.any((r) => (r['updatedAt'] ?? '').toString().trim().isEmpty)) {
+      try {
+        final nowIso = DateTime.now().toUtc().toIso8601String();
+        final ph = List.filled(pushedGids.length, '?').join(',');
+        await db.execute(
+          'UPDATE $table SET updatedAt = ? '
+          "WHERE global_id IN ($ph) AND (updatedAt IS NULL OR TRIM(updatedAt) = '')",
+          [nowIso, ...pushedGids],
+        );
+      } catch (_) {}
+    }
+
+    var maxTs = cursor;
+    for (final r in rows) {
+      final ts = (r['updatedAt'] ?? '').toString();
+      if (ts.compareTo(maxTs) > 0) maxTs = ts;
+    }
+    if (maxTs != cursor) {
+      await prefs.setString(cursorKey, maxTs);
+    }
+  }
+
+  /// سحب تزايدي لكل جدول من جداول المرحلة الأولى: صفوف بعيدة أحدث من cursor
+  /// تُدمج محلياً عبر نفس منطق دمج اللقطة (global_id + LWW + tombstones).
+  Future<void> _pullPerTableIncremental(SupabaseClient client) async {
+    final user = client.auth.currentUser;
+    if (user == null) return;
+    final db = await _dbHelper.database;
+    final prefs = await SharedPreferences.getInstance();
+    var madeProgress = false;
+    for (final table in _perTableSyncTables) {
+      try {
+        if (await _pullOnePerTable(
+          client,
+          db,
+          prefs,
+          user.id,
+          table,
+        )) {
+          madeProgress = true;
+        }
+      } catch (e) {
+        AppLogger.warn('CloudSync', 'per-table pull failed ($table): $e');
+      }
+    }
+    if (madeProgress) {
+      remoteImportGeneration.value++;
+    }
+
+    // إعادة ربط الأبناء الذين وصلوا قبل آبائهم الاختياريين.
+    try {
+      await _relinkOptionalFks();
+    } catch (e) {
+      AppLogger.warn('CloudSync', 'optional FK relink failed: $e');
+    }
+  }
+
+  /// مواصفات مفاتيح الأجانب الاختيارية القابلة لإعادة الربط لاحقاً.
+  static const List<
+          ({
+            String table,
+            String gidCol,
+            String intCol,
+            String parentTable,
+          })>
+      _optionalFkRelinkSpecs = [
+    (
+      table: 'purchase_order_items',
+      gidCol: 'product_global_id',
+      intCol: 'productId',
+      parentTable: 'products',
+    ),
+    (
+      table: 'po_receipts',
+      gidCol: 'stock_voucher_global_id',
+      intCol: 'stockVoucherId',
+      parentTable: 'stock_vouchers',
+    ),
+    (
+      table: 'stock_vouchers',
+      gidCol: 'warehouse_from_gid',
+      intCol: 'warehouseFromId',
+      parentTable: 'warehouses',
+    ),
+    (
+      table: 'stock_vouchers',
+      gidCol: 'warehouse_to_gid',
+      intCol: 'warehouseToId',
+      parentTable: 'warehouses',
+    ),
+    (
+      table: 'stocktaking_sessions',
+      gidCol: 'warehouse_global_id',
+      intCol: 'warehouseId',
+      parentTable: 'warehouses',
+    ),
+    (
+      table: 'stocktaking_items',
+      gidCol: 'adjustment_voucher_global_id',
+      intCol: 'adjustmentVoucherId',
+      parentTable: 'stock_vouchers',
+    ),
+  ];
+
+  /// تمريرة إعادة الربط: صفوف وصلت قبل أبٍ اختياري تحمل gid الأب في عمود
+  /// `*_global_id` المحلي — حين يصل الأب يُحل الارتباط ويُختم الصف.
+  Future<void> _relinkOptionalFks() async {
+    final db = await _dbHelper.database;
+    var relinked = 0;
+    await db.execute('PRAGMA foreign_keys = OFF');
+    try {
+      await db.transaction((txn) async {
+        for (final spec in _optionalFkRelinkSpecs) {
+          List<Map<String, Object?>> orphans;
+          try {
+            orphans = await txn.query(
+              spec.table,
+              columns: ['id', spec.gidCol],
+              where: "${spec.intCol} IS NULL AND IFNULL(${spec.gidCol}, '') != ''",
+              limit: 500,
+            );
+          } catch (_) {
+            continue; // عمود gid غير موجود على هذا التثبيت بعد
+          }
+          for (final o in orphans) {
+            final g = (o[spec.gidCol] ?? '').toString().trim();
+            if (g.isEmpty) continue;
+            final parent = await txn.query(
+              spec.parentTable,
+              columns: ['id'],
+              where: 'global_id = ?',
+              whereArgs: [g],
+              limit: 1,
+            );
+            if (parent.isEmpty) continue;
+            await txn.update(
+              spec.table,
+              {spec.intCol: parent.first['id']},
+              where: 'id = ?',
+              whereArgs: [o['id']],
+            );
+            relinked++;
+          }
+        }
+      });
+    } finally {
+      await db.execute('PRAGMA foreign_keys = ON');
+    }
+    if (relinked > 0) {
+      AppLogger.info('CloudSync', '_relinkOptionalFks: relinked $relinked rows');
+    }
+  }
+
+  /// إعادة جلب الأبناء المعلّقين (أب مطلوب لم يصل وقت وصولهم) مباشرةً
+  /// بالـ global_id، ودمجهم إن وصل الأب. يُحذف السجل بعد النجاح أو بعد
+  /// محاولات فاشلة كثيرة (صف لم يعد موجوداً على السحابة مثلاً).
+  Future<void> _processPendingChildren(SupabaseClient client) async {
+    final user = client.auth.currentUser;
+    if (user == null) return;
+    final db = await _dbHelper.database;
+    final pend = await db.query(
+      'sync_pending_children',
+      orderBy: 'first_seen',
+      limit: 100,
+    );
+    if (pend.isEmpty) return;
+
+    for (final p in pend) {
+      final table = (p['table_name'] ?? '').toString().trim();
+      final gid = (p['global_id'] ?? '').toString().trim();
+      if (!_perTableSyncTables.contains(table) || gid.isEmpty) {
+        await db.delete(
+          'sync_pending_children',
+          where: 'table_name = ? AND global_id = ?',
+          whereArgs: [table, gid],
+        );
+        continue;
+      }
+      try {
+        final rows = (await client
+                .from(table)
+                .select()
+                .eq('global_id', gid)
+                .limit(1))
+            .cast<Map<String, dynamic>>();
+        if (rows.isEmpty) {
+          // الصف حُذف من السحابة — لا شيء بانتظاره.
+          await db.delete(
+            'sync_pending_children',
+            where: 'table_name = ? AND global_id = ?',
+            whereArgs: [table, gid],
+          );
+          continue;
+        }
+        final raw = rows.first;
+        final localCols = (await db.rawQuery('PRAGMA table_info($table)'))
+            .map((r) => (r['name'] ?? '').toString())
+            .where((s) => s.isNotEmpty)
+            .toSet();
+        final m = _mapRemoteRowToLocal(raw, localCols);
+        raw.forEach((k, v) {
+          if (k.endsWith('_global_id') && v != null) m[k] = v;
+        });
+        m['deleted_at'] = raw['deleted_at'];
+
+        await db.execute('PRAGMA foreign_keys = OFF');
+        try {
+          await db.transaction((txn) async {
+            await _mergeTableRows(txn, table, [m]);
+          });
+        } finally {
+          await db.execute('PRAGMA foreign_keys = ON');
+        }
+
+        final exists = await db.query(
+          table,
+          columns: ['id'],
+          where: 'global_id = ?',
+          whereArgs: [gid],
+          limit: 1,
+        );
+        if (exists.isNotEmpty) {
+          // اندمج فعلاً (الأب وصل) — نظّف الانتظار.
+          await db.delete(
+            'sync_pending_children',
+            where: 'table_name = ? AND global_id = ?',
+            whereArgs: [table, gid],
+          );
+          remoteImportGeneration.value++;
+        } else {
+          // ما زال يتيماً — زد المحاولات وتخلَّ بعد حد معقول.
+          final attempts = ((p['attempts'] as num?)?.toInt() ?? 0) + 1;
+          if (attempts > 40) {
+            await db.delete(
+              'sync_pending_children',
+              where: 'table_name = ? AND global_id = ?',
+              whereArgs: [table, gid],
+            );
+            AppLogger.warn(
+              'CloudSync',
+              'pending child $table/$gid dropped after $attempts attempts',
+            );
+          } else {
+            await db.update(
+              'sync_pending_children',
+              {'attempts': attempts},
+              where: 'table_name = ? AND global_id = ?',
+              whereArgs: [table, gid],
+            );
+          }
+        }
+      } catch (e) {
+        AppLogger.warn(
+          'CloudSync',
+          'pending child retry failed ($table/$gid): $e',
+        );
+      }
+    }
+  }
+
+  Future<bool> _pullOnePerTable(
+    SupabaseClient client,
+    Database db,
+    SharedPreferences prefs,
+    String userId,
+    String table,
+  ) async {
+    final localCols = (await db.rawQuery('PRAGMA table_info($table)'))
+        .map((r) => (r['name'] ?? '').toString())
+        .where((s) => s.isNotEmpty)
+        .toSet();
+    final cursorKey = _prefsKeyTableCursor(table, userId);
+    var cursor = prefs.getString(cursorKey) ?? '1970-01-01T00:00:00Z';
+    if (DateTime.tryParse(cursor) == null) cursor = '1970-01-01T00:00:00Z';
+
+    var madeProgress = false;
+    var pages = 0;
+    const pageSize = 200;
+    while (pages < 40) {
+      final remoteRows = (await client
+              .from(table)
+              .select()
+              .gt('updated_at', cursor)
+              .order('updated_at', ascending: true)
+              .limit(pageSize))
+          .cast<Map<String, dynamic>>();
+      if (remoteRows.isEmpty) break;
+
+      // snake_case → camelCase + الاحتفاظ بمفاتيح الأجانب الخام للدمج
+      // (كل مفتاح ينتهي بـ global_id يُمرّر كما هو لأن معالجات الدمج تقرأه
+      // من incomingRaw لحل الأجانب محلياً).
+      final mapped = remoteRows.map((raw) {
+        final m = _mapRemoteRowToLocal(raw, localCols);
+        raw.forEach((k, v) {
+          if (k.endsWith('_global_id') && v != null) {
+            m[k] = v;
+          }
+        });
+        m['deleted_at'] = raw['deleted_at'];
+        return m;
+      }).toList();
+
+      await db.execute('PRAGMA foreign_keys = OFF');
+      try {
+        await db.transaction((txn) async {
+          await _mergeTableRows(txn, table, mapped);
+        });
+      } finally {
+        await db.execute('PRAGMA foreign_keys = ON');
+      }
+      madeProgress = true;
+      pages++;
+
+      var maxTs = cursor;
+      for (final r in remoteRows) {
+        final ts = (r['updated_at'] ?? '').toString();
+        if (ts.compareTo(maxTs) > 0) maxTs = ts;
+      }
+      await prefs.setString(cursorKey, maxTs);
+      cursor = maxTs;
+      if (remoteRows.length < pageSize) break;
+    }
+    return madeProgress;
+  }
+
   /// ختم حذف منطقي على فاتورة محلية داخل معاملة مزامنة — يُستخدم عندما يصل
   /// tombstone من جهاز آخر (صف بعيد بـ deleted_at غير null).
   ///
@@ -1581,6 +2486,24 @@ class CloudSyncService {
             await _pullInvoicesIncremental(Supabase.instance.client);
           } catch (e) {
             AppLogger.warn('CloudSync', 'realtime invoice pull failed: $e');
+          }
+          // جداول المرحلة الأولى تُسحب تزايدياً هنا كذلك (Realtime).
+          try {
+            await _pullPerTableIncremental(Supabase.instance.client);
+          } catch (e) {
+            AppLogger.warn('CloudSync', 'realtime per-table pull failed: $e');
+          }
+          // سجلات الحذف الصلب تُسحب هنا كذلك.
+          try {
+            await _pullSyncTombstones(Supabase.instance.client);
+          } catch (e) {
+            AppLogger.warn('CloudSync', 'realtime tombstone pull failed: $e');
+          }
+          // إعادة جلب الأبناء المعلّقين هنا كذلك.
+          try {
+            await _processPendingChildren(Supabase.instance.client);
+          } catch (e) {
+            AppLogger.warn('CloudSync', 'realtime pending children failed: $e');
           }
         }),
       );
@@ -2663,6 +3586,37 @@ class CloudSyncService {
         if (handled) continue;
       }
 
+      // ── product_unit_variants: global_id merge + توطين FK المنتج ──────
+      if (table == 'product_unit_variants' &&
+          localCols.contains('global_id')) {
+        final handled = await _mergeProductUnitVariantsByGlobalId(
+          txn: txn,
+          incomingRaw: incomingRaw,
+          incoming: incoming,
+          deletedAt: deletedAt,
+        );
+        if (handled) continue;
+      }
+
+      // ── المرحلة 3: جداول أبناء بمفاتيح أجانب تُحل عبر global_id ────────
+      if ((table == 'purchase_order_items' ||
+              table == 'po_receipts' ||
+              table == 'stock_vouchers' ||
+              table == 'stock_voucher_items' ||
+              table == 'stocktaking_sessions' ||
+              table == 'stocktaking_items') &&
+          localCols.contains('global_id')) {
+        final handled = await _mergeFkChildByGlobalId(
+          txn: txn,
+          table: table,
+          incomingRaw: incomingRaw,
+          incoming: incoming,
+          deletedAt: deletedAt,
+          fks: _phase3FkSpecs(table)!,
+        );
+        if (handled) continue;
+      }
+
       // ── products: global_id merge with FK resolution ─────────────────
       if (table == 'products' && localCols.contains('global_id')) {
         final handled = await _mergeProductsByGlobalId(
@@ -3176,6 +4130,226 @@ class CloudSyncService {
     return true;
   }
 
+  /// مواصفات مفاتيح الأجانب لجداول المرحلة 3 — remoteKey = عمود السحابة،
+  /// localCol = العمود المحلي، lookupTable = جدول البحث. الأب المطلوب
+  /// (isRequired=true) غير الموجود محلياً يُسقط الصف (يتيم — يُعاد فحصه في
+  /// دورة تالية عند وصول الأب).
+  List<({String remoteKey, String localCol, String lookupTable, bool isRequired})>? _phase3FkSpecs(
+    String table,
+  ) {
+    switch (table) {
+      case 'purchase_order_items':
+        return [
+          (
+            remoteKey: 'po_global_id',
+            localCol: 'poId',
+            lookupTable: 'purchase_orders',
+            isRequired: true,
+          ),
+          (
+            remoteKey: 'product_global_id',
+            localCol: 'productId',
+            lookupTable: 'products',
+            isRequired: false,
+          ),
+        ];
+      case 'po_receipts':
+        return [
+          (
+            remoteKey: 'po_global_id',
+            localCol: 'poId',
+            lookupTable: 'purchase_orders',
+            isRequired: true,
+          ),
+          (
+            remoteKey: 'stock_voucher_global_id',
+            localCol: 'stockVoucherId',
+            lookupTable: 'stock_vouchers',
+            isRequired: false,
+          ),
+        ];
+      case 'stock_vouchers':
+        return [
+          (
+            remoteKey: 'warehouse_from_gid',
+            localCol: 'warehouseFromId',
+            lookupTable: 'warehouses',
+            isRequired: false,
+          ),
+          (
+            remoteKey: 'warehouse_to_gid',
+            localCol: 'warehouseToId',
+            lookupTable: 'warehouses',
+            isRequired: false,
+          ),
+        ];
+      case 'stock_voucher_items':
+        return [
+          (
+            remoteKey: 'voucher_global_id',
+            localCol: 'voucherId',
+            lookupTable: 'stock_vouchers',
+            isRequired: true,
+          ),
+          (
+            remoteKey: 'product_global_id',
+            localCol: 'productId',
+            lookupTable: 'products',
+            isRequired: true,
+          ),
+        ];
+      case 'stocktaking_sessions':
+        return [
+          (
+            remoteKey: 'warehouse_global_id',
+            localCol: 'warehouseId',
+            lookupTable: 'warehouses',
+            isRequired: false,
+          ),
+        ];
+      case 'stocktaking_items':
+        return [
+          (
+            remoteKey: 'session_global_id',
+            localCol: 'sessionId',
+            lookupTable: 'stocktaking_sessions',
+            isRequired: true,
+          ),
+          (
+            remoteKey: 'product_global_id',
+            localCol: 'productId',
+            lookupTable: 'products',
+            isRequired: true,
+          ),
+          (
+            remoteKey: 'adjustment_voucher_global_id',
+            localCol: 'adjustmentVoucherId',
+            lookupTable: 'stock_vouchers',
+            isRequired: false,
+          ),
+        ];
+      default:
+        return null;
+    }
+  }
+
+  /// دمج صف ابن (المرحلة 3): حل مفاتيح الأجانب عبر global_id ثم دمج
+  /// global_id + LWW عبر [_doMergeWithGlobalId].
+  Future<bool> _mergeFkChildByGlobalId({
+    required Transaction txn,
+    required String table,
+    required Map<String, dynamic> incomingRaw,
+    required Map<String, dynamic> incoming,
+    required DateTime? deletedAt,
+    required
+        List<({String remoteKey, String localCol, String lookupTable, bool isRequired})>
+    fks,
+  }) async {
+    final gid = (incomingRaw['global_id'] ?? incoming['global_id'] ?? '')
+        .toString()
+        .trim();
+    if (gid.isEmpty) return false;
+
+    for (final fk in fks) {
+      final g = (incomingRaw[fk.remoteKey] ?? '').toString().trim();
+      int? localId;
+      if (g.isNotEmpty) {
+        final r = await txn.query(
+          fk.lookupTable,
+          columns: ['id'],
+          where: 'global_id = ?',
+          whereArgs: [g],
+          limit: 1,
+        );
+        if (r.isNotEmpty) {
+          localId = (r.first['id'] as num?)?.toInt();
+        }
+      }
+      if (localId == null) {
+        if (fk.isRequired) {
+          // الأب لم يصل بعد — سجّل الابن في دفتر الانتظار ليُعاد جلبه
+          // بالـ global_id في دورة لاحقة (انظر _processPendingChildren)،
+          // وإلا لَفَت مؤشر السحب فوقه ولن يُرى أبداً.
+          try {
+            await txn.insert(
+              'sync_pending_children',
+              {
+                'table_name': table,
+                'global_id': gid,
+                'first_seen': DateTime.now().toUtc().toIso8601String(),
+                'attempts': 0,
+              },
+              conflictAlgorithm: ConflictAlgorithm.ignore,
+            );
+          } catch (_) {}
+          return true;
+        }
+        // أب اختياري مفقود: خزّن gid الأب في العمود المحلي المخصص —
+        // تمريرة إعادة الربط تصلحه حين يصل الأب (_relinkOptionalFks).
+        incoming[fk.remoteKey] = incomingRaw[fk.remoteKey];
+        incoming[fk.localCol] = null;
+      } else {
+        incoming[fk.localCol] = localId;
+      }
+    }
+
+    await _doMergeWithGlobalId(
+      txn: txn,
+      table: table,
+      gid: gid,
+      incomingRaw: incomingRaw,
+      incoming: incoming,
+      deletedAt: deletedAt,
+    );
+    return true;
+  }
+
+  /// دمج وحدة منتج بعيدة: توطين productId عبر product_global_id ثم دمج
+  /// global_id + LWW. صف بمنتج غير موجود محلياً يُتخطى (يُعاد فحصه عند وصول
+  /// المنتج في دورة تالية).
+  Future<bool> _mergeProductUnitVariantsByGlobalId({
+    required Transaction txn,
+    required Map<String, dynamic> incomingRaw,
+    required Map<String, dynamic> incoming,
+    required DateTime? deletedAt,
+  }) async {
+    final gid = (incomingRaw['global_id'] ?? incoming['global_id'] ?? '')
+        .toString()
+        .trim();
+    if (gid.isEmpty) return false;
+
+    final pgid = (incomingRaw['product_global_id'] ?? incoming['productGlobalId'] ?? '')
+        .toString()
+        .trim();
+    int? productId;
+    if (pgid.isNotEmpty) {
+      final p = await txn.query(
+        'products',
+        columns: ['id'],
+        where: 'global_id = ?',
+        whereArgs: [pgid],
+        limit: 1,
+      );
+      if (p.isNotEmpty) {
+        productId = (p.first['id'] as num?)?.toInt();
+      }
+    }
+    if (productId == null) {
+      return true; // المنتج لم يصل بعد — تجاهل الوحدة اليتيمة
+    }
+    incoming['productId'] = productId;
+
+    await _doMergeWithGlobalId(
+      txn: txn,
+      table: 'product_unit_variants',
+      gid: gid,
+      incomingRaw: incomingRaw,
+      incoming: incoming,
+      deletedAt: deletedAt,
+    );
+    return true;
+  }
+
   Future<bool> _mergeProductsByGlobalId({
     required Transaction txn,
     required Map<String, dynamic> incomingRaw,
@@ -3512,6 +4686,34 @@ class CloudSyncService {
       // والآن تنتقل كطفرات لكل صف + سحب تزايدي (انظر _pullInvoicesIncremental).
       'invoices',
       'invoice_items',
+      // المرحلة الأولى من المزامنة لكل جدول — تنتقل عبر سحب/رفع تزايدي مستقل
+      // (انظر _pushPerTableIncremental/_pullPerTableIncremental) ولا تُحمل
+      // في لقطة app_snapshots الكاملة.
+      'products',
+      'product_unit_variants',
+      'customers',
+      'suppliers',
+      // المرحلة 2: جداول المال — سحب/رفع تزايدي مستقل.
+      'cash_ledger',
+      'expenses',
+      'expense_categories',
+      'installment_plans',
+      'installments',
+      'customer_debt_payments',
+      // المرحلة 3: المورّدون الماليون، أوامر الشراء، سندات المخزون.
+      'supplier_bills',
+      'supplier_payouts',
+      'purchase_orders',
+      'purchase_order_items',
+      'stock_vouchers',
+      'stock_voucher_items',
+      'po_receipts',
+      // المرحلة 4.
+      'work_shifts',
+      'stocktaking_sessions',
+      'stocktaking_items',
+      'parked_sales',
+      'activity_logs',
     };
     return !excluded.contains(tableName);
   }

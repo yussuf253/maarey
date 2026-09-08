@@ -393,13 +393,7 @@ extension DbShifts on DatabaseHelper {
     final id = await db.transaction((txn) async {
       final id = await DbShiftsSqlOps.insertWorkShift(txn, tid, shiftPayload);
 
-      await SyncQueueService.instance.enqueueMutation(
-        txn,
-        entityType: 'work_shift',
-        globalId: globalId,
-        operation: 'INSERT',
-        payload: shiftPayload,
-      );
+      // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
 
       if (addedCashAtOpen > 0) {
         final cashGlobalId = const Uuid().v4();
@@ -417,13 +411,7 @@ extension DbShifts on DatabaseHelper {
           'updatedAt': nowIso,
         };
         await DbCashSqlOps.insertCashLedgerEntry(txn, tid, cashPayload);
-        await SyncQueueService.instance.enqueueMutation(
-          txn,
-          entityType: 'cash_ledger',
-          globalId: cashGlobalId,
-          operation: 'INSERT',
-          payload: cashPayload,
-        );
+        // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
       }
       return id;
     });
@@ -477,13 +465,7 @@ extension DbShifts on DatabaseHelper {
           'updatedAt': nowIso,
         };
         await DbCashSqlOps.insertCashLedgerEntry(txn, tid, cashPayload);
-        await SyncQueueService.instance.enqueueMutation(
-          txn,
-          entityType: 'cash_ledger',
-          globalId: cashGlobalId,
-          operation: 'INSERT',
-          payload: cashPayload,
-        );
+        // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
       }
 
       final updatedPayload = {
@@ -496,18 +478,7 @@ extension DbShifts on DatabaseHelper {
       };
 
       await DbShiftsSqlOps.updateWorkShift(txn, tid, shiftId, updatedPayload);
-
-      if (wsGlobalId != null) {
-        final fullRow = Map<String, dynamic>.from(wsRows.first)
-          ..addAll(updatedPayload);
-        await SyncQueueService.instance.enqueueMutation(
-          txn,
-          entityType: 'work_shift',
-          globalId: wsGlobalId,
-          operation: 'UPDATE',
-          payload: fullRow,
-        );
-      }
+      // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
     });
     CloudSyncService.instance.scheduleSyncSoon();
   }
