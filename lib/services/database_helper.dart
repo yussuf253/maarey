@@ -2057,6 +2057,10 @@ class DatabaseHelper {
 
     // 1) الأعمدة الناقصة.
     Future<void> ensureCol(String table, String col, String type) async {
+      // Feature tables were introduced at different schema versions. A
+      // partial/legacy database may legitimately not have one yet; its own
+      // schema repair will create it before the next sync pass.
+      if (!await _tableExists(db, table)) return;
       if (!await _tableHasColumn(db, table, col)) {
         try {
           await db.execute('ALTER TABLE $table ADD COLUMN $col $type');
@@ -2186,6 +2190,7 @@ class DatabaseHelper {
       'service_orders',
       'service_order_items',
     ]) {
+      if (!await _tableExists(db, t)) continue;
       try {
         await db.execute(
           'CREATE INDEX IF NOT EXISTS idx_${t}_global_id ON $t(global_id)',
@@ -2293,7 +2298,7 @@ class DatabaseHelper {
           "SELECT i.id AS id, IFNULL(p.global_id, '') AS pgid, "
           "IFNULL(i.dueDate, '') AS dd, i.amount AS am, "
           "IFNULL(i.paid, 0) AS pd, IFNULL(i.paidDate, '') AS pdd, "
-          "updatedAt, createdAt AS stamp "
+          "i.updatedAt, i.createdAt AS stamp "
           "FROM installments i LEFT JOIN installment_plans p ON p.id = i.planId "
           "WHERE i.global_id IS NULL OR TRIM(i.global_id) = ''"),
       (r) => _stableGlobalId(
@@ -2358,7 +2363,7 @@ class DatabaseHelper {
       await db.rawQuery(""
           "SELECT b.id AS id, IFNULL(s.global_id, '') AS sg, b.amount AS am, "
           "b.createdAt AS ca, IFNULL(b.theirReference, '') AS tr, "
-          "updatedAt FROM supplier_bills b "
+          "b.updatedAt FROM supplier_bills b "
           "LEFT JOIN suppliers s ON s.id = b.supplierId "
           "WHERE b.global_id IS NULL OR TRIM(b.global_id) = ''"),
       (r) => _stableGlobalId(
@@ -2373,7 +2378,7 @@ class DatabaseHelper {
       await db.rawQuery(""
           "SELECT p.id AS id, IFNULL(s.global_id, '') AS sg, p.amount AS am, "
           "p.createdAt AS ca, IFNULL(p.affectsCash, 1) AS ac, "
-          "updatedAt FROM supplier_payouts p "
+          "p.updatedAt FROM supplier_payouts p "
           "LEFT JOIN suppliers s ON s.id = p.supplierId "
           "WHERE p.global_id IS NULL OR TRIM(p.global_id) = ''"),
       (r) => _stableGlobalId(
@@ -2400,7 +2405,7 @@ class DatabaseHelper {
       await db.rawQuery(""
           "SELECT i.id AS id, IFNULL(o.global_id, '') AS og, "
           "IFNULL(i.productName, '') AS pn, i.orderedQty AS oq, "
-          "i.unitPrice AS up, updatedAt, createdAt AS stamp "
+          "i.unitPrice AS up, i.updatedAt, i.createdAt AS stamp "
           "FROM purchase_order_items i "
           "LEFT JOIN purchase_orders o ON o.id = i.poId "
           "WHERE i.global_id IS NULL OR TRIM(i.global_id) = ''"),
@@ -2416,7 +2421,7 @@ class DatabaseHelper {
       await db.rawQuery(""
           "SELECT r.id AS id, IFNULL(o.global_id, '') AS og, "
           "IFNULL(r.receivedAt, '') AS ra, IFNULL(r.note, '') AS nt, "
-          "updatedAt, createdAt AS stamp "
+          "r.updatedAt, r.createdAt AS stamp "
           "FROM po_receipts r LEFT JOIN purchase_orders o ON o.id = r.poId "
           "WHERE r.global_id IS NULL OR TRIM(r.global_id) = ''"),
       (r) => _stableGlobalId('por', '${r['og']}|${r['ra']}|${r['nt']}'),
@@ -2438,7 +2443,7 @@ class DatabaseHelper {
       await db.rawQuery(""
           "SELECT i.id AS id, IFNULL(v.global_id, '') AS vg, "
           "IFNULL(p.global_id, '') AS pg, i.qty AS q, i.unitPrice AS up, "
-          "updatedAt, createdAt AS stamp "
+          "i.updatedAt, i.createdAt AS stamp "
           "FROM stock_voucher_items i "
           "LEFT JOIN stock_vouchers v ON v.id = i.voucherId "
           "LEFT JOIN products p ON p.id = i.productId "
@@ -2469,7 +2474,7 @@ class DatabaseHelper {
       'stocktaking_items',
       await db.rawQuery(""
           "SELECT i.id AS id, IFNULL(s.global_id, '') AS sg, "
-          "IFNULL(p.global_id, '') AS pg, updatedAt, startedAt AS stamp "
+          "IFNULL(p.global_id, '') AS pg, i.updatedAt, s.startedAt AS stamp "
           "FROM stocktaking_items i "
           "LEFT JOIN stocktaking_sessions s ON s.id = i.sessionId "
           "LEFT JOIN products p ON p.id = i.productId "
