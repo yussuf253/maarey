@@ -4973,7 +4973,6 @@ class CloudSyncService {
       'android_metadata',
       'sqlite_sequence',
       'users', // لا نرفع passwordHash/passwordSalt إلى السحابة
-      'sync_queue', // طابور المزامنة محلي لكل جهاز — لا يُرفع في اللقطة
       'product_warehouse_stock',
       // جداول متزامنة عبر طابور الطفرات (rpc_process_sync_queue) — كانت
       // تُضخّم لقطة app_snapshots بلا داعٍ (الفواتير أكبر جدول وأسرعها نمواً)،

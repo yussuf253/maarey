@@ -38,35 +38,6 @@ Future<void> ensureExpensesSchema(Database db) async {
     )
   ''');
 
-  await db.execute('''
-    CREATE TABLE IF NOT EXISTS sync_queue (
-      mutation_id TEXT PRIMARY KEY,
-      entity_type TEXT NOT NULL,
-      operation TEXT NOT NULL,
-      payload TEXT NOT NULL,
-      created_at TEXT NOT NULL,
-      status TEXT NOT NULL DEFAULT 'pending',
-      synced_at TEXT,
-      retry_count INTEGER NOT NULL DEFAULT 0,
-      last_error TEXT,
-      last_attempt_at TEXT
-    )
-  ''');
-
-  Future<void> addSyncQueueColumn(String col, String type) async {
-    final rows = await db.rawQuery('PRAGMA table_info(sync_queue)');
-    final exists = rows.any(
-      (r) => (r['name']?.toString().toLowerCase() ?? '') == col.toLowerCase(),
-    );
-    if (!exists) {
-      try {
-        await db.execute('ALTER TABLE sync_queue ADD COLUMN $col $type');
-      } catch (_) {}
-    }
-  }
-
-  await addSyncQueueColumn('last_attempt_at', 'TEXT');
-
   Future<void> addExpenseColumn(String col, String type) async {
     final rows = await db.rawQuery('PRAGMA table_info(expenses)');
     final exists = rows.any(

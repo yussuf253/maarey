@@ -14,84 +14,8 @@
 */
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:naboo/services/sync_queue_service.dart';
 
 void main() {
-  // ─────────────────────────────────────────────────────────────────────
-  // rpc_process_sync_queue results.
-  // ─────────────────────────────────────────────────────────────────────
-  group('rpc_process_sync_queue contract', () {
-    test('result entry has fields: mutation_id, status, error', () {
-      const raw = {
-        'mutation_id': 'abc-123',
-        'status': 'ok',
-        'error': null,
-      };
-      final r = SyncMutationResult.tryParse(raw);
-      expect(r, isNotNull);
-      expect(r!.mutationId, 'abc-123');
-      expect(r.ok, isTrue);
-      expect(r.error, isNull);
-    });
-
-    test('status is always "ok" or "fail" (never null)', () {
-      // Strict contract: only "ok" → ok=true; everything else → ok=false.
-      final ok = SyncMutationResult.tryParse({
-        'mutation_id': 'x',
-        'status': 'ok',
-        'error': null,
-      })!;
-      final fail = SyncMutationResult.tryParse({
-        'mutation_id': 'x',
-        'status': 'fail',
-        'error': 'tenant_unauthenticated',
-      })!;
-
-      expect(ok.ok, isTrue);
-      expect(fail.ok, isFalse);
-      // tryParse never crashes on weird strings; non-"ok" maps to ok=false.
-      final weird = SyncMutationResult.tryParse({
-        'mutation_id': 'x',
-        'status': 'unknown',
-        'error': null,
-      })!;
-      expect(weird.ok, isFalse);
-    });
-
-    test('clock_skew_rejected error has the documented prefix', () {
-      final r = SyncMutationResult.tryParse({
-        'mutation_id': 'x',
-        'status': 'fail',
-        'error':
-            'clock_skew_rejected: client timestamp >= server now()+5min',
-      })!;
-      expect(r.ok, isFalse);
-      expect(r.error, isNotNull);
-      expect(r.error!, startsWith('clock_skew_rejected'),
-          reason: 'server contract: error must start with the literal token');
-    });
-
-    test('tenant_unauthenticated error has the documented format', () {
-      final r = SyncMutationResult.tryParse({
-        'mutation_id': 'x',
-        'status': 'fail',
-        'error': 'tenant_unauthenticated',
-      })!;
-      expect(r.ok, isFalse);
-      expect(r.error, 'tenant_unauthenticated');
-    });
-
-    test('missing mutation_id → tryParse returns null (rejects payload)', () {
-      // The client refuses to act on a mutation it cannot key by id.
-      expect(
-        SyncMutationResult.tryParse(
-          {'status': 'ok', 'error': null},
-        ),
-        isNull,
-      );
-    });
-  });
-
   // ─────────────────────────────────────────────────────────────────────
   // app_tenant_access_status.
   // ─────────────────────────────────────────────────────────────────────
@@ -178,46 +102,6 @@ void main() {
         ).hasMatch(id),
         isTrue,
       );
-    });
-  });
-
-  // ─────────────────────────────────────────────────────────────────────
-  // Mutation payload (envelope) contract — what client SENDS.
-  // ─────────────────────────────────────────────────────────────────────
-  group('sync_queue mutation envelope contract', () {
-    // Client adds these meta-fields before sending to the server (see
-    // SyncQueueService.processQueue).
-    test('payload includes _mutation_id / _entity_type / _operation / '
-        '_device_id', () {
-      final envelope = <String, dynamic>{
-        // domain payload
-        'global_id': 'abc',
-        'amount': 1000,
-        // meta added by the client
-        '_mutation_id': '11111111-1111-1111-1111-111111111111',
-        '_entity_type': 'expense',
-        '_operation': 'INSERT',
-        '_device_id': 'device-xyz',
-      };
-      for (final key in [
-        '_mutation_id',
-        '_entity_type',
-        '_operation',
-        '_device_id',
-      ]) {
-        expect(envelope.containsKey(key), isTrue,
-            reason: 'envelope missing client meta field: $key');
-        expect(envelope[key], isNotNull);
-        expect(envelope[key], isA<String>());
-      }
-    });
-
-    test('_operation values are constrained to the supported verb set', () {
-      const allowed = {'INSERT', 'UPDATE', 'SOFT_DELETE'};
-      for (final op in allowed) {
-        final env = <String, dynamic>{'_operation': op};
-        expect(allowed.contains(env['_operation']), isTrue);
-      }
     });
   });
 }

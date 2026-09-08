@@ -10,7 +10,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'services/cloud_sync_service.dart';
-import 'services/sync_queue_service.dart';
 import 'services/database_helper.dart';
 import 'services/system_notification_service.dart';
 import 'services/license_service.dart';
@@ -201,17 +200,6 @@ void main() async {
     await LicenseService.instance.initialize();
   } catch (e) {
     debugPrint('[main] LicenseService.initialize failed: $e');
-  }
-  if (kDebugMode) {
-    debugPrint('After LicenseService / Before SyncQueueService');
-  }
-  try {
-    SyncQueueService.instance.initialize();
-  } catch (e) {
-    debugPrint('[main] SyncQueueService.initialize failed: $e');
-  }
-  if (kDebugMode) {
-    debugPrint('After SyncQueueService / Before SystemNotificationService');
   }
   try {
     await SystemNotificationService.instance.initialize();

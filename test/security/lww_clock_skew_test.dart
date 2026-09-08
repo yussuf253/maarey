@@ -1,10 +1,6 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:naboo/services/sync_queue_service.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-
 const _migrationPath = 'migrations/20260510_lww_clock_skew.sql';
 
 // ─── Pure-Dart simulation of the SQL guard ───────────────────────────────────
@@ -62,47 +58,6 @@ void simulateClockSkewGuard(
       threshold: threshold,
     );
   }
-}
-
-// ─── Integration helpers (لإثبات أن fail بسبب clock_skew_rejected
-//     يزيد retry_count عبر sync_queue_service) ─────────────────────────────────
-Future<Database> _openSyncQueueDb() async {
-  sqfliteFfiInit();
-  return databaseFactoryFfi.openDatabase(
-    inMemoryDatabasePath,
-    options: OpenDatabaseOptions(
-      version: 1,
-      onCreate: (db, _) async {
-        await db.execute('''
-          CREATE TABLE sync_queue (
-            mutation_id TEXT PRIMARY KEY,
-            entity_type TEXT NOT NULL,
-            operation TEXT NOT NULL,
-            payload TEXT NOT NULL,
-            created_at TEXT NOT NULL,
-            status TEXT NOT NULL DEFAULT 'pending',
-            synced_at TEXT,
-            retry_count INTEGER NOT NULL DEFAULT 0,
-            last_error TEXT,
-            last_attempt_at TEXT
-          )
-        ''');
-      },
-    ),
-  );
-}
-
-Future<void> _seed(Database db, String mutationId,
-    {Map<String, dynamic>? payload, int retryCount = 0}) async {
-  await db.insert('sync_queue', {
-    'mutation_id': mutationId,
-    'entity_type': 'expense',
-    'operation': 'INSERT',
-    'payload': jsonEncode(payload ?? {'global_id': 'g_$mutationId'}),
-    'created_at': DateTime.now().toUtc().toIso8601String(),
-    'status': 'pending',
-    'retry_count': retryCount,
-  });
 }
 
 void main() {
@@ -289,90 +244,4 @@ void main() {
     });
   });
 
-  // ───────────────────────────────────────────────────────────────────────
-  // 3) Integration — fail with clock_skew_rejected ⇒ retry_count++ via Step 17 wiring.
-  // ───────────────────────────────────────────────────────────────────────
-  group('SyncQueueService wiring — clock-skew rejection bumps retry_count', () {
-    late SyncQueueService service;
-    late Database db;
-
-    setUp(() async {
-      db = await _openSyncQueueDb();
-      service = SyncQueueService.instance
-        ..databaseProviderForTesting = (() async => db)
-        ..authCheckForTesting = (() => true)
-        ..deviceIdProviderForTesting = (() async => 'device-test');
-    });
-
-    tearDown(() async {
-      service
-        ..databaseProviderForTesting = null
-        ..authCheckForTesting = null
-        ..deviceIdProviderForTesting = null
-        ..rpcOverrideForTesting = null;
-      await db.close();
-    });
-
-    test('rejected mutation is marked failed with clock_skew_rejected error',
-        () async {
-      await _seed(db, 'm1', retryCount: 0);
-
-      service.rpcOverrideForTesting = (_) async => const [
-            SyncMutationResult(
-              mutationId: 'm1',
-              ok: false,
-              error: 'clock_skew_rejected: client timestamp 9999-12-31 ...',
-            ),
-          ];
-
-      await service.processQueue();
-
-      final row = (await db.query(
-        'sync_queue',
-        where: 'mutation_id = ?',
-        whereArgs: ['m1'],
-      )).single;
-
-      expect(row['status'], 'failed');
-      expect(row['retry_count'], 1,
-          reason: 'rejected mutation must increment retry_count exactly once');
-      expect(row['last_error'].toString(), contains('clock_skew_rejected'));
-      expect(row['last_attempt_at'], isA<String>());
-    });
-
-    test('mixed batch — only the skewed mutation is failed, the other is synced',
-        () async {
-      await _seed(db, 'm_ok', retryCount: 0);
-      await _seed(db, 'm_skewed', retryCount: 0);
-
-      service.rpcOverrideForTesting = (_) async => const [
-            SyncMutationResult(mutationId: 'm_ok', ok: true),
-            SyncMutationResult(
-              mutationId: 'm_skewed',
-              ok: false,
-              error: 'clock_skew_rejected: ...',
-            ),
-          ];
-
-      await service.processQueue();
-
-      final ok = (await db.query(
-        'sync_queue',
-        where: 'mutation_id = ?',
-        whereArgs: ['m_ok'],
-      )).single;
-      expect(ok['status'], 'synced');
-      expect(ok['retry_count'], 0,
-          reason: 'unrelated success must not be punished');
-
-      final skewed = (await db.query(
-        'sync_queue',
-        where: 'mutation_id = ?',
-        whereArgs: ['m_skewed'],
-      )).single;
-      expect(skewed['status'], 'failed');
-      expect(skewed['retry_count'], 1);
-      expect(skewed['last_error'].toString(), contains('clock_skew_rejected'));
-    });
-  });
 }
