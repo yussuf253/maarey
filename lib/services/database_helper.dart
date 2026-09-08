@@ -7,7 +7,6 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:uuid/uuid.dart';
 import 'cloud_sync_service.dart';
-import 'sync_queue_service.dart';
 import 'tenant_context.dart';
 import '../models/invoice.dart';
 import '../models/installment.dart';
@@ -2130,6 +2129,27 @@ class DatabaseHelper {
     await ensureCol('stock_vouchers', 'warehouse_from_gid', 'TEXT');
     await ensureCol('stock_vouchers', 'warehouse_to_gid', 'TEXT');
 
+    // المرحلة 5: التصنيفات، الماركات، إعدادات الطباعة، أوامر الخدمة.
+    await ensureCol('categories', 'global_id', 'TEXT');
+    await ensureCol('categories', 'updatedAt', 'TEXT');
+    await ensureCol('categories', 'parent_global_id', 'TEXT');
+    await ensureCol('brands', 'global_id', 'TEXT');
+    await ensureCol('brands', 'updatedAt', 'TEXT');
+    await ensureCol('print_settings', 'global_id', 'TEXT');
+    await ensureCol('service_orders', 'customer_name_snapshot', 'TEXT');
+    await ensureCol('service_orders', 'device_name', 'TEXT');
+    await ensureCol('service_orders', 'estimated_price_fils', 'INTEGER');
+    await ensureCol('service_orders', 'agreed_price_fils', 'INTEGER');
+    await ensureCol('service_orders', 'advance_payment_fils', 'INTEGER');
+    await ensureCol('service_orders', 'technician_name', 'TEXT');
+    await ensureCol('service_orders', 'issue_description', 'TEXT');
+    await ensureCol('service_orders', 'completion_notes', 'TEXT');
+    await ensureCol('service_order_items', 'order_global_id', 'TEXT');
+    await ensureCol('service_order_items', 'product_global_id', 'TEXT');
+    await ensureCol('service_order_items', 'product_name', 'TEXT');
+    await ensureCol('service_order_items', 'price_fils', 'INTEGER');
+    await ensureCol('service_order_items', 'total_fils', 'INTEGER');
+
     // فهارس على global_id لكل جدول.
     for (final t in const [
       'products',
@@ -2153,6 +2173,11 @@ class DatabaseHelper {
       'stocktaking_items',
       'parked_sales',
       'activity_logs',
+      'categories',
+      'brands',
+      'print_settings',
+      'service_orders',
+      'service_order_items',
     ]) {
       try {
         await db.execute(
@@ -2464,6 +2489,65 @@ class DatabaseHelper {
           "FROM activity_logs "
           "WHERE global_id IS NULL OR TRIM(global_id) = ''"),
       (r) => _stableGlobalId('al', '${r['ty']}|${r['ti']}|${r['ca']}|${r['am']}'),
+    );
+
+    // ── المرحلة 5: التصنيفات، الماركات، أوامر الخدمة ──
+
+    // التصنيفات: name|code (فريد).
+    await backfillRows(
+      'categories',
+      await db.rawQuery(""
+          "SELECT id, IFNULL(name, '') AS nm, IFNULL(code, '') AS cd, "
+          "createdAt, createdAt AS stamp FROM categories "
+          "WHERE global_id IS NULL OR TRIM(global_id) = ''"),
+      (r) => _stableGlobalId('cat', '${r['nm']}|${r['cd']}'),
+    );
+    // Ensure categories updatedAt for incremental push.
+    try {
+      await db.execute(
+        "UPDATE categories SET updatedAt = IFNULL(NULLIF(updatedAt, ''), IFNULL(createdAt, '')) "
+        "WHERE updatedAt IS NULL OR TRIM(updatedAt) = ''",
+      );
+    } catch (_) {}
+
+    // الماركات: name|code (فريد).
+    await backfillRows(
+      'brands',
+      await db.rawQuery(""
+          "SELECT id, IFNULL(name, '') AS nm, IFNULL(code, '') AS cd, "
+          "createdAt, createdAt AS stamp FROM brands "
+          "WHERE global_id IS NULL OR TRIM(global_id) = ''"),
+      (r) => _stableGlobalId('br', '${r['nm']}|${r['cd']}'),
+    );
+    // Ensure brands updatedAt for incremental push.
+    try {
+      await db.execute(
+        "UPDATE brands SET updatedAt = IFNULL(NULLIF(updatedAt, ''), IFNULL(createdAt, '')) "
+        "WHERE updatedAt IS NULL OR TRIM(updatedAt) = ''",
+      );
+    } catch (_) {}
+
+    // أوامر الخدمة: deviceName|customerNameSnapshot|createdAt.
+    await backfillRows(
+      'service_orders',
+      await db.rawQuery(""
+          "SELECT id, IFNULL(deviceName, '') AS dn, "
+          "IFNULL(customerNameSnapshot, '') AS cn, "
+          "createdAt, createdAt AS stamp FROM service_orders "
+          "WHERE global_id IS NULL OR TRIM(global_id) = ''"),
+      (r) => _stableGlobalId('so', '${r['dn']}|${r['cn']}|${r["createdAt"]}'),
+    );
+
+    // بنود أوامر الخدمة: orderGlobalId|productName|quantity.
+    await backfillRows(
+      'service_order_items',
+      await db.rawQuery(""
+          "SELECT i.id AS id, IFNULL(i.orderGlobalId, '') AS og, "
+          "IFNULL(i.productName, '') AS pn, i.quantity AS q, "
+          "i.createdAt, i.createdAt AS stamp "
+          "FROM service_order_items i "
+          "WHERE i.global_id IS NULL OR TRIM(i.global_id) = ''"),
+      (r) => _stableGlobalId('soi', '${r['og']}|${r['pn']}|${r['q']}'),
     );
 
     // 3) صفوف بلا updatedAt (تصلكم مزامنة تزايدية بالتاريخ) — ختمها مرة واحدة.

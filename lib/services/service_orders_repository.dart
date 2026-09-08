@@ -4,9 +4,7 @@ import 'package:uuid/uuid.dart';
 import '../utils/app_logger.dart';
 import 'database_helper.dart';
 import 'service_orders_sql_ops.dart';
-import 'sync_entity_types.dart';
 import 'tenant_context_service.dart';
-import 'sync_queue_service.dart';
 
 class ServiceOrdersRepository {
   ServiceOrdersRepository._();
@@ -166,13 +164,7 @@ class ServiceOrdersRepository {
 
     return db.transaction((txn) async {
       final id = await ServiceOrdersSqlOps.insertServiceOrder(txn, tid, payload);
-      await SyncQueueService.instance.enqueueMutation(
-        txn,
-        entityType: SyncEntityTypes.serviceOrder,
-        globalId: gid,
-        operation: 'INSERT',
-        payload: Map<String, dynamic>.from(payload),
-      );
+      // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
       return id;
     });
   }
@@ -262,16 +254,7 @@ class ServiceOrdersRepository {
         final gid = rows.isEmpty ? '' : (rows.first['global_id'] ?? '').toString();
         final clean = gid.trim();
         if (clean.isNotEmpty) {
-          await SyncQueueService.instance.enqueueMutation(
-            txn,
-            entityType: SyncEntityTypes.serviceOrder,
-            globalId: clean,
-            operation: 'UPDATE',
-            payload: {
-              'id': clean,
-              ...payload,
-            },
-          );
+          // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
         }
       }
       return affected;
@@ -317,19 +300,7 @@ class ServiceOrdersRepository {
       );
       final gid = (rows.first['global_id'] ?? '').toString().trim();
       if (gid.isNotEmpty) {
-        await SyncQueueService.instance.enqueueMutation(
-          txn,
-          entityType: SyncEntityTypes.serviceOrder,
-          globalId: gid,
-          operation: 'UPDATE',
-          payload: {
-            'id': gid,
-            'status': 'in_progress',
-            'workStartedAt': started.toIso8601String(),
-            'promisedDeliveryAt': promised,
-            'updatedAt': now,
-          },
-        );
+        // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
       }
     });
   }
@@ -360,17 +331,7 @@ class ServiceOrdersRepository {
       );
       final gid = (rows.first['global_id'] ?? '').toString().trim();
       if (gid.isNotEmpty) {
-        await SyncQueueService.instance.enqueueMutation(
-          txn,
-          entityType: SyncEntityTypes.serviceOrder,
-          globalId: gid,
-          operation: 'UPDATE',
-          payload: {
-            'id': gid,
-            'status': 'completed',
-            'updatedAt': now,
-          },
-        );
+        // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
       }
     });
   }
@@ -420,17 +381,7 @@ class ServiceOrdersRepository {
         },
       );
       if (gid.isNotEmpty) {
-        await SyncQueueService.instance.enqueueMutation(
-          txn,
-          entityType: SyncEntityTypes.serviceOrder,
-          globalId: gid,
-          operation: 'UPDATE',
-          payload: {
-            'id': gid,
-            'status': 'delivered',
-            'updatedAt': now,
-          },
-        );
+        // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
       }
       out = true;
     });
@@ -459,13 +410,7 @@ class ServiceOrdersRepository {
         final gid = rows.isEmpty ? '' : (rows.first['global_id'] ?? '').toString();
         final clean = gid.trim();
         if (clean.isNotEmpty) {
-          await SyncQueueService.instance.enqueueMutation(
-            txn,
-            entityType: SyncEntityTypes.serviceOrder,
-            globalId: clean,
-            operation: 'DELETE',
-            payload: {'id': clean, 'deletedAt': now, 'updatedAt': now},
-          );
+          // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
         }
       }
       return affected;
@@ -513,13 +458,7 @@ class ServiceOrdersRepository {
     };
     return db.transaction((txn) async {
       final id = await ServiceOrdersSqlOps.insertServiceOrderItem(txn, tid, payload);
-      await SyncQueueService.instance.enqueueMutation(
-        txn,
-        entityType: SyncEntityTypes.serviceOrderItem,
-        globalId: itemGid,
-        operation: 'INSERT',
-        payload: Map<String, dynamic>.from(payload),
-      );
+      // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
       return id;
     });
   }
@@ -546,13 +485,7 @@ class ServiceOrdersRepository {
         final gid = rows.isEmpty ? '' : (rows.first['global_id'] ?? '').toString();
         final clean = gid.trim();
         if (clean.isNotEmpty) {
-          await SyncQueueService.instance.enqueueMutation(
-            txn,
-            entityType: SyncEntityTypes.serviceOrderItem,
-            globalId: clean,
-            operation: 'DELETE',
-            payload: {'id': clean, 'deletedAt': now, 'updatedAt': now},
-          );
+          // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
         }
       }
       return affected;

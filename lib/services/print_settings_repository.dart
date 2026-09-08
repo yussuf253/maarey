@@ -2,7 +2,6 @@ import 'package:sqflite/sqflite.dart';
 
 import '../models/print_settings_data.dart';
 import 'database_helper.dart';
-import 'sync_queue_service.dart';
 
 const _kGlobalId = 'print_setting_singleton';
 
@@ -42,16 +41,7 @@ class PrintSettingsRepository {
         },
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
-      await SyncQueueService.instance.enqueueMutation(
-        txn,
-        entityType: 'print_setting',
-        globalId: _kGlobalId,
-        operation: 'UPDATE',
-        payload: {
-          'payload': data.toJsonString(),
-          'updatedAt': now,
-        },
-      );
+      // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
     });
   }
 }

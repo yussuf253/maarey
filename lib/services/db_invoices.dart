@@ -673,8 +673,6 @@ extension DbInvoices on DatabaseHelper {
     required int invoiceId,
     String? deletedAtIso,
   }) async {
-    final nowIso = DateTime.now().toUtc().toIso8601String();
-
     final invRows = await txn.query(
       'invoices',
       where: 'id = ?',
@@ -686,123 +684,7 @@ extension DbInvoices on DatabaseHelper {
 
     final invGid = (inv['global_id'] ?? '').toString().trim();
     if (invGid.isEmpty) return; // pre-migration row — snapshot still backstops
-
-    Future<String> gidOf(String table, Object? id) async {
-      final asInt = id is int ? id : int.tryParse('$id');
-      if (asInt == null) return '';
-      final r = await txn.query(
-        table,
-        columns: ['global_id'],
-        where: 'id = ?',
-        whereArgs: [asInt],
-        limit: 1,
-      );
-      if (r.isEmpty) return '';
-      return (r.first['global_id'] ?? '').toString().trim();
-    }
-
-    final customerGid = await gidOf('customers', inv['customerId']);
-    final originalGid = await gidOf('invoices', inv['originalInvoiceId']);
-    final shiftGid = await gidOf('work_shifts', inv['workShiftId']);
-
-    await SyncQueueService.instance.enqueueMutation(
-      txn,
-      entityType: 'invoice',
-      globalId: invGid,
-      // الحذف المنطقي يُرسل UPDATE تحمل deletedAt حتى يبقى الصف في السحابة
-      // للتدقيق ويُلتقط على بقية الأجهزة عبر السحب التزايدي (بدون realtime).
-      operation: deletedAtIso != null ? 'UPDATE' : 'INSERT',
-      payload: {
-        if (deletedAtIso != null) 'deletedAt': deletedAtIso,
-        'id': invGid,
-        'tenantId': (inv['tenantId'] as num?)?.toInt() ?? 1,
-        'customerName': (inv['customerName'] ?? '').toString(),
-        'date': (inv['date'] ?? '').toString(),
-        'type': (inv['type'] as num?)?.toInt() ?? 0,
-        'discount': (inv['discount'] as num?)?.toDouble() ?? 0.0,
-        'discountFils': (inv['discountFils'] as num?)?.toInt() ?? 0,
-        'tax': (inv['tax'] as num?)?.toDouble() ?? 0.0,
-        'taxFils': (inv['taxFils'] as num?)?.toInt() ?? 0,
-        'advancePayment': (inv['advancePayment'] as num?)?.toDouble() ?? 0.0,
-        'advancePaymentFils': (inv['advancePaymentFils'] as num?)?.toInt() ?? 0,
-        'total': (inv['total'] as num?)?.toDouble() ?? 0.0,
-        'totalFils': (inv['totalFils'] as num?)?.toInt() ?? 0,
-        'isReturned': (inv['isReturned'] as num?)?.toInt() ?? 0,
-        'originalInvoiceGlobalId': originalGid,
-        'deliveryAddress': (inv['deliveryAddress'] ?? '').toString(),
-        'createdByUserName': (inv['createdByUserName'] ?? '').toString(),
-        'discountPercent': (inv['discountPercent'] as num?)?.toDouble() ?? 0.0,
-        'workShiftGlobalId': shiftGid,
-        'customerGlobalId': customerGid,
-        'loyaltyDiscount': (inv['loyaltyDiscount'] as num?)?.toDouble() ?? 0.0,
-        'loyaltyDiscountFils':
-            (inv['loyaltyDiscountFils'] as num?)?.toInt() ?? 0,
-        'loyaltyPointsRedeemed':
-            (inv['loyaltyPointsRedeemed'] as num?)?.toInt() ?? 0,
-        'loyaltyPointsEarned':
-            (inv['loyaltyPointsEarned'] as num?)?.toInt() ?? 0,
-        'installmentInterestPct': inv['installmentInterestPct']?.toString(),
-        'installmentPlannedMonths': inv['installmentPlannedMonths']?.toString(),
-        'installmentFinancedAmount': inv['installmentFinancedAmount']
-            ?.toString(),
-        'installmentInterestAmount': inv['installmentInterestAmount']
-            ?.toString(),
-        'installmentTotalWithInterest': inv['installmentTotalWithInterest']
-            ?.toString(),
-        'installmentSuggestedMonthly': inv['installmentSuggestedMonthly']
-            ?.toString(),
-        'createdAt': (inv['createdAt'] ?? inv['date'] ?? nowIso).toString(),
-        'updatedAt': (inv['updatedAt'] ?? inv['date'] ?? nowIso).toString(),
-      },
-    );
-
-    final itemRows = await txn.query(
-      'invoice_items',
-      where: 'invoiceId = ?',
-      whereArgs: [invoiceId],
-    );
-    for (final it in itemRows) {
-      final itGid = (it['global_id'] ?? '').toString().trim();
-      if (itGid.isEmpty) continue;
-      final productGid = await gidOf('products', it['productId']);
-      final variantGid = await gidOf(
-        'product_variants',
-        it['productVariantId'],
-      );
-      await SyncQueueService.instance.enqueueMutation(
-        txn,
-        entityType: 'invoice_item',
-        globalId: itGid,
-        operation: 'INSERT',
-        payload: {
-          'id': itGid,
-          'tenantId':
-              (it['tenantId'] as num?)?.toInt() ??
-              ((inv['tenantId'] as num?)?.toInt() ?? 1),
-          'invoiceGlobalId': invGid,
-          'productName': (it['productName'] ?? '').toString(),
-          'quantity': (it['quantity'] as num?)?.toDouble() ?? 0.0,
-          'price': (it['price'] as num?)?.toDouble() ?? 0.0,
-          'priceFils': (it['priceFils'] as num?)?.toInt() ?? 0,
-          'total': (it['total'] as num?)?.toDouble() ?? 0.0,
-          'totalFils': (it['totalFils'] as num?)?.toInt() ?? 0,
-          'unitCost': (it['unitCost'] as num?)?.toDouble() ?? 0.0,
-          'unitCostFils': (it['unitCostFils'] as num?)?.toInt() ?? 0,
-          'productGlobalId': productGid,
-          'unitVariantId': it['unitVariantId']?.toString(),
-          'unitLabel': (it['unitLabel'] ?? '').toString(),
-          'unitFactor': (it['unitFactor'] as num?)?.toDouble() ?? 1.0,
-          'enteredQty': (it['enteredQty'] as num?)?.toDouble() ?? 0.0,
-          'baseQty': (it['baseQty'] as num?)?.toDouble() ?? 0.0,
-          'productVariantGlobalId': variantGid,
-          'variantColorNameSnapshot': (it['variantColorNameSnapshot'] ?? '')
-              .toString(),
-          'variantSizeSnapshot': (it['variantSizeSnapshot'] ?? '').toString(),
-          'createdAt': (it['createdAt'] ?? inv['date'] ?? nowIso).toString(),
-          'updatedAt': (it['updatedAt'] ?? inv['date'] ?? nowIso).toString(),
-        },
-      );
-    }
+    // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
   }
 
   Future<int> insertInvoiceWithPolicy(

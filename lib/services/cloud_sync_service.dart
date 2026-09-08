@@ -1525,6 +1525,14 @@ class CloudSyncService {
     'stocktaking_items',
     'parked_sales',
     'activity_logs',
+    // المرحلة 5: التصنيفات، الماركات، إعدادات الطباعة، الفواتير، أوامر الخدمة.
+    'categories',
+    'brands',
+    'print_settings',
+    'invoices',
+    'invoice_items',
+    'service_orders',
+    'service_order_items',
   };
 
   /// أعمدة كل جدول على السحابة (snake_case) — يُقاطع مع الأعمدة المحلية عند
@@ -1658,6 +1666,40 @@ class CloudSyncService {
       'global_id', 'tenant_id', 'session_global_id', 'product_global_id',
       'system_qty', 'counted_qty', 'difference',
       'adjustment_voucher_global_id', 'created_at', 'updated_at',
+    },
+    'categories': {
+      'global_id', 'name', 'code', 'description', 'is_active',
+      'parent_global_id', 'created_at', 'updated_at', 'deleted_at',
+    },
+    'brands': {
+      'global_id', 'name', 'code', 'is_active',
+      'created_at', 'updated_at', 'deleted_at',
+    },
+    'print_settings': {
+      'global_id', 'payload', 'updated_at',
+    },
+    'invoices': {
+      'global_id', 'tenant_id', 'type', 'status', 'total', 'subtotal',
+      'discount', 'tax', 'is_paid', 'is_returned', 'notes', 'customer_name',
+      'cashier_name', 'work_shift_global_id', 'created_at', 'updated_at',
+      'deleted_at',
+    },
+    'invoice_items': {
+      'global_id', 'tenant_id', 'invoice_global_id', 'product_global_id',
+      'product_name', 'quantity', 'base_qty', 'unit_price', 'discount',
+      'tax', 'total', 'created_at', 'updated_at', 'deleted_at',
+    },
+    'service_orders': {
+      'global_id', 'tenant_id', 'customer_name_snapshot', 'device_name',
+      'device_serial', 'estimated_price_fils', 'agreed_price_fils',
+      'advance_payment_fils', 'status', 'technician_name',
+      'issue_description', 'completion_notes', 'created_at', 'updated_at',
+      'deleted_at',
+    },
+    'service_order_items': {
+      'global_id', 'tenant_id', 'order_global_id', 'product_name',
+      'quantity', 'price_fils', 'total_fils',
+      'created_at', 'updated_at', 'deleted_at',
     },
   };
 
@@ -1956,6 +1998,29 @@ class CloudSyncService {
         'stock_vouchers',
         row['adjustmentVoucherId'],
       );
+    } else if (table == 'categories') {
+      out.remove('parent_id');
+      out['parent_global_id'] =
+          await _globalIdOfLocalRow(db, 'categories', row['parentId']);
+    } else if (table == 'invoices') {
+      out.remove('work_shift_id');
+      out['work_shift_global_id'] =
+          await _globalIdOfLocalRow(db, 'work_shifts', row['workShiftId']);
+    } else if (table == 'invoice_items') {
+      out.remove('invoice_id');
+      out.remove('product_id');
+      out['invoice_global_id'] =
+          await _globalIdOfLocalRow(db, 'invoices', row['invoiceId']);
+      out['product_global_id'] =
+          await _globalIdOfLocalRow(db, 'products', row['productId']);
+    } else if (table == 'service_orders') {
+      out.remove('customer_id');
+      out.remove('service_id');
+      out.remove('invoice_id');
+    } else if (table == 'service_order_items') {
+      out.remove('product_id');
+      out['product_global_id'] =
+          await _globalIdOfLocalRow(db, 'products', row['productId']);
     }
     // أعمدة boolean على السحابة (محلياً 0/1).
     for (final b in const ['affects_cash', 'is_recurring', 'is_active']) {
@@ -3251,6 +3316,197 @@ class CloudSyncService {
     return true;
   }
 
+  /// دمج تصنيف عبر global_id + حل parent_global_id → parentId.
+  Future<bool> _mergeCategoriesByGlobalId({
+    required Transaction txn,
+    required Map<String, dynamic> incomingRaw,
+    required Map<String, dynamic> incoming,
+    required DateTime? deletedAt,
+    required List<String> pkCols,
+  }) async {
+    const table = 'categories';
+    final gid = (incoming['global_id'] ?? '').toString().trim();
+    if (gid.isEmpty) return false;
+
+    final localMatches = await txn.query(
+      table,
+      where: 'global_id = ?',
+      whereArgs: [gid],
+      limit: 1,
+    );
+
+    if (deletedAt != null) {
+      await txn.delete(table, where: 'global_id = ?', whereArgs: [gid]);
+      return true;
+    }
+
+    // Resolve parent_global_id → parentId.
+    final parentGid =
+        (incomingRaw['parent_global_id'] ?? incoming['parent_global_id'] ?? '')
+            .toString()
+            .trim();
+    incoming.remove('parent_id');
+    if (parentGid.isNotEmpty) {
+      final parent = await txn.query(
+        table,
+        columns: ['id'],
+        where: 'global_id = ?',
+        whereArgs: [parentGid],
+        limit: 1,
+      );
+      if (parent.isNotEmpty) {
+        incoming['parentId'] = parent.first['id'];
+      }
+    }
+
+    if (localMatches.isEmpty) {
+      await txn.insert(
+        table,
+        incoming..remove('id'),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+      return true;
+    }
+
+    final current = localMatches.first;
+    if (!_incomingWins(current, incomingRaw)) return true;
+
+    final merged = Map<String, dynamic>.from(incoming);
+    for (final c in pkCols) {
+      merged[c] = current[c];
+    }
+    await txn.insert(
+      table,
+      merged,
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    return true;
+  }
+
+  /// دمج أمر خدمة عبر global_id + حل customer_id → customerId.
+  Future<bool> _mergeServiceOrdersByGlobalId({
+    required Transaction txn,
+    required Map<String, dynamic> incomingRaw,
+    required Map<String, dynamic> incoming,
+    required Set<String> localCols,
+    required DateTime? deletedAt,
+    required List<String> pkCols,
+  }) async {
+    const table = 'service_orders';
+    final gid = (incoming['global_id'] ?? '').toString().trim();
+    if (gid.isEmpty) return false;
+
+    final localMatches = await txn.query(
+      table,
+      where: 'global_id = ?',
+      whereArgs: [gid],
+      limit: 1,
+    );
+
+    if (deletedAt != null) {
+      await txn.delete(table, where: 'global_id = ?', whereArgs: [gid]);
+      return true;
+    }
+
+    // service_orders has customerId (int FK) but no customer_global_id on remote.
+    // The customer reference is carried via customer_name_snapshot.
+    incoming.remove('customer_id');
+    incoming.remove('service_id');
+    incoming.remove('invoice_id');
+
+    if (localMatches.isEmpty) {
+      await txn.insert(
+        table,
+        incoming..remove('id'),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+      return true;
+    }
+
+    final current = localMatches.first;
+    if (!_incomingWins(current, incomingRaw)) return true;
+
+    final merged = Map<String, dynamic>.from(incoming);
+    for (final c in pkCols) {
+      merged[c] = current[c];
+    }
+    await txn.insert(
+      table,
+      merged,
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    return true;
+  }
+
+  /// دمج بند أمر خدمة عبر global_id + حل product_global_id → productId.
+  Future<bool> _mergeServiceOrderItemsByGlobalId({
+    required Transaction txn,
+    required Map<String, dynamic> incomingRaw,
+    required Map<String, dynamic> incoming,
+    required Set<String> localCols,
+    required DateTime? deletedAt,
+    required List<String> pkCols,
+  }) async {
+    const table = 'service_order_items';
+    final gid = (incoming['global_id'] ?? '').toString().trim();
+    if (gid.isEmpty) return false;
+
+    final localMatches = await txn.query(
+      table,
+      where: 'global_id = ?',
+      whereArgs: [gid],
+      limit: 1,
+    );
+
+    if (deletedAt != null) {
+      await txn.delete(table, where: 'global_id = ?', whereArgs: [gid]);
+      return true;
+    }
+
+    // Resolve product_global_id → productId.
+    final pg =
+        (incomingRaw['product_global_id'] ??
+                incoming['product_global_id'] ?? '')
+            .toString()
+            .trim();
+    incoming.remove('product_id');
+    if (pg.isNotEmpty && localCols.contains('productId')) {
+      final prod = await txn.query(
+        'products',
+        columns: ['id'],
+        where: 'global_id = ?',
+        whereArgs: [pg],
+        limit: 1,
+      );
+      if (prod.isNotEmpty) {
+        incoming['productId'] = prod.first['id'];
+      }
+    }
+
+    if (localMatches.isEmpty) {
+      await txn.insert(
+        table,
+        incoming..remove('id'),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+      return true;
+    }
+
+    final current = localMatches.first;
+    if (!_incomingWins(current, incomingRaw)) return true;
+
+    final merged = Map<String, dynamic>.from(incoming);
+    for (final c in pkCols) {
+      merged[c] = current[c];
+    }
+    await txn.insert(
+      table,
+      merged,
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    return true;
+  }
+
   Future<bool> _mergeWorkShiftsByGlobalId({
     required Transaction txn,
     required Map<String, dynamic> incomingRaw,
@@ -3625,6 +3881,44 @@ class CloudSyncService {
           incoming: incoming,
           localCols: localCols,
           deletedAt: deletedAt,
+        );
+        if (handled) continue;
+      }
+
+      // ── categories: global_id merge + parent_global_id FK resolution ──
+      if (table == 'categories' && localCols.contains('global_id')) {
+        final handled = await _mergeCategoriesByGlobalId(
+          txn: txn,
+          incomingRaw: incomingRaw,
+          incoming: incoming,
+          deletedAt: deletedAt,
+          pkCols: pkCols,
+        );
+        if (handled) continue;
+      }
+
+      // ── service_orders: global_id merge + customer FK resolution ──────
+      if (table == 'service_orders' && localCols.contains('global_id')) {
+        final handled = await _mergeServiceOrdersByGlobalId(
+          txn: txn,
+          incomingRaw: incomingRaw,
+          incoming: incoming,
+          localCols: localCols,
+          deletedAt: deletedAt,
+          pkCols: pkCols,
+        );
+        if (handled) continue;
+      }
+
+      // ── service_order_items: global_id merge + product FK resolution ──
+      if (table == 'service_order_items' && localCols.contains('global_id')) {
+        final handled = await _mergeServiceOrderItemsByGlobalId(
+          txn: txn,
+          incomingRaw: incomingRaw,
+          incoming: incoming,
+          localCols: localCols,
+          deletedAt: deletedAt,
+          pkCols: pkCols,
         );
         if (handled) continue;
       }

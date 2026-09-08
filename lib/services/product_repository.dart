@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:uuid/uuid.dart';
-import 'sync_queue_service.dart';
 
 import 'cloud_sync_service.dart';
 import 'database_helper.dart';
@@ -498,13 +497,7 @@ class ProductRepository {
     
     await db.transaction((txn) async {
       await txn.insert('categories', row);
-      await SyncQueueService.instance.enqueueMutation(
-        txn,
-        entityType: 'category',
-        operation: 'INSERT',
-        globalId: gid,
-        payload: row,
-      );
+      // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
     });
     CloudSyncService.instance.scheduleSyncSoon();
     return null;
@@ -540,14 +533,12 @@ class ProductRepository {
       
       await txn.delete('categories', where: 'id = ?', whereArgs: [id]);
       
-      if (gid != null) {
-        await SyncQueueService.instance.enqueueMutation(
-          txn,
-          entityType: 'category',
-          operation: 'DELETE',
-          globalId: gid,
-          payload: {},
-        );
+      if (gid != null && gid.isNotEmpty) {
+        try {
+          await CloudSyncService.recordHardDeleteTombstones(
+            txn, 'categories', [gid],
+          );
+        } catch (_) {}
       }
     });
     CloudSyncService.instance.scheduleSyncSoon();
@@ -590,13 +581,7 @@ class ProductRepository {
     
     await db.transaction((txn) async {
       await txn.insert('brands', row);
-      await SyncQueueService.instance.enqueueMutation(
-        txn,
-        entityType: 'brand',
-        operation: 'INSERT',
-        globalId: gid,
-        payload: row,
-      );
+      // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
     });
     
     CloudSyncService.instance.scheduleSyncSoon();
@@ -613,14 +598,12 @@ class ProductRepository {
       
       await txn.delete('brands', where: 'id = ?', whereArgs: [id]);
       
-      if (gid != null) {
-        await SyncQueueService.instance.enqueueMutation(
-          txn,
-          entityType: 'brand',
-          operation: 'DELETE',
-          globalId: gid,
-          payload: {},
-        );
+      if (gid != null && gid.isNotEmpty) {
+        try {
+          await CloudSyncService.recordHardDeleteTombstones(
+            txn, 'brands', [gid],
+          );
+        } catch (_) {}
       }
     });
     CloudSyncService.instance.scheduleSyncSoon();
