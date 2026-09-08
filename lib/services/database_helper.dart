@@ -1157,11 +1157,11 @@ class DatabaseHelper {
     await _createPrintSettingsTable(db);
     await _createLoyaltyTables(db);
     await _createInstallmentSettingsTable(db);
-    await _ensureSupplierApTables(db);
-    await _ensureSupplierBillStockLinkColumns(db);
-    await _ensureMultiTenantFoundation(db);
-    await _ensureRbacFoundation(db);
-    await _ensureBranchTopology(db);
+    // A fresh database needs the same schema repairs as an upgraded one
+    // before multi-tenant/sync migrations run.  Running the sync foundation
+    // first made new Windows installs query optional tables (for example
+    // product_unit_variants) before they had been created.
+    await _onOpen(db);
   }
 
   Future<bool> _tableHasColumn(Database db, String table, String column) async {

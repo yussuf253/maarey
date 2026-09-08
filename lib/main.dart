@@ -168,7 +168,9 @@ void main() async {
       authOptions: FlutterAuthClientOptions(
         autoRefreshToken: true,
         localStorage: SecureLocalStorage(
-          persistSessionKey: supabasePersistSessionKeyFromUrl(SupabaseConfig.url),
+          persistSessionKey: supabasePersistSessionKeyFromUrl(
+            SupabaseConfig.url,
+          ),
         ),
       ),
     );
@@ -524,12 +526,12 @@ class _LicenseCheckingScreen extends StatelessWidget {
       builder: (context) {
         final loc = AppLocalizations.of(context)!;
         return Scaffold(
-          backgroundColor: Color(0xFF1E3A5F),
+          backgroundColor: const Color(0xFF1E3A5F),
           body: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
+                const Text(
                   'Maarey',
                   style: TextStyle(
                     color: Colors.white,
@@ -538,13 +540,13 @@ class _LicenseCheckingScreen extends StatelessWidget {
                     letterSpacing: 2,
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   loc.storeManagementSystem,
-                  style: TextStyle(color: Colors.white70, fontSize: 14),
+                  style: const TextStyle(color: Colors.white70, fontSize: 14),
                 ),
-                SizedBox(height: 32),
-                SizedBox(
+                const SizedBox(height: 32),
+                const SizedBox(
                   width: 28,
                   height: 28,
                   child: CircularProgressIndicator(
@@ -552,10 +554,10 @@ class _LicenseCheckingScreen extends StatelessWidget {
                     strokeWidth: 2,
                   ),
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 Text(
                   loc.checkingLicense,
-                  style: TextStyle(color: Colors.white54, fontSize: 12),
+                  style: const TextStyle(color: Colors.white54, fontSize: 12),
                 ),
               ],
             ),
