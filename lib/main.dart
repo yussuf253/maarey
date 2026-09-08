@@ -196,11 +196,14 @@ void main() async {
   if (kDebugMode) {
     debugPrint('After runStartupCriticalMigrations / Before LicenseService');
   }
-  try {
-    await LicenseService.instance.initialize();
-  } catch (e) {
-    debugPrint('[main] LicenseService.initialize failed: $e');
-  }
+  // License verification may need the network. Launch the UI first so a
+  // fresh Windows install is not held behind a pending Supabase request; the
+  // license gate updates as soon as the service resolves its local state.
+  unawaited(
+    LicenseService.instance.initialize().catchError((Object e, StackTrace s) {
+      debugPrint('[main] LicenseService.initialize failed: $e');
+    }),
+  );
   try {
     await SystemNotificationService.instance.initialize();
   } catch (e) {

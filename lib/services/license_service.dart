@@ -1,4 +1,4 @@
-import 'dart:async' show unawaited;
+import 'dart:async' show TimeoutException, unawaited;
 
 import 'package:flutter/foundation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -39,9 +39,8 @@ class SubscriptionPlan {
   String get devicesLabel =>
       isUnlimited ? 'أجهزة غير محدودة' : '$maxDevices أجهزة';
 
-  String get priceLabel => isIntroTrialTier
-      ? 'مجاناً — 15 يوماً'
-      : '${_fmt(priceIQD)} Fdj / شهر';
+  String get priceLabel =>
+      isIntroTrialTier ? 'مجاناً — 15 يوماً' : '${_fmt(priceIQD)} Fdj / شهر';
 
   static String _fmt(int p) {
     final s = p.toString();
@@ -119,11 +118,16 @@ class SubscriptionPlan {
 /// Locale-aware plan name lookup by key.
 String planNameForKey(String? key, AppLocalizations loc) {
   switch (key) {
-    case 'trial': return loc.spTrialName;
-    case 'basic': return loc.spBasicName;
-    case 'pro': return loc.spProName;
-    case 'unlimited': return loc.spUnlimitedName;
-    default: return '—';
+    case 'trial':
+      return loc.spTrialName;
+    case 'basic':
+      return loc.spBasicName;
+    case 'pro':
+      return loc.spProName;
+    case 'unlimited':
+      return loc.spUnlimitedName;
+    default:
+      return '—';
   }
 }
 
@@ -310,9 +314,15 @@ class LicenseService extends ChangeNotifier {
   LicenseService._();
   static final LicenseService instance = LicenseService._();
 
+  // Supabase requests can remain pending indefinitely on a blocked Windows
+  // network stack (proxy, captive portal, DNS, etc.).  A license check must
+  // never leave the application at the blocking "checking" screen forever.
+  static const Duration _startupVerificationTimeout = Duration(seconds: 8);
+
   final TrustedTimeService _trustedTime = TrustedTimeService();
-  late final LicenseEngineV2 _v2Activator =
-      LicenseEngineV2(trustedTime: _trustedTime);
+  late final LicenseEngineV2 _v2Activator = LicenseEngineV2(
+    trustedTime: _trustedTime,
+  );
 
   /// نظام التراخيص v2 فقط (JWT). نُبقي الـ getter لتوافق الواجهات.
   bool get usesSignedLicenseJwt => true;
@@ -358,7 +368,34 @@ class LicenseService extends ChangeNotifier {
       await resetLicenseStateForDataScopeChange();
       await prefs.setString(_Prefs.appVersion, fullVersion);
     }
-    await _initializeV2();
+    await _runWithCheckingFallback(_initializeV2);
+  }
+
+  /// Finishes a verification attempt with an offline-safe local state when a
+  /// remote request does not complete. The original request is allowed to
+  /// finish in the background; a later successful result can still refresh
+  /// the state normally.
+  Future<void> _runWithCheckingFallback(Future<void> Function() action) async {
+    try {
+      await action().timeout(_startupVerificationTimeout);
+    } on TimeoutException {
+      AppLogger.warn(
+        'LicenseService',
+        'License verification timed out; using the local state.',
+      );
+      final token = await _v2Activator.loadAndVerifyStoredToken();
+      if (token != null) {
+        await _maybeApplySignedTokenAndTrustedTimeOverlay();
+      } else {
+        await ensureLocalTrialStartedV2();
+      }
+    } catch (e) {
+      AppLogger.warn('LicenseService', 'License verification failed: $e');
+      final prefs = await SharedPreferences.getInstance();
+      if (_state.status == LicenseStatus.checking) {
+        _setState(await _resolveLocalTrialState(prefs));
+      }
+    }
   }
 
   Future<void> _initializeV2() async {
@@ -367,10 +404,12 @@ class LicenseService extends ChangeNotifier {
     final user = Supabase.instance.client.auth.currentUser;
     final tok = await _v2Activator.loadAndVerifyStoredToken();
     if (tok == null) {
+      // Establish an offline-safe state before any server call. In particular,
+      // a first-run installation has no cache and must still be able to enter
+      // its local trial while cloud verification is pending.
+      _setState(await _resolveLocalTrialState(prefs));
       if (user != null) {
         await applyTrialFromSupabaseProfileV2();
-      } else {
-        _setState(await _resolveLocalTrialState(prefs));
       }
       await _maybeApplyServerDeviceLimitOverlay(forceRemote: true);
       return;
@@ -411,15 +450,12 @@ class LicenseService extends ChangeNotifier {
   // ── التحقق من الترخيص ─────────────────────────────────────────────────────
 
   Future<void> checkLicense({bool forceRemote = false}) =>
-      _checkLicenseV2(forceRemote: forceRemote);
+      _runWithCheckingFallback(() => _checkLicenseV2(forceRemote: forceRemote));
 
   bool _readCachedOverLimit(SharedPreferences prefs) =>
       prefs.getBool(_Prefs.deviceOverLimit) ?? false;
 
-  Future<void> _writeCachedOverLimit(
-    SharedPreferences prefs,
-    bool v,
-  ) async {
+  Future<void> _writeCachedOverLimit(SharedPreferences prefs, bool v) async {
     await prefs.setBool(_Prefs.deviceOverLimit, v);
     final trustedNow = await _trustedTime.currentTrustedTime();
     await prefs.setInt(
@@ -433,7 +469,9 @@ class LicenseService extends ChangeNotifier {
     final user = Supabase.instance.client.auth.currentUser;
     if (user == null) return null;
     try {
-      final res = await Supabase.instance.client.rpc('app_device_limit_status');
+      final res = await Supabase.instance.client
+          .rpc('app_device_limit_status')
+          .timeout(_startupVerificationTimeout);
       if (res is List && res.isNotEmpty && res.first is Map) {
         final m = Map<String, dynamic>.from(res.first as Map);
         return (
@@ -473,7 +511,8 @@ class LicenseService extends ChangeNotifier {
         ? DateTime.fromMillisecondsSinceEpoch(checkedAtMs, isUtc: true)
         : null;
     final trustedNow = await _trustedTime.currentTrustedTime();
-    final recentlyChecked = checkedAt != null &&
+    final recentlyChecked =
+        checkedAt != null &&
         trustedNow.difference(checkedAt) < const Duration(minutes: 5);
     if (!forceRemote && recentlyChecked) {
       if (cached) {
@@ -552,8 +591,9 @@ class LicenseService extends ChangeNotifier {
     try {
       final user = Supabase.instance.client.auth.currentUser;
       if (user == null) return null;
-      final res =
-          await Supabase.instance.client.rpc('app_tenant_access_status');
+      final res = await Supabase.instance.client
+          .rpc('app_tenant_access_status')
+          .timeout(_startupVerificationTimeout);
       if (res is Map) return Map<String, dynamic>.from(res);
       if (res is List && res.isNotEmpty && res.first is Map) {
         return Map<String, dynamic>.from(res.first as Map);
@@ -611,19 +651,25 @@ class LicenseService extends ChangeNotifier {
     final validUntil = _coerceTimestamp(data['valid_until']);
     if (validUntil != null) {
       await prefs.setInt(
-          _Prefs.tenantAccessValidUntil, validUntil.millisecondsSinceEpoch);
+        _Prefs.tenantAccessValidUntil,
+        validUntil.millisecondsSinceEpoch,
+      );
     } else {
       await prefs.remove(_Prefs.tenantAccessValidUntil);
     }
     final graceUntil = _coerceTimestamp(data['grace_until']);
     if (graceUntil != null) {
       await prefs.setInt(
-          _Prefs.tenantAccessGraceUntil, graceUntil.millisecondsSinceEpoch);
+        _Prefs.tenantAccessGraceUntil,
+        graceUntil.millisecondsSinceEpoch,
+      );
     } else {
       await prefs.remove(_Prefs.tenantAccessGraceUntil);
     }
     await prefs.setInt(
-        _Prefs.tenantAccessCheckedAt, trustedNow.millisecondsSinceEpoch);
+      _Prefs.tenantAccessCheckedAt,
+      trustedNow.millisecondsSinceEpoch,
+    );
   }
 
   Map<String, dynamic>? _readTenantAccessCache(SharedPreferences prefs) {
@@ -684,11 +730,13 @@ class LicenseService extends ChangeNotifier {
         ? '${decision.message}\n(تعذّر التحقق من الخادم — الحالة من آخر مزامنة.)'
         : decision.message;
 
-    _setState(LicenseState(
-      status: decision.status,
-      lockReason: decision.lockReason,
-      message: messageWithWarning,
-    ));
+    _setState(
+      LicenseState(
+        status: decision.status,
+        lockReason: decision.lockReason,
+        message: messageWithWarning,
+      ),
+    );
   }
 
   Future<void> _maybeApplySignedTokenAndTrustedTimeOverlay() async {
@@ -806,7 +854,8 @@ class LicenseService extends ChangeNotifier {
     }
 
     // أول تشغيل: نخزّن لحظة بداية التجربة (timestamp بسيط، ليس قراراً للانتهاء).
-    final trialStartMs = prefs.getInt(_Prefs.localTrialStartAt) ??
+    final trialStartMs =
+        prefs.getInt(_Prefs.localTrialStartAt) ??
         (await _trustedTime.currentTrustedTime()).millisecondsSinceEpoch;
     if (!prefs.containsKey(_Prefs.localTrialStartAt)) {
       await prefs.setInt(_Prefs.localTrialStartAt, trialStartMs);
@@ -854,17 +903,20 @@ class LicenseService extends ChangeNotifier {
           // Auto-activate the assigned license JWT.
           final licId = licRow['id'];
           final plan = licRow['plan'];
-          AppLogger.info('LicenseService',
-              'Auto-activating assigned license #$licId (plan=$plan) for user ${user.email}');
+          AppLogger.info(
+            'LicenseService',
+            'Auto-activating assigned license #$licId (plan=$plan) for user ${user.email}',
+          );
           final result = await activateSignedToken(jwt);
           if (result.ok) return;
-          AppLogger.warn('LicenseService',
-              'Auto-activate failed: ${result.message}');
+          AppLogger.warn(
+            'LicenseService',
+            'Auto-activate failed: ${result.message}',
+          );
         }
       }
     } catch (e) {
-      AppLogger.warn('LicenseService',
-          'Failed to query assigned license: $e');
+      AppLogger.warn('LicenseService', 'Failed to query assigned license: $e');
     }
 
     // ── Step 2: No assigned license → fall back to trial ──
@@ -890,10 +942,7 @@ class LicenseService extends ChangeNotifier {
       } else {
         await client
             .from('profiles')
-            .update({
-              'email': user.email,
-              'updated_at': updatedAtIso,
-            })
+            .update({'email': user.email, 'updated_at': updatedAtIso})
             .eq('id', user.id);
       }
 
