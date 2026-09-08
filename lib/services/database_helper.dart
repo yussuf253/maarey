@@ -196,6 +196,13 @@ class DatabaseHelper {
     await _ensureSupplierBillStockLinkColumns(db);
     await _ensureInstallmentFinanceColumns(db);
     await _ensureMoneyFilsColumns(db);
+    // These tables are referenced by the sync foundation below. They must be
+    // created before it attempts to add/backfill their sync columns on a
+    // brand-new database.
+    await _ensurePurchaseOrdersTables(db);
+    await _ensureProductUnitVariantsSchema(db);
+    await _ensureServicesAndJobTicketsSchema(db);
+    await ensureExpensesSchema(db);
     await _ensureMultiTenantFoundation(db);
     await _ensureStockVoucherSourceColumns(db);
     await _ensureRbacFoundation(db);
