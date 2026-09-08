@@ -353,6 +353,23 @@ class LicenseService extends ChangeNotifier {
   LicenseState _state = LicenseState.checking;
   LicenseState get state => _state;
 
+  /// Last-resort UI escape hatch for platform initialization that does not
+  /// resolve (observed with some Windows installs). A normal verifier may
+  /// still finish later and replace this temporary offline state.
+  void releaseCheckingState() {
+    if (_state.status != LicenseStatus.checking) return;
+    AppLogger.warn(
+      'LicenseService',
+      'License verification did not resolve; allowing offline startup.',
+    );
+    _setState(
+      const LicenseState(
+        status: LicenseStatus.offline,
+        message: 'تعذّر التحقق من الترخيص حالياً. تم تشغيل التطبيق دون اتصال.',
+      ),
+    );
+  }
+
   // ── تهيئة ─────────────────────────────────────────────────────────────────
 
   Future<void> initialize() async {

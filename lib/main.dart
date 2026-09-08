@@ -1,4 +1,4 @@
-import 'dart:async' show unawaited;
+import 'dart:async' show Timer, unawaited;
 
 import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
@@ -456,19 +456,34 @@ class _LicenseAwareRoot extends StatefulWidget {
 }
 
 class _LicenseAwareRootState extends State<_LicenseAwareRoot> {
+  Timer? _checkingWatchdog;
+
   @override
   void initState() {
     super.initState();
     LicenseService.instance.addListener(_onLicenseChange);
+    _scheduleCheckingWatchdog();
   }
 
   @override
   void dispose() {
+    _checkingWatchdog?.cancel();
     LicenseService.instance.removeListener(_onLicenseChange);
     super.dispose();
   }
 
-  void _onLicenseChange() => setState(() {});
+  void _onLicenseChange() {
+    _scheduleCheckingWatchdog();
+    setState(() {});
+  }
+
+  void _scheduleCheckingWatchdog() {
+    _checkingWatchdog?.cancel();
+    if (LicenseService.instance.state.status != LicenseStatus.checking) return;
+    _checkingWatchdog = Timer(const Duration(seconds: 3), () {
+      LicenseService.instance.releaseCheckingState();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
