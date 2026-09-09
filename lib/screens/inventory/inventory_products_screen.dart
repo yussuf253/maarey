@@ -1491,6 +1491,33 @@ class _SearchDropdownCore extends StatelessWidget {
     final fill = isDark
         ? Colors.white.withValues(alpha: 0.05)
         : const Color(0xFFF8FAFC);
+    if (items.isEmpty) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+              color: text2,
+            ),
+          ),
+          const SizedBox(height: 5),
+          Container(
+            height: 40,
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+              color: fill,
+              border: Border.all(color: border),
+            ),
+            child: Text('—', style: TextStyle(fontSize: 12, color: text2)),
+          ),
+        ],
+      );
+    }
     final v = items.contains(value) ? value : items.first;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -1571,6 +1598,19 @@ class _AutocompletePick extends StatelessWidget {
     final fill = isDark
         ? Colors.white.withValues(alpha: 0.05)
         : const Color(0xFFF8FAFC);
+    if (options.isEmpty) {
+      return _SearchDropdownCore(
+        loc: loc,
+        label: label,
+        value: value,
+        items: options,
+        onChanged: onPick,
+        text1: text1,
+        text2: text2,
+        border: border,
+        isDark: isDark,
+      );
+    }
     final v = options.where((o) => o == value).isNotEmpty
         ? value
         : options.first;

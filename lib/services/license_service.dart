@@ -388,6 +388,11 @@ class LicenseService extends ChangeNotifier {
     await _runWithCheckingFallback(_initializeV2);
   }
 
+  /// Snapshot of the last non-checking state. If a verification attempt ends
+  /// without ever producing a concrete decision (timeout, network loss), we
+  /// fall back to this instead of staying on the blocking screen.
+  LicenseState? _lastVerifiedState;
+
   /// Finishes a verification attempt with an offline-safe local state when a
   /// remote request does not complete. The original request is allowed to
   /// finish in the background; a later successful result can still refresh
@@ -395,6 +400,12 @@ class LicenseService extends ChangeNotifier {
   Future<void> _runWithCheckingFallback(Future<void> Function() action) async {
     try {
       await action().timeout(_startupVerificationTimeout);
+      // If the whole pipeline finished without ever setting a concrete state
+      // (e.g. every overlay silently returned because the network was down),
+      // resolve to the last known good state instead of staying `checking`.
+      if (_state.status == LicenseStatus.checking) {
+        _setState(_lastVerifiedState ?? await _resolveLocalTrialState(await SharedPreferences.getInstance()));
+      }
     } on TimeoutException {
       AppLogger.warn(
         'LicenseService',
@@ -406,17 +417,35 @@ class LicenseService extends ChangeNotifier {
       } else {
         await ensureLocalTrialStartedV2();
       }
+      // Belt-and-braces: the fallback paths above normally set a concrete
+      // state; if any of them silently failed, restore the last known one.
+      if (_state.status == LicenseStatus.checking) {
+        _setState(
+          _lastVerifiedState ??
+              await _resolveLocalTrialState(
+                await SharedPreferences.getInstance(),
+              ),
+        );
+      }
     } catch (e) {
       AppLogger.warn('LicenseService', 'License verification failed: $e');
       final prefs = await SharedPreferences.getInstance();
       if (_state.status == LicenseStatus.checking) {
-        _setState(await _resolveLocalTrialState(prefs));
+        _setState(
+          _lastVerifiedState ?? await _resolveLocalTrialState(prefs),
+        );
       }
     }
   }
 
   Future<void> _initializeV2() async {
-    _setState(LicenseState.checking);
+    // Only enter the blocking "checking" screen when we have no usable local
+    // state yet. A re-initialization (e.g. after activateSignedToken triggers
+    // checkLicense -> initialize again elsewhere) must never clobber a valid
+    // trial/active state, otherwise the UI flips back to the gate.
+    if (_state.status == LicenseStatus.none) {
+      _setState(LicenseState.checking);
+    }
     final prefs = await SharedPreferences.getInstance();
     final user = Supabase.instance.client.auth.currentUser;
     final tok = await _v2Activator.loadAndVerifyStoredToken();
@@ -436,7 +465,14 @@ class LicenseService extends ChangeNotifier {
   }
 
   Future<void> _checkLicenseV2({bool forceRemote = false}) async {
-    _setState(LicenseState.checking);
+    // A re-verification (sync preflight every 60s, realtime tenant-access
+    // trigger, retry buttons) runs in the background: it must NOT reset a
+    // valid trial/active/offline state to `checking`, which would flip the UI
+    // back to the blocking license-verification screen mid-session.
+    final wasChecking = _state.status == LicenseStatus.checking;
+    if (!wasChecking) {
+      _lastVerifiedState ??= _state;
+    }
     final prefs = await SharedPreferences.getInstance();
     final tok = await _v2Activator.loadAndVerifyStoredToken();
     if (tok == null) {
@@ -1102,6 +1138,8 @@ class LicenseService extends ChangeNotifier {
 
   void _setState(LicenseState s) {
     _state = s;
+    // Remember the newest non-checking decision for fallback resolution.
+    if (s.status != LicenseStatus.checking) _lastVerifiedState = s;
     notifyListeners();
 
     // Best-effort security audit logs (no sensitive payloads).

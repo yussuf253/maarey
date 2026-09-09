@@ -1830,8 +1830,14 @@ class CloudSyncService {
     }
   }
 
-  String _prefsKeyTableCursor(String table, String userId) =>
-      'sync.table_cursor.$table.$userId';
+  // Upload and download progress are independent. Sharing one timestamp lets
+  // a successful pull skip unsent local writes (and lets a push skip remote
+  // rows), especially after an offline edit.
+  String _prefsKeyTablePushCursor(String table, String userId) =>
+      'sync.table_push_cursor.v2.$table.$userId';
+
+  String _prefsKeyTablePullCursor(String table, String userId) =>
+      'sync.table_pull_cursor.v2.$table.$userId';
 
   Future<String?> _globalIdOfLocalRow(
     Database db,
@@ -2057,7 +2063,7 @@ class CloudSyncService {
   ) async {
     final remoteCols = _perTableRemoteColumns[table];
     if (remoteCols == null) return;
-    final cursorKey = _prefsKeyTableCursor(table, userId);
+    final cursorKey = _prefsKeyTablePushCursor(table, userId);
     var cursor = prefs.getString(cursorKey) ?? '1970-01-01T00:00:00Z';
     if (DateTime.tryParse(cursor) == null) cursor = '1970-01-01T00:00:00Z';
 
@@ -2374,7 +2380,7 @@ class CloudSyncService {
         .map((r) => (r['name'] ?? '').toString())
         .where((s) => s.isNotEmpty)
         .toSet();
-    final cursorKey = _prefsKeyTableCursor(table, userId);
+    final cursorKey = _prefsKeyTablePullCursor(table, userId);
     var cursor = prefs.getString(cursorKey) ?? '1970-01-01T00:00:00Z';
     if (DateTime.tryParse(cursor) == null) cursor = '1970-01-01T00:00:00Z';
 
@@ -4219,9 +4225,9 @@ class CloudSyncService {
     incomingRaw.forEach((k, v) {
       final c = _snakeToCamelKey(k);
       if (localCols.contains(k)) {
-        mapped[k] = v;
+        mapped[k] = _sqliteValue(v);
       } else if (localCols.contains(c)) {
-        mapped[c] = v;
+        mapped[c] = _sqliteValue(v);
       }
     });
     return mapped;
@@ -5132,6 +5138,16 @@ class CloudSyncService {
   }
 
   dynamic _normalizeValue(dynamic v) {
+    if (v is DateTime) return v.toIso8601String();
+    if (v is List || v is Map) return jsonEncode(v);
+    return v;
+  }
+
+  /// sqflite does not accept Dart booleans as bound values. Supabase returns
+  /// PostgreSQL booleans as `bool`, whereas the local SQLite schema stores
+  /// them as INTEGER 0/1.
+  dynamic _sqliteValue(dynamic v) {
+    if (v is bool) return v ? 1 : 0;
     if (v is DateTime) return v.toIso8601String();
     if (v is List || v is Map) return jsonEncode(v);
     return v;
