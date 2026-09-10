@@ -4252,9 +4252,6 @@ class CloudSyncService {
         .trim();
     if (gid.isEmpty) return false;
 
-    // صفوف Supabase snake_case → أعمدة محلية camelCase.
-    final row = _mapRemoteRowToLocal(incomingRaw, localCols);
-
     // الحذف المنطقي عن بُعد: ختم المحلي بـ deleted_at + تنظيف آثار الفاتورة
     // (بنود، مخزون، قيود صندوق) بدل الحذف الفعلي في _doMergeWithGlobalId.
     if (deletedAt != null) {
@@ -4335,7 +4332,7 @@ class CloudSyncService {
       table: 'invoices',
       gid: gid,
       incomingRaw: incomingRaw,
-      incoming: row,
+      incoming: incoming,
       deletedAt: deletedAt,
     );
     return true;
@@ -4354,9 +4351,6 @@ class CloudSyncService {
         .toString()
         .trim();
     if (gid.isEmpty) return false;
-
-    // صفوف Supabase snake_case → أعمدة محلية camelCase.
-    final row = _mapRemoteRowToLocal(incomingRaw, localCols);
 
     final ig =
         (incomingRaw['invoice_global_id'] ??
@@ -4424,7 +4418,7 @@ class CloudSyncService {
       table: 'invoice_items',
       gid: gid,
       incomingRaw: incomingRaw,
-      incoming: row,
+      incoming: incoming,
       deletedAt: deletedAt,
     );
     return true;
