@@ -503,7 +503,7 @@ class LicenseService extends ChangeNotifier {
   // ── التحقق من الترخيص ─────────────────────────────────────────────────────
 
   Future<void> checkLicense({bool forceRemote = false}) =>
-      _runWithCheckingFallback(() => _checkLicenseV2(forceRemote: forceRemote));
+      _checkLicenseV2(forceRemote: forceRemote);
 
   bool _readCachedOverLimit(SharedPreferences prefs) =>
       prefs.getBool(_Prefs.deviceOverLimit) ?? false;
