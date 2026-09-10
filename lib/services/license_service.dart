@@ -39,9 +39,8 @@ class SubscriptionPlan {
   String get devicesLabel =>
       isUnlimited ? 'أجهزة غير محدودة' : '$maxDevices أجهزة';
 
-  String get priceLabel => isIntroTrialTier
-      ? 'مجاناً — 15 يوماً'
-      : '${_fmt(priceIQD)} Fdj / شهر';
+  String get priceLabel =>
+      isIntroTrialTier ? 'مجاناً — 15 يوماً' : '${_fmt(priceIQD)} Fdj / شهر';
 
   static String _fmt(int p) {
     final s = p.toString();
@@ -119,11 +118,16 @@ class SubscriptionPlan {
 /// Locale-aware plan name lookup by key.
 String planNameForKey(String? key, AppLocalizations loc) {
   switch (key) {
-    case 'trial': return loc.spTrialName;
-    case 'basic': return loc.spBasicName;
-    case 'pro': return loc.spProName;
-    case 'unlimited': return loc.spUnlimitedName;
-    default: return '—';
+    case 'trial':
+      return loc.spTrialName;
+    case 'basic':
+      return loc.spBasicName;
+    case 'pro':
+      return loc.spProName;
+    case 'unlimited':
+      return loc.spUnlimitedName;
+    default:
+      return '—';
   }
 }
 
@@ -311,8 +315,9 @@ class LicenseService extends ChangeNotifier {
   static final LicenseService instance = LicenseService._();
 
   final TrustedTimeService _trustedTime = TrustedTimeService();
-  late final LicenseEngineV2 _v2Activator =
-      LicenseEngineV2(trustedTime: _trustedTime);
+  late final LicenseEngineV2 _v2Activator = LicenseEngineV2(
+    trustedTime: _trustedTime,
+  );
 
   /// نظام التراخيص v2 فقط (JWT). نُبقي الـ getter لتوافق الواجهات.
   bool get usesSignedLicenseJwt => true;
@@ -416,10 +421,7 @@ class LicenseService extends ChangeNotifier {
   bool _readCachedOverLimit(SharedPreferences prefs) =>
       prefs.getBool(_Prefs.deviceOverLimit) ?? false;
 
-  Future<void> _writeCachedOverLimit(
-    SharedPreferences prefs,
-    bool v,
-  ) async {
+  Future<void> _writeCachedOverLimit(SharedPreferences prefs, bool v) async {
     await prefs.setBool(_Prefs.deviceOverLimit, v);
     final trustedNow = await _trustedTime.currentTrustedTime();
     await prefs.setInt(
@@ -433,7 +435,9 @@ class LicenseService extends ChangeNotifier {
     final user = Supabase.instance.client.auth.currentUser;
     if (user == null) return null;
     try {
-      final res = await Supabase.instance.client.rpc('app_device_limit_status');
+      final res = await Supabase.instance.client
+          .rpc('app_device_limit_status')
+          .timeout(const Duration(seconds: 6));
       if (res is List && res.isNotEmpty && res.first is Map) {
         final m = Map<String, dynamic>.from(res.first as Map);
         return (
@@ -473,7 +477,8 @@ class LicenseService extends ChangeNotifier {
         ? DateTime.fromMillisecondsSinceEpoch(checkedAtMs, isUtc: true)
         : null;
     final trustedNow = await _trustedTime.currentTrustedTime();
-    final recentlyChecked = checkedAt != null &&
+    final recentlyChecked =
+        checkedAt != null &&
         trustedNow.difference(checkedAt) < const Duration(minutes: 5);
     if (!forceRemote && recentlyChecked) {
       if (cached) {
@@ -552,8 +557,9 @@ class LicenseService extends ChangeNotifier {
     try {
       final user = Supabase.instance.client.auth.currentUser;
       if (user == null) return null;
-      final res =
-          await Supabase.instance.client.rpc('app_tenant_access_status');
+      final res = await Supabase.instance.client.rpc(
+        'app_tenant_access_status',
+      );
       if (res is Map) return Map<String, dynamic>.from(res);
       if (res is List && res.isNotEmpty && res.first is Map) {
         return Map<String, dynamic>.from(res.first as Map);
@@ -611,19 +617,25 @@ class LicenseService extends ChangeNotifier {
     final validUntil = _coerceTimestamp(data['valid_until']);
     if (validUntil != null) {
       await prefs.setInt(
-          _Prefs.tenantAccessValidUntil, validUntil.millisecondsSinceEpoch);
+        _Prefs.tenantAccessValidUntil,
+        validUntil.millisecondsSinceEpoch,
+      );
     } else {
       await prefs.remove(_Prefs.tenantAccessValidUntil);
     }
     final graceUntil = _coerceTimestamp(data['grace_until']);
     if (graceUntil != null) {
       await prefs.setInt(
-          _Prefs.tenantAccessGraceUntil, graceUntil.millisecondsSinceEpoch);
+        _Prefs.tenantAccessGraceUntil,
+        graceUntil.millisecondsSinceEpoch,
+      );
     } else {
       await prefs.remove(_Prefs.tenantAccessGraceUntil);
     }
     await prefs.setInt(
-        _Prefs.tenantAccessCheckedAt, trustedNow.millisecondsSinceEpoch);
+      _Prefs.tenantAccessCheckedAt,
+      trustedNow.millisecondsSinceEpoch,
+    );
   }
 
   Map<String, dynamic>? _readTenantAccessCache(SharedPreferences prefs) {
@@ -684,11 +696,13 @@ class LicenseService extends ChangeNotifier {
         ? '${decision.message}\n(تعذّر التحقق من الخادم — الحالة من آخر مزامنة.)'
         : decision.message;
 
-    _setState(LicenseState(
-      status: decision.status,
-      lockReason: decision.lockReason,
-      message: messageWithWarning,
-    ));
+    _setState(
+      LicenseState(
+        status: decision.status,
+        lockReason: decision.lockReason,
+        message: messageWithWarning,
+      ),
+    );
   }
 
   Future<void> _maybeApplySignedTokenAndTrustedTimeOverlay() async {
@@ -806,7 +820,8 @@ class LicenseService extends ChangeNotifier {
     }
 
     // أول تشغيل: نخزّن لحظة بداية التجربة (timestamp بسيط، ليس قراراً للانتهاء).
-    final trialStartMs = prefs.getInt(_Prefs.localTrialStartAt) ??
+    final trialStartMs =
+        prefs.getInt(_Prefs.localTrialStartAt) ??
         (await _trustedTime.currentTrustedTime()).millisecondsSinceEpoch;
     if (!prefs.containsKey(_Prefs.localTrialStartAt)) {
       await prefs.setInt(_Prefs.localTrialStartAt, trialStartMs);
@@ -854,17 +869,20 @@ class LicenseService extends ChangeNotifier {
           // Auto-activate the assigned license JWT.
           final licId = licRow['id'];
           final plan = licRow['plan'];
-          AppLogger.info('LicenseService',
-              'Auto-activating assigned license #$licId (plan=$plan) for user ${user.email}');
+          AppLogger.info(
+            'LicenseService',
+            'Auto-activating assigned license #$licId (plan=$plan) for user ${user.email}',
+          );
           final result = await activateSignedToken(jwt);
           if (result.ok) return;
-          AppLogger.warn('LicenseService',
-              'Auto-activate failed: ${result.message}');
+          AppLogger.warn(
+            'LicenseService',
+            'Auto-activate failed: ${result.message}',
+          );
         }
       }
     } catch (e) {
-      AppLogger.warn('LicenseService',
-          'Failed to query assigned license: $e');
+      AppLogger.warn('LicenseService', 'Failed to query assigned license: $e');
     }
 
     // ── Step 2: No assigned license → fall back to trial ──
@@ -890,10 +908,7 @@ class LicenseService extends ChangeNotifier {
       } else {
         await client
             .from('profiles')
-            .update({
-              'email': user.email,
-              'updated_at': updatedAtIso,
-            })
+            .update({'email': user.email, 'updated_at': updatedAtIso})
             .eq('id', user.id);
       }
 

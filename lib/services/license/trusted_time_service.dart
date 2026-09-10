@@ -22,11 +22,9 @@ class TrustedTimeCheck {
 /// - Offline: check رجوع الساعة مقارنة بـ last_known_time.
 /// - Monotonic: Stopwatch يبدأ فقط بعد أول تأكيد ناجح من السيرفر (داخل نفس جلسة التشغيل).
 class TrustedTimeService {
-  TrustedTimeService({
-    SharedPreferences? prefs,
-    SupabaseClient? client,
-  }) : _prefs = prefs,
-       _client = client;
+  TrustedTimeService({SharedPreferences? prefs, SupabaseClient? client})
+    : _prefs = prefs,
+      _client = client;
 
   SharedPreferences? _prefs;
   SupabaseClient? _client;
@@ -48,7 +46,7 @@ class TrustedTimeService {
     final candidates = const ['app_server_time', 'server_time', 'now'];
     for (final fn in candidates) {
       try {
-        final res = await client.rpc(fn);
+        final res = await client.rpc(fn).timeout(const Duration(seconds: 5));
         final dt = _parseServerTime(res);
         if (dt != null) return dt;
       } catch (_) {
@@ -96,7 +94,10 @@ class TrustedTimeService {
       LicensePrefsKeys.lastServerCheckAt,
       now.millisecondsSinceEpoch,
     );
-    await prefs.setInt(LicensePrefsKeys.lastKnownTime, now.millisecondsSinceEpoch);
+    await prefs.setInt(
+      LicensePrefsKeys.lastKnownTime,
+      now.millisecondsSinceEpoch,
+    );
 
     // Start stopwatch only after a successful confirmation.
     _stopwatch
@@ -116,7 +117,10 @@ class TrustedTimeService {
     final lastKnownMs = prefs.getInt(LicensePrefsKeys.lastKnownTime);
     final now = DateTime.now().toUtc();
     if (lastKnownMs == null) {
-      await prefs.setInt(LicensePrefsKeys.lastKnownTime, now.millisecondsSinceEpoch);
+      await prefs.setInt(
+        LicensePrefsKeys.lastKnownTime,
+        now.millisecondsSinceEpoch,
+      );
       return TrustedTimeCheck(
         isTampered: false,
         deltaFromLastKnown: Duration.zero,
@@ -124,12 +128,18 @@ class TrustedTimeService {
       );
     }
 
-    final lastKnown = DateTime.fromMillisecondsSinceEpoch(lastKnownMs, isUtc: true);
+    final lastKnown = DateTime.fromMillisecondsSinceEpoch(
+      lastKnownMs,
+      isUtc: true,
+    );
     final delta = now.difference(lastKnown);
 
     // Update lastKnownTime only if time moved forward (prevents "learning" a tampered backward time).
     if (delta >= Duration.zero) {
-      await prefs.setInt(LicensePrefsKeys.lastKnownTime, now.millisecondsSinceEpoch);
+      await prefs.setInt(
+        LicensePrefsKeys.lastKnownTime,
+        now.millisecondsSinceEpoch,
+      );
     }
 
     final isTampered = delta.isNegative && delta.abs() > backJumpTolerance;
@@ -167,10 +177,12 @@ class TrustedTimeService {
     if (serverMs == null) return null;
     if (!_hasStartedStopwatch) return null;
 
-    final serverTime = DateTime.fromMillisecondsSinceEpoch(serverMs, isUtc: true);
+    final serverTime = DateTime.fromMillisecondsSinceEpoch(
+      serverMs,
+      isUtc: true,
+    );
     final expectedNow = serverTime.add(_stopwatch.elapsed);
     final deviceNow = DateTime.now().toUtc();
     return deviceNow.difference(expectedNow);
   }
 }
-
