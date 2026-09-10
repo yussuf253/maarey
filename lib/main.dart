@@ -168,9 +168,7 @@ void main() async {
       authOptions: FlutterAuthClientOptions(
         autoRefreshToken: true,
         localStorage: SecureLocalStorage(
-          persistSessionKey: supabasePersistSessionKeyFromUrl(
-            SupabaseConfig.url,
-          ),
+          persistSessionKey: supabasePersistSessionKeyFromUrl(SupabaseConfig.url),
         ),
       ),
     );
@@ -198,14 +196,11 @@ void main() async {
   if (kDebugMode) {
     debugPrint('After runStartupCriticalMigrations / Before LicenseService');
   }
-  // License verification may need the network. Launch the UI first so a
-  // fresh Windows install is not held behind a pending Supabase request; the
-  // license gate updates as soon as the service resolves its local state.
-  unawaited(
-    LicenseService.instance.initialize().catchError((Object e, StackTrace s) {
-      debugPrint('[main] LicenseService.initialize failed: $e');
-    }),
-  );
+  try {
+    await LicenseService.instance.initialize();
+  } catch (e) {
+    debugPrint('[main] LicenseService.initialize failed: $e');
+  }
   try {
     await SystemNotificationService.instance.initialize();
   } catch (e) {
@@ -511,12 +506,12 @@ class _LicenseCheckingScreen extends StatelessWidget {
       builder: (context) {
         final loc = AppLocalizations.of(context)!;
         return Scaffold(
-          backgroundColor: const Color(0xFF1E3A5F),
+          backgroundColor: Color(0xFF1E3A5F),
           body: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
+                Text(
                   'Maarey',
                   style: TextStyle(
                     color: Colors.white,
@@ -525,13 +520,13 @@ class _LicenseCheckingScreen extends StatelessWidget {
                     letterSpacing: 2,
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Text(
                   loc.storeManagementSystem,
-                  style: const TextStyle(color: Colors.white70, fontSize: 14),
+                  style: TextStyle(color: Colors.white70, fontSize: 14),
                 ),
-                const SizedBox(height: 32),
-                const SizedBox(
+                SizedBox(height: 32),
+                SizedBox(
                   width: 28,
                   height: 28,
                   child: CircularProgressIndicator(
@@ -539,10 +534,10 @@ class _LicenseCheckingScreen extends StatelessWidget {
                     strokeWidth: 2,
                   ),
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 Text(
                   loc.checkingLicense,
-                  style: const TextStyle(color: Colors.white54, fontSize: 12),
+                  style: TextStyle(color: Colors.white54, fontSize: 12),
                 ),
               ],
             ),
