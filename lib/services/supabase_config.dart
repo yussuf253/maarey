@@ -18,12 +18,12 @@ import 'package:flutter/foundation.dart' show visibleForTesting;
 abstract class SupabaseConfig {
   static const url = String.fromEnvironment(
     'SUPABASE_URL',
-    defaultValue: 'https://rkofqwcuvbzrnmelvxhz.supabase.co',
+    defaultValue: 'https://tjfhveahnrflwjmeecev.supabase.co',
   );
   static const anonKey = String.fromEnvironment(
     'SUPABASE_ANON_KEY',
     defaultValue:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJrb2Zxd2N1dmJ6cm5tZWx2eGh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYzNDEyNjksImV4cCI6MjA5MTkxNzI2OX0.F5x59dpqtEqQn_MrxA7S07qw6HH136ZMW_P7nfgGFkQ',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqZmh2ZWFobnJmbHdqbWVlY2V2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQyNzk5NTQsImV4cCI6MjA5OTg1NTk1NH0.ezeyI00qykh5SHUblSYV07vAC6RKr4CykG5TivXCYDk',
   );
 
   /// Asserts that both `SUPABASE_URL` and `SUPABASE_ANON_KEY` were provided
@@ -55,14 +55,8 @@ abstract class SupabaseConfig {
         '    --dart-define=SUPABASE_URL=https://PROJECT.supabase.co \\\n'
         '    --dart-define=SUPABASE_ANON_KEY=ANON_KEY';
 
-    assert(
-      url.isNotEmpty,
-      'SUPABASE_URL is empty. $guidance',
-    );
-    assert(
-      anonKey.isNotEmpty,
-      'SUPABASE_ANON_KEY is empty. $guidance',
-    );
+    assert(url.isNotEmpty, 'SUPABASE_URL is empty. $guidance');
+    assert(anonKey.isNotEmpty, 'SUPABASE_ANON_KEY is empty. $guidance');
 
     // Defensive guard for release builds where `assert` is stripped: missing
     // dart-define values must still abort startup rather than silently producing
