@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../l10n/generated/app_localizations.dart';
 import '../providers/auth_provider.dart';
+import 'auth/device_revoked_screen.dart';
 import '../widgets/app_brand_mark.dart';
 import '../widgets/inputs/app_input.dart';
 import '../theme/erp_input_constants.dart';
@@ -232,6 +233,7 @@ class _LoginScreenState extends State<LoginScreen>
   }
 
   Future<void> _login() async {
+    if (_isLoading) return;
     setState(() {
       _blurredLoginUser = true;
       _blurredLoginPass = true;
@@ -256,6 +258,12 @@ class _LoginScreenState extends State<LoginScreen>
         if (!completed) target = '/onboarding';
       } catch (_) {}
       unawaited(nav.pushReplacementNamed(target));
+      return;
+    }
+    if (result == 'DEVICE_REVOKED') {
+      await nav.push<void>(
+        MaterialPageRoute<void>(builder: (_) => const DeviceRevokedScreen()),
+      );
       return;
     }
     // Map known error keys to localized strings; pass through any
@@ -375,7 +383,10 @@ class _LoginScreenState extends State<LoginScreen>
                         flex: 5,
                         child: _brandPanel(isNarrow: false, collapsed: false),
                       ),
-                      Expanded(flex: 6, child: _formPanel(isNarrow: false, loc: loc)),
+                      Expanded(
+                        flex: 6,
+                        child: _formPanel(isNarrow: false, loc: loc),
+                      ),
                     ],
                   )
                 : Column(
@@ -447,10 +458,7 @@ class _LoginScreenState extends State<LoginScreen>
       ),
     );
 
-    return SizedBox(
-      width: double.infinity,
-      child: content,
-    );
+    return SizedBox(width: double.infinity, child: content);
   }
 
   Widget _feature(IconData icon, String title) {
@@ -459,7 +467,10 @@ class _LoginScreenState extends State<LoginScreen>
       blurSigma: 10,
       tintColor: Colors.white.withValues(alpha: 0.07),
       strokeColor: Colors.white.withValues(alpha: 0.10),
-      padding: const EdgeInsetsDirectional.symmetric(horizontal: 18, vertical: 10),
+      padding: const EdgeInsetsDirectional.symmetric(
+        horizontal: 18,
+        vertical: 10,
+      ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -538,9 +549,7 @@ class _LoginScreenState extends State<LoginScreen>
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    _isSignUpMode
-                        ? loc.signupSubtitle
-                        : loc.loginSubtitle,
+                    _isSignUpMode ? loc.signupSubtitle : loc.loginSubtitle,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.tajawal(
                       fontSize: 14,
@@ -560,7 +569,9 @@ class _LoginScreenState extends State<LoginScreen>
                   TextButton(
                     onPressed: _isLoading ? null : _toggleMode,
                     style: TextButton.styleFrom(
-                      padding: const EdgeInsetsDirectional.symmetric(vertical: 10),
+                      padding: const EdgeInsetsDirectional.symmetric(
+                        vertical: 10,
+                      ),
                       foregroundColor: const Color(0xFFF5C518),
                     ),
                     child: Text(
@@ -754,7 +765,10 @@ class _LoginScreenState extends State<LoginScreen>
             decoration: BoxDecoration(
               color: Colors.white.withValues(alpha: 0.08),
               borderRadius: ErpInputConstants.borderRadius,
-              border: Border.all(color: Colors.white.withValues(alpha: 0.14), width: 1),
+              border: Border.all(
+                color: Colors.white.withValues(alpha: 0.14),
+                width: 1,
+              ),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -764,10 +778,7 @@ class _LoginScreenState extends State<LoginScreen>
                   style: TextStyle(
                     fontSize: 22,
                     height: 1,
-                    fontFamilyFallback: [
-                      'Segoe UI Emoji',
-                      'Apple Color Emoji',
-                    ],
+                    fontFamilyFallback: ['Segoe UI Emoji', 'Apple Color Emoji'],
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -974,7 +985,9 @@ class _LoginScreenState extends State<LoginScreen>
               minWidth: 48,
             ),
             prefixIcon: IconButton(
-              tooltip: _obscureSignupPassword ? loc.showPassword : loc.hidePassword,
+              tooltip: _obscureSignupPassword
+                  ? loc.showPassword
+                  : loc.hidePassword,
               splashRadius: 22,
               icon: Icon(
                 _obscureSignupPassword
@@ -1164,14 +1177,19 @@ class _LoginScreenState extends State<LoginScreen>
   }
 
   Widget _passwordRulesCard(AppLocalizations loc) {
-    final metCount = [_hasMinLength, _hasUppercase, _hasLowercase, _hasDigit, _hasSpecialChar]
-        .where((v) => v).length;
+    final metCount = [
+      _hasMinLength,
+      _hasUppercase,
+      _hasLowercase,
+      _hasDigit,
+      _hasSpecialChar,
+    ].where((v) => v).length;
     final strength = metCount / 5.0;
     final strengthColor = strength < 0.4
         ? Colors.red.shade400
         : strength < 0.8
-            ? const Color(0xFFF59E0B)
-            : Colors.green.shade600;
+        ? const Color(0xFFF59E0B)
+        : Colors.green.shade600;
     return GlassSurface(
       borderRadius: const BorderRadius.all(Radius.circular(12)),
       blurSigma: 10,

@@ -22,12 +22,12 @@ if (-not (Test-Path $releaseDir)) {
   exit 1
 }
 
-$exe = Join-Path $releaseDir "naboo.exe"
+$exe = Join-Path $releaseDir "maarey.exe"
 if (-not (Test-Path $exe)) {
   $exe = Join-Path $releaseDir "basra_store_manager.exe"
 }
 if (-not (Test-Path $exe)) {
-  Write-Warning "Expected naboo.exe or basra_store_manager.exe not found; zipping Release folder anyway."
+  Write-Warning "Expected maarey.exe or not found maarey_store_management basra_store_manager.exe not found; zipping Release folder anyway."
 }
 
 $dist = Join-Path $root "dist"

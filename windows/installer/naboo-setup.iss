@@ -5,7 +5,7 @@
 #define MyAppName "NABOO"
 #define MyAppPublisher "NABOO Systems"
 #define MyAppURL "https://naboo-93580.web.app/"
-#define MyAppExeName "naboo.exe"
+#define MyAppExeName "maarey.exe"
 
 ; قيم تُحقن من سطر الأوامر (workflow): /DMyAppVersion=2.0.2 /DBuildSrc=...
 #ifndef MyAppVersion

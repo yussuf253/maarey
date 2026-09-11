@@ -6,7 +6,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../services/database_helper.dart';
 import '../services/cloud_sync_service.dart'
-    show CloudSyncService;
+    show CloudSyncService, kDeviceAccessRevokedCode;
 import '../services/license_service.dart';
 import '../services/password_hashing.dart';
 import '../services/tenant_context.dart';
@@ -18,6 +18,7 @@ import '../utils/app_logger.dart';
 /// جلسة محلية فقط (SharedPreferences + SQLite). بدون سحابة أو اشتراك.
 class AuthProvider extends ChangeNotifier {
   static const _prefUserId = 'local_auth_user_id';
+
   /// يحدّد آخر «مالك بيانات» على الجهاز — لا يُحذف عند الخروج لاكتشاف تبديل الحساب.
   static const _prefActiveDataOwner = 'auth.active_data_owner';
 
@@ -58,9 +59,7 @@ class AuthProvider extends ChangeNotifier {
     // على معرّف المستخدم المحلي حتى يُفرض العزل أيضاً في الوضع المحلي.
     final supabaseUid = (row['supabaseUid'] as String?)?.trim() ?? '';
     final localId = (row['id'] as int?) ?? 0;
-    final tenantKey = supabaseUid.isNotEmpty
-        ? supabaseUid
-        : 'local-$localId';
+    final tenantKey = supabaseUid.isNotEmpty ? supabaseUid : 'local-$localId';
     if (tenantKey.isNotEmpty && tenantKey != 'local-0') {
       TenantContext.instance.set(tenantKey);
     }
@@ -157,7 +156,8 @@ class AuthProvider extends ChangeNotifier {
       _clear();
       notifyListeners();
       return;
-    }    _setFromRow(row);
+    }
+    _setFromRow(row);
     if (prefs.getString(_prefActiveDataOwner) == null) {
       await prefs.setString(_prefActiveDataOwner, _dataOwnerKeyForRow(row));
     }
@@ -171,19 +171,20 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-
-  Future<void> _completeCloudBootstrapAfterRestore(int localUserId) async {
+  Future<String?> _completeCloudBootstrapAfterRestore(int localUserId) async {
     try {
-      await _doCloudBootstrap(localUserId).timeout(
-        const Duration(seconds: 15),
-      );
+      return await _doCloudBootstrap(
+        localUserId,
+      ).timeout(const Duration(seconds: 15));
     } catch (_) {
       // لا نقطع واجهة المستخدم بسبب فشل مزامنة عند الإقلاع.
+      return null;
     }
   }
 
-  Future<void> _doCloudBootstrap(int localUserId) async {
-    final bootstrapOk = await CloudSyncService.instance.bootstrapForSignedInUser();
+  Future<String?> _doCloudBootstrap(int localUserId) async {
+    final bootstrapOk = await CloudSyncService.instance
+        .bootstrapForSignedInUser();
     if (!bootstrapOk) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.remove(_prefUserId);
@@ -193,14 +194,13 @@ class AuthProvider extends ChangeNotifier {
       } catch (_) {}
       _clear();
       notifyListeners();
-      return;
+      return kDeviceAccessRevokedCode;
     }
     await LicenseService.instance.applyTrialFromSupabaseProfile();
     final maxDevices =
         LicenseService.instance.state.plan?.maxDevices ??
         SubscriptionPlan.basic.maxDevices;
-    final limitError =
-        await CloudSyncService.instance.enforcePlanDeviceLimit(
+    final limitError = await CloudSyncService.instance.enforcePlanDeviceLimit(
       maxDevices: maxDevices,
     );
     if (limitError != null) {
@@ -209,23 +209,30 @@ class AuthProvider extends ChangeNotifier {
       await CloudSyncService.instance.stopForSignOut();
       _clear();
       notifyListeners();
-      return;
+      return limitError;
     }
     // تشغيل المزامنة في الخلفية دون التأثير على التنقل.
     await CloudSyncService.instance.syncNow();
+    return null;
   }
 
   /// Logs in the user. Returns null on success, or a localized error message on failure.
   Future<String?> login(String login, String password) async {
     final row = await _db.getUserByLogin(login);
-    AppLogger.info('Auth', 'login: local lookup ${row != null ? 'found user #${row['id']}' : 'null (no local user)'}');
+    AppLogger.info(
+      'Auth',
+      'login: local lookup ${row != null ? 'found user #${row['id']}' : 'null (no local user)'}',
+    );
     if (row == null) {
       return _loginViaSupabaseFallback(login, password);
     }
     final salt = row['passwordSalt'] as String?;
     final hash = row['passwordHash'] as String?;
     if (salt == null || hash == null || salt.isEmpty || hash.isEmpty) {
-      AppLogger.info('Auth', 'login: user exists locally but has no password hash — trying Supabase');
+      AppLogger.info(
+        'Auth',
+        'login: user exists locally but has no password hash — trying Supabase',
+      );
       return _loginViaSupabaseFallback(login, password);
     }
     if (!PasswordHashing.verify(password, salt, hash)) {
@@ -242,29 +249,36 @@ class AuthProvider extends ChangeNotifier {
     await prefs.setInt(_prefUserId, rowAfter['id'] as int);
     await LicenseService.instance.ensureLocalTrialStarted();
     // حاول تفعيل جلسة Supabase تلقائياً للحسابات البريدية (إن كانت سحابية) دون كسر الدخول المحلي.
-    await _tryEnableCloudSessionAfterLocalLogin(
+    final cloudLoginError = await _tryEnableCloudSessionAfterLocalLogin(
       row: rowAfter,
       login: login,
       password: password,
     );
+    if (cloudLoginError != null) return cloudLoginError;
     await _refreshTenantContextSilently();
     notifyListeners();
     return null; // success
   }
 
-  Future<String?> _loginViaSupabaseFallback(String login, String password) async {
+  Future<String?> _loginViaSupabaseFallback(
+    String login,
+    String password,
+  ) async {
     final mail = login.trim().toLowerCase();
     if (mail.isEmpty || !mail.contains('@')) {
-      AppLogger.info('Auth', 'login: Supabase fallback skipped — login is not an email');
+      AppLogger.info(
+        'Auth',
+        'login: Supabase fallback skipped — login is not an email',
+      );
       return 'userNotFound';
     }
     try {
-      AppLogger.info('Auth', 'login: trying Supabase signInWithPassword for $mail');
+      AppLogger.info(
+        'Auth',
+        'login: trying Supabase signInWithPassword for $mail',
+      );
       final res = await Supabase.instance.client.auth
-          .signInWithPassword(
-            email: mail,
-            password: password,
-          )
+          .signInWithPassword(email: mail, password: password)
           .timeout(const Duration(seconds: 10));
       final user = res.user ?? Supabase.instance.client.auth.currentUser;
       if (user == null) {
@@ -304,7 +318,8 @@ class AuthProvider extends ChangeNotifier {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setInt(_prefUserId, localId);
       await LicenseService.instance.ensureLocalTrialStarted();
-      await _completeCloudBootstrapAfterRestore(localId);
+      final bootstrapError = await _completeCloudBootstrapAfterRestore(localId);
+      if (bootstrapError != null) return bootstrapError;
       await _refreshTenantContextSilently();
       notifyListeners();
       AppLogger.info('Auth', 'login: Supabase fallback succeeded for $email');
@@ -312,16 +327,20 @@ class AuthProvider extends ChangeNotifier {
     } on AuthException catch (e) {
       AppLogger.error('Auth', 'login: Supabase signIn failed', e);
       final msg = e.message.toLowerCase();
-      if (msg.contains('invalid login') || msg.contains('invalid') && msg.contains('credential')) {
+      if (msg.contains('invalid login') ||
+          msg.contains('invalid') && msg.contains('credential')) {
         return 'invalidCredentials';
       }
-      if (msg.contains('email not confirmed') || msg.contains('not confirmed')) {
+      if (msg.contains('email not confirmed') ||
+          msg.contains('not confirmed')) {
         return 'emailNotConfirmed';
       }
       if (msg.contains('rate limit') || msg.contains('too many')) {
         return 'rateLimited';
       }
-      if (msg.contains('network') || msg.contains('connection') || msg.contains('timeout')) {
+      if (msg.contains('network') ||
+          msg.contains('connection') ||
+          msg.contains('timeout')) {
         return 'networkError';
       }
       // Return the actual Supabase error message so the user sees what went wrong.
@@ -332,7 +351,7 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future<bool> _ensureSupabaseSessionForLocalCloudAccount({
+  Future<String?> _ensureSupabaseSessionForLocalCloudAccount({
     required Map<String, dynamic> row,
     required String login,
     required String password,
@@ -341,26 +360,23 @@ class AuthProvider extends ChangeNotifier {
         ((row['email'] as String?)?.trim().toLowerCase().isNotEmpty ?? false)
         ? (row['email'] as String).trim().toLowerCase()
         : login.trim().toLowerCase();
-    if (email.isEmpty || !email.contains('@')) return false;
+    if (email.isEmpty || !email.contains('@')) return null;
     try {
       await Supabase.instance.client.auth
-          .signInWithPassword(
-            email: email,
-            password: password,
-          )
+          .signInWithPassword(email: email, password: password)
           .timeout(const Duration(seconds: 10));
       final localId = row['id'] as int?;
-      if (localId == null || localId <= 0) return false;
-      await _completeCloudBootstrapAfterRestore(localId);
-      return true;
+      if (localId == null || localId <= 0) return null;
+      final bootstrapError = await _completeCloudBootstrapAfterRestore(localId);
+      return bootstrapError;
     } on AuthException {
-      return false;
+      return null;
     } catch (_) {
-      return false;
+      return null;
     }
   }
 
-  Future<void> _tryEnableCloudSessionAfterLocalLogin({
+  Future<String?> _tryEnableCloudSessionAfterLocalLogin({
     required Map<String, dynamic> row,
     required String login,
     required String password,
@@ -371,16 +387,18 @@ class AuthProvider extends ChangeNotifier {
     final looksLikeEmail =
         (email.contains('@') && email.isNotEmpty) ||
         (loginKey.contains('@') && loginKey.isNotEmpty);
-    if (supabaseUid.isEmpty && !looksLikeEmail) return;
+    if (supabaseUid.isEmpty && !looksLikeEmail) return null;
 
     // لا نُفشل تسجيل الدخول المحلي إذا فشل الربط السحابي (انقطاع شبكة/حساب محلي فقط).
     try {
-      await _ensureSupabaseSessionForLocalCloudAccount(
+      return await _ensureSupabaseSessionForLocalCloudAccount(
         row: row,
         login: login,
         password: password,
       ).timeout(const Duration(seconds: 10));
-    } catch (_) {}
+    } catch (_) {
+      return null;
+    }
   }
 
   /// يعيد null عند النجاح، أو رسالة خطأ عربية.
@@ -440,7 +458,10 @@ class AuthProvider extends ChangeNotifier {
       return null;
     } on AuthException catch (e) {
       final msg = e.message.toLowerCase();
-      if (msg.contains('rate limit') || msg.contains('too many') || msg.contains('security purposes') || msg.contains('request this after')) {
+      if (msg.contains('rate limit') ||
+          msg.contains('too many') ||
+          msg.contains('security purposes') ||
+          msg.contains('request this after')) {
         return 'تم تجاوز حد الإرسال. انتظر بضع دقائق ثم حاول مجدداً.';
       }
       if (msg.contains('invalid email') || msg.contains('unable to validate')) {
@@ -449,7 +470,9 @@ class AuthProvider extends ChangeNotifier {
       if (msg.contains('not found') || msg.contains('no user')) {
         return 'لا يوجد حساب مرتبط بهذا البريد الإلكتروني.';
       }
-      if (msg.contains('network') || msg.contains('connection') || msg.contains('timeout')) {
+      if (msg.contains('network') ||
+          msg.contains('connection') ||
+          msg.contains('timeout')) {
         return 'تعذر الاتصال بالخادم. تحقق من الإنترنت وحاول مجدداً.';
       }
       AppLogger.error('Auth', 'sendEmailOtp: Supabase AuthException', e);
@@ -499,10 +522,7 @@ class AuthProvider extends ChangeNotifier {
       await Supabase.instance.client.auth.updateUser(
         UserAttributes(
           password: password,
-          data: {
-            'full_name': displayName.trim(),
-            'phone': phone.trim(),
-          },
+          data: {'full_name': displayName.trim(), 'phone': phone.trim()},
         ),
       );
     } on AuthException catch (e) {
@@ -576,23 +596,31 @@ class AuthProvider extends ChangeNotifier {
       return null;
     } on AuthException catch (e) {
       final msg = e.message.toLowerCase();
-      if (msg.contains('rate limit') || msg.contains('too many') || msg.contains('security purposes') || msg.contains('request this after')) {
+      if (msg.contains('rate limit') ||
+          msg.contains('too many') ||
+          msg.contains('security purposes') ||
+          msg.contains('request this after')) {
         return 'تم تجاوز حد الإرسال. انتظر بضع دقائق ثم حاول مجدداً.';
       }
       if (msg.contains('invalid email') || msg.contains('unable to validate')) {
         return 'البريد الإلكتروني غير صالح.';
       }
-      if (msg.contains('not found') || msg.contains('no user') || msg.contains('otp_disabled')) {
+      if (msg.contains('not found') ||
+          msg.contains('no user') ||
+          msg.contains('otp_disabled')) {
         return 'لا يوجد حساب مرتبط بهذا البريد الإلكتروني.';
-      }      AppLogger.error('Auth', 'sendPasswordResetOtp: Supabase AuthException', e);
+      }
+      AppLogger.error(
+        'Auth',
+        'sendPasswordResetOtp: Supabase AuthException',
+        e,
+      );
       return 'تعذر إرسال رمز التحقق: ${e.message}';
     } catch (e) {
       AppLogger.error('Auth', 'sendPasswordResetOtp: unexpected error', e);
       return 'تعذر إرسال رمز التحقق. تحقق من الاتصال بالإنترنت.';
     }
   }
-
-
 
   /// يتحقق من رمز الاستعادة المُدخل. لا يُغير أي بيانات محلية.
   Future<String?> verifyPasswordResetOtp({

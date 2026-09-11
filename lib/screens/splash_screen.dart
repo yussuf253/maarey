@@ -1,5 +1,6 @@
 import 'dart:async' show unawaited;
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -103,6 +104,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   Future<void> _playStampSound() async {
+    if (kIsWeb) return;
     try {
       final p = _player ?? AudioPlayer();
       _player = p;
@@ -544,7 +546,9 @@ class _SplashScreenState extends State<SplashScreen>
                 child: Column(
                   children: [
                     GlassSurface(
-                      borderRadius: const BorderRadius.all(Radius.circular(999)),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(999),
+                      ),
                       blurSigma: 12,
                       tintColor: AppGlass.surfaceTint,
                       strokeColor: AppGlass.stroke,
