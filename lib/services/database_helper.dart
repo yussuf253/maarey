@@ -376,10 +376,12 @@ class DatabaseHelper {
       if (!await _tableHasColumn(db, 'products', 'serviceKind')) {
         await db.execute('ALTER TABLE products ADD COLUMN serviceKind TEXT');
       }
-      await db.execute(
-        'CREATE INDEX IF NOT EXISTS idx_products_isService '
-        'ON products(tenantId, isService)',
-      );
+      if (await _tableHasColumn(db, 'products', 'tenantId')) {
+        await db.execute(
+          'CREATE INDEX IF NOT EXISTS idx_products_isService '
+          'ON products(tenantId, isService)',
+        );
+      }
     } catch (_) {}
   }
 
@@ -2577,11 +2579,19 @@ class DatabaseHelper {
       'activity_logs',
     ]) {
       try {
-        await db.execute(
-          "UPDATE $t SET updatedAt = IFNULL(NULLIF(createdAt, ''), ?) "
-          "WHERE updatedAt IS NULL OR TRIM(updatedAt) = ''",
-          [nowIso],
-        );
+        if (await _tableHasColumn(db, t, 'createdAt')) {
+          await db.execute(
+            "UPDATE $t SET updatedAt = IFNULL(NULLIF(createdAt, ''), ?) "
+            "WHERE updatedAt IS NULL OR TRIM(updatedAt) = ''",
+            [nowIso],
+          );
+        } else {
+          await db.execute(
+            "UPDATE $t SET updatedAt = ? "
+            "WHERE updatedAt IS NULL OR TRIM(updatedAt) = ''",
+            [nowIso],
+          );
+        }
       } catch (_) {}
     }
     try {

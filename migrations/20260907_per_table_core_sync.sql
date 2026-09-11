@@ -117,7 +117,15 @@ CREATE INDEX IF NOT EXISTS idx_suppliers_tenant  ON public.suppliers(tenant_id);
 CREATE INDEX IF NOT EXISTS idx_suppliers_updated ON public.suppliers(updated_at);
 
 -- ── 4b. Phase 4: work_shifts (new remote table) + missing updated_at columns.
-CREATE TABLE IF NOT EXISTS public.work_shifts (
+-- DROP the old RPC-era table (had session_user_id/shift_staff_pin NOT NULL)
+-- that CREATE TABLE IF NOT EXISTS cannot replace.
+DROP TRIGGER IF EXISTS trg_work_shifts_set_tenant ON public.work_shifts;
+DROP POLICY IF EXISTS work_shifts_select_own  ON public.work_shifts;
+DROP POLICY IF EXISTS work_shifts_insert_own  ON public.work_shifts;
+DROP POLICY IF EXISTS work_shifts_update_own  ON public.work_shifts;
+DROP POLICY IF EXISTS work_shifts_delete_own  ON public.work_shifts;
+DROP TABLE IF EXISTS public.work_shifts CASCADE;
+CREATE TABLE public.work_shifts (
   global_id                    text PRIMARY KEY,
   tenant_id                    integer NOT NULL DEFAULT 1,
   opened_at                    timestamptz NOT NULL,

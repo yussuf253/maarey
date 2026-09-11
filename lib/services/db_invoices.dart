@@ -842,7 +842,7 @@ extension DbInvoices on DatabaseHelper {
     );
     return Invoice(
       id: invoiceMap['id'] as int?,
-      customerName: invoiceMap['customerName'] as String,
+      customerName: (invoiceMap['customerName'] as String?) ?? '',
       date: DateTime.parse(invoiceMap['date'] as String),
       type: invoiceTypeFromDb(invoiceMap['type']),
       items: items.map((i) => InvoiceItem.fromMap(i)).toList(),
@@ -927,7 +927,7 @@ extension DbInvoices on DatabaseHelper {
       final items = itemsByInvoice[id] ?? const <Map<String, dynamic>>[];
       return Invoice(
         id: invoiceMap['id'] as int?,
-        customerName: invoiceMap['customerName'] as String,
+        customerName: (invoiceMap['customerName'] as String?) ?? '',
         date: DateTime.parse(invoiceMap['date'] as String),
         type: invoiceTypeFromDb(invoiceMap['type']),
         items: items.map((i) => InvoiceItem.fromMap(i)).toList(),
