@@ -375,43 +375,86 @@ class LicenseService extends ChangeNotifier {
   Future<void> _initializeV2() async {
     _setState(LicenseState.checking);
 
-    final prefs = await SharedPreferences.getInstance();
-    final user = Supabase.instance.client.auth.currentUser;
-    final tok = await _v2Activator.loadAndVerifyStoredToken();
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final user = Supabase.instance.client.auth.currentUser;
+      final tok = await _v2Activator.loadAndVerifyStoredToken();
 
-    if (tok == null) {
-      if (user != null) {
-        try {
-          await applyTrialFromSupabaseProfileV2().timeout(
-            const Duration(seconds: 8),
-          );
-        } catch (e) {
-          if (kDebugMode) {
-            debugPrint(
-              '[LicenseService] Cloud trial unavailable during startup: $e',
+      if (tok == null) {
+        if (user != null) {
+          try {
+            await applyTrialFromSupabaseProfileV2().timeout(
+              const Duration(seconds: 8),
             );
-          }
+          } catch (e) {
+            if (kDebugMode) {
+              debugPrint(
+                '[LicenseService] Cloud trial unavailable during startup: $e',
+              );
+            }
 
-          // Fallback local : le réseau ne doit pas empêcher Maarey de démarrer.
-          if (_state.status == LicenseStatus.checking) {
+            if (_state.status == LicenseStatus.checking) {
+              try {
+                _setState(await _resolveLocalTrialState(prefs));
+              } catch (e2) {
+                if (kDebugMode) {
+                  debugPrint(
+                    '[LicenseService] Local trial fallback failed: $e2',
+                  );
+                }
+              }
+            }
+          }
+        } else {
+          try {
             _setState(await _resolveLocalTrialState(prefs));
+          } catch (e) {
+            if (kDebugMode) {
+              debugPrint(
+                '[LicenseService] Local trial resolution failed: $e',
+              );
+            }
           }
         }
-      } else {
-        _setState(await _resolveLocalTrialState(prefs));
+
+        unawaited(_runBackgroundLicenseSync(includeTenantAccess: false));
+
+        return;
       }
 
-      // Vérification serveur en arrière-plan.
-      unawaited(_runBackgroundLicenseSync(includeTenantAccess: false));
+      // Le JWT est vérifié localement avant toute dépendance réseau.
+      try {
+        await _maybeApplySignedTokenAndTrustedTimeOverlay();
+      } catch (e) {
+        if (kDebugMode) {
+          debugPrint('[LicenseService] Token overlay failed: $e');
+        }
+      }
 
-      return;
+      // Kill-switch + limite appareils en arrière-plan.
+      unawaited(_runBackgroundLicenseSync(includeTenantAccess: true));
+    } catch (e) {
+      if (kDebugMode) {
+        debugPrint('[LicenseService] _initializeV2 failed: $e');
+      }
     }
 
-    // Le JWT est vérifié localement avant toute dépendance réseau.
-    await _maybeApplySignedTokenAndTrustedTimeOverlay();
-
-    // Kill-switch + limite appareils en arrière-plan.
-    unawaited(_runBackgroundLicenseSync(includeTenantAccess: true));
+    // Safety net: ensure state is never stuck on 'checking'.
+    if (_state.status == LicenseStatus.checking) {
+      try {
+        final prefs = await SharedPreferences.getInstance();
+        _setState(await _resolveLocalTrialState(prefs));
+      } catch (_) {
+        _setState(
+          const LicenseState(
+            status: LicenseStatus.trial,
+            plan: SubscriptionPlan.trial,
+            maxDevices: 2,
+            daysLeft: 15,
+          ),
+        );
+      }
+    }
   }
 
   /// Vérifications serveur exécutées en arrière-plan.
@@ -440,42 +483,85 @@ class LicenseService extends ChangeNotifier {
   Future<void> _checkLicenseV2({bool forceRemote = false}) async {
     _setState(LicenseState.checking);
 
-    final prefs = await SharedPreferences.getInstance();
-    final tok = await _v2Activator.loadAndVerifyStoredToken();
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final tok = await _v2Activator.loadAndVerifyStoredToken();
 
-    if (tok == null) {
-      final user = Supabase.instance.client.auth.currentUser;
+      if (tok == null) {
+        final user = Supabase.instance.client.auth.currentUser;
 
-      if (user != null) {
-        try {
-          await applyTrialFromSupabaseProfileV2().timeout(
-            const Duration(seconds: 8),
-          );
-        } catch (e) {
-          if (kDebugMode) {
-            debugPrint('[LicenseService] Cloud trial check failed: $e');
+        if (user != null) {
+          try {
+            await applyTrialFromSupabaseProfileV2().timeout(
+              const Duration(seconds: 8),
+            );
+          } catch (e) {
+            if (kDebugMode) {
+              debugPrint('[LicenseService] Cloud trial check failed: $e');
+            }
+
+            if (_state.status == LicenseStatus.checking) {
+              try {
+                _setState(await _resolveLocalTrialState(prefs));
+              } catch (e2) {
+                if (kDebugMode) {
+                  debugPrint(
+                    '[LicenseService] Local trial fallback failed: $e2',
+                  );
+                }
+              }
+            }
           }
-
-          if (_state.status == LicenseStatus.checking) {
+        } else {
+          try {
             _setState(await _resolveLocalTrialState(prefs));
+          } catch (e) {
+            if (kDebugMode) {
+              debugPrint('[LicenseService] Local trial resolution failed: $e');
+            }
           }
         }
-      } else {
-        _setState(await _resolveLocalTrialState(prefs));
+
+        await _maybeApplyTenantAccessOverlay(forceRemote: forceRemote);
+
+        await _maybeApplyServerDeviceLimitOverlay(forceRemote: forceRemote);
+
+        return;
+      }
+
+      try {
+        await _maybeApplySignedTokenAndTrustedTimeOverlay();
+      } catch (e) {
+        if (kDebugMode) {
+          debugPrint('[LicenseService] Token overlay check failed: $e');
+        }
       }
 
       await _maybeApplyTenantAccessOverlay(forceRemote: forceRemote);
 
       await _maybeApplyServerDeviceLimitOverlay(forceRemote: forceRemote);
-
-      return;
+    } catch (e) {
+      if (kDebugMode) {
+        debugPrint('[LicenseService] _checkLicenseV2 failed: $e');
+      }
     }
 
-    await _maybeApplySignedTokenAndTrustedTimeOverlay();
-
-    await _maybeApplyTenantAccessOverlay(forceRemote: forceRemote);
-
-    await _maybeApplyServerDeviceLimitOverlay(forceRemote: forceRemote);
+    // Safety net: ensure state is never stuck on 'checking'.
+    if (_state.status == LicenseStatus.checking) {
+      try {
+        final prefs = await SharedPreferences.getInstance();
+        _setState(await _resolveLocalTrialState(prefs));
+      } catch (_) {
+        _setState(
+          const LicenseState(
+            status: LicenseStatus.trial,
+            plan: SubscriptionPlan.trial,
+            maxDevices: 2,
+            daysLeft: 15,
+          ),
+        );
+      }
+    }
   }
 
   // ── معرّف الجهاز ──────────────────────────────────────────────────────────

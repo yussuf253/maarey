@@ -174,39 +174,45 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> _completeCloudBootstrapAfterRestore(int localUserId) async {
     try {
-      final bootstrapOk = await CloudSyncService.instance.bootstrapForSignedInUser();
-      if (!bootstrapOk) {
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.remove(_prefUserId);
-        await CloudSyncService.instance.stopForSignOut();
-        try {
-          await Supabase.instance.client.auth.signOut();
-        } catch (_) {}
-        _clear();
-        notifyListeners();
-        return;
-      }
-      await LicenseService.instance.applyTrialFromSupabaseProfile();
-      final maxDevices =
-          LicenseService.instance.state.plan?.maxDevices ??
-          SubscriptionPlan.basic.maxDevices;
-      final limitError =
-          await CloudSyncService.instance.enforcePlanDeviceLimit(
-        maxDevices: maxDevices,
+      await _doCloudBootstrap(localUserId).timeout(
+        const Duration(seconds: 15),
       );
-      if (limitError != null) {
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.remove(_prefUserId);
-        await CloudSyncService.instance.stopForSignOut();
-        _clear();
-        notifyListeners();
-        return;
-      }
-      // تشغيل المزامنة في الخلفية دون التأثير على التنقل.
-      await CloudSyncService.instance.syncNow();
     } catch (_) {
       // لا نقطع واجهة المستخدم بسبب فشل مزامنة عند الإقلاع.
     }
+  }
+
+  Future<void> _doCloudBootstrap(int localUserId) async {
+    final bootstrapOk = await CloudSyncService.instance.bootstrapForSignedInUser();
+    if (!bootstrapOk) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove(_prefUserId);
+      await CloudSyncService.instance.stopForSignOut();
+      try {
+        await Supabase.instance.client.auth.signOut();
+      } catch (_) {}
+      _clear();
+      notifyListeners();
+      return;
+    }
+    await LicenseService.instance.applyTrialFromSupabaseProfile();
+    final maxDevices =
+        LicenseService.instance.state.plan?.maxDevices ??
+        SubscriptionPlan.basic.maxDevices;
+    final limitError =
+        await CloudSyncService.instance.enforcePlanDeviceLimit(
+      maxDevices: maxDevices,
+    );
+    if (limitError != null) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove(_prefUserId);
+      await CloudSyncService.instance.stopForSignOut();
+      _clear();
+      notifyListeners();
+      return;
+    }
+    // تشغيل المزامنة في الخلفية دون التأثير على التنقل.
+    await CloudSyncService.instance.syncNow();
   }
 
   /// Logs in the user. Returns null on success, or a localized error message on failure.
@@ -254,10 +260,12 @@ class AuthProvider extends ChangeNotifier {
     }
     try {
       AppLogger.info('Auth', 'login: trying Supabase signInWithPassword for $mail');
-      final res = await Supabase.instance.client.auth.signInWithPassword(
-        email: mail,
-        password: password,
-      );
+      final res = await Supabase.instance.client.auth
+          .signInWithPassword(
+            email: mail,
+            password: password,
+          )
+          .timeout(const Duration(seconds: 10));
       final user = res.user ?? Supabase.instance.client.auth.currentUser;
       if (user == null) {
         AppLogger.warn('Auth', 'login: Supabase returned null user');
@@ -335,10 +343,12 @@ class AuthProvider extends ChangeNotifier {
         : login.trim().toLowerCase();
     if (email.isEmpty || !email.contains('@')) return false;
     try {
-      await Supabase.instance.client.auth.signInWithPassword(
-        email: email,
-        password: password,
-      );
+      await Supabase.instance.client.auth
+          .signInWithPassword(
+            email: email,
+            password: password,
+          )
+          .timeout(const Duration(seconds: 10));
       final localId = row['id'] as int?;
       if (localId == null || localId <= 0) return false;
       await _completeCloudBootstrapAfterRestore(localId);
@@ -369,7 +379,7 @@ class AuthProvider extends ChangeNotifier {
         row: row,
         login: login,
         password: password,
-      );
+      ).timeout(const Duration(seconds: 10));
     } catch (_) {}
   }
 
