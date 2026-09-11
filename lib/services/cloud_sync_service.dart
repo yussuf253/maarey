@@ -1462,11 +1462,41 @@ class CloudSyncService {
       final itemList = itemRows.cast<Map<String, dynamic>>();
       if (invList.isEmpty && itemList.isEmpty) break;
 
+      // Raw Supabase rows use snake_case; _mergeTableRows filters to local
+      // column names so unmapped keys (is_paid → isPaid, updated_at →
+      // updatedAt, etc.) are silently dropped — wiping those columns on
+      // INSERT OR REPLACE.  Map through _mapRemoteRowToLocal first.
+      final invoiceLocalCols = (await db.rawQuery('PRAGMA table_info(invoices)'))
+          .map((r) => (r['name'] ?? '').toString())
+          .where((s) => s.isNotEmpty)
+          .toSet();
+      final itemLocalCols = (await db.rawQuery('PRAGMA table_info(invoice_items)'))
+          .map((r) => (r['name'] ?? '').toString())
+          .where((s) => s.isNotEmpty)
+          .toSet();
+
+      final mappedInv = invList.map((raw) {
+        final m = _mapRemoteRowToLocal(raw, invoiceLocalCols);
+        raw.forEach((k, v) {
+          if (k.endsWith('_global_id') && v != null) m[k] = v;
+        });
+        m['deleted_at'] = raw['deleted_at'];
+        return m;
+      }).toList();
+      final mappedItems = itemList.map((raw) {
+        final m = _mapRemoteRowToLocal(raw, itemLocalCols);
+        raw.forEach((k, v) {
+          if (k.endsWith('_global_id') && v != null) m[k] = v;
+        });
+        m['deleted_at'] = raw['deleted_at'];
+        return m;
+      }).toList();
+
       await db.execute('PRAGMA foreign_keys = OFF');
       try {
         await db.transaction((txn) async {
-          await _mergeTableRows(txn, 'invoices', invList);
-          await _mergeTableRows(txn, 'invoice_items', itemList);
+          await _mergeTableRows(txn, 'invoices', mappedInv);
+          await _mergeTableRows(txn, 'invoice_items', mappedItems);
           await _relinkOrphanInvoiceItems(txn);
         });
       } finally {
@@ -3521,6 +3551,15 @@ class CloudSyncService {
     required DateTime? deletedAt,
     required List<String> pkCols,
   }) async {
+    // The local schema still has legacy NOT NULL columns (sessionUserId,
+    // shiftStaffPin) that are never sent by the cloud (privacy).  Supply
+    // defaults so INSERT OR REPLACE doesn't violate the constraint.
+    if (localCols.contains('sessionUserId') && !incoming.containsKey('sessionUserId')) {
+      incoming['sessionUserId'] = 0;
+    }
+    if (localCols.contains('shiftStaffPin') && !incoming.containsKey('shiftStaffPin')) {
+      incoming['shiftStaffPin'] = '';
+    }
     return _mergeSimpleTableByGlobalId(
       txn: txn,
       table: 'work_shifts',
@@ -3711,57 +3750,6 @@ class CloudSyncService {
       if ((table == 'expenses' || table == 'expense_categories') &&
           localCols.contains('global_id')) {
         final handled = await _mergeExpenseEntityByGlobalId(
-          txn: txn,
-          table: table,
-          incomingRaw: incomingRaw,
-          incoming: incoming,
-          localCols: localCols,
-          deletedAt: deletedAt,
-          pkCols: pkCols,
-        );
-        if (handled) continue;
-      }
-
-      if (table == 'installment_plans' && localCols.contains('global_id')) {
-        final handled = await _mergeInstallmentPlansByGlobalId(
-          txn: txn,
-          incomingRaw: incomingRaw,
-          incoming: incoming,
-          localCols: localCols,
-          deletedAt: deletedAt,
-          pkCols: pkCols,
-        );
-        if (handled) continue;
-      }
-
-      if (table == 'installments' && localCols.contains('global_id')) {
-        final handled = await _mergeInstallmentsByGlobalId(
-          txn: txn,
-          incomingRaw: incomingRaw,
-          incoming: incoming,
-          localCols: localCols,
-          deletedAt: deletedAt,
-          pkCols: pkCols,
-        );
-        if (handled) continue;
-      }
-
-      if (table == 'customer_debt_payments' &&
-          localCols.contains('global_id')) {
-        final handled = await _mergeCustomerDebtPaymentsByGlobalId(
-          txn: txn,
-          incomingRaw: incomingRaw,
-          incoming: incoming,
-          localCols: localCols,
-          deletedAt: deletedAt,
-          pkCols: pkCols,
-        );
-        if (handled) continue;
-      }
-
-      if ((table == 'supplier_bills' || table == 'supplier_payouts') &&
-          localCols.contains('global_id')) {
-        final handled = await _mergeSupplierFinancialsByGlobalId(
           txn: txn,
           table: table,
           incomingRaw: incomingRaw,

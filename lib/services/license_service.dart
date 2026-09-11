@@ -373,7 +373,13 @@ class LicenseService extends ChangeNotifier {
   /// - les appels Supabase ne doivent jamais empêcher l'ouverture de l'application ;
   /// - les contrôles serveur sont ensuite exécutés en arrière-plan.
   Future<void> _initializeV2() async {
-    _setState(LicenseState.checking);
+    // Only enter the blocking 'checking' state when no usable state is known
+    // yet.  A background re-verification (sync preflight) must never clobber a
+    // valid trial/active state — doing so makes _LicenseAwareRoot show the
+    // blocking _LicenseCheckingScreen mid-session.
+    if (_state.status == LicenseStatus.none) {
+      _setState(LicenseState.checking);
+    }
 
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -481,7 +487,14 @@ class LicenseService extends ChangeNotifier {
   }
 
   Future<void> _checkLicenseV2({bool forceRemote = false}) async {
-    _setState(LicenseState.checking);
+    // Snapshot the current state so the safety-net can restore it if the
+    // re-verification fails or times out.
+    final previousState = _state;
+    final hadUsableState = previousState.status == LicenseStatus.trial ||
+        previousState.status == LicenseStatus.active;
+    if (!hadUsableState) {
+      _setState(LicenseState.checking);
+    }
 
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -548,18 +561,24 @@ class LicenseService extends ChangeNotifier {
 
     // Safety net: ensure state is never stuck on 'checking'.
     if (_state.status == LicenseStatus.checking) {
-      try {
-        final prefs = await SharedPreferences.getInstance();
-        _setState(await _resolveLocalTrialState(prefs));
-      } catch (_) {
-        _setState(
-          const LicenseState(
-            status: LicenseStatus.trial,
-            plan: SubscriptionPlan.trial,
-            maxDevices: 2,
-            daysLeft: 15,
-          ),
-        );
+      if (hadUsableState) {
+        // Restore the previous valid state — the background re-check failed
+        // but the user had a working license before.
+        _setState(previousState);
+      } else {
+        try {
+          final prefs = await SharedPreferences.getInstance();
+          _setState(await _resolveLocalTrialState(prefs));
+        } catch (_) {
+          _setState(
+            const LicenseState(
+              status: LicenseStatus.trial,
+              plan: SubscriptionPlan.trial,
+              maxDevices: 2,
+              daysLeft: 15,
+            ),
+          );
+        }
       }
     }
   }
