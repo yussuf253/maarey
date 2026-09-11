@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import '../services/database_helper.dart';
+import '../services/tenant_context.dart';
 
 /// حالة الوردية المفتوحة (جلسة عمل الصندوق).
 class ShiftProvider extends ChangeNotifier {
@@ -16,6 +17,11 @@ class ShiftProvider extends ChangeNotifier {
   bool get hasOpenShift => _active != null;
 
   Future<void> refresh() async {
+    if (!TenantContext.instance.hasTenant) {
+      _active = null;
+      notifyListeners();
+      return;
+    }
     _active = await _db.getOpenWorkShift();
     notifyListeners();
   }

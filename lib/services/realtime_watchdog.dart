@@ -76,6 +76,7 @@ class RealtimeWatchdog {
   void markEvent(String label) {
     final h = _channels[label];
     if (h == null) return;
+    h.isSubscribed = true;
     h.lastHealthyAt = _clock();
     h.consecutiveErrors = 0;
     h.scheduledBackoff = null;
@@ -90,6 +91,7 @@ class RealtimeWatchdog {
   void markError(String label) {
     final h = _channels[label];
     if (h == null) return;
+    h.isSubscribed = false;
     final backoff = _nextBackoff(h.consecutiveErrors);
     h.consecutiveErrors++;
     h.scheduledBackoff = backoff;
@@ -114,6 +116,9 @@ class RealtimeWatchdog {
       final label = entry.key;
       final h = entry.value;
       if (h.pendingReconnect != null) continue;
+      // A subscribed channel can legitimately receive no database events for
+      // a long time. Lack of business traffic is not a transport failure.
+      if (h.isSubscribed) continue;
       final age = now.difference(h.lastHealthyAt);
       if (age > _unhealthyAfter) {
         if (kDebugMode) {
@@ -227,6 +232,7 @@ class _ChannelHealth {
 
   final Future<void> Function() reconnect;
   DateTime lastHealthyAt;
+  bool isSubscribed = false;
   int consecutiveErrors = 0;
   Duration? scheduledBackoff;
   Timer? pendingReconnect;

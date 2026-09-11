@@ -1294,6 +1294,8 @@ class CloudSyncService {
 
   Future<void> _processDeltas(List<Map<String, dynamic>> deltas) async {
     final client = Supabase.instance.client;
+    final user = client.auth.currentUser;
+    if (user == null) return;
     final db = await DatabaseHelper().database;
     bool uiNeedsRefresh = false;
 
@@ -1333,6 +1335,7 @@ class CloudSyncService {
           final remoteRows = await client
               .from(tableName)
               .select()
+              .eq('owner_id', user.id)
               .inFilter('global_id', batchIds);
 
           if (remoteRows.isNotEmpty) {
@@ -1449,12 +1452,14 @@ class CloudSyncService {
       final invRows = await client
           .from('invoices')
           .select()
+          .eq('owner_id', user.id)
           .gt('updated_at', cursor)
           .order('updated_at', ascending: true)
           .limit(pageSize);
       final itemRows = await client
           .from('invoice_items')
           .select()
+          .eq('owner_id', user.id)
           .gt('updated_at', cursor)
           .order('updated_at', ascending: true)
           .limit(pageSize);
@@ -1466,14 +1471,16 @@ class CloudSyncService {
       // column names so unmapped keys (is_paid → isPaid, updated_at →
       // updatedAt, etc.) are silently dropped — wiping those columns on
       // INSERT OR REPLACE.  Map through _mapRemoteRowToLocal first.
-      final invoiceLocalCols = (await db.rawQuery('PRAGMA table_info(invoices)'))
-          .map((r) => (r['name'] ?? '').toString())
-          .where((s) => s.isNotEmpty)
-          .toSet();
-      final itemLocalCols = (await db.rawQuery('PRAGMA table_info(invoice_items)'))
-          .map((r) => (r['name'] ?? '').toString())
-          .where((s) => s.isNotEmpty)
-          .toSet();
+      final invoiceLocalCols =
+          (await db.rawQuery('PRAGMA table_info(invoices)'))
+              .map((r) => (r['name'] ?? '').toString())
+              .where((s) => s.isNotEmpty)
+              .toSet();
+      final itemLocalCols =
+          (await db.rawQuery('PRAGMA table_info(invoice_items)'))
+              .map((r) => (r['name'] ?? '').toString())
+              .where((s) => s.isNotEmpty)
+              .toSet();
 
       final mappedInv = invList.map((raw) {
         final m = _mapRemoteRowToLocal(raw, invoiceLocalCols);
@@ -1569,174 +1576,427 @@ class CloudSyncService {
   /// الرفع حتى لا يكسر عمود محلي جديد جدولاً بعيداً لم يُحدّث بعد.
   static const Map<String, Set<String>> _perTableRemoteColumns = {
     'products': {
-      'global_id', 'tenant_id', 'name', 'barcode', 'product_code',
-      'category_global_id', 'brand_global_id', 'buy_price', 'sell_price',
-      'min_sell_price', 'qty', 'low_stock_threshold', 'status', 'is_active',
-      'created_at', 'updated_at', 'deleted_at', 'description', 'image_path',
-      'image_url', 'internal_notes', 'tags', 'sale_unit', 'supplier_name',
-      'tax_percent', 'discount_percent', 'discount_amount',
-      'buy_conversion_label', 'track_inventory', 'allow_negative_stock',
-      'supplier_item_code', 'net_weight_grams', 'manufacturing_date',
-      'expiry_date', 'grade', 'batch_number', 'expiry_alert_days_before',
-      'is_pinned', 'pinned_at', 'is_service', 'service_kind',
+      'global_id',
+      'tenant_id',
+      'name',
+      'barcode',
+      'product_code',
+      'category_global_id',
+      'brand_global_id',
+      'buy_price',
+      'sell_price',
+      'min_sell_price',
+      'qty',
+      'low_stock_threshold',
+      'status',
+      'is_active',
+      'created_at',
+      'updated_at',
+      'deleted_at',
+      'description',
+      'image_path',
+      'image_url',
+      'internal_notes',
+      'tags',
+      'sale_unit',
+      'supplier_name',
+      'tax_percent',
+      'discount_percent',
+      'discount_amount',
+      'buy_conversion_label',
+      'track_inventory',
+      'allow_negative_stock',
+      'supplier_item_code',
+      'net_weight_grams',
+      'manufacturing_date',
+      'expiry_date',
+      'grade',
+      'batch_number',
+      'expiry_alert_days_before',
+      'is_pinned',
+      'pinned_at',
+      'is_service',
+      'service_kind',
       'stock_base_kind',
     },
     'product_unit_variants': {
-      'global_id', 'tenant_id', 'product_global_id', 'unit_name',
-      'unit_symbol', 'barcode', 'sell_price', 'min_sell_price',
-      'factor_to_base', 'is_default', 'is_active', 'created_at', 'updated_at',
+      'global_id',
+      'tenant_id',
+      'product_global_id',
+      'unit_name',
+      'unit_symbol',
+      'barcode',
+      'sell_price',
+      'min_sell_price',
+      'factor_to_base',
+      'is_default',
+      'is_active',
+      'created_at',
+      'updated_at',
       'deleted_at',
     },
     'customers': {
-      'global_id', 'tenant_id', 'name', 'phone', 'email', 'address', 'notes',
-      'balance', 'loyalty_points', 'created_at', 'updated_at', 'deleted_at',
+      'global_id',
+      'tenant_id',
+      'name',
+      'phone',
+      'email',
+      'address',
+      'notes',
+      'balance',
+      'loyalty_points',
+      'created_at',
+      'updated_at',
+      'deleted_at',
     },
     'suppliers': {
-      'global_id', 'tenant_id', 'name', 'phone', 'notes', 'is_active',
-      'created_at', 'updated_at', 'deleted_at',
+      'global_id',
+      'tenant_id',
+      'name',
+      'phone',
+      'notes',
+      'is_active',
+      'created_at',
+      'updated_at',
+      'deleted_at',
     },
     // المرحلة 2: جداول المال. ملاحظة: remote expenses/expense_categories
     // موروثة من طابور RPC بمفتاح global_id UNIQUE (وليس PK) — الرفع يمرّ
     // onConflict: 'global_id' صراحة.
     'cash_ledger': {
-      'global_id', 'tenant_id', 'transaction_type', 'amount', 'amount_fils',
-      'description', 'work_shift_global_id', 'invoice_global_id',
-      'created_at', 'updated_at', 'deleted_at',
+      'global_id',
+      'tenant_id',
+      'transaction_type',
+      'amount',
+      'amount_fils',
+      'description',
+      'work_shift_global_id',
+      'invoice_global_id',
+      'created_at',
+      'updated_at',
+      'deleted_at',
     },
     'expenses': {
-      'global_id', 'tenant_id', 'category_global_id', 'amount', 'occurred_at',
-      'status', 'description', 'is_recurring', 'recurring_day',
-      'attachment_path', 'affects_cash', 'invoice_ref', 'landlord_or_property',
-      'tax_kind', 'created_at', 'updated_at', 'deleted_at',
+      'global_id',
+      'tenant_id',
+      'category_global_id',
+      'amount',
+      'occurred_at',
+      'status',
+      'description',
+      'is_recurring',
+      'recurring_day',
+      'attachment_path',
+      'affects_cash',
+      'invoice_ref',
+      'landlord_or_property',
+      'tax_kind',
+      'created_at',
+      'updated_at',
+      'deleted_at',
     },
     'expense_categories': {
-      'global_id', 'tenant_id', 'name', 'sort_order', 'is_active',
-      'created_at', 'updated_at',
+      'global_id',
+      'tenant_id',
+      'name',
+      'sort_order',
+      'is_active',
+      'created_at',
+      'updated_at',
     },
     'installment_plans': {
-      'global_id', 'customer_name', 'total_amount', 'paid_amount',
-      'number_of_installments', 'customer_global_id', 'invoice_global_id',
-      'interest_pct', 'interest_amount', 'financed_at_sale',
-      'total_with_interest', 'planned_months', 'suggested_monthly',
-      'created_at', 'updated_at', 'deleted_at',
+      'global_id',
+      'customer_name',
+      'total_amount',
+      'paid_amount',
+      'number_of_installments',
+      'customer_global_id',
+      'invoice_global_id',
+      'interest_pct',
+      'interest_amount',
+      'financed_at_sale',
+      'total_with_interest',
+      'planned_months',
+      'suggested_monthly',
+      'created_at',
+      'updated_at',
+      'deleted_at',
     },
     'installments': {
-      'global_id', 'plan_global_id', 'due_date', 'amount', 'paid', 'paid_date',
-      'created_at', 'updated_at', 'deleted_at',
+      'global_id',
+      'plan_global_id',
+      'due_date',
+      'amount',
+      'paid',
+      'paid_date',
+      'created_at',
+      'updated_at',
+      'deleted_at',
     },
     'customer_debt_payments': {
-      'global_id', 'customer_global_id', 'customer_name_snapshot', 'amount',
-      'debt_before', 'debt_after', 'created_by_user_name', 'note',
-      'created_at', 'updated_at', 'deleted_at',
+      'global_id',
+      'customer_global_id',
+      'customer_name_snapshot',
+      'amount',
+      'debt_before',
+      'debt_after',
+      'created_by_user_name',
+      'note',
+      'created_at',
+      'updated_at',
+      'deleted_at',
     },
     // المرحلة 3 — الجداول البعيدة موجودة من 20260531_full_sync_coverage.sql
     // و supabase_sync_queue_rpc.sql بمفتاح global_id PK وأعمدة *_global_id
     // لمفاتيح الأجانب. أعمدة ints المحلية (poId, voucherId, supplierId…)
     // لا تُرفع — تُحل إلى global_ids.
     'supplier_bills': {
-      'global_id', 'supplier_global_id', 'their_reference', 'their_bill_date',
-      'amount', 'note', 'image_path', 'created_by_user_name', 'created_at',
+      'global_id',
+      'supplier_global_id',
+      'their_reference',
+      'their_bill_date',
+      'amount',
+      'note',
+      'image_path',
+      'created_by_user_name',
+      'created_at',
       'updated_at',
     },
     'supplier_payouts': {
-      'global_id', 'supplier_global_id', 'amount', 'note',
-      'created_by_user_name', 'affects_cash', 'created_at', 'updated_at',
+      'global_id',
+      'supplier_global_id',
+      'amount',
+      'note',
+      'created_by_user_name',
+      'affects_cash',
+      'created_at',
+      'updated_at',
     },
     'purchase_orders': {
-      'global_id', 'tenant_id', 'po_number', 'supplier_global_id',
-      'supplier_name', 'status', 'order_date', 'expected_date', 'notes',
-      'total_amount', 'received_amount', 'created_by_user_name', 'created_at',
+      'global_id',
+      'tenant_id',
+      'po_number',
+      'supplier_global_id',
+      'supplier_name',
+      'status',
+      'order_date',
+      'expected_date',
+      'notes',
+      'total_amount',
+      'received_amount',
+      'created_by_user_name',
+      'created_at',
       'updated_at',
     },
     'purchase_order_items': {
-      'global_id', 'tenant_id', 'po_global_id', 'product_global_id',
-      'product_name', 'ordered_qty', 'received_qty', 'unit_price', 'total',
-      'created_at', 'updated_at',
+      'global_id',
+      'tenant_id',
+      'po_global_id',
+      'product_global_id',
+      'product_name',
+      'ordered_qty',
+      'received_qty',
+      'unit_price',
+      'total',
+      'created_at',
+      'updated_at',
     },
     'po_receipts': {
-      'global_id', 'tenant_id', 'po_global_id', 'stock_voucher_global_id',
-      'received_at', 'note', 'created_by_user_name', 'created_at',
+      'global_id',
+      'tenant_id',
+      'po_global_id',
+      'stock_voucher_global_id',
+      'received_at',
+      'note',
+      'created_by_user_name',
+      'created_at',
       'updated_at',
     },
     'stock_vouchers': {
-      'global_id', 'tenant_id', 'voucher_no', 'voucher_type', 'voucher_date',
-      'warehouse_from_gid', 'warehouse_to_gid', 'reference_no', 'notes',
-      'supplier_name', 'source_type', 'source_name', 'created_at',
+      'global_id',
+      'tenant_id',
+      'voucher_no',
+      'voucher_type',
+      'voucher_date',
+      'warehouse_from_gid',
+      'warehouse_to_gid',
+      'reference_no',
+      'notes',
+      'supplier_name',
+      'source_type',
+      'source_name',
+      'created_at',
       'updated_at',
     },
     'stock_voucher_items': {
-      'global_id', 'tenant_id', 'voucher_global_id', 'product_global_id',
-      'qty', 'unit_price', 'total', 'stock_before', 'stock_after',
-      'created_at', 'updated_at',
+      'global_id',
+      'tenant_id',
+      'voucher_global_id',
+      'product_global_id',
+      'qty',
+      'unit_price',
+      'total',
+      'stock_before',
+      'stock_after',
+      'created_at',
+      'updated_at',
     },
     // المرحلة 4. work_shifts: جدول بعيد جديد (انظر migration) — أعمدة
     // session_user_id/shift_staff_user_id/shift_staff_pin لا تُرفع
     // (أجهزية/سرية). parked_sales و activity_logs كانا بلا updated_at
     // على السحابة — يضاف عبر ALTER في migration.
     'work_shifts': {
-      'global_id', 'tenant_id', 'opened_at', 'closed_at',
-      'system_balance_at_open', 'declared_physical_cash', 'added_cash_at_open',
-      'shift_staff_name', 'declared_closing_cash', 'system_balance_at_close',
-      'withdrawn_at_close', 'declared_cash_in_box_at_close', 'created_at',
-      'updated_at', 'deleted_at',
+      'global_id',
+      'tenant_id',
+      'opened_at',
+      'closed_at',
+      'system_balance_at_open',
+      'declared_physical_cash',
+      'added_cash_at_open',
+      'shift_staff_name',
+      'declared_closing_cash',
+      'system_balance_at_close',
+      'withdrawn_at_close',
+      'declared_cash_in_box_at_close',
+      'created_at',
+      'updated_at',
+      'deleted_at',
     },
     'parked_sales': {
-      'global_id', 'tenant_id', 'title', 'payload', 'created_at',
+      'global_id',
+      'tenant_id',
+      'title',
+      'payload',
+      'created_at',
       'updated_at',
     },
     'activity_logs': {
-      'global_id', 'tenant_id', 'type', 'ref_table', 'ref_id', 'title',
-      'details', 'amount', 'created_at', 'updated_at',
+      'global_id',
+      'tenant_id',
+      'type',
+      'ref_table',
+      'ref_id',
+      'title',
+      'details',
+      'amount',
+      'created_at',
+      'updated_at',
     },
     'stocktaking_sessions': {
-      'global_id', 'tenant_id', 'warehouse_global_id', 'title', 'status',
-      'notes', 'started_at', 'closed_at', 'created_at', 'updated_at',
+      'global_id',
+      'tenant_id',
+      'warehouse_global_id',
+      'title',
+      'status',
+      'notes',
+      'started_at',
+      'closed_at',
+      'created_at',
+      'updated_at',
     },
     'stocktaking_items': {
-      'global_id', 'tenant_id', 'session_global_id', 'product_global_id',
-      'system_qty', 'counted_qty', 'difference',
-      'adjustment_voucher_global_id', 'created_at', 'updated_at',
+      'global_id',
+      'tenant_id',
+      'session_global_id',
+      'product_global_id',
+      'system_qty',
+      'counted_qty',
+      'difference',
+      'adjustment_voucher_global_id',
+      'created_at',
+      'updated_at',
     },
     'categories': {
-      'global_id', 'name', 'code', 'description', 'is_active',
-      'parent_global_id', 'created_at', 'updated_at', 'deleted_at',
+      'global_id',
+      'name',
+      'code',
+      'description',
+      'is_active',
+      'parent_global_id',
+      'created_at',
+      'updated_at',
+      'deleted_at',
     },
     'brands': {
-      'global_id', 'name', 'code', 'is_active',
-      'created_at', 'updated_at', 'deleted_at',
+      'global_id',
+      'name',
+      'code',
+      'is_active',
+      'created_at',
+      'updated_at',
+      'deleted_at',
     },
-    'print_settings': {
-      'global_id', 'payload', 'updated_at',
-    },
+    'print_settings': {'global_id', 'payload', 'updated_at'},
     'invoices': {
-      'global_id', 'tenant_id', 'type', 'status', 'total', 'subtotal',
-      'discount', 'tax', 'is_paid', 'is_returned', 'notes', 'customer_name',
-      'cashier_name', 'work_shift_global_id', 'created_at', 'updated_at',
+      'global_id',
+      'tenant_id',
+      'type',
+      'status',
+      'total',
+      'subtotal',
+      'discount',
+      'tax',
+      'is_paid',
+      'is_returned',
+      'notes',
+      'customer_name',
+      'cashier_name',
+      'work_shift_global_id',
+      'created_at',
+      'updated_at',
       'deleted_at',
     },
     'invoice_items': {
-      'global_id', 'tenant_id', 'invoice_global_id', 'product_global_id',
-      'product_name', 'quantity', 'base_qty', 'unit_price', 'discount',
-      'tax', 'total', 'created_at', 'updated_at', 'deleted_at',
+      'global_id',
+      'tenant_id',
+      'invoice_global_id',
+      'product_global_id',
+      'product_name',
+      'quantity',
+      'base_qty',
+      'unit_price',
+      'discount',
+      'tax',
+      'total',
+      'created_at',
+      'updated_at',
+      'deleted_at',
     },
     'service_orders': {
-      'global_id', 'tenant_id', 'customer_name_snapshot', 'device_name',
-      'device_serial', 'estimated_price_fils', 'agreed_price_fils',
-      'advance_payment_fils', 'status', 'technician_name',
-      'issue_description', 'completion_notes', 'created_at', 'updated_at',
+      'global_id',
+      'tenant_id',
+      'customer_name_snapshot',
+      'device_name',
+      'device_serial',
+      'estimated_price_fils',
+      'agreed_price_fils',
+      'advance_payment_fils',
+      'status',
+      'technician_name',
+      'issue_description',
+      'completion_notes',
+      'created_at',
+      'updated_at',
       'deleted_at',
     },
     'service_order_items': {
-      'global_id', 'tenant_id', 'order_global_id', 'product_name',
-      'quantity', 'price_fils', 'total_fils',
-      'created_at', 'updated_at', 'deleted_at',
+      'global_id',
+      'tenant_id',
+      'order_global_id',
+      'product_name',
+      'quantity',
+      'price_fils',
+      'total_fils',
+      'created_at',
+      'updated_at',
+      'deleted_at',
     },
   };
 
   String _camelToSnakeKey(String k) => k.replaceAllMapped(
-        RegExp(r'([A-Z])'),
-        (m) => '_${m.group(1)!.toLowerCase()}',
-      );
+    RegExp(r'([A-Z])'),
+    (m) => '_${m.group(1)!.toLowerCase()}',
+  );
 
   /// ── الحذف الصلب: نشر tombstones عبر جدول sync_hard_deletes ──────────────
   ///
@@ -1759,35 +2019,40 @@ class CloudSyncService {
     if (gids.isEmpty) return;
     final nowIso = (deletedAt ?? DateTime.now().toUtc()).toIso8601String();
     for (final gid in gids) {
-      await executor.insert(
-        'sync_tombstones',
-        {
-          'table_name': table,
-          'global_id': gid,
-          'deleted_at': nowIso,
-          'createdAt': nowIso,
-        },
-        conflictAlgorithm: ConflictAlgorithm.replace,
-      );
+      await executor.insert('sync_tombstones', {
+        'table_name': table,
+        'global_id': gid,
+        'deleted_at': nowIso,
+        'createdAt': nowIso,
+      }, conflictAlgorithm: ConflictAlgorithm.replace);
     }
   }
 
   /// رفع سجلات الحذف الصلب المعلّقة إلى السحابة ثم تنظيف الصندوق المحلي.
   Future<void> _pushSyncTombstones(SupabaseClient client) async {
+    final user = client.auth.currentUser;
+    if (user == null) return;
     final db = await _dbHelper.database;
     final tombs = await db.query('sync_tombstones', orderBy: 'id', limit: 500);
     if (tombs.isEmpty) return;
     final payload = tombs
-        .map((t) => {
-              'table_name': t['table_name'],
-              'global_id': t['global_id'],
-              'deleted_at': t['deleted_at'],
-              'created_at': t['createdAt'],
-            })
+        .map(
+          (t) => {
+            'table_name': t['table_name'],
+            'global_id': t['global_id'],
+            'deleted_at': t['deleted_at'],
+            'created_at': t['createdAt'],
+          },
+        )
         .toList();
     for (var i = 0; i < payload.length; i += 200) {
-      final chunk =
-          payload.sublist(i, i + 200 > payload.length ? payload.length : i + 200);
+      final chunk = payload.sublist(
+        i,
+        i + 200 > payload.length ? payload.length : i + 200,
+      );
+      for (final row in chunk) {
+        row['owner_id'] = user.id;
+      }
       await client.from('sync_hard_deletes').upsert(chunk);
     }
     // نجح الرفع — نظّف المُرسل.
@@ -1812,13 +2077,15 @@ class CloudSyncService {
     var pages = 0;
     const pageSize = 200;
     while (pages < 20) {
-      final rows = (await client
-              .from('sync_hard_deletes')
-              .select()
-              .gt('created_at', cursor)
-              .order('created_at', ascending: true)
-              .limit(pageSize))
-          .cast<Map<String, dynamic>>();
+      final rows =
+          (await client
+                  .from('sync_hard_deletes')
+                  .select()
+                  .eq('owner_id', user.id)
+                  .gt('created_at', cursor)
+                  .order('created_at', ascending: true)
+                  .limit(pageSize))
+              .cast<Map<String, dynamic>>();
       if (rows.isEmpty) break;
 
       await db.execute('PRAGMA foreign_keys = OFF');
@@ -1838,7 +2105,9 @@ class CloudSyncService {
             if (existing.isEmpty) continue;
             // LWW: صف محلي أحدث من الحذف (أُعيد إنشاؤه على هذا الجهاز) يبقى.
             final localTs = _bestTimestamp(existing.first);
-            if (deletedAt != null && localTs != null && localTs.isAfter(deletedAt)) {
+            if (deletedAt != null &&
+                localTs != null &&
+                localTs.isAfter(deletedAt)) {
               continue;
             }
             await txn.delete(table, where: 'global_id = ?', whereArgs: [gid]);
@@ -1899,6 +2168,7 @@ class CloudSyncService {
     String table,
     Map<String, dynamic> row,
     Set<String> remoteCols, {
+    required String ownerId,
     bool localColsHasWorkShiftGid = false,
   }) async {
     final gid = (row['global_id'] ?? '').toString().trim();
@@ -1920,26 +2190,43 @@ class CloudSyncService {
     if (table == 'products') {
       out.remove('category_id');
       out.remove('brand_id');
-      out['category_global_id'] =
-          await _globalIdOfLocalRow(db, 'categories', row['categoryId']);
-      out['brand_global_id'] =
-          await _globalIdOfLocalRow(db, 'brands', row['brandId']);
+      out['category_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'categories',
+        row['categoryId'],
+      );
+      out['brand_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'brands',
+        row['brandId'],
+      );
     } else if (table == 'product_unit_variants') {
       out.remove('product_id');
-      out['product_global_id'] =
-          await _globalIdOfLocalRow(db, 'products', row['productId']);
+      out['product_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'products',
+        row['productId'],
+      );
     } else if (table == 'cash_ledger') {
       // أعمدة ints المحلية بلا معنى عبر الأجهزة — تُستبدل بـ global_ids.
       out.remove('invoice_id');
       out.remove('work_shift_id');
-      out['invoice_global_id'] =
-          await _globalIdOfLocalRow(db, 'invoices', row['invoiceId']);
+      out['invoice_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'invoices',
+        row['invoiceId'],
+      );
       // work_shift_global_id عمود محلي يُرفع كما هو إن وُجد.
       if (localColsHasWorkShiftGid) {
-        out['work_shift_global_id'] = _normalizeValue(row['work_shift_global_id']);
+        out['work_shift_global_id'] = _normalizeValue(
+          row['work_shift_global_id'],
+        );
       } else {
-        out['work_shift_global_id'] =
-            await _globalIdOfLocalRow(db, 'work_shifts', row['workShiftId']);
+        out['work_shift_global_id'] = await _globalIdOfLocalRow(
+          db,
+          'work_shifts',
+          row['workShiftId'],
+        );
       }
     } else if (table == 'expenses') {
       out.remove('category_id');
@@ -1956,10 +2243,16 @@ class CloudSyncService {
     } else if (table == 'installment_plans') {
       out.remove('customer_id');
       out.remove('invoice_id');
-      out['customer_global_id'] =
-          await _globalIdOfLocalRow(db, 'customers', row['customerId']);
-      out['invoice_global_id'] =
-          await _globalIdOfLocalRow(db, 'invoices', row['invoiceId']);
+      out['customer_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'customers',
+        row['customerId'],
+      );
+      out['invoice_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'invoices',
+        row['invoiceId'],
+      );
     } else if (table == 'installments') {
       out.remove('plan_id');
       out['plan_global_id'] = await _globalIdOfLocalRow(
@@ -1969,28 +2262,46 @@ class CloudSyncService {
       );
     } else if (table == 'customer_debt_payments') {
       out.remove('customer_id');
-      out['customer_global_id'] =
-          await _globalIdOfLocalRow(db, 'customers', row['customerId']);
+      out['customer_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'customers',
+        row['customerId'],
+      );
     } else if (table == 'supplier_bills' || table == 'supplier_payouts') {
       out.remove('supplier_id');
-      out['supplier_global_id'] =
-          await _globalIdOfLocalRow(db, 'suppliers', row['supplierId']);
+      out['supplier_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'suppliers',
+        row['supplierId'],
+      );
     } else if (table == 'purchase_orders') {
       out.remove('supplier_id');
-      out['supplier_global_id'] =
-          await _globalIdOfLocalRow(db, 'suppliers', row['supplierId']);
+      out['supplier_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'suppliers',
+        row['supplierId'],
+      );
     } else if (table == 'purchase_order_items') {
       out.remove('po_id');
       out.remove('product_id');
-      out['po_global_id'] =
-          await _globalIdOfLocalRow(db, 'purchase_orders', row['poId']);
-      out['product_global_id'] =
-          await _globalIdOfLocalRow(db, 'products', row['productId']);
+      out['po_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'purchase_orders',
+        row['poId'],
+      );
+      out['product_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'products',
+        row['productId'],
+      );
     } else if (table == 'po_receipts') {
       out.remove('po_id');
       out.remove('stock_voucher_id');
-      out['po_global_id'] =
-          await _globalIdOfLocalRow(db, 'purchase_orders', row['poId']);
+      out['po_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'purchase_orders',
+        row['poId'],
+      );
       out['stock_voucher_global_id'] = await _globalIdOfLocalRow(
         db,
         'stock_vouchers',
@@ -2002,22 +2313,37 @@ class CloudSyncService {
       out.remove('warehouse_to_id');
       out.remove('created_by_user_id');
       out.remove('source_ref_id');
-      out['warehouse_from_gid'] =
-          await _globalIdOfLocalRow(db, 'warehouses', row['warehouseFromId']);
-      out['warehouse_to_gid'] =
-          await _globalIdOfLocalRow(db, 'warehouses', row['warehouseToId']);
+      out['warehouse_from_gid'] = await _globalIdOfLocalRow(
+        db,
+        'warehouses',
+        row['warehouseFromId'],
+      );
+      out['warehouse_to_gid'] = await _globalIdOfLocalRow(
+        db,
+        'warehouses',
+        row['warehouseToId'],
+      );
     } else if (table == 'stock_voucher_items') {
       out.remove('voucher_id');
       out.remove('product_id');
-      out['voucher_global_id'] =
-          await _globalIdOfLocalRow(db, 'stock_vouchers', row['voucherId']);
-      out['product_global_id'] =
-          await _globalIdOfLocalRow(db, 'products', row['productId']);
+      out['voucher_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'stock_vouchers',
+        row['voucherId'],
+      );
+      out['product_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'products',
+        row['productId'],
+      );
     } else if (table == 'stocktaking_sessions') {
       out.remove('warehouse_id');
       out.remove('created_by_user_id');
-      out['warehouse_global_id'] =
-          await _globalIdOfLocalRow(db, 'warehouses', row['warehouseId']);
+      out['warehouse_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'warehouses',
+        row['warehouseId'],
+      );
     } else if (table == 'stocktaking_items') {
       out.remove('session_id');
       out.remove('product_id');
@@ -2027,8 +2353,11 @@ class CloudSyncService {
         'stocktaking_sessions',
         row['sessionId'],
       );
-      out['product_global_id'] =
-          await _globalIdOfLocalRow(db, 'products', row['productId']);
+      out['product_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'products',
+        row['productId'],
+      );
       out['adjustment_voucher_global_id'] = await _globalIdOfLocalRow(
         db,
         'stock_vouchers',
@@ -2036,27 +2365,42 @@ class CloudSyncService {
       );
     } else if (table == 'categories') {
       out.remove('parent_id');
-      out['parent_global_id'] =
-          await _globalIdOfLocalRow(db, 'categories', row['parentId']);
+      out['parent_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'categories',
+        row['parentId'],
+      );
     } else if (table == 'invoices') {
       out.remove('work_shift_id');
-      out['work_shift_global_id'] =
-          await _globalIdOfLocalRow(db, 'work_shifts', row['workShiftId']);
+      out['work_shift_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'work_shifts',
+        row['workShiftId'],
+      );
     } else if (table == 'invoice_items') {
       out.remove('invoice_id');
       out.remove('product_id');
-      out['invoice_global_id'] =
-          await _globalIdOfLocalRow(db, 'invoices', row['invoiceId']);
-      out['product_global_id'] =
-          await _globalIdOfLocalRow(db, 'products', row['productId']);
+      out['invoice_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'invoices',
+        row['invoiceId'],
+      );
+      out['product_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'products',
+        row['productId'],
+      );
     } else if (table == 'service_orders') {
       out.remove('customer_id');
       out.remove('service_id');
       out.remove('invoice_id');
     } else if (table == 'service_order_items') {
       out.remove('product_id');
-      out['product_global_id'] =
-          await _globalIdOfLocalRow(db, 'products', row['productId']);
+      out['product_global_id'] = await _globalIdOfLocalRow(
+        db,
+        'products',
+        row['productId'],
+      );
     }
     // أعمدة boolean على السحابة (محلياً 0/1).
     for (final b in const ['affects_cash', 'is_recurring', 'is_active']) {
@@ -2065,6 +2409,7 @@ class CloudSyncService {
       }
     }
     out['global_id'] = gid;
+    out['owner_id'] = ownerId;
     return out;
   }
 
@@ -2112,8 +2457,11 @@ class CloudSyncService {
       try {
         hasWorkShiftGid = await db
             .rawQuery('PRAGMA table_info(cash_ledger)')
-            .then((cols) => cols.any((c) =>
-                (c['name'] ?? '').toString() == 'work_shift_global_id'));
+            .then(
+              (cols) => cols.any(
+                (c) => (c['name'] ?? '').toString() == 'work_shift_global_id',
+              ),
+            );
       } catch (_) {}
     }
     for (final r in rows) {
@@ -2122,6 +2470,7 @@ class CloudSyncService {
         table,
         r,
         remoteCols,
+        ownerId: userId,
         localColsHasWorkShiftGid: hasWorkShiftGid,
       );
       if (remote == null) continue; // بلا global_id — تُملأ عند الفتح القادم
@@ -2171,13 +2520,7 @@ class CloudSyncService {
     var madeProgress = false;
     for (final table in _perTableSyncTables) {
       try {
-        if (await _pullOnePerTable(
-          client,
-          db,
-          prefs,
-          user.id,
-          table,
-        )) {
+        if (await _pullOnePerTable(client, db, prefs, user.id, table)) {
           madeProgress = true;
         }
       } catch (e) {
@@ -2198,13 +2541,9 @@ class CloudSyncService {
 
   /// مواصفات مفاتيح الأجانب الاختيارية القابلة لإعادة الربط لاحقاً.
   static const List<
-          ({
-            String table,
-            String gidCol,
-            String intCol,
-            String parentTable,
-          })>
-      _optionalFkRelinkSpecs = [
+    ({String table, String gidCol, String intCol, String parentTable})
+  >
+  _optionalFkRelinkSpecs = [
     (
       table: 'purchase_order_items',
       gidCol: 'product_global_id',
@@ -2257,7 +2596,8 @@ class CloudSyncService {
             orphans = await txn.query(
               spec.table,
               columns: ['id', spec.gidCol],
-              where: "${spec.intCol} IS NULL AND IFNULL(${spec.gidCol}, '') != ''",
+              where:
+                  "${spec.intCol} IS NULL AND IFNULL(${spec.gidCol}, '') != ''",
               limit: 500,
             );
           } catch (_) {
@@ -2288,7 +2628,10 @@ class CloudSyncService {
       await db.execute('PRAGMA foreign_keys = ON');
     }
     if (relinked > 0) {
-      AppLogger.info('CloudSync', '_relinkOptionalFks: relinked $relinked rows');
+      AppLogger.info(
+        'CloudSync',
+        '_relinkOptionalFks: relinked $relinked rows',
+      );
     }
   }
 
@@ -2318,12 +2661,14 @@ class CloudSyncService {
         continue;
       }
       try {
-        final rows = (await client
-                .from(table)
-                .select()
-                .eq('global_id', gid)
-                .limit(1))
-            .cast<Map<String, dynamic>>();
+        final rows =
+            (await client
+                    .from(table)
+                    .select()
+                    .eq('owner_id', user.id)
+                    .eq('global_id', gid)
+                    .limit(1))
+                .cast<Map<String, dynamic>>();
         if (rows.isEmpty) {
           // الصف حُذف من السحابة — لا شيء بانتظاره.
           await db.delete(
@@ -2418,13 +2763,14 @@ class CloudSyncService {
     var pages = 0;
     const pageSize = 200;
     while (pages < 40) {
-      final remoteRows = (await client
-              .from(table)
-              .select()
-              .gt('updated_at', cursor)
-              .order('updated_at', ascending: true)
-              .limit(pageSize))
-          .cast<Map<String, dynamic>>();
+      final remoteRows =
+          (await client
+                  .from(table)
+                  .select()
+                  .gt('updated_at', cursor)
+                  .order('updated_at', ascending: true)
+                  .limit(pageSize))
+              .cast<Map<String, dynamic>>();
       if (remoteRows.isEmpty) break;
 
       // snake_case → camelCase + الاحتفاظ بمفاتيح الأجانب الخام للدمج
@@ -2486,7 +2832,9 @@ class CloudSyncService {
       final isReturned = (inv['isReturned'] as num?)?.toInt() == 1;
       final typeIdx = (inv['type'] as num?)?.toInt() ?? 0;
       final serviceReceipt =
-          typeIdx == 4 || typeIdx == 5 || typeIdx == 6; // تحصيل دين/قسط/دفع مورد
+          typeIdx == 4 ||
+          typeIdx == 5 ||
+          typeIdx == 6; // تحصيل دين/قسط/دفع مورد
 
       await txn.update(
         'invoices',
@@ -2510,7 +2858,8 @@ class CloudSyncService {
         for (final it in items) {
           final pid = (it['productId'] as num?)?.toInt();
           if (pid == null) continue;
-          final baseQty = (it['baseQty'] as num?)?.toDouble() ??
+          final baseQty =
+              (it['baseQty'] as num?)?.toDouble() ??
               (it['quantity'] as num?)?.toDouble() ??
               0.0;
           if (baseQty <= 0) continue;
@@ -3502,7 +3851,8 @@ class CloudSyncService {
     // Resolve product_global_id → productId.
     final pg =
         (incomingRaw['product_global_id'] ??
-                incoming['product_global_id'] ?? '')
+                incoming['product_global_id'] ??
+                '')
             .toString()
             .trim();
     incoming.remove('product_id');
@@ -3554,10 +3904,12 @@ class CloudSyncService {
     // The local schema still has legacy NOT NULL columns (sessionUserId,
     // shiftStaffPin) that are never sent by the cloud (privacy).  Supply
     // defaults so INSERT OR REPLACE doesn't violate the constraint.
-    if (localCols.contains('sessionUserId') && !incoming.containsKey('sessionUserId')) {
+    if (localCols.contains('sessionUserId') &&
+        !incoming.containsKey('sessionUserId')) {
       incoming['sessionUserId'] = 0;
     }
-    if (localCols.contains('shiftStaffPin') && !incoming.containsKey('shiftStaffPin')) {
+    if (localCols.contains('shiftStaffPin') &&
+        !incoming.containsKey('shiftStaffPin')) {
       incoming['shiftStaffPin'] = '';
     }
     return _mergeSimpleTableByGlobalId(
@@ -3837,8 +4189,7 @@ class CloudSyncService {
       }
 
       // ── product_unit_variants: global_id merge + توطين FK المنتج ──────
-      if (table == 'product_unit_variants' &&
-          localCols.contains('global_id')) {
+      if (table == 'product_unit_variants' && localCols.contains('global_id')) {
         final handled = await _mergeProductUnitVariantsByGlobalId(
           txn: txn,
           incomingRaw: incomingRaw,
@@ -4416,9 +4767,10 @@ class CloudSyncService {
   /// localCol = العمود المحلي، lookupTable = جدول البحث. الأب المطلوب
   /// (isRequired=true) غير الموجود محلياً يُسقط الصف (يتيم — يُعاد فحصه في
   /// دورة تالية عند وصول الأب).
-  List<({String remoteKey, String localCol, String lookupTable, bool isRequired})>? _phase3FkSpecs(
-    String table,
-  ) {
+  List<
+    ({String remoteKey, String localCol, String lookupTable, bool isRequired})
+  >?
+  _phase3FkSpecs(String table) {
     switch (table) {
       case 'purchase_order_items':
         return [
@@ -4523,8 +4875,9 @@ class CloudSyncService {
     required Map<String, dynamic> incomingRaw,
     required Map<String, dynamic> incoming,
     required DateTime? deletedAt,
-    required
-        List<({String remoteKey, String localCol, String lookupTable, bool isRequired})>
+    required List<
+      ({String remoteKey, String localCol, String lookupTable, bool isRequired})
+    >
     fks,
   }) async {
     final gid = (incomingRaw['global_id'] ?? incoming['global_id'] ?? '')
@@ -4553,16 +4906,12 @@ class CloudSyncService {
           // بالـ global_id في دورة لاحقة (انظر _processPendingChildren)،
           // وإلا لَفَت مؤشر السحب فوقه ولن يُرى أبداً.
           try {
-            await txn.insert(
-              'sync_pending_children',
-              {
-                'table_name': table,
-                'global_id': gid,
-                'first_seen': DateTime.now().toUtc().toIso8601String(),
-                'attempts': 0,
-              },
-              conflictAlgorithm: ConflictAlgorithm.ignore,
-            );
+            await txn.insert('sync_pending_children', {
+              'table_name': table,
+              'global_id': gid,
+              'first_seen': DateTime.now().toUtc().toIso8601String(),
+              'attempts': 0,
+            }, conflictAlgorithm: ConflictAlgorithm.ignore);
           } catch (_) {}
           return true;
         }
@@ -4600,9 +4949,10 @@ class CloudSyncService {
         .trim();
     if (gid.isEmpty) return false;
 
-    final pgid = (incomingRaw['product_global_id'] ?? incoming['productGlobalId'] ?? '')
-        .toString()
-        .trim();
+    final pgid =
+        (incomingRaw['product_global_id'] ?? incoming['productGlobalId'] ?? '')
+            .toString()
+            .trim();
     int? productId;
     if (pgid.isNotEmpty) {
       final p = await txn.query(
