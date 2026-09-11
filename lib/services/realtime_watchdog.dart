@@ -31,13 +31,12 @@ class RealtimeWatchdog {
     Duration maxBackoff = const Duration(seconds: 60),
     DateTime Function()? clock,
     Timer Function(Duration delay, void Function() callback)? timerFactory,
-  })  : _checkInterval = checkInterval,
-        _unhealthyAfter = unhealthyAfter,
-        _baseBackoff = baseBackoff,
-        _maxBackoff = maxBackoff,
-        _clock = clock ?? DateTime.now,
-        _timerFactory =
-            timerFactory ?? ((d, cb) => Timer(d, cb));
+  }) : _checkInterval = checkInterval,
+       _unhealthyAfter = unhealthyAfter,
+       _baseBackoff = baseBackoff,
+       _maxBackoff = maxBackoff,
+       _clock = clock ?? DateTime.now,
+       _timerFactory = timerFactory ?? ((d, cb) => Timer(d, cb));
 
   final Duration _checkInterval;
   final Duration _unhealthyAfter;
@@ -56,10 +55,7 @@ class RealtimeWatchdog {
   /// يُسجّل قناة جديدة. [reconnect] يُستدعى لإعادة الاشتراك عند تجاوز
   /// السماحية أو بعد خطأ — يجب أن يُكمّل بدون أن يرمي (الأخطاء الداخلية تُسجَّل
   /// في AppLogger وتترك للـ tick التالي).
-  void register(
-    String label, {
-    required Future<void> Function() reconnect,
-  }) {
+  void register(String label, {required Future<void> Function() reconnect}) {
     _channels[label] = _ChannelHealth(
       reconnect: reconnect,
       lastHealthyAt: _clock(),
@@ -99,7 +95,7 @@ class RealtimeWatchdog {
       AppLogger.warn(
         'RealtimeWatchdog',
         '[$label] تم رصد خطأ — جدولة إعادة اتصال بعد ${backoff.inSeconds}s '
-        '(محاولة ${h.consecutiveErrors})',
+            '(محاولة ${h.consecutiveErrors})',
       );
     }
     _scheduleReconnect(label, h, backoff);
@@ -125,7 +121,7 @@ class RealtimeWatchdog {
           AppLogger.warn(
             'RealtimeWatchdog',
             '[$label] لا نشاط منذ ${age.inSeconds}s '
-            '(> ${_unhealthyAfter.inSeconds}s) — تشغيل reconnect',
+                '(> ${_unhealthyAfter.inSeconds}s) — تشغيل reconnect',
           );
         }
         markError(label);
@@ -141,8 +137,8 @@ class RealtimeWatchdog {
       AppLogger.info(
         'RealtimeWatchdog',
         'بدأ المسح الدوري كل ${_checkInterval.inSeconds}s '
-        '(unhealthyAfter=${_unhealthyAfter.inSeconds}s, '
-        'maxBackoff=${_maxBackoff.inSeconds}s)',
+            '(unhealthyAfter=${_unhealthyAfter.inSeconds}s, '
+            'maxBackoff=${_maxBackoff.inSeconds}s)',
       );
     }
   }
@@ -197,11 +193,7 @@ class RealtimeWatchdog {
     return candidate > _maxBackoff ? _maxBackoff : candidate;
   }
 
-  void _scheduleReconnect(
-    String label,
-    _ChannelHealth h,
-    Duration backoff,
-  ) {
+  void _scheduleReconnect(String label, _ChannelHealth h, Duration backoff) {
     h.cancelPendingReconnect();
     h.pendingReconnect = _timerFactory(backoff, () async {
       h.pendingReconnect = null;
@@ -225,10 +217,7 @@ class RealtimeWatchdog {
 }
 
 class _ChannelHealth {
-  _ChannelHealth({
-    required this.reconnect,
-    required this.lastHealthyAt,
-  });
+  _ChannelHealth({required this.reconnect, required this.lastHealthyAt});
 
   final Future<void> Function() reconnect;
   DateTime lastHealthyAt;
