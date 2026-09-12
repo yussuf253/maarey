@@ -19,7 +19,7 @@ $$;
 
 do $$
 declare
-  table_name text;
+  sync_table_name text;
   policy_name text;
   sync_tables constant text[] := array[
     'categories', 'brands', 'products', 'product_unit_variants',
@@ -33,39 +33,66 @@ declare
     'print_settings', 'sync_hard_deletes'
   ];
 begin
-  foreach table_name in array sync_tables loop
-    if to_regclass('public.' || table_name) is null then
+  foreach sync_table_name in array sync_tables loop
+    if to_regclass('public.' || sync_table_name) is null then
       continue;
     end if;
 
     execute format(
       'alter table public.%I add column if not exists owner_id uuid references auth.users(id)',
-      table_name
+      sync_table_name
     );
     execute format(
       'create index if not exists %I on public.%I(owner_id)',
-      'idx_' || table_name || '_owner', table_name
+      'idx_' || sync_table_name || '_owner', sync_table_name
     );
+
+    -- Older sync tables allowed updated_at to be NULL. A cursor query using
+    -- `updated_at > ...` cannot see those rows on a fresh device, so normalize
+    -- them once during the ownership migration.
+    if exists (
+      select 1 from information_schema.columns c
+      where table_schema = 'public'
+        and c.table_name = sync_table_name
+        and column_name = 'updated_at'
+    ) then
+      if exists (
+        select 1 from information_schema.columns c
+        where table_schema = 'public'
+          and c.table_name = sync_table_name
+          and column_name = 'created_at'
+      ) then
+        execute format(
+          'update public.%I set updated_at = coalesce(updated_at, created_at, now()) where updated_at is null',
+          sync_table_name
+        );
+      else
+        execute format(
+          'update public.%I set updated_at = now() where updated_at is null',
+          sync_table_name
+        );
+      end if;
+    end if;
 
     -- Existing permissive policies (often named "Allow all for service role")
     -- would otherwise OR with the owner policy and keep the leak open.
     for policy_name in
       select policyname from pg_policies
-      where schemaname = 'public' and tablename = table_name
+      where schemaname = 'public' and tablename = sync_table_name
     loop
-      execute format('drop policy if exists %I on public.%I', policy_name, table_name);
+      execute format('drop policy if exists %I on public.%I', policy_name, sync_table_name);
     end loop;
 
-    execute format('alter table public.%I enable row level security', table_name);
+    execute format('alter table public.%I enable row level security', sync_table_name);
     execute format(
       'create policy %I on public.%I for all using (auth.uid() = owner_id) with check (auth.uid() = owner_id)',
-      table_name || '_owner_isolation', table_name
+      sync_table_name || '_owner_isolation', sync_table_name
     );
 
-    execute format('drop trigger if exists %I on public.%I', table_name || '_owner_stamp', table_name);
+    execute format('drop trigger if exists %I on public.%I', sync_table_name || '_owner_stamp', sync_table_name);
     execute format(
       'create trigger %I before insert or update on public.%I for each row execute function public.set_sync_owner_id()',
-      table_name || '_owner_stamp', table_name
+      sync_table_name || '_owner_stamp', sync_table_name
     );
   end loop;
 end $$;

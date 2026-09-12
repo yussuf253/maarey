@@ -1,5 +1,8 @@
+import 'dart:async' show unawaited;
+
 import 'package:flutter/foundation.dart';
 
+import '../services/cloud_sync_service.dart';
 import '../services/product_repository.dart';
 
 /// مزود خاص بقائمة إدارة المنتجات (Paging + Filters).
@@ -8,6 +11,12 @@ import '../services/product_repository.dart';
 /// مختلفة (مثل quick-pick/search) ولا نريد كسر سلوكها.
 class InventoryProductsProvider extends ChangeNotifier {
   static const int _pageSize = 120;
+
+  InventoryProductsProvider() {
+    CloudSyncService.instance.remoteImportGeneration.addListener(
+      _refreshAfterRemoteImport,
+    );
+  }
 
   final ProductRepository _repo = ProductRepository();
 
@@ -43,6 +52,18 @@ class InventoryProductsProvider extends ChangeNotifier {
 
   int _matchedTotal = 0;
   int _catalogTotal = 0;
+
+  void _refreshAfterRemoteImport() {
+    unawaited(refresh());
+  }
+
+  @override
+  void dispose() {
+    CloudSyncService.instance.remoteImportGeneration.removeListener(
+      _refreshAfterRemoteImport,
+    );
+    super.dispose();
+  }
 
   String get keyword => _keyword;
   String get barcode => _barcode;
@@ -102,7 +123,8 @@ class InventoryProductsProvider extends ChangeNotifier {
     final bn = _normalizeAll(brandName);
     final st = status.trim().isEmpty ? 'all' : status.trim();
     final sb = _normalizeSort(sortBy);
-    final changed = kw != _keyword ||
+    final changed =
+        kw != _keyword ||
         bc != _barcode ||
         pc != _productCode ||
         cn != _categoryName ||

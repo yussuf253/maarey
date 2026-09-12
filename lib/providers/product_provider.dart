@@ -1,5 +1,8 @@
+import 'dart:async' show unawaited;
+
 import 'package:flutter/material.dart';
 import '../models/new_product_extra_unit.dart';
+import '../services/cloud_sync_service.dart';
 import '../services/product_repository.dart';
 import '../services/tenant_context_service.dart';
 import '../utils/iqd_money.dart';
@@ -22,6 +25,12 @@ class AddProductFormData {
 }
 
 class ProductProvider extends ChangeNotifier {
+  ProductProvider() {
+    CloudSyncService.instance.remoteImportGeneration.addListener(
+      _refreshAfterRemoteImport,
+    );
+  }
+
   final ProductRepository _repo = ProductRepository();
 
   List<Map<String, dynamic>> _products = [];
@@ -29,6 +38,18 @@ class ProductProvider extends ChangeNotifier {
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+
+  void _refreshAfterRemoteImport() {
+    unawaited(loadProducts());
+  }
+
+  @override
+  void dispose() {
+    CloudSyncService.instance.remoteImportGeneration.removeListener(
+      _refreshAfterRemoteImport,
+    );
+    super.dispose();
+  }
 
   Future<void> loadProducts({bool seedIfEmpty = false}) async {
     _isLoading = true;
@@ -178,7 +199,9 @@ class ProductProvider extends ChangeNotifier {
     return _repo.resolveProductByAnyBarcode(barcode);
   }
 
-  Future<List<Map<String, dynamic>>> listActiveUnitVariantsForProduct(int productId) {
+  Future<List<Map<String, dynamic>>> listActiveUnitVariantsForProduct(
+    int productId,
+  ) {
     return _repo.listActiveUnitVariantsForProduct(productId);
   }
 

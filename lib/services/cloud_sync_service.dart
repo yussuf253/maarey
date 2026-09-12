@@ -974,14 +974,14 @@ class CloudSyncService {
         // السحب التزايدي للفواتير (خارج اللقطة): يعمل دائماً — حتى عندما
         // تكون اللقطة سليمة محلياً — لالتقاط مبيعات الأجهزة الأخرى.
         try {
-          await _pullInvoicesIncremental(client);
+          await _pullInvoicesIncremental(client, forceFullPull: forcePull);
         } catch (e) {
           AppLogger.warn('CloudSync', 'invoice incremental pull failed: $e');
         }
 
         // السحب التزايدي لجداول المرحلة الأولى (منتجات/وحدات/عملاء/موردين).
         try {
-          await _pullPerTableIncremental(client);
+          await _pullPerTableIncremental(client, forceFullPull: forcePull);
         } catch (e) {
           AppLogger.warn('CloudSync', 'per-table incremental pull failed: $e');
         }
@@ -1432,7 +1432,10 @@ class CloudSyncService {
   ///   يتحرك → إعادة محاولة في المزامنة التالية.
   /// - الحذف المنطقي: صفوف deleted_at غير null تُدمج ثم تُحذف محلياً عبر
   ///   [deletedAt] داخل _doMergeWithGlobalId.
-  Future<void> _pullInvoicesIncremental(SupabaseClient client) async {
+  Future<void> _pullInvoicesIncremental(
+    SupabaseClient client, {
+    bool forceFullPull = false,
+  }) async {
     final user = client.auth.currentUser;
     if (user == null) return;
     final db = await _dbHelper.database;
@@ -1441,6 +1444,14 @@ class CloudSyncService {
     var cursor = prefs.getString(cursorKey) ?? '';
     const pageSize = 200;
     int pagesPulled = 0;
+
+    final localInvoiceCount = await db.rawQuery(
+      'SELECT COUNT(*) AS c FROM invoices',
+    );
+    if (forceFullPull ||
+        ((localInvoiceCount.first['c'] as num?)?.toInt() ?? 0) == 0) {
+      cursor = '1970-01-01T00:00:00Z';
+    }
 
     // حماية من cursor تالف.
     if (cursor.isEmpty || DateTime.tryParse(cursor) == null) {
@@ -1453,14 +1464,14 @@ class CloudSyncService {
           .from('invoices')
           .select()
           .eq('owner_id', user.id)
-          .gt('updated_at', cursor)
+          .or('updated_at.gt.$cursor,updated_at.is.null')
           .order('updated_at', ascending: true)
           .limit(pageSize);
       final itemRows = await client
           .from('invoice_items')
           .select()
           .eq('owner_id', user.id)
-          .gt('updated_at', cursor)
+          .or('updated_at.gt.$cursor,updated_at.is.null')
           .order('updated_at', ascending: true)
           .limit(pageSize);
       final invList = invRows.cast<Map<String, dynamic>>();
@@ -2512,7 +2523,10 @@ class CloudSyncService {
 
   /// سحب تزايدي لكل جدول من جداول المرحلة الأولى: صفوف بعيدة أحدث من cursor
   /// تُدمج محلياً عبر نفس منطق دمج اللقطة (global_id + LWW + tombstones).
-  Future<void> _pullPerTableIncremental(SupabaseClient client) async {
+  Future<void> _pullPerTableIncremental(
+    SupabaseClient client, {
+    bool forceFullPull = false,
+  }) async {
     final user = client.auth.currentUser;
     if (user == null) return;
     final db = await _dbHelper.database;
@@ -2520,7 +2534,14 @@ class CloudSyncService {
     var madeProgress = false;
     for (final table in _perTableSyncTables) {
       try {
-        if (await _pullOnePerTable(client, db, prefs, user.id, table)) {
+        if (await _pullOnePerTable(
+          client,
+          db,
+          prefs,
+          user.id,
+          table,
+          forceFullPull: forceFullPull,
+        )) {
           madeProgress = true;
         }
       } catch (e) {
@@ -2749,8 +2770,9 @@ class CloudSyncService {
     Database db,
     SharedPreferences prefs,
     String userId,
-    String table,
-  ) async {
+    String table, {
+    bool forceFullPull = false,
+  }) async {
     final localCols = (await db.rawQuery('PRAGMA table_info($table)'))
         .map((r) => (r['name'] ?? '').toString())
         .where((s) => s.isNotEmpty)
@@ -2758,6 +2780,11 @@ class CloudSyncService {
     final cursorKey = _prefsKeyTablePullCursor(table, userId);
     var cursor = prefs.getString(cursorKey) ?? '1970-01-01T00:00:00Z';
     if (DateTime.tryParse(cursor) == null) cursor = '1970-01-01T00:00:00Z';
+
+    final localCount = await db.rawQuery('SELECT COUNT(*) AS c FROM $table');
+    if (forceFullPull || ((localCount.first['c'] as num?)?.toInt() ?? 0) == 0) {
+      cursor = '1970-01-01T00:00:00Z';
+    }
 
     var madeProgress = false;
     var pages = 0;
@@ -2767,7 +2794,8 @@ class CloudSyncService {
           (await client
                   .from(table)
                   .select()
-                  .gt('updated_at', cursor)
+                  .eq('owner_id', userId)
+                  .or('updated_at.gt.$cursor,updated_at.is.null')
                   .order('updated_at', ascending: true)
                   .limit(pageSize))
               .cast<Map<String, dynamic>>();
