@@ -1064,6 +1064,8 @@ class ProductRepository {
       'name': trimmed,
       'code': 'CAT-${DateTime.now().millisecondsSinceEpoch}',
       'createdAt': now,
+      'updatedAt': now,
+      'global_id': const Uuid().v4(),
     });
   }
 
@@ -1084,6 +1086,8 @@ class ProductRepository {
       'name': trimmed,
       'code': 'BR-${DateTime.now().millisecondsSinceEpoch}',
       'createdAt': now,
+      'updatedAt': now,
+      'global_id': const Uuid().v4(),
     });
   }
 

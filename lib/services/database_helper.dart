@@ -2915,6 +2915,7 @@ class DatabaseHelper {
     if (n == 0) {
       await db.insert('print_settings', {
         'id': 1,
+        'global_id': 'print_setting_singleton',
         'payload':
             '{"paperFormat":"thermal80","receiptShowBarcode":true,"receiptShowQr":true,"receiptShowBuyerAddressQr":false,"storeTitleLine":"","footerExtra":""}',
         'updatedAt': DateTime.now().toIso8601String(),
