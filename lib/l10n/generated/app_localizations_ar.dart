@@ -13131,11 +13131,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsImportMeds => 'استيراد الأدوية';
 
   @override
-  String get settingsImportMedsDesc => 'إضافة 157 دواء من ملف الجرد';
+  String get settingsImportMedsDesc => 'إضافة الأدوية من ملف الجرد المدمج';
 
   @override
   String get settingsImportMedsConfirm =>
-      'سيتم إضافة 157 دواء إلى كتالوج المنتجات. هل تريد المتابعة؟';
+      'سيتم إضافة الأدوية إلى كتالوج المنتجات. هل تريد المتابعة؟';
 
   @override
   String settingsImportedCount(Object count) {

@@ -141,3 +141,46 @@ $$;
 
 revoke all on function public.assign_unowned_sync_rows(uuid) from public;
 revoke all on function public.assign_unowned_sync_rows(uuid) from authenticated;
+
+-- ── claim_ownerless_rows: authenticated user claims rows with NULL owner_id ──
+-- The app calls this RPC on first sync after the owner_isolation migration.
+-- SECURITY DEFINER + strict owner_id check ensures a user can only claim
+-- rows that have no owner yet — never steal another user's data.
+
+create or replace function public.claim_ownerless_rows()
+returns void
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  table_name text;
+  caller uuid := auth.uid();
+  sync_tables constant text[] := array[
+    'categories', 'brands', 'products', 'product_unit_variants',
+    'customers', 'suppliers', 'warehouses', 'expenses', 'expense_categories',
+    'installment_plans', 'installments', 'customer_debt_payments',
+    'supplier_bills', 'supplier_payouts', 'purchase_orders',
+    'purchase_order_items', 'po_receipts', 'stock_vouchers',
+    'stock_voucher_items', 'stocktaking_sessions', 'stocktaking_items',
+    'parked_sales', 'activity_logs', 'work_shifts', 'cash_ledger',
+    'invoices', 'invoice_items', 'service_orders', 'service_order_items',
+    'print_settings', 'sync_hard_deletes'
+  ];
+begin
+  if caller is null then
+    raise exception 'Authentication required';
+  end if;
+  foreach table_name in array sync_tables loop
+    if to_regclass('public.' || table_name) is not null then
+      execute format(
+        'UPDATE public.%I SET owner_id = $1 WHERE owner_id IS NULL',
+        table_name
+      ) using caller;
+    end if;
+  end loop;
+end;
+$$;
+
+-- Any authenticated user can call this once after login.
+grant execute on function public.claim_ownerless_rows() to authenticated;

@@ -13263,11 +13263,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsImportMeds => 'Import Medicines';
 
   @override
-  String get settingsImportMedsDesc => 'Add 157 medicines from inventory file';
+  String get settingsImportMedsDesc =>
+      'Add medicines from the bundled inventory file';
 
   @override
   String get settingsImportMedsConfirm =>
-      'Add 157 medicines to the product catalog. Do you want to continue?';
+      'Medicines will be added to the product catalog. Do you want to continue?';
 
   @override
   String settingsImportedCount(Object count) {

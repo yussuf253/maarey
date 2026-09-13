@@ -23812,13 +23812,13 @@ abstract class AppLocalizations {
   /// No description provided for @settingsImportMedsDesc.
   ///
   /// In ar, this message translates to:
-  /// **'إضافة 157 دواء من ملف الجرد'**
+  /// **'إضافة الأدوية من ملف الجرد المدمج'**
   String get settingsImportMedsDesc;
 
   /// No description provided for @settingsImportMedsConfirm.
   ///
   /// In ar, this message translates to:
-  /// **'سيتم إضافة 157 دواء إلى كتالوج المنتجات. هل تريد المتابعة؟'**
+  /// **'سيتم إضافة الأدوية إلى كتالوج المنتجات. هل تريد المتابعة؟'**
   String get settingsImportMedsConfirm;
 
   /// No description provided for @settingsImportedCount.

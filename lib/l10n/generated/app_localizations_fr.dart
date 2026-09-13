@@ -13422,11 +13422,11 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get settingsImportMedsDesc =>
-      'Ajouter 157 médicaments depuis le fichier d\'inventaire';
+      'Ajouter les médicaments depuis le fichier d\'inventaire intégré';
 
   @override
   String get settingsImportMedsConfirm =>
-      '157 médicaments seront ajoutés au catalogue. Voulez-vous continuer ?';
+      'Les médicaments seront ajoutés au catalogue. Voulez-vous continuer ?';
 
   @override
   String settingsImportedCount(Object count) {

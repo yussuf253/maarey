@@ -843,7 +843,11 @@ extension DbInvoices on DatabaseHelper {
     return Invoice(
       id: invoiceMap['id'] as int?,
       customerName: (invoiceMap['customerName'] as String?) ?? '',
-      date: DateTime.parse(invoiceMap['date'] as String),
+      date: DateTime.parse(
+        (invoiceMap['date'] as String?) ??
+            (invoiceMap['createdAt'] as String?) ??
+            DateTime.now().toIso8601String(),
+      ),
       type: invoiceTypeFromDb(invoiceMap['type']),
       items: items.map((i) => InvoiceItem.fromMap(i)).toList(),
       discount: _readMoneyWithFilsFallback(
@@ -928,7 +932,11 @@ extension DbInvoices on DatabaseHelper {
       return Invoice(
         id: invoiceMap['id'] as int?,
         customerName: (invoiceMap['customerName'] as String?) ?? '',
-        date: DateTime.parse(invoiceMap['date'] as String),
+        date: DateTime.parse(
+        (invoiceMap['date'] as String?) ??
+            (invoiceMap['createdAt'] as String?) ??
+            DateTime.now().toIso8601String(),
+      ),
         type: invoiceTypeFromDb(invoiceMap['type']),
         items: items.map((i) => InvoiceItem.fromMap(i)).toList(),
         discount: _readMoneyWithFilsFallback(

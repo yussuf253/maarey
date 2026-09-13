@@ -796,13 +796,17 @@ class AuthProvider extends ChangeNotifier {
   Future<void> logout() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_prefUserId);
+    // ── يجب أن يسبق stopForSignOut() استدعاء signOut() ──────────────────
+    // stopForSignOut يستدعي حذف صفّ الجهاز من account_devices عبر Supabase.
+    // هذا يتطلّب بقاء الجلسة نشطة بعدة. إذا سبق signOut()، يصبح currentUser = null
+    // ولا يمكن حذف الصف → تراكم أجهزة قديمة.
+    await CloudSyncService.instance.stopForSignOut();
     try {
       await Supabase.instance.client.auth.signOut();
     } catch (_) {}
     // تنظيف جلسة Supabase من SharedPreferences (fallback) لمنع جلسة شبحية
     // عند فشل Keychain (خطأ -34018 على macOS sandbox).
     await _clearSupabaseFallbackSession();
-    await CloudSyncService.instance.stopForSignOut();
     await LicenseService.instance.resetLicenseStateForDataScopeChange();
     _clear();
     notifyListeners();

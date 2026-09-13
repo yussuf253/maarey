@@ -401,6 +401,12 @@ class CloudSyncService {
     _pendingDeltas.clear();
     devices.value = const [];
 
+    // ── حذف صفّ الجهاز الحالي عند تسجيل الخروج ───────────────────────────
+    // هذا يمنع تراكم صفوف أجهزة قديمة (UUID تغيّر / تثبيتات متعددة)
+    // ويحرّر slot الجهاز ليُعاد تسجيله كجهاز جديد عند تسجيل الدخول التالي.
+    _staleCleanupRanThisSession = false;
+    unawaited(_removeCurrentDeviceRowOnSignOut());
+
     _stopConnectivityListener();
 
     // أوقف watchdog أولاً لمنع جدولة إعادة اتصال على قنوات بصدد الإغلاق.
@@ -461,6 +467,12 @@ class CloudSyncService {
       if (access == DeviceAccessResult.revoked) {
         return 'تم إزالة هذا الجهاز من الحساب. اطلب السماح بالعودة من جهاز نشط في الإعدادات.';
       }
+
+      // ── تنظيف الأجهزة القديمة ──────────────────────────────────────────
+      // بعد تسجيل الجهاز بنجاح، نحذف صفوف الأجهزة التي لم تُرى منذ 30 يوماً
+      // لتخفيف مشكلة تراكم الأجهزة المجمّدة بعد تغيير UUID أو حذف البيانات.
+      unawaited(_cleanupStaleDeviceRows());
+
       // Fetch server over-limit status (if RPC exists). If missing, do not block.
       final status = await _tryFetchDeviceLimitStatusFromServer();
       if (status == null) return null;
@@ -507,6 +519,31 @@ class CloudSyncService {
         return;
       }
       rethrow;
+    }
+  }
+
+  /// يحذف صفوف الأجهزة التي لم تُرى منذ 30 يوماً لتخفيف تراكم الأجهزة المجمّدة.
+  /// يُستدعى كـ fire-and-forget بعد تسجيل الجهاز بنجاح.
+  static bool _staleCleanupRanThisSession = false;
+  Future<void> _cleanupStaleDeviceRows() async {
+    if (_staleCleanupRanThisSession) return;
+    _staleCleanupRanThisSession = true;
+    final client = Supabase.instance.client;
+    final user = client.auth.currentUser;
+    if (user == null) return;
+    try {
+      final threshold =
+          DateTime.now().toUtc().subtract(const Duration(days: 30));
+      // لا نحذف صفّ الجهاز الحالي مهما كان عمره.
+      final currentDeviceId = await LicenseService.instance.getDeviceId();
+      await client
+          .from(_devicesTable)
+          .delete()
+          .eq('user_id', user.id)
+          .lt('last_seen_at', threshold.toIso8601String())
+          .neq('device_id', currentDeviceId);
+    } catch (_) {
+      // تنظيف فاشل — لا نكسر تسجيل الدخول.
     }
   }
 
@@ -712,6 +749,26 @@ class CloudSyncService {
       } else {
         rethrow;
       }
+    }
+  }
+
+  /// يحذف صفّ الجهاز الحالي عند تسجيل الخروج من السيرفر.
+  /// هذا يمنع تراكم صفوف أجهزة قديمة ويحرّر slot الجهاز ليُعاد تسجيله
+  /// عند تسجيل الدخول التالي.
+  Future<void> _removeCurrentDeviceRowOnSignOut() async {
+    final client = Supabase.instance.client;
+    final user = client.auth.currentUser;
+    if (user == null) return;
+    try {
+      final deviceId = await LicenseService.instance.getDeviceId();
+      if (deviceId.isEmpty) return;
+      await client
+          .from(_devicesTable)
+          .delete()
+          .eq('user_id', user.id)
+          .eq('device_id', deviceId);
+    } catch (_) {
+      // فشل شبكي — لا نمنع تسجيل الخروج.
     }
   }
 
@@ -1298,6 +1355,14 @@ class CloudSyncService {
     if (user == null) return;
     final db = await DatabaseHelper().database;
     bool uiNeedsRefresh = false;
+
+    // صافٍ أمني: تجاهل أي دلتا لا تنتمي للمستخدم الحالي — يمنع حذف/دمج
+    // بيانات مستخدم آخر إذا وصل إشعار خارج نطاق sync_notifications RLS.
+    deltas = deltas.where((d) {
+      final uid = d['user_id']?.toString();
+      return uid == null || uid == user.id;
+    }).toList();
+    if (deltas.isEmpty) return;
 
     // 1. Sort by id to ensure UPSERT/DELETE order is correct (replaces sequence_number)
     deltas.sort(
@@ -2552,11 +2617,55 @@ class CloudSyncService {
       remoteImportGeneration.value++;
     }
 
+    // ── محاولة استرداد صفوف يتيمة (owner_id = NULL) ─────────────────────
+    // بعد تطبيق owner_isolation migration، الصفوف القديمة بلا owner_id غير
+    // مرئية لـ RLS. الدالة claim_ownerless_rows تُعيّن owner_id للمستخدم
+    // الحالي عبر SECURITY DEFINER. إذا الدالة غير موجودة (لم يُشغّل
+    // المستخدم migration Cursors بعد)، نتجاهل بصمت.
+    try {
+      await _claimOwnerlessRows(client);
+    } catch (e) {
+      // لا تكسر السحب بسبب دالة غير موجودة.
+      if (kDebugMode) {
+        AppLogger.info(
+          'CloudSync',
+          'claim_ownerless_rows unavailable or failed: $e',
+        );
+      }
+    }
+
     // إعادة ربط الأبناء الذين وصلوا قبل آبائهم الاختياريين.
     try {
       await _relinkOptionalFks();
     } catch (e) {
       AppLogger.warn('CloudSync', 'optional FK relink failed: $e');
+    }
+  }
+
+  /// استدعاء RPC آمن (SECURITY DEFINER) لتعيين owner_id على صفوف لم يُعيّن
+  /// لها مالك بعد (migration جديد). الدالة تمرّر على كل جدول في
+  /// [_perTableSyncTables] وتُعيّن owner_id = auth.uid() حيث NULL.
+  ///
+  /// إذا الدالة غير موجودة في Supabase (لم يُشغّل المستخدم SQL)، نتجاهل.
+  static bool _claimOwnerlessRowsAttempted = false;
+
+  Future<void> _claimOwnerlessRows(SupabaseClient client) async {
+    if (_claimOwnerlessRowsAttempted) return;
+    _claimOwnerlessRowsAttempted = true;
+    try {
+      await client.rpc('claim_ownerless_rows');
+      AppLogger.info(
+        'CloudSync',
+        'claim_ownerless_rows: orphan rows assigned successfully',
+      );
+    } on PostgrestException catch (e) {
+      final m = e.message.toLowerCase();
+      if (m.contains('could not find') || m.contains('function') ||
+          m.contains('does not exist')) {
+        // الدالة غير موجودة — لا مشكلة.
+        return;
+      }
+      rethrow;
     }
   }
 
@@ -4694,6 +4803,20 @@ class CloudSyncService {
       }
     }
 
+    // الحقل `date` على السحابة هو `created_at`. خرائط التوطين
+    // (_mapRemoteRowToLocal) تحوّل `created_at` → `createdAt` فقط، لكن
+    // الجدول المحلي يعتمد على `date` كعمود أساسي. املأ `date` من
+    // `createdAt` إذا كان فارغاً لمنع Null TypeError عند فتح الفاتورة.
+    if (localCols.contains('date')) {
+      final dateVal = (incoming['date'] ?? '').toString().trim();
+      if (dateVal.isEmpty) {
+        final createdAt = (incoming['createdAt'] ?? '').toString().trim();
+        if (createdAt.isNotEmpty) {
+          incoming['date'] = createdAt;
+        }
+      }
+    }
+
     await _doMergeWithGlobalId(
       txn: txn,
       table: 'invoices',
@@ -5366,13 +5489,13 @@ class CloudSyncService {
       'purchase_order_items',
       'stock_vouchers',
       'stock_voucher_items',
-      'po_receipts',
-      // المرحلة 4.
-      'work_shifts',
-      'stocktaking_sessions',
-      'stocktaking_items',
-      'parked_sales',
-      'activity_logs',
+      'po_receipts',      // المرحلة 4.
+      'work_shifts', 'stocktaking_sessions', 'stocktaking_items',
+      'parked_sales', 'activity_logs',
+      // المرحلة 5: التصنيفات، الماركات، إعدادات الطباعة، أمر الخدمة —
+      // تنتقل عبر سحب/رفع تزايدي مستقل (_perTableSyncTables).
+      'categories', 'brands', 'print_settings',
+      'service_orders', 'service_order_items',
     };
     return !excluded.contains(tableName);
   }
