@@ -408,6 +408,15 @@ class LicenseService extends ChangeNotifier {
                     '[LicenseService] Local trial fallback failed: $e2',
                   );
                 }
+                // Hard fallback: never stay on 'checking'.
+                _setState(
+                  const LicenseState(
+                    status: LicenseStatus.trial,
+                    plan: SubscriptionPlan.trial,
+                    maxDevices: 2,
+                    daysLeft: 15,
+                  ),
+                );
               }
             }
           }
@@ -420,6 +429,15 @@ class LicenseService extends ChangeNotifier {
                 '[LicenseService] Local trial resolution failed: $e',
               );
             }
+            // Hard fallback: never stay on 'checking'.
+            _setState(
+              const LicenseState(
+                status: LicenseStatus.trial,
+                plan: SubscriptionPlan.trial,
+                maxDevices: 2,
+                daysLeft: 15,
+              ),
+            );
           }
         }
 

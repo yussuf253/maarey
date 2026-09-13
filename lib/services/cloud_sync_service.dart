@@ -1612,6 +1612,10 @@ class CloudSyncService {
   /// السحابة (سحب/رفع تزايدي بالـ updatedAt) بدل ركوبها في لقطة app_snapshots
   /// الكاملة. أي خطأ في جدول لا يؤثر على بقية الجداول ولا على اللقطة.
   static const Set<String> _perTableSyncTables = {
+    // المرحلة 0: التصنيفات والماركات أولاً — products تعتمد عليها via FK.
+    'categories',
+    'brands',
+    // المرحلة 1: المنتجات والوحدات والعملاء والمورّدون.
     'products',
     'product_unit_variants',
     'customers',
@@ -1636,11 +1640,8 @@ class CloudSyncService {
     // المرحلة 4: الجرد، السلات الموقوفة، سجل النشاط.
     'stocktaking_sessions',
     'stocktaking_items',
-    'parked_sales',
-    'activity_logs',
-    // المرحلة 5: التصنيفات، الماركات، إعدادات الطباعة، الفواتير، أوامر الخدمة.
-    'categories',
-    'brands',
+    'parked_sales', 'activity_logs',
+    // المرحلة 5: إعدادات الطباعة، الفواتير، أوامر الخدمة.
     'print_settings',
     'invoices',
     'invoice_items',
@@ -2486,6 +2487,14 @@ class CloudSyncService {
     }
     out['global_id'] = gid;
     out['owner_id'] = ownerId;
+    // تأكد أن updated_at غير فارغ — بعض الجداول المحلية (مثل categories)
+    // لا تملك عمود updatedAt، فيجب تعويضه بـ created_at أو الوقت الحالي.
+    if (remoteCols.contains('updated_at') &&
+        (out['updated_at'] == null ||
+            out['updated_at'].toString().trim().isEmpty)) {
+      out['updated_at'] =
+          out['created_at'] ?? DateTime.now().toUtc().toIso8601String();
+    }
     return out;
   }
 
