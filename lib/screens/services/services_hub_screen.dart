@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 import '../../navigation/content_navigation.dart';
 import '../invoices/add_invoice_screen.dart';
@@ -10,6 +11,7 @@ class ServicesHubScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     final dark = Theme.of(context).brightness == Brightness.dark;
     final bg = dark ? const Color(0xFF0B1220) : cs.surface;
@@ -86,7 +88,7 @@ class ServicesHubScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              'الخدمات والصيانة',
+              loc.servicesAndMaintenanceLabel,
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.w900,
                   ),
@@ -94,21 +96,21 @@ class ServicesHubScreen extends StatelessWidget {
             ),
             const SizedBox(height: 6),
             Text(
-              'بيع خدمات مباشرة أو إدارة تذاكر الصيانة وتحويلها لفاتورة عند التسليم.',
+              loc.shServicesHubDesc,
               style: TextStyle(color: cs.onSurfaceVariant),
               textAlign: TextAlign.start,
             ),
             const SizedBox(height: 14),
             tile(
               icon: Icons.post_add_rounded,
-              title: 'إضافة خدمة للقائمة',
-              subtitle: 'تعريف اسم وسعر وتفاصيل لتظهر في البيع كخدمة فنية.',
+              title: loc.shAddServiceToList,
+              subtitle: loc.shAddServiceToListDesc,
               color: const Color(0xFF8B5CF6),
               onTap: () {
                 Navigator.of(context).push(
                   contentMaterialRoute(
                     routeId: AppContentRoutes.servicesAdd,
-                    breadcrumbTitle: 'إضافة خدمة',
+                    breadcrumbTitle: loc.shAddServiceBreadcrumb,
                     builder: (_) => const AddServiceScreen(),
                   ),
                 );
@@ -117,14 +119,14 @@ class ServicesHubScreen extends StatelessWidget {
             const SizedBox(height: 10),
             tile(
               icon: Icons.receipt_long_rounded,
-              title: 'بيع خدمة مباشرة',
-              subtitle: 'فتح شاشة البيع لإضافة خدمة فنية كسطر ثابت بكمية 1.',
+              title: loc.shDirectSaleService,
+              subtitle: loc.shDirectSaleServiceDesc,
               color: const Color(0xFF10B981),
               onTap: () {
                 Navigator.of(context).push(
                   contentMaterialRoute(
                     routeId: AppContentRoutes.addInvoice,
-                    breadcrumbTitle: 'بيع جديد',
+                    breadcrumbTitle: loc.shDirectSaleBreadcrumb,
                     builder: (_) => const AddInvoiceScreen(),
                   ),
                 );
@@ -133,14 +135,14 @@ class ServicesHubScreen extends StatelessWidget {
             const SizedBox(height: 10),
             tile(
               icon: Icons.assignment_rounded,
-              title: 'طلبات الصيانة وتذاكر العمل',
-              subtitle: 'إنشاء تذكرة، إضافة قطع غيار، ثم تحويلها لفاتورة عند التسليم.',
+              title: loc.shMaintenanceRequests,
+              subtitle: loc.shMaintenanceRequestsDesc,
               color: const Color(0xFF3B82F6),
               onTap: () {
                 Navigator.of(context).push(
                   contentMaterialRoute(
                     routeId: AppContentRoutes.serviceOrdersHub,
-                    breadcrumbTitle: 'طلبات الصيانة وتذاكر العمل',
+                    breadcrumbTitle: loc.shMaintenanceRequestsBreadcrumb,
                     builder: (_) => const ServiceOrdersHubScreen(),
                   ),
                 );
@@ -148,7 +150,7 @@ class ServicesHubScreen extends StatelessWidget {
             ),
             const Spacer(),
             Text(
-              'ملاحظة: عربون الصيانة يُطبّق كمدفوع مسبقاً على الفاتورة كاملة عند التحويل.',
+              loc.shDepositNote,
               style: TextStyle(fontSize: 11.5, color: cs.onSurfaceVariant),
               textAlign: TextAlign.start,
             ),

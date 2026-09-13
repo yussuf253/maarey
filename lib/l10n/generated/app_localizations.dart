@@ -27144,6 +27144,139 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'أو'**
   String get orSeparator;
+
+  /// No description provided for @shServicesHubDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع خدمات مباشرة أو إدارة تذاكر الصيانة وتحويلها لفاتورة عند التسليم.'**
+  String get shServicesHubDesc;
+
+  /// No description provided for @shAddServiceToList.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة خدمة للقائمة'**
+  String get shAddServiceToList;
+
+  /// No description provided for @shAddServiceToListDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعريف اسم وسعر وتفاصيل لتظهر في البيع كخدمة فنية.'**
+  String get shAddServiceToListDesc;
+
+  /// No description provided for @shAddServiceBreadcrumb.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة خدمة'**
+  String get shAddServiceBreadcrumb;
+
+  /// No description provided for @shDirectSaleService.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع خدمة مباشرة'**
+  String get shDirectSaleService;
+
+  /// No description provided for @shDirectSaleServiceDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح شاشة البيع لإضافة خدمة فنية كسطر ثابت بكمية 1.'**
+  String get shDirectSaleServiceDesc;
+
+  /// No description provided for @shDirectSaleBreadcrumb.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع جديد'**
+  String get shDirectSaleBreadcrumb;
+
+  /// No description provided for @shMaintenanceRequests.
+  ///
+  /// In ar, this message translates to:
+  /// **'طلبات الصيانة وتذاكر العمل'**
+  String get shMaintenanceRequests;
+
+  /// No description provided for @shMaintenanceRequestsDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنشاء تذكرة، إضافة قطع غيار، ثم تحويلها لفاتورة عند التسليم.'**
+  String get shMaintenanceRequestsDesc;
+
+  /// No description provided for @shMaintenanceRequestsBreadcrumb.
+  ///
+  /// In ar, this message translates to:
+  /// **'طلبات الصيانة وتذاكر العمل'**
+  String get shMaintenanceRequestsBreadcrumb;
+
+  /// No description provided for @shDepositNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة: عربون الصيانة يُطبّق كمدفوع مسبقاً على الفاتورة كاملة عند التحويل.'**
+  String get shDepositNote;
+
+  /// No description provided for @printSaveFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر الحفظ: {error}'**
+  String printSaveFailed(Object error);
+
+  /// No description provided for @staffQrScanTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح بطاقة الموظف'**
+  String get staffQrScanTitle;
+
+  /// No description provided for @staffQrScanHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'وجّه الكاميرا نحو رمز QR على بطاقة الهوية.'**
+  String get staffQrScanHint;
+
+  /// No description provided for @openShiftAutoHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُحدَّد تلقائياً'**
+  String get openShiftAutoHint;
+
+  /// No description provided for @closeShiftBalanceHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُحدَّد الرصيد تلقائياً من حركات الصندوق. راجع القيم ثم أكّد السحب.'**
+  String get closeShiftBalanceHint;
+
+  /// No description provided for @maintenanceDefaultMsg.
+  ///
+  /// In ar, this message translates to:
+  /// **'التطبيق تحت الصيانة. حاول لاحقاً.'**
+  String get maintenanceDefaultMsg;
+
+  /// No description provided for @forceUpdateDefaultMsg.
+  ///
+  /// In ar, this message translates to:
+  /// **'يجب تحديث التطبيق للمتابعة.'**
+  String get forceUpdateDefaultMsg;
+
+  /// No description provided for @managementMessageDefault.
+  ///
+  /// In ar, this message translates to:
+  /// **'رسالة من الإدارة'**
+  String get managementMessageDefault;
+
+  /// No description provided for @managementPrivateMessageDefault.
+  ///
+  /// In ar, this message translates to:
+  /// **'رسالة خاصة من الإدارة'**
+  String get managementPrivateMessageDefault;
+
+  /// No description provided for @cashSummaryLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'وارد {inAmount} Fdj  •  صادر {outAmount} Fdj  •  إدخال {entries}  •  إخراج {exits}  •  يدوي {manual}  •  فواتير {invoices}'**
+  String cashSummaryLine(
+    Object entries,
+    Object exits,
+    Object inAmount,
+    Object invoices,
+    Object manual,
+    Object outAmount,
+  );
 }
 
 class _AppLocalizationsDelegate

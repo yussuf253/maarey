@@ -77,14 +77,14 @@ class _PrintingScreenState extends State<PrintingScreen> {
       if (!mounted) return;
       setState(() => _dirty = false);
       nav.showSnackBar(
-        const SnackBar(
-          content: Text('تم حفظ إعدادات الطباعة'),
+        SnackBar(
+          content: Text(AppLocalizations.of(context)!.printSettingsSaved),
           behavior: SnackBarBehavior.floating,
         ),
       );
     } catch (e) {
       if (mounted) {
-        nav.showSnackBar(SnackBar(content: Text('تعذر الحفظ: $e')));
+        nav.showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.printSaveFailed(e.toString()))));
       }
     }
   }

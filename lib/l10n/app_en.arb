@@ -4597,5 +4597,33 @@
   "invDeposit": "Deposit",
   "invWithdrawal": "Withdrawal",
   "invInternalTransfer": "Internal transfer",
-  "orSeparator": "or"
+  "orSeparator": "or",
+
+  "shServicesHubDesc": "Sell services directly or manage maintenance tickets and convert them to invoices on delivery.",
+  "shAddServiceToList": "Add service to list",
+  "shAddServiceToListDesc": "Define a name, price, and details so it appears in sales as a technical service.",
+  "shAddServiceBreadcrumb": "Add service",
+  "shDirectSaleService": "Direct service sale",
+  "shDirectSaleServiceDesc": "Open the sales screen to add a technical service as a fixed line with quantity 1.",
+  "shDirectSaleBreadcrumb": "New sale",
+  "shMaintenanceRequests": "Maintenance requests & work tickets",
+  "shMaintenanceRequestsDesc": "Create a ticket, add spare parts, then convert it to an invoice on delivery.",
+  "shMaintenanceRequestsBreadcrumb": "Maintenance requests & work tickets",
+  "shDepositNote": "Note: The maintenance deposit is applied as a prepayment on the full invoice when converting.",
+
+  "printSettingsSaved": "Print settings saved",
+  "printSaveFailed": "Save failed: {error}",
+
+  "staffQrScanTitle": "Scan employee card",
+  "staffQrScanHint": "Point the camera at the QR code on the ID card.",
+
+  "openShiftAutoHint": "Determined automatically",
+  "closeShiftBalanceHint": "Balance is determined automatically from cash register movements. Review the values then confirm withdrawal.",
+
+  "maintenanceDefaultMsg": "The app is under maintenance. Try again later.",
+  "forceUpdateDefaultMsg": "The app must be updated to continue.",
+  "managementMessageDefault": "Message from management",
+  "managementPrivateMessageDefault": "Private message from management",
+
+  "cashSummaryLine": "In {inAmount} Fdj  \u2022  Out {outAmount} Fdj  \u2022  Entries {entries}  \u2022  Exits {exits}  \u2022  Manual {manual}  \u2022  Invoices {invoices}"
 }

@@ -15414,4 +15414,89 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get orSeparator => 'ou';
+
+  @override
+  String get shServicesHubDesc =>
+      'Vendre des services directement ou gérer les tickets de maintenance et les convertir en factures à la livraison.';
+
+  @override
+  String get shAddServiceToList => 'Ajouter un service à la liste';
+
+  @override
+  String get shAddServiceToListDesc =>
+      'Définir un nom, un prix et des détails pour qu\'il apparaisse dans les ventes comme un service technique.';
+
+  @override
+  String get shAddServiceBreadcrumb => 'Ajouter un service';
+
+  @override
+  String get shDirectSaleService => 'Vente directe de service';
+
+  @override
+  String get shDirectSaleServiceDesc =>
+      'Ouvrir l\'écran de vente pour ajouter un service technique en ligne fixe avec quantité 1.';
+
+  @override
+  String get shDirectSaleBreadcrumb => 'Nouvelle vente';
+
+  @override
+  String get shMaintenanceRequests =>
+      'Demandes de maintenance et tickets de travail';
+
+  @override
+  String get shMaintenanceRequestsDesc =>
+      'Créer un ticket, ajouter des pièces détachées, puis le convertir en facture à la livraison.';
+
+  @override
+  String get shMaintenanceRequestsBreadcrumb =>
+      'Demandes de maintenance et tickets de travail';
+
+  @override
+  String get shDepositNote =>
+      'Remarque : L\'acompte de maintenance est appliqué comme acompte sur la facture complète lors de la conversion.';
+
+  @override
+  String printSaveFailed(Object error) {
+    return 'Échec de l\'enregistrement : $error';
+  }
+
+  @override
+  String get staffQrScanTitle => 'Scanner la carte de l\'employé';
+
+  @override
+  String get staffQrScanHint =>
+      'Dirigez la caméra vers le code QR sur la carte d\'identité.';
+
+  @override
+  String get openShiftAutoHint => 'Déterminé automatiquement';
+
+  @override
+  String get closeShiftBalanceHint =>
+      'Le solde est déterminé automatiquement à partir des mouvements de la caisse. Vérifiez les valeurs puis confirmez le retrait.';
+
+  @override
+  String get maintenanceDefaultMsg =>
+      'L\'application est en maintenance. Réessayez plus tard.';
+
+  @override
+  String get forceUpdateDefaultMsg =>
+      'L\'application doit être mise à jour pour continuer.';
+
+  @override
+  String get managementMessageDefault => 'Message de la direction';
+
+  @override
+  String get managementPrivateMessageDefault => 'Message privé de la direction';
+
+  @override
+  String cashSummaryLine(
+    Object entries,
+    Object exits,
+    Object inAmount,
+    Object invoices,
+    Object manual,
+    Object outAmount,
+  ) {
+    return '$inAmount Fdj entrant  •  $outAmount Fdj sortant  •  $entries entrées  •  $exits sorties  •  $manual manuelles  •  $invoices factures';
+  }
 }

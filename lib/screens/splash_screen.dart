@@ -144,7 +144,7 @@ class _SplashScreenState extends State<SplashScreen>
     if (cfg.maintenanceMode) {
       final msg = cfg.maintenanceMessageAr.isNotEmpty
           ? cfg.maintenanceMessageAr
-          : 'التطبيق تحت الصيانة. حاول لاحقاً.';
+          : AppLocalizations.of(context)!.maintenanceDefaultMsg;
       await showDialog<void>(
         context: context,
         barrierDismissible: false,
@@ -170,7 +170,7 @@ class _SplashScreenState extends State<SplashScreen>
       if (!mounted) return;
       final msg = cfg.updateMessageAr.isNotEmpty
           ? cfg.updateMessageAr
-          : 'يجب تحديث التطبيق للمتابعة.';
+          : AppLocalizations.of(context)!.forceUpdateDefaultMsg;
       await showDialog<void>(
         context: context,
         barrierDismissible: false,
@@ -233,7 +233,7 @@ class _SplashScreenState extends State<SplashScreen>
         if (!mounted) return;
         final title = cfg.announcementTitleAr.isNotEmpty
             ? cfg.announcementTitleAr
-            : 'رسالة من الإدارة';
+            : AppLocalizations.of(context)!.managementMessageDefault;
         await showDialog<void>(
           context: context,
           barrierDismissible: true,
@@ -321,7 +321,7 @@ class _SplashScreenState extends State<SplashScreen>
               side: const BorderSide(color: Color(0xFFB8960C), width: 1.2),
             ),
             title: Text(
-              title.isEmpty ? 'رسالة خاصة من الإدارة' : title,
+              title.isEmpty ? AppLocalizations.of(context)!.managementPrivateMessageDefault : title,
               style: const TextStyle(
                 color: Color(0xFFFFE08A),
                 fontWeight: FontWeight.bold,

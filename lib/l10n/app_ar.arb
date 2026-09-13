@@ -4501,5 +4501,33 @@
   "invDeposit": "إيداع",
   "invWithdrawal": "صرف",
   "invInternalTransfer": "تحويل داخلي",
-  "orSeparator": "أو"
+  "orSeparator": "أو",
+
+  "shServicesHubDesc": "بيع خدمات مباشرة أو إدارة تذاكر الصيانة وتحويلها لفاتورة عند التسليم.",
+  "shAddServiceToList": "إضافة خدمة للقائمة",
+  "shAddServiceToListDesc": "تعريف اسم وسعر وتفاصيل لتظهر في البيع كخدمة فنية.",
+  "shAddServiceBreadcrumb": "إضافة خدمة",
+  "shDirectSaleService": "بيع خدمة مباشرة",
+  "shDirectSaleServiceDesc": "فتح شاشة البيع لإضافة خدمة فنية كسطر ثابت بكمية 1.",
+  "shDirectSaleBreadcrumb": "بيع جديد",
+  "shMaintenanceRequests": "طلبات الصيانة وتذاكر العمل",
+  "shMaintenanceRequestsDesc": "إنشاء تذكرة، إضافة قطع غيار، ثم تحويلها لفاتورة عند التسليم.",
+  "shMaintenanceRequestsBreadcrumb": "طلبات الصيانة وتذاكر العمل",
+  "shDepositNote": "ملاحظة: عربون الصيانة يُطبّق كمدفوع مسبقاً على الفاتورة كاملة عند التحويل.",
+
+  "printSettingsSaved": "تم حفظ إعدادات الطباعة",
+  "printSaveFailed": "تعذر الحفظ: {error}",
+
+  "staffQrScanTitle": "مسح بطاقة الموظف",
+  "staffQrScanHint": "وجّه الكاميرا نحو رمز QR على بطاقة الهوية.",
+
+  "openShiftAutoHint": "يُحدَّد تلقائياً",
+  "closeShiftBalanceHint": "يُحدَّد الرصيد تلقائياً من حركات الصندوق. راجع القيم ثم أكّد السحب.",
+
+  "maintenanceDefaultMsg": "التطبيق تحت الصيانة. حاول لاحقاً.",
+  "forceUpdateDefaultMsg": "يجب تحديث التطبيق للمتابعة.",
+  "managementMessageDefault": "رسالة من الإدارة",
+  "managementPrivateMessageDefault": "رسالة خاصة من الإدارة",
+
+  "cashSummaryLine": "وارد {inAmount} Fdj  \u2022  صادر {outAmount} Fdj  \u2022  إدخال {entries}  \u2022  إخراج {exits}  \u2022  يدوي {manual}  \u2022  فواتير {invoices}"
 }

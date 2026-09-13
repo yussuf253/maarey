@@ -15078,4 +15078,84 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get orSeparator => 'أو';
+
+  @override
+  String get shServicesHubDesc =>
+      'بيع خدمات مباشرة أو إدارة تذاكر الصيانة وتحويلها لفاتورة عند التسليم.';
+
+  @override
+  String get shAddServiceToList => 'إضافة خدمة للقائمة';
+
+  @override
+  String get shAddServiceToListDesc =>
+      'تعريف اسم وسعر وتفاصيل لتظهر في البيع كخدمة فنية.';
+
+  @override
+  String get shAddServiceBreadcrumb => 'إضافة خدمة';
+
+  @override
+  String get shDirectSaleService => 'بيع خدمة مباشرة';
+
+  @override
+  String get shDirectSaleServiceDesc =>
+      'فتح شاشة البيع لإضافة خدمة فنية كسطر ثابت بكمية 1.';
+
+  @override
+  String get shDirectSaleBreadcrumb => 'بيع جديد';
+
+  @override
+  String get shMaintenanceRequests => 'طلبات الصيانة وتذاكر العمل';
+
+  @override
+  String get shMaintenanceRequestsDesc =>
+      'إنشاء تذكرة، إضافة قطع غيار، ثم تحويلها لفاتورة عند التسليم.';
+
+  @override
+  String get shMaintenanceRequestsBreadcrumb => 'طلبات الصيانة وتذاكر العمل';
+
+  @override
+  String get shDepositNote =>
+      'ملاحظة: عربون الصيانة يُطبّق كمدفوع مسبقاً على الفاتورة كاملة عند التحويل.';
+
+  @override
+  String printSaveFailed(Object error) {
+    return 'تعذر الحفظ: $error';
+  }
+
+  @override
+  String get staffQrScanTitle => 'مسح بطاقة الموظف';
+
+  @override
+  String get staffQrScanHint => 'وجّه الكاميرا نحو رمز QR على بطاقة الهوية.';
+
+  @override
+  String get openShiftAutoHint => 'يُحدَّد تلقائياً';
+
+  @override
+  String get closeShiftBalanceHint =>
+      'يُحدَّد الرصيد تلقائياً من حركات الصندوق. راجع القيم ثم أكّد السحب.';
+
+  @override
+  String get maintenanceDefaultMsg => 'التطبيق تحت الصيانة. حاول لاحقاً.';
+
+  @override
+  String get forceUpdateDefaultMsg => 'يجب تحديث التطبيق للمتابعة.';
+
+  @override
+  String get managementMessageDefault => 'رسالة من الإدارة';
+
+  @override
+  String get managementPrivateMessageDefault => 'رسالة خاصة من الإدارة';
+
+  @override
+  String cashSummaryLine(
+    Object entries,
+    Object exits,
+    Object inAmount,
+    Object invoices,
+    Object manual,
+    Object outAmount,
+  ) {
+    return 'وارد $inAmount Fdj  •  صادر $outAmount Fdj  •  إدخال $entries  •  إخراج $exits  •  يدوي $manual  •  فواتير $invoices';
+  }
 }

@@ -4274,5 +4274,33 @@
   "invDeposit": "Dépôt",
   "invWithdrawal": "Retrait",
   "invInternalTransfer": "Transfert interne",
-  "orSeparator": "ou"
+  "orSeparator": "ou",
+
+  "shServicesHubDesc": "Vendre des services directement ou gérer les tickets de maintenance et les convertir en factures à la livraison.",
+  "shAddServiceToList": "Ajouter un service à la liste",
+  "shAddServiceToListDesc": "Définir un nom, un prix et des détails pour qu'il apparaisse dans les ventes comme un service technique.",
+  "shAddServiceBreadcrumb": "Ajouter un service",
+  "shDirectSaleService": "Vente directe de service",
+  "shDirectSaleServiceDesc": "Ouvrir l'écran de vente pour ajouter un service technique en ligne fixe avec quantité 1.",
+  "shDirectSaleBreadcrumb": "Nouvelle vente",
+  "shMaintenanceRequests": "Demandes de maintenance et tickets de travail",
+  "shMaintenanceRequestsDesc": "Créer un ticket, ajouter des pièces détachées, puis le convertir en facture à la livraison.",
+  "shMaintenanceRequestsBreadcrumb": "Demandes de maintenance et tickets de travail",
+  "shDepositNote": "Remarque : L'acompte de maintenance est appliqué comme acompte sur la facture complète lors de la conversion.",
+
+  "printSettingsSaved": "Paramètres d'impression enregistrés",
+  "printSaveFailed": "Échec de l'enregistrement : {error}",
+
+  "staffQrScanTitle": "Scanner la carte de l'employé",
+  "staffQrScanHint": "Dirigez la caméra vers le code QR sur la carte d'identité.",
+
+  "openShiftAutoHint": "Déterminé automatiquement",
+  "closeShiftBalanceHint": "Le solde est déterminé automatiquement à partir des mouvements de la caisse. Vérifiez les valeurs puis confirmez le retrait.",
+
+  "maintenanceDefaultMsg": "L'application est en maintenance. Réessayez plus tard.",
+  "forceUpdateDefaultMsg": "L'application doit être mise à jour pour continuer.",
+  "managementMessageDefault": "Message de la direction",
+  "managementPrivateMessageDefault": "Message privé de la direction",
+
+  "cashSummaryLine": "{inAmount} Fdj entrant  \u2022  {outAmount} Fdj sortant  \u2022  {entries} entrées  \u2022  {exits} sorties  \u2022  {manual} manuelles  \u2022  {invoices} factures"
 }

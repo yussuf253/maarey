@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/generated/app_localizations.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '../../utils/staff_identity_qr.dart' show StaffIdentityQr, StaffQrData;
@@ -41,7 +42,7 @@ class _StaffQrScanScreenState extends State<StaffQrScanScreen> {
       textDirection: Directionality.of(context),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('مسح بطاقة الموظف'),
+          title: Text(AppLocalizations.of(context)!.staffQrScanTitle),
           leading: IconButton(
             icon: const Icon(Icons.close),
             onPressed: () => Navigator.pop(context),
@@ -60,10 +61,10 @@ class _StaffQrScanScreenState extends State<StaffQrScanScreen> {
               child: Material(
                 color: Colors.black54,
                 borderRadius: BorderRadius.circular(8),
-                child: const Padding(
-                  padding: EdgeInsets.all(12),
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
                   child: Text(
-                    'وجّه الكاميرا نحو رمز QR على بطاقة الهوية.',
+                    AppLocalizations.of(context)!.staffQrScanHint,
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white, fontSize: 13),
                   ),

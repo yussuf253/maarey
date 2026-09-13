@@ -15226,4 +15226,88 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get orSeparator => 'or';
+
+  @override
+  String get shServicesHubDesc =>
+      'Sell services directly or manage maintenance tickets and convert them to invoices on delivery.';
+
+  @override
+  String get shAddServiceToList => 'Add service to list';
+
+  @override
+  String get shAddServiceToListDesc =>
+      'Define a name, price, and details so it appears in sales as a technical service.';
+
+  @override
+  String get shAddServiceBreadcrumb => 'Add service';
+
+  @override
+  String get shDirectSaleService => 'Direct service sale';
+
+  @override
+  String get shDirectSaleServiceDesc =>
+      'Open the sales screen to add a technical service as a fixed line with quantity 1.';
+
+  @override
+  String get shDirectSaleBreadcrumb => 'New sale';
+
+  @override
+  String get shMaintenanceRequests => 'Maintenance requests & work tickets';
+
+  @override
+  String get shMaintenanceRequestsDesc =>
+      'Create a ticket, add spare parts, then convert it to an invoice on delivery.';
+
+  @override
+  String get shMaintenanceRequestsBreadcrumb =>
+      'Maintenance requests & work tickets';
+
+  @override
+  String get shDepositNote =>
+      'Note: The maintenance deposit is applied as a prepayment on the full invoice when converting.';
+
+  @override
+  String printSaveFailed(Object error) {
+    return 'Save failed: $error';
+  }
+
+  @override
+  String get staffQrScanTitle => 'Scan employee card';
+
+  @override
+  String get staffQrScanHint =>
+      'Point the camera at the QR code on the ID card.';
+
+  @override
+  String get openShiftAutoHint => 'Determined automatically';
+
+  @override
+  String get closeShiftBalanceHint =>
+      'Balance is determined automatically from cash register movements. Review the values then confirm withdrawal.';
+
+  @override
+  String get maintenanceDefaultMsg =>
+      'The app is under maintenance. Try again later.';
+
+  @override
+  String get forceUpdateDefaultMsg => 'The app must be updated to continue.';
+
+  @override
+  String get managementMessageDefault => 'Message from management';
+
+  @override
+  String get managementPrivateMessageDefault =>
+      'Private message from management';
+
+  @override
+  String cashSummaryLine(
+    Object entries,
+    Object exits,
+    Object inAmount,
+    Object invoices,
+    Object manual,
+    Object outAmount,
+  ) {
+    return 'In $inAmount Fdj  •  Out $outAmount Fdj  •  Entries $entries  •  Exits $exits  •  Manual $manual  •  Invoices $invoices';
+  }
 }
