@@ -14,6 +14,7 @@ extension DbParkedSales on DatabaseHelper {
       'payload': payloadJson,
       'createdAt': now,
       'updatedAt': now,
+      'global_id': const Uuid().v4(),
     });
     CloudSyncService.instance.scheduleSyncSoon();
     return id;

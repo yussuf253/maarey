@@ -2,6 +2,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:uuid/uuid.dart';
 
 import '../utils/app_logger.dart';
+import 'cloud_sync_service.dart';
 import 'database_helper.dart';
 import 'service_orders_sql_ops.dart';
 import 'tenant_context_service.dart';
@@ -166,7 +167,7 @@ class ServiceOrdersRepository {
       final id = await ServiceOrdersSqlOps.insertServiceOrder(txn, tid, payload);
       // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
       return id;
-    });
+    }).then((id) { CloudSyncService.instance.scheduleSyncSoon(); return id; });
   }
 
   Future<int> updateServiceOrderById(
@@ -258,7 +259,7 @@ class ServiceOrdersRepository {
         }
       }
       return affected;
-    });
+    }).then((r) { CloudSyncService.instance.scheduleSyncSoon(); return r; });
   }
 
   /// معلّقة → قيد العمل: يبدأ احتساب موعد التسليم من وقت البدء + المدة المحفوظة.
@@ -414,7 +415,7 @@ class ServiceOrdersRepository {
         }
       }
       return affected;
-    });
+    }).then((r) { CloudSyncService.instance.scheduleSyncSoon(); return r; });
   }
 
   Future<List<Map<String, dynamic>>> getItemsForOrderGlobalId(
@@ -460,7 +461,7 @@ class ServiceOrdersRepository {
       final id = await ServiceOrdersSqlOps.insertServiceOrderItem(txn, tid, payload);
       // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
       return id;
-    });
+    }).then((id) { CloudSyncService.instance.scheduleSyncSoon(); return id; });
   }
 
   Future<int> softDeleteItemById(int id) async {
@@ -489,7 +490,7 @@ class ServiceOrdersRepository {
         }
       }
       return affected;
-    });
+    }).then((r) { CloudSyncService.instance.scheduleSyncSoon(); return r; });
   }
 }
 

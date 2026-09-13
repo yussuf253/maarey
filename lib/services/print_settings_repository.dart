@@ -1,6 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 
 import '../models/print_settings_data.dart';
+import 'cloud_sync_service.dart';
 import 'database_helper.dart';
 
 const _kGlobalId = 'print_setting_singleton';
@@ -43,5 +44,6 @@ class PrintSettingsRepository {
       );
       // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
     });
+    CloudSyncService.instance.scheduleSyncSoon();
   }
 }

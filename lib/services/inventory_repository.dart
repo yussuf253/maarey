@@ -1,5 +1,7 @@
 import 'package:sqflite/sqflite.dart';
+import 'package:uuid/uuid.dart';
 
+import 'cloud_sync_service.dart';
 import 'database_helper.dart';
 import 'tenant_context_service.dart';
 
@@ -52,6 +54,7 @@ class InventoryRepository {
   }) async {
     final db = await _db;
     final tenantId = _tenantId;
+    final now = DateTime.now().toIso8601String();
     final resolvedCode = code.trim().isEmpty
         ? 'WH-${DateTime.now().millisecondsSinceEpoch}'
         : code.trim();
@@ -72,9 +75,12 @@ class InventoryRepository {
         'location': location.trim(),
         'isDefault': isDefault ? 1 : 0,
         'isActive': isActive ? 1 : 0,
-        'createdAt': DateTime.now().toIso8601String(),
+        'global_id': const Uuid().v4(),
+        'createdAt': now,
+        'updatedAt': now,
       });
     });
+    CloudSyncService.instance.scheduleSyncSoon();
     return (id: id, resolvedCode: resolvedCode);
   }
 
@@ -343,6 +349,8 @@ class InventoryRepository {
         'startedAt': now,
         'closedAt': null,
         'createdByUserId': null,
+        'global_id': const Uuid().v4(),
+        'updatedAt': now,
       });
 
       final products = await txn.rawQuery(
@@ -366,6 +374,8 @@ class InventoryRepository {
           'productId': row['productId'],
           'systemQty': row['systemQty'],
           'countedQty': null,
+          'global_id': const Uuid().v4(),
+          'updatedAt': now,
           'difference': null,
           'adjustmentVoucherId': null,
         });
@@ -491,6 +501,8 @@ class InventoryRepository {
         'sourceRefId': sessionId,
         'createdByUserId': null,
         'createdAt': nowIso,
+        'global_id': const Uuid().v4(),
+        'updatedAt': nowIso,
       });
       for (final d in diffs) {
         final diff = (d['difference'] as num?)?.toDouble() ?? 0.0;
@@ -515,6 +527,8 @@ class InventoryRepository {
           'total': 0.0,
           'stockBefore': before,
           'stockAfter': after,
+          'global_id': const Uuid().v4(),
+          'updatedAt': nowIso,
         });
         await txn.insert('product_warehouse_stock', {
           'tenantId': tid,

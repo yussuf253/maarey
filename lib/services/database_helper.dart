@@ -1194,6 +1194,7 @@ class DatabaseHelper {
     int? createdByUserId,
     int tenantId = 1,
   }) async {
+    final now = DateTime.now().toIso8601String();
     await ex.insert('activity_logs', {
       'type': type,
       'refTable': refTable,
@@ -1202,7 +1203,9 @@ class DatabaseHelper {
       'details': details,
       'amount': amount,
       'createdByUserId': createdByUserId,
-      'createdAt': DateTime.now().toIso8601String(),
+      'createdAt': now,
+      'updatedAt': now,
+      'global_id': const Uuid().v4(),
       'tenantId': tenantId,
     });
   }

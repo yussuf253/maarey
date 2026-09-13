@@ -4,7 +4,9 @@ import '../../l10n/generated/app_localizations.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:provider/provider.dart';
 import 'package:sqflite/sqflite.dart' show Database;
+import 'package:uuid/uuid.dart';
 import '../../providers/notification_provider.dart';
+import '../../services/cloud_sync_service.dart';
 import '../../services/database_helper.dart';
 import '../../services/tenant_context_service.dart';
 
@@ -475,6 +477,9 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
             'receivedQty': l.receivedQty,
             'unitPrice':   l.parsedPrice,
             'total':       l.lineTotal,
+            'global_id':   const Uuid().v4(),
+            'createdAt':   now,
+            'updatedAt':   now,
           });
         }
       } else {
@@ -491,6 +496,7 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
           ...poData,
           'poNumber': poNo,
           'createdAt': now,
+          'global_id': const Uuid().v4(),
         });
 
         for (final l in validLines) {
@@ -503,8 +509,12 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
             'receivedQty': 0,
             'unitPrice':   l.parsedPrice,
             'total':       l.lineTotal,
+            'global_id':   const Uuid().v4(),
+            'createdAt':   now,
+            'updatedAt':   now,
           });
         }
+        CloudSyncService.instance.scheduleSyncSoon();
       }
 
       if (!mounted) return;

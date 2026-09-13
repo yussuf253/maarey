@@ -47,11 +47,12 @@ extension DbStock on DatabaseHelper {
     final db = await database;
     final no =
         'IN-${DateTime.now().microsecondsSinceEpoch}-${Random().nextInt(900000) + 100000}';
+    final now = DateTime.now().toIso8601String();
     final id = await db.insert('stock_vouchers', {
       'tenantId': tenantId,
       'voucherNo': no,
       'voucherType': 'in',
-      'voucherDate': DateTime.now().toIso8601String(),
+      'voucherDate': now,
       'warehouseFromId': null,
       'warehouseToId': warehouseToId,
       'referenceNo': referenceNo?.trim().isEmpty == true
@@ -67,7 +68,9 @@ extension DbStock on DatabaseHelper {
           : sourceName?.trim(),
       'sourceRefId': sourceRefId,
       'createdByUserId': null,
-      'createdAt': DateTime.now().toIso8601String(),
+      'createdAt': now,
+      'global_id': const Uuid().v4(),
+      'updatedAt': now,
     });
     CloudSyncService.instance.scheduleSyncSoon();
     return id;
@@ -152,6 +155,8 @@ extension DbStock on DatabaseHelper {
           'voucherDate': voucherDate.toIso8601String(),
           'warehouseFromId': null,
           'warehouseToId': warehouseToId,
+          'global_id': const Uuid().v4(),
+          'updatedAt': nowIso,
           'referenceNo': referenceNo?.trim().isEmpty == true
               ? null
               : referenceNo?.trim(),
@@ -203,6 +208,8 @@ extension DbStock on DatabaseHelper {
             'total': tot,
             'stockBefore': before,
             'stockAfter': after,
+            'global_id': const Uuid().v4(),
+            'updatedAt': nowIso,
           });
           await txn.insert(
             'product_warehouse_stock',
@@ -284,6 +291,8 @@ extension DbStock on DatabaseHelper {
           'sourceRefId': sourceRefId,
           'createdByUserId': null,
           'createdAt': nowIso,
+          'global_id': const Uuid().v4(),
+          'updatedAt': nowIso,
         });
         for (final L in lines) {
           if (L.qty <= 1e-12) continue;
@@ -326,6 +335,8 @@ extension DbStock on DatabaseHelper {
             'total': tot,
             'stockBefore': before,
             'stockAfter': allowNeg ? after : (after < 0 ? 0.0 : after),
+            'global_id': const Uuid().v4(),
+            'updatedAt': nowIso,
           });
           final newQ = allowNeg ? after : (after < 0 ? 0.0 : after);
           await txn.insert(
@@ -413,6 +424,8 @@ extension DbStock on DatabaseHelper {
           'sourceRefId': sourceRefId,
           'createdByUserId': null,
           'createdAt': nowIso,
+          'global_id': const Uuid().v4(),
+          'updatedAt': nowIso,
         });
         for (final L in lines) {
           if (L.qty <= 1e-12) continue;
@@ -467,6 +480,8 @@ extension DbStock on DatabaseHelper {
             'stockAfter': allowNeg
                 ? fromAfter
                 : (fromAfter < 0 ? 0.0 : fromAfter),
+            'global_id': const Uuid().v4(),
+            'updatedAt': nowIso,
           });
           final fromNew = allowNeg
               ? fromAfter
