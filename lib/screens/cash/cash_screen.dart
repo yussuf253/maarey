@@ -2,7 +2,9 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
+import 'package:provider/provider.dart';
 
+import '../../providers/shift_provider.dart';
 import '../../services/database_helper.dart';
 import '../../services/cloud_sync_service.dart';
 import '../../theme/design_tokens.dart';
@@ -618,7 +620,14 @@ class _CashScreenState extends State<CashScreen>
 
   Future<void> _reload() async {
     setState(() => _loading = true);
-    final sum = await _db.getCashSummary();
+    // عند وجود وردية مفتوحة: الصندوق يبدأ من 0 لكل وردية لفصل الأموال بمرور الوقت.
+    int? activeShiftId;
+    try {
+      activeShiftId = context.read<ShiftProvider>().activeShift?['id'] as int?;
+    } catch (_) {}
+    final sum = activeShiftId != null
+        ? await _db.getShiftCashSummary(activeShiftId)
+        : await _db.getCashSummary();
     final rows = await _db.getCashLedgerEntries(limit: 250);
     final invIds = rows.map((r) => r['invoiceId']).whereType<int>().toSet();
     final invShifts = await _db.getInvoiceShiftIdsByInvoiceIds(invIds);
@@ -740,6 +749,7 @@ class _CashScreenState extends State<CashScreen>
                     balance: _balance,
                     totalIn: _totalIn,
                     totalOut: _totalOut,
+                    activeShiftId: context.read<ShiftProvider>().activeShift?['id'] as int?,
                   ),
                   _QuickActions(
                     onDeposit: () => _addTransaction(initialIncome: true),
@@ -860,10 +870,12 @@ class _StickyCashTabBarDelegate extends SliverPersistentHeaderDelegate {
 // ── بطاقة الرصيد ──────────────────────────────────────────────────────────────
 class _BalanceCard extends StatelessWidget {
   final double balance, totalIn, totalOut;
+  final int? activeShiftId;
   const _BalanceCard({
     required this.balance,
     required this.totalIn,
     required this.totalOut,
+    this.activeShiftId,
   });
 
   @override
@@ -897,6 +909,24 @@ class _BalanceCard extends StatelessWidget {
             AppLocalizations.of(context)!.currentBalance,
             style: TextStyle(color: Colors.white70, fontSize: 13),
           ),
+          if (activeShiftId != null) ...[
+            const SizedBox(height: 4),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                '${AppLocalizations.of(context)!.cashShiftLabel}$activeShiftId',
+                style: TextStyle(
+                  color: Colors.white.withValues(alpha: 0.85),
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ],
           const SizedBox(height: 6),
           Text(
             '${_numFmt.format(balance)} Fdj',

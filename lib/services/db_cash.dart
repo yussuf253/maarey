@@ -162,6 +162,33 @@ class DbCashSqlOps {
     };
   }
 
+  /// ملخص الصندوق لوردية محددة فقط (تبدأ من 0 عند كل وردية).
+  static Future<Map<String, double>> getShiftCashSummary(
+    DatabaseExecutor db,
+    int tenantId,
+    int shiftId,
+  ) async {
+    final rows = await db.rawQuery(
+      '''
+      SELECT
+        COALESCE(SUM(CASE WHEN amountFils != 0 THEN amountFils ELSE ROUND(amount * 1000) END), 0) AS balanceFils,
+        COALESCE(SUM(CASE WHEN (CASE WHEN amountFils != 0 THEN amountFils ELSE ROUND(amount * 1000) END) > 0 THEN (CASE WHEN amountFils != 0 THEN amountFils ELSE ROUND(amount * 1000) END) ELSE 0 END), 0) AS totalInFils,
+        COALESCE(SUM(CASE WHEN (CASE WHEN amountFils != 0 THEN amountFils ELSE ROUND(amount * 1000) END) < 0 THEN -(CASE WHEN amountFils != 0 THEN amountFils ELSE ROUND(amount * 1000) END) ELSE 0 END), 0) AS totalOutFils
+      FROM cash_ledger
+      WHERE tenantId = ?
+        AND deleted_at IS NULL
+        AND workShiftId = ?
+      ''',
+      [tenantId, shiftId],
+    );
+    final m = rows.first;
+    return {
+      'balance': ((m['balanceFils'] as num?)?.toDouble() ?? 0) / 1000.0,
+      'totalIn': ((m['totalInFils'] as num?)?.toDouble() ?? 0) / 1000.0,
+      'totalOut': ((m['totalOutFils'] as num?)?.toDouble() ?? 0) / 1000.0,
+    };
+  }
+
   /// Inserts a `cash_ledger` row, stamping `tenantId` from the active session
   /// regardless of whatever the caller passed in [values].
   static Future<int> insertCashLedgerEntry(
@@ -244,6 +271,14 @@ extension DbCash on DatabaseHelper {
     final sessionTenant = TenantContext.instance.requireTenantId();
     final tid = await _activeTenantIdForCash(db, sessionTenant);
     return DbCashSqlOps.getCashSummary(db, tid);
+  }
+
+  /// ملخص الصندوق لوردية محددة فقط (تبدأ من 0 عند كل وردية).
+  Future<Map<String, double>> getShiftCashSummary(int shiftId) async {
+    final db = await database;
+    final sessionTenant = TenantContext.instance.requireTenantId();
+    final tid = await _activeTenantIdForCash(db, sessionTenant);
+    return DbCashSqlOps.getShiftCashSummary(db, tid, shiftId);
   }
 
   Future<int> insertManualCashEntry({
