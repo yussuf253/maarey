@@ -29,14 +29,15 @@ _PlanFilter _planFilterFromTabIndex(int i) {
 }
 
 /// ملخص أصناف الفاتورة لعرضه على بطاقة الخطة.
-String _formatInvoiceItemsBrief(Invoice? inv) {
+String _formatInvoiceItemsBrief(BuildContext context, Invoice? inv) {
+  final loc = AppLocalizations.of(context)!;
   if (inv == null || inv.items.isEmpty) {
-    return 'لا توجد أصناف مسجّلة في الفاتورة';
+    return loc.instNoInvoiceItems;
   }
   final items = inv.items;
   String trimName(String raw) {
     final n = raw.trim();
-    if (n.isEmpty) return 'صنف';
+    if (n.isEmpty) return loc.instItemFallback;
     return n.length > 40 ? '${n.substring(0, 39)}…' : n;
   }
 
@@ -49,7 +50,7 @@ String _formatInvoiceItemsBrief(Invoice? inv) {
   final a = trimName(items[0].productName);
   final b = trimName(items[1].productName);
   if (items.length == 2) return '$a، $b';
-  return '$a، $b + ${_numFmt.format(items.length - 2)} صنف';
+  return '$a، $b + ${_numFmt.format(items.length - 2)} ${loc.instItemFallback}';
 }
 
 /// قائمة خطط التقسيط مع تصفية وبحث وملخص أعلى الصفحة.
@@ -65,7 +66,10 @@ class InstallmentsScreen extends StatefulWidget {
 
 class _InstallmentsScreenState extends State<InstallmentsScreen>
     with SingleTickerProviderStateMixin {
-  static final _tabLabels = ['الكل', 'نشطة', 'متأخرة', 'مكتملة'];
+  List<String> _tabLabels(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+    return [loc.instTabAll, loc.instTabActive, loc.instTabOverdue, loc.instTabSettled];
+  }
 
   final DatabaseHelper _db = DatabaseHelper();
   final TextEditingController _search = TextEditingController();
@@ -80,7 +84,7 @@ class _InstallmentsScreenState extends State<InstallmentsScreen>
   @override
   void initState() {
     super.initState();
-    _tabs = TabController(length: _tabLabels.length, vsync: this);
+    _tabs = TabController(length: 4, vsync: this);
     _tabs.addListener(() {
       if (!_tabs.indexIsChanging) {
         setState(() {});
@@ -111,7 +115,7 @@ class _InstallmentsScreenState extends State<InstallmentsScreen>
         final pid = p.id;
         if (pid == null || p.invoiceId <= 0) return;
         final inv = await _db.getInvoiceById(p.invoiceId);
-        lines[pid] = _formatInvoiceItemsBrief(inv);
+        lines[pid] = _formatInvoiceItemsBrief(context, inv);
       }),
     );
     if (!mounted) return;
@@ -219,6 +223,7 @@ class _InstallmentsScreenState extends State<InstallmentsScreen>
     final tabFilter = _planFilterFromTabIndex(_tabs.index);
     final filtered = _filteredListFor(tabFilter);
     final tabOnly = _filteredListFor(tabFilter, searchOverride: '');
+    final labels = _tabLabels(context);
     final listScope = filtered.length != tabOnly.length;
 
     final totalDebt = _plans.fold<double>(0, (s, p) => s + _remaining(p));
@@ -271,7 +276,7 @@ class _InstallmentsScreenState extends State<InstallmentsScreen>
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: Text(
-                          'القائمة: ${filtered.length} من ${tabOnly.length} خطة في «${_tabLabels[_tabs.index]}» (بحث)',
+                          AppLocalizations.of(context)!.instFilterSummary(filtered.length, _tabLabels(context)[_tabs.index], tabOnly.length),
                           style: theme.textTheme.labelMedium?.copyWith(
                             color: cs.onSurfaceVariant,
                             height: 1.4,
@@ -295,7 +300,7 @@ class _InstallmentsScreenState extends State<InstallmentsScreen>
             controller: _tabs,
             physics: const NeverScrollableScrollPhysics(),
             children: List.generate(
-              _tabLabels.length,
+              labels.length,
               (tabIdx) => _InstallmentPlansListTabBody(
                 plans: _filteredListFor(_planFilterFromTabIndex(tabIdx)),
                 productLines: _productLineByPlanId,
@@ -340,8 +345,7 @@ class _InstallmentsScreenState extends State<InstallmentsScreen>
           fontWeight: FontWeight.bold,
           fontSize: narrow ? 12 : 13,
         ),
-        unselectedLabelStyle: TextStyle(fontSize: narrow ? 12 : 13),
-        tabs: _tabLabels.map((t) => Tab(text: t)).toList(),
+        unselectedLabelStyle: TextStyle(fontSize: narrow ? 12 : 13),                          tabs: _tabLabels(context).map((t) => Tab(text: t)).toList(),
       ),
     );
   }
@@ -417,7 +421,7 @@ class _InstallmentStatsBar extends StatelessWidget {
                   children: [
                     Expanded(
                       child: _InstStatChip(
-                        label: 'متبقي الكل',
+                        label: AppLocalizations.of(context)!.instRemainingAll,
                         value: '${_numFmt.format(totalDebt)} Fdj',
                         color: cs.primary,
                         icon: Icons.account_balance_wallet_outlined,
@@ -453,7 +457,7 @@ class _InstallmentStatsBar extends StatelessWidget {
                     const SizedBox(width: 8),
                     Expanded(
                       child: _InstStatChip(
-                        label: 'مكتملة',
+                        label: AppLocalizations.of(context)!.instSettledLabel,
                         value: '$settledPlans',
                         color: const Color(0xFF15803D),
                         icon: Icons.check_circle_outline_rounded,
@@ -468,7 +472,7 @@ class _InstallmentStatsBar extends StatelessWidget {
           return Row(
             children: [
               _InstStatChip(
-                label: 'متبقي الكل',
+                label: AppLocalizations.of(context)!.instRemainingAll,
                 value: '${_numFmt.format(totalDebt)} Fdj',
                 color: cs.primary,
                 icon: Icons.account_balance_wallet_outlined,
@@ -494,7 +498,7 @@ class _InstallmentStatsBar extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               _InstStatChip(
-                label: 'مكتملة',
+                label: AppLocalizations.of(context)!.instSettledLabel,
                 value: '$settledPlans',
                 color: const Color(0xFF15803D),
                 icon: Icons.check_circle_outline_rounded,
@@ -727,7 +731,7 @@ class _InfoBanner extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(
               child: Text(
-                'تُنشأ خطة لكل فاتورة نوعها «تقسيط» (حتى لو المقدّم = الإجمالي). التسديد من تفاصيل الخطة يظهر في الصندوق. المقدّم والجدولة: الأقساط ← إعدادات تقسيط.',
+                AppLocalizations.of(context)!.instInfoBannerText,
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   color: colorScheme.onSurfaceVariant,
                   height: 1.45,
@@ -797,7 +801,8 @@ class _PlanListTile extends StatelessWidget {
     final statusColor = overdue
         ? const Color(0xFFDC2626)
         : (settled ? const Color(0xFF15803D) : const Color(0xFF3B82F6));
-    final statusLabel = settled ? 'مكتملة' : (overdue ? AppLocalizations.of(context)!.overdueLabel : 'نشطة');
+    final loc = AppLocalizations.of(context)!;
+    final statusLabel = settled ? loc.instSettledLabel : (overdue ? loc.overdueLabel : loc.instActiveLabel);
 
     final fill = isDark ? AppColors.cardDark : colorScheme.surface;
     final r = BorderRadius.circular(12);
@@ -868,7 +873,7 @@ class _PlanListTile extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    plan.customerName.isEmpty ? 'عميل' : plan.customerName,
+                    plan.customerName.isEmpty ? loc.instCustomerFallback : plan.customerName,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: _planTextStyle(
@@ -916,7 +921,7 @@ class _PlanListTile extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'تقدّم السداد: ${_numFmt.format(plan.paidAmount)} / ${_numFmt.format(plan.totalAmount)} Fdj',
+                    loc.instPaymentProgressLine(_numFmt.format(plan.paidAmount), _numFmt.format(plan.totalAmount)),
                     style: _planTextStyle(
                       context,
                       fontSize: 11,
@@ -983,7 +988,7 @@ class _PlanListTile extends StatelessWidget {
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
                       Text(
-                        'فاتورة #${plan.invoiceId}',
+                        loc.instInvoiceShort(plan.invoiceId.toString()),
                         style: _planTextStyle(
                           context,
                           fontSize: 12,
@@ -1001,7 +1006,7 @@ class _PlanListTile extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'خطة #${plan.id}',
+                        loc.instPlanShort(plan.id.toString()),
                         style: _planTextStyle(
                           context,
                           fontSize: 12,
@@ -1020,7 +1025,7 @@ class _PlanListTile extends StatelessWidget {
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
-                            'عميل #${plan.customerId}',
+                            loc.instCustomerShort(plan.customerId.toString()),
                             style: _planTextStyle(
                               context,
                               fontSize: 10,
@@ -1035,7 +1040,7 @@ class _PlanListTile extends StatelessWidget {
                   if (nextDue != null && !settled) ...[
                     const SizedBox(height: 8),
                     Text(
-                      'القسط التالي: ${_numFmt.format(nextDue.amount)} Fdj — ${_dateFmt.format(nextDue.dueDate)}',
+                      loc.instNextInstallmentLine(_numFmt.format(nextDue.amount), _dateFmt.format(nextDue.dueDate)),
                       style: _planTextStyle(
                         context,
                         fontSize: 12,

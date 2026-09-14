@@ -14,7 +14,7 @@ import '../../theme/design_tokens.dart';
 import '../../utils/screen_layout.dart';
 import '../../l10n/generated/app_localizations.dart';
 
-final _numFmt = NumberFormat('#,##0', 'ar');
+final _numFmt = NumberFormat('#,##0', 'en');
 final _dateFmt = DateFormat('dd/MM/yyyy', 'en');
 
 String _formatSharePercent(double pct) {
@@ -899,9 +899,9 @@ class _FigmaLikeRangeDialogState extends State<_FigmaLikeRangeDialog> {
   late DateTime _displayMonth;
   bool _awaitingEndTap = false;
 
-  static final DateFormat _headerFmt = DateFormat('dd MMM yy', 'ar');
-  static final DateFormat _monthFmt = DateFormat('MMMM yyyy', 'ar');
-  static const _weekDays = ['ن', 'ث', 'ر', 'خ', 'ج', 'س', 'ح'];
+  late DateFormat _headerFmt;
+  late DateFormat _monthFmt;
+  late List<String> _weekDays;
 
   @override
   void initState() {
@@ -913,6 +913,19 @@ class _FigmaLikeRangeDialogState extends State<_FigmaLikeRangeDialog> {
     if (_end.isAfter(today)) _end = today;
     if (_end.isBefore(_start)) _end = _start;
     _displayMonth = DateTime(_start.year, _start.month, 1);
+  }
+
+  bool _dateFmtInitialized = false;
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_dateFmtInitialized) {
+      _dateFmtInitialized = true;
+      final locale = Localizations.localeOf(context).toString();
+      _headerFmt = DateFormat('dd MMM yy', locale);
+      _monthFmt = DateFormat('MMMM yyyy', locale);
+      _weekDays = List.generate(7, (i) => DateFormat.E(locale).format(DateTime(2024, 1, 1 + i)));
+    }
   }
 
   @override

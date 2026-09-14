@@ -115,11 +115,11 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
     }
     final r = _linkedCustomerRow;
     if (r == null) {
-      return 'عميل مسجّل #$_linkedCustomerId';
+      return AppLocalizations.of(context)!.instRegisteredCustomerShort(_linkedCustomerId.toString());
     }
     final n = (r['name'] as String?)?.trim() ?? '';
     final p = (r['phone'] as String?)?.trim() ?? '';
-    if (n.isEmpty) return 'عميل #$_linkedCustomerId';
+    if (n.isEmpty) return AppLocalizations.of(context)!.instCustomerShort(_linkedCustomerId.toString());
     if (p.isNotEmpty) return '$n — $p';
     return n;
   }
@@ -183,7 +183,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
     final remaining = widget.totalAmount - widget.paidAmount;
     if (remaining <= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('لا يوجد مبلغ متبقٍ للتقسيط بعد المقدم')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.instNoRemainingAfterAdvance)),
       );
       return;
     }
@@ -193,7 +193,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
       id: widget.planId,
       invoiceId: widget.invoiceId,
       customerName: widget.customerName.trim().isEmpty
-          ? 'عميل'
+          ? AppLocalizations.of(context)!.instCustomerFallback
           : widget.customerName.trim(),
       customerId: _linkedCustomerId,
       totalAmount: widget.totalAmount,
@@ -230,7 +230,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
       SnackBar(
         content: Text(
           _linkedCustomerId != null
-              ? 'تم حفظ الجدول وربط العميل #$_linkedCustomerId'
+              ? AppLocalizations.of(context)!.instSavedWithCustomerLinked(_linkedCustomerId.toString())
               : AppLocalizations.of(context)!.installmentScheduleSaved,
         ),
       ),
@@ -310,7 +310,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
             padding: const EdgeInsets.all(16),
             children: [
               Text(
-                'الخطة مسجّلة بالفعل وتظهر تحت «خطط التقسيط». عدّل الربط أو عدد الأقساط أو المرجع ثم احفظ.',
+                AppLocalizations.of(context)!.instPlanAlreadySavedHint,
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: cs.onSurfaceVariant,
                   height: 1.4,
@@ -337,7 +337,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      _SummaryRow('رقم الفاتورة', '#${widget.invoiceId}'),
+                      _SummaryRow(AppLocalizations.of(context)!.instInvoiceNumberLabel, '#${widget.invoiceId}'),
                       _SummaryRow(
                         AppLocalizations.of(context)!.customerLabel2,
                         widget.customerName.isEmpty ? '—' : widget.customerName,
@@ -352,7 +352,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
                       ),
                       const Divider(height: 20),
                       Text(
-                        'متبقٍّ للتقسيط: ${_numFmt.format(widget.totalAmount - widget.paidAmount)} Fdj',
+                        AppLocalizations.of(context)!.instRemainingForInstallment(_numFmt.format(widget.totalAmount - widget.paidAmount)),
                         style: theme.textTheme.titleSmall?.copyWith(
                           fontWeight: FontWeight.w600,
                           color: AppColors.accent,
@@ -364,7 +364,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
               ),
               const SizedBox(height: 20),
               Text(
-                'ربط العميل',
+                AppLocalizations.of(context)!.instLinkCustomerLabel,
                 style: theme.textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -430,7 +430,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
                   labelText: AppLocalizations.of(context)!.remainingInstallmentsCount,
                   border: const OutlineInputBorder(borderRadius: AppShape.none),
                   helperText:
-                      'التوزيع بالتساوي؛ آخر قسط يستوعب فرق الفلس. الفترة بين الأقساط من الإعدادات: $step شهر/أشهر.',
+                      AppLocalizations.of(context)!.instDistributionHint(step.toString()),
                 ),
                 validator: (v) {
                   if (v == null || v.trim().isEmpty) return AppLocalizations.of(context)!.enterInstallmentCount;
@@ -476,7 +476,7 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                'أول استحقاق: ${_dateFmt.format(firstDue)}',
+                                AppLocalizations.of(context)!.instFirstDueDate(_dateFmt.format(firstDue)),
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: cs.primary,
@@ -485,8 +485,8 @@ class _AddInstallmentPlanScreenState extends State<AddInstallmentPlanScreen> {
                               ),
                               Text(
                                 _settings.useCalendarMonths
-                                    ? 'جدولة: شهر تقويمي × $step لكل قسط من المرجع.'
-                                    : 'جدولة: تقريب 30 يوماً × $step لكل قسط من المرجع.',
+                                    ? AppLocalizations.of(context)!.instScheduleCalendarMonth(step.toString())
+                                    : AppLocalizations.of(context)!.instScheduleApproxDays(step.toString()),
                                 style: TextStyle(
                                   fontSize: 11,
                                   color: theme.hintColor,
@@ -671,7 +671,7 @@ class _InstallmentCustomerPickerSheetState
                           final ph = (c['phone'] as String?)?.trim() ?? '';
                           return ListTile(
                             title: Text(
-                              nm.isEmpty ? 'عميل #$id' : nm,
+                              nm.isEmpty ? AppLocalizations.of(context)!.instCustomerShort(id.toString()) : nm,
                               overflow: TextOverflow.ellipsis,
                             ),
                             subtitle: ph.isEmpty ? null : Text(ph, maxLines: 1),

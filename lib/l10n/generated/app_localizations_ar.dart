@@ -15158,4 +15158,128 @@ class AppLocalizationsAr extends AppLocalizations {
   ) {
     return 'وارد $inAmount Fdj  •  صادر $outAmount Fdj  •  إدخال $entries  •  إخراج $exits  •  يدوي $manual  •  فواتير $invoices';
   }
+
+  @override
+  String get instNoInvoiceItems => 'لا توجد أصناف مسجّلة في الفاتورة';
+
+  @override
+  String get instItemFallback => 'صنف';
+
+  @override
+  String get instTabAll => 'الكل';
+
+  @override
+  String get instTabActive => 'نشطة';
+
+  @override
+  String get instTabOverdue => 'متأخرة';
+
+  @override
+  String get instTabSettled => 'مكتملة';
+
+  @override
+  String instFilterSummary(Object filtered, Object tab, Object total) {
+    return 'القائمة: $filtered من $total خطة في «$tab» (بحث)';
+  }
+
+  @override
+  String get instRemainingAll => 'متبقي الكل';
+
+  @override
+  String get instSettledLabel => 'مكتملة';
+
+  @override
+  String get instActiveLabel => 'نشطة';
+
+  @override
+  String get instInfoBannerText =>
+      'تُنشأ خطة لكل فاتورة نوعها «تقسيط» (حتى لو المقدّم = الإجمالي). التسديد من تفاصيل الخطة يظهر في الصندوق. المقدّم والجدولة: الأقساط ← إعدادات تقسيط.';
+
+  @override
+  String instPaymentProgressLine(Object paid, Object total) {
+    return 'تقدّم السداد: $paid / $total Fdj';
+  }
+
+  @override
+  String instInvoiceShort(Object id) {
+    return 'فاتورة #$id';
+  }
+
+  @override
+  String instPlanShort(Object id) {
+    return 'خطة #$id';
+  }
+
+  @override
+  String instCustomerShort(Object id) {
+    return 'عميل #$id';
+  }
+
+  @override
+  String instNextInstallmentLine(Object amount, Object date) {
+    return 'القسط التالي: $amount Fdj — $date';
+  }
+
+  @override
+  String instRegisteredCustomerShort(Object id) {
+    return 'عميل مسجّل #$id';
+  }
+
+  @override
+  String get instNoRemainingAfterAdvance =>
+      'لا يوجد مبلغ متبقٍ للتقسيط بعد المقدم';
+
+  @override
+  String get instCustomerFallback => 'عميل';
+
+  @override
+  String instSavedWithCustomerLinked(Object id) {
+    return 'تم حفظ الجدول وربط العميل #$id';
+  }
+
+  @override
+  String get instPlanAlreadySavedHint =>
+      'الخطة مسجّلة بالفعل وتظهر تحت «خطط التقسيط». عدّل الربط أو عدد الأقساط أو المرجع ثم احفظ.';
+
+  @override
+  String get instInvoiceNumberLabel => 'رقم الفاتورة';
+
+  @override
+  String instRemainingForInstallment(Object amount) {
+    return 'متبقٍّ للتقسيط: $amount Fdj';
+  }
+
+  @override
+  String get instLinkCustomerLabel => 'ربط العميل';
+
+  @override
+  String instDistributionHint(Object step) {
+    return 'التوزيع بالتساوي؛ آخر قسط يستوعب فرق الفلس. الفترة بين الأقساط من الإعدادات: $step شهر/أشهر.';
+  }
+
+  @override
+  String instFirstDueDate(Object date) {
+    return 'أول استحقاق: $date';
+  }
+
+  @override
+  String instScheduleCalendarMonth(Object step) {
+    return 'جدولة: شهر تقويمي × $step لكل قسط من المرجع.';
+  }
+
+  @override
+  String instScheduleApproxDays(Object step) {
+    return 'جدولة: تقريب 30 يوماً × $step لكل قسط من المرجع.';
+  }
+
+  @override
+  String get debtLimitDescription =>
+      'تُطبَّق هذه الحدود عند حفظ فاتورة نوعها «دين / آجل». اترك الحقل فارغاً أو 0 لتعطيل السقف.';
+
+  @override
+  String get debtAmountCaps => 'سؤوف المبالغ';
+
+  @override
+  String get debtAutoDistributeHint =>
+      'يُوزَّع تلقائياً على الفواتير من الأقدم إلى الأحدث.';
 }

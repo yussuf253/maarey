@@ -170,7 +170,7 @@ class _DebtSettingsScreenState extends State<DebtSettingsScreen> {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              'تُطبَّق هذه الحدود عند حفظ فاتورة نوعها «دين / آجل». اترك الحقل فارغاً أو 0 لتعطيل السقف.',
+              AppLocalizations.of(context)!.debtLimitDescription,
               style: TextStyle(
                 fontSize: 13,
                 height: 1.45,
@@ -326,7 +326,7 @@ class _DebtSettingsScreenState extends State<DebtSettingsScreen> {
                         const SizedBox(height: 20),
                         _section(
                           icon: Icons.account_balance_outlined,
-                          title: 'سقوف المبالغ',
+                          title: AppLocalizations.of(context)!.debtAmountCaps,
                           subtitle:
                               ' thresholds. Empty or 0 means no limit.',
                           children: [

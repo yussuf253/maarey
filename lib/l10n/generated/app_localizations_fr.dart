@@ -15499,4 +15499,129 @@ class AppLocalizationsFr extends AppLocalizations {
   ) {
     return '$inAmount Fdj entrant  •  $outAmount Fdj sortant  •  $entries entrées  •  $exits sorties  •  $manual manuelles  •  $invoices factures';
   }
+
+  @override
+  String get instNoInvoiceItems =>
+      'Aucun article enregistré dans cette facture';
+
+  @override
+  String get instItemFallback => 'Article';
+
+  @override
+  String get instTabAll => 'Tous';
+
+  @override
+  String get instTabActive => 'Actifs';
+
+  @override
+  String get instTabOverdue => 'En retard';
+
+  @override
+  String get instTabSettled => 'Terminés';
+
+  @override
+  String instFilterSummary(Object filtered, Object tab, Object total) {
+    return 'Liste : $filtered sur $total plans dans «$tab» (recherche)';
+  }
+
+  @override
+  String get instRemainingAll => 'Total restant';
+
+  @override
+  String get instSettledLabel => 'Terminé';
+
+  @override
+  String get instActiveLabel => 'Actif';
+
+  @override
+  String get instInfoBannerText =>
+      'Un plan est créé pour chaque facture à échéancier (même si l\'avance = total). Les paiements depuis les détails du plan apparaissent dans la caisse. Avance et planification : échéancier ← paramètres d\'échéancier.';
+
+  @override
+  String instPaymentProgressLine(Object paid, Object total) {
+    return 'Progression des paiements : $paid / $total FDJ';
+  }
+
+  @override
+  String instInvoiceShort(Object id) {
+    return 'Facture #$id';
+  }
+
+  @override
+  String instPlanShort(Object id) {
+    return 'Plan #$id';
+  }
+
+  @override
+  String instCustomerShort(Object id) {
+    return 'Client #$id';
+  }
+
+  @override
+  String instNextInstallmentLine(Object amount, Object date) {
+    return 'Prochaine échéance : $amount FDJ — $date';
+  }
+
+  @override
+  String instRegisteredCustomerShort(Object id) {
+    return 'Client enregistré #$id';
+  }
+
+  @override
+  String get instNoRemainingAfterAdvance =>
+      'Aucun montant restant pour les acomptes après l\'avance';
+
+  @override
+  String get instCustomerFallback => 'Client';
+
+  @override
+  String instSavedWithCustomerLinked(Object id) {
+    return 'Planning enregistré et client #$id lié';
+  }
+
+  @override
+  String get instPlanAlreadySavedHint =>
+      'Le plan est déjà enregistré et apparaît sous «Plans d\'échéancier». Ajustez le lien, le nombre d\'acomptes ou la référence, puis enregistrez.';
+
+  @override
+  String get instInvoiceNumberLabel => 'Numéro de facture';
+
+  @override
+  String instRemainingForInstallment(Object amount) {
+    return 'Restant pour les acomptes : $amount FDJ';
+  }
+
+  @override
+  String get instLinkCustomerLabel => 'Lier le client';
+
+  @override
+  String instDistributionHint(Object step) {
+    return 'Distribution égale ; la dernière échéance absorbe l\'arrondi. Intervalle entre les échéances selon les paramètres : $step mois.';
+  }
+
+  @override
+  String instFirstDueDate(Object date) {
+    return 'Première échéance : $date';
+  }
+
+  @override
+  String instScheduleCalendarMonth(Object step) {
+    return 'Planification : mois calendaire × $step par échéance à partir de la référence.';
+  }
+
+  @override
+  String instScheduleApproxDays(Object step) {
+    return 'Planification : ~30 jours × $step par échéance à partir de la référence.';
+  }
+
+  @override
+  String get debtLimitDescription =>
+      'Ces limites sont appliquées lors de l\'enregistrement d\'une facture «crédit / différé». Laissez le champ vide ou 0 pour désactiver le plafond.';
+
+  @override
+  String get debtAmountCaps => 'Plafonds de montants';
+
+  @override
+  String get debtAutoDistributeHint =>
+      'Distribué automatiquement des factures les plus anciennes aux plus récentes.';
 }

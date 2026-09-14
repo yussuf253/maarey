@@ -27277,6 +27277,192 @@ abstract class AppLocalizations {
     Object manual,
     Object outAmount,
   );
+
+  /// No description provided for @instNoInvoiceItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد أصناف مسجّلة في الفاتورة'**
+  String get instNoInvoiceItems;
+
+  /// No description provided for @instItemFallback.
+  ///
+  /// In ar, this message translates to:
+  /// **'صنف'**
+  String get instItemFallback;
+
+  /// No description provided for @instTabAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكل'**
+  String get instTabAll;
+
+  /// No description provided for @instTabActive.
+  ///
+  /// In ar, this message translates to:
+  /// **'نشطة'**
+  String get instTabActive;
+
+  /// No description provided for @instTabOverdue.
+  ///
+  /// In ar, this message translates to:
+  /// **'متأخرة'**
+  String get instTabOverdue;
+
+  /// No description provided for @instTabSettled.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكتملة'**
+  String get instTabSettled;
+
+  /// No description provided for @instFilterSummary.
+  ///
+  /// In ar, this message translates to:
+  /// **'القائمة: {filtered} من {total} خطة في «{tab}» (بحث)'**
+  String instFilterSummary(Object filtered, Object tab, Object total);
+
+  /// No description provided for @instRemainingAll.
+  ///
+  /// In ar, this message translates to:
+  /// **'متبقي الكل'**
+  String get instRemainingAll;
+
+  /// No description provided for @instSettledLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكتملة'**
+  String get instSettledLabel;
+
+  /// No description provided for @instActiveLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'نشطة'**
+  String get instActiveLabel;
+
+  /// No description provided for @instInfoBannerText.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُنشأ خطة لكل فاتورة نوعها «تقسيط» (حتى لو المقدّم = الإجمالي). التسديد من تفاصيل الخطة يظهر في الصندوق. المقدّم والجدولة: الأقساط ← إعدادات تقسيط.'**
+  String get instInfoBannerText;
+
+  /// No description provided for @instPaymentProgressLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'تقدّم السداد: {paid} / {total} Fdj'**
+  String instPaymentProgressLine(Object paid, Object total);
+
+  /// No description provided for @instInvoiceShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة #{id}'**
+  String instInvoiceShort(Object id);
+
+  /// No description provided for @instPlanShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطة #{id}'**
+  String instPlanShort(Object id);
+
+  /// No description provided for @instCustomerShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'عميل #{id}'**
+  String instCustomerShort(Object id);
+
+  /// No description provided for @instNextInstallmentLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'القسط التالي: {amount} Fdj — {date}'**
+  String instNextInstallmentLine(Object amount, Object date);
+
+  /// No description provided for @instRegisteredCustomerShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'عميل مسجّل #{id}'**
+  String instRegisteredCustomerShort(Object id);
+
+  /// No description provided for @instNoRemainingAfterAdvance.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد مبلغ متبقٍ للتقسيط بعد المقدم'**
+  String get instNoRemainingAfterAdvance;
+
+  /// No description provided for @instCustomerFallback.
+  ///
+  /// In ar, this message translates to:
+  /// **'عميل'**
+  String get instCustomerFallback;
+
+  /// No description provided for @instSavedWithCustomerLinked.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم حفظ الجدول وربط العميل #{id}'**
+  String instSavedWithCustomerLinked(Object id);
+
+  /// No description provided for @instPlanAlreadySavedHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخطة مسجّلة بالفعل وتظهر تحت «خطط التقسيط». عدّل الربط أو عدد الأقساط أو المرجع ثم احفظ.'**
+  String get instPlanAlreadySavedHint;
+
+  /// No description provided for @instInvoiceNumberLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الفاتورة'**
+  String get instInvoiceNumberLabel;
+
+  /// No description provided for @instRemainingForInstallment.
+  ///
+  /// In ar, this message translates to:
+  /// **'متبقٍّ للتقسيط: {amount} Fdj'**
+  String instRemainingForInstallment(Object amount);
+
+  /// No description provided for @instLinkCustomerLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'ربط العميل'**
+  String get instLinkCustomerLabel;
+
+  /// No description provided for @instDistributionHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'التوزيع بالتساوي؛ آخر قسط يستوعب فرق الفلس. الفترة بين الأقساط من الإعدادات: {step} شهر/أشهر.'**
+  String instDistributionHint(Object step);
+
+  /// No description provided for @instFirstDueDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'أول استحقاق: {date}'**
+  String instFirstDueDate(Object date);
+
+  /// No description provided for @instScheduleCalendarMonth.
+  ///
+  /// In ar, this message translates to:
+  /// **'جدولة: شهر تقويمي × {step} لكل قسط من المرجع.'**
+  String instScheduleCalendarMonth(Object step);
+
+  /// No description provided for @instScheduleApproxDays.
+  ///
+  /// In ar, this message translates to:
+  /// **'جدولة: تقريب 30 يوماً × {step} لكل قسط من المرجع.'**
+  String instScheduleApproxDays(Object step);
+
+  /// No description provided for @debtLimitDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'تُطبَّق هذه الحدود عند حفظ فاتورة نوعها «دين / آجل». اترك الحقل فارغاً أو 0 لتعطيل السقف.'**
+  String get debtLimitDescription;
+
+  /// No description provided for @debtAmountCaps.
+  ///
+  /// In ar, this message translates to:
+  /// **'سؤوف المبالغ'**
+  String get debtAmountCaps;
+
+  /// No description provided for @debtAutoDistributeHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُوزَّع تلقائياً على الفواتير من الأقدم إلى الأحدث.'**
+  String get debtAutoDistributeHint;
 }
 
 class _AppLocalizationsDelegate

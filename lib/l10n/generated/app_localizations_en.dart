@@ -15310,4 +15310,128 @@ class AppLocalizationsEn extends AppLocalizations {
   ) {
     return 'In $inAmount Fdj  •  Out $outAmount Fdj  •  Entries $entries  •  Exits $exits  •  Manual $manual  •  Invoices $invoices';
   }
+
+  @override
+  String get instNoInvoiceItems => 'No items registered in this invoice';
+
+  @override
+  String get instItemFallback => 'Item';
+
+  @override
+  String get instTabAll => 'All';
+
+  @override
+  String get instTabActive => 'Active';
+
+  @override
+  String get instTabOverdue => 'Overdue';
+
+  @override
+  String get instTabSettled => 'Settled';
+
+  @override
+  String instFilterSummary(Object filtered, Object tab, Object total) {
+    return 'List: $filtered of $total plans in «$tab» (search)';
+  }
+
+  @override
+  String get instRemainingAll => 'Total remaining';
+
+  @override
+  String get instSettledLabel => 'Settled';
+
+  @override
+  String get instActiveLabel => 'Active';
+
+  @override
+  String get instInfoBannerText =>
+      'A plan is created for every installment invoice (even if advance = total). Payments from plan details appear in the cash register. Advance and scheduling: installments ← installment settings.';
+
+  @override
+  String instPaymentProgressLine(Object paid, Object total) {
+    return 'Payment progress: $paid / $total FDJ';
+  }
+
+  @override
+  String instInvoiceShort(Object id) {
+    return 'Invoice #$id';
+  }
+
+  @override
+  String instPlanShort(Object id) {
+    return 'Plan #$id';
+  }
+
+  @override
+  String instCustomerShort(Object id) {
+    return 'Customer #$id';
+  }
+
+  @override
+  String instNextInstallmentLine(Object amount, Object date) {
+    return 'Next installment: $amount FDJ — $date';
+  }
+
+  @override
+  String instRegisteredCustomerShort(Object id) {
+    return 'Registered customer #$id';
+  }
+
+  @override
+  String get instNoRemainingAfterAdvance =>
+      'No remaining amount for installments after the advance';
+
+  @override
+  String get instCustomerFallback => 'Customer';
+
+  @override
+  String instSavedWithCustomerLinked(Object id) {
+    return 'Schedule saved and customer #$id linked';
+  }
+
+  @override
+  String get instPlanAlreadySavedHint =>
+      'The plan is already saved and appears under \'Installment Plans\'. Adjust the link, installment count, or reference, then save.';
+
+  @override
+  String get instInvoiceNumberLabel => 'Invoice number';
+
+  @override
+  String instRemainingForInstallment(Object amount) {
+    return 'Remaining for installments: $amount FDJ';
+  }
+
+  @override
+  String get instLinkCustomerLabel => 'Link customer';
+
+  @override
+  String instDistributionHint(Object step) {
+    return 'Distributed equally; last installment absorbs rounding difference. Interval between installments from settings: $step month(s).';
+  }
+
+  @override
+  String instFirstDueDate(Object date) {
+    return 'First due: $date';
+  }
+
+  @override
+  String instScheduleCalendarMonth(Object step) {
+    return 'Schedule: calendar month × $step per installment from reference.';
+  }
+
+  @override
+  String instScheduleApproxDays(Object step) {
+    return 'Schedule: ~30 days × $step per installment from reference.';
+  }
+
+  @override
+  String get debtLimitDescription =>
+      'These limits are applied when saving a credit/deferred invoice. Leave the field empty or 0 to disable the cap.';
+
+  @override
+  String get debtAmountCaps => 'Amount caps';
+
+  @override
+  String get debtAutoDistributeHint =>
+      'Automatically distributed from oldest to newest invoices.';
 }

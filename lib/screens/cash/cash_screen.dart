@@ -1195,9 +1195,8 @@ class _ShiftCashBreakdown {
     );
   }
 
-  String get summaryLine =>
-      'وارد ${_numFmt.format(wared)} Fdj  •  صادر ${_numFmt.format(sader)} Fdj  •  '
-      'إدخال $edkhalCount  •  إخراج $ikhrajCount  •  يدوي $manualCount  •  فواتير $invoiceLinkedCount';
+  String summaryLine(BuildContext context) =>
+      AppLocalizations.of(context)!.cashSummaryLine(edkhalCount, ikhrajCount, wared, invoiceLinkedCount, manualCount, sader);
 }
 
 class _CashShiftSectionHeader extends StatelessWidget {

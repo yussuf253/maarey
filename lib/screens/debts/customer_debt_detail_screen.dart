@@ -153,7 +153,7 @@ class _CustomerDebtDetailScreenState extends State<CustomerDebtDetailScreen> {
               ),
               const SizedBox(height: 8),
               Text(
-                'يُوزَّع تلقائياً على الفواتير من الأقدم إلى الأحدث.',
+                loc.debtAutoDistributeHint,
                 style: TextStyle(fontSize: 12, color: Theme.of(ctx).hintColor),
               ),
             ],
