@@ -1447,6 +1447,8 @@ class ProductRepository {
     required double lowStockThreshold,
     required bool trackInventory,
     int? stockBaseKind,
+    String? manufacturingDate,
+    String? expiryDate,
   }) async {
     final db = await _db;
     final bc = barcode?.trim();
@@ -1471,6 +1473,10 @@ class ProductRepository {
     };
     if (stockBaseKind != null) {
       patch['stockBaseKind'] = stockBaseKind.clamp(0, 1);
+    }
+    if (manufacturingDate != null || expiryDate != null) {
+      patch['manufacturingDate'] = manufacturingDate;
+      patch['expiryDate'] = expiryDate;
     }
     await db.transaction((txn) async {
       await txn.update(

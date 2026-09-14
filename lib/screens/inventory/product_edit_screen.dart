@@ -1,5 +1,6 @@
 import 'dart:async' show unawaited;
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart' hide TextDirection;
 import '../../l10n/generated/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -177,6 +178,8 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
   final _qty = TextEditingController();
 
   final _low = TextEditingController();
+  final _mfgDateCtrl = TextEditingController();
+  final _expDateCtrl = TextEditingController();
 
   bool _track = true;
 
@@ -228,6 +231,8 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
     _qty.dispose();
 
     _low.dispose();
+    _mfgDateCtrl.dispose();
+    _expDateCtrl.dispose();
 
     for (final r in _variantRows) {
       r.dispose();
@@ -430,9 +435,10 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
 
     _minSell.text = dnum(p['minSellPrice']).toStringAsFixed(0);
 
-    _qty.text = dnum(p['qty']).toStringAsFixed(0);
+    _qty.text = dnum(p['qty']).toStringAsFixed(0);    _low.text = dnum(p['lowStockThreshold']).toStringAsFixed(0);
+    _mfgDateCtrl.text = _displayDateFromIso(p['manufacturingDate']?.toString());
+    _expDateCtrl.text = _displayDateFromIso(p['expiryDate']?.toString());
 
-    _low.text = dnum(p['lowStockThreshold']).toStringAsFixed(0);
 
     _track = ((p['trackInventory'] as num?)?.toInt() ?? 1) == 1;
 
@@ -614,6 +620,67 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
     return null;
   }
 
+  // ── Date helpers (shared with add_product_screen pattern) ──
+  static final _dateDisplayFmt = DateFormat('dd/MM/yyyy');
+
+  String _displayDateFromIso(String? iso) {
+    if (iso == null || iso.isEmpty) return '';
+    final p = iso.split('T').first.split('-');
+    if (p.length != 3) return iso;
+    final y = int.tryParse(p[0]);
+    final m = int.tryParse(p[1]);
+    final d = int.tryParse(p[2]);
+    if (y == null || m == null || d == null) return iso;
+    try {
+      return _dateDisplayFmt.format(DateTime(y, m, d));
+    } catch (_) {
+      return iso;
+    }
+  }
+
+  DateTime? _parseDateField(String text) {
+    final t = text.trim();
+    if (t.isEmpty) return null;
+    for (final pattern in <String>['dd/MM/yyyy', 'd/M/yyyy', 'dd/MM/yy', 'd/M/yy']) {
+      try {
+        return DateFormat(pattern).parse(t);
+      } catch (_) {}
+    }
+    final parts = t.split(RegExp(r'[/\-\.]'));
+    if (parts.length == 3) {
+      final d = int.tryParse(parts[0].trim());
+      final m = int.tryParse(parts[1].trim());
+      final y = int.tryParse(parts[2].trim());
+      if (d != null && m != null && y != null) {
+        var yy = y;
+        if (y < 100) yy = y >= 70 ? 1900 + y : 2000 + y;
+        try {
+          return DateTime(yy, m, d);
+        } catch (_) {}
+      }
+    }
+    return null;
+  }
+
+  String? _isoFromDateField(String text) {
+    final d = _parseDateField(text);
+    if (d == null) return null;
+    return '${d.year.toString().padLeft(4, '0')}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
+  }
+
+  Future<void> _pickProductDate(TextEditingController ctrl) async {
+    final initial = _parseDateField(ctrl.text) ?? DateTime.now();
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: initial,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+    );
+    if (picked != null && mounted) {
+      ctrl.text = _dateDisplayFmt.format(picked);
+    }
+  }
+
   Future<void> _save() async {
     if (_saving) return;
 
@@ -676,6 +743,8 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
         lowStockThreshold: low,
         trackInventory: _track,
         stockBaseKind: _stockBaseKind,
+        manufacturingDate: _isoFromDateField(_mfgDateCtrl.text),
+        expiryDate: _isoFromDateField(_expDateCtrl.text),
       );
 
       if (_multiVariantEnabled) {
@@ -1882,6 +1951,50 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
                               ],
                             ),
                           SizedBox(height: 10),
+                          // ── Production & Expiry dates ──
+                          LayoutBuilder(
+                            builder: (_, c) {
+                              final row = c.maxWidth >= 480;
+                              Widget mfgField() => _field(
+                                label: loc.apMfgDateLabel,
+                                controller: _mfgDateCtrl,
+                                hint: loc.apDateFormat,
+                                suffix: IconButton(
+                                  icon: const Icon(Icons.calendar_today_outlined, size: 20),
+                                  onPressed: () => _pickProductDate(_mfgDateCtrl),
+                                  tooltip: loc.apPickFromCalendar,
+                                ),
+                              );
+                              Widget expField() => _field(
+                                label: loc.apExpDateLabel,
+                                controller: _expDateCtrl,
+                                hint: loc.apDateFormat,
+                                suffix: IconButton(
+                                  icon: const Icon(Icons.calendar_today_outlined, size: 20),
+                                  onPressed: () => _pickProductDate(_expDateCtrl),
+                                  tooltip: loc.apPickFromCalendar,
+                                ),
+                              );
+                              if (row) {
+                                return Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(child: mfgField()),
+                                    const SizedBox(width: 12),
+                                    Expanded(child: expField()),
+                                  ],
+                                );
+                              }
+                              return Column(
+                                children: [
+                                  mfgField(),
+                                  const SizedBox(height: 10),
+                                  expField(),
+                                ],
+                              );
+                            },
+                          ),
+                          SizedBox(height: 10),
                           FilledButton(
                             onPressed: _saving ? null : _save,
                             child: Text(loc.saveChangesBtn),
@@ -1902,6 +2015,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
     required String hint,
     TextInputType keyboard = TextInputType.text,
     String? Function(String?)? validator,
+    Widget? suffix,
   }) {
     final cs = Theme.of(context).colorScheme;
 
@@ -1923,6 +2037,7 @@ class _ProductEditScreenState extends State<ProductEditScreen> {
             filled: true,
             fillColor: cs.surfaceContainerHighest.withValues(alpha: 0.55),
             border: OutlineInputBorder(borderRadius: ac.sm, borderSide: BorderSide.none),
+            suffixIcon: suffix,
           ),
         ),
       ],
