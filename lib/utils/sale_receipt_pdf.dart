@@ -713,8 +713,7 @@ class SaleReceiptPdf {
             child: pw.Column(
               crossAxisAlignment: pw.CrossAxisAlignment.stretch,
               children: [
-                if (_isArabicLocale(_currentLocale) &&
-                    s.invoiceShowStoreLogo &&
+                if (s.invoiceShowStoreLogo &&
                     _receiptSafe(s.storeTitleLine).isNotEmpty) ...[
                   pw.Center(
                     child: pw.Text(
@@ -864,8 +863,7 @@ class SaleReceiptPdf {
                   fontBold,
                 ),
                 ..._receiptCreditSummaryWidgets(invoice, font, fontBold),
-                if (_isArabicLocale(_currentLocale) &&
-                    s.invoiceShowFooterExtra &&
+                if (s.invoiceShowFooterExtra &&
                     _receiptSafe(s.footerExtra).isNotEmpty) ...[
                   pw.SizedBox(height: 10),
                   pw.Divider(thickness: 0.5, color: PdfColors.grey500),
@@ -1129,7 +1127,8 @@ class SaleReceiptPdf {
             child: pw.Column(
               crossAxisAlignment: pw.CrossAxisAlignment.stretch,
               children: [
-                if (_receiptSafe(s.storeTitleLine).isNotEmpty) ...[
+                if (s.invoiceShowStoreLogo &&
+                    _receiptSafe(s.storeTitleLine).isNotEmpty) ...[
                   pw.Center(
                     child: pw.Text(
                       _receiptSafe(s.storeTitleLine),
@@ -1410,7 +1409,8 @@ class SaleReceiptPdf {
             child: pw.Column(
               crossAxisAlignment: pw.CrossAxisAlignment.stretch,
               children: [
-                if (_receiptSafe(s.storeTitleLine).isNotEmpty) ...[
+                if (s.invoiceShowStoreLogo &&
+                    _receiptSafe(s.storeTitleLine).isNotEmpty) ...[
                   pw.Center(
                     child: pw.Text(
                       _receiptSafe(s.storeTitleLine),
@@ -1542,7 +1542,8 @@ class SaleReceiptPdf {
                     textDirection: _pwDirectionForLocale(_currentLocale),
                   ),
                 ],
-                if (_receiptSafe(s.footerExtra).isNotEmpty) ...[
+                if (s.invoiceShowFooterExtra &&
+                    _receiptSafe(s.footerExtra).isNotEmpty) ...[
                   pw.SizedBox(height: 10),
                   pw.Divider(thickness: 0.5, color: PdfColors.grey500),
                   pw.SizedBox(height: 6),
@@ -1941,7 +1942,8 @@ class SaleReceiptPdf {
             child: pw.Column(
               crossAxisAlignment: pw.CrossAxisAlignment.stretch,
               children: [
-                if (_receiptSafe(s.storeTitleLine).isNotEmpty) ...[
+                if (s.invoiceShowStoreLogo &&
+                    _receiptSafe(s.storeTitleLine).isNotEmpty) ...[
                   pw.Center(
                     child: pw.Text(
                       _receiptSafe(s.storeTitleLine),
