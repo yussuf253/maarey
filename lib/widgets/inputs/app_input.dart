@@ -43,6 +43,7 @@ class AppInput extends StatefulWidget {
     this.surfaceDecoration,
     this.overlayShadowOnFocus = true,
     this.densePrefixConstraints,
+    this.autofillHints,
 
     /// نمط زجاجي — مناسب لنموذج الدخول والشاشات الثابتة.
     this.useGlass = false,
@@ -98,6 +99,9 @@ class AppInput extends StatefulWidget {
 
   /// لحقول بطلبات `prefixIcon` مركبة (صف أزرار).
   final BoxConstraints? densePrefixConstraints;
+
+  /// تلميحات الملء التلقائي (Autofill) — مثلاً [AutofillHints.username].
+  final Iterable<String>? autofillHints;
 
   /// عند التفعيل، يُلفّ الحقل بسطح زجاجي مع Blur وحد أبيض خفيف.
   final bool useGlass;
@@ -314,6 +318,7 @@ class _AppInputState extends State<AppInput> {
         inputFormatters: widget.inputFormatters,
         onChanged: widget.onChanged,
         onFieldSubmitted: widget.onFieldSubmitted,
+        autofillHints: widget.autofillHints,
         decoration: _decoration(context),
       ),
     );

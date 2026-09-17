@@ -253,21 +253,19 @@ class _InvoicesScreenState extends State<InvoicesScreen>
         if (_selectedInvoiceId == id) {
           setState(() => _selectedInvoiceId = null);
         }
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(loc.deletedSnackbar)),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(loc.deletedSnackbar)));
       }
     } catch (_) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(loc.invoiceDeleteFailed)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(loc.invoiceDeleteFailed)));
     }
     // تحديث القائمة بعد الحذف حتى تختفي البطاقة فوراً.
     if (mounted) {
-      unawaited(
-        Provider.of<InvoiceProvider>(context, listen: false).refresh(),
-      );
+      unawaited(Provider.of<InvoiceProvider>(context, listen: false).refresh());
     }
   }
 
@@ -1085,8 +1083,9 @@ class _InvoiceList extends StatelessWidget {
           isSelected: inv.id != null && inv.id == selectedInvoiceId,
           serviceProductIds: serviceProductIds,
           onTap: () => onInvoiceTap(inv),
-          onDelete:
-              onInvoiceDelete == null ? null : () => onInvoiceDelete!(inv),
+          onDelete: onInvoiceDelete == null
+              ? null
+              : () => onInvoiceDelete!(inv),
         );
       },
     );

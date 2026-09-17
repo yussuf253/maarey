@@ -610,7 +610,8 @@ class _LoginScreenState extends State<LoginScreen>
 
     return Form(
       key: _loginFormKey,
-      child: Column(
+      child: AutofillGroup(
+        child: Column(
         key: const ValueKey('login'),
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -630,6 +631,7 @@ class _LoginScreenState extends State<LoginScreen>
             ),
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.next,
+            autofillHints: const [AutofillHints.username],
             onFieldSubmitted: (_) =>
                 FocusScope.of(context).requestFocus(_focusLoginPass),
             validator: validateUser,
@@ -668,6 +670,7 @@ class _LoginScreenState extends State<LoginScreen>
               size: 20,
             ),
             textInputAction: TextInputAction.done,
+            autofillHints: const [AutofillHints.password],
             onFieldSubmitted: (_) {
               if (!_isLoading) _login();
             },
@@ -744,6 +747,7 @@ class _LoginScreenState extends State<LoginScreen>
             ),
           ),
         ],
+      ),
       ),
     );
   }

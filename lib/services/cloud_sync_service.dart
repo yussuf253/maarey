@@ -404,7 +404,6 @@ class CloudSyncService {
     // ── حذف صفّ الجهاز الحالي عند تسجيل الخروج ───────────────────────────
     // هذا يمنع تراكم صفوف أجهزة قديمة (UUID تغيّر / تثبيتات متعددة)
     // ويحرّر slot الجهاز ليُعاد تسجيله كجهاز جديد عند تسجيل الدخول التالي.
-    _staleCleanupRanThisSession = false;
     unawaited(_removeCurrentDeviceRowOnSignOut());
 
     _stopConnectivityListener();
@@ -469,9 +468,10 @@ class CloudSyncService {
       }
 
       // ── تنظيف الأجهزة القديمة ──────────────────────────────────────────
-      // بعد تسجيل الجهاز بنجاح، نحذف صفوف الأجهزة التي لم تُرى منذ 30 يوماً
-      // لتخفيف مشكلة تراكم الأجهزة المجمّدة بعد تغيير UUID أو حذف البيانات.
-      unawaited(_cleanupStaleDeviceRows());
+      // نحذف صفوف الأجهزة التي لم تُرى منذ 3 أيام قبل فحص الحد.
+      // هذا يمنع تراكم صفوف أشباح بعد تثبيت/إعادة تثبيت التطبيق
+      // (كل تثبيت يولّد UUID جديد والصف القديم يعلّق).
+      await _cleanupStaleDeviceRows();
 
       // Fetch server over-limit status (if RPC exists). If missing, do not block.
       final status = await _tryFetchDeviceLimitStatusFromServer();
@@ -522,18 +522,17 @@ class CloudSyncService {
     }
   }
 
-  /// يحذف صفوف الأجهزة التي لم تُرى منذ 30 يوماً لتخفيف تراكم الأجهزة المجمّدة.
-  /// يُستدعى كـ fire-and-forget بعد تسجيل الجهاز بنجاح.
-  static bool _staleCleanupRanThisSession = false;
+  /// يحذف صفوف الأجهزة التي لم تُرى منذ 3 أيام لتخفيف تراكم صفوف
+  /// الأشباح بعد تثبيت/إعادة تثبيت التطبيق (كل تثبيت يولّد UUID جديد
+  /// والصف القديم يعلّق في DB).
+  /// يُستدعى قبل فحص الحد حتى لا تُحتسب صفوف الأشباح.
   Future<void> _cleanupStaleDeviceRows() async {
-    if (_staleCleanupRanThisSession) return;
-    _staleCleanupRanThisSession = true;
     final client = Supabase.instance.client;
     final user = client.auth.currentUser;
     if (user == null) return;
     try {
       final threshold =
-          DateTime.now().toUtc().subtract(const Duration(days: 30));
+          DateTime.now().toUtc().subtract(const Duration(days: 3));
       // لا نحذف صفّ الجهاز الحالي مهما كان عمره.
       final currentDeviceId = await LicenseService.instance.getDeviceId();
       await client
