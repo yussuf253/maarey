@@ -204,12 +204,13 @@ class AuthProvider extends ChangeNotifier {
       maxDevices: maxDevices,
     );
     if (limitError != null) {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.remove(_prefUserId);
-      await CloudSyncService.instance.stopForSignOut();
-      _clear();
-      notifyListeners();
-      return limitError;
+      // لا نُلغي الاتصال أو نسجّل خروج المستخدم إذا كان الحد متجاوزاً —
+      // القنوات مفتوحة بالفعل وتعمل. نُسجّل الخطأ فقط ونُكمل.
+      // stopForSignOut هنا كان يُدمّر قنوات Realtime والـ watchdog
+      // والاتصال فور إنشائها، مما يمنع المزامنة الفورية على الأجهزة الأصلية.
+      AppLogger.warn('CloudSync',
+          'enforcePlanDeviceLimit: $limitError — continuing without full sync');
+      CloudSyncService.instance.lastError.value = limitError;
     }
     // تشغيل المزامنة في الخلفية دون التأثير على التنقل.
     await CloudSyncService.instance.syncNow();
