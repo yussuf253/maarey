@@ -13836,6 +13836,16 @@ class AppLocalizationsAr extends AppLocalizations {
       'هذا القسم يعرض المبيعات فقط: نقدي/دين/تقسيط/توصيل.';
 
   @override
+  String get rptDigitalPaymentsTitle => 'طرق الدفع الرقمية';
+
+  @override
+  String get rptDigitalPaymentsSubtitle =>
+      'إجمالي ونسبة كل طريقة دفع إلكترونية.';
+
+  @override
+  String get rptDigitalPaymentsTotal => 'إجمالي المدفوعات الرقمية';
+
+  @override
   String get rptVouchersExcluded =>
       'سندات التحصيل/تسديد الأقساط/دفع المورد تُستبعد من “المبيعات” (لأنها ليست إيراد بيع).';
 

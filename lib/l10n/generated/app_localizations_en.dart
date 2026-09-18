@@ -13976,6 +13976,16 @@ class AppLocalizationsEn extends AppLocalizations {
       'This section shows sales only: cash/credit/installment/delivery.';
 
   @override
+  String get rptDigitalPaymentsTitle => 'Digital Payment Methods';
+
+  @override
+  String get rptDigitalPaymentsSubtitle =>
+      'Totals and share of each electronic payment method.';
+
+  @override
+  String get rptDigitalPaymentsTotal => 'Total Digital Payments';
+
+  @override
   String get rptVouchersExcluded =>
       'Collection/installment payment/supplier payment vouchers are excluded from \"sales\" (they are not sales revenue).';
 

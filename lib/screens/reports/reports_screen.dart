@@ -1510,6 +1510,7 @@ class _PanelSales extends StatelessWidget {
       InvoiceType.waafi,
       InvoiceType.dahabPlus,
       InvoiceType.cacPay,
+      InvoiceType.dmoney,
     ];
 
     final typeTotals = <InvoiceType, double>{for (final t in salesTypes) t: 0};
@@ -1632,6 +1633,10 @@ class _PanelSales extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 18),
+          _DigitalPaymentsTotalsCard(
+            typeTotals: typeTotals,
+          ),
+          const SizedBox(height: 18),
           Builder(
             builder: (context) {
               final datesSet = <String>{};
@@ -1701,11 +1706,15 @@ Color _invoiceTypeAccentColor(InvoiceType t, ColorScheme cs) {
     case InvoiceType.debtCollection:
     case InvoiceType.installmentCollection:
     case InvoiceType.supplierPayment:
-    case InvoiceType.waafi:
-    case InvoiceType.dahabPlus:
-    case InvoiceType.cacPay:
-    case InvoiceType.dmoney:
       return cs.secondary;
+    case InvoiceType.waafi:
+      return const Color(0xFF00B4D8);
+    case InvoiceType.dahabPlus:
+      return const Color(0xFFFFB703);
+    case InvoiceType.cacPay:
+      return const Color(0xFF06D6A0);
+    case InvoiceType.dmoney:
+      return const Color(0xFFE63946);
   }
 }
 
@@ -3145,6 +3154,148 @@ class _AnalyticsCard extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// بطاقة إجمالي المدفوعات الرقمية (وافي / دهاب بلس / CAC Pay / دمني).
+class _DigitalPaymentsTotalsCard extends StatelessWidget {
+  const _DigitalPaymentsTotalsCard({required this.typeTotals});
+
+  final Map<InvoiceType, double> typeTotals;
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final ac = context.appCorners;
+    final loc = AppLocalizations.of(context)!;
+
+    const digitalTypes = [
+      InvoiceType.waafi,
+      InvoiceType.dahabPlus,
+      InvoiceType.cacPay,
+      InvoiceType.dmoney,
+    ];
+
+    final digitalTotal = digitalTypes.fold<double>(
+      0,
+      (sum, t) => sum + (typeTotals[t] ?? 0),
+    );
+
+    final items = <(InvoiceType, String, IconData, Color)>[
+      (InvoiceType.waafi, loc.paymentTypeWaafi, Icons.account_balance_wallet_rounded, const Color(0xFF00B4D8)),
+      (InvoiceType.dahabPlus, loc.paymentTypeDahabPlus, Icons.diamond_rounded, const Color(0xFFFFB703)),
+      (InvoiceType.cacPay, loc.paymentTypeCacPay, Icons.credit_card_rounded, const Color(0xFF06D6A0)),
+      (InvoiceType.dmoney, loc.paymentTypeDmoney, Icons.phone_iphone_rounded, const Color(0xFFE63946)),
+    ];
+
+    return _AnalyticsCard(
+      title: loc.rptDigitalPaymentsTitle,
+      subtitle: loc.rptDigitalPaymentsSubtitle,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+            decoration: BoxDecoration(
+              color: cs.primaryContainer.withValues(alpha: 0.25),
+              borderRadius: ac.sm,
+            ),
+            child: Row(
+              children: [
+                Icon(Icons.payments_rounded, size: 20, color: cs.primary),
+                const SizedBox(width: 10),
+                Text(
+                  loc.rptDigitalPaymentsTotal,
+                  style: TextStyle(
+                    fontSize: 12.5,
+                    fontWeight: FontWeight.w600,
+                    color: cs.onSurface,
+                  ),
+                ),
+                const Spacer(),
+                Text(
+                  '${_numFmt.format(digitalTotal)} Fdj',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w800,
+                    color: cs.primary,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 12),
+          ...items.map((item) {
+            final (type, label, icon, color) = item;
+            final amount = typeTotals[type] ?? 0;
+            final pct = digitalTotal > 0 ? (amount / digitalTotal * 100) : 0.0;
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Row(
+                children: [
+                  Container(
+                    width: 36,
+                    height: 36,
+                    decoration: BoxDecoration(
+                      color: color.withValues(alpha: 0.12),
+                      borderRadius: ac.sm,
+                    ),
+                    child: Icon(icon, color: color, size: 18),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          label,
+                          style: TextStyle(
+                            fontSize: 12.5,
+                            fontWeight: FontWeight.w600,
+                            color: cs.onSurface,
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(4),
+                          child: LinearProgressIndicator(
+                            value: digitalTotal > 0 ? amount / digitalTotal : 0,
+                            backgroundColor: cs.surfaceContainerHighest.withValues(alpha: 0.4),
+                            color: color,
+                            minHeight: 5,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        '${_numFmt.format(amount)} Fdj',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700,
+                          color: cs.onSurface,
+                        ),
+                      ),
+                      Text(
+                        _formatSharePercent(pct),
+                        style: TextStyle(
+                          fontSize: 10.5,
+                          color: cs.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          }),
+        ],
       ),
     );
   }

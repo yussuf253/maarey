@@ -14144,6 +14144,16 @@ class AppLocalizationsFr extends AppLocalizations {
       'Cette section affiche uniquement les ventes : comptant/credit/échéance/livraison.';
 
   @override
+  String get rptDigitalPaymentsTitle => 'Modes de paiement numériques';
+
+  @override
+  String get rptDigitalPaymentsSubtitle =>
+      'Totaux et part de chaque mode de paiement électronique.';
+
+  @override
+  String get rptDigitalPaymentsTotal => 'Total paiements numériques';
+
+  @override
   String get rptVouchersExcluded =>
       'Les bons de perception/paiement d\'échéance/paiement fournisseur sont exclus des \"ventes\" (car ce ne sont pas des revenus de vente).';
 

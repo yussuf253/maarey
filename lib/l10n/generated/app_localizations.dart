@@ -24973,6 +24973,24 @@ abstract class AppLocalizations {
   /// **'هذا القسم يعرض المبيعات فقط: نقدي/دين/تقسيط/توصيل.'**
   String get rptSalesOnlyNote;
 
+  /// No description provided for @rptDigitalPaymentsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'طرق الدفع الرقمية'**
+  String get rptDigitalPaymentsTitle;
+
+  /// No description provided for @rptDigitalPaymentsSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي ونسبة كل طريقة دفع إلكترونية.'**
+  String get rptDigitalPaymentsSubtitle;
+
+  /// No description provided for @rptDigitalPaymentsTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي المدفوعات الرقمية'**
+  String get rptDigitalPaymentsTotal;
+
   /// No description provided for @rptVouchersExcluded.
   ///
   /// In ar, this message translates to:
