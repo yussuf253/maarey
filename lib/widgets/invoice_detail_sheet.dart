@@ -43,6 +43,8 @@ String _invoiceTypeTranslated(AppLocalizations loc, InvoiceType t) {
       return loc.paymentTypeDahabPlus;
     case InvoiceType.cacPay:
       return loc.paymentTypeCacPay;
+    case InvoiceType.dmoney:
+      return loc.paymentTypeDmoney;
   }
 }
 

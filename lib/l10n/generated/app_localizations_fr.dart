@@ -1122,6 +1122,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get paymentTypeCacPay => 'CAC Pay';
 
   @override
+  String get paymentTypeDmoney => 'Dmoney';
+
+  @override
   String noInvoiceWithNumber(Object id) {
     return 'Aucune facture avec le numéro $id';
   }
@@ -5042,6 +5045,13 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get cacPaySaleSubtitle =>
       'Désactiver masque l\'option «CAC Pay» sur l\'écran de vente.';
+
+  @override
+  String get dmoneySaleTitle => 'Paiement Dmoney';
+
+  @override
+  String get dmoneySaleSubtitle =>
+      'Désactiver masque l\'option «Dmoney» sur l\'écran de vente.';
 
   @override
   String get cashCustomerSection => 'Client en vente en espèces';
@@ -9744,6 +9754,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get rpCacPay => 'CAC Pay';
+
+  @override
+  String get rpDmoney => 'Dmoney';
 
   @override
   String get rpCreditSummary => 'Résumé vente à crédit';

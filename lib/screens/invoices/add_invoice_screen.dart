@@ -2922,6 +2922,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
       if (salePos.allowWaafi) AppLocalizations.of(context)!.paymentTypeWaafi,
       if (salePos.allowDahabPlus) AppLocalizations.of(context)!.paymentTypeDahabPlus,
       if (salePos.allowCacPay) AppLocalizations.of(context)!.paymentTypeCacPay,
+      if (salePos.allowDmoney) AppLocalizations.of(context)!.paymentTypeDmoney,
     ];
     final customerCaption =
         loc.aiSelectPaymentMethod(
@@ -3014,6 +3015,14 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                         salePos,
                         InvoiceType.cacPay,
                         AppLocalizations.of(context)!.paymentTypeCacPay,
+                      ),
+                    if (salePos.allowDmoney)
+                      _paymentTypeChip(
+                        context,
+                        palette,
+                        salePos,
+                        InvoiceType.dmoney,
+                        AppLocalizations.of(context)!.paymentTypeDmoney,
                       ),
                   ],
                 ),

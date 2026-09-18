@@ -1097,6 +1097,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get paymentTypeCacPay => 'Cac Pay';
 
   @override
+  String get paymentTypeDmoney => 'دمني';
+
+  @override
   String noInvoiceWithNumber(Object id) {
     return 'لا توجد فاتورة برقم $id';
   }
@@ -4929,6 +4932,12 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cacPaySaleSubtitle => 'إيقافه يخفي خيار «CAC Pay» في شاشة البيع.';
+
+  @override
+  String get dmoneySaleTitle => 'الدفع عبر دمني';
+
+  @override
+  String get dmoneySaleSubtitle => 'إيقافه يخفي خيار «دمني» في شاشة البيع.';
 
   @override
   String get cashCustomerSection => 'العميل في البيع النقدي';
@@ -9528,6 +9537,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get rpCacPay => 'Cac Pay';
+
+  @override
+  String get rpDmoney => 'دمني';
 
   @override
   String get rpCreditSummary => 'ملخص البيع بالدين';

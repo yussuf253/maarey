@@ -196,6 +196,7 @@ class SalePosSettingsData {
     this.allowWaafi = true,
     this.allowDahabPlus = true,
     this.allowCacPay = true,
+    this.allowDmoney = true,
     required this.enforceAvailableQtyAtSale,
     required this.useSaleBrandSkin,
     required this.showBuyerAddressOnCash,
@@ -227,6 +228,9 @@ class SalePosSettingsData {
 
   /// السماح بالدفع عبر «CAC Pay» في شاشة البيع.
   final bool allowCacPay;
+
+  /// السماح بالدفع عبر «دمني» في شاشة البيع.
+  final bool allowDmoney;
 
   /// عند التفعيل: تمنع شاشة البيع زيادة الكمية فوق الرصيد المعروض للصنف.
   /// عند الإيقاف: يُسمح بالبيع حتى لو أصبح إجمالي الرصيد سالباً، فيُلغى السالب لاحقاً عند تسجيل وارد (نفس حقل [products.qty]).
@@ -278,6 +282,7 @@ class SalePosSettingsData {
     allowWaafi: true,
     allowDahabPlus: true,
     allowCacPay: true,
+    allowDmoney: true,
     enforceAvailableQtyAtSale: false,
     useSaleBrandSkin: true,
     showBuyerAddressOnCash: true,
@@ -335,6 +340,7 @@ class SalePosSettingsData {
         allowWaafi: m['waafi'] != false,
         allowDahabPlus: m['dahabPlus'] != false,
         allowCacPay: m['cacPay'] != false,
+        allowDmoney: m['dmoney'] != false,
         enforceAvailableQtyAtSale: m.containsKey('enforceAvailQty')
             ? m['enforceAvailQty'] != false
             : false,
@@ -378,6 +384,7 @@ class SalePosSettingsData {
     'waafi': allowWaafi,
     'dahabPlus': allowDahabPlus,
     'cacPay': allowCacPay,
+    'dmoney': allowDmoney,
     'enforceAvailQty': enforceAvailableQtyAtSale,
     'brandUi': useSaleBrandSkin,
     'buyerAddrCash': showBuyerAddressOnCash,
@@ -413,6 +420,8 @@ class SalePosSettingsData {
         return allowDahabPlus;
       case InvoiceType.cacPay:
         return allowCacPay;
+      case InvoiceType.dmoney:
+        return allowDmoney;
       case InvoiceType.debtCollection:
       case InvoiceType.installmentCollection:
       case InvoiceType.supplierPayment:
@@ -429,6 +438,7 @@ class SalePosSettingsData {
     bool? allowWaafi,
     bool? allowDahabPlus,
     bool? allowCacPay,
+    bool? allowDmoney,
     bool? enforceAvailableQtyAtSale,
     bool? useSaleBrandSkin,
     bool? showBuyerAddressOnCash,
@@ -455,6 +465,7 @@ class SalePosSettingsData {
       allowWaafi: allowWaafi ?? this.allowWaafi,
       allowDahabPlus: allowDahabPlus ?? this.allowDahabPlus,
       allowCacPay: allowCacPay ?? this.allowCacPay,
+      allowDmoney: allowDmoney ?? this.allowDmoney,
       enforceAvailableQtyAtSale:
           enforceAvailableQtyAtSale ?? this.enforceAvailableQtyAtSale,
       useSaleBrandSkin: useSaleBrandSkin ?? this.useSaleBrandSkin,
@@ -491,6 +502,7 @@ class SalePosSettingsData {
       allowCredit: allowCredit,
       allowInstallment: allowInstallment,
       allowDelivery: allowDelivery,
+      allowDmoney: allowDmoney,
       enforceAvailableQtyAtSale: enforceAvailableQtyAtSale,
       useSaleBrandSkin: useSaleBrandSkin,
       showBuyerAddressOnCash: showBuyerAddressOnCash,
@@ -517,6 +529,7 @@ class SalePosSettingsData {
       allowCredit: allowCredit,
       allowInstallment: allowInstallment,
       allowDelivery: allowDelivery,
+      allowDmoney: allowDmoney,
       enforceAvailableQtyAtSale: enforceAvailableQtyAtSale,
       useSaleBrandSkin: useSaleBrandSkin,
       showBuyerAddressOnCash: showBuyerAddressOnCash,
@@ -543,6 +556,7 @@ class SalePosSettingsData {
       allowCredit: allowCredit,
       allowInstallment: allowInstallment,
       allowDelivery: allowDelivery,
+      allowDmoney: allowDmoney,
       enforceAvailableQtyAtSale: enforceAvailableQtyAtSale,
       useSaleBrandSkin: useSaleBrandSkin,
       showBuyerAddressOnCash: showBuyerAddressOnCash,
@@ -571,6 +585,7 @@ class SalePosSettingsData {
       allowCredit: allowCredit,
       allowInstallment: allowInstallment,
       allowDelivery: allowDelivery,
+      allowDmoney: allowDmoney,
       enforceAvailableQtyAtSale: enforceAvailableQtyAtSale,
       useSaleBrandSkin: def.useSaleBrandSkin,
       showBuyerAddressOnCash: showBuyerAddressOnCash,
@@ -699,6 +714,7 @@ extension SalePosSettingsDataPaletteX on SalePosSettingsData {
       allowCredit: allowCredit,
       allowInstallment: allowInstallment,
       allowDelivery: allowDelivery,
+      allowDmoney: allowDmoney,
       enforceAvailableQtyAtSale: enforceAvailableQtyAtSale,
       useSaleBrandSkin: useSaleBrandSkin,
       showBuyerAddressOnCash: showBuyerAddressOnCash,

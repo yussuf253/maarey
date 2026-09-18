@@ -208,6 +208,8 @@ String salePaymentLabel(InvoiceType t) {
       return _l.rpDahabPlus;
     case InvoiceType.cacPay:
       return _l.rpCacPay;
+    case InvoiceType.dmoney:
+      return _l.rpDmoney;
   }
 }
 
@@ -458,6 +460,7 @@ saleReceiptSecondaryQrForInvoice({
     case InvoiceType.waafi:
     case InvoiceType.dahabPlus:
     case InvoiceType.cacPay:
+    case InvoiceType.dmoney:
       if (id != null && id > 0) {
         return (
           payload: InvoiceDeepLink.uriForInvoiceId(id),

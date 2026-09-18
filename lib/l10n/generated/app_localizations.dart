@@ -2044,6 +2044,12 @@ abstract class AppLocalizations {
   /// **'Cac Pay'**
   String get paymentTypeCacPay;
 
+  /// No description provided for @paymentTypeDmoney.
+  ///
+  /// In ar, this message translates to:
+  /// **'دمني'**
+  String get paymentTypeDmoney;
+
   /// No description provided for @noInvoiceWithNumber.
   ///
   /// In ar, this message translates to:
@@ -8881,6 +8887,18 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'إيقافه يخفي خيار «CAC Pay» في شاشة البيع.'**
   String get cacPaySaleSubtitle;
+
+  /// No description provided for @dmoneySaleTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدفع عبر دمني'**
+  String get dmoneySaleTitle;
+
+  /// No description provided for @dmoneySaleSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقافه يخفي خيار «دمني» في شاشة البيع.'**
+  String get dmoneySaleSubtitle;
 
   /// No description provided for @cashCustomerSection.
   ///
@@ -17293,6 +17311,12 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'Cac Pay'**
   String get rpCacPay;
+
+  /// No description provided for @rpDmoney.
+  ///
+  /// In ar, this message translates to:
+  /// **'دمني'**
+  String get rpDmoney;
 
   /// No description provided for @rpCreditSummary.
   ///

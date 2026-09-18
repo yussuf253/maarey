@@ -818,6 +818,7 @@ extension DbInvoices on DatabaseHelper {
       case InvoiceType.waafi:
       case InvoiceType.dahabPlus:
       case InvoiceType.cacPay:
+      case InvoiceType.dmoney:
         return invoice.total;
       case InvoiceType.supplierPayment:
         return 0;

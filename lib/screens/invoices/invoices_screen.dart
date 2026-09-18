@@ -57,6 +57,7 @@ bool _canReturnInvoice(Invoice inv, Set<int> serviceProductIds) {
     case InvoiceType.waafi:
     case InvoiceType.dahabPlus:
     case InvoiceType.cacPay:
+    case InvoiceType.dmoney:
       return false;
   }
   if (inv.items.isNotEmpty &&
@@ -88,6 +89,7 @@ Color _invoiceStatusColor(Invoice invoice, ColorScheme cs) {
     case InvoiceType.waafi:
     case InvoiceType.dahabPlus:
     case InvoiceType.cacPay:
+    case InvoiceType.dmoney:
       return cs.primary;
   }
 }
@@ -1282,6 +1284,8 @@ class _InvoiceCard extends StatelessWidget {
         return loc.paymentTypeDahabPlus;
       case InvoiceType.cacPay:
         return loc.paymentTypeCacPay;
+      case InvoiceType.dmoney:
+        return loc.paymentTypeDmoney;
     }
   }
 
@@ -1303,6 +1307,7 @@ class _InvoiceCard extends StatelessWidget {
       case InvoiceType.waafi:
       case InvoiceType.dahabPlus:
       case InvoiceType.cacPay:
+      case InvoiceType.dmoney:
         return Icons.storefront_outlined;
     }
   }

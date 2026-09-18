@@ -317,6 +317,8 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
         return loc.paymentTypeDahabPlus;
       case InvoiceType.cacPay:
         return loc.paymentTypeCacPay;
+      case InvoiceType.dmoney:
+        return loc.paymentTypeDmoney;
     }
   }
 
@@ -336,6 +338,7 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
       case InvoiceType.waafi:
       case InvoiceType.dahabPlus:
       case InvoiceType.cacPay:
+      case InvoiceType.dmoney:
         return loc.notApplicableForType;
     }
   }
@@ -507,6 +510,7 @@ class _ProcessReturnScreenState extends State<ProcessReturnScreen> {
       case InvoiceType.waafi:
       case InvoiceType.dahabPlus:
       case InvoiceType.cacPay:
+      case InvoiceType.dmoney:
         return '';
     }
   }

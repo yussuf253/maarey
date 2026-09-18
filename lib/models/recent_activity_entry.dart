@@ -343,6 +343,8 @@ String _invoiceTypeLabelAr(InvoiceType t) {
       return 'دهاب بلس';
     case InvoiceType.cacPay:
       return 'Cac Pay';
+    case InvoiceType.dmoney:
+      return 'دمني';
   }
 }
 

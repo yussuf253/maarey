@@ -21,6 +21,9 @@ enum InvoiceType {
 
   /// الدفع عبر CAC Pay.
   cacPay,
+
+  /// الدفع عبر دمني.
+  dmoney,
 }
 
 /// تحويل عمود `type` من SQLite إلى [InvoiceType] بأمان (قيم قديمة أو تالفة).

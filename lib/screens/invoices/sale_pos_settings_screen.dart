@@ -84,6 +84,7 @@ class SalePosSettingsScreen extends StatelessWidget {
         allowCredit: true,
         allowInstallment: true,
         allowDelivery: true,
+        allowDmoney: true,
         enforceAvailableQtyAtSale: false,
         useSaleBrandSkin: true,
         showBuyerAddressOnCash: true,
@@ -201,6 +202,16 @@ class SalePosSettingsScreen extends StatelessWidget {
                   onChanged: (v) {
                     if (v == null) return;
                     prov.save(d.copyWith(allowCacPay: v));
+                  },
+                ),
+                const Divider(height: 1),
+                _PolicySwitch(
+                  title: AppLocalizations.of(context)!.dmoneySaleTitle,
+                  subtitle: AppLocalizations.of(context)!.dmoneySaleSubtitle,
+                  value: d.allowDmoney,
+                  onChanged: (v) {
+                    if (v == null) return;
+                    prov.save(d.copyWith(allowDmoney: v));
                   },
                 ),
               ],

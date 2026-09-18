@@ -1704,6 +1704,7 @@ Color _invoiceTypeAccentColor(InvoiceType t, ColorScheme cs) {
     case InvoiceType.waafi:
     case InvoiceType.dahabPlus:
     case InvoiceType.cacPay:
+    case InvoiceType.dmoney:
       return cs.secondary;
   }
 }
@@ -3899,5 +3900,7 @@ String _invoiceTypeLabel(InvoiceType t, BuildContext context) {
       return AppLocalizations.of(context)!.paymentTypeDahabPlus;
     case InvoiceType.cacPay:
       return AppLocalizations.of(context)!.paymentTypeCacPay;
+    case InvoiceType.dmoney:
+      return AppLocalizations.of(context)!.paymentTypeDmoney;
   }
 }
