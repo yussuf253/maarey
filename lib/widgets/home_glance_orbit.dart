@@ -117,7 +117,9 @@ class _HomeGlanceOrbitState extends State<HomeGlanceOrbit> {
         'SELECT COUNT(*) AS c FROM products WHERE tenantId = ? AND isActive = 1',
         [tid],
       );
-      final shiftOrders = await _db.getShiftCompletedSalesInvoicesStat();
+      final shiftOrders = await _db.getShiftCompletedSalesInvoicesStat(
+        activeShiftId: activeShiftId,
+      );
       final n = pc.isEmpty ? 0 : (pc.first['c'] as int?) ?? 0;
       if (!mounted) return;
       setState(() {

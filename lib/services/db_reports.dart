@@ -93,8 +93,98 @@ extension DbReports on DatabaseHelper {
   }
 
   /// عدد قوائم البيع المنجزة ضمن الوردية الحالية/الأخيرة.
-  Future<Map<String, dynamic>> getShiftCompletedSalesInvoicesStat() async {
+  Future<Map<String, dynamic>> getShiftCompletedSalesInvoicesStat({int? activeShiftId}) async {
     final db = await database;
+
+    // When an active shift ID is provided, use it directly.
+    if (activeShiftId != null) {
+      final shiftRows = await db.rawQuery(
+        'SELECT id, openedAt, closedAt FROM work_shifts WHERE id = ?',
+        [activeShiftId],
+      );
+      if (shiftRows.isEmpty) {
+        return {
+          'hasShift': false,
+          'shiftId': null,
+          'salesInvoicesCount': 0,
+          'currentShiftSalesTotal': 0.0,
+          'previousShiftSalesTotal': 0.0,
+          'diffPercent': 0.0,
+          'isPositive': true,
+          'openedAt': null,
+          'closedAt': null,
+        };
+      }
+      final currentShift = shiftRows.first;
+      final shiftId = currentShift['id'] as int;
+      final openedAt = currentShift['openedAt']?.toString();
+      final closedAt = currentShift['closedAt']?.toString();
+
+      // Find the previous shift for comparison.
+      final prevRows = await db.rawQuery(
+        '''SELECT id FROM work_shifts
+           WHERE id != ?
+           ORDER BY datetime(COALESCE(closedAt, openedAt)) DESC LIMIT 1''',
+        [shiftId],
+      );
+      final previousShiftId = prevRows.isNotEmpty
+          ? (prevRows.first['id'] as int?)
+          : null;
+
+      final countRows = await db.rawQuery(
+        '''
+        SELECT COUNT(*) AS c
+        FROM invoices
+        WHERE IFNULL(isReturned, 0) = 0
+          AND deleted_at IS NULL
+          AND type IN (0, 1, 2, 3)
+          AND workShiftId = ?
+        ''',
+        [shiftId],
+      );
+      final c = (countRows.first['c'] as num?)?.toInt() ?? 0;
+
+      Future<double> sumShiftSalesTotal(int sid) async {
+        final rows = await db.rawQuery(
+          '''
+          SELECT IFNULL(
+            SUM(CASE WHEN totalFils != 0 THEN totalFils ELSE ROUND(total * 1000) END) / 1000.0,
+            0
+          ) AS s
+          FROM invoices
+          WHERE IFNULL(isReturned, 0) = 0
+            AND deleted_at IS NULL
+            AND type IN (0, 1, 2, 3)
+            AND workShiftId = ?
+          ''',
+          [sid],
+        );
+        return (rows.first['s'] as num?)?.toDouble() ?? 0;
+      }
+
+      final currentTotal = await sumShiftSalesTotal(shiftId);
+      final previousTotal = previousShiftId == null
+          ? 0.0
+          : await sumShiftSalesTotal(previousShiftId);
+      final diff = currentTotal - previousTotal;
+      final isPositive = diff >= 0;
+      final pct = previousTotal == 0
+          ? (currentTotal > 0 ? 100.0 : 0.0)
+          : (diff / previousTotal) * 100.0;
+
+      return {
+        'hasShift': true,
+        'shiftId': shiftId,
+        'salesInvoicesCount': c,
+        'currentShiftSalesTotal': currentTotal,
+        'previousShiftSalesTotal': previousTotal,
+        'diffPercent': pct,
+        'isPositive': isPositive,
+        'openedAt': openedAt,
+        'closedAt': closedAt,
+      };
+    }
+
     final shiftRows = await db.rawQuery('''
       SELECT id, openedAt, closedAt
       FROM work_shifts

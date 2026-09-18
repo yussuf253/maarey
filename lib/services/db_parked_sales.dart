@@ -41,7 +41,13 @@ extension DbParkedSales on DatabaseHelper {
 
   Future<void> deleteParkedSale(int id) async {
     final db = await database;
-    await db.delete('parked_sales', where: 'id = ?', whereArgs: [id]);
+    final nowIso = DateTime.now().toUtc().toIso8601String();
+    await db.update(
+      'parked_sales',
+      {'deleted_at': nowIso, 'updatedAt': nowIso},
+      where: 'id = ? AND deleted_at IS NULL',
+      whereArgs: [id],
+    );
     CloudSyncService.instance.scheduleSyncSoon();
   }
 
@@ -58,12 +64,18 @@ extension DbParkedSales on DatabaseHelper {
 
   Future<List<Map<String, dynamic>>> listParkedSales() async {
     final db = await database;
-    return db.query('parked_sales', orderBy: 'updatedAt DESC');
+    return db.query(
+      'parked_sales',
+      where: 'deleted_at IS NULL',
+      orderBy: 'updatedAt DESC',
+    );
   }
 
   Future<int> countParkedSales() async {
     final db = await database;
-    final r = await db.rawQuery('SELECT COUNT(*) AS c FROM parked_sales');
+    final r = await db.rawQuery(
+      "SELECT COUNT(*) AS c FROM parked_sales WHERE deleted_at IS NULL",
+    );
     if (r.isEmpty) return 0;
     return (r.first['c'] as int?) ?? 0;
   }

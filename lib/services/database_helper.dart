@@ -2132,6 +2132,7 @@ class DatabaseHelper {
     await ensureCol('activity_logs', 'global_id', 'TEXT');
     await ensureCol('activity_logs', 'updatedAt', 'TEXT');
     await ensureCol('parked_sales', 'global_id', 'TEXT');
+    await ensureCol('parked_sales', 'deleted_at', 'TEXT');
     await ensureCol('stocktaking_sessions', 'global_id', 'TEXT');
     await ensureCol('stocktaking_sessions', 'updatedAt', 'TEXT');
     await ensureCol('stocktaking_sessions', 'warehouse_global_id', 'TEXT');
