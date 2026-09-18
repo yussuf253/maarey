@@ -99,7 +99,13 @@ class _HomeGlanceOrbitState extends State<HomeGlanceOrbit> {
 
   Future<void> _loadStats() async {
     try {
-      final cash = await _db.getCashSummary();
+      int? activeShiftId;
+      try {
+        activeShiftId = context.read<ShiftProvider>().activeShift?['id'] as int?;
+      } catch (_) {}
+      final cash = activeShiftId != null
+          ? await _db.getShiftCashSummary(activeShiftId)
+          : await _db.getCashSummary();
       final parked = await _db.countParkedSales();
       final tid = TenantContextService.instance.activeTenantId;
       final low = await _db.getProductsForLowStockNotifications(
