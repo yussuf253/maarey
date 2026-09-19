@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:naboo/l10n/generated/app_localizations.dart';
 import '../../theme/app_spacing.dart';
 import '../../utils/screen_layout.dart';
 
@@ -43,7 +44,8 @@ class ShiftPermissionBanner extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    final isDesktop = variant == DeviceVariant.desktopSM ||
+    final isDesktop =
+        variant == DeviceVariant.desktopSM ||
         variant == DeviceVariant.desktopLG;
 
     if (isDesktop) {
@@ -71,7 +73,7 @@ class ShiftPermissionBanner extends StatelessWidget {
                 const SizedBox(width: AppSpacing.sm),
                 Expanded(
                   child: Text(
-                    _compactText(),
+                    _compactText(AppLocalizations.of(context)!),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
@@ -95,6 +97,7 @@ class ShiftPermissionBanner extends StatelessWidget {
 
   /// بانر كامل للديسكتوب — نص توضيحي + رمز + تفاصيل.
   Widget _buildDesktopBanner(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final cs = Theme.of(context).colorScheme;
     return Material(
       color: cs.primaryContainer,
@@ -111,7 +114,7 @@ class ShiftPermissionBanner extends StatelessWidget {
               const SizedBox(width: AppSpacing.md),
               Expanded(
                 child: Text(
-                  _fullText(),
+                  _fullText(AppLocalizations.of(context)!),
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: cs.onPrimaryContainer,
                     fontWeight: FontWeight.w500,
@@ -127,7 +130,7 @@ class ShiftPermissionBanner extends StatelessWidget {
                     color: cs.onPrimaryContainer,
                   ),
                   label: Text(
-                    'تفاصيل',
+                    loc.shiftDetails,
                     style: TextStyle(color: cs.onPrimaryContainer),
                   ),
                 ),
@@ -138,17 +141,17 @@ class ShiftPermissionBanner extends StatelessWidget {
     );
   }
 
-  String _compactText() {
+  String _compactText(AppLocalizations loc) {
     if (roleName != null && roleName!.isNotEmpty) {
-      return 'وردية $userName - $roleName';
+      return loc.shiftLabelForUserWithRole(roleName!, userName);
     }
-    return 'وردية $userName';
+    return loc.shiftLabelForUser(userName);
   }
 
-  String _fullText() {
+  String _fullText(AppLocalizations loc) {
     if (roleName != null && roleName!.isNotEmpty) {
-      return 'صلاحيات التشغيل مرتبطة بنوبة الوردية - $userName ($roleName)';
+      return loc.shiftPermissionsFullWithRole(roleName!, userName);
     }
-    return 'صلاحيات التشغيل مرتبطة بنوبة الوردية - $userName';
+    return loc.shiftPermissionsFull(userName);
   }
 }

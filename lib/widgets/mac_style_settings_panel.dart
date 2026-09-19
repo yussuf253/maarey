@@ -5,6 +5,7 @@ import 'dart:ui' show lerpDouble;
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/material.dart';
 
+import 'package:naboo/l10n/generated/app_localizations.dart';
 import '../navigation/content_navigation.dart';
 import '../screens/settings/settings_screen.dart';
 import 'mac_floating_dock_icons.dart';
@@ -57,7 +58,7 @@ Future<void> showMacStyleSettingsPanel(BuildContext context) {
   return showMacStyleFloatingPanel(
     context,
     routeId: AppContentRoutes.settings,
-    windowTitle: 'الإعدادات',
+    windowTitle: AppLocalizations.of(context)?.settingsTitle ?? 'الإعدادات',
     pageBuilder: (_) => const SettingsScreen(showAppBar: false),
   );
 }

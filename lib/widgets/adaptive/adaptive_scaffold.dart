@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:naboo/l10n/generated/app_localizations.dart';
 import '../../utils/screen_layout.dart';
 import '../../theme/app_spacing.dart';
 import 'adaptive_destination.dart';
@@ -88,10 +89,7 @@ class AdaptiveScaffold extends StatelessWidget {
   PreferredSizeWidget? _resolveAppBar() {
     if (appBar != null) return appBar;
     if (appBarTitle == null) return null;
-    return AppBar(
-      title: Text(appBarTitle!),
-      actions: appBarActions,
-    );
+    return AppBar(title: Text(appBarTitle!), actions: appBarActions);
   }
 
   @override
@@ -153,9 +151,9 @@ class AdaptiveScaffold extends StatelessWidget {
             ),
           ),
           if (hasMore)
-            const NavigationDestination(
-              icon: Icon(Icons.menu),
-              label: 'المزيد',
+            NavigationDestination(
+              icon: const Icon(Icons.menu),
+              label: AppLocalizations.of(context)!.scaffoldMore,
             ),
         ],
       ),

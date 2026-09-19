@@ -1,6 +1,7 @@
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
+import 'package:naboo/l10n/generated/app_localizations.dart';
 
 import '../utils/staff_identity_qr.dart';
 
@@ -17,13 +18,13 @@ class EmployeeIdCard extends StatelessWidget {
   final double width;
   final bool compact;
 
-  static String _roleLabel(String? key) {
+  static String _roleLabel(String? key, AppLocalizations loc) {
     switch (key) {
       case 'admin':
-        return 'مدير النظام';
+        return loc.roleAdmin;
       case 'staff':
       default:
-        return 'موظف';
+        return loc.roleStaff;
     }
   }
 
@@ -39,9 +40,7 @@ class EmployeeIdCard extends StatelessWidget {
     final job = (user['jobTitle'] as String?)?.trim() ?? '';
     final pin = (user['shiftAccessPin'] as String?)?.trim() ?? '';
     final createdRaw = user['createdAt'] as String?;
-    final created = createdRaw != null
-        ? DateTime.tryParse(createdRaw)
-        : null;
+    final created = createdRaw != null ? DateTime.tryParse(createdRaw) : null;
     final createdStr = created != null
         ? DateFormat('yyyy-MM-dd', 'en').format(created.toLocal())
         : '—';
@@ -50,6 +49,8 @@ class EmployeeIdCard extends StatelessWidget {
 
     final h = compact ? width * 0.52 : width * 0.58;
     final border = Theme.of(context).colorScheme.outline.withValues(alpha: 0.5);
+
+    final loc = AppLocalizations.of(context)!;
 
     return Directionality(
       textDirection: Directionality.of(context),
@@ -76,7 +77,7 @@ class EmployeeIdCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    'هوية موظف',
+                    loc.employeeIdCard,
                     style: TextStyle(
                       fontSize: compact ? 13 : 15,
                       fontWeight: FontWeight.w900,
@@ -98,18 +99,38 @@ class EmployeeIdCard extends StatelessWidget {
               ],
             ),
             Divider(height: compact ? 12 : 16, color: border),
-            _line(Icons.person_outline, 'الاسم', name, compact),
-            _line(Icons.work_outline, 'الدور الوظيفي', job.isEmpty ? '—' : job, compact),
-            _line(Icons.badge_outlined, 'الصلاحية', _roleLabel(roleKey), compact),
-            _line(Icons.phone_android, 'الهاتف', phone.isEmpty ? '—' : phone, compact),
-            _line(Icons.email_outlined, 'البريد', email.isEmpty ? '—' : email, compact),
-            _line(Icons.event, 'تاريخ الإنشاء', createdStr, compact),
+            _line(Icons.person_outline, loc.fieldName, name, compact),
+            _line(
+              Icons.work_outline,
+              loc.fieldJobTitle,
+              job.isEmpty ? '—' : job,
+              compact,
+            ),
+            _line(
+              Icons.badge_outlined,
+              loc.fieldPermission,
+              _roleLabel(roleKey, loc),
+              compact,
+            ),
+            _line(
+              Icons.phone_android,
+              loc.fieldPhone,
+              phone.isEmpty ? '—' : phone,
+              compact,
+            ),
+            _line(
+              Icons.email_outlined,
+              loc.fieldEmail,
+              email.isEmpty ? '—' : email,
+              compact,
+            ),
+            _line(Icons.event, loc.fieldCreatedAt, createdStr, compact),
             if (!compact) ...[
               const SizedBox(height: 6),
               Directionality(
                 textDirection: TextDirection.ltr,
                 child: Text(
-                  'رمز الوردية: $pin',
+                  loc.fieldShiftPin(pin),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 13,
@@ -137,7 +158,11 @@ class EmployeeIdCard extends StatelessWidget {
                 child: Text(
                   'QR فقط: كاميرا التطبيق، أو جهاز قراءة خارجي (USB/Bluetooth) يوجّه على البطاقة مع التركيز على حقل «جهاز القراءة» في نافذة فتح/إغلاق الوردية.',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 10, color: Colors.grey.shade700, height: 1.3),
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: Colors.grey.shade700,
+                    height: 1.3,
+                  ),
                 ),
               ),
           ],

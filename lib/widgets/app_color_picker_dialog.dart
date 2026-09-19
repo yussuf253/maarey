@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../l10n/generated/app_localizations.dart';
 import '../theme/design_tokens.dart';
 import '../utils/debug_ndjson_logger.dart';
 
@@ -141,6 +142,7 @@ class _AppColorPickerSheetState extends State<_AppColorPickerSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final scheme = Theme.of(context).colorScheme;
     final preview = _hsv.toColor();
     final screenW = MediaQuery.sizeOf(context).width;
@@ -219,7 +221,7 @@ class _AppColorPickerSheetState extends State<_AppColorPickerSheet> {
                         ),
                         TextButton(
                           onPressed: () => Navigator.pop(context),
-                          child: const Text('إغلاق'),
+                          child: Text(loc.colorPickerClose),
                         ),
                       ],
                     ),
@@ -267,7 +269,7 @@ class _AppColorPickerSheetState extends State<_AppColorPickerSheet> {
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       Text(
-                                        'معاينة مباشرة',
+                                        loc.colorPickerLivePreview,
                                         style: TextStyle(
                                           fontSize: 11,
                                           color: scheme.onSurfaceVariant,
@@ -292,7 +294,7 @@ class _AppColorPickerSheetState extends State<_AppColorPickerSheet> {
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              'التشبع والسطوع',
+                              loc.colorPickerSatBright,
                               style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w700,
@@ -358,7 +360,7 @@ class _AppColorPickerSheetState extends State<_AppColorPickerSheet> {
                             ),
                             const SizedBox(height: 6),
                             Text(
-                              'اسحب داخل المربع لضبط التشبع (أفقياً) والسطوع (عمودياً)',
+                              loc.colorPickerSatBrightHint,
                               textAlign: TextAlign.right,
                               style: TextStyle(
                                 fontSize: 10.5,
@@ -369,7 +371,7 @@ class _AppColorPickerSheetState extends State<_AppColorPickerSheet> {
                             ),
                             const SizedBox(height: 14),
                             Text(
-                              'درجة اللون (الطيف)',
+                              loc.colorPickerHue,
                               style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w700,
@@ -439,7 +441,7 @@ class _AppColorPickerSheetState extends State<_AppColorPickerSheet> {
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              'ألوان جاهزة — اضغط للاختيار',
+                              loc.colorPickerPresets,
                               style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w700,
@@ -483,7 +485,7 @@ class _AppColorPickerSheetState extends State<_AppColorPickerSheet> {
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              'قيمة HEX (للنسخ أو الإدخال الدقيق)',
+                              loc.colorPickerHexHint,
                               style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w700,
@@ -500,7 +502,7 @@ class _AppColorPickerSheetState extends State<_AppColorPickerSheet> {
                                   borderRadius: AppShape.none,
                                 ),
                                 suffixIcon: IconButton(
-                                  tooltip: 'تطبيق النص',
+                                  tooltip: loc.colorPickerApplyText,
                                   icon: const Icon(
                                     Icons.check_rounded,
                                     size: 20,
@@ -534,14 +536,14 @@ class _AppColorPickerSheetState extends State<_AppColorPickerSheet> {
                           Expanded(
                             child: OutlinedButton(
                               onPressed: () => Navigator.pop(context),
-                              child: const Text('إلغاء'),
+                              child: Text(loc.colorPickerCancel),
                             ),
                           ),
                           const SizedBox(width: 10),
                           Expanded(
                             child: FilledButton(
                               onPressed: () => Navigator.pop(context, preview),
-                              child: const Text('تأكيد اللون'),
+                              child: Text(loc.colorPickerConfirm),
                             ),
                           ),
                         ],

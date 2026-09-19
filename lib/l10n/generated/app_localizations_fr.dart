@@ -45,41 +45,34 @@ class AppLocalizationsFr extends AppLocalizations {
   String get invoiceSettings => 'Paramètres des Factures';
 
   @override
-  String get invoiceSettingsSubtitle =>
-      'Numéro de départ, pied de page, taxe, remise';
+  String get invoiceSettingsSubtitle => 'Numéro de départ, pied de page, taxe, remise';
 
   @override
   String get businessFeatures => 'Fonctionnalités Commerciales';
 
   @override
-  String get businessFeaturesSubtitle =>
-      'Clients, fidélité, taxe, remise, dette, paiement échelonné, poids, vêtements et services';
+  String get businessFeaturesSubtitle => 'Clients, fidélité, taxe, remise, dette, paiement échelonné, poids, vêtements et services';
 
   @override
   String get customizeDashboard => 'Personnaliser le Tableau de Bord';
 
   @override
-  String get customizeDashboardSubtitle =>
-      'Afficher ou masquer les sections du tableau de bord et réorganiser par glisser-déposer';
+  String get customizeDashboardSubtitle => 'Afficher ou masquer les sections du tableau de bord et réorganiser par glisser-déposer';
 
   @override
   String get appColorsIdentity => 'Couleurs & Identité de l\'App';
 
   @override
-  String get appColorsIdentitySubtitle =>
-      'Schémas prédéfinis, personnalisés et coins des cartes — s\'applique à tous les écrans';
+  String get appColorsIdentitySubtitle => 'Schémas prédéfinis, personnalisés et coins des cartes — s\'applique à tous les écrans';
 
   @override
-  String get compactSnackNotifications =>
-      'Forme des Notifications (Toute l\'App)';
+  String get compactSnackNotifications => 'Forme des Notifications (Toute l\'App)';
 
   @override
-  String get compactSnackNotificationsSubtitleOn =>
-      'Barres étroites et flottantes sur tous les écrans — depuis les paramètres globaux ici, pas depuis les paramètres du POS';
+  String get compactSnackNotificationsSubtitleOn => 'Barres étroites et flottantes sur tous les écrans — depuis les paramètres globaux ici, pas depuis les paramètres du POS';
 
   @override
-  String get compactSnackNotificationsSubtitleOff =>
-      'Mode classique: barre de notification fixe en bas de l\'écran sur toutes les pages';
+  String get compactSnackNotificationsSubtitleOff => 'Mode classique: barre de notification fixe en bas de l\'écran sur toutes les pages';
 
   @override
   String get idleMode => 'Mode Veille';
@@ -102,12 +95,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get floatingWindowMacos => 'Fenêtre Flottante (macOS)';
 
   @override
-  String get floatingWindowSubtitleOn =>
-      'Plusieurs fenêtres peuvent être ouvertes ensemble; la tuile jaune de minimisation se place en bas de l\'écran avec icône pour chaque page — désactiver pour ouvrir dans le contenu';
+  String get floatingWindowSubtitleOn => 'Plusieurs fenêtres peuvent être ouvertes ensemble; la tuile jaune de minimisation se place en bas de l\'écran avec icône pour chaque page — désactiver pour ouvrir dans le contenu';
 
   @override
-  String get floatingWindowSubtitleOff =>
-      'Ces écrans s\'ouvrent dans le contenu. Activez pour utiliser les fenêtres flottantes et les tuiles';
+  String get floatingWindowSubtitleOff => 'Ces écrans s\'ouvrent dans le contenu. Activez pour utiliser les fenêtres flottantes et les tuiles';
 
   @override
   String get theme => 'Thème';
@@ -140,8 +131,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get subscriptionPlan => 'Plan d\'Abonnement';
 
   @override
-  String get subscriptionPlanSubtitle =>
-      'Compte, appareils et synchronisation automatique';
+  String get subscriptionPlanSubtitle => 'Compte, appareils et synchronisation automatique';
 
   @override
   String get trialVersion => 'Version d\'Essai';
@@ -162,8 +152,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get appName => 'Maarey Store Manager';
 
   @override
-  String get appDescription =>
-      'Application intégrée pour la gestion des ventes, stocks et comptabilité.';
+  String get appDescription => 'Application intégrée pour la gestion des ventes, stocks et comptabilité.';
 
   @override
   String get accountData => 'Données du Compte';
@@ -223,8 +212,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get noExpirationDate =>
-      'Abonnement actif sans date d\'expiration spécifique dans le cloud.';
+  String get noExpirationDate => 'Abonnement actif sans date d\'expiration spécifique dans le cloud.';
 
   @override
   String get linkedDevices => 'Appareils Liés';
@@ -253,8 +241,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get autoSync => 'Synchronisation Automatique';
 
   @override
-  String get autoSyncDescription =>
-      'Une copie complète de la base de données est téléchargée depuis chaque appareil; la plus récente du cloud est importée sur les autres appareils après \'Synchroniser\' ou dans ~1 minute. Pas en temps réel par entrée. Le fichier SQL de synchronisation doit être exécuté dans Supabase, et l\'internet doit être activé.';
+  String get autoSyncDescription => 'Une copie complète de la base de données est téléchargée depuis chaque appareil; la plus récente du cloud est importée sur les autres appareils après \'Synchroniser\' ou dans ~1 minute. Pas en temps réel par entrée. Le fichier SQL de synchronisation doit être exécuté dans Supabase, et l\'internet doit être activé.';
 
   @override
   String get syncNow => 'Synchroniser';
@@ -309,40 +296,34 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get notificationsBuildFromDb =>
-      'Les notifications sont construites depuis la base de données lors de l\'ouverture du panneau de notification depuis l\'écran d\'accueil.';
+  String get notificationsBuildFromDb => 'Les notifications sont construites depuis la base de données lors de l\'ouverture du panneau de notification depuis l\'écran d\'accueil.';
 
   @override
   String get lowStockAlert => 'Alerte de Stock Faible';
 
   @override
-  String get lowStockAlertSubtitle =>
-      'Produits au niveau minimum ou en rupture de stock (avec suivi de stock)';
+  String get lowStockAlertSubtitle => 'Produits au niveau minimum ou en rupture de stock (avec suivi de stock)';
 
   @override
   String get negativeStockSaleAlert => 'Alerte de Vente avec Stock Négatif';
 
   @override
-  String get negativeStockSaleAlertSubtitle =>
-      'Après sauvegarde de la facture de vente: numéro de facture, vendeur, client, articles et quantités avant/après le solde';
+  String get negativeStockSaleAlertSubtitle => 'Après sauvegarde de la facture de vente: numéro de facture, vendeur, client, articles et quantités avant/après le solde';
 
   @override
   String get financedSaleAlert => 'Alerte de Vente Crédit ou Échelonnée';
 
   @override
-  String get financedSaleAlertSubtitle =>
-      'Lors de la sauvegarde d\'une facture crédit ou échelonnée depuis l\'écran POS: numéro de facture, vendeur, client, montants, lignes, et plan d\'échelonnement si existant';
+  String get financedSaleAlertSubtitle => 'Lors de la sauvegarde d\'une facture crédit ou échelonnée depuis l\'écran POS: numéro de facture, vendeur, client, montants, lignes, et plan d\'échelonnement si existant';
 
   @override
   String get expiryAlert => 'Alerte d\'Expiration des Produits';
 
   @override
-  String get expiryAlertSubtitle =>
-      'Expirés, ou dans la \'fenêtre d\'alerte\' avant la date (par produit ou par défaut ci-dessous)';
+  String get expiryAlertSubtitle => 'Expirés, ou dans la \'fenêtre d\'alerte\' avant la date (par produit ou par défaut ci-dessous)';
 
   @override
-  String get defaultExpiryDaysLabel =>
-      'Jours par défaut avant la date d\'expiration pour afficher une alerte \'proche de l\'expiration\' (utilisé lors de l\'ajout d\'un produit si non défini pour l\'article, 1-365).';
+  String get defaultExpiryDaysLabel => 'Jours par défaut avant la date d\'expiration pour afficher une alerte \'proche de l\'expiration\' (utilisé lors de l\'ajout d\'un produit si non défini pour l\'article, 1-365).';
 
   @override
   String get defaultExpiryDaysHint => 'ex: 14';
@@ -357,15 +338,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get installmentAlert => 'Paiements Échelonnés';
 
   @override
-  String get installmentAlertSubtitle =>
-      'En retard ou dus dans les 14 prochains jours';
+  String get installmentAlertSubtitle => 'En retard ou dus dans les 14 prochains jours';
 
   @override
   String get customerDebtAlert => 'Dettes des Clients (Crédit)';
 
   @override
-  String get customerDebtAlertSubtitle =>
-      'Solde crédit client, selon les paramètres de dette: âge de la facture, plafond total par client, plafond par facture';
+  String get customerDebtAlertSubtitle => 'Solde crédit client, selon les paramètres de dette: âge de la facture, plafond total par client, plafond par facture';
 
   @override
   String get returnsAlert => 'Enregistrement des Retours';
@@ -377,15 +356,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dailyReportAlert => 'Résumé des Ventes du Jour';
 
   @override
-  String get dailyReportAlertSubtitle =>
-      'Total des factures de vente pour aujourd\'hui (hors retours)';
+  String get dailyReportAlertSubtitle => 'Total des factures de vente pour aujourd\'hui (hors retours)';
 
   @override
   String get shiftLifecycleAlert => 'Ouverture/Fermeture du Shift';
 
   @override
-  String get shiftLifecycleAlertSubtitle =>
-      'Notifier le shift et les montants (solde système, inventaire, ajouté, retiré, restant)';
+  String get shiftLifecycleAlertSubtitle => 'Notifier le shift et les montants (solde système, inventaire, ajouté, retiré, restant)';
 
   @override
   String get allowDeviceReturnTitle => 'Autoriser le Retour';
@@ -422,8 +399,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get noLicense => 'Sans Licence';
 
   @override
-  String get revokedDevice =>
-      'Déconnecté — ne peut pas entrer tant qu\'approuvé';
+  String get revokedDevice => 'Déconnecté — ne peut pas entrer tant qu\'approuvé';
 
   @override
   String get activeLicense => 'Actif';
@@ -444,8 +420,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get deviceKickedOutTitle => 'Cet appareil a été déconnecté du compte';
 
   @override
-  String get deviceKickedOutBody =>
-      'Votre session sur cet appareil a été terminée. La prochaine fois que vous ouvrirez l\'application, l\'écran de connexion habituel s\'affichera.';
+  String get deviceKickedOutBody => 'Votre session sur cet appareil a été terminée. La prochaine fois que vous ouvrirez l\'application, l\'écran de connexion habituel s\'affichera.';
 
   @override
   String get goToLoginAction => 'Aller à la connexion';
@@ -454,8 +429,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get exitAction => 'Quitter';
 
   @override
-  String get closeWindowHint =>
-      'Vous pouvez fermer cette fenêtre ou utiliser le bouton ci-dessus.';
+  String get closeWindowHint => 'Vous pouvez fermer cette fenêtre ou utiliser le bouton ci-dessus.';
 
   @override
   String get appWillCloseHint => 'L\'application va se fermer';
@@ -464,8 +438,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get deviceRevokedTitle => 'Cet appareil a été retiré du compte';
 
   @override
-  String get deviceRevokedBody =>
-      'Vous ne pouvez pas vous connecter depuis cet appareil tant qu\'un des appareils actifs du compte ne l\'approuve pas, depuis Paramètres → Compte et abonnement → « Autoriser le retour ».';
+  String get deviceRevokedBody => 'Vous ne pouvez pas vous connecter depuis cet appareil tant qu\'un des appareils actifs du compte ne l\'approuve pas, depuis Paramètres → Compte et abonnement → « Autoriser le retour ».';
 
   @override
   String get backToLoginAction => 'Retour à la connexion';
@@ -521,8 +494,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get enterYourEmail => 'Entrez votre e-mail';
 
   @override
-  String get forgotPasswordSendCodeHint =>
-      'Nous vous enverrons un code de vérification pour réinitialiser votre mot de passe';
+  String get forgotPasswordSendCodeHint => 'Nous vous enverrons un code de vérification pour réinitialiser votre mot de passe';
 
   @override
   String get sendVerificationCode => 'Envoyer le code de vérification';
@@ -566,8 +538,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get passwordMismatch => 'Les mots de passe ne correspondent pas';
 
   @override
-  String get passwordRequirementsTitle =>
-      'Exigences du mot de passe (facultatif)';
+  String get passwordRequirementsTitle => 'Exigences du mot de passe (facultatif)';
 
   @override
   String get reqMinLength => 'Au moins 8 caractères';
@@ -585,8 +556,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get reqSpecialChar => 'Caractère spécial (!@#...)';
 
   @override
-  String get onboardingChangeLaterHint =>
-      'Vous pouvez modifier ces options plus tard depuis Paramètres → Fonctionnalités du magasin.';
+  String get onboardingChangeLaterHint => 'Vous pouvez modifier ces options plus tard depuis Paramètres → Fonctionnalités du magasin.';
 
   @override
   String get businessFeaturesWizardTitle => 'Fonctionnalités du magasin';
@@ -609,248 +579,190 @@ class AppLocalizationsFr extends AppLocalizations {
   String get practicalExamplesLabel => 'Exemples pratiques';
 
   @override
-  String get onboardingStep1Question =>
-      'Utilisez-vous des clients dans votre activité ?';
+  String get onboardingStep1Question => 'Utilisez-vous des clients dans votre activité ?';
 
   @override
-  String get onboardingStep1Paragraph1 =>
-      'Une fois activé, vous obtenez le module client complet : une fiche pour chaque client, un historique d\'achats et un suivi rapide depuis la facture.';
+  String get onboardingStep1Paragraph1 => 'Une fois activé, vous obtenez le module client complet : une fiche pour chaque client, un historique d\'achats et un suivi rapide depuis la facture.';
 
   @override
-  String get onboardingStep1Paragraph2 =>
-      'Vous pouvez lier chaque vente à un client précis, ce qui facilite les rapports par la suite et uniformise l\'expérience pour les clients réguliers.';
+  String get onboardingStep1Paragraph2 => 'Vous pouvez lier chaque vente à un client précis, ce qui facilite les rapports par la suite et uniformise l\'expérience pour les clients réguliers.';
 
   @override
-  String get onboardingStep1Paragraph3 =>
-      'Si vous faites une vente rapide au comptant sans nom, cela reste possible ; l\'activation n\'impose pas de choisir un client à chaque fois.';
+  String get onboardingStep1Paragraph3 => 'Si vous faites une vente rapide au comptant sans nom, cela reste possible ; l\'activation n\'impose pas de choisir un client à chaque fois.';
 
   @override
-  String get onboardingStep1Example1 =>
-      'Exemple : un client régulier qui achète quotidiennement — vous enregistrez son nom et consultez rapidement ses dernières factures.';
+  String get onboardingStep1Example1 => 'Exemple : un client régulier qui achète quotidiennement — vous enregistrez son nom et consultez rapidement ses dernières factures.';
 
   @override
-  String get onboardingStep1Example2 =>
-      'Exemple : en cas de dette ou de points de fidélité, ils apparaissent liés au même client au lieu d\'une recherche manuelle.';
+  String get onboardingStep1Example2 => 'Exemple : en cas de dette ou de points de fidélité, ils apparaissent liés au même client au lieu d\'une recherche manuelle.';
 
   @override
   String get onboardingStep1SwitchLabel => 'Activer le module clients';
 
   @override
-  String get onboardingStep2Question =>
-      'Voulez-vous un programme de points de fidélité ?';
+  String get onboardingStep2Question => 'Voulez-vous un programme de points de fidélité ?';
 
   @override
-  String get onboardingStep2Paragraph1 =>
-      'La fidélité accorde des points aux clients lors des achats, qu\'ils peuvent échanger selon les règles que vous définissez dans les paramètres.';
+  String get onboardingStep2Paragraph1 => 'La fidélité accorde des points aux clients lors des achats, qu\'ils peuvent échanger selon les règles que vous définissez dans les paramètres.';
 
   @override
-  String get onboardingStep2Paragraph2 =>
-      'Le programme est lié aux profils clients ; plus les données clients sont claires, plus le suivi est facile.';
+  String get onboardingStep2Paragraph2 => 'Le programme est lié aux profils clients ; plus les données clients sont claires, plus le suivi est facile.';
 
   @override
-  String get onboardingStep2Paragraph3 =>
-      'Vous pouvez activer la fonctionnalité maintenant et ajuster les taux d\'acquisition et d\'échange plus tard sans refaire cet assistant.';
+  String get onboardingStep2Paragraph3 => 'Vous pouvez activer la fonctionnalité maintenant et ajuster les taux d\'acquisition et d\'échange plus tard sans refaire cet assistant.';
 
   @override
-  String get onboardingStep2Example1 =>
-      'Exemple : chaque 10 000 FDJ rapporte 10 points selon la règle choisie.';
+  String get onboardingStep2Example1 => 'Exemple : chaque 10 000 FDJ rapporte 10 points selon la règle choisie.';
 
   @override
-  String get onboardingStep2Example2 =>
-      'Exemple : un client ayant accumulé assez de points les échange contre une remise sur une facture ultérieure.';
+  String get onboardingStep2Example2 => 'Exemple : un client ayant accumulé assez de points les échange contre une remise sur une facture ultérieure.';
 
   @override
   String get onboardingStep2SwitchLabel => 'Activer les points de fidélité';
 
   @override
-  String get onboardingStep2Footnote =>
-      'Nécessite l\'activation du module clients à l\'étape précédente ; s\'il n\'est pas activé, la fidélité ne fonctionnera pas tant que vous ne réactivez pas les clients.';
+  String get onboardingStep2Footnote => 'Nécessite l\'activation du module clients à l\'étape précédente ; s\'il n\'est pas activé, la fidélité ne fonctionnera pas tant que vous ne réactivez pas les clients.';
 
   @override
-  String get onboardingStep3Question =>
-      'Appliquez-vous une taxe lors de la vente ?';
+  String get onboardingStep3Question => 'Appliquez-vous une taxe lors de la vente ?';
 
   @override
-  String get onboardingStep3Paragraph1 =>
-      'Une fois activé, un champ de taxe clair apparaît sur la facture de vente afin qu\'elle soit calculée de façon cohérente avec le total.';
+  String get onboardingStep3Paragraph1 => 'Une fois activé, un champ de taxe clair apparaît sur la facture de vente afin qu\'elle soit calculée de façon cohérente avec le total.';
 
   @override
-  String get onboardingStep3Paragraph2 =>
-      'Convient aux commerces qui appliquent un taux de taxe connu sur les biens ou services.';
+  String get onboardingStep3Paragraph2 => 'Convient aux commerces qui appliquent un taux de taxe connu sur les biens ou services.';
 
   @override
-  String get onboardingStep3Paragraph3 =>
-      'Vous pouvez ajuster le comportement détaillé depuis les paramètres du point de vente après cette configuration rapide.';
+  String get onboardingStep3Paragraph3 => 'Vous pouvez ajuster le comportement détaillé depuis les paramètres du point de vente après cette configuration rapide.';
 
   @override
-  String get onboardingStep3Example1 =>
-      'Exemple : une facture de 100 000 FDJ à laquelle un pourcentage de taxe déterminé est ajouté.';
+  String get onboardingStep3Example1 => 'Exemple : une facture de 100 000 FDJ à laquelle un pourcentage de taxe déterminé est ajouté.';
 
   @override
-  String get onboardingStep3Example2 =>
-      'Exemple : l\'employé voit la taxe et le total final dans la même facture de vente.';
+  String get onboardingStep3Example2 => 'Exemple : l\'employé voit la taxe et le total final dans la même facture de vente.';
 
   @override
-  String get onboardingStep3SwitchLabel =>
-      'Afficher la taxe sur la facture de vente';
+  String get onboardingStep3SwitchLabel => 'Afficher la taxe sur la facture de vente';
 
   @override
-  String get onboardingStep4Question =>
-      'Autorisez-vous une remise sur le total de la facture ?';
+  String get onboardingStep4Question => 'Autorisez-vous une remise sur le total de la facture ?';
 
   @override
-  String get onboardingStep4Paragraph1 =>
-      'La remise globale est utile pour les offres saisonnières ou pour négocier le prix devant le client sans modifier le prix de chaque article.';
+  String get onboardingStep4Paragraph1 => 'La remise globale est utile pour les offres saisonnières ou pour négocier le prix devant le client sans modifier le prix de chaque article.';
 
   @override
-  String get onboardingStep4Paragraph2 =>
-      'Le champ apparaît sur l\'écran de vente afin de compléter la facture sans complexité supplémentaire pour l\'employé.';
+  String get onboardingStep4Paragraph2 => 'Le champ apparaît sur l\'écran de vente afin de compléter la facture sans complexité supplémentaire pour l\'employé.';
 
   @override
-  String get onboardingStep4Paragraph3 =>
-      'Vous pouvez la désactiver plus tard si vous décidez de travailler uniquement avec des prix fixes.';
+  String get onboardingStep4Paragraph3 => 'Vous pouvez la désactiver plus tard si vous décidez de travailler uniquement avec des prix fixes.';
 
   @override
-  String get onboardingStep4Example1 =>
-      'Exemple : vous accordez une remise globale de 5 000 FDJ sur une grosse facture.';
+  String get onboardingStep4Example1 => 'Exemple : vous accordez une remise globale de 5 000 FDJ sur une grosse facture.';
 
   @override
-  String get onboardingStep4Example2 =>
-      'Exemple : une offre spéciale d\'un jour sans changer les prix de base des produits.';
+  String get onboardingStep4Example2 => 'Exemple : une offre spéciale d\'un jour sans changer les prix de base des produits.';
 
   @override
-  String get onboardingStep4SwitchLabel =>
-      'Afficher la remise globale sur la facture';
+  String get onboardingStep4SwitchLabel => 'Afficher la remise globale sur la facture';
 
   @override
-  String get onboardingStep5Question =>
-      'Vendez-vous à crédit (paiement différé) ?';
+  String get onboardingStep5Question => 'Vendez-vous à crédit (paiement différé) ?';
 
   @override
-  String get onboardingStep5Paragraph1 =>
-      'L\'activation ouvre le panneau des dettes et le suivi des montants dus par chaque client, avec des alertes et des plafonds ajustables.';
+  String get onboardingStep5Paragraph1 => 'L\'activation ouvre le panneau des dettes et le suivi des montants dus par chaque client, avec des alertes et des plafonds ajustables.';
 
   @override
-  String get onboardingStep5Paragraph2 =>
-      'Convient aux commerçants qui font confiance à des clients connus et ont besoin d\'un historique clair des ventes à crédit.';
+  String get onboardingStep5Paragraph2 => 'Convient aux commerçants qui font confiance à des clients connus et ont besoin d\'un historique clair des ventes à crédit.';
 
   @override
-  String get onboardingStep5Paragraph3 =>
-      'Cela n\'empêche pas les ventes au comptant ; cela ajoute seulement l\'option d\'enregistrer une vente comme dette lors de la sélection d\'un client avec les permissions appropriées.';
+  String get onboardingStep5Paragraph3 => 'Cela n\'empêche pas les ventes au comptant ; cela ajoute seulement l\'option d\'enregistrer une vente comme dette lors de la sélection d\'un client avec les permissions appropriées.';
 
   @override
-  String get onboardingStep5Example1 =>
-      'Exemple : un client prend la marchandise aujourd\'hui et paie en fin de semaine.';
+  String get onboardingStep5Example1 => 'Exemple : un client prend la marchandise aujourd\'hui et paie en fin de semaine.';
 
   @override
-  String get onboardingStep5Example2 =>
-      'Exemple : vous consultez le relevé d\'un client et voyez clairement le montant payé et le solde restant.';
+  String get onboardingStep5Example2 => 'Exemple : vous consultez le relevé d\'un client et voyez clairement le montant payé et le solde restant.';
 
   @override
-  String get onboardingStep5SwitchLabel =>
-      'Activer les ventes à crédit et les dettes';
+  String get onboardingStep5SwitchLabel => 'Activer les ventes à crédit et les dettes';
 
   @override
-  String get onboardingStep6Question =>
-      'Vendez-vous à tempérament (paiement échelonné) ?';
+  String get onboardingStep6Question => 'Vendez-vous à tempérament (paiement échelonné) ?';
 
   @override
-  String get onboardingStep6Paragraph1 =>
-      'Les plans d\'échelonnement permettent de diviser le prix d\'une facture en paiements programmés tout en suivant ce qu\'il reste dû par le client.';
+  String get onboardingStep6Paragraph1 => 'Les plans d\'échelonnement permettent de diviser le prix d\'une facture en paiements programmés tout en suivant ce qu\'il reste dû par le client.';
 
   @override
-  String get onboardingStep6Paragraph2 =>
-      'Utile pour les biens à prix élevé ou les contrats de longue durée.';
+  String get onboardingStep6Paragraph2 => 'Utile pour les biens à prix élevé ou les contrats de longue durée.';
 
   @override
-  String get onboardingStep6Paragraph3 =>
-      'Les détails précis de l\'échéancier sont gérés depuis les modules dédiés une fois cette configuration terminée.';
+  String get onboardingStep6Paragraph3 => 'Les détails précis de l\'échéancier sont gérés depuis les modules dédiés une fois cette configuration terminée.';
 
   @override
-  String get onboardingStep6Example1 =>
-      'Exemple : un appareil d\'une valeur de 600 000 FDJ payé en 6 mensualités.';
+  String get onboardingStep6Example1 => 'Exemple : un appareil d\'une valeur de 600 000 FDJ payé en 6 mensualités.';
 
   @override
-  String get onboardingStep6Example2 =>
-      'Exemple : vous voyez les paiements à venir et en retard de chaque client au même endroit.';
+  String get onboardingStep6Example2 => 'Exemple : vous voyez les paiements à venir et en retard de chaque client au même endroit.';
 
   @override
   String get onboardingStep6SwitchLabel => 'Activer les ventes à tempérament';
 
   @override
-  String get onboardingStep7Question =>
-      'Vendez-vous au poids (kilo, gramme, etc.) ?';
+  String get onboardingStep7Question => 'Vendez-vous au poids (kilo, gramme, etc.) ?';
 
   @override
-  String get onboardingStep7Paragraph1 =>
-      'L\'activation prépare l\'interface de vente et les codes-barres pour prendre en charge les poids et quantités décimales lorsque nécessaire.';
+  String get onboardingStep7Paragraph1 => 'L\'activation prépare l\'interface de vente et les codes-barres pour prendre en charge les poids et quantités décimales lorsque nécessaire.';
 
   @override
-  String get onboardingStep7Paragraph2 =>
-      'Convient à l\'alimentation, à la quincaillerie, ou à toute activité reposant sur une balance.';
+  String get onboardingStep7Paragraph2 => 'Convient à l\'alimentation, à la quincaillerie, ou à toute activité reposant sur une balance.';
 
   @override
-  String get onboardingStep7Paragraph3 =>
-      'Vous pouvez configurer les formats de codes-barres au poids depuis les paramètres avancés après cet assistant.';
+  String get onboardingStep7Paragraph3 => 'Vous pouvez configurer les formats de codes-barres au poids depuis les paramètres avancés après cet assistant.';
 
   @override
-  String get onboardingStep7Example1 =>
-      'Exemple : vendre 1,250 kg d\'un produit plutôt qu\'une seule pièce.';
+  String get onboardingStep7Example1 => 'Exemple : vendre 1,250 kg d\'un produit plutôt qu\'une seule pièce.';
 
   @override
-  String get onboardingStep7Example2 =>
-      'Exemple : lire un code-barres de balance contenant automatiquement le poids et le prix du produit.';
+  String get onboardingStep7Example2 => 'Exemple : lire un code-barres de balance contenant automatiquement le poids et le prix du produit.';
 
   @override
   String get onboardingStep7SwitchLabel => 'Activer la vente au poids';
 
   @override
-  String get onboardingStep8Question =>
-      'Vendez-vous des vêtements (couleurs et tailles) ?';
+  String get onboardingStep8Question => 'Vendez-vous des vêtements (couleurs et tailles) ?';
 
   @override
-  String get onboardingStep8Paragraph1 =>
-      'L\'activation prépare les écrans de produits et de vente pour prendre en charge les variantes d\'articles (couleurs et tailles différentes du même modèle).';
+  String get onboardingStep8Paragraph1 => 'L\'activation prépare les écrans de produits et de vente pour prendre en charge les variantes d\'articles (couleurs et tailles différentes du même modèle).';
 
   @override
-  String get onboardingStep8Paragraph2 =>
-      'Facilite le suivi du stock de chaque couleur ou taille séparément et affiche une fenêtre de sélection rapide lors de la vente.';
+  String get onboardingStep8Paragraph2 => 'Facilite le suivi du stock de chaque couleur ou taille séparément et affiche une fenêtre de sélection rapide lors de la vente.';
 
   @override
-  String get onboardingStep8Example1 =>
-      'Exemple : une chemise disponible en bleu et noir, en tailles S, M et L.';
+  String get onboardingStep8Example1 => 'Exemple : une chemise disponible en bleu et noir, en tailles S, M et L.';
 
   @override
-  String get onboardingStep8Example2 =>
-      'Exemple : sélectionner un vêtement ouvre une fenêtre rapide pour choisir la taille et la couleur disponibles en stock.';
+  String get onboardingStep8Example2 => 'Exemple : sélectionner un vêtement ouvre une fenêtre rapide pour choisir la taille et la couleur disponibles en stock.';
 
   @override
-  String get onboardingStep8SwitchLabel =>
-      'Activer le module vêtements et tailles';
+  String get onboardingStep8SwitchLabel => 'Activer le module vêtements et tailles';
 
   @override
-  String get onboardingStep9Question =>
-      'Proposez-vous des services spécifiques (réparation, atelier, etc.) ?';
+  String get onboardingStep9Question => 'Proposez-vous des services spécifiques (réparation, atelier, etc.) ?';
 
   @override
-  String get onboardingStep9Paragraph1 =>
-      'L\'activation affiche le module complet de services et maintenance : tickets de travail, demandes d\'intervention, et catalogue des services et tarifs.';
+  String get onboardingStep9Paragraph1 => 'L\'activation affiche le module complet de services et maintenance : tickets de travail, demandes d\'intervention, et catalogue des services et tarifs.';
 
   @override
-  String get onboardingStep9Paragraph2 =>
-      'Utile pour les ateliers, centres de service, et toute activité offrant des services aux clients en plus de la vente de marchandises.';
+  String get onboardingStep9Paragraph2 => 'Utile pour les ateliers, centres de service, et toute activité offrant des services aux clients en plus de la vente de marchandises.';
 
   @override
-  String get onboardingStep9Example1 =>
-      'Exemple : ouvrir un ticket de maintenance pour un ordinateur ou une voiture et définir le statut du travail.';
+  String get onboardingStep9Example1 => 'Exemple : ouvrir un ticket de maintenance pour un ordinateur ou une voiture et définir le statut du travail.';
 
   @override
-  String get onboardingStep9Example2 =>
-      'Exemple : ajouter un service d\'installation ou de maintenance rapide à une facture de vente.';
+  String get onboardingStep9Example2 => 'Exemple : ajouter un service d\'installation ou de maintenance rapide à une facture de vente.';
 
   @override
-  String get onboardingStep9SwitchLabel =>
-      'Activer les services et tickets de maintenance';
+  String get onboardingStep9SwitchLabel => 'Activer les services et tickets de maintenance';
 
   @override
   String get invoicesLabel => 'Factures';
@@ -949,15 +861,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get servicesAndMaintenanceLabel => 'Services et maintenance';
 
   @override
-  String get servicesAndMaintenancePanelLabel =>
-      'Panneau des services et maintenance';
+  String get servicesAndMaintenancePanelLabel => 'Panneau des services et maintenance';
 
   @override
   String get addTechnicalServiceLabel => 'Ajouter un service technique';
 
   @override
-  String get maintenanceRequestsLabel =>
-      'Demandes de maintenance et tickets de travail';
+  String get maintenanceRequestsLabel => 'Demandes de maintenance et tickets de travail';
 
   @override
   String get cashRegisterLabel => 'Caisse';
@@ -1015,8 +925,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get closeShiftTooltip => 'Fermer l\'équipe';
 
   @override
-  String get syncFailedTooltip =>
-      'Synchronisation — dernière tentative échouée';
+  String get syncFailedTooltip => 'Synchronisation — dernière tentative échouée';
 
   @override
   String get cloudSyncTooltip => 'Synchronisation cloud';
@@ -1055,15 +964,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get closeAction => 'Clôturer';
 
   @override
-  String get barcodeScanTooltip =>
-      'Scanner un code-barres (caméra sur mobile, ou fenêtre du lecteur sur ordinateur)';
+  String get barcodeScanTooltip => 'Scanner un code-barres (caméra sur mobile, ou fenêtre du lecteur sur ordinateur)';
 
   @override
   String get hideKeyboardTooltip => 'Masquer le clavier';
 
   @override
-  String get keyboardDragPinHint =>
-      'Clavier arabe / anglais — faites glisser par la poignée ou épinglez-le';
+  String get keyboardDragPinHint => 'Clavier arabe / anglais — faites glisser par la poignée ou épinglez-le';
 
   @override
   String get clearSearchTooltip => 'Effacer la recherche';
@@ -1075,12 +982,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get showKeyboardTooltip => 'Afficher le clavier (arabe / anglais)';
 
   @override
-  String get quickSearchHint =>
-      'Recherche rapide : modules, produits, clients…';
+  String get quickSearchHint => 'Recherche rapide : modules, produits, clients…';
 
   @override
-  String get fullSearchHint =>
-      'Recherche : modules, produits, clients, personnel, code-barres…';
+  String get fullSearchHint => 'Recherche : modules, produits, clients, personnel, code-barres…';
 
   @override
   String get collapseMenuTooltip => 'Réduire le menu';
@@ -1130,12 +1035,10 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get invoiceAlreadyReturned =>
-      'Cette facture est déjà enregistrée comme retournée';
+  String get invoiceAlreadyReturned => 'Cette facture est déjà enregistrée comme retournée';
 
   @override
-  String get invoiceNotOpenableAsReturn =>
-      'Ce bon ne peut pas être ouvert comme retour de vente — annulez le paiement depuis l\'écran fournisseur ou la gestion des échelonnements selon son type.';
+  String get invoiceNotOpenableAsReturn => 'Ce bon ne peut pas être ouvert comme retour de vente — annulez le paiement depuis l\'écran fournisseur ou la gestion des échelonnements selon son type.';
 
   @override
   String salesInvoiceNumber(Object id) {
@@ -1146,11 +1049,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get emptyPlaceholder => '(vide)';
 
   @override
-  String returnInvoiceDialogBody(
-    Object customer,
-    Object paymentType,
-    Object total,
-  ) {
+  String returnInvoiceDialogBody(Object customer, Object paymentType, Object total) {
     return 'Client : $customer\nPaiement : $paymentType\nTotal : $total\n\nOuvrir l\'écran de retour ? Vous pouvez réduire les quantités ou supprimer des lignes pour un retour partiel uniquement.';
   }
 
@@ -1259,8 +1158,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get invoiceDeleteFailed =>
-      'Impossible de supprimer la facture, veuillez réessayer.';
+  String get invoiceDeleteFailed => 'Impossible de supprimer la facture, veuillez réessayer.';
 
   @override
   String get parkedSalesScreenTitle => 'Ventes en attente';
@@ -1269,8 +1167,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get noParkedSalesTitle => 'Aucune vente en attente';
 
   @override
-  String get noParkedSalesHint =>
-      'Depuis l\'écran de vente, appuyez sur « Mettre en attente » pour enregistrer le travail en cours et servir un autre client.';
+  String get noParkedSalesHint => 'Depuis l\'écran de vente, appuyez sur « Mettre en attente » pour enregistrer le travail en cours et servir un autre client.';
 
   @override
   String parkedSaleSummaryLine(Object count, Object total) {
@@ -1295,8 +1192,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get unpaidStatus => 'Impayée';
 
   @override
-  String get cannotShowInvoiceNoId =>
-      'Impossible d\'afficher une facture sans numéro';
+  String get cannotShowInvoiceNoId => 'Impossible d\'afficher une facture sans numéro';
 
   @override
   String get invoiceNotFound => 'Facture introuvable';
@@ -1341,8 +1237,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sortLowestAmount => 'Montant le plus bas';
 
   @override
-  String get searchInvoicesHint =>
-      'Rechercher par nom du client, numéro de facture ou téléphone du client...';
+  String get searchInvoicesHint => 'Rechercher par nom du client, numéro de facture ou téléphone du client...';
 
   @override
   String shiftNumberLabel(Object id) {
@@ -1388,8 +1283,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get createReturnInvoiceTooltip =>
-      'Créer une facture de retour pour cette facture';
+  String get createReturnInvoiceTooltip => 'Créer une facture de retour pour cette facture';
 
   @override
   String get returnActionLabel => 'Retour';
@@ -1494,15 +1388,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get agreeToTerms => 'J\'accepte les Conditions d\'Utilisation';
 
   @override
-  String get agreeToTermsRequired =>
-      'Vous devez accepter les conditions pour continuer';
+  String get agreeToTermsRequired => 'Vous devez accepter les conditions pour continuer';
 
   @override
   String get passwordRecovery => 'Récupération de Mot de Passe';
 
   @override
-  String get enterEmailForRecovery =>
-      'Entrez votre email pour récupérer votre mot de passe';
+  String get enterEmailForRecovery => 'Entrez votre email pour récupérer votre mot de passe';
 
   @override
   String get captchaLabel => 'Code de Vérification';
@@ -1516,20 +1408,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get invalidCaptcha => 'Code de vérification incorrect';
 
   @override
-  String get invalidCredentials =>
-      'Nom d\'utilisateur ou mot de passe invalide';
+  String get invalidCredentials => 'Nom d\'utilisateur ou mot de passe invalide';
 
   @override
-  String get emailNotConfirmed =>
-      'Email non confirmé. Veuillez vérifier votre boîte de réception.';
+  String get emailNotConfirmed => 'Email non confirmé. Veuillez vérifier votre boîte de réception.';
 
   @override
-  String get tooManyRequests =>
-      'Trop de tentatives. Veuillez patienter quelques minutes puis réessayer.';
+  String get tooManyRequests => 'Trop de tentatives. Veuillez patienter quelques minutes puis réessayer.';
 
   @override
-  String get networkError =>
-      'Erreur réseau. Veuillez vérifier votre connexion et réessayer.';
+  String get networkError => 'Erreur réseau. Veuillez vérifier votre connexion et réessayer.';
 
   @override
   String get accountCreated => 'Compte créé avec succès';
@@ -1538,8 +1426,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get loginSuccessful => 'Connecté avec succès';
 
   @override
-  String get passwordResetSent =>
-      'Le code de réinitialisation du mot de passe a été envoyé à votre email';
+  String get passwordResetSent => 'Le code de réinitialisation du mot de passe a été envoyé à votre email';
 
   @override
   String get passwordResetSuccess => 'Mot de passe réinitialisé avec succès';
@@ -1626,7 +1513,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get done => 'Terminé';
 
   @override
-  String get businessManagementSystem => 'Système de gestion commerciale';
+  String get businessManagementSystem => 'Système de gestion d\'entreprise';
 
   @override
   String get salesAndInvoices => 'Ventes et factures';
@@ -1644,19 +1531,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get loginTitle => 'Connexion';
 
   @override
-  String get signupSubtitle =>
-      'Vous recevrez un code de vérification par e-mail pour confirmer votre compte';
+  String get signupSubtitle => 'Vous recevrez un code de vérification par e-mail pour confirmer votre compte';
 
   @override
-  String get loginSubtitle =>
-      'Entrez votre e-mail et mot de passe pour vous connecter';
+  String get loginSubtitle => 'Entrez votre e-mail et mot de passe pour vous connecter';
 
   @override
   String get haveAccountBackToLogin => 'Déjà un compte ? Retour à la connexion';
 
   @override
-  String get noAccountCreateNew =>
-      'Pas encore de compte ? Créer un nouveau compte';
+  String get noAccountCreateNew => 'Pas encore de compte ? Créer un nouveau compte';
 
   @override
   String get requiredField => 'Obligatoire';
@@ -1674,15 +1558,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get emailRequiredShort => 'L\'e-mail est requis';
 
   @override
-  String get iraqMobileInvalid =>
-      'Mobile irakien : 11 chiffres commençant par 07 (ex. : 07701234567)';
+  String get iraqMobileInvalid => 'Mobile irakien : 11 chiffres commençant par 07 (ex. : 07701234567)';
 
   @override
   String get passwordRequired => 'Le mot de passe est requis';
 
   @override
-  String get passwordDoesNotMeetRequirements =>
-      'Le mot de passe ne respecte pas les exigences';
+  String get passwordDoesNotMeetRequirements => 'Le mot de passe ne respecte pas les exigences';
 
   @override
   String get passwordsDoNotMatch => 'Les mots de passe ne correspondent pas';
@@ -1691,8 +1573,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get enterPasswordAgain => 'Veuillez ressaisir votre mot de passe';
 
   @override
-  String get iraqDialTooltip =>
-      '+964 Irak — d\'autres codes pays seront disponibles plus tard';
+  String get iraqDialTooltip => '+964 Irak — d\'autres codes pays seront disponibles plus tard';
 
   @override
   String get welcomeToMaarey => 'Bienvenue sur Maarey';
@@ -1709,8 +1590,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get userFallback => 'Utilisateur';
 
   @override
-  String get failedToLoadChartData =>
-      'Échec du chargement des données graphiques.';
+  String get failedToLoadChartData => 'Échec du chargement des données graphiques.';
 
   @override
   String get lastWeek => 'Dernière semaine';
@@ -1743,8 +1623,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get changePeriod => 'Changer la période';
 
   @override
-  String get pinnedProductsHint =>
-      'Produits épinglés — appuyez pour une vente rapide';
+  String get pinnedProductsHint => 'Produits épinglés — appuyez pour une vente rapide';
 
   @override
   String get byPiece => 'Par pièce';
@@ -1768,15 +1647,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get groupByCategory => 'Grouper par catégorie';
 
   @override
-  String get groupByCategoryDesc =>
-      'Filtrer les produits épinglés par une seule catégorie';
+  String get groupByCategoryDesc => 'Filtrer les produits épinglés par une seule catégorie';
 
   @override
   String get groupByBrand => 'Grouper par marque';
 
   @override
-  String get groupByBrandDesc =>
-      'Filtrer les produits épinglés par une seule marque';
+  String get groupByBrandDesc => 'Filtrer les produits épinglés par une seule marque';
 
   @override
   String get noCategoriesYet => 'Aucune catégorie pour le moment';
@@ -1788,8 +1665,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get categoryFallback => 'Catégorie';
 
   @override
-  String get noBrandsYet =>
-      'Aucune marque pour l\'instant.\nAppuyez sur «Nouvelle marque» pour ajouter votre première marque.';
+  String get noBrandsYet => 'Aucune marque pour l\'instant.\nAppuyez sur «Nouvelle marque» pour ajouter votre première marque.';
 
   @override
   String get chooseBrand => 'Choisir une marque';
@@ -1801,12 +1677,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get groupAlreadyExists => 'Ce groupe existe déjà';
 
   @override
-  String get noMatchingActivityYet =>
-      'Aucune activité correspondante pour le moment';
+  String get noMatchingActivityYet => 'Aucune activité correspondante pour le moment';
 
   @override
-  String get noActivityHint =>
-      'Enregistrez des ventes, mouvements de caisse ou toute activité dans l\'application pour les voir ici chronologiquement.';
+  String get noActivityHint => 'Enregistrez des ventes, mouvements de caisse ou toute activité dans l\'application pour les voir ici chronologiquement.';
 
   @override
   String failedToLoadActivity(Object error) {
@@ -1897,8 +1771,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get reportsHint => 'Indicateurs de la période';
 
   @override
-  String get dragToReorderCards =>
-      'Glissez les éléments vers le haut ou le bas pour réordonner. L\'ordre est sauvegardé sur cet appareil.';
+  String get dragToReorderCards => 'Glissez les éléments vers le haut ou le bas pour réordonner. L\'ordre est sauvegardé sur cet appareil.';
 
   @override
   String get saveOrder => 'Enregistrer l\'ordre';
@@ -1913,12 +1786,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get glanceOverview => 'Aperçu rapide';
 
   @override
-  String get dragHeightHint =>
-      'Glissez vers le haut ou le bas pour modifier la hauteur de la liste des produits';
+  String get dragHeightHint => 'Glissez vers le haut ou le bas pour modifier la hauteur de la liste des produits';
 
   @override
-  String get pinnedProductsHeightHandle =>
-      'Poignée pour modifier la hauteur de la liste des produits épinglés';
+  String get pinnedProductsHeightHandle => 'Poignée pour modifier la hauteur de la liste des produits épinglés';
 
   @override
   String filterByCategoryColon(Object name) {
@@ -1958,8 +1829,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get editDone => 'Terminer l\'édition';
 
   @override
-  String get breadcrumbNavHint =>
-      'Chemin de navigation — appuyez sur une étape pour revenir';
+  String get breadcrumbNavHint => 'Chemin de navigation — appuyez sur une étape pour revenir';
 
   @override
   String currentPageLabel(Object title) {
@@ -1967,8 +1837,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get restrictedModeBanner =>
-      'Mode restreint — connectez-vous à Internet pour vérifier';
+  String get restrictedModeBanner => 'Mode restreint — connectez-vous à Internet pour vérifier';
 
   @override
   String get retryButton => 'Réessayer';
@@ -1986,8 +1855,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get subscriptionExpiredTitle => 'انتهى الاشتراك';
 
   @override
-  String get timeTamperMessage =>
-      'تم اكتشاف تعارض في إعدادات الوقت. تواصل مع الدعم للمساعدة في إعادة التحقق.';
+  String get timeTamperMessage => 'تم اكتشاف تعارض في إعدادات الوقت. تواصل مع الدعم للمساعدة في إعادة التحقق.';
 
   @override
   String get accountSuspendedMessage => 'تم إيقاف حسابك. تواصل مع الدعم الفني.';
@@ -2038,8 +1906,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get noInternetConnection => 'لا يوجد اتصال بالإنترنت';
 
   @override
-  String get offlineMessage =>
-      'يعمل التطبيق بآخر بيانات ترخيص محفوظة.\nتأكد من الاتصال في أقرب فرصة.';
+  String get offlineMessage => 'يعمل التطبيق بآخر بيانات ترخيص محفوظة.\nتأكد من الاتصال في أقرب فرصة.';
 
   @override
   String get enterWithoutConnection => 'الدخول بدون اتصال';
@@ -2051,8 +1918,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get enterLicenseKeyToContinue => 'أدخل مفتاح الترخيص للمتابعة';
 
   @override
-  String get contactTeamForLicense =>
-      'للحصول على مفتاح ترخيص، تواصل مع فريق Maarey.';
+  String get contactTeamForLicense => 'للحصول على مفتاح ترخيص، تواصل مع فريق Maarey.';
 
   @override
   String get subscriptionPlansTitle => 'خطط الاشتراك';
@@ -2061,23 +1927,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get chooseRightPlan => 'اختر الخطة المناسبة لنشاطك';
 
   @override
-  String get plansDescriptionJwt =>
-      'البطاقات أدناه للمقارنة والأسعار فقط. بعد الدفع تستلم رمزاً موقّعاً (JWT) — الصقه في حقل التفعيل أسفل البطاقات مباشرة.';
+  String get plansDescriptionJwt => 'البطاقات أدناه للمقارنة والأسعار فقط. بعد الدفع تستلم رمزاً موقّعاً (JWT) — الصقه في حقل التفعيل أسفل البطاقات مباشرة.';
 
   @override
-  String get plansDescriptionLegacy =>
-      'البطاقة الأولى: تجربة تلقائية 15 يوماً (جهازان). البطاقات التالية خطط مدفوعة — بعد الدفع تُدخل المفتاح في الحقل الموحّد أسفل الصفحة.';
+  String get plansDescriptionLegacy => 'البطاقة الأولى: تجربة تلقائية 15 يوماً (جهازان). البطاقات التالية خطط مدفوعة — بعد الدفع تُدخل المفتاح في الحقل الموحّد أسفل الصفحة.';
 
   @override
   String get howToSubscribe => 'كيفية الاشتراك';
 
   @override
-  String get subscribeStepsJwt =>
-      '١. تواصل مع فريق Maarey عبر الطرق أدناه\n٢. أكمل الدفع للخطة التي تريدها\n٣. استلم رمز التفعيل الكامل (JWT) من الإدارة\n٤. الصق الرمز في الحقل الموحّد أسفل بطاقات الخطط — الخطة وحد الأجهزة يُستنتجان من الرمز';
+  String get subscribeStepsJwt => '١. تواصل مع فريق Maarey عبر الطرق أدناه\n٢. أكمل الدفع للخطة التي تريدها\n٣. استلم رمز التفعيل الكامل (JWT) من الإدارة\n٤. الصق الرمز في الحقل الموحّد أسفل بطاقات الخطط — الخطة وحد الأجهزة يُستنتجان من الرمز';
 
   @override
-  String get subscribeStepsLegacy =>
-      '١. تواصل مع فريق Maarey عبر الطرق أدناه\n٢. أخبرنا بالخطة التي تريدها وأكمل الدفع\n٣. استلم مفتاح الترخيص من الإدارة\n٤. الصق المفتاح في الحقل الموحّد أسفل بطاقات الخطط ثم اضغط «تفعيل المفتاح»';
+  String get subscribeStepsLegacy => '١. تواصل مع فريق Maarey عبر الطرق أدناه\n٢. أخبرنا بالخطة التي تريدها وأكمل الدفع\n٣. استلم مفتاح الترخيص من الإدارة\n٤. الصق المفتاح في الحقل الموحّد أسفل بطاقات الخطط ثم اضغط «تفعيل المفتاح»';
 
   @override
   String get whatsappOrPhone => 'واتساب / هاتف';
@@ -2086,7 +1948,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get emailContact => 'البريد الإلكتروني';
 
   @override
-  String get continueButton => 'متابعة';
+  String get continueButton => 'Continuer';
 
   @override
   String get pasteTokenFirst => 'الصق رمز الترخيص أولاً';
@@ -2095,8 +1957,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get activateTokenTitle => 'تفعيل رمز الترخيص';
 
   @override
-  String get activateTokenDescription =>
-      'الصق الرمز الكامل الذي أرسلته الإدارة. الخطة وحد الأجهزة يُستنتجان من داخل الرمز وليس من شكل البطاقة.';
+  String get activateTokenDescription => 'الصق الرمز الكامل الذي أرسلته الإدارة. الخطة وحد الأجهزة يُستنتجان من داخل الرمز وليس من شكل البطاقة.';
 
   @override
   String get pasteTokenHint => 'الصق رمز التفعيل هنا';
@@ -2111,8 +1972,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get activateKeyTitle => 'تفعيل المفتاح';
 
   @override
-  String get activateKeyDescription =>
-      'الصق مفتاح الترخيص الذي استلمته بعد الدفع، أو رمز JWT إن وُجد. الخطط أعلاه للعرض والمقارنة فقط.';
+  String get activateKeyDescription => 'الصق مفتاح الترخيص الذي استلمته بعد الدفع، أو رمز JWT إن وُجد. الخطط أعلاه للعرض والمقارنة فقط.';
 
   @override
   String get pasteKeyHint => 'الصق مفتاح الترخيص أو رمز التفعيل';
@@ -2139,16 +1999,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get yourCurrentPlanCard => 'خطتك الحالية';
 
   @override
-  String get trialAutoStartsMessage =>
-      'التجربة تبدأ تلقائياً — لا مفتاح. عند الترقية استلم الرمز من الإدارة والصقه في الحقل الموحّد أسفل البطاقات.';
+  String get trialAutoStartsMessage => 'التجربة تبدأ تلقائياً — لا مفتاح. عند الترقية استلم الرمز من الإدارة والصقه في الحقل الموحّد أسفل البطاقات.';
 
   @override
-  String get jwtPlanDescription =>
-      'هذه البطاقة للعرض والمقارنة فقط. بعد الدفع الصق رمز التفعيل (JWT) في الحقل الموحّد أسفل البطاقات مباشرة.';
+  String get jwtPlanDescription => 'هذه البطاقة للعرض والمقارنة فقط. بعد الدفع الصق رمز التفعيل (JWT) في الحقل الموحّد أسفل البطاقات مباشرة.';
 
   @override
-  String get legacyPlanDescription =>
-      'هذه البطاقة للعرض والمقارنة فقط. بعد الدفع الصق مفتاح الترخيص في الحقل الموحّد أسفل البطاقات.';
+  String get legacyPlanDescription => 'هذه البطاقة للعرض والمقارنة فقط. بعد الدفع الصق مفتاح الترخيص في الحقل الموحّد أسفل البطاقات.';
 
   @override
   String get mostPopular => 'الأكثر طلباً';
@@ -2169,29 +2026,25 @@ class AppLocalizationsFr extends AppLocalizations {
   String get subSettingsTitle => 'Sous-paramètres';
 
   @override
-  String get subSettingsSubtitle =>
-      'Paramètres détaillés pour chaque aspect de l\'inventaire';
+  String get subSettingsSubtitle => 'Paramètres détaillés pour chaque aspect de l\'inventaire';
 
   @override
   String get productAddSettingsTitle => 'Paramètres d\'ajout de produit';
 
   @override
-  String get productAddSettingsDesc =>
-      'Champs par défaut, entrepôt par défaut, champs obligatoires';
+  String get productAddSettingsDesc => 'Champs par défaut, entrepôt par défaut, champs obligatoires';
 
   @override
   String get barcodeSettingsTitle => 'Paramètres de code-barres';
 
   @override
-  String get barcodeSettingsDesc =>
-      'Standard de code-barres, champs intégrés dans le code-barres';
+  String get barcodeSettingsDesc => 'Standard de code-barres, champs intégrés dans le code-barres';
 
   @override
   String get categoriesTitle => 'Catégories';
 
   @override
-  String get categoriesDesc =>
-      'Ajouter, modifier et supprimer des catégories de produits';
+  String get categoriesDesc => 'Ajouter, modifier et supprimer des catégories de produits';
 
   @override
   String get brandsTitle => 'Marques';
@@ -2203,8 +2056,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get unitTemplatesTitle => 'Modèles d\'unités';
 
   @override
-  String get unitTemplatesDesc =>
-      'Gérez les modèles d\'unités (base et conversion) depuis l\'écran dédié. Ouvrez «Modèles d\'unités» depuis le menu principal.';
+  String get unitTemplatesDesc => 'Gérez les modèles d\'unités (base et conversion) depuis l\'écran dédié. Ouvrez «Modèles d\'unités» depuis le menu principal.';
 
   @override
   String get stockMovementsTitle => 'Mouvements de stock';
@@ -2222,8 +2074,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get transfers => 'Transferts';
 
   @override
-  String get searchByProductOrVoucher =>
-      'Rechercher par produit ou numéro de bon...';
+  String get searchByProductOrVoucher => 'Rechercher par produit ou numéro de bon...';
 
   @override
   String get noMovements => 'Aucun mouvement';
@@ -2391,8 +2242,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get results => 'Résultats';
 
   @override
-  String get noTemplatesYet =>
-      'Aucun modèle pour l\'instant.\nAppuyez sur «Nouveau modèle» pour ajouter un modèle et lier les unités de vente aux produits.';
+  String get noTemplatesYet => 'Aucun modèle pour l\'instant.\nAppuyez sur «Nouveau modèle» pour ajouter un modèle et lier les unités de vente aux produits.';
 
   @override
   String get edit => 'Modifier';
@@ -2472,8 +2322,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get unitSymbolHint => 'ex. kg';
 
   @override
-  String get baseUnitTooltip =>
-      'Plus petite unité de mesure dans ce modèle (ex. kilogramme pour la vente au poids).';
+  String get baseUnitTooltip => 'Plus petite unité de mesure dans ce modèle (ex. kilogramme pour la vente au poids).';
 
   @override
   String get newBrand => 'Nouvelle marque';
@@ -2497,10 +2346,13 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String showHide(String show) {
-    String _temp0 = intl.Intl.selectLogic(show, {
-      'true': 'Masquer',
-      'other': 'Afficher',
-    });
+    String _temp0 = intl.Intl.selectLogic(
+      show,
+      {
+        'true': 'Masquer',
+        'other': 'Afficher',
+      },
+    );
     return '$_temp0';
   }
 
@@ -2508,23 +2360,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get barcodeConfiguration => 'Configuration du code-barres';
 
   @override
-  String get barcodeConfigDesc =>
-      'Définissez les préférences et formats de code-barres pour un scan précis et la tarification au poids.';
+  String get barcodeConfigDesc => 'Définissez les préférences et formats de code-barres pour un scan précis et la tarification au poids.';
 
   @override
   String get barcodeType => 'Type de code-barres';
 
   @override
-  String get code128Desc =>
-      'Code-barres flexible prenant en charge l\'encodage alphanumérique, largement utilisé dans la logistique, l\'entreposage et le suivi des produits.';
+  String get code128Desc => 'Code-barres flexible prenant en charge l\'encodage alphanumérique, largement utilisé dans la logistique, l\'entreposage et le suivi des produits.';
 
   @override
-  String get ean13Desc =>
-      'Standard à 13 chiffres couramment utilisé dans la distribution, incluant le code pays, le code fabricant et le code produit avec chiffre de contrôle.';
+  String get ean13Desc => 'Standard à 13 chiffres couramment utilisé dans la distribution, incluant le code pays, le code fabricant et le code produit avec chiffre de contrôle.';
 
   @override
-  String get selectBarcodeStandard =>
-      'Sélectionnez le standard de code-barres que le système utilisera pour générer et lire les codes-barres des produits.';
+  String get selectBarcodeStandard => 'Sélectionnez le standard de code-barres que le système utilisera pour générer et lire les codes-barres des produits.';
 
   @override
   String get weightEmbedBarcode => 'Code-barres avec poids intégré';
@@ -2536,19 +2384,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get disabledLabel => 'Désactivé';
 
   @override
-  String get weightEmbedDesc =>
-      'Utilisez le code-barres avec poids intégré pour que le système puisse lire le poids du produit directement depuis le code-barres.';
+  String get weightEmbedDesc => 'Utilisez le code-barres avec poids intégré pour que le système puisse lire le poids du produit directement depuis le code-barres.';
 
   @override
   String get embeddedPattern => 'Format du code-barres intégré';
 
   @override
-  String get patternFormatDesc =>
-      'Entrez le format du code-barres intégré, où X représente les chiffres du produit et W les chiffres du poids.';
+  String get patternFormatDesc => 'Entrez le format du code-barres intégré, où X représente les chiffres du produit et W les chiffres du poids.';
 
   @override
-  String get patternExample =>
-      'Par exemple, si le poids est affiché sur 4 chiffres, 250 grammes apparaîtra comme 0250.';
+  String get patternExample => 'Par exemple, si le poids est affiché sur 4 chiffres, 250 grammes apparaîtra comme 0250.';
 
   @override
   String get weightDivisor => 'Diviseur d\'unité de poids';
@@ -2557,8 +2402,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get weightDivisorHint => 'ex. 1000';
 
   @override
-  String get weightDivisorDesc =>
-      'Entrez la valeur que le système utilise pour convertir l\'unité de poids dans le code-barres en unité de vente.';
+  String get weightDivisorDesc => 'Entrez la valeur que le système utilise pour convertir l\'unité de poids dans le code-barres en unité de vente.';
 
   @override
   String get currencyDivisor => 'Diviseur de devise';
@@ -2567,20 +2411,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get currencyDivisorHint => 'ex. 100';
 
   @override
-  String get currencyDivisorDesc =>
-      'Entrez la valeur que le système utilise pour convertir le prix de l\'unité intégrée dans le code-barres en prix de vente.';
+  String get currencyDivisorDesc => 'Entrez la valeur que le système utilise pour convertir le prix de l\'unité intégrée dans le code-barres en prix de vente.';
 
   @override
-  String get barcodePatternError =>
-      'Le format du code-barres intégré ne doit contenir que les lettres X, W, P et N.';
+  String get barcodePatternError => 'Le format du code-barres intégré ne doit contenir que les lettres X, W, P et N.';
 
   @override
-  String get weightDivisorError =>
-      'Entrez une valeur valide supérieure à zéro pour le diviseur d\'unité de poids.';
+  String get weightDivisorError => 'Entrez une valeur valide supérieure à zéro pour le diviseur d\'unité de poids.';
 
   @override
-  String get currencyDivisorError =>
-      'Entrez une valeur valide supérieure à zéro pour le diviseur de devise.';
+  String get currencyDivisorError => 'Entrez une valeur valide supérieure à zéro pour le diviseur de devise.';
 
   @override
   String get barcodeSettingsSaved => 'Paramètres de code-barres enregistrés.';
@@ -2597,81 +2437,67 @@ class AppLocalizationsFr extends AppLocalizations {
   String get saveSettings => 'Enregistrer les paramètres';
 
   @override
-  String get productsFullSettings =>
-      'Les paramètres complets des produits (configuration, suivi, autorisations, valeurs par défaut) sont disponibles depuis la carte principale «Paramètres des produits».';
+  String get productsFullSettings => 'Les paramètres complets des produits (configuration, suivi, autorisations, valeurs par défaut) sont disponibles depuis la carte principale «Paramètres des produits».';
 
   @override
-  String get categoriesMoved =>
-      'La gestion des catégories a été déplacée vers un écran dédié. Ouvrez «Catégories» depuis le menu principal.';
+  String get categoriesMoved => 'La gestion des catégories a été déplacée vers un écran dédié. Ouvrez «Catégories» depuis le menu principal.';
 
   @override
-  String get brandsMoved =>
-      'La gestion des marques a été déplacée vers un écran dédié. Ouvrez «Marques» depuis le menu principal.';
+  String get brandsMoved => 'La gestion des marques a été déplacée vers un écran dédié. Ouvrez «Marques» depuis le menu principal.';
 
   @override
-  String get barcodeMoved =>
-      'La configuration du code-barres a été déplacée vers un écran dédié. Ouvrez «Paramètres du code-barres» depuis ce menu.';
+  String get barcodeMoved => 'La configuration du code-barres a été déplacée vers un écran dédié. Ouvrez «Paramètres du code-barres» depuis ce menu.';
 
   @override
   String get defaultWarehouses => 'Entrepôts par défaut des employés';
 
   @override
-  String get forceDefaultWarehouse =>
-      'Forcer l\'entrepôt par défaut lors de l\'enregistrement des mouvements';
+  String get forceDefaultWarehouse => 'Forcer l\'entrepôt par défaut lors de l\'enregistrement des mouvements';
 
   @override
-  String get recommendDefaultWarehouse =>
-      'Il est recommandé de lier chaque employé à un entrepôt par défaut pour suivre les autorisations et les mouvements.';
+  String get recommendDefaultWarehouse => 'Il est recommandé de lier chaque employé à un entrepôt par défaut pour suivre les autorisations et les mouvements.';
 
   @override
   String get unitsSection => 'Unités';
 
   @override
-  String get allowDifferentPurchaseUnits =>
-      'Autoriser des unités d\'achat différentes des unités de vente';
+  String get allowDifferentPurchaseUnits => 'Autoriser des unités d\'achat différentes des unités de vente';
 
   @override
-  String get showConversionsInPO =>
-      'Afficher les conversions dans les bons de commande';
+  String get showConversionsInPO => 'Afficher les conversions dans les bons de commande';
 
   @override
   String get printingSection => 'Impression';
 
   @override
-  String get includeStoreLogo =>
-      'Inclure le logo du magasin dans les documents';
+  String get includeStoreLogo => 'Inclure le logo du magasin dans les documents';
 
   @override
-  String get printBarcodeOnIssue =>
-      'Imprimer le code-barres sur les bons de sortie';
+  String get printBarcodeOnIssue => 'Imprimer le code-barres sur les bons de sortie';
 
   @override
   String get customFieldsSection => 'Champs personnalisés';
 
   @override
-  String get showCustomFieldLists =>
-      'Afficher les champs personnalisés dans les listes de produits';
+  String get showCustomFieldLists => 'Afficher les champs personnalisés dans les listes de produits';
 
   @override
   String get includeInExport => 'Inclure dans les rapports exportables';
 
   @override
-  String get noAdditionalSettings =>
-      'Aucun paramètre supplémentaire pour cette catégorie pour l\'instant.';
+  String get noAdditionalSettings => 'Aucun paramètre supplémentaire pour cette catégorie pour l\'instant.';
 
   @override
   String get autoNumberingTitle => 'Numérotation automatique des produits';
 
   @override
-  String get autoNumberingDesc =>
-      'Contrôler les paramètres et le format de la numérotation automatique.';
+  String get autoNumberingDesc => 'Contrôler les paramètres et le format de la numérotation automatique.';
 
   @override
   String get nextNumberLabel => 'Numéro suivant';
 
   @override
-  String get nextNumberDesc =>
-      'Le numéro que le système attribuera au prochain élément.';
+  String get nextNumberDesc => 'Le numéro que le système attribuera au prochain élément.';
 
   @override
   String get numberingFormat => 'Format de numérotation';
@@ -2686,22 +2512,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get alnumFormat => 'Alphanumérique';
 
   @override
-  String get formatDescription =>
-      'Choisissez le format à utiliser pour la génération des numéros (numérique, alphabétique ou mixte).';
+  String get formatDescription => 'Choisissez le format à utiliser pour la génération des numéros (numérique, alphabétique ou mixte).';
 
   @override
   String get digitCountLabel => 'Nombre de chiffres';
 
   @override
-  String get digitCountDesc =>
-      'Définissez le nombre de chiffres pour le numéro de série. Si le nombre est inférieur, des zéros sont ajoutés à gauche.';
+  String get digitCountDesc => 'Définissez le nombre de chiffres pour le numéro de série. Si le nombre est inférieur, des zéros sont ajoutés à gauche.';
 
   @override
   String get uniqueLabel => 'Unique';
 
   @override
-  String get uniqueDesc =>
-      'Assurez-vous que chaque numéro de la séquence est unique et non dupliqué.';
+  String get uniqueDesc => 'Assurez-vous que chaque numéro de la séquence est unique et non dupliqué.';
 
   @override
   String get prefixLabel => 'Préfixe';
@@ -2710,12 +2533,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get prefixHint => 'ex. PR ou INV';
 
   @override
-  String get prefixDesc =>
-      'Caractères qui apparaissent avant le numéro du document. Peuvent être fixes comme INV ou suivre un motif.';
+  String get prefixDesc => 'Caractères qui apparaissent avant le numéro du document. Peuvent être fixes comme INV ou suivre un motif.';
 
   @override
-  String get noAdditionalSettingsForCategory =>
-      'Aucun paramètre supplémentaire pour cette catégorie pour l\'instant.';
+  String get noAdditionalSettingsForCategory => 'Aucun paramètre supplémentaire pour cette catégorie pour l\'instant.';
 
   @override
   String get hideLabel => 'Masquer';
@@ -2761,8 +2582,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get noMatchingCategories =>
-      'Aucune catégorie correspondante.\nAjoutez une catégorie ou modifiez le filtre.';
+  String get noMatchingCategories => 'Aucune catégorie correspondante.\nAjoutez une catégorie ou modifiez le filtre.';
 
   @override
   String get noResults => 'Aucun résultat';
@@ -2858,8 +2678,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get activityProfile => 'Profil d\'activité';
 
   @override
-  String get activityTypeDesc =>
-      'Lors de la sélection d\'un type d\'activité, les propriétés par défaut sont définies automatiquement — vous pouvez les modifier manuellement.';
+  String get activityTypeDesc => 'Lors de la sélection d\'un type d\'activité, les propriétés par défaut sont définies automatiquement — vous pouvez les modifier manuellement.';
 
   @override
   String get enableUnits => 'Activer les unités';
@@ -2988,8 +2807,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get reportAction => 'Rapport';
 
   @override
-  String get startNewStocktakeSession =>
-      'Démarrer une nouvelle session d\'inventaire';
+  String get startNewStocktakeSession => 'Démarrer une nouvelle session d\'inventaire';
 
   @override
   String get sessionTitleLabel => 'Titre de la session *';
@@ -3004,7 +2822,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get startStocktakingBtn => 'Démarrer l\'inventaire';
 
   @override
-  String get searchHint => 'Nom, code-barres, SKU, ou numéro de produit';
+  String get searchHint => 'Rechercher...';
 
   @override
   String systemQty(Object qty) {
@@ -3132,16 +2950,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get orPressCtrlN => 'Ou appuyez sur Ctrl+N';
 
   @override
-  String get failedToFetchLowItems =>
-      'Échec de la récupération des articles en rupture. Vérifiez la base de données.';
+  String get failedToFetchLowItems => 'Échec de la récupération des articles en rupture. Vérifiez la base de données.';
 
   @override
-  String get noNewItemsAllAdded =>
-      'Aucun nouvel article : tous les produits en rupture sont déjà dans la liste.';
+  String get noNewItemsAllAdded => 'Aucun nouvel article : tous les produits en rupture sont déjà dans la liste.';
 
   @override
-  String get noLowStockProducts =>
-      'Aucun produit en stock bas (au ou en dessous du seuil d\'alerte avec suivi activé).';
+  String get noLowStockProducts => 'Aucun produit en stock bas (au ou en dessous du seuil d\'alerte avec suivi activé).';
 
   @override
   String addedLowItems(Object added) {
@@ -3162,8 +2977,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get addAtLeastOne => 'Ajoutez au moins un article';
 
   @override
-  String get checkNameAndQty =>
-      'Vérifiez le nom et la quantité de chaque article';
+  String get checkNameAndQty => 'Vérifiez le nom et la quantité de chaque article';
 
   @override
   String errorOccurred(Object error) {
@@ -3231,8 +3045,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get addItem => 'Ajouter un article';
 
   @override
-  String get emptyListHint =>
-      'Appuyez sur «Remplir depuis stock bas» ou «Ajouter un article» pour commencer';
+  String get emptyListHint => 'Appuyez sur «Remplir depuis stock bas» ou «Ajouter un article» pour commencer';
 
   @override
   String get itemCol => 'Article';
@@ -3262,8 +3075,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get removeFromList => 'Retirer de la liste';
 
   @override
-  String get removeConfirm =>
-      'La quantité d\'impression est supérieure à 5. Retirer ?';
+  String get removeConfirm => 'La quantité d\'impression est supérieure à 5. Retirer ?';
 
   @override
   String get removeAction => 'Retirer';
@@ -3280,8 +3092,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get resetAll => 'Tout réinitialiser';
 
   @override
-  String get resetConfirm =>
-      'Toutes les quantités seront réinitialisées à 1. Continuer ?';
+  String get resetConfirm => 'Toutes les quantités seront réinitialisées à 1. Continuer ?';
 
   @override
   String get printPreview => 'Aperçu avant impression';
@@ -3292,8 +3103,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get printViaSystem =>
-      'Imprimer via l\'imprimante par défaut ou depuis l\'écran d\'aperçu.';
+  String get printViaSystem => 'Imprimer via l\'imprimante par défaut ou depuis l\'écran d\'aperçu.';
 
   @override
   String get productBarcodes => 'Étiquettes code-barres produits';
@@ -3302,8 +3112,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get printedTitle => 'Imprimé';
 
   @override
-  String get printedContent =>
-      'Aperçu exécuté ou imprimé depuis la fenêtre système.';
+  String get printedContent => 'Aperçu exécuté ou imprimé depuis la fenêtre système.';
 
   @override
   String get clearList => 'Vider la liste';
@@ -3361,12 +3170,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get searchProductHint => 'Rechercher un produit';
 
   @override
-  String get searchProductSub =>
-      'Deux caractères ou plus (nom / code-barres / SKU)';
+  String get searchProductSub => 'Deux caractères ou plus (nom / code-barres / SKU)';
 
   @override
-  String get weightProductsNote =>
-      'Produits au poids : L\'ID est imprimé sur l\'étiquette ; le poids est déterminé à la vente.';
+  String get weightProductsNote => 'Produits au poids : L\'ID est imprimé sur l\'étiquette ; le poids est déterminé à la vente.';
 
   @override
   String get barcodeLabel => 'Code-barres';
@@ -3382,8 +3189,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get sizeAndPreview =>
-      'Choisir la taille et l\'apparence de l\'aperçu (s\'applique aux cartes et à l\'impression).';
+  String get sizeAndPreview => 'Choisir la taille et l\'apparence de l\'aperçu (s\'applique aux cartes et à l\'impression).';
 
   @override
   String get labelSizeHint => 'Taille de l\'étiquette';
@@ -3395,8 +3201,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get showPrice => 'Afficher le prix';
 
   @override
-  String get smartQtyTooltip =>
-      'Ajuste automatiquement la quantité d\'impression selon le stock';
+  String get smartQtyTooltip => 'Ajuste automatiquement la quantité d\'impression selon le stock';
 
   @override
   String get smartQtyLabel => 'Quantité intelligente';
@@ -3420,12 +3225,10 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get searchToAddHint =>
-      'Rechercher un produit à ajouter pour l\'impression';
+  String get searchToAddHint => 'Rechercher un produit à ajouter pour l\'impression';
 
   @override
-  String get addMultipleHint =>
-      'Vous pouvez ajouter plusieurs produits et les imprimer tous en une fois';
+  String get addMultipleHint => 'Vous pouvez ajouter plusieurs produits et les imprimer tous en une fois';
 
   @override
   String get removeTooltip => 'Retirer';
@@ -3436,8 +3239,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get printQtyExceedsStock =>
-      'La quantité d\'impression dépasse le stock';
+  String get printQtyExceedsStock => 'La quantité d\'impression dépasse le stock';
 
   @override
   String get decreaseTooltip => 'Diminuer';
@@ -3462,8 +3264,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get unsavedChanges => 'Modifications non enregistrées';
 
   @override
-  String get unsavedChangesConfirm =>
-      'Les modifications n\'ont pas été enregistrées. Quitter ?';
+  String get unsavedChangesConfirm => 'Les modifications n\'ont pas été enregistrées. Quitter ?';
 
   @override
   String get stayAction => 'Rester';
@@ -3499,15 +3300,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get barcodeAlreadyUsed => 'Le code-barres est déjà utilisé';
 
   @override
-  String get minPriceExceedsSalePrice =>
-      'Le prix de vente minimum ne peut pas dépasser le prix de vente';
+  String get minPriceExceedsSalePrice => 'Le prix de vente minimum ne peut pas dépasser le prix de vente';
 
   @override
   String get productUpdatedSuccess => 'Produit mis à jour avec succès';
 
   @override
-  String get barcodeUsedByOther =>
-      'Le code-barres est utilisé par un autre produit/unité';
+  String get barcodeUsedByOther => 'Le code-barres est utilisé par un autre produit/unité';
 
   @override
   String get saveFailed => 'Échec de l\'enregistrement des modifications';
@@ -3531,19 +3330,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get searchLabel => 'Rechercher';
 
   @override
-  String get typeTwoCharsHint =>
-      'Saisissez deux caractères pour la recherche unifiée';
+  String get typeTwoCharsHint => 'Saisissez deux caractères pour la recherche unifiée';
 
   @override
   String get noResultsFound => 'Aucun résultat trouvé';
 
   @override
-  String get scannerSearchNote =>
-      'Sur cette page : Le lecteur code-barres (HID) recherche le produit ici et ne redirige pas vers les ventes. Faites défiler pour charger plus.';
+  String get scannerSearchNote => 'Sur cette page : Le lecteur code-barres (HID) recherche le produit ici et ne redirige pas vers les ventes. Faites défiler pour charger plus.';
 
   @override
-  String get noResultsForText =>
-      'Aucun résultat pour ce texte pour l\'instant.';
+  String get noResultsForText => 'Aucun résultat pour ce texte pour l\'instant.';
 
   @override
   String get pieceUnit => 'pièce';
@@ -3589,8 +3385,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get stockTrackingDisabled =>
-      'Le suivi des stocks est désactivé pour cet article — la quantité en base restera telle quelle lors de l\'enregistrement.';
+  String get stockTrackingDisabled => 'Le suivi des stocks est désactivé pour cet article — la quantité en base restera telle quelle lors de l\'enregistrement.';
 
   @override
   String get saveLabel => 'Enregistrer';
@@ -3599,15 +3394,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get retailList => 'Liste de détail';
 
   @override
-  String get retailDesc =>
-      'Prix de vente au détail pour les clients ordinaires';
+  String get retailDesc => 'Prix de vente au détail pour les clients ordinaires';
 
   @override
   String get wholesaleList => 'Liste de gros';
 
   @override
-  String get wholesaleDesc =>
-      'Prix de gros pour les distributeurs et commerçants';
+  String get wholesaleDesc => 'Prix de gros pour les distributeurs et commerçants';
 
   @override
   String get vipList => 'Liste Client VIP';
@@ -3616,8 +3409,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get vipDesc => 'Prix spéciaux pour les clients fidèles (VIP)';
 
   @override
-  String get cannotDeleteDefault =>
-      'Impossible de supprimer la liste de prix par défaut';
+  String get cannotDeleteDefault => 'Impossible de supprimer la liste de prix par défaut';
 
   @override
   String get deletePriceList => 'Supprimer la liste de prix';
@@ -3716,30 +3508,25 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get qtyMustBeNonNegative =>
-      'La quantité doit être un entier positif ou nul.';
+  String get qtyMustBeNonNegative => 'La quantité doit être un entier positif ou nul.';
 
   @override
-  String get duplicateBarcode =>
-      'Code-barres en double trouvé dans les variantes.';
+  String get duplicateBarcode => 'Code-barres en double trouvé dans les variantes.';
 
   @override
-  String get conversionFactorError =>
-      'Le facteur de conversion doit être supérieur à 0 pour chaque nouvelle unité.';
+  String get conversionFactorError => 'Le facteur de conversion doit être supérieur à 0 pour chaque nouvelle unité.';
 
   @override
   String get variantBarcodeUsed => 'Le code-barres variante est déjà utilisé';
 
   @override
-  String get conversionFactorGt0 =>
-      'Le facteur de conversion doit être supérieur à 0';
+  String get conversionFactorGt0 => 'Le facteur de conversion doit être supérieur à 0';
 
   @override
   String get chooseColorTitle => 'Choisir une couleur';
 
   @override
-  String get chooseColorSubtitle =>
-      'Choisissez une couleur pour représenter cette option (optionnel).';
+  String get chooseColorSubtitle => 'Choisissez une couleur pour représenter cette option (optionnel).';
 
   @override
   String get applyUniformQtyTitle => 'Appliquer une quantité uniforme';
@@ -3748,8 +3535,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get enterQtyHint => 'Saisissez la quantité (0 ou plus)';
 
   @override
-  String get qtyMustBePositive =>
-      'La quantité doit être un entier positif ou nul.';
+  String get qtyMustBePositive => 'La quantité doit être un entier positif ou nul.';
 
   @override
   String get sizeLabel => 'Taille';
@@ -3779,8 +3565,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sizesAndQuantities => 'Tailles & Quantités';
 
   @override
-  String get noSizesYet =>
-      'Aucune taille pour l\'instant. Ajoutez au moins une taille.';
+  String get noSizesYet => 'Aucune taille pour l\'instant. Ajoutez au moins une taille.';
 
   @override
   String get addSizeBtn => 'Ajouter une taille';
@@ -3794,12 +3579,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get addNewColor => 'Ajouter une nouvelle couleur';
 
   @override
-  String get applyUniformQtyAllSizes =>
-      'Appliquer une quantité uniforme à toutes les tailles';
+  String get applyUniformQtyAllSizes => 'Appliquer une quantité uniforme à toutes les tailles';
 
   @override
-  String get noColorsYet =>
-      'Aucune couleur pour l\'instant. Ajoutez une couleur pour commencer.';
+  String get noColorsYet => 'Aucune couleur pour l\'instant. Ajoutez une couleur pour commencer.';
 
   @override
   String get editProductTitle => 'Modifier le produit';
@@ -3817,8 +3600,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get trackStock => 'Suivi des stocks';
 
   @override
-  String get trackStockDesc =>
-      'Calcule la quantité et les alertes de stock bas';
+  String get trackStockDesc => 'Calcule la quantité et les alertes de stock bas';
 
   @override
   String get noTrackDesc => 'La quantité devient 0 et aucune alerte affichée';
@@ -3851,8 +3633,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get salesUnitsBarcode => 'Unités de vente & code-barres';
 
   @override
-  String get unitsDesc =>
-      'L\'unité par défaut est gérée automatiquement avec le produit ; vous pouvez modifier les unités supplémentaires ou en ajouter une nouvelle.';
+  String get unitsDesc => 'L\'unité par défaut est gérée automatiquement avec le produit ; vous pouvez modifier les unités supplémentaires ou en ajouter une nouvelle.';
 
   @override
   String get defaultUnitTitle => 'Unité par défaut';
@@ -3967,8 +3748,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get advanceFirstPaymentLabel => 'Avance / Premier paiement';
 
   @override
-  String get interestInfoSavedAtSale =>
-      'Info d\'intérêt (enregistrée à la vente)';
+  String get interestInfoSavedAtSale => 'Info d\'intérêt (enregistrée à la vente)';
 
   @override
   String get interestRatePercent => 'Taux d\'intérêt %';
@@ -3991,8 +3771,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get selectInvoicePrompt =>
-      'Sélectionnez une facture pour voir les détails';
+  String get selectInvoicePrompt => 'Sélectionnez une facture pour voir les détails';
 
   @override
   String get invoiceNotFoundMsg => 'Facture introuvable';
@@ -4028,27 +3807,22 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get serviceQtyFixed =>
-      'La quantité du service est fixe et ne peut pas être modifiée.';
+  String get serviceQtyFixed => 'La quantité du service est fixe et ne peut pas être modifiée.';
 
   @override
   String get okAction => 'OK';
 
   @override
-  String get addAtLeastOneToSell =>
-      'Ajoutez au moins un article pour finaliser la vente';
+  String get addAtLeastOneToSell => 'Ajoutez au moins un article pour finaliser la vente';
 
   @override
-  String get addAtLeastOneToPark =>
-      'Ajoutez au moins un article pour mettre la facture en attente';
+  String get addAtLeastOneToPark => 'Ajoutez au moins un article pour mettre la facture en attente';
 
   @override
-  String get fillRequiredFields =>
-      'Remplissez les champs requis : pour le crédit ou l\'échéancier, entrez le nom du client ; pour la livraison, entrez le nom et l\'adresse.';
+  String get fillRequiredFields => 'Remplissez les champs requis : pour le crédit ou l\'échéancier, entrez le nom du client ; pour la livraison, entrez le nom et l\'adresse.';
 
   @override
-  String get paymentTypeNotAllowed =>
-      'Le type de paiement actuel n\'est pas autorisé. Vérifiez Factures > Paramètres Caisse ou sélectionnez espèces.';
+  String get paymentTypeNotAllowed => 'Le type de paiement actuel n\'est pas autorisé. Vérifiez Factures > Paramètres Caisse ou sélectionnez espèces.';
 
   @override
   String discountExceedsMax(Object limit) {
@@ -4056,12 +3830,10 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get creditInstallmentNeedCustomer =>
-      'Pour la vente à crédit ou à échéancier : sélectionnez un client enregistré dans la liste sous le champ de nom (ou ajoutez-en un depuis Clients d\'abord).';
+  String get creditInstallmentNeedCustomer => 'Pour la vente à crédit ou à échéancier : sélectionnez un client enregistré dans la liste sous le champ de nom (ou ajoutez-en un depuis Clients d\'abord).';
 
   @override
-  String get loyaltyRedeemNeedCustomer =>
-      'Pour échanger les points, sélectionnez le client dans la liste ou entrez un nom correspondant à un enregistrement client.';
+  String get loyaltyRedeemNeedCustomer => 'Pour échanger les points, sélectionnez le client dans la liste ou entrez un nom correspondant à un enregistrement client.';
 
   @override
   String installmentMinAdvanceError(Object amount, Object percent) {
@@ -4094,8 +3866,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get serviceOrderUpdateFailed =>
-      'Attention : Facture enregistrée mais échec de la mise à jour du statut du ticket de service. Veuillez le vérifier manuellement.';
+  String get serviceOrderUpdateFailed => 'Attention : Facture enregistrée mais échec de la mise à jour du statut du ticket de service. Veuillez le vérifier manuellement.';
 
   @override
   String installmentPlanCreationFailed(Object error) {
@@ -4103,20 +3874,16 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get invoiceSavedWithPlan =>
-      'Facture enregistrée et plan d\'échéancier créé — vous pouvez ajuster le calendrier';
+  String get invoiceSavedWithPlan => 'Facture enregistrée et plan d\'échéancier créé — vous pouvez ajuster le calendrier';
 
   @override
-  String get installmentFullyPaid =>
-      'Facture à échéancier enregistrée et liée (aucune échéance restante car le montant est entièrement payé).';
+  String get installmentFullyPaid => 'Facture à échéancier enregistrée et liée (aucune échéance restante car le montant est entièrement payé).';
 
   @override
-  String get invoiceSavedSuccess =>
-      'Facture enregistrée et inventaire/caisse mis à jour';
+  String get invoiceSavedSuccess => 'Facture enregistrée et inventaire/caisse mis à jour';
 
   @override
-  String get failedToLoadParkedInvoice =>
-      'Impossible de trouver la facture en attente';
+  String get failedToLoadParkedInvoice => 'Impossible de trouver la facture en attente';
 
   @override
   String failedToApplyParkedInvoice(Object error) {
@@ -4127,8 +3894,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get clearCartTitle => 'Vider le panier ?';
 
   @override
-  String get clearCartBody =>
-      'Tous les articles seront supprimés de la facture en cours.';
+  String get clearCartBody => 'Tous les articles seront supprimés de la facture en cours.';
 
   @override
   String get clearCartAction => 'Vider';
@@ -4140,8 +3906,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get productNotFoundTitle => 'Produit introuvable';
 
   @override
-  String get productNotFoundBody =>
-      'Ce code-barres n\'existe pas dans les produits. Voulez-vous ouvrir l\'écran d\'ajout de produit ?';
+  String get productNotFoundBody => 'Ce code-barres n\'existe pas dans les produits. Voulez-vous ouvrir l\'écran d\'ajout de produit ?';
 
   @override
   String get addProductAction => 'Ajouter un produit';
@@ -4155,8 +3920,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get searchCustomerHint => 'Recherchez à partir de la première lettre…';
 
   @override
-  String get addNewCustomerTooltip =>
-      'Ajouter un nouveau client sans quitter la vente';
+  String get addNewCustomerTooltip => 'Ajouter un nouveau client sans quitter la vente';
 
   @override
   String get discountOnTotalSaleLabel => 'Remise sur le total de la vente %';
@@ -4170,8 +3934,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get taxSectionLabel => 'Taxe';
 
   @override
-  String get taxDescription =>
-      'Entrez le montant de la taxe en francs si applicable ; ajouté au total après la remise de facture.';
+  String get taxDescription => 'Entrez le montant de la taxe en francs si applicable ; ajouté au total après la remise de facture.';
 
   @override
   String get taxAmountLabel => 'Montant de la taxe (FDJ)';
@@ -4183,8 +3946,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get advanceDownPaymentLabel => 'Avance / Acompte (FDJ)';
 
   @override
-  String get advancePaymentHelper =>
-      'Déduit du total avant le calcul des intérêts et de l\'échéancier';
+  String get advancePaymentHelper => 'Déduit du total avant le calcul des intérêts et de l\'échéancier';
 
   @override
   String get installmentInterestLabel => 'Intérêt sur le montant à financer';
@@ -4199,27 +3961,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get receivedAmountLabel => 'Montant reçu (FDJ)';
 
   @override
-  String get advanceDescription =>
-      'Calculé sur le total après avance. Pour revue client — pas ajouté à la facture sauf si vous augmentez les prix manuellement.';
+  String get advanceDescription => 'Calculé sur le total après avance. Pour revue client — pas ajouté à la facture sauf si vous augmentez les prix manuellement.';
 
   @override
-  String get priceSummaryCaptionNoDiscount =>
-      'Résumé des chiffres et de l\'avance (le cas échéant), avant de passer aux détails du client.';
+  String get priceSummaryCaptionNoDiscount => 'Résumé des chiffres et de l\'avance (le cas échéant), avant de passer aux détails du client.';
 
   @override
-  String get priceSummaryCaptionWithDiscount =>
-      'Résumé après remise et taxe, et avance (le cas échéant), avant de passer aux détails du client.';
+  String get priceSummaryCaptionWithDiscount => 'Résumé après remise et taxe, et avance (le cas échéant), avant de passer aux détails du client.';
 
   @override
   String get financedAmountBasis => 'Montant après avance (base d\'échéancier)';
 
   @override
-  String get parkedInvoiceDialogHint =>
-      'Enregistré localement sur cet appareil. Vous pouvez reprendre plus tard depuis Factures > Ventes en attente.';
+  String get parkedInvoiceDialogHint => 'Enregistré localement sur cet appareil. Vous pouvez reprendre plus tard depuis Factures > Ventes en attente.';
 
   @override
-  String get parkedInvoiceNameLabel =>
-      'Nom pour identification (affiché dans la liste)';
+  String get parkedInvoiceNameLabel => 'Nom pour identification (affiché dans la liste)';
 
   @override
   String get saveParkingAction => 'Enregistrer la mise en attente';
@@ -4240,8 +3997,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sizesLabel => 'Tailles';
 
   @override
-  String get selectColorFirstHint =>
-      'Sélectionnez d\'abord une couleur pour afficher les tailles.';
+  String get selectColorFirstHint => 'Sélectionnez d\'abord une couleur pour afficher les tailles.';
 
   @override
   String priceMinLine(Object min, Object price) {
@@ -4257,12 +4013,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get parkedInvoiceUpdated => 'Facture en attente mise à jour';
 
   @override
-  String get parkedInvoiceCreated =>
-      'Facture mise en attente — vous pouvez la reprendre depuis la liste des factures';
+  String get parkedInvoiceCreated => 'Facture mise en attente — vous pouvez la reprendre depuis la liste des factures';
 
   @override
-  String get barcodeScanTitle =>
-      'Code-barres d\'article ou facture pour retour';
+  String get barcodeScanTitle => 'Scanner code-barres';
 
   @override
   String get productFallback => 'Produit';
@@ -4302,8 +4056,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get vouchersNotReturnable =>
-      'Les reçus ou paiements fournisseurs ne peuvent pas être traités depuis l\'écran de retour.';
+  String get vouchersNotReturnable => 'Les reçus ou paiements fournisseurs ne peuvent pas être traités depuis l\'écran de retour.';
 
   @override
   String get noInvoiceNumber => 'Pas de numéro de facture';
@@ -4312,8 +4065,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get invoiceNotFoundReturn => 'Facture introuvable';
 
   @override
-  String get alreadyReturnedReturn =>
-      'Cette facture est déjà enregistrée comme retournée';
+  String get alreadyReturnedReturn => 'Cette facture est déjà enregistrée comme retournée';
 
   @override
   String get cashPaymentType => 'Espèces';
@@ -4337,23 +4089,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get supplierPaymentTypeLabel => 'Reçu de paiement fournisseur';
 
   @override
-  String get cashReturnHint =>
-      'Enregistré comme retrait de caisse du même montant.';
+  String get cashReturnHint => 'Enregistré comme retrait de caisse du même montant.';
 
   @override
-  String get installmentReturnHint =>
-      'Met à jour le total du plan d\'échéancier ; enregistre un retrait de caisse si une avance est remboursée.';
+  String get installmentReturnHint => 'Met à jour le total du plan d\'échéancier ; enregistre un retrait de caisse si une avance est remboursée.';
 
   @override
-  String get creditReturnHintLabel =>
-      'Retour enregistré comme lié à l\'original ; vérifiez la liste des factures pour le statut de la dette.';
+  String get creditReturnHintLabel => 'Retour enregistré comme lié à l\'original ; vérifiez la liste des factures pour le statut de la dette.';
 
   @override
   String get notApplicableForType => 'Non applicable pour ce type.';
 
   @override
-  String get selectAtLeastOneReturnQty =>
-      'Sélectionnez une quantité de retour d\'au moins une';
+  String get selectAtLeastOneReturnQty => 'Sélectionnez une quantité de retour d\'au moins une';
 
   @override
   String returnSaveFailed(Object error) {
@@ -4361,12 +4109,10 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get returnUseBarcodeOnly =>
-      'Pour les retours, utilisez uniquement le code-barres de la facture (ex. INV-12)';
+  String get returnUseBarcodeOnly => 'Pour les retours, utilisez uniquement le code-barres de la facture (ex. INV-12)';
 
   @override
-  String get sameInvoiceDisplayed =>
-      'C\'est la même facture actuellement affichée';
+  String get sameInvoiceDisplayed => 'C\'est la même facture actuellement affichée';
 
   @override
   String noInvoiceWithIdReturn(Object id) {
@@ -4382,8 +4128,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get navigateToInvoiceBody =>
-      'Les produits affichés seront remplacés par une autre facture.';
+  String get navigateToInvoiceBody => 'Les produits affichés seront remplacés par une autre facture.';
 
   @override
   String allItemsReturnedBanner(Object id) {
@@ -4394,12 +4139,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get noItemsInInvoice => 'Aucun article dans cette facture';
 
   @override
-  String get noItemsInInvoiceHint =>
-      'Vérifiez le numéro de facture, ou utilisez le champ code-barres pour sélectionner une autre facture.';
+  String get noItemsInInvoiceHint => 'Vérifiez le numéro de facture, ou utilisez le champ code-barres pour sélectionner une autre facture.';
 
   @override
-  String get itemsSelectReturnQty =>
-      'Articles — sélectionnez la quantité à retourner';
+  String get itemsSelectReturnQty => 'Articles — sélectionnez la quantité à retourner';
 
   @override
   String get fullReturnAction => 'Retour complet';
@@ -4408,8 +4151,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get switchInvoiceHint => 'Changer de facture (INV-numéro)';
 
   @override
-  String get scanReceiptBarcodeHint =>
-      'Scannez un autre code-barres de reçu puis Entrez';
+  String get scanReceiptBarcodeHint => 'Scannez un autre code-barres de reçu puis Entrez';
 
   @override
   String originalInvoiceHashLabel(Object id) {
@@ -4487,8 +4229,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get deleteReturnTitle => 'Supprimer le retour ?';
 
   @override
-  String get deleteReturnConfirm =>
-      'Êtes-vous sûr de vouloir supprimer ce retour ?';
+  String get deleteReturnConfirm => 'Êtes-vous sûr de vouloir supprimer ce retour ?';
 
   @override
   String get amountDueLabel => 'Montant dû (FDJ)';
@@ -4503,8 +4244,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get parkingInvoiceTitle => 'Mettre en attente la facture';
 
   @override
-  String get parkedInvoiceSnackbarHint =>
-      'Enregistré localement. Vous pouvez reprendre depuis Factures > En attente.';
+  String get parkedInvoiceSnackbarHint => 'Enregistré localement. Vous pouvez reprendre depuis Factures > En attente.';
 
   @override
   String get pieceFallback => 'Pièce';
@@ -4526,8 +4266,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get noStockAvailableForProduct =>
-      'Aucun stock disponible pour ce produit.';
+  String get noStockAvailableForProduct => 'Aucun stock disponible pour ce produit.';
 
   @override
   String stockUnavailableAvailableIs(Object max) {
@@ -4543,12 +4282,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get installmentPlanTitle => 'Plan de versements';
 
   @override
-  String get installmentCalcNote =>
-      'Calculé sur « Total après acompte ». À vérifier avec le client — non ajouté à la facture sauf si vous augmentez les prix manuellement.';
+  String get installmentCalcNote => 'Calculé sur « Total après acompte ». À vérifier avec le client — non ajouté à la facture sauf si vous augmentez les prix manuellement.';
 
   @override
-  String get advanceDownPaymentHelper =>
-      'Déduit du total avant calcul des intérêts et de la mensualité.';
+  String get advanceDownPaymentHelper => 'Déduit du total avant calcul des intérêts et de la mensualité.';
 
   @override
   String get monthsSuffix => 'mois';
@@ -4559,8 +4296,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get advanceEqualsTotalHint =>
-      'L\'acompte est égal au total — aucun montant à verser. Réduisez l\'acompte pour voir les intérêts et la mensualité.';
+  String get advanceEqualsTotalHint => 'L\'acompte est égal au total — aucun montant à verser. Réduisez l\'acompte pour voir les intérêts et la mensualité.';
 
   @override
   String parkInvoiceWithCount(Object count) {
@@ -4568,8 +4304,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get parkInvoiceOtherCustomer =>
-      'Mettre en attente — servir un autre client';
+  String get parkInvoiceOtherCustomer => 'Mettre en attente — servir un autre client';
 
   @override
   String payButtonLabel(Object amount) {
@@ -4577,41 +4312,34 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get swipeToResizeHint =>
-      'Glisser pour modifier la largeur de la barre latérale';
+  String get swipeToResizeHint => 'Glisser pour modifier la largeur de la barre latérale';
 
   @override
-  String get checkoutStepHintWithPayment =>
-      'Lignes de facture, quantités et prix — puis vérifier les détails du prix et le mode de paiement.';
+  String get checkoutStepHintWithPayment => 'Lignes de facture, quantités et prix — puis vérifier les détails du prix et le mode de paiement.';
 
   @override
-  String get checkoutStepHintNoPayment =>
-      'Lignes de facture, quantités et prix — puis passer à la remise et la taxe.';
+  String get checkoutStepHintNoPayment => 'Lignes de facture, quantités et prix — puis passer à la remise et la taxe.';
 
   @override
   String get productsTitle => 'Produits';
 
   @override
-  String get barcodeFieldHint =>
-      'Ajouter un article par code-barres, ou ouvrir un retour en scannant le numéro de facture (INV-)';
+  String get barcodeFieldHint => 'Ajouter un article par code-barres, ou ouvrir un retour en scannant le numéro de facture (INV-)';
 
   @override
   String get scannerTabLabel => 'Scanner';
 
   @override
-  String get noItemsYetWithScanner =>
-      'Aucun article pour le moment.\nScannez le code-barres ci-dessus ou ajoutez depuis la recherche.\nRecherchez un produit ou scannez le code-barres pour ajouter.';
+  String get noItemsYetWithScanner => 'Aucun article pour le moment.\nScannez le code-barres ci-dessus ou ajoutez depuis la recherche.\nRecherchez un produit ou scannez le code-barres pour ajouter.';
 
   @override
-  String get noItemsYetNoScanner =>
-      'Aucun article pour le moment.\nAjoutez des produits depuis la recherche.\nRecherchez un produit ou scannez le code-barres pour ajouter.';
+  String get noItemsYetNoScanner => 'Aucun article pour le moment.\nAjoutez des produits depuis la recherche.\nRecherchez un produit ou scannez le code-barres pour ajouter.';
 
   @override
   String get saleSummaryTitle => 'Résumé de la vente';
 
   @override
-  String get discountTaxNote =>
-      'La remise et la taxe sont appliquées au total de la facture (et non par article).';
+  String get discountTaxNote => 'La remise et la taxe sont appliquées au total de la facture (et non par article).';
 
   @override
   String maxDiscountAllowedHint(Object max) {
@@ -4619,16 +4347,13 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get taxHelperHint =>
-      'Entrez le montant de la taxe en francs si applicable ; ajouté au sous-total après remise facture.';
+  String get taxHelperHint => 'Entrez le montant de la taxe en francs si applicable ; ajouté au sous-total après remise facture.';
 
   @override
-  String get priceDetailStepHintWithPayment =>
-      'Résultat des chiffres et du premier versement le cas échéant, avant de passer aux données client.';
+  String get priceDetailStepHintWithPayment => 'Résultat des chiffres et du premier versement le cas échéant, avant de passer aux données client.';
 
   @override
-  String get priceDetailStepHintNoPayment =>
-      'Résultat des chiffres après remise et taxe, et du premier versement le cas échéant, avant de passer aux données client.';
+  String get priceDetailStepHintNoPayment => 'Résultat des chiffres après remise et taxe, et du premier versement le cas échéant, avant de passer aux données client.';
 
   @override
   String get priceDetailsTitle => 'Détails du prix';
@@ -4643,8 +4368,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get invoiceDiscountAmountLabel => 'Montant de la remise facture';
 
   @override
-  String get subtotalAfterDiscountLabel =>
-      'Sous-total après remise (avant taxe)';
+  String get subtotalAfterDiscountLabel => 'Sous-total après remise (avant taxe)';
 
   @override
   String get iqdCurrencySymbol => 'FDJ';
@@ -4676,31 +4400,25 @@ class AppLocalizationsFr extends AppLocalizations {
   String get paymentMethodLabel => 'Mode de paiement';
 
   @override
-  String get customerNameRequiredForDelivery =>
-      'Nom du client requis pour la livraison';
+  String get customerNameRequiredForDelivery => 'Nom du client requis pour la livraison';
 
   @override
   String get requiredForCreditInstallment => 'Requis pour crédit/versement';
 
   @override
-  String get addNewCustomerMessage =>
-      'Ajouter un nouveau client sans quitter la vente';
+  String get addNewCustomerMessage => 'Ajouter un nouveau client sans quitter la vente';
 
   @override
-  String get deliveryAddressWithMapQR =>
-      'Adresse de livraison et emplacement (QR cartes)';
+  String get deliveryAddressWithMapQR => 'Adresse de livraison et emplacement (QR cartes)';
 
   @override
-  String get buyerAddressWithMapQR =>
-      'Adresse de l\'acheteur (QR pour cartes sur le reçu)';
+  String get buyerAddressWithMapQR => 'Adresse de l\'acheteur (QR pour cartes sur le reçu)';
 
   @override
-  String get addressMapDescriptionOptional =>
-      'Optionnel — description ou adresse affichée dans Google Maps lors du scan du code';
+  String get addressMapDescriptionOptional => 'Optionnel — description ou adresse affichée dans Google Maps lors du scan du code';
 
   @override
-  String get addressMapRequired =>
-      'Requis — le QR cartes est imprimé si du texte est présent ; écrivez l\'adresse de livraison clairement';
+  String get addressMapRequired => 'Requis — le QR cartes est imprimé si du texte est présent ; écrivez l\'adresse de livraison clairement';
 
   @override
   String get qrOpensMapsOnScan => 'Le QR ouvre les cartes lors du scan';
@@ -4709,8 +4427,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get deliveryAddressRequired => 'L\'adresse de livraison est requise';
 
   @override
-  String get loyaltyPointsRequiresCustomer =>
-      'Pour utiliser les points : sélectionnez un client enregistré dans la liste suggérée.';
+  String get loyaltyPointsRequiresCustomer => 'Pour utiliser les points : sélectionnez un client enregistré dans la liste suggérée.';
 
   @override
   String customerLoyaltyBalance(Object balance) {
@@ -4723,12 +4440,10 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get deliveryInstruction =>
-      'Pour la livraison : entrez le nom du client et l\'adresse de livraison (les deux requis). Des suggestions de noms apparaissent de la base clients pendant la saisie.';
+  String get deliveryInstruction => 'Pour la livraison : entrez le nom du client et l\'adresse de livraison (les deux requis). Des suggestions de noms apparaissent de la base clients pendant la saisie.';
 
   @override
-  String get creditInstallmentCustomerTip =>
-      'Important : Pour crédit et versement, cliquez sur le nom du client dans la liste suggérée pour lier la vente à sa carte (taper le nom manuellement ne suffit pas s\'il ne correspond pas exactement à un enregistrement).';
+  String get creditInstallmentCustomerTip => 'Important : Pour crédit et versement, cliquez sur le nom du client dans la liste suggérée pour lier la vente à sa carte (taper le nom manuellement ne suffit pas s\'il ne correspond pas exactement à un enregistrement).';
 
   @override
   String get hideDetailsLabel => 'Masquer les détails';
@@ -4750,19 +4465,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get unitSellPriceLabel => 'Prix de vente (par unité)';
 
   @override
-  String get lineTotalBeforeDiscount =>
-      'Total de la ligne avant remise facture';
+  String get lineTotalBeforeDiscount => 'Total de la ligne avant remise facture';
 
   @override
   String get lineDiscountShare => 'Part de la remise facture pour cette ligne';
 
   @override
-  String get lineTotalAfterDiscount =>
-      'Total de la ligne après remise facture (cette ligne)';
+  String get lineTotalAfterDiscount => 'Total de la ligne après remise facture (cette ligne)';
 
   @override
-  String get percentageDiscountDistributionNote =>
-      'La remise en pourcentage est répartie sur les lignes selon la contribution de chaque ligne au total des articles.';
+  String get percentageDiscountDistributionNote => 'La remise en pourcentage est répartie sur les lignes selon la contribution de chaque ligne au total des articles.';
 
   @override
   String get quantityKgLabel => 'Quantité (kilogrammes)';
@@ -4774,8 +4486,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get quantityHintPiece => 'ex. : 2';
 
   @override
-  String get quantityErrorWeight =>
-      'Entrez une quantité supérieure à 0 (décimales autorisées pour le poids).';
+  String get quantityErrorWeight => 'Entrez une quantité supérieure à 0 (décimales autorisées pour le poids).';
 
   @override
   String get quantityErrorPiece => 'Entrez un nombre entier 1 ou plus';
@@ -4784,15 +4495,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get itemFallbackShort => 'Article';
 
   @override
-  String get payloadEmptyOrNotText =>
-      'La charge est vide ou n\'est pas du texte';
+  String get payloadEmptyOrNotText => 'La charge est vide ou n\'est pas du texte';
 
   @override
   String get payloadNotValidJson => 'La charge n\'est pas un objet JSON valide';
 
   @override
-  String get payloadNoVersionField =>
-      'Pas de champ de version (v) dans la charge';
+  String get payloadNoVersionField => 'Pas de champ de version (v) dans la charge';
 
   @override
   String payloadUnsupportedVersion(Object ver) {
@@ -4818,16 +4527,13 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get invoiceParkedMessage =>
-      'Facture mise en attente — vous pouvez la reprendre depuis la liste des factures';
+  String get invoiceParkedMessage => 'Facture mise en attente — vous pouvez la reprendre depuis la liste des factures';
 
   @override
-  String get requiredFieldsMessage =>
-      'Remplissez les champs requis : pour crédit ou versement entrez le nom du client, pour livraison entrez le nom et l\'adresse. Vérifiez les champs surlignés en rouge.';
+  String get requiredFieldsMessage => 'Remplissez les champs requis : pour crédit ou versement entrez le nom du client, pour livraison entrez le nom et l\'adresse. Vérifiez les champs surlignés en rouge.';
 
   @override
-  String get paymentMethodNotAllowed =>
-      'Le mode de paiement actuel n\'est pas autorisé — vérifiez « Factures → Paramètres Caisse » ou choisissez espèces.';
+  String get paymentMethodNotAllowed => 'Le mode de paiement actuel n\'est pas autorisé — vérifiez « Factures → Paramètres Caisse » ou choisissez espèces.';
 
   @override
   String discountExceedsMaximum(Object max) {
@@ -4835,12 +4541,10 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get creditInstallmentMustSelectCustomer =>
-      'Pour une vente à crédit ou en versement : sélectionnez un client enregistré dans la liste suggérée sous le champ nom (ou ajoutez depuis « Clients » d\'abord) pour lier la facture à sa carte.';
+  String get creditInstallmentMustSelectCustomer => 'Pour une vente à crédit ou en versement : sélectionnez un client enregistré dans la liste suggérée sous le champ nom (ou ajoutez depuis « Clients » d\'abord) pour lier la facture à sa carte.';
 
   @override
-  String get loyaltyRedeemMustSelectCustomer =>
-      'Pour échanger les points, sélectionnez le client dans la liste ou entrez un nom correspondant exactement à un enregistrement.';
+  String get loyaltyRedeemMustSelectCustomer => 'Pour échanger les points, sélectionnez le client dans la liste ou entrez un nom correspondant exactement à un enregistrement.';
 
   @override
   String invoiceDebtLimitExceeded(Object cap, Object rem) {
@@ -4853,8 +4557,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get debtLimitActionHint =>
-      'Liez le client depuis la liste, réduisez le montant, ou vérifiez les paramètres de dette.';
+  String get debtLimitActionHint => 'Liez le client depuis la liste, réduisez le montant, ou vérifiez les paramètres de dette.';
 
   @override
   String invoiceSaveFailed(Object error) {
@@ -4862,20 +4565,16 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get maintenanceTicketUpdateFailed =>
-      'Note : La facture a été enregistrée mais la mise à jour automatique du ticket de maintenance a échoué. Veuillez le vérifier manuellement.';
+  String get maintenanceTicketUpdateFailed => 'Note : La facture a été enregistrée mais la mise à jour automatique du ticket de maintenance a échoué. Veuillez le vérifier manuellement.';
 
   @override
-  String get installmentPlanCreated =>
-      'Facture enregistrée et plan de versement créé — vous pouvez ajuster l\'échéancier ou revenir en arrière';
+  String get installmentPlanCreated => 'Facture enregistrée et plan de versement créé — vous pouvez ajuster l\'échéancier ou revenir en arrière';
 
   @override
-  String get installmentPlanSavedNoRemaining =>
-      'Facture de versement enregistrée et liée à un plan (aucun versement restant car le montant est intégralement collecté).';
+  String get installmentPlanSavedNoRemaining => 'Facture de versement enregistrée et liée à un plan (aucun versement restant car le montant est intégralement collecté).';
 
   @override
-  String get barcodeOrInvoiceForReturn =>
-      'Code-barres article ou facture pour retour';
+  String get barcodeOrInvoiceForReturn => 'Code-barres article ou facture pour retour';
 
   @override
   String get alreadyReturned => 'Cette facture a déjà été retournée';
@@ -4897,8 +4596,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get selectColorAndSize => 'Sélectionner Couleur & Taille';
 
   @override
-  String get cannotChangeQtyBeforeSelection =>
-      'Impossible de modifier la quantité avant la sélection';
+  String get cannotChangeQtyBeforeSelection => 'Impossible de modifier la quantité avant la sélection';
 
   @override
   String get loadingColorsAndSizes => 'Chargement des couleurs et tailles…';
@@ -4921,15 +4619,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get colorOrSize => 'Couleur/Taille';
 
   @override
-  String get selectColorFirst =>
-      'Sélectionnez d\'abord une couleur pour afficher les tailles.';
+  String get selectColorFirst => 'Sélectionnez d\'abord une couleur pour afficher les tailles.';
 
   @override
   String get parkInvoiceDialogTitle => 'Mettre en attente la facture';
 
   @override
-  String get parkInvoiceDescription =>
-      'Enregistré localement sur cet appareil. Vous pouvez reprendre la vente plus tard depuis Factures → En attente.';
+  String get parkInvoiceDescription => 'Enregistré localement sur cet appareil. Vous pouvez reprendre la vente plus tard depuis Factures → En attente.';
 
   @override
   String get saveParkButton => 'Enregistrer en attente';
@@ -4944,8 +4640,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get switchCameraTooltip => 'Changer de caméra';
 
   @override
-  String get scanToAddAuto =>
-      'Scannez — les articles seront ajoutés automatiquement';
+  String get scanToAddAuto => 'Scannez — les articles seront ajoutés automatiquement';
 
   @override
   String get passOriginalInvoiceOrId => 'Passez originalInvoice ou invoiceId';
@@ -4963,8 +4658,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get scanAnotherReceiptHint => 'Scannez un autre reçu puis Entrez';
 
   @override
-  String get barcodeNotFoundAddNew =>
-      'Ce code-barres n\'existe pas dans les produits. Voulez-vous ouvrir l\'écran d\'ajout de produit ?';
+  String get barcodeNotFoundAddNew => 'Ce code-barres n\'existe pas dans les produits. Voulez-vous ouvrir l\'écran d\'ajout de produit ?';
 
   @override
   String get receiptPrintFailed => 'Échec de l\'impression du reçu';
@@ -5009,15 +4703,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get creditSaleTitle => 'Vente à crédit';
 
   @override
-  String get creditSaleSubtitle =>
-      'Désactiver masque l\'option «crédit» sur l\'écran de vente.';
+  String get creditSaleSubtitle => 'Désactiver masque l\'option «crédit» sur l\'écran de vente.';
 
   @override
   String get installmentSaleTitle => 'Vente en versements';
 
   @override
-  String get installmentSaleSubtitle =>
-      'Désactiver masque l\'option «versement».';
+  String get installmentSaleSubtitle => 'Désactiver masque l\'option «versement».';
 
   @override
   String get deliverySaleTitle => 'Vente avec livraison';
@@ -5029,88 +4721,73 @@ class AppLocalizationsFr extends AppLocalizations {
   String get waafiSaleTitle => 'Paiement Waafi';
 
   @override
-  String get waafiSaleSubtitle =>
-      'Désactiver masque l\'option «Waafi» sur l\'écran de vente.';
+  String get waafiSaleSubtitle => 'Désactiver masque l\'option «Waafi» sur l\'écran de vente.';
 
   @override
   String get dahabPlusSaleTitle => 'Paiement Dahab Plus';
 
   @override
-  String get dahabPlusSaleSubtitle =>
-      'Désactiver masque l\'option «Dahab Plus» sur l\'écran de vente.';
+  String get dahabPlusSaleSubtitle => 'Désactiver masque l\'option «Dahab Plus» sur l\'écran de vente.';
 
   @override
   String get cacPaySaleTitle => 'Paiement CAC Pay';
 
   @override
-  String get cacPaySaleSubtitle =>
-      'Désactiver masque l\'option «CAC Pay» sur l\'écran de vente.';
+  String get cacPaySaleSubtitle => 'Désactiver masque l\'option «CAC Pay» sur l\'écran de vente.';
 
   @override
   String get dmoneySaleTitle => 'Paiement Dmoney';
 
   @override
-  String get dmoneySaleSubtitle =>
-      'Désactiver masque l\'option «Dmoney» sur l\'écran de vente.';
+  String get dmoneySaleSubtitle => 'Désactiver masque l\'option «Dmoney» sur l\'écran de vente.';
 
   @override
   String get cashCustomerSection => 'Client en vente en espèces';
 
   @override
-  String get showBuyerAddressCashTitle =>
-      'Afficher le champ adresse de l\'acheteur en mode espèces';
+  String get showBuyerAddressCashTitle => 'Afficher le champ adresse de l\'acheteur en mode espèces';
 
   @override
-  String get showBuyerAddressCashDesc =>
-      'Affiché uniquement si «QR pour adresse acheteur» est activé. Désactivé, le champ reste pour la livraison.';
+  String get showBuyerAddressCashDesc => 'Affiché uniquement si «QR pour adresse acheteur» est activé. Désactivé, le champ reste pour la livraison.';
 
   @override
   String get stockInSaleSection => 'Stock en vente';
 
   @override
-  String get preventOversellTitle =>
-      'Empêcher la vente quand le solde affiché est dépassé';
+  String get preventOversellTitle => 'Empêcher la vente quand le solde affiché est dépassé';
 
   @override
-  String get preventOversellDesc =>
-      'Activé : la quantité ne dépasse pas le stock. Désactivé : la vente est autorisée même si le solde est négatif, et le négatif est annulé à la sauvegarde.';
+  String get preventOversellDesc => 'Activé : la quantité ne dépasse pas le stock. Désactivé : la vente est autorisée même si le solde est négatif, et le négatif est annulé à la sauvegarde.';
 
   @override
   String get discountTaxSection => 'Remise & Taxe';
 
   @override
-  String get invoiceDiscountPercentTitle =>
-      'Champ remise facture (pourcentage)';
+  String get invoiceDiscountPercentTitle => 'Champ remise facture (pourcentage)';
 
   @override
-  String get invoiceDiscountPercentSubtitle =>
-      'Désactivé : la remise est fixée à 0 et le champ est masqué.';
+  String get invoiceDiscountPercentSubtitle => 'Désactivé : la remise est fixée à 0 et le champ est masqué.';
 
   @override
   String get taxFieldTitle => 'Champ taxe';
 
   @override
-  String get taxFieldSubtitle =>
-      'Désactivé : la taxe est fixée à 0 et le champ est masqué.';
+  String get taxFieldSubtitle => 'Désactivé : la taxe est fixée à 0 et le champ est masqué.';
 
   @override
-  String get brandColorsTitle =>
-      'Couleurs d\'identité de marque au lieu du thème';
+  String get brandColorsTitle => 'Couleurs d\'identité de marque au lieu du thème';
 
   @override
-  String get brandColorsDesc =>
-      'Désactivé : le thème général (clair/sombre) reste sur toutes les pages, avec la même forme de coins ci-dessous.';
+  String get brandColorsDesc => 'Désactivé : le thème général (clair/sombre) reste sur toutes les pages, avec la même forme de coins ci-dessous.';
 
   @override
   String get colorSchemesTitle => 'Palettes de couleurs';
 
   @override
-  String get colorSchemesDesc =>
-      'Toutes les palettes professionnelles sont prêtes ; «Personnalisé» ouvre un studio de couleurs interactif (teinte, saturation, luminosité, prêt, HEX) pour chaque couleur.';
+  String get colorSchemesDesc => 'Toutes les palettes professionnelles sont prêtes ; «Personnalisé» ouvre un studio de couleurs interactif (teinte, saturation, luminosité, prêt, HEX) pour chaque couleur.';
 
   @override
-  String get primaryColorLabel =>
-      'Couleur principale (barre de titre & boutons)';
+  String get primaryColorLabel => 'Couleur principale (barre de titre & boutons)';
 
   @override
   String get accentColorLabel => 'Couleur d\'accent (or/en vedette)';
@@ -5125,8 +4802,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get saleCardShapeTitle => 'Forme des cartes de vente';
 
   @override
-  String get saleCardShapeDesc =>
-      'Aperçu simple à côté de chaque option — à quoi ressemblent les coins et les lignes de produits.';
+  String get saleCardShapeDesc => 'Aperçu simple à côté de chaque option — à quoi ressemblent les coins et les lignes de produits.';
 
   @override
   String get sharpCornersTitle => 'Coins pointus';
@@ -5138,8 +4814,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get fontAndSizeTitle => 'Police et taille de l\'application';
 
   @override
-  String get fontAndSizeDesc =>
-      'Appliqué à tous les écrans et menus, multiplié par la taille de police du système.';
+  String get fontAndSizeDesc => 'Appliqué à tous les écrans et menus, multiplié par la taille de police du système.';
 
   @override
   String get fontStyleTitle => 'Style de police';
@@ -5151,46 +4826,37 @@ class AppLocalizationsFr extends AppLocalizations {
   String get textColorTitle => 'Couleur du texte';
 
   @override
-  String get textColorDesc =>
-      'Optionnel — studio de couleurs complet pour chaque mode (clair/sombre) ; appliqué au texte principal et aux listes.';
+  String get textColorDesc => 'Optionnel — studio de couleurs complet pour chaque mode (clair/sombre) ; appliqué au texte principal et aux listes.';
 
   @override
   String get textLightLabel => 'Couleur texte — Mode clair';
 
   @override
-  String get textLightDesc =>
-      'Actif en thème clair. Appuyez pour modifier, ou «Défaut» pour effacer la couleur personnalisée.';
+  String get textLightDesc => 'Actif en thème clair. Appuyez pour modifier, ou «Défaut» pour effacer la couleur personnalisée.';
 
   @override
   String get textDarkLabel => 'Couleur texte — Mode sombre';
 
   @override
-  String get textDarkDesc =>
-      'Actif en thème sombre. Appuyez pour modifier, ou «Défaut» pour effacer la couleur personnalisée.';
+  String get textDarkDesc => 'Actif en thème sombre. Appuyez pour modifier, ou «Défaut» pour effacer la couleur personnalisée.';
 
   @override
-  String get resetTextColorLabel =>
-      'Réinitialiser la couleur du texte pour les deux modes';
+  String get resetTextColorLabel => 'Réinitialiser la couleur du texte pour les deux modes';
 
   @override
-  String get royalNavyDefaultDesc =>
-      'Référence des couleurs «Bleu marine» par défaut — les autres palettes ci-dessus.';
+  String get royalNavyDefaultDesc => 'Référence des couleurs «Bleu marine» par défaut — les autres palettes ci-dessus.';
 
   @override
-  String get wideSaleLayoutTitle =>
-      'Disposition de l\'espace de vente (écran large)';
+  String get wideSaleLayoutTitle => 'Disposition de l\'espace de vente (écran large)';
 
   @override
-  String get wideSaleLayoutSwitchTitle =>
-      'Diviser l\'écran de vente en deux colonnes (écran large)';
+  String get wideSaleLayoutSwitchTitle => 'Diviser l\'écran de vente en deux colonnes (écran large)';
 
   @override
-  String get wideSaleLayoutSwitchDesc =>
-      'Désactivé : «Nouvelle vente» revient à une seule colonne même sur écran large. Le ratio est sauvegardé.';
+  String get wideSaleLayoutSwitchDesc => 'Désactivé : «Nouvelle vente» revient à une seule colonne même sur écran large. Le ratio est sauvegardé.';
 
   @override
-  String get wideSaleLayoutDesc =>
-      'Quand la fenêtre fait 700+ points de large et n\'est pas un écran téléphone, l\'écran «Nouvelle vente» se divise en deux colonnes.';
+  String get wideSaleLayoutDesc => 'Quand la fenêtre fait 700+ points de large et n\'est pas un écran téléphone, l\'écran «Nouvelle vente» se divise en deux colonnes.';
 
   @override
   String productsColumnRatioLabel(Object products, Object summary) {
@@ -5203,34 +4869,28 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get wideSalePreviewLabel =>
-      'Aperçu en direct (petit espace — comment la disposition change) :';
+  String get wideSalePreviewLabel => 'Aperçu en direct (petit espace — comment la disposition change) :';
 
   @override
-  String get wideSaleDragHint =>
-      'Dans l\'écran «Nouvelle vente» en large : survolez la fine bande entre les colonnes et glissez horizontalement.';
+  String get wideSaleDragHint => 'Dans l\'écran «Nouvelle vente» en large : survolez la fine bande entre les colonnes et glissez horizontalement.';
 
   @override
   String get saleSpaceLayoutLabel => 'Disposition de l\'espace de vente';
 
   @override
-  String get phoneLayoutDesc =>
-      'Sur cette taille (téléphone), «Nouvelle vente» s\'affiche toujours en colonne unique.';
+  String get phoneLayoutDesc => 'Sur cette taille (téléphone), «Nouvelle vente» s\'affiche toujours en colonne unique.';
 
   @override
-  String get appearanceNote =>
-      'Les couleurs et coins s\'appliquent immédiatement. Les politiques de vente restent dans «Paramètres de caisse».';
+  String get appearanceNote => 'Les couleurs et coins s\'appliquent immédiatement. Les politiques de vente restent dans «Paramètres de caisse».';
 
   @override
-  String get posNote =>
-      'Les politiques de vente s\'appliquent immédiatement. L\'apparence est configurée dans «Apparence de l\'application».';
+  String get posNote => 'Les politiques de vente s\'appliquent immédiatement. L\'apparence est configurée dans «Apparence de l\'application».';
 
   @override
   String get resetAppearanceTitle => 'Restaurer l\'apparence par défaut ?';
 
   @override
-  String get resetAppearanceDesc =>
-      'Rétablira la police, la taille du texte, les couleurs personnalisées, la palette, les coins et l\'identité de marque. Les politiques de vente ne sont pas affectées.';
+  String get resetAppearanceDesc => 'Rétablira la police, la taille du texte, les couleurs personnalisées, la palette, les coins et l\'identité de marque. Les politiques de vente ne sont pas affectées.';
 
   @override
   String get cancelLabel => 'Annuler';
@@ -5239,12 +4899,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get restoreLabel => 'Restaurer';
 
   @override
-  String get appearanceRestoredSnack =>
-      'Paramètres d\'apparence par défaut restaurés';
+  String get appearanceRestoredSnack => 'Paramètres d\'apparence par défaut restaurés';
 
   @override
-  String get resetAppearanceLog =>
-      'Restaurer l\'apparence par défaut (police, couleurs, palette, coins)';
+  String get resetAppearanceLog => 'Restaurer l\'apparence par défaut (police, couleurs, palette, coins)';
 
   @override
   String get summaryCustomerLabel => 'Résumé\n& client';
@@ -5258,22 +4916,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get themeDefaultLabel => 'Défaut du thème';
 
   @override
-  String get colorStudioDesc =>
-      'Boîte de saturation/luminosité, barre de spectre, couleurs prêtes, ou HEX — puis confirmer.';
+  String get colorStudioDesc => 'Boîte de saturation/luminosité, barre de spectre, couleurs prêtes, ou HEX — puis confirmer.';
 
   @override
   String get appIdentityTitle => 'Identité de l\'application';
 
   @override
-  String get appIdentityDesc =>
-      'Configurez les couleurs d\'identité et la forme des coins pour l\'application entière. Les politiques de paiement, stock et remise restent dans «Paramètres de caisse».';
+  String get appIdentityDesc => 'Configurez les couleurs d\'identité et la forme des coins pour l\'application entière. Les politiques de paiement, stock et remise restent dans «Paramètres de caisse».';
 
   @override
   String get saleControlTitle => 'Contrôle centralisé des ventes';
 
   @override
-  String get saleControlDesc =>
-      'Activez ou désactivez les modes de paiement et champs financiers sans modifier le code. L\'apparence est configurée séparément.';
+  String get saleControlDesc => 'Activez ou désactivez les modes de paiement et champs financiers sans modifier le code. L\'apparence est configurée séparément.';
 
   @override
   String get printSettingsSaved => 'Paramètres d\'impression enregistrés';
@@ -5317,8 +4972,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get thermal76x297mm => 'Thermique 76×297mm (reçu)';
 
   @override
-  String get showTransactionBarcodeTitle =>
-      'Afficher le code-barres de transaction';
+  String get showTransactionBarcodeTitle => 'Afficher le code-barres de transaction';
 
   @override
   String get transactionBarcodeDesc => 'CODE128 — lu rapidement par le scanner';
@@ -5327,31 +4981,25 @@ class AppLocalizationsFr extends AppLocalizations {
   String get showQrCodeTitle => 'Afficher le code QR';
 
   @override
-  String get qrCodeDesc =>
-      'Résumé texte pour le client — recommandé pour la taxe et la vérification';
+  String get qrCodeDesc => 'Résumé texte pour le client — recommandé pour la taxe et la vérification';
 
   @override
   String get qrBuyerAddressTitle => 'QR pour l\'adresse acheteur (cartes)';
 
   @override
-  String get qrBuyerAddressDesc =>
-      'Quand activé, affiche le champ adresse acheteur et imprime un QR qui ouvre la position sur Google Maps';
+  String get qrBuyerAddressDesc => 'Quand activé, affiche le champ adresse acheteur et imprime un QR qui ouvre la position sur Google Maps';
 
   @override
-  String get headerLineLabel =>
-      'Ligne au-dessus du titre \"Reçu de vente\" (nom du magasin)';
+  String get headerLineLabel => 'Ligne au-dessus du titre \"Reçu de vente\" (nom du magasin)';
 
   @override
-  String get footerLineLabel =>
-      'Pied de page supplémentaire (téléphone, conditions, remerciements)';
+  String get footerLineLabel => 'Pied de page supplémentaire (téléphone, conditions, remerciements)';
 
   @override
-  String get autoOpenReceiptTitle =>
-      'Ouvrir automatiquement le reçu après chaque vente';
+  String get autoOpenReceiptTitle => 'Ouvrir automatiquement le reçu après chaque vente';
 
   @override
-  String get autoOpenReceiptDesc =>
-      'Désactivé par défaut : rien ne s\'ouvre ou ne s\'imprime sans votre action. Une fois activé, le reçu de vente s\'ouvre juste après le paiement.';
+  String get autoOpenReceiptDesc => 'Désactivé par défaut : rien ne s\'ouvre ou ne s\'imprime sans votre action. Une fois activé, le reçu de vente s\'ouvre juste après le paiement.';
 
   @override
   String get barcodeLabelsSection => 'Paramètres code-barres & étiquettes';
@@ -5360,12 +5008,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get storeDataTitle => 'Données du magasin';
 
   @override
-  String get storeDataDesc =>
-      'Depuis les paramètres — peut être lié automatiquement au reçu';
+  String get storeDataDesc => 'Depuis les paramètres — peut être lié automatiquement au reçu';
 
   @override
-  String get storeDataHint =>
-      'Utilisez le champ \"Nom du magasin\" ci-dessus ou la fiche données du magasin';
+  String get storeDataHint => 'Utilisez le champ \"Nom du magasin\" ci-dessus ou la fiche données du magasin';
 
   @override
   String get previewReceiptButton => 'Aperçu reçu test';
@@ -5374,15 +5020,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get saveSettingsButton => 'Enregistrer les paramètres en base';
 
   @override
-  String get printSettingsDesc =>
-      'Données stockées dans print_settings et appliquées automatiquement lors de l\'impression.';
+  String get printSettingsDesc => 'Données stockées dans print_settings et appliquées automatiquement lors de l\'impression.';
 
   @override
   String get professionalPrintCenter => 'Centre d\'impression professionnel';
 
   @override
-  String get printCenterDesc =>
-      'Configure les tailles thermique et A4, le contenu du reçu, et les liens inventaire — tout est sauvegardé localement.';
+  String get printCenterDesc => 'Configure les tailles thermique et A4, le contenu du reçu, et les liens inventaire — tout est sauvegardé localement.';
 
   @override
   String get close => 'Fermer';
@@ -5601,12 +5245,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get creditSales => 'Ventes à crédit (dette)';
 
   @override
-  String get creditSalesDesc =>
-      'Chaque facture liée à un reçu de vente — cliquez pour voir les détails';
+  String get creditSalesDesc => 'Chaque facture liée à un reçu de vente — cliquez pour voir les détails';
 
   @override
-  String get noCreditInvoices =>
-      'Aucune facture «crédit» liée à ce client. Utilisez la vente à crédit en sélectionnant le client depuis';
+  String get noCreditInvoices => 'Aucune facture «crédit» liée à ce client. Utilisez la vente à crédit en sélectionnant le client depuis';
 
   @override
   String get installments => 'Versements';
@@ -5615,12 +5257,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get installmentSales => 'Ventes en versements';
 
   @override
-  String get installmentSalesDesc =>
-      'Factures avec plans de versement — cliquez pour voir les détails';
+  String get installmentSalesDesc => 'Factures avec plans de versement — cliquez pour voir les détails';
 
   @override
-  String get noInstallmentInvoices =>
-      'Aucune facture de versement liée à ce client.';
+  String get noInstallmentInvoices => 'Aucune facture de versement liée à ce client.';
 
   @override
   String get totalDebt => 'Dette totale';
@@ -5778,12 +5418,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get financialGauges => 'Indicateurs de performance';
 
   @override
-  String get gaugesConsistent =>
-      'Cohérent avec les ratios du diagramme circulaire et du tableau';
+  String get gaugesConsistent => 'Cohérent avec les ratios du diagramme circulaire et du tableau';
 
   @override
-  String get gaugesRelative =>
-      'Distribution relative montrant où va chaque unité de revenu';
+  String get gaugesRelative => 'Distribution relative montrant où va chaque unité de revenu';
 
   @override
   String get reportSettings => 'Paramètres de rapports';
@@ -5792,8 +5430,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get reportPreferences => 'فترة افتراضية وتفضيلات';
 
   @override
-  String get periodApplied =>
-      'عند الحفظ تُحدَّث الفترة الحالية وتُخزَّن للمرّة القادمة';
+  String get periodApplied => 'عند الحفظ تُحدَّث الفترة الحالية وتُخزَّن للمرّة القادمة';
 
   @override
   String get currentPeriod => 'الفترة المختارة:';
@@ -5847,8 +5484,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get noMetricsData => 'لا توجد بيانات لعرض المقاييس';
 
   @override
-  String get tryDateRange =>
-      'Essayez de modifier la plage de dates ou le filtre';
+  String get tryDateRange => 'Essayez de modifier la plage de dates ou le filtre';
 
   @override
   String get filterNone => 'لا نتائج';
@@ -5860,8 +5496,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get searchDescriptionCategory => 'بحث (وصف أو فئة)';
 
   @override
-  String get searchCustomerProductPlan =>
-      'بحث: عميل، منتج، رقم خطة، رقم فاتورة...';
+  String get searchCustomerProductPlan => 'بحث: عميل، منتج، رقم خطة، رقم فاتورة...';
 
   @override
   String get salesInvoices => 'Ventes';
@@ -5939,8 +5574,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get topEmployees => 'Meilleurs employés';
 
   @override
-  String get topEmployeesBySales =>
-      'ترتيب حسب إجمالي المبيعات المسجّلة على الفواتير';
+  String get topEmployeesBySales => 'ترتيب حسب إجمالي المبيعات المسجّلة على الفواتير';
 
   @override
   String get topCategories => 'أعلى الفئات إيراداً';
@@ -5957,8 +5591,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get reportAccuracyNote => 'ملاحظات الدقّة';
 
   @override
-  String get marginAccuracyDesc =>
-      'نسبة تغطية التكلفة — كلما ارتفعت زادت الدقة';
+  String get marginAccuracyDesc => 'نسبة تغطية التكلفة — كلما ارتفعت زادت الدقة';
 
   @override
   String get fixedCostRatio => 'نسبة السطور ذات التكلفة المثبّتة من الإجمالي';
@@ -5986,8 +5619,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get lowMarginProducts => 'منتجات هامشها منخفض أو سالب';
 
   @override
-  String get lowMarginDesc =>
-      'منتجات هامشها منخفض أو سالب — قد تحتاج مراجعة السعر أو التكلفة';
+  String get lowMarginDesc => 'منتجات هامشها منخفض أو سالب — قد تحتاج مراجعة السعر أو التكلفة';
 
   @override
   String get customerBalances => 'أرصدة العملاء';
@@ -6027,23 +5659,19 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get employeePerformance =>
-      'جدول — أداء التسجيل حسب اسم الموظف على الفاتورة';
+  String get employeePerformance => 'جدول — أداء التسجيل حسب اسم الموظف على الفاتورة';
 
   @override
-  String get employeePerformanceDesc =>
-      'فواتير مسجّلة باسم الموظف (حقل الفاتورة)';
+  String get employeePerformanceDesc => 'فواتير مسجّلة باسم الموظف (حقل الفاتورة)';
 
   @override
   String get loyaltySummary => 'ملخص نقاط وخصومات الولاء';
 
   @override
-  String get loyaltyGranted =>
-      'نقاط ممنوحة (مجموع النقاط المسجّلة على الفواتير)';
+  String get loyaltyGranted => 'نقاط ممنوحة (مجموع النقاط المسجّلة على الفواتير)';
 
   @override
-  String get loyaltyRedeemed =>
-      'نقاط ممنوحة (مجموع النقاط المسجّلة على الفواتير)';
+  String get loyaltyRedeemed => 'نقاط ممنوحة (مجموع النقاط المسجّلة على الفواتير)';
 
   @override
   String get loyaltyDiscounts => 'خصومات ولاء على الفواتير';
@@ -6079,8 +5707,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get noItemsRecorded => 'لا توجد أصناف مسجّلة في الفاتورة';
 
   @override
-  String get salesOnlySection =>
-      'هذا القسم يعرض المبيعات فقط: نقدي/دين/تقسيط/توصيل';
+  String get salesOnlySection => 'هذا القسم يعرض المبيعات فقط: نقدي/دين/تقسيط/توصيل';
 
   @override
   String get thankYou => 'Merci d\'utiliser Maarey';
@@ -6098,7 +5725,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get closeShift => 'Fermer le quart';
 
   @override
-  String get shiftDetails => 'Détails du quart';
+  String get shiftDetails => 'Détails';
 
   @override
   String get shiftIdentity => 'هوية الوردية والجلسة';
@@ -6178,8 +5805,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get noInflowMovements => 'لا توجد حركات وارد في هذه المجموعة';
 
   @override
-  String get noLinkedMovements =>
-      'لا توجد في هذه المجموعة حركات مرتبطة برقم فاتورة';
+  String get noLinkedMovements => 'لا توجد في هذه المجموعة حركات مرتبطة برقم فاتورة';
 
   @override
   String get otherMovements => 'حركات أخرى';
@@ -6371,15 +5997,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get minAdvancePercentLabel => 'أقل نسبة مقدّم من إجمالي الفاتورة (%)';
 
   @override
-  String get minAdvancePercentDesc =>
-      'مثال: 10 تعني ألا يقل المقدّم عن 10٪ من الإجمالي';
+  String get minAdvancePercentDesc => 'مثال: 10 تعني ألا يقل المقدّم عن 10٪ من الإجمالي';
 
   @override
   String get useCalendarMonthsLabel => 'استخدام أشهر تقويمية لتواريخ الاستحقاق';
 
   @override
-  String get useCalendarMonthsDesc =>
-      'مفعّل: إضافة شهر تقويمي من تاريخ المرجع. معطّل: تقريب 30 يوماً لكل فترة.';
+  String get useCalendarMonthsDesc => 'مفعّل: إضافة شهر تقويمي من تاريخ المرجع. معطّل: تقريب 30 يوماً لكل فترة.';
 
   @override
   String get referenceDateLabel => 'مرجع الجدولة (بداية العدّ)';
@@ -6454,12 +6078,10 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get cantRescheduleLabel =>
-      'لا يمكن إعادة جدولة الأقساط بعد تسديد قسط من هذه الخطة';
+  String get cantRescheduleLabel => 'لا يمكن إعادة جدولة الأقساط بعد تسديد قسط من هذه الخطة';
 
   @override
-  String get planAlreadyExistsLabel =>
-      'الخطة مسجّلة بالفعل وتظهر تحت «خطط التقسيط»';
+  String get planAlreadyExistsLabel => 'الخطة مسجّلة بالفعل وتظهر تحت «خطط التقسيط»';
 
   @override
   String get planCreatedLabel => 'تم حفظ الجدول وربط العميل';
@@ -6509,8 +6131,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get noRemainingAfterAdvanceLabel =>
-      'لا يوجد مبلغ متبقٍ للتقسيط بعد المقدم';
+  String get noRemainingAfterAdvanceLabel => 'لا يوجد مبلغ متبقٍ للتقسيط بعد المقدم';
 
   @override
   String calendarScheduleLabel(Object step) {
@@ -6610,12 +6231,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get advancePayment => 'Avance';
 
   @override
-  String get advancePercentExample =>
-      'Exemple : 10 signifie que l\'avance doit être d\'au moins 10% du total.';
+  String get advancePercentExample => 'Exemple : 10 signifie que l\'avance doit être d\'au moins 10% du total.';
 
   @override
-  String get advancePercentRange =>
-      'Le pourcentage d\'avance doit être entre 0 et 100';
+  String get advancePercentRange => 'Le pourcentage d\'avance doit être entre 0 et 100';
 
   @override
   String get affectedCashBox => 'Affecté à la caisse';
@@ -6639,8 +6258,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get approxNet => 'Net approx. (Vente − Retour)';
 
   @override
-  String get attachInvoiceImageOptional =>
-      'Joindre l\'image de la facture (optionnel)';
+  String get attachInvoiceImageOptional => 'Joindre l\'image de la facture (optionnel)';
 
   @override
   String get balance => 'Solde';
@@ -6649,16 +6267,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get beneficiary => 'Bénéficiaire';
 
   @override
-  String get bottom10ProfitProducts =>
-      '10 derniers produits par profit (Révision des prix)';
+  String get bottom10ProfitProducts => '10 derniers produits par profit (Révision des prix)';
 
   @override
-  String get calendarMonthsExplanation =>
-      'ACTIVÉ : ajoute un mois calendrier. DÉSACTIVÉ : arrondit à 30 jours.';
+  String get calendarMonthsExplanation => 'ACTIVÉ : ajoute un mois calendrier. DÉSACTIVÉ : arrondit à 30 jours.';
 
   @override
-  String get cannotRescheduleAfterPayment =>
-      'Impossible de reprogrammer après un paiement sur ce plan.';
+  String get cannotRescheduleAfterPayment => 'Impossible de reprogrammer après un paiement sur ce plan.';
 
   @override
   String get cashBox => 'Caisse';
@@ -6676,8 +6291,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get change => 'Changer';
 
   @override
-  String get changeOrRemoveAnytime =>
-      'Vous pouvez la changer ou la supprimer à tout moment.';
+  String get changeOrRemoveAnytime => 'Vous pouvez la changer ou la supprimer à tout moment.';
 
   @override
   String get choose => 'Choisir';
@@ -6686,22 +6300,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get chooseOtherCategory => 'Choisir une autre catégorie';
 
   @override
-  String get clearSearchOrChangeTab =>
-      'Effacer la recherche (×) ou passer à l\'onglet Tous.';
+  String get clearSearchOrChangeTab => 'Effacer la recherche (×) ou passer à l\'onglet Tous.';
 
   @override
   String get closeForm => 'Fermer le formulaire ?';
 
   @override
-  String get closeFormConfirm =>
-      'Fermer le formulaire ? Les données ne seront pas sauvegardées.';
+  String get closeFormConfirm => 'Fermer le formulaire ? Les données ne seront pas sauvegardées.';
 
   @override
   String get cogs => 'Coût des marchandises vendues (CMV)';
 
   @override
-  String get controlAdvanceRequirements =>
-      'Contrôler l\'avance obligatoire et le pourcentage minimum.';
+  String get controlAdvanceRequirements => 'Contrôler l\'avance obligatoire et le pourcentage minimum.';
 
   @override
   String get copySectionName => 'Copier le nom de la section';
@@ -6740,39 +6351,31 @@ class AppLocalizationsFr extends AppLocalizations {
   String get debts => 'Dettes';
 
   @override
-  String get declaredCashAfterWithdrawal =>
-      'Espèces déclarées dans la caisse après retrait';
+  String get declaredCashAfterWithdrawal => 'Espèces déclarées dans la caisse après retrait';
 
   @override
-  String get declaredCashAtOpen =>
-      'Espèces déclarées à l\'ouverture (Inventaire)';
+  String get declaredCashAtOpen => 'Espèces déclarées à l\'ouverture (Inventaire)';
 
   @override
-  String get defaultInstallmentCountRange =>
-      'Nombre d\'acomptes par défaut entre 1 et 120';
+  String get defaultInstallmentCountRange => 'Nombre d\'acomptes par défaut entre 1 et 120';
 
   @override
-  String get defaultInstallmentInterestRate =>
-      'Taux d\'intérêt par défaut pour les ventes à tempérament (%)';
+  String get defaultInstallmentInterestRate => 'Taux d\'intérêt par défaut pour les ventes à tempérament (%)';
 
   @override
-  String get defaultInterestRange =>
-      'Taux d\'intérêt par défaut entre 0 et 100';
+  String get defaultInterestRange => 'Taux d\'intérêt par défaut entre 0 et 100';
 
   @override
   String get defaultPeriodAndPreferences => 'Période par défaut et préférences';
 
   @override
-  String get defaultRemainingInstallments =>
-      'Acomptes restants par défaut (lors de la création d\'un plan)';
+  String get defaultRemainingInstallments => 'Acomptes restants par défaut (lors de la création d\'un plan)';
 
   @override
-  String get defaultReportPeriod =>
-      'Période par défaut lors de l\'ouverture des rapports';
+  String get defaultReportPeriod => 'Période par défaut lors de l\'ouverture des rapports';
 
   @override
-  String get deleteExpenseConfirm =>
-      'Supprimer cette dépense ? Cette action est irréversible.';
+  String get deleteExpenseConfirm => 'Supprimer cette dépense ? Cette action est irréversible.';
 
   @override
   String get descriptionOptional => 'Description (Optionnel)';
@@ -6796,8 +6399,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get enterInstallmentCount => 'Entrez le nombre d\'acomptes';
 
   @override
-  String get enterMovementDescription =>
-      'Entrez une description pour le mouvement';
+  String get enterMovementDescription => 'Entrez une description pour le mouvement';
 
   @override
   String get entry => 'Entrée';
@@ -6824,19 +6426,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get exportExcel => 'Exporter (Copier Excel)';
 
   @override
-  String get failedToLoadInstallmentPlan =>
-      'Échec du chargement du plan de paiement.';
+  String get failedToLoadInstallmentPlan => 'Échec du chargement du plan de paiement.';
 
   @override
   String get firstDueReferenceDate => 'Date de référence de première échéance';
 
   @override
-  String get fullTransparency =>
-      'Transparence totale — voici les règles adoptées';
+  String get fullTransparency => 'Transparence totale — voici les règles adoptées';
 
   @override
-  String get futureFeatures =>
-      'Bientôt : export PDF/Excel, planification des rapports et accès par rôle.';
+  String get futureFeatures => 'Bientôt : export PDF/Excel, planification des rapports et accès par rôle.';
 
   @override
   String get grossMargin => 'Marge brute';
@@ -6860,8 +6459,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get inboundLineByLine => 'Entrant — Ligne par ligne';
 
   @override
-  String get inboundOutboundSummary =>
-      'Résumé entrées et sorties (Cette liste)';
+  String get inboundOutboundSummary => 'Résumé entrées et sorties (Cette liste)';
 
   @override
   String get inboundTotal => 'Entrant';
@@ -6870,19 +6468,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get indicatorsAndPeriod => 'Indicateurs et période';
 
   @override
-  String get installmentPeriodMethod =>
-      'Période des acomptes, méthode de calcul du mois et date de référence.';
+  String get installmentPeriodMethod => 'Période des acomptes, méthode de calcul du mois et date de référence.';
 
   @override
-  String get installmentPeriodRange =>
-      'Période entre les acomptes : 1 à 24 mois';
+  String get installmentPeriodRange => 'Période entre les acomptes : 1 à 24 mois';
 
   @override
   String get installmentPlanDetails => 'Détails du plan de paiement';
 
   @override
-  String get installmentPlansInPeriod =>
-      'Plans de paiement (Factures dans la période)';
+  String get installmentPlansInPeriod => 'Plans de paiement (Factures dans la période)';
 
   @override
   String get installmentScheduleSaved => 'Planning des acomptes sauvegardé';
@@ -6927,12 +6522,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get itemLabel => 'Article';
 
   @override
-  String get itemsSoldWithStock =>
-      'Articles vendus avec le solde de stock actuel.';
+  String get itemsSoldWithStock => 'Articles vendus avec le solde de stock actuel.';
 
   @override
-  String get kpiPieDescription =>
-      'Graphique unifié pour les indicateurs financiers — ventes/retours/net';
+  String get kpiPieDescription => 'Graphique unifié pour les indicateurs financiers — ventes/retours/net';
 
   @override
   String get loadingInvoiceItems => 'Chargement des articles…';
@@ -6941,24 +6534,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get loyaltyInRange => 'Fidélité (Dans la période)';
 
   @override
-  String get mainPerformanceIndicators =>
-      'Indicateurs de performance principaux';
+  String get mainPerformanceIndicators => 'Indicateurs de performance principaux';
 
   @override
-  String get manualDepositReceipt =>
-      'Reçu de dépôt manuel (Total des entrées de dépôt)';
+  String get manualDepositReceipt => 'Reçu de dépôt manuel (Total des entrées de dépôt)';
 
   @override
-  String get manualDepositWithdrawalGroup =>
-      'Dépôt et retrait manuels (Ce groupe)';
+  String get manualDepositWithdrawalGroup => 'Dépôt et retrait manuels (Ce groupe)';
 
   @override
-  String get manualDepositWithdrawalInShift =>
-      'Dépôt et retrait manuels dans le quart de travail';
+  String get manualDepositWithdrawalInShift => 'Dépôt et retrait manuels dans le quart de travail';
 
   @override
-  String get manualWithdrawalReceipt =>
-      'Reçu de retrait manuel (Total des entrées de retrait)';
+  String get manualWithdrawalReceipt => 'Reçu de retrait manuel (Total des entrées de retrait)';
 
   @override
   String get margin => 'Marge';
@@ -6970,12 +6558,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get marginPercent => 'Marge %';
 
   @override
-  String get minOneInstallment =>
-      'Le nombre d\'acomptes doit être d\'au moins 1';
+  String get minOneInstallment => 'Le nombre d\'acomptes doit être d\'au moins 1';
 
   @override
-  String get minimumAdvancePercent =>
-      'Pourcentage minimum d\'avance du total de la facture';
+  String get minimumAdvancePercent => 'Pourcentage minimum d\'avance du total de la facture';
 
   @override
   String get miscExpenses => 'Dépenses diverses';
@@ -6990,19 +6576,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get more => 'Plus';
 
   @override
-  String get movementsWithoutShift =>
-      'Détails des mouvements (Sans quart de travail)';
+  String get movementsWithoutShift => 'Détails des mouvements (Sans quart de travail)';
 
   @override
   String get netProfit => 'Bénéfice net (Marge − Dépenses)';
 
   @override
-  String get noComment =>
-      'Pas de commentaire — recommander d\'ajouter un motif.';
+  String get noComment => 'Pas de commentaire — recommander d\'ajouter un motif.';
 
   @override
-  String get noDailyDataInPeriod =>
-      'Pas de données journalières pour cette période';
+  String get noDailyDataInPeriod => 'Pas de données journalières pour cette période';
 
   @override
   String get noDataAvailable => 'Aucune donnée disponible';
@@ -7014,15 +6597,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get noInboundMovements => 'Aucun mouvement entrant dans ce groupe.';
 
   @override
-  String get noInvoiceLinkedMovements =>
-      'Aucun mouvement lié à une facture dans ce groupe.';
+  String get noInvoiceLinkedMovements => 'Aucun mouvement lié à une facture dans ce groupe.';
 
   @override
   String get noItemsInPeriod => 'Aucun article dans cette période.';
 
   @override
-  String get noLinkUseInvoiceName =>
-      'Sans lien — utiliser le nom de la facture';
+  String get noLinkUseInvoiceName => 'Sans lien — utiliser le nom de la facture';
 
   @override
   String get noMovementsInGroup => 'Aucun mouvement dans ce groupe.';
@@ -7031,8 +6612,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get noOutboundMovements => 'Aucun mouvement sortant dans ce groupe.';
 
   @override
-  String get noPlansInCurrentFilter =>
-      'Aucun plan ne correspond à la recherche ou au filtre actuel';
+  String get noPlansInCurrentFilter => 'Aucun plan ne correspond à la recherche ou au filtre actuel';
 
   @override
   String get noSalesInPeriod => 'Aucune vente dans cette période';
@@ -7074,8 +6654,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ownerOrProperty => 'Propriétaire ou Bien';
 
   @override
-  String get paidCappedAtTotal =>
-      '\'Payé\' est plafonné au total du plan en cas de conflit.';
+  String get paidCappedAtTotal => '\'Payé\' est plafonné au total du plan en cas de conflit.';
 
   @override
   String get paidRemaining => 'Payé / Restant';
@@ -7090,15 +6669,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get paymentType => 'Type de paiement';
 
   @override
-  String get paymentTypeRatio =>
-      'Ratio de chaque type de paiement par rapport aux ventes';
+  String get paymentTypeRatio => 'Ratio de chaque type de paiement par rapport aux ventes';
 
   @override
   String get paymentTypesAndReturns => 'Types de paiement et retours';
 
   @override
-  String get paymentTypesTrendOverTime =>
-      'Évolution des types de paiement dans le temps';
+  String get paymentTypesTrendOverTime => 'Évolution des types de paiement dans le temps';
 
   @override
   String get pendingLabel => 'En attente';
@@ -7125,12 +6702,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get plan => 'Plan';
 
   @override
-  String get planAutoCreatedAfterSave =>
-      'Après la sauvegarde d\'une facture à tempérament, le plan est créé automatiquement.';
+  String get planAutoCreatedAfterSave => 'Après la sauvegarde d\'une facture à tempérament, le plan est créé automatiquement.';
 
   @override
-  String get preferRegisteredCustomer =>
-      'Préférez sélectionner un client enregistré pour un suivi plus facile.';
+  String get preferRegisteredCustomer => 'Préférez sélectionner un client enregistré pour un suivi plus facile.';
 
   @override
   String get printPeriodReport => 'Imprimer le rapport de période';
@@ -7157,8 +6732,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get reportSections => 'Sections des rapports';
 
   @override
-  String get requireAdvanceForInstallment =>
-      'Exiger une avance pour les factures à tempérament';
+  String get requireAdvanceForInstallment => 'Exiger une avance pour les factures à tempérament';
 
   @override
   String get returnCount => 'Nombre de retours';
@@ -7173,8 +6747,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get revenueComposition => 'Composition du revenu : Coût + Marge';
 
   @override
-  String get revenueTrend =>
-      'Tendance du revenu : Coût + Marge + Dépenses journalières';
+  String get revenueTrend => 'Tendance du revenu : Coût + Marge + Dépenses journalières';
 
   @override
   String get salaries => 'Salaires';
@@ -7189,12 +6762,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sales => 'Ventes';
 
   @override
-  String get salesNotMixedWithReceipts =>
-      'Pour que les ventes ne soient pas mêlées aux reçus';
+  String get salesNotMixedWithReceipts => 'Pour que les ventes ne soient pas mêlées aux reçus';
 
   @override
-  String get salesVsExpensesDailyTrend =>
-      'Ventes vs Dépenses — Tendance journalière';
+  String get salesVsExpensesDailyTrend => 'Ventes vs Dépenses — Tendance journalière';
 
   @override
   String get saveAndApply => 'Enregistrer et appliquer';
@@ -7212,27 +6783,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get schedulingAndDueDates => 'Planification et dates d\'échéance';
 
   @override
-  String get searchByNameOrPhone =>
-      'Rechercher par nom, identifiant ou téléphone';
+  String get searchByNameOrPhone => 'Rechercher par nom, identifiant ou téléphone';
 
   @override
-  String get searchByNameOrPhoneOrNumber =>
-      'Rechercher par nom, téléphone ou numéro…';
+  String get searchByNameOrPhoneOrNumber => 'Rechercher par nom, téléphone ou numéro…';
 
   @override
-  String get searchDescriptionOrCategory =>
-      'Recherche (description ou catégorie)';
+  String get searchDescriptionOrCategory => 'Recherche (description ou catégorie)';
 
   @override
-  String get searchPlaceholder =>
-      'Recherche : client, produit, numéro de plan, facture…';
+  String get searchPlaceholder => 'Recherche : client, produit, numéro de plan, facture…';
 
   @override
   String get sectionOptions => 'Options de la section';
 
   @override
-  String get selectCategoryAndAmount =>
-      'Veuillez sélectionner une catégorie et entrer un montant valide.';
+  String get selectCategoryAndAmount => 'Veuillez sélectionner une catégorie et entrer un montant valide.';
 
   @override
   String get selectEmployeeTitle => 'Sélectionner un employé';
@@ -7241,15 +6807,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get selectExpenseCategory => 'Choisir la catégorie de dépense';
 
   @override
-  String get selectPeriodForReport =>
-      'Sélectionnez la période pour le rapport :';
+  String get selectPeriodForReport => 'Sélectionnez la période pour le rapport :';
 
   @override
   String get selectedPeriod => 'Période sélectionnée :';
 
   @override
-  String get sellerChosenFromCalendar =>
-      'Choisi par le vendeur du calendrier (accord)';
+  String get sellerChosenFromCalendar => 'Choisi par le vendeur du calendrier (accord)';
 
   @override
   String get serviceInvoiceNumber => 'Numéro de facture de service';
@@ -7261,12 +6825,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get setupInstallmentSchedule => 'Configurer le planning des acomptes';
 
   @override
-  String get showCalculatorCard =>
-      'Afficher la carte calculatrice et les valeurs par défaut.';
+  String get showCalculatorCard => 'Afficher la carte calculatrice et les valeurs par défaut.';
 
   @override
-  String get showInstallmentCardInSale =>
-      'Afficher la carte « Plan d\'acomptes » dans l\'écran de vente';
+  String get showInstallmentCardInSale => 'Afficher la carte « Plan d\'acomptes » dans l\'écran de vente';
 
   @override
   String get stay => 'Rester';
@@ -7278,8 +6840,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get systemBalanceAtOpen => 'Solde système à l\'ouverture';
 
   @override
-  String get tableCopiedToClipboard =>
-      'Tableau copié dans le presse-papiers (collez dans Excel).';
+  String get tableCopiedToClipboard => 'Tableau copié dans le presse-papiers (collez dans Excel).';
 
   @override
   String get tapForFullDetails => 'Appuyez pour les détails complets';
@@ -7327,15 +6888,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get transactionCount => 'Nombre de transactions';
 
   @override
-  String get tryChangingDateRange =>
-      'Essayez de changer la plage de dates ou le filtre';
+  String get tryChangingDateRange => 'Essayez de changer la plage de dates ou le filtre';
 
   @override
   String get unlinked => 'Non lié';
 
   @override
-  String get usefulForUtilityBills =>
-      'Utile pour les factures d\'eau/électricité/taxes.';
+  String get usefulForUtilityBills => 'Utile pour les factures d\'eau/électricité/taxes.';
 
   @override
   String get viewSectionDescription => 'Voir la description de la section';
@@ -7598,8 +7157,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get whDeactivateTitle => 'Désactiver l\'entrepôt';
 
   @override
-  String get whDeactivateContent =>
-      'Cet entrepôt ne sera pas utilisé dans les opérations de vente et d\'achat jusqu\'à sa réactivation.';
+  String get whDeactivateContent => 'Cet entrepôt ne sera pas utilisé dans les opérations de vente et d\'achat jusqu\'à sa réactivation.';
 
   @override
   String get whActivate => 'Activer';
@@ -7664,8 +7222,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get whSetDefaultTitle => 'Définir par défaut';
 
   @override
-  String get whSetDefaultContent =>
-      'La valeur par défaut sera retirée de l\'entrepôt actuel et cet entrepôt sera défini par défaut.';
+  String get whSetDefaultContent => 'La valeur par défaut sera retirée de l\'entrepôt actuel et cet entrepôt sera défini par défaut.';
 
   @override
   String get whConfirmAction => 'Confirmer';
@@ -7674,8 +7231,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get whCloseFormTitle => 'Fermer le formulaire';
 
   @override
-  String get whCloseFormContent =>
-      'Voulez-vous fermer le formulaire ? Les données ne seront pas enregistrées.';
+  String get whCloseFormContent => 'Voulez-vous fermer le formulaire ? Les données ne seront pas enregistrées.';
 
   @override
   String get whCloseAction => 'Fermer';
@@ -7684,8 +7240,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get whSelectBranchError => 'Sélectionnez une succursale';
 
   @override
-  String get whAutoDefaultFirst =>
-      'Défini automatiquement par défaut car c\'est le premier entrepôt';
+  String get whAutoDefaultFirst => 'Défini automatiquement par défaut car c\'est le premier entrepôt';
 
   @override
   String whSaveFailed(Object error) {
@@ -7705,8 +7260,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get whWarehouseNameLabel => 'Nom de l\'entrepôt';
 
   @override
-  String get whWarehouseNameHint =>
-      'ex. : Entrepôt principal, Entrepôt succursale nord';
+  String get whWarehouseNameHint => 'ex. : Entrepôt principal, Entrepôt succursale nord';
 
   @override
   String get whWarehouseCodeLabel => 'Code entrepôt';
@@ -7727,8 +7281,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get whActiveWarehouse => 'Entrepôt actif';
 
   @override
-  String get whInactiveWarning =>
-      'L\'entrepôt désactivé n\'apparaîtra pas dans les opérations de vente et d\'achat';
+  String get whInactiveWarning => 'L\'entrepôt désactivé n\'apparaîtra pas dans les opérations de vente et d\'achat';
 
   @override
   String get whSaving => 'Enregistrement...';
@@ -7746,8 +7299,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get whChooseBranch => 'Choisir la succursale';
 
   @override
-  String get whBranchSearchHint =>
-      'Rechercher par nom ou code de succursale...';
+  String get whBranchSearchHint => 'Rechercher par nom ou code de succursale...';
 
   @override
   String whStockTitle(Object name) {
@@ -7788,8 +7340,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ipPrintBarcodes => 'Imprimer les étiquettes de codes-barres';
 
   @override
-  String get ipProductSavedSnackbar =>
-      'Produit enregistré et liste mise à jour';
+  String get ipProductSavedSnackbar => 'Produit enregistré et liste mise à jour';
 
   @override
   String get ipNewProductBtn => 'Nouveau produit';
@@ -7881,16 +7432,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ipNoProductsYet => 'Aucun produit pour le moment';
 
   @override
-  String get ipNoProductsMatch =>
-      'Aucun produit ne correspond à votre recherche';
+  String get ipNoProductsMatch => 'Aucun produit ne correspond à votre recherche';
 
   @override
-  String get ipAddFirstHint =>
-      'Commencez par ajouter votre premier article à l\'inventaire.';
+  String get ipAddFirstHint => 'Commencez par ajouter votre premier article à l\'inventaire.';
 
   @override
-  String get ipTryChangeSearch =>
-      'Essayez de modifier vos termes de recherche ou d\'effacer le filtre.';
+  String get ipTryChangeSearch => 'Essayez de modifier vos termes de recherche ou d\'effacer le filtre.';
 
   @override
   String get ipAddFirstBtn => '+ Ajouter le premier produit';
@@ -7920,8 +7468,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ipDeleteProductTitle => 'Supprimer le produit';
 
   @override
-  String get ipDeleteProductContent =>
-      'Le produit sera masqué des listes (suppression logique) sans affecter les factures liées.';
+  String get ipDeleteProductContent => 'Le produit sera masqué des listes (suppression logique) sans affecter les factures liées.';
 
   @override
   String get ipProductType => 'Produit';
@@ -7957,8 +7504,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get apUnsavedChanges => 'Modifications non enregistrées';
 
   @override
-  String get apUnsavedConfirm =>
-      'Vous n\'avez pas enregistré le produit. Voulez-vous enregistrer avant de partir ?';
+  String get apUnsavedConfirm => 'Vous n\'avez pas enregistré le produit. Voulez-vous enregistrer avant de partir ?';
 
   @override
   String get apLeaveWithoutSaving => 'Quitter sans enregistrer';
@@ -7973,8 +7519,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get apDone => 'Terminé';
 
   @override
-  String get apLoadFormFailed =>
-      'Échec du chargement des données du formulaire produit';
+  String get apLoadFormFailed => 'Échec du chargement des données du formulaire produit';
 
   @override
   String apLoadFormFailedDetail(Object error) {
@@ -7987,40 +7532,31 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get apPercentDiscountMax =>
-      'La remise en pourcentage ne peut pas dépasser 100%.';
+  String get apPercentDiscountMax => 'La remise en pourcentage ne peut pas dépasser 100%.';
 
   @override
-  String get apBarcodeRequired =>
-      'Le champ code-barres est obligatoire selon les paramètres.';
+  String get apBarcodeRequired => 'Le champ code-barres est obligatoire selon les paramètres.';
 
   @override
-  String get apSupplierRequired =>
-      'Le champ fournisseur est obligatoire selon les paramètres.';
+  String get apSupplierRequired => 'Le champ fournisseur est obligatoire selon les paramètres.';
 
   @override
-  String get apWarehouseRequired =>
-      'La sélection de l\'entrepôt est obligatoire selon les paramètres.';
+  String get apWarehouseRequired => 'La sélection de l\'entrepôt est obligatoire selon les paramètres.';
 
   @override
-  String get apImageRequired =>
-      'L\'image du produit est obligatoire selon les paramètres.';
+  String get apImageRequired => 'L\'image du produit est obligatoire selon les paramètres.';
 
   @override
-  String get apMfgDateFormatError =>
-      'Format de date de fabrication invalide. Utilisez jour/mois/année (ex. 15/01/2026).';
+  String get apMfgDateFormatError => 'Format de date de fabrication invalide. Utilisez jour/mois/année (ex. 15/01/2026).';
 
   @override
-  String get apExpDateFormatError =>
-      'Format de date d\'expiration invalide. Utilisez jour/mois/année (ex. 15/01/2026).';
+  String get apExpDateFormatError => 'Format de date d\'expiration invalide. Utilisez jour/mois/année (ex. 15/01/2026).';
 
   @override
-  String get apExpDateAfterMfg =>
-      'La date d\'expiration doit être postérieure ou égale à la date de fabrication.';
+  String get apExpDateAfterMfg => 'La date d\'expiration doit être postérieure ou égale à la date de fabrication.';
 
   @override
-  String get apConversionFactorGt0 =>
-      'Le facteur de conversion doit être supérieur à 0 pour chaque unité supplémentaire.';
+  String get apConversionFactorGt0 => 'Le facteur de conversion doit être supérieur à 0 pour chaque unité supplémentaire.';
 
   @override
   String get apAddAtLeastOneColor => 'Ajoutez au moins une couleur.';
@@ -8040,24 +7576,19 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get apQtyMustBeNonNeg =>
-      'La quantité doit être un nombre entier supérieur ou égal à 0.';
+  String get apQtyMustBeNonNeg => 'La quantité doit être un nombre entier supérieur ou égal à 0.';
 
   @override
-  String get apDuplicateBarcodeVariants =>
-      'Code-barres en double trouvé dans les variantes.';
+  String get apDuplicateBarcodeVariants => 'Code-barres en double trouvé dans les variantes.';
 
   @override
-  String get apBarcodeUsedByOther =>
-      'Ce code-barres est utilisé par un autre produit.';
+  String get apBarcodeUsedByOther => 'Ce code-barres est utilisé par un autre produit.';
 
   @override
-  String get apVariantBarcodeTaken =>
-      'Le code-barres de la variante est déjà utilisé.';
+  String get apVariantBarcodeTaken => 'Le code-barres de la variante est déjà utilisé.';
 
   @override
-  String get apDuplicateSizeInColor =>
-      'La taille est en double dans la même couleur.';
+  String get apDuplicateSizeInColor => 'La taille est en double dans la même couleur.';
 
   @override
   String get apQtyMustBeGe0 => 'La quantité doit être supérieure ou égale à 0.';
@@ -8071,15 +7602,13 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get apProductSaved =>
-      'Produit enregistré. Vous pouvez saisir un nouveau produit.';
+  String get apProductSaved => 'Produit enregistré. Vous pouvez saisir un nouveau produit.';
 
   @override
   String get apChooseColorTitle => 'Choisir une couleur';
 
   @override
-  String get apChooseColorSubtitle =>
-      'Choisissez une couleur pour représenter cette option (facultatif).';
+  String get apChooseColorSubtitle => 'Choisissez une couleur pour représenter cette option (facultatif).';
 
   @override
   String get apApplyUniformQty => 'Appliquer une quantité uniforme';
@@ -8115,8 +7644,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get apSizesAndQuantities => 'Tailles et quantités';
 
   @override
-  String get apNoSizesYet =>
-      'Aucune taille pour le moment. Ajoutez au moins une taille.';
+  String get apNoSizesYet => 'Aucune taille pour le moment. Ajoutez au moins une taille.';
 
   @override
   String get apAddSizeBtn => 'Ajouter une taille';
@@ -8130,12 +7658,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get apAddNewColor => 'Ajouter une nouvelle couleur';
 
   @override
-  String get apApplyQtyAllSizes =>
-      'Appliquer une quantité uniforme à toutes les tailles';
+  String get apApplyQtyAllSizes => 'Appliquer une quantité uniforme à toutes les tailles';
 
   @override
-  String get apNoColorsYet =>
-      'Aucune couleur pour le moment. Ajoutez une couleur pour commencer.';
+  String get apNoColorsYet => 'Aucune couleur pour le moment. Ajoutez une couleur pour commencer.';
 
   @override
   String apProductCodeHint(Object code) {
@@ -8251,12 +7777,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get apSupplierCodeOptional => 'Code fournisseur (facultatif)';
 
   @override
-  String get apExtraUnitsOptional =>
-      'Unités de vente supplémentaires (facultatif)';
+  String get apExtraUnitsOptional => 'Unités de vente supplémentaires (facultatif)';
 
   @override
-  String get apExtraUnitsDesc =>
-      'ex. : Carton, couche, kilogramme… chacun avec code-barres optionnel et facteur de conversion vers le stock de base.';
+  String get apExtraUnitsDesc => 'ex. : Carton, couche, kilogramme… chacun avec code-barres optionnel et facteur de conversion vers le stock de base.';
 
   @override
   String get apAddUnit => 'Ajouter une unité';
@@ -8303,8 +7827,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get apGenerateNewBarcode => 'Générer un nouveau code-barres numérique';
 
   @override
-  String get apWeightPriceNote =>
-      'Calculé par kilogramme (stock basé sur le poids).';
+  String get apWeightPriceNote => 'Calculé par kilogramme (stock basé sur le poids).';
 
   @override
   String get apPricingSection => 'Tarification';
@@ -8319,8 +7842,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get apSellPriceLabel => 'Prix de vente';
 
   @override
-  String get apSellBelowBuyWarning =>
-      'Avertissement : le prix de vente est inférieur au prix d\'achat (vous pouvez continuer).';
+  String get apSellBelowBuyWarning => 'Avertissement : le prix de vente est inférieur au prix d\'achat (vous pouvez continuer).';
 
   @override
   String get apTaxSection => 'Taxe';
@@ -8387,16 +7909,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get apTrackInventory => 'Suivi de l\'inventaire';
 
   @override
-  String get apTrackInventoryOff =>
-      'Lorsque désactivé, les quantités ne seront pas enregistrées pour ce produit';
+  String get apTrackInventoryOff => 'Lorsque désactivé, les quantités ne seront pas enregistrées pour ce produit';
 
   @override
-  String get apWeightSales =>
-      'Par kilogramme — supporte les décimales (0,25, 0,5, 1,5…)';
+  String get apWeightSales => 'Par kilogramme — supporte les décimales (0,25, 0,5, 1,5…)';
 
   @override
-  String get apWeightThreshold =>
-      'Par kilogramme (ex. : 1 = alerte en dessous de 1 kg)';
+  String get apWeightThreshold => 'Par kilogramme (ex. : 1 = alerte en dessous de 1 kg)';
 
   @override
   String get apStockQty => 'Quantité en stock';
@@ -8413,8 +7932,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get apNetWeightLabel => 'Poids net (grammes) — facultatif';
 
   @override
-  String get apNetWeightHint =>
-      'Rempli automatiquement depuis le code-barres GS1 ou le poids intégré';
+  String get apNetWeightHint => 'Rempli automatiquement depuis le code-barres GS1 ou le poids intégré';
 
   @override
   String get apMfgDateLabel => 'Date de fabrication — facultatif';
@@ -8432,41 +7950,34 @@ class AppLocalizationsFr extends AppLocalizations {
   String get apExpiryAlertDays => 'Jours d\'alerte avant expiration';
 
   @override
-  String get apExpiryAlertHint =>
-      'Lorsque la date d\'expiration est définie : 1–365 (vide = par défaut des paramètres)';
+  String get apExpiryAlertHint => 'Lorsque la date d\'expiration est définie : 1–365 (vide = par défaut des paramètres)';
 
   @override
-  String get apExpiryAlertNote =>
-      'Utilisé uniquement avec la «date d\'expiration» ; l\'alerte apparaît dans le panneau de notification dans cette période avant la date.';
+  String get apExpiryAlertNote => 'Utilisé uniquement avec la «date d\'expiration» ; l\'alerte apparaît dans le panneau de notification dans cette période avant la date.';
 
   @override
   String get apInternalNotes => 'Notes internes';
 
   @override
-  String get apInternalNotesHint =>
-      'Non visible par les clients — pour l\'équipe uniquement';
+  String get apInternalNotesHint => 'Non visible par les clients — pour l\'équipe uniquement';
 
   @override
   String get apTags => 'Étiquettes';
 
   @override
-  String get apTagsHint =>
-      'Séparées par des virgules ou des espaces — pour la recherche et le filtrage';
+  String get apTagsHint => 'Séparées par des virgules ou des espaces — pour la recherche et le filtrage';
 
   @override
   String get apChooseFromList => 'Choisir dans la liste';
 
   @override
-  String get apImageSelected =>
-      'Image sélectionnée (aperçu web non disponible)';
+  String get apImageSelected => 'Image sélectionnée (aperçu web non disponible)';
 
   @override
-  String get apTapToAddImage =>
-      'Appuyez pour ajouter une image depuis la galerie';
+  String get apTapToAddImage => 'Appuyez pour ajouter une image depuis la galerie';
 
   @override
-  String get apManualEditActive =>
-      'Modification manuelle active — le prix de vente ne se mettra pas à jour automatiquement lorsque le coût change.';
+  String get apManualEditActive => 'Modification manuelle active — le prix de vente ne se mettra pas à jour automatiquement lorsque le coût change.';
 
   @override
   String get apRelinkToCost => ' Relier au coût d\'achat';
@@ -8497,19 +8008,16 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get aiBaseForInstallments =>
-      'Montant après l\'avance (base de l\'échelonnement)';
+  String get aiBaseForInstallments => 'Montant après l\'avance (base de l\'échelonnement)';
 
   @override
   String get aiProductsTab => 'Produits';
 
   @override
-  String get aiNoItemsWithBarcode =>
-      'Aucun article pour le moment.\nScannez le code-barres ci-dessus ou ajoutez via la recherche de l\'écran principal.\nRecherchez un produit ou scannez un code-barres pour ajouter.';
+  String get aiNoItemsWithBarcode => 'Aucun article pour le moment.\nScannez le code-barres ci-dessus ou ajoutez via la recherche de l\'écran principal.\nRecherchez un produit ou scannez un code-barres pour ajouter.';
 
   @override
-  String get aiNoItemsWithoutBarcode =>
-      'Aucun article pour le moment.\nAjoutez des produits via la recherche de l\'écran principal.\nRecherchez un produit ou scannez un code-barres pour ajouter.';
+  String get aiNoItemsWithoutBarcode => 'Aucun article pour le moment.\nAjoutez des produits via la recherche de l\'écran principal.\nRecherchez un produit ou scannez un code-barres pour ajouter.';
 
   @override
   String aiMaxDiscountHint(Object percent) {
@@ -8517,12 +8025,10 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get aiNumbersResultHint =>
-      'Résultat des chiffres et premier versement le cas échéant, avant de passer aux données client.';
+  String get aiNumbersResultHint => 'Résultat des chiffres et premier versement le cas échéant, avant de passer aux données client.';
 
   @override
-  String get aiNumbersResultWithDiscountHint =>
-      'Résultat des chiffres après remise et taxe, et premier versement le cas échéant, avant de passer aux données client.';
+  String get aiNumbersResultWithDiscountHint => 'Résultat des chiffres après remise et taxe, et premier versement le cas échéant, avant de passer aux données client.';
 
   @override
   String get aiPriceDetails => 'Détails du prix';
@@ -8547,12 +8053,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get aiQRMapHint => 'QR imprimé ouvre les cartes lors du scan';
 
   @override
-  String get aiDeliveryHint =>
-      'Pour la livraison: entrez le nom du client et l\'adresse de livraison (tous deux requis). Des suggestions de nom apparaissent de la base de données clients pendant la saisie.';
+  String get aiDeliveryHint => 'Pour la livraison: entrez le nom du client et l\'adresse de livraison (tous deux requis). Des suggestions de nom apparaissent de la base de données clients pendant la saisie.';
 
   @override
-  String get aiDebtInstallmentHint =>
-      'Important: pour la dette/l\'échelonnement, appuyez sur le nom du client dans les suggestions pour lier la vente à sa carte (taper le nom manuellement ne suffit pas s\'il ne correspond pas exactement à un enregistrement).';
+  String get aiDebtInstallmentHint => 'Important: pour la dette/l\'échelonnement, appuyez sur le nom du client dans les suggestions pour lier la vente à sa carte (taper le nom manuellement ne suffit pas s\'il ne correspond pas exactement à un enregistrement).';
 
   @override
   String get aiHideDetails => 'Masquer les détails';
@@ -8574,20 +8078,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get aiSellPricePerUnit => 'Prix de vente (par unité)';
 
   @override
-  String get aiInvoiceLineBeforeDiscount =>
-      'Total de la ligne avant remise facture';
+  String get aiInvoiceLineBeforeDiscount => 'Total de la ligne avant remise facture';
 
   @override
-  String get aiInvoiceLineDiscountShare =>
-      'Part de la remise facture pour cette ligne';
+  String get aiInvoiceLineDiscountShare => 'Part de la remise facture pour cette ligne';
 
   @override
-  String get aiInvoiceLineAfterDiscount =>
-      'Total après remise facture (pour cette ligne)';
+  String get aiInvoiceLineAfterDiscount => 'Total après remise facture (pour cette ligne)';
 
   @override
-  String get aiPercentDiscountDistribution =>
-      'La remise en pourcentage est répartie sur les lignes selon la contribution de chaque ligne au total des articles.';
+  String get aiPercentDiscountDistribution => 'La remise en pourcentage est répartie sur les lignes selon la contribution de chaque ligne au total des articles.';
 
   @override
   String get aiCancel => 'Annuler';
@@ -8606,11 +8106,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String aiDebtCapExceededCustomer(
-    Object cap,
-    Object existing,
-    Object invoice,
-  ) {
+  String aiDebtCapExceededCustomer(Object cap, Object existing, Object invoice) {
     return 'Limite de dette client: total restant actuel ≈ $existing, la facture ajoute $invoice (dépasse $cap). Liez le client depuis la liste, réduisez le montant, ou vérifiez les paramètres de dette.';
   }
 
@@ -8625,8 +8121,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get aiServiceOrderUpdateWarning =>
-      'Attention: la facture a été enregistrée mais le statut du ticket de maintenance lié n\'a pas pu être mis à jour automatiquement. Veuillez le vérifier manuellement.';
+  String get aiServiceOrderUpdateWarning => 'Attention: la facture a été enregistrée mais le statut du ticket de maintenance lié n\'a pas pu être mis à jour automatiquement. Veuillez le vérifier manuellement.';
 
   @override
   String aiReturnScreenTitle(Object id) {
@@ -8653,8 +8148,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get aiUnitPiece => 'Pièce';
 
   @override
-  String get aiParkedSalesHint =>
-      'Enregistré localement sur cet appareil. Vous pouvez reprendre la vente plus tard depuis «Factures ← Ventes en attente».';
+  String get aiParkedSalesHint => 'Enregistré localement sur cet appareil. Vous pouvez reprendre la vente plus tard depuis «Factures ← Ventes en attente».';
 
   @override
   String get aiScanToAdd => 'Scannez — sera ajouté automatiquement';
@@ -8663,8 +8157,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get apTrackStock => 'Gère la quantité et les alertes de stock bas';
 
   @override
-  String get apNoTrackDesc =>
-      'La quantité devient 0, aucune alerte de stock affichée';
+  String get apNoTrackDesc => 'La quantité devient 0, aucune alerte de stock affichée';
 
   @override
   String get ipStatusDisabled => 'Désactivé';
@@ -8693,8 +8186,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get apTrackDisabledHint =>
-      'Lorsque désactivé, les quantités ne sont pas suivies pour ce produit';
+  String get apTrackDisabledHint => 'Lorsque désactivé, les quantités ne sont pas suivies pour ce produit';
 
   @override
   String apOptionalHintIQD(Object amount) {
@@ -8758,12 +8250,10 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get csAlertsTooltip =>
-      'Alertes : retards, factures crédit, stock et échéanciers';
+  String get csAlertsTooltip => 'Alertes : retards, factures crédit, stock et échéanciers';
 
   @override
-  String get csRefreshFromCloud =>
-      'Rafraîchir la liste depuis le cloud & synchroniser — F5';
+  String get csRefreshFromCloud => 'Rafraîchir la liste depuis le cloud & synchroniser — F5';
 
   @override
   String get csLastUpdatedNow => 'Dernière mise à jour : à l\'instant — F5';
@@ -8811,15 +8301,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get csSearchFilter => 'Recherche et filtre';
 
   @override
-  String get csSearchDescription =>
-      'Recherche par nom, téléphone ou email. Les ventes à crédit et les échéanciers sont liés au client depuis l\'écran de vente.';
+  String get csSearchDescription => 'Recherche par nom, téléphone ou email. Les ventes à crédit et les échéanciers sont liés au client depuis l\'écran de vente.';
 
   @override
   String get csSearchInputHint => 'Recherche par nom, téléphone ou email…';
 
   @override
-  String get csSearchApplyHint =>
-      'Appliqué automatiquement en une fraction de seconde — Entrée ou bouton Appliquer pour plus de clarté. Raccourci : Ctrl+F';
+  String get csSearchApplyHint => 'Appliqué automatiquement en une fraction de seconde — Entrée ou bouton Appliquer pour plus de clarté. Raccourci : Ctrl+F';
 
   @override
   String get csSortLabel => 'Trier';
@@ -8852,8 +8340,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get csNoCustomersYet => 'Aucun client pour le moment';
 
   @override
-  String get csNoMatchingCustomers =>
-      'Aucun client ne correspond à la recherche ou au filtre';
+  String get csNoMatchingCustomers => 'Aucun client ne correspond à la recherche ou au filtre';
 
   @override
   String get csColName => 'Client';
@@ -8912,8 +8399,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get csSortTooltip => 'Recherche';
 
   @override
-  String get cfLoadFailedAfterAdd =>
-      'Échec du chargement des données client après ajout';
+  String get cfLoadFailedAfterAdd => 'Échec du chargement des données client après ajout';
 
   @override
   String get cfLoadFailed => 'Échec du chargement des données client';
@@ -8922,8 +8408,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get cfTitleEdit => 'Modifier les données du client';
 
   @override
-  String get cfFillBasic =>
-      'Remplissez les données de base. Les champs optionnels peuvent rester vides.';
+  String get cfFillBasic => 'Remplissez les données de base. Les champs optionnels peuvent rester vides.';
 
   @override
   String get cfNameHint => 'Nom complet tel qu\'affiché sur les factures';
@@ -8935,8 +8420,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get cfPhone2Hint => 'Numéro de téléphone supplémentaire';
 
   @override
-  String get cfPhonePrimaryExample =>
-      'Exemple : 07701234567 — ne doit pas dupliquer un autre client (distingue les noms similaires)';
+  String get cfPhonePrimaryExample => 'Exemple : 07701234567 — ne doit pas dupliquer un autre client (distingue les noms similaires)';
 
   @override
   String get cfPhone2Example => 'Exemple : 07801234567';
@@ -9021,22 +8505,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ctDebtOverdueLabel => 'En retard ou crédit';
 
   @override
-  String get ctDebtOverdueDescription =>
-      'Factures de vente à crédit non retournées, ou solde débit sur le compte — à contacter concernant la dette.';
+  String get ctDebtOverdueDescription => 'Factures de vente à crédit non retournées, ou solde débit sur le compte — à contacter concernant la dette.';
 
   @override
   String get ctInstallmentsLabel => 'Échéanciers';
 
   @override
-  String get ctInstallmentsDescription =>
-      'A un plan d\'échéance enregistré — à contacter concernant les échéances.';
+  String get ctInstallmentsDescription => 'A un plan d\'échéance enregistré — à contacter concernant les échéances.';
 
   @override
   String get ctNoContactsYet => 'Aucun contact pour le moment';
 
   @override
-  String get ctNoResults =>
-      'Aucun résultat correspondant. Modifiez la recherche ou ajoutez un client.';
+  String get ctNoResults => 'Aucun résultat correspondant. Modifiez la recherche ou ajoutez un client.';
 
   @override
   String get ctColBalance => 'Solde';
@@ -9102,35 +8583,28 @@ class AppLocalizationsFr extends AppLocalizations {
   String get lsSave => 'Enregistrer';
 
   @override
-  String get lsWhyNotSpoilTitle =>
-      'Pourquoi « n\'abîme »-t-il pas les profits ?';
+  String get lsWhyNotSpoilTitle => 'Pourquoi « n\'abîme »-t-il pas les profits ?';
 
   @override
-  String get lsWhyNotSpoilBody =>
-      'Les points sont une subvention marketing : enregistrés comme remise de fidélité séparée de la marge. L\'attribution des points ne modifie pas le coût d\'achat ; la réduction diminue ce que le client paie en espèces selon vos règles.';
+  String get lsWhyNotSpoilBody => 'Les points sont une subvention marketing : enregistrés comme remise de fidélité séparée de la marge. L\'attribution des points ne modifie pas le coût d\'achat ; la réduction diminue ce que le client paie en espèces selon vos règles.';
 
   @override
   String get lsEnablePoints => 'Activer le programme de points';
 
   @override
-  String get lsEnablePointsSubtitle =>
-      'Lorsque désactivé, les factures sont enregistrées sans collecte ni rédemption';
+  String get lsEnablePointsSubtitle => 'Lorsque désactivé, les factures sont enregistrées sans collecte ni rédemption';
 
   @override
-  String get lsPointsPerThousand =>
-      'Points pour 1 000 FDJ de net de facture éligible';
+  String get lsPointsPerThousand => 'Points pour 1 000 FDJ de net de facture éligible';
 
   @override
-  String get lsRedemptionValue =>
-      'Valeur de réduction en francs par point lors de la rédemption';
+  String get lsRedemptionValue => 'Valeur de réduction en francs par point lors de la rédemption';
 
   @override
-  String get lsMinRedemption =>
-      'Points minimum pour une rédemption unique (0 = pas de limite)';
+  String get lsMinRedemption => 'Points minimum pour une rédemption unique (0 = pas de limite)';
 
   @override
-  String get lsMaxRedemptionPercent =>
-      'Max % du net de facture couvert par les points';
+  String get lsMaxRedemptionPercent => 'Max % du net de facture couvert par les points';
 
   @override
   String get lsAwardWhenTitle => 'Quand les points sont-ils attribués ?';
@@ -9165,8 +8639,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get llRefresh => 'Actualiser';
 
   @override
-  String get llNoData =>
-      'Aucune transaction — activez la fidélité dans les paramètres et enregistrez des ventes liées à des clients.';
+  String get llNoData => 'Aucune transaction — activez la fidélité dans les paramètres et enregistrez des ventes liées à des clients.';
 
   @override
   String llCustomerId(Object id) {
@@ -9212,19 +8685,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get svSupplier2 => 'Fournisseur 2';
 
   @override
-  String get svNoActiveWarehouse =>
-      'Aucun entrepôt actif — ajoutez-en un d\'abord';
+  String get svNoActiveWarehouse => 'Aucun entrepôt actif — ajoutez-en un d\'abord';
 
   @override
-  String get svStocktakingDisabled =>
-      'Sauvegarde de l\'inventaire pas encore activée';
+  String get svStocktakingDisabled => 'Sauvegarde de l\'inventaire pas encore activée';
 
   @override
   String get svUnnamedItem => 'Article sans nom';
 
   @override
-  String get svEnterMatchingItems =>
-      'Saisissez des articles avec quantités et noms correspondant aux produits enregistrés';
+  String get svEnterMatchingItems => 'Saisissez des articles avec quantités et noms correspondant aux produits enregistrés';
 
   @override
   String get svWarning => 'Avertissement';
@@ -9236,8 +8706,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get svContinue => 'Continuer';
 
   @override
-  String get svPleaseFillSourceName =>
-      'Veuillez remplir le nom de la source du bon';
+  String get svPleaseFillSourceName => 'Veuillez remplir le nom de la source du bon';
 
   @override
   String get svVoucherDocument => 'Bon de stock';
@@ -9252,8 +8721,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get svWarehouse => 'Entrepôt';
 
   @override
-  String get svNoActiveWarehouseAdd =>
-      'Aucun entrepôt actif. Ajoutez-en depuis « Entrepôts ».';
+  String get svNoActiveWarehouseAdd => 'Aucun entrepôt actif. Ajoutez-en depuis « Entrepôts ».';
 
   @override
   String get svReceivingWarehouse => 'Entrepôt de réception';
@@ -9319,20 +8787,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get svNotes => 'Notes';
 
   @override
-  String get svAutoSupplierReceipt =>
-      'Créer automatiquement un reçu fournisseur et lier au bon';
+  String get svAutoSupplierReceipt => 'Créer automatiquement un reçu fournisseur et lier au bon';
 
   @override
-  String get svAutoSupplierReceiptDesc =>
-      'Enregistre une entrée à payer pour le montant du bon puis la lie.';
+  String get svAutoSupplierReceiptDesc => 'Enregistre une entrée à payer pour le montant du bon puis la lie.';
 
   @override
-  String get svAutoReturnRecord =>
-      'Enregistrer automatiquement le retour fournisseur';
+  String get svAutoReturnRecord => 'Enregistrer automatiquement le retour fournisseur';
 
   @override
-  String get svAutoReturnRecordDesc =>
-      'Enregistre un paiement fournisseur sans caisse pour réduire le solde lors de la sortie de marchandises retournées.';
+  String get svAutoReturnRecordDesc => 'Enregistre un paiement fournisseur sans caisse pour réduire le solde lors de la sortie de marchandises retournées.';
 
   @override
   String get svTotal => 'Total';
@@ -9399,19 +8863,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get usRoleEmployee => 'Employé';
 
   @override
-  String get usNoPermission =>
-      'Pas de permission — seuls les admins peuvent ajouter ou modifier les utilisateurs';
+  String get usNoPermission => 'Pas de permission — seuls les admins peuvent ajouter ou modifier les utilisateurs';
 
   @override
-  String get usCannotDisableSelf =>
-      'Vous ne pouvez pas désactiver votre propre compte tant que vous êtes connecté';
+  String get usCannotDisableSelf => 'Vous ne pouvez pas désactiver votre propre compte tant que vous êtes connecté';
 
   @override
   String get usDisableUserTitle => 'Désactiver l\'utilisateur';
 
   @override
-  String get usDisableUserDesc =>
-      'Le compte sera arrêté et ils ne pourront plus se connecter.';
+  String get usDisableUserDesc => 'Le compte sera arrêté et ils ne pourront plus se connecter.';
 
   @override
   String get usCancel => 'Annuler';
@@ -9435,12 +8896,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get usNoActiveUsers => 'Aucun utilisateur actif';
 
   @override
-  String get usNoActiveUsersHintAdmin =>
-      'Appuyez sur le bouton ajouter pour créer un nouvel utilisateur';
+  String get usNoActiveUsersHintAdmin => 'Appuyez sur le bouton ajouter pour créer un nouvel utilisateur';
 
   @override
-  String get usNoActiveUsersHintManager =>
-      'Connectez-vous en tant qu\'admin pour ajouter des utilisateurs';
+  String get usNoActiveUsersHintManager => 'Connectez-vous en tant qu\'admin pour ajouter des utilisateurs';
 
   @override
   String get usIdCard => 'Carte d\'identité';
@@ -9452,31 +8911,25 @@ class AppLocalizationsFr extends AppLocalizations {
   String get usDisableButton => 'Désactiver';
 
   @override
-  String get ufPhoneFormatHint =>
-      'Utilisez le format téléphonique irakien (ex. : 07XXXXXXXXX)';
+  String get ufPhoneFormatHint => 'Utilisez le format téléphonique irakien (ex. : 07XXXXXXXXX)';
 
   @override
-  String get ufEmailRequired =>
-      'L\'e-mail est requis (utilisé comme nom de connexion)';
+  String get ufEmailRequired => 'L\'e-mail est requis (utilisé comme nom de connexion)';
 
   @override
   String get ufEmailAlreadyRegistered => 'Cet e-mail est déjà enregistré';
 
   @override
-  String get ufPasswordMinLength =>
-      'Le mot de passe doit contenir au moins 6 caractères';
+  String get ufPasswordMinLength => 'Le mot de passe doit contenir au moins 6 caractères';
 
   @override
-  String get ufPasswordMismatch =>
-      'La confirmation du mot de passe ne correspond pas';
+  String get ufPasswordMismatch => 'La confirmation du mot de passe ne correspond pas';
 
   @override
-  String get ufEmailTaken =>
-      'Cet e-mail est enregistré pour un autre utilisateur';
+  String get ufEmailTaken => 'Cet e-mail est enregistré pour un autre utilisateur';
 
   @override
-  String get ufInvalidPasswordOrMismatch =>
-      'Mot de passe invalide ou confirmation incorrecte';
+  String get ufInvalidPasswordOrMismatch => 'Mot de passe invalide ou confirmation incorrecte';
 
   @override
   String get ufTitleEdit => 'Modifier l\'utilisateur';
@@ -9488,8 +8941,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ufAccountData => 'Données du compte';
 
   @override
-  String get ufAccountDataDesc =>
-      'L\'e-mail est utilisé comme nom de connexion. Téléphone au format irakien courant (07…).';
+  String get ufAccountDataDesc => 'L\'e-mail est utilisé comme nom de connexion. Téléphone au format irakien courant (07…).';
 
   @override
   String get ufFullName => 'Nom complet';
@@ -9531,8 +8983,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ufAccountAdmin => 'Admin (toutes les permissions)';
 
   @override
-  String get ufAdminNote =>
-      'Le compte admin contourne les restrictions détaillées et reçoit un accès complet au système.';
+  String get ufAdminNote => 'Le compte admin contourne les restrictions détaillées et reçoit un accès complet au système.';
 
   @override
   String get ufNewPasswordOptional => 'Nouveau mot de passe (optionnel)';
@@ -9550,8 +9001,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ufDetailedPermissions => 'Permissions détaillées';
 
   @override
-  String get ufDetailedPermissionsDesc =>
-      'Activez ce que cet employé peut accéder. Enregistré en base de données par utilisateur.';
+  String get ufDetailedPermissionsDesc => 'Activez ce que cet employé peut accéder. Enregistré en base de données par utilisateur.';
 
   @override
   String get ufSaving => 'Enregistrement…';
@@ -9571,8 +9021,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get eiRegenerateShiftCode => 'Régénérer le code de quart';
 
   @override
-  String get eiRegenerateShiftCodeDesc =>
-      'Un nouveau code sera généré. La carte d\'identité doit être imprimée/mise à jour et redistribuée.';
+  String get eiRegenerateShiftCodeDesc => 'Un nouveau code sera généré. La carte d\'identité doit être imprimée/mise à jour et redistribuée.';
 
   @override
   String get eiCancel => 'Annuler';
@@ -9587,8 +9036,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get eiTitle => 'Identités des employés';
 
   @override
-  String get eiNoActiveUsers =>
-      'Aucun utilisateur actif dans la base de données.';
+  String get eiNoActiveUsers => 'Aucun utilisateur actif dans la base de données.';
 
   @override
   String get swTimeZero => '0 min';
@@ -9609,12 +9057,10 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get swHintCompact =>
-      'Aperçu journalier ; touchez le jour pour voir les détails des quarts.';
+  String get swHintCompact => 'Aperçu journalier ; touchez le jour pour voir les détails des quarts.';
 
   @override
-  String get swHintFull =>
-      'Sept colonnes (sam → ven) : axe 00:00–24:00 en chiffres latins ; chaque barre est un quart (nom et heure dans la barre).';
+  String get swHintFull => 'Sept colonnes (sam → ven) : axe 00:00–24:00 en chiffres latins ; chaque barre est un quart (nom et heure dans la barre).';
 
   @override
   String get swNoShifts => 'Aucun quart';
@@ -9876,8 +9322,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get rpDeliveryNote =>
-      'Bon de livraison — localisation via QR en bas de page.';
+  String get rpDeliveryNote => 'Bon de livraison — localisation via QR en bas de page.';
 
   @override
   String rpAddress(Object address) {
@@ -9960,8 +9405,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get rpRemainingInstallments => 'Échéances restantes & dates';
 
   @override
-  String get rpAllInstallmentsPaid =>
-      'Toutes les échéances de ce plan sont payées.';
+  String get rpAllInstallmentsPaid => 'Toutes les échéances de ce plan sont payées.';
 
   @override
   String get rpScanToOpenInvoice => 'Scannez pour ouvrir facture & articles';
@@ -9976,8 +9420,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get rpDebtDetailsAndPayments => 'Détails dette & paiements';
 
   @override
-  String get rpScanToOpenDebtVoucher =>
-      'Scannez pour ouvrir bon de recouvrement';
+  String get rpScanToOpenDebtVoucher => 'Scannez pour ouvrir bon de recouvrement';
 
   @override
   String get rpPaymentRef => 'Référence paiement';
@@ -10008,8 +9451,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get rpAutoDistribute =>
-      'Les paiements sont répartis automatiquement sur les factures crédit, des plus anciennes.';
+  String get rpAutoDistribute => 'Les paiements sont répartis automatiquement sur les factures crédit, des plus anciennes.';
 
   @override
   String rpPaymentRecord(Object id) {
@@ -10041,8 +9483,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get rpDeductedFromCash => 'Montant déduit de la caisse.';
 
   @override
-  String get rpNotDeductedFromCash =>
-      'Non déduit de la caisse (paiement externe/bancaire).';
+  String get rpNotDeductedFromCash => 'Non déduit de la caisse (paiement externe/bancaire).';
 
   @override
   String rpNote(Object text) {
@@ -10072,12 +9513,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get rpNoPrinter => 'Aucune imprimante trouvée. Vérifiez la connexion.';
 
   @override
-  String get rpNoPrinterFound =>
-      'Aucune imprimante trouvée. Connectez une imprimante pour continuer.';
+  String get rpNoPrinterFound => 'Aucune imprimante trouvée. Connectez une imprimante pour continuer.';
 
   @override
-  String get rpPrintError =>
-      'Impression directe échouée. Vérifiez les paramètres de l\'imprimante.';
+  String get rpPrintError => 'Impression directe échouée. Vérifiez les paramètres de l\'imprimante.';
 
   @override
   String rpInstallmentDetail(Object amount, Object date, Object number) {
@@ -10085,12 +9524,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String rpInstallmentLine(
-    Object amount,
-    Object date,
-    Object number,
-    Object paidStatus,
-  ) {
+  String rpInstallmentLine(Object amount, Object date, Object number, Object paidStatus) {
     return 'Tranche $number — $amount FDJ — Échéance $date — $paidStatus';
   }
 
@@ -10106,8 +9540,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get rpCustomerDefaultName => 'Client';
 
   @override
-  String get rpRemainingInstallmentsReminder =>
-      'Tranches restantes (rappels d\'échéance)';
+  String get rpRemainingInstallmentsReminder => 'Tranches restantes (rappels d\'échéance)';
 
   @override
   String rpReceiptItemsAmount(Object amount) {
@@ -10131,8 +9564,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get anHideAlert => 'Masquer l\'alerte';
 
   @override
-  String get anHideConfirm =>
-      'C\'est une alerte importante. Voulez-vous vraiment la masquer de la liste ?';
+  String get anHideConfirm => 'C\'est une alerte importante. Voulez-vous vraiment la masquer de la liste ?';
 
   @override
   String get anCancel => 'Annuler';
@@ -10324,8 +9756,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get npInstallmentPlanError =>
-      'Attention : impossible de créer automatiquement le plan — vérifiez les Tranches et liez la facture.';
+  String get npInstallmentPlanError => 'Attention : impossible de créer automatiquement le plan — vérifiez les Tranches et liez la facture.';
 
   @override
   String npInstallmentPlanRef(Object id) {
@@ -10396,14 +9827,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get npDebtAgeTitle => 'Facture différée — avertissement';
 
   @override
-  String npDebtAgeBody(
-    Object age,
-    Object ageWord,
-    Object customer,
-    Object date,
-    Object days,
-    Object id,
-  ) {
+  String npDebtAgeBody(Object age, Object ageWord, Object customer, Object date, Object days, Object id) {
     return 'Selon les paramètres de dette ($days jours) : facture #$id — $customer — depuis le $date ($age $ageWord).';
   }
 
@@ -10430,13 +9854,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get npInvoiceCapTitle => 'Plafond de facture différée dépassé';
 
   @override
-  String npInvoiceCapBody(
-    Object cap,
-    Object customer,
-    Object date,
-    Object id,
-    Object remaining,
-  ) {
+  String npInvoiceCapBody(Object cap, Object customer, Object date, Object id, Object remaining) {
     return 'Selon les paramètres : facture #$id — $customer — reste $remaining FDJ (plafond $cap FDJ) — date $date.';
   }
 
@@ -10450,12 +9868,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get npNegativeStockTitle => 'Solde de stock négatif';
 
   @override
-  String npNegativeStockBody(
-    Object name,
-    Object over,
-    Object qty,
-    Object unitWord,
-  ) {
+  String npNegativeStockBody(Object name, Object over, Object qty, Object unitWord) {
     return '\"$name\" — quantité actuelle $qty (survente de $over $unitWord).';
   }
 
@@ -10509,13 +9922,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get npReturnTitle => 'Retour enregistré';
 
   @override
-  String npReturnBody(
-    Object count,
-    Object customer,
-    Object id,
-    Object orig,
-    Object total,
-  ) {
+  String npReturnBody(Object count, Object customer, Object id, Object orig, Object total) {
     return 'Facture retournée #$id$orig — $customer — $count articles — $total FDJ';
   }
 
@@ -10533,8 +9940,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get npLoggerNotifyFail =>
-      'Échec de l\'actualisation des notifications';
+  String get npLoggerNotifyFail => 'Échec de l\'actualisation des notifications';
 
   @override
   String get npRefreshHidden => 'Notifications masquées';
@@ -10552,46 +9958,37 @@ class AppLocalizationsFr extends AppLocalizations {
   String get spSubtitle => 'Choisissez le plan adapté à votre activité';
 
   @override
-  String get spJwtDescription =>
-      'Les cartes ci-dessous servent uniquement à la comparaison et aux prix. Après le paiement, vous recevrez un jeton signé (JWT) — collez-le dans le champ d\'activation sous les cartes.';
+  String get spJwtDescription => 'Les cartes ci-dessous servent uniquement à la comparaison et aux prix. Après le paiement, vous recevrez un jeton signé (JWT) — collez-le dans le champ d\'activation sous les cartes.';
 
   @override
-  String get spLegacyDescription =>
-      'Première carte : essai automatique de 15 jours (2 appareils). Les cartes suivantes sont des plans payants — après le paiement, entrez la clé dans le champ unifié ci-dessous.';
+  String get spLegacyDescription => 'Première carte : essai automatique de 15 jours (2 appareils). Les cartes suivantes sont des plans payants — après le paiement, entrez la clé dans le champ unifié ci-dessous.';
 
   @override
   String get spHowToSubscribe => 'Comment S\'abonner';
 
   @override
-  String get spHowJwtStep1 =>
-      '1. Contactez l\'équipe Maarey via les méthodes ci-dessous';
+  String get spHowJwtStep1 => '1. Contactez l\'équipe Maarey via les méthodes ci-dessous';
 
   @override
   String get spHowJwtStep2 => '2. Effectuez le paiement pour le plan souhaité';
 
   @override
-  String get spHowJwtStep3 =>
-      '3. Recevez le jeton d\'activation complet (JWT) de l\'administration';
+  String get spHowJwtStep3 => '3. Recevez le jeton d\'activation complet (JWT) de l\'administration';
 
   @override
-  String get spHowJwtStep4 =>
-      '4. Collez le jeton dans le champ unifié sous les cartes — le plan et le nombre d\'appareils sont extraits du jeton';
+  String get spHowJwtStep4 => '4. Collez le jeton dans le champ unifié sous les cartes — le plan et le nombre d\'appareils sont extraits du jeton';
 
   @override
-  String get spHowLegacyStep1 =>
-      '1. Contactez l\'équipe Maarey via les méthodes ci-dessous';
+  String get spHowLegacyStep1 => '1. Contactez l\'équipe Maarey via les méthodes ci-dessous';
 
   @override
-  String get spHowLegacyStep2 =>
-      '2. Dites-nous le plan souhaité et effectuez le paiement';
+  String get spHowLegacyStep2 => '2. Dites-nous le plan souhaité et effectuez le paiement';
 
   @override
-  String get spHowLegacyStep3 =>
-      '3. Recevez la clé de licence de l\'administration';
+  String get spHowLegacyStep3 => '3. Recevez la clé de licence de l\'administration';
 
   @override
-  String get spHowLegacyStep4 =>
-      '4. Collez la clé dans le champ unifié sous les cartes puis appuyez « Activer la Clé »';
+  String get spHowLegacyStep4 => '4. Collez la clé dans le champ unifié sous les cartes puis appuyez « Activer la Clé »';
 
   @override
   String get spContactWhatsApp => 'WhatsApp / Téléphone';
@@ -10609,8 +10006,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get spActivateTokenTitle => 'Activer le Jeton de Licence';
 
   @override
-  String get spActivateTokenDesc =>
-      'Collez le jeton complet envoyé par l\'administration. Le plan et le nombre d\'appareils sont extraits du jeton, pas de la mise en page de la carte.';
+  String get spActivateTokenDesc => 'Collez le jeton complet envoyé par l\'administration. Le plan et le nombre d\'appareils sont extraits du jeton, pas de la mise en page de la carte.';
 
   @override
   String get spTokenHint => 'Collez le jeton d\'activation ici';
@@ -10619,15 +10015,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get spActivateTokenButton => 'Activer le Jeton';
 
   @override
-  String get spErrorPasteKeyFirst =>
-      'Collez d\'abord la clé de licence ou le jeton d\'activation';
+  String get spErrorPasteKeyFirst => 'Collez d\'abord la clé de licence ou le jeton d\'activation';
 
   @override
   String get spActivateKeyTitle => 'Activer la Clé';
 
   @override
-  String get spActivateKeyDesc =>
-      'Collez la clé de licence reçue après le paiement, ou le jeton JWT si disponible. Les cartes ci-dessus servent uniquement à l\'affichage et à la comparaison.';
+  String get spActivateKeyDesc => 'Collez la clé de licence reçue après le paiement, ou le jeton JWT si disponible. Les cartes ci-dessus servent uniquement à l\'affichage et à la comparaison.';
 
   @override
   String get spKeyHint => 'Collez la clé de licence ou le jeton d\'activation';
@@ -10651,16 +10045,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get spCurrentPlan => 'Votre plan actuel';
 
   @override
-  String get spTrialAutoDescription =>
-      'L\'essai démarre automatiquement — aucune clé nécessaire. Lors de la mise à niveau, recevez le jeton de l\'administration et collez-le dans le champ unifié sous les cartes.';
+  String get spTrialAutoDescription => 'L\'essai démarre automatiquement — aucune clé nécessaire. Lors de la mise à niveau, recevez le jeton de l\'administration et collez-le dans le champ unifié sous les cartes.';
 
   @override
-  String get spJwtCardDescription =>
-      'Cette carte est uniquement pour l\'affichage et la comparaison. Après le paiement, collez le jeton d\'activation (JWT) dans le champ unifié sous les cartes.';
+  String get spJwtCardDescription => 'Cette carte est uniquement pour l\'affichage et la comparaison. Après le paiement, collez le jeton d\'activation (JWT) dans le champ unifié sous les cartes.';
 
   @override
-  String get spLegacyCardDescription =>
-      'Cette carte est uniquement pour l\'affichage et la comparaison. Après le paiement, collez la clé de licence dans le champ unifié sous les cartes.';
+  String get spLegacyCardDescription => 'Cette carte est uniquement pour l\'affichage et la comparaison. Après le paiement, collez la clé de licence dans le champ unifié sous les cartes.';
 
   @override
   String get spMostPopular => 'Le Plus Populaire';
@@ -10703,22 +10094,19 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get spTrialFeature1 =>
-      '15 jours à partir de la première utilisation (ou de la première inscription au compte cloud)';
+  String get spTrialFeature1 => '15 jours à partir de la première utilisation (ou de la première inscription au compte cloud)';
 
   @override
   String get spTrialFeature2 => '2 appareils sur le même compte';
 
   @override
-  String get spTrialFeature3 =>
-      'Ensuite choisissez un plan payant et activez la clé envoyée par l\'administration';
+  String get spTrialFeature3 => 'Ensuite choisissez un plan payant et activez la clé envoyée par l\'administration';
 
   @override
   String get spBasicFeature1 => '2 appareils sur le même compte';
 
   @override
-  String get spBasicFeature2 =>
-      'Toutes les fonctionnalités d\'inventaire et de facturation';
+  String get spBasicFeature2 => 'Toutes les fonctionnalités d\'inventaire et de facturation';
 
   @override
   String get spBasicFeature3 => 'Rapports et analyses';
@@ -10745,8 +10133,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get spUnlimitedFeature1 => 'Appareils illimités sur un seul compte';
 
   @override
-  String get spUnlimitedFeature2 =>
-      'Toutes les fonctionnalités du plan Professionnel';
+  String get spUnlimitedFeature2 => 'Toutes les fonctionnalités du plan Professionnel';
 
   @override
   String get spUnlimitedFeature3 => 'Support multi-agences';
@@ -10761,22 +10148,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get bulkImportTitle => 'Importer des Produits depuis CSV';
 
   @override
-  String get bulkImportSubtitle =>
-      'Importez rapidement vos produits depuis un fichier CSV';
+  String get bulkImportSubtitle => 'Importez rapidement vos produits depuis un fichier CSV';
 
   @override
   String get bulkImportTemplate => 'Télécharger le Modèle CSV';
 
   @override
-  String get bulkImportTemplateDesc =>
-      'Téléchargez un modèle pré-rempli, puis complétez-le avec vos données produit';
+  String get bulkImportTemplateDesc => 'Téléchargez un modèle pré-rempli, puis complétez-le avec vos données produit';
 
   @override
   String get bulkImportPickFile => 'Choisir un Fichier CSV';
 
   @override
-  String get bulkImportPickFileDesc =>
-      'Sélectionnez un fichier CSV depuis votre appareil';
+  String get bulkImportPickFileDesc => 'Sélectionnez un fichier CSV depuis votre appareil';
 
   @override
   String get bulkImportPreview => 'Aperçu des Données';
@@ -10955,8 +10339,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get olOnlineFound => 'Trouvé dans l\'annuaire international';
 
   @override
-  String get olOnlineNotFound =>
-      'Produit non trouvé dans l\'annuaire international';
+  String get olOnlineNotFound => 'Produit non trouvé dans l\'annuaire international';
 
   @override
   String get olUseThisProduct => 'Utiliser ce produit';
@@ -10980,16 +10363,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get olAddToProducts => 'Ajouter aux produits';
 
   @override
-  String get olAutoFilled =>
-      'Champs remplis automatiquement depuis l\'annuaire international';
+  String get olAutoFilled => 'Champs remplis automatiquement depuis l\'annuaire international';
 
   @override
-  String get signupAcceptTermsFirst =>
-      'Vous devez accepter les conditions générales d\'abord';
+  String get signupAcceptTermsFirst => 'Vous devez accepter les conditions générales d\'abord';
 
   @override
-  String get signupAccountCreated =>
-      'Compte créé avec succès ! Veuillez vous connecter.';
+  String get signupAccountCreated => 'Compte créé avec succès ! Veuillez vous connecter.';
 
   @override
   String get signupGoogleSoon => 'Google Sign-In sera bientôt disponible';
@@ -11037,8 +10417,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get signupPhoneRequired => 'Le numéro de téléphone est requis';
 
   @override
-  String get signupPhoneIraqInvalid =>
-      'Numéro irakien : 11 chiffres commençant par 07';
+  String get signupPhoneIraqInvalid => 'Numéro irakien : 11 chiffres commençant par 07';
 
   @override
   String get signupPhoneInvalid => 'Numéro invalide';
@@ -11062,16 +10441,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get signupConfirmPasswordHint => 'Ressaisissez le mot de passe';
 
   @override
-  String get signupConfirmPasswordRequired =>
-      'La confirmation du mot de passe est requise';
+  String get signupConfirmPasswordRequired => 'La confirmation du mot de passe est requise';
 
   @override
-  String get signupPasswordsMismatch =>
-      'Les mots de passe ne correspondent pas';
+  String get signupPasswordsMismatch => 'Les mots de passe ne correspondent pas';
 
   @override
-  String get signupCaptchaTitle =>
-      'Vérification d\'identité — Répondez à la question simple';
+  String get signupCaptchaTitle => 'Vérification d\'identité — Répondez à la question simple';
 
   @override
   String get signupCaptchaChange => 'Changer';
@@ -11125,8 +10501,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get licActivation => 'Activation de la licence';
 
   @override
-  String get licEnterKeyToContinue =>
-      'Entrez votre clé de licence pour continuer';
+  String get licEnterKeyToContinue => 'Entrez votre clé de licence pour continuer';
 
   @override
   String get licKeyHint => 'MAAREY-XXXX-XXXX-XXXX ou JWT';
@@ -11135,8 +10510,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get licActivate => 'Activer';
 
   @override
-  String get licContactSupport =>
-      'Pour obtenir une clé de licence, contactez l\'équipe Maarey.';
+  String get licContactSupport => 'Pour obtenir une clé de licence, contactez l\'équipe Maarey.';
 
   @override
   String get licAllRightsReserved => 'Maarey v2.0 — Tous droits réservés';
@@ -11154,16 +10528,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get licExpired => 'Abonnement expiré';
 
   @override
-  String get licTimeConflictMsg =>
-      'Conflit de paramètres horaires détecté. Contactez le support pour une re-vérification.';
+  String get licTimeConflictMsg => 'Conflit de paramètres horaires détecté. Contactez le support pour une re-vérification.';
 
   @override
-  String get licAccountSuspended =>
-      'Votre compte a été suspendu. Contactez le support technique.';
+  String get licAccountSuspended => 'Votre compte a été suspendu. Contactez le support technique.';
 
   @override
-  String get licSubscriptionEnded =>
-      'Votre abonnement a expiré. Renouvelez pour continuer.';
+  String get licSubscriptionEnded => 'Votre abonnement a expiré. Renouvelez pour continuer.';
 
   @override
   String get licCurrentPlan => 'Forfait actuel';
@@ -11217,8 +10588,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get cashOutflow => 'Sortie';
 
   @override
-  String get cashNoLinkedEntries =>
-      'Aucune écriture liée à une facture dans ce groupe.';
+  String get cashNoLinkedEntries => 'Aucune écriture liée à une facture dans ce groupe.';
 
   @override
   String get cashInvoiceIdsShown => 'Numéros de factures affichés :';
@@ -11422,8 +10792,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get cdAmountLabel => 'Montant (FDJ)';
 
   @override
-  String get cdAutoDistribute =>
-      'Réparti automatiquement des factures les plus anciennes aux plus récentes.';
+  String get cdAutoDistribute => 'Réparti automatiquement des factures les plus anciennes aux plus récentes.';
 
   @override
   String get cdCancel => 'Annuler';
@@ -11494,8 +10863,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dsReloadTooltip => 'Recharger depuis la base';
 
   @override
-  String get dsApplyInfo =>
-      'Ces limites s\'appliquent lors de la sauvegarde d\'une facture à crédit. Laissez vide ou 0 pour désactiver.';
+  String get dsApplyInfo => 'Ces limites s\'appliquent lors de la sauvegarde d\'une facture à crédit. Laissez vide ou 0 pour désactiver.';
 
   @override
   String get dsAmountCeilings => 'Plafonds de montants';
@@ -11528,15 +10896,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dsAutoEnforce => 'Application automatique des limites';
 
   @override
-  String get dsAutoEnforceHint =>
-      'Empêcher la sauvegarde si les limites sont dépassées';
+  String get dsAutoEnforceHint => 'Empêcher la sauvegarde si les limites sont dépassées';
 
   @override
   String get dsReminderDays => 'Jours de rappel';
 
   @override
-  String get dsReminderHint =>
-      'Jours avant l\'échéance pour afficher le rappel';
+  String get dsReminderHint => 'Jours avant l\'échéance pour afficher le rappel';
 
   @override
   String get dsOverdueThreshold => 'Seuil de retard (jours)';
@@ -11548,12 +10914,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get cashInvoiceNumShort => 'Facture #';
 
   @override
-  String get cashShiftLoadError =>
-      'Échec du chargement de l\'historique du quart ; ci-dessous uniquement la vue de la caisse.';
+  String get cashShiftLoadError => 'Échec du chargement de l\'historique du quart ; ci-dessous uniquement la vue de la caisse.';
 
   @override
-  String get cashTotalMovements =>
-      'Total des mouvements affichés en caisse pour ce groupe';
+  String get cashTotalMovements => 'Total des mouvements affichés en caisse pour ce groupe';
 
   @override
   String get cashMovementsCount => 'mouvements.';
@@ -11622,12 +10986,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get cashTapInvoice => 'Appuyez pour la facture #';
 
   @override
-  String get cashCashboxInfo =>
-      'Enregistré séparément des factures de vente et tranches. Utilisé pour les dépenses du magasin ou dépôt/retrait bancaire.';
+  String get cashCashboxInfo => 'Enregistré séparément des factures de vente et tranches. Utilisé pour les dépenses du magasin ou dépôt/retrait bancaire.';
 
   @override
-  String get cashCashboxBalanceInfo =>
-      'Total des entrées en caisse des ventes au comptant, acomptes, paiements de tranches et dépôts manuels — hors factures à crédit sans acompte.';
+  String get cashCashboxBalanceInfo => 'Total des entrées en caisse des ventes au comptant, acomptes, paiements de tranches et dépôts manuels — hors factures à crédit sans acompte.';
 
   @override
   String get calculatorTitle => 'Calculatrice';
@@ -11639,8 +11001,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get calculatorClearAll => 'Tout effacer';
 
   @override
-  String get debtsGroupByCustomer =>
-      'Regroupement par client : produits, vendeurs et paiement partiel depuis l\'écran détails. QR sur reçu pour les clients enregistrés uniquement.';
+  String get debtsGroupByCustomer => 'Regroupement par client : produits, vendeurs et paiement partiel depuis l\'écran détails. QR sur reçu pour les clients enregistrés uniquement.';
 
   @override
   String get debtsSearchHintCustomer => 'Recherche par nom ou ID client…';
@@ -11649,8 +11010,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get debtsXofYCustomers => 'sur';
 
   @override
-  String get debtsNoCreditRemaining =>
-      'Aucun crédit restant regroupé par clients';
+  String get debtsNoCreditRemaining => 'Aucun crédit restant regroupé par clients';
 
   @override
   String get debtsNoResults => 'Aucun résultat';
@@ -11678,16 +11038,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get debtsCustomerStatement => 'Relevé client';
 
   @override
-  String get debtsAgingWarningInfo =>
-      'L\'avertissement commence après X jours.';
+  String get debtsAgingWarningInfo => 'L\'avertissement commence après X jours.';
 
   @override
-  String get debtsAgingDisabled =>
-      'Activez les jours d\'avertissement pour marquer les factures anciennes.';
+  String get debtsAgingDisabled => 'Activez les jours d\'avertissement pour marquer les factures anciennes.';
 
   @override
-  String get debtsInfoBanner =>
-      'Les créances sont calculées depuis les factures à crédit.';
+  String get debtsInfoBanner => 'Les créances sont calculées depuis les factures à crédit.';
 
   @override
   String get debtsTotalRemaining => 'Total restant';
@@ -11732,19 +11089,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get debtsTapForDetails => 'Appuyez pour voir les détails';
 
   @override
-  String get debtsNoInvoicesInFilter =>
-      'Aucune facture dans la recherche actuelle';
+  String get debtsNoInvoicesInFilter => 'Aucune facture dans la recherche actuelle';
 
   @override
   String get debtsNoDebtInvoices => 'Aucune facture de dette enregistrée';
 
   @override
-  String get debtsClearSearchHint =>
-      'Effacez la recherche ou sélectionnez «Tout» dans la barre de filtres.';
+  String get debtsClearSearchHint => 'Effacez la recherche ou sélectionnez «Tout» dans la barre de filtres.';
 
   @override
-  String get debtsNewSaleHint =>
-      'Depuis «Nouvelle vente» choisissez le type «crédit» pour afficher le montant ici.';
+  String get debtsNewSaleHint => 'Depuis «Nouvelle vente» choisissez le type «crédit» pour afficher le montant ici.';
 
   @override
   String get hubInventoryTitle => 'Centre de stock';
@@ -11753,8 +11107,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get hubProductsList => 'Liste des produits';
 
   @override
-  String get hubProductsListDesc =>
-      'Rechercher, filtrer et gérer tous les articles';
+  String get hubProductsListDesc => 'Rechercher, filtrer et gérer tous les articles';
 
   @override
   String get hubAddProduct => 'Ajouter un produit';
@@ -11766,8 +11119,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get hubQuickUpdate => 'Mettre à jour un produit';
 
   @override
-  String get hubQuickUpdateDesc =>
-      'Rechercher, code-barres, modifier prix et quantités sans créer de nouvel article';
+  String get hubQuickUpdateDesc => 'Rechercher, code-barres, modifier prix et quantités sans créer de nouvel article';
 
   @override
   String get hubVouchers => 'Mouvements de stock';
@@ -11779,8 +11131,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get hubWarehouses => 'Gestion des entrepôts';
 
   @override
-  String get hubWarehousesDesc =>
-      'Ajouter et modifier les entrepôts et emplacements';
+  String get hubWarehousesDesc => 'Ajouter et modifier les entrepôts et emplacements';
 
   @override
   String get hubPriceLists => 'Listes de prix';
@@ -11792,15 +11143,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get hubStocktaking => 'Inventaire périodique';
 
   @override
-  String get hubStocktakingDesc =>
-      'Concilier le stock physique avec le système';
+  String get hubStocktakingDesc => 'Concilier le stock physique avec le système';
 
   @override
   String get hubPurchaseOrders => 'Bons de commande';
 
   @override
-  String get hubPurchaseOrdersDesc =>
-      'Créer et suivre les commandes fournisseurs';
+  String get hubPurchaseOrdersDesc => 'Créer et suivre les commandes fournisseurs';
 
   @override
   String get hubAnalytics => 'Analyses de stock';
@@ -11812,8 +11161,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get hubSettings => 'Paramètres de stock';
 
   @override
-  String get hubSettingsDesc =>
-      'Type d\'activité, caractéristiques produit, activer les fonctionnalités';
+  String get hubSettingsDesc => 'Type d\'activité, caractéristiques produit, activer les fonctionnalités';
 
   @override
   String get hubTenantSelect => 'Sélectionner le compte/locataire';
@@ -11825,8 +11173,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get hubCustomizeUnits => 'Personnaliser les unités de stock';
 
   @override
-  String get hubCustomizeUnitsDesc =>
-      'Masquer toute unité dont vous n\'avez pas besoin. Vous pourrez la restaurer plus tard au même endroit';
+  String get hubCustomizeUnitsDesc => 'Masquer toute unité dont vous n\'avez pas besoin. Vous pourrez la restaurer plus tard au même endroit';
 
   @override
   String get hubCancel => 'Annuler';
@@ -11844,37 +11191,31 @@ class AppLocalizationsFr extends AppLocalizations {
   String get hubSwitchTenant => 'Changer de locataire';
 
   @override
-  String get hubAllHidden =>
-      'Toutes les unités sont masquées ou désactivées depuis les paramètres';
+  String get hubAllHidden => 'Toutes les unités sont masquées ou désactivées depuis les paramètres';
 
   @override
   String get hubManageUnits => 'Gérer les unités';
 
   @override
-  String get hubReloadOnReturn =>
-      'Recharger au retour (les paramètres peuvent avoir changé)';
+  String get hubReloadOnReturn => 'Recharger au retour (les paramètres peuvent avoir changé)';
 
   @override
   String get bsTitle => 'Paramètres du code-barres';
 
   @override
-  String get bsSubtitle =>
-      'Configurer les formats de code-barres, les codes-barres avec poids intégré et les paramètres de tarification';
+  String get bsSubtitle => 'Configurer les formats de code-barres, les codes-barres avec poids intégré et les paramètres de tarification';
 
   @override
   String get bsTypeTitle => 'Type de code-barres';
 
   @override
-  String get bsTypeCode128Desc =>
-      'Code-barres flexible supportant les lettres, chiffres et symboles. Utilisé largement dans la logistique et l\'entreposage';
+  String get bsTypeCode128Desc => 'Code-barres flexible supportant les lettres, chiffres et symboles. Utilisé largement dans la logistique et l\'entreposage';
 
   @override
-  String get bsTypeEan13Desc =>
-      'Standard composé de 13 chiffres couramment utilisé dans la grande distribution. Inclut le code pays, le code fabricant et le code produit';
+  String get bsTypeEan13Desc => 'Standard composé de 13 chiffres couramment utilisé dans la grande distribution. Inclut le code pays, le code fabricant et le code produit';
 
   @override
-  String get bsTypeLabel =>
-      'Choisir le standard de code-barres que le système utilisera pour créer et lire les codes-barres produits';
+  String get bsTypeLabel => 'Choisir le standard de code-barres que le système utilisera pour créer et lire les codes-barres produits';
 
   @override
   String get bsWeightEmbedded => 'Code-barres avec poids intégré';
@@ -11886,19 +11227,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get bsWeightDisabled => 'Désactivé';
 
   @override
-  String get bsWeightDesc =>
-      'Utiliser le code-barres avec poids intégré pour que le système puisse lire le poids et le prix directement du code-barres';
+  String get bsWeightDesc => 'Utiliser le code-barres avec poids intégré pour que le système puisse lire le poids et le prix directement du code-barres';
 
   @override
   String get bsWeightFormat => 'Format du code-barres avec poids intégré';
 
   @override
-  String get bsWeightFormatDesc =>
-      'Saisir le format du code-barres selon le modèle, où les chiffres représentent le produit, les chiffres de poids et les chiffres de prix';
+  String get bsWeightFormatDesc => 'Saisir le format du code-barres selon le modèle, où les chiffres représentent le produit, les chiffres de poids et les chiffres de prix';
 
   @override
-  String get bsWeightExample =>
-      'Par exemple, si le poids est affiché en 4 chiffres il apparaîtra en grammes, et en 5 chiffres en dizaines de grammes';
+  String get bsWeightExample => 'Par exemple, si le poids est affiché en 4 chiffres il apparaîtra en grammes, et en 5 chiffres en dizaines de grammes';
 
   @override
   String get bsWeightUnit => 'Division de l\'unité de poids';
@@ -11907,8 +11245,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get bsWeightUnitExample => 'Exemple';
 
   @override
-  String get bsWeightUnitDesc =>
-      'Saisir la valeur utilisée par le système pour convertir l\'unité de poids dans le code-barres en votre unité de vente';
+  String get bsWeightUnitDesc => 'Saisir la valeur utilisée par le système pour convertir l\'unité de poids dans le code-barres en votre unité de vente';
 
   @override
   String get bsCurrencyDivision => 'Division de la devise';
@@ -11917,23 +11254,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get bsCurrencyExample => 'Exemple';
 
   @override
-  String get bsCurrencyDesc =>
-      'Saisir la valeur utilisée par le système pour convertir le prix de l\'unité intégrée dans le code-barres vers votre devise de base';
+  String get bsCurrencyDesc => 'Saisir la valeur utilisée par le système pour convertir le prix de l\'unité intégrée dans le code-barres vers votre devise de base';
 
   @override
   String get bsFormatLabel => 'Format du code-barres intégré';
 
   @override
-  String get bsFormatError =>
-      'Le format du code-barres intégré ne doit contenir que les lettres W, P et D';
+  String get bsFormatError => 'Le format du code-barres intégré ne doit contenir que les lettres W, P et D';
 
   @override
-  String get bsWeightUnitError =>
-      'Saisir une valeur positive valide pour diviser l\'unité de poids';
+  String get bsWeightUnitError => 'Saisir une valeur positive valide pour diviser l\'unité de poids';
 
   @override
-  String get bsCurrencyDivError =>
-      'Saisir une valeur positive valide pour diviser la devise';
+  String get bsCurrencyDivError => 'Saisir une valeur positive valide pour diviser la devise';
 
   @override
   String get bsSaveSuccess => 'Paramètres du code-barres enregistrés';
@@ -12002,8 +11335,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get plWholesale => 'Liste de gros';
 
   @override
-  String get plWholesaleDesc =>
-      'Prix de gros pour les distributeurs et commerçants';
+  String get plWholesaleDesc => 'Prix de gros pour les distributeurs et commerçants';
 
   @override
   String get plVIP => 'Liste clients VIP';
@@ -12126,8 +11458,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get rptNoCustomerData => 'Aucune donnée client pour cette période';
 
   @override
-  String get rptNoStaffSales =>
-      'Aucune vente enregistrée par le personnel pour cette période';
+  String get rptNoStaffSales => 'Aucune vente enregistrée par le personnel pour cette période';
 
   @override
   String get rptTopBuyers => 'Meilleurs acheteurs par nom de facture';
@@ -12139,23 +11470,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get rptSalesByStaff => 'Répartition des ventes par personnel';
 
   @override
-  String get rptDebtsBalances =>
-      'Soldes enregistrés dans le grand livre clients';
+  String get rptDebtsBalances => 'Soldes enregistrés dans le grand livre clients';
 
   @override
-  String get rptInstallmentPlans =>
-      'Plans d\'acomptes liés aux factures de la période';
+  String get rptInstallmentPlans => 'Plans d\'acomptes liés aux factures de la période';
 
   @override
   String get rptDetails => 'Détails des plans';
 
   @override
-  String get rptStaffPercentage =>
-      'Pourcentage de chaque membre du personnel du total des ventes';
+  String get rptStaffPercentage => 'Pourcentage de chaque membre du personnel du total des ventes';
 
   @override
-  String get rptConsistentWithPie =>
-      'Cohérent avec les pourcentages du graphique circulaire et du tableau';
+  String get rptConsistentWithPie => 'Cohérent avec les pourcentages du graphique circulaire et du tableau';
 
   @override
   String get rptUnknown => 'Inconnu';
@@ -12179,26 +11506,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get rptInvoicesReturns => 'Factures et retours';
 
   @override
-  String get rptDailySalesInRange =>
-      'Tendance des ventes quotidiennes dans la période';
+  String get rptDailySalesInRange => 'Tendance des ventes quotidiennes dans la période';
 
   @override
   String get rptPiePayments => 'Répartition des modes de paiement';
 
   @override
-  String get osDescription =>
-      'Après connexion, afficher le solde de la caisse, l\'inventaire, ajouter de l\'argent, puis identifier l\'employé du quart';
+  String get osDescription => 'Après connexion, afficher le solde de la caisse, l\'inventaire, ajouter de l\'argent, puis identifier l\'employé du quart';
 
   @override
-  String get osSessionExpired =>
-      'Session terminée en arrière-plan pendant le chargement de l\'écran';
+  String get osSessionExpired => 'Session terminée en arrière-plan pendant le chargement de l\'écran';
 
   @override
   String get osUnexpectedError => 'Erreur inattendue lors de l\'initialisation';
 
   @override
-  String get osPasswordRequired =>
-      'En revenant à l\'application avec un quart ouvert, nous demandons le mot de passe de l\'employé';
+  String get osPasswordRequired => 'En revenant à l\'application avec un quart ouvert, nous demandons le mot de passe de l\'employé';
 
   @override
   String get osShiftEmployee => 'Employé du quart';
@@ -12219,8 +11542,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get osErrorOpening => 'Échec de l\'ouverture du quart';
 
   @override
-  String get osNoShiftId =>
-      'Opération terminée sans ID de quart valide, réessayez';
+  String get osNoShiftId => 'Opération terminée sans ID de quart valide, réessayez';
 
   @override
   String get osShiftOpened => 'Quart ouvert avec succès';
@@ -12229,8 +11551,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get osAmountHint => 'Montant affiché lors de l\'inventaire';
 
   @override
-  String get osAmountLabel =>
-      'Saisissez le montant réel dans la caisse maintenant';
+  String get osAmountLabel => 'Saisissez le montant réel dans la caisse maintenant';
 
   @override
   String get osExample => 'Exemple';
@@ -12239,15 +11560,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get osAddMoney => 'Ajouter de l\'argent à la caisse';
 
   @override
-  String get osAddMoneyDesc =>
-      'Optionnel - utilisez si vous ajoutez du cash avant de commencer les ventes';
+  String get osAddMoneyDesc => 'Optionnel - utilisez si vous ajoutez du cash avant de commencer les ventes';
 
   @override
   String get osLogout => 'Quitter le compte';
 
   @override
-  String get osReviewBalance =>
-      'Vérifiez le solde de la caisse système, puis enregistrez le comptage réel avant de commencer';
+  String get osReviewBalance => 'Vérifiez le solde de la caisse système, puis enregistrez le comptage réel avant de commencer';
 
   @override
   String get osOpeningSystemBalance => 'Solde de la caisse selon le système';
@@ -12259,42 +11578,34 @@ class AppLocalizationsFr extends AppLocalizations {
   String get osStaffDialogTitle => 'Dialogue employé du quart';
 
   @override
-  String get osStaffDialogDesc =>
-      'Sélectionner un utilisateur enregistré par code carte ou scanner';
+  String get osStaffDialogDesc => 'Sélectionner un utilisateur enregistré par code carte ou scanner';
 
   @override
   String get osAllActiveUsers => 'Tous les utilisateurs actifs';
 
   @override
-  String get osErrorLoadingUsers =>
-      'Échec du chargement des utilisateurs du quart';
+  String get osErrorLoadingUsers => 'Échec du chargement des utilisateurs du quart';
 
   @override
-  String get osInvalidCard =>
-      'Le texte lu n\'est pas un code d\'identité valide';
+  String get osInvalidCard => 'Le texte lu n\'est pas un code d\'identité valide';
 
   @override
-  String get osSelectUser =>
-      'Sélectionnez l\'utilisateur du quart dans la liste ou scannez la carte';
+  String get osSelectUser => 'Sélectionnez l\'utilisateur du quart dans la liste ou scannez la carte';
 
   @override
-  String get osUserNotFound =>
-      'Utilisateur non trouvé, sélectionnez un autre utilisateur';
+  String get osUserNotFound => 'Utilisateur non trouvé, sélectionnez un autre utilisateur';
 
   @override
-  String get osNoLocalPassword =>
-      'Aucun mot de passe local pour ce compte, définissez un mot de passe depuis la gestion des utilisateurs';
+  String get osNoLocalPassword => 'Aucun mot de passe local pour ce compte, définissez un mot de passe depuis la gestion des utilisateurs';
 
   @override
   String get osWrongPassword => 'Mot de passe de connexion incorrect';
 
   @override
-  String get osSelectEmployee =>
-      'Sélectionnez l\'employé responsable de la caisse pour ce quart';
+  String get osSelectEmployee => 'Sélectionnez l\'employé responsable de la caisse pour ce quart';
 
   @override
-  String get osNoActiveUsers =>
-      'Aucun utilisateur actif dans le système, ajoutez un utilisateur depuis la gestion';
+  String get osNoActiveUsers => 'Aucun utilisateur actif dans le système, ajoutez un utilisateur depuis la gestion';
 
   @override
   String get osUserLabel => 'Utilisateur du quart';
@@ -12309,8 +11620,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get osAutoDetermined => 'Déterminé automatiquement';
 
   @override
-  String get osScanDesc =>
-      'Sélectionner l\'utilisateur par caméra ou lecteur externe, puis saisir le mot de passe pour confirmer';
+  String get osScanDesc => 'Sélectionner l\'utilisateur par caméra ou lecteur externe, puis saisir le mot de passe pour confirmer';
 
   @override
   String get osScanCamera => 'Scanner avec la caméra';
@@ -12322,8 +11632,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get osPressToScan => 'Appuyez ici puis scannez la carte';
 
   @override
-  String get osInvalidIdCode =>
-      'Le texte lu n\'est pas un code d\'identité valide';
+  String get osInvalidIdCode => 'Le texte lu n\'est pas un code d\'identité valide';
 
   @override
   String get osLoginPassword => 'Mot de passe de connexion';
@@ -12343,28 +11652,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get osNoStaffSelected => 'Aucun employé du quart sélectionné';
 
   @override
-  String get osIncompleteData =>
-      'Données incomplètes, sélectionnez l\'employé à nouveau';
+  String get osIncompleteData => 'Données incomplètes, sélectionnez l\'employé à nouveau';
 
   @override
-  String get osPasswordNotStored =>
-      'Nous ne stockons pas les mots de passe, la vérification était dans le dialogue uniquement';
+  String get osPasswordNotStored => 'Nous ne stockons pas les mots de passe, la vérification était dans le dialogue uniquement';
 
   @override
-  String get osAutoFixed =>
-      'Données de l\'employé corrigées automatiquement sur cet appareil, vous pouvez continuer';
+  String get osAutoFixed => 'Données de l\'employé corrigées automatiquement sur cet appareil, vous pouvez continuer';
 
   @override
-  String get osStaffMissing =>
-      'L\'employé enregistré n\'existe plus, fermez le quart depuis un autre appareil ou contactez l\'admin';
+  String get osStaffMissing => 'L\'employé enregistré n\'existe plus, fermez le quart depuis un autre appareil ou contactez l\'admin';
 
   @override
-  String get osAuthRejected =>
-      'Authentification rejetée, l\'application ne doit pas s\'ouvrir sur un quart sans preuve';
+  String get osAuthRejected => 'Authentification rejetée, l\'application ne doit pas s\'ouvrir sur un quart sans preuve';
 
   @override
-  String get osReturningToLogin =>
-      'Déconnexion de cette session et retour à l\'écran de connexion';
+  String get osReturningToLogin => 'Déconnexion de cette session et retour à l\'écran de connexion';
 
   @override
   String get osUseExistingShift => 'Revenir au quart existant au lieu de cela';
@@ -12373,8 +11676,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sdRecordSupplierReceipt => 'Enregistrer le reçu fournisseur';
 
   @override
-  String get sdRecordSupplierReceiptSubtitle =>
-      'Leur numéro de reçu + date + montant + photo optionnelle';
+  String get sdRecordSupplierReceiptSubtitle => 'Leur numéro de reçu + date + montant + photo optionnelle';
 
   @override
   String get sdSupplierPayment => 'Paiement fournisseur';
@@ -12437,19 +11739,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sdReceiptRecorded => 'Reçu fournisseur enregistré';
 
   @override
-  String get sdRecordDiscountFromCash =>
-      'Enregistrer la déduction de la caisse';
+  String get sdRecordDiscountFromCash => 'Enregistrer la déduction de la caisse';
 
   @override
-  String get sdDisableCashHint =>
-      'Désactivez si payé depuis un compte bancaire ou hors système';
+  String get sdDisableCashHint => 'Désactivez si payé depuis un compte bancaire ou hors système';
 
   @override
   String get sdConfirm => 'Confirmer';
 
   @override
-  String get sdPaymentRecordedCash =>
-      'Paiement enregistré et caisse mise à jour';
+  String get sdPaymentRecordedCash => 'Paiement enregistré et caisse mise à jour';
 
   @override
   String get sdPaymentRecordedNoCash => 'Paiement enregistré (sans caisse)';
@@ -12464,8 +11763,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sdNote => 'Note';
 
   @override
-  String get sdReturnCashHint =>
-      'Ce retour sera enregistré uniquement dans la dette fournisseur, sans mouvement de caisse.';
+  String get sdReturnCashHint => 'Ce retour sera enregistré uniquement dans la dette fournisseur, sans mouvement de caisse.';
 
   @override
   String get sdRegister => 'Enregistrer';
@@ -12488,8 +11786,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get sdReverseNoCashDesc =>
-      'Seul l\'enregistrement du paiement sera supprimé (n\'était pas lié à la caisse).';
+  String get sdReverseNoCashDesc => 'Seul l\'enregistrement du paiement sera supprimé (n\'était pas lié à la caisse).';
 
   @override
   String get sdConfirmReverse => 'Confirmer l\'annulation';
@@ -12501,8 +11798,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sdReversed => 'Paiement annulé';
 
   @override
-  String get sdNoActiveWarehouse =>
-      'Aucun entrepôt actif — ajoutez-en un depuis les paramètres';
+  String get sdNoActiveWarehouse => 'Aucun entrepôt actif — ajoutez-en un depuis les paramètres';
 
   @override
   String get sdTargetWarehouse => 'Entrepôt cible';
@@ -12525,27 +11821,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sdUnlinkVoucher => 'Détacher le bon ?';
 
   @override
-  String get sdUnlinkVoucherDesc =>
-      'Supprimera uniquement le lien entre le reçu fournisseur et le bon de stock, sans supprimer le bon.';
+  String get sdUnlinkVoucherDesc => 'Supprimera uniquement le lien entre le reçu fournisseur et le bon de stock, sans supprimer le bon.';
 
   @override
   String get sdUnlinked => 'Lien supprimé';
 
   @override
-  String get sdLinkToSupplierReceipt =>
-      'Lier au reçu fournisseur — Bon d\'entrée';
+  String get sdLinkToSupplierReceipt => 'Lier au reçu fournisseur — Bon d\'entrée';
 
   @override
-  String get sdEmptyVoucherAutoLink =>
-      'Bon d\'entrée vide + liaison automatique';
+  String get sdEmptyVoucherAutoLink => 'Bon d\'entrée vide + liaison automatique';
 
   @override
-  String get sdLinkInstruction =>
-      'Ou sélectionnez un bon d\'entrée enregistré, ou entrez le numéro / identifiant puis « Rechercher et lier ».';
+  String get sdLinkInstruction => 'Ou sélectionnez un bon d\'entrée enregistré, ou entrez le numéro / identifiant puis « Rechercher et lier ».';
 
   @override
-  String get sdNoVouchersYet =>
-      'Aucun bon d\'entrée dans la base — utilisez le champ ci-dessous lorsque disponible.';
+  String get sdNoVouchersYet => 'Aucun bon d\'entrée dans la base — utilisez le champ ci-dessous lorsque disponible.';
 
   @override
   String get sdLatestVouchers => 'Derniers bons';
@@ -12596,8 +11887,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sdBalanceWithSupplier => 'Solde avec le fournisseur';
 
   @override
-  String get sdNoBillForPayout =>
-      'Aucun reçu fournisseur ne couvre ce paiement — utilisez « Annuler le paiement » à côté';
+  String get sdNoBillForPayout => 'Aucun reçu fournisseur ne couvre ce paiement — utilisez « Annuler le paiement » à côté';
 
   @override
   String sdPhoneLabel(Object phone) {
@@ -12605,8 +11895,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get sdPaymentWithoutReceipt =>
-      'Avertissement : payé au fournisseur sans enregistrer de reçu. Si le paiement a été fait par erreur,';
+  String get sdPaymentWithoutReceipt => 'Avertissement : payé au fournisseur sans enregistrer de reçu. Si le paiement a été fait par erreur,';
 
   @override
   String get sdSupplierReturnLabel => 'Retour fournisseur';
@@ -12621,8 +11910,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sdSupplierReceipts => 'Reçus fournisseur';
 
   @override
-  String get sdLinkReceiptInstruction =>
-      'Vous pouvez lier chaque reçu à un bon d\'entrée (numéro) lors de l\'enregistrement des bons dans la base.';
+  String get sdLinkReceiptInstruction => 'Vous pouvez lier chaque reçu à un bon d\'entrée (numéro) lors de l\'enregistrement des bons dans la base.';
 
   @override
   String get sdNoReceiptsYet => 'Aucun reçu pour le moment.';
@@ -12711,24 +11999,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sohTimeRemaining => 'Temps restant';
 
   @override
-  String get sohTryReLogin =>
-      'Essayez de vous déconnecter puis reconnecter, ou redémarrez l\'application.';
+  String get sohTryReLogin => 'Essayez de vous déconnecter puis reconnecter, ou redémarrez l\'application.';
 
   @override
-  String get sohRestartToCompleteInit =>
-      'Redémarrez l\'application pour finaliser l\'initialisation de la base.';
+  String get sohRestartToCompleteInit => 'Redémarrez l\'application pour finaliser l\'initialisation de la base.';
 
   @override
-  String get sohUnexpectedLocalData =>
-      'Données locales inattendues ; redémarrez l\'application. Si ça persiste, signalez au support.';
+  String get sohUnexpectedLocalData => 'Données locales inattendues ; redémarrez l\'application. Si ça persiste, signalez au support.';
 
   @override
-  String get sohDatabaseBusy =>
-      'Base de données occupée ; attendez quelques secondes et réessayez.';
+  String get sohDatabaseBusy => 'Base de données occupée ; attendez quelques secondes et réessayez.';
 
   @override
-  String get sohPersistentError =>
-      'Si le problème persiste, redémarrez l\'application.';
+  String get sohPersistentError => 'Si le problème persiste, redémarrez l\'application.';
 
   @override
   String get sohNewTicketBreadcrumb => 'Nouveau ticket de maintenance';
@@ -12763,8 +12046,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sohDeliveryBadge => 'Livraison';
 
   @override
-  String get sohDeadlineOverdue =>
-      'Délai dépassé — terminez le travail ou mettez à jour le statut.';
+  String get sohDeadlineOverdue => 'Délai dépassé — terminez le travail ou mettez à jour le statut.';
 
   @override
   String get sohTicketDetailsBreadcrumb => 'Détails du ticket';
@@ -12804,8 +12086,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sohItemsSentToSale => 'Articles envoyés à l\'écran de vente.';
 
   @override
-  String get sohFailedToOpenSale =>
-      'Échec de l\'ouverture de la vente — vérifiez le ticket ou réessayez.';
+  String get sohFailedToOpenSale => 'Échec de l\'ouverture de la vente — vérifiez le ticket ou réessayez.';
 
   @override
   String get sohWorkStarted => 'Travail commencé et suivi du délai lancé';
@@ -12829,8 +12110,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sohDeliveryRecorded => 'Livraison enregistrée';
 
   @override
-  String get sohDeliveryFailed =>
-      'Échec de la livraison — vérifiez les montants dans les détails.';
+  String get sohDeliveryFailed => 'Échec de la livraison — vérifiez les montants dans les détails.';
 
   @override
   String get sohConfirmDelivery => 'Confirmer la livraison';
@@ -12880,8 +12160,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get psSetupTitle => 'Configuration Produits';
 
   @override
-  String get psSetupDesc =>
-      'Numérotation automatique, tarification avancée, système d\'unités et gestion des lots.';
+  String get psSetupDesc => 'Numérotation automatique, tarification avancée, système d\'unités et gestion des lots.';
 
   @override
   String get psNextSkuTitle => 'Numéro de Série du Prochain Produit';
@@ -12893,8 +12172,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get psNumberingSettings => 'Paramètres de Numérotation';
 
   @override
-  String get psNextSkuHint =>
-      'Le numéro affiché comme indice du prochain identifiant. Le préfixe est enregistré dans les paramètres de numérotation.';
+  String get psNextSkuHint => 'Le numéro affiché comme indice du prochain identifiant. Le préfixe est enregistré dans les paramètres de numérotation.';
 
   @override
   String get psAdvancedPricingTitle => 'Options de Tarification Avancée';
@@ -12906,8 +12184,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get psDisabled => 'Désactivé';
 
   @override
-  String get psAdvancedPricingDesc =>
-      'Lorsque activé : dans \"Ajouter un Produit\", le prix de vente et le prix minimum sont suggérés à partir du prix d\'achat selon la marge ci-dessous (modifiable manuellement avant l\'enregistrement).';
+  String get psAdvancedPricingDesc => 'Lorsque activé : dans \"Ajouter un Produit\", le prix de vente et le prix minimum sont suggérés à partir du prix d\'achat selon la marge ci-dessous (modifiable manuellement avant l\'enregistrement).';
 
   @override
   String get psCostMarginDecoration => 'Marge sur Coût (%)';
@@ -12916,8 +12193,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get psCostMarginHint => 'Exemple : 25';
 
   @override
-  String get psMinSellPriceDesc =>
-      'Prix de vente minimum en pourcentage du prix de vente (%)';
+  String get psMinSellPriceDesc => 'Prix de vente minimum en pourcentage du prix de vente (%)';
 
   @override
   String get psMinSellPriceHint => '100 = Égal au prix de vente';
@@ -12926,8 +12202,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get psSaveSuggestedPrices => 'Enregistrer les Prix Suggérés';
 
   @override
-  String get psPricingExample =>
-      'Exemple : coût 10 000 et marge 25% → prix de vente suggéré 12 500. Ratio prix minimum 100% rend le prix minimum = prix de vente.';
+  String get psPricingExample => 'Exemple : coût 10 000 et marge 25% → prix de vente suggéré 12 500. Ratio prix minimum 100% rend le prix minimum = prix de vente.';
 
   @override
   String get psMultiUnitTitle => 'Utiliser Plusieurs Unités par Article';
@@ -12936,37 +12211,31 @@ class AppLocalizationsFr extends AppLocalizations {
   String get psManageUnits => 'Gérer les Unités';
 
   @override
-  String get psMultiUnitDesc =>
-      'Autoriser l\'achat en une unité et la vente en une autre avec des facteurs de conversion depuis les modèles d\'unités.';
+  String get psMultiUnitDesc => 'Autoriser l\'achat en une unité et la vente en une autre avec des facteurs de conversion depuis les modèles d\'unités.';
 
   @override
-  String get psDefaultStockDisplayTitle =>
-      'Unité par Défaut pour l\'Affichage du Stock';
+  String get psDefaultStockDisplayTitle => 'Unité par Défaut pour l\'Affichage du Stock';
 
   @override
   String get psUnitBase => 'Unité de Base du Modèle';
 
   @override
-  String get psUnitBaseDesc =>
-      'Afficher le stock dans l\'unité de base du modèle.';
+  String get psUnitBaseDesc => 'Afficher le stock dans l\'unité de base du modèle.';
 
   @override
   String get psUnitSale => 'Unité de Vente';
 
   @override
-  String get psUnitSaleDesc =>
-      'Afficher le solde dans l\'unité de vente par défaut.';
+  String get psUnitSaleDesc => 'Afficher le solde dans l\'unité de vente par défaut.';
 
   @override
   String get psUnitPurchase => 'Unité d\'Achat';
 
   @override
-  String get psUnitPurchaseDesc =>
-      'Afficher le solde dans l\'unité d\'achat par défaut.';
+  String get psUnitPurchaseDesc => 'Afficher le solde dans l\'unité d\'achat par défaut.';
 
   @override
-  String get psStockDisplayDesc =>
-      'Détermine comment le stock est affiché dans les rapports et l\'inventaire lorsque le multi-unité est activé.';
+  String get psStockDisplayDesc => 'Détermine comment le stock est affiché dans les rapports et l\'inventaire lorsque le multi-unité est activé.';
 
   @override
   String get psBundlesTitle => 'Lots et Unités Composites';
@@ -12978,20 +12247,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get psBundlesNotAllowed => 'Non Autorisé';
 
   @override
-  String get psBundlesDesc =>
-      'Définir un article composite à partir de plusieurs articles et déduire le stock lors de l\'assemblage ou de la vente (nécessite un développement futur).';
+  String get psBundlesDesc => 'Définir un article composite à partir de plusieurs articles et déduire le stock lors de l\'assemblage ou de la vente (nécessite un développement futur).';
 
   @override
-  String get psAddProductPoliciesTitle =>
-      'Politiques de l\'Écran Ajouter un Produit';
+  String get psAddProductPoliciesTitle => 'Politiques de l\'Écran Ajouter un Produit';
 
   @override
-  String get psShowAdvancedPricing =>
-      'Afficher la Section Tarification Avancée';
+  String get psShowAdvancedPricing => 'Afficher la Section Tarification Avancée';
 
   @override
-  String get psShowAdvancedPricingDesc =>
-      'Contrôle la visibilité de la taxe, la remise, le prix minimum de vente et la marge bénéficiaire.';
+  String get psShowAdvancedPricingDesc => 'Contrôle la visibilité de la taxe, la remise, le prix minimum de vente et la marge bénéficiaire.';
 
   @override
   String get psShowBarcodeField => 'Afficher le Champ Code-Barres';
@@ -13009,12 +12274,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get psShowExtraFields => 'Afficher les Champs Supplémentaires';
 
   @override
-  String get psShowExtraFieldsDesc =>
-      'Comme : notes internes, étiquettes, poids et dates de production/expiry.';
+  String get psShowExtraFieldsDesc => 'Comme : notes internes, étiquettes, poids et dates de production/expiry.';
 
   @override
-  String get psSupplierRequired =>
-      'Fournisseur Obligatoire à l\'Enregistrement';
+  String get psSupplierRequired => 'Fournisseur Obligatoire à l\'Enregistrement';
 
   @override
   String get psWarehouseRequired => 'Entrepôt Obligatoire à l\'Enregistrement';
@@ -13023,105 +12286,85 @@ class AppLocalizationsFr extends AppLocalizations {
   String get psDefaultTrackingEnabled => 'Activer le Suivi de Stock par Défaut';
 
   @override
-  String get psDefaultTrackingDesc =>
-      'Affecte l\'état du bouton lors de l\'ouverture de l\'écran Ajouter un Produit.';
+  String get psDefaultTrackingDesc => 'Affecte l\'état du bouton lors de l\'ouverture de l\'écran Ajouter un Produit.';
 
   @override
-  String get psAddProductPoliciesDesc =>
-      'Ces politiques s\'appliquent directement à l\'écran \"Ajouter un Produit\" sans affecter l\'écran de vente.';
+  String get psAddProductPoliciesDesc => 'Ces politiques s\'appliquent directement à l\'écran \"Ajouter un Produit\" sans affecter l\'écran de vente.';
 
   @override
   String get psTrackingTitle => 'Suivi des Produits';
 
   @override
-  String get psTrackingDesc =>
-      'Configurer les méthodes de suivi et le comportement du système lorsque le stock est épuisé.';
+  String get psTrackingDesc => 'Configurer les méthodes de suivi et le comportement du système lorsque le stock est épuisé.';
 
   @override
-  String get psSerialBatchExpiryTitle =>
-      'Suivi par Numéro de Série / Lot / Date d\'Expiry';
+  String get psSerialBatchExpiryTitle => 'Suivi par Numéro de Série / Lot / Date d\'Expiry';
 
   @override
-  String get psSerialBatchExpiryDesc =>
-      'Lorsque activé, le suivi peut être activé pour chaque produit individuellement lors de l\'ajout.';
+  String get psSerialBatchExpiryDesc => 'Lorsque activé, le suivi peut être activé pour chaque produit individuellement lors de l\'ajout.';
 
   @override
   String get psNegativeStockTitle => 'Stock Négatif';
 
   @override
-  String get psNegativeStockStop =>
-      'Arrêter les opérations lorsque le stock est épuisé pour tous les produits';
+  String get psNegativeStockStop => 'Arrêter les opérations lorsque le stock est épuisé pour tous les produits';
 
   @override
-  String get psNegativeStockStopDesc =>
-      'Empêcher les ventes ou les sorties lorsque le stock atteint zéro.';
+  String get psNegativeStockStopDesc => 'Empêcher les ventes ou les sorties lorsque le stock atteint zéro.';
 
   @override
-  String get psNegativeStockTrackableOnly =>
-      'Autoriser uniquement les produits suivis à avoir des quantités négatives';
+  String get psNegativeStockTrackableOnly => 'Autoriser uniquement les produits suivis à avoir des quantités négatives';
 
   @override
-  String get psNegativeStockTrackableDesc =>
-      'Les ventes ou sorties négatives sont autorisées selon la politique de l\'article.';
+  String get psNegativeStockTrackableDesc => 'Les ventes ou sorties négatives sont autorisées selon la politique de l\'article.';
 
   @override
-  String get psNegativeStockDesc =>
-      'Détermine le comportement du système lorsque le stock est épuisé.';
+  String get psNegativeStockDesc => 'Détermine le comportement du système lorsque le stock est épuisé.';
 
   @override
-  String get psShowTotalAvailableTitle =>
-      'Afficher la Quantité Totale et Disponible';
+  String get psShowTotalAvailableTitle => 'Afficher la Quantité Totale et Disponible';
 
   @override
-  String get psShowTotalAvailableDesc =>
-      'Afficher la quantité totale vs disponible après les réservations (lorsque la réservation est activée plus tard).';
+  String get psShowTotalAvailableDesc => 'Afficher la quantité totale vs disponible après les réservations (lorsque la réservation est activée plus tard).';
 
   @override
   String get psVouchersTitle => 'Bons d\'Inventaire';
 
   @override
-  String get psVouchersDesc =>
-      'Créer des demandes d\'inventaire, numérotation des bons de transfert et les lier aux ventes et achats.';
+  String get psVouchersDesc => 'Créer des demandes d\'inventaire, numérotation des bons de transfert et les lier aux ventes et achats.';
 
   @override
   String get psInventoryRequestsTitle => 'Demandes d\'Inventaire';
 
   @override
-  String get psInventoryRequestsDesc =>
-      'Permettre aux départements de soumettre des demandes d\'inventaire pour examen. Les permissions sont définies par les rôles utilisateurs.';
+  String get psInventoryRequestsDesc => 'Permettre aux départements de soumettre des demandes d\'inventaire pour examen. Les permissions sont définies par les rôles utilisateurs.';
 
   @override
-  String get psTransferVoucherNextTitle =>
-      'Prochain Numéro de Série du Bon de Transfert';
+  String get psTransferVoucherNextTitle => 'Prochain Numéro de Série du Bon de Transfert';
 
   @override
   String get psTransferVoucherNextDecoration => 'Numéro';
 
   @override
-  String get psTransferVoucherNextDesc =>
-      'Le prochain numéro suggéré pour les bons de transfert.';
+  String get psTransferVoucherNextDesc => 'Le prochain numéro suggéré pour les bons de transfert.';
 
   @override
   String get psSalesVoucherTitle => 'Bons d\'Inventaire pour Factures de Vente';
 
   @override
-  String get psSalesVoucherDesc =>
-      'Lorsque activé, crée un bon de sortie nécessitant une approbation avant la déduction du stock.';
+  String get psSalesVoucherDesc => 'Lorsque activé, crée un bon de sortie nécessitant une approbation avant la déduction du stock.';
 
   @override
-  String get psPurchaseVoucherTitle =>
-      'Bons d\'Inventaire pour Factures d\'Achat';
+  String get psPurchaseVoucherTitle => 'Bons d\'Inventaire pour Factures d\'Achat';
 
   @override
-  String get psPurchaseVoucherDesc =>
-      'Lorsque activé, crée un bon d\'entrée nécessitant une approbation avant l\'ajout du stock.';
+  String get psPurchaseVoucherDesc => 'Lorsque activé, crée un bon d\'entrée nécessitant une approbation avant l\'ajout du stock.';
 
   @override
   String get psDefaultsTitle => 'Valeurs par Défaut du Système';
 
   @override
-  String get psDefaultsDesc =>
-      'Valeurs suggérées automatiquement pour les entrepôts, produits et taxes.';
+  String get psDefaultsDesc => 'Valeurs suggérées automatiquement pour les entrepôts, produits et taxes.';
 
   @override
   String get psDefaultSubAccountTitle => 'Sous-Compte par Défaut';
@@ -13142,8 +12385,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get psCommercial => 'Commercial';
 
   @override
-  String get psDefaultSubAccountDesc =>
-      'Utilisé comme référence comptable lors du lien inventaire-comptes.';
+  String get psDefaultSubAccountDesc => 'Utilisé comme référence comptable lors du lien inventaire-comptes.';
 
   @override
   String get psDefaultWarehouseTitle => 'Entrepôt par Défaut';
@@ -13155,8 +12397,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get psChooseWarehouse => 'Choisir un entrepôt';
 
   @override
-  String get psDefaultWarehouseDesc =>
-      'Suggéré lors de l\'ajout de nouveaux produits et mouvements de stock.';
+  String get psDefaultWarehouseDesc => 'Suggéré lors de l\'ajout de nouveaux produits et mouvements de stock.';
 
   @override
   String get psDefaultPriceListTitle => 'Liste de Prix par Défaut';
@@ -13165,8 +12406,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get psManagePriceLists => 'Gérer les Listes';
 
   @override
-  String get psDefaultPriceListDesc =>
-      'Utilisée comme liste de prix par défaut pour la succursale actuelle lorsque le lien est disponible.';
+  String get psDefaultPriceListDesc => 'Utilisée comme liste de prix par défaut pour la succursale actuelle lorsque le lien est disponible.';
 
   @override
   String get psDefaultTax1Title => 'Taxe par Défaut 1';
@@ -13175,19 +12415,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get psManageTaxes => 'Gérer les Taxes';
 
   @override
-  String get psTaxRatesDesc =>
-      'Les taux de taxe sont définis par produit ou depuis les paramètres de facture.';
+  String get psTaxRatesDesc => 'Les taux de taxe sont définis par produit ou depuis les paramètres de facture.';
 
   @override
-  String get psDefaultTax1Desc =>
-      'Suggérée pour les nouveaux produits et compatible avec le champ taxe du produit.';
+  String get psDefaultTax1Desc => 'Suggérée pour les nouveaux produits et compatible avec le champ taxe du produit.';
 
   @override
   String get psDefaultTax2Title => 'Taxe par Défaut 2';
 
   @override
-  String get psDefaultTax2Desc =>
-      'Pour une utilisation double lors du support de deux taxes ultérieurement.';
+  String get psDefaultTax2Desc => 'Pour une utilisation double lors du support de deux taxes ultérieurement.';
 
   @override
   String get psReturnCostMethodTitle => 'Méthode de Calcul du Coût des Retours';
@@ -13196,19 +12433,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get psReturnBySalePrice => 'Par Prix de Vente';
 
   @override
-  String get psReturnBySalePriceDesc =>
-      'Utiliser le prix de vente de la facture de vente.';
+  String get psReturnBySalePriceDesc => 'Utiliser le prix de vente de la facture de vente.';
 
   @override
   String get psReturnByAvgCost => 'Par Dernier Coût Moyen';
 
   @override
-  String get psReturnByAvgCostDesc =>
-      'Utiliser le coût moyen lors de la création du retour.';
+  String get psReturnByAvgCostDesc => 'Utiliser le coût moyen lors de la création du retour.';
 
   @override
-  String get psReturnCostDesc =>
-      'Appliqué lors du traitement des retours de vente.';
+  String get psReturnCostDesc => 'Appliqué lors du traitement des retours de vente.';
 
   @override
   String get psBusinessNatureTitle => 'Nature de l\'Activité Commerciale';
@@ -13223,8 +12457,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get psNatureServices => 'Services Uniquement';
 
   @override
-  String get psNatureServicesDesc =>
-      'Activités basées sur le temps ou les projets.';
+  String get psNatureServicesDesc => 'Activités basées sur le temps ou les projets.';
 
   @override
   String get psNatureBoth => 'Produits et Services';
@@ -13233,8 +12466,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get psNatureBothDesc => 'Combine les deux types dans le système.';
 
   @override
-  String get psBusinessNatureDesc =>
-      'Détermine le focus par défaut dans les écrans d\'inventaire et de facturation.';
+  String get psBusinessNatureDesc => 'Détermine le focus par défaut dans les écrans d\'inventaire et de facturation.';
 
   @override
   String get psVoucherPermEnabled => 'Activé';
@@ -13249,8 +12481,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get psCustomTax => 'Personnalisé';
 
   @override
-  String get psTransferSettingsTitle =>
-      'Paramètres de Numérotation des Transferts';
+  String get psTransferSettingsTitle => 'Paramètres de Numérotation des Transferts';
 
   @override
   String get psOptionalPrefix => 'Préfixe Optionnel';
@@ -13265,34 +12496,28 @@ class AppLocalizationsFr extends AppLocalizations {
   String get psSave => 'Enregistrer';
 
   @override
-  String get psSavePrefixHint =>
-      'Le préfixe est enregistré dans les paramètres de numérotation.';
+  String get psSavePrefixHint => 'Le préfixe est enregistré dans les paramètres de numérotation.';
 
   @override
-  String get psSerialHint =>
-      'Le numéro affiché comme indice du prochain identifiant. Le préfixe est enregistré dans les paramètres de numérotation.';
+  String get psSerialHint => 'Le numéro affiché comme indice du prochain identifiant. Le préfixe est enregistré dans les paramètres de numérotation.';
 
   @override
-  String get psTaxToggleTooltip =>
-      'Désactiver la gestion de la taxe — masquer le champ de taxe';
+  String get psTaxToggleTooltip => 'Désactiver la gestion de la taxe — masquer le champ de taxe';
 
   @override
   String get psShowTaxField => 'Afficher le champ de taxe';
 
   @override
-  String get psTaxToggleDesc =>
-      'Dans «Ajouter un produit». L\'icône de blocage désactive la taxe entièrement.';
+  String get psTaxToggleDesc => 'Dans «Ajouter un produit». L\'icône de blocage désactive la taxe entièrement.';
 
   @override
-  String get psDiscountToggleTooltip =>
-      'Désactiver la gestion des remises — masquer les champs de remise';
+  String get psDiscountToggleTooltip => 'Désactiver la gestion des remises — masquer les champs de remise';
 
   @override
   String get psShowDiscountFields => 'Afficher les champs de remise';
 
   @override
-  String get psDiscountToggleDesc =>
-      'Dans «Ajouter un produit». L\'icône de blocage désactive les remises entièrement.';
+  String get psDiscountToggleDesc => 'Dans «Ajouter un produit». L\'icône de blocage désactive les remises entièrement.';
 
   @override
   String get sodEditTicket => 'Modifier le ticket';
@@ -13364,8 +12589,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sodViewOnly => 'Consultation uniquement';
 
   @override
-  String get sodInvoiceProductsDesc =>
-      'Produits et services enregistrés dans la facture de vente liée.';
+  String get sodInvoiceProductsDesc => 'Produits et services enregistrés dans la facture de vente liée.';
 
   @override
   String get sodPastDue => 'Date de livraison dépassée';
@@ -13434,12 +12658,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsImportMeds => 'Importer les médicaments';
 
   @override
-  String get settingsImportMedsDesc =>
-      'Ajouter les médicaments depuis le fichier d\'inventaire intégré';
+  String get settingsImportMedsDesc => 'Ajouter les médicaments depuis le fichier d\'inventaire intégré';
 
   @override
-  String get settingsImportMedsConfirm =>
-      'Les médicaments seront ajoutés au catalogue. Voulez-vous continuer ?';
+  String get settingsImportMedsConfirm => 'Les médicaments seront ajoutés au catalogue. Voulez-vous continuer ?';
 
   @override
   String settingsImportedCount(Object count) {
@@ -13494,8 +12716,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get settingsSubscriptionActiveNoExpiry =>
-      'Abonnement actif sans date d\'expiration dans le cloud.';
+  String get settingsSubscriptionActiveNoExpiry => 'Abonnement actif sans date d\'expiration dans le cloud.';
 
   @override
   String get settingsLinkedDevices => 'Appareils liés au compte';
@@ -13512,8 +12733,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get settingsDisconnectedCannotLogin =>
-      'Déconnecté — ne peut pas se connecter tant qu\'il n\'est pas approuvé';
+  String get settingsDisconnectedCannotLogin => 'Déconnecté — ne peut pas se connecter tant qu\'il n\'est pas approuvé';
 
   @override
   String get settingsThisDevice => 'Cet appareil';
@@ -13528,8 +12748,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsAutoSync => 'Synchronisation automatique';
 
   @override
-  String get settingsAutoSyncDesc =>
-      'Une sauvegarde complète de la base de données est envoyée depuis chaque appareil ; la dernière dans le cloud est importée sur l\'appareil.';
+  String get settingsAutoSyncDesc => 'Une sauvegarde complète de la base de données est envoyée depuis chaque appareil ; la dernière dans le cloud est importée sur l\'appareil.';
 
   @override
   String get settingsSyncNow => 'Synchroniser maintenant';
@@ -13546,12 +12765,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsClearCloudProducts => 'Effacer les produits cloud';
 
   @override
-  String get settingsClearCloudProductsDesc =>
-      'Tous les produits seront supprimés uniquement du cloud. Les paramètres, factures et clients ne seront pas affectés. Voulez-vous continuer ?';
+  String get settingsClearCloudProductsDesc => 'Tous les produits seront supprimés uniquement du cloud. Les paramètres, factures et clients ne seront pas affectés. Voulez-vous continuer ?';
 
   @override
-  String get settingsCleared =>
-      'Produits cloud effacés. Appuyez sur Synchroniser';
+  String get settingsCleared => 'Produits cloud effacés. Appuyez sur Synchroniser';
 
   @override
   String settingsClearFailed(Object error) {
@@ -13568,16 +12785,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsThankYou => 'Merci de votre confiance';
 
   @override
-  String get sofTenantError =>
-      'Impossible de déterminer les données du locataire. Rouvrez l\'application et réessayez.';
+  String get sofTenantError => 'Impossible de déterminer les données du locataire. Rouvrez l\'application et réessayez.';
 
   @override
-  String get sofDbInitError =>
-      'La base de données nécessite une initialisation/mise à jour. Rouvrez l\'application et réessayez.';
+  String get sofDbInitError => 'La base de données nécessite une initialisation/mise à jour. Rouvrez l\'application et réessayez.';
 
   @override
-  String get sofUnexpectedError =>
-      'Une erreur inattendue s\'est produite lors de l\'enregistrement.';
+  String get sofUnexpectedError => 'Une erreur inattendue s\'est produite lors de l\'enregistrement.';
 
   @override
   String get sofExpectedWorkDuration => 'Durée de travail estimée';
@@ -13595,8 +12809,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sofDone => 'Terminé';
 
   @override
-  String get sofNotSet =>
-      'Non défini — appuyez pour choisir les heures et minutes';
+  String get sofNotSet => 'Non défini — appuyez pour choisir les heures et minutes';
 
   @override
   String sofHoursMinutes(Object hours, Object minutes) {
@@ -13614,8 +12827,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get sofTaskNotStarted =>
-      'Après \'Commencer le travail\' depuis la liste des tickets, la date est fixée à partir de l\'heure de début.';
+  String get sofTaskNotStarted => 'Après \'Commencer le travail\' depuis la liste des tickets, la date est fixée à partir de l\'heure de début.';
 
   @override
   String sofWorkDurationMin(Object minutes) {
@@ -13644,8 +12856,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sofSave => 'Enregistrer';
 
   @override
-  String get sofSaveError =>
-      'Une erreur s\'est produite lors de l\'enregistrement. Réessayez.';
+  String get sofSaveError => 'Une erreur s\'est produite lors de l\'enregistrement. Réessayez.';
 
   @override
   String get sofAll => 'Tout';
@@ -13654,8 +12865,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sofCustomerName => 'Nom du client';
 
   @override
-  String get sofCustomerSearchHint =>
-      'Commencez à taper pour rechercher les clients';
+  String get sofCustomerSearchHint => 'Commencez à taper pour rechercher les clients';
 
   @override
   String get sofCustomerRequired => 'Le nom du client est requis';
@@ -13676,8 +12886,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sofSerialPlateOptional => 'Série / Plaque (optionnel)';
 
   @override
-  String get sofSerialHint =>
-      'Si laissé vide, un numéro de référence interne est généré automatiquement pour le ticket (pas la série de l\'appareil).';
+  String get sofSerialHint => 'Si laissé vide, un numéro de référence interne est généré automatiquement pour le ticket (pas la série de l\'appareil).';
 
   @override
   String get sofExpectedDuration => 'Durée estimée';
@@ -13698,8 +12907,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sofEstimatedPrice => 'Prix estimé (du service)';
 
   @override
-  String get sofEstimatedPriceHint =>
-      'Rempli automatiquement depuis le prix du service';
+  String get sofEstimatedPriceHint => 'Rempli automatiquement depuis le prix du service';
 
   @override
   String get sofAgreedPrice => 'Prix convenu (Fdj)';
@@ -13729,8 +12937,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get licNoInternet => 'Pas de connexion Internet';
 
   @override
-  String get licOfflineWarning =>
-      'L\'application fonctionne avec les dernières données de licence enregistrées.\nAssurez-vous de vous connecter dès que possible.';
+  String get licOfflineWarning => 'L\'application fonctionne avec les dernières données de licence enregistrées.\nAssurez-vous de vous connecter dès que possible.';
 
   @override
   String get licRetry => 'Réessayer';
@@ -13790,8 +12997,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get osResumeShiftHint =>
-      'Entrez le mot de passe de l\'employé pour continuer';
+  String get osResumeShiftHint => 'Entrez le mot de passe de l\'employé pour continuer';
 
   @override
   String osUserFallback(Object id) {
@@ -13825,12 +13031,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get csReturnInvoices => 'Factures de Retour';
 
   @override
-  String get csPasswordVerifyTitle =>
-      'Confirmer avec le mot de passe de l\'employé (optionnel)';
+  String get csPasswordVerifyTitle => 'Confirmer avec le mot de passe de l\'employé (optionnel)';
 
   @override
-  String get csPasswordHintNoUser =>
-      'Entrez le mot de passe de connexion pour vérifier. Laissez vide pour ignorer la vérification';
+  String get csPasswordHintNoUser => 'Entrez le mot de passe de connexion pour vérifier. Laissez vide pour ignorer la vérification';
 
   @override
   String csPasswordHintWithName(Object name) {
@@ -13844,8 +13048,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get csSystemBalance => 'Solde de Caisse (Système)';
 
   @override
-  String get csBalanceDesc =>
-      'Le solde est déterminé automatiquement à partir des mouvements de caisse. Vérifiez les valeurs puis confirmez le retrait.';
+  String get csBalanceDesc => 'Le solde est déterminé automatiquement à partir des mouvements de caisse. Vérifiez les valeurs puis confirmez le retrait.';
 
   @override
   String get csCashInBox => 'Argent en Caisse';
@@ -13860,27 +13063,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get csConfirmClose => 'Confirmer et Fermer le Quart';
 
   @override
-  String get csPasswordVerifyError =>
-      'Échec de la vérification du mot de passe pour ce compte';
+  String get csPasswordVerifyError => 'Échec de la vérification du mot de passe pour ce compte';
 
   @override
-  String get csUserVerifyError =>
-      'Échec de la vérification de l\'utilisateur actuel';
+  String get csUserVerifyError => 'Échec de la vérification de l\'utilisateur actuel';
 
   @override
-  String get csNoSavedPassword =>
-      'Aucun mot de passe enregistré pour ce compte. Laissez le champ vide.';
+  String get csNoSavedPassword => 'Aucun mot de passe enregistré pour ce compte. Laissez le champ vide.';
 
   @override
   String get csWrongPassword => 'Mot de passe incorrect';
 
   @override
-  String get csWithdrawNegative =>
-      'Le montant du retrait ne peut pas être négatif';
+  String get csWithdrawNegative => 'Le montant du retrait ne peut pas être négatif';
 
   @override
-  String get csWithdrawExceeds =>
-      'Le montant du retrait dépasse l\'argent en caisse';
+  String get csWithdrawExceeds => 'Le montant du retrait dépasse l\'argent en caisse';
 
   @override
   String csCloseError(Object error) {
@@ -13899,8 +13097,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get csShiftClosedMsg =>
-      'Quart fermé. Ouvrez un nouveau quart pour continuer.';
+  String get csShiftClosedMsg => 'Quart fermé. Ouvrez un nouveau quart pour continuer.';
 
   @override
   String csDetailStaff(Object name) {
@@ -13928,8 +13125,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get cashBucketInvoices =>
-      'Factures et ventes (écritures liées à une facture)';
+  String get cashBucketInvoices => 'Factures et ventes (écritures liées à une facture)';
 
   @override
   String get cashBucketOther => 'Autres mouvements';
@@ -13938,8 +13134,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get cashDeclaredClosingCash => 'Montant déclaré restant en caisse';
 
   @override
-  String get expCsvHeader =>
-      'Catégorie,Description,Montant,Date,Statut,Récurrent,Employé';
+  String get expCsvHeader => 'Catégorie,Description,Montant,Date,Statut,Récurrent,Employé';
 
   @override
   String expDateFromTo(Object from, Object to) {
@@ -13959,16 +13154,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get expCategoryShareGauge => 'Parts de dépenses par catégorie';
 
   @override
-  String get expCategoryShareDescription =>
-      'Chaque arc représente la proportion d\'une catégorie par rapport aux dépenses totales de la période.';
+  String get expCategoryShareDescription => 'Chaque arc représente la proportion d\'une catégorie par rapport aux dépenses totales de la période.';
 
   @override
-  String get expDailyTrendDescription =>
-      'Affiche le total journalier cumulé pour chaque catégorie avec des axes et espaces clairs.';
+  String get expDailyTrendDescription => 'Affiche le total journalier cumulé pour chaque catégorie avec des axes et espaces clairs.';
 
   @override
-  String get expAnalyticsDisclaimer =>
-      'Remarque : Les analyses sont basées sur l\'agrégation SQL directe de la table des dépenses dans la période sélectionnée.';
+  String get expAnalyticsDisclaimer => 'Remarque : Les analyses sont basées sur l\'agrégation SQL directe de la table des dépenses dans la période sélectionnée.';
 
   @override
   String get expNoMetricsData => 'Aucune donnée pour afficher les métriques.';
@@ -14016,8 +13208,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get blPrintHint =>
-      'Imprimer via l\'imprimante par défaut ou l\'écran d\'aperçu.';
+  String get blPrintHint => 'Imprimer via l\'imprimante par défaut ou l\'écran d\'aperçu.';
 
   @override
   String get blDocTitle => 'Étiquettes de codes-barres produits';
@@ -14033,8 +13224,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get blWeightProductsHint =>
-      'Produits au poids : l\'ID est imprimé sur l\'étiquette ; le poids est pesé à la vente.';
+  String get blWeightProductsHint => 'Produits au poids : l\'ID est imprimé sur l\'étiquette ; le poids est pesé à la vente.';
 
   @override
   String blBarcode(Object code) {
@@ -14055,8 +13245,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get blSettingsHint =>
-      'Choisir la taille et l\'apparence de l\'aperçu (s\'applique aux cartes et à l\'impression).';
+  String get blSettingsHint => 'Choisir la taille et l\'apparence de l\'aperçu (s\'applique aux cartes et à l\'impression).';
 
   @override
   String get blLabelSize => 'Taille de l\'étiquette';
@@ -14081,12 +13270,10 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get blEmptyHint =>
-      'Rechercher un produit à ajouter pour l\'impression';
+  String get blEmptyHint => 'Rechercher un produit à ajouter pour l\'impression';
 
   @override
-  String get blEmptySubHint =>
-      'Vous pouvez ajouter plusieurs produits et les imprimer en un seul lot';
+  String get blEmptySubHint => 'Vous pouvez ajouter plusieurs produits et les imprimer en un seul lot';
 
   @override
   String blStockPrint(Object print, Object stock) {
@@ -14116,74 +13303,58 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get rptSalesTrendSubtitle =>
-      'Graphique à colonnes — montre la tendance des ventes entre les dates de la période';
+  String get rptSalesTrendSubtitle => 'Graphique à colonnes — montre la tendance des ventes entre les dates de la période';
 
   @override
-  String get rptKPIShare =>
-      'Part de chaque KPI dans le net des ventes — synchronisé avec les cartes KPI ci-dessus';
+  String get rptKPIShare => 'Part de chaque KPI dans le net des ventes — synchronisé avec les cartes KPI ci-dessus';
 
   @override
-  String get rptDailyBreakdownSubtitle =>
-      'Barres empilées — données quotidiennes des factures et dépenses (SQL GROUP BY jour)';
+  String get rptDailyBreakdownSubtitle => 'Barres empilées — données quotidiennes des factures et dépenses (SQL GROUP BY jour)';
 
   @override
-  String get rptCustomerPieSubtitle =>
-      'Graphique circulaire interactif — uniquement les factures de vente (sans les bons)';
+  String get rptCustomerPieSubtitle => 'Graphique circulaire interactif — uniquement les factures de vente (sans les bons)';
 
   @override
-  String get rptPaymentGaugeSubtitle =>
-      'Jauges — cohérentes avec les pourcentages du graphique circulaire et du tableau';
+  String get rptPaymentGaugeSubtitle => 'Jauges — cohérentes avec les pourcentages du graphique circulaire et du tableau';
 
   @override
-  String get rptPaymentTrendSubtitle =>
-      'Empilé — construit les totaux quotidiens par type de paiement directement depuis SQL';
+  String get rptPaymentTrendSubtitle => 'Empilé — construit les totaux quotidiens par type de paiement directement depuis SQL';
 
   @override
-  String get rptSalesOnlyNote =>
-      'Cette section affiche uniquement les ventes : comptant/credit/échéance/livraison.';
+  String get rptSalesOnlyNote => 'Cette section affiche uniquement les ventes : comptant/credit/échéance/livraison.';
 
   @override
   String get rptDigitalPaymentsTitle => 'Modes de paiement numériques';
 
   @override
-  String get rptDigitalPaymentsSubtitle =>
-      'Totaux et part de chaque mode de paiement électronique.';
+  String get rptDigitalPaymentsSubtitle => 'Totaux et part de chaque mode de paiement électronique.';
 
   @override
   String get rptDigitalPaymentsTotal => 'Total paiements numériques';
 
   @override
-  String get rptVouchersExcluded =>
-      'Les bons de perception/paiement d\'échéance/paiement fournisseur sont exclus des \"ventes\" (car ce ne sont pas des revenus de vente).';
+  String get rptVouchersExcluded => 'Les bons de perception/paiement d\'échéance/paiement fournisseur sont exclus des \"ventes\" (car ce ne sont pas des revenus de vente).';
 
   @override
-  String get rptCustomerDistributionTitle =>
-      'Distribution des ventes par client';
+  String get rptCustomerDistributionTitle => 'Distribution des ventes par client';
 
   @override
-  String get rptCustomerDistributionDesc =>
-      'Graphique circulaire interactif — affiche les 6 meilleurs clients et le reste comme \"Autres\"';
+  String get rptCustomerDistributionDesc => 'Graphique circulaire interactif — affiche les 6 meilleurs clients et le reste comme \"Autres\"';
 
   @override
-  String get rptTopCustomersTitle =>
-      'Meilleurs clients par achat (nom de la facture)';
+  String get rptTopCustomersTitle => 'Meilleurs clients par achat (nom de la facture)';
 
   @override
-  String get rptTopCustomersSubtitle =>
-      'Triés par total — données des factures de la période';
+  String get rptTopCustomersSubtitle => 'Triés par total — données des factures de la période';
 
   @override
-  String get rptCustomerNameNote =>
-      'Remarque : Le nom est pris du champ \"nom du client\" de la facture ; pour un lien plus précis, utilisez la sélection client depuis le registre.';
+  String get rptCustomerNameNote => 'Remarque : Le nom est pris du champ \"nom du client\" de la facture ; pour un lien plus précis, utilisez la sélection client depuis le registre.';
 
   @override
-  String get rptCustomerBalancesSubtitle =>
-      'Tableau — soldes enregistrés dans le registre des clients';
+  String get rptCustomerBalancesSubtitle => 'Tableau — soldes enregistrés dans le registre des clients';
 
   @override
-  String get rptInstallmentPlansSubtitle =>
-      'Tableau — plans de versement liés aux factures de la période';
+  String get rptInstallmentPlansSubtitle => 'Tableau — plans de versement liés aux factures de la période';
 
   @override
   String get rptUnknownStaff => '(Inconnu)';
@@ -14192,52 +13363,40 @@ class AppLocalizationsFr extends AppLocalizations {
   String get rptStaffDistributionTitle => 'Distribution des ventes par employé';
 
   @override
-  String get rptStaffDistributionDesc =>
-      'Graphique circulaire interactif — par nom d\'employé sur la facture (factures de vente uniquement)';
+  String get rptStaffDistributionDesc => 'Graphique circulaire interactif — par nom d\'employé sur la facture (factures de vente uniquement)';
 
   @override
-  String get rptNoStaffData =>
-      'Aucune vente enregistrée sous un nom d\'employé pour cette période';
+  String get rptNoStaffData => 'Aucune vente enregistrée sous un nom d\'employé pour cette période';
 
   @override
-  String get rptStaffShareTitle =>
-      'Part de chaque employé dans le total des ventes';
+  String get rptStaffShareTitle => 'Part de chaque employé dans le total des ventes';
 
   @override
-  String get rptStaffShareSubtitle =>
-      'Jauges — cohérentes avec les pourcentages du graphique circulaire et du tableau';
+  String get rptStaffShareSubtitle => 'Jauges — cohérentes avec les pourcentages du graphique circulaire et du tableau';
 
   @override
-  String get rptStaffTrendTitle =>
-      'Tendance des ventes par employé au fil du temps';
+  String get rptStaffTrendTitle => 'Tendance des ventes par employé au fil du temps';
 
   @override
-  String get rptStaffTrendSubtitle =>
-      'Empilé — top 5 employés uniquement pour éviter l\'encombrement';
+  String get rptStaffTrendSubtitle => 'Empilé — top 5 employés uniquement pour éviter l\'encombrement';
 
   @override
-  String get rptStaffInvoicesTitle =>
-      'Factures enregistrées par employé (champ facture)';
+  String get rptStaffInvoicesTitle => 'Factures enregistrées par employé (champ facture)';
 
   @override
-  String get rptStaffInvoicesSubtitle =>
-      'Tableau — performance d\'enregistrement par nom d\'employé sur la facture';
+  String get rptStaffInvoicesSubtitle => 'Tableau — performance d\'enregistrement par nom d\'employé sur la facture';
 
   @override
-  String get rptMarginGaugeSubtitle =>
-      'Jauges — distribution relative montrant où va chaque unité de revenu';
+  String get rptMarginGaugeSubtitle => 'Jauges — distribution relative montrant où va chaque unité de revenu';
 
   @override
-  String get rptMarginTrendStacked =>
-      'Empilé — chaque jour montre la composition des revenus face aux dépenses';
+  String get rptMarginTrendStacked => 'Empilé — chaque jour montre la composition des revenus face aux dépenses';
 
   @override
-  String get rptMarginTrendStackedExpense =>
-      'Empilé — chaque jour montre la composition des revenus face aux dépenses';
+  String get rptMarginTrendStackedExpense => 'Empilé — chaque jour montre la composition des revenus face aux dépenses';
 
   @override
-  String get rptMarginSortNote =>
-      'Triés par marge nette (revenu − coût) après allocation des remises et déduction des retours';
+  String get rptMarginSortNote => 'Triés par marge nette (revenu − coût) après allocation des remises et déduction des retours';
 
   @override
   String get rptMarginPercent => 'Marge %';
@@ -14253,36 +13412,28 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get rptCostBasisNote =>
-      'Le coût de l\'article est déterminé par : (1) fixé à la vente, (2) prix moyen pondéré des achats (WAC), (3) dernier prix d\'achat dans la fiche produit';
+  String get rptCostBasisNote => 'Le coût de l\'article est déterminé par : (1) fixé à la vente, (2) prix moyen pondéré des achats (WAC), (3) dernier prix d\'achat dans la fiche produit';
 
   @override
-  String get rptCostBasisNote2 =>
-      'Les nouvelles factures fixent automatiquement le coût lors de la création, le passé n\'est pas affecté par les changements de prix d\'achat.';
+  String get rptCostBasisNote2 => 'Les nouvelles factures fixent automatiquement le coût lors de la création, le passé n\'est pas affecté par les changements de prix d\'achat.';
 
   @override
-  String get rptInvoiceDiscountNote =>
-      'La remise au niveau de la facture (remise facture + remise fidélité) est distribuée proportionnellement à chaque ligne.';
+  String get rptInvoiceDiscountNote => 'La remise au niveau de la facture (remise facture + remise fidélité) est distribuée proportionnellement à chaque ligne.';
 
   @override
-  String get rptReturnsNote =>
-      'Les retours (isReturned = 1) sont déduits à la fois du revenu et du coût pour obtenir le vrai net.';
+  String get rptReturnsNote => 'Les retours (isReturned = 1) sont déduits à la fois du revenu et du coût pour obtenir le vrai net.';
 
   @override
-  String get rptVouchersExcludedNote =>
-      'Les bons (perception/paiement fournisseur) sont exclus car ce ne sont pas des ventes.';
+  String get rptVouchersExcludedNote => 'Les bons (perception/paiement fournisseur) sont exclus car ce ne sont pas des ventes.';
 
   @override
-  String get rptNetTotalNote =>
-      'Net = Marge totale − Dépenses totales de la période.';
+  String get rptNetTotalNote => 'Net = Marge totale − Dépenses totales de la période.';
 
   @override
-  String get rptItemRevenueSubtitle =>
-      'Tableau — triés par revenu des articles dans la période';
+  String get rptItemRevenueSubtitle => 'Tableau — triés par revenu des articles dans la période';
 
   @override
-  String get rptCostConfidenceSubtitle =>
-      'Plus la part des lignes à coût fixe est élevée, plus le chiffre est précis';
+  String get rptCostConfidenceSubtitle => 'Plus la part des lignes à coût fixe est élevée, plus le chiffre est précis';
 
   @override
   String rptCostAccuracyLine1(Object known, Object total) {
@@ -14315,8 +13466,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get rptSavePeriodNote =>
-      'Lors de la sauvegarde, la période courante est mise à jour et stockée pour la prochaine fois.';
+  String get rptSavePeriodNote => 'Lors de la sauvegarde, la période courante est mise à jour et stockée pour la prochaine fois.';
 
   @override
   String get rptStaffRecorder => 'Employé / Enregistreur';
@@ -14327,8 +13477,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get rptDefaultPeriodSubtitle =>
-      'Lors de la sauvegarde, la période actuelle est mise à jour et enregistrée pour la prochaine fois.';
+  String get rptDefaultPeriodSubtitle => 'Lors de la sauvegarde, la période actuelle est mise à jour et enregistrée pour la prochaine fois.';
 
   @override
   String get expReportTitle => 'Rapport de dépenses';
@@ -14378,8 +13527,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get expExpenseReason => 'Motif de la dépense (note)';
 
   @override
-  String get expNoNoteHint =>
-      'Pas de note - veuillez ajouter un motif de dépense.';
+  String get expNoNoteHint => 'Pas de note - veuillez ajouter un motif de dépense.';
 
   @override
   String get expDaily => 'Journalier';
@@ -14417,8 +13565,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get debtsAggregateHint =>
-      'Agrégation par client : produits, vendeurs, paiement partiel depuis l\'écran détails. QR sur le reçu pour les clients enregistrés uniquement.';
+  String get debtsAggregateHint => 'Agrégation par client : produits, vendeurs, paiement partiel depuis l\'écran détails. QR sur le reçu pour les clients enregistrés uniquement.';
 
   @override
   String debtsCustomersFiltered(Object filtered, Object total) {
@@ -14426,12 +13573,10 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get debtsNoRemainingAged =>
-      'Aucun solde aging restant agrégé avec les clients';
+  String get debtsNoRemainingAged => 'Aucun solde aging restant agrégé avec les clients';
 
   @override
-  String get debtsUnlinkedToCustomerTable =>
-      'Non lié à la table des clients (par nom)';
+  String get debtsUnlinkedToCustomerTable => 'Non lié à la table des clients (par nom)';
 
   @override
   String debtsAgeWarningActive(Object days) {
@@ -14439,8 +13584,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get debtsAgeWarningDisabled =>
-      ' Activez «Jours d\'avertissement» dans les paramètres de dette pour marquer les vieilles factures.';
+  String get debtsAgeWarningDisabled => ' Activez «Jours d\'avertissement» dans les paramètres de dette pour marquer les vieilles factures.';
 
   @override
   String debtsHowCalculated(Object ageHint) {
@@ -14479,12 +13623,10 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get debtsTapForInvoiceDetails =>
-      'Appuyez pour voir les détails de la facture';
+  String get debtsTapForInvoiceDetails => 'Appuyez pour voir les détails de la facture';
 
   @override
-  String get debtsNoMatchingInvoices =>
-      'Aucune facture ne correspond à la recherche ou au filtre actuel';
+  String get debtsNoMatchingInvoices => 'Aucune facture ne correspond à la recherche ou au filtre actuel';
 
   @override
   String get debtsNoCreditInvoices => 'Aucune facture à crédit enregistrée';
@@ -14495,8 +13637,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get instFullBoxOnly =>
-      'Enregistré en totalité dans la caisse (pas de paiement partiel).';
+  String get instFullBoxOnly => 'Enregistré en totalité dans la caisse (pas de paiement partiel).';
 
   @override
   String instMustPayFull(Object amount) {
@@ -14504,8 +13645,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get instPayFailed =>
-      'Échec de l\'enregistrement (la tranche est peut-être déjà payée)';
+  String get instPayFailed => 'Échec de l\'enregistrement (la tranche est peut-être déjà payée)';
 
   @override
   String get instCustomer => 'Client';
@@ -14521,8 +13661,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get instNoCustomerMatch =>
-      'Aucune correspondance dans la table clients — le nom provient uniquement de la facture.';
+  String get instNoCustomerMatch => 'Aucune correspondance dans la table clients — le nom provient uniquement de la facture.';
 
   @override
   String instInvoiceNumber(Object id) {
@@ -14569,8 +13708,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get instSuggestedMonthly => 'Tranche mensuelle suggérée';
 
   @override
-  String get instEstimateNote =>
-      'Note : les chiffres ci-dessus sont des estimations à la vente.';
+  String get instEstimateNote => 'Note : les chiffres ci-dessus sont des estimations à la vente.';
 
   @override
   String get instAdvance => 'Avance';
@@ -14605,20 +13743,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mpBundledSuccess => 'Matériaux intégrés importés avec succès';
 
   @override
-  String get mpErrorEmptyPath =>
-      'Entrez d\'abord le chemin du fichier base de données';
+  String get mpErrorEmptyPath => 'Entrez d\'abord le chemin du fichier base de données';
 
   @override
-  String get mpErrorMissingFile =>
-      'Fichier introuvable. Si le fichier est dans une archive RAR/ZIP, extrayez d\'abord le fichier .db, puis saisissez son chemin ou son nom.';
+  String get mpErrorMissingFile => 'Fichier introuvable. Si le fichier est dans une archive RAR/ZIP, extrayez d\'abord le fichier .db, puis saisissez son chemin ou son nom.';
 
   @override
-  String get mpErrorNoProducts =>
-      'Le fichier ne contient pas de table produits. Choisissez un fichier de base valide';
+  String get mpErrorNoProducts => 'Le fichier ne contient pas de table produits. Choisissez un fichier de base valide';
 
   @override
-  String get mpErrorReadFailed =>
-      'Impossible de lire le fichier. Assurez-vous qu\'il s\'agit d\'une base SQLite valide et non protégée';
+  String get mpErrorReadFailed => 'Impossible de lire le fichier. Assurez-vous qu\'il s\'agit d\'une base SQLite valide et non protégée';
 
   @override
   String mpErrorGeneric(Object s) {
@@ -14629,15 +13763,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mpTitle => 'Importer matériaux & prix';
 
   @override
-  String get mpBundledDesc =>
-      'Cette option importe une base de données de matériaux prête à l\'emploi (≈ 3 500 articles des produits les plus populaires du marché avec leurs prix). Il est recommandé de vérifier les prix après l\'import car les prix du marché changent.';
+  String get mpBundledDesc => 'Cette option importe une base de données de matériaux prête à l\'emploi (≈ 3 500 articles des produits les plus populaires du marché avec leurs prix). Il est recommandé de vérifier les prix après l\'import car les prix du marché changent.';
 
   @override
   String get mpBundledRestoreTitle => 'Restaurer la base de matériaux intégrée';
 
   @override
-  String get mpBundledRestoreDesc =>
-      'En un clic : l\'application extraira le fichier intégré et ajoutera les matériaux à votre inventaire. Si un article existe déjà avec le même code-barres, seul son nom/prix/catégorie sera mis à jour (sans doublons).';
+  String get mpBundledRestoreDesc => 'En un clic : l\'application extraira le fichier intégré et ajoutera les matériaux à votre inventaire. Si un article existe déjà avec le même code-barres, seul son nom/prix/catégorie sera mis à jour (sans doublons).';
 
   @override
   String get mpBundledButtonBusy => 'Import en cours...';
@@ -14649,22 +13781,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mpAdvancedTileTitle => 'Import avancé : depuis un fichier externe';
 
   @override
-  String get mpAdvancedTileSubtitle =>
-      'Si vous avez un fichier .db Market POS en dehors de l\'application';
+  String get mpAdvancedTileSubtitle => 'Si vous avez un fichier .db Market POS en dehors de l\'application';
 
   @override
   String get mpDbPathLabel => 'Chemin du fichier base de données';
 
   @override
-  String get mpDbPathHint =>
-      'Exemple : /Users/you/Documents/supermarket_backup_2026-04-15_20-05-15.db';
+  String get mpDbPathHint => 'Exemple : /Users/you/Documents/supermarket_backup_2026-04-15_20-05-15.db';
 
   @override
   String get mpImportExternal => 'Importer depuis un fichier externe';
 
   @override
-  String get mpTipHint =>
-      'Astuce : vous pouvez écrire juste le nom du fichier et il sera recherché dans Documents/Téléchargements/Bureau.';
+  String get mpTipHint => 'Astuce : vous pouvez écrire juste le nom du fichier et il sera recherché dans Documents/Téléchargements/Bureau.';
 
   @override
   String get mpResultTitle => 'Résultat de l\'import';
@@ -14887,29 +14016,25 @@ class AppLocalizationsFr extends AppLocalizations {
   String get isStockTracking => 'Suivi des stocks';
 
   @override
-  String get isStockTrackingDesc =>
-      'Activer le suivi des quantités de produits';
+  String get isStockTrackingDesc => 'Activer le suivi des quantités de produits';
 
   @override
   String get isBarcodeRequired => 'Code-barres requis';
 
   @override
-  String get isBarcodeRequiredDesc =>
-      'Exiger un code-barres lors de l\'ajout de produits';
+  String get isBarcodeRequiredDesc => 'Exiger un code-barres lors de l\'ajout de produits';
 
   @override
   String get isAutoDeduct => 'Déduction automatique du stock';
 
   @override
-  String get isAutoDeductDesc =>
-      'Réduire automatiquement le stock lorsque la facture est confirmée';
+  String get isAutoDeductDesc => 'Réduire automatiquement le stock lorsque la facture est confirmée';
 
   @override
   String get isLowStockAlert => 'Alerte stock bas';
 
   @override
-  String get isLowStockAlertDesc =>
-      'Afficher un avertissement lorsque le stock tombe en dessous du seuil';
+  String get isLowStockAlertDesc => 'Afficher un avertissement lorsque le stock tombe en dessous du seuil';
 
   @override
   String get isThreshold => 'Seuil d\'alerte';
@@ -14987,8 +14112,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get asDelete => 'Supprimer le service';
 
   @override
-  String get asConfirmDelete =>
-      'Êtes-vous sûr de vouloir supprimer ce service ?';
+  String get asConfirmDelete => 'Êtes-vous sûr de vouloir supprimer ce service ?';
 
   @override
   String cdCustomerFallback(Object id) {
@@ -15004,8 +14128,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get cdAutoDistributeHint =>
-      'Distribué automatiquement de la plus ancienne à la plus récente facture.';
+  String get cdAutoDistributeHint => 'Distribué automatiquement de la plus ancienne à la plus récente facture.';
 
   @override
   String get cdNothingToPay => 'Aucun restant à payer ou montant invalide';
@@ -15079,30 +14202,25 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get cfFullDebtScreen =>
-      'Écran complet des dettes (paiement et détails)';
+  String get cfFullDebtScreen => 'Écran complet des dettes (paiement et détails)';
 
   @override
   String get cfCreditSales => 'Ventes à crédit (dette)';
 
   @override
-  String get cfCreditSalesDesc =>
-      'Chaque facture est liée à un reçu de vente — appuyez pour voir les détails';
+  String get cfCreditSalesDesc => 'Chaque facture est liée à un reçu de vente — appuyez pour voir les détails';
 
   @override
-  String get cfNoCreditInvoices =>
-      'Aucune facture à crédit liée à ce client. Utilisez la vente à crédit et sélectionnez le client dans la liste.';
+  String get cfNoCreditInvoices => 'Aucune facture à crédit liée à ce client. Utilisez la vente à crédit et sélectionnez le client dans la liste.';
 
   @override
   String get cfInstallments => 'Échéancier';
 
   @override
-  String get cfInstallmentsDesc =>
-      'Plans de versements liés aux factures de vente';
+  String get cfInstallmentsDesc => 'Plans de versements liés aux factures de vente';
 
   @override
-  String get cfNoInstallmentPlans =>
-      'Aucun plan de versement lié à ce client. Utilisez la vente par versements et sélectionnez le client.';
+  String get cfNoInstallmentPlans => 'Aucun plan de versement lié à ce client. Utilisez la vente par versements et sélectionnez le client.';
 
   @override
   String get cfEditCustomer => 'Modifier les informations client';
@@ -15114,8 +14232,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get cfSelectCustomer => 'Sélectionnez un client dans la liste';
 
   @override
-  String get cfDebtDetailsWillAppear =>
-      'Les détails de la dette et des versements du client apparaîtront ici.';
+  String get cfDebtDetailsWillAppear => 'Les détails de la dette et des versements du client apparaîtront ici.';
 
   @override
   String get cfPhone => 'Téléphone';
@@ -15188,8 +14305,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get saCreditAccounts => 'Comptes créditeurs (fournisseurs)';
 
   @override
-  String get saCreditAccountsDesc =>
-      'Enregistrez les reçus fournisseur (numéro et date), puis enregistrez les paiements lors du règlement. La caisse peut être liée automatiquement.';
+  String get saCreditAccountsDesc => 'Enregistrez les reçus fournisseur (numéro et date), puis enregistrez les paiements lors du règlement. La caisse peut être liée automatiquement.';
 
   @override
   String saTotalOwed(Object amount) {
@@ -15226,73 +14342,58 @@ class AppLocalizationsFr extends AppLocalizations {
   String get saSupplierChip => 'Fournisseur';
 
   @override
-  String get isFullSettingsHint =>
-      'Paramètres complets des produits (configuration, suivi, autorisations, valeurs par défaut) disponibles depuis la carte principale «Paramètres produits».';
+  String get isFullSettingsHint => 'Paramètres complets des produits (configuration, suivi, autorisations, valeurs par défaut) disponibles depuis la carte principale «Paramètres produits».';
 
   @override
-  String get isCategoriesMoved =>
-      'La gestion des catégories a été déplacée vers un écran dédié. Ouvrez «Catégories» depuis le menu principal.';
+  String get isCategoriesMoved => 'La gestion des catégories a été déplacée vers un écran dédié. Ouvrez «Catégories» depuis le menu principal.';
 
   @override
-  String get isBrandsMoved =>
-      'La gestion des marques a été déplacée vers un écran dédié. Ouvrez «Marques» depuis le menu principal.';
+  String get isBrandsMoved => 'La gestion des marques a été déplacée vers un écran dédié. Ouvrez «Marques» depuis le menu principal.';
 
   @override
-  String get isBarcodeConfigMoved =>
-      'La configuration du code-barres a été déplacée vers un écran dédié. Ouvrez «Paramètres code-barres» depuis le menu principal.';
+  String get isBarcodeConfigMoved => 'La configuration du code-barres a été déplacée vers un écran dédié. Ouvrez «Paramètres code-barres» depuis le menu principal.';
 
   @override
   String get isDefaultWarehouses => 'Entrepôts par défaut pour les employés';
 
   @override
-  String get isForceDefaultWarehouse =>
-      'Forcer un entrepôt par défaut lors de l\'enregistrement des mouvements';
+  String get isForceDefaultWarehouse => 'Forcer un entrepôt par défaut lors de l\'enregistrement des mouvements';
 
   @override
-  String get isWarehouseRecommendation =>
-      'Il est recommandé de lier chaque employé à un entrepôt par défaut pour suivre les autorisations et les mouvements.';
+  String get isWarehouseRecommendation => 'Il est recommandé de lier chaque employé à un entrepôt par défaut pour suivre les autorisations et les mouvements.';
 
   @override
-  String get isUnitsTemplatesMoved =>
-      'Gestion des modèles d\'unités (de base et conversion) depuis l\'écran dédié. Ouvrez «Modèles d\'unités» depuis le menu principal.';
+  String get isUnitsTemplatesMoved => 'Gestion des modèles d\'unités (de base et conversion) depuis l\'écran dédié. Ouvrez «Modèles d\'unités» depuis le menu principal.';
 
   @override
-  String get isAllowDifferentPurchaseUnits =>
-      'Autoriser des unités d\'achat différentes des unités de vente';
+  String get isAllowDifferentPurchaseUnits => 'Autoriser des unités d\'achat différentes des unités de vente';
 
   @override
-  String get isShowConversionsOnPurchase =>
-      'Afficher les conversions sur la facture d\'achat';
+  String get isShowConversionsOnPurchase => 'Afficher les conversions sur la facture d\'achat';
 
   @override
   String get isPrinting => 'Impression';
 
   @override
-  String get isIncludeStoreLogo =>
-      'Inclure le logo du magasin dans les documents';
+  String get isIncludeStoreLogo => 'Inclure le logo du magasin dans les documents';
 
   @override
-  String get isPrintBarcodeOnReceipts =>
-      'Imprimer le code-barres sur les bons de sortie';
+  String get isPrintBarcodeOnReceipts => 'Imprimer le code-barres sur les bons de sortie';
 
   @override
   String get isExtraFields => 'Champs supplémentaires';
 
   @override
-  String get isShowExtraFieldsInLists =>
-      'Afficher les champs supplémentaires dans les listes de produits';
+  String get isShowExtraFieldsInLists => 'Afficher les champs supplémentaires dans les listes de produits';
 
   @override
-  String get isIncludeInExportReports =>
-      'Inclure dans les rapports exportables';
+  String get isIncludeInExportReports => 'Inclure dans les rapports exportables';
 
   @override
-  String get isNoExtraSettings =>
-      'Aucun paramètre supplémentaire pour cette catégorie.';
+  String get isNoExtraSettings => 'Aucun paramètre supplémentaire pour cette catégorie.';
 
   @override
-  String get asMinPriceError =>
-      'Le prix de vente minimum ne peut pas dépasser le prix de vente';
+  String get asMinPriceError => 'Le prix de vente minimum ne peut pas dépasser le prix de vente';
 
   @override
   String get asSavedSuccess => 'Service enregistré';
@@ -15301,8 +14402,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get asAddTitle => 'Ajouter un service technique';
 
   @override
-  String get asAddDescription =>
-      'Ajoutez un service pour la vente directe depuis l\'écran de vente (quantité fixe 1, pas de stock).';
+  String get asAddDescription => 'Ajoutez un service pour la vente directe depuis l\'écran de vente (quantité fixe 1, pas de stock).';
 
   @override
   String get asNameRequired => 'Saisissez un nom de service';
@@ -15317,15 +14417,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get asRefCostLabel => 'Coût de référence du service';
 
   @override
-  String get asRefCostDesc =>
-      'Frais du technicien ou matériaux consommés par défaut — pour le calcul de la marge dans les rapports.';
+  String get asRefCostDesc => 'Frais du technicien ou matériaux consommés par défaut — pour le calcul de la marge dans les rapports.';
 
   @override
   String get asMinSalePriceLabel => 'Prix de vente minimum';
 
   @override
-  String get asMinSalePriceDesc =>
-      'Si laissé vide, le prix de vente est utilisé.';
+  String get asMinSalePriceDesc => 'Si laissé vide, le prix de vente est utilisé.';
 
   @override
   String get asDescriptionLabel => 'Description ou détails';
@@ -15340,8 +14438,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dlCustomizeHome => 'Personnaliser l\'écran d\'accueil';
 
   @override
-  String get dlToggleHint =>
-      'Activez ou désactivez chaque section, puis faites glisser l\'icône ⋮⋮ pour réordonner de haut en bas.';
+  String get dlToggleHint => 'Activez ou désactivez chaque section, puis faites glisser l\'icône ⋮⋮ pour réordonner de haut en bas.';
 
   @override
   String get dlOrderOnHome => 'Ordre sur l\'accueil';
@@ -15353,8 +14450,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dlResetTitle => 'Réinitialiser par défaut ?';
 
   @override
-  String get dlResetDesc =>
-      'Toutes les sections seront affichées et ordonnées comme dans l\'application d\'origine.';
+  String get dlResetDesc => 'Toutes les sections seront affichées et ordonnées comme dans l\'application d\'origine.';
 
   @override
   String get dlCancel => 'Annuler';
@@ -15363,8 +14459,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dlReset => 'Réinitialiser';
 
   @override
-  String get dlResetButton =>
-      'Réinitialiser l\'ordre et la visibilité par défaut';
+  String get dlResetButton => 'Réinitialiser l\'ordre et la visibilité par défaut';
 
   @override
   String get wsMonthShifts => 'Garde mensuelles';
@@ -15376,8 +14471,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get wsPrevMonth => 'Mois précédent';
 
   @override
-  String get wsMonthDesc =>
-      'Les gardes qui ont commencé ou se sont terminées dans ce mois (ou sont encore ouvertes) sont affichées. \"Employé de garde\" est ce qui a été saisi lors de l\'ouverture.';
+  String get wsMonthDesc => 'Les gardes qui ont commencé ou se sont terminées dans ce mois (ou sont encore ouvertes) sont affichées. \"Employé de garde\" est ce qui a été saisi lors de l\'ouverture.';
 
   @override
   String get wsNoShiftsThisMonth => 'Aucune garde ce mois-ci';
@@ -15400,28 +14494,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get isSavedInstallment => 'Paramètres d\'échelonnement enregistrés';
 
   @override
-  String get isAppliesToDesc =>
-      'Appliqué aux ventes par échelonnement, à la carte de plan d\'échelonnement sur l\'écran de vente (lorsqu\'activé), et à la configuration du plan après enregistrement.';
+  String get isAppliesToDesc => 'Appliqué aux ventes par échelonnement, à la carte de plan d\'échelonnement sur l\'écran de vente (lorsqu\'activé), et à la configuration du plan après enregistrement.';
 
   @override
-  String get isMinAdvanceHint =>
-      'Empêche l\'enregistrement d\'une facture d\'échelonnement si l\'avance est inférieure au pourcentage minimum ci-dessous (du total après remise et taxe).';
+  String get isMinAdvanceHint => 'Empêche l\'enregistrement d\'une facture d\'échelonnement si l\'avance est inférieure au pourcentage minimum ci-dessous (du total après remise et taxe).';
 
   @override
-  String get isSummaryCardHint =>
-      'Affiche l\'avance, le taux d\'intérêt, le nombre de mois et la mensualité suggérée. Lorsqu\'il est masqué, seule l\'avance avec les « détails des montants » est affichée, et l\'intérêt est calculé automatiquement.';
+  String get isSummaryCardHint => 'Affiche l\'avance, le taux d\'intérêt, le nombre de mois et la mensualité suggérée. Lorsqu\'il est masqué, seule l\'avance avec les « détails des montants » est affichée, et l\'intérêt est calculé automatiquement.';
 
   @override
-  String get isDefaultMonthsHint =>
-      'Utilisé comme nombre de mois par défaut dans la carte de plan lors des ventes ; lorsqu\'il est masqué, il est utilisé lors de l\'enregistrement.';
+  String get isDefaultMonthsHint => 'Utilisé comme nombre de mois par défaut dans la carte de plan lors des ventes ; lorsqu\'il est masqué, il est utilisé lors de l\'enregistrement.';
 
   @override
-  String get isInterestHint =>
-      'Le champ d\'intérêt est rempli lors de la sélection de « échelonnement » ; lorsqu\'il est masqué, il est utilisé lors de l\'enregistrement.';
+  String get isInterestHint => 'Le champ d\'intérêt est rempli lors de la sélection de « échelonnement » ; lorsqu\'il est masqué, il est utilisé lors de l\'enregistrement.';
 
   @override
-  String get isCalendarDatesTitle =>
-      'Utiliser les mois calendaires pour les dates d\'échéance';
+  String get isCalendarDatesTitle => 'Utiliser les mois calendaires pour les dates d\'échéance';
 
   @override
   String get isFromInvoiceDate => 'À partir de la date de facture';
@@ -15439,15 +14527,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get orSeparator => 'ou';
 
   @override
-  String get shServicesHubDesc =>
-      'Vendre des services directement ou gérer les tickets de maintenance et les convertir en factures à la livraison.';
+  String get shServicesHubDesc => 'Vendre des services directement ou gérer les tickets de maintenance et les convertir en factures à la livraison.';
 
   @override
   String get shAddServiceToList => 'Ajouter un service à la liste';
 
   @override
-  String get shAddServiceToListDesc =>
-      'Définir un nom, un prix et des détails pour qu\'il apparaisse dans les ventes comme un service technique.';
+  String get shAddServiceToListDesc => 'Définir un nom, un prix et des détails pour qu\'il apparaisse dans les ventes comme un service technique.';
 
   @override
   String get shAddServiceBreadcrumb => 'Ajouter un service';
@@ -15456,27 +14542,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get shDirectSaleService => 'Vente directe de service';
 
   @override
-  String get shDirectSaleServiceDesc =>
-      'Ouvrir l\'écran de vente pour ajouter un service technique en ligne fixe avec quantité 1.';
+  String get shDirectSaleServiceDesc => 'Ouvrir l\'écran de vente pour ajouter un service technique en ligne fixe avec quantité 1.';
 
   @override
   String get shDirectSaleBreadcrumb => 'Nouvelle vente';
 
   @override
-  String get shMaintenanceRequests =>
-      'Demandes de maintenance et tickets de travail';
+  String get shMaintenanceRequests => 'Demandes de maintenance et tickets de travail';
 
   @override
-  String get shMaintenanceRequestsDesc =>
-      'Créer un ticket, ajouter des pièces détachées, puis le convertir en facture à la livraison.';
+  String get shMaintenanceRequestsDesc => 'Créer un ticket, ajouter des pièces détachées, puis le convertir en facture à la livraison.';
 
   @override
-  String get shMaintenanceRequestsBreadcrumb =>
-      'Demandes de maintenance et tickets de travail';
+  String get shMaintenanceRequestsBreadcrumb => 'Demandes de maintenance et tickets de travail';
 
   @override
-  String get shDepositNote =>
-      'Remarque : L\'acompte de maintenance est appliqué comme acompte sur la facture complète lors de la conversion.';
+  String get shDepositNote => 'Remarque : L\'acompte de maintenance est appliqué comme acompte sur la facture complète lors de la conversion.';
 
   @override
   String printSaveFailed(Object error) {
@@ -15487,23 +14568,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get staffQrScanTitle => 'Scanner la carte de l\'employé';
 
   @override
-  String get staffQrScanHint =>
-      'Dirigez la caméra vers le code QR sur la carte d\'identité.';
+  String get staffQrScanHint => 'Dirigez la caméra vers le code QR sur la carte d\'identité.';
 
   @override
   String get openShiftAutoHint => 'Déterminé automatiquement';
 
   @override
-  String get closeShiftBalanceHint =>
-      'Le solde est déterminé automatiquement à partir des mouvements de la caisse. Vérifiez les valeurs puis confirmez le retrait.';
+  String get closeShiftBalanceHint => 'Le solde est déterminé automatiquement à partir des mouvements de la caisse. Vérifiez les valeurs puis confirmez le retrait.';
 
   @override
-  String get maintenanceDefaultMsg =>
-      'L\'application est en maintenance. Réessayez plus tard.';
+  String get maintenanceDefaultMsg => 'L\'application est en maintenance. Réessayez plus tard.';
 
   @override
-  String get forceUpdateDefaultMsg =>
-      'L\'application doit être mise à jour pour continuer.';
+  String get forceUpdateDefaultMsg => 'L\'application doit être mise à jour pour continuer.';
 
   @override
   String get managementMessageDefault => 'Message de la direction';
@@ -15512,20 +14589,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get managementPrivateMessageDefault => 'Message privé de la direction';
 
   @override
-  String cashSummaryLine(
-    Object entries,
-    Object exits,
-    Object inAmount,
-    Object invoices,
-    Object manual,
-    Object outAmount,
-  ) {
+  String cashSummaryLine(Object entries, Object exits, Object inAmount, Object invoices, Object manual, Object outAmount) {
     return '$inAmount Fdj entrant  •  $outAmount Fdj sortant  •  $entries entrées  •  $exits sorties  •  $manual manuelles  •  $invoices factures';
   }
 
   @override
-  String get instNoInvoiceItems =>
-      'Aucun article enregistré dans cette facture';
+  String get instNoInvoiceItems => 'Aucun article enregistré dans cette facture';
 
   @override
   String get instItemFallback => 'Article';
@@ -15557,8 +14626,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get instActiveLabel => 'Actif';
 
   @override
-  String get instInfoBannerText =>
-      'Un plan est créé pour chaque facture à échéancier (même si l\'avance = total). Les paiements depuis les détails du plan apparaissent dans la caisse. Avance et planification : échéancier ← paramètres d\'échéancier.';
+  String get instInfoBannerText => 'Un plan est créé pour chaque facture à échéancier (même si l\'avance = total). Les paiements depuis les détails du plan apparaissent dans la caisse. Avance et planification : échéancier ← paramètres d\'échéancier.';
 
   @override
   String instPaymentProgressLine(Object paid, Object total) {
@@ -15591,8 +14659,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get instNoRemainingAfterAdvance =>
-      'Aucun montant restant pour les acomptes après l\'avance';
+  String get instNoRemainingAfterAdvance => 'Aucun montant restant pour les acomptes après l\'avance';
 
   @override
   String get instCustomerFallback => 'Client';
@@ -15603,8 +14670,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get instPlanAlreadySavedHint =>
-      'Le plan est déjà enregistré et apparaît sous «Plans d\'échéancier». Ajustez le lien, le nombre d\'acomptes ou la référence, puis enregistrez.';
+  String get instPlanAlreadySavedHint => 'Le plan est déjà enregistré et apparaît sous «Plans d\'échéancier». Ajustez le lien, le nombre d\'acomptes ou la référence, puis enregistrez.';
 
   @override
   String get instInvoiceNumberLabel => 'Numéro de facture';
@@ -15638,13 +14704,624 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get debtLimitDescription =>
-      'Ces limites sont appliquées lors de l\'enregistrement d\'une facture «crédit / différé». Laissez le champ vide ou 0 pour désactiver le plafond.';
+  String get debtLimitDescription => 'Ces limites sont appliquées lors de l\'enregistrement d\'une facture «crédit / différé». Laissez le champ vide ou 0 pour désactiver le plafond.';
 
   @override
   String get debtAmountCaps => 'Plafonds de montants';
 
   @override
-  String get debtAutoDistributeHint =>
-      'Distribué automatiquement des factures les plus anciennes aux plus récentes.';
+  String get debtAutoDistributeHint => 'Distribué automatiquement des factures les plus anciennes aux plus récentes.';
+
+  @override
+  String get navHome => 'Accueil';
+
+  @override
+  String get navInvoices => 'Factures';
+
+  @override
+  String get navAddInvoice => 'Nouvelle vente';
+
+  @override
+  String get navParkedSales => 'Ventes en attente';
+
+  @override
+  String get navSalePosSettings => 'Paramètres PDV';
+
+  @override
+  String get navCustomers => 'Clients';
+
+  @override
+  String get navCustomerContacts => 'Contacts clients';
+
+  @override
+  String get navLoyaltySettings => 'Paramètres fidélité';
+
+  @override
+  String get navLoyaltyLedger => 'Registre de fidélité';
+
+  @override
+  String get navInstallments => 'Échéanciers';
+
+  @override
+  String get navInstallmentSettings => 'Paramètres d\'échéancier';
+
+  @override
+  String get navDebts => 'Créances';
+
+  @override
+  String get navDebtSettings => 'Paramètres de créances';
+
+  @override
+  String get navInventory => 'Inventaire';
+
+  @override
+  String get navInventoryProducts => 'Liste des produits';
+
+  @override
+  String get navInventoryBarcodeLabels => 'Imprimer étiquettes code-barres';
+
+  @override
+  String get navAddProduct => 'Ajouter un produit';
+
+  @override
+  String get navQuickUpdateProducts => 'Mise à jour rapide produit';
+
+  @override
+  String get navInventoryManagement => 'Mouvements de stock';
+
+  @override
+  String get navInventoryWarehouses => 'Entrepôts';
+
+  @override
+  String get navInventoryPriceLists => 'Listes de prix';
+
+  @override
+  String get navInventoryStocktaking => 'Inventaire physique';
+
+  @override
+  String get navInventoryPurchaseOrders => 'Bons de commande';
+
+  @override
+  String get navInventoryAnalytics => 'Analyses inventaire';
+
+  @override
+  String get navInventorySettings => 'Paramètres inventaire';
+
+  @override
+  String get navCash => 'Caisse';
+
+  @override
+  String get navExpenses => 'Dépenses';
+
+  @override
+  String get navLocalAiAgent => 'Assistant intelligent';
+
+  @override
+  String get navUsers => 'Utilisateurs';
+
+  @override
+  String get navStaffShiftsWeek => 'Plannings du personnel';
+
+  @override
+  String get navEmployeeIdentity => 'Badges employés';
+
+  @override
+  String get navPrinting => 'Impression';
+
+  @override
+  String get navSettings => 'Paramètres';
+
+  @override
+  String get navSettingsStoreInfo => 'Informations magasin';
+
+  @override
+  String get navSettingsInvoice => 'Paramètres facturation';
+
+  @override
+  String get navSettingsSalePosAppearance => 'Thème et couleurs';
+
+  @override
+  String get navSettingsNotifications => 'Notifications';
+
+  @override
+  String get navSettingsPrintingInline => 'Paramètres impression';
+
+  @override
+  String get navSettingsDashboardLayout => 'Disposition tableau de bord';
+
+  @override
+  String get navSettingsSubscriptionAccount => 'Abonnement et compte';
+
+  @override
+  String get navSettingsBusinessFeatures => 'Fonctionnalités magasin';
+
+  @override
+  String get navSubscriptionPlans => 'Plans d\'abonnement';
+
+  @override
+  String get navServicesHub => 'Services et maintenance';
+
+  @override
+  String get navServicesAdd => 'Ajouter un service';
+
+  @override
+  String get navServicesCatalog => 'Répertoire et tarifs';
+
+  @override
+  String get navServiceOrdersHub => 'Ordres de maintenance';
+
+  @override
+  String get navServiceOrdersCreate => 'Nouvel ordre de travail';
+
+  @override
+  String get reportsTabDashboard => 'Rapports — Tableau de bord';
+
+  @override
+  String get reportsTabSales => 'Rapports — Ventes et factures';
+
+  @override
+  String get reportsTabCustomers => 'Rapports — Clients';
+
+  @override
+  String get reportsTabDebts => 'Rapports — Créances';
+
+  @override
+  String get reportsTabInstallments => 'Rapports — Échéanciers';
+
+  @override
+  String get reportsTabStaff => 'Rapports — Personnel';
+
+  @override
+  String get reportsTabAnalytics => 'Rapports — Analyse et marge';
+
+  @override
+  String get reportsTabSettings => 'Rapports — Paramètres';
+
+  @override
+  String navProcessReturn(Object id) {
+    return 'Retour facture #$id';
+  }
+
+  @override
+  String activityToday(Object time) {
+    return 'Aujourd\'hui $time';
+  }
+
+  @override
+  String get activityYesterday => 'Hier';
+
+  @override
+  String activityReturnLabel(Object id) {
+    return 'Retour #$id';
+  }
+
+  @override
+  String activityInvoiceLabel(Object id, Object type) {
+    return '$type · #$id';
+  }
+
+  @override
+  String get activityNoCustomerName => 'Sans nom de client';
+
+  @override
+  String activityLinkedInvoice(Object id) {
+    return 'Lié à la facture #$id';
+  }
+
+  @override
+  String get activityCashLedger => 'Caisse';
+
+  @override
+  String get activityDeferredSale => 'Vente différée';
+
+  @override
+  String activityDeferredLabel(Object id) {
+    return 'Différé · #$id';
+  }
+
+  @override
+  String activityCustomerCreated(Object id) {
+    return 'Nouveau client · #$id';
+  }
+
+  @override
+  String activityItemCreated(Object id) {
+    return 'Nouvel article · #$id';
+  }
+
+  @override
+  String get activityShiftClose => 'Fermer quart';
+
+  @override
+  String get activityShiftOpen => 'Ouvrir quart';
+
+  @override
+  String activityShiftLabel(Object id) {
+    return 'Quart #$id';
+  }
+
+  @override
+  String get activityLoyaltyEarn => 'Gagner des points';
+
+  @override
+  String get activityLoyaltyRedeem => 'Échanger des points';
+
+  @override
+  String get activityLoyaltyAdjust => 'Ajuster des points';
+
+  @override
+  String get activityLoyaltyFallback => 'Fidélité';
+
+  @override
+  String activityPointsLabel(Object points, Object type) {
+    return '$type · $points pts';
+  }
+
+  @override
+  String get activityStockIn => 'Entrant';
+
+  @override
+  String get activityStockOut => 'Sortant';
+
+  @override
+  String get activityStockTransfer => 'Transfert';
+
+  @override
+  String get activityStockFallback => 'Inventaire';
+
+  @override
+  String activityStockVoucherLabel(Object no, Object type) {
+    return 'Bordereau $type · $no';
+  }
+
+  @override
+  String get activityCashSale => 'Vente comptant';
+
+  @override
+  String get activityAdvancePayment => 'Avance / Paiement';
+
+  @override
+  String get activitySalePayment => 'Vente';
+
+  @override
+  String get activityManualDeposit => 'Dépôt manuel';
+
+  @override
+  String get activityManualWithdraw => 'Retrait manuel';
+
+  @override
+  String get activityInstallmentPay => 'Paiement échéance';
+
+  @override
+  String get activitySupplierPay => 'Paiement fournisseur';
+
+  @override
+  String get activitySupplierPayReversal => 'Annulation paiement fournisseur';
+
+  @override
+  String get activitySaleReturnLabel => 'Retour';
+
+  @override
+  String get activityCashMovementFallback => 'Mouvement de caisse';
+
+  @override
+  String get employeeIdCard => 'Badge employé';
+
+  @override
+  String get roleAdmin => 'Admin';
+
+  @override
+  String get roleStaff => 'Personnel';
+
+  @override
+  String get fieldName => 'Nom';
+
+  @override
+  String get fieldJobTitle => 'Poste';
+
+  @override
+  String get fieldPermission => 'Permission';
+
+  @override
+  String get fieldPhone => 'Téléphone';
+
+  @override
+  String get fieldEmail => 'E-mail';
+
+  @override
+  String get fieldCreatedAt => 'Créé le';
+
+  @override
+  String fieldShiftPin(Object pin) {
+    return 'PIN quart : $pin';
+  }
+
+  @override
+  String get clearHistory => 'Effacer l\'historique';
+
+  @override
+  String get copyResult => 'Copier le résultat';
+
+  @override
+  String get calcError => 'Erreur';
+
+  @override
+  String get calcDivideByZero => 'Division par zéro impossible';
+
+  @override
+  String get copied => 'Copié';
+
+  @override
+  String get noCustomerPhone => 'Aucun numéro de téléphone';
+
+  @override
+  String get callLabel => 'Appeler';
+
+  @override
+  String get whatsappLabel => 'WhatsApp';
+
+  @override
+  String get sleepModeMessage => 'Mode veille — session protégée';
+
+  @override
+  String get tapToWake => 'Appuyez n\'importe où ou sur Continuer';
+
+  @override
+  String shiftLabelForUser(Object userName) {
+    return 'Quart $userName';
+  }
+
+  @override
+  String shiftLabelForUserWithRole(Object roleName, Object userName) {
+    return 'Quart $userName - $roleName';
+  }
+
+  @override
+  String shiftPermissionsFull(Object userName) {
+    return 'Permissions opérationnelles liées au quart — $userName';
+  }
+
+  @override
+  String shiftPermissionsFullWithRole(Object roleName, Object userName) {
+    return 'Permissions opérationnelles liées au quart — $userName ($roleName)';
+  }
+
+  @override
+  String get kbSpaceArabic => 'مسافة';
+
+  @override
+  String get kbHideKeyboard => 'Masquer le clavier';
+
+  @override
+  String get kbUnpin => 'Désépingler';
+
+  @override
+  String get kbPin => 'Épingler le clavier';
+
+  @override
+  String get kbDelete => 'Supprimer';
+
+  @override
+  String get kbArabicLabel => 'عربي';
+
+  @override
+  String get kbTapToType => 'Appuyez sur un champ pour écrire';
+
+  @override
+  String get barcodeInstructions => 'Dirigez le curseur vers le champ, puis passez le code-barres.';
+
+  @override
+  String get barcodeReaderHint => 'Le lecteur écrira ici';
+
+  @override
+  String get barcodeConfirm => 'Confirmer';
+
+  @override
+  String get barcodeClose => 'Fermer';
+
+  @override
+  String get barcodeToggleFlash => 'Allumer/éteindre flash';
+
+  @override
+  String get barcodeSwitchCamera => 'Changer de caméra';
+
+  @override
+  String get barcodeAlignHint => 'Alignez le code-barres dans le cadre';
+
+  @override
+  String get barcodeAlignQrHint => 'Dirigez la caméra vers le QR ou code-barres';
+
+  @override
+  String get variantPickColor => 'Choisir une couleur';
+
+  @override
+  String get variantPickColorSubtitle => 'Choisissez une couleur pour cette option (facultatif).';
+
+  @override
+  String get variantSizeLabel => 'Taille';
+
+  @override
+  String get variantPickSize => 'Choisir taille';
+
+  @override
+  String get variantQtyLabel => 'Quantité';
+
+  @override
+  String get variantBarcodeOptional => 'Code-barres (facultatif)';
+
+  @override
+  String get variantDelete => 'Supprimer';
+
+  @override
+  String get variantColorNameLabel => 'Nom de la couleur';
+
+  @override
+  String get variantPickColorHex => 'Choisir couleur (HEX)';
+
+  @override
+  String get variantDeleteColor => 'Supprimer couleur';
+
+  @override
+  String get variantSizesAndQty => 'Tailles et quantités';
+
+  @override
+  String get variantPresetSizes => 'Tailles prédéfinies (facultatif)';
+
+  @override
+  String get variantNoSizesYet => 'Aucune taille. Ajoutez au moins une taille.';
+
+  @override
+  String get variantCustomSize => 'Taille personnalisée';
+
+  @override
+  String variantColorTotal(Object count) {
+    return 'Total couleur : $count';
+  }
+
+  @override
+  String get variantColorsAndSizes => 'Couleurs et tailles';
+
+  @override
+  String variantTotalLabel(Object count) {
+    return 'Total : $count';
+  }
+
+  @override
+  String get variantAddColor => 'Ajouter une couleur';
+
+  @override
+  String get variantNoColorsYet => 'Aucune couleur. Ajoutez une couleur pour commencer.';
+
+  @override
+  String get variantIntlSizes => 'Tailles internationales';
+
+  @override
+  String get variantTapRowHint => 'Appuyez sur une ligne ou une cellule — la ligne entière est enregistrée.';
+
+  @override
+  String get variantOrQuickPick => 'Ou choisissez rapidement';
+
+  @override
+  String get variantCustomSizeManual => 'Taille personnalisée (saisir)';
+
+  @override
+  String get variantEnterSize => 'Saisir la taille';
+
+  @override
+  String get variantDone => 'Terminé';
+
+  @override
+  String get productGroupByCategory => 'Grouper par catégorie';
+
+  @override
+  String get productGroupByBrand => 'Grouper par marque';
+
+  @override
+  String get productSelectCategory => 'Sélectionner catégorie';
+
+  @override
+  String get productSelectBrand => 'Sélectionner marque';
+
+  @override
+  String get productQuantityLabel => 'Quantité';
+
+  @override
+  String get productQuantityKg => 'Quantité (kg)';
+
+  @override
+  String get productAdd => 'Ajouter';
+
+  @override
+  String get productNotTracked => 'Non suivi';
+
+  @override
+  String get productTechnicalService => 'Service technique';
+
+  @override
+  String productAvailableStock(Object stock) {
+    return 'Stock disponible : $stock';
+  }
+
+  @override
+  String get productSoldOut => 'Épuisé';
+
+  @override
+  String get productPinnedProducts => 'Produits épinglés';
+
+  @override
+  String get productAll => 'Tous';
+
+  @override
+  String get productByPiece => 'À l\'unité';
+
+  @override
+  String get productByWeight => 'Au poids';
+
+  @override
+  String get productAddGroup => 'Ajouter un groupe';
+
+  @override
+  String get productDragToResize => 'Glissez pour redimensionner';
+
+  @override
+  String get productAllProducts => 'Tous les produits';
+
+  @override
+  String productFilterLabel(Object query) {
+    return 'Filtrer : «$query»';
+  }
+
+  @override
+  String get productNoItems => 'Aucun article';
+
+  @override
+  String get productNoResults => 'Aucun résultat';
+
+  @override
+  String get productUnpinHint => 'Désépingler du haut uniquement';
+
+  @override
+  String get productPinTopHint => 'Épingler en haut uniquement';
+
+  @override
+  String get scaffoldMore => 'Plus';
+
+  @override
+  String get masterDetailSelectItem => 'Sélectionnez un élément pour voir les détails';
+
+  @override
+  String get colorPickerClose => 'Fermer';
+
+  @override
+  String get colorPickerLivePreview => 'Aperçu en direct';
+
+  @override
+  String get colorPickerSatBright => 'Saturation & Luminosité';
+
+  @override
+  String get colorPickerSatBrightHint => 'Glissez dans la boîte pour régler la saturation (horizontal) et la luminosité (vertical)';
+
+  @override
+  String get colorPickerHue => 'Teinte (Spectre)';
+
+  @override
+  String get colorPickerPresets => 'Couleurs prédéfinies — appuyez pour sélectionner';
+
+  @override
+  String get colorPickerHexHint => 'Valeur HEX (pour copier ou saisie précise)';
+
+  @override
+  String get colorPickerApplyText => 'Appliquer le texte';
+
+  @override
+  String get colorPickerCancel => 'Annuler';
+
+  @override
+  String get colorPickerConfirm => 'Confirmer la couleur';
+
+  @override
+  String get navNoPermission => 'Vous n\'avez pas la permission d\'accéder à cet écran';
+
+  @override
+  String get settingsTitle => 'Paramètres';
 }

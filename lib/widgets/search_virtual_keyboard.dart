@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show HapticFeedback;
+import 'package:naboo/l10n/generated/app_localizations.dart';
 
 import '../utils/target_platform_helpers.dart';
 import 'virtual_keyboard_controller.dart';
@@ -139,6 +140,7 @@ class _SearchVirtualKeyboardState extends State<SearchVirtualKeyboard> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final mq = MediaQuery.sizeOf(context);
     final height =
         mq.height *
@@ -217,11 +219,7 @@ class _SearchVirtualKeyboardState extends State<SearchVirtualKeyboard> {
       key('.', flex: 0.9),
       key('-', flex: 0.9),
       key('@', flex: 0.9),
-      key(
-        _lang == _KbLang.arabic ? 'مسافة' : 'space',
-        flex: 3.5,
-        onTap: _space,
-      ),
+      key(loc.kbSpaceArabic, flex: 3.5, onTap: _space),
       key('', flex: 1.2, onTap: _backspace, icon: Icons.backspace_outlined),
       key('↵', flex: 1.5, onTap: _submit, bg: enterColor, fg: Colors.white),
     ]);
@@ -282,12 +280,12 @@ class _SearchVirtualKeyboardState extends State<SearchVirtualKeyboard> {
             children: [
               // يمين بصرياً في RTL
               IconButton(
-                tooltip: 'إخفاء لوحة المفاتيح',
+                tooltip: loc.kbHideKeyboard,
                 icon: Icon(Icons.keyboard_hide_rounded, color: keyFg, size: 22),
                 onPressed: widget.onClose,
               ),
               IconButton(
-                tooltip: _pinned ? 'إلغاء التثبيت' : 'تثبيت اللوحة',
+                tooltip: _pinned ? loc.kbUnpin : loc.kbPin,
                 icon: Icon(
                   _pinned ? Icons.push_pin : Icons.push_pin_outlined,
                   color: _pinned ? Colors.teal.shade700 : Colors.grey.shade600,
@@ -296,7 +294,7 @@ class _SearchVirtualKeyboardState extends State<SearchVirtualKeyboard> {
                 onPressed: () => setState(() => _setPinned(!_pinned)),
               ),
               IconButton(
-                tooltip: 'حذف',
+                tooltip: loc.kbDelete,
                 icon: Icon(Icons.backspace_outlined, color: keyFg, size: 21),
                 onPressed: _backspace,
               ),
@@ -373,9 +371,9 @@ class _SearchVirtualKeyboardState extends State<SearchVirtualKeyboard> {
                             color: Colors.black.withValues(alpha: 0.28),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: const Text(
-                            'انقر على حقل نص للكتابة',
-                            style: TextStyle(
+                          child: Text(
+                            loc.kbTapToType,
+                            style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w700,
                             ),

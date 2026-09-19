@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:naboo/l10n/generated/app_localizations.dart';
 
 import '../app_color_picker_dialog.dart';
 import '../../utils/color_name_ar.dart';
@@ -18,7 +19,9 @@ class VariantsEditor extends StatelessWidget {
   bool _hasSize(VariantColorDraft c, String size) {
     final t = size.trim();
     if (t.isEmpty) return false;
-    return c.sizes.any((s) => s.sizeCtrl.text.trim().toUpperCase() == t.toUpperCase());
+    return c.sizes.any(
+      (s) => s.sizeCtrl.text.trim().toUpperCase() == t.toUpperCase(),
+    );
   }
 
   void _addPresetSize(VariantColorDraft c, String size) {
@@ -74,8 +77,8 @@ class VariantsEditor extends StatelessWidget {
     final chosen = await showAppColorPickerDialog(
       context: context,
       initialColor: current,
-      title: 'اختيار لون',
-      subtitle: 'اختر لوناً يمثّل هذا الخيار (اختياري).',
+      title: AppLocalizations.of(context)!.variantPickColor,
+      subtitle: AppLocalizations.of(context)!.variantPickColorSubtitle,
     );
     if (chosen == null) return;
     final hex =
@@ -109,7 +112,7 @@ class VariantsEditor extends StatelessWidget {
                 canRequestFocus: false,
                 onTap: () => _pickSizeFor(context, size: s),
                 decoration: InputDecoration(
-                  labelText: 'المقاس',
+                  labelText: AppLocalizations.of(context)!.variantSizeLabel,
                   border: const OutlineInputBorder(),
                   isDense: true,
                   suffixIcon: Icon(Icons.expand_more, color: cs.primary),
@@ -120,7 +123,7 @@ class VariantsEditor extends StatelessWidget {
             ),
             const SizedBox(width: 6),
             IconButton(
-              tooltip: 'اختيار مقاس',
+              tooltip: AppLocalizations.of(context)!.variantPickSize,
               onPressed: () => _pickSizeFor(context, size: s),
               icon: Icon(Icons.view_module_outlined, color: cs.primary),
             ),
@@ -130,9 +133,9 @@ class VariantsEditor extends StatelessWidget {
               child: TextFormField(
                 controller: s.qtyCtrl,
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'الكمية',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.variantQtyLabel,
+                  border: const OutlineInputBorder(),
                   isDense: true,
                 ),
                 textDirection: TextDirection.ltr,
@@ -144,9 +147,11 @@ class VariantsEditor extends StatelessWidget {
               flex: 4,
               child: TextFormField(
                 controller: s.barcodeCtrl,
-                decoration: const InputDecoration(
-                  labelText: 'الباركود (اختياري)',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(
+                    context,
+                  )!.variantBarcodeOptional,
+                  border: const OutlineInputBorder(),
                   isDense: true,
                 ),
                 textDirection: TextDirection.ltr,
@@ -155,7 +160,7 @@ class VariantsEditor extends StatelessWidget {
             ),
             const SizedBox(width: 6),
             IconButton(
-              tooltip: 'حذف',
+              tooltip: AppLocalizations.of(context)!.variantDelete,
               onPressed: () {
                 final removed = c.sizes.removeAt(sizeIndex);
                 removed.dispose();
@@ -189,9 +194,11 @@ class VariantsEditor extends StatelessWidget {
                   Expanded(
                     child: TextFormField(
                       controller: c.nameCtrl,
-                      decoration: const InputDecoration(
-                        labelText: 'اسم اللون',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: AppLocalizations.of(
+                          context,
+                        )!.variantColorNameLabel,
+                        border: const OutlineInputBorder(),
                         isDense: true,
                       ),
                       onChanged: (_) {
@@ -203,7 +210,7 @@ class VariantsEditor extends StatelessWidget {
                   ),
                   const SizedBox(width: 10),
                   Tooltip(
-                    message: 'اختيار لون (HEX)',
+                    message: AppLocalizations.of(context)!.variantPickColorHex,
                     child: InkWell(
                       key: ValueKey('variant_color_swatch_$colorIndex'),
                       onTap: () => _pickColorFor(context, c),
@@ -226,7 +233,7 @@ class VariantsEditor extends StatelessWidget {
                   ),
                   const SizedBox(width: 8),
                   IconButton(
-                    tooltip: 'حذف اللون',
+                    tooltip: AppLocalizations.of(context)!.variantDeleteColor,
                     onPressed: () {
                       final idx = colorDrafts.indexOf(c);
                       if (idx >= 0) {
@@ -250,7 +257,7 @@ class VariantsEditor extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      'المقاسات والكميات',
+                      AppLocalizations.of(context)!.variantSizesAndQty,
                       style: TextStyle(
                         fontWeight: FontWeight.w800,
                         color: cs.onSurface,
@@ -258,7 +265,7 @@ class VariantsEditor extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      'مقاسات جاهزة (اختياري)',
+                      AppLocalizations.of(context)!.variantPresetSizes,
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         color: cs.onSurfaceVariant,
@@ -273,17 +280,25 @@ class VariantsEditor extends StatelessWidget {
                       children: [
                         for (final s in kVariantQuickSizes)
                           ActionChip(
-                            onPressed: _hasSize(c, s) ? null : () => _addPresetSize(c, s),
+                            onPressed: _hasSize(c, s)
+                                ? null
+                                : () => _addPresetSize(c, s),
                             label: Text(
                               s,
                               textDirection: TextDirection.ltr,
-                              style: const TextStyle(fontWeight: FontWeight.w800),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w800,
+                              ),
                             ),
                             side: BorderSide(
-                              color: _hasSize(c, s) ? cs.outlineVariant : cs.primary,
+                              color: _hasSize(c, s)
+                                  ? cs.outlineVariant
+                                  : cs.primary,
                             ),
                             backgroundColor: _hasSize(c, s)
-                                ? cs.surfaceContainerHighest.withValues(alpha: 0.35)
+                                ? cs.surfaceContainerHighest.withValues(
+                                    alpha: 0.35,
+                                  )
                                 : cs.primary.withValues(alpha: 0.08),
                           ),
                       ],
@@ -293,7 +308,7 @@ class VariantsEditor extends StatelessWidget {
                     const SizedBox(height: 10),
                     if (c.sizes.isEmpty)
                       Text(
-                        'لا توجد مقاسات بعد. أضف مقاساً واحداً على الأقل.',
+                        AppLocalizations.of(context)!.variantNoSizesYet,
                         style: TextStyle(color: cs.onSurfaceVariant),
                       )
                     else
@@ -334,8 +349,13 @@ class VariantsEditor extends StatelessWidget {
                               c.sizes.add(draft);
                               onChanged();
                             },
-                            icon: const Icon(Icons.view_module_outlined, size: 18),
-                            label: const Text('اختيار مقاس'),
+                            icon: const Icon(
+                              Icons.view_module_outlined,
+                              size: 18,
+                            ),
+                            label: Text(
+                              AppLocalizations.of(context)!.variantPickSize,
+                            ),
                           ),
                         ),
                         const SizedBox(width: 10),
@@ -346,14 +366,18 @@ class VariantsEditor extends StatelessWidget {
                               onChanged();
                             },
                             icon: const Icon(Icons.edit_outlined, size: 18),
-                            label: const Text('مقاس مخصص'),
+                            label: Text(
+                              AppLocalizations.of(context)!.variantCustomSize,
+                            ),
                           ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'إجمالي اللون: ${_totalForColor(c)}',
+                      AppLocalizations.of(
+                        context,
+                      )!.variantColorTotal(_totalForColor(c)),
                       textAlign: TextAlign.end,
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
@@ -376,7 +400,7 @@ class VariantsEditor extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-                'الألوان والمقاسات',
+                AppLocalizations.of(context)!.variantColorsAndSizes,
                 style: theme.textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.w800,
                   color: cs.primary,
@@ -384,7 +408,9 @@ class VariantsEditor extends StatelessWidget {
               ),
             ),
             Text(
-              'الإجمالي: ${_totalAll()}',
+              AppLocalizations.of(
+                context,
+              )!.variantTotalLabel(_totalAll()),
               style: TextStyle(
                 fontWeight: FontWeight.w700,
                 color: cs.onSurfaceVariant,
@@ -403,13 +429,13 @@ class VariantsEditor extends StatelessWidget {
               onChanged();
             },
             icon: const Icon(Icons.add),
-            label: const Text('إضافة لون جديد'),
+            label: Text(AppLocalizations.of(context)!.variantAddColor),
           ),
         ),
         const SizedBox(height: 12),
         if (colorDrafts.isEmpty)
           Text(
-            'لا توجد ألوان بعد. أضف لوناً للبدء.',
+            AppLocalizations.of(context)!.variantNoColorsYet,
             style: TextStyle(color: cs.onSurfaceVariant),
             textAlign: TextAlign.end,
           )
@@ -424,4 +450,3 @@ class VariantsEditor extends StatelessWidget {
     );
   }
 }
-

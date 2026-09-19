@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../l10n/generated/app_localizations.dart';
 import '../providers/auth_provider.dart';
 import '../providers/shift_provider.dart';
 import '../services/permission_service.dart';
@@ -38,7 +39,7 @@ class PermissionGuard extends StatelessWidget {
         }
         if (snap.data == true) return child;
         return fallback ??
-            const Center(child: Text('ليس لديك صلاحية للوصول إلى هذه الشاشة'));
+            Center(child: Text(AppLocalizations.of(context)?.navNoPermission ?? 'ليس لديك صلاحية للوصول إلى هذه الشاشة'));
       },
     );
   }

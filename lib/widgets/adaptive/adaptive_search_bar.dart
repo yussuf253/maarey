@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:naboo/l10n/generated/app_localizations.dart';
 import '../../utils/screen_layout.dart';
 import '../../theme/app_spacing.dart';
 
@@ -10,7 +11,7 @@ import '../../theme/app_spacing.dart';
 class AdaptiveSearchBar extends StatelessWidget {
   const AdaptiveSearchBar({
     super.key,
-    this.hintText = 'بحث...',
+    this.hintText = '',
     this.onChanged,
     this.onSubmitted,
     this.controller,
@@ -25,6 +26,7 @@ class AdaptiveSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final variant = context.screenLayout.layoutVariant;
 
     final isDesktop = variant == DeviceVariant.desktopSM || variant == DeviceVariant.desktopLG;
@@ -39,7 +41,7 @@ class AdaptiveSearchBar extends StatelessWidget {
           onChanged: onChanged,
           onSubmitted: onSubmitted,
           decoration: InputDecoration(
-            hintText: hintText,
+            hintText: hintText.isEmpty ? loc.searchHint : hintText,
             prefixIcon: const Icon(Icons.search),
             suffixIcon: isDesktop 
                 ? Padding(

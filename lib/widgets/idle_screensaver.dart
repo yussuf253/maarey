@@ -3,6 +3,7 @@ import 'dart:ui' show FontFeature, ImageFilter;
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
+import 'package:naboo/l10n/generated/app_localizations.dart';
 
 import '../theme/design_tokens.dart';
 
@@ -48,6 +49,7 @@ class _IdleScreensaverState extends State<IdleScreensaver> {
     final timeFmt = DateFormat('HH:mm', 'en');
     final dateFmt = DateFormat('dd/MM/yyyy', 'ar');
 
+    final loc = AppLocalizations.of(context)!;
     final isDark = widget.isDark;
     final onWake = widget.onWake;
     final displayName = widget.userLabel?.trim();
@@ -128,9 +130,7 @@ class _IdleScreensaverState extends State<IdleScreensaver> {
                         Icon(
                           Icons.hub_rounded,
                           size: 52,
-                          color: isDark
-                              ? AppColors.accent
-                              : AppColors.primary,
+                          color: isDark ? AppColors.accent : AppColors.primary,
                         ),
                         const SizedBox(height: 16),
                         Text(
@@ -140,9 +140,7 @@ class _IdleScreensaverState extends State<IdleScreensaver> {
                             fontWeight: FontWeight.w200,
                             letterSpacing: 2,
                             color: isDark ? Colors.white : AppColors.primary,
-                            fontFeatures: const [
-                              FontFeature.tabularFigures(),
-                            ],
+                            fontFeatures: const [FontFeature.tabularFigures()],
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -152,9 +150,7 @@ class _IdleScreensaverState extends State<IdleScreensaver> {
                           style: TextStyle(
                             fontSize: 14,
                             height: 1.4,
-                            color: isDark
-                                ? Colors.white70
-                                : Colors.black54,
+                            color: isDark ? Colors.white70 : Colors.black54,
                           ),
                         ),
                         const SizedBox(height: 24),
@@ -163,17 +159,14 @@ class _IdleScreensaverState extends State<IdleScreensaver> {
                           height: 3,
                           decoration: const BoxDecoration(
                             gradient: LinearGradient(
-                              colors: [
-                                AppColors.accent,
-                                AppColors.primary,
-                              ],
+                              colors: [AppColors.accent, AppColors.primary],
                             ),
                             borderRadius: BorderRadius.zero,
                           ),
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          'نظام إدارة الأعمال',
+                          loc.businessManagementSystem,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 18,
@@ -184,13 +177,11 @@ class _IdleScreensaverState extends State<IdleScreensaver> {
                         ),
                         const SizedBox(height: 6),
                         Text(
-                          'وضع السكون — الجلسة محمية',
+                          loc.sleepModeMessage,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 13,
-                            color: isDark
-                                ? Colors.white60
-                                : Colors.black45,
+                            color: isDark ? Colors.white60 : Colors.black45,
                           ),
                         ),
                         if (displayName != null && displayName.isNotEmpty)
@@ -209,7 +200,7 @@ class _IdleScreensaverState extends State<IdleScreensaver> {
                         FilledButton.icon(
                           onPressed: onWake,
                           icon: const Icon(Icons.touch_app_rounded, size: 20),
-                          label: const Text('المتابعة'),
+                          label: Text(loc.continueButton),
                           style: FilledButton.styleFrom(
                             backgroundColor: AppColors.primary,
                             foregroundColor: Colors.white,
@@ -221,7 +212,7 @@ class _IdleScreensaverState extends State<IdleScreensaver> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          'اضغط في أي مكان أو زر المتابعة',
+                          loc.tapToWake,
                           style: TextStyle(
                             fontSize: 11,
                             color: isDark ? Colors.white38 : Colors.black38,

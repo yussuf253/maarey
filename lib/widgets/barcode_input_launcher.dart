@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:naboo/l10n/generated/app_localizations.dart';
 
 import '../utils/screen_layout.dart';
 import '../utils/target_platform_helpers.dart';
@@ -19,13 +20,17 @@ class BarcodeInputLauncher {
 
   static Future<String?> captureBarcode(
     BuildContext context, {
-    String title = 'التقاط باركود',
+    String? title,
+
     /// على **Android / iOS** مع `phoneXS`/`phoneSM`: نافذة صغيرة فوق البيع
     /// بدل استبدال الشاشة بالكامل — أسرع ولا يفقد سياق السلة.
     bool preferCompactHandsetOverlay = false,
   }) async {
+    final effectiveTitle =
+        title ?? AppLocalizations.of(context)!.barcodeScanTitle;
     if (useCamera(context)) {
-      final compact = preferCompactHandsetOverlay &&
+      final compact =
+          preferCompactHandsetOverlay &&
           isMobileOsBuild &&
           ScreenLayout.of(context).isPhoneVariant;
       if (compact) {
@@ -37,23 +42,24 @@ class BarcodeInputLauncher {
           backgroundColor: Colors.transparent,
           barrierColor: Colors.black.withValues(alpha: 0.35),
           isDismissible: false,
-          enableDrag: false, // منع سحب الأسفل للإغلاق (نستخدم DraggableScrollableSheet للتمديد)
+          enableDrag:
+              false, // منع سحب الأسفل للإغلاق (نستخدم DraggableScrollableSheet للتمديد)
           builder: (ctx) {
             final bottomInset = MediaQuery.viewPaddingOf(ctx).bottom;
             return Padding(
               padding: EdgeInsets.only(bottom: bottomInset),
-              child: _HandsetScannerSheet(title: title),
+              child: _HandsetScannerSheet(title: effectiveTitle),
             );
           },
         );
       }
       return Navigator.of(context).push<String>(
         MaterialPageRoute(
-          builder: (_) => _CameraBarcodePage(title: title),
+          builder: (_) => _CameraBarcodePage(title: effectiveTitle),
         ),
       );
     }
-    return _captureFromKeyboardDevice(context, title: title);
+    return _captureFromKeyboardDevice(context, title: effectiveTitle);
   }
 
   static Future<String?> _captureFromKeyboardDevice(
@@ -71,9 +77,7 @@ class BarcodeInputLauncher {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text(
-                'وجّه المؤشر إلى الحقل ثم مرّر الباركود عبر جهاز القراءة المتصل.',
-              ),
+              Text(AppLocalizations.of(ctx)!.barcodeInstructions),
               const SizedBox(height: 12),
               KeyboardListener(
                 focusNode: focus,
@@ -96,9 +100,9 @@ class BarcodeInputLauncher {
                       Navigator.of(ctx).pop(t);
                     }
                   },
-                  decoration: const InputDecoration(
-                    hintText: 'قارئ الباركود سيكتب هنا',
-                    prefixIcon: Icon(Icons.keyboard_alt_rounded),
+                  decoration: InputDecoration(
+                    hintText: AppLocalizations.of(ctx)!.barcodeReaderHint,
+                    prefixIcon: const Icon(Icons.keyboard_alt_rounded),
                   ),
                 ),
               ),
@@ -107,7 +111,7 @@ class BarcodeInputLauncher {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(ctx).pop(),
-              child: const Text('إلغاء'),
+              child: Text(MaterialLocalizations.of(ctx).cancelButtonLabel),
             ),
             FilledButton(
               onPressed: () {
@@ -116,7 +120,7 @@ class BarcodeInputLauncher {
                   Navigator.of(ctx).pop(v);
                 }
               },
-              child: const Text('تأكيد'),
+              child: Text(AppLocalizations.of(ctx)!.barcodeConfirm),
             ),
           ],
         );
@@ -174,8 +178,13 @@ class _HandsetScannerSheetState extends State<_HandsetScannerSheet> {
             elevation: 14,
             shadowColor: Colors.black.withValues(alpha: 0.35),
             shape: RoundedRectangleBorder(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
-              side: BorderSide(color: outline.withValues(alpha: 0.45), width: 1),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(18),
+              ),
+              side: BorderSide(
+                color: outline.withValues(alpha: 0.45),
+                width: 1,
+              ),
             ),
             clipBehavior: Clip.antiAlias,
             child: Column(
@@ -197,7 +206,7 @@ class _HandsetScannerSheetState extends State<_HandsetScannerSheet> {
                   child: Row(
                     children: [
                       IconButton(
-                        tooltip: 'إغلاق',
+                        tooltip: AppLocalizations.of(context)!.barcodeClose,
                         onPressed: () => Navigator.of(context).pop(),
                         icon: const Icon(Icons.close_rounded),
                       ),
@@ -206,18 +215,21 @@ class _HandsetScannerSheetState extends State<_HandsetScannerSheet> {
                           widget.title,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                fontWeight: FontWeight.w800,
-                              ),
+                          style: Theme.of(context).textTheme.titleSmall
+                              ?.copyWith(fontWeight: FontWeight.w800),
                         ),
                       ),
                       IconButton(
-                        tooltip: 'تشغيل/إيقاف الفلاش',
+                        tooltip: AppLocalizations.of(
+                          context,
+                        )!.barcodeToggleFlash,
                         onPressed: () => _controller.toggleTorch(),
                         icon: const Icon(Icons.flash_on_rounded),
                       ),
                       IconButton(
-                        tooltip: 'تبديل الكاميرا',
+                        tooltip: AppLocalizations.of(
+                          context,
+                        )!.barcodeSwitchCamera,
                         onPressed: () => _controller.switchCamera(),
                         icon: const Icon(Icons.cameraswitch_rounded),
                       ),
@@ -263,12 +275,16 @@ class _HandsetScannerSheetState extends State<_HandsetScannerSheet> {
                                       vertical: 6,
                                     ),
                                     decoration: BoxDecoration(
-                                      color: Colors.black.withValues(alpha: 0.55),
+                                      color: Colors.black.withValues(
+                                        alpha: 0.55,
+                                      ),
                                       borderRadius: BorderRadius.circular(999),
                                     ),
-                                    child: const Text(
-                                      'وجّه الباركود داخل الإطار',
-                                      style: TextStyle(
+                                    child: Text(
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.barcodeAlignHint,
+                                      style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 12,
                                         fontWeight: FontWeight.w600,
@@ -349,13 +365,16 @@ class _CameraBarcodePageState extends State<_CameraBarcodePage> {
             bottom: 40,
             child: Center(
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.black.withValues(alpha: 0.55),
                   borderRadius: BorderRadius.zero,
                 ),
-                child: const Text(
-                  'وجّه الكاميرا إلى QR أو Barcode داخل الإطار',
+                child: Text(
+                  AppLocalizations.of(context)!.barcodeAlignQrHint,
                   style: TextStyle(color: Colors.white, fontSize: 13),
                 ),
               ),

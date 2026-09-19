@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:naboo/l10n/generated/app_localizations.dart';
 
 import '../theme/app_corner_style.dart';
 import '../utils/iraqi_currency_format.dart';
@@ -48,7 +49,8 @@ class CalculatorPanelState extends State<CalculatorPanel> {
   }
 
   String _decorate(String raw) {
-    if (raw == 'خطأ' || raw == 'تعذّر القسمة') return raw;
+    if (raw == 'خطأ' || raw == 'تعذّر القسمة')
+      return raw; // internal calc error — keep Arabic for calc display
     final neg = raw.startsWith('-');
     final body = neg ? raw.substring(1) : raw;
     final parts = body.split('.');
@@ -221,8 +223,8 @@ class CalculatorPanelState extends State<CalculatorPanel> {
     widget.onCopySnack?.call();
     if (!context.mounted) return;
     ScaffoldMessenger.maybeOf(context)?.showSnackBar(
-      const SnackBar(
-        content: Text('تم النسخ'),
+      SnackBar(
+        content: Text(AppLocalizations.of(context)?.copied ?? 'تم النسخ'),
         behavior: SnackBarBehavior.floating,
       ),
     );

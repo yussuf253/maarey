@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:naboo/l10n/generated/app_localizations.dart';
 import '../../utils/screen_layout.dart';
 
 /// تخطيط متجاوب لنمط Master-Detail.
 ///
-/// على الهواتف: يعرض القائمة (Master) فقط، وعند اختيار عنصر 
+/// على الهواتف: يعرض القائمة (Master) فقط، وعند اختيار عنصر
 /// يجب على المطور استخدام Navigator لفتح صفحة الـ Detail.
-/// 
+///
 /// على التابلت والكمبيوتر: يعرض القائمة والتفاصيل جنباً إلى جنب.
 class MasterDetailLayout<T> extends StatelessWidget {
   const MasterDetailLayout({
@@ -31,7 +32,7 @@ class MasterDetailLayout<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final variant = context.screenLayout.layoutVariant;
-    
+
     // الموبايل يعرض Master فقط
     if (variant == DeviceVariant.phoneXS || variant == DeviceVariant.phoneSM) {
       return masterBuilder(context, false);
@@ -42,14 +43,15 @@ class MasterDetailLayout<T> extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        SizedBox(
-          width: masterWidth,
-          child: masterBuilder(context, true),
-        ),
+        SizedBox(width: masterWidth, child: masterBuilder(context, true)),
         const VerticalDivider(width: 1, thickness: 1),
         Expanded(
           child: selectedItemId == null
-              ? const Center(child: Text('الرجاء اختيار عنصر لعرض تفاصيله'))
+              ? Center(
+                  child: Text(
+                    AppLocalizations.of(context)!.masterDetailSelectItem,
+                  ),
+                )
               : detailBuilder(context),
         ),
       ],

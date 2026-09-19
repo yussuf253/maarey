@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:naboo/l10n/generated/app_localizations.dart';
 
 import '../theme/app_corner_style.dart';
 import 'calculator_panel.dart';
@@ -44,6 +45,7 @@ class _FloatingCalculatorPageState extends State<_FloatingCalculatorPage> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final mq = MediaQuery.of(context);
     final w = math.min(400.0, mq.size.width - 20);
     final h = math.min(540.0, mq.size.height - 24);
@@ -123,7 +125,7 @@ class _FloatingCalculatorPageState extends State<_FloatingCalculatorPage> {
                                   child: Row(
                                     children: [
                                       IconButton(
-                                        tooltip: 'مسح السجل',
+                                        tooltip: loc.clearHistory,
                                         style: IconButton.styleFrom(
                                           foregroundColor: onBar,
                                         ),
@@ -135,7 +137,7 @@ class _FloatingCalculatorPageState extends State<_FloatingCalculatorPage> {
                                             ?.clearHistory(),
                                       ),
                                       IconButton(
-                                        tooltip: 'نسخ الناتج',
+                                        tooltip: loc.copyResult,
                                         style: IconButton.styleFrom(
                                           foregroundColor: onBar,
                                         ),
@@ -148,13 +150,13 @@ class _FloatingCalculatorPageState extends State<_FloatingCalculatorPage> {
                                       ),
                                       Expanded(
                                         child: Text(
-                                          'الحاسبة',
+                                          loc.calculatorTitle,
                                           textAlign: TextAlign.center,
                                           style: titleStyle,
                                         ),
                                       ),
                                       IconButton(
-                                        tooltip: 'إغلاق',
+                                        tooltip: loc.barcodeClose,
                                         style: IconButton.styleFrom(
                                           foregroundColor: onBar,
                                         ),

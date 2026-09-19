@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:naboo/l10n/generated/app_localizations.dart';
 
 import '../theme/design_tokens.dart';
 import '../utils/customer_phone_launch.dart';
@@ -24,7 +25,9 @@ class CustomerContactBar extends StatelessWidget {
     Widget wrapDisabled(Widget child) {
       if (_hasPhones) return child;
       return Tooltip(
-        message: 'لا يوجد رقم للعميل',
+        message:
+            AppLocalizations.of(context)?.noCustomerPhone ??
+            'لا يوجد رقم للعميل',
         child: child,
       );
     }
@@ -51,7 +54,9 @@ class CustomerContactBar extends StatelessWidget {
                       ),
                     ),
                     icon: const Icon(Icons.phone_rounded),
-                    label: const Text('اتصال'),
+                    label: Text(
+                      AppLocalizations.of(context)?.callLabel ?? 'اتصال',
+                    ),
                   ),
                 ),
               ),
@@ -68,8 +73,13 @@ class CustomerContactBar extends StatelessWidget {
                         borderRadius: AppShape.none,
                       ),
                     ),
-                    icon: const Icon(Icons.chat_rounded, color: Color(0xFF25D366)),
-                    label: const Text('واتساب'),
+                    icon: const Icon(
+                      Icons.chat_rounded,
+                      color: Color(0xFF25D366),
+                    ),
+                    label: Text(
+                      AppLocalizations.of(context)?.whatsappLabel ?? 'واتساب',
+                    ),
                   ),
                 ),
               ),

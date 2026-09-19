@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:naboo/l10n/generated/app_localizations.dart';
 
 import '../../utils/clothing_intl_sizes.dart';
 
@@ -35,24 +36,24 @@ Future<String?> _promptCustomSize(BuildContext context) async {
     context: context,
     builder: (ctx) {
       return AlertDialog(
-        title: const Text('مقاس مخصص'),
+        title: Text(AppLocalizations.of(context)!.variantCustomSize),
         content: TextField(
           controller: ctrl,
           autofocus: true,
-          decoration: const InputDecoration(
-            labelText: 'اكتب المقاس',
-            border: OutlineInputBorder(),
+          decoration: InputDecoration(
+            labelText: AppLocalizations.of(context)!.variantEnterSize,
+            border: const OutlineInputBorder(),
           ),
           textDirection: TextDirection.ltr,
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('إلغاء'),
+            child: Text(MaterialLocalizations.of(ctx).cancelButtonLabel),
           ),
           FilledButton(
             onPressed: () => Navigator.pop(ctx, ctrl.text.trim()),
-            child: const Text('تم'),
+            child: Text(AppLocalizations.of(context)!.variantDone),
           ),
         ],
       );
@@ -73,10 +74,7 @@ Widget _intlColumnHeader(String label, ColorScheme cs) {
       ),
       child: Text(
         label,
-        style: TextStyle(
-          fontWeight: FontWeight.w900,
-          color: cs.primary,
-        ),
+        style: TextStyle(fontWeight: FontWeight.w900, color: cs.primary),
         textDirection: TextDirection.ltr,
         textAlign: TextAlign.center,
       ),
@@ -130,7 +128,7 @@ Future<String?> showVariantSizePickerSheet(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                'المقاسات العالمية',
+                AppLocalizations.of(ctx)!.variantIntlSizes,
                 style: theme.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.w900,
                   color: cs.primary,
@@ -139,7 +137,7 @@ Future<String?> showVariantSizePickerSheet(
               ),
               const SizedBox(height: 4),
               Text(
-                'اضغط صفاً كاملاً أو أي خلية فيه — يُحفظ الصف كاملاً كنص واحد.',
+                AppLocalizations.of(ctx)!.variantTapRowHint,
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: cs.onSurfaceVariant,
                 ),
@@ -177,7 +175,7 @@ Future<String?> showVariantSizePickerSheet(
               Divider(height: 1, color: cs.outlineVariant),
               const SizedBox(height: 12),
               Text(
-                'أو اختر سريعاً',
+                AppLocalizations.of(ctx)!.variantOrQuickPick,
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   color: cs.onSurfaceVariant,
@@ -203,9 +201,13 @@ Future<String?> showVariantSizePickerSheet(
                         decoration: BoxDecoration(
                           color: current == s
                               ? cs.primary.withValues(alpha: 0.10)
-                              : cs.surfaceContainerHighest.withValues(alpha: 0.55),
+                              : cs.surfaceContainerHighest.withValues(
+                                  alpha: 0.55,
+                                ),
                           border: Border.all(
-                            color: current == s ? cs.primary : cs.outlineVariant,
+                            color: current == s
+                                ? cs.primary
+                                : cs.outlineVariant,
                             width: current == s ? 2 : 1,
                           ),
                           borderRadius: BorderRadius.zero,
@@ -227,7 +229,7 @@ Future<String?> showVariantSizePickerSheet(
               FilledButton.tonalIcon(
                 onPressed: () => Navigator.pop(ctx, _kCustomSizeChoice),
                 icon: const Icon(Icons.edit_outlined),
-                label: const Text('مقاس مخصص (اكتب بنفسك)'),
+                label: Text(AppLocalizations.of(ctx)!.variantCustomSizeManual),
               ),
             ],
           ),
