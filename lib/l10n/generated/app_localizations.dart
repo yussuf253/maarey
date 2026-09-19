@@ -28608,6 +28608,24 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'الإعدادات'**
   String get settingsTitle;
+
+  /// No description provided for @statusDebtor.
+  ///
+  /// In ar, this message translates to:
+  /// **'مديون'**
+  String get statusDebtor;
+
+  /// No description provided for @statusCreditor.
+  ///
+  /// In ar, this message translates to:
+  /// **'دائن'**
+  String get statusCreditor;
+
+  /// No description provided for @statusVip.
+  ///
+  /// In ar, this message translates to:
+  /// **'مميز'**
+  String get statusVip;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

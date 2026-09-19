@@ -4876,5 +4876,8 @@
 
   "navNoPermission": "You do not have permission to access this screen",
   "settingsTitle": "Settings",
-  "searchHint": "Search..."
+  "searchHint": "Search...",
+  "statusDebtor": "Debtor",
+  "statusCreditor": "Creditor",
+  "statusVip": "VIP"
 }

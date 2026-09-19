@@ -4553,5 +4553,8 @@
 
   "navNoPermission": "Vous n'avez pas la permission d'accéder à cet écran",
   "settingsTitle": "Paramètres",
-  "searchHint": "Rechercher..."
+  "searchHint": "Rechercher...",
+  "statusDebtor": "Débiteur",
+  "statusCreditor": "Créancier",
+  "statusVip": "VIP"
 }

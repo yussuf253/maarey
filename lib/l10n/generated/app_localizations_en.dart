@@ -15324,4 +15324,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsTitle => 'Settings';
+
+  @override
+  String get statusDebtor => 'Debtor';
+
+  @override
+  String get statusCreditor => 'Creditor';
+
+  @override
+  String get statusVip => 'VIP';
 }

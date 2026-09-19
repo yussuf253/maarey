@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:naboo/l10n/generated/app_localizations.dart';
 
 import 'invoice.dart';
 import '../utils/iraqi_currency_format.dart';
@@ -85,7 +86,7 @@ class RecentActivityEntry {
       ? ''
       : IraqiCurrencyFormat.formatIqd(amountIqd!);
 
-  String get timeLabel {
+  String timeLabel(AppLocalizations loc) {
     final now = DateTime.now();
     final d = DateTime(at.year, at.month, at.day);
     final t = DateTime(now.year, now.month, now.day);
@@ -93,13 +94,13 @@ class RecentActivityEntry {
     if (diff == 0) {
       final h = at.hour.toString().padLeft(2, '0');
       final m = at.minute.toString().padLeft(2, '0');
-      return 'اليوم $h:$m';
+      return loc.activityToday('$h:$m');
     }
-    if (diff == 1) return 'أمس';
+    if (diff == 1) return loc.activityYesterday;
     return '${at.day.toString().padLeft(2, '0')}/${at.month.toString().padLeft(2, '0')}/${at.year}';
   }
 
-  factory RecentActivityEntry.fromInvoiceRow(Map<String, dynamic> r) {
+  factory RecentActivityEntry.fromInvoiceRow(Map<String, dynamic> r, AppLocalizations loc) {
     final id = r['id'] as int;
     final type = invoiceTypeFromDb(r['type']);
     final isRet = (r['isReturned'] as int? ?? 0) != 0;
@@ -107,9 +108,9 @@ class RecentActivityEntry {
     final total = (r['total'] as num?)?.toDouble() ?? 0;
     final rawDate = r['date']?.toString();
     final date = DateTime.tryParse(rawDate ?? '') ?? DateTime.now();
-    final typeLabel = _invoiceTypeLabelAr(type);
-    final title = isRet ? 'مرتجع #$id' : 'فاتورة $typeLabel · #$id';
-    final sub = (name != null && name.isNotEmpty) ? name : 'بدون اسم عميل';
+    final typeLabel = _invoiceTypeLabelForActivity(type, loc);
+    final title = isRet ? loc.activityReturnLabel(id) : loc.activityInvoiceLabel(typeLabel, id);
+    final sub = (name != null && name.isNotEmpty) ? name : loc.activityNoCustomerName;
     final by = r['createdByUserName']?.toString().trim();
     final sub2 = (by != null && by.isNotEmpty) ? '$sub · $by' : sub;
     return RecentActivityEntry(
@@ -130,7 +131,7 @@ class RecentActivityEntry {
     );
   }
 
-  factory RecentActivityEntry.fromCashRow(Map<String, dynamic> r) {
+  factory RecentActivityEntry.fromCashRow(Map<String, dynamic> r, AppLocalizations loc) {
     final id = r['id'] as int;
     final amt = (r['amount'] as num).toDouble();
     final tt = r['transactionType']?.toString() ?? '';
@@ -138,14 +139,14 @@ class RecentActivityEntry {
     final invId = r['invoiceId'] as int?;
     final raw = r['createdAt']?.toString();
     final date = DateTime.tryParse(raw ?? '') ?? DateTime.now();
-    final typeLabel = ledgerTransactionTypeLabelAr(tt);
+    final typeLabel = ledgerTransactionTypeLabelForActivity(tt, loc);
     String sub;
     if (desc.isNotEmpty) {
       sub = desc;
     } else if (invId != null) {
-      sub = 'مرتبط بفاتورة #$invId';
+      sub = loc.activityLinkedInvoice(invId);
     } else {
-      sub = 'صندوق';
+      sub = loc.activityCashLedger;
     }
     return RecentActivityEntry(
       kind: RecentActivityKind.cashMovement,
@@ -165,16 +166,16 @@ class RecentActivityEntry {
     );
   }
 
-  factory RecentActivityEntry.fromParkedRow(Map<String, dynamic> r) {
+  factory RecentActivityEntry.fromParkedRow(Map<String, dynamic> r, AppLocalizations loc) {
     final id = r['id'] as int;
     final title = r['title']?.toString().trim();
     final raw = r['updatedAt']?.toString();
     final date = DateTime.tryParse(raw ?? '') ?? DateTime.now();
-    final label = (title != null && title.isNotEmpty) ? title : 'بيع مؤجّل';
+    final label = (title != null && title.isNotEmpty) ? title : loc.activityDeferredSale;
     return RecentActivityEntry(
       kind: RecentActivityKind.parkedSale,
       at: date,
-      title: 'مؤجّل · #$id',
+      title: loc.activityDeferredLabel(id),
       subtitle: label,
       amountIqd: null,
       invoiceId: null,
@@ -189,7 +190,7 @@ class RecentActivityEntry {
     );
   }
 
-  factory RecentActivityEntry.fromLoyaltyRow(Map<String, dynamic> r) {
+  factory RecentActivityEntry.fromLoyaltyRow(Map<String, dynamic> r, AppLocalizations loc) {
     final id = r['id'] as int;
     final cid = r['customerId'] as int;
     final kind = r['kind']?.toString() ?? '';
@@ -198,11 +199,11 @@ class RecentActivityEntry {
     final sub = (name != null && name.isNotEmpty) ? name : 'عميل #$cid';
     final raw = r['createdAt']?.toString();
     final date = DateTime.tryParse(raw ?? '') ?? DateTime.now();
-    final typeLabel = loyaltyKindLabelAr(kind);
+    final typeLabel = loyaltyKindLabelForActivity(kind, loc);
     return RecentActivityEntry(
       kind: RecentActivityKind.loyalty,
       at: date,
-      title: '$typeLabel · ${pts >= 0 ? '+' : ''}$pts نقطة',
+      title: loc.activityPointsLabel('${pts >= 0 ? '+' : ''}$pts', typeLabel),
       subtitle: sub,
       amountIqd: null,
       invoiceId: null,
@@ -217,19 +218,19 @@ class RecentActivityEntry {
     );
   }
 
-  factory RecentActivityEntry.fromStockVoucherRow(Map<String, dynamic> r) {
+  factory RecentActivityEntry.fromStockVoucherRow(Map<String, dynamic> r, AppLocalizations loc) {
     final id = r['id'] as int;
     final no = r['voucherNo']?.toString() ?? '#$id';
     final vType = r['voucherType']?.toString() ?? '';
     final raw = r['createdAt']?.toString();
     final date = DateTime.tryParse(raw ?? '') ?? DateTime.now();
-    final typeLabel = stockVoucherTypeLabelAr(vType);
+    final typeLabel = stockVoucherTypeLabelForActivity(vType, loc);
     final note = r['notes']?.toString().trim();
     return RecentActivityEntry(
       kind: RecentActivityKind.stockVoucher,
       at: date,
-      title: 'سند مخزون $typeLabel · $no',
-      subtitle: (note != null && note.isNotEmpty) ? note : 'مخزون',
+      title: loc.activityStockVoucherLabel(typeLabel, no),
+      subtitle: (note != null && note.isNotEmpty) ? note : loc.activityStockFallback,
       amountIqd: null,
       invoiceId: null,
       cashLedgerId: null,
@@ -243,7 +244,7 @@ class RecentActivityEntry {
     );
   }
 
-  factory RecentActivityEntry.fromCustomerCreatedRow(Map<String, dynamic> r) {
+  factory RecentActivityEntry.fromCustomerCreatedRow(Map<String, dynamic> r, AppLocalizations loc) {
     final id = r['id'] as int;
     final name = r['name']?.toString().trim() ?? 'عميل #$id';
     final raw = r['createdAt']?.toString();
@@ -251,7 +252,7 @@ class RecentActivityEntry {
     return RecentActivityEntry(
       kind: RecentActivityKind.customerCreated,
       at: date,
-      title: 'عميل جديد · #$id',
+      title: loc.activityCustomerCreated(id),
       subtitle: name,
       amountIqd: null,
       invoiceId: null,
@@ -266,7 +267,7 @@ class RecentActivityEntry {
     );
   }
 
-  factory RecentActivityEntry.fromProductCreatedRow(Map<String, dynamic> r) {
+  factory RecentActivityEntry.fromProductCreatedRow(Map<String, dynamic> r, AppLocalizations loc) {
     final id = r['id'] as int;
     final name = r['name']?.toString().trim() ?? 'صنف #$id';
     final raw = r['createdAt']?.toString();
@@ -274,7 +275,7 @@ class RecentActivityEntry {
     return RecentActivityEntry(
       kind: RecentActivityKind.productCreated,
       at: date,
-      title: 'صنف جديد · #$id',
+      title: loc.activityItemCreated(id),
       subtitle: name,
       amountIqd: null,
       invoiceId: null,
@@ -293,6 +294,7 @@ class RecentActivityEntry {
   factory RecentActivityEntry.fromWorkShiftRow(
     Map<String, dynamic> r, {
     required bool isClose,
+    required AppLocalizations loc,
   }) {
     final id = r['id'] as int;
     final name = r['shiftStaffName']?.toString().trim() ?? '';
@@ -300,8 +302,8 @@ class RecentActivityEntry {
         ? r['closedAt']?.toString()
         : r['openedAt']?.toString();
     final date = DateTime.tryParse(rawAt ?? '') ?? DateTime.now();
-    final title = isClose ? 'إغلاق وردية' : 'فتح وردية';
-    final sub = name.isNotEmpty ? name : 'وردية #$id';
+    final title = isClose ? loc.activityShiftClose : loc.activityShiftOpen;
+    final sub = name.isNotEmpty ? name : loc.activityShiftLabel(id);
     return RecentActivityEntry(
       kind: RecentActivityKind.workShift,
       at: date,
@@ -321,81 +323,81 @@ class RecentActivityEntry {
   }
 }
 
-String _invoiceTypeLabelAr(InvoiceType t) {
+String _invoiceTypeLabelForActivity(InvoiceType t, AppLocalizations loc) {
   switch (t) {
     case InvoiceType.cash:
-      return 'نقدي';
+      return loc.paymentTypeCash;
     case InvoiceType.credit:
-      return 'آجل';
+      return loc.paymentTypeCredit;
     case InvoiceType.installment:
-      return 'تقسيط';
+      return loc.paymentTypeInstallment;
     case InvoiceType.delivery:
-      return 'توصيل';
+      return loc.paymentTypeDelivery;
     case InvoiceType.debtCollection:
-      return 'تحصيل دين';
+      return loc.paymentTypeDebtCollection;
     case InvoiceType.installmentCollection:
-      return 'تسديد قسط';
+      return loc.paymentTypeInstallmentCollection;
     case InvoiceType.supplierPayment:
-      return 'دفع مورد';
+      return loc.paymentTypeSupplierPayment;
     case InvoiceType.waafi:
-      return 'وافي';
+      return loc.paymentTypeWaafi;
     case InvoiceType.dahabPlus:
-      return 'دهاب بلس';
+      return loc.paymentTypeDahabPlus;
     case InvoiceType.cacPay:
-      return 'Cac Pay';
+      return loc.paymentTypeCacPay;
     case InvoiceType.dmoney:
-      return 'دمني';
+      return loc.paymentTypeDmoney;
   }
 }
 
 /// يطابق تسميات [cash_screen] لحركات [cash_ledger].
-String ledgerTransactionTypeLabelAr(String transactionType) {
+String ledgerTransactionTypeLabelForActivity(String transactionType, AppLocalizations loc) {
   switch (transactionType) {
     case 'sale_cash':
-      return 'بيع نقدي';
+      return loc.activityCashSale;
     case 'sale_advance':
-      return 'مقدم / دفعة';
+      return loc.activityAdvancePayment;
     case 'sale_other':
-      return 'بيع';
+      return loc.activitySalePayment;
     case 'manual_in':
-      return 'إيداع يدوي';
+      return loc.activityManualDeposit;
     case 'manual_out':
-      return 'سحب يدوي';
+      return loc.activityManualWithdraw;
     case 'installment_payment':
-      return 'تسديد قسط';
+      return loc.activityInstallmentPay;
     case 'supplier_payment':
-      return 'دفع مورد';
+      return loc.activitySupplierPay;
     case 'supplier_payment_reversal':
-      return 'عكس دفع مورد';
+      return loc.activitySupplierPayReversal;
     case 'sale_return':
-      return 'مرتجع';
+      return loc.activitySaleReturnLabel;
     default:
-      return transactionType.isEmpty ? 'حركة صندوق' : transactionType;
+      return transactionType.isEmpty ? loc.activityCashMovementFallback : transactionType;
   }
 }
 
-String loyaltyKindLabelAr(String kind) {
+String loyaltyKindLabelForActivity(String kind, AppLocalizations loc) {
   switch (kind) {
     case 'earn':
-      return 'كسب نقاط';
+      return loc.activityLoyaltyEarn;
     case 'redeem':
-      return 'استبدال نقاط';
+      return loc.activityLoyaltyRedeem;
     case 'adjust':
-      return 'تعديل نقاط';
+      return loc.activityLoyaltyAdjust;
     default:
-      return kind.isEmpty ? 'ولاء' : kind;
+      return kind.isEmpty ? loc.activityLoyaltyFallback : kind;
   }
 }
 
-String stockVoucherTypeLabelAr(String voucherType) {
+String stockVoucherTypeLabelForActivity(String voucherType, AppLocalizations loc) {
   switch (voucherType) {
     case 'in':
-      return 'وارد';
+      return loc.activityStockIn;
     case 'out':
-      return 'صادر';
+      return loc.activityStockOut;
     case 'transfer':
-      return 'نقل';
+      return loc.activityStockTransfer;
     default:
-      return voucherType.isEmpty ? 'مخزون' : voucherType;
+      return voucherType.isEmpty ? loc.activityStockFallback : voucherType;
   }
 }

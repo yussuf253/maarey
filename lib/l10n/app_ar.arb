@@ -4780,5 +4780,8 @@
 
   "navNoPermission": "ليس لديك صلاحية للوصول إلى هذه الشاشة",
   "settingsTitle": "الإعدادات",
-  "searchHint": "بحث..."
+  "searchHint": "بحث...",
+  "statusDebtor": "مديون",
+  "statusCreditor": "دائن",
+  "statusVip": "مميز"
 }

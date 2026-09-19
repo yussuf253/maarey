@@ -1333,7 +1333,8 @@ class _HomeScreenState extends State<HomeScreen>
   void _appendBreadcrumbForRoute(Route<dynamic> route) {
     final id = route.settings.name;
     if (id is! String) return;
-    final title = breadcrumbTitleForRouteSettings(route.settings);
+    final loc = AppLocalizations.of(context)!;
+    final title = breadcrumbTitleForRouteSettings(route.settings, loc);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       setState(() {

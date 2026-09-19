@@ -1,3 +1,5 @@
+import 'package:naboo/l10n/generated/app_localizations.dart';
+
 /// تمثيل صف عميل من جدول `customers` — للعرض والفرز في الواجهة فقط.
 class CustomerRecord {
   const CustomerRecord({
@@ -73,9 +75,9 @@ class CustomerRecord {
     };
   }
 
-  String get statusLabel {
-    if (balance > 0.01) return 'مديون';
-    if (balance < -0.01) return 'دائن';
-    return 'مميز';
+  String getStatusLabel(AppLocalizations loc) {
+    if (balance > 0.01) return loc.statusDebtor;
+    if (balance < -0.01) return loc.statusCreditor;
+    return loc.statusVip;
   }
 }

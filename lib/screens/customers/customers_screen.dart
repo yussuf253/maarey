@@ -958,7 +958,7 @@ class _CustomersScreenState extends State<CustomersScreen> {
     final phone = (c.phone?.trim().isNotEmpty == true) ? c.phone! : '—';
     final selected = _selectedIds.contains(c.id);
     final av = _avatarColor(c.id);
-    final st = c.statusLabel;
+    final st = c.getStatusLabel(AppLocalizations.of(context)!);
     final fin = finance[c.id] ?? (creditInvoices: 0, installmentPlans: 0);
 
     Widget statusBadge({double fontSize = 12}) => Container(

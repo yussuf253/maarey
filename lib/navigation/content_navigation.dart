@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:naboo/l10n/generated/app_localizations.dart';
 
 /// عنصر واحد في شريط فتات الخبز.
 class BreadcrumbSegment {
@@ -137,7 +138,7 @@ bool popUntilContentRoute(NavigatorState nav, String routeId) {
 // ── عناوين فتات الخبز الاحتياطية (عند غياب [BreadcrumbMeta]) ─────────────────
 
 /// عنوان واجهة لفتات الخبز: يفضّل [BreadcrumbMeta] ثم التسمية حسب [RouteSettings.name].
-String breadcrumbTitleForRouteSettings(RouteSettings settings) {
+String breadcrumbTitleForRouteSettings(RouteSettings settings, AppLocalizations loc) {
   final args = settings.arguments;
   if (args is BreadcrumbMeta) {
     final t = args.title.trim();
@@ -145,126 +146,126 @@ String breadcrumbTitleForRouteSettings(RouteSettings settings) {
   }
   final id = settings.name;
   if (id is! String) return '…';
-  return breadcrumbFallbackTitleForRouteId(id);
+  return breadcrumbFallbackTitleForRouteId(id, loc);
 }
 
 /// تسمية عربية لمعرّف المسار — يُكمّل التتبع حتى لو نُسيت [BreadcrumbMeta].
-String breadcrumbFallbackTitleForRouteId(String id) {
+String breadcrumbFallbackTitleForRouteId(String id, AppLocalizations loc) {
   switch (id) {
     case AppContentRoutes.home:
-      return 'الرئيسية';
+      return loc.navHome;
     case AppContentRoutes.invoices:
-      return 'الفواتير';
+      return loc.navInvoices;
     case AppContentRoutes.addInvoice:
-      return 'بيع جديد';
+      return loc.navAddInvoice;
     case AppContentRoutes.parkedSales:
-      return 'معلّقة مؤقتاً';
+      return loc.navParkedSales;
     case AppContentRoutes.salePosSettings:
-      return 'إعدادات نقطة البيع';
+      return loc.navSalePosSettings;
     case AppContentRoutes.customers:
-      return 'العملاء';
+      return loc.navCustomers;
     case AppContentRoutes.customerContacts:
-      return 'جهات اتصال العملاء';
+      return loc.navCustomerContacts;
     case AppContentRoutes.loyaltySettings:
-      return 'إعدادات الولاء';
+      return loc.navLoyaltySettings;
     case AppContentRoutes.loyaltyLedger:
-      return 'سجل نقاط الولاء';
+      return loc.navLoyaltyLedger;
     case AppContentRoutes.installments:
-      return 'الأقساط';
+      return loc.navInstallments;
     case AppContentRoutes.installmentSettings:
-      return 'إعدادات التقسيط';
+      return loc.navInstallmentSettings;
     case AppContentRoutes.debts:
-      return 'الديون';
+      return loc.navDebts;
     case AppContentRoutes.debtSettings:
-      return 'إعدادات الدين';
+      return loc.navDebtSettings;
     case AppContentRoutes.inventory:
-      return 'المخزون';
+      return loc.navInventory;
     case AppContentRoutes.inventoryProducts:
-      return 'قائمة المنتجات';
+      return loc.navInventoryProducts;
     case AppContentRoutes.inventoryBarcodeLabels:
-      return 'طباعة ملصقات باركود';
+      return loc.navInventoryBarcodeLabels;
     case AppContentRoutes.addProduct:
-      return 'إضافة منتج';
+      return loc.navAddProduct;
     case AppContentRoutes.quickUpdateProducts:
-      return 'تحديث منتج موجود';
+      return loc.navQuickUpdateProducts;
     case AppContentRoutes.inventoryManagement:
-      return 'حركات المخزون';
+      return loc.navInventoryManagement;
     case AppContentRoutes.inventoryWarehouses:
-      return 'المستودعات';
+      return loc.navInventoryWarehouses;
     case AppContentRoutes.inventoryPriceLists:
-      return 'قوائم الأسعار';
+      return loc.navInventoryPriceLists;
     case AppContentRoutes.inventoryStocktaking:
-      return 'جرد المخزون';
+      return loc.navInventoryStocktaking;
     case AppContentRoutes.inventoryPurchaseOrders:
-      return 'أوامر الشراء';
+      return loc.navInventoryPurchaseOrders;
     case AppContentRoutes.inventoryAnalytics:
-      return 'تحليلات المخزون';
+      return loc.navInventoryAnalytics;
     case AppContentRoutes.inventorySettings:
-      return 'إعدادات المخزون';
+      return loc.navInventorySettings;
     case AppContentRoutes.cash:
-      return 'الصندوق';
+      return loc.navCash;
     case AppContentRoutes.expenses:
-      return 'المصروفات';
+      return loc.navExpenses;
     case AppContentRoutes.localAiAgent:
-      return 'مساعد المبيعات الذكي';
+      return loc.navLocalAiAgent;
     case AppContentRoutes.users:
-      return 'المستخدمون';
+      return loc.navUsers;
     case AppContentRoutes.staffShiftsWeek:
-      return 'ورديات الموظفين';
+      return loc.navStaffShiftsWeek;
     case AppContentRoutes.employeeIdentity:
-      return 'هويات الموظفين';
+      return loc.navEmployeeIdentity;
     case AppContentRoutes.printing:
-      return 'الطباعة';
+      return loc.navPrinting;
     case AppContentRoutes.settings:
-      return 'الإعدادات';
+      return loc.navSettings;
     case AppContentRoutes.settingsStoreInfo:
-      return 'بيانات المتجر';
+      return loc.navSettingsStoreInfo;
     case AppContentRoutes.settingsInvoice:
-      return 'إعدادات الفواتير';
+      return loc.navSettingsInvoice;
     case AppContentRoutes.settingsSalePosAppearance:
-      return 'ألوان وهوية التطبيق';
+      return loc.navSettingsSalePosAppearance;
     case AppContentRoutes.settingsNotifications:
-      return 'الإشعارات';
+      return loc.navSettingsNotifications;
     case AppContentRoutes.settingsPrintingInline:
-      return 'إعدادات الطباعة';
+      return loc.navSettingsPrintingInline;
     case AppContentRoutes.settingsDashboardLayout:
-      return 'تخصيص الشاشة الرئيسية';
+      return loc.navSettingsDashboardLayout;
     case AppContentRoutes.settingsSubscriptionAccount:
-      return 'خطة الاشتراك والحساب';
+      return loc.navSettingsSubscriptionAccount;
     case AppContentRoutes.settingsBusinessFeatures:
-      return 'ميزات المتجر';
+      return loc.navSettingsBusinessFeatures;
     case AppContentRoutes.subscriptionPlans:
-      return 'خطط الاشتراك';
+      return loc.navSubscriptionPlans;
     case AppContentRoutes.servicesHub:
-      return 'الخدمات والصيانة';
+      return loc.navServicesHub;
     case AppContentRoutes.servicesAdd:
-      return 'إضافة خدمة';
+      return loc.navServicesAdd;
     case AppContentRoutes.servicesCatalog:
-      return 'دليل الخدمات والأسعار';
+      return loc.navServicesCatalog;
     case AppContentRoutes.serviceOrdersHub:
-      return 'طلبات الصيانة وتذاكر العمل';
+      return loc.navServiceOrdersHub;
     case AppContentRoutes.serviceOrdersCreate:
-      return 'تذكرة صيانة جديدة';
+      return loc.navServiceOrdersCreate;
     default:
       break;
   }
   if (id.startsWith(AppContentRoutes.reportsPrefix)) {
     final tail = id.substring(AppContentRoutes.reportsPrefix.length);
-    const labels = <String, String>{
-      '0': 'التقارير — لوحة تنفيذية',
-      '1': 'التقارير — المبيعات والفواتير',
-      '2': 'التقارير — العملاء',
-      '3': 'التقارير — الديون',
-      '4': 'التقارير — الأقساط',
-      '5': 'التقارير — الموظفون',
-      '6': 'التقارير — تحليل وهامش',
-      '7': 'التقارير — إعدادات',
+    final labels = <String, String>{
+      '0': loc.reportsTabDashboard,
+      '1': loc.reportsTabSales,
+      '2': loc.reportsTabCustomers,
+      '3': loc.reportsTabDebts,
+      '4': loc.reportsTabInstallments,
+      '5': loc.reportsTabStaff,
+      '6': loc.reportsTabAnalytics,
+      '7': loc.reportsTabSettings,
     };
-    return labels[tail] ?? 'التقارير — $tail';
+    return labels[tail] ?? loc.reportsTabDashboard;
   }
   if (id.startsWith('app_process_return_')) {
     final n = id.replaceFirst('app_process_return_', '');
-    return 'مرتجع فاتورة #$n';
+    return loc.navProcessReturn(n);
   }
   return id;
 }

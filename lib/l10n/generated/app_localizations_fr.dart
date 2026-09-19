@@ -15324,4 +15324,13 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get settingsTitle => 'Paramètres';
+
+  @override
+  String get statusDebtor => 'Débiteur';
+
+  @override
+  String get statusCreditor => 'Créancier';
+
+  @override
+  String get statusVip => 'VIP';
 }

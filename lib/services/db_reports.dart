@@ -268,6 +268,7 @@ extension DbReports on DatabaseHelper {
 
   /// دمج أنشطة حديثة من عدة جداول — مرتّب زمنياً للوحة التحكم.
   Future<List<RecentActivityEntry>> getRecentActivityFeed({
+    required AppLocalizations loc,
     int perSource = 120,
     int maxTotal = 280,
   }) async {
@@ -365,25 +366,25 @@ extension DbReports on DatabaseHelper {
     final shiftRows = futures[7];
 
     final out = <RecentActivityEntry>[
-      for (final r in invRows) RecentActivityEntry.fromInvoiceRow(r),
-      for (final r in cashRows) RecentActivityEntry.fromCashRow(r),
-      for (final r in parkedRows) RecentActivityEntry.fromParkedRow(r),
-      for (final r in loyaltyRows) RecentActivityEntry.fromLoyaltyRow(r),
-      for (final r in voucherRows) RecentActivityEntry.fromStockVoucherRow(r),
+      for (final r in invRows) RecentActivityEntry.fromInvoiceRow(r, loc),
+      for (final r in cashRows) RecentActivityEntry.fromCashRow(r, loc),
+      for (final r in parkedRows) RecentActivityEntry.fromParkedRow(r, loc),
+      for (final r in loyaltyRows) RecentActivityEntry.fromLoyaltyRow(r, loc),
+      for (final r in voucherRows) RecentActivityEntry.fromStockVoucherRow(r, loc),
       for (final r in customerRows)
-        RecentActivityEntry.fromCustomerCreatedRow(r),
+        RecentActivityEntry.fromCustomerCreatedRow(r, loc),
       for (final r in productRows)
-        RecentActivityEntry.fromProductCreatedRow(r),
+        RecentActivityEntry.fromProductCreatedRow(r, loc),
     ];
 
     for (final r in shiftRows) {
       final open = r['openedAt']?.toString();
       final close = r['closedAt']?.toString();
       if (open != null && open.isNotEmpty) {
-        out.add(RecentActivityEntry.fromWorkShiftRow(r, isClose: false));
+        out.add(RecentActivityEntry.fromWorkShiftRow(r, isClose: false, loc: loc));
       }
       if (close != null && close.isNotEmpty) {
-        out.add(RecentActivityEntry.fromWorkShiftRow(r, isClose: true));
+        out.add(RecentActivityEntry.fromWorkShiftRow(r, isClose: true, loc: loc));
       }
     }
 

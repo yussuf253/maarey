@@ -15324,4 +15324,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get settingsTitle => 'الإعدادات';
+
+  @override
+  String get statusDebtor => 'مديون';
+
+  @override
+  String get statusCreditor => 'دائن';
+
+  @override
+  String get statusVip => 'مميز';
 }

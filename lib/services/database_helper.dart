@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:uuid/uuid.dart';
+import 'package:naboo/l10n/generated/app_localizations.dart';
 import 'cloud_sync_service.dart';
 import 'tenant_context.dart';
 import '../models/invoice.dart';

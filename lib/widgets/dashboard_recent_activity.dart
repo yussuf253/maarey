@@ -138,7 +138,8 @@ class _DashboardRecentActivityState extends State<DashboardRecentActivity> {
       _error = null;
     });
     try {
-      final rows = await _db.getRecentActivityFeed();
+      final loc = AppLocalizations.of(context)!;
+      final rows = await _db.getRecentActivityFeed(loc: loc);
       if (!mounted) return;
       setState(() {
         _all = rows;
@@ -699,7 +700,7 @@ class _ActivityRow extends StatelessWidget {
                     ),
                   if (entry.amountLabel.isNotEmpty) const SizedBox(height: 4),
                   Text(
-                    entry.timeLabel,
+                    entry.timeLabel(AppLocalizations.of(context)!),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(

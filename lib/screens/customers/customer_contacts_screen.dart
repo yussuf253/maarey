@@ -694,7 +694,7 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
     final phone = (c.phone?.trim().isNotEmpty == true) ? c.phone! : '—';
     final email = (c.email?.trim().isNotEmpty == true) ? c.email! : '—';
     final av = _avatarColor(c.id);
-    final st = c.statusLabel;
+    final st = c.getStatusLabel(AppLocalizations.of(context)!);
     final bal = IraqiCurrencyFormat.formatIqd(c.balance);
 
     return Material(
