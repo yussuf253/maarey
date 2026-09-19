@@ -1392,7 +1392,35 @@ class _PanelDashboard extends StatelessWidget {
                 icon: Icons.receipt_long_rounded,
                 color: const Color(0xFFD97706),
               ),
+              _KpiCard(
+                title: 'Waafi',
+                value: '${_numFmt.format(_typeSum(data, InvoiceType.waafi))} Fdj',
+                icon: Icons.phone_iphone_rounded,
+                color: const Color(0xFF00B4D8),
+              ),
+              _KpiCard(
+                title: 'Dahab Plus',
+                value: '${_numFmt.format(_typeSum(data, InvoiceType.dahabPlus))} Fdj',
+                icon: Icons.credit_card_rounded,
+                color: const Color(0xFFFFB703),
+              ),
+              _KpiCard(
+                title: 'CAC Pay',
+                value: '${_numFmt.format(_typeSum(data, InvoiceType.cacPay))} Fdj',
+                icon: Icons.account_balance_wallet_rounded,
+                color: const Color(0xFF06D6A0),
+              ),
+              _KpiCard(
+                title: 'Dmoney',
+                value: '${_numFmt.format(_typeSum(data, InvoiceType.dmoney))} Fdj',
+                icon: Icons.send_rounded,
+                color: const Color(0xFFE63946),
+              ),
             ],
+          ),
+          const SizedBox(height: 18),
+          _DigitalPaymentsTotalsCard(
+            typeTotals: _buildDigitalTypeTotals(data),
           ),
           const SizedBox(height: 18),
           _AnalyticsCard(
@@ -1633,10 +1661,6 @@ class _PanelSales extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 18),
-          _DigitalPaymentsTotalsCard(
-            typeTotals: typeTotals,
-          ),
-          const SizedBox(height: 18),
           Builder(
             builder: (context) {
               final datesSet = <String>{};
@@ -1691,6 +1715,44 @@ class _PanelSales extends StatelessWidget {
       ),
     );
   }
+}
+
+double _typeSum(ReportsSnapshot data, InvoiceType type) {
+  final salesTypes = <InvoiceType>[
+    InvoiceType.cash,
+    InvoiceType.credit,
+    InvoiceType.installment,
+    InvoiceType.delivery,
+    InvoiceType.waafi,
+    InvoiceType.dahabPlus,
+    InvoiceType.cacPay,
+    InvoiceType.dmoney,
+  ];
+  final typeTotals = <InvoiceType, double>{for (final t in salesTypes) t: 0};
+  data.salesByType.forEach((typeIdx, sum) {
+    if (typeIdx >= 0 && typeIdx < InvoiceType.values.length) {
+      final t = InvoiceType.values[typeIdx];
+      if (typeTotals.containsKey(t)) typeTotals[t] = sum;
+    }
+  });
+  return typeTotals[type] ?? 0;
+}
+
+Map<InvoiceType, double> _buildDigitalTypeTotals(ReportsSnapshot data) {
+  final digitalTypes = [
+    InvoiceType.waafi,
+    InvoiceType.dahabPlus,
+    InvoiceType.cacPay,
+    InvoiceType.dmoney,
+  ];
+  final result = <InvoiceType, double>{for (final t in digitalTypes) t: 0};
+  data.salesByType.forEach((typeIdx, sum) {
+    if (typeIdx >= 0 && typeIdx < InvoiceType.values.length) {
+      final t = InvoiceType.values[typeIdx];
+      if (result.containsKey(t)) result[t] = sum;
+    }
+  });
+  return result;
 }
 
 Color _invoiceTypeAccentColor(InvoiceType t, ColorScheme cs) {
