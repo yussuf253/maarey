@@ -63,7 +63,8 @@ import 'app_localizations_fr.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -71,7 +72,8 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -83,18 +85,19 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
-    delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-  ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('ar'),
     Locale('en'),
-    Locale('fr')
+    Locale('fr'),
   ];
 
   /// No description provided for @appTitle.
@@ -2081,7 +2084,11 @@ abstract class AppLocalizations {
   ///
   /// In ar, this message translates to:
   /// **'العميل: {customer}\nالدفع: {paymentType}\nالإجمالي: {total}\n\nفتح شاشة المرتجع؟ يمكنك تقليل الكمية أو حذف الأسطر لإرجاع جزئي فقط.'**
-  String returnInvoiceDialogBody(Object customer, Object paymentType, Object total);
+  String returnInvoiceDialogBody(
+    Object customer,
+    Object paymentType,
+    Object total,
+  );
 
   /// No description provided for @returnLabel.
   ///
@@ -17825,7 +17832,12 @@ abstract class AppLocalizations {
   ///
   /// In ar, this message translates to:
   /// **'القسط {number} — {amount} Fdj — استحق {date} — سُدد {paidStatus}'**
-  String rpInstallmentLine(Object amount, Object date, Object number, Object paidStatus);
+  String rpInstallmentLine(
+    Object amount,
+    Object date,
+    Object number,
+    Object paidStatus,
+  );
 
   /// No description provided for @rpDebtPaymentReceiptTitle.
   ///
@@ -18323,7 +18335,14 @@ abstract class AppLocalizations {
   ///
   /// In ar, this message translates to:
   /// **'حسب إعدادات الدين ({days} يوماً): فاتورة #{id} — {customer} — منذ {date} ({age} {ageWord}).'**
-  String npDebtAgeBody(Object age, Object ageWord, Object customer, Object date, Object days, Object id);
+  String npDebtAgeBody(
+    Object age,
+    Object ageWord,
+    Object customer,
+    Object date,
+    Object days,
+    Object id,
+  );
 
   /// No description provided for @npDay.
   ///
@@ -18365,7 +18384,13 @@ abstract class AppLocalizations {
   ///
   /// In ar, this message translates to:
   /// **'حسب إعدادات الدين: فاتورة #{id} — {customer} — المتبقي {remaining} Fdj (السقف {cap} Fdj) — تاريخ {date}.'**
-  String npInvoiceCapBody(Object cap, Object customer, Object date, Object id, Object remaining);
+  String npInvoiceCapBody(
+    Object cap,
+    Object customer,
+    Object date,
+    Object id,
+    Object remaining,
+  );
 
   /// No description provided for @npWithoutName.
   ///
@@ -18389,7 +18414,12 @@ abstract class AppLocalizations {
   ///
   /// In ar, this message translates to:
   /// **'«{name}» — الكمية الحالية {qty} (أي بيع زائد نحو {over} {unitWord}).'**
-  String npNegativeStockBody(Object name, Object over, Object qty, Object unitWord);
+  String npNegativeStockBody(
+    Object name,
+    Object over,
+    Object qty,
+    Object unitWord,
+  );
 
   /// No description provided for @npOutOfStockTitle.
   ///
@@ -18473,7 +18503,13 @@ abstract class AppLocalizations {
   ///
   /// In ar, this message translates to:
   /// **'فاتورة مرتجعة #{id}{orig} — {customer} — {count} صنف — {total} Fdj'**
-  String npReturnBody(Object count, Object customer, Object id, Object orig, Object total);
+  String npReturnBody(
+    Object count,
+    Object customer,
+    Object id,
+    Object orig,
+    Object total,
+  );
 
   /// No description provided for @npOrigRef.
   ///
@@ -27275,7 +27311,14 @@ abstract class AppLocalizations {
   ///
   /// In ar, this message translates to:
   /// **'وارد {inAmount} Fdj  •  صادر {outAmount} Fdj  •  إدخال {entries}  •  إخراج {exits}  •  يدوي {manual}  •  فواتير {invoices}'**
-  String cashSummaryLine(Object entries, Object exits, Object inAmount, Object invoices, Object manual, Object outAmount);
+  String cashSummaryLine(
+    Object entries,
+    Object exits,
+    Object inAmount,
+    Object invoices,
+    Object manual,
+    Object outAmount,
+  );
 
   /// No description provided for @instNoInvoiceItems.
   ///
@@ -28628,7 +28671,8 @@ abstract class AppLocalizations {
   String get statusVip;
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -28637,26 +28681,28 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['ar', 'en', 'fr'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['ar', 'en', 'fr'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
-
-
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'ar': return AppLocalizationsAr();
-    case 'en': return AppLocalizationsEn();
-    case 'fr': return AppLocalizationsFr();
+    case 'ar':
+      return AppLocalizationsAr();
+    case 'en':
+      return AppLocalizationsEn();
+    case 'fr':
+      return AppLocalizationsFr();
   }
 
   throw FlutterError(
     'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
+    'that was used.',
   );
 }
