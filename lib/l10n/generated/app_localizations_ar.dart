@@ -10797,7 +10797,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get signupPhoneLabel => 'رقم الجوال';
 
   @override
-  String get signupPhoneHintIraq => '07701234567';
+  String get signupPhoneHintDjibouti => '77123456';
 
   @override
   String get signupPhoneHintOther => 'أدخل الرقم';
@@ -10806,7 +10806,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get signupPhoneRequired => 'رقم الجوال مطلوب';
 
   @override
-  String get signupPhoneIraqInvalid => 'رقم عراقي: 11 رقماً يبدأ بـ 07';
+  String get signupPhoneDjiboutiInvalid =>
+      'رقم جيبوتي: 8 أرقام تبدأ بـ 6 أو 7 أو 8';
 
   @override
   String get signupPhoneInvalid => 'رقم غير صحيح';
@@ -11690,6 +11691,68 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get bsSaveError => 'تعذر الحفظ';
+
+  @override
+  String get hwScanTitle => 'قارئ الباركود العتادي (USB)';
+
+  @override
+  String get hwScanDesc =>
+      'فعّل المسح بقارئ باركود سلكي USB. يلتقط التطبيق ضربات المفاتيح السريعة من القارئ ويتجاهل الكتابة اليدوية العادية.';
+
+  @override
+  String get hwScanHandheld => 'قارئ محمول (يدوي)';
+
+  @override
+  String get hwScanHandheldDesc =>
+      'قارئ يدوي سلكي 1D/2D (USB، سرعة 100 إطار/ث). يقرأ Code39 وCode128 وEAN13 وQR وDataMatrix وPDF417، ويرسل Enter بعد كل عملية مسح.';
+
+  @override
+  String get hwScanDesktop => 'قارئ مكتبي متعدد الاتجاهات';
+
+  @override
+  String get hwScanDesktopDesc =>
+      'قارئ مكتبي ثابت (مستشعر 640×480، قراءة حركة حتى 6 م/ث). أوضاع العمل: عادي، هاتف محمول، حركة سريعة. قد لا يرسل مُنهيًا — يجمع التطبيق الكود عند انتهاء المهلة.';
+
+  @override
+  String get hwScanSuffixLabel => 'لاحقة المسح (مُنهي)';
+
+  @override
+  String get hwScanSuffixEnter => 'Enter (CR)';
+
+  @override
+  String get hwScanSuffixTab => 'Tab';
+
+  @override
+  String get hwScanSuffixBoth => 'Enter أو Tab';
+
+  @override
+  String get hwScanSuffixNone => 'بدون (مهلة الخمول)';
+
+  @override
+  String get hwScanSuffixDesc =>
+      'يجب أن تطابق الإعداد المُهيّأ على القارئ نفسه. الافتراضي هو Enter؛ اختر «بدون» إذا كان القارئ يرسل الكود دون مُنهي.';
+
+  @override
+  String get hwScanTestTitle => 'اختبار القارئ';
+
+  @override
+  String get hwScanTestEmpty =>
+      'لم يُكتشف أي مسح بعد — امسح أي باركود للاختبار';
+
+  @override
+  String hwScanTestCount(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'تم اكتشاف $count مسحات',
+      one: 'تم اكتشاف مسح واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get hwScanTestHint =>
+      'امسح أي باركود وهذه الشاشة مفتوحة. سيظهر الكود هنا وسيُعالج أيضًا كالمعتاد (بيع / بحث عن منتج).';
 
   @override
   String get imTabAll => 'الكل';

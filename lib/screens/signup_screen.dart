@@ -60,7 +60,7 @@ class _SignUpScreenState extends State<SignUpScreen>
   bool   _acceptTerms    = false;
 
   AppLocalizations get _loc => AppLocalizations.of(context)!;
-  String _dialCode       = '+964'; // العراق افتراضيًا
+  String _dialCode       = '+253'; // جيبوتي افتراضيًا
 
   // ── Captcha ─────────────────────────────────────────────────────────────
   late int _captchaA;
@@ -74,7 +74,7 @@ class _SignUpScreenState extends State<SignUpScreen>
 
   // ── Country codes ───────────────────────────────────────────────────────
   static const _countryCodes = [
-    {'flag': '🇮🇶', 'name': 'العراق',         'code': '+964'},
+    {'flag': '🇩🇯', 'name': 'جيبوتي',         'code': '+253'},
     {'flag': '🇸🇦', 'name': 'السعودية',        'code': '+966'},
     {'flag': '🇦🇪', 'name': 'الإمارات',        'code': '+971'},
     {'flag': '🇰🇼', 'name': 'الكويت',          'code': '+965'},
@@ -526,20 +526,20 @@ class _SignUpScreenState extends State<SignUpScreen>
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
               LengthLimitingTextInputFormatter(
-                _dialCode == '+964' ? 11 : 15,
+                _dialCode == '+253' ? 8 : 15,
               ),
             ],
             style: const TextStyle(color: _navy2),
             decoration: _dec(
-              hint: _dialCode == '+964' ? _loc.signupPhoneHintIraq : _loc.signupPhoneHintOther,
+              hint: _dialCode == '+253' ? _loc.signupPhoneHintDjibouti : _loc.signupPhoneHintOther,
               icon: Icons.phone_outlined,
             ),
             validator: (v) {
               final t = v?.trim() ?? '';
               if (t.isEmpty) return _loc.signupPhoneRequired;
-              if (_dialCode == '+964') {
-                if (!RegExp(r'^07\d{9}$').hasMatch(t)) {
-                  return _loc.signupPhoneIraqInvalid;
+              if (_dialCode == '+253') {
+                if (!RegExp(r'^[678]\d{7}$').hasMatch(t)) {
+                  return _loc.signupPhoneDjiboutiInvalid;
                 }
               } else if (t.length < 7) {
                 return _loc.signupPhoneInvalid;

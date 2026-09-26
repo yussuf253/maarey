@@ -10904,7 +10904,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get signupPhoneLabel => 'Phone Number';
 
   @override
-  String get signupPhoneHintIraq => '07701234567';
+  String get signupPhoneHintDjibouti => '77123456';
 
   @override
   String get signupPhoneHintOther => 'Enter number';
@@ -10913,8 +10913,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get signupPhoneRequired => 'Phone number is required';
 
   @override
-  String get signupPhoneIraqInvalid =>
-      'Iraqi number: 11 digits starting with 07';
+  String get signupPhoneDjiboutiInvalid =>
+      'Djiboutian number: 8 digits starting with 6, 7 or 8';
 
   @override
   String get signupPhoneInvalid => 'Invalid number';
@@ -11809,6 +11809,68 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get bsSaveError => 'Failed to save';
+
+  @override
+  String get hwScanTitle => 'Hardware barcode scanner (USB)';
+
+  @override
+  String get hwScanDesc =>
+      'Enable scanning with a wired USB barcode scanner. The app captures fast keystroke bursts from the scanner and ignores normal typing.';
+
+  @override
+  String get hwScanHandheld => 'Handheld scanner';
+
+  @override
+  String get hwScanHandheldDesc =>
+      'Wired 1D/2D handheld gun (USB, 100fps). Reads Code39, Code128, EAN13, QR, DataMatrix and PDF417. Sends Enter after each scan.';
+
+  @override
+  String get hwScanDesktop => 'Omnidirectional desktop scanner';
+
+  @override
+  String get hwScanDesktopDesc =>
+      'Desktop presentation scanner (640×480 sensor, motion reading up to 6 m/s). Modes: normal, mobile phone, fast moving. May send no suffix — the app collects the code on idle timeout.';
+
+  @override
+  String get hwScanSuffixLabel => 'Scan suffix (terminator)';
+
+  @override
+  String get hwScanSuffixEnter => 'Enter (CR)';
+
+  @override
+  String get hwScanSuffixTab => 'Tab';
+
+  @override
+  String get hwScanSuffixBoth => 'Enter or Tab';
+
+  @override
+  String get hwScanSuffixNone => 'None (idle timeout)';
+
+  @override
+  String get hwScanSuffixDesc =>
+      'Must match the suffix configured on the scanner itself. Default is Enter; choose None if the scanner sends no terminator after the code.';
+
+  @override
+  String get hwScanTestTitle => 'Scanner test';
+
+  @override
+  String get hwScanTestEmpty =>
+      'No scan detected yet — scan any barcode to test';
+
+  @override
+  String hwScanTestCount(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count scans detected',
+      one: '1 scan detected',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get hwScanTestHint =>
+      'Scan any barcode while this screen is open. The detected code appears here and is also processed as usual (sale / product lookup).';
 
   @override
   String get imTabAll => 'All';

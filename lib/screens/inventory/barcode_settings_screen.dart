@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'dart:async';
 
 import '../../l10n/generated/app_localizations.dart';
 
+import '../../providers/global_barcode_route_bridge.dart';
+import '../../providers/hardware_scanner_provider.dart';
 import '../../services/app_settings_repository.dart';
+import '../../utils/barcode_keystroke_decoder.dart';
 
 /// تهيئة الباركود — إعدادات حقيقية في [app_settings].
 class BarcodeSettingsScreen extends StatefulWidget {
@@ -388,6 +393,8 @@ class _BarcodeSettingsScreenState extends State<BarcodeSettingsScreen> {
                     ),
                     textAlign: TextAlign.right,
                   ),
+                  const SizedBox(height: 24),
+                  const _HardwareScannerSection(),
                   const SizedBox(height: 32),
                   SizedBox(
                     width: double.infinity,
@@ -518,6 +525,327 @@ class _FormatCard extends StatelessWidget {
                   color: cs.onSurfaceVariant,
                 ),
                 textAlign: TextAlign.right,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// قسم إعدادات قارئ الباركود العتادي (USB HID) — قارئ محمول أو مكتبي متعدد
+/// الاتجاهات أو أي قارئ لوحة مفاتيح آخر. يشمل لوحة اختبار مباشر بالمسح الحقيقي.
+class _HardwareScannerSection extends StatefulWidget {
+  const _HardwareScannerSection();
+
+  @override
+  State<_HardwareScannerSection> createState() =>
+      _HardwareScannerSectionState();
+}
+
+class _HardwareScannerSectionState extends State<_HardwareScannerSection> {
+  static const _testMaxLen = 40;
+
+  StreamSubscription<String>? _scanSub;
+  String _lastScanned = '';
+  int _scanCount = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _scanSub = context.read<GlobalBarcodeRouteBridge>().scanStream.listen(
+      _onTestScan,
+    );
+  }
+
+  @override
+  void dispose() {
+    _scanSub?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final cs = theme.colorScheme;
+    final loc = AppLocalizations.of(context)!;
+    final data = context.watch<HardwareScannerProvider>().data;
+
+    return _Panel(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  loc.hwScanTitle,
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
+                  textAlign: TextAlign.right,
+                ),
+              ),
+              Switch(
+                value: data.enabled,
+                onChanged: (v) => _update(data.copyWith(enabled: v)),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          Text(
+            loc.hwScanDesc,
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: cs.onSurfaceVariant,
+              height: 1.5,
+            ),
+            textAlign: TextAlign.right,
+          ),
+          const SizedBox(height: 16),
+          // بطاقتا الجهازين المدعومين
+          LayoutBuilder(
+            builder: (_, c) {
+              final handheld = _ScannerTypeCard(
+                selected: data.profile == ScannerProfile.handheld,
+                icon: Icons.settings_remote_rounded,
+                title: loc.hwScanHandheld,
+                description: loc.hwScanHandheldDesc,
+                onTap: () =>
+                    _update(data.copyWith(profile: ScannerProfile.handheld)),
+              );
+              final desktop = _ScannerTypeCard(
+                selected:
+                    data.profile == ScannerProfile.omnidirectionalDesktop,
+                icon: Icons.sensors_rounded,
+                title: loc.hwScanDesktop,
+                description: loc.hwScanDesktopDesc,
+                onTap: () => _update(
+                  data.copyWith(profile: ScannerProfile.omnidirectionalDesktop),
+                ),
+              );
+              if (c.maxWidth >= 560) {
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(child: handheld),
+                    const SizedBox(width: 12),
+                    Expanded(child: desktop),
+                  ],
+                );
+              }
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  handheld,
+                  const SizedBox(height: 12),
+                  desktop,
+                ],
+              );
+            },
+          ),
+          const SizedBox(height: 16),
+          Text(
+            loc.hwScanSuffixLabel,
+            style: theme.textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+            textAlign: TextAlign.right,
+          ),
+          const SizedBox(height: 8),
+          DropdownButtonFormField<BarcodeSuffix>(
+            initialValue: data.suffix,
+            decoration: const InputDecoration(
+              isDense: true,
+              filled: true,
+              border: OutlineInputBorder(borderRadius: BorderRadius.zero),
+            ),
+            items: [
+              DropdownMenuItem(
+                value: BarcodeSuffix.enter,
+                child: Text(loc.hwScanSuffixEnter),
+              ),
+              DropdownMenuItem(
+                value: BarcodeSuffix.tab,
+                child: Text(loc.hwScanSuffixTab),
+              ),
+              DropdownMenuItem(
+                value: BarcodeSuffix.enterOrTab,
+                child: Text(loc.hwScanSuffixBoth),
+              ),
+              DropdownMenuItem(
+                value: BarcodeSuffix.none,
+                child: Text(loc.hwScanSuffixNone),
+              ),
+            ],
+            onChanged: (v) {
+              if (v != null) _update(data.copyWith(suffix: v));
+            },
+          ),
+          const SizedBox(height: 8),
+          Text(
+            loc.hwScanSuffixDesc,
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: cs.onSurfaceVariant,
+              height: 1.5,
+            ),
+            textAlign: TextAlign.right,
+          ),
+          const SizedBox(height: 16),
+          Text(
+            loc.hwScanTestTitle,
+            style: theme.textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+            textAlign: TextAlign.right,
+          ),
+          const SizedBox(height: 8),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: cs.surfaceContainerHighest.withValues(alpha: 0.45),
+              borderRadius: BorderRadius.zero,
+              border: Border.all(color: cs.outlineVariant),
+            ),
+            child: _lastScanned.isEmpty
+                ? Text(
+                    loc.hwScanTestEmpty,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: cs.onSurfaceVariant,
+                    ),
+                    textAlign: TextAlign.center,
+                  )
+                : Column(
+                    children: [
+                      Text(
+                        _lastScanned,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: 0.5,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        loc.hwScanTestCount(_scanCount),
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: cs.primary,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            loc.hwScanTestHint,
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: cs.onSurfaceVariant,
+              height: 1.5,
+            ),
+            textAlign: TextAlign.right,
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _update(HardwareScannerSettingsData d) {
+    context.read<HardwareScannerProvider>().save(d);
+  }
+
+  /// لوحة الاختبار: يستمع لنفس تدفق HID العالمي عبر الرسائل المرسلة للجسر.
+  void _onTestScan(String code) {
+    if (!mounted) return;
+    setState(() {
+      _lastScanned = code.length > _testMaxLen
+          ? '${code.substring(0, _testMaxLen)}…'
+          : code;
+      _scanCount++;
+    });
+  }
+}
+
+class _ScannerTypeCard extends StatelessWidget {
+  const _ScannerTypeCard({
+    required this.selected,
+    required this.icon,
+    required this.title,
+    required this.description,
+    required this.onTap,
+  });
+
+  final bool selected;
+  final IconData icon;
+  final String title;
+  final String description;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final primary = cs.primary;
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.zero,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: selected
+                ? primary.withValues(alpha: 0.06)
+                : cs.surface,
+            borderRadius: BorderRadius.zero,
+            border: Border.all(
+              color: selected ? primary : cs.outlineVariant,
+              width: selected ? 2 : 1,
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    icon,
+                    size: 22,
+                    color: selected ? primary : cs.onSurfaceVariant,
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 14,
+                        color: selected ? primary : cs.onSurface,
+                      ),
+                    ),
+                  ),
+                  Icon(
+                    selected
+                        ? Icons.radio_button_checked
+                        : Icons.radio_button_off,
+                    color: selected ? primary : cs.outline,
+                    size: 20,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Text(
+                description,
+                style: TextStyle(
+                  fontSize: 12,
+                  height: 1.5,
+                  color: cs.onSurfaceVariant,
+                ),
               ),
             ],
           ),

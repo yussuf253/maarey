@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -8,11 +7,16 @@ import 'package:provider/provider.dart';
 
 import '../providers/auth_provider.dart';
 import '../providers/global_barcode_route_bridge.dart';
+import '../providers/hardware_scanner_provider.dart';
+import '../utils/barcode_keystroke_decoder.dart';
 
-/// يستمع لضربات لوحة المفاتيح السريعة (قارئ HID) ويُجمّع الباركود حتى Enter.
+/// يستمع لضربات لوحة المفاتيح السريعة من قارئ الباركود العتادي (USB HID) ويُجمّع
+/// الباركود حتى المُنهي المُعدّ (Enter / Tab) أو مهلة الخمول (وضع «بدون لاحقة»).
 ///
-/// يُسجَّل بعد [IdleSessionShell] ليُستدعى قبل معالج السكون (LIFO).
-/// الحرف الأول قد يظهر في الحقل المُركَّز؛ باقي الرموز تُستهلك هنا حتى لا يُفسد المسح الحقول.
+/// يعمل على **جميع المنصّات بما فيها الويب** — قارئات USB HID تُصدر أحداث لوحة
+/// مفاتيح على الويب أيضًا. يُسجَّل بعد [IdleSessionShell] ليُستدعى قبل معالج
+/// السكون (LIFO). الحرف الأول قد يظهر في الحقل المُركَّز؛ باقي الرموز تُستهلك
+/// هنا حتى لا يُفسد المسح الحقول.
 class GlobalBarcodeKeyboardListener extends StatefulWidget {
   const GlobalBarcodeKeyboardListener({super.key, required this.child});
 
@@ -25,48 +29,124 @@ class GlobalBarcodeKeyboardListener extends StatefulWidget {
 
 class _GlobalBarcodeKeyboardListenerState
     extends State<GlobalBarcodeKeyboardListener> {
-  /// رموز شائعة في الباركود — يُكمّلها [_charFromPhysicalUsLayout] حتى لا تعتمد على لغة لوحة النظام.
-  static final RegExp _sym = RegExp(r'^[A-Za-z0-9.\-/]$');
+  final BarcodeKeystrokeDecoder _decoder = BarcodeKeystrokeDecoder();
+  BarcodeCaptureSettings _settings = const BarcodeCaptureSettings();
 
-  final StringBuffer _buf = StringBuffer();
-  DateTime? _lastTs;
-  bool _capturing = false;
-
-  String? _lastDispatched;
-  DateTime? _lastDispatchAt;
+  Timer? _idleTimer;
 
   @override
   void initState() {
     super.initState();
-    if (kIsWeb) return;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
         HardwareKeyboard.instance.addHandler(_onKey);
+        _reloadSettings();
       }
     });
   }
 
   @override
   void dispose() {
-    if (!kIsWeb) {
-      HardwareKeyboard.instance.removeHandler(_onKey);
-    }
+    _idleTimer?.cancel();
+    HardwareKeyboard.instance.removeHandler(_onKey);
     super.dispose();
   }
 
-  void _reset() {
-    _buf.clear();
-    _lastTs = null;
-    _capturing = false;
+  void _reloadSettings() {
+    final p = Provider.of<HardwareScannerProvider>(context, listen: false);
+    _settings = p.capture;
+    p.addListener(_onSettingsChanged);
   }
 
-  /// قارئ HID يرسل ضربات كأنها لوحة **إنجليزية فيزيائية**؛ [KeyEvent.character] يتبع لغة الإدخال (عربي…)
-  /// فيُنتج حروفاً لا تمرّ عبر [_sym]. نقرأ بدل ذلك [PhysicalKeyboardKey] (موضع المفتاح).
+  void _onSettingsChanged() {
+    if (!mounted) return;
+    final p = Provider.of<HardwareScannerProvider>(context, listen: false);
+    _settings = p.capture;
+    // إعدادات المُنهي تغيّرت — تفريغ الالتقاط الجاري لتفادي تسليم كود قديم.
+    _decoder.reset();
+  }
+
+  bool _onKey(KeyEvent event) {
+    if (event is! KeyDownEvent) return false;
+    if (!mounted) return false;
+    if (!_settings.enabled) return false;
+
+    if (!Provider.of<AuthProvider>(context, listen: false).isLoggedIn) {
+      return false;
+    }
+    final bridge = Provider.of<GlobalBarcodeRouteBridge>(context, listen: false);
+
+    final hk = HardwareKeyboard.instance;
+    if (hk.isControlPressed || hk.isMetaPressed || hk.isAltPressed) {
+      _decoder.reset();
+      return false;
+    }
+
+    final isEnter =
+        event.logicalKey == LogicalKeyboardKey.enter ||
+        event.logicalKey == LogicalKeyboardKey.numpadEnter;
+    final isTab = event.logicalKey == LogicalKeyboardKey.tab;
+
+    if (isEnter || isTab) {
+      final st = _decoder.onKey(
+        Keystroke('', isEnter: isEnter, isTab: isTab),
+        DateTime.now(),
+        _settings,
+      );
+      if (st.code != null) {
+        _dispatch(bridge, st.code!);
+        return true;
+      }
+      return st.consumed;
+    }
+
+    final ch = _charFromPhysicalUsLayout(event) ?? _charFromLocalizedFallback(event);
+    if (ch == null) {
+      _decoder.reset();
+      return false;
+    }
+
+    final st = _decoder.onKey(Keystroke(ch), DateTime.now(), _settings);
+    if (st.code != null) {
+      _dispatch(bridge, st.code!);
+      _idleTimer?.cancel();
+    } else if (st.isCapturing) {
+      _restartIdleTimer(bridge);
+    }
+    return st.consumed;
+  }
+
+  void _dispatch(GlobalBarcodeRouteBridge bridge, String code) {
+    unawaited(bridge.dispatch(code));
+    SchedulerBinding.instance.scheduleFrame();
+  }
+
+  /// مؤقت الخمول: يسلّم الباركود المُجمَّع عند عدم وصول ضربات خلال مهلة الوضع
+  /// (ضروري لوضع «بدون لاحقة» في القارئ المكتبي — الحركة السريعة).
+  void _restartIdleTimer(GlobalBarcodeRouteBridge bridge) {
+    _idleTimer?.cancel();
+    _idleTimer = Timer(
+      Duration(milliseconds: BarcodeCaptureSettings.flushDelayFor(_settings.suffix)),
+      () {
+        _idleTimer = null;
+        if (!mounted) return;
+        final st = _decoder.onIdleFlush(DateTime.now(), _settings);
+        if (st.code != null) {
+          _dispatch(bridge, st.code!);
+        }
+      },
+    );
+  }
+
+  /// قارئ HID يرسل ضربات كأنها لوحة **إنجليزية فيزيائية**؛ [KeyEvent.character]
+  /// يتبع لغة الإدخال (عربي…) فتُنتج حروفاً غير متوافقة مع نمط الباركود. نقرأ
+  /// بدل ذلك [PhysicalKeyboardKey] (موضع المفتاح الفيزيائي).
   String? _charFromPhysicalUsLayout(KeyEvent event) {
     final pk = event.physicalKey;
     final shift = HardwareKeyboard.instance.isShiftPressed;
 
-    String letter(bool upper, String lower) => upper ? lower.toUpperCase() : lower;
+    String letter(bool upper, String lower) =>
+        upper ? lower.toUpperCase() : lower;
 
     // أرقام الصف العلوي والنمط الرقمي
     final topDigits = <PhysicalKeyboardKey, String>{
@@ -96,6 +176,7 @@ class _GlobalBarcodeKeyboardListenerState
 
     final punct = <PhysicalKeyboardKey, String>{
       PhysicalKeyboardKey.minus: '-',
+      PhysicalKeyboardKey.equal: '=',
       PhysicalKeyboardKey.period: '.',
       PhysicalKeyboardKey.slash: '/',
     };
@@ -136,100 +217,14 @@ class _GlobalBarcodeKeyboardListenerState
     return null;
   }
 
-  /// إن فشل المسار الفيزيائي (منصّة نادرة): نستخدم الحرف إن وافق نمط الباركود (مثلاً لوحة إنجليزية).
+  /// إن فشل المسار الفيزيائي (منصّة نادرة): نستخدم الحرف إن وافق نمط الباركود
+  /// (مثلاً لوحة إنجليزية).
   String? _charFromLocalizedFallback(KeyEvent event) {
     final ch = event.character;
     if (ch == null || ch.isEmpty || ch.length != 1) return null;
     if (ch == '\r' || ch == '\n') return null;
-    if (!_sym.hasMatch(ch)) return null;
+    if (!isPlausibleBarcode(ch)) return null;
     return ch;
-  }
-
-  bool _isDupScan(String code) {
-    final now = DateTime.now();
-    if (_lastDispatched == code &&
-        _lastDispatchAt != null &&
-        now.difference(_lastDispatchAt!) < const Duration(milliseconds: 700)) {
-      return true;
-    }
-    _lastDispatched = code;
-    _lastDispatchAt = now;
-    return false;
-  }
-
-  bool _onKey(KeyEvent event) {
-    if (event is! KeyDownEvent) return false;
-    if (!mounted) return false;
-
-    if (!Provider.of<AuthProvider>(context, listen: false).isLoggedIn) {
-      return false;
-    }
-    final bridge = Provider.of<GlobalBarcodeRouteBridge>(context, listen: false);
-
-    final hk = HardwareKeyboard.instance;
-    if (hk.isControlPressed || hk.isMetaPressed || hk.isAltPressed) {
-      _reset();
-      return false;
-    }
-
-    final isEnter = event.logicalKey == LogicalKeyboardKey.enter ||
-        event.logicalKey == LogicalKeyboardKey.numpadEnter;
-
-    if (isEnter) {
-      if (_buf.isEmpty) {
-        return false;
-      }
-      final code = _buf.toString().trim();
-      _reset();
-      if (code.length < 4) return false;
-      if (_isDupScan(code)) return true;
-      unawaited(bridge.dispatch(code));
-      // يضمن بدء سلسلة async + إطار رسم دون انتظار حدث إدخال آخر.
-      SchedulerBinding.instance.scheduleFrame();
-      return true;
-    }
-
-    final ch = _charFromPhysicalUsLayout(event) ?? _charFromLocalizedFallback(event);
-    if (ch == null) {
-      _reset();
-      return false;
-    }
-
-    final now = DateTime.now();
-
-    if (!_capturing) {
-      if (_buf.isEmpty) {
-        _buf.write(ch);
-        _lastTs = now;
-        return false;
-      }
-      final gap = _lastTs == null
-          ? Duration.zero
-          : now.difference(_lastTs!);
-      if (gap < const Duration(milliseconds: 110)) {
-        _capturing = true;
-        _buf.write(ch);
-        _lastTs = now;
-        return true;
-      }
-      _buf
-        ..clear()
-        ..write(ch);
-      _lastTs = now;
-      return false;
-    }
-
-    final gap = _lastTs == null ? Duration.zero : now.difference(_lastTs!);
-    if (gap > const Duration(milliseconds: 140)) {
-      _reset();
-      _buf.write(ch);
-      _lastTs = now;
-      return false;
-    }
-    _lastTs = now;
-    _buf.write(ch);
-    if (_buf.length > 96) _reset();
-    return true;
   }
 
   @override

@@ -22,6 +22,10 @@ class GlobalBarcodeRouteBridge {
 
   static String? _pendingScan;
 
+  /// بثّ جميع المسحات المكتشفة (قبل الأولويات) — للوحات الاختبار والتشخيص.
+  final StreamController<String> _scanEvents = StreamController<String>.broadcast();
+  Stream<String> get scanStream => _scanEvents.stream;
+
   bool get isAttached => _handler != null;
 
   void attach(Future<void> Function(String scanned) handler) {
@@ -56,6 +60,7 @@ class GlobalBarcodeRouteBridge {
   }
 
   Future<void> dispatch(String scanned) async {
+    _scanEvents.add(scanned);
     final p = _priorityHandler;
     if (p != null) {
       try {

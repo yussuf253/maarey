@@ -19441,11 +19441,11 @@ abstract class AppLocalizations {
   /// **'رقم الجوال'**
   String get signupPhoneLabel;
 
-  /// No description provided for @signupPhoneHintIraq.
+  /// No description provided for @signupPhoneHintDjibouti.
   ///
   /// In ar, this message translates to:
-  /// **'07701234567'**
-  String get signupPhoneHintIraq;
+  /// **'77123456'**
+  String get signupPhoneHintDjibouti;
 
   /// No description provided for @signupPhoneHintOther.
   ///
@@ -19459,11 +19459,11 @@ abstract class AppLocalizations {
   /// **'رقم الجوال مطلوب'**
   String get signupPhoneRequired;
 
-  /// No description provided for @signupPhoneIraqInvalid.
+  /// No description provided for @signupPhoneDjiboutiInvalid.
   ///
   /// In ar, this message translates to:
-  /// **'رقم عراقي: 11 رقماً يبدأ بـ 07'**
-  String get signupPhoneIraqInvalid;
+  /// **'رقم جيبوتي: 8 أرقام تبدأ بـ 6 أو 7 أو 8'**
+  String get signupPhoneDjiboutiInvalid;
 
   /// No description provided for @signupPhoneInvalid.
   ///
@@ -21162,6 +21162,102 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'تعذر الحفظ'**
   String get bsSaveError;
+
+  /// No description provided for @hwScanTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'قارئ الباركود العتادي (USB)'**
+  String get hwScanTitle;
+
+  /// No description provided for @hwScanDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'فعّل المسح بقارئ باركود سلكي USB. يلتقط التطبيق ضربات المفاتيح السريعة من القارئ ويتجاهل الكتابة اليدوية العادية.'**
+  String get hwScanDesc;
+
+  /// No description provided for @hwScanHandheld.
+  ///
+  /// In ar, this message translates to:
+  /// **'قارئ محمول (يدوي)'**
+  String get hwScanHandheld;
+
+  /// No description provided for @hwScanHandheldDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'قارئ يدوي سلكي 1D/2D (USB، سرعة 100 إطار/ث). يقرأ Code39 وCode128 وEAN13 وQR وDataMatrix وPDF417، ويرسل Enter بعد كل عملية مسح.'**
+  String get hwScanHandheldDesc;
+
+  /// No description provided for @hwScanDesktop.
+  ///
+  /// In ar, this message translates to:
+  /// **'قارئ مكتبي متعدد الاتجاهات'**
+  String get hwScanDesktop;
+
+  /// No description provided for @hwScanDesktopDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'قارئ مكتبي ثابت (مستشعر 640×480، قراءة حركة حتى 6 م/ث). أوضاع العمل: عادي، هاتف محمول، حركة سريعة. قد لا يرسل مُنهيًا — يجمع التطبيق الكود عند انتهاء المهلة.'**
+  String get hwScanDesktopDesc;
+
+  /// No description provided for @hwScanSuffixLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'لاحقة المسح (مُنهي)'**
+  String get hwScanSuffixLabel;
+
+  /// No description provided for @hwScanSuffixEnter.
+  ///
+  /// In ar, this message translates to:
+  /// **'Enter (CR)'**
+  String get hwScanSuffixEnter;
+
+  /// No description provided for @hwScanSuffixTab.
+  ///
+  /// In ar, this message translates to:
+  /// **'Tab'**
+  String get hwScanSuffixTab;
+
+  /// No description provided for @hwScanSuffixBoth.
+  ///
+  /// In ar, this message translates to:
+  /// **'Enter أو Tab'**
+  String get hwScanSuffixBoth;
+
+  /// No description provided for @hwScanSuffixNone.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدون (مهلة الخمول)'**
+  String get hwScanSuffixNone;
+
+  /// No description provided for @hwScanSuffixDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'يجب أن تطابق الإعداد المُهيّأ على القارئ نفسه. الافتراضي هو Enter؛ اختر «بدون» إذا كان القارئ يرسل الكود دون مُنهي.'**
+  String get hwScanSuffixDesc;
+
+  /// No description provided for @hwScanTestTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختبار القارئ'**
+  String get hwScanTestTitle;
+
+  /// No description provided for @hwScanTestEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يُكتشف أي مسح بعد — امسح أي باركود للاختبار'**
+  String get hwScanTestEmpty;
+
+  /// No description provided for @hwScanTestCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, one{تم اكتشاف مسح واحد} other{تم اكتشاف {count} مسحات}}'**
+  String hwScanTestCount(num count);
+
+  /// No description provided for @hwScanTestHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'امسح أي باركود وهذه الشاشة مفتوحة. سيظهر الكود هنا وسيُعالج أيضًا كالمعتاد (بيع / بحث عن منتج).'**
+  String get hwScanTestHint;
 
   /// No description provided for @imTabAll.
   ///

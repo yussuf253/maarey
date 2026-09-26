@@ -32,6 +32,7 @@ import 'providers/sale_pos_settings_provider.dart';
 import 'providers/ui_feedback_settings_provider.dart';
 import 'providers/dashboard_layout_provider.dart';
 import 'providers/global_barcode_route_bridge.dart';
+import 'providers/hardware_scanner_provider.dart';
 import 'providers/open_ops_registry.dart';
 import 'widgets/global_barcode_keyboard_listener.dart';
 import 'widgets/restricted_mode_banner_controller.dart';
@@ -242,6 +243,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => SalePosSettingsProvider()),
         ChangeNotifierProvider(create: (_) => UiFeedbackSettingsProvider()),
         ChangeNotifierProvider(create: (_) => DashboardLayoutProvider()),
+        ChangeNotifierProvider(create: (_) => HardwareScannerProvider()),
         ChangeNotifierProvider(create: (_) => OpenOpsRegistry()),
         ChangeNotifierProvider.value(value: TenantContextService.instance),
         Provider(create: (_) => GlobalBarcodeRouteBridge()),

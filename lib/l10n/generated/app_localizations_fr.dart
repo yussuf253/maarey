@@ -11027,7 +11027,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get signupPhoneLabel => 'Numéro de téléphone';
 
   @override
-  String get signupPhoneHintIraq => '07701234567';
+  String get signupPhoneHintDjibouti => '77123456';
 
   @override
   String get signupPhoneHintOther => 'Entrez le numéro';
@@ -11036,8 +11036,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get signupPhoneRequired => 'Le numéro de téléphone est requis';
 
   @override
-  String get signupPhoneIraqInvalid =>
-      'Numéro irakien : 11 chiffres commençant par 07';
+  String get signupPhoneDjiboutiInvalid =>
+      'Numéro djiboutien : 8 chiffres commençant par 6, 7 ou 8';
 
   @override
   String get signupPhoneInvalid => 'Numéro invalide';
@@ -11939,6 +11939,68 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get bsSaveError => 'Échec de l\'enregistrement';
+
+  @override
+  String get hwScanTitle => 'Lecteur de code-barres matériel (USB)';
+
+  @override
+  String get hwScanDesc =>
+      'Activez la lecture avec un lecteur de code-barres filaire USB. L\'application capture les frappes rapides du lecteur et ignore la saisie manuelle normale.';
+
+  @override
+  String get hwScanHandheld => 'Lecteur portable (manuel)';
+
+  @override
+  String get hwScanHandheldDesc =>
+      'Pistolet filaire 1D/2D (USB, 100 fps). Lit Code39, Code128, EAN13, QR, DataMatrix et PDF417. Envoie Entrée après chaque scan.';
+
+  @override
+  String get hwScanDesktop => 'Lecteur de bureau omnidirectionnel';
+
+  @override
+  String get hwScanDesktopDesc =>
+      'Lecteur de présentation de bureau (capteur 640×480, lecture en mouvement jusqu\'à 6 m/s). Modes : normal, téléphone mobile, mouvement rapide. Peut n\'envoyer aucun suffixe — l\'application assemble le code après un délai d\'inactivité.';
+
+  @override
+  String get hwScanSuffixLabel => 'Suffixe de scan (terminateur)';
+
+  @override
+  String get hwScanSuffixEnter => 'Entrée (CR)';
+
+  @override
+  String get hwScanSuffixTab => 'Tab';
+
+  @override
+  String get hwScanSuffixBoth => 'Entrée ou Tab';
+
+  @override
+  String get hwScanSuffixNone => 'Aucun (délai d\'inactivité)';
+
+  @override
+  String get hwScanSuffixDesc =>
+      'Doit correspondre au suffixe configuré sur le lecteur lui-même. Par défaut : Entrée ; choisissez « Aucun » si le lecteur envoie le code sans terminateur.';
+
+  @override
+  String get hwScanTestTitle => 'Test du lecteur';
+
+  @override
+  String get hwScanTestEmpty =>
+      'Aucun scan détecté — scannez un code-barres pour tester';
+
+  @override
+  String hwScanTestCount(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count scans détectés',
+      one: '1 scan détecté',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get hwScanTestHint =>
+      'Scannez un code-barres pendant que cet écran est ouvert. Le code détecté s\'affiche ici et est également traité normalement (vente / recherche produit).';
 
   @override
   String get imTabAll => 'Tout';

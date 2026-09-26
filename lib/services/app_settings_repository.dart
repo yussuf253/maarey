@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 
+import '../utils/barcode_keystroke_decoder.dart';
 import 'database_helper.dart';
 
 /// إعدادات عامة مفتاح/قيمة في جدول [app_settings].
@@ -77,6 +78,163 @@ class AppSettingsRepository {
       if (v != null) out[k] = v;
     }
     return out;
+  }
+}
+
+/// مفاتيح إعدادات قارئ الباركود العتادي (USB HID) — قابلة للتخزين.
+abstract class HardwareScannerSettingsKeys {
+  static const enabled = 'scan.hw.enabled';
+  static const profile = 'scan.hw.profile';
+  static const suffix = 'scan.hw.suffix';
+  static const maxInterKeyGapMs = 'scan.hw.max_inter_key_gap_ms';
+  static const minCodeLength = 'scan.hw.min_code_length';
+  static const dedupeWindowMs = 'scan.hw.dedupe_window_ms';
+}
+
+/// إعدادات قارئ الباركود العتادي (لوحة المفاتيح).
+/// القيم الافتراضية من مواصفات القارئ المحمول (100fps ⇒ فجوات ~10ms).
+class HardwareScannerSettingsData {
+  const HardwareScannerSettingsData({
+    required this.enabled,
+    required this.profile,
+    required this.suffix,
+    required this.maxInterKeyGapMs,
+    required this.minCodeLength,
+    required this.dedupeWindowMs,
+  });
+
+  final bool enabled;
+  final ScannerProfile profile;
+  final BarcodeSuffix suffix;
+  final int maxInterKeyGapMs;
+  final int minCodeLength;
+  final int dedupeWindowMs;
+
+  static HardwareScannerSettingsData defaults() =>
+      const HardwareScannerSettingsData(
+        enabled: true,
+        profile: ScannerProfile.handheld,
+        suffix: BarcodeSuffix.enter,
+        maxInterKeyGapMs: BarcodeCaptureSettings.defaultMaxInterKeyGapMs,
+        minCodeLength: BarcodeCaptureSettings.defaultMinCodeLength,
+        dedupeWindowMs: BarcodeCaptureSettings.defaultDedupeWindowMs,
+      );
+
+  BarcodeCaptureSettings toCaptureSettings() => BarcodeCaptureSettings(
+    enabled: enabled,
+    profile: profile,
+    suffix: suffix,
+    maxInterKeyGapMs: maxInterKeyGapMs,
+    minCodeLength: minCodeLength,
+    dedupeWindowMs: dedupeWindowMs,
+  );
+
+  HardwareScannerSettingsData copyWith({
+    bool? enabled,
+    ScannerProfile? profile,
+    BarcodeSuffix? suffix,
+    int? maxInterKeyGapMs,
+    int? minCodeLength,
+    int? dedupeWindowMs,
+  }) {
+    return HardwareScannerSettingsData(
+      enabled: enabled ?? this.enabled,
+      profile: profile ?? this.profile,
+      suffix: suffix ?? this.suffix,
+      maxInterKeyGapMs: maxInterKeyGapMs ?? this.maxInterKeyGapMs,
+      minCodeLength: minCodeLength ?? this.minCodeLength,
+      dedupeWindowMs: dedupeWindowMs ?? this.dedupeWindowMs,
+    );
+  }
+
+  static Future<HardwareScannerSettingsData> load(
+    AppSettingsRepository repo,
+  ) async {
+    final d = defaults();
+    final raw = await repo.getKeys(const [
+      HardwareScannerSettingsKeys.enabled,
+      HardwareScannerSettingsKeys.profile,
+      HardwareScannerSettingsKeys.suffix,
+      HardwareScannerSettingsKeys.maxInterKeyGapMs,
+      HardwareScannerSettingsKeys.minCodeLength,
+      HardwareScannerSettingsKeys.dedupeWindowMs,
+    ]);
+    return HardwareScannerSettingsData(
+      enabled: (raw[HardwareScannerSettingsKeys.enabled] ?? '1') == '1',
+      profile: _profileFromRaw(
+        raw[HardwareScannerSettingsKeys.profile],
+        d.profile,
+      ),
+      suffix: _suffixFromRaw(raw[HardwareScannerSettingsKeys.suffix], d.suffix),
+      maxInterKeyGapMs:
+          int.tryParse(
+            raw[HardwareScannerSettingsKeys.maxInterKeyGapMs] ?? '',
+          ) ??
+          d.maxInterKeyGapMs,
+      minCodeLength:
+          int.tryParse(raw[HardwareScannerSettingsKeys.minCodeLength] ?? '') ??
+          d.minCodeLength,
+      dedupeWindowMs:
+          int.tryParse(raw[HardwareScannerSettingsKeys.dedupeWindowMs] ?? '') ??
+          d.dedupeWindowMs,
+    );
+  }
+
+  static ScannerProfile _profileFromRaw(String? raw, ScannerProfile fallback) {
+    switch (raw) {
+      case 'handheld':
+        return ScannerProfile.handheld;
+      case 'omnidirectionalDesktop':
+        return ScannerProfile.omnidirectionalDesktop;
+      case 'generic':
+        return ScannerProfile.generic;
+      default:
+        return fallback;
+    }
+  }
+
+  static BarcodeSuffix _suffixFromRaw(String? raw, BarcodeSuffix fallback) {
+    switch (raw) {
+      case 'enter':
+        return BarcodeSuffix.enter;
+      case 'tab':
+        return BarcodeSuffix.tab;
+      case 'enterOrTab':
+        return BarcodeSuffix.enterOrTab;
+      case 'none':
+        return BarcodeSuffix.none;
+      default:
+        return fallback;
+    }
+  }
+
+  Future<void> save(AppSettingsRepository repo) async {
+    final profileRaw = switch (profile) {
+      ScannerProfile.handheld => 'handheld',
+      ScannerProfile.omnidirectionalDesktop => 'omnidirectionalDesktop',
+      ScannerProfile.generic => 'generic',
+    };
+    final suffixRaw = switch (suffix) {
+      BarcodeSuffix.enter => 'enter',
+      BarcodeSuffix.tab => 'tab',
+      BarcodeSuffix.enterOrTab => 'enterOrTab',
+      BarcodeSuffix.none => 'none',
+    };
+    await repo.set(HardwareScannerSettingsKeys.enabled, enabled ? '1' : '0');
+    await repo.set(HardwareScannerSettingsKeys.profile, profileRaw);
+    await repo.set(HardwareScannerSettingsKeys.suffix, suffixRaw);
+    await repo.set(
+      HardwareScannerSettingsKeys.maxInterKeyGapMs,
+      maxInterKeyGapMs.toString(),
+    );
+    await repo.set(
+      HardwareScannerSettingsKeys.minCodeLength,
+      minCodeLength.toString(),
+    );
+    await repo.set(
+      HardwareScannerSettingsKeys.dedupeWindowMs,
+      dedupeWindowMs.toString(),
+    );
   }
 }
 
