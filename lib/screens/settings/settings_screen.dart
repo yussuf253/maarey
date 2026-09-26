@@ -683,6 +683,14 @@ class _SubscriptionPlanTrailingBadge extends StatelessWidget {
           label = loc.settingsLicenseDisconnected;
           fg = Colors.orange.shade800;
           bg = Colors.orange.withValues(alpha: 0.18);
+        } else if (s.status == LicenseStatus.restricted) {
+          label = loc.settingsLicenseRestricted;
+          fg = _kRed;
+          bg = _kRed.withValues(alpha: 0.12);
+        } else if (s.status == LicenseStatus.pendingLock) {
+          label = loc.settingsLicensePendingLock;
+          fg = _kRed;
+          bg = _kRed.withValues(alpha: 0.12);
         } else if (s.status == LicenseStatus.checking) {
           label = '…';
           fg = Colors.grey.shade700;
@@ -695,13 +703,30 @@ class _SubscriptionPlanTrailingBadge extends StatelessWidget {
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
           decoration: BoxDecoration(color: bg, borderRadius: ac.sm),
-          child: Text(
-            label,
-            style: TextStyle(
-              color: fg,
-              fontSize: 11,
-              fontWeight: FontWeight.bold,
-            ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                label,
+                style: TextStyle(
+                  color: fg,
+                  fontSize: 11,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              if (s.deviceOverLimit)
+                Padding(
+                  padding: const EdgeInsets.only(left: 4),
+                  child: Tooltip(
+                    message: loc.licDeviceLimitExceeded,
+                    child: Icon(
+                      Icons.warning_amber_rounded,
+                      size: 14,
+                      color: _kAmber,
+                    ),
+                  ),
+                ),
+            ],
           ),
         );
       },
@@ -2329,9 +2354,12 @@ class _SectionCard extends StatelessWidget {
           ),
         ],
       ),
-      child: DefaultTextStyle.merge(
-        style: TextStyle(color: cs.onSurface),
-        child: child,
+      child: Material(
+        type: MaterialType.transparency,
+        child: DefaultTextStyle.merge(
+          style: TextStyle(color: cs.onSurface),
+          child: child,
+        ),
       ),
     );
   }

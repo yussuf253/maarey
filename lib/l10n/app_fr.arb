@@ -3734,6 +3734,8 @@
   "settingsLicenseInactive": "Inactif",
   "settingsLicenseDisconnected": "Déconnecté",
   "settingsLicenseNone": "Pas de licence",
+  "settingsLicenseRestricted": "Restreint",
+  "settingsLicensePendingLock": "Verrouillage en attente",
   "settingsDeviceAllowed": "L'appareil a été autorisé à revenir",
   "settingsDeviceCount": "{count} appareils",
   "settingsSubscription": "Abonnement",

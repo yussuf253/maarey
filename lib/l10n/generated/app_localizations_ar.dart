@@ -13181,6 +13181,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsLicenseNone => 'بدون ترخيص';
 
   @override
+  String get settingsLicenseRestricted => 'مقيّد';
+
+  @override
+  String get settingsLicensePendingLock => 'بانتظار القفل';
+
+  @override
   String get settingsDeviceAllowed => 'تم السماح للجهاز بالعودة';
 
   @override

@@ -13472,6 +13472,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsLicenseNone => 'Pas de licence';
 
   @override
+  String get settingsLicenseRestricted => 'Restreint';
+
+  @override
+  String get settingsLicensePendingLock => 'Verrouillage en attente';
+
+  @override
   String get settingsDeviceAllowed => 'L\'appareil a été autorisé à revenir';
 
   @override

@@ -23899,6 +23899,18 @@ abstract class AppLocalizations {
   /// **'بدون ترخيص'**
   String get settingsLicenseNone;
 
+  /// No description provided for @settingsLicenseRestricted.
+  ///
+  /// In ar, this message translates to:
+  /// **'مقيّد'**
+  String get settingsLicenseRestricted;
+
+  /// No description provided for @settingsLicensePendingLock.
+  ///
+  /// In ar, this message translates to:
+  /// **'بانتظار القفل'**
+  String get settingsLicensePendingLock;
+
   /// No description provided for @settingsDeviceAllowed.
   ///
   /// In ar, this message translates to:

@@ -3961,6 +3961,8 @@
   "settingsLicenseInactive": "غير نشط",
   "settingsLicenseDisconnected": "غير متصّل",
   "settingsLicenseNone": "بدون ترخيص",
+  "settingsLicenseRestricted": "مقيّد",
+  "settingsLicensePendingLock": "بانتظار القفل",
   "settingsDeviceAllowed": "تم السماح للجهاز بالعودة",
   "settingsDeviceCount": "{count} أجهزة",
   "settingsSubscription": "الاشتراك",

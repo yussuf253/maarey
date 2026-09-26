@@ -4057,6 +4057,8 @@
   "settingsLicenseInactive": "Inactive",
   "settingsLicenseDisconnected": "Disconnected",
   "settingsLicenseNone": "No License",
+  "settingsLicenseRestricted": "Restricted",
+  "settingsLicensePendingLock": "Pending Lock",
   "settingsDeviceAllowed": "Device has been allowed to return",
   "settingsDeviceCount": "{count} devices",
   "settingsSubscription": "Subscription",

@@ -194,6 +194,8 @@ class LicenseState {
     this.registeredDeviceCount = 0,
     this.maxDevices = 1,
     this.lockReason,
+    this.deviceOverLimit = false,
+    this.activeDeviceCount = 0,
   });
 
   final LicenseStatus status;
@@ -206,6 +208,13 @@ class LicenseState {
   final int registeredDeviceCount;
   final int maxDevices;
   final LockReason? lockReason;
+
+  /// Server reports device count exceeds plan limit.
+  /// When true and status is active/trial, this is a warning — not a block.
+  final bool deviceOverLimit;
+
+  /// Actual active device count reported by server (for UI display).
+  final int activeDeviceCount;
 
   bool get isAllowed =>
       status == LicenseStatus.trial || status == LicenseStatus.active;
@@ -607,6 +616,13 @@ class LicenseService extends ChangeNotifier {
 
   Future<String> getDeviceName() => _v2Activator.getDeviceName();
 
+  /// Whether the current state has been validated by a JWT token overlay
+  /// (active or trial). Used to avoid overriding a freshly-activated state
+  /// with a stale cached device-limit flag when offline.
+  bool get _hasActiveJwtOverlay =>
+      _state.status == LicenseStatus.active ||
+      _state.status == LicenseStatus.trial;
+
   // ── التحقق من الترخيص ─────────────────────────────────────────────────────
 
   Future<void> checkLicense({bool forceRemote = false}) =>
@@ -690,13 +706,32 @@ class LicenseService extends ChangeNotifier {
 
     if (!forceRemote && recentlyChecked) {
       if (cached) {
-        _setState(
-          const LicenseState(
-            status: LicenseStatus.restricted,
-            message:
-                'تم تجاوز حد الأجهزة في حسابك. افصل جهازاً من لوحة الإدارة أو قم بترقية الخطة.',
-          ),
-        );
+        // Only force restricted if there's no valid JWT active/trial state.
+        if (_hasActiveJwtOverlay) {
+          // Preserve active/trial — just annotate with device-over-limit.
+          _setState(
+            LicenseState(
+              status: _state.status,
+              plan: _state.plan,
+              maxDevices: _state.maxDevices,
+              registeredDeviceCount: _state.registeredDeviceCount,
+              expiresAt: _state.expiresAt,
+              trialEndsAt: _state.trialEndsAt,
+              daysLeft: _state.daysLeft,
+              businessName: _state.businessName,
+              deviceOverLimit: true,
+            ),
+          );
+        } else {
+          _setState(
+            const LicenseState(
+              status: LicenseStatus.restricted,
+              message:
+                  'تم تجاوز حد الأجهزة في حسابك. افصل جهازاً من لوحة الإدارة أو قم بترقية الخطة.',
+              deviceOverLimit: true,
+            ),
+          );
+        }
       }
 
       return;
@@ -705,8 +740,12 @@ class LicenseService extends ChangeNotifier {
     final server = await _tryFetchOverLimitFromServer();
 
     if (server == null) {
-      // Offline/failed : un cache "true" reste appliqué.
-      if (cached) {
+      // Offline/failed: Don't override an active/trial state with a
+      // stale cached over-limit. The user may have just activated a new
+      // license and the server hasn't propagated the new limits yet.
+      // Only force restricted if there's no active JWT (i.e. the user
+      // was already in a degraded state before going offline).
+      if (cached && !_hasActiveJwtOverlay) {
         _setState(
           const LicenseState(
             status: LicenseStatus.restricted,
@@ -722,19 +761,67 @@ class LicenseService extends ChangeNotifier {
     await _writeCachedOverLimit(prefs, server.isOverLimit);
 
     if (server.isOverLimit) {
-      final maxLabel = server.maxDevices == 0
-          ? 'غير محدود'
-          : '${server.maxDevices}';
+      // If a valid JWT has already set active/trial status, preserve it.
+      // Device limit is a soft warning, not a license killer.
+      final hasValidJwt = _state.status == LicenseStatus.active ||
+          _state.status == LicenseStatus.trial;
 
-      _setState(
-        LicenseState(
-          status: LicenseStatus.restricted,
-          message:
-              'عدد الأجهزة النشطة على الحساب تجاوز الحد (${server.activeDevices}/$maxLabel). افصل جهازاً أو قم بترقية الخطة.',
-        ),
-      );
+      if (hasValidJwt) {
+        // Preserve the current active/trial state — just annotate it with
+        // the device-limit warning so the UI can show a banner.
+        _setState(
+          LicenseState(
+            status: _state.status,
+            plan: _state.plan,
+            maxDevices: _state.maxDevices,
+            registeredDeviceCount: _state.registeredDeviceCount,
+            expiresAt: _state.expiresAt,
+            trialEndsAt: _state.trialEndsAt,
+            daysLeft: _state.daysLeft,
+            businessName: _state.businessName,
+            deviceOverLimit: true,
+            activeDeviceCount: server.activeDevices,
+          ),
+        );
+      } else {
+        // No valid JWT — fall back to restricted (e.g. no license at all).
+        final maxLabel = server.maxDevices == 0
+            ? 'غير محدود'
+            : '${server.maxDevices}';
+
+        _setState(
+          LicenseState(
+            status: LicenseStatus.restricted,
+            message:
+                'عدد الأجهزة النشطة على الحساب تجاوز الحد (${server.activeDevices}/$maxLabel). افصل جهازاً أو قم بترقية الخطة.',
+            deviceOverLimit: true,
+            activeDeviceCount: server.activeDevices,
+            maxDevices: server.maxDevices,
+          ),
+        );
+      }
+    } else {
+      // Server confirms NOT over-limit.
+      // If state is currently restricted from a previous device-limit check
+      // AND we now have a valid JWT, restore the active/trial state.
+      if (_state.status == LicenseStatus.restricted &&
+          _state.deviceOverLimit) {
+        // Re-run the full license check to restore the active/trial state
+        // from the stored JWT token.
+        unawaited(_recheckAfterDeviceLimitCleared());
+      }
     }
   }
+
+  /// Deferred re-check: runs after the device limit overlay clears,
+  /// so we don't call notifyListeners() inside an active build/layout.
+  Future<void> _recheckAfterDeviceLimitCleared() async {
+    await Future<void>.delayed(const Duration(milliseconds: 100));
+    try {
+      await checkLicense(forceRemote: true);
+    } catch (_) {}
+  }
+
 
   // ── Step 21: Kill Switch overlay ──────────────────────────────────────────
 
@@ -910,12 +997,41 @@ class LicenseService extends ChangeNotifier {
     if (data != null) {
       await _persistTenantAccess(prefs, data, trustedNow: trustedNow);
     } else {
+      // Server unreachable (including 404 when the RPC doesn't exist).
+      // If there's cached tenant-access data from a previous check, it may
+      // be stale (e.g. 'revoked'/'suspended' from before the function was
+      // removed). Don't let stale cached access status override a valid
+      // JWT-verified active/trial state.
       final cached = _readTenantAccessCache(prefs);
 
       if (cached == null) {
         if (kDebugMode) {
           debugPrint(
             '[LicenseService] tenant_access offline + no cache; keeping current state.',
+          );
+        }
+
+        return;
+      }
+
+      // If the cached access status is negative (revoked/suspended/grace),
+      // clear it to avoid locking the user out based on stale data when
+      // the server function is unavailable (404).
+      final cachedStatus = (cached['access_status'] ?? '').toString();
+      final isNegativeCached = cachedStatus == 'revoked' ||
+          cachedStatus == 'suspended' ||
+          cachedStatus == 'grace';
+
+      if (isNegativeCached) {
+        await prefs.remove(_Prefs.tenantAccessStatus);
+        await prefs.remove(_Prefs.tenantAccessKillSwitch);
+        await prefs.remove(_Prefs.tenantAccessValidUntil);
+        await prefs.remove(_Prefs.tenantAccessGraceUntil);
+
+        if (kDebugMode) {
+          debugPrint(
+            '[LicenseService] Cleared stale negative tenant-access cache '
+            '(status=$cachedStatus) — server unavailable.',
           );
         }
 
@@ -1296,9 +1412,34 @@ class LicenseService extends ChangeNotifier {
 
     unawaited(_trustedTime.confirmWithServer());
 
+    // ── Clear stale device-limit cache so the new license takes effect ──
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove(_Prefs.deviceOverLimit);
+      await prefs.remove(_Prefs.deviceOverLimitCheckedAt);
+    } catch (_) {}
+
+    // First check: immediate — verifies JWT + sets active state.
     await checkLicense(forceRemote: true);
 
+    // Second check: delayed retry — gives the server time to propagate
+    // the new license limits after admin-web creation.
+    unawaited(_delayedDeviceLimitRetry());
+
     return r;
+  }
+
+  /// Re-checks the device limit after a short delay to handle the case
+  /// where the server hasn't yet propagated a newly created license.
+  Future<void> _delayedDeviceLimitRetry() async {
+    await Future<void>.delayed(const Duration(seconds: 3));
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove(_Prefs.deviceOverLimit);
+      await prefs.remove(_Prefs.deviceOverLimitCheckedAt);
+      await _maybeApplyServerDeviceLimitOverlay(forceRemote: true)
+          .timeout(const Duration(seconds: 8));
+    } catch (_) {}
   }
 
   // ── إلغاء الترخيص ─────────────────────────────────────────────────────────

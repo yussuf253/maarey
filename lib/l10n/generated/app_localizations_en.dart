@@ -13315,6 +13315,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsLicenseNone => 'No License';
 
   @override
+  String get settingsLicenseRestricted => 'Restricted';
+
+  @override
+  String get settingsLicensePendingLock => 'Pending Lock';
+
+  @override
   String get settingsDeviceAllowed => 'Device has been allowed to return';
 
   @override
