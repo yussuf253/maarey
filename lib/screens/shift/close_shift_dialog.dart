@@ -403,7 +403,7 @@ class _CloseShiftDialogState extends State<_CloseShiftDialog> {
                             ),
                             const SizedBox(height: 10),
                             Text(
-                              'يُحدَّد الرصيد تلقائياً من حركات الصندوق. راجع القيم ثم أكّد السحب.',
+                              AppLocalizations.of(context)!.csAutoBalanceNote,
                               style: theme.textTheme.bodyMedium?.copyWith(
                                 color: cs.onSurfaceVariant,
                                 height: 1.35,

@@ -81,7 +81,8 @@ class ExpenseReceiptPrinter {
               row(AppLocalizations.of(context as BuildContext)!.expenseStatus, entry.status == ExpenseStatus.paid ? AppLocalizations.of(context as BuildContext)!.paidLabel2 : AppLocalizations.of(context as BuildContext)!.pendingLabel2),
               if (entry.description.isNotEmpty) row(AppLocalizations.of(context as BuildContext)!.expenseDescription, entry.description),
               if (entry.isRecurring)
-                row(AppLocalizations.of(context as BuildContext)!.monthlyRepeat, 'يوم ${entry.recurringDay ?? '-'}'),
+                row(AppLocalizations.of(context as BuildContext)!.monthlyRepeat,
+                    AppLocalizations.of(context as BuildContext)!.monthlyRepeatDay(entry.recurringDay?.toString() ?? '-')),
               if (entry.affectsCash)
                 row(AppLocalizations.of(context as BuildContext)!.affectedCashBox, AppLocalizations.of(context as BuildContext)!.yesDeduction)
               else

@@ -1096,6 +1096,8 @@ class _QBtn extends StatelessWidget {
 // ── قائمة المعاملات ───────────────────────────────────────────────────────────
 
 int? _shiftIdFromCashDescription(String d) {
+  // الأنماط تطابق أوصاف الحركات **المخزّنة** في قاعدة البيانات (بيانات عربية ثابتة)،
+  // وليست نصوص واجهة — لذلك تبقى كما هي.
   final open = RegExp(r'فتح الوردية\s*#(\d+)').firstMatch(d);
   if (open != null) return int.tryParse(open.group(1)!);
   final close = RegExp(r'إغلاق الوردية\s*#(\d+)').firstMatch(d);

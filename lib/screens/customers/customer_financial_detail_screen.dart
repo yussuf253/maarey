@@ -60,7 +60,7 @@ class _CustomerFinancialDetailScreenState
           ),
           actions: [
             IconButton(
-              tooltip: 'تعديل بيانات العميل',
+              tooltip: AppLocalizations.of(context)!.editCustomer,
               icon: const Icon(Icons.edit_outlined),
               onPressed: _openEdit,
             ),

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../../services/local_ai_agent_service.dart';
 
 class LocalAiAgentScreen extends StatefulWidget {
@@ -17,27 +18,32 @@ class _LocalAiAgentScreenState extends State<LocalAiAgentScreen> {
   final List<_ChatTurn> _turns = [];
   bool _loading = false;
 
-  static const List<String> _suggestions = [
-    'Which product performed this month?',
-    'ملخص المبيعات هذا الشهر',
-    'ما المنتجات التي قد تنفد؟',
-    'اقترح طلبية شراء',
+  List<String> _suggestions(AppLocalizations loc) => [
+    loc.aiSuggestSalesSummary,
+    loc.aiSuggestLowStock,
+    loc.aiSuggestPurchaseOrder,
   ];
 
   @override
   void initState() {
     super.initState();
-    _turns.add(
-      const _ChatTurn.agent(
-        AiAgentMessage(
-          intent: AiAgentIntent.help,
-          answer:
-              'أنا مساعد محلي لتحليل المبيعات والمخزون. اسألني عن أفضل المنتجات، خطر النفاد، أو توصيات الشراء.',
-          insights: [],
-          actions: ['كل التحليل يتم من بيانات المتجر المحلية.'],
-        ),
-      ),
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final loc = AppLocalizations.of(context);
+      if (loc == null) return;
+      setState(() {
+        _turns.add(
+          _ChatTurn.agent(
+            AiAgentMessage(
+              intent: AiAgentIntent.help,
+              answer: loc.aiAgentWelcome,
+              insights: const [],
+              actions: [loc.aiAgentLocalNote],
+            ),
+          ),
+        );
+      });
+    });
   }
 
   @override
@@ -68,8 +74,7 @@ class _LocalAiAgentScreenState extends State<LocalAiAgentScreen> {
           _ChatTurn.agent(
             AiAgentMessage(
               intent: AiAgentIntent.help,
-              answer:
-                  'لم أستطع إكمال التحليل الآن. تحقق من تحميل بيانات المتجر ثم جرّب مرة أخرى.\n$e',
+              answer: AppLocalizations.of(context)!.aiAgentError(e.toString()),
               insights: const [],
               actions: const [],
             ),
@@ -91,7 +96,10 @@ class _LocalAiAgentScreenState extends State<LocalAiAgentScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            _Header(onSuggestion: _ask, suggestions: _suggestions),
+            _Header(
+              onSuggestion: _ask,
+              suggestions: _suggestions(AppLocalizations.of(context)!),
+            ),
             Expanded(
               child: ListView.builder(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
@@ -157,7 +165,7 @@ class _Header extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'مساعد ذكي يقرأ المبيعات والمخزون محلياً ويقترح قرارات عملية.',
+              AppLocalizations.of(context)!.aiAgentSubtitle,
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: cs.onSurfaceVariant,
               ),

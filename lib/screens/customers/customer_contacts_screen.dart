@@ -162,7 +162,7 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(_loc.ctDeleteContact),
-        content: Text('حذف «${c.name}» من النظام؟'),
+        content: Text(_loc.ctDeleteConfirmBody(c.name)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
@@ -184,7 +184,7 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('تعذر الحذف: $e')),
+          SnackBar(content: Text(_loc.ctDeleteFailed(e.toString()))),
         );
       }
     }
@@ -199,14 +199,9 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
     }
 
   Color _statusColor(String label) {
-    switch (label) {
-      case 'مديون':
-        return const Color(0xFFFF9800);
-      case 'دائن':
-        return const Color(0xFF7E57C2);
-      default:
-        return const Color(0xFF00897B);
-    }
+    if (label == _loc.statusDebtor) return const Color(0xFFFF9800);
+    if (label == _loc.statusCreditor) return const Color(0xFF7E57C2);
+    return const Color(0xFF00897B);
   }
 
   Color _avatarColor(int id) {
@@ -253,7 +248,7 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
             children: [
             Expanded(
               child: Text(
-                'المعروض: $shown',
+                _loc.ctShownCount(shown),
                 style: TextStyle(fontSize: 13, color: _textSecondary),
               ),
             ),
@@ -496,16 +491,14 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
             const SizedBox(width: 10),
             _buildFilterChip(
               filter: _ContactFilter.debtOrCreditSale,
-              label: 'عليهم دين أو آجل',
-              tooltip:
-                  'فواتير بيع آجل غير مرتجعة، أو رصيد مدين على الحساب — للاتصال بخصوص الدين.',
+              label: _loc.ctFilterDebt,
+              tooltip: _loc.ctFilterDebtTooltip,
             ),
             const SizedBox(width: 10),
             _buildFilterChip(
               filter: _ContactFilter.hasInstallments,
-              label: 'عليهم أقساط',
-              tooltip:
-                  'لديهم خطة تقسيط مسجّلة — للاتصال بخصوص الأقساط.',
+              label: _loc.ctFilterInstallments,
+              tooltip: _loc.ctFilterInstallmentsTooltip,
             ),
           ],
         ),
@@ -652,7 +645,7 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
                 ),
               ),
                 child: Text(
-                'بيع آجل ×${fin.creditInvoices}',
+                _loc.ctCreditSalesBadge(fin.creditInvoices),
                 style: const TextStyle(
                   fontSize: 10.5,
                   fontWeight: FontWeight.w700,
@@ -671,7 +664,7 @@ class _CustomerContactsScreenState extends State<CustomerContactsScreen> {
                 ),
               ),
               child: Text(
-                'تقسيط ×${fin.installmentPlans}',
+                _loc.ctInstallmentsBadge(fin.installmentPlans),
                 style: const TextStyle(
                   fontSize: 10.5,
                   fontWeight: FontWeight.w700,

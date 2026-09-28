@@ -152,7 +152,6 @@ class _ServiceOrdersHubScreenState extends State<ServiceOrdersHubScreen>
     if (err == null) return '';
     final s = err.toString().toLowerCase();
     if (s.contains('tenantcontextservice') ||
-        s.contains('مستأجر') ||
         s.contains('tenant')) {
       return _loc.sohTryReLogin;
     }

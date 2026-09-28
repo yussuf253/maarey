@@ -519,9 +519,9 @@ class _ResultsCard extends StatelessWidget {
                             if (v == 'delete') onMenuDelete(row);
                           },
                           itemBuilder: (ctx) => [
-                            const PopupMenuItem(
+                            PopupMenuItem(
                               value: 'delete',
-                              child: Text('حذف'),
+                              child: Text(AppLocalizations.of(ctx)!.delete),
                             ),
                           ],
                         ),

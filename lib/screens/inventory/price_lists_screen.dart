@@ -417,12 +417,12 @@ class _ProductPriceTable extends StatelessWidget {
 
   const _ProductPriceTable({required this.priceLists});
 
-  static const _products = [
+  List<(String, double)> _products(AppLocalizations loc) => [
     ('Pringles-1250', 1000.0),
     ('Coca-Cola 330ml', 750.0),
     ('Pepsi 500ml', 700.0),
-    ('رز الحياني 5 كيلو', 3000.0),
-    ('مياه نون 1.5L', 250.0),
+    (loc.invDemoRiceName, 3000.0),
+    (loc.invDemoWaterName, 250.0),
   ];
 
   @override
@@ -460,7 +460,7 @@ class _ProductPriceTable extends StatelessWidget {
                 ),
               ),
           ],
-          rows: _products.map((p) {
+          rows: _products(loc).map((p) {
             return DataRow(
               cells: [
                 DataCell(Text(p.$1, style: const TextStyle(fontSize: 13))),
@@ -523,12 +523,12 @@ class _PriceItemsSheet extends StatelessWidget {
 
   const _PriceItemsSheet({required this.list});
 
-  static const _items = [
+  List<(String, String, String)> _items(AppLocalizations loc) => [
     ('Pringles-1250', '1,625', '1,300'),
     ('Coca-Cola 330ml', '975', '750'),
     ('Pepsi 500ml', '910', '700'),
-    ('رز الحياني 5 كيلو', '3,900', '3,000'),
-    ('مياه نون 1.5L', '325', '250'),
+    (loc.invDemoRiceName, '3,900', '3,000'),
+    (loc.invDemoWaterName, '325', '250'),
   ];
 
   @override
@@ -624,11 +624,11 @@ class _PriceItemsSheet extends StatelessWidget {
             SizedBox(
               height: 250,
               child: ListView.separated(
-                itemCount: _items.length,
+                itemCount: _items(loc).length,
                 separatorBuilder: (_, __) =>
                     const Divider(height: 1, color: _border),
                 itemBuilder: (_, i) {
-                  final item = _items[i];
+                  final item = _items(loc)[i];
 
                   return Padding(
                     padding: const EdgeInsets.symmetric(

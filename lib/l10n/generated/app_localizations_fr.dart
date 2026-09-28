@@ -16345,4 +16345,270 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get statusVip => 'VIP';
+
+  @override
+  String get aiSuggestSalesSummary => 'Résumé des ventes de ce mois';
+
+  @override
+  String get aiSuggestLowStock => 'Quels produits pourraient s\'épuiser ?';
+
+  @override
+  String get aiSuggestPurchaseOrder => 'Proposer une commande d\'achat';
+
+  @override
+  String get aiAgentWelcome =>
+      'Je suis un assistant local d\'analyse des ventes et du stock. Interrogez-moi sur les meilleurs produits, le risque de rupture ou les recommandations d\'achat.';
+
+  @override
+  String get aiAgentLocalNote =>
+      'Toute l\'analyse s\'appuie sur les données locales du magasin.';
+
+  @override
+  String aiAgentError(Object error) {
+    return 'Je n\'ai pas pu terminer l\'analyse pour le moment. Vérifiez le chargement des données du magasin puis réessayez.\n$error';
+  }
+
+  @override
+  String get aiAgentSubtitle =>
+      'Assistant intelligent qui lit les ventes et le stock localement et propose des décisions concrètes.';
+
+  @override
+  String ctDeleteConfirmBody(Object name) {
+    return 'Supprimer « $name » du système ?';
+  }
+
+  @override
+  String ctShownCount(Object count) {
+    return 'Affichés : $count';
+  }
+
+  @override
+  String get ctFilterDebt => 'Avec dette ou crédit';
+
+  @override
+  String get ctFilterDebtTooltip =>
+      'Factures de vente à crédit non retournées, ou solde débiteur sur le compte — pour les relances de dette.';
+
+  @override
+  String get ctFilterInstallments => 'Avec échéanciers';
+
+  @override
+  String get ctFilterInstallmentsTooltip =>
+      'Ils ont un plan de paiement échelonné enregistré — pour le suivi des échéances.';
+
+  @override
+  String ctCreditSalesBadge(Object count) {
+    return 'Vente à crédit ×$count';
+  }
+
+  @override
+  String ctInstallmentsBadge(Object count) {
+    return 'Échéancier ×$count';
+  }
+
+  @override
+  String monthlyRepeatDay(Object day) {
+    return 'Jour $day';
+  }
+
+  @override
+  String invDemoQtyInPieces(Object count) {
+    return '+$count pièces';
+  }
+
+  @override
+  String invDemoQtyOutBoxes(Object count) {
+    return '-$count boîtes';
+  }
+
+  @override
+  String invDemoQtyTransferBags(Object count) {
+    return '×$count sacs';
+  }
+
+  @override
+  String invDemoQtyInBottles(Object count) {
+    return '+$count bouteilles';
+  }
+
+  @override
+  String get invDemoMainWarehouse => 'Entrepôt principal';
+
+  @override
+  String get invDemoSalesWarehouse => 'Entrepôt des ventes';
+
+  @override
+  String get invDemoInternalTransfer => 'Transfert interne';
+
+  @override
+  String get invDemoTodayTime => 'Aujourd\'hui, 10:30';
+
+  @override
+  String get invDemoYesterdayTime => 'Hier, 14:15';
+
+  @override
+  String get invDemoYesterdayMorning => 'Hier, 09:00';
+
+  @override
+  String get invDemoMonday => 'Lundi';
+
+  @override
+  String get invDemoRiceName => 'Riz Anbar 5kg';
+
+  @override
+  String get invDemoWaterName => 'Eau Nun 1,5L';
+
+  @override
+  String poAutoAddMsg(Object added) {
+    return '$added articles ajoutés depuis le stock faible/épuisé. Ajustez les quantités puis enregistrez.';
+  }
+
+  @override
+  String poAutoAddSkipped(Object skipped) {
+    return ' ($skipped doublons ignorés)';
+  }
+
+  @override
+  String poAutoAddTruncated(Object max) {
+    return ' — seuls les $max premiers articles sont affichés.';
+  }
+
+  @override
+  String get poSearchHint =>
+      'Rechercher par fournisseur, numéro de commande ou date…';
+
+  @override
+  String poReceivedOfTotal(Object received, Object total) {
+    return 'Reçu $received sur $total';
+  }
+
+  @override
+  String poTotalValue(Object value) {
+    return 'Valeur totale : $value';
+  }
+
+  @override
+  String instTwoItemsJoin(Object a, Object b) {
+    return '$a, $b';
+  }
+
+  @override
+  String blQtyKg(Object qty) {
+    return '$qty kg';
+  }
+
+  @override
+  String qpuSelected(Object name) {
+    return 'Sélectionné : $name';
+  }
+
+  @override
+  String qpuLoadMoreFailed(Object error) {
+    return 'Impossible de charger plus : $error';
+  }
+
+  @override
+  String qpuSaveFailed(Object error) {
+    return 'Impossible d\'enregistrer : $error';
+  }
+
+  @override
+  String get qpuTrackingDisabledNote =>
+      'Le suivi de stock est désactivé pour cet article — la quantité en base reste inchangée à l\'enregistrement.';
+
+  @override
+  String qpuNumberLabel(Object id) {
+    return 'N° $id';
+  }
+
+  @override
+  String get skuPrefixHint =>
+      'Symboles ou lettres affichés avant le numéro du document. Ils peuvent être fixes comme INV ou inclure une année/mois selon la politique du magasin.';
+
+  @override
+  String get posPaletteRoyal => 'Bleu royal — or — ivoire (par défaut)';
+
+  @override
+  String get posPaletteMidnight => 'Minuit — argent — gris clair';
+
+  @override
+  String get posPaletteOcean => 'Océan — or sableux — crème';
+
+  @override
+  String get posPaletteForest => 'Forêt — bronze — menthe claire';
+
+  @override
+  String get posPaletteWine => 'Bordeaux — or chaud — blanc rosé';
+
+  @override
+  String get posPaletteCharcoal => 'Anthracite — ambre — blanc bleuté';
+
+  @override
+  String get posPaletteSlate => 'Ardoise — ciel — blanc froid';
+
+  @override
+  String get posPaletteCopper => 'Cuivre — laiton rougi — sable';
+
+  @override
+  String get posPaletteCustom => 'Personnalisé — studio de couleurs interactif';
+
+  @override
+  String posTextScalePercent(Object percent) {
+    return '$percent %';
+  }
+
+  @override
+  String invoiceSettingsSaveFailed(Object error) {
+    return 'Impossible d\'enregistrer les paramètres des factures : $error';
+  }
+
+  @override
+  String get invoiceSettingsSaved => 'Paramètres des factures enregistrés';
+
+  @override
+  String get osAutoAssigned => 'Attribué automatiquement';
+
+  @override
+  String get csAutoBalanceNote =>
+      'Le solde est rempli automatiquement depuis les mouvements de caisse. Vérifiez les valeurs puis confirmez le retrait.';
+
+  @override
+  String get printingStorageNote =>
+      'Les données sont stockées dans la table print_settings et appliquées automatiquement à l\'impression du reçu de vente après chaque opération.';
+
+  @override
+  String get countryDjibouti => 'Djibouti';
+
+  @override
+  String get countrySaudiArabia => 'Arabie saoudite';
+
+  @override
+  String get countryUAE => 'Émirats arabes unis';
+
+  @override
+  String get countryKuwait => 'Koweït';
+
+  @override
+  String get countrySyria => 'Syrie';
+
+  @override
+  String get countryJordan => 'Jordanie';
+
+  @override
+  String get countryLebanon => 'Liban';
+
+  @override
+  String get countryEgypt => 'Égypte';
+
+  @override
+  String get countryTurkey => 'Turquie';
+
+  @override
+  String get countryGermany => 'Allemagne';
+
+  @override
+  String get countryUK => 'Royaume-Uni';
+
+  @override
+  String get countryUSA => 'États-Unis';
 }

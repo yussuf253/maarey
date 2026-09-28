@@ -28777,6 +28777,426 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'مميز'**
   String get statusVip;
+
+  /// No description provided for @aiSuggestSalesSummary.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخص المبيعات هذا الشهر'**
+  String get aiSuggestSalesSummary;
+
+  /// No description provided for @aiSuggestLowStock.
+  ///
+  /// In ar, this message translates to:
+  /// **'ما المنتجات التي قد تنفد؟'**
+  String get aiSuggestLowStock;
+
+  /// No description provided for @aiSuggestPurchaseOrder.
+  ///
+  /// In ar, this message translates to:
+  /// **'اقترح طلبية شراء'**
+  String get aiSuggestPurchaseOrder;
+
+  /// No description provided for @aiAgentWelcome.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنا مساعد محلي لتحليل المبيعات والمخزون. اسألني عن أفضل المنتجات، خطر النفاد، أو توصيات الشراء.'**
+  String get aiAgentWelcome;
+
+  /// No description provided for @aiAgentLocalNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل التحليل يتم من بيانات المتجر المحلية.'**
+  String get aiAgentLocalNote;
+
+  /// No description provided for @aiAgentError.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم أستطع إكمال التحليل الآن. تحقق من تحميل بيانات المتجر ثم جرّب مرة أخرى.\n{error}'**
+  String aiAgentError(Object error);
+
+  /// No description provided for @aiAgentSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مساعد ذكي يقرأ المبيعات والمخزون محلياً ويقترح قرارات عملية.'**
+  String get aiAgentSubtitle;
+
+  /// No description provided for @ctDeleteConfirmBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف «{name}» من النظام؟'**
+  String ctDeleteConfirmBody(Object name);
+
+  /// No description provided for @ctShownCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'المعروض: {count}'**
+  String ctShownCount(Object count);
+
+  /// No description provided for @ctFilterDebt.
+  ///
+  /// In ar, this message translates to:
+  /// **'عليهم دين أو آجل'**
+  String get ctFilterDebt;
+
+  /// No description provided for @ctFilterDebtTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'فواتير بيع آجل غير مرتجعة، أو رصيد مدين على الحساب — للاتصال بخصوص الدين.'**
+  String get ctFilterDebtTooltip;
+
+  /// No description provided for @ctFilterInstallments.
+  ///
+  /// In ar, this message translates to:
+  /// **'عليهم أقساط'**
+  String get ctFilterInstallments;
+
+  /// No description provided for @ctFilterInstallmentsTooltip.
+  ///
+  /// In ar, this message translates to:
+  /// **'لديهم خطة تقسيط مسجّلة — للاتصال بخصوص الأقساط.'**
+  String get ctFilterInstallmentsTooltip;
+
+  /// No description provided for @ctCreditSalesBadge.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيع آجل ×{count}'**
+  String ctCreditSalesBadge(Object count);
+
+  /// No description provided for @ctInstallmentsBadge.
+  ///
+  /// In ar, this message translates to:
+  /// **'تقسيط ×{count}'**
+  String ctInstallmentsBadge(Object count);
+
+  /// No description provided for @monthlyRepeatDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'يوم {day}'**
+  String monthlyRepeatDay(Object day);
+
+  /// No description provided for @invDemoQtyInPieces.
+  ///
+  /// In ar, this message translates to:
+  /// **'+{count} قطعة'**
+  String invDemoQtyInPieces(Object count);
+
+  /// No description provided for @invDemoQtyOutBoxes.
+  ///
+  /// In ar, this message translates to:
+  /// **'-{count} علبة'**
+  String invDemoQtyOutBoxes(Object count);
+
+  /// No description provided for @invDemoQtyTransferBags.
+  ///
+  /// In ar, this message translates to:
+  /// **'×{count} كيس'**
+  String invDemoQtyTransferBags(Object count);
+
+  /// No description provided for @invDemoQtyInBottles.
+  ///
+  /// In ar, this message translates to:
+  /// **'+{count} زجاجة'**
+  String invDemoQtyInBottles(Object count);
+
+  /// No description provided for @invDemoMainWarehouse.
+  ///
+  /// In ar, this message translates to:
+  /// **'المستودع الرئيسي'**
+  String get invDemoMainWarehouse;
+
+  /// No description provided for @invDemoSalesWarehouse.
+  ///
+  /// In ar, this message translates to:
+  /// **'مستودع المبيعات'**
+  String get invDemoSalesWarehouse;
+
+  /// No description provided for @invDemoInternalTransfer.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحويل داخلي'**
+  String get invDemoInternalTransfer;
+
+  /// No description provided for @invDemoTodayTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'اليوم، 10:30'**
+  String get invDemoTodayTime;
+
+  /// No description provided for @invDemoYesterdayTime.
+  ///
+  /// In ar, this message translates to:
+  /// **'أمس، 14:15'**
+  String get invDemoYesterdayTime;
+
+  /// No description provided for @invDemoYesterdayMorning.
+  ///
+  /// In ar, this message translates to:
+  /// **'أمس، 09:00'**
+  String get invDemoYesterdayMorning;
+
+  /// No description provided for @invDemoMonday.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإثنين'**
+  String get invDemoMonday;
+
+  /// No description provided for @invDemoRiceName.
+  ///
+  /// In ar, this message translates to:
+  /// **'رز الحياني 5 كيلو'**
+  String get invDemoRiceName;
+
+  /// No description provided for @invDemoWaterName.
+  ///
+  /// In ar, this message translates to:
+  /// **'مياه نون 1.5L'**
+  String get invDemoWaterName;
+
+  /// No description provided for @poAutoAddMsg.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمت إضافة {added} صنفاً من المخزون المنخفض/النافض. عُدّل الكميات ثم احفظ.'**
+  String poAutoAddMsg(Object added);
+
+  /// No description provided for @poAutoAddSkipped.
+  ///
+  /// In ar, this message translates to:
+  /// **' (تُجاهل {skipped} مكرراً)'**
+  String poAutoAddSkipped(Object skipped);
+
+  /// No description provided for @poAutoAddTruncated.
+  ///
+  /// In ar, this message translates to:
+  /// **' — عُرض أول {max} صنفاً فقط.'**
+  String poAutoAddTruncated(Object max);
+
+  /// No description provided for @poSearchHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'بحث باسم المورد أو رقم الأمر أو التاريخ…'**
+  String get poSearchHint;
+
+  /// No description provided for @poReceivedOfTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'مستلم {received} من {total}'**
+  String poReceivedOfTotal(Object received, Object total);
+
+  /// No description provided for @poTotalValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'القيمة الكلية: {value}'**
+  String poTotalValue(Object value);
+
+  /// No description provided for @instTwoItemsJoin.
+  ///
+  /// In ar, this message translates to:
+  /// **'{a}، {b}'**
+  String instTwoItemsJoin(Object a, Object b);
+
+  /// No description provided for @blQtyKg.
+  ///
+  /// In ar, this message translates to:
+  /// **'{qty} كغم'**
+  String blQtyKg(Object qty);
+
+  /// No description provided for @qpuSelected.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم اختيار: {name}'**
+  String qpuSelected(Object name);
+
+  /// No description provided for @qpuLoadMoreFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر تحميل المزيد: {error}'**
+  String qpuLoadMoreFailed(Object error);
+
+  /// No description provided for @qpuSaveFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر الحفظ: {error}'**
+  String qpuSaveFailed(Object error);
+
+  /// No description provided for @qpuTrackingDisabledNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'تتبع المخزون معطّل لهذا الصنف — الكمية من قاعدة البيانات تبقى كما هي عند الحفظ.'**
+  String get qpuTrackingDisabledNote;
+
+  /// No description provided for @qpuNumberLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم {id}'**
+  String qpuNumberLabel(Object id);
+
+  /// No description provided for @skuPrefixHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرموز أو الأحرف التي تظهر قبل رقم المستند. يمكن أن تكون ثابتة مثل INV أو تتضمن سنة/شهراً حسب سياسة المتجر.'**
+  String get skuPrefixHint;
+
+  /// No description provided for @posPaletteRoyal.
+  ///
+  /// In ar, this message translates to:
+  /// **'كحلي ملكي — ذهبي — عاجي (الافتراضي)'**
+  String get posPaletteRoyal;
+
+  /// No description provided for @posPaletteMidnight.
+  ///
+  /// In ar, this message translates to:
+  /// **'منتصف ليل — فضي — رمادي فاتح'**
+  String get posPaletteMidnight;
+
+  /// No description provided for @posPaletteOcean.
+  ///
+  /// In ar, this message translates to:
+  /// **'محيط — رملي ذهبي — كريمي'**
+  String get posPaletteOcean;
+
+  /// No description provided for @posPaletteForest.
+  ///
+  /// In ar, this message translates to:
+  /// **'غابة — برونزي — نعناعي فاتح'**
+  String get posPaletteForest;
+
+  /// No description provided for @posPaletteWine.
+  ///
+  /// In ar, this message translates to:
+  /// **'نبيذي — ذهبي دافئ — أبيض وردي'**
+  String get posPaletteWine;
+
+  /// No description provided for @posPaletteCharcoal.
+  ///
+  /// In ar, this message translates to:
+  /// **'فحمي — عنبر — أبيض مزرق'**
+  String get posPaletteCharcoal;
+
+  /// No description provided for @posPaletteSlate.
+  ///
+  /// In ar, this message translates to:
+  /// **'أردوازي — سماوي — أبيض بارد'**
+  String get posPaletteSlate;
+
+  /// No description provided for @posPaletteCopper.
+  ///
+  /// In ar, this message translates to:
+  /// **'نحاسي — نحاس محمر — رمل'**
+  String get posPaletteCopper;
+
+  /// No description provided for @posPaletteCustom.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخصص — استوديو ألوان تفاعلي'**
+  String get posPaletteCustom;
+
+  /// No description provided for @posTextScalePercent.
+  ///
+  /// In ar, this message translates to:
+  /// **'{percent}٪'**
+  String posTextScalePercent(Object percent);
+
+  /// No description provided for @invoiceSettingsSaveFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر حفظ إعدادات الفواتير: {error}'**
+  String invoiceSettingsSaveFailed(Object error);
+
+  /// No description provided for @invoiceSettingsSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم حفظ إعدادات الفواتير'**
+  String get invoiceSettingsSaved;
+
+  /// No description provided for @osAutoAssigned.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُحدَّد تلقائياً'**
+  String get osAutoAssigned;
+
+  /// No description provided for @csAutoBalanceNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'يُحدَّد الرصيد تلقائياً من حركات الصندوق. راجع القيم ثم أكّد السحب.'**
+  String get csAutoBalanceNote;
+
+  /// No description provided for @printingStorageNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'البيانات تُخزَّن في جدول print_settings وتُطبَّق تلقائياً عند طباعة إيصال البيع بعد كل عملية.'**
+  String get printingStorageNote;
+
+  /// No description provided for @countryDjibouti.
+  ///
+  /// In ar, this message translates to:
+  /// **'جيبوتي'**
+  String get countryDjibouti;
+
+  /// No description provided for @countrySaudiArabia.
+  ///
+  /// In ar, this message translates to:
+  /// **'السعودية'**
+  String get countrySaudiArabia;
+
+  /// No description provided for @countryUAE.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإمارات'**
+  String get countryUAE;
+
+  /// No description provided for @countryKuwait.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكويت'**
+  String get countryKuwait;
+
+  /// No description provided for @countrySyria.
+  ///
+  /// In ar, this message translates to:
+  /// **'سوريا'**
+  String get countrySyria;
+
+  /// No description provided for @countryJordan.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأردن'**
+  String get countryJordan;
+
+  /// No description provided for @countryLebanon.
+  ///
+  /// In ar, this message translates to:
+  /// **'لبنان'**
+  String get countryLebanon;
+
+  /// No description provided for @countryEgypt.
+  ///
+  /// In ar, this message translates to:
+  /// **'مصر'**
+  String get countryEgypt;
+
+  /// No description provided for @countryTurkey.
+  ///
+  /// In ar, this message translates to:
+  /// **'تركيا'**
+  String get countryTurkey;
+
+  /// No description provided for @countryGermany.
+  ///
+  /// In ar, this message translates to:
+  /// **'ألمانيا'**
+  String get countryGermany;
+
+  /// No description provided for @countryUK.
+  ///
+  /// In ar, this message translates to:
+  /// **'المملكة المتحدة'**
+  String get countryUK;
+
+  /// No description provided for @countryUSA.
+  ///
+  /// In ar, this message translates to:
+  /// **'الولايات المتحدة'**
+  String get countryUSA;
 }
 
 class _AppLocalizationsDelegate

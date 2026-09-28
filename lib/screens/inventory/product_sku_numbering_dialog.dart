@@ -237,7 +237,9 @@ class _ProductSkuNumberingDialogState extends State<_ProductSkuNumberingDialog> 
                         ),
                         child: SwitchListTile(
                           contentPadding: EdgeInsets.zero,
-                          title: Text(_prefixEnabled ? 'مفعّل' : 'معطّل'),
+                          title: Text(_prefixEnabled
+                              ? AppLocalizations.of(context)!.enabledLabel
+                              : AppLocalizations.of(context)!.disabledLabel),
                           value: _prefixEnabled,
                           onChanged: (v) =>
                               setState(() => _prefixEnabled = v),
@@ -253,7 +255,7 @@ class _ProductSkuNumberingDialogState extends State<_ProductSkuNumberingDialog> 
                         ),
                       ),
                       _footer(
-                        'الرموز أو الأحرف التي تظهر قبل رقم المستند. يمكن أن تكون ثابتة مثل INV أو تتضمن سنة/شهراً حسب سياسة المتجر.',
+                        AppLocalizations.of(context)!.skuPrefixHint,
                         cs,
                       ),
                     ],

@@ -1837,7 +1837,9 @@ class _InvoiceSettingsScreenState extends State<_InvoiceSettingsScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('تعذر حفظ إعدادات الفواتير: $e'),
+            content: Text(
+              AppLocalizations.of(context)!.invoiceSettingsSaveFailed(e.toString()),
+            ),
             backgroundColor: Colors.redAccent,
             behavior: SnackBarBehavior.floating,
           ),
@@ -1865,8 +1867,10 @@ class _InvoiceSettingsScreenState extends State<_InvoiceSettingsScreen> {
                 if (!mounted) return;
                 if (ok) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('تم حفظ إعدادات الفواتير'),
+                    SnackBar(
+                      content: Text(
+                        AppLocalizations.of(context)!.invoiceSettingsSaved,
+                      ),
                       behavior: SnackBarBehavior.floating,
                     ),
                   );

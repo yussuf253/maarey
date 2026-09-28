@@ -26,9 +26,16 @@ class _LicenseExpiredScreenState extends State<LicenseExpiredScreen> {
     return '${d.day.toString().padLeft(2, '0')}/${d.month.toString().padLeft(2, '0')}/${d.year}';
   }
 
+  /// الرسالة القادمة من الخادم قد تكون بأي لغة؛ نطابق على الكلمات المفتاحية
+  /// المعروفة (عربي/إنجليزي) التي تشير لتجاوز حد الأجهزة.
   bool get _isDeviceLimitExceeded =>
       widget.state.status == LicenseStatus.suspended &&
-      (widget.state.message?.contains('الحد الأقصى') ?? false);
+      (widget.state.message?.contains('الحد الأقصى') ??
+          false ||
+      (widget.state.message?.toLowerCase().contains('device limit') ??
+          false) ||
+      (widget.state.message?.toLowerCase().contains('maximum devices') ??
+          false));
 
   bool get _isSuspended =>
       widget.state.status == LicenseStatus.suspended && !_isDeviceLimitExceeded;

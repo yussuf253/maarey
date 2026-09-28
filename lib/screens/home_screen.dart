@@ -1108,7 +1108,7 @@ class _HomeScreenState extends State<HomeScreen>
         _globalSearchLoading = false;
       });
     } catch (e, st) {
-      AppLogger.error('HomeSearch', 'فشل البحث الشامل', e, st);
+      AppLogger.error('HomeSearch', 'global search failed', e, st);
       if (!mounted) return;
       setState(() => _globalSearchLoading = false);
       ScaffoldMessenger.of(context).showSnackBar(

@@ -16003,4 +16003,268 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get statusVip => 'مميز';
+
+  @override
+  String get aiSuggestSalesSummary => 'ملخص المبيعات هذا الشهر';
+
+  @override
+  String get aiSuggestLowStock => 'ما المنتجات التي قد تنفد؟';
+
+  @override
+  String get aiSuggestPurchaseOrder => 'اقترح طلبية شراء';
+
+  @override
+  String get aiAgentWelcome =>
+      'أنا مساعد محلي لتحليل المبيعات والمخزون. اسألني عن أفضل المنتجات، خطر النفاد، أو توصيات الشراء.';
+
+  @override
+  String get aiAgentLocalNote => 'كل التحليل يتم من بيانات المتجر المحلية.';
+
+  @override
+  String aiAgentError(Object error) {
+    return 'لم أستطع إكمال التحليل الآن. تحقق من تحميل بيانات المتجر ثم جرّب مرة أخرى.\n$error';
+  }
+
+  @override
+  String get aiAgentSubtitle =>
+      'مساعد ذكي يقرأ المبيعات والمخزون محلياً ويقترح قرارات عملية.';
+
+  @override
+  String ctDeleteConfirmBody(Object name) {
+    return 'حذف «$name» من النظام؟';
+  }
+
+  @override
+  String ctShownCount(Object count) {
+    return 'المعروض: $count';
+  }
+
+  @override
+  String get ctFilterDebt => 'عليهم دين أو آجل';
+
+  @override
+  String get ctFilterDebtTooltip =>
+      'فواتير بيع آجل غير مرتجعة، أو رصيد مدين على الحساب — للاتصال بخصوص الدين.';
+
+  @override
+  String get ctFilterInstallments => 'عليهم أقساط';
+
+  @override
+  String get ctFilterInstallmentsTooltip =>
+      'لديهم خطة تقسيط مسجّلة — للاتصال بخصوص الأقساط.';
+
+  @override
+  String ctCreditSalesBadge(Object count) {
+    return 'بيع آجل ×$count';
+  }
+
+  @override
+  String ctInstallmentsBadge(Object count) {
+    return 'تقسيط ×$count';
+  }
+
+  @override
+  String monthlyRepeatDay(Object day) {
+    return 'يوم $day';
+  }
+
+  @override
+  String invDemoQtyInPieces(Object count) {
+    return '+$count قطعة';
+  }
+
+  @override
+  String invDemoQtyOutBoxes(Object count) {
+    return '-$count علبة';
+  }
+
+  @override
+  String invDemoQtyTransferBags(Object count) {
+    return '×$count كيس';
+  }
+
+  @override
+  String invDemoQtyInBottles(Object count) {
+    return '+$count زجاجة';
+  }
+
+  @override
+  String get invDemoMainWarehouse => 'المستودع الرئيسي';
+
+  @override
+  String get invDemoSalesWarehouse => 'مستودع المبيعات';
+
+  @override
+  String get invDemoInternalTransfer => 'تحويل داخلي';
+
+  @override
+  String get invDemoTodayTime => 'اليوم، 10:30';
+
+  @override
+  String get invDemoYesterdayTime => 'أمس، 14:15';
+
+  @override
+  String get invDemoYesterdayMorning => 'أمس، 09:00';
+
+  @override
+  String get invDemoMonday => 'الإثنين';
+
+  @override
+  String get invDemoRiceName => 'رز الحياني 5 كيلو';
+
+  @override
+  String get invDemoWaterName => 'مياه نون 1.5L';
+
+  @override
+  String poAutoAddMsg(Object added) {
+    return 'تمت إضافة $added صنفاً من المخزون المنخفض/النافض. عُدّل الكميات ثم احفظ.';
+  }
+
+  @override
+  String poAutoAddSkipped(Object skipped) {
+    return ' (تُجاهل $skipped مكرراً)';
+  }
+
+  @override
+  String poAutoAddTruncated(Object max) {
+    return ' — عُرض أول $max صنفاً فقط.';
+  }
+
+  @override
+  String get poSearchHint => 'بحث باسم المورد أو رقم الأمر أو التاريخ…';
+
+  @override
+  String poReceivedOfTotal(Object received, Object total) {
+    return 'مستلم $received من $total';
+  }
+
+  @override
+  String poTotalValue(Object value) {
+    return 'القيمة الكلية: $value';
+  }
+
+  @override
+  String instTwoItemsJoin(Object a, Object b) {
+    return '$a، $b';
+  }
+
+  @override
+  String blQtyKg(Object qty) {
+    return '$qty كغم';
+  }
+
+  @override
+  String qpuSelected(Object name) {
+    return 'تم اختيار: $name';
+  }
+
+  @override
+  String qpuLoadMoreFailed(Object error) {
+    return 'تعذّر تحميل المزيد: $error';
+  }
+
+  @override
+  String qpuSaveFailed(Object error) {
+    return 'تعذّر الحفظ: $error';
+  }
+
+  @override
+  String get qpuTrackingDisabledNote =>
+      'تتبع المخزون معطّل لهذا الصنف — الكمية من قاعدة البيانات تبقى كما هي عند الحفظ.';
+
+  @override
+  String qpuNumberLabel(Object id) {
+    return 'رقم $id';
+  }
+
+  @override
+  String get skuPrefixHint =>
+      'الرموز أو الأحرف التي تظهر قبل رقم المستند. يمكن أن تكون ثابتة مثل INV أو تتضمن سنة/شهراً حسب سياسة المتجر.';
+
+  @override
+  String get posPaletteRoyal => 'كحلي ملكي — ذهبي — عاجي (الافتراضي)';
+
+  @override
+  String get posPaletteMidnight => 'منتصف ليل — فضي — رمادي فاتح';
+
+  @override
+  String get posPaletteOcean => 'محيط — رملي ذهبي — كريمي';
+
+  @override
+  String get posPaletteForest => 'غابة — برونزي — نعناعي فاتح';
+
+  @override
+  String get posPaletteWine => 'نبيذي — ذهبي دافئ — أبيض وردي';
+
+  @override
+  String get posPaletteCharcoal => 'فحمي — عنبر — أبيض مزرق';
+
+  @override
+  String get posPaletteSlate => 'أردوازي — سماوي — أبيض بارد';
+
+  @override
+  String get posPaletteCopper => 'نحاسي — نحاس محمر — رمل';
+
+  @override
+  String get posPaletteCustom => 'مخصص — استوديو ألوان تفاعلي';
+
+  @override
+  String posTextScalePercent(Object percent) {
+    return '$percent٪';
+  }
+
+  @override
+  String invoiceSettingsSaveFailed(Object error) {
+    return 'تعذر حفظ إعدادات الفواتير: $error';
+  }
+
+  @override
+  String get invoiceSettingsSaved => 'تم حفظ إعدادات الفواتير';
+
+  @override
+  String get osAutoAssigned => 'يُحدَّد تلقائياً';
+
+  @override
+  String get csAutoBalanceNote =>
+      'يُحدَّد الرصيد تلقائياً من حركات الصندوق. راجع القيم ثم أكّد السحب.';
+
+  @override
+  String get printingStorageNote =>
+      'البيانات تُخزَّن في جدول print_settings وتُطبَّق تلقائياً عند طباعة إيصال البيع بعد كل عملية.';
+
+  @override
+  String get countryDjibouti => 'جيبوتي';
+
+  @override
+  String get countrySaudiArabia => 'السعودية';
+
+  @override
+  String get countryUAE => 'الإمارات';
+
+  @override
+  String get countryKuwait => 'الكويت';
+
+  @override
+  String get countrySyria => 'سوريا';
+
+  @override
+  String get countryJordan => 'الأردن';
+
+  @override
+  String get countryLebanon => 'لبنان';
+
+  @override
+  String get countryEgypt => 'مصر';
+
+  @override
+  String get countryTurkey => 'تركيا';
+
+  @override
+  String get countryGermany => 'ألمانيا';
+
+  @override
+  String get countryUK => 'المملكة المتحدة';
+
+  @override
+  String get countryUSA => 'الولايات المتحدة';
 }

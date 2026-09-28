@@ -73,20 +73,37 @@ class _SignUpScreenState extends State<SignUpScreen>
   late Animation<double>   _fadeAnim;
 
   // ── Country codes ───────────────────────────────────────────────────────
+  // الأسماء تُعرض من الترجمات؛ الـ code هو المعرف الثابت.
   static const _countryCodes = [
-    {'flag': '🇩🇯', 'name': 'جيبوتي',         'code': '+253'},
-    {'flag': '🇸🇦', 'name': 'السعودية',        'code': '+966'},
-    {'flag': '🇦🇪', 'name': 'الإمارات',        'code': '+971'},
-    {'flag': '🇰🇼', 'name': 'الكويت',          'code': '+965'},
-    {'flag': '🇸🇾', 'name': 'سوريا',           'code': '+963'},
-    {'flag': '🇯🇴', 'name': 'الأردن',          'code': '+962'},
-    {'flag': '🇱🇧', 'name': 'لبنان',           'code': '+961'},
-    {'flag': '🇪🇬', 'name': 'مصر',             'code': '+20'},
-    {'flag': '🇹🇷', 'name': 'تركيا',           'code': '+90'},
-    {'flag': '🇩🇪', 'name': 'ألمانيا',         'code': '+49'},
-    {'flag': '🇬🇧', 'name': 'المملكة المتحدة', 'code': '+44'},
-    {'flag': '🇺🇸', 'name': 'الولايات المتحدة','code': '+1'},
+    {'flag': '🇩🇯', 'code': '+253'},
+    {'flag': '🇸🇦', 'code': '+966'},
+    {'flag': '🇦🇪', 'code': '+971'},
+    {'flag': '🇰🇼', 'code': '+965'},
+    {'flag': '🇸🇾', 'code': '+963'},
+    {'flag': '🇯🇴', 'code': '+962'},
+    {'flag': '🇱🇧', 'code': '+961'},
+    {'flag': '🇪🇬', 'code': '+20'},
+    {'flag': '🇹🇷', 'code': '+90'},
+    {'flag': '🇩🇪', 'code': '+49'},
+    {'flag': '🇬🇧', 'code': '+44'},
+    {'flag': '🇺🇸', 'code': '+1'},
   ];
+
+  static String _countryName(String code, AppLocalizations loc) => switch (code) {
+    '+253' => loc.countryDjibouti,
+    '+966' => loc.countrySaudiArabia,
+    '+971' => loc.countryUAE,
+    '+965' => loc.countryKuwait,
+    '+963' => loc.countrySyria,
+    '+962' => loc.countryJordan,
+    '+961' => loc.countryLebanon,
+    '+20'  => loc.countryEgypt,
+    '+90'  => loc.countryTurkey,
+    '+49'  => loc.countryGermany,
+    '+44'  => loc.countryUK,
+    '+1'   => loc.countryUSA,
+    _      => code,
+  };
 
   @override
   void initState() {
@@ -509,7 +526,9 @@ class _SignUpScreenState extends State<SignUpScreen>
               items: _countryCodes
                   .map((c) => DropdownMenuItem<String>(
                         value: c['code'],
-                        child: Text('${c['flag']}  ${c['code']}',
+                        child: Text(
+                            '${c['flag']}  ${c['code']}'
+                            '  ${_countryName(c['code']!, _loc)}',
                             style: const TextStyle(fontSize: 13)),
                       ))
                   .toList(),

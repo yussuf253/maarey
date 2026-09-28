@@ -16154,4 +16154,269 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get statusVip => 'VIP';
+
+  @override
+  String get aiSuggestSalesSummary => 'Sales summary this month';
+
+  @override
+  String get aiSuggestLowStock => 'Which products might run out?';
+
+  @override
+  String get aiSuggestPurchaseOrder => 'Suggest a purchase order';
+
+  @override
+  String get aiAgentWelcome =>
+      'I am a local assistant for sales and inventory analysis. Ask me about best-selling products, stockout risk, or purchase recommendations.';
+
+  @override
+  String get aiAgentLocalNote =>
+      'All analysis runs on your store\'s local data.';
+
+  @override
+  String aiAgentError(Object error) {
+    return 'I couldn\'t complete the analysis right now. Make sure store data is loaded, then try again.\n$error';
+  }
+
+  @override
+  String get aiAgentSubtitle =>
+      'Smart assistant that reads your sales and inventory locally and suggests practical decisions.';
+
+  @override
+  String ctDeleteConfirmBody(Object name) {
+    return 'Delete “$name” from the system?';
+  }
+
+  @override
+  String ctShownCount(Object count) {
+    return 'Showing: $count';
+  }
+
+  @override
+  String get ctFilterDebt => 'With debt or credit';
+
+  @override
+  String get ctFilterDebtTooltip =>
+      'Unreturned credit sales invoices, or a debit balance on the account — for debt collection calls.';
+
+  @override
+  String get ctFilterInstallments => 'With installments';
+
+  @override
+  String get ctFilterInstallmentsTooltip =>
+      'They have a registered installment plan — for installment follow-up calls.';
+
+  @override
+  String ctCreditSalesBadge(Object count) {
+    return 'Credit sale ×$count';
+  }
+
+  @override
+  String ctInstallmentsBadge(Object count) {
+    return 'Installment ×$count';
+  }
+
+  @override
+  String monthlyRepeatDay(Object day) {
+    return 'Day $day';
+  }
+
+  @override
+  String invDemoQtyInPieces(Object count) {
+    return '+$count pcs';
+  }
+
+  @override
+  String invDemoQtyOutBoxes(Object count) {
+    return '-$count boxes';
+  }
+
+  @override
+  String invDemoQtyTransferBags(Object count) {
+    return '×$count bags';
+  }
+
+  @override
+  String invDemoQtyInBottles(Object count) {
+    return '+$count bottles';
+  }
+
+  @override
+  String get invDemoMainWarehouse => 'Main warehouse';
+
+  @override
+  String get invDemoSalesWarehouse => 'Sales warehouse';
+
+  @override
+  String get invDemoInternalTransfer => 'Internal transfer';
+
+  @override
+  String get invDemoTodayTime => 'Today, 10:30';
+
+  @override
+  String get invDemoYesterdayTime => 'Yesterday, 14:15';
+
+  @override
+  String get invDemoYesterdayMorning => 'Yesterday, 09:00';
+
+  @override
+  String get invDemoMonday => 'Monday';
+
+  @override
+  String get invDemoRiceName => 'Anbar rice 5kg';
+
+  @override
+  String get invDemoWaterName => 'Nun water 1.5L';
+
+  @override
+  String poAutoAddMsg(Object added) {
+    return 'Added $added items from low/out-of-stock inventory. Adjust quantities then save.';
+  }
+
+  @override
+  String poAutoAddSkipped(Object skipped) {
+    return ' (ignored $skipped duplicates)';
+  }
+
+  @override
+  String poAutoAddTruncated(Object max) {
+    return ' — only the first $max items are shown.';
+  }
+
+  @override
+  String get poSearchHint => 'Search by supplier name, order number or date…';
+
+  @override
+  String poReceivedOfTotal(Object received, Object total) {
+    return 'Received $received of $total';
+  }
+
+  @override
+  String poTotalValue(Object value) {
+    return 'Total value: $value';
+  }
+
+  @override
+  String instTwoItemsJoin(Object a, Object b) {
+    return '$a, $b';
+  }
+
+  @override
+  String blQtyKg(Object qty) {
+    return '$qty kg';
+  }
+
+  @override
+  String qpuSelected(Object name) {
+    return 'Selected: $name';
+  }
+
+  @override
+  String qpuLoadMoreFailed(Object error) {
+    return 'Couldn\'t load more: $error';
+  }
+
+  @override
+  String qpuSaveFailed(Object error) {
+    return 'Couldn\'t save: $error';
+  }
+
+  @override
+  String get qpuTrackingDisabledNote =>
+      'Inventory tracking is disabled for this item — the database quantity stays unchanged on save.';
+
+  @override
+  String qpuNumberLabel(Object id) {
+    return '#$id';
+  }
+
+  @override
+  String get skuPrefixHint =>
+      'Symbols or letters shown before the document number. They can be fixed like INV or include a year/month depending on store policy.';
+
+  @override
+  String get posPaletteRoyal => 'Royal navy — gold — ivory (default)';
+
+  @override
+  String get posPaletteMidnight => 'Midnight — silver — light gray';
+
+  @override
+  String get posPaletteOcean => 'Ocean — sandy gold — cream';
+
+  @override
+  String get posPaletteForest => 'Forest — bronze — light mint';
+
+  @override
+  String get posPaletteWine => 'Wine — warm gold — blush white';
+
+  @override
+  String get posPaletteCharcoal => 'Charcoal — amber — bluish white';
+
+  @override
+  String get posPaletteSlate => 'Slate — sky — cool white';
+
+  @override
+  String get posPaletteCopper => 'Copper — reddish brass — sand';
+
+  @override
+  String get posPaletteCustom => 'Custom — interactive color studio';
+
+  @override
+  String posTextScalePercent(Object percent) {
+    return '$percent%';
+  }
+
+  @override
+  String invoiceSettingsSaveFailed(Object error) {
+    return 'Couldn\'t save invoice settings: $error';
+  }
+
+  @override
+  String get invoiceSettingsSaved => 'Invoice settings saved';
+
+  @override
+  String get osAutoAssigned => 'Auto-assigned';
+
+  @override
+  String get csAutoBalanceNote =>
+      'The balance is filled automatically from cash movements. Review the values then confirm the withdrawal.';
+
+  @override
+  String get printingStorageNote =>
+      'Data is stored in the print_settings table and applied automatically when printing a sales receipt after each transaction.';
+
+  @override
+  String get countryDjibouti => 'Djibouti';
+
+  @override
+  String get countrySaudiArabia => 'Saudi Arabia';
+
+  @override
+  String get countryUAE => 'United Arab Emirates';
+
+  @override
+  String get countryKuwait => 'Kuwait';
+
+  @override
+  String get countrySyria => 'Syria';
+
+  @override
+  String get countryJordan => 'Jordan';
+
+  @override
+  String get countryLebanon => 'Lebanon';
+
+  @override
+  String get countryEgypt => 'Egypt';
+
+  @override
+  String get countryTurkey => 'Turkey';
+
+  @override
+  String get countryGermany => 'Germany';
+
+  @override
+  String get countryUK => 'United Kingdom';
+
+  @override
+  String get countryUSA => 'United States';
 }

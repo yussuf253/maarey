@@ -658,9 +658,10 @@ class _BarcodeLabelsScreenState extends State<BarcodeLabelsScreen> {
   }
 
   String _qtyLine(Map<String, dynamic> r) {
+    final loc = AppLocalizations.of(context)!;
     final isWeight = ((r['stockBaseKind'] as num?)?.toInt() ?? 0) == 1;
     final q = (r['qty'] as num?)?.toDouble() ?? 0;
-    if (isWeight) return '${q.toStringAsFixed(2)} كغم';
+    if (isWeight) return loc.blQtyKg(q.toStringAsFixed(2));
     final w = q == q.roundToDouble();
     return w ? '${q.round()}' : q.toStringAsFixed(2);
   }

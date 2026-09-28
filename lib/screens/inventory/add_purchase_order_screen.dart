@@ -243,6 +243,8 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
   Future<void> _appendLowStockProductLines() async {
     final tid = _tenant.activeTenantId;
 
+    final loc = AppLocalizations.of(context)!;
+
     final db = await _db.database;
 
     List<Map<String, dynamic>> rows;
@@ -378,16 +380,14 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
       return;
     }
 
-    var msg =
-
-        'تمت إضافة $added صنفاً من المخزون المنخفض/النافض. عُدّل الكميات ثم احفظ.';
+    var msg = loc.poAutoAddMsg(added);
 
     if (skippedDup > 0) {
-      msg += ' (تُجاهل $skippedDup مكرراً)';
+      msg += loc.poAutoAddSkipped(skippedDup);
     }
 
     if (truncated) {
-      msg += ' — عُرض أول $_kMaxAutoPoLines صنفاً فقط.';
+      msg += loc.poAutoAddTruncated(_kMaxAutoPoLines);
     }
 
     _snack(msg);
@@ -527,7 +527,8 @@ class _AddPurchaseOrderScreenState extends State<AddPurchaseOrderScreen> {
     } catch (e) {
       if (!mounted) return;
 
-      _snack('حدث خطأ: $e', error: true);
+      _snack(AppLocalizations.of(context)!.errorOccurred(e.toString()),
+          error: true);
     } finally {
       if (mounted) setState(() => _saving = false);
     }

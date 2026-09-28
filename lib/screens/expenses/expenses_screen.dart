@@ -526,6 +526,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
 }
 
 /// أيقونة اختيار سريعة تظهر مع الفئات في فلتر القائمة.
+/// ملاحظة: تُطابق أسماء الفئات كما تُخزَّن في قاعدة البيانات (قيم بيانات وليست نصوص واجهة).
 String _ledgerFilterEmojiForCategoryName(String name) {
   switch (name) {
     case 'رواتب':

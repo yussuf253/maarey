@@ -1062,7 +1062,7 @@ class _ShiftStaffIdentityDialogState extends State<_ShiftStaffIdentityDialog> {
                           style: const TextStyle(color: Color(0xFFF8FAFC)),
                           decoration: inputDecoration(
                             labelText: '${_loc.osDisplayName}',
-                            hintText: 'يُحدَّد تلقائياً',
+                            hintText: _loc.osAutoAssigned,
                             prefixIcon: Icons.account_circle_outlined,
                           ),
                         ),

@@ -229,7 +229,7 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
     setState(() => _loading = false);
 
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('تم اختيار: ${row['name']}')),
+      SnackBar(content: Text(loc.qpuSelected(row['name'] ?? ''))),
     );
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -318,7 +318,7 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           backgroundColor: Theme.of(context).colorScheme.error,
-          content: Text('تعذّر التحميل: $e'),
+          content: Text(loc.loadFailed(e.toString())),
         ),
       );
     }
@@ -361,7 +361,7 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           backgroundColor: Theme.of(context).colorScheme.error,
-          content: Text('تعذّر تحميل المزيد: $e'),
+          content: Text(loc.qpuLoadMoreFailed(e.toString())),
         ),
       );
     }
@@ -606,7 +606,7 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           backgroundColor: Theme.of(context).colorScheme.error,
-          content: Text('تعذّر الحفظ: $e'),
+          content: Text(loc.qpuSaveFailed(e.toString())),
         ),
       );
     }
@@ -849,9 +849,7 @@ class _QuickProductUpdateScreenState extends State<QuickProductUpdateScreen> {
                   bottom: 8,
                 ),
                 child: Text(
-                  'في هذه الصفحة: قارئ الباركود (HID) يبحث عن المنتج هنا ولا يُوجَّه للبيع. '
-
-                  'مرّر للأسفل لتحميل المزيد.',
+                  loc.scannerSearchNote,
                   style: TextStyle(
                       fontSize: 12, color: cs.onSurfaceVariant, height: 1.35),
                 ),
@@ -1293,7 +1291,7 @@ class _QuickProductCardState extends State<_QuickProductCard> {
 
     final stockKind = (widget.row['stockBaseKind'] as num?)?.toInt() ?? 0;
 
-    final unitSuffix = stockKind == 1 ? 'كجم' : 'قطعة';
+    final unitSuffix = stockKind == 1 ? loc.kgUnit : loc.pieceUnit;
 
     final buyI = NumericFormat.parseNumber(d.buy.text);
 
@@ -1320,12 +1318,12 @@ class _QuickProductCardState extends State<_QuickProductCard> {
     String qtyWarn = '';
 
     if (d.track && qtyI <= 0) {
-      qtyWarn = 'المنتج نفذ من المخزون';
+      qtyWarn = loc.outOfStockWarning;
     }
 
     final lowWarn = (d.track && lowI > 0 && qtyI <= lowI && qtyI >= 0)
 
-        ? 'الكمية وصلت لحد التنبيه'
+        ? loc.lowStockWarning
 
         : '';
 
@@ -1585,7 +1583,7 @@ class _QuickProductCardState extends State<_QuickProductCard> {
 
                     Expanded(
                       child: Text(
-                        'رقم ${widget.row['id']}',
+                        loc.qpuNumberLabel(widget.row['id'] ?? ''),
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
                           color: cs.primary,
@@ -1607,7 +1605,7 @@ class _QuickProductCardState extends State<_QuickProductCard> {
 
                   const SizedBox(height: 4),
                   Text(
-                    'التصنيف: $cat',
+                    loc.categoryLabel(cat),
                     style: TextStyle(
                         fontSize: 12, color: cs.onSurfaceVariant),
                   ),
@@ -1625,7 +1623,7 @@ class _QuickProductCardState extends State<_QuickProductCard> {
                   Padding(
                     padding: const EdgeInsets.only(top: 6),
                     child: Text(
-                      'تتبع المخزون معطّل لهذا الصنف — الكمية من قاعدة البيانات تبقى كما هي عند الحفظ.',
+                      loc.qpuTrackingDisabledNote,
                       style:
 
                           TextStyle(fontSize: 11, color: cs.outline),

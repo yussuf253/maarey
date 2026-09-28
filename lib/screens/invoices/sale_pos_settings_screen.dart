@@ -20,26 +20,26 @@ class SalePosSettingsScreen extends StatelessWidget {
   /// وضع «مظهر التطبيق» من الإعدادات العامة — يخفي أقسام سياسة البيع.
   final bool appearanceOnly;
 
-  static String _paletteTitle(String id) {
+  static String _paletteTitle(String id, AppLocalizations loc) {
     switch (id) {
       case SalePaletteIds.royal:
-        return 'كحلي ملكي — ذهبي — عاجي (الافتراضي)';
+        return loc.posPaletteRoyal;
       case SalePaletteIds.midnight:
-        return 'منتصف ليل — فضي — رمادي فاتح';
+        return loc.posPaletteMidnight;
       case SalePaletteIds.ocean:
-        return 'محيط — رملي ذهبي — كريمي';
+        return loc.posPaletteOcean;
       case SalePaletteIds.forest:
-        return 'غابة — برونزي — نعناعي فاتح';
+        return loc.posPaletteForest;
       case SalePaletteIds.wine:
-        return 'نبيذي — ذهبي دافئ — أبيض وردي';
+        return loc.posPaletteWine;
       case SalePaletteIds.charcoal:
-        return 'فحمي — عنبر — أبيض مزرق';
+        return loc.posPaletteCharcoal;
       case SalePaletteIds.slate:
-        return 'أردوازي — سماوي — أبيض بارد';
+        return loc.posPaletteSlate;
       case SalePaletteIds.copper:
-        return 'نحاسي — نحاس محمر — رمل';
+        return loc.posPaletteCopper;
       case SalePaletteIds.custom:
-        return 'مخصص — استوديو ألوان تفاعلي';
+        return loc.posPaletteCustom;
       default:
         return id;
     }
@@ -351,13 +351,21 @@ class SalePosSettingsScreen extends StatelessWidget {
                                 ...SalePaletteIds.builtIn.map(
                                   (id) => DropdownMenuItem(
                                     value: id,
-                                    child: Text(_paletteTitle(id)),
+                                    child: Text(
+                                      _paletteTitle(
+                                        id,
+                                        AppLocalizations.of(context)!,
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 DropdownMenuItem(
                                   value: SalePaletteIds.custom,
                                   child: Text(
-                                    _paletteTitle(SalePaletteIds.custom),
+                                    _paletteTitle(
+                                      SalePaletteIds.custom,
+                                      AppLocalizations.of(context)!,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -383,7 +391,10 @@ class SalePosSettingsScreen extends StatelessWidget {
                           children: [
                             for (final id in SalePaletteIds.builtIn)
                               _MiniPaletteSwatch(
-                                label: _paletteTitle(id).split(' —').first,
+                                label: _paletteTitle(
+                                  id,
+                                  AppLocalizations.of(context)!,
+                                ).split(' —').first,
                                 paletteId: id,
                                 selected: d.salePaletteId == id,
                                 onTap: () => prov.save(
@@ -579,7 +590,9 @@ class SalePosSettingsScreen extends StatelessWidget {
                           ),
                           const Spacer(),
                           Text(
-                            '${(d.appTextScale * 100).round()}٪',
+                            AppLocalizations.of(context)!.posTextScalePercent(
+                              (d.appTextScale * 100).round(),
+                            ),
                             style: TextStyle(
                               fontWeight: FontWeight.w700,
                               fontSize: 13,

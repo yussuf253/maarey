@@ -49,8 +49,9 @@ String _formatInvoiceItemsBrief(BuildContext context, Invoice? inv) {
   }
   final a = trimName(items[0].productName);
   final b = trimName(items[1].productName);
-  if (items.length == 2) return '$a، $b';
-  return '$a، $b + ${_numFmt.format(items.length - 2)} ${loc.instItemFallback}';
+  if (items.length == 2) return loc.instTwoItemsJoin(a, b);
+  return loc.instTwoItemsJoin(a, b) +
+      ' + ${_numFmt.format(items.length - 2)} ${loc.instItemFallback}';
 }
 
 /// قائمة خطط التقسيط مع تصفية وبحث وملخص أعلى الصفحة.

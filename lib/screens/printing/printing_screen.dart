@@ -368,7 +368,7 @@ class _PrintingScreenState extends State<PrintingScreen> {
                 ),
                 const SizedBox(height: 24),
                 Text(
-                  'البيانات تُخزَّن في جدول print_settings وتُطبَّق تلقائياً عند طباعة إيصال البيع بعد كل عملية.',
+                  AppLocalizations.of(context)!.printingStorageNote,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 12,

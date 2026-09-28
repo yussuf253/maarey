@@ -426,6 +426,7 @@ class ExpenseReportPrinter {
     required Map<String, List<ExpenseEntry>> byCategory,
     required _PdfLabels labels,
   }) {
+    // مفاتيح الفئات هنا هي أسماء فئات مخزّنة في قاعدة البيانات (بيانات)، وليست نصوص واجهة.
     final widgets = <pw.Widget>[];
     for (final key in categoriesOrder) {
       final list = byCategory[key]!;

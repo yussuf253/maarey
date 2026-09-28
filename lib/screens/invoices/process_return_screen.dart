@@ -26,7 +26,7 @@ class ProcessReturnScreen extends StatefulWidget {
     this.invoiceId,
   }) : assert(
           originalInvoice != null || invoiceId != null,
-          'مرّر originalInvoice أو invoiceId',
+          'originalInvoice or invoiceId is required',
         );
 
   /// إن وُجدت تُستخدم مباشرة (بدون طلب شبكة).

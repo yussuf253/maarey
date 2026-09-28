@@ -35,12 +35,12 @@ class _PoStatus {
 
   static const cancelled = 'cancelled';
 
-  static String label(String s) => switch (s) {
-    draft    => 'مسودة',
-    sent     => 'مرسل',
-    partial  => 'مستلم جزئياً',
-    received => 'مكتمل',
-    cancelled => 'ملغى',
+  static String label(String s, AppLocalizations loc) => switch (s) {
+    draft    => loc.draftStatus,
+    sent     => loc.sentStatus,
+    partial  => loc.partialStatus,
+    received => loc.receivedStatus,
+    cancelled => loc.cancelledStatus,
     _ => s,
   };
 
@@ -392,7 +392,9 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                               Align(
                                 alignment: AlignmentDirectional.centerStart,
                                 child: Text(
-                                  'القيمة الكلية: ${IraqiCurrencyFormat.formatIqd(totalValue)}',
+                                  loc.poTotalValue(
+                                    IraqiCurrencyFormat.formatIqd(totalValue),
+                                  ),
                                   style: TextStyle(
                                     color: Colors.white.withOpacity(0.9),
                                     fontSize: 12,
@@ -419,7 +421,7 @@ class _PurchaseOrdersScreenState extends State<PurchaseOrdersScreen> {
                               focusNode: _searchFocus,
                               textAlign: TextAlign.right,
                               decoration: InputDecoration(
-                                hintText: 'بحث باسم المورد أو رقم الأمر أو التاريخ…',
+                                hintText: loc.poSearchHint,
                                 prefixIcon: const Icon(Icons.search, size: 20),
                                 suffixIcon: _search.text.trim().isEmpty
 
@@ -706,7 +708,7 @@ class _StatusFilterDropdown extends StatelessWidget {
         dropdownColor: cs.surface,
         items: [
 
-          _statusItem('all', 'الكل', _kBlue),
+          _statusItem('all', loc.all, _kBlue),
           _statusItem(_PoStatus.draft, loc.draftStatus, Colors.grey),
           _statusItem(_PoStatus.sent, loc.sentStatus, _kAmber),
           _statusItem(_PoStatus.partial, loc.partialStatus, _kOrange),
@@ -811,7 +813,7 @@ class _PoCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Text(
-                    _PoStatus.label(status),
+                    _PoStatus.label(status, loc),
                     style: TextStyle(
                       color: _PoStatus.color(status),
                       fontSize: 11,
@@ -855,7 +857,10 @@ class _PoCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'مستلم ${IraqiCurrencyFormat.formatIqd(received)} من ${IraqiCurrencyFormat.formatIqd(total)}',
+                        loc.poReceivedOfTotal(
+                          IraqiCurrencyFormat.formatIqd(received),
+                          IraqiCurrencyFormat.formatIqd(total),
+                        ),
                         style: TextStyle(fontSize: 11, color: Colors.grey.shade500),
                       ),
                     ],
@@ -868,7 +873,7 @@ class _PoCard extends StatelessWidget {
 
                     Text(IraqiCurrencyFormat.formatIqd(total),
                         style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-                    Text('${po['itemCount'] ?? 0} صنف',
+                    Text(loc.itemCount(po['itemCount'] ?? 0),
                         style: TextStyle(fontSize: 11, color: Colors.grey.shade500)),
                   ],
                 ),
@@ -924,7 +929,7 @@ class _PoEmptyState extends StatelessWidget {
             Icon(Icons.receipt_long_outlined, size: 72, color: textSec),
             const SizedBox(height: 12),
             Text(
-              hasAny ? 'لا توجد نتائج تطابق البحث' : 'لا توجد أوامر شراء بعد',
+              hasAny ? loc.noResults : loc.noPurchaseOrdersYet,
               textAlign: TextAlign.center,
               style: TextStyle(color: textSec, fontSize: 14),
             ),

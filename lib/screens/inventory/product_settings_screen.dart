@@ -43,7 +43,19 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
 
   String _hintProductCode = 'N1-…';
 
+  /// قيم مخزّنة في قاعدة البيانات (لا تُترجم) — العرض يُترجم عبر [_taxLabel].
   static const _taxChoices = <String>['معفى', '5', '10', '15', 'مخصص'];
+
+  String _taxLabel(String value) {
+    switch (value) {
+      case 'معفى':
+        return _loc.psTaxExempt;
+      case 'مخصص':
+        return _loc.psCustomTax;
+      default:
+        return value;
+    }
+  }
 
   @override
 
@@ -1076,7 +1088,8 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                     decoration: const InputDecoration(border: OutlineInputBorder()),
                     items: _taxChoices
 
-                        .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                        .map((e) => DropdownMenuItem(
+                            value: e, child: Text(_taxLabel(e))))
 
                         .toList(),
                     onChanged: (v) {
@@ -1114,7 +1127,8 @@ class _ProductSettingsScreenState extends State<ProductSettingsScreen> {
                     decoration: const InputDecoration(border: OutlineInputBorder()),
                     items: _taxChoices
 
-                        .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                        .map((e) => DropdownMenuItem(
+                            value: e, child: Text(_taxLabel(e))))
 
                         .toList(),
                     onChanged: (v) {

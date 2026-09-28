@@ -523,11 +523,11 @@ class _ModuleCardState extends State<_ModuleCard> {
 class _RecentMovements extends StatelessWidget {
   const _RecentMovements();
 
-  static const _movements = [
-    ('in',       'Pringles-1250',          '+50 قطعة',  'المستودع الرئيسي', 'اليوم، 10:30'),
-    ('out',      'Coca-Cola 330ml',         '-20 علبة',  'مستودع المبيعات',  'أمس، 14:15'),
-    ('transfer', 'رز الحياني 5 كيلو',      '×30 كيس',   'تحويل داخلي',      'أمس، 09:00'),
-    ('in',       'Pepsi 500ml',            '+100 زجاجة', 'المستودع الرئيسي', 'الإثنين'),
+  List<(String, String, String, String, String)> _movements(AppLocalizations loc) => [
+    ('in',       'Pringles-1250',          loc.invDemoQtyInPieces(50),  loc.invDemoMainWarehouse, loc.invDemoTodayTime),
+    ('out',      'Coca-Cola 330ml',        loc.invDemoQtyOutBoxes(20),  loc.invDemoSalesWarehouse, loc.invDemoYesterdayTime),
+    ('transfer', loc.invDemoRiceName,      loc.invDemoQtyTransferBags(30), loc.invDemoInternalTransfer, loc.invDemoYesterdayMorning),
+    ('in',       'Pepsi 500ml',            loc.invDemoQtyInBottles(100), loc.invDemoMainWarehouse, loc.invDemoMonday),
   ];
 
   @override
@@ -568,7 +568,7 @@ class _RecentMovements extends StatelessWidget {
               ],
             ),
           ),
-          for (final m in _movements)
+          for (final m in _movements(loc))
             _MoveTile(type: m.$1, name: m.$2, qty: m.$3, locLabel: m.$4, date: m.$5),
         ],
       ),
