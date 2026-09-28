@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen>
   bool _obscurePassword = true;
   bool _obscureSignupPassword = true;
   bool _obscureConfirmSignupPassword = true;
-  final String _dialCode = '+964';
+  final String _dialCode = '+253';
 
   late AnimationController _animController;
   late Animation<double> _slideAnim;
@@ -97,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen>
   bool get _signupSubmissionReady {
     if (_nameController.text.trim().length < 3) return false;
     if (!_emailFormatOk(_emailController.text.trim())) return false;
-    if (!_iraqMobileOk(_phoneController.text.trim())) return false;
+    if (!_djiboutiMobileOk(_phoneController.text.trim())) return false;
     if (!_allPasswordRequirementsMet) return false;
     final c = _confirmSignupPasswordController.text;
     if (c.isEmpty || c != _signupPasswordController.text) return false;
@@ -112,8 +112,8 @@ class _LoginScreenState extends State<LoginScreen>
     ).hasMatch(t.trim());
   }
 
-  /// جوال عراقي محلي: 11 رقماً يبدأ بـ 07 (بدون +964 في هذا الحقل).
-  bool _iraqMobileOk(String raw) => RegExp(r'^07\d{9}$').hasMatch(raw.trim());
+  /// جوال جيبوتي محلي: 8 أرقام تبدأ بـ 6/7/8 (بدون +253 في هذا الحقل).
+  bool _djiboutiMobileOk(String raw) => RegExp(r'^[678]\d{7}$').hasMatch(raw.trim());
 
   bool get _passwordsMatch =>
       _confirmSignupPasswordController.text.isNotEmpty &&
@@ -752,10 +752,10 @@ class _LoginScreenState extends State<LoginScreen>
     );
   }
 
-  Widget _iraqDialChip() {
+  Widget _djiboutiDialChip() {
     final loc = AppLocalizations.of(context)!;
     return Tooltip(
-      message: loc.iraqDialTooltip,
+      message: loc.djiboutiDialTooltip,
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -778,7 +778,7 @@ class _LoginScreenState extends State<LoginScreen>
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Text(
-                  '🇮🇶',
+                  '🇩🇯',
                   style: TextStyle(
                     fontSize: 22,
                     height: 1,
@@ -786,7 +786,7 @@ class _LoginScreenState extends State<LoginScreen>
                   ),
                 ),
                 const SizedBox(width: 8),
-                const Text('+964', style: TextStyle(color: Colors.white)),
+                const Text('+253', style: TextStyle(color: Colors.white)),
                 Icon(
                   Icons.keyboard_arrow_down_rounded,
                   color: Colors.white.withValues(alpha: 0.85),
@@ -820,8 +820,8 @@ class _LoginScreenState extends State<LoginScreen>
     String? validateSignupPhone(String? value) {
       final raw = (value ?? '').trim();
       if (!_blurredSignupPhone) return null;
-      if (!_iraqMobileOk(raw)) {
-        return loc.iraqMobileInvalid;
+      if (!_djiboutiMobileOk(raw)) {
+        return loc.djiboutiMobileInvalid;
       }
       return null;
     }
@@ -939,13 +939,13 @@ class _LoginScreenState extends State<LoginScreen>
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _iraqDialChip(),
+                _djiboutiDialChip(),
                 const SizedBox(width: 10),
                 Expanded(
                   child: AppInput(
                     label: ' ',
                     showLabel: false,
-                    hint: '07701234567',
+                    hint: '77123456',
                     controller: _phoneController,
                     focusNode: _focusSignupPhone,
                     useGlass: true,
@@ -960,7 +960,7 @@ class _LoginScreenState extends State<LoginScreen>
                     textInputAction: TextInputAction.next,
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(11),
+                      LengthLimitingTextInputFormatter(8),
                     ],
                     overlayShadowOnFocus: false,
                     onChanged: (_) => setState(() {}),

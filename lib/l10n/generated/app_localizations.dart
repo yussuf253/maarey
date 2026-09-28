@@ -3026,11 +3026,11 @@ abstract class AppLocalizations {
   /// **'البريد مطلوب'**
   String get emailRequiredShort;
 
-  /// No description provided for @iraqMobileInvalid.
+  /// No description provided for @djiboutiMobileInvalid.
   ///
   /// In ar, this message translates to:
-  /// **'رقم عراقي: 11 رقماً يبدأ بـ 07 (مثال: 07701234567)'**
-  String get iraqMobileInvalid;
+  /// **'رقم جيبوتي: 8 أرقام تبدأ بـ 6 أو 7 أو 8 (مثال: 77123456)'**
+  String get djiboutiMobileInvalid;
 
   /// No description provided for @passwordRequired.
   ///
@@ -3056,11 +3056,11 @@ abstract class AppLocalizations {
   /// **'الرجاء إعادة كتابة كلمة السر'**
   String get enterPasswordAgain;
 
-  /// No description provided for @iraqDialTooltip.
+  /// No description provided for @djiboutiDialTooltip.
   ///
   /// In ar, this message translates to:
-  /// **'+964 العراق — سيتوفر اختيار دول أخرى لاحقاً'**
-  String get iraqDialTooltip;
+  /// **'+253 جيبوتي — سيتوفر اختيار دول أخرى لاحقاً'**
+  String get djiboutiDialTooltip;
 
   /// No description provided for @welcomeToMaarey.
   ///

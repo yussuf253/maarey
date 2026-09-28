@@ -1641,8 +1641,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get emailRequiredShort => 'البريد مطلوب';
 
   @override
-  String get iraqMobileInvalid =>
-      'رقم عراقي: 11 رقماً يبدأ بـ 07 (مثال: 07701234567)';
+  String get djiboutiMobileInvalid =>
+      'رقم جيبوتي: 8 أرقام تبدأ بـ 6 أو 7 أو 8 (مثال: 77123456)';
 
   @override
   String get passwordRequired => 'كلمة السر مطلوبة';
@@ -1658,7 +1658,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get enterPasswordAgain => 'الرجاء إعادة كتابة كلمة السر';
 
   @override
-  String get iraqDialTooltip => '+964 العراق — سيتوفر اختيار دول أخرى لاحقاً';
+  String get djiboutiDialTooltip =>
+      '+253 جيبوتي — سيتوفر اختيار دول أخرى لاحقاً';
 
   @override
   String get welcomeToMaarey => 'مرحباً بك في Mاري';

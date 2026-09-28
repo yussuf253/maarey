@@ -1674,8 +1674,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get emailRequiredShort => 'L\'e-mail est requis';
 
   @override
-  String get iraqMobileInvalid =>
-      'Mobile irakien : 11 chiffres commençant par 07 (ex. : 07701234567)';
+  String get djiboutiMobileInvalid =>
+      'Mobile djiboutien : 8 chiffres commençant par 6, 7 ou 8 (ex. : 77123456)';
 
   @override
   String get passwordRequired => 'Le mot de passe est requis';
@@ -1691,8 +1691,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get enterPasswordAgain => 'Veuillez ressaisir votre mot de passe';
 
   @override
-  String get iraqDialTooltip =>
-      '+964 Irak — d\'autres codes pays seront disponibles plus tard';
+  String get djiboutiDialTooltip =>
+      '+253 Djibouti — d\'autres codes pays seront disponibles plus tard';
 
   @override
   String get welcomeToMaarey => 'Bienvenue sur Maarey';
