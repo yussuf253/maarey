@@ -17,6 +17,7 @@ import '../models/credit_debt_invoice.dart';
 import '../models/customer_debt_models.dart';
 import '../models/supplier_ap_models.dart';
 import '../models/loyalty_settings_data.dart';
+import '../models/print_settings_data.dart';
 import '../models/recent_activity_entry.dart';
 import '../utils/app_logger.dart';
 import '../utils/loyalty_math.dart';
@@ -2915,12 +2916,28 @@ class DatabaseHelper {
     );
     final n = rows.isEmpty ? 0 : (rows.first['c'] as num?)?.toInt() ?? 0;
     if (n == 0) {
+      // الصف الافتراضي للتمهيد: يُدمج فوق أي قيم محفوظة سابقاً (تعبير ينتهي
+      // برمي كاشف يبدأ '{"paperFormat"' — مولّد في إصدارات قديمة) ولا يمسحها.
+      // updatedAt بختم قديم ثابت كي لا يفوق صف السحابة في LWW — وإلا سيغطي
+      // الجهاز الجديد إعدادات المستخدم البعيدة بالقيم الافتراضية في أول مزامنة.
+      const bootstrapDefaults =
+          '{"paperFormat":"thermal80","receiptShowBarcode":true,"receiptShowQr":true,"receiptShowBuyerAddressQr":false,"storeTitleLine":"","footerExtra":""}';
+      List<Map<String, Object?>> previous = const [];
+      try {
+        previous = await db.rawQuery(
+          'SELECT payload FROM print_settings LIMIT 1',
+        );
+      } catch (_) {}
+      final mergedPayload = previous.isEmpty
+          ? bootstrapDefaults
+          : PrintSettingsData.mergeFromJsonString(
+              previous.first['payload'] as String?,
+            ).toJsonString();
       await db.insert('print_settings', {
         'id': 1,
         'global_id': 'print_setting_singleton',
-        'payload':
-            '{"paperFormat":"thermal80","receiptShowBarcode":true,"receiptShowQr":true,"receiptShowBuyerAddressQr":false,"storeTitleLine":"","footerExtra":""}',
-        'updatedAt': DateTime.now().toIso8601String(),
+        'payload': mergedPayload,
+        'updatedAt': '2020-01-01T00:00:00.000Z',
       });
     }
   }

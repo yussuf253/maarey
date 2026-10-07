@@ -153,6 +153,9 @@ abstract class _Prefs {
   /// مفتاح قديم من نظام v1؛ يُمسح في [resetLicenseStateForDataScopeChange] لتنظيف التركة.
   static const legacyLicenseSystemVersion = 'lic.license_system_version';
 
+  /// نبض الجهاز (تحديث last_seen_at بشكل دوري على الخادم).
+  static const deviceLastHeartbeatAt = 'lic.device_last_heartbeat_at';
+
   /// آخر بصمة إصدار طُبِّقت بعدها سياسة الترخيص (`version+buildNumber` من [PackageInfo]).
   static const appVersion = 'lic.app_version';
 
@@ -368,11 +371,31 @@ class LicenseService extends ChangeNotifier {
     final storedVersion = (prefs.getString(_Prefs.appVersion) ?? '').trim();
 
     if (storedVersion != fullVersion) {
-      await resetLicenseStateForDataScopeChange();
+      // ترقية/تحديث التطبيق لا يُلغي ترخيص الحساب: نمسح فقط ذاكرة سياسات
+      // الخادم (حدّ الأجهزة/tenant_access) ليعاد جلبها، مع الإبقاء على JWT
+      // والتجربة. المسح الكامل يبقى محفوظاً لتغيّر نطاق الحساب فعلياً
+      // (تسجيل خروج/تبديل حساب) في [resetLicenseStateForDataScopeChange].
+      await _resetServerPolicyCaches(prefs);
       await prefs.setString(_Prefs.appVersion, fullVersion);
     }
 
     await _initializeV2();
+  }
+
+  /// مسح كاش سياسات الخادم فقط (بدون لمس JWT/التجربة) — يُستخدم عند ترقية
+  /// التطبيق وحالياً بعد تفعيل ترخيص جديد لإجبار إعادة التحقق من السيرفر.
+  Future<void> _resetServerPolicyCaches(SharedPreferences prefs) async {
+    for (final k in [
+      _Prefs.deviceOverLimit,
+      _Prefs.deviceOverLimitCheckedAt,
+      _Prefs.tenantAccessStatus,
+      _Prefs.tenantAccessKillSwitch,
+      _Prefs.tenantAccessValidUntil,
+      _Prefs.tenantAccessGraceUntil,
+      _Prefs.tenantAccessCheckedAt,
+    ]) {
+      await prefs.remove(k);
+    }
   }
 
   /// Initialisation non bloquante par le réseau.
@@ -623,6 +646,17 @@ class LicenseService extends ChangeNotifier {
       _state.status == LicenseStatus.active ||
       _state.status == LicenseStatus.trial;
 
+  /// Whether there is an authenticated cloud session. A signed-out device has
+  /// no server truth to be restricted against — a stale cached device-limit
+  /// flag must never degrade it to restricted.
+  bool get _hasAuthSession {
+    try {
+      return Supabase.instance.client.auth.currentUser != null;
+    } catch (_) {
+      return false;
+    }
+  }
+
   // ── التحقق من الترخيص ─────────────────────────────────────────────────────
 
   Future<void> checkLicense({bool forceRemote = false}) =>
@@ -745,7 +779,7 @@ class LicenseService extends ChangeNotifier {
       // license and the server hasn't propagated the new limits yet.
       // Only force restricted if there's no active JWT (i.e. the user
       // was already in a degraded state before going offline).
-      if (cached && !_hasActiveJwtOverlay) {
+      if (cached && _hasAuthSession && !_hasActiveJwtOverlay) {
         _setState(
           const LicenseState(
             status: LicenseStatus.restricted,
@@ -1234,7 +1268,46 @@ class LicenseService extends ChangeNotifier {
       return;
     }
 
-    // ── Step 1: licence assignée ────────────────────────────────────────────
+    // ── Step 0: ترخيص الحساب المسند (per-account) ─────────────────────────
+    // مصدر الحقيقة هو صف الترخيص المُسند للمستخدم على الخادم (RPC
+    // security definer يعيد jwt المُسند لحساب auth.uid()) — لا نسخة محلية.
+    // أي جهاز يسجّل الدخول بنفس الحساب يفعّل نفس الترخيص تلقائياً،
+    // فيصبح وضع «نسخ JWT لكل جهاز» غير ضروري.
+    try {
+      final res = await Supabase.instance.client
+          .rpc('app_assigned_license_jwt')
+          .timeout(const Duration(seconds: 8));
+
+      String jwt = '';
+      if (res is List && res.isNotEmpty) {
+        jwt = (res.first as Map?)?['license_jwt']?.toString() ?? '';
+      } else if (res is Map) {
+        jwt = res['license_jwt']?.toString() ?? '';
+      }
+
+      jwt = normalizeJwtCompactInput(jwt);
+
+      if (jwt.split('.').length == 3) {
+        AppLogger.info(
+          'LicenseService',
+          'Auto-activating account-assigned license via app_assigned_license_jwt for ${user.email}',
+        );
+
+        final result = await activateSignedToken(jwt);
+
+        if (result.ok) return;
+
+        AppLogger.warn(
+          'LicenseService',
+          'Auto-activate account license failed: ${result.message}',
+        );
+      }
+    } catch (e) {
+      // دالة غير موجودة بعد / خطأ شبكة → نُكمل لمنطق legacy ثم التجربة.
+      AppLogger.warn('LicenseService', 'app_assigned_license_jwt unavailable: $e');
+    }
+
+    // ── Step 1: licence assignée (legacy مباشر من جدول licenses) ───────────
     try {
       final client = Supabase.instance.client;
 
@@ -1435,11 +1508,44 @@ class LicenseService extends ChangeNotifier {
     await Future<void>.delayed(const Duration(seconds: 3));
     try {
       final prefs = await SharedPreferences.getInstance();
-      await prefs.remove(_Prefs.deviceOverLimit);
-      await prefs.remove(_Prefs.deviceOverLimitCheckedAt);
+      await _resetServerPolicyCaches(prefs);
       await _maybeApplyServerDeviceLimitOverlay(forceRemote: true)
           .timeout(const Duration(seconds: 8));
     } catch (_) {}
+  }
+
+  /// نبض الجهاز: تحديث last_seen_at على الخادم بشكل دوري حتى لا يُعتبر
+  /// الجهاز «ميتاً» ويُحذف/يُفصل وهو يعمل فعلياً.
+  Future<void> heartbeatCurrentDevice({
+    Duration idleThreshold = const Duration(minutes: 10),
+  }) async {
+    try {
+      final user = Supabase.instance.client.auth.currentUser;
+      if (user == null) return;
+
+      final prefs = await SharedPreferences.getInstance();
+      final lastMs = prefs.getInt(_Prefs.deviceLastHeartbeatAt);
+      final now = DateTime.now().toUtc();
+
+      if (lastMs != null &&
+          now.difference(DateTime.fromMillisecondsSinceEpoch(lastMs, isUtc: true)) <
+              idleThreshold) {
+        return;
+      }
+
+      await prefs.setInt(_Prefs.deviceLastHeartbeatAt, now.millisecondsSinceEpoch);
+
+      final deviceId = await getDeviceId();
+
+      await Supabase.instance.client
+          .from('account_devices')
+          .update({'last_seen_at': now.toIso8601String()})
+          .eq('user_id', user.id)
+          .eq('device_id', deviceId)
+          .timeout(const Duration(seconds: 6));
+    } catch (_) {
+      // نبض فاشل (أوفلاين/جدول غير موجود) — يُعاد لاحقاً؛ لا يؤثر على الجلسة.
+    }
   }
 
   // ── إلغاء الترخيص ─────────────────────────────────────────────────────────

@@ -1132,6 +1132,9 @@ class CloudSyncService {
     _syncTimer?.cancel();
     // دورة دورية خفيفة: دفع التغييرات المحلية فقط (بدون سحب تلقائي من الخادم).
     _syncTimer = Timer.periodic(const Duration(minutes: 1), (_) {
+      // نبض الجهاز (last_seen_at) كل ~10 دقائق كي لا يُعتبر الجهاز النشط
+      // «ميتاً» على الخادم ويُحذف/يُفصل وهو يعمل فعلياً.
+      unawaited(LicenseService.instance.heartbeatCurrentDevice());
       unawaited(syncNow(forcePull: false));
     });
   }
@@ -2520,6 +2523,40 @@ class CloudSyncService {
     String userId,
     String table,
   ) async {
+    try {
+      await _pushOnePerTableAttempt(client, db, prefs, userId, table);
+    } on PostgrestException catch (e) {
+      // RLS يرفض الصفوف بلا owner_id (تقييم السياسة يسبق الـ trigger الذي
+      // يختم owner_id). نستدعي claim_ownerless_rows مرة أخرى ثم نعيد المحاولة
+      // مرة واحدة — بدل تعطيل رفع هذا الجدول حتى إعادة تشغيل التطبيق.
+      final m = e.message.toLowerCase();
+      final rlsRejected = e.code == '42501' ||
+          m.contains('row-level security') ||
+          m.contains('violates row-level');
+      if (!rlsRejected) rethrow;
+      AppLogger.warn(
+        'CloudSync',
+        'RLS rejected push for $table — claiming ownerless rows and retrying once',
+      );
+      try {
+        await _claimOwnerlessRows(client, force: true);
+      } catch (claimErr) {
+        AppLogger.warn(
+          'CloudSync',
+          'claim_ownerless_rows retry failed: $claimErr',
+        );
+      }
+      await _pushOnePerTableAttempt(client, db, prefs, userId, table);
+    }
+  }
+
+  Future<void> _pushOnePerTableAttempt(
+    SupabaseClient client,
+    Database db,
+    SharedPreferences prefs,
+    String userId,
+    String table,
+  ) async {
     final remoteCols = _perTableRemoteColumns[table];
     if (remoteCols == null) return;
     final cursorKey = _prefsKeyTablePushCursor(table, userId);
@@ -2655,16 +2692,25 @@ class CloudSyncService {
   /// [_perTableSyncTables] وتُعيّن owner_id = auth.uid() حيث NULL.
   ///
   /// إذا الدالة غير موجودة في Supabase (لم يُشغّل المستخدم SQL)، نتجاهل.
+  ///
+  /// [force] يعيد المحاولة حتى لو سبق الاستدعاء في هذه الجلسة — يُستدعى
+  /// قبل إعادة رفع صفوف فشل سابقاً برفض RLS (owner_id = NULL يُرفض في
+  /// WITH CHECK قبل أن يختمه الـ trigger).
   static bool _claimOwnerlessRowsAttempted = false;
 
-  Future<void> _claimOwnerlessRows(SupabaseClient client) async {
-    if (_claimOwnerlessRowsAttempted) return;
+  Future<void> _claimOwnerlessRows(
+    SupabaseClient client, {
+    bool force = false,
+  }) async {
+    if (_claimOwnerlessRowsAttempted && !force) return;
     _claimOwnerlessRowsAttempted = true;
     try {
       await client.rpc('claim_ownerless_rows');
       AppLogger.info(
         'CloudSync',
-        'claim_ownerless_rows: orphan rows assigned successfully',
+        force
+            ? 'claim_ownerless_rows (retry after RLS rejection): rows assigned'
+            : 'claim_ownerless_rows: orphan rows assigned successfully',
       );
     } on PostgrestException catch (e) {
       final m = e.message.toLowerCase();
