@@ -1,3 +1,5 @@
+import '../l10n/app_l10n.dart';
+
 /// قواعد إدخال العملاء — متسقة مع حفظ SQLite (بدون تغيير مخطط الجداول).
 class CustomerValidation {
   CustomerValidation._();
@@ -17,16 +19,16 @@ class CustomerValidation {
 
   static String? name(String? v) {
     final t = v?.trim() ?? '';
-    if (t.isEmpty) return 'اسم العميل مطلوب';
-    if (t.length < 2) return 'الاسم قصير جداً';
-    if (t.length > 200) return 'الاسم طويل جداً';
+    if (t.isEmpty) return AppL10n.current.sofCustomerRequired;
+    if (t.length < 2) return AppL10n.current.cvNameTooShort;
+    if (t.length > 200) return AppL10n.current.cvNameTooLong;
     return null;
   }
 
   static String? optionalEmail(String? v) {
     final t = v?.trim() ?? '';
     if (t.isEmpty) return null;
-    if (!_email.hasMatch(t)) return 'صيغة البريد غير صحيحة';
+    if (!_email.hasMatch(t)) return AppL10n.current.emailInvalidFormat;
     return null;
   }
 
@@ -34,8 +36,8 @@ class CustomerValidation {
     final t = v?.trim() ?? '';
     if (t.isEmpty) return null;
     final digits = RegExp(r'\d').allMatches(t).length;
-    if (digits < 7) return 'رقم الهاتف يبدو غير مكتمل';
-    if (t.length > 40) return 'رقم الهاتف طويل جداً';
+    if (digits < 7) return AppL10n.current.cvPhoneIncomplete;
+    if (t.length > 40) return AppL10n.current.cvPhoneTooLong;
     return null;
   }
 }

@@ -655,16 +655,16 @@ extension DbSuppliers on DatabaseHelper {
       );
       final name = (sup.isNotEmpty ? sup.first['name'] as String? : null)
               ?.trim() ??
-          'مورد';
+          AppL10n.current.rpSupplierDefaultName;
       // Tenant-scoped lookup guarantees this `tenantId` matches the active
       // session; use it for activity_logs writes that still take an int.
       final tenantInt =
           (sup.isNotEmpty ? (sup.first['tenantId'] as num?)?.toInt() : null) ??
               1;
 
-      var meta = 'مورد #$supplierId';
+      var meta = AppL10n.current.supMeta(supplierId);
       final n = note?.trim();
-      if (n != null && n.isNotEmpty) meta = '$meta — ملاحظة: $n';
+      if (n != null && n.isNotEmpty) meta = AppL10n.current.supMetaNote(meta, n);
       if (meta.length > 900) meta = meta.substring(0, 900);
 
       final receiptInv = Invoice(
@@ -673,7 +673,7 @@ extension DbSuppliers on DatabaseHelper {
         type: InvoiceType.supplierPayment,
         items: [
           InvoiceItem(
-            productName: 'دفع ذمة مورد',
+            productName: AppL10n.current.supDebtPaymentProduct,
             quantity: 1,
             price: amount,
             total: amount,
@@ -695,14 +695,14 @@ extension DbSuppliers on DatabaseHelper {
         loyaltySettings,
         enforceStockNonZero: false,
       );
-      final actor = user.isEmpty ? 'غير معروف' : user;
+      final actor = user.isEmpty ? AppL10n.current.rptUnknown : user;
       await _insertActivityLogInTxn(
         txn,
         type: 'supplier_receipt_created',
         refTable: 'invoices',
         refId: invoiceId,
-        title: 'إنشاء سند دفع مورد',
-        details: 'المورد: $name (#$supplierId) • المنفذ: $actor',
+        title: AppL10n.current.actSupplierPayoutCreate,
+        details: AppL10n.current.actorSupplierLine(name, supplierId, actor),
         amount: amount,
         tenantId: tenantInt,
       );
@@ -738,9 +738,14 @@ extension DbSuppliers on DatabaseHelper {
         type: 'supplier_payout_created',
         refTable: 'supplier_payouts',
         refId: pid,
-        title: 'تسجيل دفعة مورد',
+        title: AppL10n.current.actSupplierPayment,
         details:
-            'المورد: $name (#$supplierId) • الفاتورة المرجعية: #$invoiceId • المنفذ: $actor',
+            AppL10n.current.actSupplierPaymentDetails(
+              name,
+              supplierId,
+              invoiceId,
+              actor,
+            ),
         amount: amount,
         tenantId: tenantInt,
       );
@@ -791,7 +796,7 @@ extension DbSuppliers on DatabaseHelper {
       final receiptInvoiceId = (r['receiptInvoiceId'] as num?)?.toInt();
       final tenantInt = (r['tenantId'] as num?)?.toInt() ?? 1;
       final actor = ((r['createdByUserName'] as String?) ?? '').trim().isEmpty
-          ? 'غير معروف'
+          ? AppL10n.current.rptUnknown
           : ((r['createdByUserName'] as String?) ?? '').trim();
 
       if (receiptInvoiceId != null && receiptInvoiceId > 0) {
@@ -824,9 +829,13 @@ extension DbSuppliers on DatabaseHelper {
           type: 'supplier_receipt_deleted',
           refTable: 'invoices',
           refId: receiptInvoiceId,
-          title: 'حذف سند دفع مورد',
+          title: AppL10n.current.actSupplierPayoutDelete,
           details:
-              'المورد #$supplierId • الحذف ضمن عكس دفعة #$payoutId • المنفذ: $actor',
+              AppL10n.current.actSupplierPayoutDeleteDetails(
+                supplierId,
+                payoutId,
+                actor,
+              ),
           amount: amount,
           tenantId: tenantInt,
         );
@@ -853,12 +862,15 @@ extension DbSuppliers on DatabaseHelper {
         );
         final name = (sup.isNotEmpty ? sup.first['name'] as String? : null)
                 ?.trim() ??
-            'مورد';
+            AppL10n.current.rpSupplierDefaultName;
         await DbCashSqlOps.insertCashLedgerEntry(txn, tenantInt, {
           'transactionType': 'supplier_payment_reversal',
           'amount': amount,
-          'description':
-              'عكس دفعة مورد #$supplierId — $name (كانت دفعة #$payoutId)',
+          'description': AppL10n.current.supReversePaymentName(
+                supplierId,
+                name,
+                payoutId,
+              ),
           'invoiceId': null,
           'workShiftId': openShiftId,
           'createdAt': DateTime.now().toIso8601String(),
@@ -868,8 +880,8 @@ extension DbSuppliers on DatabaseHelper {
           type: 'supplier_payout_reversed',
           refTable: 'supplier_payouts',
           refId: payoutId,
-          title: 'عكس دفعة مورد',
-          details: 'المورد: $name (#$supplierId) • المنفذ: $actor',
+          title: AppL10n.current.actSupplierPaymentReverse,
+          details: AppL10n.current.actorSupplierLine(name, supplierId, actor),
           amount: amount,
           tenantId: tenantInt,
         );
@@ -886,8 +898,8 @@ extension DbSuppliers on DatabaseHelper {
           type: 'supplier_payout_deleted',
           refTable: 'supplier_payouts',
           refId: payoutId,
-          title: 'حذف دفعة مورد',
-          details: 'المورد #$supplierId • المنفذ: $actor',
+          title: AppL10n.current.actSupplierPaymentDelete,
+          details: AppL10n.current.actSupplierPaymentDeleteDetails(supplierId, actor),
           amount: amount,
           tenantId: tenantInt,
         );

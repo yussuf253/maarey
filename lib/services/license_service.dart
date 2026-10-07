@@ -10,6 +10,7 @@ import '../utils/app_logger.dart';
 import 'license/license_engine_v2.dart';
 import 'license/license_token.dart';
 import 'license/trusted_time_service.dart';
+import '../l10n/app_l10n.dart';
 import '../l10n/generated/app_localizations.dart';
 import '../providers/open_ops_registry.dart';
 import 'security_audit_log_service.dart';
@@ -36,11 +37,13 @@ class SubscriptionPlan {
   /// بطاقة واجهة للتجربة التلقائية — ليست خطة «الأساسية» المدفوعة؛ حد الأجهزة كما في التجربة السابقة (جهازان).
   bool get isIntroTrialTier => key == 'trial';
 
-  String get devicesLabel =>
-      isUnlimited ? 'أجهزة غير محدودة' : '$maxDevices أجهزة';
+  String get devicesLabel => isUnlimited
+      ? AppL10n.current.spDevicesUnlimited
+      : AppL10n.current.licDevicesN(maxDevices);
 
-  String get priceLabel =>
-      isIntroTrialTier ? 'مجاناً — 15 يوماً' : '${_fmt(priceIQD)} Fdj / شهر';
+  String get priceLabel => isIntroTrialTier
+      ? AppL10n.current.spPlanPriceFree
+      : AppL10n.current.licPricePerMonth(_fmt(priceIQD));
 
   static String _fmt(int p) {
     final s = p.toString();
@@ -225,8 +228,8 @@ class LicenseState {
   bool get isUnlimited => maxDevices == 0;
 
   String get devicesInfo => isUnlimited
-      ? 'أجهزة غير محدودة'
-      : '$registeredDeviceCount / $maxDevices جهاز';
+      ? AppL10n.current.spDevicesUnlimited
+      : AppL10n.current.licDevicesCount(registeredDeviceCount, maxDevices);
 
   static const none = LicenseState(status: LicenseStatus.none);
 
@@ -257,35 +260,33 @@ KillSwitchDecision? computeKillSwitchDecision({
   required DateTime trustedNow,
 }) {
   if (killSwitch) {
-    return const KillSwitchDecision(
+    return KillSwitchDecision(
       status: LicenseStatus.suspended,
       lockReason: LockReason.suspended,
-      message:
-          'تم إيقاف الوصول إلى حسابك إدارياً. تواصل مع الدعم لإعادة التفعيل.',
+      message: AppL10n.current.licKillAdmin,
     );
   }
 
   if (accessStatus == 'revoked') {
-    return const KillSwitchDecision(
+    return KillSwitchDecision(
       status: LicenseStatus.suspended,
       lockReason: LockReason.suspended,
-      message: 'تم إلغاء وصولك إلى الخدمة. تواصل مع الدعم.',
+      message: AppL10n.current.licRevoked,
     );
   }
 
   if (accessStatus == 'suspended') {
-    return const KillSwitchDecision(
+    return KillSwitchDecision(
       status: LicenseStatus.suspended,
       lockReason: LockReason.suspended,
-      message: 'حسابك معلَّق مؤقتاً. تواصل مع الدعم لمتابعة الاستخدام.',
+      message: AppL10n.current.licSuspendedContact,
     );
   }
 
   if (accessStatus == 'grace') {
-    return const KillSwitchDecision(
+    return KillSwitchDecision(
       status: LicenseStatus.restricted,
-      message:
-          'حسابك في فترة سماح بعد انتهاء الاشتراك. جدّد قبل انتهاء المهلة لاستعادة جميع الميزات.',
+      message: AppL10n.current.licGrace,
     );
   }
 
@@ -294,10 +295,10 @@ KillSwitchDecision? computeKillSwitchDecision({
     final endUtc = validUntil.toUtc();
 
     if (!nowUtc.isBefore(endUtc)) {
-      return const KillSwitchDecision(
+      return KillSwitchDecision(
         status: LicenseStatus.expired,
         lockReason: LockReason.expired,
-        message: 'انتهت صلاحية اشتراكك. جدّد المفتاح للمتابعة.',
+        message: AppL10n.current.licExpiredRenew,
       );
     }
   }
@@ -341,11 +342,10 @@ class LicenseService extends ChangeNotifier {
 
     if (!hasOpen) {
       _setState(
-        const LicenseState(
+        LicenseState(
           status: LicenseStatus.expired,
           lockReason: LockReason.timeTamper,
-          message:
-              'تم اكتشاف تعارض في إعدادات الوقت. تواصل مع الدعم للمساعدة في إعادة التحقق.',
+          message: AppL10n.current.timeTamperMessage,
         ),
       );
     }
@@ -758,10 +758,9 @@ class LicenseService extends ChangeNotifier {
           );
         } else {
           _setState(
-            const LicenseState(
+            LicenseState(
               status: LicenseStatus.restricted,
-              message:
-                  'تم تجاوز حد الأجهزة في حسابك. افصل جهازاً من لوحة الإدارة أو قم بترقية الخطة.',
+              message: AppL10n.current.licDeviceLimitAdmin,
               deviceOverLimit: true,
             ),
           );
@@ -781,10 +780,9 @@ class LicenseService extends ChangeNotifier {
       // was already in a degraded state before going offline).
       if (cached && _hasAuthSession && !_hasActiveJwtOverlay) {
         _setState(
-          const LicenseState(
+          LicenseState(
             status: LicenseStatus.restricted,
-            message:
-                'تم تجاوز حد الأجهزة في حسابك. اتصل بالإنترنت لإعادة التحقق بعد فصل جهاز.',
+            message: AppL10n.current.licDeviceLimitOffline,
           ),
         );
       }
@@ -820,14 +818,16 @@ class LicenseService extends ChangeNotifier {
       } else {
         // No valid JWT — fall back to restricted (e.g. no license at all).
         final maxLabel = server.maxDevices == 0
-            ? 'غير محدود'
+            ? AppL10n.current.unlimited
             : '${server.maxDevices}';
 
         _setState(
           LicenseState(
             status: LicenseStatus.restricted,
-            message:
-                'عدد الأجهزة النشطة على الحساب تجاوز الحد (${server.activeDevices}/$maxLabel). افصل جهازاً أو قم بترقية الخطة.',
+            message: AppL10n.current.licDeviceLimitCount(
+              server.activeDevices,
+              maxLabel,
+            ),
             deviceOverLimit: true,
             activeDeviceCount: server.activeDevices,
             maxDevices: server.maxDevices,
@@ -1087,7 +1087,7 @@ class LicenseService extends ChangeNotifier {
     if (decision == null) return;
 
     final messageWithWarning = fromCache
-        ? '${decision.message}\n(تعذّر التحقق من الخادم — الحالة من آخر مزامنة.)'
+        ? '${decision.message}${AppL10n.current.licCacheWarning}'
         : decision.message;
 
     _setState(
@@ -1126,19 +1126,18 @@ class LicenseService extends ChangeNotifier {
 
       if (severe || count >= 2) {
         _setState(
-          const LicenseState(
-            status: LicenseStatus.pendingLock,
-            lockReason: LockReason.timeTamper,
-            message:
-                'تم اكتشاف تعارض في إعدادات الوقت. أكمل العملية الحالية ثم سيُقفل التطبيق.',
-          ),
+        LicenseState(
+          status: LicenseStatus.pendingLock,
+          lockReason: LockReason.timeTamper,
+          message: AppL10n.current.licTimeTamperPending,
+        ),
         );
       } else {
         _setState(
-          const LicenseState(
+          LicenseState(
             status: LicenseStatus.restricted,
             lockReason: LockReason.timeTamper,
-            message: 'يرجى الاتصال بالإنترنت للتحقق من الوقت.',
+            message: AppL10n.current.licTimeSyncOnline,
           ),
         );
       }
@@ -1150,10 +1149,10 @@ class LicenseService extends ChangeNotifier {
 
     if (tok.isExpired) {
       _setState(
-        const LicenseState(
+        LicenseState(
           status: LicenseStatus.expired,
           lockReason: LockReason.expired,
-          message: 'انتهى اشتراكك. جدّد للمتابعة.',
+          message: AppL10n.current.subscriptionExpiredMessage,
         ),
       );
 
@@ -1206,7 +1205,7 @@ class LicenseService extends ChangeNotifier {
         plan: SubscriptionPlan.trial,
         maxDevices: SubscriptionPlan.trial.maxDevices,
         registeredDeviceCount: 1,
-        message: 'انتهت التجربة المجانية (15 يوم). اختر خطة اشتراك للمتابعة.',
+        message: AppL10n.current.licTrialEnded,
       );
     }
 
@@ -1218,8 +1217,8 @@ class LicenseService extends ChangeNotifier {
       maxDevices: SubscriptionPlan.trial.maxDevices,
       registeredDeviceCount: 1,
       message: cloud
-          ? 'تجربة مجانية 15 يوم من أول تسجيل Google لهذا الحساب (موحّدة لكل الأجهزة).'
-          : 'تجربة مجانية مفعلة لمدة 15 يوم من أول استخدام لهذا الجهاز.',
+          ? AppL10n.current.licTrialCloudDesc
+          : AppL10n.current.licTrialLocalDesc,
     );
   }
 
@@ -1470,8 +1469,7 @@ class LicenseService extends ChangeNotifier {
     if (k.split('.').length != 3) {
       return (
         ok: false,
-        message:
-            'حسابك يستخدم ترخيصاً موقّعاً. الصق رمز التفعيل الكامل (JWT) وليس المفتاح القديم.',
+        message: AppL10n.current.licJwtRequired,
       );
     }
 

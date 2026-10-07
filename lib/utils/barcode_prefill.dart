@@ -1,3 +1,4 @@
+import '../l10n/app_l10n.dart';
 import '../services/app_settings_repository.dart';
 import 'gs1_barcode_parse.dart';
 
@@ -85,13 +86,13 @@ class BarcodePrefill {
             exp != null ||
             netGFromGs1 != null ||
             (gtin != null && gtin.isNotEmpty))) {
-      buf.writeln('مستخرج من الباركود (GS1) — راجع العبوة:');
+      buf.writeln(AppL10n.current.gs1Header);
       if (gtin != null && gtin.isNotEmpty) buf.writeln('• GTIN: $gtin');
-      if (mfg != null) buf.writeln('• تاريخ إنتاج: ${_fmtDate(mfg)}');
-      if (exp != null) buf.writeln('• تاريخ انتهاء: ${_fmtDate(exp)}');
+      if (mfg != null) buf.writeln(AppL10n.current.gs1MfgDate(_fmtDate(mfg)));
+      if (exp != null) buf.writeln(AppL10n.current.gs1ExpDate(_fmtDate(exp)));
       if (netGFromGs1 != null) {
         buf.writeln(
-          '• وزن صافٍ (من الباركود): ${formatSuggestedQty(netGFromGs1)} غ',
+          AppL10n.current.gs1NetWeight(formatSuggestedQty(netGFromGs1)),
         );
       }
     }
@@ -109,7 +110,7 @@ class BarcodePrefill {
           netG ??= grams.toDouble();
           if (buf.isNotEmpty) buf.writeln();
           buf.writeln(
-            'وزن مدمج (حسب إعدادات المخزن): $wDigits → كمية/وزن أولي ${formatSuggestedQty(qty)}',
+            AppL10n.current.gs1EmbeddedWeight(wDigits, formatSuggestedQty(qty)),
           );
         }
       }

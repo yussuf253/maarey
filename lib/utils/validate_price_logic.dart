@@ -1,3 +1,5 @@
+import '../l10n/app_l10n.dart';
+
 /// تحذيرات تسقيف بين حقول الأسعار (لا تمنع الحفظ؛ تستخدم للرسائل الكهرت).
 class PriceLogicWarnings {
   const PriceLogicWarnings({
@@ -17,12 +19,12 @@ PriceLogicWarnings validatePriceLogic({
 }) {
   String? sellVsBuyWarning;
   if (buyIqd >= 0 && sellIqd < buyIqd) {
-    sellVsBuyWarning = 'سعر البيع أقل من سعر الشراء';
+    sellVsBuyWarning = AppL10n.current.vpSellBelowBuy;
   }
 
   String? sellVsMinSellWarning;
   if (minSellIqdParsed > 0 && sellIqd < minSellIqdParsed) {
-    sellVsMinSellWarning = 'سعر البيع أقل من الحد الأدنى';
+    sellVsMinSellWarning = AppL10n.current.vpSellBelowMin;
   }
 
   return PriceLogicWarnings(

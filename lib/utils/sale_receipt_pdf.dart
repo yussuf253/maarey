@@ -164,7 +164,7 @@ String buildReceiptQrPlainText({
   }
 
   final cv = _customerLineValue(invoice);
-  final custQr = cv.isEmpty ? _l.rpCustomer + ':' : 'العميل: $cv';
+  final custQr = cv.isEmpty ? _l.rpCustomer + ':' : '${_l.rpCustomer}: $cv';
   final payLine = omitPay
       ? _l.rpDeliveryShort
       : _l.rpPaymentShort(salePaymentLabel(invoice.type));

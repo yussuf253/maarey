@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../l10n/app_l10n.dart';
 import '../models/invoice.dart' show InvoiceType;
 import 'database_helper.dart';
 import 'tenant_context_service.dart';
@@ -604,7 +605,7 @@ class ReportsRepository {
     final rows = await db.rawQuery(
       '''
       WITH top_staff AS (
-        SELECT IFNULL(NULLIF(TRIM(createdByUserName), ''), '(غير معروف)') AS u,
+        SELECT IFNULL(NULLIF(TRIM(createdByUserName), ''), '${AppL10n.current.rptUnknownStaff}') AS u,
                COALESCE(SUM(total), 0) AS s
         FROM invoices
         WHERE tenantId = ?
@@ -617,7 +618,7 @@ class ReportsRepository {
         LIMIT 5
       )
       SELECT substr(date, 1, 10) AS d,
-             IFNULL(NULLIF(TRIM(createdByUserName), ''), '(غير معروف)') AS u,
+             IFNULL(NULLIF(TRIM(createdByUserName), ''), '${AppL10n.current.rptUnknownStaff}') AS u,
              COALESCE(SUM(total), 0) AS s
       FROM invoices
       WHERE tenantId = ?
@@ -625,7 +626,7 @@ class ReportsRepository {
         AND IFNULL(isReturned, 0) = 0
         AND $_salesTypeInSql
         AND date >= ? AND date <= ?
-        AND IFNULL(NULLIF(TRIM(createdByUserName), ''), '(غير معروف)') IN (SELECT u FROM top_staff)
+        AND IFNULL(NULLIF(TRIM(createdByUserName), ''), '${AppL10n.current.rptUnknownStaff}') IN (SELECT u FROM top_staff)
       GROUP BY substr(date, 1, 10), u
       ORDER BY d ASC
       ''',
@@ -806,7 +807,7 @@ class ReportsRepository {
   ) async {
     final rows = await db.rawQuery(
       '''
-      SELECT IFNULL(NULLIF(TRIM(createdByUserName), ''), '(غير معروف)') AS u,
+      SELECT IFNULL(NULLIF(TRIM(createdByUserName), ''), '${AppL10n.current.rptUnknownStaff}') AS u,
              COUNT(*) AS c,
              COALESCE(SUM(total), 0) AS s
       FROM invoices
@@ -1023,7 +1024,7 @@ class ReportsRepository {
         '''
         SELECT
           ii.productId AS pid,
-          COALESCE(NULLIF(TRIM(ii.productName), ''), p.name, '(بدون اسم)') AS name,
+          COALESCE(NULLIF(TRIM(ii.productName), ''), p.name, '(${AppL10n.current.withoutName})') AS name,
           COALESCE(SUM(
             (CASE WHEN IFNULL(inv.isReturned, 0) = 0 THEN 1 ELSE -1 END) * ii.quantity
           ), 0) AS qty,

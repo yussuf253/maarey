@@ -98,7 +98,7 @@ extension DbLoyalty on DatabaseHelper {
           delta: -effectiveLoyaltyRedeem,
           kind: 'redeem',
           balanceAfter: running,
-          note: 'استبدال نقاط — فاتورة #$invoiceId',
+          note: '${AppL10n.current.loyRedeemNote} #$invoiceId',
         ),
       );
     }
@@ -110,7 +110,7 @@ extension DbLoyalty on DatabaseHelper {
           delta: earned,
           kind: 'earn',
           balanceAfter: running,
-          note: 'مكافأة شراء — فاتورة #$invoiceId',
+          note: '${AppL10n.current.loyEarnNote} #$invoiceId',
         ),
       );
     }

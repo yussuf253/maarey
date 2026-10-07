@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 
+import '../../l10n/app_l10n.dart';
 import 'device_uuid_migrator.dart';
 import 'jwt_rs256_verifier.dart';
 import 'license_engine.dart';
@@ -104,27 +105,25 @@ rQIDAQAB
   Future<({bool ok, String message})> activateLicense(String key) {
     final cleaned = normalizeJwtCompactInput(key);
     if (cleaned.isEmpty) {
-      return Future.value((ok: false, message: 'أدخل مفتاح الترخيص'));
+      return Future.value((ok: false, message: AppL10n.current.enterLicenseKeyError));
     }
     if (cleaned.split('.').length != 3) {
       return Future.value((
         ok: false,
-        message:
-            'الصق رمز JWT كاملاً من أول «ey» حتى نهاية الجزء الثالث (بدون أسطر أو مسافات في الوسط).',
+        message: AppL10n.current.licJwtPasteHint,
       ));
     }
     final tok = verifyToken(cleaned);
     if (tok == null) {
       return Future.value((
         ok: false,
-        message:
-            'مفتاح الترخيص غير صالح. إن كان النص صحيحاً فتأكد من تحديث التطبيق بعد مزامنة المفتاح العام، ومن عدم تغيير حالة الأحرف (مثل eyJ وليس eyj).',
+        message: AppL10n.current.licJwtInvalid,
       ));
     }
     _token = tok;
     return _storage
         .saveToken(jwt: cleaned, kid: tok.kid)
-        .then((_) => (ok: true, message: 'تم تفعيل الترخيص بنجاح!'));
+        .then((_) => (ok: true, message: AppL10n.current.licActivatedOk));
   }
 
   @override

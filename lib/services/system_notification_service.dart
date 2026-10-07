@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart'
     show TargetPlatform, defaultTargetPlatform, kIsWeb;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+import '../l10n/app_l10n.dart';
 import '../utils/app_logger.dart';
 
 /// إشعارات في **شريط إشعارات النظام** (Android / iOS) — ليست فقط داخل التطبيق.
@@ -10,9 +11,8 @@ class SystemNotificationService {
   static final SystemNotificationService instance = SystemNotificationService._();
 
   static const _channelId = 'maarey_alerts';
-  static const _channelName = 'تنبيهات ماري';
-  static const _channelDesc =
-      'مخزون، أقساط، مرتجعات، صندوق، وغيرها — تظهر في شريط الإشعارات.';
+  static String get _channelName => AppL10n.current.snChannelName;
+  static String get _channelDesc => AppL10n.current.snChannelDesc;
 
   final FlutterLocalNotificationsPlugin _plugin = FlutterLocalNotificationsPlugin();
   bool _initialized = false;
@@ -45,7 +45,7 @@ class SystemNotificationService {
             AndroidFlutterLocalNotificationsPlugin>();
         if (android != null) {
           await android.createNotificationChannel(
-            const AndroidNotificationChannel(
+            AndroidNotificationChannel(
               _channelId,
               _channelName,
               description: _channelDesc,
@@ -81,9 +81,10 @@ class SystemNotificationService {
     required String id,
     required String title,
     required String body,
-    String summaryText = 'ماري',
+    String? summaryText,
   }) async {
     if (!_initialized || kIsWeb) return;
+    final summary = summaryText ?? AppL10n.current.snAppName;
     try {
       final nid = id.hashCode & 0x7FFFFFFF;
       if (_isAndroid) {
@@ -96,8 +97,7 @@ class SystemNotificationService {
           ticker: title,
           styleInformation: BigTextStyleInformation(
             body,
-            contentTitle: title,
-            summaryText: summaryText,
+            contentTitle: title,              summaryText: summary,
           ),
         );
         await _plugin.show(
@@ -111,8 +111,7 @@ class SystemNotificationService {
         final ios = DarwinNotificationDetails(
           presentAlert: true,
           presentBadge: true,
-          presentSound: true,
-          subtitle: summaryText,
+          presentSound: true,              subtitle: summary,
         );
         await _plugin.show(
           nid,

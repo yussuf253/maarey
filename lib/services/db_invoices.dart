@@ -287,7 +287,7 @@ extension DbInvoices on DatabaseHelper {
     _validateInvoiceForSave(invoice);
     final tenantId = await _resolveActiveTenantIdForLocalDb(txn);
     final actor = (invoice.createdByUserName ?? '').trim();
-    final actorLabel = actor.isEmpty ? 'غير معروف' : actor;
+    final actorLabel = actor.isEmpty ? AppL10n.current.rptUnknown : actor;
     final serviceReceipt =
         invoice.type == InvoiceType.debtCollection ||
         invoice.type == InvoiceType.installmentCollection ||
@@ -355,9 +355,16 @@ extension DbInvoices on DatabaseHelper {
       type: invoice.isReturned ? 'invoice_returned' : 'invoice_created',
       refTable: 'invoices',
       refId: id,
-      title: invoice.isReturned ? 'تسجيل مرتجع فاتورة' : 'تسجيل فاتورة',
-      details:
-          'المنفّذ: $actorLabel — العميل: ${invoice.customerName.isEmpty ? 'عميل' : invoice.customerName} — النوع: ${invoice.type.name}',
+      title: invoice.isReturned
+          ? AppL10n.current.actInvoiceReturn
+          : AppL10n.current.actInvoiceCreate,
+      details: AppL10n.current.actInvoiceDetails(
+        actorLabel,
+        invoice.customerName.isEmpty
+            ? AppL10n.current.debtsCustomer
+            : invoice.customerName,
+        invoice.type.name,
+      ),
       amount: invoice.isReturned ? -invoice.total : invoice.total,
     );
 
@@ -443,7 +450,7 @@ extension DbInvoices on DatabaseHelper {
             final q = (rows.first['qty'] as num?)?.toDouble() ?? 0.0;
             if (q <= 1e-12 && item.baseQtyResolved > 1e-12) {
               throw FormatException(
-                'لا يمكن بيع «${item.productName}» لأن المخزون صفر في الوضع المقيّد.',
+                AppL10n.current.ivCannotSellLocked(item.productName),
               );
             }
           }
@@ -456,8 +463,8 @@ extension DbInvoices on DatabaseHelper {
             final delta = item.baseQtyResolved;
             final q = delta.round();
             if ((delta - q).abs() > 1e-9) {
-              throw const FormatException(
-                'كمية الملابس يجب أن تكون رقماً صحيحاً.',
+              throw FormatException(
+                AppL10n.current.ivVariantQtyInteger,
               );
             }
             final affected = await txn.rawUpdate(
@@ -466,8 +473,8 @@ extension DbInvoices on DatabaseHelper {
               [q, pvId, q],
             );
             if (affected < 1 && !allowNeg) {
-              throw const FormatException(
-                'لا توجد كمية متوفرة لهذا المقاس/اللون.',
+              throw FormatException(
+                AppL10n.current.ivNoQtyForSize,
               );
             }
 
@@ -535,14 +542,14 @@ extension DbInvoices on DatabaseHelper {
       if (invoice.type == InvoiceType.supplierPayment) {
         if (invoice.supplierPaymentAffectsCash && invoice.total > 1e-9) {
           final cust = invoice.customerName.isEmpty
-              ? 'مورد'
+              ? AppL10n.current.rpSupplierDefaultName
               : invoice.customerName;
           await txn.insert('cash_ledger', {
             'tenantId': tenantId,
             'transactionType': 'supplier_payment',
             'amount': -invoice.total,
             'amountFils': _toFils(-invoice.total),
-            'description': 'دفع مورد — $cust (سند #${id.toString()})',
+            'description': AppL10n.current.cashSupplierPaymentDesc(cust, id),
             'invoiceId': id,
             'workShiftId': shiftId,
             'createdAt': DateTime.now().toIso8601String(),
@@ -552,8 +559,8 @@ extension DbInvoices on DatabaseHelper {
             type: 'cash_entry_created',
             refTable: 'cash_ledger',
             refId: id,
-            title: 'قيد صندوق: دفع مورد',
-            details: 'المنفّذ: $actorLabel — الفاتورة #$id — $cust',
+            title: AppL10n.current.actCashSupplierPayment,
+            details: AppL10n.current.actCashInvoiceLinkDetails(actorLabel, id, cust),
             amount: -invoice.total,
           );
         }
@@ -573,13 +580,13 @@ extension DbInvoices on DatabaseHelper {
                 : 'sale_other';
           }
           final cust = invoice.customerName.isEmpty
-              ? 'عميل'
+              ? AppL10n.current.debtsCustomer
               : invoice.customerName;
           final desc = serviceReceipt
               ? (invoice.type == InvoiceType.debtCollection
-                    ? 'سند تحصيل دين #$id — $cust'
-                    : 'سند تسديد قسط #$id — $cust')
-              : 'فاتورة بيع #${id.toString()} — $cust';
+                    ? AppL10n.current.cashDebtCollectionDesc(id, cust)
+                    : AppL10n.current.cashInstallmentDesc(id, cust))
+              : AppL10n.current.cashSaleInvoiceDesc(id, cust);
           await txn.insert('cash_ledger', {
             'tenantId': tenantId,
             'transactionType': typeLabel,
@@ -595,9 +602,12 @@ extension DbInvoices on DatabaseHelper {
             type: 'cash_entry_created',
             refTable: 'cash_ledger',
             refId: id,
-            title: 'قيد صندوق مرتبط بفاتورة',
-            details:
-                'المنفّذ: $actorLabel — الفاتورة #$id — نوع القيد: $typeLabel',
+            title: AppL10n.current.actCashInvoiceLinked,
+            details: AppL10n.current.actCashInvoiceLinkedDetails(
+              actorLabel,
+              id,
+              typeLabel,
+            ),
             amount: cashAmount,
           );
         }
@@ -620,8 +630,20 @@ extension DbInvoices on DatabaseHelper {
           'transactionType': 'sale_return',
           'amount': -refund,
           'amountFils': _toFils(-refund),
-          'description':
-              'مرتجع فاتورة #${id.toString()}${invoice.originalInvoiceId != null ? ' (أصل #${invoice.originalInvoiceId})' : ''} — ${invoice.customerName.isEmpty ? 'عميل' : invoice.customerName}',
+          'description': invoice.originalInvoiceId != null
+              ? AppL10n.current.cashReturnDescWithOrig(
+                  id,
+                  invoice.originalInvoiceId!,
+                  invoice.customerName.isEmpty
+                      ? AppL10n.current.debtsCustomer
+                      : invoice.customerName,
+                )
+              : AppL10n.current.cashReturnDesc(
+                  id,
+                  invoice.customerName.isEmpty
+                      ? AppL10n.current.debtsCustomer
+                      : invoice.customerName,
+                ),
           'invoiceId': id,
           'workShiftId': shiftId,
           'createdAt': DateTime.now().toIso8601String(),
@@ -631,8 +653,8 @@ extension DbInvoices on DatabaseHelper {
           type: 'cash_entry_created',
           refTable: 'cash_ledger',
           refId: id,
-          title: 'قيد صندوق: مرتجع بيع',
-          details: 'المنفّذ: $actorLabel — الفاتورة #$id',
+          title: AppL10n.current.actCashReturn,
+          details: AppL10n.current.actCashReturnDetails(actorLabel, id),
           amount: -refund,
         );
       }
@@ -713,28 +735,28 @@ extension DbInvoices on DatabaseHelper {
 
     void ensureFinite(String label, double v) {
       if (!isFiniteNum(v)) {
-        throw const FormatException(
-          'بيانات الفاتورة غير صالحة (قيمة رقمية غير منتهية).',
+        throw FormatException(
+          AppL10n.current.dvInvalidNumeric,
         );
       }
       if (v < -moneyTol) {
-        throw FormatException('لا يمكن أن يكون $label أقل من الصفر.');
+        throw FormatException(AppL10n.current.dvNotBelowZero(label));
       }
     }
 
     if (invoice.items.isEmpty) {
-      throw const FormatException('لا يمكن حفظ فاتورة بدون بنود.');
+      throw FormatException(AppL10n.current.dvNoItems);
     }
 
-    ensureFinite('الخصم', invoice.discount);
-    ensureFinite('الضريبة', invoice.tax);
-    ensureFinite('الدفعة المقدمة', invoice.advancePayment);
-    ensureFinite('إجمالي الفاتورة', invoice.total);
+    ensureFinite(AppL10n.current.dvLabelDiscount, invoice.discount);
+    ensureFinite(AppL10n.current.taxLabel, invoice.tax);
+    ensureFinite(AppL10n.current.dvLabelAdvance, invoice.advancePayment);
+    ensureFinite(AppL10n.current.dvLabelInvoiceTotal, invoice.total);
 
     if (!isFiniteNum(invoice.discountPercent) ||
         invoice.discountPercent < -moneyTol ||
         invoice.discountPercent > 100 + moneyTol) {
-      throw const FormatException('نسبة الخصم يجب أن تكون بين 0% و100%.');
+      throw FormatException(AppL10n.current.dvDiscountPctRange);
     }
 
     final serviceReceipt =
@@ -742,8 +764,8 @@ extension DbInvoices on DatabaseHelper {
         invoice.type == InvoiceType.installmentCollection ||
         invoice.type == InvoiceType.supplierPayment;
     if (serviceReceipt && invoice.items.length != 1) {
-      throw const FormatException(
-        'سندات التحصيل/الدفع يجب أن تحتوي على بند واحد فقط.',
+      throw FormatException(
+        AppL10n.current.dvCollectionSingleItem,
       );
     }
 
@@ -755,28 +777,28 @@ extension DbInvoices on DatabaseHelper {
       final baseQty = item.baseQtyResolved;
 
       if (item.productName.trim().isEmpty) {
-        throw FormatException('اسم المنتج في البند رقم $lineNo مطلوب.');
+        throw FormatException(AppL10n.current.dvItemNameRequired(lineNo));
       }
-      ensureFinite('سعر البند رقم $lineNo', item.price);
-      ensureFinite('إجمالي البند رقم $lineNo', item.total);
+      ensureFinite(AppL10n.current.dvItemPriceLabel(lineNo), item.price);
+      ensureFinite(AppL10n.current.dvItemTotalLabel(lineNo), item.total);
       if (!isFiniteNum(enteredQty) || enteredQty <= 0) {
         throw FormatException(
-          'كمية البيع في البند رقم $lineNo يجب أن تكون أكبر من صفر.',
+          AppL10n.current.dvItemQtyPositive(lineNo),
         );
       }
       if (!isFiniteNum(baseQty) || baseQty <= 0) {
         throw FormatException(
-          'كمية المخزون الأساسية في البند رقم $lineNo غير صالحة.',
+          AppL10n.current.dvItemBaseQtyInvalid(lineNo),
         );
       }
       if (item.productId != null && item.productId! <= 0) {
-        throw FormatException('معرّف المنتج في البند رقم $lineNo غير صالح.');
+        throw FormatException(AppL10n.current.dvItemProductIdInvalid(lineNo));
       }
 
       final expectedLine = item.price * enteredQty;
       if ((expectedLine - item.total).abs() > moneyTol) {
         throw FormatException(
-          'إجمالي البند رقم $lineNo غير متطابق مع السعر × الكمية.',
+          AppL10n.current.dvItemTotalMismatch(lineNo),
         );
       }
 
@@ -784,18 +806,18 @@ extension DbInvoices on DatabaseHelper {
     }
 
     if (invoice.discount - subtotal > moneyTol) {
-      throw const FormatException('قيمة الخصم لا يمكن أن تتجاوز مجموع البنود.');
+      throw FormatException(AppL10n.current.dvDiscountExceedsSum);
     }
 
     final expectedTotal = subtotal - invoice.discount + invoice.tax;
     if ((expectedTotal - invoice.total).abs() > moneyTol) {
-      throw const FormatException(
-        'إجمالي الفاتورة غير متطابق مع مجموع البنود بعد الخصم والضريبة.',
+      throw FormatException(
+        AppL10n.current.dvTotalMismatch,
       );
     }
     if (invoice.advancePayment - invoice.total > moneyTol) {
-      throw const FormatException(
-        'الدفعة المقدمة لا يمكن أن تتجاوز إجمالي الفاتورة.',
+      throw FormatException(
+        AppL10n.current.dvAdvanceExceedsTotal,
       );
     }
   }
@@ -1076,9 +1098,10 @@ extension DbInvoices on DatabaseHelper {
         type: 'invoice_deleted',
         refTable: 'invoices',
         refId: id,
-        title: 'حذف فاتورة',
-        details:
-            'الفاتورة #${(inv['id'] ?? id).toString()} — الحذف المنطقي يحفظ سجل التدقيق',
+        title: AppL10n.current.actDeleteInvoice,
+        details: AppL10n.current.actDeleteInvoiceDetails(
+          (inv['id'] ?? id).toString(),
+        ),
         amount: (inv['total'] as num?)?.toDouble(),
       );
 

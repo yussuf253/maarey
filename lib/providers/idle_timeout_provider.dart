@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../l10n/app_l10n.dart';
+
 /// مهلة عدم النشاط قبل عرض شاشة السكون (بالدقائق). 0 = معطّل.
 class IdleTimeoutProvider extends ChangeNotifier {
   IdleTimeoutProvider() {
@@ -19,19 +21,20 @@ class IdleTimeoutProvider extends ChangeNotifier {
   Duration get duration => Duration(minutes: _minutes);
 
   static String labelForMinutes(int m) {
+    final loc = AppL10n.current;
     switch (m) {
       case 0:
-        return 'معطّل';
+        return loc.disabledLabel;
       case 5:
-        return '5 دقائق';
+        return loc.idl5Minutes;
       case 10:
-        return '10 دقائق';
+        return loc.idl10Minutes;
       case 15:
-        return '15 دقيقة';
+        return loc.idl15Minutes;
       case 30:
-        return '30 دقيقة';
+        return loc.idl30Minutes;
       default:
-        return '$m دقيقة';
+        return loc.idlMinutesGeneric(m);
     }
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:naboo/l10n/app_l10n.dart';
 import 'package:naboo/l10n/generated/app_localizations.dart';
 
 import 'invoice.dart';
@@ -196,7 +197,7 @@ class RecentActivityEntry {
     final kind = r['kind']?.toString() ?? '';
     final pts = (r['points'] as num?)?.toInt() ?? 0;
     final name = r['customerName']?.toString().trim();
-    final sub = (name != null && name.isNotEmpty) ? name : 'عميل #$cid';
+    final sub = (name != null && name.isNotEmpty) ? name : AppL10n.current.raCustomerFallback(cid);
     final raw = r['createdAt']?.toString();
     final date = DateTime.tryParse(raw ?? '') ?? DateTime.now();
     final typeLabel = loyaltyKindLabelForActivity(kind, loc);
@@ -246,7 +247,7 @@ class RecentActivityEntry {
 
   factory RecentActivityEntry.fromCustomerCreatedRow(Map<String, dynamic> r, AppLocalizations loc) {
     final id = r['id'] as int;
-    final name = r['name']?.toString().trim() ?? 'عميل #$id';
+    final name = r['name']?.toString().trim() ?? AppL10n.current.raCustomerFallback(id);
     final raw = r['createdAt']?.toString();
     final date = DateTime.tryParse(raw ?? '') ?? DateTime.now();
     return RecentActivityEntry(
@@ -269,7 +270,7 @@ class RecentActivityEntry {
 
   factory RecentActivityEntry.fromProductCreatedRow(Map<String, dynamic> r, AppLocalizations loc) {
     final id = r['id'] as int;
-    final name = r['name']?.toString().trim() ?? 'صنف #$id';
+    final name = r['name']?.toString().trim() ?? AppL10n.current.raItemFallback(id);
     final raw = r['createdAt']?.toString();
     final date = DateTime.tryParse(raw ?? '') ?? DateTime.now();
     return RecentActivityEntry(

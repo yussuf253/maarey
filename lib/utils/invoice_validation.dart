@@ -1,3 +1,4 @@
+import '../l10n/app_l10n.dart';
 import '../models/invoice.dart';
 
 /// نتيجة فحص توازن الفاتورة. عند [isValid] = `false` تحتوي [errorMessage]
@@ -56,38 +57,38 @@ ValidationResult validateInvoiceBalance(
   for (final item in inv.items) {
     if (item.quantity.isNaN || item.price.isNaN || item.total.isNaN) {
       return ValidationResult.invalid(
-        'بند يحتوي قيمة غير صالحة (NaN): ${item.productName}',
+        AppL10n.current.ivItemInvalidValue(item.productName),
       );
     }
     if (item.quantity < 0) {
       return ValidationResult.invalid(
-        'الكمية سالبة في بند: ${item.productName}',
+        AppL10n.current.ivItemNegativeQty(item.productName),
       );
     }
     if (item.price < 0) {
       return ValidationResult.invalid(
-        'سعر البند سالب: ${item.productName}',
+        AppL10n.current.ivItemNegativePrice(item.productName),
       );
     }
     if (item.total < 0) {
       return ValidationResult.invalid(
-        'إجمالي البند سالب: ${item.productName}',
+        AppL10n.current.ivItemNegativeTotal(item.productName),
       );
     }
   }
 
   // ---- 2) ضريبة/خصم غير سالبَيْن. -----------------------------------------
   if (inv.tax.isNaN || inv.discount.isNaN || inv.loyaltyDiscount.isNaN) {
-    return ValidationResult.invalid('الفاتورة تحتوي قيمة غير صالحة (NaN)');
+    return ValidationResult.invalid(AppL10n.current.ivInvoiceNaN);
   }
   if (inv.tax < 0) {
-    return ValidationResult.invalid('الضريبة سالبة');
+    return ValidationResult.invalid(AppL10n.current.ivTaxNegative);
   }
   if (inv.discount < 0) {
-    return ValidationResult.invalid('الخصم سالب');
+    return ValidationResult.invalid(AppL10n.current.ivDiscountNegative);
   }
   if (inv.loyaltyDiscount < 0) {
-    return ValidationResult.invalid('خصم الولاء سالب');
+    return ValidationResult.invalid(AppL10n.current.ivLoyaltyDiscountNegative);
   }
 
   final isCollection = inv.type == InvoiceType.debtCollection ||
@@ -101,8 +102,10 @@ ValidationResult validateInvoiceBalance(
     // ---- 3) الخصم لا يتجاوز إجمالي البنود. -------------------------------
     if (totalDiscount > subtotal + tolerance) {
       return ValidationResult.invalid(
-        'الخصم (${_fmt(totalDiscount)}) أكبر من إجمالي البنود '
-        '(${_fmt(subtotal)})',
+        AppL10n.current.ivDiscountExceedsItems(
+          _fmt(totalDiscount),
+          _fmt(subtotal),
+        ),
       );
     }
 
@@ -111,34 +114,40 @@ ValidationResult validateInvoiceBalance(
         subtotal + inv.tax - inv.discount - inv.loyaltyDiscount;
     if ((inv.total - expectedTotal).abs() > tolerance) {
       return ValidationResult.invalid(
-        'إجمالي الفاتورة (${_fmt(inv.total)}) لا يطابق المعادلة: '
-        'مجموع البنود (${_fmt(subtotal)}) + الضريبة (${_fmt(inv.tax)}) '
-        '- الخصم الكلي (${_fmt(totalDiscount)}) = ${_fmt(expectedTotal)}',
+        AppL10n.current.ivTotalMismatch(
+          _fmt(inv.total),
+          _fmt(subtotal),
+          _fmt(inv.tax),
+          _fmt(totalDiscount),
+          _fmt(expectedTotal),
+        ),
       );
     }
   }
 
   // ---- 5) total >= 0. -----------------------------------------------------
   if (inv.total.isNaN) {
-    return ValidationResult.invalid('إجمالي الفاتورة قيمة غير صالحة (NaN)');
+    return ValidationResult.invalid(AppL10n.current.ivTotalNaN);
   }
   if (inv.total < -tolerance) {
-    return ValidationResult.invalid('إجمالي الفاتورة سالب');
+    return ValidationResult.invalid(AppL10n.current.ivTotalNegative);
   }
 
   // ---- 6) advancePayment >= 0. -------------------------------------------
   if (inv.advancePayment.isNaN) {
-    return ValidationResult.invalid('المبلغ المدفوع قيمة غير صالحة (NaN)');
+    return ValidationResult.invalid(AppL10n.current.ivPaidNaN);
   }
   if (inv.advancePayment < 0) {
-    return ValidationResult.invalid('المبلغ المدفوع سالب');
+    return ValidationResult.invalid(AppL10n.current.ivPaidNegative);
   }
 
   // ---- 7) advancePayment <= total. ---------------------------------------
   if (inv.advancePayment > inv.total + tolerance) {
     return ValidationResult.invalid(
-      'المبلغ المدفوع (${_fmt(inv.advancePayment)}) أكبر من إجمالي '
-      'الفاتورة (${_fmt(inv.total)})',
+      AppL10n.current.ivPaidExceedsTotal(
+        _fmt(inv.advancePayment),
+        _fmt(inv.total),
+      ),
     );
   }
 

@@ -415,7 +415,9 @@ extension DbDebts on DatabaseHelper {
       final names = list
           .map((x) => x.customerName.trim())
           .where((s) => s.isNotEmpty);
-      final display = names.isNotEmpty ? names.first : 'عميل #${e.key}';
+      final display = names.isNotEmpty
+          ? names.first
+          : '${AppL10n.current.debtsCustomer} #${e.key}';
       out.add(
         CustomerDebtSummary(
           customerId: e.key,
@@ -436,7 +438,7 @@ extension DbDebts on DatabaseHelper {
         oldest = oldest == null || x.date.isBefore(oldest) ? x.date : oldest;
       }
       final display = list.first.customerName.trim().isEmpty
-          ? 'عميل'
+          ? AppL10n.current.debtsCustomer
           : list.first.customerName.trim();
       out.add(
         CustomerDebtSummary(
@@ -568,9 +570,11 @@ extension DbDebts on DatabaseHelper {
 
       final loyaltySettings = await _readLoyaltySettings(txn);
       var meta =
-          'دين قبل التسديد: ${debtBefore.toStringAsFixed(0)} Fdj — متبقي بعد: ${debtAfter.toStringAsFixed(0)} Fdj';
+          '${AppL10n.current.dpDebtBefore}: ${debtBefore.toStringAsFixed(0)} Fdj — ${AppL10n.current.dpRemainingAfter}: ${debtAfter.toStringAsFixed(0)} Fdj';
       final n = note?.trim();
-      if (n != null && n.isNotEmpty) meta = '$meta — ملاحظة: $n';
+      if (n != null && n.isNotEmpty) {
+        meta = '$meta — ${AppL10n.current.dpNote}: $n';
+      }
       if (meta.length > 900) meta = meta.substring(0, 900);
 
       final receiptInv = Invoice(
@@ -579,7 +583,7 @@ extension DbDebts on DatabaseHelper {
         type: InvoiceType.debtCollection,
         items: [
           InvoiceItem(
-            productName: 'تحصيل دين آجل',
+            productName: AppL10n.current.dpCollectionProduct,
             quantity: 1,
             price: applied,
             total: applied,

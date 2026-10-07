@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:ui' show ImageFilter;
+import 'package:naboo/l10n/generated/app_localizations.dart';
 
 import '../../theme/erp_input_constants.dart';
 import '../../theme/design_tokens.dart';
@@ -396,7 +397,7 @@ class _AppInputState extends State<AppInput> {
         Padding(
           padding: const EdgeInsetsDirectional.only(start: 4),
           child: Text(
-            '(اختياري)',
+            AppLocalizations.of(context)!.optional,
             style: TextStyle(
               fontSize: 11,
               height: 1.25,

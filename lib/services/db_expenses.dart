@@ -398,15 +398,19 @@ extension DbExpenses on DatabaseHelper {
       };
       expenseId = await txn.insert('expenses', basePayload);
 
-      final actor = employeeUserId != null ? 'الموظف #$employeeUserId' : 'غير معروف';
-      final statusLabel = status == 'paid' ? 'مدفوع' : 'معلق';
+      final actor = employeeUserId != null
+          ? AppL10n.current.actorEmployee(employeeUserId)
+          : AppL10n.current.rptUnknown;
+      final statusLabel = status == 'paid'
+          ? AppL10n.current.paid
+          : AppL10n.current.pending;
       await _insertActivityLogInTxn(
         txn,
         type: 'expense_created',
         refTable: 'expenses',
         refId: expenseId,
-        title: 'تسجيل مصروف',
-        details: 'الفئة #$categoryId • الحالة: $statusLabel • المنفذ: $actor',
+        title: AppL10n.current.actExpenseCreated,
+        details: AppL10n.current.actExpenseDetails(categoryId, statusLabel, actor),
         amount: amount,
         tenantId: tenantId,
       );
@@ -467,10 +471,11 @@ extension DbExpenses on DatabaseHelper {
       limit: 1,
     );
     final catName = catRows.isNotEmpty
-        ? (catRows.first['name']?.toString() ?? 'مصروف')
-        : 'مصروف';
-    final extra = (description != null && description.isNotEmpty) ? ' — $description' : '';
-    final note = 'مصروف — $catName$extra (#exp:$expenseId)';
+        ? (catRows.first['name']?.toString() ?? AppL10n.current.expenseWord)
+        : AppL10n.current.expenseWord;
+    final note = (description != null && description.isNotEmpty)
+        ? AppL10n.current.expenseLedgerNoteDesc(catName, description, expenseId)
+        : AppL10n.current.expenseLedgerNote(catName, expenseId);
     final ledgerGlobalId = _expenseCashLedgerGlobalId(expenseGlobalId);
     final updatedIso = DateTime.now().toUtc().toIso8601String();
     final fils = -(amount.abs() * 1000).round();
@@ -503,15 +508,17 @@ extension DbExpenses on DatabaseHelper {
       await txn.update('cash_ledger', row, where: 'id = ?', whereArgs: [id]);
     }
 
-    final actor = (actorName ?? '').trim().isEmpty ? 'غير معروف' : actorName!.trim();
+    final actor = (actorName ?? '').trim().isEmpty
+        ? AppL10n.current.rptUnknown
+        : actorName!.trim();
     if (existing.isEmpty) {
       await _insertActivityLogInTxn(
         txn,
         type: 'cash_entry_created',
         refTable: 'cash_ledger',
         refId: id,
-        title: 'قيد صندوق: مصروف',
-        details: 'مصروف #$expenseId • فئة #$categoryId • المنفذ: $actor',
+        title: AppL10n.current.actCashEntryExpense,
+        details: AppL10n.current.actCashEntryExpenseDetails(expenseId, categoryId, actor),
         amount: -amount.abs(),
         tenantId: tenantId,
       );
@@ -557,7 +564,9 @@ extension DbExpenses on DatabaseHelper {
           existingRows.first['createdAt'] as String? ??
           DateTime.now().toUtc().toIso8601String();
       final priorLedger = (existingRows.first['cashLedgerId'] as num?)?.toInt();
-      final actor = employeeUserId != null ? 'الموظف #$employeeUserId' : 'غير معروف';
+      final actor = employeeUserId != null
+          ? AppL10n.current.actorEmployee(employeeUserId)
+          : AppL10n.current.rptUnknown;
       final ledgerGid = _expenseCashLedgerGlobalId(globalId);
 
       int? newLedgerId;
@@ -587,8 +596,8 @@ extension DbExpenses on DatabaseHelper {
             type: 'cash_entry_deleted',
             refTable: 'cash_ledger',
             refId: priorLedger,
-            title: 'حذف قيد صندوق: مصروف',
-            details: 'تم حذف القيد المرتبط بمصروف #$id أثناء التعديل • المنفذ: $actor',
+            title: AppL10n.current.actDeleteCashEntryExpense,
+            details: AppL10n.current.actCashEntryExpenseDeletedDetails(id, actor),
             amount: null,
             tenantId: tenantId,
           );
@@ -629,14 +638,16 @@ extension DbExpenses on DatabaseHelper {
 
       // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
       // Cash ledger entry is synced independently via the cash_ledger table.
-      final statusLabel = status == 'paid' ? 'مدفوع' : 'معلق';
+      final statusLabel = status == 'paid'
+          ? AppL10n.current.paid
+          : AppL10n.current.pending;
       await _insertActivityLogInTxn(
         txn,
         type: 'expense_updated',
         refTable: 'expenses',
         refId: id,
-        title: 'تعديل مصروف',
-        details: 'الفئة #$categoryId • الحالة: $statusLabel • المنفذ: $actor',
+        title: AppL10n.current.editExpense,
+        details: AppL10n.current.actExpenseDetails(categoryId, statusLabel, actor),
         amount: amount,
         tenantId: tenantId,
       );
@@ -657,8 +668,10 @@ extension DbExpenses on DatabaseHelper {
         limit: 1,
       );
       final actor = prior.isNotEmpty && prior.first['employeeUserId'] != null
-          ? 'الموظف #${(prior.first['employeeUserId'] as num).toInt()}'
-          : 'غير معروف';
+          ? AppL10n.current.actorEmployee(
+              (prior.first['employeeUserId'] as num).toInt(),
+            )
+          : AppL10n.current.rptUnknown;
       final priorLedger = prior.isNotEmpty
           ? (prior.first['cashLedgerId'] as num?)?.toInt()
           : null;
@@ -692,8 +705,8 @@ extension DbExpenses on DatabaseHelper {
           type: 'cash_entry_deleted',
           refTable: 'cash_ledger',
           refId: priorLedger,
-          title: 'حذف قيد صندوق: مصروف',
-          details: 'حذف المصروف #$id أدى لحذف القيد المرتبط • المنفذ: $actor',
+          title: AppL10n.current.actDeleteCashEntryExpense,
+          details: AppL10n.current.actCashEntryExpenseDeletedDetails2(id, actor),
           amount: null,
           tenantId: tenantId,
         );
@@ -715,8 +728,11 @@ extension DbExpenses on DatabaseHelper {
         type: 'expense_deleted',
         refTable: 'expenses',
         refId: id,
-        title: 'حذف مصروف',
-        details: 'الفئة #${categoryId ?? '-'} • المنفذ: $actor',
+        title: AppL10n.current.actDeleteExpense,
+        details: AppL10n.current.actDeleteExpenseDetails(
+          '${categoryId ?? '-'}',
+          actor,
+        ),
         amount: amount,
         tenantId: tenantId,
       );

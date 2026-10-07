@@ -156,7 +156,7 @@ class EmployeeIdCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 6),
                 child: Text(
-                  'QR فقط: كاميرا التطبيق، أو جهاز قراءة خارجي (USB/Bluetooth) يوجّه على البطاقة مع التركيز على حقل «جهاز القراءة» في نافذة فتح/إغلاق الوردية.',
+                  loc.eidQrReaderHint,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 10,

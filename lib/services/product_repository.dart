@@ -8,6 +8,7 @@ import 'package:uuid/uuid.dart';
 import 'cloud_sync_service.dart';
 import 'database_helper.dart';
 import 'tenant_context_service.dart';
+import '../l10n/app_l10n.dart';
 import '../models/new_product_extra_unit.dart';
 import '../utils/iqd_money.dart';
 
@@ -324,7 +325,7 @@ class ProductRepository {
     String? description,
   }) async {
     final trimmed = name.trim();
-    if (trimmed.isEmpty) return 'اسم التصنيف مطلوب';
+    if (trimmed.isEmpty) return AppL10n.current.prCatNameRequired;
     final db = await _db;
     final clash = await db.query(
       'categories',
@@ -333,7 +334,7 @@ class ProductRepository {
       whereArgs: [trimmed],
       limit: 1,
     );
-    if (clash.isNotEmpty) return 'هذا الاسم مستخدم مسبقاً';
+    if (clash.isNotEmpty) return AppL10n.current.prNameUsed;
     String? parentGlobalId;
     if (parentId != null) {
       final p = await db.query(
@@ -343,7 +344,7 @@ class ProductRepository {
         whereArgs: [parentId],
         limit: 1,
       );
-      if (p.isEmpty) return 'التصنيف الرئيسي غير صالح';
+      if (p.isEmpty) return AppL10n.current.prParentInvalid;
       parentGlobalId = p.first['global_id'] as String?;
     }
     final now = DateTime.now().toIso8601String();
@@ -383,7 +384,7 @@ class ProductRepository {
       limit: 1,
     );
     if (kids.isNotEmpty) {
-      return 'لا يمكن الحذف: يوجد تصنيفات فرعية';
+      return AppL10n.current.prCatHasSubcategories;
     }
     final prods = await db.query(
       'products',
@@ -393,7 +394,7 @@ class ProductRepository {
       limit: 1,
     );
     if (prods.isNotEmpty) {
-      return 'لا يمكن الحذف: التصنيف مرتبط بمنتجات';
+      return AppL10n.current.prCatLinkedToProducts;
     }
     await db.transaction((txn) async {
       final cRow = await txn.query('categories', columns: ['global_id'], where: 'id = ?', whereArgs: [id], limit: 1);
@@ -428,7 +429,7 @@ class ProductRepository {
   /// إضافة ماركة جديدة. يُرجع `null` عند النجاح أو رسالة خطأ عربية.
   Future<String?> insertBrandByName(String name) async {
     final trimmed = name.trim();
-    if (trimmed.isEmpty) return 'اسم الماركة مطلوب';
+    if (trimmed.isEmpty) return AppL10n.current.prBrandNameRequired;
     final db = await _db;
     final clash = await db.query(
       'brands',
@@ -437,7 +438,7 @@ class ProductRepository {
       whereArgs: [trimmed],
       limit: 1,
     );
-    if (clash.isNotEmpty) return 'هذه الماركة موجودة مسبقاً';
+    if (clash.isNotEmpty) return AppL10n.current.prBrandExists;
     final now = DateTime.now().toIso8601String();
     final gid = const Uuid().v4();
     final row = {
@@ -1190,19 +1191,19 @@ class ProductRepository {
     final n = name.trim();
     final bn = baseUnitName.trim();
     final bs = baseUnitSymbol.trim();
-    if (n.isEmpty) return 'اسم القالب مطلوب';
-    if (bn.isEmpty) return 'اسم الوحدة الأساسية مطلوب';
-    if (bs.isEmpty) return 'تمييز الوحدة الأساسية مطلوب';
+    if (n.isEmpty) return AppL10n.current.prTplNameRequired;
+    if (bn.isEmpty) return AppL10n.current.prTplBaseUnitRequired;
+    if (bs.isEmpty) return AppL10n.current.prTplBaseSymbolRequired;
     for (var i = 0; i < conversions.length; i++) {
       final c = conversions[i];
       final un = (c['unitName'] as String?)?.trim() ?? '';
       final sym = (c['unitSymbol'] as String?)?.trim() ?? '';
       final f = (c['factorToBase'] as num?)?.toDouble() ?? 0;
       if (un.isEmpty || sym.isEmpty) {
-        return 'أكمل اسم التمييز لكل وحدة تحويل أو احذف الصف الفارغ';
+        return AppL10n.current.prTplCompleteConversion;
       }
       if (f <= 0) {
-        return 'معامل التحويل يجب أن يكون أكبر من صفر';
+        return AppL10n.current.prTplFactorPositive;
       }
     }
     final db = await _db;
@@ -1240,18 +1241,18 @@ class ProductRepository {
     final n = name.trim();
     final bn = baseUnitName.trim();
     final bs = baseUnitSymbol.trim();
-    if (n.isEmpty) return 'اسم القالب مطلوب';
-    if (bn.isEmpty) return 'اسم الوحدة الأساسية مطلوب';
-    if (bs.isEmpty) return 'تمييز الوحدة الأساسية مطلوب';
+    if (n.isEmpty) return AppL10n.current.prTplNameRequired;
+    if (bn.isEmpty) return AppL10n.current.prTplBaseUnitRequired;
+    if (bs.isEmpty) return AppL10n.current.prTplBaseSymbolRequired;
     for (final c in conversions) {
       final un = (c['unitName'] as String?)?.trim() ?? '';
       final sym = (c['unitSymbol'] as String?)?.trim() ?? '';
       final f = (c['factorToBase'] as num?)?.toDouble() ?? 0;
       if (un.isEmpty || sym.isEmpty) {
-        return 'أكمل اسم التمييز لكل وحدة تحويل أو احذف الصف الفارغ';
+        return AppL10n.current.prTplCompleteConversion;
       }
       if (f <= 0) {
-        return 'معامل التحويل يجب أن يكون أكبر من صفر';
+        return AppL10n.current.prTplFactorPositive;
       }
     }
     final db = await _db;
@@ -2270,7 +2271,7 @@ class ProductRepository {
       );
       if (rows.isEmpty) return code;
     }
-    throw StateError('تعذر توليد رمز منتج فريد. حاول مجدداً.');
+    throw StateError(AppL10n.current.prCodeGenFailed);
   }
 
   Future<void> _enqueueProductMutation(DatabaseExecutor txn, int productId, String operation) async {

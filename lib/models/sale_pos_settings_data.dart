@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
+import '../l10n/app_l10n.dart';
 import 'invoice.dart';
 import '../theme/sale_brand.dart';
 
@@ -79,54 +80,56 @@ abstract final class AppFontFamilies {
   }
 
   static String labelAr(String family) {
+    final loc = AppL10n.current;
     switch (normalize(family)) {
       case notoNaskhArabic:
-        return 'نوتو نسخ عربي';
+        return loc.fpNotoNaskh;
       case cairo:
-        return 'القاهرة';
+        return loc.fpCairo;
       case almarai:
-        return 'المراعي';
+        return loc.fpAlmarai;
       case amiri:
-        return 'أميري';
+        return loc.fpAmiri;
       case lateef:
-        return 'لطيف';
+        return loc.fpLateef;
       case scheherazadeNew:
-        return 'شهرزاد الجديد';
+        return loc.fpScheherazadeNew;
       case ibmPlexSansArabic:
-        return 'آي بي إم بلكس سانس عربي';
+        return loc.fpIbmPlexSansArabic;
       case elMessiri:
-        return 'المسيري';
+        return loc.fpElMessiri;
       case changa:
-        return 'تشانغا';
+        return loc.fpChanga;
       case tajawal:
       default:
-        return 'تجوال';
+        return loc.fpTajawal;
     }
   }
 
   static String subtitleAr(String family) {
+    final loc = AppL10n.current;
     switch (normalize(family)) {
       case notoNaskhArabic:
-        return 'نسخ تقليدي — مناسب للنصوص الطويلة والوثائق.';
+        return loc.fpNotoNaskhDesc;
       case cairo:
-        return 'هندسي عصري — واجهات وتطبيقات حديثة.';
+        return loc.fpCairoDesc;
       case almarai:
-        return 'نظيف ومقروء — يُستخدم كثيراً في الواجهات العربية.';
+        return loc.fpAlmaraiDesc;
       case amiri:
-        return 'كلاسيكي مائل للكتب والطباعة الرصينة.';
+        return loc.fpAmiriDesc;
       case lateef:
-        return 'نسخي مريح بسُمك متوسط — تميّز بسيط.';
+        return loc.fpLateefDesc;
       case scheherazadeNew:
-        return 'نسخ تقليدي أنيق — حروف طويلة ووضوح جيد.';
+        return loc.fpScheherazadeNewDesc;
       case ibmPlexSansArabic:
-        return 'تقني منظم — أرقام وبيانات واضحة.';
+        return loc.fpIbmPlexDesc;
       case elMessiri:
-        return 'عناوين قوية — إيقاع مميز للعناوين.';
+        return loc.fpElMessiriDesc;
       case changa:
-        return 'مائل للعرض — حروف عريضة ولافتة.';
+        return loc.fpChangaDesc;
       case tajawal:
       default:
-        return 'خط عصري وواضح للواجهات والعناوين.';
+        return loc.fpTajawalDesc;
     }
   }
 }

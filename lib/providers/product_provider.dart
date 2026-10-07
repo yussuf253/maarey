@@ -1,6 +1,7 @@
 import 'dart:async' show unawaited;
 
 import 'package:flutter/material.dart';
+import '../l10n/app_l10n.dart';
 import '../models/new_product_extra_unit.dart';
 import '../services/cloud_sync_service.dart';
 import '../services/product_repository.dart';
@@ -180,14 +181,14 @@ class ProductProvider extends ChangeNotifier {
       return null;
     } on StateError catch (e) {
       if (e.message == 'duplicate_barcode') {
-        return 'هذا الباركود مستخدم لمنتج آخر.';
+        return AppL10n.current.apBarcodeUsedByOther;
       }
       if (e.message == 'bad_unit_factor') {
-        return 'عامل التحويل يجب أن يكون أكبر من 0 لكل وحدة إضافية.';
+        return AppL10n.current.apConversionFactorGt0;
       }
       return e.message;
     } catch (e) {
-      return 'تعذر حفظ المنتج: $e';
+      return AppL10n.current.productSaveFailed(e);
     }
   }
 

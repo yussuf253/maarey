@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:naboo/l10n/generated/app_localizations.dart';
+
 import '../../theme/erp_input_constants.dart';
 import '../../utils/iraqi_currency_format.dart';
 import '../../utils/numeric_format.dart';
@@ -273,7 +275,7 @@ class _AppPriceInputState extends State<AppPriceInput> {
           Padding(
             padding: const EdgeInsetsDirectional.only(start: 4),
             child: Text(
-              '(اختياري)',
+              AppLocalizations.of(context)!.optional,
               style: TextStyle(
                 fontSize: 11,
                 height: 1.25,

@@ -1,6 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:uuid/uuid.dart';
 
+import '../l10n/app_l10n.dart';
 import 'cloud_sync_service.dart';
 import 'database_helper.dart';
 import 'tenant_context_service.dart';
@@ -494,7 +495,7 @@ class InventoryRepository {
         'warehouseFromId': null,
         'warehouseToId': warehouseId,
         'referenceNo': 'stocktaking:$sessionId',
-        'notes': 'تسوية فروقات جرد: $sessionTitle',
+        'notes': '${AppL10n.current.invStocktakingAdjustNote}: $sessionTitle',
         'supplierName': null,
         'sourceType': 'manual',
         'sourceName': 'stocktaking',

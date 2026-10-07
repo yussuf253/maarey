@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../l10n/app_l10n.dart';
+
 /// تفضيلات ترتيب وإظهار أقسام الشاشة الرئيسية (لوحة التحكم).
 class DashboardLayoutProvider extends ChangeNotifier {
   DashboardLayoutProvider() {
@@ -21,16 +23,18 @@ class DashboardLayoutProvider extends ChangeNotifier {
     'charts',
   ];
 
+  /// عناوين الأقسام المعروضة في إعدادات لوحة الرئيسية (مُعرّبة عند القراءة).
   static String sectionTitleAr(String id) {
+    final loc = AppL10n.current;
     switch (id) {
       case 'header':
-        return 'الترحيب والملخص العلوي';
+        return loc.dlsHeader;
       case 'orbit':
-        return 'الاختصارات الدائرية (صندوق، بيع، …)';
+        return loc.dlsOrbit;
       case 'pinned':
-        return 'المنتجات المثبّتة';
+        return loc.dlsPinned;
       case 'charts':
-        return 'المخططات والنشاط الأخير';
+        return loc.dlsCharts;
       default:
         return id;
     }

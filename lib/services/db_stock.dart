@@ -142,7 +142,7 @@ extension DbStock on DatabaseHelper {
     required List<({int productId, double qty, double unitPrice})> lines,
   }) async {
     if (lines.isEmpty) {
-      return (ok: false, message: 'لا توجد بنود بكمية صالحة', voucherId: null);
+      return (ok: false, message: AppL10n.current.stNoValidItems, voucherId: null);
     }
     final db = await database;
     final nowIso = DateTime.now().toIso8601String();
@@ -184,7 +184,7 @@ extension DbStock on DatabaseHelper {
             limit: 1,
           );
           if (prow.isEmpty) {
-            throw StateError('منتج غير موجود #${L.productId}');
+            throw StateError(AppL10n.current.stProductMissing(L.productId));
           }
           final track = ((prow.first['trackInventory'] as int?) ?? 1) != 0;
           final beforeRows = await txn.query(
@@ -236,14 +236,14 @@ extension DbStock on DatabaseHelper {
           ),
         );
         if ((ic ?? 0) < 1) {
-          throw StateError('لم يُحفظ أي بند للسند');
+          throw StateError(AppL10n.current.stNothingSaved);
         }
         return vId;
       });
       CloudSyncService.instance.scheduleSyncSoon();
       return (ok: true, message: '', voucherId: vid);
     } catch (e) {
-      return (ok: false, message: 'تعذّر الحفظ: $e', voucherId: null);
+      return (ok: false, message: AppL10n.current.saveError(e), voucherId: null);
     }
   }
 
@@ -262,7 +262,7 @@ extension DbStock on DatabaseHelper {
     required List<({int productId, double qty, double unitPrice})> lines,
   }) async {
     if (lines.isEmpty) {
-      return (ok: false, message: 'لا توجد بنود بكمية صالحة', voucherId: null);
+      return (ok: false, message: AppL10n.current.stNoValidItems, voucherId: null);
     }
     final db = await database;
     final nowIso = DateTime.now().toIso8601String();
@@ -304,7 +304,7 @@ extension DbStock on DatabaseHelper {
             limit: 1,
           );
           if (prow.isEmpty) {
-            throw StateError('منتج غير موجود #${L.productId}');
+            throw StateError(AppL10n.current.stProductMissing(L.productId));
           }
           final track = ((prow.first['trackInventory'] as int?) ?? 1) != 0;
           final allowNeg =
@@ -322,7 +322,10 @@ extension DbStock on DatabaseHelper {
           final after = before - L.qty;
           if (after < -1e-9 && !allowNeg) {
             throw StateError(
-              'رصيد غير كافٍ للمنتج #${L.productId} في المخزن (المتاح ${before.toStringAsFixed(0)})',
+              AppL10n.current.stInsufficientBalance(
+                L.productId,
+                before.toStringAsFixed(0),
+              ),
             );
           }
           final tot = L.qty * L.unitPrice;
@@ -364,7 +367,7 @@ extension DbStock on DatabaseHelper {
           ),
         );
         if ((ic ?? 0) < 1) {
-          throw StateError('لم يُحفظ أي بند للسند');
+          throw StateError(AppL10n.current.stNothingSaved);
         }
         return vId;
       });
@@ -392,12 +395,12 @@ extension DbStock on DatabaseHelper {
     if (warehouseFromId == warehouseToId) {
       return (
         ok: false,
-        message: 'المخزن المصدر والمستهدف متطابقان',
+        message: AppL10n.current.stSameWarehouse,
         voucherId: null,
       );
     }
     if (lines.isEmpty) {
-      return (ok: false, message: 'لا توجد بنود بكمية صالحة', voucherId: null);
+      return (ok: false, message: AppL10n.current.stNoValidItems, voucherId: null);
     }
     final db = await database;
     final nowIso = DateTime.now().toIso8601String();
@@ -437,7 +440,7 @@ extension DbStock on DatabaseHelper {
             limit: 1,
           );
           if (prow.isEmpty) {
-            throw StateError('منتج غير موجود #${L.productId}');
+            throw StateError(AppL10n.current.stProductMissing(L.productId));
           }
           final allowNeg =
               ((prow.first['allowNegativeStock'] as int?) ?? 0) != 0;
@@ -454,7 +457,7 @@ extension DbStock on DatabaseHelper {
           final fromAfter = fromBefore - L.qty;
           if (fromAfter < -1e-9 && !allowNeg) {
             throw StateError(
-              'رصيد غير كافٍ في المخزن المصدر للمنتج #${L.productId}',
+              AppL10n.current.stInsufficientSource(L.productId),
             );
           }
           final toRows = await txn.query(
@@ -516,7 +519,7 @@ extension DbStock on DatabaseHelper {
           ),
         );
         if ((ic ?? 0) < 1) {
-          throw StateError('لم يُحفظ أي بند للسند');
+          throw StateError(AppL10n.current.stNothingSaved);
         }
         return vId;
       });

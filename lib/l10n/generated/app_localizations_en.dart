@@ -6099,7 +6099,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cashSales => 'Cash sales';
 
   @override
-  String get creditSalesLabel => 'دين';
+  String get creditSalesLabel => 'Credit';
 
   @override
   String get noOutflowMovements => 'No outflow movements in this group';
@@ -6286,100 +6286,101 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dueDates => 'Due Dates';
 
   @override
-  String get monthlyPaymentLabel => 'القسط الشهري المقترح';
+  String get monthlyPaymentLabel => 'Suggested monthly payment';
 
   @override
-  String get interestRateLabel => 'نسبة الفائدة';
+  String get interestRateLabel => 'Interest rate';
 
   @override
-  String get downPaymentLabel => 'المقدّم';
+  String get downPaymentLabel => 'Down payment';
 
   @override
   String get downPaymentRequired => 'Down payment required';
 
   @override
-  String get advanceAmountLabel => 'المبلغ المموّل';
+  String get advanceAmountLabel => 'Financed amount';
 
   @override
-  String get minAdvancePercentLabel => 'أقل نسبة مقدّم من إجمالي الفاتورة (%)';
+  String get minAdvancePercentLabel =>
+      'Minimum down payment as % of invoice total';
 
   @override
   String get minAdvancePercentDesc =>
       'Example: 10 means advance must be at least 10% of total';
 
   @override
-  String get useCalendarMonthsLabel => 'استخدام أشهر تقويمية لتواريخ الاستحقاق';
+  String get useCalendarMonthsLabel => 'Use calendar months for due dates';
 
   @override
   String get useCalendarMonthsDesc =>
       'Active: add calendar month from reference. Disabled: round 30 days per period.';
 
   @override
-  String get referenceDateLabel => 'مرجع الجدولة (بداية العدّ)';
+  String get referenceDateLabel => 'Scheduling reference (count start)';
 
   @override
-  String get fromInvoiceDateLabel => 'من تاريخ الفاتورة';
+  String get fromInvoiceDateLabel => 'From invoice date';
 
   @override
-  String get fromSessionOpenLabel => 'من فتح الجلسة في النظام';
+  String get fromSessionOpenLabel => 'From session open in the system';
 
   @override
-  String get linkCustomerLabel => 'ربط العميل';
+  String get linkCustomerLabel => 'Link customer';
 
   @override
   String get selectRegisteredCustomer => 'Select a registered customer';
 
   @override
   String customerBalanceLabel(Object amount) {
-    return 'رصيد العميل المسجّل: $amount';
+    return 'Recorded customer balance: $amount';
   }
 
   @override
   String planCreatedAtLabel(Object date) {
-    return 'تم الإنشاء: $date';
+    return 'Created: $date';
   }
 
   @override
-  String get totalInstallmentsLabel => 'عدد الأقساط';
+  String get totalInstallmentsLabel => 'Number of installments';
 
   @override
-  String get remainingInstallmentsLabel => 'عدد أقساط المتبقي';
+  String get remainingInstallmentsLabel => 'Remaining installments';
 
   @override
   String get paidAmountLabel => 'Paid Amount';
 
   @override
-  String get remainingAmountLabel => 'المتبقي';
+  String get remainingAmountLabel => 'Remaining';
 
   @override
-  String get nextInstallmentLabel => 'القسط التالي';
+  String get nextInstallmentLabel => 'Next installment';
 
   @override
   String nextDueLabel(Object amount, Object date) {
-    return 'القسط التالي: $amount — $date';
+    return 'Next due: $amount — $date';
   }
 
   @override
   String firstDueLabel(Object date) {
-    return 'أول استحقاق: $date';
+    return 'First due: $date';
   }
 
   @override
   String installmentPaidLabel(Object date) {
-    return 'سُدد: $date';
+    return 'Paid: $date';
   }
 
   @override
-  String get installmentPendingLabel => 'المعلق';
+  String get installmentPendingLabel => 'Pending';
 
   @override
-  String get installmentOverdueLabel => 'متأخرة';
+  String get installmentOverdueLabel => 'Overdue';
 
   @override
-  String get installmentCompletedLabel => 'مكتملة';
+  String get installmentCompletedLabel => 'Completed';
 
   @override
-  String get settleInstallmentLabel => 'تسديد قسط';
+  String get settleInstallmentLabel => 'Pay installment';
 
   @override
   String settleInstallmentDesc(Object amount) {
@@ -6388,71 +6389,72 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cantRescheduleLabel =>
-      'لا يمكن إعادة جدولة الأقساط بعد تسديد قسط من هذه الخطة';
+      'Installments cannot be rescheduled after one has been paid on this plan';
 
   @override
   String get planAlreadyExistsLabel =>
-      'الخطة مسجّلة بالفعل وتظهر تحت «خطط التقسيط»';
+      'This plan is already recorded and appears under \"Installment plans\"';
 
   @override
-  String get planCreatedLabel => 'تم حفظ الجدول وربط العميل';
+  String get planCreatedLabel => 'Schedule saved and customer linked';
 
   @override
-  String get scheduleSavedLabel => 'تم حفظ جدول الأقساط';
+  String get scheduleSavedLabel => 'Installment schedule saved';
 
   @override
-  String get planLoadErrorLabel => 'تعذر تحميل خطة التقسيط';
+  String get planLoadErrorLabel => 'Could not load the installment plan';
 
   @override
-  String get paymentRecordErrorLabel => 'تعذر التسجيل (قد يكون القسط مدفوعاً)';
+  String get paymentRecordErrorLabel =>
+      'Could not record the payment (the installment may already be paid)';
 
   @override
   String planIdLabel(Object id) {
-    return 'خطة #$id';
+    return 'Plan #$id';
   }
 
   @override
   String installmentNumberLabel(Object index) {
-    return 'القسط #$index';
+    return 'Installment #$index';
   }
 
   @override
   String planMonthsLabel(Object count) {
-    return 'عدد الأشهر: $count';
+    return 'Number of months: $count';
   }
 
   @override
   String planSuggestedMonthlyLabel(Object amount) {
-    return 'القسط الشهري المقترح: $amount';
+    return 'Suggested monthly payment: $amount';
   }
 
   @override
   String planFinancedAtSaleLabel(Object amount) {
-    return 'المبلغ المموّل: $amount';
+    return 'Financed amount: $amount';
   }
 
   @override
   String planInterestAmountLabel(Object amount) {
-    return 'قيمة الفائدة: $amount';
+    return 'Interest amount: $amount';
   }
 
   @override
   String planProgressLabel(Object paid, Object total) {
-    return 'تقدّم السداد: $paid / $total';
+    return 'Repayment progress: $paid / $total';
   }
 
   @override
   String get noRemainingAfterAdvanceLabel =>
-      'لا يوجد مبلغ متبقٍ للتقسيط بعد المقدم';
+      'No remaining amount to finance after the down payment';
 
   @override
   String calendarScheduleLabel(Object step) {
-    return 'جدولة: شهر تقويمي × $step لكل قسط من المرجع';
+    return 'Schedule: 1 calendar month × $step per installment from the reference';
   }
 
   @override
   String roundScheduleLabel(Object step) {
-    return 'جدولة: تقريب 30 يوماً × $step لكل قسط من المرجع';
+    return 'Schedule: 30 days rounded × $step per installment from the reference';
   }
 
   @override
@@ -6462,13 +6464,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dueDayDesc => 'Seller selects from calendar (agreement)';
 
   @override
-  String get installmentSettingsSavedLabel => 'تم حفظ إعدادات التقسيط';
+  String get installmentSettingsSavedLabel => 'Installment settings saved';
 
   @override
-  String get requiredInstallmentsLabel => 'عدد الأقساط يجب أن يكون 1 على الأقل';
+  String get requiredInstallmentsLabel =>
+      'Number of installments must be at least 1';
 
   @override
-  String get validAmountLabel => 'قيمة غير صالحة';
+  String get validAmountLabel => 'Invalid amount';
 
   @override
   String get debtCollectionLabel => 'Debt Collection';
@@ -6477,19 +6480,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supplierPaymentLabel => 'Supplier Payment';
 
   @override
-  String get salaryLabel => 'رواتب';
+  String get salaryLabel => 'Salaries';
 
   @override
-  String get rentLabel => 'إيجار';
+  String get rentLabel => 'Rent';
 
   @override
-  String get waterLabel => 'ماء';
+  String get waterLabel => 'Water';
 
   @override
-  String get electricityLabel => 'كهرباء';
+  String get electricityLabel => 'Electricity';
 
   @override
-  String get otherLabel => 'آخرون';
+  String get otherLabel => 'Others';
 
   @override
   String get updateAction => 'Update';
@@ -6847,7 +6850,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get isExpensePrepaid => 'Is the expense prepaid?';
 
   @override
-  String get item => 'الصنف';
+  String get item => 'Item';
 
   @override
   String get itemLabel => 'Item';
@@ -16419,4 +16422,1247 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get countryUSA => 'United States';
+
+  @override
+  String get authEmailAlreadyRegistered =>
+      'This email is already registered — sign in or use another email';
+
+  @override
+  String get authReadAccountAfterCreate =>
+      'Could not read the account after creation';
+
+  @override
+  String get authReadAccountAfterIsolation =>
+      'Could not read the account after data isolation';
+
+  @override
+  String get authCreateAccountFailed =>
+      'Could not create the account. Try again.';
+
+  @override
+  String get authRateLimited =>
+      'Rate limit reached. Wait a few minutes and try again.';
+
+  @override
+  String get authNoAccountForEmail =>
+      'No account is linked to this email address.';
+
+  @override
+  String get authServerUnreachable =>
+      'Could not reach the server. Check your connection and try again.';
+
+  @override
+  String authSendOtpFailed(Object error) {
+    return 'Could not send the verification code: $error';
+  }
+
+  @override
+  String get authSendOtpNetwork =>
+      'Could not send the verification code. Check your internet connection.';
+
+  @override
+  String get authOtpInvalidOrExpired =>
+      'The verification code is incorrect or expired';
+
+  @override
+  String get authOtpWrongOrExpired =>
+      'The verification code is wrong or expired.';
+
+  @override
+  String get authOtpBannedEmail =>
+      'Could not complete verification for this email. Try another email or contact support.';
+
+  @override
+  String get authOtpVerifyFailed => 'Could not verify the code. Try again.';
+
+  @override
+  String get authSignupEmailInvalid =>
+      'Could not create the account. The email address is invalid.';
+
+  @override
+  String get authWeakPassword =>
+      'The password is too weak. Use a stronger one.';
+
+  @override
+  String get authSetPasswordFailed =>
+      'Could not set the password on the server. Try again.';
+
+  @override
+  String get authSetPasswordNetwork =>
+      'Could not set the password on the server. Check your connection.';
+
+  @override
+  String get authLocalAccountCreateFailed =>
+      'Could not create the account locally.';
+
+  @override
+  String get authLocalAccountCreateForUserFailed =>
+      'Could not create a local account for this user.';
+
+  @override
+  String get authLocalPrepFailed =>
+      'Could not finish preparing the account locally. Try again.';
+
+  @override
+  String get authPasswordTooShort => 'The password is too short';
+
+  @override
+  String get authVerificationSessionExpired =>
+      'The verification session expired. Request a new code and try again.';
+
+  @override
+  String get authUpdatePasswordFailed =>
+      'Could not update the password on the server. Try again.';
+
+  @override
+  String get authUpdatePasswordNetwork =>
+      'Could not update the password on the server. Check your connection.';
+
+  @override
+  String get authUpdatePasswordLocalFailed =>
+      'Could not update the password locally on this device.';
+
+  @override
+  String get authGoogleSigningIn => 'Signing in with Google. Please wait.';
+
+  @override
+  String get authGooglePageFailed => 'Could not open the Google sign-in page.';
+
+  @override
+  String get authGoogleIncomplete => 'Google sign-in was not completed.';
+
+  @override
+  String get authGoogleNoEmail => 'The Google account has no valid email.';
+
+  @override
+  String get authGoogleTimeout =>
+      'Google sign-in timed out. Check the authorization page and try again.';
+
+  @override
+  String get authGoogleFailed => 'Google sign-in failed. Try again.';
+
+  @override
+  String get authGoogleNetwork =>
+      'Google sign-in failed. Check your internet connection.';
+
+  @override
+  String get dlsHeader => 'Welcome & top summary';
+
+  @override
+  String get dlsOrbit => 'Circular shortcuts (cash register, sale, …)';
+
+  @override
+  String get dlsPinned => 'Pinned products';
+
+  @override
+  String get dlsCharts => 'Charts & recent activity';
+
+  @override
+  String get idl5Minutes => '5 minutes';
+
+  @override
+  String get idl10Minutes => '10 minutes';
+
+  @override
+  String get idl15Minutes => '15 minutes';
+
+  @override
+  String get idl30Minutes => '30 minutes';
+
+  @override
+  String idlMinutesGeneric(Object count) {
+    return '$count min';
+  }
+
+  @override
+  String productSaveFailed(Object error) {
+    return 'Could not save the product: $error';
+  }
+
+  @override
+  String get invoiceUnbalanced => 'Invoice is unbalanced';
+
+  @override
+  String ivItemInvalidValue(Object name) {
+    return 'Item with an invalid value (NaN): $name';
+  }
+
+  @override
+  String ivItemNegativeQty(Object name) {
+    return 'Negative quantity in item: $name';
+  }
+
+  @override
+  String ivItemNegativePrice(Object name) {
+    return 'Item price is negative: $name';
+  }
+
+  @override
+  String ivItemNegativeTotal(Object name) {
+    return 'Item total is negative: $name';
+  }
+
+  @override
+  String get ivInvoiceNaN => 'Invoice contains an invalid value (NaN)';
+
+  @override
+  String get ivTaxNegative => 'Tax is negative';
+
+  @override
+  String get ivDiscountNegative => 'Discount is negative';
+
+  @override
+  String get ivLoyaltyDiscountNegative => 'Loyalty discount is negative';
+
+  @override
+  String ivDiscountExceedsItems(Object discount, Object subtotal) {
+    return 'Discount ($discount) exceeds item total ($subtotal)';
+  }
+
+  @override
+  String ivTotalMismatch(
+    Object discount,
+    Object expected,
+    Object subtotal,
+    Object tax,
+    Object total,
+  ) {
+    return 'Invoice total ($total) does not match the equation: item sum ($subtotal) + tax ($tax) - total discount ($discount) = $expected';
+  }
+
+  @override
+  String get ivTotalNaN => 'Invoice total has an invalid value (NaN)';
+
+  @override
+  String get ivTotalNegative => 'Invoice total is negative';
+
+  @override
+  String get ivPaidNaN => 'Paid amount has an invalid value (NaN)';
+
+  @override
+  String get ivPaidNegative => 'Paid amount is negative';
+
+  @override
+  String ivPaidExceedsTotal(Object paid, Object total) {
+    return 'Paid amount ($paid) exceeds invoice total ($total)';
+  }
+
+  @override
+  String get fpNotoNaskh => 'Noto Naskh Arabic';
+
+  @override
+  String get fpCairo => 'Cairo';
+
+  @override
+  String get fpAlmarai => 'Almarai';
+
+  @override
+  String get fpAmiri => 'Amiri';
+
+  @override
+  String get fpLateef => 'Lateef';
+
+  @override
+  String get fpScheherazadeNew => 'Scheherazade New';
+
+  @override
+  String get fpIbmPlexSansArabic => 'IBM Plex Sans Arabic';
+
+  @override
+  String get fpElMessiri => 'El Messiri';
+
+  @override
+  String get fpChanga => 'Changa';
+
+  @override
+  String get fpTajawal => 'Tajawal';
+
+  @override
+  String get fpNotoNaskhDesc =>
+      'Traditional Naskh — suited to long text and documents.';
+
+  @override
+  String get fpCairoDesc =>
+      'Modern geometric — for contemporary interfaces and apps.';
+
+  @override
+  String get fpAlmaraiDesc =>
+      'Clean and readable — widely used in Arabic interfaces.';
+
+  @override
+  String get fpAmiriDesc =>
+      'Classical slanted style for books and formal print.';
+
+  @override
+  String get fpLateefDesc =>
+      'Comfortable Naskh with medium weight — simple distinction.';
+
+  @override
+  String get fpScheherazadeNewDesc =>
+      'Elegant traditional Naskh — long letters and good clarity.';
+
+  @override
+  String get fpIbmPlexDesc =>
+      'Structured technical style — clear digits and data.';
+
+  @override
+  String get fpElMessiriDesc =>
+      'Strong headings — distinctive headline rhythm.';
+
+  @override
+  String get fpChangaDesc => 'Display slanted — bold, eye-catching letters.';
+
+  @override
+  String get fpTajawalDesc => 'Modern clear font for interfaces and headings.';
+
+  @override
+  String raCustomerFallback(Object id) {
+    return 'Customer #$id';
+  }
+
+  @override
+  String raItemFallback(Object id) {
+    return 'Item #$id';
+  }
+
+  @override
+  String get permGroupAppAccess => 'App & access';
+
+  @override
+  String get permDashboardNav => 'Home & navigation';
+
+  @override
+  String get permDashboardNavSub =>
+      'Access to the app dashboard and main sections';
+
+  @override
+  String get permCustomersView => 'View customers & search';
+
+  @override
+  String get permCustomersEdit => 'Add & edit customers';
+
+  @override
+  String get permCustomersContacts => 'Customer contact list';
+
+  @override
+  String get permLoyaltyPoints => 'Loyalty points & settings';
+
+  @override
+  String get permPosScreen => 'Sale screen (POS)';
+
+  @override
+  String get permParkedSales => 'Parked sales';
+
+  @override
+  String get permProductsView => 'View products & inventory';
+
+  @override
+  String get permProductsManage => 'Manage products & prices';
+
+  @override
+  String get permStockIn => 'Stock-in movements';
+
+  @override
+  String get permStockOut => 'Stock-out movements';
+
+  @override
+  String get permWarehouseTransfer => 'Transfers between warehouses';
+
+  @override
+  String get permStockPolicies => 'Stock policies & settings';
+
+  @override
+  String get permCashView => 'View cash drawer & movements';
+
+  @override
+  String get permCashManual => 'Deposits, withdrawals & manual entry';
+
+  @override
+  String get permDebtsTitle => 'Debts (credit)';
+
+  @override
+  String get permDebtsBoard => 'Debts dashboard & follow-up';
+
+  @override
+  String get permInstallmentPlans => 'Installment plans & schedules';
+
+  @override
+  String get permReportsPrint => 'Reports & printing';
+
+  @override
+  String get permReportsLedgers => 'Reports & ledgers';
+
+  @override
+  String get permPrintTemplates => 'Printing & templates';
+
+  @override
+  String get permUsersShifts => 'Users & shifts';
+
+  @override
+  String get permUsersView => 'View the user list';
+
+  @override
+  String get permUsersManage => 'Add & edit users and permissions';
+
+  @override
+  String get permStaffAbsences => 'Employee absences';
+
+  @override
+  String get permSettingsGeneral => 'General settings';
+
+  @override
+  String get permSystemLicense => 'System & license settings';
+
+  @override
+  String get cvNameTooShort => 'Name is too short';
+
+  @override
+  String get cvNameTooLong => 'Name is too long';
+
+  @override
+  String get cvPhoneIncomplete => 'Phone number looks incomplete';
+
+  @override
+  String get cvPhoneTooLong => 'Phone number is too long';
+
+  @override
+  String get siaStaffNotFound => 'Employee not found or account is inactive';
+
+  @override
+  String get siaCardMismatch => 'Card code does not match the record';
+
+  @override
+  String get gs1Header => 'Extracted from barcode (GS1) — check the package:';
+
+  @override
+  String gs1MfgDate(Object date) {
+    return '• Production date: $date';
+  }
+
+  @override
+  String gs1ExpDate(Object date) {
+    return '• Expiry date: $date';
+  }
+
+  @override
+  String gs1NetWeight(Object weight) {
+    return '• Net weight (from barcode): $weight g';
+  }
+
+  @override
+  String gs1EmbeddedWeight(Object digits, Object qty) {
+    return 'Embedded weight (per warehouse settings): $digits → initial qty/weight $qty';
+  }
+
+  @override
+  String get cplOpenFailed => 'Could not open the appropriate app';
+
+  @override
+  String cplOpenError(Object error) {
+    return 'Could not open: $error';
+  }
+
+  @override
+  String get cplChooseDial => 'Choose the number to call';
+
+  @override
+  String get cplChooseWhatsapp => 'Choose the number for WhatsApp';
+
+  @override
+  String get vpSellBelowBuy => 'Selling price is below purchase price';
+
+  @override
+  String get vpSellBelowMin => 'Selling price is below the minimum';
+
+  @override
+  String blSizeMm(Object h, Object w) {
+    return '$w × $h mm';
+  }
+
+  @override
+  String blPricePerKg(Object price) {
+    return '$price Fdj/kg';
+  }
+
+  @override
+  String get licKillAdmin =>
+      'Access to your account was disabled by an administrator. Contact support to reactivate.';
+
+  @override
+  String get licRevoked =>
+      'Your access to the service was revoked. Contact support.';
+
+  @override
+  String get licGrace =>
+      'Your account is in a grace period after the subscription ended. Renew before the deadline to restore all features.';
+
+  @override
+  String get licExpiredRenew =>
+      'Your subscription has expired. Renew the key to continue.';
+
+  @override
+  String get licDeviceLimitAdmin =>
+      'Your account exceeded the device limit. Disconnect a device from the admin panel or upgrade your plan.';
+
+  @override
+  String get licDeviceLimitOffline =>
+      'Your account exceeded the device limit. Connect to the internet to re-verify after disconnecting a device.';
+
+  @override
+  String licDeviceLimitCount(Object active, Object max) {
+    return 'Active devices on the account exceeded the limit ($active/$max). Disconnect a device or upgrade your plan.';
+  }
+
+  @override
+  String get licTimeTamperPending =>
+      'A time settings conflict was detected. Finish the current operation, then the app will lock.';
+
+  @override
+  String get licTimeSyncOnline =>
+      'Please connect to the internet to verify the time.';
+
+  @override
+  String get licTrialEnded =>
+      'The free trial (15 days) ended. Choose a subscription plan to continue.';
+
+  @override
+  String get licTrialCloudDesc =>
+      'Free 15-day trial from the first Google sign-in for this account (shared across devices).';
+
+  @override
+  String get licTrialLocalDesc =>
+      'Free 15-day trial enabled from first use on this device.';
+
+  @override
+  String get licJwtRequired =>
+      'Your account uses a signed license. Paste the full activation token (JWT), not the old key.';
+
+  @override
+  String get licCacheWarning =>
+      '\n(Could not reach the server — status from the last sync.)';
+
+  @override
+  String licDevicesCount(Object max, Object registered) {
+    return '$registered / $max devices';
+  }
+
+  @override
+  String licDevicesN(Object count) {
+    return '$count devices';
+  }
+
+  @override
+  String licPricePerMonth(Object price) {
+    return '$price Fdj / month';
+  }
+
+  @override
+  String get licJwtPasteHint =>
+      'Paste the full JWT from \"ey\" to the end of the third part (no line breaks or spaces in between).';
+
+  @override
+  String get licJwtInvalid =>
+      'Invalid license key. If the text is correct, update the app after syncing the public key and make sure letter casing is unchanged (eyJ, not eyj).';
+
+  @override
+  String get licActivatedOk => 'License activated successfully!';
+
+  @override
+  String get licSuspendedContact =>
+      'Your account is temporarily suspended. Contact support to continue.';
+
+  @override
+  String get stNoValidItems => 'No lines with a valid quantity';
+
+  @override
+  String stProductMissing(Object id) {
+    return 'Product not found #$id';
+  }
+
+  @override
+  String get stNothingSaved => 'No lines were saved for the voucher';
+
+  @override
+  String stInsufficientBalance(Object available, Object id) {
+    return 'Insufficient stock for product #$id in the warehouse (available $available)';
+  }
+
+  @override
+  String get stSameWarehouse => 'Source and target warehouses are identical';
+
+  @override
+  String stInsufficientSource(Object id) {
+    return 'Insufficient stock in the source warehouse for product #$id';
+  }
+
+  @override
+  String actorEmployee(Object id) {
+    return 'Employee #$id';
+  }
+
+  @override
+  String get actExpenseCreated => 'Record expense';
+
+  @override
+  String actExpenseDetails(Object actor, Object id, Object status) {
+    return 'Category #$id • Status: $status • By: $actor';
+  }
+
+  @override
+  String get expenseWord => 'Expense';
+
+  @override
+  String expenseLedgerNote(Object id, Object name) {
+    return 'Expense — $name (#exp:$id)';
+  }
+
+  @override
+  String expenseLedgerNoteDesc(Object description, Object id, Object name) {
+    return 'Expense — $name — $description (#exp:$id)';
+  }
+
+  @override
+  String get actCashEntryExpense => 'Cash entry: expense';
+
+  @override
+  String actCashEntryExpenseDetails(
+    Object actor,
+    Object category,
+    Object expense,
+  ) {
+    return 'Expense #$expense • Category #$category • By: $actor';
+  }
+
+  @override
+  String get actDeleteCashEntryExpense => 'Delete cash entry: expense';
+
+  @override
+  String actCashEntryExpenseDeletedDetails(Object actor, Object id) {
+    return 'The linked entry was deleted while editing expense #$id • By: $actor';
+  }
+
+  @override
+  String actCashEntryExpenseDeletedDetails2(Object actor, Object id) {
+    return 'Deleting expense #$id also deleted the linked entry • By: $actor';
+  }
+
+  @override
+  String get actDeleteExpense => 'Delete expense';
+
+  @override
+  String actDeleteExpenseDetails(Object actor, Object id) {
+    return 'Category #$id • By: $actor';
+  }
+
+  @override
+  String supMeta(Object id) {
+    return 'Supplier #$id';
+  }
+
+  @override
+  String supMetaNote(Object meta, Object note) {
+    return '$meta — Note: $note';
+  }
+
+  @override
+  String get supDebtPaymentProduct => 'Supplier debt payment';
+
+  @override
+  String get actSupplierPayoutCreate => 'Create supplier payout voucher';
+
+  @override
+  String actorSupplierLine(Object actor, Object id, Object name) {
+    return 'Supplier: $name ($id) • By: $actor';
+  }
+
+  @override
+  String get actSupplierPayment => 'Record supplier payment';
+
+  @override
+  String actSupplierPaymentDetails(
+    Object actor,
+    Object id,
+    Object invoice,
+    Object name,
+  ) {
+    return 'Supplier: $name ($id) • Reference invoice: #$invoice • By: $actor';
+  }
+
+  @override
+  String get actSupplierPayoutDelete => 'Delete supplier payout voucher';
+
+  @override
+  String actSupplierPayoutDeleteDetails(
+    Object actor,
+    Object id,
+    Object payout,
+  ) {
+    return 'Supplier #$id • Deleted while reversing payment #$payout • By: $actor';
+  }
+
+  @override
+  String supReversePaymentName(Object id, Object name, Object payout) {
+    return 'Supplier payment reversal #$id — $name (was payment #$payout)';
+  }
+
+  @override
+  String get actSupplierPaymentReverse => 'Reverse supplier payment';
+
+  @override
+  String get actSupplierPaymentDelete => 'Delete supplier payment';
+
+  @override
+  String actSupplierPaymentDeleteDetails(Object actor, Object id) {
+    return 'Supplier #$id • By: $actor';
+  }
+
+  @override
+  String get actInvoiceCreate => 'Record invoice';
+
+  @override
+  String get actInvoiceReturn => 'Record invoice return';
+
+  @override
+  String actInvoiceDetails(Object actor, Object customer, Object type) {
+    return 'By: $actor — Customer: $customer — Type: $type';
+  }
+
+  @override
+  String ivCannotSellLocked(Object name) {
+    return 'Cannot sell \"$name\" because stock is zero in restricted mode.';
+  }
+
+  @override
+  String get ivVariantQtyInteger => 'Clothing quantity must be a whole number.';
+
+  @override
+  String get ivNoQtyForSize => 'No quantity available for this size/color.';
+
+  @override
+  String cashSupplierPaymentDesc(Object id, Object name) {
+    return 'Supplier payment — $name (voucher #$id)';
+  }
+
+  @override
+  String get actCashSupplierPayment => 'Cash entry: supplier payment';
+
+  @override
+  String actCashInvoiceLinkDetails(Object actor, Object id, Object name) {
+    return 'By: $actor — Invoice #$id — $name';
+  }
+
+  @override
+  String cashDebtCollectionDesc(Object id, Object name) {
+    return 'Debt collection voucher #$id — $name';
+  }
+
+  @override
+  String cashInstallmentDesc(Object id, Object name) {
+    return 'Installment payment voucher #$id — $name';
+  }
+
+  @override
+  String cashSaleInvoiceDesc(Object id, Object name) {
+    return 'Sales invoice #$id — $name';
+  }
+
+  @override
+  String get actCashInvoiceLinked => 'Cash entry linked to an invoice';
+
+  @override
+  String actCashInvoiceLinkedDetails(Object actor, Object id, Object type) {
+    return 'By: $actor — Invoice #$id — Entry type: $type';
+  }
+
+  @override
+  String cashReturnDesc(Object customer, Object id) {
+    return 'Return of invoice #$id — $customer';
+  }
+
+  @override
+  String cashReturnDescWithOrig(Object customer, Object id, Object original) {
+    return 'Return of invoice #$id (original #$original) — $customer';
+  }
+
+  @override
+  String get actCashReturn => 'Cash entry: sales return';
+
+  @override
+  String actCashReturnDetails(Object actor, Object id) {
+    return 'By: $actor — Invoice #$id';
+  }
+
+  @override
+  String get dvInvalidNumeric =>
+      'Invalid invoice data (non-finite numeric value).';
+
+  @override
+  String dvNotBelowZero(Object label) {
+    return '$label cannot be below zero.';
+  }
+
+  @override
+  String get dvNoItems => 'Cannot save an invoice with no items.';
+
+  @override
+  String get dvLabelDiscount => 'Discount';
+
+  @override
+  String get dvLabelAdvance => 'Advance payment';
+
+  @override
+  String get dvLabelInvoiceTotal => 'Invoice total';
+
+  @override
+  String get dvDiscountPctRange =>
+      'Discount percentage must be between 0% and 100%.';
+
+  @override
+  String get dvCollectionSingleItem =>
+      'Collection/payment vouchers must contain exactly one line.';
+
+  @override
+  String dvItemNameRequired(Object line) {
+    return 'Product name in line $line is required.';
+  }
+
+  @override
+  String dvItemPriceLabel(Object line) {
+    return 'Line $line price';
+  }
+
+  @override
+  String dvItemTotalLabel(Object line) {
+    return 'Line $line total';
+  }
+
+  @override
+  String dvItemQtyPositive(Object line) {
+    return 'Sale quantity in line $line must be greater than zero.';
+  }
+
+  @override
+  String dvItemBaseQtyInvalid(Object line) {
+    return 'Base stock quantity in line $line is invalid.';
+  }
+
+  @override
+  String dvItemProductIdInvalid(Object line) {
+    return 'Product id in line $line is invalid.';
+  }
+
+  @override
+  String dvItemTotalMismatch(Object line) {
+    return 'Line $line total does not match price × quantity.';
+  }
+
+  @override
+  String get dvDiscountExceedsSum => 'Discount cannot exceed the sum of lines.';
+
+  @override
+  String get dvTotalMismatch =>
+      'Invoice total does not match the sum of lines after discount and tax.';
+
+  @override
+  String get dvAdvanceExceedsTotal =>
+      'Advance payment cannot exceed the invoice total.';
+
+  @override
+  String get actDeleteInvoice => 'Delete invoice';
+
+  @override
+  String actDeleteInvoiceDetails(Object id) {
+    return 'Invoice #$id — soft delete keeps the audit trail';
+  }
+
+  @override
+  String get csUnknownDevice => 'Unknown device';
+
+  @override
+  String get csDeviceLimitPlan =>
+      'Your plan reached the maximum number of devices. Disconnect a device from the account or upgrade your plan.';
+
+  @override
+  String get csDeviceRemovedAsk =>
+      'This device was removed from the account. Request readmission from an active device in settings.';
+
+  @override
+  String get csNotSpecified => 'Not set';
+
+  @override
+  String csDeviceLimitCount(Object active, Object max) {
+    return 'Active devices on the account exceeded the limit ($active/$max). Disconnect an unused device or upgrade your plan.';
+  }
+
+  @override
+  String get csNotLoggedIn => 'The user is not signed in.';
+
+  @override
+  String get csCannotDetachCurrent =>
+      'Cannot detach the current device. Sign out from this device first.';
+
+  @override
+  String get csDevicesTableMissing =>
+      'The devices table does not exist in Supabase yet. Run the SQL first.';
+
+  @override
+  String get csDevicesTableNotReady => 'The devices table is not ready.';
+
+  @override
+  String get csAccessColumnSql =>
+      'Run the SQL file to add the access_status column first.';
+
+  @override
+  String get csNoValidLicense => 'Cannot sync without a valid license.';
+
+  @override
+  String get csDeviceLimitPlanSignout =>
+      'The account reached the maximum number of devices. Disconnect a device or upgrade your plan.';
+
+  @override
+  String get csDeviceRemovedSignout =>
+      'This device was removed from the account. Sign out, then request readmission from an active device.';
+
+  @override
+  String get csSyncTablesMissing =>
+      'Sync tables are missing in Supabase. Run supabase_sync_setup.sql once from the SQL Editor.';
+
+  @override
+  String get csSyncTablesNotReady =>
+      'Sync tables are not ready in Supabase. Run supabase_sync_setup.sql.';
+
+  @override
+  String csSnapshotVersionMismatch(Object app, Object schema) {
+    return 'Cloud snapshot version ($schema) does not match the app ($app). Update the app on this device, then run \"Sync now\" again.';
+  }
+
+  @override
+  String get csSnapshotFetchFailed =>
+      'Could not fetch the cloud snapshot after metadata verification. Try again.';
+
+  @override
+  String get csSnapshotEmptyPayload =>
+      'The cloud snapshot contains no data (payload). Check Supabase.';
+
+  @override
+  String get csSnapshotMissingSyncId =>
+      'The cloud snapshot is chunked but sync_id is missing.';
+
+  @override
+  String get csSnapshotChunksFailed =>
+      'Could not assemble the snapshot chunks from the cloud. Check the app_snapshot_chunks table and read permissions.';
+
+  @override
+  String get csPushStoppedEmptyLocal =>
+      'Push stopped: the local database is empty while data exists in the cloud. Run \"Sync now\" from the device that shows the data first, or pull before pushing.';
+
+  @override
+  String csRemoteCheckFailed(Object error) {
+    return 'Could not verify the cloud snapshot before pushing (data-loss protection): $error';
+  }
+
+  @override
+  String get prCatNameRequired => 'Category name is required';
+
+  @override
+  String get prNameUsed => 'This name is already in use';
+
+  @override
+  String get prParentInvalid => 'Invalid parent category';
+
+  @override
+  String get prCatHasSubcategories => 'Cannot delete: it has subcategories';
+
+  @override
+  String get prCatLinkedToProducts =>
+      'Cannot delete: the category is linked to products';
+
+  @override
+  String get prBrandNameRequired => 'Brand name is required';
+
+  @override
+  String get prBrandExists => 'This brand already exists';
+
+  @override
+  String get prTplNameRequired => 'Template name is required';
+
+  @override
+  String get prTplBaseUnitRequired => 'Base unit name is required';
+
+  @override
+  String get prTplBaseSymbolRequired => 'Base unit symbol is required';
+
+  @override
+  String get prTplCompleteConversion =>
+      'Set the symbol for every conversion unit or delete the empty row';
+
+  @override
+  String get prTplFactorPositive =>
+      'Conversion factor must be greater than zero';
+
+  @override
+  String get prCodeGenFailed =>
+      'Could not generate a unique product code. Try again.';
+
+  @override
+  String get dcpSameCustomer =>
+      'The same phone number cannot be entered more than once for this customer.';
+
+  @override
+  String get dcpOtherCustomer =>
+      'This phone number is already registered to another customer. Names may look similar, but phone numbers must be unique.';
+
+  @override
+  String get dpDebtBefore => 'Debt before payment';
+
+  @override
+  String get dpRemainingAfter => 'Remaining after';
+
+  @override
+  String get dpNote => 'Note';
+
+  @override
+  String get dpCollectionProduct => 'Credit debt collection';
+
+  @override
+  String get ipPlan => 'Installment plan';
+
+  @override
+  String get ipOriginalInvoice => 'Original invoice';
+
+  @override
+  String get ipPaymentProduct => 'Installment payment — plan';
+
+  @override
+  String get shDepositOpen => 'Deposit when opening the shift';
+
+  @override
+  String get shWithdrawClose => 'Withdrawal when closing the shift';
+
+  @override
+  String get shInvalidValues => 'Invalid values';
+
+  @override
+  String get shWithdrawExceedsBox =>
+      'The withdrawn amount exceeds the cash in the box';
+
+  @override
+  String get loyRedeemNote => 'Points redemption — invoice';
+
+  @override
+  String get loyEarnNote => 'Purchase reward — invoice';
+
+  @override
+  String get snChannelName => 'Maarey alerts';
+
+  @override
+  String get snChannelDesc =>
+      'Stock, installments, returns, cash box, and more — shown in the notification shade.';
+
+  @override
+  String get snAppName => 'Maarey';
+
+  @override
+  String get bpSmallShop => 'Small shop';
+
+  @override
+  String get bpRetail => 'Retail store';
+
+  @override
+  String get bpPharmacy => 'Pharmacy';
+
+  @override
+  String get bpClothing => 'Clothing store';
+
+  @override
+  String get bpConstruction => 'Building materials shop';
+
+  @override
+  String get bpWarehouse => 'Warehouse / wholesale';
+
+  @override
+  String get invStocktakingAdjustNote => 'Stocktaking variance adjustment';
+
+  @override
+  String get aiLocalAppData => 'Local app data';
+
+  @override
+  String aiRewriteNote(Object confidence, Object source) {
+    return 'I read $source; my confidence in this answer is $confidence%. The figures are computed from the database, not guessed.';
+  }
+
+  @override
+  String get aiLast7Days => 'Last 7 days';
+
+  @override
+  String get aiThisYear => 'This year';
+
+  @override
+  String get aiLastMonth => 'Last month';
+
+  @override
+  String aiSalesSummaryAnswer(
+    Object avg,
+    Object invoices,
+    Object margin,
+    Object revenue,
+    Object window,
+  ) {
+    return 'Summary for $window: sales of $revenue across $invoices invoices. Average invoice $avg, estimated margin $margin.';
+  }
+
+  @override
+  String get aiAvgInvoice => 'Average invoice';
+
+  @override
+  String get aiEstMargin => 'Estimated margin';
+
+  @override
+  String get aiAskTopProductsThisMonth => 'Ask: best products this month';
+
+  @override
+  String get aiAskWhatMayRunOut => 'Ask: which products might run out?';
+
+  @override
+  String aiNoProductSalesIn(Object window) {
+    return 'No product sales in $window.';
+  }
+
+  @override
+  String get aiTryOtherPeriod =>
+      'Try asking for a sales summary or another period.';
+
+  @override
+  String aiTopPerformerAnswer(
+    Object name,
+    Object quantity,
+    Object revenue,
+    Object window,
+  ) {
+    return 'Best performer in $window: $name with $revenue revenue and $quantity quantity. Here are the strongest products by revenue.';
+  }
+
+  @override
+  String aiQtyMarginDetail(Object margin, Object qty) {
+    return 'Qty $qty | margin $margin';
+  }
+
+  @override
+  String get aiReviewRestock =>
+      'Check stock of these products so sales do not stop.';
+
+  @override
+  String get aiAskPo => 'Ask: suggest a purchase order';
+
+  @override
+  String get aiNoShortageRisk =>
+      'I see no clear shortage risk over the last 30 days. Either products are not selling fast enough or their stock is above the danger threshold.';
+
+  @override
+  String get aiKeepReviewingFastMovers =>
+      'Keep reviewing fast-moving products daily.';
+
+  @override
+  String aiTopShortageAnswer(
+    Object days,
+    Object name,
+    Object qty,
+    Object salesPerDay,
+  ) {
+    return 'Highest shortage risk: $name. Available $qty, selling $salesPerDay per day, enough for about $days.';
+  }
+
+  @override
+  String aiDaysRemaining(Object days) {
+    return '$days remaining';
+  }
+
+  @override
+  String aiStockDetail(Object qty, Object salesPerDay, Object suggested) {
+    return 'Available $qty | sales rate $salesPerDay/day | suggested order $suggested';
+  }
+
+  @override
+  String get aiCreatePoForCritical =>
+      'Create a purchase order for critical products.';
+
+  @override
+  String get aiRaiseAlertThreshold =>
+      'Raise the alert threshold for fast-moving products.';
+
+  @override
+  String aiOrderLabel(Object name) {
+    return 'Order $name';
+  }
+
+  @override
+  String aiStockWillLast(Object days, Object history) {
+    return 'Stock lasts about $days based on the last $history days.';
+  }
+
+  @override
+  String aiPushSalesLabel(Object name) {
+    return 'Boost sales of $name';
+  }
+
+  @override
+  String aiStrongProductDetail(Object window) {
+    return 'Strong product in $window. Keep it in stock.';
+  }
+
+  @override
+  String get aiNoStrongRecs =>
+      'No strong recommendations right now. I need more sales or stock data to suggest a better decision.';
+
+  @override
+  String aiTopRecAnswer(Object top, Object window) {
+    return 'Top recommendation now: $top. It combines sales speed, available stock, and performance in $window.';
+  }
+
+  @override
+  String get aiStartWithCritical =>
+      'Start with critical products, then top sellers.';
+
+  @override
+  String get aiAskSalesSummaryThisMonth => 'Ask: sales summary this month';
+
+  @override
+  String get aiNoLowStockNow =>
+      'No products are at the alert threshold right now.';
+
+  @override
+  String get aiAskShortageRisk =>
+      'Ask about shortage risk to see which products may drop soon.';
+
+  @override
+  String aiLowStockFound(Object count) {
+    return 'Found $count products at or below the alert threshold.';
+  }
+
+  @override
+  String get aiReviewPurchaseOrders =>
+      'Review purchase orders for these products.';
+
+  @override
+  String get aiHelpAnswer =>
+      'I can analyze sales and stock locally from app data. Ask me about top products, sales summary, products that might run out, or purchase recommendations.';
+
+  @override
+  String get aiExample => 'Example';
+
+  @override
+  String get aiAnswersFromLocalDb =>
+      'All answers are based on this store\'s local database.';
+
+  @override
+  String get aiLessThanDay => 'Less than a day';
+
+  @override
+  String aiDaysCount(Object days) {
+    return '$days days';
+  }
+
+  @override
+  String get eidQrReaderHint =>
+      'QR only: the app camera, or an external reader (USB/Bluetooth) pointed at the card while focusing on the \"Reader device\" field in the shift open/close dialog.';
 }

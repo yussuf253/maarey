@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:sqflite/sqflite.dart';
 
+import '../l10n/app_l10n.dart';
 import '../utils/iraqi_currency_format.dart';
 import 'database_helper.dart';
 import 'tenant_context_service.dart';
@@ -135,13 +136,13 @@ class RuleBasedLocalAiLanguageModel implements LocalAiLanguageModel {
     required AiAgentMessage factualMessage,
   }) async {
     if (factualMessage.intent == AiAgentIntent.help) return null;
+    final l = AppL10n.current;
     final source = factualMessage.dataSources.isEmpty
-        ? 'بيانات التطبيق المحلية'
+        ? l.aiLocalAppData
         : factualMessage.dataSources.join(' + ');
     final confidencePct = (factualMessage.confidence.clamp(0, 1) * 100).round();
     return '${factualMessage.answer}\n\n'
-        'قرأت $source، وثقتي في هذا الجواب $confidencePct%. '
-        'الأرقام محسوبة من قاعدة البيانات ولا أعتمد على تخمين حر.';
+        '${l.aiRewriteNote(confidencePct, source)}';
   }
 }
 
@@ -266,23 +267,24 @@ class LocalAiAgentService {
 
   AiDateWindow _detectDateWindow(String raw, DateTime now) {
     final q = raw.toLowerCase();
+    final l = AppL10n.current;
     if (_hasAny(q, ['today']) || _hasAny(raw, ['اليوم'])) {
-      return AiDateWindow(label: 'اليوم', from: now, to: now);
+      return AiDateWindow(label: l.today, from: now, to: now);
     }
     if (_hasAny(q, ['yesterday']) || _hasAny(raw, ['أمس', 'امس'])) {
       final d = now.subtract(const Duration(days: 1));
-      return AiDateWindow(label: 'أمس', from: d, to: d);
+      return AiDateWindow(label: l.yesterday, from: d, to: d);
     }
     if (_hasAny(q, ['week']) || _hasAny(raw, ['الأسبوع', 'اسبوع', 'أسبوع'])) {
       return AiDateWindow(
-        label: 'آخر 7 أيام',
+        label: l.aiLast7Days,
         from: now.subtract(const Duration(days: 6)),
         to: now,
       );
     }
     if (_hasAny(q, ['year']) || _hasAny(raw, ['السنة', 'عام'])) {
       return AiDateWindow(
-        label: 'هذه السنة',
+        label: l.aiThisYear,
         from: DateTime(now.year),
         to: now,
       );
@@ -291,13 +293,13 @@ class LocalAiAgentService {
       final firstThisMonth = DateTime(now.year, now.month);
       final lastMonthEnd = firstThisMonth.subtract(const Duration(days: 1));
       return AiDateWindow(
-        label: 'الشهر الماضي',
+        label: l.aiLastMonth,
         from: DateTime(lastMonthEnd.year, lastMonthEnd.month),
         to: lastMonthEnd,
       );
     }
     return AiDateWindow(
-      label: 'هذا الشهر',
+      label: l.thisMonth,
       from: DateTime(now.year, now.month),
       to: now,
     );
@@ -330,23 +332,28 @@ class LocalAiAgentService {
 
     return AiAgentMessage(
       intent: AiAgentIntent.salesSummary,
-      answer:
-          'ملخص ${window.label}: المبيعات ${_money(revenue)} عبر $invoices فاتورة. متوسط الفاتورة ${_money(avg)}، والهامش التقريبي ${_money(margin)}.',
+      answer: AppL10n.current.aiSalesSummaryAnswer(
+        _money(avg),
+        invoices,
+        _money(margin),
+        _money(revenue),
+        window.label,
+      ),
       insights: [
-        AiAgentInsight(label: 'المبيعات', value: _money(revenue)),
-        AiAgentInsight(label: 'عدد الفواتير', value: '$invoices'),
-        AiAgentInsight(label: 'متوسط الفاتورة', value: _money(avg)),
+        AiAgentInsight(label: AppL10n.current.salesTitle, value: _money(revenue)),
+        AiAgentInsight(label: AppL10n.current.invoiceCount, value: '$invoices'),
+        AiAgentInsight(label: AppL10n.current.aiAvgInvoice, value: _money(avg)),
         AiAgentInsight(
-          label: 'الهامش التقريبي',
+          label: AppL10n.current.aiEstMargin,
           value: _money(margin),
           severity: margin >= 0
               ? AiInsightSeverity.positive
               : AiInsightSeverity.warning,
         ),
       ],
-      actions: const [
-        'اسأل: أفضل المنتجات هذا الشهر',
-        'اسأل: ما المنتجات التي قد تنفد؟',
+      actions: [
+        AppL10n.current.aiAskTopProductsThisMonth,
+        AppL10n.current.aiAskWhatMayRunOut,
       ],
       dataSources: const ['invoices', 'invoice_items', 'products'],
       confidence: invoices == 0 ? 0.65 : 0.92,
@@ -359,12 +366,13 @@ class LocalAiAgentService {
     AiDateWindow window,
   ) async {
     final products = await _productPerformance(db, tenantId, window, limit: 5);
+    final l = AppL10n.current;
     if (products.isEmpty) {
       return AiAgentMessage(
         intent: AiAgentIntent.topProducts,
-        answer: 'لا توجد مبيعات منتجات في ${window.label}.',
+        answer: l.aiNoProductSalesIn(window.label),
         insights: const [],
-        actions: const ['جرّب السؤال عن ملخص المبيعات أو فترة أخرى.'],
+        actions: [l.aiTryOtherPeriod],
         dataSources: const ['invoice_items', 'invoices'],
         confidence: 0.72,
       );
@@ -372,24 +380,25 @@ class LocalAiAgentService {
     final leader = products.first;
     return AiAgentMessage(
       intent: AiAgentIntent.topProducts,
-      answer:
-          'أفضل أداء في ${window.label}: ${leader.name} بإيراد ${_money(leader.revenue)} وكمية ${_qty(leader.quantity)}. هذه قائمة المنتجات الأقوى حسب الإيراد.',
+      answer: l.aiTopPerformerAnswer(
+        leader.name,
+        _qty(leader.quantity),
+        _money(leader.revenue),
+        window.label,
+      ),
       insights: products
           .map(
             (p) => AiAgentInsight(
               label: p.name,
               value: _money(p.revenue),
-              detail: 'الكمية ${_qty(p.quantity)} | هامش ${_money(p.margin)}',
+              detail: l.aiQtyMarginDetail(_money(p.margin), _qty(p.quantity)),
               severity: p.margin >= 0
                   ? AiInsightSeverity.positive
                   : AiInsightSeverity.warning,
             ),
           )
           .toList(),
-      actions: const [
-        'راجع مخزون هذه المنتجات حتى لا تتوقف المبيعات.',
-        'اسأل: اقترح طلبية شراء',
-      ],
+      actions: [l.aiReviewRestock, l.aiAskPo],
       dataSources: const ['invoice_items', 'invoices', 'products'],
       confidence: 0.9,
     );
@@ -397,39 +406,43 @@ class LocalAiAgentService {
 
   Future<AiAgentMessage> _shortageRisk(Database db, int tenantId) async {
     final risks = await _shortageRisks(db, tenantId, limit: 8);
+    final l = AppL10n.current;
     if (risks.isEmpty) {
-      return const AiAgentMessage(
+      return AiAgentMessage(
         intent: AiAgentIntent.shortageRisk,
-        answer:
-            'لا أرى خطر نفاد واضحاً من آخر 30 يوماً. المنتجات إما لا تبيع بسرعة أو مخزونها فوق حد الخطر.',
-        insights: [],
-        actions: ['استمر بمراجعة المنتجات سريعة البيع يومياً.'],
-        dataSources: ['products', 'invoice_items', 'invoices'],
+        answer: l.aiNoShortageRisk,
+        insights: const [],
+        actions: [l.aiKeepReviewingFastMovers],
+        dataSources: const ['products', 'invoice_items', 'invoices'],
         confidence: 0.78,
       );
     }
     final first = risks.first;
     return AiAgentMessage(
       intent: AiAgentIntent.shortageRisk,
-      answer:
-          'أعلى خطر نفاد: ${first.name}. المتاح ${_qty(first.qty)}، ومعدل البيع ${_qty(first.salesPerDay)} يومياً، وقد يكفي حوالي ${_days(first.daysLeft)}.',
+      answer: l.aiTopShortageAnswer(
+        _days(first.daysLeft),
+        first.name,
+        _qty(first.qty),
+        _qty(first.salesPerDay),
+      ),
       insights: risks
           .map(
             (r) => AiAgentInsight(
               label: r.name,
-              value: '${_days(r.daysLeft)} متبقية',
-              detail:
-                  'المتاح ${_qty(r.qty)} | معدل البيع ${_qty(r.salesPerDay)}/يوم | طلب مقترح ${_qty(r.suggestedOrderQty)}',
+              value: l.aiDaysRemaining(_days(r.daysLeft)),
+              detail: l.aiStockDetail(
+                _qty(r.qty),
+                _qty(r.salesPerDay),
+                _qty(r.suggestedOrderQty),
+              ),
               severity: r.daysLeft <= 3
                   ? AiInsightSeverity.critical
                   : AiInsightSeverity.warning,
             ),
           )
           .toList(),
-      actions: const [
-        'أنشئ أمر شراء للمنتجات الحرجة.',
-        'ارفع حد التنبيه للمنتجات سريعة الحركة.',
-      ],
+      actions: [l.aiCreatePoForCritical, l.aiRaiseAlertThreshold],
       dataSources: const ['products', 'invoice_items', 'invoices'],
       confidence: 0.86,
     );
@@ -442,14 +455,14 @@ class LocalAiAgentService {
   ) async {
     final risks = await _shortageRisks(db, tenantId, limit: 5);
     final top = await _productPerformance(db, tenantId, window, limit: 5);
+    final l = AppL10n.current;
 
     final insights = <AiAgentInsight>[
       ...risks.map(
         (r) => AiAgentInsight(
-          label: 'اطلب ${r.name}',
+          label: l.aiOrderLabel(r.name),
           value: _qty(r.suggestedOrderQty),
-          detail:
-              'يكفي المخزون حوالي ${_days(r.daysLeft)} بناءً على آخر $_historyDays يوماً.',
+          detail: l.aiStockWillLast(_days(r.daysLeft), _historyDays),
           severity: r.daysLeft <= 3
               ? AiInsightSeverity.critical
               : AiInsightSeverity.warning,
@@ -459,25 +472,25 @@ class LocalAiAgentService {
           .take(math.max(0, 5 - risks.length))
           .map(
             (p) => AiAgentInsight(
-              label: 'ادفع مبيعات ${p.name}',
+              label: l.aiPushSalesLabel(p.name),
               value: _money(p.revenue),
-              detail: 'منتج قوي في ${window.label}. حافظ على توفره.',
+              detail: l.aiStrongProductDetail(window.label),
               severity: AiInsightSeverity.positive,
             ),
           ),
     ];
 
     final answer = insights.isEmpty
-        ? 'لا توجد توصيات قوية الآن. أحتاج مبيعات أو مخزون أكثر لأقدم قراراً أفضل.'
-        : 'أقوى توصية الآن: ${insights.first.label}. جمعت بين سرعة البيع والمخزون المتاح وأداء ${window.label}.';
+        ? l.aiNoStrongRecs
+        : l.aiTopRecAnswer(insights.first.label, window.label);
 
     return AiAgentMessage(
       intent: AiAgentIntent.recommendations,
       answer: answer,
       insights: insights,
-      actions: const [
-        'ابدأ بالمنتجات الحرجة ثم المنتجات الأعلى مبيعاً.',
-        'اسأل: ملخص المبيعات هذا الشهر',
+      actions: [
+        l.aiStartWithCritical,
+        l.aiAskSalesSummaryThisMonth,
       ],
       dataSources: const ['products', 'invoice_items', 'invoices'],
       confidence: insights.isEmpty ? 0.55 : 0.84,
@@ -500,51 +513,52 @@ class LocalAiAgentService {
       ''',
       [tenantId],
     );
+    final l = AppL10n.current;
     if (rows.isEmpty) {
-      return const AiAgentMessage(
+      return AiAgentMessage(
         intent: AiAgentIntent.lowStock,
-        answer: 'لا توجد منتجات تحت حد التنبيه حالياً.',
-        insights: [],
-        actions: ['اسأل عن خطر النفاد لمعرفة المنتجات التي قد تنخفض قريباً.'],
-        dataSources: ['products'],
+        answer: l.aiNoLowStockNow,
+        insights: const [],
+        actions: [l.aiAskShortageRisk],
+        dataSources: const ['products'],
         confidence: 0.9,
       );
     }
     return AiAgentMessage(
       intent: AiAgentIntent.lowStock,
-      answer: 'وجدت ${rows.length} منتجاً تحت حد التنبيه أو عنده.',
+      answer: l.aiLowStockFound(rows.length),
       insights: rows
           .map(
             (r) => AiAgentInsight(
               label: r['name']?.toString() ?? '',
               value: _qty((r['qty'] as num?)?.toDouble() ?? 0),
               detail:
-                  'حد التنبيه ${_qty((r['lowStockThreshold'] as num?)?.toDouble() ?? 0)}',
+                  '${l.alertThresholdLabel} ${_qty((r['lowStockThreshold'] as num?)?.toDouble() ?? 0)}',
               severity: AiInsightSeverity.warning,
             ),
           )
           .toList(),
-      actions: const ['راجع أوامر الشراء لهذه المنتجات.'],
+      actions: [l.aiReviewPurchaseOrders],
       dataSources: const ['products'],
       confidence: 0.95,
     );
   }
 
   AiAgentMessage _help() {
-    return const AiAgentMessage(
+    final l = AppL10n.current;
+    return AiAgentMessage(
       intent: AiAgentIntent.help,
-      answer:
-          'أستطيع تحليل المبيعات والمخزون محلياً من بيانات التطبيق. اسألني عن أفضل المنتجات، ملخص المبيعات، المنتجات التي قد تنفد، أو توصيات الشراء.',
+      answer: l.aiHelpAnswer,
       insights: [
         AiAgentInsight(
-          label: 'مثال',
+          label: l.aiExample,
           value: 'Which product performed this month?',
         ),
-        AiAgentInsight(label: 'مثال', value: 'ما المنتجات التي قد تنفد؟'),
-        AiAgentInsight(label: 'مثال', value: 'اقترح طلبية شراء'),
+        AiAgentInsight(label: l.aiExample, value: l.aiSuggestLowStock),
+        AiAgentInsight(label: l.aiExample, value: l.aiSuggestPurchaseOrder),
       ],
-      actions: ['كل الإجابات مبنية على قاعدة البيانات المحلية لهذا المتجر.'],
-      dataSources: ['local agent tools'],
+      actions: [l.aiAnswersFromLocalDb],
+      dataSources: const ['local agent tools'],
       confidence: 1,
     );
   }
@@ -586,7 +600,8 @@ class LocalAiAgentService {
     final rows = await db.rawQuery(
       '''
       SELECT
-        COALESCE(NULLIF(TRIM(ii.productName), ''), p.name, 'منتج غير مسمى') AS name,
+        COALESCE(NULLIF(TRIM(ii.productName), ''), p.name,
+          '${AppL10n.current.unnamedProduct}') AS name,
         COALESCE(SUM(ii.quantity), 0) AS qty,
         COALESCE(SUM(ii.total), 0) AS revenue,
         COALESCE(SUM(
@@ -710,9 +725,10 @@ class LocalAiAgentService {
   }
 
   String _days(double value) {
-    if (!value.isFinite) return 'غير محدد';
-    if (value < 1) return 'أقل من يوم';
+    final l = AppL10n.current;
+    if (!value.isFinite) return l.csNotSpecified;
+    if (value < 1) return l.aiLessThanDay;
     final rounded = value.round();
-    return '$rounded يوم';
+    return l.aiDaysCount(rounded);
   }
 }

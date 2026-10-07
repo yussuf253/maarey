@@ -29197,6 +29197,1957 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'الولايات المتحدة'**
   String get countryUSA;
+
+  /// No description provided for @authEmailAlreadyRegistered.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا البريد مسجّل مسبقاً — سجّل الدخول أو استخدم بريداً آخر'**
+  String get authEmailAlreadyRegistered;
+
+  /// No description provided for @authReadAccountAfterCreate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر قراءة الحساب بعد الإنشاء'**
+  String get authReadAccountAfterCreate;
+
+  /// No description provided for @authReadAccountAfterIsolation.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر قراءة الحساب بعد عزل البيانات'**
+  String get authReadAccountAfterIsolation;
+
+  /// No description provided for @authCreateAccountFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر إنشاء الحساب. حاول مرة أخرى.'**
+  String get authCreateAccountFailed;
+
+  /// No description provided for @authRateLimited.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم تجاوز حد الإرسال. انتظر بضع دقائق ثم حاول مجدداً.'**
+  String get authRateLimited;
+
+  /// No description provided for @authNoAccountForEmail.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد حساب مرتبط بهذا البريد الإلكتروني.'**
+  String get authNoAccountForEmail;
+
+  /// No description provided for @authServerUnreachable.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر الاتصال بالخادم. تحقق من الإنترنت وحاول مجدداً.'**
+  String get authServerUnreachable;
+
+  /// No description provided for @authSendOtpFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر إرسال رمز التحقق: {error}'**
+  String authSendOtpFailed(Object error);
+
+  /// No description provided for @authSendOtpNetwork.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر إرسال رمز التحقق. تحقق من الاتصال بالإنترنت.'**
+  String get authSendOtpNetwork;
+
+  /// No description provided for @authOtpInvalidOrExpired.
+  ///
+  /// In ar, this message translates to:
+  /// **'رمز التحقق غير صحيح أو منتهي الصلاحية'**
+  String get authOtpInvalidOrExpired;
+
+  /// No description provided for @authOtpWrongOrExpired.
+  ///
+  /// In ar, this message translates to:
+  /// **'رمز التحقق خاطئ أو منتهي الصلاحية.'**
+  String get authOtpWrongOrExpired;
+
+  /// No description provided for @authOtpBannedEmail.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر إكمال التحقق بهذا البريد. جرّب بريداً إلكترونياً آخر أو تواصل مع الدعم.'**
+  String get authOtpBannedEmail;
+
+  /// No description provided for @authOtpVerifyFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر التحقق من الرمز. حاول مرة أخرى.'**
+  String get authOtpVerifyFailed;
+
+  /// No description provided for @authSignupEmailInvalid.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر إنشاء الحساب. البريد الإلكتروني غير صالح.'**
+  String get authSignupEmailInvalid;
+
+  /// No description provided for @authWeakPassword.
+  ///
+  /// In ar, this message translates to:
+  /// **'رمز الدخول ضعيف. استخدم رمزاً أقوى.'**
+  String get authWeakPassword;
+
+  /// No description provided for @authSetPasswordFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر تثبيت رمز الدخول على السيرفر. حاول مجدداً.'**
+  String get authSetPasswordFailed;
+
+  /// No description provided for @authSetPasswordNetwork.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر تثبيت رمز الدخول على السيرفر. تحقق من الاتصال بالإنترنت.'**
+  String get authSetPasswordNetwork;
+
+  /// No description provided for @authLocalAccountCreateFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر إنشاء الحساب محلياً.'**
+  String get authLocalAccountCreateFailed;
+
+  /// No description provided for @authLocalAccountCreateForUserFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر إنشاء حساب محلي لهذا المستخدم.'**
+  String get authLocalAccountCreateForUserFailed;
+
+  /// No description provided for @authLocalPrepFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر إكمال تجهيز الحساب محلياً. حاول مرة أخرى.'**
+  String get authLocalPrepFailed;
+
+  /// No description provided for @authPasswordTooShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'رمز الدخول قصير جداً'**
+  String get authPasswordTooShort;
+
+  /// No description provided for @authVerificationSessionExpired.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهت جلسة التحقق. أعد طلب رمز التحقق ثم حاول مجدداً.'**
+  String get authVerificationSessionExpired;
+
+  /// No description provided for @authUpdatePasswordFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر تحديث كلمة المرور على السيرفر. حاول مرة أخرى.'**
+  String get authUpdatePasswordFailed;
+
+  /// No description provided for @authUpdatePasswordNetwork.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر تحديث كلمة المرور على السيرفر. تحقق من الاتصال بالإنترنت.'**
+  String get authUpdatePasswordNetwork;
+
+  /// No description provided for @authUpdatePasswordLocalFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر تحديث رمز الدخول محلياً على هذا الجهاز.'**
+  String get authUpdatePasswordLocalFailed;
+
+  /// No description provided for @authGoogleSigningIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'جاري تسجيل الدخول عبر Google. يرجى الانتظار.'**
+  String get authGoogleSigningIn;
+
+  /// No description provided for @authGooglePageFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر فتح صفحة تسجيل Google.'**
+  String get authGooglePageFailed;
+
+  /// No description provided for @authGoogleIncomplete.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يكتمل تسجيل الدخول عبر Google.'**
+  String get authGoogleIncomplete;
+
+  /// No description provided for @authGoogleNoEmail.
+  ///
+  /// In ar, this message translates to:
+  /// **'حساب Google لا يحتوي على بريد صالح.'**
+  String get authGoogleNoEmail;
+
+  /// No description provided for @authGoogleTimeout.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهت مهلة تسجيل Google. تحقق من صفحة التفويض ثم أعد المحاولة.'**
+  String get authGoogleTimeout;
+
+  /// No description provided for @authGoogleFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'فشل تسجيل الدخول عبر Google. حاول مرة أخرى.'**
+  String get authGoogleFailed;
+
+  /// No description provided for @authGoogleNetwork.
+  ///
+  /// In ar, this message translates to:
+  /// **'فشل تسجيل الدخول عبر Google. تحقق من الاتصال بالإنترنت.'**
+  String get authGoogleNetwork;
+
+  /// No description provided for @dlsHeader.
+  ///
+  /// In ar, this message translates to:
+  /// **'الترحيب والملخص العلوي'**
+  String get dlsHeader;
+
+  /// No description provided for @dlsOrbit.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاختصارات الدائرية (صندوق، بيع، …)'**
+  String get dlsOrbit;
+
+  /// No description provided for @dlsPinned.
+  ///
+  /// In ar, this message translates to:
+  /// **'المنتجات المثبّتة'**
+  String get dlsPinned;
+
+  /// No description provided for @dlsCharts.
+  ///
+  /// In ar, this message translates to:
+  /// **'المخططات والنشاط الأخير'**
+  String get dlsCharts;
+
+  /// No description provided for @idl5Minutes.
+  ///
+  /// In ar, this message translates to:
+  /// **'5 دقائق'**
+  String get idl5Minutes;
+
+  /// No description provided for @idl10Minutes.
+  ///
+  /// In ar, this message translates to:
+  /// **'10 دقائق'**
+  String get idl10Minutes;
+
+  /// No description provided for @idl15Minutes.
+  ///
+  /// In ar, this message translates to:
+  /// **'15 دقيقة'**
+  String get idl15Minutes;
+
+  /// No description provided for @idl30Minutes.
+  ///
+  /// In ar, this message translates to:
+  /// **'30 دقيقة'**
+  String get idl30Minutes;
+
+  /// No description provided for @idlMinutesGeneric.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} دقيقة'**
+  String idlMinutesGeneric(Object count);
+
+  /// No description provided for @productSaveFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر حفظ المنتج: {error}'**
+  String productSaveFailed(Object error);
+
+  /// No description provided for @invoiceUnbalanced.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفاتورة غير متوازنة'**
+  String get invoiceUnbalanced;
+
+  /// No description provided for @ivItemInvalidValue.
+  ///
+  /// In ar, this message translates to:
+  /// **'بند يحتوي قيمة غير صالحة (NaN): {name}'**
+  String ivItemInvalidValue(Object name);
+
+  /// No description provided for @ivItemNegativeQty.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكمية سالبة في بند: {name}'**
+  String ivItemNegativeQty(Object name);
+
+  /// No description provided for @ivItemNegativePrice.
+  ///
+  /// In ar, this message translates to:
+  /// **'سعر البند سالب: {name}'**
+  String ivItemNegativePrice(Object name);
+
+  /// No description provided for @ivItemNegativeTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي البند سالب: {name}'**
+  String ivItemNegativeTotal(Object name);
+
+  /// No description provided for @ivInvoiceNaN.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفاتورة تحتوي قيمة غير صالحة (NaN)'**
+  String get ivInvoiceNaN;
+
+  /// No description provided for @ivTaxNegative.
+  ///
+  /// In ar, this message translates to:
+  /// **'الضريبة سالبة'**
+  String get ivTaxNegative;
+
+  /// No description provided for @ivDiscountNegative.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخصم سالب'**
+  String get ivDiscountNegative;
+
+  /// No description provided for @ivLoyaltyDiscountNegative.
+  ///
+  /// In ar, this message translates to:
+  /// **'خصم الولاء سالب'**
+  String get ivLoyaltyDiscountNegative;
+
+  /// No description provided for @ivDiscountExceedsItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخصم ({discount}) أكبر من إجمالي البنود ({subtotal})'**
+  String ivDiscountExceedsItems(Object discount, Object subtotal);
+
+  /// No description provided for @ivTotalMismatch.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي الفاتورة ({total}) لا يطابق المعادلة: مجموع البنود ({subtotal}) + الضريبة ({tax}) - الخصم الكلي ({discount}) = {expected}'**
+  String ivTotalMismatch(
+    Object discount,
+    Object expected,
+    Object subtotal,
+    Object tax,
+    Object total,
+  );
+
+  /// No description provided for @ivTotalNaN.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي الفاتورة قيمة غير صالحة (NaN)'**
+  String get ivTotalNaN;
+
+  /// No description provided for @ivTotalNegative.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي الفاتورة سالب'**
+  String get ivTotalNegative;
+
+  /// No description provided for @ivPaidNaN.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ المدفوع قيمة غير صالحة (NaN)'**
+  String get ivPaidNaN;
+
+  /// No description provided for @ivPaidNegative.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ المدفوع سالب'**
+  String get ivPaidNegative;
+
+  /// No description provided for @ivPaidExceedsTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ المدفوع ({paid}) أكبر من إجمالي الفاتورة ({total})'**
+  String ivPaidExceedsTotal(Object paid, Object total);
+
+  /// No description provided for @fpNotoNaskh.
+  ///
+  /// In ar, this message translates to:
+  /// **'نوتو نسخ عربي'**
+  String get fpNotoNaskh;
+
+  /// No description provided for @fpCairo.
+  ///
+  /// In ar, this message translates to:
+  /// **'القاهرة'**
+  String get fpCairo;
+
+  /// No description provided for @fpAlmarai.
+  ///
+  /// In ar, this message translates to:
+  /// **'المراعي'**
+  String get fpAlmarai;
+
+  /// No description provided for @fpAmiri.
+  ///
+  /// In ar, this message translates to:
+  /// **'أميري'**
+  String get fpAmiri;
+
+  /// No description provided for @fpLateef.
+  ///
+  /// In ar, this message translates to:
+  /// **'لطيف'**
+  String get fpLateef;
+
+  /// No description provided for @fpScheherazadeNew.
+  ///
+  /// In ar, this message translates to:
+  /// **'شهرزاد الجديد'**
+  String get fpScheherazadeNew;
+
+  /// No description provided for @fpIbmPlexSansArabic.
+  ///
+  /// In ar, this message translates to:
+  /// **'آي بي إم بلكس سانس عربي'**
+  String get fpIbmPlexSansArabic;
+
+  /// No description provided for @fpElMessiri.
+  ///
+  /// In ar, this message translates to:
+  /// **'المسيري'**
+  String get fpElMessiri;
+
+  /// No description provided for @fpChanga.
+  ///
+  /// In ar, this message translates to:
+  /// **'تشانغا'**
+  String get fpChanga;
+
+  /// No description provided for @fpTajawal.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجوال'**
+  String get fpTajawal;
+
+  /// No description provided for @fpNotoNaskhDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخ تقليدي — مناسب للنصوص الطويلة والوثائق.'**
+  String get fpNotoNaskhDesc;
+
+  /// No description provided for @fpCairoDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'هندسي عصري — واجهات وتطبيقات حديثة.'**
+  String get fpCairoDesc;
+
+  /// No description provided for @fpAlmaraiDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'نظيف ومقروء — يُستخدم كثيراً في الواجهات العربية.'**
+  String get fpAlmaraiDesc;
+
+  /// No description provided for @fpAmiriDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلاسيكي مائل للكتب والطباعة الرصينة.'**
+  String get fpAmiriDesc;
+
+  /// No description provided for @fpLateefDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخي مريح بسُمك متوسط — تميّز بسيط.'**
+  String get fpLateefDesc;
+
+  /// No description provided for @fpScheherazadeNewDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخ تقليدي أنيق — حروف طويلة ووضوح جيد.'**
+  String get fpScheherazadeNewDesc;
+
+  /// No description provided for @fpIbmPlexDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'تقني منظم — أرقام وبيانات واضحة.'**
+  String get fpIbmPlexDesc;
+
+  /// No description provided for @fpElMessiriDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'عناوين قوية — إيقاع مميز للعناوين.'**
+  String get fpElMessiriDesc;
+
+  /// No description provided for @fpChangaDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'مائل للعرض — حروف عريضة ولافتة.'**
+  String get fpChangaDesc;
+
+  /// No description provided for @fpTajawalDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'خط عصري وواضح للواجهات والعناوين.'**
+  String get fpTajawalDesc;
+
+  /// No description provided for @raCustomerFallback.
+  ///
+  /// In ar, this message translates to:
+  /// **'عميل #{id}'**
+  String raCustomerFallback(Object id);
+
+  /// No description provided for @raItemFallback.
+  ///
+  /// In ar, this message translates to:
+  /// **'صنف #{id}'**
+  String raItemFallback(Object id);
+
+  /// No description provided for @permGroupAppAccess.
+  ///
+  /// In ar, this message translates to:
+  /// **'التطبيق والوصول'**
+  String get permGroupAppAccess;
+
+  /// No description provided for @permDashboardNav.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرئيسية والتنقّل'**
+  String get permDashboardNav;
+
+  /// No description provided for @permDashboardNavSub.
+  ///
+  /// In ar, this message translates to:
+  /// **'الوصول إلى لوحة التطبيق والأقسام الرئيسية'**
+  String get permDashboardNavSub;
+
+  /// No description provided for @permCustomersView.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض العملاء والبحث'**
+  String get permCustomersView;
+
+  /// No description provided for @permCustomersEdit.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة وتعديل العملاء'**
+  String get permCustomersEdit;
+
+  /// No description provided for @permCustomersContacts.
+  ///
+  /// In ar, this message translates to:
+  /// **'قائمة اتصال العملاء'**
+  String get permCustomersContacts;
+
+  /// No description provided for @permLoyaltyPoints.
+  ///
+  /// In ar, this message translates to:
+  /// **'نقاط الولاء والإعدادات'**
+  String get permLoyaltyPoints;
+
+  /// No description provided for @permPosScreen.
+  ///
+  /// In ar, this message translates to:
+  /// **'شاشة البيع (نقطة البيع)'**
+  String get permPosScreen;
+
+  /// No description provided for @permParkedSales.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبيعات المعلّقة'**
+  String get permParkedSales;
+
+  /// No description provided for @permProductsView.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض المنتجات والمخزون'**
+  String get permProductsView;
+
+  /// No description provided for @permProductsManage.
+  ///
+  /// In ar, this message translates to:
+  /// **'إدارة المنتجات والأسعار'**
+  String get permProductsManage;
+
+  /// No description provided for @permStockIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'حركات وارد مخزون'**
+  String get permStockIn;
+
+  /// No description provided for @permStockOut.
+  ///
+  /// In ar, this message translates to:
+  /// **'حركات صادر مخزون'**
+  String get permStockOut;
+
+  /// No description provided for @permWarehouseTransfer.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحويل بين المستودعات'**
+  String get permWarehouseTransfer;
+
+  /// No description provided for @permStockPolicies.
+  ///
+  /// In ar, this message translates to:
+  /// **'سياسات المخزون والإعدادات'**
+  String get permStockPolicies;
+
+  /// No description provided for @permCashView.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض الصندوق والحركات'**
+  String get permCashView;
+
+  /// No description provided for @permCashManual.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيداع وسحب وقيد يدوي'**
+  String get permCashManual;
+
+  /// No description provided for @permDebtsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الديون (آجل)'**
+  String get permDebtsTitle;
+
+  /// No description provided for @permDebtsBoard.
+  ///
+  /// In ar, this message translates to:
+  /// **'لوحة الديون والمتابعة'**
+  String get permDebtsBoard;
+
+  /// No description provided for @permInstallmentPlans.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطط التقسيط والجداول'**
+  String get permInstallmentPlans;
+
+  /// No description provided for @permReportsPrint.
+  ///
+  /// In ar, this message translates to:
+  /// **'التقارير والطباعة'**
+  String get permReportsPrint;
+
+  /// No description provided for @permReportsLedgers.
+  ///
+  /// In ar, this message translates to:
+  /// **'التقارير والدفاتر'**
+  String get permReportsLedgers;
+
+  /// No description provided for @permPrintTemplates.
+  ///
+  /// In ar, this message translates to:
+  /// **'الطباعة والقوالب'**
+  String get permPrintTemplates;
+
+  /// No description provided for @permUsersShifts.
+  ///
+  /// In ar, this message translates to:
+  /// **'المستخدمون والورديات'**
+  String get permUsersShifts;
+
+  /// No description provided for @permUsersView.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض قائمة المستخدمين'**
+  String get permUsersView;
+
+  /// No description provided for @permUsersManage.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة وتعديل المستخدمين والصلاحيات'**
+  String get permUsersManage;
+
+  /// No description provided for @permStaffAbsences.
+  ///
+  /// In ar, this message translates to:
+  /// **'غيابات الموظفين'**
+  String get permStaffAbsences;
+
+  /// No description provided for @permSettingsGeneral.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإعدادات العامة'**
+  String get permSettingsGeneral;
+
+  /// No description provided for @permSystemLicense.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعدادات النظام والترخيص'**
+  String get permSystemLicense;
+
+  /// No description provided for @cvNameTooShort.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم قصير جداً'**
+  String get cvNameTooShort;
+
+  /// No description provided for @cvNameTooLong.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم طويل جداً'**
+  String get cvNameTooLong;
+
+  /// No description provided for @cvPhoneIncomplete.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الهاتف يبدو غير مكتمل'**
+  String get cvPhoneIncomplete;
+
+  /// No description provided for @cvPhoneTooLong.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الهاتف طويل جداً'**
+  String get cvPhoneTooLong;
+
+  /// No description provided for @siaStaffNotFound.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يُعثر على الموظف أو الحساب غير مفعّل'**
+  String get siaStaffNotFound;
+
+  /// No description provided for @siaCardMismatch.
+  ///
+  /// In ar, this message translates to:
+  /// **'رمز البطاقة لا يطابق السجل'**
+  String get siaCardMismatch;
+
+  /// No description provided for @gs1Header.
+  ///
+  /// In ar, this message translates to:
+  /// **'مستخرج من الباركود (GS1) — راجع العبوة:'**
+  String get gs1Header;
+
+  /// No description provided for @gs1MfgDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'• تاريخ إنتاج: {date}'**
+  String gs1MfgDate(Object date);
+
+  /// No description provided for @gs1ExpDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'• تاريخ انتهاء: {date}'**
+  String gs1ExpDate(Object date);
+
+  /// No description provided for @gs1NetWeight.
+  ///
+  /// In ar, this message translates to:
+  /// **'• وزن صافٍ (من الباركود): {weight} غ'**
+  String gs1NetWeight(Object weight);
+
+  /// No description provided for @gs1EmbeddedWeight.
+  ///
+  /// In ar, this message translates to:
+  /// **'وزن مدمج (حسب إعدادات المخزن): {digits} → كمية/وزن أولي {qty}'**
+  String gs1EmbeddedWeight(Object digits, Object qty);
+
+  /// No description provided for @cplOpenFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر فتح التطبيق المناسب'**
+  String get cplOpenFailed;
+
+  /// No description provided for @cplOpenError.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر الفتح: {error}'**
+  String cplOpenError(Object error);
+
+  /// No description provided for @cplChooseDial.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر الرقم للاتصال'**
+  String get cplChooseDial;
+
+  /// No description provided for @cplChooseWhatsapp.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر الرقم للواتساب'**
+  String get cplChooseWhatsapp;
+
+  /// No description provided for @vpSellBelowBuy.
+  ///
+  /// In ar, this message translates to:
+  /// **'سعر البيع أقل من سعر الشراء'**
+  String get vpSellBelowBuy;
+
+  /// No description provided for @vpSellBelowMin.
+  ///
+  /// In ar, this message translates to:
+  /// **'سعر البيع أقل من الحد الأدنى'**
+  String get vpSellBelowMin;
+
+  /// No description provided for @blSizeMm.
+  ///
+  /// In ar, this message translates to:
+  /// **'{w} × {h} مم'**
+  String blSizeMm(Object h, Object w);
+
+  /// No description provided for @blPricePerKg.
+  ///
+  /// In ar, this message translates to:
+  /// **'{price} Fdj/كغم'**
+  String blPricePerKg(Object price);
+
+  /// No description provided for @licKillAdmin.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم إيقاف الوصول إلى حسابك إدارياً. تواصل مع الدعم لإعادة التفعيل.'**
+  String get licKillAdmin;
+
+  /// No description provided for @licRevoked.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم إلغاء وصولك إلى الخدمة. تواصل مع الدعم.'**
+  String get licRevoked;
+
+  /// No description provided for @licGrace.
+  ///
+  /// In ar, this message translates to:
+  /// **'حسابك في فترة سماح بعد انتهاء الاشتراك. جدّد قبل انتهاء المهلة لاستعادة جميع الميزات.'**
+  String get licGrace;
+
+  /// No description provided for @licExpiredRenew.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهت صلاحية اشتراكك. جدّد المفتاح للمتابعة.'**
+  String get licExpiredRenew;
+
+  /// No description provided for @licDeviceLimitAdmin.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم تجاوز حد الأجهزة في حسابك. افصل جهازاً من لوحة الإدارة أو قم بترقية الخطة.'**
+  String get licDeviceLimitAdmin;
+
+  /// No description provided for @licDeviceLimitOffline.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم تجاوز حد الأجهزة في حسابك. اتصل بالإنترنت لإعادة التحقق بعد فصل جهاز.'**
+  String get licDeviceLimitOffline;
+
+  /// No description provided for @licDeviceLimitCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الأجهزة النشطة على الحساب تجاوز الحد ({active}/{max}). افصل جهازاً أو قم بترقية الخطة.'**
+  String licDeviceLimitCount(Object active, Object max);
+
+  /// No description provided for @licTimeTamperPending.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم اكتشاف تعارض في إعدادات الوقت. أكمل العملية الحالية ثم سيُقفل التطبيق.'**
+  String get licTimeTamperPending;
+
+  /// No description provided for @licTimeSyncOnline.
+  ///
+  /// In ar, this message translates to:
+  /// **'يرجى الاتصال بالإنترنت للتحقق من الوقت.'**
+  String get licTimeSyncOnline;
+
+  /// No description provided for @licTrialEnded.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتهت التجربة المجانية (15 يوم). اختر خطة اشتراك للمتابعة.'**
+  String get licTrialEnded;
+
+  /// No description provided for @licTrialCloudDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجربة مجانية 15 يوم من أول تسجيل Google لهذا الحساب (موحّدة لكل الأجهزة).'**
+  String get licTrialCloudDesc;
+
+  /// No description provided for @licTrialLocalDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'تجربة مجانية مفعلة لمدة 15 يوم من أول استخدام لهذا الجهاز.'**
+  String get licTrialLocalDesc;
+
+  /// No description provided for @licJwtRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'حسابك يستخدم ترخيصاً موقّعاً. الصق رمز التفعيل الكامل (JWT) وليس المفتاح القديم.'**
+  String get licJwtRequired;
+
+  /// No description provided for @licCacheWarning.
+  ///
+  /// In ar, this message translates to:
+  /// **'\n(تعذّر التحقق من الخادم — الحالة من آخر مزامنة.)'**
+  String get licCacheWarning;
+
+  /// No description provided for @licDevicesCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{registered} / {max} جهاز'**
+  String licDevicesCount(Object max, Object registered);
+
+  /// No description provided for @licDevicesN.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} أجهزة'**
+  String licDevicesN(Object count);
+
+  /// No description provided for @licPricePerMonth.
+  ///
+  /// In ar, this message translates to:
+  /// **'{price} Fdj / شهر'**
+  String licPricePerMonth(Object price);
+
+  /// No description provided for @licJwtPasteHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصق رمز JWT كاملاً من أول «ey» حتى نهاية الجزء الثالث (بدون أسطر أو مسافات في الوسط).'**
+  String get licJwtPasteHint;
+
+  /// No description provided for @licJwtInvalid.
+  ///
+  /// In ar, this message translates to:
+  /// **'مفتاح الترخيص غير صالح. إن كان النص صحيحاً فتأكد من تحديث التطبيق بعد مزامنة المفتاح العام، ومن عدم تغيير حالة الأحرف (مثل eyJ وليس eyj).'**
+  String get licJwtInvalid;
+
+  /// No description provided for @licActivatedOk.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم تفعيل الترخيص بنجاح!'**
+  String get licActivatedOk;
+
+  /// No description provided for @licSuspendedContact.
+  ///
+  /// In ar, this message translates to:
+  /// **'حسابك معلَّق مؤقتاً. تواصل مع الدعم لمتابعة الاستخدام.'**
+  String get licSuspendedContact;
+
+  /// No description provided for @stNoValidItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد بنود بكمية صالحة'**
+  String get stNoValidItems;
+
+  /// No description provided for @stProductMissing.
+  ///
+  /// In ar, this message translates to:
+  /// **'منتج غير موجود #{id}'**
+  String stProductMissing(Object id);
+
+  /// No description provided for @stNothingSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يُحفظ أي بند للسند'**
+  String get stNothingSaved;
+
+  /// No description provided for @stInsufficientBalance.
+  ///
+  /// In ar, this message translates to:
+  /// **'رصيد غير كافٍ للمنتج #{id} في المخزن (المتاح {available})'**
+  String stInsufficientBalance(Object available, Object id);
+
+  /// No description provided for @stSameWarehouse.
+  ///
+  /// In ar, this message translates to:
+  /// **'المخزن المصدر والمستهدف متطابقان'**
+  String get stSameWarehouse;
+
+  /// No description provided for @stInsufficientSource.
+  ///
+  /// In ar, this message translates to:
+  /// **'رصيد غير كافٍ في المخزن المصدر للمنتج #{id}'**
+  String stInsufficientSource(Object id);
+
+  /// No description provided for @actorEmployee.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموظف #{id}'**
+  String actorEmployee(Object id);
+
+  /// No description provided for @actExpenseCreated.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل مصروف'**
+  String get actExpenseCreated;
+
+  /// No description provided for @actExpenseDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفئة #{id} • الحالة: {status} • المنفذ: {actor}'**
+  String actExpenseDetails(Object actor, Object id, Object status);
+
+  /// No description provided for @expenseWord.
+  ///
+  /// In ar, this message translates to:
+  /// **'مصروف'**
+  String get expenseWord;
+
+  /// No description provided for @expenseLedgerNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'مصروف — {name} (#exp:{id})'**
+  String expenseLedgerNote(Object id, Object name);
+
+  /// No description provided for @expenseLedgerNoteDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'مصروف — {name} — {description} (#exp:{id})'**
+  String expenseLedgerNoteDesc(Object description, Object id, Object name);
+
+  /// No description provided for @actCashEntryExpense.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيد صندوق: مصروف'**
+  String get actCashEntryExpense;
+
+  /// No description provided for @actCashEntryExpenseDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'مصروف #{expense} • فئة #{category} • المنفذ: {actor}'**
+  String actCashEntryExpenseDetails(
+    Object actor,
+    Object category,
+    Object expense,
+  );
+
+  /// No description provided for @actDeleteCashEntryExpense.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف قيد صندوق: مصروف'**
+  String get actDeleteCashEntryExpense;
+
+  /// No description provided for @actCashEntryExpenseDeletedDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم حذف القيد المرتبط بمصروف #{id} أثناء التعديل • المنفذ: {actor}'**
+  String actCashEntryExpenseDeletedDetails(Object actor, Object id);
+
+  /// No description provided for @actCashEntryExpenseDeletedDetails2.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف المصروف #{id} أدى لحذف القيد المرتبط • المنفذ: {actor}'**
+  String actCashEntryExpenseDeletedDetails2(Object actor, Object id);
+
+  /// No description provided for @actDeleteExpense.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف مصروف'**
+  String get actDeleteExpense;
+
+  /// No description provided for @actDeleteExpenseDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفئة #{id} • المنفذ: {actor}'**
+  String actDeleteExpenseDetails(Object actor, Object id);
+
+  /// No description provided for @supMeta.
+  ///
+  /// In ar, this message translates to:
+  /// **'مورد #{id}'**
+  String supMeta(Object id);
+
+  /// No description provided for @supMetaNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'{meta} — ملاحظة: {note}'**
+  String supMetaNote(Object meta, Object note);
+
+  /// No description provided for @supDebtPaymentProduct.
+  ///
+  /// In ar, this message translates to:
+  /// **'دفع ذمة مورد'**
+  String get supDebtPaymentProduct;
+
+  /// No description provided for @actSupplierPayoutCreate.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنشاء سند دفع مورد'**
+  String get actSupplierPayoutCreate;
+
+  /// No description provided for @actorSupplierLine.
+  ///
+  /// In ar, this message translates to:
+  /// **'المورد: {name} ({id}) • المنفذ: {actor}'**
+  String actorSupplierLine(Object actor, Object id, Object name);
+
+  /// No description provided for @actSupplierPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل دفعة مورد'**
+  String get actSupplierPayment;
+
+  /// No description provided for @actSupplierPaymentDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'المورد: {name} ({id}) • الفاتورة المرجعية: #{invoice} • المنفذ: {actor}'**
+  String actSupplierPaymentDetails(
+    Object actor,
+    Object id,
+    Object invoice,
+    Object name,
+  );
+
+  /// No description provided for @actSupplierPayoutDelete.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف سند دفع مورد'**
+  String get actSupplierPayoutDelete;
+
+  /// No description provided for @actSupplierPayoutDeleteDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'مورد #{id} • الحذف ضمن عكس دفعة #{payout} • المنفذ: {actor}'**
+  String actSupplierPayoutDeleteDetails(Object actor, Object id, Object payout);
+
+  /// No description provided for @supReversePaymentName.
+  ///
+  /// In ar, this message translates to:
+  /// **'عكس دفعة مورد #{id} — {name} (كانت دفعة #{payout})'**
+  String supReversePaymentName(Object id, Object name, Object payout);
+
+  /// No description provided for @actSupplierPaymentReverse.
+  ///
+  /// In ar, this message translates to:
+  /// **'عكس دفعة مورد'**
+  String get actSupplierPaymentReverse;
+
+  /// No description provided for @actSupplierPaymentDelete.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف دفعة مورد'**
+  String get actSupplierPaymentDelete;
+
+  /// No description provided for @actSupplierPaymentDeleteDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'مورد #{id} • المنفذ: {actor}'**
+  String actSupplierPaymentDeleteDetails(Object actor, Object id);
+
+  /// No description provided for @actInvoiceCreate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل فاتورة'**
+  String get actInvoiceCreate;
+
+  /// No description provided for @actInvoiceReturn.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل مرتجع فاتورة'**
+  String get actInvoiceReturn;
+
+  /// No description provided for @actInvoiceDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'المنفّذ: {actor} — العميل: {customer} — النوع: {type}'**
+  String actInvoiceDetails(Object actor, Object customer, Object type);
+
+  /// No description provided for @ivCannotSellLocked.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يمكن بيع «{name}» لأن المخزون صفر في الوضع المقيّد.'**
+  String ivCannotSellLocked(Object name);
+
+  /// No description provided for @ivVariantQtyInteger.
+  ///
+  /// In ar, this message translates to:
+  /// **'كمية الملابس يجب أن تكون رقماً صحيحاً.'**
+  String get ivVariantQtyInteger;
+
+  /// No description provided for @ivNoQtyForSize.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد كمية متوفرة لهذا المقاس/اللون.'**
+  String get ivNoQtyForSize;
+
+  /// No description provided for @cashSupplierPaymentDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'دفع مورد — {name} (سند #{id})'**
+  String cashSupplierPaymentDesc(Object id, Object name);
+
+  /// No description provided for @actCashSupplierPayment.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيد صندوق: دفع مورد'**
+  String get actCashSupplierPayment;
+
+  /// No description provided for @actCashInvoiceLinkDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'المنفّذ: {actor} — الفاتورة #{id} — {name}'**
+  String actCashInvoiceLinkDetails(Object actor, Object id, Object name);
+
+  /// No description provided for @cashDebtCollectionDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'سند تحصيل دين #{id} — {name}'**
+  String cashDebtCollectionDesc(Object id, Object name);
+
+  /// No description provided for @cashInstallmentDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'سند تسديد قسط #{id} — {name}'**
+  String cashInstallmentDesc(Object id, Object name);
+
+  /// No description provided for @cashSaleInvoiceDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة بيع #{id} — {name}'**
+  String cashSaleInvoiceDesc(Object id, Object name);
+
+  /// No description provided for @actCashInvoiceLinked.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيد صندوق مرتبط بفاتورة'**
+  String get actCashInvoiceLinked;
+
+  /// No description provided for @actCashInvoiceLinkedDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'المنفّذ: {actor} — الفاتورة #{id} — نوع القيد: {type}'**
+  String actCashInvoiceLinkedDetails(Object actor, Object id, Object type);
+
+  /// No description provided for @cashReturnDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتجع فاتورة #{id} — {customer}'**
+  String cashReturnDesc(Object customer, Object id);
+
+  /// No description provided for @cashReturnDescWithOrig.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتجع فاتورة #{id} (أصل #{original}) — {customer}'**
+  String cashReturnDescWithOrig(Object customer, Object id, Object original);
+
+  /// No description provided for @actCashReturn.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيد صندوق: مرتجع بيع'**
+  String get actCashReturn;
+
+  /// No description provided for @actCashReturnDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'المنفّذ: {actor} — الفاتورة #{id}'**
+  String actCashReturnDetails(Object actor, Object id);
+
+  /// No description provided for @dvInvalidNumeric.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيانات الفاتورة غير صالحة (قيمة رقمية غير منتهية).'**
+  String get dvInvalidNumeric;
+
+  /// No description provided for @dvNotBelowZero.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يمكن أن يكون {label} أقل من الصفر.'**
+  String dvNotBelowZero(Object label);
+
+  /// No description provided for @dvNoItems.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يمكن حفظ فاتورة بدون بنود.'**
+  String get dvNoItems;
+
+  /// No description provided for @dvLabelDiscount.
+  ///
+  /// In ar, this message translates to:
+  /// **'الخصم'**
+  String get dvLabelDiscount;
+
+  /// No description provided for @dvLabelAdvance.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدفعة المقدمة'**
+  String get dvLabelAdvance;
+
+  /// No description provided for @dvLabelInvoiceTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي الفاتورة'**
+  String get dvLabelInvoiceTotal;
+
+  /// No description provided for @dvDiscountPctRange.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسبة الخصم يجب أن تكون بين 0% و100%.'**
+  String get dvDiscountPctRange;
+
+  /// No description provided for @dvCollectionSingleItem.
+  ///
+  /// In ar, this message translates to:
+  /// **'سندات التحصيل/الدفع يجب أن تحتوي على بند واحد فقط.'**
+  String get dvCollectionSingleItem;
+
+  /// No description provided for @dvItemNameRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم المنتج في البند رقم {line} مطلوب.'**
+  String dvItemNameRequired(Object line);
+
+  /// No description provided for @dvItemPriceLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'سعر البند رقم {line}'**
+  String dvItemPriceLabel(Object line);
+
+  /// No description provided for @dvItemTotalLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي البند رقم {line}'**
+  String dvItemTotalLabel(Object line);
+
+  /// No description provided for @dvItemQtyPositive.
+  ///
+  /// In ar, this message translates to:
+  /// **'كمية البيع في البند رقم {line} يجب أن تكون أكبر من صفر.'**
+  String dvItemQtyPositive(Object line);
+
+  /// No description provided for @dvItemBaseQtyInvalid.
+  ///
+  /// In ar, this message translates to:
+  /// **'كمية المخزون الأساسية في البند رقم {line} غير صالحة.'**
+  String dvItemBaseQtyInvalid(Object line);
+
+  /// No description provided for @dvItemProductIdInvalid.
+  ///
+  /// In ar, this message translates to:
+  /// **'معرّف المنتج في البند رقم {line} غير صالح.'**
+  String dvItemProductIdInvalid(Object line);
+
+  /// No description provided for @dvItemTotalMismatch.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي البند رقم {line} غير متطابق مع السعر × الكمية.'**
+  String dvItemTotalMismatch(Object line);
+
+  /// No description provided for @dvDiscountExceedsSum.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيمة الخصم لا يمكن أن تتجاوز مجموع البنود.'**
+  String get dvDiscountExceedsSum;
+
+  /// No description provided for @dvTotalMismatch.
+  ///
+  /// In ar, this message translates to:
+  /// **'إجمالي الفاتورة غير متطابق مع مجموع البنود بعد الخصم والضريبة.'**
+  String get dvTotalMismatch;
+
+  /// No description provided for @dvAdvanceExceedsTotal.
+  ///
+  /// In ar, this message translates to:
+  /// **'الدفعة المقدمة لا يمكن أن تتجاوز إجمالي الفاتورة.'**
+  String get dvAdvanceExceedsTotal;
+
+  /// No description provided for @actDeleteInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف فاتورة'**
+  String get actDeleteInvoice;
+
+  /// No description provided for @actDeleteInvoiceDetails.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفاتورة #{id} — الحذف المنطقي يحفظ سجل التدقيق'**
+  String actDeleteInvoiceDetails(Object id);
+
+  /// No description provided for @csUnknownDevice.
+  ///
+  /// In ar, this message translates to:
+  /// **'جهاز غير معروف'**
+  String get csUnknownDevice;
+
+  /// No description provided for @csDeviceLimitPlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم الوصول إلى الحد الأقصى للأجهزة في خطتك. افصل جهازاً من الحساب أو قم بترقية الخطة.'**
+  String get csDeviceLimitPlan;
+
+  /// No description provided for @csDeviceRemovedAsk.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم إزالة هذا الجهاز من الحساب. اطلب السماح بالعودة من جهاز نشط في الإعدادات.'**
+  String get csDeviceRemovedAsk;
+
+  /// No description provided for @csNotSpecified.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير محدد'**
+  String get csNotSpecified;
+
+  /// No description provided for @csDeviceLimitCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'عدد الأجهزة النشطة على الحساب تجاوز الحد ({active}/{max}). افصل جهازاً غير مستخدم أو قم بترقية الخطة.'**
+  String csDeviceLimitCount(Object active, Object max);
+
+  /// No description provided for @csNotLoggedIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'المستخدم غير مسجل دخول.'**
+  String get csNotLoggedIn;
+
+  /// No description provided for @csCannotDetachCurrent.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يمكن فصل الجهاز الحالي. سجّل الخروج من هذا الجهاز أولاً.'**
+  String get csCannotDetachCurrent;
+
+  /// No description provided for @csDevicesTableMissing.
+  ///
+  /// In ar, this message translates to:
+  /// **'جدول الأجهزة غير موجود بعد في Supabase. شغّل SQL أولاً.'**
+  String get csDevicesTableMissing;
+
+  /// No description provided for @csDevicesTableNotReady.
+  ///
+  /// In ar, this message translates to:
+  /// **'جدول الأجهزة غير جاهز.'**
+  String get csDevicesTableNotReady;
+
+  /// No description provided for @csAccessColumnSql.
+  ///
+  /// In ar, this message translates to:
+  /// **'شغّل ملف SQL لإضافة عمود access_status أولاً.'**
+  String get csAccessColumnSql;
+
+  /// No description provided for @csNoValidLicense.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يمكن المزامنة بدون ترخيص صالح.'**
+  String get csNoValidLicense;
+
+  /// No description provided for @csDeviceLimitPlanSignout.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم الوصول إلى الحد الأقصى للأجهزة في الحساب. افصل جهازاً أو قم بترقية الخطة.'**
+  String get csDeviceLimitPlanSignout;
+
+  /// No description provided for @csDeviceRemovedSignout.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم إزالة هذا الجهاز من الحساب. سجّل الخروج ثم اطلب السماح بالعودة من جهاز نشط.'**
+  String get csDeviceRemovedSignout;
+
+  /// No description provided for @csSyncTablesMissing.
+  ///
+  /// In ar, this message translates to:
+  /// **'جداول المزامنة غير موجودة في Supabase. نفّذ ملف supabase_sync_setup.sql مرة واحدة من SQL Editor.'**
+  String get csSyncTablesMissing;
+
+  /// No description provided for @csSyncTablesNotReady.
+  ///
+  /// In ar, this message translates to:
+  /// **'جداول المزامنة غير جاهزة في Supabase. نفّذ supabase_sync_setup.sql.'**
+  String get csSyncTablesNotReady;
+
+  /// No description provided for @csSnapshotVersionMismatch.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخة لقطة السحابة ({schema}) لا تطابق التطبيق ({app}). حدّث التطبيق على هذا الجهاز ثم أعد «مزامنة الآن».'**
+  String csSnapshotVersionMismatch(Object app, Object schema);
+
+  /// No description provided for @csSnapshotFetchFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر جلب لقطة السحابة بعد التحقق من البيانات الوصفية. أعد المحاولة.'**
+  String get csSnapshotFetchFailed;
+
+  /// No description provided for @csSnapshotEmptyPayload.
+  ///
+  /// In ar, this message translates to:
+  /// **'لقطة السحابة لا تحتوي على بيانات (payload). تحقق من Supabase.'**
+  String get csSnapshotEmptyPayload;
+
+  /// No description provided for @csSnapshotMissingSyncId.
+  ///
+  /// In ar, this message translates to:
+  /// **'لقطة السحابة مُجزّأة لكن sync_id ناقص.'**
+  String get csSnapshotMissingSyncId;
+
+  /// No description provided for @csSnapshotChunksFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر تجميع أجزاء اللقطة من السحابة. تحقق من جدول app_snapshot_chunks وصلاحيات القراءة.'**
+  String get csSnapshotChunksFailed;
+
+  /// No description provided for @csPushStoppedEmptyLocal.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم إيقاف الرفع: القاعدة المحلية فارغة بينما توجد بيانات على السحابة. اضغط «مزامنة الآن» من الجهاز الذي يعرض البيانات أولاً، أو تأكد من السحب قبل الرفع.'**
+  String get csPushStoppedEmptyLocal;
+
+  /// No description provided for @csRemoteCheckFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر التحقق من لقطة السحابة قبل الرفع (حماية من استبدال البيانات): {error}'**
+  String csRemoteCheckFailed(Object error);
+
+  /// No description provided for @prCatNameRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم التصنيف مطلوب'**
+  String get prCatNameRequired;
+
+  /// No description provided for @prNameUsed.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا الاسم مستخدم مسبقاً'**
+  String get prNameUsed;
+
+  /// No description provided for @prParentInvalid.
+  ///
+  /// In ar, this message translates to:
+  /// **'التصنيف الرئيسي غير صالح'**
+  String get prParentInvalid;
+
+  /// No description provided for @prCatHasSubcategories.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يمكن الحذف: يوجد تصنيفات فرعية'**
+  String get prCatHasSubcategories;
+
+  /// No description provided for @prCatLinkedToProducts.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يمكن الحذف: التصنيف مرتبط بمنتجات'**
+  String get prCatLinkedToProducts;
+
+  /// No description provided for @prBrandNameRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الماركة مطلوب'**
+  String get prBrandNameRequired;
+
+  /// No description provided for @prBrandExists.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذه الماركة موجودة مسبقاً'**
+  String get prBrandExists;
+
+  /// No description provided for @prTplNameRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم القالب مطلوب'**
+  String get prTplNameRequired;
+
+  /// No description provided for @prTplBaseUnitRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم الوحدة الأساسية مطلوب'**
+  String get prTplBaseUnitRequired;
+
+  /// No description provided for @prTplBaseSymbolRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'تمييز الوحدة الأساسية مطلوب'**
+  String get prTplBaseSymbolRequired;
+
+  /// No description provided for @prTplCompleteConversion.
+  ///
+  /// In ar, this message translates to:
+  /// **'أكمل اسم التمييز لكل وحدة تحويل أو احذف الصف الفارغ'**
+  String get prTplCompleteConversion;
+
+  /// No description provided for @prTplFactorPositive.
+  ///
+  /// In ar, this message translates to:
+  /// **'معامل التحويل يجب أن يكون أكبر من صفر'**
+  String get prTplFactorPositive;
+
+  /// No description provided for @prCodeGenFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر توليد رمز منتج فريد. حاول مجدداً.'**
+  String get prCodeGenFailed;
+
+  /// No description provided for @dcpSameCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يمكن إدخال نفس رقم الهاتف أكثر من مرة لهذا العميل.'**
+  String get dcpSameCustomer;
+
+  /// No description provided for @dcpOtherCustomer.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الهاتف مسجّل مسبقًا لعميل آخر. الأسماء يمكن أن تتشابه، أما رقم الهاتف فيجب أن يكون فريدًا.'**
+  String get dcpOtherCustomer;
+
+  /// No description provided for @dpDebtBefore.
+  ///
+  /// In ar, this message translates to:
+  /// **'دين قبل التسديد'**
+  String get dpDebtBefore;
+
+  /// No description provided for @dpRemainingAfter.
+  ///
+  /// In ar, this message translates to:
+  /// **'متبقي بعد'**
+  String get dpRemainingAfter;
+
+  /// No description provided for @dpNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملاحظة'**
+  String get dpNote;
+
+  /// No description provided for @dpCollectionProduct.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحصيل دين آجل'**
+  String get dpCollectionProduct;
+
+  /// No description provided for @ipPlan.
+  ///
+  /// In ar, this message translates to:
+  /// **'خطة تقسيط'**
+  String get ipPlan;
+
+  /// No description provided for @ipOriginalInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتورة أصلية'**
+  String get ipOriginalInvoice;
+
+  /// No description provided for @ipPaymentProduct.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسديد قسط — خطة'**
+  String get ipPaymentProduct;
+
+  /// No description provided for @shDepositOpen.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيداع عند فتح الوردية'**
+  String get shDepositOpen;
+
+  /// No description provided for @shWithdrawClose.
+  ///
+  /// In ar, this message translates to:
+  /// **'سحب عند إغلاق الوردية'**
+  String get shWithdrawClose;
+
+  /// No description provided for @shInvalidValues.
+  ///
+  /// In ar, this message translates to:
+  /// **'قيم غير صالحة'**
+  String get shInvalidValues;
+
+  /// No description provided for @shWithdrawExceedsBox.
+  ///
+  /// In ar, this message translates to:
+  /// **'المبلغ المسحوب أكبر من المبلغ في الصندوق'**
+  String get shWithdrawExceedsBox;
+
+  /// No description provided for @loyRedeemNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'استبدال نقاط — فاتورة'**
+  String get loyRedeemNote;
+
+  /// No description provided for @loyEarnNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكافأة شراء — فاتورة'**
+  String get loyEarnNote;
+
+  /// No description provided for @snChannelName.
+  ///
+  /// In ar, this message translates to:
+  /// **'تنبيهات ماري'**
+  String get snChannelName;
+
+  /// No description provided for @snChannelDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'مخزون، أقساط، مرتجعات، صندوق، وغيرها — تظهر في شريط الإشعارات.'**
+  String get snChannelDesc;
+
+  /// No description provided for @snAppName.
+  ///
+  /// In ar, this message translates to:
+  /// **'ماري'**
+  String get snAppName;
+
+  /// No description provided for @bpSmallShop.
+  ///
+  /// In ar, this message translates to:
+  /// **'محل صغير'**
+  String get bpSmallShop;
+
+  /// No description provided for @bpRetail.
+  ///
+  /// In ar, this message translates to:
+  /// **'متجر تجزئة'**
+  String get bpRetail;
+
+  /// No description provided for @bpPharmacy.
+  ///
+  /// In ar, this message translates to:
+  /// **'صيدلية'**
+  String get bpPharmacy;
+
+  /// No description provided for @bpClothing.
+  ///
+  /// In ar, this message translates to:
+  /// **'محل ملابس'**
+  String get bpClothing;
+
+  /// No description provided for @bpConstruction.
+  ///
+  /// In ar, this message translates to:
+  /// **'محل إنشائي'**
+  String get bpConstruction;
+
+  /// No description provided for @bpWarehouse.
+  ///
+  /// In ar, this message translates to:
+  /// **'مستودع / جملة'**
+  String get bpWarehouse;
+
+  /// No description provided for @invStocktakingAdjustNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسوية فروقات جرد'**
+  String get invStocktakingAdjustNote;
+
+  /// No description provided for @aiLocalAppData.
+  ///
+  /// In ar, this message translates to:
+  /// **'بيانات التطبيق المحلية'**
+  String get aiLocalAppData;
+
+  /// No description provided for @aiRewriteNote.
+  ///
+  /// In ar, this message translates to:
+  /// **'قرأت {source}، وثقتي في هذا الجواب {confidence}%. الأرقام محسوبة من قاعدة البيانات ولا أعتمد على تخمين حر.'**
+  String aiRewriteNote(Object confidence, Object source);
+
+  /// No description provided for @aiLast7Days.
+  ///
+  /// In ar, this message translates to:
+  /// **'آخر 7 أيام'**
+  String get aiLast7Days;
+
+  /// No description provided for @aiThisYear.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذه السنة'**
+  String get aiThisYear;
+
+  /// No description provided for @aiLastMonth.
+  ///
+  /// In ar, this message translates to:
+  /// **'الشهر الماضي'**
+  String get aiLastMonth;
+
+  /// No description provided for @aiSalesSummaryAnswer.
+  ///
+  /// In ar, this message translates to:
+  /// **'ملخص {window}: المبيعات {revenue} عبر {invoices} فاتورة. متوسط الفاتورة {avg}، والهامش التقريبي {margin}.'**
+  String aiSalesSummaryAnswer(
+    Object avg,
+    Object invoices,
+    Object margin,
+    Object revenue,
+    Object window,
+  );
+
+  /// No description provided for @aiAvgInvoice.
+  ///
+  /// In ar, this message translates to:
+  /// **'متوسط الفاتورة'**
+  String get aiAvgInvoice;
+
+  /// No description provided for @aiEstMargin.
+  ///
+  /// In ar, this message translates to:
+  /// **'الهامش التقريبي'**
+  String get aiEstMargin;
+
+  /// No description provided for @aiAskTopProductsThisMonth.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسأل: أفضل المنتجات هذا الشهر'**
+  String get aiAskTopProductsThisMonth;
+
+  /// No description provided for @aiAskWhatMayRunOut.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسأل: ما المنتجات التي قد تنفد؟'**
+  String get aiAskWhatMayRunOut;
+
+  /// No description provided for @aiNoProductSalesIn.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد مبيعات منتجات في {window}.'**
+  String aiNoProductSalesIn(Object window);
+
+  /// No description provided for @aiTryOtherPeriod.
+  ///
+  /// In ar, this message translates to:
+  /// **'جرّب السؤال عن ملخص المبيعات أو فترة أخرى.'**
+  String get aiTryOtherPeriod;
+
+  /// No description provided for @aiTopPerformerAnswer.
+  ///
+  /// In ar, this message translates to:
+  /// **'أفضل أداء في {window}: {name} بإيراد {revenue} وكمية {quantity}. هذه قائمة المنتجات الأقوى حسب الإيراد.'**
+  String aiTopPerformerAnswer(
+    Object name,
+    Object quantity,
+    Object revenue,
+    Object window,
+  );
+
+  /// No description provided for @aiQtyMarginDetail.
+  ///
+  /// In ar, this message translates to:
+  /// **'الكمية {qty} | هامش {margin}'**
+  String aiQtyMarginDetail(Object margin, Object qty);
+
+  /// No description provided for @aiReviewRestock.
+  ///
+  /// In ar, this message translates to:
+  /// **'راجع مخزون هذه المنتجات حتى لا تتوقف المبيعات.'**
+  String get aiReviewRestock;
+
+  /// No description provided for @aiAskPo.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسأل: اقترح طلبية شراء'**
+  String get aiAskPo;
+
+  /// No description provided for @aiNoShortageRisk.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا أرى خطر نفاد واضحاً من آخر 30 يوماً. المنتجات إما لا تبيع بسرعة أو مخزونها فوق حد الخطر.'**
+  String get aiNoShortageRisk;
+
+  /// No description provided for @aiKeepReviewingFastMovers.
+  ///
+  /// In ar, this message translates to:
+  /// **'استمر بمراجعة المنتجات سريعة البيع يومياً.'**
+  String get aiKeepReviewingFastMovers;
+
+  /// No description provided for @aiTopShortageAnswer.
+  ///
+  /// In ar, this message translates to:
+  /// **'أعلى خطر نفاد: {name}. المتاح {qty}، ومعدل البيع {salesPerDay} يومياً، وقد يكفي حوالي {days}.'**
+  String aiTopShortageAnswer(
+    Object days,
+    Object name,
+    Object qty,
+    Object salesPerDay,
+  );
+
+  /// No description provided for @aiDaysRemaining.
+  ///
+  /// In ar, this message translates to:
+  /// **'{days} متبقية'**
+  String aiDaysRemaining(Object days);
+
+  /// No description provided for @aiStockDetail.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتاح {qty} | معدل البيع {salesPerDay}/يوم | طلب مقترح {suggested}'**
+  String aiStockDetail(Object qty, Object salesPerDay, Object suggested);
+
+  /// No description provided for @aiCreatePoForCritical.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنشئ أمر شراء للمنتجات الحرجة.'**
+  String get aiCreatePoForCritical;
+
+  /// No description provided for @aiRaiseAlertThreshold.
+  ///
+  /// In ar, this message translates to:
+  /// **'ارفع حد التنبيه للمنتجات سريعة الحركة.'**
+  String get aiRaiseAlertThreshold;
+
+  /// No description provided for @aiOrderLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'اطلب {name}'**
+  String aiOrderLabel(Object name);
+
+  /// No description provided for @aiStockWillLast.
+  ///
+  /// In ar, this message translates to:
+  /// **'يكفي المخزون حوالي {days} بناءً على آخر {history} يوماً.'**
+  String aiStockWillLast(Object days, Object history);
+
+  /// No description provided for @aiPushSalesLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'ادفع مبيعات {name}'**
+  String aiPushSalesLabel(Object name);
+
+  /// No description provided for @aiStrongProductDetail.
+  ///
+  /// In ar, this message translates to:
+  /// **'منتج قوي في {window}. حافظ على توفره.'**
+  String aiStrongProductDetail(Object window);
+
+  /// No description provided for @aiNoStrongRecs.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد توصيات قوية الآن. أحتاج مبيعات أو مخزون أكثر لأقدم قراراً أفضل.'**
+  String get aiNoStrongRecs;
+
+  /// No description provided for @aiTopRecAnswer.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقوى توصية الآن: {top}. جمعت بين سرعة البيع والمخزون المتاح وأداء {window}.'**
+  String aiTopRecAnswer(Object top, Object window);
+
+  /// No description provided for @aiStartWithCritical.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابدأ بالمنتجات الحرجة ثم المنتجات الأعلى مبيعاً.'**
+  String get aiStartWithCritical;
+
+  /// No description provided for @aiAskSalesSummaryThisMonth.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسأل: ملخص المبيعات هذا الشهر'**
+  String get aiAskSalesSummaryThisMonth;
+
+  /// No description provided for @aiNoLowStockNow.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد منتجات تحت حد التنبيه حالياً.'**
+  String get aiNoLowStockNow;
+
+  /// No description provided for @aiAskShortageRisk.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسأل عن خطر النفاد لمعرفة المنتجات التي قد تنخفض قريباً.'**
+  String get aiAskShortageRisk;
+
+  /// No description provided for @aiLowStockFound.
+  ///
+  /// In ar, this message translates to:
+  /// **'وجدت {count} منتجاً تحت حد التنبيه أو عنده.'**
+  String aiLowStockFound(Object count);
+
+  /// No description provided for @aiReviewPurchaseOrders.
+  ///
+  /// In ar, this message translates to:
+  /// **'راجع أوامر الشراء لهذه المنتجات.'**
+  String get aiReviewPurchaseOrders;
+
+  /// No description provided for @aiHelpAnswer.
+  ///
+  /// In ar, this message translates to:
+  /// **'أستطيع تحليل المبيعات والمخزون محلياً من بيانات التطبيق. اسألني عن أفضل المنتجات، ملخص المبيعات، المنتجات التي قد تنفد، أو توصيات الشراء.'**
+  String get aiHelpAnswer;
+
+  /// No description provided for @aiExample.
+  ///
+  /// In ar, this message translates to:
+  /// **'مثال'**
+  String get aiExample;
+
+  /// No description provided for @aiAnswersFromLocalDb.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل الإجابات مبنية على قاعدة البيانات المحلية لهذا المتجر.'**
+  String get aiAnswersFromLocalDb;
+
+  /// No description provided for @aiLessThanDay.
+  ///
+  /// In ar, this message translates to:
+  /// **'أقل من يوم'**
+  String get aiLessThanDay;
+
+  /// No description provided for @aiDaysCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{days} يوم'**
+  String aiDaysCount(Object days);
+
+  /// No description provided for @eidQrReaderHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'QR فقط: كاميرا التطبيق، أو جهاز قراءة خارجي (USB/Bluetooth) يوجّه على البطاقة مع التركيز على حقل «جهاز القراءة» في نافذة فتح/إغلاق الوردية.'**
+  String get eidQrReaderHint;
 }
 
 class _AppLocalizationsDelegate

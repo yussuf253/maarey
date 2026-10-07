@@ -412,7 +412,7 @@ LEFT JOIN (
       if (n == null || n.isEmpty) continue;
       if (!seen.add(n)) {
         throw DuplicateCustomerPhoneException(
-          'لا يمكن إدخال نفس رقم الهاتف أكثر من مرة لهذا العميل.',
+          AppL10n.current.dcpSameCustomer,
         );
       }
     }
@@ -425,7 +425,7 @@ LEFT JOIN (
       );
       if (other != null) {
         throw DuplicateCustomerPhoneException(
-          'رقم الهاتف مسجّل مسبقًا لعميل آخر. الأسماء يمكن أن تتشابه، أما رقم الهاتف فيجب أن يكون فريدًا.',
+          AppL10n.current.dcpOtherCustomer,
         );
       }
     }

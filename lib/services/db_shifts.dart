@@ -403,7 +403,7 @@ extension DbShifts on DatabaseHelper {
           'transactionType': 'manual_in',
           'amount': addedCashAtOpen,
           'amountFils': (addedCashAtOpen * 1000).round(),
-          'description': 'إيداع عند فتح الوردية #$id',
+          'description': '${AppL10n.current.shDepositOpen} #$id',
           'invoiceId': null,
           'workShiftId': id,
           'work_shift_global_id': globalId,
@@ -431,10 +431,10 @@ extension DbShifts on DatabaseHelper {
     final sessionTenant = TenantContext.instance.requireTenantId();
     final tid = await _activeTenantIdForShifts(db, sessionTenant);
     if (withdrawnAmount < 0 || declaredCashInBox < 0) {
-      throw ArgumentError('قيم غير صالحة');
+      throw ArgumentError(AppL10n.current.shInvalidValues);
     }
     if (withdrawnAmount > declaredCashInBox + 0.0001) {
-      throw ArgumentError('المبلغ المسحوب أكبر من المبلغ في الصندوق');
+      throw ArgumentError(AppL10n.current.shWithdrawExceedsBox);
     }
 
     // Tenant-scoped fetch — a cross-tenant or soft-deleted shiftId silently
@@ -457,7 +457,7 @@ extension DbShifts on DatabaseHelper {
           'transactionType': 'manual_out',
           'amount': -withdrawnAmount,
           'amountFils': (-withdrawnAmount * 1000).round(),
-          'description': 'سحب عند إغلاق الوردية #$shiftId',
+          'description': '${AppL10n.current.shWithdrawClose} #$shiftId',
           'invoiceId': null,
           'workShiftId': shiftId,
           'work_shift_global_id': wsGlobalId,

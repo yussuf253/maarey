@@ -1,3 +1,5 @@
+import '../l10n/app_l10n.dart';
+
 /// تجميع ديون «آجل» لعميل (مسجّل أو باسم فقط).
 class CustomerDebtSummary {
   const CustomerDebtSummary({
@@ -78,7 +80,7 @@ extension CustomerDebtPartyFromSummary on CustomerDebtSummary {
     final n = displayName.trim().toLowerCase();
     return CustomerDebtParty(
       customerId: customerId,
-      displayName: displayName.trim().isEmpty ? 'عميل' : displayName.trim(),
+      displayName: displayName.trim().isEmpty ? AppL10n.current.debtsCustomer : displayName.trim(),
       normalizedName: n,
     );
   }

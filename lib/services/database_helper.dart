@@ -9,6 +9,7 @@ import 'package:uuid/uuid.dart';
 import 'package:naboo/l10n/generated/app_localizations.dart';
 import 'cloud_sync_service.dart';
 import 'tenant_context.dart';
+import '../l10n/app_l10n.dart';
 import '../models/invoice.dart';
 import '../models/installment.dart';
 import '../models/installment_settings_data.dart';

@@ -13,6 +13,7 @@ import '../services/tenant_context.dart';
 import '../services/tenant_context_service.dart';
 import '../services/supabase_config.dart';
 import '../services/auth/secure_session_storage.dart';
+import '../l10n/app_l10n.dart';
 import '../utils/app_logger.dart';
 
 /// جلسة محلية فقط (SharedPreferences + SQLite). بدون سحابة أو اشتراك.
@@ -28,8 +29,7 @@ class AuthProvider extends ChangeNotifier {
   int? _userId;
   String _username = '';
   String _displayName = '';
-  String _role = '';
-  String _roleKey = 'staff';
+  String _roleKey = '';
   String _email = '';
   String _phone = '';
   bool _googleSignInRunning = false;
@@ -39,7 +39,12 @@ class AuthProvider extends ChangeNotifier {
   int? get userId => _userId;
   String get username => _username;
   String get displayName => _displayName.isNotEmpty ? _displayName : _username;
-  String get role => _role;
+  /// اسم الدور المعروض — يُشتق عند القراءة ليبقى مترجمًا عند تغيير اللغة.
+  String get role => switch (_roleKey) {
+    'admin' => AppL10n.current.roleAdmin,
+    'staff' => AppL10n.current.roleStaff,
+    _ => '',
+  };
   String get email => _email;
   String get phone => _phone;
 
@@ -52,7 +57,6 @@ class AuthProvider extends ChangeNotifier {
     _phone = row['phone'] as String? ?? '';
     final r = row['role'] as String? ?? 'staff';
     _roleKey = r;
-    _role = r == 'admin' ? 'مدير النظام' : 'موظف';
 
     // اضبط tenant_id بعد كل تسجيل دخول ناجح. للحسابات السحابية نستخدم
     // Supabase UID؛ للحسابات المحلية فقط نستخدم مفتاحاً مستقرّاً مبنيّاً
@@ -117,8 +121,7 @@ class AuthProvider extends ChangeNotifier {
     _userId = null;
     _username = '';
     _displayName = '';
-    _role = '';
-    _roleKey = 'staff';
+    _roleKey = '';
     _email = '';
     _phone = '';
     TenantContext.instance.clear();
@@ -410,9 +413,9 @@ class AuthProvider extends ChangeNotifier {
     required String password,
   }) async {
     final mail = email.trim().toLowerCase();
-    if (mail.isEmpty) return 'البريد مطلوب';
+    if (mail.isEmpty) return AppL10n.current.emailRequiredShort;
     if (await _db.signupEmailTaken(mail)) {
-      return 'هذا البريد مسجّل مسبقاً — سجّل الدخول أو استخدم بريداً آخر';
+      return AppL10n.current.authEmailAlreadyRegistered;
     }
 
     final n = await _db.countActiveUsers();
@@ -432,10 +435,10 @@ class AuthProvider extends ChangeNotifier {
         displayName: displayName.trim(),
       );
       final row = await _db.getUserById(id);
-      if (row == null) return 'تعذر قراءة الحساب بعد الإنشاء';
+      if (row == null) return AppL10n.current.authReadAccountAfterCreate;
       await _bindAccountDataScope(_dataOwnerKeyForRow(row));
       final rowAfter = await _db.getUserById(id);
-      if (rowAfter == null) return 'تعذر قراءة الحساب بعد عزل البيانات';
+      if (rowAfter == null) return AppL10n.current.authReadAccountAfterIsolation;
       _setFromRow(rowAfter);
       final prefs = await SharedPreferences.getInstance();
       await prefs.setInt(_prefUserId, id);
@@ -443,7 +446,7 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
       return null;
     } catch (e) {
-      return 'تعذر إنشاء الحساب. حاول مرة أخرى.';
+      return AppL10n.current.authCreateAccountFailed;
     }
   }
 
@@ -463,24 +466,24 @@ class AuthProvider extends ChangeNotifier {
           msg.contains('too many') ||
           msg.contains('security purposes') ||
           msg.contains('request this after')) {
-        return 'تم تجاوز حد الإرسال. انتظر بضع دقائق ثم حاول مجدداً.';
+        return AppL10n.current.authRateLimited;
       }
       if (msg.contains('invalid email') || msg.contains('unable to validate')) {
-        return 'البريد الإلكتروني غير صالح.';
+        return AppL10n.current.emailInvalid;
       }
       if (msg.contains('not found') || msg.contains('no user')) {
-        return 'لا يوجد حساب مرتبط بهذا البريد الإلكتروني.';
+        return AppL10n.current.authNoAccountForEmail;
       }
       if (msg.contains('network') ||
           msg.contains('connection') ||
           msg.contains('timeout')) {
-        return 'تعذر الاتصال بالخادم. تحقق من الإنترنت وحاول مجدداً.';
+        return AppL10n.current.authServerUnreachable;
       }
       AppLogger.error('Auth', 'sendEmailOtp: Supabase AuthException', e);
-      return 'تعذر إرسال رمز التحقق: ${e.message}';
+      return AppL10n.current.authSendOtpFailed(e.message);
     } catch (e) {
       AppLogger.error('Auth', 'sendEmailOtp: unexpected error', e);
-      return 'تعذر إرسال رمز التحقق. تحقق من الاتصال بالإنترنت.';
+      return AppL10n.current.authSendOtpNetwork;
     }
   }
 
@@ -502,21 +505,21 @@ class AuthProvider extends ChangeNotifier {
       );
       verifiedUser = res.user ?? Supabase.instance.client.auth.currentUser;
       if (verifiedUser == null) {
-        return 'رمز التحقق غير صحيح أو منتهي الصلاحية';
+        return AppL10n.current.authOtpInvalidOrExpired;
       }
     } on AuthException catch (e) {
       final lower = e.message.toLowerCase();
       if (lower.contains('banned')) {
-        return 'تعذّر إكمال التحقق بهذا البريد. جرّب بريداً إلكترونياً آخر أو تواصل مع الدعم.';
+        return AppL10n.current.authOtpBannedEmail;
       }
-      return 'رمز التحقق خاطئ أو منتهي الصلاحية.';
+      return AppL10n.current.authOtpWrongOrExpired;
     } catch (e) {
-      return 'تعذر التحقق من الرمز. حاول مرة أخرى.';
+      return AppL10n.current.authOtpVerifyFailed;
     }
     final user = verifiedUser;
 
     final mail = (user.email ?? email).trim().toLowerCase();
-    if (mail.isEmpty) return 'تعذر إنشاء الحساب. البريد الإلكتروني غير صالح.';
+    if (mail.isEmpty) return AppL10n.current.authSignupEmailInvalid;
 
     // ثبّت كلمة مرور السيرفر مباشرة بعد نجاح OTP لضمان تسجيل الدخول من أي جهاز.
     try {
@@ -529,11 +532,11 @@ class AuthProvider extends ChangeNotifier {
     } on AuthException catch (e) {
       final msg = e.message.toLowerCase();
       if (msg.contains('weak') || msg.contains('password')) {
-        return 'رمز الدخول ضعيف. استخدم رمزاً أقوى.';
+        return AppL10n.current.authWeakPassword;
       }
-      return 'تعذر تثبيت رمز الدخول على السيرفر. حاول مجدداً.';
+      return AppL10n.current.authSetPasswordFailed;
     } catch (_) {
-      return 'تعذر تثبيت رمز الدخول على السيرفر. تحقق من الاتصال بالإنترنت.';
+      return AppL10n.current.authSetPasswordNetwork;
     }
 
     try {
@@ -553,7 +556,7 @@ class AuthProvider extends ChangeNotifier {
       );
 
       final localRow = await _db.getUserById(localId);
-      if (localRow == null) return 'تعذر إنشاء الحساب محلياً.';
+      if (localRow == null) return AppL10n.current.authLocalAccountCreateFailed;
       final role = ((localRow['role'] ?? 'staff').toString().trim().isEmpty)
           ? 'staff'
           : (localRow['role'] ?? 'staff').toString().trim();
@@ -570,7 +573,7 @@ class AuthProvider extends ChangeNotifier {
       );
 
       final rowAfter = await _db.getUserById(localId);
-      if (rowAfter == null) return 'تعذر قراءة الحساب بعد الإنشاء.';
+      if (rowAfter == null) return AppL10n.current.authReadAccountAfterCreate;
       _setFromRow(rowAfter);
       final prefs = await SharedPreferences.getInstance();
       await prefs.setInt(_prefUserId, localId);
@@ -579,7 +582,7 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
       return null;
     } catch (_) {
-      return 'تعذر إكمال تجهيز الحساب محلياً. حاول مرة أخرى.';
+      return AppL10n.current.authLocalPrepFailed;
     }
   }
 
@@ -588,7 +591,7 @@ class AuthProvider extends ChangeNotifier {
   /// يُرسل رمز تحقق إلى البريد لإعادة تعيين رمز الدخول المحلي.
   Future<String?> sendPasswordResetOtp(String email) async {
     final mail = email.trim().toLowerCase();
-    if (mail.isEmpty) return 'أدخل البريد الإلكتروني';
+    if (mail.isEmpty) return AppL10n.current.emailHint;
     try {
       await Supabase.instance.client.auth.signInWithOtp(
         email: mail,
@@ -601,25 +604,25 @@ class AuthProvider extends ChangeNotifier {
           msg.contains('too many') ||
           msg.contains('security purposes') ||
           msg.contains('request this after')) {
-        return 'تم تجاوز حد الإرسال. انتظر بضع دقائق ثم حاول مجدداً.';
+        return AppL10n.current.authRateLimited;
       }
       if (msg.contains('invalid email') || msg.contains('unable to validate')) {
-        return 'البريد الإلكتروني غير صالح.';
+        return AppL10n.current.emailInvalid;
       }
       if (msg.contains('not found') ||
           msg.contains('no user') ||
           msg.contains('otp_disabled')) {
-        return 'لا يوجد حساب مرتبط بهذا البريد الإلكتروني.';
+        return AppL10n.current.authNoAccountForEmail;
       }
       AppLogger.error(
         'Auth',
         'sendPasswordResetOtp: Supabase AuthException',
         e,
       );
-      return 'تعذر إرسال رمز التحقق: ${e.message}';
+      return AppL10n.current.authSendOtpFailed(e.message);
     } catch (e) {
       AppLogger.error('Auth', 'sendPasswordResetOtp: unexpected error', e);
-      return 'تعذر إرسال رمز التحقق. تحقق من الاتصال بالإنترنت.';
+      return AppL10n.current.authSendOtpNetwork;
     }
   }
 
@@ -629,8 +632,8 @@ class AuthProvider extends ChangeNotifier {
     required String otp,
   }) async {
     final mail = email.trim().toLowerCase();
-    if (mail.isEmpty) return 'أدخل البريد الإلكتروني';
-    if (otp.trim().isEmpty) return 'أدخل رمز التحقق';
+    if (mail.isEmpty) return AppL10n.current.emailHint;
+    if (otp.trim().isEmpty) return AppL10n.current.enterVerificationCode;
     try {
       final res = await Supabase.instance.client.auth.verifyOTP(
         email: mail,
@@ -638,17 +641,17 @@ class AuthProvider extends ChangeNotifier {
         type: OtpType.email,
       );
       if (res.user == null) {
-        return 'رمز التحقق غير صحيح أو منتهي الصلاحية';
+        return AppL10n.current.authOtpInvalidOrExpired;
       }
       return null;
     } on AuthException catch (e) {
       final lower = e.message.toLowerCase();
       if (lower.contains('banned')) {
-        return 'تعذّر إكمال التحقق بهذا البريد. جرّب بريداً إلكترونياً آخر أو تواصل مع الدعم.';
+        return AppL10n.current.authOtpBannedEmail;
       }
-      return 'رمز التحقق غير صحيح أو منتهي الصلاحية';
+      return AppL10n.current.authOtpInvalidOrExpired;
     } catch (_) {
-      return 'تعذر التحقق من الرمز. حاول مرة أخرى.';
+      return AppL10n.current.authOtpVerifyFailed;
     }
   }
 
@@ -658,15 +661,15 @@ class AuthProvider extends ChangeNotifier {
     required String newPassword,
   }) async {
     final mail = email.trim().toLowerCase();
-    if (mail.isEmpty) return 'أدخل البريد الإلكتروني';
-    if (newPassword.trim().length < 8) return 'رمز الدخول قصير جداً';
+    if (mail.isEmpty) return AppL10n.current.emailHint;
+    if (newPassword.trim().length < 8) return AppL10n.current.authPasswordTooShort;
 
     // 1) تأكد من جلسة OTP ثم حدّث كلمة المرور على السيرفر.
     try {
       final session = Supabase.instance.client.auth.currentSession;
       final user = Supabase.instance.client.auth.currentUser;
       if (session == null || user == null) {
-        return 'انتهت جلسة التحقق. أعد طلب رمز التحقق ثم حاول مجدداً.';
+        return AppL10n.current.authVerificationSessionExpired;
       }
       await Supabase.instance.client.auth.updateUser(
         UserAttributes(password: newPassword),
@@ -683,9 +686,9 @@ class AuthProvider extends ChangeNotifier {
         displayName: displayName,
       );
     } on AuthException catch (_) {
-      return 'تعذر تحديث كلمة المرور على السيرفر. حاول مرة أخرى.';
+      return AppL10n.current.authUpdatePasswordFailed;
     } catch (_) {
-      return 'تعذر تحديث كلمة المرور على السيرفر. تحقق من الاتصال بالإنترنت.';
+      return AppL10n.current.authUpdatePasswordNetwork;
     }
 
     // 2) حدّث رمز الدخول المحلي.
@@ -696,7 +699,7 @@ class AuthProvider extends ChangeNotifier {
       passwordHash: hash,
       passwordSalt: salt,
     );
-    if (!ok) return 'تعذر تحديث رمز الدخول محلياً على هذا الجهاز.';
+    if (!ok) return AppL10n.current.authUpdatePasswordLocalFailed;
 
     // لا نحتفظ بجلسة Supabase الناتجة عن verifyOTP داخل تطبيق محلي.
     try {
@@ -709,7 +712,7 @@ class AuthProvider extends ChangeNotifier {
 
   Future<String?> signInWithGoogle() async {
     if (_googleSignInRunning) {
-      return 'جاري تسجيل الدخول عبر Google. يرجى الانتظار.';
+      return AppL10n.current.authGoogleSigningIn;
     }
     _googleSignInRunning = true;
     try {
@@ -720,7 +723,7 @@ class AuthProvider extends ChangeNotifier {
         redirectTo: kIsWeb ? null : 'io.supabase.naboo://login-callback',
       );
       if (!launched) {
-        return 'تعذر فتح صفحة تسجيل Google.';
+        return AppL10n.current.authGooglePageFailed;
       }
 
       // على macOS قد يصل callback قبل التقاط حدث signedIn.
@@ -754,11 +757,11 @@ class AuthProvider extends ChangeNotifier {
 
       final user = session?.user ?? client.auth.currentUser;
       if (user == null) {
-        return 'لم يكتمل تسجيل الدخول عبر Google.';
+        return AppL10n.current.authGoogleIncomplete;
       }
       final email = (user.email ?? '').trim();
       if (email.isEmpty) {
-        return 'حساب Google لا يحتوي على بريد صالح.';
+        return AppL10n.current.authGoogleNoEmail;
       }
 
       final displayName =
@@ -773,7 +776,7 @@ class AuthProvider extends ChangeNotifier {
         displayName: displayName,
       );
       final row = await _db.getUserById(localId);
-      if (row == null) return 'تعذر إنشاء حساب محلي لهذا المستخدم.';
+      if (row == null) return AppL10n.current.authLocalAccountCreateForUserFailed;
 
       _setFromRow(row);
       final prefs = await SharedPreferences.getInstance();
@@ -784,11 +787,11 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
       return null;
     } on TimeoutException {
-      return 'انتهت مهلة تسجيل Google. تحقق من صفحة التفويض ثم أعد المحاولة.';
+      return AppL10n.current.authGoogleTimeout;
     } on AuthException catch (_) {
-      return 'فشل تسجيل الدخول عبر Google. حاول مرة أخرى.';
+      return AppL10n.current.authGoogleFailed;
     } catch (_) {
-      return 'فشل تسجيل الدخول عبر Google. تحقق من الاتصال بالإنترنت.';
+      return AppL10n.current.authGoogleNetwork;
     } finally {
       _googleSignInRunning = false;
     }

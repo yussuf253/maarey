@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/app_l10n.dart';
 import '../services/database_helper.dart';
 import 'staff_identity_qr.dart';
 
@@ -16,11 +17,11 @@ class StaffIdentityApply {
   }) async {
     final row = await db.getUserById(data.userId);
     if (row == null || (row['isActive'] != 1)) {
-      return 'لم يُعثر على الموظف أو الحساب غير مفعّل';
+      return AppL10n.current.siaStaffNotFound;
     }
     final dbPin = (row['shiftAccessPin'] as String?)?.trim() ?? '';
     if (dbPin != data.pin) {
-      return 'رمز البطاقة لا يطابق السجل';
+      return AppL10n.current.siaCardMismatch;
     }
     final disp = (row['displayName'] as String?)?.trim() ?? '';
     nameCtrl.text =
@@ -37,7 +38,7 @@ class StaffIdentityApply {
   }) async {
     final row = await db.getUserById(data.userId);
     if (row == null || (row['isActive'] != 1)) {
-      return 'لم يُعثر على الموظف أو الحساب غير مفعّل';
+      return AppL10n.current.siaStaffNotFound;
     }
     final disp = (row['displayName'] as String?)?.trim() ?? '';
     nameCtrl.text =
@@ -53,11 +54,11 @@ class StaffIdentityApply {
   }) async {
     final row = await db.getUserById(data.userId);
     if (row == null || (row['isActive'] != 1)) {
-      return 'لم يُعثر على الموظف أو الحساب غير مفعّل';
+      return AppL10n.current.siaStaffNotFound;
     }
     final dbPin = (row['shiftAccessPin'] as String?)?.trim() ?? '';
     if (dbPin != data.pin) {
-      return 'رمز البطاقة لا يطابق السجل';
+      return AppL10n.current.siaCardMismatch;
     }
     pinCtrl.text = data.pin;
     return null;

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../l10n/app_l10n.dart';
+
 const List<Locale> kSupportedLocales = [
   Locale('ar'),
   Locale('en'),
@@ -23,12 +25,16 @@ class LocaleProvider extends ChangeNotifier {
       _locale = Locale(code);
       notifyListeners();
     }
+    // Keep BuildContext-free localization (services/providers) in sync with
+    // the widget-tree locale, including the default when nothing is stored.
+    AppL10n.setLocale(_locale);
   }
 
   Future<void> setLocale(String languageCode) async {
     if (!kSupportedLocales.any((l) => l.languageCode == languageCode)) return;
     if (_locale.languageCode == languageCode) return;
     _locale = Locale(languageCode);
+    AppL10n.setLocale(_locale);
     notifyListeners();
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_prefsKey, languageCode);

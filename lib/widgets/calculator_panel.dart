@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:naboo/l10n/generated/app_localizations.dart';
 
+import '../l10n/app_l10n.dart';
+
 import '../theme/app_corner_style.dart';
 import '../utils/iraqi_currency_format.dart';
 import '../utils/target_platform_helpers.dart';
@@ -49,8 +51,9 @@ class CalculatorPanelState extends State<CalculatorPanel> {
   }
 
   String _decorate(String raw) {
-    if (raw == 'خطأ' || raw == 'تعذّر القسمة')
-      return raw; // internal calc error — keep Arabic for calc display
+    // Internal error sentinels — shown translated (state keeps the raw form).
+    if (raw == 'خطأ') return AppL10n.current.calcError;
+    if (raw == 'تعذّر القسمة') return AppL10n.current.calcDivideByZero;
     final neg = raw.startsWith('-');
     final body = neg ? raw.substring(1) : raw;
     final parts = body.split('.');

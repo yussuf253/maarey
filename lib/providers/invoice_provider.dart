@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_l10n.dart';
 import '../models/invoice.dart';
 import '../services/cloud_sync_service.dart';
 import '../services/database_helper.dart';
@@ -100,7 +101,7 @@ class InvoiceProvider extends ChangeNotifier {
     final validation = validateInvoiceBalance(invoice);
     if (!validation.isValid) {
       throw InvoiceValidationException(
-        validation.errorMessage ?? 'الفاتورة غير متوازنة',
+        validation.errorMessage ?? AppL10n.current.invoiceUnbalanced,
       );
     }
 

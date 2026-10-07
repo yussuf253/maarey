@@ -8,6 +8,8 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart' as printing;
 
+import '../l10n/app_l10n.dart';
+import '../l10n/generated/app_localizations.dart';
 import 'pdf_print_helper.dart';
 
 class BarcodeLabelProduct {
@@ -51,9 +53,9 @@ extension BarcodeLabelSizeX on BarcodeLabelSize {
 
   /// نص المواصفات: عرض × ارتفاع (مثل واجهة الطابعة الشائعة).
   String get labelAr => switch (this) {
-        BarcodeLabelSize.mm50x30 => '50 × 30 مم',
-        BarcodeLabelSize.mm40x30 => '40 × 30 مم',
-        BarcodeLabelSize.mm30x50 => '30 × 50 مم',
+        BarcodeLabelSize.mm50x30 => AppL10n.current.blSizeMm('50', '30'),
+        BarcodeLabelSize.mm40x30 => AppL10n.current.blSizeMm('40', '30'),
+        BarcodeLabelSize.mm30x50 => AppL10n.current.blSizeMm('30', '50'),
       };
 }
 
@@ -86,7 +88,7 @@ class BarcodeLabelsPdf {
     );
 
     pw.Widget one(BarcodeLabelProduct p) {
-      final name = p.name.trim().isEmpty ? 'صنف' : p.name.trim();
+      final name = p.name.trim().isEmpty ? AppL10n.current.itemFallback : p.name.trim();
       final bcText = p.barcode.trim();
       final price = p.sellPrice;
       final isWeight = p.stockBaseKind == 1;
@@ -134,7 +136,7 @@ class BarcodeLabelsPdf {
                 if (showPrice)
                   pw.Text(
                     isWeight
-                        ? '${_fmtIqd(price)} Fdj/كغم'
+                        ? AppL10n.current.blPricePerKg(_fmtIqd(price))
                         : '${_fmtIqd(price)} Fdj',
                     style: smallStyle,
                     textDirection: pw.TextDirection.rtl,
@@ -211,10 +213,10 @@ class BarcodeLabelsPdf {
                 pdfFileName: 'barcode-labels.pdf',
                 onPrintError: (context, error) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
+                    SnackBar(
                       content: Text(
-                        'لم يتم العثور على طابعة متصلة بالجهاز. يرجى مراجعة توصيل الطابعة.',
-                        style: TextStyle(fontFamily: 'NotoNaskhArabic'),
+                        AppLocalizations.of(context)!.rpNoPrinter,
+                        style: const TextStyle(fontFamily: 'NotoNaskhArabic'),
                       ),
                       backgroundColor: Colors.redAccent,
                       behavior: SnackBarBehavior.floating,

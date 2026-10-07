@@ -156,7 +156,7 @@ class _LicenseExpiredScreenState extends State<LicenseExpiredScreen> {
                         _InfoRow(
                           icon:  Icons.inventory_2_outlined,
                           label: _loc.licCurrentPlan,
-                          value: widget.state.plan!.nameAr,
+                          value: planNameForKey(widget.state.plan!.key, _loc),
                           valueColor: cs.onSurface,
                         ),
                         if (!widget.state.isUnlimited)

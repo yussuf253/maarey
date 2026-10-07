@@ -1,3 +1,4 @@
+import '../l10n/generated/app_localizations.dart';
 import 'app_settings_repository.dart';
 import 'tenant_context_service.dart';
 
@@ -44,7 +45,19 @@ enum BusinessProfile {
 
   const BusinessProfile(this.key, this.label);
   final String key;
+
+  /// الاسم المخزَّن (ثابت) — تُفضَّل [labelFor] في الواجهات.
   final String label;
+
+  /// الاسم المعروض باللغة الحالية.
+  String labelFor(AppLocalizations loc) => switch (this) {
+    BusinessProfile.smallShop => loc.bpSmallShop,
+    BusinessProfile.retail => loc.bpRetail,
+    BusinessProfile.pharmacy => loc.bpPharmacy,
+    BusinessProfile.clothing => loc.bpClothing,
+    BusinessProfile.construction => loc.bpConstruction,
+    BusinessProfile.warehouse => loc.bpWarehouse,
+  };
 
   static BusinessProfile fromKey(String? key) =>
       BusinessProfile.values.firstWhere(

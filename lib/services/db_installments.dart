@@ -114,7 +114,9 @@ extension DbInstallments on DatabaseHelper {
       return existing.first['id'] as int;
     }
 
-    final nm = customerName.trim().isEmpty ? 'عميل' : customerName.trim();
+    final nm = customerName.trim().isEmpty
+        ? AppL10n.current.instCustomer
+        : customerName.trim();
     final remaining = totalAmount - paidAmount;
     if (remaining <= 1e-6) {
       final plan = InstallmentPlan(
@@ -566,19 +568,21 @@ WHERE i.type IN ($placeholders)
           : null;
 
       final loyaltySettings = await _readLoyaltySettings(txn);
-      var meta = 'خطة تقسيط #$planId';
+      var meta = '${AppL10n.current.ipPlan} #$planId';
       if (invoiceRef != null && invoiceRef > 0) {
-        meta = '$meta — فاتورة أصلية #$invoiceRef';
+        meta = '$meta — ${AppL10n.current.ipOriginalInvoice} #$invoiceRef';
       }
       if (meta.length > 900) meta = meta.substring(0, 900);
 
       final receiptInv = Invoice(
-        customerName: customerName.isEmpty ? 'عميل' : customerName,
+        customerName: customerName.isEmpty
+            ? AppL10n.current.instCustomer
+            : customerName,
         date: DateTime.now(),
         type: InvoiceType.installmentCollection,
         items: [
           InvoiceItem(
-            productName: 'تسديد قسط — خطة #$planId',
+            productName: '${AppL10n.current.ipPaymentProduct} #$planId',
             quantity: 1,
             price: applied,
             total: applied,

@@ -86,7 +86,7 @@ class _InventoryPolicyCenterScreenState
                       items: BusinessProfile.values.map((p) {
                         return DropdownMenuItem(
                           value: p.key,
-                          child: Text(p.label),
+                          child: Text(p.labelFor(loc)),
                         );
                       }).toList(),
                       onChanged: (v) {

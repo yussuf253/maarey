@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:naboo/l10n/generated/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../l10n/app_l10n.dart';
 import '../services/product_repository.dart';
 import '../services/product_variants_repository.dart';
 import '../utils/iraqi_currency_format.dart';
@@ -212,7 +213,8 @@ class _WideHomeProductRailState extends State<WideHomeProductRail> {
               separatorBuilder: (_, __) => const Divider(height: 1),
               itemBuilder: (_, i) {
                 final r = rows[i];
-                final name = (r['name'] as String?)?.trim() ?? 'تصنيف';
+                final name = (r['name'] as String?)?.trim() ??
+                    AppLocalizations.of(context)!.categoryFallback;
                 return ListTile(
                   title: Text(name),
                   onTap: () => Navigator.pop(ctx, r),
@@ -262,7 +264,8 @@ class _WideHomeProductRailState extends State<WideHomeProductRail> {
               separatorBuilder: (_, __) => const Divider(height: 1),
               itemBuilder: (_, i) {
                 final r = rows[i];
-                final name = (r['name'] as String?)?.trim() ?? 'ماركة';
+                final name = (r['name'] as String?)?.trim() ??
+                    AppLocalizations.of(context)!.brandFallback;
                 return ListTile(
                   title: Text(name),
                   onTap: () => Navigator.pop(ctx, r),
@@ -472,7 +475,7 @@ class _WideHomeProductRailState extends State<WideHomeProductRail> {
 
   static String _stockLine(Map<String, dynamic> p) {
     final track = (p['trackInventory'] as int?) != 0;
-    if (!track) return 'غير متتبّع'; // static method — needs refactor for loc
+    if (!track) return AppL10n.current.notTracked;
     final q = p['qty'];
     if (q == null) return '—';
     final n = (q as num).toDouble();
@@ -526,7 +529,8 @@ class _WideHomeProductRailState extends State<WideHomeProductRail> {
         .toList(growable: false);
 
     Widget pinnedCard(Map<String, dynamic> p) {
-      final name = (p['name'] as String?)?.trim() ?? 'منتج';
+      final name = (p['name'] as String?)?.trim() ??
+          AppLocalizations.of(context)!.productFallback;
       final sellRaw = p['sell'] as num?;
       final sell = sellRaw != null ? sellRaw.toDouble() : 0.0;
       final pid = (p['id'] as num?)?.toInt();

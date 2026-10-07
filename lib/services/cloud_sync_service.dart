@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../l10n/app_l10n.dart';
 import '../utils/app_logger.dart';
 import 'app_remote_config_service.dart';
 import 'database_helper.dart';
@@ -57,7 +58,7 @@ class AccountDevice {
 
     return AccountDevice(
       deviceId: (map['device_id'] ?? '').toString(),
-      deviceName: (map['device_name'] ?? 'جهاز غير معروف').toString(),
+      deviceName: (map['device_name'] ?? AppL10n.current.csUnknownDevice).toString(),
       platform: (map['platform'] ?? '').toString(),
       lastSeenAt: parseDate(map['last_seen_at']),
       createdAt: parseDate(map['created_at']),
@@ -459,12 +460,12 @@ class CloudSyncService {
       try {
         await _registerCurrentDeviceViaServerLimit();
       } on DeviceLimitReachedException {
-        return 'تم الوصول إلى الحد الأقصى للأجهزة في خطتك. افصل جهازاً من الحساب أو قم بترقية الخطة.';
+        return AppL10n.current.csDeviceLimitPlan;
       }
 
       final access = await registerCurrentDevice();
       if (access == DeviceAccessResult.revoked) {
-        return 'تم إزالة هذا الجهاز من الحساب. اطلب السماح بالعودة من جهاز نشط في الإعدادات.';
+        return AppL10n.current.csDeviceRemovedAsk;
       }
 
       // ── تنظيف الأجهزة القديمة ──────────────────────────────────────────
@@ -478,9 +479,12 @@ class CloudSyncService {
       if (status == null) return null;
       if (!status.isOverLimit) return null;
       final maxLabel = status.maxDevices == 0
-          ? 'غير محدد'
+          ? AppL10n.current.csNotSpecified
           : '${status.maxDevices}';
-      return 'عدد الأجهزة النشطة على الحساب تجاوز الحد (${status.activeDevices}/$maxLabel). افصل جهازاً غير مستخدم أو قم بترقية الخطة.';
+      return AppL10n.current.csDeviceLimitCount(
+        status.activeDevices,
+        maxLabel,
+      );
     } on PostgrestException catch (e) {
       if (_isMissingAccountDevicesTable(e)) {
         // لا نمنع الدخول إذا جدول الأجهزة لم يُنشأ بعد في السحابة.
@@ -856,16 +860,16 @@ class CloudSyncService {
 
   Future<String?> removeDevice(String deviceId) async {
     final user = Supabase.instance.client.auth.currentUser;
-    if (user == null) return 'المستخدم غير مسجل دخول.';
+    if (user == null) return AppL10n.current.csNotLoggedIn;
     final currentDeviceId = await LicenseService.instance.getDeviceId();
     if (deviceId == currentDeviceId) {
-      return 'لا يمكن فصل الجهاز الحالي. سجّل الخروج من هذا الجهاز أولاً.';
+      return AppL10n.current.csCannotDetachCurrent;
     }
     try {
       await _revokeDeviceRow(user.id, deviceId);
     } on PostgrestException catch (e) {
       if (_isMissingAccountDevicesTable(e)) {
-        return 'جدول الأجهزة غير موجود بعد في Supabase. شغّل SQL أولاً.';
+        return AppL10n.current.csDevicesTableMissing;
       }
       rethrow;
     }
@@ -877,7 +881,7 @@ class CloudSyncService {
   Future<String?> approveDeviceAccess(String deviceId) async {
     final client = Supabase.instance.client;
     final user = client.auth.currentUser;
-    if (user == null) return 'المستخدم غير مسجل دخول.';
+    if (user == null) return AppL10n.current.csNotLoggedIn;
     try {
       await client
           .from(_devicesTable)
@@ -886,10 +890,10 @@ class CloudSyncService {
           .eq('device_id', deviceId);
     } on PostgrestException catch (e) {
       if (_isMissingAccountDevicesTable(e)) {
-        return 'جدول الأجهزة غير جاهز.';
+        return AppL10n.current.csDevicesTableNotReady;
       }
       if (_isMissingAccessStatusColumn(e)) {
-        return 'شغّل ملف SQL لإضافة عمود access_status أولاً.';
+        return AppL10n.current.csAccessColumnSql;
       }
       rethrow;
     }
@@ -976,7 +980,7 @@ class CloudSyncService {
             'CloudSync',
             'syncNow: license check failed — status=${lic.status}',
           );
-          lastError.value = lic.message ?? 'لا يمكن المزامنة بدون ترخيص صالح.';
+          lastError.value = lic.message ?? AppL10n.current.csNoValidLicense;
           _syncResultNotifier.value = SyncResult.licenseFailed;
           return;
         }
@@ -995,8 +999,7 @@ class CloudSyncService {
           access = await registerCurrentDevice();
         } on DeviceLimitReachedException {
           AppLogger.warn('CloudSync', 'syncNow: device limit reached');
-          lastError.value =
-              'تم الوصول إلى الحد الأقصى للأجهزة في الحساب. افصل جهازاً أو قم بترقية الخطة.';
+          lastError.value = AppL10n.current.csDeviceLimitPlanSignout;
           _syncResultNotifier.value = SyncResult.deviceBlocked;
           return;
         }
@@ -1006,8 +1009,7 @@ class CloudSyncService {
           if (kick != null) {
             unawaited(kick());
           } else {
-            lastError.value =
-                'تم إزالة هذا الجهاز من الحساب. سجّل الخروج ثم اطلب السماح بالعودة من جهاز نشط.';
+            lastError.value = AppL10n.current.csDeviceRemovedSignout;
           }
           _syncResultNotifier.value = SyncResult.deviceBlocked;
           return;
@@ -1091,8 +1093,7 @@ class CloudSyncService {
       } on PostgrestException catch (e) {
         AppLogger.error('CloudSync', 'syncNow: PostgrestException', e);
         if (_isMissingSyncTables(e)) {
-          lastError.value =
-              'جداول المزامنة غير موجودة في Supabase. نفّذ ملف supabase_sync_setup.sql مرة واحدة من SQL Editor.';
+          lastError.value = AppL10n.current.csSyncTablesMissing;
         } else {
           lastError.value = e.toString();
         }
@@ -1221,8 +1222,7 @@ class CloudSyncService {
       );
     } on PostgrestException catch (e) {
       if (_isMissingSyncTables(e)) {
-        lastError.value =
-            'جداول المزامنة غير جاهزة في Supabase. نفّذ supabase_sync_setup.sql.';
+        lastError.value = AppL10n.current.csSyncTablesNotReady;
         _snapshotChannel = null;
         return;
       }
@@ -3367,9 +3367,10 @@ class CloudSyncService {
     final remoteUpdatedAtMeta = (meta['updated_at'] ?? '').toString();
     final schemaVersion = (meta['schema_version'] as num?)?.toInt() ?? 1;
     if (schemaVersion != _snapshotSchemaVersion) {
-      lastError.value =
-          'نسخة لقطة السحابة ($schemaVersion) لا تطابق التطبيق ($_snapshotSchemaVersion). '
-          'حدّث التطبيق على هذا الجهاز ثم أعد «مزامنة الآن».';
+      lastError.value = AppL10n.current.csSnapshotVersionMismatch(
+        schemaVersion,
+        _snapshotSchemaVersion,
+      );
       return _PullOutcome.blockPush;
     }
     if (!forceImport && remoteUpdatedAtMeta.isNotEmpty) {
@@ -3402,8 +3403,7 @@ class CloudSyncService {
         .limit(1);
 
     if (payloadRows.isEmpty) {
-      lastError.value =
-          'تعذر جلب لقطة السحابة بعد التحقق من البيانات الوصفية. أعد المحاولة.';
+      lastError.value = AppL10n.current.csSnapshotFetchFailed;
       return _PullOutcome.blockPush;
     }
     final row = payloadRows.first;
@@ -3413,8 +3413,7 @@ class CloudSyncService {
     }
     final payloadRaw = row['payload'];
     if (payloadRaw == null) {
-      lastError.value =
-          'لقطة السحابة لا تحتوي على بيانات (payload). تحقق من Supabase.';
+      lastError.value = AppL10n.current.csSnapshotEmptyPayload;
       return _PullOutcome.blockPush;
     }
     Map<String, dynamic> payload;
@@ -3426,7 +3425,7 @@ class CloudSyncService {
     if (payload['chunked'] == true) {
       final syncId = (payload['sync_id'] ?? '').toString();
       if (syncId.isEmpty) {
-        lastError.value = 'لقطة السحابة مُجزّأة لكن sync_id ناقص.';
+        lastError.value = AppL10n.current.csSnapshotMissingSyncId;
         return _PullOutcome.blockPush;
       }
       final decoded = await _fetchChunkedPayload(
@@ -3434,8 +3433,7 @@ class CloudSyncService {
         syncId: syncId,
       );
       if (decoded == null) {
-        lastError.value =
-            'تعذر تجميع أجزاء اللقطة من السحابة. تحقق من جدول app_snapshot_chunks وصلاحيات القراءة.';
+        lastError.value = AppL10n.current.csSnapshotChunksFailed;
         return _PullOutcome.blockPush;
       }
       payload = decoded;
@@ -3483,14 +3481,11 @@ class CloudSyncService {
     if (await _localDbHasNoSyncData(db)) {
       try {
         if (await _remoteSnapshotHasNonEmptyData(userId)) {
-          lastError.value =
-              'تم إيقاف الرفع: القاعدة المحلية فارغة بينما توجد بيانات على السحابة. '
-              'اضغط «مزامنة الآن» من الجهاز الذي يعرض البيانات أولاً، أو تأكد من السحب قبل الرفع.';
+          lastError.value = AppL10n.current.csPushStoppedEmptyLocal;
           return false;
         }
       } catch (e) {
-        lastError.value =
-            'تعذر التحقق من لقطة السحابة قبل الرفع (حماية من استبدال البيانات): $e';
+        lastError.value = AppL10n.current.csRemoteCheckFailed(e);
         return false;
       }
     }

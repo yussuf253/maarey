@@ -16267,4 +16267,1222 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get countryUSA => 'الولايات المتحدة';
+
+  @override
+  String get authEmailAlreadyRegistered =>
+      'هذا البريد مسجّل مسبقاً — سجّل الدخول أو استخدم بريداً آخر';
+
+  @override
+  String get authReadAccountAfterCreate => 'تعذر قراءة الحساب بعد الإنشاء';
+
+  @override
+  String get authReadAccountAfterIsolation =>
+      'تعذر قراءة الحساب بعد عزل البيانات';
+
+  @override
+  String get authCreateAccountFailed => 'تعذر إنشاء الحساب. حاول مرة أخرى.';
+
+  @override
+  String get authRateLimited =>
+      'تم تجاوز حد الإرسال. انتظر بضع دقائق ثم حاول مجدداً.';
+
+  @override
+  String get authNoAccountForEmail =>
+      'لا يوجد حساب مرتبط بهذا البريد الإلكتروني.';
+
+  @override
+  String get authServerUnreachable =>
+      'تعذر الاتصال بالخادم. تحقق من الإنترنت وحاول مجدداً.';
+
+  @override
+  String authSendOtpFailed(Object error) {
+    return 'تعذر إرسال رمز التحقق: $error';
+  }
+
+  @override
+  String get authSendOtpNetwork =>
+      'تعذر إرسال رمز التحقق. تحقق من الاتصال بالإنترنت.';
+
+  @override
+  String get authOtpInvalidOrExpired => 'رمز التحقق غير صحيح أو منتهي الصلاحية';
+
+  @override
+  String get authOtpWrongOrExpired => 'رمز التحقق خاطئ أو منتهي الصلاحية.';
+
+  @override
+  String get authOtpBannedEmail =>
+      'تعذّر إكمال التحقق بهذا البريد. جرّب بريداً إلكترونياً آخر أو تواصل مع الدعم.';
+
+  @override
+  String get authOtpVerifyFailed => 'تعذر التحقق من الرمز. حاول مرة أخرى.';
+
+  @override
+  String get authSignupEmailInvalid =>
+      'تعذر إنشاء الحساب. البريد الإلكتروني غير صالح.';
+
+  @override
+  String get authWeakPassword => 'رمز الدخول ضعيف. استخدم رمزاً أقوى.';
+
+  @override
+  String get authSetPasswordFailed =>
+      'تعذر تثبيت رمز الدخول على السيرفر. حاول مجدداً.';
+
+  @override
+  String get authSetPasswordNetwork =>
+      'تعذر تثبيت رمز الدخول على السيرفر. تحقق من الاتصال بالإنترنت.';
+
+  @override
+  String get authLocalAccountCreateFailed => 'تعذر إنشاء الحساب محلياً.';
+
+  @override
+  String get authLocalAccountCreateForUserFailed =>
+      'تعذر إنشاء حساب محلي لهذا المستخدم.';
+
+  @override
+  String get authLocalPrepFailed =>
+      'تعذر إكمال تجهيز الحساب محلياً. حاول مرة أخرى.';
+
+  @override
+  String get authPasswordTooShort => 'رمز الدخول قصير جداً';
+
+  @override
+  String get authVerificationSessionExpired =>
+      'انتهت جلسة التحقق. أعد طلب رمز التحقق ثم حاول مجدداً.';
+
+  @override
+  String get authUpdatePasswordFailed =>
+      'تعذر تحديث كلمة المرور على السيرفر. حاول مرة أخرى.';
+
+  @override
+  String get authUpdatePasswordNetwork =>
+      'تعذر تحديث كلمة المرور على السيرفر. تحقق من الاتصال بالإنترنت.';
+
+  @override
+  String get authUpdatePasswordLocalFailed =>
+      'تعذر تحديث رمز الدخول محلياً على هذا الجهاز.';
+
+  @override
+  String get authGoogleSigningIn =>
+      'جاري تسجيل الدخول عبر Google. يرجى الانتظار.';
+
+  @override
+  String get authGooglePageFailed => 'تعذر فتح صفحة تسجيل Google.';
+
+  @override
+  String get authGoogleIncomplete => 'لم يكتمل تسجيل الدخول عبر Google.';
+
+  @override
+  String get authGoogleNoEmail => 'حساب Google لا يحتوي على بريد صالح.';
+
+  @override
+  String get authGoogleTimeout =>
+      'انتهت مهلة تسجيل Google. تحقق من صفحة التفويض ثم أعد المحاولة.';
+
+  @override
+  String get authGoogleFailed => 'فشل تسجيل الدخول عبر Google. حاول مرة أخرى.';
+
+  @override
+  String get authGoogleNetwork =>
+      'فشل تسجيل الدخول عبر Google. تحقق من الاتصال بالإنترنت.';
+
+  @override
+  String get dlsHeader => 'الترحيب والملخص العلوي';
+
+  @override
+  String get dlsOrbit => 'الاختصارات الدائرية (صندوق، بيع، …)';
+
+  @override
+  String get dlsPinned => 'المنتجات المثبّتة';
+
+  @override
+  String get dlsCharts => 'المخططات والنشاط الأخير';
+
+  @override
+  String get idl5Minutes => '5 دقائق';
+
+  @override
+  String get idl10Minutes => '10 دقائق';
+
+  @override
+  String get idl15Minutes => '15 دقيقة';
+
+  @override
+  String get idl30Minutes => '30 دقيقة';
+
+  @override
+  String idlMinutesGeneric(Object count) {
+    return '$count دقيقة';
+  }
+
+  @override
+  String productSaveFailed(Object error) {
+    return 'تعذر حفظ المنتج: $error';
+  }
+
+  @override
+  String get invoiceUnbalanced => 'الفاتورة غير متوازنة';
+
+  @override
+  String ivItemInvalidValue(Object name) {
+    return 'بند يحتوي قيمة غير صالحة (NaN): $name';
+  }
+
+  @override
+  String ivItemNegativeQty(Object name) {
+    return 'الكمية سالبة في بند: $name';
+  }
+
+  @override
+  String ivItemNegativePrice(Object name) {
+    return 'سعر البند سالب: $name';
+  }
+
+  @override
+  String ivItemNegativeTotal(Object name) {
+    return 'إجمالي البند سالب: $name';
+  }
+
+  @override
+  String get ivInvoiceNaN => 'الفاتورة تحتوي قيمة غير صالحة (NaN)';
+
+  @override
+  String get ivTaxNegative => 'الضريبة سالبة';
+
+  @override
+  String get ivDiscountNegative => 'الخصم سالب';
+
+  @override
+  String get ivLoyaltyDiscountNegative => 'خصم الولاء سالب';
+
+  @override
+  String ivDiscountExceedsItems(Object discount, Object subtotal) {
+    return 'الخصم ($discount) أكبر من إجمالي البنود ($subtotal)';
+  }
+
+  @override
+  String ivTotalMismatch(
+    Object discount,
+    Object expected,
+    Object subtotal,
+    Object tax,
+    Object total,
+  ) {
+    return 'إجمالي الفاتورة ($total) لا يطابق المعادلة: مجموع البنود ($subtotal) + الضريبة ($tax) - الخصم الكلي ($discount) = $expected';
+  }
+
+  @override
+  String get ivTotalNaN => 'إجمالي الفاتورة قيمة غير صالحة (NaN)';
+
+  @override
+  String get ivTotalNegative => 'إجمالي الفاتورة سالب';
+
+  @override
+  String get ivPaidNaN => 'المبلغ المدفوع قيمة غير صالحة (NaN)';
+
+  @override
+  String get ivPaidNegative => 'المبلغ المدفوع سالب';
+
+  @override
+  String ivPaidExceedsTotal(Object paid, Object total) {
+    return 'المبلغ المدفوع ($paid) أكبر من إجمالي الفاتورة ($total)';
+  }
+
+  @override
+  String get fpNotoNaskh => 'نوتو نسخ عربي';
+
+  @override
+  String get fpCairo => 'القاهرة';
+
+  @override
+  String get fpAlmarai => 'المراعي';
+
+  @override
+  String get fpAmiri => 'أميري';
+
+  @override
+  String get fpLateef => 'لطيف';
+
+  @override
+  String get fpScheherazadeNew => 'شهرزاد الجديد';
+
+  @override
+  String get fpIbmPlexSansArabic => 'آي بي إم بلكس سانس عربي';
+
+  @override
+  String get fpElMessiri => 'المسيري';
+
+  @override
+  String get fpChanga => 'تشانغا';
+
+  @override
+  String get fpTajawal => 'تجوال';
+
+  @override
+  String get fpNotoNaskhDesc => 'نسخ تقليدي — مناسب للنصوص الطويلة والوثائق.';
+
+  @override
+  String get fpCairoDesc => 'هندسي عصري — واجهات وتطبيقات حديثة.';
+
+  @override
+  String get fpAlmaraiDesc =>
+      'نظيف ومقروء — يُستخدم كثيراً في الواجهات العربية.';
+
+  @override
+  String get fpAmiriDesc => 'كلاسيكي مائل للكتب والطباعة الرصينة.';
+
+  @override
+  String get fpLateefDesc => 'نسخي مريح بسُمك متوسط — تميّز بسيط.';
+
+  @override
+  String get fpScheherazadeNewDesc => 'نسخ تقليدي أنيق — حروف طويلة ووضوح جيد.';
+
+  @override
+  String get fpIbmPlexDesc => 'تقني منظم — أرقام وبيانات واضحة.';
+
+  @override
+  String get fpElMessiriDesc => 'عناوين قوية — إيقاع مميز للعناوين.';
+
+  @override
+  String get fpChangaDesc => 'مائل للعرض — حروف عريضة ولافتة.';
+
+  @override
+  String get fpTajawalDesc => 'خط عصري وواضح للواجهات والعناوين.';
+
+  @override
+  String raCustomerFallback(Object id) {
+    return 'عميل #$id';
+  }
+
+  @override
+  String raItemFallback(Object id) {
+    return 'صنف #$id';
+  }
+
+  @override
+  String get permGroupAppAccess => 'التطبيق والوصول';
+
+  @override
+  String get permDashboardNav => 'الرئيسية والتنقّل';
+
+  @override
+  String get permDashboardNavSub => 'الوصول إلى لوحة التطبيق والأقسام الرئيسية';
+
+  @override
+  String get permCustomersView => 'عرض العملاء والبحث';
+
+  @override
+  String get permCustomersEdit => 'إضافة وتعديل العملاء';
+
+  @override
+  String get permCustomersContacts => 'قائمة اتصال العملاء';
+
+  @override
+  String get permLoyaltyPoints => 'نقاط الولاء والإعدادات';
+
+  @override
+  String get permPosScreen => 'شاشة البيع (نقطة البيع)';
+
+  @override
+  String get permParkedSales => 'المبيعات المعلّقة';
+
+  @override
+  String get permProductsView => 'عرض المنتجات والمخزون';
+
+  @override
+  String get permProductsManage => 'إدارة المنتجات والأسعار';
+
+  @override
+  String get permStockIn => 'حركات وارد مخزون';
+
+  @override
+  String get permStockOut => 'حركات صادر مخزون';
+
+  @override
+  String get permWarehouseTransfer => 'تحويل بين المستودعات';
+
+  @override
+  String get permStockPolicies => 'سياسات المخزون والإعدادات';
+
+  @override
+  String get permCashView => 'عرض الصندوق والحركات';
+
+  @override
+  String get permCashManual => 'إيداع وسحب وقيد يدوي';
+
+  @override
+  String get permDebtsTitle => 'الديون (آجل)';
+
+  @override
+  String get permDebtsBoard => 'لوحة الديون والمتابعة';
+
+  @override
+  String get permInstallmentPlans => 'خطط التقسيط والجداول';
+
+  @override
+  String get permReportsPrint => 'التقارير والطباعة';
+
+  @override
+  String get permReportsLedgers => 'التقارير والدفاتر';
+
+  @override
+  String get permPrintTemplates => 'الطباعة والقوالب';
+
+  @override
+  String get permUsersShifts => 'المستخدمون والورديات';
+
+  @override
+  String get permUsersView => 'عرض قائمة المستخدمين';
+
+  @override
+  String get permUsersManage => 'إضافة وتعديل المستخدمين والصلاحيات';
+
+  @override
+  String get permStaffAbsences => 'غيابات الموظفين';
+
+  @override
+  String get permSettingsGeneral => 'الإعدادات العامة';
+
+  @override
+  String get permSystemLicense => 'إعدادات النظام والترخيص';
+
+  @override
+  String get cvNameTooShort => 'الاسم قصير جداً';
+
+  @override
+  String get cvNameTooLong => 'الاسم طويل جداً';
+
+  @override
+  String get cvPhoneIncomplete => 'رقم الهاتف يبدو غير مكتمل';
+
+  @override
+  String get cvPhoneTooLong => 'رقم الهاتف طويل جداً';
+
+  @override
+  String get siaStaffNotFound => 'لم يُعثر على الموظف أو الحساب غير مفعّل';
+
+  @override
+  String get siaCardMismatch => 'رمز البطاقة لا يطابق السجل';
+
+  @override
+  String get gs1Header => 'مستخرج من الباركود (GS1) — راجع العبوة:';
+
+  @override
+  String gs1MfgDate(Object date) {
+    return '• تاريخ إنتاج: $date';
+  }
+
+  @override
+  String gs1ExpDate(Object date) {
+    return '• تاريخ انتهاء: $date';
+  }
+
+  @override
+  String gs1NetWeight(Object weight) {
+    return '• وزن صافٍ (من الباركود): $weight غ';
+  }
+
+  @override
+  String gs1EmbeddedWeight(Object digits, Object qty) {
+    return 'وزن مدمج (حسب إعدادات المخزن): $digits → كمية/وزن أولي $qty';
+  }
+
+  @override
+  String get cplOpenFailed => 'تعذّر فتح التطبيق المناسب';
+
+  @override
+  String cplOpenError(Object error) {
+    return 'تعذّر الفتح: $error';
+  }
+
+  @override
+  String get cplChooseDial => 'اختر الرقم للاتصال';
+
+  @override
+  String get cplChooseWhatsapp => 'اختر الرقم للواتساب';
+
+  @override
+  String get vpSellBelowBuy => 'سعر البيع أقل من سعر الشراء';
+
+  @override
+  String get vpSellBelowMin => 'سعر البيع أقل من الحد الأدنى';
+
+  @override
+  String blSizeMm(Object h, Object w) {
+    return '$w × $h مم';
+  }
+
+  @override
+  String blPricePerKg(Object price) {
+    return '$price Fdj/كغم';
+  }
+
+  @override
+  String get licKillAdmin =>
+      'تم إيقاف الوصول إلى حسابك إدارياً. تواصل مع الدعم لإعادة التفعيل.';
+
+  @override
+  String get licRevoked => 'تم إلغاء وصولك إلى الخدمة. تواصل مع الدعم.';
+
+  @override
+  String get licGrace =>
+      'حسابك في فترة سماح بعد انتهاء الاشتراك. جدّد قبل انتهاء المهلة لاستعادة جميع الميزات.';
+
+  @override
+  String get licExpiredRenew => 'انتهت صلاحية اشتراكك. جدّد المفتاح للمتابعة.';
+
+  @override
+  String get licDeviceLimitAdmin =>
+      'تم تجاوز حد الأجهزة في حسابك. افصل جهازاً من لوحة الإدارة أو قم بترقية الخطة.';
+
+  @override
+  String get licDeviceLimitOffline =>
+      'تم تجاوز حد الأجهزة في حسابك. اتصل بالإنترنت لإعادة التحقق بعد فصل جهاز.';
+
+  @override
+  String licDeviceLimitCount(Object active, Object max) {
+    return 'عدد الأجهزة النشطة على الحساب تجاوز الحد ($active/$max). افصل جهازاً أو قم بترقية الخطة.';
+  }
+
+  @override
+  String get licTimeTamperPending =>
+      'تم اكتشاف تعارض في إعدادات الوقت. أكمل العملية الحالية ثم سيُقفل التطبيق.';
+
+  @override
+  String get licTimeSyncOnline => 'يرجى الاتصال بالإنترنت للتحقق من الوقت.';
+
+  @override
+  String get licTrialEnded =>
+      'انتهت التجربة المجانية (15 يوم). اختر خطة اشتراك للمتابعة.';
+
+  @override
+  String get licTrialCloudDesc =>
+      'تجربة مجانية 15 يوم من أول تسجيل Google لهذا الحساب (موحّدة لكل الأجهزة).';
+
+  @override
+  String get licTrialLocalDesc =>
+      'تجربة مجانية مفعلة لمدة 15 يوم من أول استخدام لهذا الجهاز.';
+
+  @override
+  String get licJwtRequired =>
+      'حسابك يستخدم ترخيصاً موقّعاً. الصق رمز التفعيل الكامل (JWT) وليس المفتاح القديم.';
+
+  @override
+  String get licCacheWarning =>
+      '\n(تعذّر التحقق من الخادم — الحالة من آخر مزامنة.)';
+
+  @override
+  String licDevicesCount(Object max, Object registered) {
+    return '$registered / $max جهاز';
+  }
+
+  @override
+  String licDevicesN(Object count) {
+    return '$count أجهزة';
+  }
+
+  @override
+  String licPricePerMonth(Object price) {
+    return '$price Fdj / شهر';
+  }
+
+  @override
+  String get licJwtPasteHint =>
+      'الصق رمز JWT كاملاً من أول «ey» حتى نهاية الجزء الثالث (بدون أسطر أو مسافات في الوسط).';
+
+  @override
+  String get licJwtInvalid =>
+      'مفتاح الترخيص غير صالح. إن كان النص صحيحاً فتأكد من تحديث التطبيق بعد مزامنة المفتاح العام، ومن عدم تغيير حالة الأحرف (مثل eyJ وليس eyj).';
+
+  @override
+  String get licActivatedOk => 'تم تفعيل الترخيص بنجاح!';
+
+  @override
+  String get licSuspendedContact =>
+      'حسابك معلَّق مؤقتاً. تواصل مع الدعم لمتابعة الاستخدام.';
+
+  @override
+  String get stNoValidItems => 'لا توجد بنود بكمية صالحة';
+
+  @override
+  String stProductMissing(Object id) {
+    return 'منتج غير موجود #$id';
+  }
+
+  @override
+  String get stNothingSaved => 'لم يُحفظ أي بند للسند';
+
+  @override
+  String stInsufficientBalance(Object available, Object id) {
+    return 'رصيد غير كافٍ للمنتج #$id في المخزن (المتاح $available)';
+  }
+
+  @override
+  String get stSameWarehouse => 'المخزن المصدر والمستهدف متطابقان';
+
+  @override
+  String stInsufficientSource(Object id) {
+    return 'رصيد غير كافٍ في المخزن المصدر للمنتج #$id';
+  }
+
+  @override
+  String actorEmployee(Object id) {
+    return 'الموظف #$id';
+  }
+
+  @override
+  String get actExpenseCreated => 'تسجيل مصروف';
+
+  @override
+  String actExpenseDetails(Object actor, Object id, Object status) {
+    return 'الفئة #$id • الحالة: $status • المنفذ: $actor';
+  }
+
+  @override
+  String get expenseWord => 'مصروف';
+
+  @override
+  String expenseLedgerNote(Object id, Object name) {
+    return 'مصروف — $name (#exp:$id)';
+  }
+
+  @override
+  String expenseLedgerNoteDesc(Object description, Object id, Object name) {
+    return 'مصروف — $name — $description (#exp:$id)';
+  }
+
+  @override
+  String get actCashEntryExpense => 'قيد صندوق: مصروف';
+
+  @override
+  String actCashEntryExpenseDetails(
+    Object actor,
+    Object category,
+    Object expense,
+  ) {
+    return 'مصروف #$expense • فئة #$category • المنفذ: $actor';
+  }
+
+  @override
+  String get actDeleteCashEntryExpense => 'حذف قيد صندوق: مصروف';
+
+  @override
+  String actCashEntryExpenseDeletedDetails(Object actor, Object id) {
+    return 'تم حذف القيد المرتبط بمصروف #$id أثناء التعديل • المنفذ: $actor';
+  }
+
+  @override
+  String actCashEntryExpenseDeletedDetails2(Object actor, Object id) {
+    return 'حذف المصروف #$id أدى لحذف القيد المرتبط • المنفذ: $actor';
+  }
+
+  @override
+  String get actDeleteExpense => 'حذف مصروف';
+
+  @override
+  String actDeleteExpenseDetails(Object actor, Object id) {
+    return 'الفئة #$id • المنفذ: $actor';
+  }
+
+  @override
+  String supMeta(Object id) {
+    return 'مورد #$id';
+  }
+
+  @override
+  String supMetaNote(Object meta, Object note) {
+    return '$meta — ملاحظة: $note';
+  }
+
+  @override
+  String get supDebtPaymentProduct => 'دفع ذمة مورد';
+
+  @override
+  String get actSupplierPayoutCreate => 'إنشاء سند دفع مورد';
+
+  @override
+  String actorSupplierLine(Object actor, Object id, Object name) {
+    return 'المورد: $name ($id) • المنفذ: $actor';
+  }
+
+  @override
+  String get actSupplierPayment => 'تسجيل دفعة مورد';
+
+  @override
+  String actSupplierPaymentDetails(
+    Object actor,
+    Object id,
+    Object invoice,
+    Object name,
+  ) {
+    return 'المورد: $name ($id) • الفاتورة المرجعية: #$invoice • المنفذ: $actor';
+  }
+
+  @override
+  String get actSupplierPayoutDelete => 'حذف سند دفع مورد';
+
+  @override
+  String actSupplierPayoutDeleteDetails(
+    Object actor,
+    Object id,
+    Object payout,
+  ) {
+    return 'مورد #$id • الحذف ضمن عكس دفعة #$payout • المنفذ: $actor';
+  }
+
+  @override
+  String supReversePaymentName(Object id, Object name, Object payout) {
+    return 'عكس دفعة مورد #$id — $name (كانت دفعة #$payout)';
+  }
+
+  @override
+  String get actSupplierPaymentReverse => 'عكس دفعة مورد';
+
+  @override
+  String get actSupplierPaymentDelete => 'حذف دفعة مورد';
+
+  @override
+  String actSupplierPaymentDeleteDetails(Object actor, Object id) {
+    return 'مورد #$id • المنفذ: $actor';
+  }
+
+  @override
+  String get actInvoiceCreate => 'تسجيل فاتورة';
+
+  @override
+  String get actInvoiceReturn => 'تسجيل مرتجع فاتورة';
+
+  @override
+  String actInvoiceDetails(Object actor, Object customer, Object type) {
+    return 'المنفّذ: $actor — العميل: $customer — النوع: $type';
+  }
+
+  @override
+  String ivCannotSellLocked(Object name) {
+    return 'لا يمكن بيع «$name» لأن المخزون صفر في الوضع المقيّد.';
+  }
+
+  @override
+  String get ivVariantQtyInteger => 'كمية الملابس يجب أن تكون رقماً صحيحاً.';
+
+  @override
+  String get ivNoQtyForSize => 'لا توجد كمية متوفرة لهذا المقاس/اللون.';
+
+  @override
+  String cashSupplierPaymentDesc(Object id, Object name) {
+    return 'دفع مورد — $name (سند #$id)';
+  }
+
+  @override
+  String get actCashSupplierPayment => 'قيد صندوق: دفع مورد';
+
+  @override
+  String actCashInvoiceLinkDetails(Object actor, Object id, Object name) {
+    return 'المنفّذ: $actor — الفاتورة #$id — $name';
+  }
+
+  @override
+  String cashDebtCollectionDesc(Object id, Object name) {
+    return 'سند تحصيل دين #$id — $name';
+  }
+
+  @override
+  String cashInstallmentDesc(Object id, Object name) {
+    return 'سند تسديد قسط #$id — $name';
+  }
+
+  @override
+  String cashSaleInvoiceDesc(Object id, Object name) {
+    return 'فاتورة بيع #$id — $name';
+  }
+
+  @override
+  String get actCashInvoiceLinked => 'قيد صندوق مرتبط بفاتورة';
+
+  @override
+  String actCashInvoiceLinkedDetails(Object actor, Object id, Object type) {
+    return 'المنفّذ: $actor — الفاتورة #$id — نوع القيد: $type';
+  }
+
+  @override
+  String cashReturnDesc(Object customer, Object id) {
+    return 'مرتجع فاتورة #$id — $customer';
+  }
+
+  @override
+  String cashReturnDescWithOrig(Object customer, Object id, Object original) {
+    return 'مرتجع فاتورة #$id (أصل #$original) — $customer';
+  }
+
+  @override
+  String get actCashReturn => 'قيد صندوق: مرتجع بيع';
+
+  @override
+  String actCashReturnDetails(Object actor, Object id) {
+    return 'المنفّذ: $actor — الفاتورة #$id';
+  }
+
+  @override
+  String get dvInvalidNumeric =>
+      'بيانات الفاتورة غير صالحة (قيمة رقمية غير منتهية).';
+
+  @override
+  String dvNotBelowZero(Object label) {
+    return 'لا يمكن أن يكون $label أقل من الصفر.';
+  }
+
+  @override
+  String get dvNoItems => 'لا يمكن حفظ فاتورة بدون بنود.';
+
+  @override
+  String get dvLabelDiscount => 'الخصم';
+
+  @override
+  String get dvLabelAdvance => 'الدفعة المقدمة';
+
+  @override
+  String get dvLabelInvoiceTotal => 'إجمالي الفاتورة';
+
+  @override
+  String get dvDiscountPctRange => 'نسبة الخصم يجب أن تكون بين 0% و100%.';
+
+  @override
+  String get dvCollectionSingleItem =>
+      'سندات التحصيل/الدفع يجب أن تحتوي على بند واحد فقط.';
+
+  @override
+  String dvItemNameRequired(Object line) {
+    return 'اسم المنتج في البند رقم $line مطلوب.';
+  }
+
+  @override
+  String dvItemPriceLabel(Object line) {
+    return 'سعر البند رقم $line';
+  }
+
+  @override
+  String dvItemTotalLabel(Object line) {
+    return 'إجمالي البند رقم $line';
+  }
+
+  @override
+  String dvItemQtyPositive(Object line) {
+    return 'كمية البيع في البند رقم $line يجب أن تكون أكبر من صفر.';
+  }
+
+  @override
+  String dvItemBaseQtyInvalid(Object line) {
+    return 'كمية المخزون الأساسية في البند رقم $line غير صالحة.';
+  }
+
+  @override
+  String dvItemProductIdInvalid(Object line) {
+    return 'معرّف المنتج في البند رقم $line غير صالح.';
+  }
+
+  @override
+  String dvItemTotalMismatch(Object line) {
+    return 'إجمالي البند رقم $line غير متطابق مع السعر × الكمية.';
+  }
+
+  @override
+  String get dvDiscountExceedsSum =>
+      'قيمة الخصم لا يمكن أن تتجاوز مجموع البنود.';
+
+  @override
+  String get dvTotalMismatch =>
+      'إجمالي الفاتورة غير متطابق مع مجموع البنود بعد الخصم والضريبة.';
+
+  @override
+  String get dvAdvanceExceedsTotal =>
+      'الدفعة المقدمة لا يمكن أن تتجاوز إجمالي الفاتورة.';
+
+  @override
+  String get actDeleteInvoice => 'حذف فاتورة';
+
+  @override
+  String actDeleteInvoiceDetails(Object id) {
+    return 'الفاتورة #$id — الحذف المنطقي يحفظ سجل التدقيق';
+  }
+
+  @override
+  String get csUnknownDevice => 'جهاز غير معروف';
+
+  @override
+  String get csDeviceLimitPlan =>
+      'تم الوصول إلى الحد الأقصى للأجهزة في خطتك. افصل جهازاً من الحساب أو قم بترقية الخطة.';
+
+  @override
+  String get csDeviceRemovedAsk =>
+      'تم إزالة هذا الجهاز من الحساب. اطلب السماح بالعودة من جهاز نشط في الإعدادات.';
+
+  @override
+  String get csNotSpecified => 'غير محدد';
+
+  @override
+  String csDeviceLimitCount(Object active, Object max) {
+    return 'عدد الأجهزة النشطة على الحساب تجاوز الحد ($active/$max). افصل جهازاً غير مستخدم أو قم بترقية الخطة.';
+  }
+
+  @override
+  String get csNotLoggedIn => 'المستخدم غير مسجل دخول.';
+
+  @override
+  String get csCannotDetachCurrent =>
+      'لا يمكن فصل الجهاز الحالي. سجّل الخروج من هذا الجهاز أولاً.';
+
+  @override
+  String get csDevicesTableMissing =>
+      'جدول الأجهزة غير موجود بعد في Supabase. شغّل SQL أولاً.';
+
+  @override
+  String get csDevicesTableNotReady => 'جدول الأجهزة غير جاهز.';
+
+  @override
+  String get csAccessColumnSql =>
+      'شغّل ملف SQL لإضافة عمود access_status أولاً.';
+
+  @override
+  String get csNoValidLicense => 'لا يمكن المزامنة بدون ترخيص صالح.';
+
+  @override
+  String get csDeviceLimitPlanSignout =>
+      'تم الوصول إلى الحد الأقصى للأجهزة في الحساب. افصل جهازاً أو قم بترقية الخطة.';
+
+  @override
+  String get csDeviceRemovedSignout =>
+      'تم إزالة هذا الجهاز من الحساب. سجّل الخروج ثم اطلب السماح بالعودة من جهاز نشط.';
+
+  @override
+  String get csSyncTablesMissing =>
+      'جداول المزامنة غير موجودة في Supabase. نفّذ ملف supabase_sync_setup.sql مرة واحدة من SQL Editor.';
+
+  @override
+  String get csSyncTablesNotReady =>
+      'جداول المزامنة غير جاهزة في Supabase. نفّذ supabase_sync_setup.sql.';
+
+  @override
+  String csSnapshotVersionMismatch(Object app, Object schema) {
+    return 'نسخة لقطة السحابة ($schema) لا تطابق التطبيق ($app). حدّث التطبيق على هذا الجهاز ثم أعد «مزامنة الآن».';
+  }
+
+  @override
+  String get csSnapshotFetchFailed =>
+      'تعذر جلب لقطة السحابة بعد التحقق من البيانات الوصفية. أعد المحاولة.';
+
+  @override
+  String get csSnapshotEmptyPayload =>
+      'لقطة السحابة لا تحتوي على بيانات (payload). تحقق من Supabase.';
+
+  @override
+  String get csSnapshotMissingSyncId =>
+      'لقطة السحابة مُجزّأة لكن sync_id ناقص.';
+
+  @override
+  String get csSnapshotChunksFailed =>
+      'تعذر تجميع أجزاء اللقطة من السحابة. تحقق من جدول app_snapshot_chunks وصلاحيات القراءة.';
+
+  @override
+  String get csPushStoppedEmptyLocal =>
+      'تم إيقاف الرفع: القاعدة المحلية فارغة بينما توجد بيانات على السحابة. اضغط «مزامنة الآن» من الجهاز الذي يعرض البيانات أولاً، أو تأكد من السحب قبل الرفع.';
+
+  @override
+  String csRemoteCheckFailed(Object error) {
+    return 'تعذر التحقق من لقطة السحابة قبل الرفع (حماية من استبدال البيانات): $error';
+  }
+
+  @override
+  String get prCatNameRequired => 'اسم التصنيف مطلوب';
+
+  @override
+  String get prNameUsed => 'هذا الاسم مستخدم مسبقاً';
+
+  @override
+  String get prParentInvalid => 'التصنيف الرئيسي غير صالح';
+
+  @override
+  String get prCatHasSubcategories => 'لا يمكن الحذف: يوجد تصنيفات فرعية';
+
+  @override
+  String get prCatLinkedToProducts => 'لا يمكن الحذف: التصنيف مرتبط بمنتجات';
+
+  @override
+  String get prBrandNameRequired => 'اسم الماركة مطلوب';
+
+  @override
+  String get prBrandExists => 'هذه الماركة موجودة مسبقاً';
+
+  @override
+  String get prTplNameRequired => 'اسم القالب مطلوب';
+
+  @override
+  String get prTplBaseUnitRequired => 'اسم الوحدة الأساسية مطلوب';
+
+  @override
+  String get prTplBaseSymbolRequired => 'تمييز الوحدة الأساسية مطلوب';
+
+  @override
+  String get prTplCompleteConversion =>
+      'أكمل اسم التمييز لكل وحدة تحويل أو احذف الصف الفارغ';
+
+  @override
+  String get prTplFactorPositive => 'معامل التحويل يجب أن يكون أكبر من صفر';
+
+  @override
+  String get prCodeGenFailed => 'تعذر توليد رمز منتج فريد. حاول مجدداً.';
+
+  @override
+  String get dcpSameCustomer =>
+      'لا يمكن إدخال نفس رقم الهاتف أكثر من مرة لهذا العميل.';
+
+  @override
+  String get dcpOtherCustomer =>
+      'رقم الهاتف مسجّل مسبقًا لعميل آخر. الأسماء يمكن أن تتشابه، أما رقم الهاتف فيجب أن يكون فريدًا.';
+
+  @override
+  String get dpDebtBefore => 'دين قبل التسديد';
+
+  @override
+  String get dpRemainingAfter => 'متبقي بعد';
+
+  @override
+  String get dpNote => 'ملاحظة';
+
+  @override
+  String get dpCollectionProduct => 'تحصيل دين آجل';
+
+  @override
+  String get ipPlan => 'خطة تقسيط';
+
+  @override
+  String get ipOriginalInvoice => 'فاتورة أصلية';
+
+  @override
+  String get ipPaymentProduct => 'تسديد قسط — خطة';
+
+  @override
+  String get shDepositOpen => 'إيداع عند فتح الوردية';
+
+  @override
+  String get shWithdrawClose => 'سحب عند إغلاق الوردية';
+
+  @override
+  String get shInvalidValues => 'قيم غير صالحة';
+
+  @override
+  String get shWithdrawExceedsBox => 'المبلغ المسحوب أكبر من المبلغ في الصندوق';
+
+  @override
+  String get loyRedeemNote => 'استبدال نقاط — فاتورة';
+
+  @override
+  String get loyEarnNote => 'مكافأة شراء — فاتورة';
+
+  @override
+  String get snChannelName => 'تنبيهات ماري';
+
+  @override
+  String get snChannelDesc =>
+      'مخزون، أقساط، مرتجعات، صندوق، وغيرها — تظهر في شريط الإشعارات.';
+
+  @override
+  String get snAppName => 'ماري';
+
+  @override
+  String get bpSmallShop => 'محل صغير';
+
+  @override
+  String get bpRetail => 'متجر تجزئة';
+
+  @override
+  String get bpPharmacy => 'صيدلية';
+
+  @override
+  String get bpClothing => 'محل ملابس';
+
+  @override
+  String get bpConstruction => 'محل إنشائي';
+
+  @override
+  String get bpWarehouse => 'مستودع / جملة';
+
+  @override
+  String get invStocktakingAdjustNote => 'تسوية فروقات جرد';
+
+  @override
+  String get aiLocalAppData => 'بيانات التطبيق المحلية';
+
+  @override
+  String aiRewriteNote(Object confidence, Object source) {
+    return 'قرأت $source، وثقتي في هذا الجواب $confidence%. الأرقام محسوبة من قاعدة البيانات ولا أعتمد على تخمين حر.';
+  }
+
+  @override
+  String get aiLast7Days => 'آخر 7 أيام';
+
+  @override
+  String get aiThisYear => 'هذه السنة';
+
+  @override
+  String get aiLastMonth => 'الشهر الماضي';
+
+  @override
+  String aiSalesSummaryAnswer(
+    Object avg,
+    Object invoices,
+    Object margin,
+    Object revenue,
+    Object window,
+  ) {
+    return 'ملخص $window: المبيعات $revenue عبر $invoices فاتورة. متوسط الفاتورة $avg، والهامش التقريبي $margin.';
+  }
+
+  @override
+  String get aiAvgInvoice => 'متوسط الفاتورة';
+
+  @override
+  String get aiEstMargin => 'الهامش التقريبي';
+
+  @override
+  String get aiAskTopProductsThisMonth => 'اسأل: أفضل المنتجات هذا الشهر';
+
+  @override
+  String get aiAskWhatMayRunOut => 'اسأل: ما المنتجات التي قد تنفد؟';
+
+  @override
+  String aiNoProductSalesIn(Object window) {
+    return 'لا توجد مبيعات منتجات في $window.';
+  }
+
+  @override
+  String get aiTryOtherPeriod => 'جرّب السؤال عن ملخص المبيعات أو فترة أخرى.';
+
+  @override
+  String aiTopPerformerAnswer(
+    Object name,
+    Object quantity,
+    Object revenue,
+    Object window,
+  ) {
+    return 'أفضل أداء في $window: $name بإيراد $revenue وكمية $quantity. هذه قائمة المنتجات الأقوى حسب الإيراد.';
+  }
+
+  @override
+  String aiQtyMarginDetail(Object margin, Object qty) {
+    return 'الكمية $qty | هامش $margin';
+  }
+
+  @override
+  String get aiReviewRestock =>
+      'راجع مخزون هذه المنتجات حتى لا تتوقف المبيعات.';
+
+  @override
+  String get aiAskPo => 'اسأل: اقترح طلبية شراء';
+
+  @override
+  String get aiNoShortageRisk =>
+      'لا أرى خطر نفاد واضحاً من آخر 30 يوماً. المنتجات إما لا تبيع بسرعة أو مخزونها فوق حد الخطر.';
+
+  @override
+  String get aiKeepReviewingFastMovers =>
+      'استمر بمراجعة المنتجات سريعة البيع يومياً.';
+
+  @override
+  String aiTopShortageAnswer(
+    Object days,
+    Object name,
+    Object qty,
+    Object salesPerDay,
+  ) {
+    return 'أعلى خطر نفاد: $name. المتاح $qty، ومعدل البيع $salesPerDay يومياً، وقد يكفي حوالي $days.';
+  }
+
+  @override
+  String aiDaysRemaining(Object days) {
+    return '$days متبقية';
+  }
+
+  @override
+  String aiStockDetail(Object qty, Object salesPerDay, Object suggested) {
+    return 'المتاح $qty | معدل البيع $salesPerDay/يوم | طلب مقترح $suggested';
+  }
+
+  @override
+  String get aiCreatePoForCritical => 'أنشئ أمر شراء للمنتجات الحرجة.';
+
+  @override
+  String get aiRaiseAlertThreshold => 'ارفع حد التنبيه للمنتجات سريعة الحركة.';
+
+  @override
+  String aiOrderLabel(Object name) {
+    return 'اطلب $name';
+  }
+
+  @override
+  String aiStockWillLast(Object days, Object history) {
+    return 'يكفي المخزون حوالي $days بناءً على آخر $history يوماً.';
+  }
+
+  @override
+  String aiPushSalesLabel(Object name) {
+    return 'ادفع مبيعات $name';
+  }
+
+  @override
+  String aiStrongProductDetail(Object window) {
+    return 'منتج قوي في $window. حافظ على توفره.';
+  }
+
+  @override
+  String get aiNoStrongRecs =>
+      'لا توجد توصيات قوية الآن. أحتاج مبيعات أو مخزون أكثر لأقدم قراراً أفضل.';
+
+  @override
+  String aiTopRecAnswer(Object top, Object window) {
+    return 'أقوى توصية الآن: $top. جمعت بين سرعة البيع والمخزون المتاح وأداء $window.';
+  }
+
+  @override
+  String get aiStartWithCritical =>
+      'ابدأ بالمنتجات الحرجة ثم المنتجات الأعلى مبيعاً.';
+
+  @override
+  String get aiAskSalesSummaryThisMonth => 'اسأل: ملخص المبيعات هذا الشهر';
+
+  @override
+  String get aiNoLowStockNow => 'لا توجد منتجات تحت حد التنبيه حالياً.';
+
+  @override
+  String get aiAskShortageRisk =>
+      'اسأل عن خطر النفاد لمعرفة المنتجات التي قد تنخفض قريباً.';
+
+  @override
+  String aiLowStockFound(Object count) {
+    return 'وجدت $count منتجاً تحت حد التنبيه أو عنده.';
+  }
+
+  @override
+  String get aiReviewPurchaseOrders => 'راجع أوامر الشراء لهذه المنتجات.';
+
+  @override
+  String get aiHelpAnswer =>
+      'أستطيع تحليل المبيعات والمخزون محلياً من بيانات التطبيق. اسألني عن أفضل المنتجات، ملخص المبيعات، المنتجات التي قد تنفد، أو توصيات الشراء.';
+
+  @override
+  String get aiExample => 'مثال';
+
+  @override
+  String get aiAnswersFromLocalDb =>
+      'كل الإجابات مبنية على قاعدة البيانات المحلية لهذا المتجر.';
+
+  @override
+  String get aiLessThanDay => 'أقل من يوم';
+
+  @override
+  String aiDaysCount(Object days) {
+    return '$days يوم';
+  }
+
+  @override
+  String get eidQrReaderHint =>
+      'QR فقط: كاميرا التطبيق، أو جهاز قراءة خارجي (USB/Bluetooth) يوجّه على البطاقة مع التركيز على حقل «جهاز القراءة» في نافذة فتح/إغلاق الوردية.';
 }

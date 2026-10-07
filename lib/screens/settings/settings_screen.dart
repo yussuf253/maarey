@@ -667,7 +667,9 @@ class _SubscriptionPlanTrailingBadge extends StatelessWidget {
         late final Color fg;
         late final Color bg;
         if (s.status == LicenseStatus.active) {
-          label = s.plan?.nameAr ?? loc.settingsLicenseActive;
+          label = s.plan == null
+              ? loc.settingsLicenseActive
+              : planNameForKey(s.plan!.key, loc);
           fg = cs.primary;
           bg = cs.primary.withValues(alpha: 0.12);
         } else if (s.status == LicenseStatus.trial) {
@@ -1242,7 +1244,12 @@ class _AccountSubscriptionScreenState
                       Text(
                         AppLocalizations.of(
                           context,
-                        )!.currentPlanLabel(displayPlan?.nameAr ?? '—'),
+                        )!.currentPlanLabel(
+                          planNameForKey(
+                            displayPlan?.key,
+                            AppLocalizations.of(context)!,
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 6),
                       Text(

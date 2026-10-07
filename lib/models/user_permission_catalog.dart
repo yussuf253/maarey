@@ -1,8 +1,10 @@
+import '../l10n/app_l10n.dart';
 import '../services/permission_service.dart';
 
-/// مجموعات عرض الصلاحيات في واجهة المستخدم (عربي).
+/// مجموعات عرض الصلاحيات في واجهة المستخدم — النصوص تُحلّ عبر [AppL10n]
+/// عند بناء القائمة لتعكس اللغة الحالية.
 class PermissionGroupUi {
-  const PermissionGroupUi({
+  PermissionGroupUi({
     required this.title,
     required this.items,
   });
@@ -26,171 +28,171 @@ class PermissionItemUi {
 /// ترتيب المجموعات والعناوين — يتطابق مع [PermissionKeys.allKeys].
 List<PermissionGroupUi> buildPermissionGroupsUi() {
   return [
-    const PermissionGroupUi(
-      title: 'التطبيق والوصول',
+    PermissionGroupUi(
+      title: AppL10n.current.permGroupAppAccess,
       items: [
         PermissionItemUi(
           key: PermissionKeys.appDashboard,
-          label: 'الرئيسية والتنقّل',
-          subtitle: 'الوصول إلى لوحة التطبيق والأقسام الرئيسية',
+          label: AppL10n.current.permDashboardNav,
+          subtitle: AppL10n.current.permDashboardNavSub,
         ),
       ],
     ),
-    const PermissionGroupUi(
-      title: 'العملاء',
+    PermissionGroupUi(
+      title: AppL10n.current.customersTitle,
       items: [
         PermissionItemUi(
           key: PermissionKeys.customersView,
-          label: 'عرض العملاء والبحث',
+          label: AppL10n.current.permCustomersView,
         ),
         PermissionItemUi(
           key: PermissionKeys.customersManage,
-          label: 'إضافة وتعديل العملاء',
+          label: AppL10n.current.permCustomersEdit,
         ),
         PermissionItemUi(
           key: PermissionKeys.customersContacts,
-          label: 'قائمة اتصال العملاء',
+          label: AppL10n.current.permCustomersContacts,
         ),
       ],
     ),
-    const PermissionGroupUi(
-      title: 'ولاء العملاء',
+    PermissionGroupUi(
+      title: AppL10n.current.customerLoyaltyLabel,
       items: [
         PermissionItemUi(
           key: PermissionKeys.loyaltyAccess,
-          label: 'نقاط الولاء والإعدادات',
+          label: AppL10n.current.permLoyaltyPoints,
         ),
       ],
     ),
-    const PermissionGroupUi(
-      title: 'المبيعات',
+    PermissionGroupUi(
+      title: AppL10n.current.salesTitle,
       items: [
         PermissionItemUi(
           key: PermissionKeys.salesPos,
-          label: 'شاشة البيع (نقطة البيع)',
+          label: AppL10n.current.permPosScreen,
         ),
         PermissionItemUi(
           key: PermissionKeys.salesParked,
-          label: 'المبيعات المعلّقة',
+          label: AppL10n.current.permParkedSales,
         ),
         PermissionItemUi(
           key: PermissionKeys.salesReturns,
-          label: 'المرتجعات',
+          label: AppL10n.current.returns,
         ),
       ],
     ),
-    const PermissionGroupUi(
-      title: 'المخزون',
+    PermissionGroupUi(
+      title: AppL10n.current.inventoryLabel,
       items: [
         PermissionItemUi(
           key: PermissionKeys.inventoryView,
-          label: 'عرض المنتجات والمخزون',
+          label: AppL10n.current.permProductsView,
         ),
         PermissionItemUi(
           key: PermissionKeys.inventoryProductsManage,
-          label: 'إدارة المنتجات والأسعار',
+          label: AppL10n.current.permProductsManage,
         ),
         PermissionItemUi(
           key: PermissionKeys.inventoryVoucherIn,
-          label: 'حركات وارد مخزون',
+          label: AppL10n.current.permStockIn,
         ),
         PermissionItemUi(
           key: PermissionKeys.inventoryVoucherOut,
-          label: 'حركات صادر مخزون',
+          label: AppL10n.current.permStockOut,
         ),
         PermissionItemUi(
           key: PermissionKeys.inventoryVoucherTransfer,
-          label: 'تحويل بين المستودعات',
+          label: AppL10n.current.permWarehouseTransfer,
         ),
         PermissionItemUi(
           key: PermissionKeys.inventoryStocktakingManage,
-          label: 'جرد المخزون',
+          label: AppL10n.current.navInventoryStocktaking,
         ),
         PermissionItemUi(
           key: PermissionKeys.inventoryPoliciesManage,
-          label: 'سياسات المخزون والإعدادات',
+          label: AppL10n.current.permStockPolicies,
         ),
       ],
     ),
-    const PermissionGroupUi(
-      title: 'الصندوق',
+    PermissionGroupUi(
+      title: AppL10n.current.cashTitle,
       items: [
         PermissionItemUi(
           key: PermissionKeys.cashView,
-          label: 'عرض الصندوق والحركات',
+          label: AppL10n.current.permCashView,
         ),
         PermissionItemUi(
           key: PermissionKeys.cashManual,
-          label: 'إيداع وسحب وقيد يدوي',
+          label: AppL10n.current.permCashManual,
         ),
       ],
     ),
-    const PermissionGroupUi(
-      title: 'الديون (آجل)',
+    PermissionGroupUi(
+      title: AppL10n.current.permDebtsTitle,
       items: [
         PermissionItemUi(
           key: PermissionKeys.debtsPanel,
-          label: 'لوحة الديون والمتابعة',
+          label: AppL10n.current.permDebtsBoard,
         ),
         PermissionItemUi(
           key: PermissionKeys.debtsSettings,
-          label: 'إعدادات الدين',
+          label: AppL10n.current.debtSettingsLabel,
         ),
       ],
     ),
-    const PermissionGroupUi(
-      title: 'الأقساط',
+    PermissionGroupUi(
+      title: AppL10n.current.installmentsTitle,
       items: [
         PermissionItemUi(
           key: PermissionKeys.installmentsPlans,
-          label: 'خطط التقسيط والجداول',
+          label: AppL10n.current.permInstallmentPlans,
         ),
         PermissionItemUi(
           key: PermissionKeys.installmentsSettings,
-          label: 'إعدادات التقسيط',
+          label: AppL10n.current.navInstallmentSettings,
         ),
       ],
     ),
-    const PermissionGroupUi(
-      title: 'التقارير والطباعة',
+    PermissionGroupUi(
+      title: AppL10n.current.permReportsPrint,
       items: [
         PermissionItemUi(
           key: PermissionKeys.reportsAccess,
-          label: 'التقارير والدفاتر',
+          label: AppL10n.current.permReportsLedgers,
         ),
         PermissionItemUi(
           key: PermissionKeys.printingAccess,
-          label: 'الطباعة والقوالب',
+          label: AppL10n.current.permPrintTemplates,
         ),
       ],
     ),
-    const PermissionGroupUi(
-      title: 'المستخدمون والورديات',
+    PermissionGroupUi(
+      title: AppL10n.current.permUsersShifts,
       items: [
         PermissionItemUi(
           key: PermissionKeys.usersView,
-          label: 'عرض قائمة المستخدمين',
+          label: AppL10n.current.permUsersView,
         ),
         PermissionItemUi(
           key: PermissionKeys.usersManage,
-          label: 'إضافة وتعديل المستخدمين والصلاحيات',
+          label: AppL10n.current.permUsersManage,
         ),
         PermissionItemUi(
           key: PermissionKeys.shiftsAccess,
-          label: 'ورديات الموظفين',
+          label: AppL10n.current.staffShiftsLabel,
         ),
         PermissionItemUi(
           key: PermissionKeys.absencesAccess,
-          label: 'غيابات الموظفين',
+          label: AppL10n.current.permStaffAbsences,
         ),
       ],
     ),
-    const PermissionGroupUi(
-      title: 'الإعدادات العامة',
+    PermissionGroupUi(
+      title: AppL10n.current.permSettingsGeneral,
       items: [
         PermissionItemUi(
           key: PermissionKeys.settingsApp,
-          label: 'إعدادات النظام والترخيص',
+          label: AppL10n.current.permSystemLicense,
         ),
       ],
     ),
