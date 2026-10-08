@@ -10866,6 +10866,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get bulkImportColSaleUnit => 'Unité de Vente';
 
   @override
+  String get bulkImportColExpiry => 'Date de Péremption';
+
+  @override
   String bulkImportRowsFound(Object count) {
     return '$count lignes trouvées';
   }
@@ -10885,6 +10888,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get bulkImportInvalidNumber => 'Nombre invalide';
+
+  @override
+  String get bulkImportInvalidDate => 'Date invalide';
 
   @override
   String get bulkImportImportAll => 'Tout Importer';
@@ -10945,6 +10951,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get bulkImportSampleUnit => 'Pièce';
+
+  @override
+  String get bulkImportSampleExpiry => '31/12/2027';
 
   @override
   String get ipBulkImport => 'Import en masse de produits';

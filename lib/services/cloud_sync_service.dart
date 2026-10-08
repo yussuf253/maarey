@@ -170,6 +170,29 @@ class CloudSyncService {
   bool _syncRunning = false;
   bool _syncQueued = false;
   bool _preflightInProgress = false;
+
+  /// كتم مؤقت للمزامنة أثناء عملية تحجز قاعدة البيانات لفترة طويلة
+  /// (مثل استيراد دفعة منتجات في معاملة واحدة) حتى لا يتنافس [syncNow]
+  /// معها على المعاملات/الاتصال فيتعطّل الطرفان.
+  bool _syncSuppressed = false;
+
+  /// يمنع أي مزامنة جديدة حتى [resumeSyncs]. أي استدعاء [syncNow] أثناء
+  /// الكتم يُؤجَّل ويُنفَّذ تلقائيًا عند الفك.
+  void suppressSyncs() {
+    _syncSuppressed = true;
+    AppLogger.info('CloudSync', 'syncNow suppressed (long DB operation)');
+  }
+
+  /// يفك الكتم؛ إن كانت مزامنة مؤجَّلة فيُشغَّلها فورًا.
+  void resumeSyncs() {
+    if (!_syncSuppressed) return;
+    _syncSuppressed = false;
+    AppLogger.info('CloudSync', 'syncNow suppression lifted');
+    if (_syncQueued) {
+      _syncQueued = false;
+      unawaited(syncNow(forcePull: true, forceImportOnPull: false));
+    }
+  }
   DateTime? _lastSuccessfulPreflightAt;
   final Map<String, String> _lastRealtimeStatusLog = {};
   final Map<String, DateTime> _lastRealtimeErrorLogAt = {};
@@ -939,6 +962,11 @@ class CloudSyncService {
     bool forcePush = false,
     bool forceImportOnPull = false,
   }) async {
+    if (_syncSuppressed) {
+      _syncQueued = true;
+      AppLogger.info('CloudSync', 'syncNow: suppressed — queued');
+      return;
+    }
     if (_syncRunning) {
       _syncQueued = true;
       AppLogger.info('CloudSync', 'syncNow: already running, queued');

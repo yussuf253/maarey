@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:csv/csv.dart';
@@ -10,6 +11,7 @@ import '../../l10n/generated/app_localizations.dart';
 import '../../providers/product_provider.dart';
 import '../../services/app_settings_repository.dart';
 import '../../services/product_repository.dart';
+import '../../utils/app_logger.dart';
 import '../../widgets/glass/glass_background.dart';
 
 /// Internal parsed row.
@@ -26,6 +28,7 @@ class _ParsedRow {
   final String? supplierName;
   final double taxPercent;
   final String? saleUnit;
+  final String? expiryDate;
   final List<String> errors;
 
   const _ParsedRow({
@@ -41,6 +44,7 @@ class _ParsedRow {
     this.supplierName,
     this.taxPercent = 0,
     this.saleUnit,
+    this.expiryDate,
     this.errors = const [],
   });
 
@@ -55,6 +59,10 @@ class BulkImportScreen extends StatefulWidget {
 }
 
 class _BulkImportScreenState extends State<BulkImportScreen> {
+  /// لا يوجد `Provider<ProductRepository>` في شجرة الـ providers — كل الشاشات
+  /// في هذا المشروع تُنشئ النسخة مباشرة (انظر add_product_screen وغيره).
+  final ProductRepository _productRepo = ProductRepository();
+
   List<_ParsedRow>? _rows;
   bool _importing = false;
   int _imported = 0;
@@ -82,6 +90,7 @@ class _BulkImportScreenState extends State<BulkImportScreen> {
         loc.bulkImportColSupplier,
         loc.bulkImportColTaxPercent,
         loc.bulkImportColSaleUnit,
+        loc.bulkImportColExpiry,
       ],
       [
         loc.bulkImportSampleName,
@@ -95,6 +104,7 @@ class _BulkImportScreenState extends State<BulkImportScreen> {
         loc.bulkImportSampleSupplier,
         loc.bulkImportSampleTax,
         loc.bulkImportSampleUnit,
+        loc.bulkImportSampleExpiry,
       ],
     ]);
 
@@ -120,13 +130,19 @@ Future<void> _pickFile() async {
       allowedExtensions: ['csv'],
     );
     
-    // Check if the list itself is null or empty
-    if (result == null || result.isEmpty) return;
+    // Cancelled picker returns an empty list (non-nullable in file_picker 12).
+    if (result.isEmpty) return;
 
     // Get the first file directly from 'result'
     final file = result.first;
-    final path = file.path;
-    if (path == null) {
+
+    // Read via the cross-platform API: on web, file.path is always null
+    // (blob: URI), so File(path) must not be the only option.
+    String content;
+    try {
+      final bytes = await file.readAsBytes();
+      content = utf8.decode(bytes, allowMalformed: true);
+    } catch (_) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(loc.bulkImportNoFile)),
@@ -134,8 +150,10 @@ Future<void> _pickFile() async {
       }
       return;
     }
+    // Strip a UTF-8 BOM if present (Excel often adds one) so the first
+    // header still matches.
+    if (content.startsWith('\uFEFF')) content = content.substring(1);
 
-    final content = await File(path).readAsString();
     final rows = Csv().decode(content);
     if (rows.length < 2) {
       if (mounted) {
@@ -230,6 +248,16 @@ Future<void> _pickFile() async {
     // Sale unit.
     final unit = _cell(row, _ci(loc, loc.bulkImportColSaleUnit, 'unit'));
 
+    // Expiry date (dd/MM/yyyy or yyyy-MM-dd → stored as ISO yyyy-MM-dd).
+    String? expiryIso;
+    final expStr = _cell(row, _ci(loc, loc.bulkImportColExpiry, 'expiry date'));
+    if (expStr.isNotEmpty) {
+      expiryIso = _toIsoDate(expStr);
+      if (expiryIso == null) {
+        errors.add('${loc.bulkImportColExpiry}: ${loc.bulkImportInvalidDate}');
+      }
+    }
+
     return _ParsedRow(
       rowNumber: rowNum,
       name: name,
@@ -243,8 +271,37 @@ Future<void> _pickFile() async {
       supplierName: supplier.isNotEmpty ? supplier : null,
       taxPercent: tax,
       saleUnit: unit.isNotEmpty ? unit : null,
+      expiryDate: expiryIso,
       errors: errors,
     );
+  }
+
+  /// Parses `dd/MM/yyyy` or `yyyy-MM-dd` into ISO `yyyy-MM-dd`; null if invalid.
+  String? _toIsoDate(String raw) {
+    final s = raw.trim();
+    final fwd = s.split('/');
+    if (fwd.length == 3) {
+      final d = int.tryParse(fwd[0]);
+      final m = int.tryParse(fwd[1]);
+      final y = int.tryParse(fwd[2]);
+      if (d == null || m == null || y == null) return null;
+      if (d < 1 || d > 31 || m < 1 || m > 12 || y < 1900 || y > 2200) {
+        return null;
+      }
+      return '${y.toString().padLeft(4, '0')}-${m.toString().padLeft(2, '0')}-${d.toString().padLeft(2, '0')}';
+    }
+    final dash = s.split('-');
+    if (dash.length == 3) {
+      final y = int.tryParse(dash[0]);
+      final m = int.tryParse(dash[1]);
+      final d = int.tryParse(dash[2]);
+      if (d == null || m == null || y == null) return null;
+      if (d < 1 || d > 31 || m < 1 || m > 12 || y < 1900 || y > 2200) {
+        return null;
+      }
+      return '${y.toString().padLeft(4, '0')}-${m.toString().padLeft(2, '0')}-${d.toString().padLeft(2, '0')}';
+    }
+    return null;
   }
 
   // ── Import ───────────────────────────────────────────────────────────────
@@ -261,53 +318,85 @@ Future<void> _pickFile() async {
       _failed = 0;
     });
 
-    final productRepo = context.read<ProductRepository>();
+    var hardFailure = false;
+    Object? importError;
+    try {
+      final productRepo = _productRepo;
 
-    // Resolve default warehouse from settings.
-    final settings = AppSettingsRepository.instance;
-    final defWhStr = await settings.get('default_warehouse_id');
-    final defaultWarehouse = int.tryParse(defWhStr ?? '');
+      // Resolve default warehouse from settings.
+      final settings = AppSettingsRepository.instance;
+      final defWhStr = await settings.get('default_warehouse_id');
+      final defaultWarehouse = int.tryParse(defWhStr ?? '');
 
-    for (final row in valid) {
-      try {
-        await productRepo.insertProductComplete(
-          name: row.name,
-          barcode: row.barcode,
-          buyPrice: row.buyPrice,
-          sellPrice: row.sellPrice,
-          qty: row.qty,
-          lowStockThreshold: row.lowStockThreshold,
-          description: row.description,
-          supplierName: row.supplierName,
-          taxPercent: row.taxPercent,
-          saleUnit: row.saleUnit,
-          stockBaseKind: 0,
-          warehouseId: defaultWarehouse,
-        );
-        _imported++;
-      } catch (_) {
-        _failed++;
-      }
-      if (mounted) setState(() {});
+      // معاملة واحدة لكل الملف + مزامنة واحدة بعد الانتهاء — أسرع
+      // بكثير من insert لكل صف مع جدولة مزامنة بعد كل صف.
+      final result = await productRepo.importProductsBulk(
+        [
+          for (final row in valid)
+            BulkImportProductRow(
+              name: row.name,
+              barcode: row.barcode,
+              categoryName: row.categoryName,
+              buyPrice: row.buyPrice,
+              sellPrice: row.sellPrice,
+              qty: row.qty,
+              lowStockThreshold: row.lowStockThreshold,
+              description: row.description,
+              supplierName: row.supplierName,
+              taxPercent: row.taxPercent,
+              saleUnit: row.saleUnit,
+              expiryDate: row.expiryDate,
+            ),
+        ],
+        warehouseId: defaultWarehouse,
+        onProgress: (imported, failed) {
+          _imported = imported;
+          _failed = failed;
+          if (mounted) setState(() {});
+        },
+      );
+      _imported = result.imported;
+      _failed = result.failed;
+    } catch (e, st) {
+      hardFailure = true;
+      importError = e;
+      AppLogger.error('BulkImport', 'importProductsBulk failed', e, st);
+    } finally {
+      // يضمن توقف مؤشر التحميل دائمًا حتى لو فشل الاستيراد أو أُغلقت الشاشة.
+      if (mounted) setState(() => _importing = false);
     }
 
-    setState(() => _importing = false);
-
-    if (mounted) {
-      final loc = AppLocalizations.of(context)!;
-      final msg = _failed == 0
-          ? loc.bulkImportSuccess
-          : loc.bulkImportPartial(_failed, _imported, _total);
+    if (!mounted) return;
+    final loc = AppLocalizations.of(context)!;
+    if (hardFailure) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(msg),
-          backgroundColor: _failed == 0 ? Colors.green : Colors.orange,
+          content: Text(
+            importError == null
+                ? loc.bulkImportFailed
+                : '${loc.bulkImportFailed}: $importError',
+          ),
+          backgroundColor: Colors.red,
+          duration: const Duration(seconds: 10),
         ),
       );
+      return;
     }
 
-    if (mounted) {
-      context.read<ProductProvider>().loadProducts();
+    final msg = _failed == 0
+        ? loc.bulkImportSuccess
+        : loc.bulkImportPartial(_failed, _imported, _total);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(msg),
+        backgroundColor: _failed == 0 ? Colors.green : Colors.orange,
+      ),
+    );
+
+    try {
+      await context.read<ProductProvider>().loadProducts();
+    } catch (_) {
+      // فشل تحديث القائمة لا يُفشل الاستيراد.
     }
   }
 
@@ -502,7 +591,9 @@ Future<void> _pickFile() async {
                         )
                       : const Icon(Icons.download_done),
                   label: Text(
-                    _importing ? loc.bulkImportImporting : loc.bulkImportImportAll,
+                    _importing
+                        ? '${loc.bulkImportImporting} $_imported / $_total'
+                        : loc.bulkImportImportAll,
                   ),
                 ),
               ),

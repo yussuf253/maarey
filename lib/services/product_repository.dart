@@ -2252,6 +2252,168 @@ class ProductRepository {
     return newId;
   }
 
+  /// استيراد دفعة منتجات (ملف CSV) داخل **معاملة واحدة**.
+  ///
+  /// لماذا ليس حلقة حول [insertProductComplete]؟
+  /// - معاملة واحدة بدل معاملة لكل صف — أسرع بكثير، خاصة على الويب.
+  /// - لا تُجدول مزامنة سحابية لكل صف، بل مرة واحدة بعد الانتهاء فقط، حتى
+  ///   لا يتنافس [CloudSyncService.syncNow] مع الاستيراد على قاعدة البيانات
+  ///   (وهو ما كان يجعل مؤشر التحميل لا يتوقف).
+  Future<BulkImportProductResult> importProductsBulk(
+    List<BulkImportProductRow> rows, {
+    int? warehouseId,
+    int stockBaseKind = 0,
+    void Function(int imported, int failed)? onProgress,
+  }) async {
+    if (rows.isEmpty) {
+      return const BulkImportProductResult(imported: 0, failed: 0);
+    }
+    final db = await _db;
+    final now = DateTime.now().toIso8601String();
+    final tid = _tenant.activeTenantId.clamp(1, 999999999);
+    final sbk = stockBaseKind.clamp(0, 1);
+    final defaultUnitName = sbk == 1 ? 'كيلوغرام' : 'قطعة';
+
+    String? nz(String? s) {
+      final t = s?.trim();
+      return (t == null || t.isEmpty) ? null : t;
+    }
+
+    var imported = 0;
+    var failed = 0;
+    var catSeq = 0;
+
+    // اكتم المزامنة طوال المعاملة حتى لا يبدأ syncNow سحبًا/رفعًا
+    // فيتداخل مع معاملتنا على الاتصال الواحد لقاعدة البيانات.
+    CloudSyncService.instance.suppressSyncs();
+    try {
+      await db.transaction((txn) async {
+      // كاش التصنيفات داخل المعاملة: استعلام واحد بدل استعلامين لكل صف.
+      final catRows = await txn.query('categories', columns: ['id', 'name']);
+      final categoriesByName = <String, int>{
+        for (final r in catRows)
+          ((r['name'] as String?) ?? '').trim(): (r['id'] as num).toInt(),
+      }..removeWhere((key, _) => key.isEmpty);
+
+      Future<int?> ensureCategoryId(String rawName) async {
+        final trimmed = rawName.trim();
+        if (trimmed.isEmpty) return null;
+        final cached = categoriesByName[trimmed];
+        if (cached != null) return cached;
+        final id = await txn.insert('categories', {
+          'name': trimmed,
+          // لاحق عدّاد لتفادي تصادم الكود عند إنشاء عدة تصنيفات في نفس اللحظة.
+          'code': 'CAT-${DateTime.now().millisecondsSinceEpoch}-${catSeq++}',
+          'createdAt': now,
+          'updatedAt': now,
+          'global_id': const Uuid().v4(),
+        });
+        categoriesByName[trimmed] = id;
+        return id;
+      }
+
+      for (final row in rows) {
+        try {
+          final name = row.name.trim();
+          if (name.isEmpty) throw StateError('empty_name');
+
+          final b0 = row.barcode?.trim();
+          final bc = (b0 == null || b0.isEmpty) ? null : b0;
+          // نفس فحص تكرار الباركود في [insertProductComplete] —
+          // يشمل ما أُدخل قبله في هذه المعاملة نفسها.
+          if (bc != null && await isBarcodeTakenAnywhere(bc, executor: txn)) {
+            throw StateError('duplicate_barcode');
+          }
+
+          final categoryId = row.categoryName == null
+              ? null
+              : await ensureCategoryId(row.categoryName!);
+
+          final buyN = IqdMoney.normalizeDinar(row.buyPrice);
+          final sellN = IqdMoney.normalizeDinar(row.sellPrice);
+          final minN = IqdMoney.normalizeDinar(row.buyPrice);
+          final qtyF = row.qty;
+          final lowF = row.lowStockThreshold;
+          final status = qtyF <= lowF ? 'low' : 'instock';
+
+          final productCode = await _allocateTenantScopedProductCode(tid, txn);
+          final id = await txn.insert('products', {
+            'tenantId': tid,
+            'name': name,
+            'barcode': bc,
+            'productCode': productCode,
+            'categoryId': categoryId,
+            'brandId': null,
+            'stockBaseKind': sbk,
+            'buyPrice': buyN,
+            'sellPrice': sellN,
+            'minSellPrice': minN,
+            'qty': qtyF,
+            'lowStockThreshold': lowF,
+            'status': status,
+            'createdAt': now,
+            'updatedAt': now,
+            'description': nz(row.description),
+            'saleUnit': nz(row.saleUnit),
+            'supplierName': nz(row.supplierName),
+            'taxPercent': row.taxPercent,
+            'discountPercent': 0.0,
+            'discountAmount': 0.0,
+            'trackInventory': 1,
+            'allowNegativeStock': 0,
+            'expiryDate': nz(row.expiryDate),
+            'isService': 0,
+            'global_id': const Uuid().v4(),
+          });
+          await _enqueueProductMutation(txn, id, 'INSERT');
+
+          await txn.insert('product_unit_variants', {
+            'productId': id,
+            'unitName': defaultUnitName,
+            'unitSymbol': null,
+            'factorToBase': 1.0,
+            'barcode': null,
+            'sellPrice': null,
+            'minSellPrice': null,
+            'isDefault': 1,
+            'isActive': 1,
+            'createdAt': now,
+          });
+
+          if (bc == null) {
+            await _ensureInternalBarcodeIfMissing(txn, id);
+          }
+
+          if (warehouseId != null && qtyF > 0) {
+            await upsertProductWarehouseStock(
+              productId: id,
+              warehouseId: warehouseId,
+              qty: qtyF,
+              executor: txn,
+              tenantId: tid,
+            );
+          }
+
+          imported++;
+        } catch (_) {
+          // فشل صف واحد لا يُسقط المعاملة كلها.
+          failed++;
+        }
+        // عطل في مؤشر التقدّم لا يُسقط المعاملة كلها.
+        try {
+          onProgress?.call(imported, failed);
+        } catch (_) {}
+      }
+    });
+    } finally {
+      CloudSyncService.instance.resumeSyncs();
+    }
+
+    // مزامنة واحدة بعد انتهاء الاستيراد بدل مزامنة لكل صف.
+    CloudSyncService.instance.scheduleSyncSoon();
+    return BulkImportProductResult(imported: imported, failed: failed);
+  }
+
   Future<String> _allocateTenantScopedProductCode(
     int tenantId,
     DatabaseExecutor e,
@@ -2302,5 +2464,46 @@ class ProductRepository {
     }
     // Sync via per-table push (CloudSyncService._pushPerTableIncremental).
   }
+}
+
+/// صف منتج مُستورد من ملف CSV — يُمرَّر إلى [ProductRepository.importProductsBulk].
+class BulkImportProductRow {
+  const BulkImportProductRow({
+    required this.name,
+    this.barcode,
+    this.categoryName,
+    required this.buyPrice,
+    required this.sellPrice,
+    required this.qty,
+    required this.lowStockThreshold,
+    this.description,
+    this.supplierName,
+    this.taxPercent = 0,
+    this.saleUnit,
+    this.expiryDate,
+  });
+
+  final String name;
+  final String? barcode;
+  final String? categoryName;
+  final double buyPrice;
+  final double sellPrice;
+  final double qty;
+  final double lowStockThreshold;
+  final String? description;
+  final String? supplierName;
+  final double taxPercent;
+  final String? saleUnit;
+
+  /// تاريخ الصلاحية بصيغة ISO `yyyy-MM-dd`.
+  final String? expiryDate;
+}
+
+/// نتيجة [ProductRepository.importProductsBulk].
+class BulkImportProductResult {
+  const BulkImportProductResult({required this.imported, required this.failed});
+
+  final int imported;
+  final int failed;
 }
 

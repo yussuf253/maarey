@@ -19081,6 +19081,12 @@ abstract class AppLocalizations {
   /// **'وحدة البيع'**
   String get bulkImportColSaleUnit;
 
+  /// No description provided for @bulkImportColExpiry.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ الانتهاء'**
+  String get bulkImportColExpiry;
+
   /// No description provided for @bulkImportRowsFound.
   ///
   /// In ar, this message translates to:
@@ -19110,6 +19116,12 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'رقم غير صحيح'**
   String get bulkImportInvalidNumber;
+
+  /// No description provided for @bulkImportInvalidDate.
+  ///
+  /// In ar, this message translates to:
+  /// **'تاريخ غير صحيح'**
+  String get bulkImportInvalidDate;
 
   /// No description provided for @bulkImportImportAll.
   ///
@@ -19230,6 +19242,12 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'قطعة'**
   String get bulkImportSampleUnit;
+
+  /// No description provided for @bulkImportSampleExpiry.
+  ///
+  /// In ar, this message translates to:
+  /// **'31/12/2027'**
+  String get bulkImportSampleExpiry;
 
   /// No description provided for @ipBulkImport.
   ///

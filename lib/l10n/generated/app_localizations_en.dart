@@ -10719,6 +10719,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bulkImportColSaleUnit => 'Sale Unit';
 
   @override
+  String get bulkImportColExpiry => 'Expiry Date';
+
+  @override
   String bulkImportRowsFound(Object count) {
     return '$count rows found';
   }
@@ -10738,6 +10741,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get bulkImportInvalidNumber => 'Invalid number';
+
+  @override
+  String get bulkImportInvalidDate => 'Invalid date';
 
   @override
   String get bulkImportImportAll => 'Import All';
@@ -10798,6 +10804,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get bulkImportSampleUnit => 'Piece';
+
+  @override
+  String get bulkImportSampleExpiry => '31/12/2027';
 
   @override
   String get ipBulkImport => 'Bulk import products';

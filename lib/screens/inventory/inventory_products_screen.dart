@@ -351,7 +351,8 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
                     children: [
                       const Icon(Icons.qr_code_rounded, size: 18),
                       const SizedBox(width: 10),
-                      Text(loc.ipPrintBarcodes),
+                      // Expanded يمنع فيض النص خارج عرض القائمة المنبثقة.
+                      Expanded(child: Text(loc.ipPrintBarcodes)),
                     ],
                   ),
                 ),
@@ -361,7 +362,7 @@ class _InventoryProductsScreenState extends State<InventoryProductsScreen>
                     children: [
                       const Icon(Icons.upload_file_rounded, size: 18),
                       const SizedBox(width: 10),
-                      Text(loc.ipBulkImport),
+                      Expanded(child: Text(loc.ipBulkImport)),
                     ],
                   ),
                 ),

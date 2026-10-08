@@ -10611,6 +10611,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get bulkImportColSaleUnit => 'وحدة البيع';
 
   @override
+  String get bulkImportColExpiry => 'تاريخ الانتهاء';
+
+  @override
   String bulkImportRowsFound(Object count) {
     return 'تم العثور على $count صفوف';
   }
@@ -10630,6 +10633,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get bulkImportInvalidNumber => 'رقم غير صحيح';
+
+  @override
+  String get bulkImportInvalidDate => 'تاريخ غير صحيح';
 
   @override
   String get bulkImportImportAll => 'استيراد الكل';
@@ -10690,6 +10696,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get bulkImportSampleUnit => 'قطعة';
+
+  @override
+  String get bulkImportSampleExpiry => '31/12/2027';
 
   @override
   String get ipBulkImport => 'استيراد منتجات بالجملة';

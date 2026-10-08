@@ -55,14 +55,16 @@ class ProductProvider extends ChangeNotifier {
   Future<void> loadProducts({bool seedIfEmpty = false}) async {
     _isLoading = true;
     notifyListeners();
-
-    if (seedIfEmpty) {
-      await _repo.seedIfEmpty();
+    try {
+      if (seedIfEmpty) {
+        await _repo.seedIfEmpty();
+      }
+      _products = await _repo.getProducts();
+    } finally {
+      // حتى لا يعلق مؤشر التحميل للأبد لو فشل التحميل.
+      _isLoading = false;
+      notifyListeners();
     }
-    _products = await _repo.getProducts();
-
-    _isLoading = false;
-    notifyListeners();
   }
 
   Future<AddProductFormData> loadAddProductFormData() async {
