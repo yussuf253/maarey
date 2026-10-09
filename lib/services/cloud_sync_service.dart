@@ -2170,6 +2170,84 @@ class CloudSyncService {
     }
   }
 
+  /// ── محو مخزون المنتجات من السحابة لمستأجر واحد ─────────────────────
+  ///
+  /// الحذف الصلب عبر tombstones لا يمسّ صفوف السحابة نفسها (المؤثر لا يقرأ
+  /// إلا الصفوف القائمة)، فلا يُجدي وحده عند «تفريغ المخزون»: الدورة التالية
+  /// من السحب التزايدي تُعيد دمج المنتجات الباقية على السحابة محلياً ويعود
+  /// المخزون كما كان. لذلك يُستدعى هذا أولاً ليحذف صفوف السحابة فعلياً.
+  ///
+  /// الأمان:
+  /// - يعتمد على جلسة المستخدم المُصادَق عليها؛ RLS يقيّد كل حذف بـ
+  ///   `owner_id = auth.uid()` فلا يمكنه بلوغ بيانات مستخدم آخر مهما جرى.
+  /// - سجلات التاريخ (بنود سندات المخزون / الجرد / أوامر الشراء) لا تُحذف،
+  ///   بل يُفك ارتباطها فقط (`product_global_id = NULL`) — هذا ما يفرضه قيد
+  ///   RESTRICT على السحابة، وهو متوافق مع إبقاء السجلات المالية.
+  /// - جداول الألوان/المقاسات القديمة معزولة بـ `tenant_uuid` (بلا owner_id)
+  ///   فتُحذف عبر قيمتَي المعرّف المحتملتين.
+  Future<void> purgeCloudInventoryForCurrentUser({
+    SupabaseClient? clientOverride,
+  }) async {
+    final client = clientOverride ?? Supabase.instance.client;
+    final user = client.auth.currentUser;
+    if (user == null) return;
+    final uid = user.id;
+
+    // جدول قد يغيب على بعض التركيبات (كل الجداول CREATE IF NOT EXISTS في
+    // الـ migrations) — فشله لا يوقف بقية المحو.
+    Future<void> bestEffort(String label, Future<void> Function() run) async {
+      try {
+        await run();
+      } catch (e) {
+        AppLogger.warn('CloudSync', 'purgeCloudInventory $label failed: $e');
+      }
+    }
+
+    // 1) فك ارتباط سجلات التاريخ بدل حذفها — يُرضي قيود RESTRICT ويحفظ السجل.
+    for (final table in const [
+      'stock_voucher_items',
+      'stocktaking_items',
+      'purchase_order_items',
+    ]) {
+      await bestEffort(table, () async {
+        await client
+            .from(table)
+            .update({'product_global_id': null})
+            .eq('owner_id', uid)
+            .not('product_global_id', 'is', null);
+      });
+    }
+
+    // 2) حذف أبناء المنتجات — فشلهم لا يمنع حذف المنتجات لكن يُسجَّل.
+    for (final table in const [
+      'price_list_items',
+      'product_batches',
+      'product_unit_variants',
+    ]) {
+      await bestEffort(table, () async {
+        await client.from(table).delete().eq('owner_id', uid);
+      });
+    }
+
+    // 3) المنتجات نفسها — إلزامية؛ أي فشل هنا يُرفع ليعلمه النادٍ للمستخدم.
+    await client.from('products').delete().eq('owner_id', uid);
+
+    // 4) جداول الألوان/المقاسات القديمة: tenant_uuid بدل owner_id.
+    for (final table in const ['product_variants', 'product_colors']) {
+      await bestEffort(table, () async {
+        await client
+            .from(table)
+            .delete()
+            .inFilter('tenant_uuid', [uid, 'local-$uid']);
+      });
+    }
+
+    AppLogger.info(
+      'CloudSync',
+      'purgeCloudInventory: cloud product rows removed for owner $uid',
+    );
+  }
+
   /// سحب سجلات الحذف الصلب من السحابة وتطبيقها محلياً مع حماية LWW:
   /// صف محلي أحدث من زمن الحذف (أُعيد إنشاؤه) لا يُحذف.
   Future<void> _pullSyncTombstones(SupabaseClient client) async {

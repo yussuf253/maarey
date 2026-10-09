@@ -400,6 +400,134 @@ Future<void> _pickFile() async {
     }
   }
 
+  // ── Danger zone: تفريغ كامل المخزون ──────────────────────────────────────
+
+  /// عبارة التأكيد الإلزامية — يكتبها المستخدم حرفيًّا لفتح زر التفريغ.
+  static const String _wipeConfirmPhrase = 'DELETE ALL';
+
+  /// يفتح حوار تأكيد بكتابة العبارة، ثم يفريغ مخزون المستأجر الحالي فقط.
+  ///
+  /// لا يمس مستأجرًا آخر ولا مستخدمًا آخر: الحذف مقيّد بالمستargent النشط
+  /// داخل [ProductRepository.wipeAllProductsForCurrentTenant].
+  Future<void> _confirmAndWipeInventory() async {
+    final loc = AppLocalizations.of(context)!;
+    final cs = Theme.of(context).colorScheme;
+    final count = await _productRepo.countActiveProductsForCurrentTenant();
+    if (!mounted) return;
+    if (count == 0) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(loc.wipeInventoryEmpty),
+          backgroundColor: Colors.orange,
+        ),
+      );
+      return;
+    }
+
+    final controller = TextEditingController();
+    final confirmed = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) {
+        // يُسمح بالتفريغ فقط بعد كتابة العبارة حرفيًّا.
+        return StatefulBuilder(
+          builder: (ctx, setDialogState) {
+            final matches =
+                controller.text.trim() == _wipeConfirmPhrase;
+            return AlertDialog(
+              title: Text(loc.wipeInventoryTitle),
+              content: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      loc.wipeInventoryBody(count),
+                      style: TextStyle(color: cs.onSurfaceVariant),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      loc.wipeInventoryConfirmLabel(_wipeConfirmPhrase),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 8),
+                    TextField(
+                      controller: controller,
+                      autofocus: true,
+                      textCapitalization: TextCapitalization.characters,
+                      onChanged: (_) => setDialogState(() {}),
+                      decoration: const InputDecoration(
+                        hintText: _wipeConfirmPhrase,
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(ctx, false),
+                  child: Text(loc.wipeInventoryCancel),
+                ),
+                FilledButton(
+                  style: FilledButton.styleFrom(
+                    backgroundColor: cs.error,
+                    foregroundColor: cs.onError,
+                  ),
+                  onPressed:
+                      matches ? () => Navigator.pop(ctx, true) : null,
+                  child: Text(loc.wipeInventoryConfirmButton),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+    if (confirmed != true || !mounted) return;
+
+    setState(() => _importing = true);
+    WipeInventoryResult result =
+        const WipeInventoryResult(deletedLocal: 0, cloudPurged: false);
+    try {
+      result = await _productRepo.wipeAllProductsForCurrentTenant();
+    } catch (e, st) {
+      AppLogger.error('BulkImport', 'wipeAllProducts failed', e, st);
+      if (mounted) setState(() => _importing = false);
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('${loc.wipeInventoryFailed}: $e'),
+          backgroundColor: Colors.red,
+          duration: const Duration(seconds: 10),
+        ),
+      );
+      return;
+    }
+    if (mounted) setState(() => _importing = false);
+    if (!mounted) return;
+
+    // نجاح مشروط: لا محو سحابي يعني أن المنتجات قد تعود بالسحب في الدورة
+    // القادمة — نُنبّه برتقالي بدل ادعاء النجاح.
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          result.cloudPurged
+              ? loc.wipeInventoryDone(result.deletedLocal)
+              : loc.wipeInventoryCloudFailed(result.deletedLocal),
+        ),
+        backgroundColor:
+            result.cloudPurged ? Colors.green : Colors.orange,
+        duration: const Duration(seconds: 12),
+      ),
+    );
+    try {
+      await context.read<ProductProvider>().loadProducts();
+    } catch (_) {
+      // فشل تحديث القائمة لا يُفشل التفريغ.
+    }
+  }
+
   // ── Build ────────────────────────────────────────────────────────────────
 
   @override
@@ -454,6 +582,16 @@ Future<void> _pickFile() async {
               title: loc.bulkImportPickFile,
               subtitle: loc.bulkImportPickFileDesc,
               onTap: _pickFile,
+            ),
+            const SizedBox(height: 32),
+            const Divider(),
+            const SizedBox(height: 8),
+            // منطقة الخطر: خارج مسار الاستيراد الآمن، خلف تأكيد بكتابة العبارة.
+            _ActionCard(
+              icon: Icons.delete_forever_outlined,
+              title: loc.wipeInventoryTitle,
+              subtitle: loc.wipeInventoryCardDesc,
+              onTap: _confirmAndWipeInventory,
             ),
           ],
         ),

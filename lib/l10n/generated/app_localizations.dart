@@ -19249,6 +19249,66 @@ abstract class AppLocalizations {
   /// **'31/12/2027'**
   String get bulkImportSampleExpiry;
 
+  /// No description provided for @wipeInventoryTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفريغ المخزون بالكامل'**
+  String get wipeInventoryTitle;
+
+  /// No description provided for @wipeInventoryCardDesc.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف كل منتجات هذا الحساب (مع وحداته). تبقى الفواتير محفوظة.'**
+  String get wipeInventoryCardDesc;
+
+  /// No description provided for @wipeInventoryBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيؤدي هذا إلى حذف {count} منتج (وكل وحداته ودفعاته وروابط مخزونه) نهائيًا من هذا الحساب. تبقى الفواتير وبنودها محفوظة. لا يمكن التراجع عن هذا الإجراء.'**
+  String wipeInventoryBody(Object count);
+
+  /// No description provided for @wipeInventoryConfirmLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب {phrase} للتأكيد'**
+  String wipeInventoryConfirmLabel(Object phrase);
+
+  /// No description provided for @wipeInventoryConfirmButton.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفريغ المخزون'**
+  String get wipeInventoryConfirmButton;
+
+  /// No description provided for @wipeInventoryCancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get wipeInventoryCancel;
+
+  /// No description provided for @wipeInventoryEmpty.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا توجد منتجات للحذف'**
+  String get wipeInventoryEmpty;
+
+  /// No description provided for @wipeInventoryDone.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم حذف {count} منتج'**
+  String wipeInventoryDone(Object count);
+
+  /// No description provided for @wipeInventoryCloudFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'حُذف {count} منتج محليًا، لكن محو نسخة السحابة لم يكتمل — سيُعاد استيرادها تلقائيًا عند المزامنة القادمة. أعد المحاولة وأنت متصل بالإنترنت.'**
+  String wipeInventoryCloudFailed(Object count);
+
+  /// No description provided for @wipeInventoryFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'فشل التفريغ'**
+  String get wipeInventoryFailed;
+
   /// No description provided for @ipBulkImport.
   ///
   /// In ar, this message translates to:

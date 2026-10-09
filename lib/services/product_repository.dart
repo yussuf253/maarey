@@ -10,6 +10,7 @@ import 'database_helper.dart';
 import 'tenant_context_service.dart';
 import '../l10n/app_l10n.dart';
 import '../models/new_product_extra_unit.dart';
+import '../utils/app_logger.dart';
 import '../utils/iqd_money.dart';
 
 class ProductRepository {
@@ -794,6 +795,156 @@ class ProductRepository {
       await _enqueueProductMutation(txn, productId, 'UPDATE');
     });
     CloudSyncService.instance.scheduleSyncSoon();
+  }
+
+  /// عدّ المنتجات النشطة في المستأجر الحالي — يُعرض قبل التأكيد في حوار التفريغ.
+  Future<int> countActiveProductsForCurrentTenant() => countActiveProductsForTenant();
+
+  /// تفريغ كامل للمخزون (المنتجات + كل小心翼اتها) للمستأجر الحالي فقط.
+  ///
+  /// الأمان:
+  /// - الحذف مقيّد بـ `tenantId = tenantId` الحالي — لا يمس منتجات مستأجر آخر
+  ///   ولا مستخدم آخر. على السحابة يكون العزل بـ `owner_id` عبر RLS.
+  /// - يسجّل حذفاً صلباً (tombstone) لكل `global_id` محذوف عبر
+  ///   [CloudSyncService.recordHardDeleteTombstones] فتنتقل الحذفة إلى بقية
+  ///   أجهزة نفس المستخدم في الدورة التزامنية القادمة، ولا تُعاد المنتجات بالسحب.
+  /// - الفواتير وبنودها تبقى سليمة: `invoice_items.productId` عليه
+  ///   `ON DELETE SET NULL`، واسم/سعر المنتج مُجسَّمَان في البند فلا يختشر السجل.
+  ///
+  /// الأمان من «الإحياء»: يُحذف من السحابة أولاً عبر
+  /// [CloudSyncService.purgeCloudInventoryForCurrentUser] (جلسة المستخدم،
+  /// RLS بـ owner_id = auth.uid()) لأن الحذف المحلي وحده يعود بالسحب التزايدي
+  /// في الدورة التالية.
+  Future<WipeInventoryResult> wipeAllProductsForCurrentTenant() async {
+    final db = await _db;
+    final tid = _tenant.activeTenantId;
+
+    final countRows = await db.rawQuery(
+      'SELECT COUNT(*) AS c FROM products WHERE tenantId = ?',
+      [tid],
+    );
+    final total = (countRows.isEmpty ? null : countRows.first['c']) as num?;
+    if (total == null || total.toInt() == 0) {
+      // لا شيء محلياً — قد تبقى صفوف سحابية «يتيمة»؛ نمحوها حتى لا تعود
+      // بالسحب ثم نُرجع صفر محلي.
+      final cloudEmpty = await _purgeCloudQuietly();
+      return WipeInventoryResult(
+        deletedLocal: 0,
+        cloudPurged: cloudEmpty,
+      );
+    }
+
+    // أولاً: محو السحابة (owner-scoped عبر RLS). يسبق الحذف المحلي حتى لا
+    // تُعيد الدورة التالية من السحب دمج المنتجات و"إحياء" المخزون.
+    final cloudPurged = await _purgeCloudQuietly();
+
+    // نجمع الـ global_ids قبل الحذف لتسجيل الحذفات.
+    Future<List<String>> globalIdsOf(String table) async {
+      final rows = await db.query(
+        table,
+        columns: ['global_id'],
+        where: 'tenantId = ?',
+        whereArgs: [tid],
+      );
+      return rows
+          .map((r) => (r['global_id'] ?? '').toString().trim())
+          .where((g) => g.isNotEmpty)
+          .toList();
+    }
+
+    final productGids = await globalIdsOf('products');
+    final variantGids = await globalIdsOf('product_variants');
+
+    // معرّفات منتجات هذا المستأجر فقط — مرجع الحذف لكل جدول ابن.
+    // بعض الجداول الأبناء لا تملك عمود tenantId (price_list_items،
+    // product_warehouse_stock، product_batches)، فحذفها بـ tenantId مباشر
+    // سيُفشل أو يمسّ بيانات مستأجر آخر. الربط بـ productId داخل هذا المحدّد
+    // يضمن ألّا يخرج الحذف عن منتجات المستأجر الحالي.
+    const idsOfTenant =
+        'SELECT id FROM products WHERE tenantId = ?';
+
+    await db.transaction((txn) async {
+      // أولاً: الجداول الصغيرة التي تستشهد بالمنتجات — كلها مقيدة بـ productId.
+      await txn.delete(
+        'price_list_items',
+        where: 'productId IN ($idsOfTenant)',
+        whereArgs: [tid],
+      );
+      await txn.delete(
+        'product_warehouse_stock',
+        where: 'productId IN ($idsOfTenant)',
+        whereArgs: [tid],
+      );
+      await txn.delete(
+        'product_batches',
+        where: 'productId IN ($idsOfTenant)',
+        whereArgs: [tid],
+      );
+      // الجداول التي تملك tenantId: حذف مباشر به أدقّ.
+      // product_unit_variants ليس له tenantId — يُحذف عبر منتجات المستأجر.
+      await txn.delete(
+        'product_unit_variants',
+        where: 'productId IN ($idsOfTenant)',
+        whereArgs: [tid],
+      );
+      await txn.delete(
+        'product_variants',
+        where: 'tenantId = ?',
+        whereArgs: [tid],
+      );
+      // ألوان المنتجات — بعد product_variants لأن colorId عليه RESTRICT.
+      await txn.delete(
+        'product_colors',
+        where: 'tenantId = ?',
+        whereArgs: [tid],
+      );
+      // أخيراً: المنتجات نفسها.
+      await txn.delete('products', where: 'tenantId = ?', whereArgs: [tid]);
+
+      // حذفات صلبة: تُرفع إلى sync_hard_deletes على السحابة فتُنظّف بقية الأجهزة.
+      for (final gids in [
+        ('products', productGids),
+        ('product_variants', variantGids),
+      ]) {
+        if (gids.$2.isEmpty) continue;
+        try {
+          await CloudSyncService.recordHardDeleteTombstones(
+            txn,
+            gids.$1,
+            gids.$2,
+          );
+        } catch (_) {
+          // الحذفة أفضل جهد — لا نُفشل التفريغ بسببها.
+        }
+      }
+    });
+
+    CloudSyncService.instance.scheduleSyncSoon();
+    return WipeInventoryResult(
+      deletedLocal: total.toInt(),
+      cloudPurged: cloudPurged,
+    );
+  }
+
+  /// محو المخزون من السحابة مع تسجيل الفشل دون رمي استثناء.
+  ///
+  /// يُعيد `true` إذا نجح المحو أو إذا لم يكن هناك مستخدم سحابي أصلاً (وضع
+  /// محلي بحت — لا وجود لصفوف سحابية تُعيد «إحياء» المخزون). يُعيد `false`
+  /// عند فشل حقيقي (بلا اتصال أو صلاحيات) حتى يُنبَّه المستخدم أن المخزون قد
+  /// يعود بالسحب في الدورة القادمة.
+  Future<bool> _purgeCloudQuietly() async {
+    try {
+      await CloudSyncService.instance.purgeCloudInventoryForCurrentUser();
+      return true;
+    } catch (e, st) {
+      AppLogger.error(
+        'ProductRepository',
+        'purgeCloudInventory failed (continuing local wipe)',
+        e,
+        st,
+      );
+      return false;
+    }
   }
 
   /// صفحات لشاشة «تحديث منتج موجود»: بحث موحّد (اسم / باركود / رمز / معرف) أو كل الأصناف عند فراغ النص.
@@ -2507,5 +2658,20 @@ class BulkImportProductResult {
 
   final int imported;
   final int failed;
+}
+
+/// نتيجة [ProductRepository.wipeAllProductsForCurrentTenant].
+///
+/// [deletedLocal] عدد المنتجات المحذوفة من قاعدة البيانات المحلية.
+/// [cloudPurged] هل نجح محو صفوف السحابة (owner-scoped). عند `false` قد
+/// يعود المخزون محلياً في الدورة التالية من السحب — يجب تنبيه المستخدم.
+class WipeInventoryResult {
+  const WipeInventoryResult({
+    required this.deletedLocal,
+    required this.cloudPurged,
+  });
+
+  final int deletedLocal;
+  final bool cloudPurged;
 }
 

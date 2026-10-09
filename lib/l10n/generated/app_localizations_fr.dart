@@ -10956,6 +10956,45 @@ class AppLocalizationsFr extends AppLocalizations {
   String get bulkImportSampleExpiry => '31/12/2027';
 
   @override
+  String get wipeInventoryTitle => 'Vider tout l\'inventaire';
+
+  @override
+  String get wipeInventoryCardDesc =>
+      'Supprimer tous les produits de ce compte (avec leurs variantes). Les factures sont conservées.';
+
+  @override
+  String wipeInventoryBody(Object count) {
+    return 'Cela supprimera définitivement $count produit(s) ainsi que toutes leurs variantes, leurs lots et leurs liens de stock de ce compte. Les factures et leurs lignes sont conservées. Cette action est irréversible.';
+  }
+
+  @override
+  String wipeInventoryConfirmLabel(Object phrase) {
+    return 'Tapez $phrase pour confirmer';
+  }
+
+  @override
+  String get wipeInventoryConfirmButton => 'Vider l\'inventaire';
+
+  @override
+  String get wipeInventoryCancel => 'Annuler';
+
+  @override
+  String get wipeInventoryEmpty => 'Aucun produit à supprimer';
+
+  @override
+  String wipeInventoryDone(Object count) {
+    return '$count produit(s) supprimé(s)';
+  }
+
+  @override
+  String wipeInventoryCloudFailed(Object count) {
+    return '$count produit(s) supprimé(s) localement, mais la copie cloud n\'a pas pu être effacée — elle sera réimportée à la prochaine synchronisation. Réessayez en ligne.';
+  }
+
+  @override
+  String get wipeInventoryFailed => 'Échec du vidage';
+
+  @override
   String get ipBulkImport => 'Import en masse de produits';
 
   @override

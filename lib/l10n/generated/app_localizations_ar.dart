@@ -10701,6 +10701,45 @@ class AppLocalizationsAr extends AppLocalizations {
   String get bulkImportSampleExpiry => '31/12/2027';
 
   @override
+  String get wipeInventoryTitle => 'تفريغ المخزون بالكامل';
+
+  @override
+  String get wipeInventoryCardDesc =>
+      'حذف كل منتجات هذا الحساب (مع وحداته). تبقى الفواتير محفوظة.';
+
+  @override
+  String wipeInventoryBody(Object count) {
+    return 'سيؤدي هذا إلى حذف $count منتج (وكل وحداته ودفعاته وروابط مخزونه) نهائيًا من هذا الحساب. تبقى الفواتير وبنودها محفوظة. لا يمكن التراجع عن هذا الإجراء.';
+  }
+
+  @override
+  String wipeInventoryConfirmLabel(Object phrase) {
+    return 'اكتب $phrase للتأكيد';
+  }
+
+  @override
+  String get wipeInventoryConfirmButton => 'تفريغ المخزون';
+
+  @override
+  String get wipeInventoryCancel => 'إلغاء';
+
+  @override
+  String get wipeInventoryEmpty => 'لا توجد منتجات للحذف';
+
+  @override
+  String wipeInventoryDone(Object count) {
+    return 'تم حذف $count منتج';
+  }
+
+  @override
+  String wipeInventoryCloudFailed(Object count) {
+    return 'حُذف $count منتج محليًا، لكن محو نسخة السحابة لم يكتمل — سيُعاد استيرادها تلقائيًا عند المزامنة القادمة. أعد المحاولة وأنت متصل بالإنترنت.';
+  }
+
+  @override
+  String get wipeInventoryFailed => 'فشل التفريغ';
+
+  @override
   String get ipBulkImport => 'استيراد منتجات بالجملة';
 
   @override

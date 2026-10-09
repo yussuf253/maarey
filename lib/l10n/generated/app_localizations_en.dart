@@ -10809,6 +10809,45 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bulkImportSampleExpiry => '31/12/2027';
 
   @override
+  String get wipeInventoryTitle => 'Wipe all inventory';
+
+  @override
+  String get wipeInventoryCardDesc =>
+      'Delete every product of this account (with its variants). Invoices are kept.';
+
+  @override
+  String wipeInventoryBody(Object count) {
+    return 'This will permanently delete $count product(s) and all their variants, batches and stock links from this account. Invoices and their line items are kept. This cannot be undone.';
+  }
+
+  @override
+  String wipeInventoryConfirmLabel(Object phrase) {
+    return 'Type $phrase to confirm';
+  }
+
+  @override
+  String get wipeInventoryConfirmButton => 'Wipe inventory';
+
+  @override
+  String get wipeInventoryCancel => 'Cancel';
+
+  @override
+  String get wipeInventoryEmpty => 'No products to delete';
+
+  @override
+  String wipeInventoryDone(Object count) {
+    return 'Deleted $count product(s)';
+  }
+
+  @override
+  String wipeInventoryCloudFailed(Object count) {
+    return 'Deleted $count product(s) locally, but the cloud copy could not be cleared — they will be re-imported on the next sync. Please retry while online.';
+  }
+
+  @override
+  String get wipeInventoryFailed => 'Wipe failed';
+
+  @override
   String get ipBulkImport => 'Bulk import products';
 
   @override
