@@ -11623,6 +11623,15 @@ class AppLocalizationsFr extends AppLocalizations {
   String get cashInstallmentPayment => 'Paiement de tranche';
 
   @override
+  String get cashDebtCollection => 'Recouvrement de dette';
+
+  @override
+  String get cashInstallmentCollection => 'Recouvrement de tranche';
+
+  @override
+  String get cashExpense => 'Dépense';
+
+  @override
   String get cashSupplierPayment => 'Paiement fournisseur';
 
   @override

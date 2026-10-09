@@ -11357,6 +11357,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cashInstallmentPayment => 'تسديد قسط';
 
   @override
+  String get cashDebtCollection => 'تحصيل دين';
+
+  @override
+  String get cashInstallmentCollection => 'تحصيل قسط';
+
+  @override
+  String get cashExpense => 'مصروف';
+
+  @override
   String get cashSupplierPayment => 'دفع مورد';
 
   @override

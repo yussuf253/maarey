@@ -1368,7 +1368,12 @@ class _InvoiceCard extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              invoice.customerName,
+                              // الفواتير بدون اسم عميل (بيع نقدي سريع) تعرض
+                              // اسم الفاتورة نفسها بدل عنوان فارغ — تماماً كما
+                              // تعرض شاشة الصندوق وصفاً لكل حركة.
+                              invoice.customerName.trim().isEmpty
+                                  ? loc.salesInvoiceNumber(invoice.id ?? 0)
+                                  : invoice.customerName,
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 14,

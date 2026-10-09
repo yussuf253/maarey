@@ -294,7 +294,9 @@ class _ChartsRowState extends State<_ChartsRow> {
   };
   final Map<String, Offset> _panelPos = {
     'sales': const Offset(0, 0),
-    'expenseIncome': const Offset(430, 0),
+    // 560 (عرض لوحة المبيعات) + 16 فاصل — القيمة القديمة (430,0)
+    // كانت تُركّب لوحة المصروفات فوق لوحة المبيعات.
+    'expenseIncome': const Offset(576, 0),
     'recent': const Offset(0, 360),
   };
   String? _activePanelId;
@@ -356,7 +358,13 @@ class _ChartsRowState extends State<_ChartsRow> {
           final y = double.tryParse(vals[1].trim());
           if (x == null || y == null) continue;
           if (_panelPos.containsKey(id)) {
-            _panelPos[id] = Offset(x, y);
+            // ترحيل: الإزاحة القديمة الافتراضية (430,0) كانت تضع لوحة
+            // المصروفات فوق لوحة المبيعات — نزيحها لليمين.
+            if (id == 'expenseIncome' && x == 430 && y == 0) {
+              _panelPos[id] = const Offset(576, 0);
+            } else {
+              _panelPos[id] = Offset(x, y);
+            }
           }
         }
       }
@@ -427,9 +435,17 @@ class _ChartsRowState extends State<_ChartsRow> {
             for (final id in _panelOrder) {
               final sz = _panelSize[id] ?? const Size(560, 360);
               final minH = id == 'recent' ? 420.0 : 330.0;
-              final maxW = c.maxWidth.toDouble();
-              final minW = maxW < 260 ? (maxW - 8).clamp(120.0, 260.0) : 260.0;
-              final w = sz.width.clamp(minW, maxW);
+              // اللوحة لا تمتد إلى يمين حدود اللوحة (board): ما تبقّى
+              // بعد إزاحتها هو أقصى عرض لها — يمنع تغطية اللوحة التي
+              // على يسارها والخروج من حدود المنطقة.
+              final left = (_panelPos[id]?.dx ?? 0)
+                  .clamp(0, c.maxWidth - 140)
+                  .toDouble();
+              final availW = (c.maxWidth - left).clamp(120.0, c.maxWidth);
+              final minW = availW < 260
+                  ? (availW - 8).clamp(120.0, 260.0)
+                  : 260.0;
+              final w = sz.width.clamp(minW, availW);
               final h = sz.height.clamp(minH, 900.0);
               itemDims[id] = Size(w.toDouble(), h.toDouble());
             }

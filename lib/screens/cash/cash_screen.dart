@@ -11,6 +11,7 @@ import '../../theme/design_tokens.dart';
 import '../../utils/iraqi_currency_format.dart';
 import '../../utils/screen_layout.dart';
 import '../../widgets/invoice_detail_sheet.dart';
+import '../../l10n/app_l10n.dart';
 import '../../l10n/generated/app_localizations.dart';
 
 /// أرقام مبالغ وواجهات الصندوق بالأرقام اللاتينية مع فواصل آلاف.
@@ -575,6 +576,12 @@ String _ledgerTypeLabelAr(BuildContext context, String transactionType) {
       return loc.manualWithdrawal;
     case 'installment_payment':
       return loc.cashInstallmentPayment;
+    case 'debt_collection':
+      return loc.cashDebtCollection;
+    case 'installment_collection':
+      return loc.cashInstallmentCollection;
+    case 'expense_out':
+      return loc.cashExpense;
     case 'supplier_payment':
       return loc.cashSupplierPayment;
     case 'supplier_payment_reversal':
@@ -582,8 +589,64 @@ String _ledgerTypeLabelAr(BuildContext context, String transactionType) {
     case 'sale_return':
       return loc.cashReturn;
     default:
-      return transactionType.isEmpty ? loc.cashMovement : transactionType;
+      // أنواع غير معروفة: نعرضها بلا شرطات سفلية بدل رمزها الخام.
+      return transactionType.isEmpty
+          ? loc.cashMovement
+          : transactionType.replaceAll('_', ' ');
   }
+}
+
+/// وصف الحركة **باللغة الحالية** للعرض في شاشة الصندوق.
+///
+/// النص المخزّن في `description` صُنع بلغة وقت الإدخال (أو في إصدار
+/// سابق)؛ عند تغيير لغة الواجهة يبقى نصاً بلغة أخرى. لذلك نعيد بناء
+/// أوصاف قيود الفواتير والوردية من الحقول المهيكلة (invoiceId، النوع،
+/// اسم العميل من الـ join)، ونترك النصوص التي كتبها المستخدم كما هي.
+String _liveTxDescription(BuildContext context, _CashTx tx) {
+  final loc = AppLocalizations.of(context)!;
+  final stored = tx.description.trim();
+
+  final iid = tx.invoiceId;
+  if (iid != null) {
+    final cust = tx.invoiceCustomerName.isEmpty
+        ? loc.debtsCustomer
+        : tx.invoiceCustomerName;
+    return switch (tx.transactionType) {
+      'debt_collection' => loc.cashDebtCollectionDesc(iid, cust),
+      'installment_collection' || 'installment_payment' =>
+        loc.cashInstallmentDesc(iid, cust),
+      'supplier_payment' => loc.cashSupplierPaymentDesc(iid, cust),
+      'sale_return' => tx.invoiceOriginalInvoiceId != null
+          ? loc.cashReturnDescWithOrig(
+              cust,
+              iid,
+              tx.invoiceOriginalInvoiceId!,
+            )
+          : loc.cashReturnDesc(cust, iid),
+      _ => loc.cashSaleInvoiceDesc(iid, cust),
+    };
+  }
+
+  // إيداع/سحب عند فتح/إغلاق الوردية: قالب معروف في إحدى اللغات
+  // المدعومة + "#N" حيث N = معرّف الوردية — نعيد بنائه باللغة الحالية.
+  final suffix = RegExp(r'#(\d+)\s*$').firstMatch(stored);
+  final n = suffix == null ? null : int.tryParse(suffix.group(1)!);
+  if (suffix != null && n != null && tx.workShiftId == n) {
+    final head = stored.substring(0, suffix.start).trimRight();
+    for (final l in AppL10n.all) {
+      if (tx.transactionType == 'manual_in' && head == l.shDepositOpen) {
+        return '${loc.shDepositOpen} #$n';
+      }
+      if (tx.transactionType == 'manual_out' && head == l.shWithdrawClose) {
+        return '${loc.shWithdrawClose} #$n';
+      }
+      // أنماط قديمة: «فتح الوردية #N» / «إغلاق الوردية #N».
+      if (head == l.openShift) return '${loc.openShift} #$n';
+      if (head == l.closeShift) return '${loc.closeShift} #$n';
+    }
+  }
+
+  return tx.description;
 }
 
 // ═════════════════════════════════════════════════════════════════════════════
@@ -1124,6 +1187,13 @@ class _CashTx {
   /// وردية مرتبطة بالحركة (من الفاتورة أو من وصف فتح/إغلاق الوردية).
   final int? workShiftId;
 
+  /// اسم عميل الفاتورة المرتبطة (join في الاستعلام) — يُستخدم لإعادة
+  /// بناء وصف الحركة باللغة الحالية.
+  final String invoiceCustomerName;
+
+  /// الفاتورة الأصلية للاسترجاع — لقالب الوصف بمرجع الأصل.
+  final int? invoiceOriginalInvoiceId;
+
   const _CashTx({
     this.ledgerId,
     required this.transactionType,
@@ -1132,6 +1202,8 @@ class _CashTx {
     required this.amount,
     required this.date,
     this.workShiftId,
+    this.invoiceCustomerName = '',
+    this.invoiceOriginalInvoiceId,
   });
 
   factory _CashTx.fromRow(
@@ -1152,6 +1224,9 @@ class _CashTx {
       amount: amt,
       date: DateTime.tryParse(created ?? '') ?? DateTime.now(),
       workShiftId: wid,
+      invoiceCustomerName:
+          (r['invoiceCustomerName'] as String?)?.trim() ?? '',
+      invoiceOriginalInvoiceId: r['invoiceOriginalInvoiceId'] as int?,
     );
   }
 
@@ -1585,12 +1660,11 @@ class _TxCard extends StatelessWidget {
                 child: Icon(icon, color: color, size: 22),
               ),
               const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      tx.description,
+              Expanded(                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        _liveTxDescription(context, tx),
                       style: const TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 13,

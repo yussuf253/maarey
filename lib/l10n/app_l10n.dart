@@ -36,6 +36,14 @@ class AppL10n {
   /// Localizations for the active locale (cached; no BuildContext needed).
   static AppLocalizations get current => _cache ??= _load(_locale.languageCode);
 
+  /// كل اللغات المدعومة — لمقارنة/إعادة كتابة نصوص محفوظة كانت كُتبت
+  /// بلغة أخرى (مثل أوصاف قيود الصندوق في شاشة الكاش).
+  static final List<AppLocalizations> all = [
+    AppLocalizationsAr(),
+    AppLocalizationsEn(),
+    AppLocalizationsFr(),
+  ];
+
   static AppLocalizations _load(String code) => switch (code) {
     'en' => AppLocalizationsEn(),
     'fr' => AppLocalizationsFr(),

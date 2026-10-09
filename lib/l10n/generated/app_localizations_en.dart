@@ -11471,6 +11471,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cashInstallmentPayment => 'Installment payment';
 
   @override
+  String get cashDebtCollection => 'Debt collection';
+
+  @override
+  String get cashInstallmentCollection => 'Installment collection';
+
+  @override
+  String get cashExpense => 'Expense';
+
+  @override
   String get cashSupplierPayment => 'Supplier payment';
 
   @override

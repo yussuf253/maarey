@@ -2352,7 +2352,9 @@ class ProductRepository {
             'lowStockThreshold': lowF,
             'status': status,
             'createdAt': now,
-            'updatedAt': now,
+            // طابع فريد لكل صف: مؤشرات الرفع التزايدي تعتمد على updatedAt،
+            // وطابع موحّد لكل الصفوف يجعل المتساويات تتخطّى بعد دفعة 400.
+            'updatedAt': DateTime.now().toIso8601String(),
             'description': nz(row.description),
             'saleUnit': nz(row.saleUnit),
             'supplierName': nz(row.supplierName),

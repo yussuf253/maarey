@@ -2588,15 +2588,41 @@ class CloudSyncService {
     final remoteCols = _perTableRemoteColumns[table];
     if (remoteCols == null) return;
     final cursorKey = _prefsKeyTablePushCursor(table, userId);
-    var cursor = prefs.getString(cursorKey) ?? '1970-01-01T00:00:00Z';
-    if (DateTime.tryParse(cursor) == null) cursor = '1970-01-01T00:00:00Z';
 
-    final rows = await db.query(
+    // المؤشر = (updatedAt, id) بالصيغة 'timestamp|id'.
+    // timestamp وحده يتخطّى صفوفًا لها نفس updatedAt بالضبط بعد أول
+    // دفعة 400 صف: الاستيراد المجمّع يكتب الطابع نفسه لكل الصفوف،
+    // فبعد رفع أول دفعة يصبح المؤشر = ذلك الطابع وتبقى بقية الصفوف
+    // محليًّا ولا تُرفع أبدًا ( updatedAt > cursor يفشل عند المساواة ).
+    // الفاصل + id يضمن تقدّم المؤشر عبر المتساويات، وهذا يتطلب فرزًا
+    // تصاعديًا (بالأسفل) ليكون الدفعة دائمًا أصغر القيم الباقية.
+    var cursorTs = '1970-01-01T00:00:00Z';
+    var cursorId = '';
+    final rawCursor = (prefs.getString(cursorKey) ?? '').trim();
+    if (rawCursor.isNotEmpty) {
+      final sep = rawCursor.indexOf('|');
+      final ts = sep == -1 ? rawCursor : rawCursor.substring(0, sep);
+      if (DateTime.tryParse(ts) != null) cursorTs = ts;
+      if (sep >= 0) {
+        cursorId = rawCursor.substring(sep + 1);
+      } else if (table == 'products') {
+        // مؤشر قديم (بلا id) لجدول المنتجات: الدفعات القديمة تخطّت
+        // صفوفًا فعلًا بعد استيراد 1389 منتجًا بنفس الطابع — نعيد ضبط
+        // المؤشر لإعادة رفع كامل الجدول (upsert عبر global_id آمن).
+        cursorTs = '1970-01-01T00:00:00Z';
+      }
+    }
+
+    // المفتاح الأساسي للجدول: فاصل المساواة في المؤشر وفي الفرز.
+    // إن لم نجده (مفتاح مركّب/غير موجود) نرجع لسلوك المؤشر القديم.
+    final batch = await fetchPushBatch(
+      db,
       table,
-      where: 'updatedAt IS NULL OR updatedAt > ?',
-      whereArgs: [cursor],
-      limit: 400,
+      cursorTs: cursorTs,
+      cursorId: cursorId,
     );
+    final rows = batch.rows;
+    final pkCol = batch.pkCol;
     if (rows.isEmpty) return;
 
     final out = <Map<String, dynamic>>[];
@@ -2649,13 +2675,101 @@ class CloudSyncService {
       } catch (_) {}
     }
 
-    var maxTs = cursor;
-    for (final r in rows) {
-      final ts = (r['updatedAt'] ?? '').toString();
-      if (ts.compareTo(maxTs) > 0) maxTs = ts;
+    final next = advancePushCursor(
+      cursorTs: cursorTs,
+      cursorId: cursorId,
+      pkCol: pkCol,
+      rows: rows,
+    );
+    if (next.ts != cursorTs || next.id != cursorId) {
+      await prefs.setString(cursorKey, '${next.ts}|${next.id}');
     }
-    if (maxTs != cursor) {
-      await prefs.setString(cursorKey, maxTs);
+  }
+
+  /// دفعة صفوف الرفع التزايدي: أصغر القيَم بعد المؤشر (updatedAt, id)
+  /// فرزًا تصاعديًا — يضمن أن الدفعة دائمًا تسبق كل ما تبقّى، فلا
+  /// تُخطَّ صفوف بتاتًا مهما تساوت الطوابع. [pkCol] تُعاد لاستخدامها
+  /// عند تقدّم المؤشر (انظر [advancePushCursor]).
+  @visibleForTesting
+  static Future<({List<Map<String, Object?>> rows, String pkCol})>
+  fetchPushBatch(
+    Database db,
+    String table, {
+    required String cursorTs,
+    required String cursorId,
+    int limit = 400,
+  }) async {
+    final pkCol = await _tablePrimaryKeyColumn(db, table);
+    final hasPk = pkCol.isNotEmpty;
+    final rows = await db.query(
+      table,
+      where: hasPk
+          ? 'updatedAt IS NULL OR updatedAt > ? OR '
+              '(updatedAt = ? AND "$pkCol" > ?)'
+          : 'updatedAt IS NULL OR updatedAt > ?',
+      whereArgs: hasPk ? [cursorTs, cursorTs, cursorId] : [cursorTs],
+      orderBy: hasPk ? 'updatedAt ASC, "$pkCol" ASC' : null,
+      limit: limit,
+    );
+    return (rows: rows, pkCol: pkCol);
+  }
+
+  /// المؤشر الجديد بعد دفعة: أكبر (updatedAt, id) في الدفعة مقارنةً
+  /// بالمؤشر الحالي — يتجاوز صفوف المساواة عبر id بدل تخطّيها.
+  /// صفوف updatedAt فارغة تُستثنى (تُختم بعدين فتأتي في الدورة القادمة).
+  @visibleForTesting
+  static ({String ts, String id}) advancePushCursor({
+    required String cursorTs,
+    required String cursorId,
+    required String pkCol,
+    required List<Map<String, Object?>> rows,
+  }) {
+    var maxTs = cursorTs;
+    var maxId = cursorId;
+    final hasPk = pkCol.isNotEmpty;
+    for (final r in rows) {
+      final ts = (r['updatedAt'] ?? '').toString().trim();
+      if (ts.isEmpty) continue;
+      final idVal = hasPk ? r[pkCol] : null;
+      final cmp = ts.compareTo(maxTs);
+      if (cmp > 0) {
+        maxTs = ts;
+        maxId = idVal?.toString() ?? '';
+      } else if (cmp == 0 &&
+          idVal != null &&
+          _comparePushIds(idVal, maxId) > 0) {
+        maxId = idVal.toString();
+      }
+    }
+    return (ts: maxTs, id: maxId);
+  }
+
+  /// مقارنة قيم المفتاح الأساسي (رقم أو نص) مقارنة رقمية عند الإمكان —
+  /// المقارنة النصية تجعل '999' أكبر من '1000'.
+  static int _comparePushIds(Object a, String b) {
+    final na = a is num ? a : num.tryParse(a.toString());
+    final nb = num.tryParse(b);
+    if (na != null && nb != null) return na.compareTo(nb);
+    return a.toString().compareTo(b);
+  }
+
+  /// عمود المفتاح الأساسي الوحيد للجدول، أو '' إن كان المفتاح مركّبًا/غير
+  /// موجود — يُستخدم في مؤشر الرفع التزايدي (شرط المساواة + الفرز).
+  static Future<String> _tablePrimaryKeyColumn(Database db, String table) async {
+    try {
+      final info = await db.rawQuery('PRAGMA table_info($table)');
+      final pks = info
+          .where((c) => ((c['pk'] as num?)?.toInt() ?? 0) > 0)
+          .toList()
+        ..sort(
+          (x, y) => ((x['pk'] as num).toInt()).compareTo(
+            (y['pk'] as num).toInt(),
+          ),
+        );
+      if (pks.length != 1) return '';
+      return (pks.first['name'] ?? '').toString();
+    } catch (_) {
+      return '';
     }
   }
 

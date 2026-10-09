@@ -549,7 +549,7 @@ extension DbInvoices on DatabaseHelper {
             'transactionType': 'supplier_payment',
             'amount': -invoice.total,
             'amountFils': _toFils(-invoice.total),
-            'description': AppL10n.current.cashSupplierPaymentDesc(cust, id),
+            'description': AppL10n.current.cashSupplierPaymentDesc(id, cust),
             'invoiceId': id,
             'workShiftId': shiftId,
             'createdAt': DateTime.now().toIso8601String(),
@@ -632,17 +632,17 @@ extension DbInvoices on DatabaseHelper {
           'amountFils': _toFils(-refund),
           'description': invoice.originalInvoiceId != null
               ? AppL10n.current.cashReturnDescWithOrig(
+                  invoice.customerName.isEmpty
+                      ? AppL10n.current.debtsCustomer
+                      : invoice.customerName,
                   id,
                   invoice.originalInvoiceId!,
-                  invoice.customerName.isEmpty
-                      ? AppL10n.current.debtsCustomer
-                      : invoice.customerName,
                 )
               : AppL10n.current.cashReturnDesc(
-                  id,
                   invoice.customerName.isEmpty
                       ? AppL10n.current.debtsCustomer
                       : invoice.customerName,
+                  id,
                 ),
           'invoiceId': id,
           'workShiftId': shiftId,

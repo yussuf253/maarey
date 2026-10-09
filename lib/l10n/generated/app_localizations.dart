@@ -20539,6 +20539,24 @@ abstract class AppLocalizations {
   /// **'تسديد قسط'**
   String get cashInstallmentPayment;
 
+  /// No description provided for @cashDebtCollection.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحصيل دين'**
+  String get cashDebtCollection;
+
+  /// No description provided for @cashInstallmentCollection.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحصيل قسط'**
+  String get cashInstallmentCollection;
+
+  /// No description provided for @cashExpense.
+  ///
+  /// In ar, this message translates to:
+  /// **'مصروف'**
+  String get cashExpense;
+
   /// No description provided for @cashSupplierPayment.
   ///
   /// In ar, this message translates to:

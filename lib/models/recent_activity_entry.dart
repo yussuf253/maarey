@@ -366,6 +366,12 @@ String ledgerTransactionTypeLabelForActivity(String transactionType, AppLocaliza
       return loc.activityManualWithdraw;
     case 'installment_payment':
       return loc.activityInstallmentPay;
+    case 'debt_collection':
+      return loc.cashDebtCollection;
+    case 'installment_collection':
+      return loc.cashInstallmentCollection;
+    case 'expense_out':
+      return loc.cashExpense;
     case 'supplier_payment':
       return loc.activitySupplierPay;
     case 'supplier_payment_reversal':
@@ -373,7 +379,9 @@ String ledgerTransactionTypeLabelForActivity(String transactionType, AppLocaliza
     case 'sale_return':
       return loc.activitySaleReturnLabel;
     default:
-      return transactionType.isEmpty ? loc.activityCashMovementFallback : transactionType;
+      return transactionType.isEmpty
+          ? loc.activityCashMovementFallback
+          : transactionType.replaceAll('_', ' ');
   }
 }
 

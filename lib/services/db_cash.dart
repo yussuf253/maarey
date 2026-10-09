@@ -104,12 +104,22 @@ class DbCashSqlOps {
     int tenantId, {
     int limit = 300,
   }) {
-    return db.query(
-      'cash_ledger',
-      where: 'tenantId = ? AND deleted_at IS NULL',
-      whereArgs: [tenantId],
-      orderBy: 'id DESC',
-      limit: limit,
+    // join مع الفاتورة نفسها (بنطاق المستأجر) لجلب اسم العميل — يُستخدم
+    // لإعادة بناء وصف الحركة باللغة الحالية في الواجهة.
+    return db.rawQuery(
+      '''
+      SELECT
+        cl.*,
+        i.customerName AS invoiceCustomerName,
+        i.originalInvoiceId AS invoiceOriginalInvoiceId
+      FROM cash_ledger cl
+      LEFT JOIN invoices i
+        ON i.id = cl.invoiceId AND i.tenantId = cl.tenantId
+      WHERE cl.tenantId = ? AND cl.deleted_at IS NULL
+      ORDER BY cl.id DESC
+      LIMIT ?
+      ''',
+      [tenantId, limit],
     );
   }
 
